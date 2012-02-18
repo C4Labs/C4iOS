@@ -34,7 +34,9 @@
 		ED50C8D214EAC92F0040D844 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED50C8D114EAC92F0040D844 /* QuartzCore.framework */; };
 		ED50C8D614EACA340040D844 /* C4View.m in Sources */ = {isa = PBXBuildFile; fileRef = ED50C8D514EACA340040D844 /* C4View.m */; };
 		ED89848714EE180400BB7AB0 /* C4ShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED89848614EE180400BB7AB0 /* C4ShapeLayer.m */; };
-		EDECBF6C14EAE26700D9A446 /* C4ShapeView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDECBF6B14EAE26600D9A446 /* C4ShapeView.m */; };
+		ED89849514EF1C4800BB7AB0 /* C4Color.m in Sources */ = {isa = PBXBuildFile; fileRef = ED89849414EF1C4800BB7AB0 /* C4Color.m */; };
+		ED89849814EF1C8800BB7AB0 /* C4Object.m in Sources */ = {isa = PBXBuildFile; fileRef = ED89849714EF1C8700BB7AB0 /* C4Object.m */; };
+		EDECBF6C14EAE26700D9A446 /* C4Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = EDECBF6B14EAE26600D9A446 /* C4Shape.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,8 +81,12 @@
 		ED50C8D514EACA340040D844 /* C4View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4View.m; sourceTree = "<group>"; };
 		ED89848514EE180400BB7AB0 /* C4ShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4ShapeLayer.h; sourceTree = "<group>"; };
 		ED89848614EE180400BB7AB0 /* C4ShapeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4ShapeLayer.m; sourceTree = "<group>"; };
-		EDECBF6A14EAE26600D9A446 /* C4ShapeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4ShapeView.h; sourceTree = "<group>"; };
-		EDECBF6B14EAE26600D9A446 /* C4ShapeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4ShapeView.m; sourceTree = "<group>"; };
+		ED89849314EF1C4800BB7AB0 /* C4Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Color.h; sourceTree = "<group>"; };
+		ED89849414EF1C4800BB7AB0 /* C4Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Color.m; sourceTree = "<group>"; };
+		ED89849614EF1C8700BB7AB0 /* C4Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Object.h; sourceTree = "<group>"; };
+		ED89849714EF1C8700BB7AB0 /* C4Object.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Object.m; sourceTree = "<group>"; };
+		EDECBF6A14EAE26600D9A446 /* C4Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Shape.h; sourceTree = "<group>"; };
+		EDECBF6B14EAE26600D9A446 /* C4Shape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Shape.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,8 +141,12 @@
 				ED50C8C414EAC4F70040D844 /* C4CanvasController.m */,
 				ED50C8D414EACA340040D844 /* C4View.h */,
 				ED50C8D514EACA340040D844 /* C4View.m */,
-				EDECBF6A14EAE26600D9A446 /* C4ShapeView.h */,
-				EDECBF6B14EAE26600D9A446 /* C4ShapeView.m */,
+				EDECBF6A14EAE26600D9A446 /* C4Shape.h */,
+				EDECBF6B14EAE26600D9A446 /* C4Shape.m */,
+				ED89849314EF1C4800BB7AB0 /* C4Color.h */,
+				ED89849414EF1C4800BB7AB0 /* C4Color.m */,
+				ED89849614EF1C8700BB7AB0 /* C4Object.h */,
+				ED89849714EF1C8700BB7AB0 /* C4Object.m */,
 				ED50C8D314EACA0E0040D844 /* Source */,
 				ED50C88C14EAC2010040D844 /* App */,
 			);
@@ -278,8 +288,10 @@
 				ED50C8CB14EAC5990040D844 /* C4Layer.m in Sources */,
 				ED50C8CE14EAC61D0040D844 /* C4Foundation.m in Sources */,
 				ED50C8D614EACA340040D844 /* C4View.m in Sources */,
-				EDECBF6C14EAE26700D9A446 /* C4ShapeView.m in Sources */,
+				EDECBF6C14EAE26700D9A446 /* C4Shape.m in Sources */,
 				ED89848714EE180400BB7AB0 /* C4ShapeLayer.m in Sources */,
+				ED89849514EF1C4800BB7AB0 /* C4Color.m in Sources */,
+				ED89849814EF1C8800BB7AB0 /* C4Object.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

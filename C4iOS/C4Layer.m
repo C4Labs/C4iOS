@@ -52,6 +52,5 @@
 }
 
 -(void)test {
-    
 }
 @end

@@ -7,16 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-enum _C4ViewAnimationTiming {
-    IMMEDIATE = 0,
-    DEFAULT,
-    CUSTOM
-};
-typedef NSUInteger C4ViewAnimationTiming;
 
 @interface C4View : UIView {
 //    C4ViewAnimationDuration animationDuration;
 }
 @property (readwrite) CGFloat animationDuration;
-@property (readwrite) C4ViewAnimationTiming animationTiming;
+@property (readwrite, nonatomic) C4ViewAnimationTiming animationTiming;
 @end

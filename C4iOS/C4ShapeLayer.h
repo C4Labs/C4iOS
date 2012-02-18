@@ -8,4 +8,6 @@
 
 @interface C4ShapeLayer : CAShapeLayer
 
+@property (readwrite) CGFloat animationDuration;
+@property (readwrite, nonatomic) C4ViewAnimationTiming animationTiming;
 @end

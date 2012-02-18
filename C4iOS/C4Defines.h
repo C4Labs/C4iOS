@@ -9,4 +9,11 @@
 #ifndef C4iOSDevelopment_C4Defines_h
 #define C4iOSDevelopment_C4Defines_h
 
+enum _C4ViewAnimationTiming {
+    IMMEDIATE = 0,
+    DEFAULT,
+    CUSTOM
+};
+typedef NSUInteger C4ViewAnimationTiming;
+
 #endif

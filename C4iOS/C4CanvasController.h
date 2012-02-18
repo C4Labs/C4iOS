@@ -11,5 +11,4 @@
 @interface C4CanvasController : UIViewController {
 }
 -(void)setup;
-@property (readwrite,retain) C4Canvas *canvas;
 @end

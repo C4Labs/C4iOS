@@ -17,9 +17,10 @@
 #import <math.h>
 
 //#import "C4AudioPlayer.h"
+#import "C4Object.h"
 #import "C4Canvas.h"
 #import "C4CanvasController.h"
-//#import "C4Color.h"
+#import "C4Color.h"
 //#import "C4DateTime.h"
 //#import "C4Font.h"
 #import "C4Foundation.h"
@@ -28,7 +29,6 @@
 //#import "C4Math.h"
 //#import "C4Movie.h"
 //#import "C4Noise.h"
-//#import "C4Object.h"
 //#import "C4Shape.h"
 //#import "C4String.h"
 //#import "C4TextLayer.h"

@@ -7,9 +7,6 @@
 //
 
 #import "C4Layer.h"
-@class C4Image;
-@class C4Shape;
-@class C4TextLayer;
 
 @interface C4Canvas : C4Layer {
 @private

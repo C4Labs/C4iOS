@@ -13,15 +13,15 @@
 @end
 
 @implementation C4View
-@synthesize animationDuration, animationTiming;
+@synthesize animationDuration = _animationDuration, animationTiming = _animationTiming;
 
 -(id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if(self != nil) {
         
         CGFloat colorComponents[4] = {0,0,0,0.5};
-        self.animationTiming = CUSTOM;
-        self.animationDuration = 1.5f;
+        self.animationTiming = IMMEDIATE;
+        self.animationDuration = 0.0f;
         self.layer.backgroundColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), colorComponents);
     }
     return self;
@@ -92,6 +92,10 @@
     [UIView animateWithDuration:[self switchAnimationDuration] animations:^{
         [super setContentStretch:contentStretch];
     }];
+}
+
+-(void)setAnimationTiming:(C4ViewAnimationTiming)animationTiming {
+    _animationTiming = animationTiming;
 }
 
 @end
