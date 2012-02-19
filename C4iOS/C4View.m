@@ -7,22 +7,20 @@
 //
 
 #import "C4View.h"
-
-@interface C4View()
--(CGFloat)switchAnimationDuration;
+@interface C4View() 
+-(void)animateWithBlock:(void (^)(void))blockAnimation;
 @end
 
 @implementation C4View
-@synthesize animationDuration = _animationDuration, animationTiming = _animationTiming;
+
+/* leaving animation delay only to views for now */
+@synthesize animationDuration, animationDelay, animationOptions = _animationEasing;
 
 -(id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if(self != nil) {
-        
-        CGFloat colorComponents[4] = {0,0,0,0.5};
-        self.animationTiming = IMMEDIATE;
-        self.animationDuration = 0.0f;
-        self.layer.backgroundColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), colorComponents);
+        self.animationDuration = 0.25f;
+        self.animationDelay = 0.0f;
     }
     return self;
 }
@@ -36,66 +34,54 @@
  }
  */
 
--(CGFloat)switchAnimationDuration {
-    CGFloat _duration;
-    switch (self.animationTiming) {
-        case IMMEDIATE:
-            _duration = 0.0f;
-            break;
-        case DEFAULT:
-            _duration = 0.25f;
-            break;
-        case CUSTOM:
-            _duration = self.animationDuration;
-            break;
-    }
-    return _duration;
-}
-
 -(void)setCenter:(CGPoint)center {
-    [UIView animateWithDuration:[self switchAnimationDuration] animations:^{
+    [self animateWithBlock:^{
         [super setCenter:center];
     }];
 }
 
 -(void)setFrame:(CGRect)frame {
-    [UIView animateWithDuration:[self switchAnimationDuration] animations:^{
+    [self animateWithBlock:^{
         [super setFrame:frame];
     }];
 }
 
 -(void)setBounds:(CGRect)bounds {
-    [UIView animateWithDuration:[self switchAnimationDuration] animations:^{
+    [self animateWithBlock:^{
         [super setBounds:bounds];
     }];
 }
 
 -(void)setTransform:(CGAffineTransform)transform {
-    [UIView animateWithDuration:[self switchAnimationDuration] animations:^{
+    [self animateWithBlock:^{
         [super setTransform:transform];
     }];
 }
 
 -(void)setAlpha:(CGFloat)alpha {
-    [UIView animateWithDuration:[self switchAnimationDuration] animations:^{
+    [self animateWithBlock:^{
         [super setAlpha:alpha];
     }];
 }
 
 -(void)setBackgroundColor:(UIColor *)backgroundColor {
-    [UIView animateWithDuration:[self switchAnimationDuration] animations:^{
+    [self animateWithBlock:^{
         [super setBackgroundColor:backgroundColor];
     }];
 }
 
 -(void)setContentStretch:(CGRect)contentStretch {
-    [UIView animateWithDuration:[self switchAnimationDuration] animations:^{
+    [self animateWithBlock:^{
         [super setContentStretch:contentStretch];
     }];
 }
 
--(void)setAnimationTiming:(C4ViewAnimationTiming)animationTiming {
-    _animationTiming = animationTiming;
-}
+-(void)animateWithBlock:(void (^)(void))blockAnimation {
+    [UIView animateWithDuration:self.animationDuration
+                          delay:(NSTimeInterval)self.animationDelay
+                        options:self.animationOptions 
+                     animations:blockAnimation
+                     completion:nil];
+};
 
 @end

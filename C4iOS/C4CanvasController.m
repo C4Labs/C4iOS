@@ -19,21 +19,19 @@ C4Shape *line, *triangle, *poly;
     CGPoint polypoints[4] = {CGPointMake(0, 100),CGPointMake(100, 0),CGPointMake(200, 150),CGPointMake(250, 100)};
     poly = [C4Shape polygon:polypoints pointCount:4];
     [self.view addSubview:poly];
-    
-    CGPoint linepoints[2] = {CGPointMake(500, 500),CGPointMake(600, 600)};
-    line = [C4Shape line:linepoints];
-    [self.view addSubview:line];
-    
-    CGPoint trianglepoints[3] = {CGPointMake(200, 500),CGPointMake(200, 600),CGPointMake(300, 550)};
-    triangle = [C4Shape triangle:trianglepoints];
-    [self.view addSubview:triangle];
-    
-    triangle.shapeLayer.fillColor = [C4Color greenColor];
-    
+    poly.animationDuration = 2.0f;
+    poly.animationOptions = EASEIN | UIViewAnimationOptionAllowUserInteraction;
+
+    NSUInteger mask = UIViewAnimationOptionCurveLinear | UIViewAnimationOptionAllowUserInteraction;
+    if((mask & UIViewAnimationOptionAllowUserInteraction) == UIViewAnimationOptionAllowUserInteraction) NSLog(@"INTERACTION");
+    if((mask & UIViewAnimationOptionShowHideTransitionViews) == UIViewAnimationOptionShowHideTransitionViews) NSLog(@"TRANSITIONVIEWS");
+    if((mask & UIViewAnimationOptionCurveEaseIn) == UIViewAnimationOptionCurveEaseIn) NSLog(@"EASEIN");
+    if((mask & UIViewAnimationOptionCurveLinear) == UIViewAnimationOptionCurveLinear) NSLog(@"LINEAR");
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [poly rect:CGRectMake(300, 100, 50, 50)];
+    poly.animationDelay = 2.0f;
+    poly.fillColor = [UIColor redColor];
 }
 
 @end

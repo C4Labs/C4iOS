@@ -6,8 +6,13 @@
 //  Copyright (c) 2012 POSTFL. All rights reserved.
 //
 
-@interface C4ShapeLayer : CAShapeLayer
+@interface C4ShapeLayer : CAShapeLayer {
+    NSString *currentAnimationEasing;
+}
+-(void)setAnimationDurationValue:(CGFloat)duration;
+-(CGFloat)animationDurationValue;
+-(void)test;
 
-@property (readwrite) CGFloat animationDuration;
-@property (readwrite, nonatomic) C4ViewAnimationTiming animationTiming;
+@property (nonatomic) NSUInteger animationOptions;
+@property (readonly, strong) NSString *currentAnimationEasing;
 @end

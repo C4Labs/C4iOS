@@ -9,6 +9,4 @@
 
 
 @interface C4Color : C4Object
-+(CGColorRef)red:(CGFloat)redValue blue:(CGFloat)blueValue green:(CGFloat)greenValue;
-+(CGColorRef)greenColor;
 @end

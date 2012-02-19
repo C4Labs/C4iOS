@@ -33,6 +33,7 @@
 		ED50C8D014EAC77C0040D844 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED50C8CF14EAC77C0040D844 /* AVFoundation.framework */; };
 		ED50C8D214EAC92F0040D844 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED50C8D114EAC92F0040D844 /* QuartzCore.framework */; };
 		ED50C8D614EACA340040D844 /* C4View.m in Sources */ = {isa = PBXBuildFile; fileRef = ED50C8D514EACA340040D844 /* C4View.m */; };
+		ED80BBC014F0648800AAD49C /* C4Defines.m in Sources */ = {isa = PBXBuildFile; fileRef = ED80BBBF14F0648800AAD49C /* C4Defines.m */; };
 		ED89848714EE180400BB7AB0 /* C4ShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED89848614EE180400BB7AB0 /* C4ShapeLayer.m */; };
 		ED89849514EF1C4800BB7AB0 /* C4Color.m in Sources */ = {isa = PBXBuildFile; fileRef = ED89849414EF1C4800BB7AB0 /* C4Color.m */; };
 		ED89849814EF1C8800BB7AB0 /* C4Object.m in Sources */ = {isa = PBXBuildFile; fileRef = ED89849714EF1C8700BB7AB0 /* C4Object.m */; };
@@ -79,6 +80,7 @@
 		ED50C8D114EAC92F0040D844 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		ED50C8D414EACA340040D844 /* C4View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4View.h; sourceTree = "<group>"; };
 		ED50C8D514EACA340040D844 /* C4View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4View.m; sourceTree = "<group>"; };
+		ED80BBBF14F0648800AAD49C /* C4Defines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Defines.m; sourceTree = "<group>"; };
 		ED89848514EE180400BB7AB0 /* C4ShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4ShapeLayer.h; sourceTree = "<group>"; };
 		ED89848614EE180400BB7AB0 /* C4ShapeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4ShapeLayer.m; sourceTree = "<group>"; };
 		ED89849314EF1C4800BB7AB0 /* C4Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Color.h; sourceTree = "<group>"; };
@@ -143,10 +145,8 @@
 				ED50C8D514EACA340040D844 /* C4View.m */,
 				EDECBF6A14EAE26600D9A446 /* C4Shape.h */,
 				EDECBF6B14EAE26600D9A446 /* C4Shape.m */,
-				ED89849314EF1C4800BB7AB0 /* C4Color.h */,
-				ED89849414EF1C4800BB7AB0 /* C4Color.m */,
-				ED89849614EF1C8700BB7AB0 /* C4Object.h */,
-				ED89849714EF1C8700BB7AB0 /* C4Object.m */,
+				ED89848514EE180400BB7AB0 /* C4ShapeLayer.h */,
+				ED89848614EE180400BB7AB0 /* C4ShapeLayer.m */,
 				ED50C8D314EACA0E0040D844 /* Source */,
 				ED50C88C14EAC2010040D844 /* App */,
 			);
@@ -162,6 +162,7 @@
 				ED50C88E14EAC2010040D844 /* InfoPlist.strings */,
 				ED50C89114EAC2010040D844 /* main.m */,
 				ED50C8C114EAC4A40040D844 /* C4Defines.h */,
+				ED80BBBF14F0648800AAD49C /* C4Defines.m */,
 				ED50C8C214EAC4A40040D844 /* C4Imports.h */,
 				ED50C89314EAC2010040D844 /* C4iOS-Prefix.pch */,
 			);
@@ -188,12 +189,14 @@
 		ED50C8D314EACA0E0040D844 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				ED89849314EF1C4800BB7AB0 /* C4Color.h */,
+				ED89849414EF1C4800BB7AB0 /* C4Color.m */,
+				ED89849614EF1C8700BB7AB0 /* C4Object.h */,
+				ED89849714EF1C8700BB7AB0 /* C4Object.m */,
 				ED50C8C614EAC5350040D844 /* C4Canvas.h */,
 				ED50C8C714EAC5350040D844 /* C4Canvas.m */,
 				ED50C8C914EAC5990040D844 /* C4Layer.h */,
 				ED50C8CA14EAC5990040D844 /* C4Layer.m */,
-				ED89848514EE180400BB7AB0 /* C4ShapeLayer.h */,
-				ED89848614EE180400BB7AB0 /* C4ShapeLayer.m */,
 				ED50C8CC14EAC61C0040D844 /* C4Foundation.h */,
 				ED50C8CD14EAC61D0040D844 /* C4Foundation.m */,
 				ED50C89414EAC2010040D844 /* C4AppDelegate.h */,
@@ -292,6 +295,7 @@
 				ED89848714EE180400BB7AB0 /* C4ShapeLayer.m in Sources */,
 				ED89849514EF1C4800BB7AB0 /* C4Color.m in Sources */,
 				ED89849814EF1C8800BB7AB0 /* C4Object.m in Sources */,
+				ED80BBC014F0648800AAD49C /* C4Defines.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

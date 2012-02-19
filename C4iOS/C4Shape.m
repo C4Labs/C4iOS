@@ -9,7 +9,8 @@
 #import "C4Shape.h"
 
 @implementation C4Shape
-@synthesize isLine =_isLine, shapeLayer, animationTiming = _animationTiming, animationDuration = _animationDuration, pointA = _pointA, pointB = _pointB;
+@synthesize animationDuration = _animationDuration;
+@synthesize isLine =_isLine, shapeLayer, pointA = _pointA, pointB = _pointB;
 @synthesize fillColor, fillRule, lineCap, lineDashPattern, lineDashPhase, lineJoin, lineWidth, mitreLimit, strokeColor, strokeEnd, strokeStart;
 -(id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -21,15 +22,9 @@
         self.shapeLayer.lineWidth = 4.0f;
         _isLine = NO;
         [self.layer addSublayer:shapeLayer];
-        self.animationDuration = 1.0f;
-        self.animationTiming = DEFAULT;
     }
     return self;
 }
-
-/*
- add in those references from here to the shapelayer properties
- */
 
 +(C4Shape *)ellipse:(CGRect)aRect {
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:aRect];
@@ -149,23 +144,13 @@
 }
 
 -(void)closeShape {
-    C4ViewAnimationTiming temp = self.animationTiming;
-    self.animationTiming = IMMEDIATE;
+    CGFloat tempDuration = self.animationDuration;
+    self.animationDuration = 0.0f;
     CGMutablePathRef newPath = CGPathCreateMutableCopy(self.shapeLayer.path);
     CGPathCloseSubpath(newPath);
     self.shapeLayer.path = newPath;
     CGPathRelease(newPath);
-    self.animationTiming = temp;
-}
-
--(void)setAnimationTiming:(C4ViewAnimationTiming)animationTiming {
-    _animationTiming = animationTiming;
-    self.shapeLayer.animationTiming = animationTiming;
-}
-
--(void)setAnimationDuration:(CGFloat)animationDuration {
-    _animationDuration = animationDuration;
-    self.shapeLayer.animationDuration = animationDuration;
+    self.animationDuration = tempDuration;
 }
 
 -(CGPoint)pointA {
@@ -201,6 +186,61 @@
         CGPoint points[2] = {_pointA, _pointB};
         [self line:points];
     }
+}
+
+-(void)setFillColor:(UIColor *)_fillColor {
+    self.shapeLayer.fillColor = _fillColor.CGColor;
+}
+
+-(void)setFillRule:(NSString *)_fillRule {
+    self.shapeLayer.fillRule = _fillRule;
+}
+
+-(void)setLineCap:(NSString *)_lineCap {
+    self.shapeLayer.lineCap = _lineCap;
+}
+
+-(void)setLineDashPattern:(NSArray *)_lineDashPattern {
+    self.shapeLayer.lineDashPattern = _lineDashPattern;
+}
+
+-(void)setLineDashPhase:(CGFloat)_lineDashPhase {
+    self.shapeLayer.lineDashPhase = _lineDashPhase;
+}
+
+-(void)setLineJoin:(NSString *)_lineJoin {
+    self.shapeLayer.lineJoin = _lineJoin;
+}
+
+-(void)setLineWidth:(CGFloat)_lineWidth {
+    self.shapeLayer.lineWidth = _lineWidth;
+}
+
+-(void)setMitreLimit:(CGFloat)_mitreLimit {
+    self.shapeLayer.miterLimit = _mitreLimit;
+}
+
+-(void)setStrokeColor:(UIColor *)_strokeColor {
+    self.shapeLayer.strokeColor = _strokeColor.CGColor;
+}
+
+-(void)setStrokeEnd:(CGFloat)_strokeEnd {
+    self.shapeLayer.strokeEnd = _strokeEnd;
+}
+
+-(void)setStrokeStart:(CGFloat)_strokeStart {
+    self.shapeLayer.strokeStart = _strokeStart;
+}
+
+-(void)setAnimationDuration:(CGFloat)animationDuration {
+    _animationDuration = animationDuration;
+    [self.shapeLayer setAnimationDurationValue:animationDuration];
+}
+
+-(void)setAnimationOptions:(NSUInteger)animationOptions {
+    [super setAnimationOptions:animationOptions];
+    self.shapeLayer.animationOptions = animationOptions;
+    [self.shapeLayer test];
 }
 
 @end

@@ -9,8 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface C4View : UIView {
-//    C4ViewAnimationDuration animationDuration;
 }
-@property (readwrite) CGFloat animationDuration;
-@property (readwrite, nonatomic) C4ViewAnimationTiming animationTiming;
+@property CGFloat animationDuration, animationDelay;
+@property NSUInteger animationOptions;
 @end
