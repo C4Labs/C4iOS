@@ -30,6 +30,7 @@
 -(void)triangle:(CGPoint *)pointArray;
 -(void)polygon:(CGPoint *)pointArray pointCount:(NSInteger)pointCount;
 
+-(void)setDashPattern:(CGFloat *)dashPattern pointCount:(NSUInteger)pointCount;
 -(void)test;
 @property (readwrite, strong) C4ShapeLayer *shapeLayer;
 @property (readonly) BOOL isLine;

@@ -10,6 +10,9 @@
 
 @interface C4View : UIView {
 }
+
 @property CGFloat animationDuration, animationDelay;
 @property NSUInteger animationOptions;
+@property (nonatomic) CGFloat repeatCount;
+@property (readonly, nonatomic) BOOL isAnimating;
 @end

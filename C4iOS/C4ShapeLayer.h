@@ -14,5 +14,7 @@
 -(void)test;
 
 @property (nonatomic) NSUInteger animationOptions;
+@property (nonatomic) CGFloat repeatCount;
 @property (readonly, strong) NSString *currentAnimationEasing;
+@property (readonly, nonatomic) BOOL allowsInteraction, repeats;
 @end

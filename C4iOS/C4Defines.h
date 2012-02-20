@@ -11,20 +11,22 @@
 
 //UIKIT_EXTERN NSString *const EASEIN, *const EASEINOUT, *const EASEOUT, *const LINEAR, *const DEFAULT;
 
+UIKIT_EXTERN const CGFloat FOREVER;
+
 enum {
-//    UIViewAnimationOptionAllowUserInteraction      = 1 <<  1,
+    ALLOWSINTERACTION = UIViewAnimationOptionAllowUserInteraction,
 //    UIViewAnimationOptionBeginFromCurrentState     = 1 <<  2,
-//    UIViewAnimationOptionRepeat                    = 1 <<  3,
-//    UIViewAnimationOptionAutoreverse               = 1 <<  4,
+        REPEAT = UIViewAnimationOptionRepeat,
+        AUTOREVERSE = UIViewAnimationOptionAutoreverse,
 //    UIViewAnimationOptionOverrideInheritedDuration = 1 <<  5,
 //    UIViewAnimationOptionOverrideInheritedCurve    = 1 <<  6,
 //    UIViewAnimationOptionAllowAnimatedContent      = 1 <<  7,
 //    UIViewAnimationOptionShowHideTransitionViews   = 1 <<  8,
 //    
-    //    UIViewAnimationOptionCurveEaseInOut            = 0 << 16,
-    //    UIViewAnimationOptionCurveEaseIn               = 1 << 16,
-    //    UIViewAnimationOptionCurveEaseOut              = 2 << 16,
-    //    UIViewAnimationOptionCurveLinear               = 3 << 16,
+//    UIViewAnimationOptionCurveEaseInOut            = 0 << 16,
+//    UIViewAnimationOptionCurveEaseIn               = 1 << 16,
+//    UIViewAnimationOptionCurveEaseOut              = 2 << 16,
+//    UIViewAnimationOptionCurveLinear               = 3 << 16,
     EASEINOUT            = UIViewAnimationOptionCurveEaseInOut,
     EASEIN               = UIViewAnimationOptionCurveEaseIn,
     EASEOUT              = UIViewAnimationOptionCurveEaseOut,

@@ -8,8 +8,4 @@
 
 #import "C4Defines.h"
 
-//NSString *const EASEIN = @"easeIn";
-//NSString *const EASEINOUT = @"easeInEaseOut";
-//NSString *const EASEOUT = @"easeOut";
-//NSString *const LINEAR = @"linear";
-//NSString *const DEFAULT = @"default";
+const CGFloat FOREVER = HUGE_VALF;

@@ -8,6 +8,10 @@
 
 #import "C4Shape.h"
 
+@interface C4Shape()
+//-(void)animateWithBlock:(void (^)(void))blockAnimation completion:(void (^)(BOOL completed))blockCompletion;
+@end
+
 @implementation C4Shape
 @synthesize animationDuration = _animationDuration;
 @synthesize isLine =_isLine, shapeLayer, pointA = _pointA, pointB = _pointB;
@@ -15,11 +19,11 @@
 -(id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if(self != nil) {
+        self.animationDuration = 0.0f;
         self.shapeLayer = [[C4ShapeLayer alloc] init];
-        self.shapeLayer.path = CGPathCreateWithRect(CGRectZero, nil);
-        self.shapeLayer.strokeColor = [UIColor redColor].CGColor;
-        self.shapeLayer.fillColor = [UIColor blueColor].CGColor;
-        self.shapeLayer.lineWidth = 4.0f;
+        self.strokeColor = [UIColor redColor];
+        self.fillColor = [UIColor blueColor];
+        self.lineWidth = 20.0f;
         _isLine = NO;
         [self.layer addSublayer:shapeLayer];
     }
@@ -92,6 +96,10 @@
  so, i create a path, get the bounding box, then shift all the points to CGPointZero
  and recreate the path so that it sits at CGPointZero in its superview
  and then i move the superview to the right position and size
+ */
+
+/*
+ 
  */
 -(void)polygon:(CGPoint *)pointArray pointCount:(NSInteger)pointCount {
     CGMutablePathRef newPath = CGPathCreateMutable();//(self.shapeLayer.path);
@@ -188,7 +196,7 @@
     }
 }
 
--(void)setFillColor:(UIColor *)_fillColor {
+-(void)setFillColor:(UIColor *)_fillColor {   
     self.shapeLayer.fillColor = _fillColor.CGColor;
 }
 
@@ -200,7 +208,13 @@
     self.shapeLayer.lineCap = _lineCap;
 }
 
+-(void)setDashPattern:(CGFloat *)dashPattern pointCount:(NSUInteger)pointCount {
+    NSMutableArray *patternArray = [[NSMutableArray alloc] initWithCapacity:0];
+    for(int i = 0; i < pointCount; i++) [patternArray addObject:[NSNumber numberWithFloat:dashPattern[i]]];
+    self.lineDashPattern = patternArray;
+}
 -(void)setLineDashPattern:(NSArray *)_lineDashPattern {
+//    NSArray *array = [NSArray arrayWithObjects:[NSNumber numberWithInt:5],[NSNumber numberWithInt:5], nil]; 
     self.shapeLayer.lineDashPattern = _lineDashPattern;
 }
 
@@ -240,7 +254,28 @@
 -(void)setAnimationOptions:(NSUInteger)animationOptions {
     [super setAnimationOptions:animationOptions];
     self.shapeLayer.animationOptions = animationOptions;
-    [self.shapeLayer test];
 }
+
+/* leaving out repeat count for now... it's a bit awkward */
+-(void)setRepeatCount:(CGFloat)repeatCount {
+//    [super setRepeatCount:repeatCount];
+//    self.shapeLayer.repeatCount = repeatCount;
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    C4Log(@"hi");
+}
+
+-(BOOL)isAnimating {
+    NSInteger animationKeyCount = [self.shapeLayer.animationKeys count];
+    return animationKeyCount != 0 ? YES : NO;
+}
+//-(void)animateWithBlock:(void (^)(void))blockAnimation completion:(void (^)(BOOL completed))blockCompletion{
+//    [UIView animateWithDuration:self.animationDuration
+//                          delay:(NSTimeInterval)self.animationDelay
+//                        options:self.animationOptions
+//                     animations:blockAnimation
+//                     completion:blockCompletion];
+//};
 
 @end
