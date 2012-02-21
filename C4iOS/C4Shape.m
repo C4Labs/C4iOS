@@ -21,9 +21,9 @@
     if(self != nil) {
         self.animationDuration = 0.0f;
         self.shapeLayer = [[C4ShapeLayer alloc] init];
-        self.strokeColor = [UIColor redColor];
-        self.fillColor = [UIColor blueColor];
-        self.lineWidth = 20.0f;
+        self.strokeColor = C4RED;
+        self.fillColor = C4BLUE;
+        self.lineWidth = 5.0f;
         _isLine = NO;
         [self.layer addSublayer:shapeLayer];
     }
@@ -239,7 +239,8 @@
 }
 
 -(void)setStrokeEnd:(CGFloat)_strokeEnd {
-    self.shapeLayer.strokeEnd = _strokeEnd;
+    [self.shapeLayer animateStrokeEnd:_strokeEnd];
+//    self.shapeLayer.strokeEnd = _strokeEnd;
 }
 
 -(void)setStrokeStart:(CGFloat)_strokeStart {
@@ -277,5 +278,14 @@
 //                     animations:blockAnimation
 //                     completion:blockCompletion];
 //};
+
+//- (id <CAAction>)actionForLayer:(CALayer *)layer forKey:(NSString *)event {
+//    if([layer.name isEqualToString:@"shapeLayer"]) {
+//        CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:event]; // Default Animation for 'event'
+//        animation.duration = 0.0;//((C4ShapeLayer *)layer).animationDuration; // Your custom animation duration
+//        return animation;
+//    }
+//    return nil;
+//}
 
 @end

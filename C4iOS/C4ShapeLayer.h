@@ -12,9 +12,11 @@
 -(void)setAnimationDurationValue:(CGFloat)duration;
 -(CGFloat)animationDurationValue;
 -(void)test;
+-(void)animateStrokeEnd:(CGFloat)_strokeEnd;
 
+@property (readonly) BOOL isShapeLayer;
 @property (nonatomic) NSUInteger animationOptions;
-@property (nonatomic) CGFloat repeatCount;
+@property (nonatomic) CGFloat repeatCount, animationDuration;
 @property (readonly, strong) NSString *currentAnimationEasing;
 @property (readonly, nonatomic) BOOL allowsInteraction, repeats;
 @end

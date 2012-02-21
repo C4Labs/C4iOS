@@ -16,25 +16,20 @@ C4Shape *line, *triangle, *poly;
 @implementation C4CanvasController
 
 /*
- ANIMATIONS ARE ALL SET UP, TIME TO WRITE THEM INTO EACH FUNCTION AND MAKE SURE THEY WORK...
- 
- NEED TO FIND A BETTER SOLUTION FOR LINEDASHPATTERN
- */
+ ANIMATIONS ARE ALL SET UP, TIME TO MAKE SURE THEY WORK...
+*/
 
 -(void)setup {
-    CGPoint polypoints[4] = {CGPointMake(0, 100),CGPointMake(100, 0),CGPointMake(200, 150),CGPointMake(250, 100)};
-    poly = [C4Shape polygon:polypoints pointCount:4];
+    poly = [C4Shape ellipse:CGRectMake(0, 0, 500, 500)];
     [self.view addSubview:poly];
-    poly.lineWidth = 5.0f;
+    poly.animationDuration = 2.0f;
+    poly.animationOptions = AUTOREVERSE | REPEAT;
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     if(!poly.isAnimating) {
-        poly.animationDuration = 2.0f;
-        poly.animationOptions = AUTOREVERSE;
-        poly.strokeEnd = 0.25f;
-        poly.fillColor = [UIColor greenColor];
-        [poly rect:CGRectMake(400, 400, 100, 100)];
+        poly.center = CGPointMake(368, 512);
+        poly.strokeEnd = 0.250f;
     }
 }
 

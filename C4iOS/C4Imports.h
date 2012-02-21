@@ -13,8 +13,9 @@
 #import <Foundation/Foundation.h>
 #import <QuartzCore/QuartzCore.h>
 #import <AVFoundation/AVFoundation.h>
-
 #import <math.h>
+
+#import "C4Defines.h"
 
 //#import "C4AudioPlayer.h"
 #import "C4Object.h"
@@ -26,7 +27,7 @@
 #import "C4Foundation.h"
 //#import "C4Image.h"
 #import "C4Layer.h"
-//#import "C4Math.h"
+#import "C4Math.h"
 //#import "C4Movie.h"
 //#import "C4Noise.h"
 //#import "C4Shape.h"

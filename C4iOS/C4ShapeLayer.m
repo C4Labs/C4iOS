@@ -12,21 +12,24 @@
 @end
 
 @implementation C4ShapeLayer
-@synthesize animationOptions = _animationOptions, currentAnimationEasing, repeatCount;
-@synthesize allowsInteraction, repeats;
+@synthesize animationOptions = _animationOptions, currentAnimationEasing, repeatCount, animationDuration;
+@synthesize allowsInteraction, repeats, isShapeLayer;
 
 -(id)init {
     self = [super init];
     if(self != nil) {
+        self.name = @"shapeLayer";
+        isShapeLayer = YES;
         currentAnimationEasing = kCAMediaTimingFunctionDefault;
         allowsInteraction = NO;
         repeats = NO;
-        self.animationDurationValue = 0.0f;
+        self.animationDuration = 0.0f;
         self.repeatCount = 0;
         self.autoreverses = NO;
         self.fillMode = kCAFillModeBoth;
-        self.strokeEnd = 1.0f;
-        self.strokeStart = 0.0f;
+//        [self setValue:[NSNumber numberWithFloat:5.0f] forKey:kCATransactionAnimationDuration];
+
+//        self.fillMode = kCAFillModeBoth;
         /* create basic attributes after setting animation attributes above */
         self.path = CGPathCreateWithRect(CGRectZero, nil);
         self.fillColor = [UIColor blueColor].CGColor;
@@ -38,12 +41,13 @@
 
 -(CABasicAnimation *)setupBasicAnimationWithKeyPath:(NSString *)keyPath {
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:keyPath];
-    animation.duration = [[self valueForKey:kCATransactionAnimationDuration] doubleValue];
+    animation.duration = (double)self.animationDuration;
     animation.timingFunction = [CAMediaTimingFunction functionWithName:self.currentAnimationEasing];
     animation.autoreverses = self.autoreverses;
     animation.repeatCount = self.repeats ? FOREVER : 0;
     animation.fillMode = kCAFillModeBoth;
     animation.removedOnCompletion = YES;
+    animation.delegate = self;
     return animation;
 }
 
@@ -97,18 +101,17 @@
     if(!self.autoreverses) [super setStrokeColor:_strokeColor];
 }
 
--(void)setStrokeEnd:(CGFloat)_strokeEnd {
+-(void)animateStrokeEnd:(CGFloat)_strokeEnd {
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"strokeEnd"];
     animation.fromValue = [NSNumber numberWithFloat:self.strokeEnd];
-    animation.toValue = [NSNumber numberWithFloat:_strokeEnd];  
+    animation.toValue = [NSNumber numberWithFloat:_strokeEnd];
     [self addAnimation:animation forKey:@"animateStrokeEnd"];
-    if(!self.autoreverses) [super setStrokeEnd:_strokeEnd];
 }
 
 -(void)setStrokeStart:(CGFloat)_strokeStart {
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"strokeStart"];
     animation.fromValue = [NSNumber numberWithFloat:self.strokeStart];
-    animation.toValue = [NSNumber numberWithFloat:_strokeStart];  
+    animation.toValue = [NSNumber numberWithFloat:_strokeStart];
     [self addAnimation:animation forKey:@"animateStrokeStart"];
     if(!self.autoreverses) [super setStrokeStart:_strokeStart];
 }
@@ -124,17 +127,8 @@
 
 /* in the following method
  if we implement other kinds of options, we'll have to get rid of the returns...
- (i.e. the ones which are outlined in C4AnimationOptions, in C4Defines.h) 
- was doing shit like the following, and it wasn't working:
-    mask = LINEAR;
-    C4Log(@"--- EASEIN --- %d", mask);
-    if((mask & EASEIN) == EASEIN) C4Log(@"EASEIN");
-    if((mask & EASEINOUT) == EASEINOUT) C4Log(@"EASEINOUT");
-    if((mask & EASEOUT) == EASEOUT) C4Log(@"EASEOUT");
-    if((mask & LINEAR) == LINEAR) C4Log(@"LINEAR");
+ reversing how i check the values, if linear is at the bottom, then all the other values get called
  */
-
-//reversing how i check the values, if linear is at the bottom, then all the other values get called
 -(void)setAnimationOptions:(NSUInteger)animationOptions {
     if((animationOptions & LINEAR) == LINEAR) {
         currentAnimationEasing = kCAMediaTimingFunctionLinear;
@@ -161,6 +155,18 @@
 -(void)test {
     C4Log(@"animationOptions: %@",self.currentAnimationEasing);
     C4Log(@"autoreverses: %@", self.autoreverses ? @"YES" : @"NO");
+}
+
+-(void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
+    NSString *keyPath = ((CAPropertyAnimation *)anim).keyPath;
+    if ([keyPath isEqualToString:@"strokeEnd"] && anim.repeatCount != FOREVER) {
+        if(!self.autoreverses){
+            CAAnimation *animation = [CAAnimation animation];
+            animation.duration = 0.0f;
+            self.strokeEnd = [((CABasicAnimation *)anim).toValue floatValue];
+            [self addAnimation:animation forKey:@"strokeEnd"];
+        }
+    }
 }
 
 @end

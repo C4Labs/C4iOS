@@ -12,5 +12,4 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
     #import "C4Imports.h"
-    #import "C4Defines.h"
 #endif

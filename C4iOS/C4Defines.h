@@ -9,9 +9,26 @@
 #ifndef C4iOSDevelopment_C4Defines_h
 #define C4iOSDevelopment_C4Defines_h
 
+#ifndef C4RED
+#define C4RED [UIColor colorWithRed:1.0f green:0.196 blue:0.196 alpha:1.0f];
+#endif
+
+#ifndef C4BLUE
+#define C4BLUE [UIColor colorWithRed:0.196 green:0.392 blue:1.0f alpha:1.0f];
+#endif
+
+#ifndef C4GREY
+#define C4GREY [UIColor colorWithRed:0.125 green:0.125 blue:0.125 alpha:1.0f];
+#endif
+
 //UIKIT_EXTERN NSString *const EASEIN, *const EASEINOUT, *const EASEOUT, *const LINEAR, *const DEFAULT;
 
 UIKIT_EXTERN const CGFloat FOREVER;
+
+UIKIT_EXTERN BOOL VERBOSELOAD;
+
+/* more lexical names for common mathematic variables, e.g. QUARTER_PI instead of M_PI_4 */
+UIKIT_EXTERN const CGFloat QUARTER_PI, HALF_PI, PI, TWO_PI, ONE_OVER_PI, TWO_OVER_PI, TWO_OVER_ROOT_PI, E, LOG2E, LOG10E, LN2, LN10, SQRT_TWO, SQRT_ONE_OVER_TWO;
 
 enum {
     ALLOWSINTERACTION = UIViewAnimationOptionAllowUserInteraction,
@@ -41,6 +58,17 @@ enum {
 //    UIViewAnimationOptionTransitionFlipFromTop     = 6 << 20,
 //    UIViewAnimationOptionTransitionFlipFromBottom  = 7 << 20,
 };
-
 typedef NSUInteger C4AnimationOptions;
+
+enum {
+    PATH = 0,
+    FILLCOLOR,
+    LINEDASHPHASE,
+    LINEWIDTH,
+    MITRELIMIT,
+    STROKECOLOR,
+    STROKEEND,
+    STROKESTART
+};
+typedef NSUInteger C4ShapeLayerAnimationType;
 #endif
