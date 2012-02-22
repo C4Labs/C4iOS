@@ -8,22 +8,42 @@
 
 #import "C4Shape.h"
 
-@interface C4Shape()
-//-(void)animateWithBlock:(void (^)(void))blockAnimation completion:(void (^)(BOOL completed))blockCompletion;
+@interface C4Shape() 
+-(void)_ellipse:(NSValue *)ellipseValue;
+-(void)_rect:(NSValue *)rectValue;
+-(void)_line:(NSArray *)pointArray;
+-(void)_triangle:(NSArray *)pointArray;
+-(void)_polygon:(NSArray *)pointArray;
+-(void)_closeShape;
+-(void)_setFillColor:(UIColor *)_fillColor;
+-(void)_setFillRule:(NSString *)_fillRule;
+-(void)_setLineCap:(NSString *)_lineCap;
+-(void)_setLineDashPattern:(NSArray *)_lineDashPattern;
+-(void)_setLineDashPhase:(NSNumber *)_lineDashPhase;
+-(void)_setLineJoin:(NSString *)_lineJoin;
+-(void)_setLineWidth:(NSNumber *)_lineWidth;
+-(void)_setMiterLimit:(NSNumber *)_miterLimit;
+-(void)_setStrokeColor:(UIColor *)_strokeColor;
+-(void)_setStrokeStart:(NSNumber *)_strokeStart;
+-(void)_setShadowOffSet:(NSValue *)_shadowOffset;
+-(void)_setShadowOpacity:(NSNumber *)_shadowOpacity;
+-(void)_setShadowRadius:(NSNumber *)_shadowRadius;
 @end
 
 @implementation C4Shape
 @synthesize animationDuration = _animationDuration;
 @synthesize isLine =_isLine, shapeLayer, pointA = _pointA, pointB = _pointB;
-@synthesize fillColor, fillRule, lineCap, lineDashPattern, lineDashPhase, lineJoin, lineWidth, mitreLimit, strokeColor, strokeEnd, strokeStart;
+@synthesize fillColor, fillRule, lineCap, lineDashPattern, lineDashPhase, lineJoin, lineWidth, miterLimit, strokeColor, strokeEnd, strokeStart, shadowOffset, shadowOpacity, shadowRadius;
+
 -(id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if(self != nil) {
-        self.animationDuration = 0.0f;
         self.shapeLayer = [[C4ShapeLayer alloc] init];
+        self.animationDuration = 0.001f;
         self.strokeColor = C4RED;
         self.fillColor = C4BLUE;
         self.lineWidth = 5.0f;
+        self.shadowOpacity = 0.8f;
         _isLine = NO;
         [self.layer addSublayer:shapeLayer];
     }
@@ -62,32 +82,46 @@
 
 /* the technique in both the following methods allows me to change the shape of a shape and change the shape of their view's frame automatically */
 -(void)ellipse:(CGRect)aRect {
+    [self performSelector:@selector(_ellipse:) withObject:[NSValue valueWithCGRect:aRect] afterDelay:self.animationDelay];
+}
+-(void)_ellipse:(NSValue *)ellipseValue {
     _isLine = NO;
+    CGRect aRect = [ellipseValue CGRectValue];
     CGMutablePathRef newPath = CGPathCreateMutable();//(self.shapeLayer.path);
     CGRect newPathRect = CGRectMake(0, 0, aRect.size.width, aRect.size.height);
     CGPathAddEllipseInRect(newPath, nil, newPathRect);
-    self.shapeLayer.path = newPath;
+    [self.shapeLayer animatePath:newPath];
     self.frame = aRect;
 }
 
 -(void)rect:(CGRect)aRect {
+    [self performSelector:@selector(_rect:) withObject:[NSValue valueWithCGRect:aRect] afterDelay:self.animationDelay];
+}
+-(void)_rect:(NSValue *)rectValue {
     _isLine = NO;
+    CGRect aRect = [rectValue CGRectValue];
     CGMutablePathRef newPath = CGPathCreateMutable();//(self.shapeLayer.path);
     CGRect newPathRect = CGRectMake(0, 0, aRect.size.width, aRect.size.height);
     CGPathAddRect(newPath, nil, newPathRect);
-    self.shapeLayer.path = newPath;
+    [self.shapeLayer animatePath:newPath];
     self.frame = aRect;
     CGPathRelease(newPath);
 }
 
 -(void)line:(CGPoint *)pointArray {
+    [self performSelector:@selector(_line:) withObject:[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointArray[0]],[NSValue valueWithCGPoint:pointArray[1]], nil] afterDelay:self.animationDelay];
+}
+-(void)_line:(NSArray *)pointArray {
     _isLine = YES;
-    [self polygon:pointArray pointCount:2];
+    [self _polygon:pointArray];
 }
 
 -(void)triangle:(CGPoint *)pointArray {
+    [self performSelector:@selector(_triangle:) withObject:[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointArray[0]],[NSValue valueWithCGPoint:pointArray[1]],[NSValue valueWithCGPoint:pointArray[2]], nil] afterDelay:self.animationDelay];
+}
+-(void)_triangle:(NSArray *)pointArray {
     _isLine = NO;
-    [self polygon:pointArray pointCount:3];
+    [self _polygon:pointArray];
     [self closeShape];
 }
 
@@ -98,65 +132,54 @@
  and then i move the superview to the right position and size
  */
 
-/*
- 
- */
 -(void)polygon:(CGPoint *)pointArray pointCount:(NSInteger)pointCount {
+    NSMutableArray *points = [[NSMutableArray alloc] initWithCapacity:0];
+    for(int i = 0; i < pointCount; i++) {
+        [points addObject:[NSValue valueWithCGPoint:pointArray[i]]];
+    }
+    [self performSelector:@selector(_polygon:) withObject:points afterDelay:self.animationDelay];
+}
+-(void)_polygon:(NSArray *)pointArray {
+    NSInteger pointCount = [pointArray count];
+    CGPoint points[pointCount];
+    for (int i = 0; i < [pointArray count]; i++) {
+        points[i] = [[pointArray objectAtIndex:i] CGPointValue];
+    }
     CGMutablePathRef newPath = CGPathCreateMutable();//(self.shapeLayer.path);
-    CGPathMoveToPoint(newPath, nil, pointArray[0].x, pointArray[0].y);
+    CGPathMoveToPoint(newPath, nil, points[0].x, points[0].y);
     for(int i = 1; i < pointCount; i++) {
-        CGPathAddLineToPoint(newPath, nil, pointArray[i].x, pointArray[i].y);
+        CGPathAddLineToPoint(newPath, nil, points[i].x, points[i].y);
     }
     if(self.isLine) {
-        _pointA = CGPointMake(pointArray[0].x, pointArray[0].y);
-        _pointB = CGPointMake(pointArray[1].x, pointArray[1].y);
+        _pointA = CGPointMake(points[0].x, points[0].y);
+        _pointB = CGPointMake(points[1].x, points[1].y);
     }
     CGRect shapeRect = CGPathGetBoundingBox(newPath);
     CGPoint origin = shapeRect.origin;
     for(int i = 0; i < pointCount; i++) {
-        pointArray[i].x -= origin.x;
-        pointArray[i].y -= origin.y;
+        points[i].x -= origin.x;
+        points[i].y -= origin.y;
     }
     CGPathRelease(newPath);
     newPath = CGPathCreateMutable();
-    CGPathMoveToPoint(newPath, nil, pointArray[0].x, pointArray[0].y);
+    CGPathMoveToPoint(newPath, nil, points[0].x, points[0].y);
     for(int i = 1; i < pointCount; i++) {
-        CGPathAddLineToPoint(newPath, nil, pointArray[i].x, pointArray[i].y);
+        CGPathAddLineToPoint(newPath, nil, points[i].x, points[i].y);
     }
-    self.shapeLayer.path = newPath;
+    [self.shapeLayer animatePath:newPath];
     self.frame = shapeRect;
     CGPathRelease(newPath);
 }
 
--(void)addShape {
-    CGMutablePathRef newPath = CGPathCreateMutable();//(self.shapeLayer.path);
-    CGPathAddEllipseInRect(newPath, nil, CGRectMake(0, 0, 200, 100));
-    CGMutablePathRef shapeLayerPathCopy = CGPathCreateMutableCopy(self.shapeLayer.path);
-    CGPathAddPath(shapeLayerPathCopy, nil, newPath);
-    self.shapeLayer.path = shapeLayerPathCopy;
-    CGRect bounds = CGPathGetBoundingBox(self.shapeLayer.path);
-    bounds.origin = self.frame.origin;
-    self.frame = bounds;
-}
-
--(void)addAnotherShape {
-    CGMutablePathRef newPath = CGPathCreateMutable();//(self.shapeLayer.path);
-    CGPathAddEllipseInRect(newPath, nil, CGRectMake(0, 100, 200, 100));
-    CGMutablePathRef shapeLayerPathCopy = CGPathCreateMutableCopy(self.shapeLayer.path);
-    CGPathAddPath(shapeLayerPathCopy, nil, newPath);
-    self.shapeLayer.path = shapeLayerPathCopy;
-    CGRect bounds = CGPathGetBoundingBox(self.shapeLayer.path);
-    bounds.origin = self.frame.origin;
-    self.frame = bounds;
-    CGPathRelease(newPath);
-}
-
 -(void)closeShape {
+    [self performSelector:@selector(closeShape) withObject:nil afterDelay:self.animationDelay];
+}
+-(void)_closeShape {
     CGFloat tempDuration = self.animationDuration;
     self.animationDuration = 0.0f;
     CGMutablePathRef newPath = CGPathCreateMutableCopy(self.shapeLayer.path);
     CGPathCloseSubpath(newPath);
-    self.shapeLayer.path = newPath;
+    [self.shapeLayer animatePath:newPath];
     CGPathRelease(newPath);
     self.animationDuration = tempDuration;
 }
@@ -176,7 +199,6 @@
 }
 
 -(void)test {
-    C4Log(@"(%4.2f,%4.2f) (%4.2f,%4.2f)",_pointA.x,_pointA.y,_pointB.x,_pointB.y);
 }
 
 -(void)setPointA:(CGPoint)pointA {
@@ -196,55 +218,109 @@
     }
 }
 
--(void)setFillColor:(UIColor *)_fillColor {   
-    self.shapeLayer.fillColor = _fillColor.CGColor;
+-(void)setFillColor:(UIColor *)_fillColor {
+    [self performSelector:@selector(_setFillColor:) withObject:_fillColor afterDelay:self.animationDelay];
+}
+-(void)_setFillColor:(UIColor *)_fillColor {
+    [self.shapeLayer animateFillColor:_fillColor.CGColor];
 }
 
 -(void)setFillRule:(NSString *)_fillRule {
+    [self performSelector:@selector(setFillRule:) withObject:_fillRule afterDelay:self.animationDelay];
+}
+-(void)_setFillRule:(NSString *)_fillRule {
     self.shapeLayer.fillRule = _fillRule;
 }
 
 -(void)setLineCap:(NSString *)_lineCap {
+    [self performSelector:@selector(setLineCap:) withObject:_lineCap afterDelay:self.animationDelay];
+}
+-(void)_setLineCap:(NSString *)_lineCap {
     self.shapeLayer.lineCap = _lineCap;
 }
 
 -(void)setDashPattern:(CGFloat *)dashPattern pointCount:(NSUInteger)pointCount {
     NSMutableArray *patternArray = [[NSMutableArray alloc] initWithCapacity:0];
     for(int i = 0; i < pointCount; i++) [patternArray addObject:[NSNumber numberWithFloat:dashPattern[i]]];
-    self.lineDashPattern = patternArray;
+    [self performSelector:@selector(_setLineDashPattern:) withObject:patternArray afterDelay:self.animationDelay];
 }
+
 -(void)setLineDashPattern:(NSArray *)_lineDashPattern {
-//    NSArray *array = [NSArray arrayWithObjects:[NSNumber numberWithInt:5],[NSNumber numberWithInt:5], nil]; 
+    [self performSelector:@selector(_setLineDashPattern:) withObject:_lineDashPattern afterDelay:self.animationDelay];
+}
+-(void)_setLineDashPattern:(NSArray *)_lineDashPattern {
     self.shapeLayer.lineDashPattern = _lineDashPattern;
 }
 
 -(void)setLineDashPhase:(CGFloat)_lineDashPhase {
-    self.shapeLayer.lineDashPhase = _lineDashPhase;
+    [self performSelector:@selector(_setLineDashPhase:) withObject:[NSNumber numberWithFloat:_lineDashPhase] afterDelay:self.animationDelay];
+}
+-(void)_setLineDashPhase:(NSNumber *)_lineDashPhase {
+    self.shapeLayer.lineDashPhase = [_lineDashPhase floatValue];
 }
 
 -(void)setLineJoin:(NSString *)_lineJoin {
+    [self performSelector:@selector(_setLineJoin:) withObject:_lineJoin afterDelay:self.animationDelay];
+}
+-(void)_setLineJoin:(NSString *)_lineJoin {
     self.shapeLayer.lineJoin = _lineJoin;
 }
 
 -(void)setLineWidth:(CGFloat)_lineWidth {
-    self.shapeLayer.lineWidth = _lineWidth;
+    [self performSelector:@selector(_setLineWidth:) withObject:[NSNumber numberWithFloat:_lineWidth] afterDelay:self.animationDelay];
+}
+-(void)_setLineWidth:(NSNumber *)_lineWidth {
+    [self.shapeLayer animateLineWidth:[_lineWidth floatValue]];
 }
 
--(void)setMitreLimit:(CGFloat)_mitreLimit {
-    self.shapeLayer.miterLimit = _mitreLimit;
+-(void)setMiterLimit:(CGFloat)_miterLimit {
+    [self performSelector:@selector(_setMiterLimit:) withObject:[NSNumber numberWithFloat:_miterLimit] afterDelay:self.animationDelay];
+}
+-(void)_setMiterLimit:(NSNumber *)_miterLimit {
+    [self.shapeLayer animateMiterLimit:[_miterLimit floatValue]];
 }
 
 -(void)setStrokeColor:(UIColor *)_strokeColor {
-    self.shapeLayer.strokeColor = _strokeColor.CGColor;
+    [self performSelector:@selector(_setStrokeColor:) withObject:_strokeColor afterDelay:self.animationDelay];
+}
+-(void)_setStrokeColor:(UIColor *)_strokeColor {
+    [self.shapeLayer animateStrokeColor:_strokeColor.CGColor];
 }
 
 -(void)setStrokeEnd:(CGFloat)_strokeEnd {
-    [self.shapeLayer animateStrokeEnd:_strokeEnd];
-//    self.shapeLayer.strokeEnd = _strokeEnd;
+    [self performSelector:@selector(_setStrokeEnd:) withObject:[NSNumber numberWithFloat:_strokeEnd] afterDelay:self.animationDelay];
+}
+-(void)_setStrokeEnd:(NSNumber *)_strokeEnd {
+    [self.shapeLayer animateStrokeEnd:[_strokeEnd floatValue]];
 }
 
 -(void)setStrokeStart:(CGFloat)_strokeStart {
-    self.shapeLayer.strokeStart = _strokeStart;
+    [self performSelector:@selector(_setStrokeStart:) withObject:[NSNumber numberWithFloat:_strokeStart] afterDelay:self.animationDelay];
+}
+-(void)_setStrokeStart:(NSNumber *)_strokeStart {
+    [self.shapeLayer animateStrokeStart:[_strokeStart floatValue]];
+}
+
+-(void)setShadowOffset:(CGSize)_shadowOffset {
+    [self performSelector:@selector(_setShadowOffSet:) withObject:[NSValue valueWithCGSize:_shadowOffset] afterDelay:self.animationDelay];
+}
+-(void)_setShadowOffSet:(NSValue *)_shadowOffset {
+    [self.shapeLayer animateShadowOffset:[_shadowOffset CGSizeValue]];
+}
+
+-(void)setShadowOpacity:(CGFloat)_shadowOpacity {
+    [self performSelector:@selector(_setShadowOpacity:) withObject:[NSNumber numberWithFloat:_shadowOpacity] afterDelay:self.animationDelay];
+}
+-(void)_setShadowOpacity:(NSNumber *)_shadowOpacity {
+    [self.shapeLayer animateShadowOpacity:[_shadowOpacity floatValue]];
+}
+
+-(void)setShadowRadius:(CGFloat)_shadowRadius {
+    [self performSelector:@selector(_setShadowRadius:) withObject:[NSNumber numberWithFloat:_shadowRadius] afterDelay:self.animationDelay];
+}
+-(void)_setShadowRadius:(NSNumber *)_shadowRadius {
+    C4Log(@"shadow");
+    [self.shapeLayer animateShadowRadius:[_shadowRadius floatValue]];
 }
 
 -(void)setAnimationDuration:(CGFloat)animationDuration {
@@ -271,21 +347,4 @@
     NSInteger animationKeyCount = [self.shapeLayer.animationKeys count];
     return animationKeyCount != 0 ? YES : NO;
 }
-//-(void)animateWithBlock:(void (^)(void))blockAnimation completion:(void (^)(BOOL completed))blockCompletion{
-//    [UIView animateWithDuration:self.animationDuration
-//                          delay:(NSTimeInterval)self.animationDelay
-//                        options:self.animationOptions
-//                     animations:blockAnimation
-//                     completion:blockCompletion];
-//};
-
-//- (id <CAAction>)actionForLayer:(CALayer *)layer forKey:(NSString *)event {
-//    if([layer.name isEqualToString:@"shapeLayer"]) {
-//        CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:event]; // Default Animation for 'event'
-//        animation.duration = 0.0;//((C4ShapeLayer *)layer).animationDuration; // Your custom animation duration
-//        return animation;
-//    }
-//    return nil;
-//}
-
 @end

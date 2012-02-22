@@ -12,7 +12,20 @@
 -(void)setAnimationDurationValue:(CGFloat)duration;
 -(CGFloat)animationDurationValue;
 -(void)test;
+-(void)animatePath:(CGPathRef)_path;
+-(void)animateFillColor:(CGColorRef)_fillColor;
+-(void)animateLineWidth:(CGFloat)_lineWidth;
+-(void)animateMiterLimit:(CGFloat)_miterLimit;
+-(void)animateStrokeColor:(CGColorRef)_strokeColor;
 -(void)animateStrokeEnd:(CGFloat)_strokeEnd;
+-(void)animateStrokeStart:(CGFloat)_strokeStart;
+
+-(void)animateShadowOpacity:(CGFloat)_shadowOpacity;
+-(void)animateShadowRadius:(CGFloat)_shadowRadius;
+-(void)animateShadowOffset:(CGSize)_shadowOffset;
+-(void)animateShadowPath:(CGPathRef)_shadowPath;
+-(void)animateBackgroundFilters:(NSArray *)_backgroundFilters;
+-(void)animateCompositingFilter:(id)_compositingFilter;
 
 @property (readonly) BOOL isShapeLayer;
 @property (nonatomic) NSUInteger animationOptions;

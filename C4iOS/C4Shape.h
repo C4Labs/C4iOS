@@ -10,6 +10,7 @@
 #import "C4ShapeLayer.h"
 
 @interface C4Shape : C4View {
+    @private
     C4ShapeLayer *shapeLayer;
 }
 
@@ -32,11 +33,14 @@
 
 -(void)setDashPattern:(CGFloat *)dashPattern pointCount:(NSUInteger)pointCount;
 -(void)test;
+
 @property (readwrite, strong) C4ShapeLayer *shapeLayer;
 @property (readonly) BOOL isLine;
 @property (readwrite, nonatomic) CGPoint pointA, pointB;
 @property (readwrite, strong, nonatomic) UIColor *fillColor, *strokeColor;
-@property (readwrite, nonatomic) CGFloat lineDashPhase, lineWidth, mitreLimit, strokeEnd, strokeStart;
+@property (readwrite, nonatomic) CGFloat lineDashPhase, lineWidth, miterLimit, strokeEnd, strokeStart, shadowOpacity, shadowRadius;
 @property (readwrite, strong, nonatomic) NSArray *lineDashPattern;
 @property (readwrite, strong, nonatomic) NSString *fillRule, *lineCap, *lineJoin;
+@property (readwrite, nonatomic) CGSize shadowOffset;
+
 @end

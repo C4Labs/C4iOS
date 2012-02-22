@@ -20,7 +20,7 @@
 -(id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if(self != nil) {
-        self.animationDuration = 0.25f;
+        self.animationDuration = 0.0f;
         self.animationDelay = 0.0f;
         self.repeatCount = 0;
     }
@@ -38,8 +38,17 @@
  */
 
 -(void)setCenter:(CGPoint)center {
+    CGPoint oldCenter = self.center;
     [self animateWithBlock:^{
         [super setCenter:center];
+    } completion:^(BOOL completed) {
+        if ((self.animationOptions & AUTOREVERSE) == AUTOREVERSE && self.repeatCount == 0 && completed) {
+            CGFloat oldDuration = self.animationDuration;
+            CGFloat oldDelay = self.animationDelay;
+            [super setCenter:oldCenter];
+            self.animationDuration = oldDuration;
+            self.animationDelay = oldDelay;
+        }
     }];
 }
 
@@ -140,7 +149,7 @@
 -(void)animateWithBlock:(void (^)(void))animationBlock completion:(void (^)(BOOL))completionBlock {
     [UIView animateWithDuration:self.animationDuration
                           delay:(NSTimeInterval)self.animationDelay
-                        options:self.animationOptions 
+                        options:self.animationOptions
                      animations:animationBlock
                      completion:completionBlock];
 };
