@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface C4Object : NSObject
+@interface C4Object : NSObject <C4CommonMethods>
 
 @end

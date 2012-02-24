@@ -15,6 +15,8 @@
 #import <AVFoundation/AVFoundation.h>
 #import <math.h>
 
+#import "C4CommonMethods.h"
+
 #import "C4Defines.h"
 
 //#import "C4AudioPlayer.h"

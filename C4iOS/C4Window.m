@@ -26,7 +26,9 @@
 -(id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if(self != nil) {
+#ifdef VERBOSE
         C4Log(@"%@ initWithFrame",[self class]);
+#endif
     }
     return self;
 }

@@ -8,12 +8,14 @@
 
 #import "C4Shape.h"
 
-@interface C4Shape() 
+@interface C4Shape()
 -(void)_ellipse:(NSValue *)ellipseValue;
 -(void)_rect:(NSValue *)rectValue;
 -(void)_line:(NSArray *)pointArray;
 -(void)_triangle:(NSArray *)pointArray;
 -(void)_polygon:(NSArray *)pointArray;
+-(void)_arc:(NSDictionary *)arcDict;
+-(void)_curve:(NSDictionary *)curveDict;
 -(void)_closeShape;
 -(void)_setFillColor:(UIColor *)_fillColor;
 -(void)_setFillRule:(NSString *)_fillRule;
@@ -43,7 +45,6 @@
         self.strokeColor = C4RED;
         self.fillColor = C4BLUE;
         self.lineWidth = 5.0f;
-        self.shadowOpacity = 0.8f;
         _isLine = NO;
         [self.layer addSublayer:shapeLayer];
     }
@@ -80,6 +81,12 @@
     return newShape;
 }
 
++(C4Shape *)arcWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle {
+    C4Shape *newShape = [[C4Shape alloc] initWithFrame:CGRectZero];
+    [newShape arcWithCenter:centerPoint radius:radius startAngle:startAngle endAngle:endAngle];
+    return newShape;
+}
+
 /* the technique in both the following methods allows me to change the shape of a shape and change the shape of their view's frame automatically */
 -(void)ellipse:(CGRect)aRect {
     [self performSelector:@selector(_ellipse:) withObject:[NSValue valueWithCGRect:aRect] afterDelay:self.animationDelay];
@@ -92,6 +99,68 @@
     CGPathAddEllipseInRect(newPath, nil, newPathRect);
     [self.shapeLayer animatePath:newPath];
     self.frame = aRect;
+}
+
+-(void)arcWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle {
+    NSMutableDictionary *arcDict = [[NSMutableDictionary alloc] initWithCapacity:0];
+    [arcDict setValue:[NSValue valueWithCGPoint:centerPoint] forKey:@"centerPoint"];
+    [arcDict setObject:[NSNumber numberWithFloat:radius] forKey:@"radius"];
+    [arcDict setObject:[NSNumber numberWithFloat:startAngle] forKey:@"startAngle"];
+    [arcDict setObject:[NSNumber numberWithFloat:endAngle] forKey:@"endAngle"];
+    [self performSelector:@selector(_arc:) withObject:arcDict afterDelay:self.animationDelay];
+}
+
+-(void)_arc:(NSDictionary *)arcDict {
+    CGMutablePathRef newPath = CGPathCreateMutable();//(self.shapeLayer.path);
+    CGPoint centerPoint = [[arcDict valueForKey:@"centerPoint"] CGPointValue];
+    CGPathAddArc(newPath, nil, centerPoint.x, centerPoint.y, [[arcDict objectForKey:@"radius"] floatValue], [[arcDict objectForKey:@"startAngle"] floatValue], [[arcDict objectForKey:@"endAngle"] floatValue], YES);
+    CGRect tempFrame = CGPathGetBoundingBox(newPath);
+    CGPathRelease(newPath);
+    newPath = CGPathCreateMutable();
+    CGPathAddArc(newPath, nil, tempFrame.size.width/2.0f, tempFrame.size.height, [[arcDict objectForKey:@"radius"] floatValue], [[arcDict objectForKey:@"startAngle"] floatValue], [[arcDict objectForKey:@"endAngle"] floatValue], YES);
+    self.frame = tempFrame;
+    [self.shapeLayer animatePath:newPath];
+    CGPathRelease(newPath);
+}
+
++(C4Shape *)curve:(CGPoint *)beginEndPointArray controlPoints:(CGPoint *)controlPointArray{
+    C4Shape *newShape = [[C4Shape alloc] initWithFrame:CGRectZero];
+    [newShape curve:beginEndPointArray controlPoints:controlPointArray];
+    return newShape;
+}
+-(void)curve:(CGPoint *)beginEndPointArray controlPoints:(CGPoint *)controlPointArray{
+    NSMutableDictionary *curveDict = [[NSMutableDictionary alloc] initWithCapacity:0];
+    [curveDict setValue:[NSValue valueWithCGPoint:beginEndPointArray[0]] forKey:@"beginPoint"];
+    [curveDict setValue:[NSValue valueWithCGPoint:beginEndPointArray[1]] forKey:@"endPoint"];
+    [curveDict setValue:[NSValue valueWithCGPoint:controlPointArray[0]] forKey:@"controlPoint1"];
+    [curveDict setValue:[NSValue valueWithCGPoint:controlPointArray[1]] forKey:@"controlPoint2"];
+    [self _curve:curveDict];
+}
+-(void)_curve:(NSDictionary *)curveDict{
+    CGMutablePathRef newPath = CGPathCreateMutable();//(self.shapeLayer.path);
+    CGPoint beginPoint = [[curveDict valueForKey:@"beginPoint"] CGPointValue];
+    CGPoint endPoint = [[curveDict valueForKey:@"endPoint"] CGPointValue];
+    CGPoint controlPoint1 = [[curveDict valueForKey:@"controlPoint1"] CGPointValue];
+    CGPoint controlPoint2 = [[curveDict valueForKey:@"controlPoint2"] CGPointValue];
+    CGPathMoveToPoint(newPath, nil, beginPoint.x, beginPoint.y);
+    CGPathAddCurveToPoint(newPath, nil, controlPoint1.x, controlPoint1.y, controlPoint2.x, controlPoint2.y, endPoint.x, endPoint.y);
+    CGRect tempFrame = CGPathGetPathBoundingBox(newPath);
+    CGPoint tempFrameOrigin = tempFrame.origin;
+    beginPoint.x -= tempFrameOrigin.x;
+    beginPoint.y -= tempFrameOrigin.y;
+    endPoint.x -= tempFrameOrigin.x;
+    endPoint.y -= tempFrameOrigin.y;
+    controlPoint1.x -= tempFrameOrigin.x;
+    controlPoint1.y -= tempFrameOrigin.y;
+    controlPoint2.x -= tempFrameOrigin.x;
+    controlPoint2.y -= tempFrameOrigin.y;    
+    CGPathRelease(newPath);
+    newPath = CGPathCreateMutable();
+    CGPathMoveToPoint(newPath, nil, beginPoint.x, beginPoint.y);
+    CGPathAddCurveToPoint(newPath, NULL, controlPoint1.x, controlPoint1.y, controlPoint2.x, controlPoint2.y, endPoint.x, endPoint.y);
+    [self.shapeLayer animatePath:newPath];
+    self.frame = tempFrame;
+    CGPathRelease(newPath);
 }
 
 -(void)rect:(CGRect)aRect {
@@ -329,6 +398,7 @@
 }
 
 -(void)setAnimationOptions:(NSUInteger)animationOptions {
+    animationOptions = animationOptions | UIViewAnimationOptionBeginFromCurrentState;
     [super setAnimationOptions:animationOptions];
     self.shapeLayer.animationOptions = animationOptions;
 }

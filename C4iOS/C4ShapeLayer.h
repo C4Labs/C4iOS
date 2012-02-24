@@ -19,7 +19,6 @@
 -(void)animateStrokeColor:(CGColorRef)_strokeColor;
 -(void)animateStrokeEnd:(CGFloat)_strokeEnd;
 -(void)animateStrokeStart:(CGFloat)_strokeStart;
-
 -(void)animateShadowOpacity:(CGFloat)_shadowOpacity;
 -(void)animateShadowRadius:(CGFloat)_shadowRadius;
 -(void)animateShadowOffset:(CGSize)_shadowOffset;

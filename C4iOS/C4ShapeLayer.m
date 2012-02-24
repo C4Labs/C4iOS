@@ -35,8 +35,9 @@
 }
 
 -(CABasicAnimation *)setupBasicAnimationWithKeyPath:(NSString *)keyPath {
+    double duration = (double)self.animationDuration;
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:keyPath];
-    animation.duration = (double)self.animationDuration;
+    animation.duration = duration;
     animation.timingFunction = [CAMediaTimingFunction functionWithName:self.currentAnimationEasing];
     animation.autoreverses = self.autoreverses;
     animation.repeatCount = self.repeats ? FOREVER : 0;
@@ -56,6 +57,10 @@
 
 -(void)animateFillColor:(CGColorRef)_fillColor {
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"fillColor"];
+    C4Log(@"fillColor");
+    C4Log(@"self.animationDuration: %4.2f",self.animationDuration);
+    C4Log(@"animation.duration: %4.2f",animation.duration);
+
     animation.fromValue = (id)self.fillColor;
     animation.toValue = (__bridge id)_fillColor;   
     [self addAnimation:animation forKey:@"animateFillColor"];
@@ -92,6 +97,9 @@
 
 -(void)animateStrokeEnd:(CGFloat)_strokeEnd {
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"strokeEnd"];
+    C4Log(@"strokeEnd");
+    C4Log(@"self.animationDuration: %4.2f",self.animationDuration);
+    C4Log(@"animation.duration: %4.2f",animation.duration);
     animation.fromValue = [NSNumber numberWithFloat:self.strokeEnd];
     animation.toValue = [NSNumber numberWithFloat:_strokeEnd];
     [self addAnimation:animation forKey:@"animateStrokeEnd"];
@@ -168,7 +176,6 @@
     
     if((animationOptions & REPEAT) == REPEAT) repeats = YES;
     else repeats = NO;
-    C4Log(@"repeats: %@",repeats == YES ? @"YES" : @"NO");
     
     if((animationOptions & ALLOWSINTERACTION) == ALLOWSINTERACTION) allowsInteraction = YES;
     else allowsInteraction = NO;

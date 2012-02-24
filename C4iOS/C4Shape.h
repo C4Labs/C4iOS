@@ -19,9 +19,11 @@
 +(C4Shape *)line:(CGPoint *)pointArray;
 +(C4Shape *)triangle:(CGPoint *)pointArray;
 +(C4Shape *)polygon:(CGPoint *)pointArray pointCount:(NSInteger)pointCount;
-
++(C4Shape *)arcWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle;
++(C4Shape *)curve:(CGPoint *)beginEndPointArray controlPoints:(CGPoint *)controlPointArray;
+-(void)curve:(CGPoint *)beginEndPointArray controlPoints:(CGPoint *)controlPointArray;
 /* 
- add curves and arcs 
+ add curves and arcs
  */
 
 -(void)closeShape;
@@ -30,6 +32,7 @@
 -(void)line:(CGPoint *)pointArray;
 -(void)triangle:(CGPoint *)pointArray;
 -(void)polygon:(CGPoint *)pointArray pointCount:(NSInteger)pointCount;
+-(void)arcWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle;
 
 -(void)setDashPattern:(CGFloat *)dashPattern pointCount:(NSUInteger)pointCount;
 -(void)test;

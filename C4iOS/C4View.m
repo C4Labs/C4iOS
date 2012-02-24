@@ -38,11 +38,11 @@
  */
 
 -(void)setCenter:(CGPoint)center {
-    CGPoint oldCenter = self.center;
+    CGPoint oldCenter = CGPointMake(self.center.x, self.center.y);
     [self animateWithBlock:^{
         [super setCenter:center];
     } completion:^(BOOL completed) {
-        if ((self.animationOptions & AUTOREVERSE) == AUTOREVERSE && self.repeatCount == 0 && completed) {
+        if ((self.animationOptions & AUTOREVERSE) == AUTOREVERSE && completed) {
             CGFloat oldDuration = self.animationDuration;
             CGFloat oldDelay = self.animationDelay;
             [super setCenter:oldCenter];

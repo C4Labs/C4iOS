@@ -88,6 +88,7 @@
 		ED89849414EF1C4800BB7AB0 /* C4Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Color.m; sourceTree = "<group>"; };
 		ED89849614EF1C8700BB7AB0 /* C4Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Object.h; sourceTree = "<group>"; };
 		ED89849714EF1C8700BB7AB0 /* C4Object.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Object.m; sourceTree = "<group>"; };
+		EDAFFAD714F70D5F00CA356A /* C4CommonMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4CommonMethods.h; sourceTree = "<group>"; };
 		EDECBF6A14EAE26600D9A446 /* C4Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Shape.h; sourceTree = "<group>"; };
 		EDECBF6B14EAE26600D9A446 /* C4Shape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Shape.m; sourceTree = "<group>"; };
 		EDF7734D14F361B00094E656 /* C4Math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Math.h; sourceTree = "<group>"; };
@@ -144,14 +145,6 @@
 			children = (
 				ED50C8C314EAC4F70040D844 /* C4CanvasController.h */,
 				ED50C8C414EAC4F70040D844 /* C4CanvasController.m */,
-				ED50C8D414EACA340040D844 /* C4View.h */,
-				ED50C8D514EACA340040D844 /* C4View.m */,
-				EDECBF6A14EAE26600D9A446 /* C4Shape.h */,
-				EDECBF6B14EAE26600D9A446 /* C4Shape.m */,
-				ED89848514EE180400BB7AB0 /* C4ShapeLayer.h */,
-				ED89848614EE180400BB7AB0 /* C4ShapeLayer.m */,
-				EDF7734D14F361B00094E656 /* C4Math.h */,
-				EDF7734E14F361B00094E656 /* C4Math.m */,
 				ED50C8D314EACA0E0040D844 /* Source */,
 				ED50C88C14EAC2010040D844 /* App */,
 			);
@@ -194,10 +187,19 @@
 		ED50C8D314EACA0E0040D844 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				ED50C8D414EACA340040D844 /* C4View.h */,
+				ED50C8D514EACA340040D844 /* C4View.m */,
+				EDECBF6A14EAE26600D9A446 /* C4Shape.h */,
+				EDECBF6B14EAE26600D9A446 /* C4Shape.m */,
+				ED89848514EE180400BB7AB0 /* C4ShapeLayer.h */,
+				ED89848614EE180400BB7AB0 /* C4ShapeLayer.m */,
+				EDF7734D14F361B00094E656 /* C4Math.h */,
+				EDF7734E14F361B00094E656 /* C4Math.m */,
 				ED89849314EF1C4800BB7AB0 /* C4Color.h */,
 				ED89849414EF1C4800BB7AB0 /* C4Color.m */,
 				ED89849614EF1C8700BB7AB0 /* C4Object.h */,
 				ED89849714EF1C8700BB7AB0 /* C4Object.m */,
+				EDAFFAD714F70D5F00CA356A /* C4CommonMethods.h */,
 				ED50C8C614EAC5350040D844 /* C4Canvas.h */,
 				ED50C8C714EAC5350040D844 /* C4Canvas.m */,
 				ED50C8C914EAC5990040D844 /* C4Layer.h */,
