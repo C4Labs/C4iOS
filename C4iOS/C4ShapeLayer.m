@@ -57,10 +57,6 @@
 
 -(void)animateFillColor:(CGColorRef)_fillColor {
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"fillColor"];
-    C4Log(@"fillColor");
-    C4Log(@"self.animationDuration: %4.2f",self.animationDuration);
-    C4Log(@"animation.duration: %4.2f",animation.duration);
-
     animation.fromValue = (id)self.fillColor;
     animation.toValue = (__bridge id)_fillColor;   
     [self addAnimation:animation forKey:@"animateFillColor"];

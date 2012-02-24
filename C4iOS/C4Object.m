@@ -10,4 +10,22 @@
 
 @implementation C4Object
 
+-(void)setup {}
+
+-(void)listenFor:(NSString *)aNotification andRunMethod:(NSString *)aMethodName{
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(aMethodName) name:aNotification object:nil];
+}
+
+-(void)listenFor:(NSString *)aNotification fromObject:(id)anObject andRunMethod:(NSString *)aMethodName {
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(aMethodName) name:aNotification object:anObject];
+}
+
+-(void)stopListeningFor:(NSString *)aMethodName {
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:aMethodName object:nil];
+}
+
+-(void)postNotification:(NSString *)aNotification {
+	[[NSNotificationCenter defaultCenter] postNotificationName:aNotification object:self];
+}
+
 @end

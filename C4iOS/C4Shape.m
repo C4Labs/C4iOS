@@ -37,6 +37,10 @@
 @synthesize isLine =_isLine, shapeLayer, pointA = _pointA, pointB = _pointB;
 @synthesize fillColor, fillRule, lineCap, lineDashPattern, lineDashPhase, lineJoin, lineWidth, miterLimit, strokeColor, strokeEnd, strokeStart, shadowOffset, shadowOpacity, shadowRadius;
 
+-(id)init {
+    return [self initWithFrame:CGRectZero];
+}
+
 -(id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if(self != nil) {
@@ -398,7 +402,6 @@
 }
 
 -(void)setAnimationOptions:(NSUInteger)animationOptions {
-    animationOptions = animationOptions | UIViewAnimationOptionBeginFromCurrentState;
     [super setAnimationOptions:animationOptions];
     self.shapeLayer.animationOptions = animationOptions;
 }
@@ -409,12 +412,25 @@
 //    self.shapeLayer.repeatCount = repeatCount;
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    C4Log(@"hi");
-}
-
 -(BOOL)isAnimating {
     NSInteger animationKeyCount = [self.shapeLayer.animationKeys count];
     return animationKeyCount != 0 ? YES : NO;
+}
+
+-(void)setup {
+    self.animationDuration = 2.0f;
+    self.fillColor = C4GREY;
+}
+
+/* NOTE: YOU CAN'T HIT TEST A CGPATH */
+-(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
+    return CGPathContainsPoint(self.shapeLayer.path, nil, point, nil) ? YES : NO;
+}
+/* 
+ blocked methods
+ */
+
+-(void)addSubview:(UIView *)view {
+    /* NEVER ADD A SUBVIEW TO A SHAPE */
 }
 @end

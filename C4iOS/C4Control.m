@@ -1,18 +1,19 @@
 //
-//  C4View.m
+//  C4Control.m
 //  C4iOS
 //
-//  Created by Travis Kirton on 12-02-14.
+//  Created by Travis Kirton on 12-02-23.
 //  Copyright (c) 2012 POSTFL. All rights reserved.
 //
 
-#import "C4View.h"
-@interface C4View() 
+#import "C4Control.h"
+
+@interface C4Control() 
 -(void)animateWithBlock:(void (^)(void))blockAnimation;
 -(void)animateWithBlock:(void (^)(void))blockAnimation completion:(void (^)(BOOL))completionBlock;
 @end
 
-@implementation C4View
+@implementation C4Control
 
 /* leaving animation delay only to views for now */
 @synthesize animationDuration, animationDelay, animationOptions = _animationOptions, repeatCount = _repeatCount;
@@ -165,7 +166,7 @@
 #pragma mark Common Methods
 -(void)setup {}
 
--(void)listenFor:(NSString *)aNotification andRunMethod:(NSString *)aMethodName{
+-(void)listenFor:(NSString *)aNotification andRunMethod:(NSString *)aMethodName {
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(aMethodName) name:aNotification object:nil];
 }
 
@@ -181,4 +182,20 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName:aNotification object:self];
 }
 
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self postNotification:@"touchesBegan"];
+    [super touchesBegan:touches withEvent:event];
+}
+
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self postNotification:@"touchesMoved"];
+    [super touchesMoved:touches withEvent:event];
+}
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self postNotification:@"touchesEnded"];
+    [super touchesEnded:touches withEvent:event];
+}
+
 @end
+

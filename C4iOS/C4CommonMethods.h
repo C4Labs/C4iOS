@@ -12,6 +12,7 @@
 
 -(void)setup;
 -(void)listenFor:(NSString *)aNotification andRunMethod:(NSString *)aMethodName;
+-(void)listenFor:(NSString *)aNotification fromObject:(id)anObject andRunMethod:(NSString *)aMethodName;
 -(void)stopListeningFor:(NSString *)aMethodName;
 -(void)postNotification:(NSString *)aNotification;
 

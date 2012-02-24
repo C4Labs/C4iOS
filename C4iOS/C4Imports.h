@@ -36,6 +36,7 @@
 //#import "C4String.h"
 //#import "C4TextLayer.h"
 //#import "C4Vector.h"
+#import "C4Control.h"
 #import "C4Window.h"
 
 //#import "C4GlobalShapeAttributes.h"

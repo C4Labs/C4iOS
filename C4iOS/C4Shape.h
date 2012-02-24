@@ -6,10 +6,9 @@
 //  Copyright (c) 2012 POSTFL. All rights reserved.
 //
 
-#import "C4View.h"
 #import "C4ShapeLayer.h"
 
-@interface C4Shape : C4View {
+@interface C4Shape : C4Control {
     @private
     C4ShapeLayer *shapeLayer;
 }
@@ -21,10 +20,6 @@
 +(C4Shape *)polygon:(CGPoint *)pointArray pointCount:(NSInteger)pointCount;
 +(C4Shape *)arcWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle;
 +(C4Shape *)curve:(CGPoint *)beginEndPointArray controlPoints:(CGPoint *)controlPointArray;
--(void)curve:(CGPoint *)beginEndPointArray controlPoints:(CGPoint *)controlPointArray;
-/* 
- add curves and arcs
- */
 
 -(void)closeShape;
 -(void)ellipse:(CGRect)aRect;
@@ -33,6 +28,7 @@
 -(void)triangle:(CGPoint *)pointArray;
 -(void)polygon:(CGPoint *)pointArray pointCount:(NSInteger)pointCount;
 -(void)arcWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle;
+-(void)curve:(CGPoint *)beginEndPointArray controlPoints:(CGPoint *)controlPointArray;
 
 -(void)setDashPattern:(CGFloat *)dashPattern pointCount:(NSUInteger)pointCount;
 -(void)test;
