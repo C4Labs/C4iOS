@@ -27,6 +27,10 @@
     return self;
 }
 
+-(void)addShape:(C4Shape *)aShape {
+    [self addSubview:aShape];
+}
+
 /* don't add this ever...
  creates a:
  CoreAnimation: failed to allocate 3145760 bytes

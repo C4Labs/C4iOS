@@ -30,12 +30,17 @@
     [self setup];
 }
 
+#pragma mark Common Methods
 -(void)setup {
     
 }
 
 -(void)listenFor:(NSString *)aNotification andRunMethod:(NSString *)aMethodName{
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(aMethodName) name:aNotification object:nil];
+}
+
+-(void)listenFor:(NSString *)aNotification fromObject:(id)anObject andRunMethod:(NSString *)aMethodName {
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(aMethodName) name:aNotification object:anObject];
 }
 
 -(void)stopListeningFor:(NSString *)aMethodName {

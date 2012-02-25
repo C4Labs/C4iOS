@@ -392,7 +392,6 @@
     [self performSelector:@selector(_setShadowRadius:) withObject:[NSNumber numberWithFloat:_shadowRadius] afterDelay:self.animationDelay];
 }
 -(void)_setShadowRadius:(NSNumber *)_shadowRadius {
-    C4Log(@"shadow");
     [self.shapeLayer animateShadowRadius:[_shadowRadius floatValue]];
 }
 
@@ -426,6 +425,7 @@
 -(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
     return CGPathContainsPoint(self.shapeLayer.path, nil, point, nil) ? YES : NO;
 }
+
 /* 
  blocked methods
  */

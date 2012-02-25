@@ -10,5 +10,7 @@
 
 @interface C4Window : UIWindow 
     
+-(void)addShape:(C4Shape *)aShape;
+
 @property (readwrite,strong) C4CanvasController *canvasController;
 @end

@@ -26,8 +26,14 @@
 }
 
 -(void)display {
-    if(readyToDisplay) {
-        [super display]; 
-    }
+    if(readyToDisplay) [super display]; 
+}
+
+/* makes sure the background color is never transparent */
+-(void)setBackgroundColor:(CGColorRef)backgroundColor {
+    if (CGColorGetAlpha(backgroundColor) == 1.0f)
+        [super setBackgroundColor:backgroundColor];
+    else 
+        [super setBackgroundColor:CGColorCreateCopyWithAlpha(backgroundColor, 1.0f)];
 }
 @end

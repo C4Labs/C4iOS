@@ -23,8 +23,6 @@
     /* don't do the following !
      self.canvasController.view = self.window;
      */
-
-//    self.canvasController.canvas = (C4Canvas *)self.window.layer;
     
     [self.window makeKeyAndVisible];
 //    [[AVAudioSession sharedInstance] setDelegate:self.canvasController];

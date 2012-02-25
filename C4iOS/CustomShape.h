@@ -13,4 +13,12 @@
 -(void)blueSquare;
 -(void)redCircle;
 -(void)redSquare;
+-(void)greySquare;
+-(void)circle;
+-(void)greenCircle;
+-(void)swipedRight;
+-(void)swipedLeft;
+-(void)swipedUp;
+-(void)swipedDown;
+-(void)orangeRect;
 @end

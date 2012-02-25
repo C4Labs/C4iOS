@@ -35,8 +35,8 @@
 		ED50C8D614EACA340040D844 /* C4View.m in Sources */ = {isa = PBXBuildFile; fileRef = ED50C8D514EACA340040D844 /* C4View.m */; };
 		ED80BBC014F0648800AAD49C /* C4Defines.m in Sources */ = {isa = PBXBuildFile; fileRef = ED80BBBF14F0648800AAD49C /* C4Defines.m */; };
 		ED89848714EE180400BB7AB0 /* C4ShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED89848614EE180400BB7AB0 /* C4ShapeLayer.m */; };
-		ED89849514EF1C4800BB7AB0 /* C4Color.m in Sources */ = {isa = PBXBuildFile; fileRef = ED89849414EF1C4800BB7AB0 /* C4Color.m */; };
 		ED89849814EF1C8800BB7AB0 /* C4Object.m in Sources */ = {isa = PBXBuildFile; fileRef = ED89849714EF1C8700BB7AB0 /* C4Object.m */; };
+		ED979F3514F875AF00645114 /* C4Gesture.m in Sources */ = {isa = PBXBuildFile; fileRef = ED979F3414F875AF00645114 /* C4Gesture.m */; };
 		EDAFFAF014F7602F00CA356A /* C4Control.m in Sources */ = {isa = PBXBuildFile; fileRef = EDAFFAEF14F7602F00CA356A /* C4Control.m */; };
 		EDAFFAFC14F77E1400CA356A /* CustomShape.m in Sources */ = {isa = PBXBuildFile; fileRef = EDAFFAFB14F77E1400CA356A /* CustomShape.m */; };
 		EDECBF6C14EAE26700D9A446 /* C4Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = EDECBF6B14EAE26600D9A446 /* C4Shape.m */; };
@@ -86,10 +86,10 @@
 		ED80BBBF14F0648800AAD49C /* C4Defines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Defines.m; sourceTree = "<group>"; };
 		ED89848514EE180400BB7AB0 /* C4ShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4ShapeLayer.h; sourceTree = "<group>"; };
 		ED89848614EE180400BB7AB0 /* C4ShapeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4ShapeLayer.m; sourceTree = "<group>"; };
-		ED89849314EF1C4800BB7AB0 /* C4Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Color.h; sourceTree = "<group>"; };
-		ED89849414EF1C4800BB7AB0 /* C4Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Color.m; sourceTree = "<group>"; };
 		ED89849614EF1C8700BB7AB0 /* C4Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Object.h; sourceTree = "<group>"; };
 		ED89849714EF1C8700BB7AB0 /* C4Object.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Object.m; sourceTree = "<group>"; };
+		ED979F3314F875AF00645114 /* C4Gesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Gesture.h; sourceTree = "<group>"; };
+		ED979F3414F875AF00645114 /* C4Gesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Gesture.m; sourceTree = "<group>"; };
 		EDAFFAD714F70D5F00CA356A /* C4CommonMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4CommonMethods.h; sourceTree = "<group>"; };
 		EDAFFAEE14F7602F00CA356A /* C4Control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Control.h; sourceTree = "<group>"; };
 		EDAFFAEF14F7602F00CA356A /* C4Control.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Control.m; sourceTree = "<group>"; };
@@ -205,8 +205,6 @@
 				ED89848614EE180400BB7AB0 /* C4ShapeLayer.m */,
 				EDF7734D14F361B00094E656 /* C4Math.h */,
 				EDF7734E14F361B00094E656 /* C4Math.m */,
-				ED89849314EF1C4800BB7AB0 /* C4Color.h */,
-				ED89849414EF1C4800BB7AB0 /* C4Color.m */,
 				ED89849614EF1C8700BB7AB0 /* C4Object.h */,
 				ED89849714EF1C8700BB7AB0 /* C4Object.m */,
 				EDAFFAD714F70D5F00CA356A /* C4CommonMethods.h */,
@@ -214,6 +212,8 @@
 				ED50C8C714EAC5350040D844 /* C4Canvas.m */,
 				ED50C8C914EAC5990040D844 /* C4Layer.h */,
 				ED50C8CA14EAC5990040D844 /* C4Layer.m */,
+				ED979F3314F875AF00645114 /* C4Gesture.h */,
+				ED979F3414F875AF00645114 /* C4Gesture.m */,
 				ED50C8CC14EAC61C0040D844 /* C4Foundation.h */,
 				ED50C8CD14EAC61D0040D844 /* C4Foundation.m */,
 				ED50C89414EAC2010040D844 /* C4AppDelegate.h */,
@@ -310,12 +310,12 @@
 				ED50C8D614EACA340040D844 /* C4View.m in Sources */,
 				EDECBF6C14EAE26700D9A446 /* C4Shape.m in Sources */,
 				ED89848714EE180400BB7AB0 /* C4ShapeLayer.m in Sources */,
-				ED89849514EF1C4800BB7AB0 /* C4Color.m in Sources */,
 				ED89849814EF1C8800BB7AB0 /* C4Object.m in Sources */,
 				ED80BBC014F0648800AAD49C /* C4Defines.m in Sources */,
 				EDF7734F14F361B00094E656 /* C4Math.m in Sources */,
 				EDAFFAF014F7602F00CA356A /* C4Control.m in Sources */,
 				EDAFFAFC14F77E1400CA356A /* CustomShape.m in Sources */,
+				ED979F3514F875AF00645114 /* C4Gesture.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

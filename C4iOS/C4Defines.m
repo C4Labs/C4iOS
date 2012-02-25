@@ -8,7 +8,7 @@
 
 #import "C4Defines.h"
 
-BOOL VERBOSELOAD = YES;
+BOOL VERBOSELOAD = NO;
 
 const CGFloat FOREVER = HUGE_VALF;
 

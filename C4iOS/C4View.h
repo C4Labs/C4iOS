@@ -11,6 +11,8 @@
 @interface C4View : UIView <C4CommonMethods> {
 }
 
+-(void)addShape:(C4Shape *)aShape;
+
 @property CGFloat animationDuration, animationDelay;
 @property (nonatomic) NSUInteger animationOptions;
 @property (nonatomic) CGFloat repeatCount;

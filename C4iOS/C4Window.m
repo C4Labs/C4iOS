@@ -37,12 +37,14 @@
 #ifdef VERBOSE
     C4Log(@"%@ awakeFromNib",[self class]);
 #endif
-    C4Log(@"%@ awakeFromNib",[self class]);
-    [(C4Canvas *)[self layer] setup];
 }
 
 -(void)drawRect:(CGRect)rect {
     [self.layer display];
+}
+
+-(void)addShape:(C4Shape *)aShape {
+    [self addSubview:aShape];
 }
 
 /*
