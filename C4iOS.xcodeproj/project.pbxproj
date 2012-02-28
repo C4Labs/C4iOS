@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED10F17214FC0BDE00B54390 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED10F17114FC0BDE00B54390 /* CoreText.framework */; };
 		ED50C88614EAC2010040D844 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED50C88514EAC2010040D844 /* UIKit.framework */; };
 		ED50C88814EAC2010040D844 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED50C88714EAC2010040D844 /* Foundation.framework */; };
 		ED50C88A14EAC2010040D844 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED50C88914EAC2010040D844 /* CoreGraphics.framework */; };
@@ -36,7 +37,11 @@
 		ED80BBC014F0648800AAD49C /* C4Defines.m in Sources */ = {isa = PBXBuildFile; fileRef = ED80BBBF14F0648800AAD49C /* C4Defines.m */; };
 		ED89848714EE180400BB7AB0 /* C4ShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED89848614EE180400BB7AB0 /* C4ShapeLayer.m */; };
 		ED89849814EF1C8800BB7AB0 /* C4Object.m in Sources */ = {isa = PBXBuildFile; fileRef = ED89849714EF1C8700BB7AB0 /* C4Object.m */; };
-		ED979F3514F875AF00645114 /* C4Gesture.m in Sources */ = {isa = PBXBuildFile; fileRef = ED979F3414F875AF00645114 /* C4Gesture.m */; };
+		ED900CEF14FBF2B4006C2AED /* C4Font.m in Sources */ = {isa = PBXBuildFile; fileRef = ED900CEE14FBF2B3006C2AED /* C4Font.m */; };
+		ED900CF514FBFCDD006C2AED /* C4TextLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED900CF414FBFCDB006C2AED /* C4TextLayer.m */; };
+		ED979F3914F8D13400645114 /* TestView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED979F3814F8D13400645114 /* TestView.m */; };
+		ED979F3F14F95EFF00645114 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED979F3E14F95EFF00645114 /* CoreImage.framework */; };
+		EDA7014914FC496300A0D77D /* C4Label.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA7014814FC496300A0D77D /* C4Label.m */; };
 		EDAFFAF014F7602F00CA356A /* C4Control.m in Sources */ = {isa = PBXBuildFile; fileRef = EDAFFAEF14F7602F00CA356A /* C4Control.m */; };
 		EDAFFAFC14F77E1400CA356A /* CustomShape.m in Sources */ = {isa = PBXBuildFile; fileRef = EDAFFAFB14F77E1400CA356A /* CustomShape.m */; };
 		EDECBF6C14EAE26700D9A446 /* C4Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = EDECBF6B14EAE26600D9A446 /* C4Shape.m */; };
@@ -44,6 +49,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		ED10F17114FC0BDE00B54390 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		ED50C88114EAC2010040D844 /* C4iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = C4iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED50C88514EAC2010040D844 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		ED50C88714EAC2010040D844 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -88,8 +94,15 @@
 		ED89848614EE180400BB7AB0 /* C4ShapeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4ShapeLayer.m; sourceTree = "<group>"; };
 		ED89849614EF1C8700BB7AB0 /* C4Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Object.h; sourceTree = "<group>"; };
 		ED89849714EF1C8700BB7AB0 /* C4Object.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Object.m; sourceTree = "<group>"; };
-		ED979F3314F875AF00645114 /* C4Gesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Gesture.h; sourceTree = "<group>"; };
-		ED979F3414F875AF00645114 /* C4Gesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Gesture.m; sourceTree = "<group>"; };
+		ED900CED14FBF2B3006C2AED /* C4Font.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Font.h; sourceTree = "<group>"; };
+		ED900CEE14FBF2B3006C2AED /* C4Font.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Font.m; sourceTree = "<group>"; };
+		ED900CF314FBFCDA006C2AED /* C4TextLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4TextLayer.h; sourceTree = "<group>"; };
+		ED900CF414FBFCDB006C2AED /* C4TextLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4TextLayer.m; sourceTree = "<group>"; };
+		ED979F3714F8D13300645114 /* TestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestView.h; sourceTree = "<group>"; };
+		ED979F3814F8D13400645114 /* TestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestView.m; sourceTree = "<group>"; };
+		ED979F3E14F95EFF00645114 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		EDA7014714FC496300A0D77D /* C4Label.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Label.h; sourceTree = "<group>"; };
+		EDA7014814FC496300A0D77D /* C4Label.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Label.m; sourceTree = "<group>"; };
 		EDAFFAD714F70D5F00CA356A /* C4CommonMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4CommonMethods.h; sourceTree = "<group>"; };
 		EDAFFAEE14F7602F00CA356A /* C4Control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Control.h; sourceTree = "<group>"; };
 		EDAFFAEF14F7602F00CA356A /* C4Control.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Control.m; sourceTree = "<group>"; };
@@ -106,6 +119,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED10F17214FC0BDE00B54390 /* CoreText.framework in Frameworks */,
+				ED979F3F14F95EFF00645114 /* CoreImage.framework in Frameworks */,
 				ED50C8D214EAC92F0040D844 /* QuartzCore.framework in Frameworks */,
 				ED50C8D014EAC77C0040D844 /* AVFoundation.framework in Frameworks */,
 				ED50C88614EAC2010040D844 /* UIKit.framework in Frameworks */,
@@ -139,6 +154,8 @@
 			children = (
 				ED50C8CF14EAC77C0040D844 /* AVFoundation.framework */,
 				ED50C88914EAC2010040D844 /* CoreGraphics.framework */,
+				ED979F3E14F95EFF00645114 /* CoreImage.framework */,
+				ED10F17114FC0BDE00B54390 /* CoreText.framework */,
 				ED50C88714EAC2010040D844 /* Foundation.framework */,
 				ED50C8D114EAC92F0040D844 /* QuartzCore.framework */,
 				ED50C88514EAC2010040D844 /* UIKit.framework */,
@@ -153,6 +170,7 @@
 				ED50C8C414EAC4F70040D844 /* C4CanvasController.m */,
 				EDAFFAFA14F77E1400CA356A /* CustomShape.h */,
 				EDAFFAFB14F77E1400CA356A /* CustomShape.m */,
+				ED900CEB14FBF286006C2AED /* Test Files */,
 				ED50C8D314EACA0E0040D844 /* Source */,
 				ED50C88C14EAC2010040D844 /* App */,
 			);
@@ -212,8 +230,6 @@
 				ED50C8C714EAC5350040D844 /* C4Canvas.m */,
 				ED50C8C914EAC5990040D844 /* C4Layer.h */,
 				ED50C8CA14EAC5990040D844 /* C4Layer.m */,
-				ED979F3314F875AF00645114 /* C4Gesture.h */,
-				ED979F3414F875AF00645114 /* C4Gesture.m */,
 				ED50C8CC14EAC61C0040D844 /* C4Foundation.h */,
 				ED50C8CD14EAC61D0040D844 /* C4Foundation.m */,
 				ED50C89414EAC2010040D844 /* C4AppDelegate.h */,
@@ -224,6 +240,21 @@
 				ED50C8BB14EAC3B10040D844 /* UITouch+C4Touch.m */,
 			);
 			name = Source;
+			sourceTree = "<group>";
+		};
+		ED900CEB14FBF286006C2AED /* Test Files */ = {
+			isa = PBXGroup;
+			children = (
+				EDA7014714FC496300A0D77D /* C4Label.h */,
+				EDA7014814FC496300A0D77D /* C4Label.m */,
+				ED900CF314FBFCDA006C2AED /* C4TextLayer.h */,
+				ED900CF414FBFCDB006C2AED /* C4TextLayer.m */,
+				ED900CED14FBF2B3006C2AED /* C4Font.h */,
+				ED900CEE14FBF2B3006C2AED /* C4Font.m */,
+				ED979F3714F8D13300645114 /* TestView.h */,
+				ED979F3814F8D13400645114 /* TestView.m */,
+			);
+			name = "Test Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -315,7 +346,10 @@
 				EDF7734F14F361B00094E656 /* C4Math.m in Sources */,
 				EDAFFAF014F7602F00CA356A /* C4Control.m in Sources */,
 				EDAFFAFC14F77E1400CA356A /* CustomShape.m in Sources */,
-				ED979F3514F875AF00645114 /* C4Gesture.m in Sources */,
+				ED979F3914F8D13400645114 /* TestView.m in Sources */,
+				ED900CEF14FBF2B4006C2AED /* C4Font.m in Sources */,
+				ED900CF514FBFCDD006C2AED /* C4TextLayer.m in Sources */,
+				EDA7014914FC496300A0D77D /* C4Label.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

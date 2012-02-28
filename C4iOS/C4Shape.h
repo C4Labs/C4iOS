@@ -13,6 +13,10 @@
     C4ShapeLayer *shapeLayer;
 }
 
+/*
+ should add adding shapes to shapes
+ */
+
 +(C4Shape *)ellipse:(CGRect)aRect;
 +(C4Shape *)rect:(CGRect)aRect;
 +(C4Shape *)line:(CGPoint *)pointArray;

@@ -9,17 +9,19 @@
 #ifndef C4iOSDevelopment_C4Defines_h
 #define C4iOSDevelopment_C4Defines_h
 
-#ifndef C4RED
-#define C4RED [UIColor colorWithRed:1.0f green:0.196 blue:0.196 alpha:1.0f];
+/* NOT SUPPOSED TO USE #DEFINES, BUT HERE WE DON'T WANT PEOPLE TO CHANGE THE VALUE OF THESE VARIABLES */
+#ifndef C4_DEFAULT_COLORS
+#define C4RED [UIColor colorWithRed:1.0f green:0.196 blue:0.196 alpha:1.0f]
+#define C4BLUE [UIColor colorWithRed:0.196 green:0.392 blue:1.0f alpha:1.0f]
+#define C4GREY [UIColor colorWithRed:0.125 green:0.125 blue:0.125 alpha:1.0f]
 #endif
 
-#ifndef C4BLUE
-#define C4BLUE [UIColor colorWithRed:0.196 green:0.392 blue:1.0f alpha:1.0f];
+#ifndef C4_DEFAULT_FONTNAMES
+#define SYSTEMFONTNAME [[UIFont systemFontOfSize:12.0f] fontName]
+#define BOLDSYSTEMFONTNAME [[UIFont boldSystemFontOfSize:12.0f] fontName]
+#define ITALICSYSTEMFONTNAME [[UIFont italicSystemFontOfSize:12.0f] fontName]
 #endif
 
-#ifndef C4GREY
-#define C4GREY [UIColor colorWithRed:0.125 green:0.125 blue:0.125 alpha:1.0f];
-#endif
 
 //UIKIT_EXTERN NSString *const EASEIN, *const EASEINOUT, *const EASEOUT, *const LINEAR, *const DEFAULT;
 
@@ -31,10 +33,11 @@ UIKIT_EXTERN BOOL VERBOSELOAD;
 UIKIT_EXTERN const CGFloat QUARTER_PI, HALF_PI, PI, TWO_PI, ONE_OVER_PI, TWO_OVER_PI, TWO_OVER_ROOT_PI, E, LOG2E, LOG10E, LN2, LN10, SQRT_TWO, SQRT_ONE_OVER_TWO;
 
 enum {
+    
     ALLOWSINTERACTION = UIViewAnimationOptionAllowUserInteraction,
-//    UIViewAnimationOptionBeginFromCurrentState     = 1 <<  2,
-        REPEAT = UIViewAnimationOptionRepeat,
-        AUTOREVERSE = UIViewAnimationOptionAutoreverse,
+    BEGINCURRENT = UIViewAnimationOptionBeginFromCurrentState,
+    REPEAT = UIViewAnimationOptionRepeat,
+    AUTOREVERSE = UIViewAnimationOptionAutoreverse,
 //    UIViewAnimationOptionOverrideInheritedDuration = 1 <<  5,
 //    UIViewAnimationOptionOverrideInheritedCurve    = 1 <<  6,
 //    UIViewAnimationOptionAllowAnimatedContent      = 1 <<  7,

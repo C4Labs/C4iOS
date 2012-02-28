@@ -23,7 +23,7 @@
 #import "C4Object.h"
 #import "C4Math.h"
 //#import "C4DateTime.h"
-//#import "C4Font.h"
+#import "C4Font.h"
 #import "C4Foundation.h"
 //#import "C4Image.h"
 #import "C4Control.h"

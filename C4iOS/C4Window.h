@@ -12,5 +12,5 @@
     
 -(void)addShape:(C4Shape *)aShape;
 
-@property (readwrite,strong) C4CanvasController *canvasController;
+@property (readwrite, strong) C4CanvasController *canvasController;
 @end

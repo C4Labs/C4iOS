@@ -11,11 +11,12 @@
 @interface C4Control() 
 -(void)animateWithBlock:(void (^)(void))blockAnimation;
 -(void)animateWithBlock:(void (^)(void))blockAnimation completion:(void (^)(BOOL))completionBlock;
+-(void)pressedLong:(id)sender;
+@property (readwrite,strong) NSString *longPressMethodName;
 @end
 
 @implementation C4Control
-
-/* leaving animation delay only to views for now */
+@synthesize longPressMethodName;
 @synthesize animationDuration, animationDelay, animationOptions = _animationOptions, repeatCount = _repeatCount;
 @synthesize gestureDictionary;
 
@@ -24,6 +25,7 @@
     if(self != nil) {
         self.animationDuration = 0.0f;
         self.animationDelay = 0.0f;
+        self.animationOptions = BEGINCURRENT;
         self.repeatCount = 0;
     }
     return self;
@@ -115,7 +117,7 @@
 }
 
 -(void)setBackgroundColor:(UIColor *)backgroundColor {
-    UIColor *oldBackgroundColor = [self.backgroundColor copy];
+    UIColor *oldBackgroundColor = self.backgroundColor;
     [self animateWithBlock:^{
         [super setBackgroundColor:backgroundColor];
     } completion:^(BOOL completed) {
@@ -157,7 +159,7 @@
 };
 
 -(void)setAnimationOptions:(NSUInteger)animationOptions {
-    _animationOptions = animationOptions | UIViewAnimationOptionBeginFromCurrentState;
+    _animationOptions = animationOptions | BEGINCURRENT;
 }
 
 -(BOOL)isAnimating {
@@ -207,8 +209,8 @@
             ((UISwipeGestureRecognizer *)recognizer).direction = SWIPEDIRDOWN;
             break;
         case LONGPRESS:
-            recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:NSSelectorFromString(methodName)];
-            ((UILongPressGestureRecognizer *)recognizer).minimumPressDuration = 1.0f;
+            self.longPressMethodName = methodName;
+            recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(pressedLong:)];
         default:
             break;
     }
@@ -295,5 +297,31 @@
     [super touchesEnded:touches withEvent:event];
 }
 
+
+-(void)swipedRight {
+    C4Log(@"swipedRight");
+}
+
+-(void)swipedLeft {
+    C4Log(@"swipedLeft");
+}
+
+-(void)swipedUp {
+    C4Log(@"swipedUp");
+}
+
+-(void)swipedDown {
+    C4Log(@"swipedDown");
+}
+
+-(void)pressedLong {
+    C4Log(@"pressedLong");
+}
+
+-(void)pressedLong:(id)sender {
+    if(((UIGestureRecognizer *)sender).state == UIGestureRecognizerStateBegan
+       && [((UIGestureRecognizer *)sender) isKindOfClass:[UILongPressGestureRecognizer class]])
+        [self sendAction:NSSelectorFromString(self.longPressMethodName) to:self forEvent:nil];
+}
 @end
 

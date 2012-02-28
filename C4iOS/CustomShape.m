@@ -57,7 +57,7 @@
 }
 
 -(void)circle {
-//    self.animationOptions = AUTOREVERSE;
+    self.animationOptions = AUTOREVERSE;
     self.animationDuration = 1.0f;
     self.lineWidth = 5.0f;
     self.fillColor = [UIColor clearColor];
@@ -92,18 +92,12 @@
 -(void)swipedDown {
     [self redSquare];
 }
+-(void)pressedLong {
+    [self greenCircle];
+}
 
--(void)move:(id)sender {
-    CGFloat _ani = self.animationOptions;
-    CGFloat _dur = self.animationDuration;
-    CGFloat _del = self.animationDelay;
-    self.animationDuration = 0;
-    self.animationDelay = 0;
-    self.animationOptions = 0;
-    CGPoint tranlatedPoint = [(UIPanGestureRecognizer *)sender locationInView:self];
-    self.center = CGPointMake(self.center.x + tranlatedPoint.x - self.frame.size.width/2.0f, self.center.y+tranlatedPoint.y-self.frame.size.height/2.0f);
-    self.animationDuration = _dur;
-    self.animationDelay = _del;
-    self.animationOptions = _ani;
+-(void)touchesBegan {
+//    self.animationOptions = AUTOREVERSE;
+    [self circle];
 }
 @end

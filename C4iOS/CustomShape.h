@@ -16,9 +16,5 @@
 -(void)greySquare;
 -(void)circle;
 -(void)greenCircle;
--(void)swipedRight;
--(void)swipedLeft;
--(void)swipedUp;
--(void)swipedDown;
 -(void)orangeRect;
 @end

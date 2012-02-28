@@ -22,6 +22,7 @@
     if(self != nil) {
         self.animationDuration = 0.0f;
         self.animationDelay = 0.0f;
+        self.animationOptions = BEGINCURRENT;
         self.repeatCount = 0;
     }
     return self;
@@ -117,7 +118,7 @@
 }
 
 -(void)setBackgroundColor:(UIColor *)backgroundColor {
-    UIColor *oldBackgroundColor = [self.backgroundColor copy];
+    UIColor *oldBackgroundColor = self.backgroundColor;
     [self animateWithBlock:^{
         [super setBackgroundColor:backgroundColor];
     } completion:^(BOOL completed) {
@@ -159,7 +160,7 @@
 };
 
 -(void)setAnimationOptions:(NSUInteger)animationOptions {
-    _animationOptions = animationOptions | UIViewAnimationOptionBeginFromCurrentState;
+    _animationOptions = animationOptions;
 }
 
 -(BOOL)isAnimating {

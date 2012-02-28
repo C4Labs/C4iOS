@@ -41,7 +41,7 @@
     animation.timingFunction = [CAMediaTimingFunction functionWithName:self.currentAnimationEasing];
     animation.autoreverses = self.autoreverses;
     animation.repeatCount = self.repeats ? FOREVER : 0;
-    animation.fillMode = kCAFillModeBoth;
+//    animation.fillMode = kCAFillModeForwards;
     animation.removedOnCompletion = YES;
     animation.delegate = self;
     return animation;
@@ -93,9 +93,6 @@
 
 -(void)animateStrokeEnd:(CGFloat)_strokeEnd {
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"strokeEnd"];
-    C4Log(@"strokeEnd");
-    C4Log(@"self.animationDuration: %4.2f",self.animationDuration);
-    C4Log(@"animation.duration: %4.2f",animation.duration);
     animation.fromValue = [NSNumber numberWithFloat:self.strokeEnd];
     animation.toValue = [NSNumber numberWithFloat:_strokeEnd];
     [self addAnimation:animation forKey:@"animateStrokeEnd"];
@@ -153,6 +150,11 @@
 /* in the following method
  if we implement other kinds of options, we'll have to get rid of the returns...
  reversing how i check the values, if linear is at the bottom, then all the other values get called
+ */
+/*
+ SMALL GLITCH
+ IN THE SIMULATOR THIS DOESN'T HAPPEN, BUT ON AN IPAD2...
+ BEFORE THE ANIMATIONDIDSTOP: CALL GETS MADE, THE ANIMATION FLIPS TO THE ORIGINAL SHAPE FOR A SPLIT SECOND
  */
 -(void)setAnimationOptions:(NSUInteger)animationOptions {
     if((animationOptions & LINEAR) == LINEAR) {
