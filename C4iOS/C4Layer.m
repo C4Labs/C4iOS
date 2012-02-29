@@ -30,7 +30,7 @@
     [self setup];
 }
 
-#pragma mark Common Methods
+#pragma mark Notification Methods
 -(void)setup {
     
 }

@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol C4CommonMethods <NSObject>
+@protocol C4NotificationMethods <NSObject>
 
-#pragma mark Common Methods
+#pragma mark Notification Methods
 -(void)setup;
 -(void)listenFor:(NSString *)aNotification andRunMethod:(NSString *)aMethodName;
 -(void)listenFor:(NSString *)aNotification fromObject:(id)anObject andRunMethod:(NSString *)aMethodName;

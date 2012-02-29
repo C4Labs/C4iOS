@@ -39,7 +39,7 @@
 
 @property (readwrite, strong) C4ShapeLayer *shapeLayer;
 @property (readonly) BOOL isLine;
-@property (readwrite, nonatomic) CGPoint pointA, pointB;
+@property (readwrite, nonatomic) CGPoint pointA, pointB, origin;
 @property (readwrite, strong, nonatomic) UIColor *fillColor, *strokeColor;
 @property (readwrite, nonatomic) CGFloat lineDashPhase, lineWidth, miterLimit, strokeEnd, strokeStart, shadowOpacity, shadowRadius;
 @property (readwrite, strong, nonatomic) NSArray *lineDashPattern;

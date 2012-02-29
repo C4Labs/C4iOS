@@ -10,7 +10,7 @@
 
 @implementation C4Object
 
-#pragma mark Common Methods
+#pragma mark Notification Methods
 -(void)setup {}
 
 -(void)listenFor:(NSString *)aNotification andRunMethod:(NSString *)aMethodName{

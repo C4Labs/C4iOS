@@ -15,9 +15,9 @@
 #import <AVFoundation/AVFoundation.h>
 #import <math.h>
 
-#import "C4CommonMethods.h"
-
 #import "C4Defines.h"
+#import "C4NotificationMethods.h"
+#import "C4GestureMethods.h"
 
 //#import "C4AudioPlayer.h"
 #import "C4Object.h"

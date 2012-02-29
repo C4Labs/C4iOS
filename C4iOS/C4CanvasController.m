@@ -8,6 +8,21 @@
 
 #import "C4CanvasController.h"
 #import "C4Font.h"
+#import "C4Label.h"
+
+//@implementation C4CanvasController
+//@synthesize canvas;
+//-(void)setup {
+//    canvas = (C4View *)self.view;
+//    C4Label *newLabel = [[C4Label alloc] initWithFrame:CGRectMake(0, 0, 180, 100)];
+////    [newLabel sizeToFit];
+//    newLabel.text = @"there";
+//    newLabel.center = CGPointMake(100, 200);
+//    newLabel.backgroundColor = [UIColor lightGrayColor];
+//    [canvas addSubview:newLabel];
+//}
+//
+//@end
 
 //@implementation C4CanvasController
 //@synthesize canvas;
@@ -109,7 +124,7 @@
 //}
 
 //@end
-
+//
 #import "CustomShape.h"
 
 @interface C4CanvasController ()

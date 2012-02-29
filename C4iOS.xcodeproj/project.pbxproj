@@ -103,11 +103,12 @@
 		ED979F3E14F95EFF00645114 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		EDA7014714FC496300A0D77D /* C4Label.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Label.h; sourceTree = "<group>"; };
 		EDA7014814FC496300A0D77D /* C4Label.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Label.m; sourceTree = "<group>"; };
-		EDAFFAD714F70D5F00CA356A /* C4CommonMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4CommonMethods.h; sourceTree = "<group>"; };
+		EDAFFAD714F70D5F00CA356A /* C4NotificationMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4NotificationMethods.h; sourceTree = "<group>"; };
 		EDAFFAEE14F7602F00CA356A /* C4Control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Control.h; sourceTree = "<group>"; };
 		EDAFFAEF14F7602F00CA356A /* C4Control.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Control.m; sourceTree = "<group>"; };
 		EDAFFAFA14F77E1400CA356A /* CustomShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomShape.h; sourceTree = "<group>"; };
 		EDAFFAFB14F77E1400CA356A /* CustomShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomShape.m; sourceTree = "<group>"; };
+		EDCEA5A514FD7567009969F2 /* C4GestureMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4GestureMethods.h; sourceTree = "<group>"; };
 		EDECBF6A14EAE26600D9A446 /* C4Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Shape.h; sourceTree = "<group>"; };
 		EDECBF6B14EAE26600D9A446 /* C4Shape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Shape.m; sourceTree = "<group>"; };
 		EDF7734D14F361B00094E656 /* C4Math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Math.h; sourceTree = "<group>"; };
@@ -168,8 +169,8 @@
 			children = (
 				ED50C8C314EAC4F70040D844 /* C4CanvasController.h */,
 				ED50C8C414EAC4F70040D844 /* C4CanvasController.m */,
-				EDAFFAFA14F77E1400CA356A /* CustomShape.h */,
-				EDAFFAFB14F77E1400CA356A /* CustomShape.m */,
+				EDA7014714FC496300A0D77D /* C4Label.h */,
+				EDA7014814FC496300A0D77D /* C4Label.m */,
 				ED900CEB14FBF286006C2AED /* Test Files */,
 				ED50C8D314EACA0E0040D844 /* Source */,
 				ED50C88C14EAC2010040D844 /* App */,
@@ -225,7 +226,8 @@
 				EDF7734E14F361B00094E656 /* C4Math.m */,
 				ED89849614EF1C8700BB7AB0 /* C4Object.h */,
 				ED89849714EF1C8700BB7AB0 /* C4Object.m */,
-				EDAFFAD714F70D5F00CA356A /* C4CommonMethods.h */,
+				EDAFFAD714F70D5F00CA356A /* C4NotificationMethods.h */,
+				EDCEA5A514FD7567009969F2 /* C4GestureMethods.h */,
 				ED50C8C614EAC5350040D844 /* C4Canvas.h */,
 				ED50C8C714EAC5350040D844 /* C4Canvas.m */,
 				ED50C8C914EAC5990040D844 /* C4Layer.h */,
@@ -245,8 +247,8 @@
 		ED900CEB14FBF286006C2AED /* Test Files */ = {
 			isa = PBXGroup;
 			children = (
-				EDA7014714FC496300A0D77D /* C4Label.h */,
-				EDA7014814FC496300A0D77D /* C4Label.m */,
+				EDAFFAFA14F77E1400CA356A /* CustomShape.h */,
+				EDAFFAFB14F77E1400CA356A /* CustomShape.m */,
 				ED900CF314FBFCDA006C2AED /* C4TextLayer.h */,
 				ED900CF414FBFCDB006C2AED /* C4TextLayer.m */,
 				ED900CED14FBF2B3006C2AED /* C4Font.h */,

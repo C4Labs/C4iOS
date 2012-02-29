@@ -35,7 +35,7 @@
 @implementation C4Shape
 @synthesize animationDuration = _animationDuration;
 @synthesize isLine =_isLine, shapeLayer, pointA = _pointA, pointB = _pointB;
-@synthesize fillColor, fillRule, lineCap, lineDashPattern, lineDashPhase, lineJoin, lineWidth, miterLimit, strokeColor, strokeEnd, strokeStart, shadowOffset, shadowOpacity, shadowRadius;
+@synthesize fillColor, fillRule, lineCap, lineDashPattern, lineDashPhase, lineJoin, lineWidth, miterLimit, origin = _origin, strokeColor, strokeEnd, strokeStart, shadowOffset, shadowOpacity, shadowRadius;
 
 -(id)init {
     return [self initWithFrame:CGRectZero];
@@ -291,6 +291,14 @@
     }
 }
 
+-(void)setOrigin:(CGPoint)origin {
+    _origin = origin;
+    CGPoint difference = self.origin;
+    difference.x += self.frame.size.width/2.0f;
+    difference.y += self.frame.size.height/2.0f;
+    self.center = difference;
+}
+
 -(void)setFillColor:(UIColor *)_fillColor {
     [self performSelector:@selector(_setFillColor:) withObject:_fillColor afterDelay:self.animationDelay];
 }
@@ -432,5 +440,6 @@
 
 -(void)addSubview:(UIView *)view {
     /* NEVER ADD A SUBVIEW TO A SHAPE */
+    C4Log(@"???");
 }
 @end

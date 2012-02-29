@@ -16,6 +16,7 @@
 
 /* leaving animation delay only to views for now */
 @synthesize animationDuration, animationDelay, animationOptions = _animationOptions, repeatCount = _repeatCount;
+@synthesize origin = _origin;
 
 -(id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -167,7 +168,15 @@
     return [self.layer.animationKeys count];
 }
 
-#pragma mark Common Methods
+-(void)setOrigin:(CGPoint)origin {
+    _origin = origin;
+    CGPoint difference = self.origin;
+    difference.x += self.frame.size.width/2.0f;
+    difference.y += self.frame.size.height/2.0f;
+    self.center = difference;
+}
+
+#pragma mark Notification Methods
 -(void)setup {}
 
 -(void)listenFor:(NSString *)aNotification andRunMethod:(NSString *)aMethodName{

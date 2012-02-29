@@ -74,4 +74,28 @@ enum {
     STROKESTART
 };
 typedef NSUInteger C4ShapeLayerAnimationType;
+
+enum {		
+    WORDWRAP = UILineBreakModeWordWrap,
+    CHARWRAP = UILineBreakModeCharacterWrap,
+    CLIP = UILineBreakModeClip,
+    TRUNCATEHEAD = UILineBreakModeHeadTruncation,
+    TRUNCATETAIL = UILineBreakModeTailTruncation,
+    TRUNCATEMIDDLE = UILineBreakModeMiddleTruncation,
+};
+typedef NSUInteger C4LineBreakMode;
+
+enum {
+    ALIGNTEXTLEFT = UITextAlignmentLeft,
+    ALIGNTEXTCENTER = UITextAlignmentCenter,
+    ALIGNTEXTRIGHT = UITextAlignmentRight
+};
+typedef NSUInteger C4TextAlignment;
+
+enum { 
+    ALIGNBASELINES = UIBaselineAdjustmentAlignBaselines, 
+    ALIGNBASELINECENTERS = UIBaselineAdjustmentAlignCenters, 
+    ALIGNBASELINENONE = UIBaselineAdjustmentNone
+};
+typedef NSUInteger C4BaselineAdjustment;
 #endif

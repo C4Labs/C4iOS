@@ -8,35 +8,25 @@
 
 #import <UIKit/UIKit.h>
 
-enum {		
-    WORDWRAP = UILineBreakModeWordWrap,
-    CHARWRAP = UILineBreakModeCharacterWrap,
-    CLIP = UILineBreakModeClip,
-    TRUNCATEHEAD = UILineBreakModeHeadTruncation,
-    TRUNCATETAIL = UILineBreakModeTailTruncation,
-    TRUNCATEMIDDLE = UILineBreakModeMiddleTruncation,
-};
-typedef NSUInteger C4LineBreakMode;
+@interface C4Label : C4Control {
+}
+-(void)sizeToFit;
 
-enum {
-    ALIGNLEFT = UITextAlignmentLeft,
-    ALIGNCENTER = UITextAlignmentCenter,
-    ALIGNRIGHT = UITextAlignmentRight
-};
-typedef NSUInteger C4TextAlignment;
-
-enum { 
-    ADJUSTBASELINES = UIBaselineAdjustmentAlignBaselines, 
-    ALIGNCENTERS = UIBaselineAdjustmentAlignCenters, 
-    ALIGNNONE = UIBaselineAdjustmentNone
-};
-typedef NSUInteger C4BaselineAdjustment;
-
-@interface C4Label : UILabel <C4CommonMethods>
-@property(readwrite, strong, nonatomic) C4Font *C4Font;
-@property(readwrite, weak, nonatomic) UIFont *UIFont;
-@property(nonatomic)        C4TextAlignment textAlignment;
-@property(nonatomic)        C4LineBreakMode lineBreakMode;
-@property(nonatomic)        C4BaselineAdjustment baselineAdjustment; // default is UIBaselineAdjustmentAlignBaselines
-
+@property (readonly, strong, nonatomic) UILabel *label;
+@property (readwrite, strong, nonatomic) NSString *text;
+@property (readwrite, strong, nonatomic) C4Font *font;
+@property (readwrite, strong, nonatomic) UIColor *textColor;
+@property (readwrite, nonatomic) C4TextAlignment textAlignment;
+@property (readwrite, nonatomic) C4LineBreakMode lineBreakMode;
+@property (readwrite, nonatomic, getter = isEnabled) BOOL enabled;
+@property (readwrite, nonatomic) BOOL adjustsFontSizeToFitWidth;
+@property (readwrite, nonatomic) C4BaselineAdjustment baselineAdjustment;
+@property (readwrite, nonatomic) CGFloat minimumFontSize;
+@property (readwrite, nonatomic) NSUInteger numberOfLines;
+@property (readwrite, strong, nonatomic) UIColor *highlightedTextColor;
+@property(nonatomic, getter=isHighlighted) BOOL highlighted;
+@property (readwrite, strong, nonatomic) UIColor *shadowColor;
+@property (readwrite, nonatomic) CGRect shadowOffset;
+@property(nonatomic, getter=isUserInteractionEnabled) BOOL userInteractionEnabled;
 @end
+

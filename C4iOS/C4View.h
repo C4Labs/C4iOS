@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface C4View : UIView <C4CommonMethods> {
+@interface C4View : UIView <C4NotificationMethods> {
 }
 
 -(void)addShape:(C4Shape *)aShape;
@@ -16,5 +16,6 @@
 @property CGFloat animationDuration, animationDelay;
 @property (nonatomic) NSUInteger animationOptions;
 @property (nonatomic) CGFloat repeatCount;
+@property (nonatomic) CGPoint origin;
 @property (readonly, nonatomic) BOOL isAnimating;
 @end

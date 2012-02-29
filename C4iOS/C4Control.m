@@ -19,6 +19,7 @@
 @synthesize longPressMethodName;
 @synthesize animationDuration, animationDelay, animationOptions = _animationOptions, repeatCount = _repeatCount;
 @synthesize gestureDictionary;
+@synthesize origin = _origin;
 
 -(id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -54,6 +55,14 @@
             self.animationDelay = oldDelay;
         }
     }];
+}
+
+-(void)setOrigin:(CGPoint)origin {
+    _origin = origin;
+    CGPoint difference = self.origin;
+    difference.x += self.frame.size.width/2.0f;
+    difference.y += self.frame.size.height/2.0f;
+    self.center = difference;
 }
 
 -(void)setFrame:(CGRect)frame {
@@ -180,6 +189,11 @@
     self.animationOptions = _ani;
 }
 
+-(void)addSubview:(UIView *)view {
+    [super addSubview:view];
+    C4Log(@"control addsubview, %d", [self.subviews count]);
+}
+
 #pragma mark Gesture Methods
 
 -(void)addGesture:(C4GestureType)type name:(NSString *)gestureName action:(NSString *)methodName {
@@ -260,30 +274,13 @@
         ((UISwipeGestureRecognizer *) recognizer).direction = direction;
 }
 
-#pragma mark Common Methods
--(void)setup {}
-
--(void)listenFor:(NSString *)aNotification andRunMethod:(NSString *)aMethodName {
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(aMethodName) name:aNotification object:nil];
-}
-
--(void)listenFor:(NSString *)aNotification fromObject:(id)anObject andRunMethod:(NSString *)aMethodName {
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(aMethodName) name:aNotification object:anObject];
-}
-
--(void)stopListeningFor:(NSString *)aMethodName {
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:aMethodName object:nil];
-}
-
--(void)postNotification:(NSString *)aNotification {
-	[[NSNotificationCenter defaultCenter] postNotificationName:aNotification object:self];
-}
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
     [self postNotification:@"touchesBegan"];
     [self touchesBegan];
 }
+
 -(void)touchesBegan {
 }
 
@@ -322,6 +319,26 @@
     if(((UIGestureRecognizer *)sender).state == UIGestureRecognizerStateBegan
        && [((UIGestureRecognizer *)sender) isKindOfClass:[UILongPressGestureRecognizer class]])
         [self sendAction:NSSelectorFromString(self.longPressMethodName) to:self forEvent:nil];
+}
+
+#pragma mark Notification Methods
+-(void)setup {}
+
+-(void)listenFor:(NSString *)aNotification andRunMethod:(NSString *)aMethodName {
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(aMethodName) name:aNotification object:nil];
+}
+
+-(void)listenFor:(NSString *)aNotification fromObject:(id)anObject andRunMethod:(NSString *)aMethodName {
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(aMethodName) name:aNotification object:anObject];
+}
+
+
+-(void)stopListeningFor:(NSString *)aMethodName {
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:aMethodName object:nil];
+}
+
+-(void)postNotification:(NSString *)aNotification {
+	[[NSNotificationCenter defaultCenter] postNotificationName:aNotification object:self];
 }
 @end
 
