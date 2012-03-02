@@ -24,28 +24,29 @@
 
 -(void)blueCircle {
     self.animationDuration = 1.0f;
-    self.fillColor = C4BLUE;
+//    self.fillColor = C4BLUE;
 //    self.strokeColor = C4RED;
     [self ellipse:self.frame];
 }
 
 -(void)blueSquare {
     self.animationDuration = 1.0f;
-    self.fillColor = C4BLUE;
+//    self.fillColor = C4BLUE;
 //    self.strokeColor = C4RED;
     [self rect:self.frame];
 }
 
 -(void)redCircle {
     self.animationDuration = 1.0f;
-    self.fillColor = C4RED;
+//    self.fillColor = C4RED;
 //    self.strokeColor = C4BLUE;
     [self ellipse:self.frame];
 }
 
 -(void)redSquare {
+//    self.animationOptions = AUTOREVERSE | REPEAT;
     self.animationDuration = 1.0f;
-    self.fillColor = C4RED;
+//    self.fillColor = C4RED;
 //    self.strokeColor = C4BLUE;
     [self rect:self.frame];
 }
@@ -60,7 +61,7 @@
     self.animationOptions = AUTOREVERSE;
     self.animationDuration = 1.0f;
     self.lineWidth = 5.0f;
-    self.fillColor = [UIColor clearColor];
+//    self.fillColor = [UIColor clearColor];
     [self ellipse:self.frame];
 }
 

@@ -17,17 +17,17 @@
 
 @implementation C4Control
 @synthesize longPressMethodName;
-@synthesize animationDuration, animationDelay, animationOptions = _animationOptions, repeatCount = _repeatCount;
+@synthesize animationDuration = _animationDuration, animationDelay = _animationDelay, animationOptions = _animationOptions, repeatCount = _repeatCount;
 @synthesize gestureDictionary;
 @synthesize origin = _origin;
 
 -(id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if(self != nil) {
-        self.animationDuration = 0.0f;
-        self.animationDelay = 0.0f;
-        self.animationOptions = BEGINCURRENT;
-        self.repeatCount = 0;
+        _animationDuration = 0.0f;
+        _animationDelay = 0.0f;
+        _animationOptions = BEGINCURRENT;
+        _repeatCount = 0;
     }
     return self;
 }
@@ -41,6 +41,8 @@
  [self.layer display];
  }
  */
+
+#pragma mark UIView animatable property overrides
 
 -(void)setCenter:(CGPoint)center {
     CGPoint oldCenter = CGPointMake(self.center.x, self.center.y);
@@ -155,6 +157,7 @@
     }];
 }
 
+#pragma mark Animation methods
 -(void)animateWithBlock:(void (^)(void))animationBlock {
     [self animateWithBlock:animationBlock completion:nil];
 };
@@ -171,10 +174,8 @@
     _animationOptions = animationOptions | BEGINCURRENT;
 }
 
--(BOOL)isAnimating {
-    return [self.layer.animationKeys count];
-}
 
+#pragma mark Move
 -(void)move:(id)sender {
     CGFloat _ani = self.animationOptions;
     CGFloat _dur = self.animationDuration;
@@ -187,11 +188,6 @@
     self.animationDuration = _dur;
     self.animationDelay = _del;
     self.animationOptions = _ani;
-}
-
--(void)addSubview:(UIView *)view {
-    [super addSubview:view];
-    C4Log(@"control addsubview, %d", [self.subviews count]);
 }
 
 #pragma mark Gesture Methods
@@ -274,7 +270,6 @@
         ((UISwipeGestureRecognizer *) recognizer).direction = direction;
 }
 
-
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
     [self postNotification:@"touchesBegan"];
@@ -321,6 +316,10 @@
         [self sendAction:NSSelectorFromString(self.longPressMethodName) to:self forEvent:nil];
 }
 
+#pragma mark Test
+-(void)test {
+}
+
 #pragma mark Notification Methods
 -(void)setup {}
 
@@ -331,7 +330,6 @@
 -(void)listenFor:(NSString *)aNotification fromObject:(id)anObject andRunMethod:(NSString *)aMethodName {
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(aMethodName) name:aNotification object:anObject];
 }
-
 
 -(void)stopListeningFor:(NSString *)aMethodName {
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:aMethodName object:nil];

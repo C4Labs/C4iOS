@@ -15,10 +15,12 @@
 @interface C4Control : UIControl <C4NotificationMethods, C4GestureMethods> {
 }
 
+-(void)test;
+
 @property CGFloat animationDuration, animationDelay;
 @property (nonatomic) NSUInteger animationOptions;
 @property (nonatomic) CGFloat repeatCount;
-@property (readonly, nonatomic) BOOL isAnimating;
 @property (readonly, strong) NSMutableDictionary *gestureDictionary;
 @property (nonatomic) CGPoint origin;
+
 @end

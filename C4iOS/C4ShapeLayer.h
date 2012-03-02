@@ -9,8 +9,6 @@
 @interface C4ShapeLayer : CAShapeLayer {
     NSString *currentAnimationEasing;
 }
--(void)setAnimationDurationValue:(CGFloat)duration;
--(CGFloat)animationDurationValue;
 -(void)test;
 -(void)animatePath:(CGPathRef)_path;
 -(void)animateFillColor:(CGColorRef)_fillColor;

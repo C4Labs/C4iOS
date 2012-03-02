@@ -16,6 +16,7 @@
 -(void)_polygon:(NSArray *)pointArray;
 -(void)_arc:(NSDictionary *)arcDict;
 -(void)_curve:(NSDictionary *)curveDict;
+-(void)_shapeFromString:(NSDictionary *)stringAndFontDictionary;
 -(void)_closeShape;
 -(void)_setFillColor:(UIColor *)_fillColor;
 -(void)_setFillRule:(NSString *)_fillRule;
@@ -44,13 +45,8 @@
 -(id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if(self != nil) {
-        self.shapeLayer = [[C4ShapeLayer alloc] init];
-        self.animationDuration = 0.001f;
-        self.strokeColor = C4RED;
-        self.fillColor = C4BLUE;
-        self.lineWidth = 5.0f;
+        _animationDuration = 0.001f;
         _isLine = NO;
-        [self.layer addSublayer:shapeLayer];
     }
     return self;
 }
@@ -91,6 +87,13 @@
     return newShape;
 }
 
++(C4Shape *)shapeFromString:(NSString *)string withFont:(C4Font *)font {
+    C4Shape *newShape = [[C4Shape alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+    [newShape shapeFromString:string withFont:font];
+    return newShape;
+}
+
+
 /* the technique in both the following methods allows me to change the shape of a shape and change the shape of their view's frame automatically */
 -(void)ellipse:(CGRect)aRect {
     [self performSelector:@selector(_ellipse:) withObject:[NSValue valueWithCGRect:aRect] afterDelay:self.animationDelay];
@@ -101,6 +104,7 @@
     CGMutablePathRef newPath = CGPathCreateMutable();//(self.shapeLayer.path);
     CGRect newPathRect = CGRectMake(0, 0, aRect.size.width, aRect.size.height);
     CGPathAddEllipseInRect(newPath, nil, newPathRect);
+
     [self.shapeLayer animatePath:newPath];
     self.frame = aRect;
 }
@@ -181,6 +185,40 @@
     CGPathRelease(newPath);
 }
 
+-(void)shapeFromString:(NSString *)string withFont:(C4Font *)font {
+    NSDictionary *stringAndFontDictionary = [NSDictionary dictionaryWithObjectsAndKeys:string,@"string",font,@"font", nil];
+    [self performSelector:@selector(_shapeFromString:) withObject:stringAndFontDictionary];
+}
+
+-(void)_shapeFromString:(NSDictionary *)stringAndFontDictionary {
+    NSString *string = [stringAndFontDictionary objectForKey:@"string"];
+    C4Font *font = [stringAndFontDictionary objectForKey:@"font"];
+    NSStringEncoding encoding = [NSString defaultCStringEncoding];
+    CFStringRef stringRef = CFStringCreateWithCString(kCFAllocatorDefault, [string cStringUsingEncoding:encoding], encoding);
+    CFIndex length = CFStringGetLength(stringRef);
+    CGAffineTransform afft = CGAffineTransformMakeScale(1, -1);
+    CGMutablePathRef glyphPaths = CGPathCreateMutable();
+    CGPathMoveToPoint(glyphPaths, nil, 0, 0);
+    CTFontRef ctFont = CTFontCreateWithName((__bridge CFStringRef)font.fontName, font.pointSize, nil);
+
+    CGPoint currentOrigin = CGPointZero;
+    for(int i = 0; i < length; i++) {
+        CGGlyph currentGlyph;
+        const unichar c = [string characterAtIndex:i];
+        CTFontGetGlyphsForCharacters(ctFont, &c, &currentGlyph, 1);
+        CGPathRef path = CTFontCreatePathForGlyph(ctFont, currentGlyph, &afft);
+        CGSize advance = CGSizeZero;
+        CGAffineTransform t = CGAffineTransformMakeTranslation(currentOrigin.x, currentOrigin.y);
+        CGPathAddPath(glyphPaths, &t, path);
+        CTFontGetAdvancesForGlyphs(ctFont, kCTFontDefaultOrientation, &currentGlyph, &advance, 1);
+        currentOrigin.x += advance.width;
+    }
+    [self.shapeLayer animatePath:glyphPaths];
+    CGRect pathRect = CGPathGetBoundingBox(self.shapeLayer.path);
+    pathRect.origin = self.frame.origin;
+    self.frame = pathRect;
+    CGPathRelease(glyphPaths);
+}
 -(void)line:(CGPoint *)pointArray {
     [self performSelector:@selector(_line:) withObject:[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointArray[0]],[NSValue valueWithCGPoint:pointArray[1]], nil] afterDelay:self.animationDelay];
 }
@@ -405,7 +443,7 @@
 
 -(void)setAnimationDuration:(CGFloat)animationDuration {
     _animationDuration = animationDuration;
-    [self.shapeLayer setAnimationDurationValue:animationDuration];
+    self.shapeLayer.animationDuration = animationDuration;
 }
 
 -(void)setAnimationOptions:(NSUInteger)animationOptions {
@@ -419,14 +457,9 @@
 //    self.shapeLayer.repeatCount = repeatCount;
 }
 
--(BOOL)isAnimating {
-    NSInteger animationKeyCount = [self.shapeLayer.animationKeys count];
-    return animationKeyCount != 0 ? YES : NO;
-}
-
 -(void)setup {
-    self.animationDuration = 2.0f;
-    self.fillColor = C4GREY;
+//    self.animationDuration = 2.0f;
+//    self.fillColor = C4GREY;
 }
 
 /* NOTE: YOU CAN'T HIT TEST A CGPATH */
@@ -440,6 +473,14 @@
 
 -(void)addSubview:(UIView *)view {
     /* NEVER ADD A SUBVIEW TO A SHAPE */
-    C4Log(@"???");
+    C4Log(@"NEVER ADD A SUBVIEW TO A SHAPE");
+}
+
+-(C4ShapeLayer *)shapeLayer {
+    return (C4ShapeLayer *)self.layer;
+}
+
++(Class)layerClass {
+    return [C4ShapeLayer class];
 }
 @end

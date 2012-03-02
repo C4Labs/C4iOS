@@ -7,25 +7,30 @@
 //
 
 #import "C4ShapeLayer.h"
-@interface C4ShapeLayer() 
+
+@interface C4ShapeLayer()
 -(CABasicAnimation *)setupBasicAnimationWithKeyPath:(NSString *)keyPath;
 @end
 
 @implementation C4ShapeLayer
-@synthesize animationOptions = _animationOptions, currentAnimationEasing, repeatCount, animationDuration;
+@synthesize animationOptions = _animationOptions, currentAnimationEasing, repeatCount, animationDuration = _animationDuration;
 @synthesize allowsInteraction, repeats, isShapeLayer;
 
 -(id)init {
     self = [super init];
     if(self != nil) {
         self.name = @"shapeLayer";
-        isShapeLayer = YES;
-        currentAnimationEasing = kCAMediaTimingFunctionDefault;
-        allowsInteraction = NO;
-        repeats = NO;
+        self.strokeColor = C4RED.CGColor;
+        self.fillColor = C4BLUE.CGColor;
+        self.lineWidth = 5.0f;
         self.repeatCount = 0;
         self.autoreverses = NO;
-        self.fillMode = kCAFillModeBoth;
+        
+        isShapeLayer = YES;
+        currentAnimationEasing = (NSString *)kCAMediaTimingFunctionEaseInEaseOut;
+        allowsInteraction = NO;
+        repeats = NO;
+        
         /* create basic attributes after setting animation attributes above */
         self.path = CGPathCreateWithRect(CGRectZero, nil);
         /* makes sure there are no extraneous animation keys lingering about after init */
@@ -34,6 +39,7 @@
     return self;
 }
 
+#pragma mark Animation Methods
 -(CABasicAnimation *)setupBasicAnimationWithKeyPath:(NSString *)keyPath {
     double duration = (double)self.animationDuration;
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:keyPath];
@@ -41,121 +47,11 @@
     animation.timingFunction = [CAMediaTimingFunction functionWithName:self.currentAnimationEasing];
     animation.autoreverses = self.autoreverses;
     animation.repeatCount = self.repeats ? FOREVER : 0;
-//    animation.fillMode = kCAFillModeForwards;
-    animation.removedOnCompletion = YES;
-    animation.delegate = self;
+    animation.removedOnCompletion = NO;
+    animation.fillMode = kCAFillModeBoth;
     return animation;
 }
 
-/* encapsulating an animation that will correspond to the superview's animation */
--(void)animatePath:(CGPathRef)_path {
-    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"path"];
-    animation.fromValue = (id)self.path;
-    animation.toValue = (__bridge id)_path;    
-    [self addAnimation:animation forKey:@"animatePath"];
-}
-
--(void)animateFillColor:(CGColorRef)_fillColor {
-    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"fillColor"];
-    animation.fromValue = (id)self.fillColor;
-    animation.toValue = (__bridge id)_fillColor;   
-    [self addAnimation:animation forKey:@"animateFillColor"];
-}
-
--(void)setLineDashPhase:(CGFloat)_lineDashPhase {
-    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"lineDashPhase"];
-    animation.fromValue = [NSNumber numberWithFloat:self.lineDashPhase];
-    animation.toValue = [NSNumber numberWithFloat:_lineDashPhase];
-    [self addAnimation:animation forKey:@"animateLineDashPhase"];
-    if(!self.autoreverses) [super setLineDashPhase:_lineDashPhase];
-}
-
--(void)animateLineWidth:(CGFloat)_lineWidth {
-    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"lineWidth"];
-    animation.fromValue = [NSNumber numberWithFloat:self.lineWidth];
-    animation.toValue = [NSNumber numberWithFloat:_lineWidth];
-    [self addAnimation:animation forKey:@"animateLineWidth"];
-}
-
--(void)animateMiterLimit:(CGFloat)_miterLimit {
-    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"miterLimit"];
-    animation.fromValue = [NSNumber numberWithFloat:self.miterLimit];
-    animation.toValue = [NSNumber numberWithFloat:_miterLimit];
-    [self addAnimation:animation forKey:@"animateMiterLimit"];
-}
-
--(void)animateStrokeColor:(CGColorRef)_strokeColor {
-    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"strokeColor"];
-    animation.fromValue = (id)self.strokeColor;
-    animation.toValue = (__bridge id)_strokeColor;   
-    [self addAnimation:animation forKey:@"animateStrokeColor"];
-}
-
--(void)animateStrokeEnd:(CGFloat)_strokeEnd {
-    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"strokeEnd"];
-    animation.fromValue = [NSNumber numberWithFloat:self.strokeEnd];
-    animation.toValue = [NSNumber numberWithFloat:_strokeEnd];
-    [self addAnimation:animation forKey:@"animateStrokeEnd"];
-}
-
--(void)animateStrokeStart:(CGFloat)_strokeStart {
-    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"strokeStart"];
-    animation.fromValue = [NSNumber numberWithFloat:self.strokeStart];
-    animation.toValue = [NSNumber numberWithFloat:_strokeStart];
-    [self addAnimation:animation forKey:@"animateStrokeStart"];
-}
- 
--(void)animateShadowOpacity:(CGFloat)_shadowOpacity {
-    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowOpacity"];
-    animation.fromValue = [NSNumber numberWithFloat:self.shadowOpacity];
-    animation.toValue = [NSNumber numberWithFloat:_shadowOpacity];
-    [self addAnimation:animation forKey:@"animateShadowOpacity"];
-}
-
--(void)animateShadowRadius:(CGFloat)_shadowRadius {
-    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowRadius"];
-    animation.fromValue = [NSNumber numberWithFloat:self.shadowRadius];
-    animation.toValue = [NSNumber numberWithFloat:_shadowRadius];
-    [self addAnimation:animation forKey:@"animateShadowOpacity"];
-}
-
--(void)animateShadowOffset:(CGSize)_shadowOffset {
-    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowOffset"];
-    animation.fromValue = [NSValue valueWithCGSize:self.shadowOffset];
-    animation.toValue = [NSValue valueWithCGSize:_shadowOffset];
-    [self addAnimation:animation forKey:@"animateShadowOffset"];
-}
-
--(void)animateShadowPath:(CGPathRef)_shadowPath {
-    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowPath"];
-    animation.fromValue = (id)self.path;
-    animation.toValue = (__bridge id)_shadowPath;    
-    [self addAnimation:animation forKey:@"animateShadowPath"];
-}
-
--(void)animateBackgroundFilters:(NSArray *)_backgroundFilters {
-    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"backgroundFilters"];
-    animation.fromValue = self.backgroundFilters;
-    animation.toValue = _backgroundFilters;
-    [self addAnimation:animation forKey:@"animateBackgroundFilters"];
-}
-
--(void)animateCompositingFilter:(id)_compositingFilter {
-    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"compositingFilter"];
-    animation.fromValue = self.compositingFilter;
-    animation.toValue = _compositingFilter;
-    [self addAnimation:animation forKey:@"animateCompositingFilter"];
-}
-
-/* in the following method
- if we implement other kinds of options, we'll have to get rid of the returns...
- reversing how i check the values, if linear is at the bottom, then all the other values get called
- */
-/*
- SMALL GLITCH
- IN THE SIMULATOR THIS DOESN'T HAPPEN, BUT ON AN IPAD2...
- BEFORE THE ANIMATIONDIDSTOP: CALL GETS MADE, THE ANIMATION FLIPS TO THE ORIGINAL SHAPE FOR A SPLIT SECOND
- */
 -(void)setAnimationOptions:(NSUInteger)animationOptions {
     if((animationOptions & LINEAR) == LINEAR) {
         currentAnimationEasing = kCAMediaTimingFunctionLinear;
@@ -178,123 +74,201 @@
     if((animationOptions & ALLOWSINTERACTION) == ALLOWSINTERACTION) allowsInteraction = YES;
     else allowsInteraction = NO;
 }
+ 
+#pragma mark C4Layer methods
+-(void)animateShadowOpacity:(CGFloat)_shadowOpacity {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowOpacity"];
+    animation.fromValue = [NSNumber numberWithFloat:self.shadowOpacity];
+    animation.toValue = [NSNumber numberWithFloat:_shadowOpacity];
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { self.shadowOpacity = _shadowOpacity; }];
+    }
+    [self addAnimation:animation forKey:@"animateShadowOpacity"];
+    [CATransaction commit];
+}
+
+-(void)animateShadowRadius:(CGFloat)_shadowRadius {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowRadius"];
+    animation.fromValue = [NSNumber numberWithFloat:self.shadowRadius];
+    animation.toValue = [NSNumber numberWithFloat:_shadowRadius];
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { self.shadowRadius = _shadowRadius; }];
+    }
+    [self addAnimation:animation forKey:@"animateShadowOpacity"];
+    [CATransaction commit];
+}
+
+-(void)animateShadowOffset:(CGSize)_shadowOffset {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowOffset"];
+    animation.fromValue = [NSValue valueWithCGSize:self.shadowOffset];
+    animation.toValue = [NSValue valueWithCGSize:_shadowOffset];
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { self.shadowOffset = _shadowOffset; }];
+    }
+    [self addAnimation:animation forKey:@"animateShadowOffset"];
+    [CATransaction commit];
+}
+
+-(void)animateShadowPath:(CGPathRef)_shadowPath {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowPath"];
+    animation.fromValue = (id)self.path;
+    animation.toValue = (__bridge id)_shadowPath;    
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { self.shadowPath = _shadowPath; }];
+    }
+    [self addAnimation:animation forKey:@"animateShadowPath"];
+    [CATransaction commit];
+}
+
+-(void)animateBackgroundFilters:(NSArray *)_backgroundFilters {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"backgroundFilters"];
+    animation.fromValue = self.backgroundFilters;
+    animation.toValue = _backgroundFilters;
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { self.backgroundFilters = _backgroundFilters; }];
+    }
+    [self addAnimation:animation forKey:@"animateBackgroundFilters"];
+    [CATransaction commit];
+}
+
+-(void)animateCompositingFilter:(id)_compositingFilter {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"compositingFilter"];
+    animation.fromValue = self.compositingFilter;
+    animation.toValue = _compositingFilter;
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { self.compositingFilter = _compositingFilter; }];
+    }
+    [self addAnimation:animation forKey:@"animateCompositingFilter"];
+    [CATransaction commit];
+}
+
+/* in the following method
+ if we implement other kinds of options, we'll have to get rid of the returns...
+ reversing how i check the values, if linear is at the bottom, then all the other values get called
+ */
 
 -(void)test {
     C4Log(@"animationOptions: %@",self.currentAnimationEasing);
     C4Log(@"autoreverses: %@", self.autoreverses ? @"YES" : @"NO");
 }
 
--(void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
-    NSString *keyPath = ((CAPropertyAnimation *)anim).keyPath;
-    if ([keyPath isEqualToString:@"path"] && anim.repeatCount != FOREVER) {
-        if(!self.autoreverses){
-            CAAnimation *animation = [CAAnimation animation];
-            animation.duration = 0.0f;
-            self.path = (__bridge CGPathRef)(((CABasicAnimation *)anim).toValue);
-            [self addAnimation:animation forKey:@"path"];
-        }
-    } else if ([keyPath isEqualToString:@"fillColor"] && anim.repeatCount != FOREVER) {
-        if(!self.autoreverses){
-            CAAnimation *animation = [CAAnimation animation];
-            animation.duration = 0.0f;
-            self.fillColor = (__bridge CGColorRef)(((CABasicAnimation *)anim).toValue);
-            [self addAnimation:animation forKey:@"fillColor"];
-        }
-    } else if ([keyPath isEqualToString:@"lineWidth"] && anim.repeatCount != FOREVER) {
-        if(!self.autoreverses){
-            CAAnimation *animation = [CAAnimation animation];
-            animation.duration = 0.0f;
-            self.lineWidth = [((CABasicAnimation *)anim).toValue floatValue];
-            [self addAnimation:animation forKey:@"lineWidth"];
-        }
-    } else if ([keyPath isEqualToString:@"miterLimit"] && anim.repeatCount != FOREVER) {
-        if(!self.autoreverses){
-            CAAnimation *animation = [CAAnimation animation];
-            animation.duration = 0.0f;
-            self.miterLimit = [((CABasicAnimation *)anim).toValue floatValue];
-            [self addAnimation:animation forKey:@"miterLimit"];
-        }
-    } else if ([keyPath isEqualToString:@"strokeColor"] && anim.repeatCount != FOREVER) {
-        if(!self.autoreverses){
-            CAAnimation *animation = [CAAnimation animation];
-            animation.duration = 0.0f;
-            self.strokeColor = (__bridge CGColorRef)(((CABasicAnimation *)anim).toValue);
-            [self addAnimation:animation forKey:@"strokeColor"];
-        }
-    } else if ([keyPath isEqualToString:@"strokeEnd"] && anim.repeatCount != FOREVER) {
-        if(!self.autoreverses){
-            CAAnimation *animation = [CAAnimation animation];
-            animation.duration = 0.0f;
-            self.strokeEnd = [((CABasicAnimation *)anim).toValue floatValue];
-            [self addAnimation:animation forKey:@"strokeEnd"];
-        }
-    } else if ([keyPath isEqualToString:@"strokeStart"] && anim.repeatCount != FOREVER) {
-        if(!self.autoreverses){
-            CAAnimation *animation = [CAAnimation animation];
-            animation.duration = 0.0f;
-            self.strokeStart = [((CABasicAnimation *)anim).toValue floatValue];
-            [self addAnimation:animation forKey:@"strokeStart"];
-        }
-    } else if ([keyPath isEqualToString:@"shadowOpacity"] && anim.repeatCount != FOREVER) {
-        if(!self.autoreverses){
-            CAAnimation *animation = [CAAnimation animation];
-            animation.duration = 0.0f;
-            self.shadowOpacity = [((CABasicAnimation *)anim).toValue floatValue];
-            [self addAnimation:animation forKey:@"shadowOpacity"];
-        }
-    } else if ([keyPath isEqualToString:@"shadowRadius"] && anim.repeatCount != FOREVER) {
-        if(!self.autoreverses){
-            CAAnimation *animation = [CAAnimation animation];
-            animation.duration = 0.0f;
-            self.shadowRadius = [((CABasicAnimation *)anim).toValue floatValue];
-            [self addAnimation:animation forKey:@"shadowRadius"];
-        }
-    } else if ([keyPath isEqualToString:@"shadowOffset"] && anim.repeatCount != FOREVER) {
-        if(!self.autoreverses){
-            CAAnimation *animation = [CAAnimation animation];
-            animation.duration = 0.0f;
-            self.shadowOffset = [((CABasicAnimation *)anim).toValue CGSizeValue];
-            [self addAnimation:animation forKey:@"shadowOffset"];
-        }
-    } else if ([keyPath isEqualToString:@"shadowPath"] && anim.repeatCount != FOREVER) {
-        if(!self.autoreverses){
-            CAAnimation *animation = [CAAnimation animation];
-            animation.duration = 0.0f;
-            self.shadowPath = (__bridge CGPathRef)(((CABasicAnimation *)anim).toValue);
-            [self addAnimation:animation forKey:@"shadowPath"];
-        }
-    } else if ([keyPath isEqualToString:@"backgroundFilters"] && anim.repeatCount != FOREVER) {
-        if(!self.autoreverses){
-            CAAnimation *animation = [CAAnimation animation];
-            animation.duration = 0.0f;
-            self.backgroundFilters = ((CABasicAnimation *)anim).toValue;
-            [self addAnimation:animation forKey:@"backgroundFilters"];
-        }
-    } else if ([keyPath isEqualToString:@"compositingFilter"] && anim.repeatCount != FOREVER) {
-        if(!self.autoreverses){
-            CAAnimation *animation = [CAAnimation animation];
-            animation.duration = 0.0f;
-            self.compositingFilter = ((CABasicAnimation *)anim).toValue;
-            [self addAnimation:animation forKey:@"compositingFilter"];
-        }
-    } 
-}
-
 -(BOOL)isOpaque {
+    /*
+     Apple docs say that the frameworks flip this to NO automatically 
+     ...if you do things like set the background color to anything transparent
+     */
     return YES;
 }
 
--(void)setAnimationDurationValue:(CGFloat)duration {
+-(void)setAnimationDuration:(CGFloat)duration {
     if (duration <= 0.0f) duration = 0.001f;
-    [self setValue:[NSNumber numberWithFloat:duration] forKey:kCATransactionAnimationDuration];
+    _animationDuration = duration;
 }
 
--(CGFloat)animationDurationValue {
-    return [[self valueForKey:kCATransactionAnimationDuration] floatValue];
+#pragma mark ShapeLayer Methods
+/* encapsulating an animation that will correspond to the superview's animation */
+-(void)animatePath:(CGPathRef)_path {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"path"];
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { self.path = _path; }];
+    }
+    animation.fromValue = (id)self.path;
+    animation.toValue = (__bridge id)_path;    
+    [self addAnimation:animation forKey:@"animatePath"];
+    [CATransaction commit];
 }
 
-/* blocked methods, for now... */
+-(void)animateFillColor:(CGColorRef)_fillColor {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"fillColor"];
+    animation.fromValue = (id)self.fillColor;
+    animation.toValue = (__bridge id)_fillColor;
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { self.fillColor = _fillColor; }];
+    }
+    [self addAnimation:animation forKey:@"animateFillColor"];
+    [CATransaction commit];
+}
 
+-(void)setLineDashPhase:(CGFloat)_lineDashPhase {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"lineDashPhase"];
+    animation.fromValue = [NSNumber numberWithFloat:self.lineDashPhase];
+    animation.toValue = [NSNumber numberWithFloat:_lineDashPhase];
+    [self addAnimation:animation forKey:@"animateLineDashPhase"];
+    if(!self.autoreverses) [super setLineDashPhase:_lineDashPhase];
+    [CATransaction commit];
+}
+
+-(void)animateLineWidth:(CGFloat)_lineWidth {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"lineWidth"];
+    animation.fromValue = [NSNumber numberWithFloat:self.lineWidth];
+    animation.toValue = [NSNumber numberWithFloat:_lineWidth];
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { self.lineWidth = _lineWidth; }];
+    }
+    [self addAnimation:animation forKey:@"animateLineWidth"];
+    [CATransaction commit];
+}
+
+-(void)animateMiterLimit:(CGFloat)_miterLimit {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"miterLimit"];
+    animation.fromValue = [NSNumber numberWithFloat:self.miterLimit];
+    animation.toValue = [NSNumber numberWithFloat:_miterLimit];
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { self.miterLimit = _miterLimit; }];
+    }
+    [self addAnimation:animation forKey:@"animateMiterLimit"];
+    [CATransaction commit];
+}
+
+-(void)animateStrokeColor:(CGColorRef)_strokeColor {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"strokeColor"];
+    animation.fromValue = (id)self.strokeColor;
+    animation.toValue = (__bridge id)_strokeColor;   
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { self.strokeColor = _strokeColor; }];
+    }
+    
+    [self addAnimation:animation forKey:@"animateStrokeColor"];
+    [CATransaction commit];
+}
+
+-(void)animateStrokeEnd:(CGFloat)_strokeEnd {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"strokeEnd"];
+    animation.fromValue = [NSNumber numberWithFloat:self.strokeEnd];
+    animation.toValue = [NSNumber numberWithFloat:_strokeEnd];
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { self.strokeEnd = _strokeEnd; }];
+    }
+    [self addAnimation:animation forKey:@"animateStrokeEnd"];
+    [CATransaction commit];
+}
+
+-(void)animateStrokeStart:(CGFloat)_strokeStart {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"strokeStart"];
+    animation.fromValue = [NSNumber numberWithFloat:self.strokeStart];
+    animation.toValue = [NSNumber numberWithFloat:_strokeStart];
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { self.strokeStart = _strokeStart; }];
+    }
+    [self addAnimation:animation forKey:@"animateStrokeStart"];
+    [CATransaction commit];
+}
+
+#pragma mark Blocked Methods
 -(void)setBorderWidth:(CGFloat)borderWidth{
     C4Log(@"C4ShapeLayer setBorderWidth not currently available");
 }
@@ -347,5 +321,4 @@
 -(void)setZPosition:(CGFloat)zPosition {
     C4Log(@"C4ShapeLayer setZPosition not currently available");
 }
-
 @end

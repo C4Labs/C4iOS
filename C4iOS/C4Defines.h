@@ -22,15 +22,18 @@
 #define ITALICSYSTEMFONTNAME [[UIFont italicSystemFontOfSize:12.0f] fontName]
 #endif
 
+#ifndef C4_EXTERN
+#define C4_EXTERN extern
+#endif
 
-//UIKIT_EXTERN NSString *const EASEIN, *const EASEINOUT, *const EASEOUT, *const LINEAR, *const DEFAULT;
+//C4_EXTERN NSString *const EASEIN, *const EASEINOUT, *const EASEOUT, *const LINEAR, *const DEFAULT;
 
-UIKIT_EXTERN const CGFloat FOREVER;
+C4_EXTERN const CGFloat FOREVER;
 
-UIKIT_EXTERN BOOL VERBOSELOAD;
+C4_EXTERN BOOL VERBOSELOAD;
 
 /* more lexical names for common mathematic variables, e.g. QUARTER_PI instead of M_PI_4 */
-UIKIT_EXTERN const CGFloat QUARTER_PI, HALF_PI, PI, TWO_PI, ONE_OVER_PI, TWO_OVER_PI, TWO_OVER_ROOT_PI, E, LOG2E, LOG10E, LN2, LN10, SQRT_TWO, SQRT_ONE_OVER_TWO;
+C4_EXTERN const CGFloat QUARTER_PI, HALF_PI, PI, TWO_PI, ONE_OVER_PI, TWO_OVER_PI, TWO_OVER_ROOT_PI, E, LOG2E, LOG10E, LN2, LN10, SQRT_TWO, SQRT_ONE_OVER_TWO;
 
 enum {
     
@@ -76,14 +79,29 @@ enum {
 typedef NSUInteger C4ShapeLayerAnimationType;
 
 enum {		
-    WORDWRAP = UILineBreakModeWordWrap,
-    CHARWRAP = UILineBreakModeCharacterWrap,
-    CLIP = UILineBreakModeClip,
-    TRUNCATEHEAD = UILineBreakModeHeadTruncation,
-    TRUNCATETAIL = UILineBreakModeTailTruncation,
-    TRUNCATEMIDDLE = UILineBreakModeMiddleTruncation,
+    LABELWORDWRAP = UILineBreakModeWordWrap,
+    LABELCHARWRAP = UILineBreakModeCharacterWrap,
+    LABELCLIP = UILineBreakModeClip,
+    LABELTRUNCATEHEAD = UILineBreakModeHeadTruncation,
+    LABELTRUNCATETAIL = UILineBreakModeTailTruncation,
+    LABELTRUNCATEMIDDLE = UILineBreakModeMiddleTruncation,
 };
 typedef NSUInteger C4LineBreakMode;
+
+C4_EXTERN NSString * const TRUNCATENONE;
+C4_EXTERN NSString * const TRUNCATESTART;
+C4_EXTERN NSString * const TRUNCATEEND;
+C4_EXTERN NSString * const TRUNCATEMIDDLE;
+
+/* Alignment modes. */
+
+C4_EXTERN NSString * const ALIGNNATURAL;
+C4_EXTERN NSString * const ALIGNLEFT;
+C4_EXTERN NSString * const ALIGNRIGHT;
+C4_EXTERN NSString * const ALIGNCENTER;
+C4_EXTERN NSString * const ALIGNJUSTIFIED;
+
+
 
 enum {
     ALIGNTEXTLEFT = UITextAlignmentLeft,

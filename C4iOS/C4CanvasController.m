@@ -8,21 +8,53 @@
 
 #import "C4CanvasController.h"
 #import "C4Font.h"
-#import "C4Label.h"
+C4Label *newLabel;
+C4Shape *what;
 
-//@implementation C4CanvasController
-//@synthesize canvas;
-//-(void)setup {
-//    canvas = (C4View *)self.view;
-//    C4Label *newLabel = [[C4Label alloc] initWithFrame:CGRectMake(0, 0, 180, 100)];
-////    [newLabel sizeToFit];
-//    newLabel.text = @"there";
+@implementation C4CanvasController
+@synthesize canvas;
+-(void)setup {
+    canvas = (C4View *)self.view;
+
+//    newLabel = [C4Label new];
+//    newLabel.frame = CGRectMake(100, 100, 100, 100);
+//    newLabel.font = [C4Font fontWithName:@"arial" size:40];
+//    newLabel.text = @"travis";
+//    newLabel.shadowOffset = CGSizeMake(1, 1);
 //    newLabel.center = CGPointMake(100, 200);
-//    newLabel.backgroundColor = [UIColor lightGrayColor];
-//    [canvas addSubview:newLabel];
-//}
+//    newLabel.shadowColor = [UIColor magentaColor];
+//    newLabel.backgroundColor = [UIColor orangeColor];
+//    newLabel.animationDuration = 2.0f;
 //
-//@end
+//    C4Shape *rect = [C4Shape rect:CGRectMake(500, 500, 100, 100)];
+//    [canvas addShape:rect];
+//    [canvas addSubview:newLabel];
+//    [newLabel sizeToFit];
+//    [newLabel listenFor:@"touchesBegan" fromObject:rect andRunMethod:@"test"]; 
+    
+    what = [C4Shape shapeFromString:@"TRAVIS KIRTON" withFont:[C4Font fontWithName:@"helvetica" size:40.0f]];
+    what.fillColor = C4BLUE;
+    what.lineWidth = 0.0f;
+    what.center = CGPointMake(200, 200);
+    [canvas addShape:what];
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    what.animationDuration = 5.10f;
+    what.animationOptions = AUTOREVERSE;
+//    what.shadowOffset = CGSizeMake(10, 10);
+//    what.shadowRadius = 2.0f;
+//    what.shadowOpacity = 0.5;
+    [what shapeFromString:@"ANYTHING ELSE" withFont:[C4Font fontWithName:@"helvetica" size:40.0f]];
+    
+//    newLabel.backgroundColor = [UIColor whiteColor];
+//    newLabel.shadowOffset = CGSizeMake(10, 10);
+//    newLabel.shadowOpacity = 0.5;
+//    newLabel.textShadowColor = [UIColor whiteColor];
+//    newLabel.textShadowOffset = CGSizeMake(2, 2);
+}
+
+@end
 
 //@implementation C4CanvasController
 //@synthesize canvas;
@@ -125,88 +157,100 @@
 
 //@end
 //
-#import "CustomShape.h"
-
-@interface C4CanvasController ()
--(void)changeCenters;
-@end
-@implementation C4CanvasController
-@synthesize canvas;
-
-C4Shape *greyrect;
-NSMutableArray *shapes;
-
-
--(void)setup {
-    greyrect = [[CustomShape alloc] init];
-    [greyrect rect:CGRectMake(334, -100, 100, 100)];
-    greyrect.fillColor = C4GREY;
-    greyrect.strokeColor = C4GREY;
-
-    shapes = [[NSMutableArray alloc] initWithCapacity:0];
-    canvas = (C4View *)self.view;
-    
-    for(int i = 0; i < 7; i++) {
-        C4Shape *rect = [[CustomShape alloc] init];
-        [rect rect:CGRectMake(334, -100, 100, 100)];
-        rect.fillColor = C4RED;
-        rect.strokeColor = C4RED;
-        [shapes addObject:rect];
-        [canvas addShape:rect];
-    }
-
-    [canvas addShape:greyrect];
-    [shapes addObject:greyrect];
-
-    for(int i = 0; i < 8; i++) {
-        C4Shape *rect = [[CustomShape alloc] init];
-        [rect rect:CGRectMake(334, -100, 100, 100)];
-        rect.fillColor = C4BLUE;
-        rect.strokeColor = C4BLUE;
-        [shapes addObject:rect];
-        [canvas addShape:rect];
-    }
-    [self performSelector:@selector(changeCenters) withObject:self afterDelay:0.25f];
-
-    for(C4Shape *s in shapes) [s listenFor:@"touchesBegan" fromObject:greyrect andRunMethod:@"circle"];
-}
-
--(C4View *)canvas {
-    return (C4View *)self.view;
-}
-
--(void)changeCenters {
-    for(C4Shape *s in shapes) s.animationDuration = 1.0f;
-    ((C4Shape *)[shapes objectAtIndex:0]).center = CGPointMake(350, 584);
-    ((C4Shape *)[shapes objectAtIndex:1]).center = CGPointMake(250, 584);
-    ((C4Shape *)[shapes objectAtIndex:2]).center = CGPointMake(150, 584);
-    ((C4Shape *)[shapes objectAtIndex:3]).center = CGPointMake(150, 484);
-    ((C4Shape *)[shapes objectAtIndex:4]).center = CGPointMake(150, 384);
-    ((C4Shape *)[shapes objectAtIndex:5]).center = CGPointMake(150, 284);
-    ((C4Shape *)[shapes objectAtIndex:6]).center = CGPointMake(250, 284);
-    ((C4Shape *)[shapes objectAtIndex:7]).center = CGPointMake(350, 284);
-    ((C4Shape *)[shapes objectAtIndex:8]).center = CGPointMake(350, 384);
-    ((C4Shape *)[shapes objectAtIndex:9]).center = CGPointMake(350, 484);
-    ((C4Shape *)[shapes objectAtIndex:10]).center = CGPointMake(450, 484);
-    ((C4Shape *)[shapes objectAtIndex:11]).center = CGPointMake(550, 484);
-    ((C4Shape *)[shapes objectAtIndex:12]).center = CGPointMake(650, 484);
-    ((C4Shape *)[shapes objectAtIndex:13]).center = CGPointMake(550, 284);
-    ((C4Shape *)[shapes objectAtIndex:14]).center = CGPointMake(550, 384);
-    ((C4Shape *)[shapes objectAtIndex:15]).center = CGPointMake(550, 584);
-}
-@end
-
+//#import "CustomShape.h"
 //
+//@interface C4CanvasController ()
+//-(void)changeCenters;
+//@end
+//@implementation C4CanvasController
+//@synthesize canvas;
+//
+//C4Shape *greyrect;
+//NSMutableArray *shapes;
+//
+//
+//-(void)setup {
+//    greyrect = [[CustomShape alloc] init];
+//    [greyrect rect:CGRectMake(334, -100, 100, 100)];
+//    greyrect.fillColor = C4GREY;
+//    greyrect.strokeColor = C4GREY;
+//
+//    shapes = [[NSMutableArray alloc] initWithCapacity:0];
+//    canvas = (C4View *)self.view;
+//    
+//    for(int i = 0; i < 7; i++) {
+//        C4Shape *rect = [[CustomShape alloc] init];
+//        [rect rect:CGRectMake(334, -100, 100, 100)];
+//        rect.fillColor = C4RED;
+//        rect.strokeColor = C4RED;
+//        [shapes addObject:rect];
+//        [canvas addShape:rect];
+//    }
+//
+//    [canvas addShape:greyrect];
+//    [shapes addObject:greyrect];
+//
+//    for(int i = 0; i < 8; i++) {
+//        C4Shape *rect = [[CustomShape alloc] init];
+//        [rect rect:CGRectMake(334, -100, 100, 100)];
+//        rect.fillColor = C4BLUE;
+//        rect.strokeColor = C4BLUE;
+//        [shapes addObject:rect];
+//        [canvas addShape:rect];
+//    }
+//    [self performSelector:@selector(changeCenters) withObject:self afterDelay:0.25f];
+//
+//    for(C4Shape *s in shapes) [s listenFor:@"touchesBegan" fromObject:greyrect andRunMethod:@"circle"];
+//}
+//
+//-(C4View *)canvas {
+//    return (C4View *)self.view;
+//}
+//
+//-(void)changeCenters {
+//    for(C4Shape *s in shapes) s.animationDuration = 1.0f;
+//    ((C4Shape *)[shapes objectAtIndex:0]).center = CGPointMake(350, 584);
+//    ((C4Shape *)[shapes objectAtIndex:1]).center = CGPointMake(250, 584);
+//    ((C4Shape *)[shapes objectAtIndex:2]).center = CGPointMake(150, 584);
+//    ((C4Shape *)[shapes objectAtIndex:3]).center = CGPointMake(150, 484);
+//    ((C4Shape *)[shapes objectAtIndex:4]).center = CGPointMake(150, 384);
+//    ((C4Shape *)[shapes objectAtIndex:5]).center = CGPointMake(150, 284);
+//    ((C4Shape *)[shapes objectAtIndex:6]).center = CGPointMake(250, 284);
+//    ((C4Shape *)[shapes objectAtIndex:7]).center = CGPointMake(350, 284);
+//    ((C4Shape *)[shapes objectAtIndex:8]).center = CGPointMake(350, 384);
+//    ((C4Shape *)[shapes objectAtIndex:9]).center = CGPointMake(350, 484);
+//    ((C4Shape *)[shapes objectAtIndex:10]).center = CGPointMake(450, 484);
+//    ((C4Shape *)[shapes objectAtIndex:11]).center = CGPointMake(550, 484);
+//    ((C4Shape *)[shapes objectAtIndex:12]).center = CGPointMake(650, 484);
+//    ((C4Shape *)[shapes objectAtIndex:13]).center = CGPointMake(550, 284);
+//    ((C4Shape *)[shapes objectAtIndex:14]).center = CGPointMake(550, 384);
+//    ((C4Shape *)[shapes objectAtIndex:15]).center = CGPointMake(550, 584);
+//}
+//@end
+
+
 //#import "CustomShape.h"
 //
 //C4Shape *blueCircle, *blueSquare, *redCircle, *redSquare;
 //CustomShape *transformer;
-//
+//CAShapeLayer *aLayer;
+
 //@implementation C4CanvasController
 //@synthesize canvas;
 //
 //-(void)setup {
+//    
 //    canvas = (C4View *)self.view;
+//    
+//    aLayer = [CAShapeLayer layer];
+//    aLayer.frame = CGRectMake(0, 0, 200, 200);
+//    aLayer.path = CGPathCreateWithEllipseInRect(aLayer.frame, nil);
+//    aLayer.position = CGPointMake(384, 512);
+//    aLayer.lineWidth = 15.0f;
+//    aLayer.strokeColor = [UIColor blackColor].CGColor;
+//    aLayer.fillColor = [UIColor clearColor].CGColor;
+//    [canvas.layer addSublayer:aLayer];
+        
 //    blueCircle = [C4Shape ellipse:CGRectMake(73, 562, 100, 100)];
 //    [canvas addShape:blueCircle];
 //    
@@ -223,8 +267,10 @@ NSMutableArray *shapes;
 //    redSquare.strokeColor = C4BLUE;
 //    [canvas addShape:redSquare];
 //    
-//    CustomShape *transformer = [[CustomShape alloc] init];
+//    CustomShape *transformer = [CustomShape new];
 //    [transformer ellipse:CGRectMake(284, 262, 200, 200)];
+//    transformer.lineWidth = 10.0f;
+//    transformer.lineCap = kCALineCapRound;
 //    [canvas addShape:transformer];
 //    
 //    [transformer listenFor:@"touchesBegan" fromObject:blueCircle andRunMethod:@"blueCircle"];
@@ -232,5 +278,20 @@ NSMutableArray *shapes;
 //    [transformer listenFor:@"touchesBegan" fromObject:redCircle andRunMethod:@"redCircle"];
 //    [transformer listenFor:@"touchesBegan" fromObject:redSquare andRunMethod:@"redSquare"];
 //}
-//
+
+//-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+//    CGPathRef newPath = CGPathCreateWithRect(aLayer.bounds, nil);
+//    [CATransaction lock];
+//    [CATransaction begin];
+//    [CATransaction setAnimationDuration:2.5f];
+//    CABasicAnimation *ba = [CABasicAnimation animationWithKeyPath:@"path"];
+//    ba.autoreverses = YES;
+//    ba.fillMode = kCAFillModeForwards;
+//    ba.repeatCount = HUGE_VALF;
+//    ba.fromValue = (id)aLayer.path;
+//    ba.toValue = (__bridge id)newPath;
+//    [aLayer addAnimation:ba forKey:@"animatePath"];
+//    [CATransaction commit];
+//    [CATransaction unlock];
+//}
 //@end

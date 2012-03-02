@@ -17,5 +17,4 @@
 @property (nonatomic) NSUInteger animationOptions;
 @property (nonatomic) CGFloat repeatCount;
 @property (nonatomic) CGPoint origin;
-@property (readonly, nonatomic) BOOL isAnimating;
 @end

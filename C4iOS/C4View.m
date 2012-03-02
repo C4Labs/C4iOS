@@ -33,6 +33,10 @@
     [self addSubview:aShape];
 }
 
+-(void)addLabel:(C4Label *)aShape {
+    [self addSubview:aShape];
+}
+
 /* don't add this ever...
  creates a:
  CoreAnimation: failed to allocate 3145760 bytes
@@ -162,10 +166,6 @@
 
 -(void)setAnimationOptions:(NSUInteger)animationOptions {
     _animationOptions = animationOptions;
-}
-
--(BOOL)isAnimating {
-    return [self.layer.animationKeys count];
 }
 
 -(void)setOrigin:(CGPoint)origin {

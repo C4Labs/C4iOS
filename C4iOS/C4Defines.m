@@ -25,3 +25,16 @@ const CGFloat LOG10E =              M_LOG10E;
 const CGFloat LN2 =                 M_LN2;
 const CGFloat SQRT_TWO =            M_SQRT2;
 const CGFloat SQRT_ONE_OVER_TWO =   M_SQRT1_2;
+
+NSString * const TRUNCATENONE = @"none";
+NSString * const TRUNCATESTART = @"start";
+NSString * const TRUNCATEEND = @"end";
+NSString * const TRUNCATEMIDDLE = @"middle";
+
+/* Alignment modes. */
+
+NSString * const ALIGNNATURAL = @"natural";
+NSString * const ALIGNLEFT = @"left";
+NSString * const ALIGNRIGHT = @"right";
+NSString * const ALIGNCENTER = @"center";
+NSString * const ALIGNJUSTIFIED = @"justified";

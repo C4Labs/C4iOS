@@ -31,6 +31,7 @@
 
 @property(readonly, strong, nonatomic)  UIFont   *UIFont;
 @property(readonly, nonatomic)  CTFontRef   CTFont;
+@property(readonly, nonatomic)  CGFontRef   CGFont;
 @property(nonatomic,readonly,strong)    NSString *familyName;
 @property(nonatomic,readonly,strong)    NSString *fontName;
 @property(nonatomic,readonly)           CGFloat   pointSize;

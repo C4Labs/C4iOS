@@ -9,8 +9,6 @@
 #import "C4ShapeLayer.h"
 
 @interface C4Shape : C4Control {
-    @private
-    C4ShapeLayer *shapeLayer;
 }
 
 /*
@@ -24,6 +22,7 @@
 +(C4Shape *)polygon:(CGPoint *)pointArray pointCount:(NSInteger)pointCount;
 +(C4Shape *)arcWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle;
 +(C4Shape *)curve:(CGPoint *)beginEndPointArray controlPoints:(CGPoint *)controlPointArray;
++(C4Shape *)shapeFromString:(NSString *)string withFont:(C4Font *)font;
 
 -(void)closeShape;
 -(void)ellipse:(CGRect)aRect;
@@ -33,17 +32,20 @@
 -(void)polygon:(CGPoint *)pointArray pointCount:(NSInteger)pointCount;
 -(void)arcWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle;
 -(void)curve:(CGPoint *)beginEndPointArray controlPoints:(CGPoint *)controlPointArray;
+-(void)shapeFromString:(NSString *)string withFont:(C4Font *)font;
 
 -(void)setDashPattern:(CGFloat *)dashPattern pointCount:(NSUInteger)pointCount;
 -(void)test;
 
-@property (readwrite, strong) C4ShapeLayer *shapeLayer;
+@property (readonly, weak) C4ShapeLayer *shapeLayer;
 @property (readonly) BOOL isLine;
 @property (readwrite, nonatomic) CGPoint pointA, pointB, origin;
 @property (readwrite, strong, nonatomic) UIColor *fillColor, *strokeColor;
-@property (readwrite, nonatomic) CGFloat lineDashPhase, lineWidth, miterLimit, strokeEnd, strokeStart, shadowOpacity, shadowRadius;
+@property (readwrite, nonatomic) CGFloat lineDashPhase, lineWidth, miterLimit, strokeEnd, strokeStart;
+@property (readwrite, nonatomic) CGFloat shadowOpacity, shadowRadius;
+@property (readwrite, nonatomic) CGSize shadowOffset;
 @property (readwrite, strong, nonatomic) NSArray *lineDashPattern;
 @property (readwrite, strong, nonatomic) NSString *fillRule, *lineCap, *lineJoin;
-@property (readwrite, nonatomic) CGSize shadowOffset;
+
 
 @end

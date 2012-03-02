@@ -15,18 +15,17 @@
 @property (readonly, strong, nonatomic) UILabel *label;
 @property (readwrite, strong, nonatomic) NSString *text;
 @property (readwrite, strong, nonatomic) C4Font *font;
+@property (readwrite, nonatomic) BOOL adjustsFontSizeToFitWidth;
+@property (readwrite, nonatomic) C4BaselineAdjustment baselineAdjustment;
+@property (nonatomic, getter=isHighlighted) BOOL highlighted;
 @property (readwrite, strong, nonatomic) UIColor *textColor;
 @property (readwrite, nonatomic) C4TextAlignment textAlignment;
 @property (readwrite, nonatomic) C4LineBreakMode lineBreakMode;
-@property (readwrite, nonatomic, getter = isEnabled) BOOL enabled;
-@property (readwrite, nonatomic) BOOL adjustsFontSizeToFitWidth;
-@property (readwrite, nonatomic) C4BaselineAdjustment baselineAdjustment;
-@property (readwrite, nonatomic) CGFloat minimumFontSize;
+@property (readwrite, nonatomic) CGFloat minimumFontSize, shadowRadius, shadowOpacity;
 @property (readwrite, nonatomic) NSUInteger numberOfLines;
 @property (readwrite, strong, nonatomic) UIColor *highlightedTextColor;
-@property(nonatomic, getter=isHighlighted) BOOL highlighted;
-@property (readwrite, strong, nonatomic) UIColor *shadowColor;
-@property (readwrite, nonatomic) CGRect shadowOffset;
-@property(nonatomic, getter=isUserInteractionEnabled) BOOL userInteractionEnabled;
+@property (readwrite, strong, nonatomic) UIColor *shadowColor, *textShadowColor;
+@property (readwrite, nonatomic) CGSize shadowOffset, textShadowOffset;
+
 @end
 

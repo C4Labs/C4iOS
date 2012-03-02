@@ -31,6 +31,7 @@
 #import "C4Canvas.h"
 #import "C4ShapeLayer.h"
 #import "C4Shape.h"
+#import "C4Label.h"
 //#import "C4Movie.h"
 //#import "C4Noise.h"
 //#import "C4Shape.h"
