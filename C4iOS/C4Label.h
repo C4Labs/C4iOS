@@ -10,6 +10,7 @@
 
 @interface C4Label : C4Control {
 }
+
 -(void)sizeToFit;
 
 @property (readonly, strong, nonatomic) UILabel *label;
@@ -27,5 +28,6 @@
 @property (readwrite, strong, nonatomic) UIColor *shadowColor, *textShadowColor;
 @property (readwrite, nonatomic) CGSize shadowOffset, textShadowOffset;
 
+#pragma mark C4Layer-backed object properties
+@property (readonly, weak, nonatomic) C4Layer *backingLayer;
 @end
-

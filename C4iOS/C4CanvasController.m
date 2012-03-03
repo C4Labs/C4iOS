@@ -10,48 +10,41 @@
 #import "C4Font.h"
 C4Label *newLabel;
 C4Shape *what;
+CALayer *rLayer;
 
 @implementation C4CanvasController
 @synthesize canvas;
 -(void)setup {
     canvas = (C4View *)self.view;
 
-//    newLabel = [C4Label new];
-//    newLabel.frame = CGRectMake(100, 100, 100, 100);
-//    newLabel.font = [C4Font fontWithName:@"arial" size:40];
-//    newLabel.text = @"travis";
-//    newLabel.shadowOffset = CGSizeMake(1, 1);
-//    newLabel.center = CGPointMake(100, 200);
-//    newLabel.shadowColor = [UIColor magentaColor];
-//    newLabel.backgroundColor = [UIColor orangeColor];
-//    newLabel.animationDuration = 2.0f;
-//
-//    C4Shape *rect = [C4Shape rect:CGRectMake(500, 500, 100, 100)];
-//    [canvas addShape:rect];
-//    [canvas addSubview:newLabel];
-//    [newLabel sizeToFit];
-//    [newLabel listenFor:@"touchesBegan" fromObject:rect andRunMethod:@"test"]; 
-    
-    what = [C4Shape shapeFromString:@"TRAVIS KIRTON" withFont:[C4Font fontWithName:@"helvetica" size:40.0f]];
-    what.fillColor = C4BLUE;
-    what.lineWidth = 0.0f;
-    what.center = CGPointMake(200, 200);
-    [canvas addShape:what];
+    newLabel = [C4Label new];
+    newLabel.frame = CGRectMake(100, 100, 100, 100);
+    newLabel.font = [C4Font fontWithName:@"arial" size:40];
+    newLabel.text = @"travis";
+    newLabel.shadowOffset = CGSizeMake(1, 1);
+    newLabel.center = CGPointMake(100, 200);
+    newLabel.shadowColor = [UIColor magentaColor];
+    newLabel.backgroundColor = [UIColor orangeColor];
+    [canvas addSubview:newLabel];
+
+    C4Shape *rect = [C4Shape rect:CGRectMake(500, 500, 100, 100)];
+    [canvas addShape:rect];
+    [canvas addSubview:newLabel];
+    [newLabel sizeToFit];
+    [newLabel listenFor:@"touchesBegan" fromObject:rect andRunMethod:@"test"]; 
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    what.animationDuration = 5.10f;
-    what.animationOptions = AUTOREVERSE;
-//    what.shadowOffset = CGSizeMake(10, 10);
-//    what.shadowRadius = 2.0f;
-//    what.shadowOpacity = 0.5;
-    [what shapeFromString:@"ANYTHING ELSE" withFont:[C4Font fontWithName:@"helvetica" size:40.0f]];
-    
-//    newLabel.backgroundColor = [UIColor whiteColor];
-//    newLabel.shadowOffset = CGSizeMake(10, 10);
-//    newLabel.shadowOpacity = 0.5;
-//    newLabel.textShadowColor = [UIColor whiteColor];
-//    newLabel.textShadowOffset = CGSizeMake(2, 2);
+    newLabel.animationDuration = 1.0f;
+    newLabel.animationDelay = 1.0f;
+    newLabel.animationOptions = AUTOREVERSE | REPEAT;
+    newLabel.backgroundColor = [UIColor whiteColor];
+    newLabel.shadowOffset = CGSizeMake(10, 10);
+    newLabel.shadowOpacity = 0.5;
+    newLabel.textShadowOffset = CGSizeMake(2, 2);
+    newLabel.text = @"kirton";
+    [newLabel sizeToFit];
+    newLabel.center = CGPointMake(300, 300);
 }
 
 @end

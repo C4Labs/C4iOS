@@ -39,7 +39,7 @@
     return self;
 }
 
-#pragma mark Animation Methods
+#pragma mark C4Layer Animation Methods
 -(CABasicAnimation *)setupBasicAnimationWithKeyPath:(NSString *)keyPath {
     double duration = (double)self.animationDuration;
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:keyPath];
@@ -76,6 +76,18 @@
 }
  
 #pragma mark C4Layer methods
+-(void)animateShadowColor:(CGColorRef)_shadowColor {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowColor"];
+    animation.fromValue = (id)self.shadowColor;
+    animation.toValue = (__bridge id)_shadowColor;
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { self.shadowColor = _shadowColor; }];
+    }
+    [self addAnimation:animation forKey:@"animateShadowColor"];
+    [CATransaction commit];
+}
+
 -(void)animateShadowOpacity:(CGFloat)_shadowOpacity {
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowOpacity"];

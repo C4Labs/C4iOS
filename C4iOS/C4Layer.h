@@ -10,13 +10,25 @@
 
 @interface C4Layer : CALayer {
 }
+#pragma mark C4Layer Animation Methods
+-(CABasicAnimation *)setupBasicAnimationWithKeyPath:(NSString *)keyPath;
+-(void)setAnimationOptions:(NSUInteger)animationOptions;
 
--(void)setup;
-
--(void)listenFor:(NSString *)aNotification andRunMethod:(NSString *)aMethodName;
--(void)stopListeningFor:(NSString *)aMethodName;
--(void)postNotification:(NSString *)aNotification;
+#pragma mark C4Layer methods
+-(void)animateShadowColor:(CGColorRef)shadowColor;
+-(void)animateShadowOpacity:(CGFloat)shadowOpacity;
+-(void)animateShadowRadius:(CGFloat)shadowRadius;
+-(void)animateShadowOffset:(CGSize)shadowOffset;
+-(void)animateShadowPath:(CGPathRef)shadowPath;
+-(void)animateBackgroundFilters:(NSArray *)backgroundFilters;
+-(void)animateCompositingFilter:(id)compositingFilter;
 -(void)test;
 
-@property (nonatomic, readwrite) NSTimeInterval timeStamp;
+-(BOOL)isOpaque;
+
+#pragma mark C4Layer properties
+@property (nonatomic) NSUInteger animationOptions;
+@property (nonatomic) CGFloat repeatCount, animationDuration;
+@property (readonly, strong) NSString *currentAnimationEasing;
+@property (readonly, nonatomic) BOOL allowsInteraction, repeats;
 @end

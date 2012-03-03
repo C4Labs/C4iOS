@@ -26,17 +26,19 @@
 -(void)_setLineJoin:(NSString *)_lineJoin;
 -(void)_setLineWidth:(NSNumber *)_lineWidth;
 -(void)_setMiterLimit:(NSNumber *)_miterLimit;
+-(void)_setShadowColor:(UIColor *)_shadowColor;
 -(void)_setStrokeColor:(UIColor *)_strokeColor;
 -(void)_setStrokeStart:(NSNumber *)_strokeStart;
 -(void)_setShadowOffSet:(NSValue *)_shadowOffset;
 -(void)_setShadowOpacity:(NSNumber *)_shadowOpacity;
+-(void)_setShadowPath:(id)shadowPath;
 -(void)_setShadowRadius:(NSNumber *)_shadowRadius;
 @end
 
 @implementation C4Shape
 @synthesize animationDuration = _animationDuration;
 @synthesize isLine =_isLine, shapeLayer, pointA = _pointA, pointB = _pointB;
-@synthesize fillColor, fillRule, lineCap, lineDashPattern, lineDashPhase, lineJoin, lineWidth, miterLimit, origin = _origin, strokeColor, strokeEnd, strokeStart, shadowOffset, shadowOpacity, shadowRadius;
+@synthesize fillColor, fillRule, lineCap, lineDashPattern, lineDashPhase, lineJoin, lineWidth, miterLimit, origin = _origin, strokeColor, strokeEnd, strokeStart, shadowOffset, shadowOpacity, shadowRadius, shadowPath, shadowColor;
 
 -(id)init {
     return [self initWithFrame:CGRectZero];
@@ -420,6 +422,14 @@
     [self.shapeLayer animateStrokeStart:[_strokeStart floatValue]];
 }
 
+-(void)setShadowColor:(UIColor *)_shadowColor {
+    [self performSelector:@selector(_setShadowColor:) withObject:_shadowColor afterDelay:self.animationDelay];
+}
+
+-(void)_setShadowColor:(UIColor *)_shadowColor {
+    [self.shapeLayer animateShadowColor:_shadowColor.CGColor];
+}
+
 -(void)setShadowOffset:(CGSize)_shadowOffset {
     [self performSelector:@selector(_setShadowOffSet:) withObject:[NSValue valueWithCGSize:_shadowOffset] afterDelay:self.animationDelay];
 }
@@ -432,6 +442,13 @@
 }
 -(void)_setShadowOpacity:(NSNumber *)_shadowOpacity {
     [self.shapeLayer animateShadowOpacity:[_shadowOpacity floatValue]];
+}
+
+-(void)setShadowPath:(CGPathRef)_shadowPath {
+    [self performSelector:@selector(_setShadowPath:) withObject:(__bridge id)_shadowPath afterDelay:self.animationDelay];
+}
+-(void)_setShadowPath:(id)_shadowPath {
+    [self.shapeLayer animateShadowPath:(__bridge CGPathRef)_shadowPath];
 }
 
 -(void)setShadowRadius:(CGFloat)_shadowRadius {
@@ -467,15 +484,13 @@
     return CGPathContainsPoint(self.shapeLayer.path, nil, point, nil) ? YES : NO;
 }
 
-/* 
- blocked methods
- */
-
+#pragma mark C4Shapelayer-backed object methods
 -(void)addSubview:(UIView *)view {
     /* NEVER ADD A SUBVIEW TO A SHAPE */
     C4Log(@"NEVER ADD A SUBVIEW TO A SHAPE");
 }
 
+#pragma mark Layer class methods
 -(C4ShapeLayer *)shapeLayer {
     return (C4ShapeLayer *)self.layer;
 }

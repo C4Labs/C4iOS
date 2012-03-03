@@ -9,16 +9,27 @@
 #import "C4Layer.h"
 
 @implementation C4Layer
+@synthesize animationOptions = _animationOptions, currentAnimationEasing, repeatCount, animationDuration = _animationDuration;
+@synthesize allowsInteraction, repeats;
 
-@synthesize timeStamp = _timeStamp;
 - (id)init
 {
     self = [super init];
     if (self) {
+        self.name = @"backingLayer";
+        self.repeatCount = 0;
+        self.autoreverses = NO;
+        
+        currentAnimationEasing = (NSString *)kCAMediaTimingFunctionEaseInEaseOut;
+        allowsInteraction = NO;
+        repeats = NO;
+        
+        /* makes sure there are no extraneous animation keys lingering about after init */
+        [self removeAllAnimations];
+
 #ifdef VERBOSE
         C4Log(@"%@ init",[self class]);
 #endif
-        [self setup];
     }
     return self;
 }
@@ -27,35 +38,148 @@
 #ifdef VERBOSE
     C4Log(@"%@ awakeFromNib",[self class]);
 #endif
-    [self setup];
 }
 
-#pragma mark Notification Methods
--(void)setup {
+#pragma mark C4Layer Animation Methods
+-(CABasicAnimation *)setupBasicAnimationWithKeyPath:(NSString *)keyPath {
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:keyPath];
+    animation.duration = self.animationDuration;
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:self.currentAnimationEasing];
+    animation.autoreverses = self.autoreverses;
+    animation.repeatCount = self.repeats ? FOREVER : 0;
+    animation.removedOnCompletion = NO;
+    animation.fillMode = kCAFillModeBoth;
+    return animation;
+}
+
+-(void)setAnimationOptions:(NSUInteger)animationOptions {
+    if((animationOptions & LINEAR) == LINEAR) {
+        currentAnimationEasing = kCAMediaTimingFunctionLinear;
+    } else if((animationOptions & EASEOUT) == EASEOUT) {
+        currentAnimationEasing = kCAMediaTimingFunctionEaseOut;
+    } else if((animationOptions & EASEIN) == EASEIN) {
+        currentAnimationEasing = kCAMediaTimingFunctionEaseIn;
+    } else if((animationOptions & EASEINOUT) == EASEINOUT) {
+        currentAnimationEasing = kCAMediaTimingFunctionEaseInEaseOut;
+    } else {
+        currentAnimationEasing = kCAMediaTimingFunctionDefault;
+    }
     
+    if((animationOptions & AUTOREVERSE) == AUTOREVERSE) self.autoreverses = YES;
+    else self.autoreverses = NO;
+    
+    if((animationOptions & REPEAT) == REPEAT) repeats = YES;
+    else repeats = NO;
+    
+    if((animationOptions & ALLOWSINTERACTION) == ALLOWSINTERACTION) allowsInteraction = YES;
+    else allowsInteraction = NO;
 }
 
--(void)listenFor:(NSString *)aNotification andRunMethod:(NSString *)aMethodName{
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(aMethodName) name:aNotification object:nil];
+#pragma mark C4Layer methods
+-(void)animateShadowColor:(CGColorRef)_shadowColor {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowColor"];
+    animation.fromValue = (id)self.shadowColor;
+    animation.toValue = (__bridge id)_shadowColor;
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { self.shadowColor = _shadowColor; }];
+    }
+    [self addAnimation:animation forKey:@"animateShadowColor"];
+    [CATransaction commit];
 }
 
--(void)listenFor:(NSString *)aNotification fromObject:(id)anObject andRunMethod:(NSString *)aMethodName {
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(aMethodName) name:aNotification object:anObject];
+-(void)animateShadowOpacity:(CGFloat)_shadowOpacity {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowOpacity"];
+    animation.fromValue = [NSNumber numberWithFloat:self.shadowOpacity];
+    animation.toValue = [NSNumber numberWithFloat:_shadowOpacity];
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { self.shadowOpacity = _shadowOpacity; }];
+    }
+    [self addAnimation:animation forKey:@"animateShadowOpacity"];
+    [CATransaction commit];
 }
 
--(void)stopListeningFor:(NSString *)aMethodName {
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:aMethodName object:nil];
+-(void)animateShadowRadius:(CGFloat)_shadowRadius {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowRadius"];
+    animation.fromValue = [NSNumber numberWithFloat:self.shadowRadius];
+    animation.toValue = [NSNumber numberWithFloat:_shadowRadius];
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { self.shadowRadius = _shadowRadius; }];
+    }
+    [self addAnimation:animation forKey:@"animateShadowOpacity"];
+    [CATransaction commit];
 }
 
--(void)postNotification:(NSString *)aNotification {
-	[[NSNotificationCenter defaultCenter] postNotificationName:aNotification object:self];
+-(void)animateShadowOffset:(CGSize)_shadowOffset {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowOffset"];
+    animation.fromValue = [NSValue valueWithCGSize:self.shadowOffset];
+    animation.toValue = [NSValue valueWithCGSize:_shadowOffset];
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { self.shadowOffset = _shadowOffset; }];
+    }
+    [self addAnimation:animation forKey:@"animateShadowOffset"];
+    [CATransaction commit];
 }
 
--(void)setTimestamp:(NSTimeInterval)newTimestamp {
-    if(self.timeStamp == 0.0f)
-        _timeStamp = newTimestamp;
+-(void)animateShadowPath:(CGPathRef)_shadowPath {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowPath"];
+    animation.fromValue = (id)self.shadowPath;
+    animation.toValue = (__bridge id)_shadowPath;
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { self.shadowPath = _shadowPath; }];
+    }
+    [self addAnimation:animation forKey:@"animateShadowPath"];
+    [CATransaction commit];
 }
+
+-(void)animateBackgroundFilters:(NSArray *)_backgroundFilters {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"backgroundFilters"];
+    animation.fromValue = self.backgroundFilters;
+    animation.toValue = _backgroundFilters;
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { self.backgroundFilters = _backgroundFilters; }];
+    }
+    [self addAnimation:animation forKey:@"animateBackgroundFilters"];
+    [CATransaction commit];
+}
+
+-(void)animateCompositingFilter:(id)_compositingFilter {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"compositingFilter"];
+    animation.fromValue = self.compositingFilter;
+    animation.toValue = _compositingFilter;
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { self.compositingFilter = _compositingFilter; }];
+    }
+    [self addAnimation:animation forKey:@"animateCompositingFilter"];
+    [CATransaction commit];
+}
+
+/* in the following method
+ if we implement other kinds of options, we'll have to get rid of the returns...
+ reversing how i check the values, if linear is at the bottom, then all the other values get called
+ */
 
 -(void)test {
+    C4Log(@"animationOptions: %@",self.currentAnimationEasing);
+    C4Log(@"autoreverses: %@", self.autoreverses ? @"YES" : @"NO");
+}
+
+-(BOOL)isOpaque {
+    /*
+     Apple docs say that the frameworks flip this to NO automatically 
+     ...if you do things like set the background color to anything transparent
+     */
+    return YES;
+}
+
+-(void)setAnimationDuration:(CGFloat)duration {
+    if (duration <= 0.0f) duration = 0.001f;
+    _animationDuration = duration;
 }
 @end

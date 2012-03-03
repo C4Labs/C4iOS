@@ -7,9 +7,19 @@
 //
 
 @interface C4ShapeLayer : CAShapeLayer {
-    NSString *currentAnimationEasing;
+//    NSString *currentAnimationEasing;
 }
--(void)test;
+
+#pragma mark C4Layer animation methods
+-(void)animateShadowColor:(CGColorRef)shadowColor;
+-(void)animateShadowOpacity:(CGFloat)shadowOpacity;
+-(void)animateShadowRadius:(CGFloat)shadowRadius;
+-(void)animateShadowOffset:(CGSize)shadowOffset;
+-(void)animateShadowPath:(CGPathRef)shadowPath;
+-(void)animateBackgroundFilters:(NSArray *)backgroundFilters;
+-(void)animateCompositingFilter:(id)compositingFilter;
+
+#pragma mark C4ShapeLayer animation methods
 -(void)animatePath:(CGPathRef)_path;
 -(void)animateFillColor:(CGColorRef)_fillColor;
 -(void)animateLineWidth:(CGFloat)_lineWidth;
@@ -17,16 +27,17 @@
 -(void)animateStrokeColor:(CGColorRef)_strokeColor;
 -(void)animateStrokeEnd:(CGFloat)_strokeEnd;
 -(void)animateStrokeStart:(CGFloat)_strokeStart;
--(void)animateShadowOpacity:(CGFloat)_shadowOpacity;
--(void)animateShadowRadius:(CGFloat)_shadowRadius;
--(void)animateShadowOffset:(CGSize)_shadowOffset;
--(void)animateShadowPath:(CGPathRef)_shadowPath;
--(void)animateBackgroundFilters:(NSArray *)_backgroundFilters;
--(void)animateCompositingFilter:(id)_compositingFilter;
+
+#pragma mark Test
+-(void)test;
+
 
 @property (readonly) BOOL isShapeLayer;
+
+#pragma mark C4Layer properties
 @property (nonatomic) NSUInteger animationOptions;
 @property (nonatomic) CGFloat repeatCount, animationDuration;
 @property (readonly, strong) NSString *currentAnimationEasing;
 @property (readonly, nonatomic) BOOL allowsInteraction, repeats;
+
 @end
