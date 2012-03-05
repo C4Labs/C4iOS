@@ -43,8 +43,12 @@
     [self.layer display];
 }
 
--(void)addShape:(C4Shape *)aShape {
-    [self addSubview:aShape];
+-(void)addShape:(C4Shape *)shape {
+    [self addSubview:shape];
+}
+
+-(void)addText:(C4Text *)text {
+    [self addSubview:text];
 }
 
 /*

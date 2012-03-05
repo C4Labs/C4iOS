@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface C4Object : NSObject <C4NotificationMethods>
-
+-(void)setup;
 @end

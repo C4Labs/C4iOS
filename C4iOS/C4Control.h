@@ -12,22 +12,6 @@
  and animating along a path 
  */
 
-UIControl is the base class for control objects such as buttons and sliders that convey user intent to the application. You cannot use the UIControl class directly to instantiate controls. It instead defines the common interface and behavioral structure for all its subclasses.
-
-The main role of UIControl is to define an interface and base implementation for preparing action messages and initially dispatching them to their targets when certain events occur.
-
-For an overview of the target-action mechanism, see “Target-Action in UIKit” in Cocoa Fundamentals Guide. For information on the Multi-Touch event model, see Event Handling Guide for iOS.
-
-The UIControl class also includes methods for getting and setting control state—for example, for determining whether a control is enabled or highlighted—and it defines methods for tracking touches within a control. These tracking methods are overridden by UIControl subclasses.
-
-
-/** C4Control is the base class for almost all objects that have visual representations. Because of the interactive nature of C4, where all objects have the flexibility of enabling user interaction, it makes sense to have them all as basic subclasses of UIControl rather than UIView.
-
- The main rold of C4Control is to define 
- 
- @return C4Window a subclass of UIWindow customized specifically for the C4 Framework
- */
-
 @interface C4Control : UIControl <C4NotificationMethods, C4GestureMethods> {
 }
 
@@ -149,7 +133,7 @@ The UIControl class also includes methods for getting and setting control state�
 -(void)listenFor:(NSString *)aNotification andRunMethod:(NSString *)aMethodName {
 }
 
--(void)listenFor:(NSString *)aNotification fromObject:(id)anObject andRunMethod:(NSString *)aMethodName {
+-(void)listenFor:(NSString *)aNotification fromObject:(id)object andRunMethod:(NSString *)aMethodName {
 }
 
 -(void)stopListeningFor:(NSString *)aMethodName {

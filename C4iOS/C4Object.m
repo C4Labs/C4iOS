@@ -13,20 +13,24 @@
 #pragma mark Notification Methods
 -(void)setup {}
 
--(void)listenFor:(NSString *)aNotification andRunMethod:(NSString *)aMethodName{
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(aMethodName) name:aNotification object:nil];
+-(void)listenFor:(NSString *)notification andRunMethod:(NSString *)methodName{
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(methodName) name:notification object:nil];
 }
 
--(void)listenFor:(NSString *)aNotification fromObject:(id)anObject andRunMethod:(NSString *)aMethodName {
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(aMethodName) name:aNotification object:anObject];
+-(void)listenFor:(NSString *)notification fromObject:(id)object andRunMethod:(NSString *)methodName {
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(methodName) name:notification object:object];
 }
 
--(void)stopListeningFor:(NSString *)aMethodName {
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:aMethodName object:nil];
+-(void)stopListeningFor:(NSString *)methodName {
+    [self stopListeningFor:methodName object:nil];
 }
 
--(void)postNotification:(NSString *)aNotification {
-	[[NSNotificationCenter defaultCenter] postNotificationName:aNotification object:self];
+-(void)stopListeningFor:(NSString *)methodName object:(id)object {
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:methodName object:object];
+}
+
+-(void)postNotification:(NSString *)notification {
+	[[NSNotificationCenter defaultCenter] postNotificationName:notification object:self];
 }
 
 @end
