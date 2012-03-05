@@ -140,7 +140,6 @@
 }
 
 -(void)touchesBegan {
-    self.center = CGPointMake([C4Math randomInt:768], [C4Math randomInt:1024]);
 }
 
 -(void)setEnabled:(BOOL)enabled {

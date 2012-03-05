@@ -183,8 +183,8 @@
     self.animationDuration = 0;
     self.animationDelay = 0;
     self.animationOptions = 0;
-    CGPoint tranlatedPoint = [(UIPanGestureRecognizer *)sender locationInView:self];
-    self.center = CGPointMake(self.center.x + tranlatedPoint.x - self.frame.size.width/2.0f, self.center.y+tranlatedPoint.y-self.frame.size.height/2.0f);
+    CGPoint translatedPoint = [(UIPanGestureRecognizer *)sender locationInView:self];
+    self.center = CGPointMake(self.center.x + translatedPoint.x - self.frame.size.width/2.0f, self.center.y+translatedPoint.y-self.frame.size.height/2.0f);
     self.animationDuration = _dur;
     self.animationDelay = _del;
     self.animationOptions = _ani;
@@ -236,14 +236,14 @@
     }
 }
 
--(void)numberOfTouchesRequired:(NSInteger)tapCount forGesture:(NSString *)gestureName {
+-(void)numberOfTouchesRequired:(NSInteger)touchCount forGesture:(NSString *)gestureName {
     UIGestureRecognizer *recognizer = [gestureDictionary objectForKey:gestureName];
     if([recognizer isKindOfClass:[UITapGestureRecognizer class]])
-        ((UITapGestureRecognizer *) recognizer).numberOfTouchesRequired = tapCount;
+        ((UITapGestureRecognizer *) recognizer).numberOfTouchesRequired = touchCount;
     else if([recognizer isKindOfClass:[UISwipeGestureRecognizer class]])
-        ((UISwipeGestureRecognizer *) recognizer).numberOfTouchesRequired = tapCount;
+        ((UISwipeGestureRecognizer *) recognizer).numberOfTouchesRequired = touchCount;
     else if([recognizer isKindOfClass:[UILongPressGestureRecognizer class]])
-        ((UILongPressGestureRecognizer *) recognizer).numberOfTouchesRequired = tapCount;
+        ((UILongPressGestureRecognizer *) recognizer).numberOfTouchesRequired = touchCount;
 }
 
 -(void)setMinimumPressDuration:(CGFloat)duration forGesture:(NSString *)gestureName {
@@ -279,35 +279,40 @@
 -(void)touchesBegan {
 }
 
+-(void)touchesEnded {
+    
+}
+
+-(void)touchesMoved {
+    
+}
+
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     [self postNotification:@"touchesMoved"];
     [super touchesMoved:touches withEvent:event];
+    [self touchesMoved];
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [self postNotification:@"touchesEnded"];
     [super touchesEnded:touches withEvent:event];
+    [self touchesEnded];
 }
 
 
 -(void)swipedRight {
-    C4Log(@"swipedRight");
 }
 
 -(void)swipedLeft {
-    C4Log(@"swipedLeft");
 }
 
 -(void)swipedUp {
-    C4Log(@"swipedUp");
 }
 
 -(void)swipedDown {
-    C4Log(@"swipedDown");
 }
 
 -(void)pressedLong {
-    C4Log(@"pressedLong");
 }
 
 -(void)pressedLong:(id)sender {

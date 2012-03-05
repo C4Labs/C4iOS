@@ -43,6 +43,7 @@
 		EDA7014914FC496300A0D77D /* C4Label.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA7014814FC496300A0D77D /* C4Label.m */; };
 		EDAFFAF014F7602F00CA356A /* C4Control.m in Sources */ = {isa = PBXBuildFile; fileRef = EDAFFAEF14F7602F00CA356A /* C4Control.m */; };
 		EDAFFAFC14F77E1400CA356A /* CustomShape.m in Sources */ = {isa = PBXBuildFile; fileRef = EDAFFAFB14F77E1400CA356A /* CustomShape.m */; };
+		EDC56D671504449700E88AAC /* CommentNotes in Resources */ = {isa = PBXBuildFile; fileRef = EDC56D661504449700E88AAC /* CommentNotes */; };
 		EDECBF6C14EAE26700D9A446 /* C4Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = EDECBF6B14EAE26600D9A446 /* C4Shape.m */; };
 		EDF7734F14F361B00094E656 /* C4Math.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF7734E14F361B00094E656 /* C4Math.m */; };
 /* End PBXBuildFile section */
@@ -105,6 +106,7 @@
 		EDAFFAEF14F7602F00CA356A /* C4Control.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Control.m; sourceTree = "<group>"; };
 		EDAFFAFA14F77E1400CA356A /* CustomShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomShape.h; sourceTree = "<group>"; };
 		EDAFFAFB14F77E1400CA356A /* CustomShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomShape.m; sourceTree = "<group>"; };
+		EDC56D661504449700E88AAC /* CommentNotes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CommentNotes; sourceTree = "<group>"; };
 		EDCEA5A514FD7567009969F2 /* C4GestureMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4GestureMethods.h; sourceTree = "<group>"; };
 		EDECBF6A14EAE26600D9A446 /* C4Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Shape.h; sourceTree = "<group>"; };
 		EDECBF6B14EAE26600D9A446 /* C4Shape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Shape.m; sourceTree = "<group>"; };
@@ -133,8 +135,6 @@
 		ED27819F1502D17800887165 /* To Comment */ = {
 			isa = PBXGroup;
 			children = (
-				ED50C89414EAC2010040D844 /* C4AppDelegate.h */,
-				ED50C89514EAC2010040D844 /* C4AppDelegate.m */,
 				ED50C8C614EAC5350040D844 /* C4Canvas.h */,
 				ED50C8C714EAC5350040D844 /* C4Canvas.m */,
 				EDAFFAEE14F7602F00CA356A /* C4Control.h */,
@@ -158,6 +158,7 @@
 				ED50C8BE14EAC4920040D844 /* C4Window.h */,
 				ED50C8BF14EAC4920040D844 /* C4Window.m */,
 				EDAFFAD714F70D5F00CA356A /* C4NotificationMethods.h */,
+				EDC56D661504449700E88AAC /* CommentNotes */,
 				EDCEA5A514FD7567009969F2 /* C4GestureMethods.h */,
 				ED50C8BA14EAC3B10040D844 /* UITouch+C4Touch.h */,
 				ED50C8BB14EAC3B10040D844 /* UITouch+C4Touch.m */,
@@ -245,6 +246,8 @@
 		ED50C8D314EACA0E0040D844 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				ED50C89414EAC2010040D844 /* C4AppDelegate.h */,
+				ED50C89514EAC2010040D844 /* C4AppDelegate.m */,
 				EDF7734D14F361B00094E656 /* C4Math.h */,
 				EDF7734E14F361B00094E656 /* C4Math.m */,
 			);
@@ -325,6 +328,7 @@
 				ED50C8B714EAC2A10040D844 /* C4LogoiPad-08.png in Resources */,
 				ED50C8B814EAC2A10040D844 /* C4LogoiPad-Landscape.png in Resources */,
 				ED50C8B914EAC2A10040D844 /* C4LogoiPad-Portrait.png in Resources */,
+				EDC56D671504449700E88AAC /* CommentNotes in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
