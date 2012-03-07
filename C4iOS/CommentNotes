@@ -23,7 +23,7 @@
 
  For internal links: do it like method:name and property property.
  For remote links: do it like method [C4Class method:name:] and property [C4Class property]
- For external links: do it like [this page](http://www.site.com) and [this class](C4Class) and [this method]([C4Class method:]
+ For external links: do it like [this page](http://www.site.com) and    and [this method]([C4Class method:]
 
  @param paramName description afterwards.
  @return return value discussion.

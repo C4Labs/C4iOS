@@ -28,18 +28,20 @@
 ///---------------------------------------------------------------------------------------
 /** Computes the absolute value of an integer number
 
+ @param value The number to be converted to its absolute value
  @return NSInteger returns the positive whole (integer), if the given number is a floating-point the method first converts it to an integer
  */
 +(NSInteger)abs:(NSInteger)value;
 
 /** Computes the absolute value of a floating-point number
  
+ @param value The float number to be converted to its absolute value
  @return NSInteger returns the positive floating-point value of a given number
  */
 +(CGFloat)absf:(CGFloat)value;
 
 /** Rounds a floating-point value
- 
+ @param value The number for which to calculate ceil:
  @return NSInteger returns the smallest whole number no less than _value_
  */
 +(NSInteger)ceil:(CGFloat)value;
@@ -70,12 +72,15 @@
  
  Raises the mathematical constant e to the power of a given value [for more details](http://en.wikipedia.org/wiki/Exponential_function)
  
+ @param value The value to use in the exponential function.
+
  @return CGFloat Returns the calucation of of e ^ _value_
  */
 +(CGFloat)exp:(CGFloat)value;
 
 /** Rounds a floating-point value
- 
+  
+ @param value The number to round up
  @return NSInteger returns the largest whole number no greater than _value_
  */
 +(NSInteger)floor:(CGFloat)value;
@@ -94,6 +99,7 @@
 +(CGFloat)lerpBetweenA:(CGFloat)a B:(CGFloat)b byAmount:(CGFloat)amount;
 
 /**Calculates the natural logarithm of a given value
+ @param value The number to which to apply the logarithm equation
  @return CGFloat The natural logartihm of a given floating-point value
  */
 +(CGFloat)log:(CGFloat)value;
@@ -108,12 +114,16 @@
  @param value The number to map (should be between _min1_ and _max1_)
  @param min1 The smallest number in the original range
  @param max1 The largest number in the original range
- @param max The largest possible number in the range
+ @param min2 The smallest number in the new range
+ @param max2 The largest number in the new range
  @return CGFloat Either _min_ or _max_ if the given number lies outside the range (e.g. if _value_ is less than _min_ this method returns _min_), otherwise this method returns _value_ (unchanged)
  */
 +(CGFloat)map:(CGFloat)value fromMin:(CGFloat)min1 max:(CGFloat)max1 toMin:(CGFloat)min2 max:(CGFloat)max2;
 
 /**Calculates the larger value of two given numbers
+ 
+ @param a A given number to compare
+ @param b A given number to compare
  
  @return CGFlaot the larger value of _a_ and _b_
  */
@@ -121,18 +131,26 @@
 
 /**Calculates the larger of three given numbers
  
+ @param a A given number to compare
+ @param b A given number to compare
+ @param c A given number to compare
  @return CGFlaot the larger of _a_, _b_ and _c_
  */
 +(CGFloat)maxOfA:(CGFloat)a B:(CGFloat)b C:(CGFloat)c;
 
 /**Calculates the smaller value of two given numbers
  
+ @param a A given number to compare
+ @param b A given number to compare
  @return CGFlaot the smaller value of _a_ and _b_
  */
 +(CGFloat)minOfA:(CGFloat)a B:(CGFloat)b;
 
 /**Calculates the smaller value of three given numbers
 
+ @param a A given number to compare
+ @param b A given number to compare
+ @param c A given number to compare
  @return CGFlaot the smaller value of _a_, _b_ and _c_
  */
 +(CGFloat)minOfA:(CGFloat)a B:(CGFloat)b C:(CGFloat)c;
@@ -140,6 +158,9 @@
 
 /**Unused
  
+ @param value -
+ @param min -
+ @param max -
  @return CGFloat returns 0
  */
 +(CGFloat)norm:(CGFloat)value fromMin:(CGFloat)min toMax:(CGFloat)max;
@@ -159,7 +180,8 @@
  
  Example: round:0.3 = 0.0
  Example: round:0.8 = 1.0
- 
+
+ @param value The number to round
  @return NSInteger returns the closest whole number to a given _value_
  */
 +(CGFloat)round:(CGFloat)value;
@@ -170,6 +192,8 @@
  
  Example: square:3 = 3 * 3 = 4
  Example: square:2 = 2 * 2 = 4
+ 
+ @param value The number to square
 
  @return CGFloat The result of _value_ multiplied by itself
  */
@@ -180,7 +204,8 @@
  Example: sqrt:9 = 3
  Example: square:4 = 2
  
- @return CGFloat The square root of a given value
+ @param value The number to which to apply the square root
+ @return CGFloat The square root of _value_
  */
 +(CGFloat)sqrt:(CGFloat)value;
 
@@ -191,43 +216,50 @@
 
 /**Calculates the arc cosine of a given value.
  
- @return CGFloat A value in the range of [0, PI]
+ @param value The number for which to calculate the arccosine 
+ @return CGFloat A value in the range of (0..PI)
  */
 +(CGFloat)acos:(CGFloat)value;
 
 /**Calculates the arc sine of a given value.
  
- @return CGFloat A value in the range of [-PI/2, +PI/2]
+ @param value The number for which to calculate the arcsine 
+ @return CGFloat A value in the range of (-PI/2..+PI/2)
  */
 +(CGFloat)asin:(CGFloat)value;
 
 /**Calculates the arc tangent of a single given value.
  
- @return CGFloat A value in the range of [-PI/2, +PI/2]
+ @param value The number for which to calculate the arctanent 
+ @return CGFloat A value in the range of (-PI/2..+PI/2)
  */
 +(CGFloat)atan:(CGFloat)value;
 
 /**Calculates the arc tangent of a two given values.
  
- @return CGFloat The value of th earc tangent of y/x, using the signs of both
- arguments to determine the quadrant of the return value.
+ @param y The y value for which to calculate the arctangent2 
+ @param x The x value for which to calculate the arctangent2 
+ @return CGFloat The value of th earc tangent of y/x, using the signs of both arguments to determine the quadrant of the return value.
  */
 +(CGFloat)atan2Y:(CGFloat)y X:(CGFloat)x;
 
 /**Calculates the cosine of a value
  
+ @param value The number for which to calculate the cosine 
  @return CGFloat The cosine of _value_ measured in RADIANS.
  */
 +(CGFloat)cos:(CGFloat)value;
 
 /**Calculates the sine of a value
  
+ @param value The number for which to calculate the sine 
  @return CGFloat The sine of _value_ measured in RADIANS.
  */
 +(CGFloat)sin:(CGFloat)value;
 
 /**Calculates the tangent of a value
  
+ @param value The number for which to calculate the tan 
  @return CGFloat The tangent of _value_ measured in RADIANS.
  */
 +(CGFloat)tan:(CGFloat)value;
@@ -239,12 +271,15 @@
 
 /**Calculates a random value 
  
+ @param value The highest possible random number to return
  @return NSInteger A random integer between 0 and _value_
  */
 +(NSInteger)randomInt:(NSInteger)value;
 
 /**Calculates a random value 
  
+ @param a The lowest possible random number to return
+ @param b The highest possible random number to return
  @return NSInteger A random integer between _a_ and _b_
  */
 +(NSInteger)randomIntBetweenA:(NSInteger)a andB:(NSInteger)b;
@@ -256,12 +291,14 @@
 
 /**Converts a radian value to an equivalent in degrees 
  
+ @param radianValue A number specificed in radians to be converted to degrees
  @return NSInteger A integer, corresponding to the given _radianValue_
  */
 NSInteger RadiansToDegrees(CGFloat radianValue);
 
 /**Converts a degree value to an equivalent in radians 
  
+ @param degreeValue A number specificed in degrees to be converted to radians
  @return CGFloat A floating-point value, corresponding to the given _degreeValue_
  */
 CGFloat DegreesToRadians(NSInteger degreeValue);
@@ -270,7 +307,8 @@ CGFloat DegreesToRadians(NSInteger degreeValue);
  
  This conversion function assumes that the color coordinate space is 0 .. 1.0  which is mapped to the RGB space of 0 .. 255
  
- @return NSInteger A integer limited to the range [0,255], corresponding to the given _floatValue_
+ @param floatValue A number specificed in float (i.e. 0.0f to 1.0f) to be converted to an RGB value (i.e. 0 to 255)
+ @return NSInteger A integer limited to the range (0..255), corresponding to the given _floatValue_
  */
 NSInteger FloatToRGB(CGFloat floatValue);
 
@@ -278,7 +316,8 @@ NSInteger FloatToRGB(CGFloat floatValue);
  
  This conversion function assumes that the color coordinate space is 0 .. 1.0  which is mapped to the RGB space of 0 .. 255
  
- @return NSInteger A floating limited to the range [0.0,1.0], corresponding to the given _rgbValue_
+ @param rgbValue A number specificed in RGB value (i.e. 0 to 255) to be converted to a float (i.e. 0.0f to 1.0f)
+@return NSInteger A floating limited to the range (0.0f..1.0f), corresponding to the given _rgbValue_
  */
 CGFloat RGBToFloat(NSInteger rgbValue);
 

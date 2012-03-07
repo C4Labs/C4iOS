@@ -7,52 +7,51 @@
 //
 
 #import "C4CanvasController.h"
-#import "C4Font.h"
-C4Label *newLabel;
-C4Shape *what;
-CALayer *rLayer;
-UIImageView *imgView;
+//C4Label *newLabel;
+//C4Shape *what;
+//CALayer *rLayer;
+//UIImageView *imgView;
 
 @implementation C4CanvasController
 @synthesize canvas;
 
-UIImageView *imgView;
-UIBezierPath *animationPath;
+//UIImageView *imgView;
+//UIBezierPath *animationPath;
 
 -(void)setup {
     canvas = (C4View *)self.view;
-    imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"candahar256.png"]];
-    imgView.frame = CGRectMake(0, 0, 128, 128);
-    imgView.center = CGPointMake(384, 128);
-    [canvas addSubview:imgView];
-    
+//    imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"candahar256.png"]];
+//    imgView.frame = CGRectMake(0, 0, 128, 128);
+//    imgView.center = CGPointMake(384, 128);
+//    canvas.layer.backgroundColor = [UIColor blueColor].CGColor;
+//    [canvas addSubview:imgView];
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [UIImageView animateWithDuration:2.0f animations:^{
-        [CATransaction begin];        
-        CAKeyframeAnimation *pathAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
-        pathAnimation.duration = 2.0f;
-        pathAnimation.calculationMode = kCAAnimationPaced;
-        animationPath = [UIBezierPath bezierPath];
-        [animationPath moveToPoint:imgView.center];
-        [animationPath addLineToPoint:CGPointMake(128, 512)];
-        [animationPath addLineToPoint:CGPointMake(384, 896)];
-        pathAnimation.path = animationPath.CGPath;
-        pathAnimation.fillMode = kCAFillModeForwards;
-        pathAnimation.removedOnCompletion = NO;
-        [imgView.layer addAnimation:pathAnimation forKey:@"animatePosition"];
-        [CATransaction commit];
-
-        CGFloat scaleFactor = 2.0f;
-        CGRect newFrame = imgView.frame;
-        newFrame.size.width *= scaleFactor;
-        newFrame.size.height *= scaleFactor;
-        newFrame.origin = CGPointMake(256, 0);
-        imgView.frame = newFrame;
-        imgView.transform = CGAffineTransformRotate(imgView.transform,90.0*M_PI/180);
-    }];
-}
+//-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+//    [UIImageView animateWithDuration:2.0f animations:^{
+//        [CATransaction begin];        
+//        CAKeyframeAnimation *pathAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+//        pathAnimation.duration = 2.0f;
+//        pathAnimation.calculationMode = kCAAnimationPaced;
+//        animationPath = [UIBezierPath bezierPath];
+//        [animationPath moveToPoint:imgView.center];
+//        [animationPath addLineToPoint:CGPointMake(128, 512)];
+//        [animationPath addLineToPoint:CGPointMake(384, 896)];
+//        pathAnimation.path = animationPath.CGPath;
+//        pathAnimation.fillMode = kCAFillModeForwards;
+//        pathAnimation.removedOnCompletion = NO;
+//        [imgView.layer addAnimation:pathAnimation forKey:@"animatePosition"];
+//        [CATransaction commit];
+//
+//        CGFloat scaleFactor = 2.0f;
+//        CGRect newFrame = imgView.frame;
+//        newFrame.size.width *= scaleFactor;
+//        newFrame.size.height *= scaleFactor;
+//        newFrame.origin = CGPointMake(256, 0);
+//        imgView.frame = newFrame;
+//        imgView.transform = CGAffineTransformRotate(imgView.transform,90.0*M_PI/180);
+//    }];
+//}
 
 //-(void)setup {
 //    canvas = (C4View *)self.view;

@@ -29,7 +29,6 @@
 		ED50C8BC14EAC3B10040D844 /* UITouch+C4Touch.m in Sources */ = {isa = PBXBuildFile; fileRef = ED50C8BB14EAC3B10040D844 /* UITouch+C4Touch.m */; };
 		ED50C8C014EAC4920040D844 /* C4Window.m in Sources */ = {isa = PBXBuildFile; fileRef = ED50C8BF14EAC4920040D844 /* C4Window.m */; };
 		ED50C8C514EAC4F70040D844 /* C4CanvasController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED50C8C414EAC4F70040D844 /* C4CanvasController.m */; };
-		ED50C8C814EAC5350040D844 /* C4Canvas.m in Sources */ = {isa = PBXBuildFile; fileRef = ED50C8C714EAC5350040D844 /* C4Canvas.m */; };
 		ED50C8CB14EAC5990040D844 /* C4Layer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED50C8CA14EAC5990040D844 /* C4Layer.m */; };
 		ED50C8CE14EAC61D0040D844 /* C4Foundation.m in Sources */ = {isa = PBXBuildFile; fileRef = ED50C8CD14EAC61D0040D844 /* C4Foundation.m */; };
 		ED50C8D014EAC77C0040D844 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED50C8CF14EAC77C0040D844 /* AVFoundation.framework */; };
@@ -81,8 +80,6 @@
 		ED50C8C214EAC4A40040D844 /* C4Imports.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Imports.h; sourceTree = "<group>"; };
 		ED50C8C314EAC4F70040D844 /* C4CanvasController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4CanvasController.h; sourceTree = "<group>"; };
 		ED50C8C414EAC4F70040D844 /* C4CanvasController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4CanvasController.m; sourceTree = "<group>"; };
-		ED50C8C614EAC5350040D844 /* C4Canvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Canvas.h; sourceTree = "<group>"; };
-		ED50C8C714EAC5350040D844 /* C4Canvas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Canvas.m; sourceTree = "<group>"; };
 		ED50C8C914EAC5990040D844 /* C4Layer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Layer.h; sourceTree = "<group>"; };
 		ED50C8CA14EAC5990040D844 /* C4Layer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Layer.m; sourceTree = "<group>"; };
 		ED50C8CC14EAC61C0040D844 /* C4Foundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Foundation.h; sourceTree = "<group>"; };
@@ -138,20 +135,7 @@
 		ED27819F1502D17800887165 /* To Comment */ = {
 			isa = PBXGroup;
 			children = (
-				ED50C8C614EAC5350040D844 /* C4Canvas.h */,
-				ED50C8C714EAC5350040D844 /* C4Canvas.m */,
-				EDAFFAEE14F7602F00CA356A /* C4Control.h */,
-				EDAFFAEF14F7602F00CA356A /* C4Control.m */,
-				EDA7014714FC496300A0D77D /* C4Label.h */,
-				EDA7014814FC496300A0D77D /* C4Label.m */,
 				EDC56D661504449700E88AAC /* CommentNotes */,
-				EDC75ED81506D7D2002D82A1 /* C4LayerAnimation.h */,
-				EDECBF6A14EAE26600D9A446 /* C4Shape.h */,
-				EDECBF6B14EAE26600D9A446 /* C4Shape.m */,
-				ED89848514EE180400BB7AB0 /* C4ShapeLayer.h */,
-				ED89848614EE180400BB7AB0 /* C4ShapeLayer.m */,
-				ED50C8BA14EAC3B10040D844 /* UITouch+C4Touch.h */,
-				ED50C8BB14EAC3B10040D844 /* UITouch+C4Touch.m */,
 			);
 			name = "To Comment";
 			sourceTree = "<group>";
@@ -237,24 +221,35 @@
 		ED50C8D314EACA0E0040D844 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				EDAFFAD714F70D5F00CA356A /* C4Notification.h */,
 				EDCEA5A514FD7567009969F2 /* C4Gesture.h */,
+				EDC75ED81506D7D2002D82A1 /* C4LayerAnimation.h */,
+				EDAFFAD714F70D5F00CA356A /* C4Notification.h */,
 				ED50C89414EAC2010040D844 /* C4AppDelegate.h */,
 				ED50C89514EAC2010040D844 /* C4AppDelegate.m */,
+				EDAFFAEE14F7602F00CA356A /* C4Control.h */,
+				EDAFFAEF14F7602F00CA356A /* C4Control.m */,
 				ED900CED14FBF2B3006C2AED /* C4Font.h */,
 				ED900CEE14FBF2B3006C2AED /* C4Font.m */,
 				ED50C8CC14EAC61C0040D844 /* C4Foundation.h */,
 				ED50C8CD14EAC61D0040D844 /* C4Foundation.m */,
+				EDA7014714FC496300A0D77D /* C4Label.h */,
+				EDA7014814FC496300A0D77D /* C4Label.m */,
 				ED50C8C914EAC5990040D844 /* C4Layer.h */,
 				ED50C8CA14EAC5990040D844 /* C4Layer.m */,
 				EDF7734D14F361B00094E656 /* C4Math.h */,
 				EDF7734E14F361B00094E656 /* C4Math.m */,
 				ED89849614EF1C8700BB7AB0 /* C4Object.h */,
 				ED89849714EF1C8700BB7AB0 /* C4Object.m */,
+				EDECBF6A14EAE26600D9A446 /* C4Shape.h */,
+				EDECBF6B14EAE26600D9A446 /* C4Shape.m */,
+				ED89848514EE180400BB7AB0 /* C4ShapeLayer.h */,
+				ED89848614EE180400BB7AB0 /* C4ShapeLayer.m */,
 				ED50C8D414EACA340040D844 /* C4View.h */,
 				ED50C8D514EACA340040D844 /* C4View.m */,
 				ED50C8BE14EAC4920040D844 /* C4Window.h */,
 				ED50C8BF14EAC4920040D844 /* C4Window.m */,
+				ED50C8BA14EAC3B10040D844 /* UITouch+C4Touch.h */,
+				ED50C8BB14EAC3B10040D844 /* UITouch+C4Touch.m */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -350,7 +345,6 @@
 				ED50C8BC14EAC3B10040D844 /* UITouch+C4Touch.m in Sources */,
 				ED50C8C014EAC4920040D844 /* C4Window.m in Sources */,
 				ED50C8C514EAC4F70040D844 /* C4CanvasController.m in Sources */,
-				ED50C8C814EAC5350040D844 /* C4Canvas.m in Sources */,
 				ED50C8CB14EAC5990040D844 /* C4Layer.m in Sources */,
 				ED50C8CE14EAC61D0040D844 /* C4Foundation.m in Sources */,
 				ED50C8D614EACA340040D844 /* C4View.m in Sources */,

@@ -88,7 +88,6 @@
 -(void)_sizeToFit {
     [self.label sizeToFit];
     self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.label.frame.size.width, self.label.frame.size.height);
-    [self setNeedsDisplay];
 }
 
 #pragma mark C4Label Methods

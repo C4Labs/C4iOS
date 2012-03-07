@@ -39,14 +39,14 @@ typedef UISwipeGestureRecognizerDirection C4SwipeDirection;
 */
 @protocol C4Gesture <NSObject>
 ///---------------------------------------------------------------------------------------
-/// @Gesture Methods
+/// @name Gesture Methods
 ///---------------------------------------------------------------------------------------
 #pragma mark Gesture Methods
 /** Adds a gesture to an object.
  
  From the input parameters, this method constructs a gesture recognizer and adds it to the object from which it was called.
  
- Internally, this method creates a UIGestureRecognizer which it then uses as the main parameter when calling [self addGestureRecognizer:]
+ Internally, this method creates a UIGestureRecognizer which it then uses as the main parameter when calling addGestureRecognizer:
   
  @param type defines the type of gesture that will be added, should be one of C4GestureType (e.g. TAP, PINCH, SWIPERIGHT, SWIPELEFT, SWIPEUP, SWIPEDOWN, ROTATION, PAN, LONGPRESS).
  @param gestureName a string (can be anything) which identifies the current gesture, so that it can be accessed later on.
@@ -116,7 +116,7 @@ typedef UISwipeGestureRecognizerDirection C4SwipeDirection;
 -(void)setMinimumPressDuration:(CGFloat)duration forGesture:(NSString *)gestureName;
 
 ///---------------------------------------------------------------------------------------
-/// @Basic Touch Methods
+/// @name Basic Touch Methods
 ///---------------------------------------------------------------------------------------
 #pragma mark Basic Touch Methods
 
@@ -124,7 +124,7 @@ typedef UISwipeGestureRecognizerDirection C4SwipeDirection;
  
  This method is a simplified version of touchesBegan:withEvent: which can be called to trigger other custom actions or events.
  
- @warning *NOTE:* If direct access to the event and set of touches is needed, it is possible to override touchesBegan:withEvent: making sure to call [super touchesBegan:withEvent:]
+ @warning *NOTE:* If direct access to the event and set of touches is needed, it is possible to override touchesBegan:withEvent: making sure to call _super touchesBegan:withEvent:_
  */
 -(void)touchesBegan;
 
@@ -132,7 +132,7 @@ typedef UISwipeGestureRecognizerDirection C4SwipeDirection;
  
  This method is a simplified version of touchesEnded:withEvent: which can be called to trigger other custom actions or events.
  
- @warning *NOTE:* If direct access to the event and set of touches is needed, it is possible to override touchesEnded:withEvent: making sure to call [super touchesEnded:withEvent:]
+ @warning *NOTE:* If direct access to the event and set of touches is needed, it is possible to override touchesEnded:withEvent: making sure to call _super touchesEnded:withEvent:_
  */
 -(void)touchesEnded;
 
@@ -140,7 +140,7 @@ typedef UISwipeGestureRecognizerDirection C4SwipeDirection;
  
  This method is a simplified version of touchesMoved:withEvent: which can be overridden to trigger other custom actions or events.
  
- @warning *NOTE:* If direct access to the event and set of touches is needed, it is possible to override touchesEnded:withEvent: making sure to call [super touchesMoved:withEvent:] 
+ @warning *NOTE:* If direct access to the event and set of touches is needed, it is possible to override touchesEnded:withEvent: making sure to call _super touchesMoved:withEvent:_
  */
 -(void)touchesMoved;
 
@@ -153,7 +153,7 @@ typedef UISwipeGestureRecognizerDirection C4SwipeDirection;
 -(void)pressedLong;
 
 ///---------------------------------------------------------------------------------------
-/// @Basic Swipe Methods
+/// @name Basic Swipe Methods
 ///---------------------------------------------------------------------------------------
 #pragma mark Basic Swipe Methods
 /** Method which is called each time an object receives a swipe from left to right

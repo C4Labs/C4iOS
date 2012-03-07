@@ -101,8 +101,6 @@ C4_EXTERN NSString * const ALIGNRIGHT;
 C4_EXTERN NSString * const ALIGNCENTER;
 C4_EXTERN NSString * const ALIGNJUSTIFIED;
 
-
-
 enum {
     ALIGNTEXTLEFT = UITextAlignmentLeft,
     ALIGNTEXTCENTER = UITextAlignmentCenter,
@@ -116,4 +114,29 @@ enum {
     ALIGNBASELINENONE = UIBaselineAdjustmentNone
 };
 typedef NSUInteger C4BaselineAdjustment;
+
+/* `fillRule' values. */
+
+C4_EXTERN NSString *const FILLNORMAL
+__OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
+C4_EXTERN NSString *const FILLEVENODD
+__OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
+
+/* `lineJoin' values. */
+
+C4_EXTERN NSString *const JOINMITER
+__OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
+C4_EXTERN NSString *const JOINROUND
+__OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
+C4_EXTERN NSString *const JOINBEVEL
+__OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
+
+/* `lineCap' values. */
+
+C4_EXTERN NSString *const CAPBUTT
+__OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
+C4_EXTERN NSString *const CAPROUND
+__OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
+C4_EXTERN NSString *const CAPSQUARE
+__OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
 #endif

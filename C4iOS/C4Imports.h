@@ -29,7 +29,6 @@
 //#import "C4Image.h"
 #import "C4Control.h"
 #import "C4Layer.h"
-#import "C4Canvas.h"
 #import "C4ShapeLayer.h"
 #import "C4Shape.h"
 #import "C4Label.h"

@@ -28,9 +28,9 @@ For more information about how to use windows, see View Programming Guide for iO
  
  Use this method instead of addSubview: when adding C4Shapes, because if there are special conditions for adding shapes this method will handle those.
  
- @param aShape A C4Shape object.
+ @param shape A C4Shape object.
  */
--(void)addShape:(C4Shape *)aShape;
+-(void)addShape:(C4Shape *)shape;
 
 /** Adds a C4Label to the window.
  
@@ -38,22 +38,22 @@ For more information about how to use windows, see View Programming Guide for iO
  
  Use this method instead of addSubview: when adding C4Labels, because if there are special conditions for adding shapes this method will handle those.
  
- @param aShape A C4Label object.
+ @param label A C4Label object.
  */
--(void)addLabel:(C4Label *)aLabel;
+-(void)addLabel:(C4Label *)label;
 
 ///---------------------------------------------------------------------------------------
 /// @name Accessing the Root View Controller
 ///---------------------------------------------------------------------------------------
 #pragma mark Root View Controller
 
-/** This property provides access for setting a C4Window's root view controller. 
+/** A controller which will be set at the window's root view controller.
+ 
+ This property provides access for setting a C4Window's root view controller. 
  
  The C4CanvasController is a subclass of UIViewController and is the principle object within C4 in which programmers will set up and control their applications.
  
  @warning *NOTE:* When programming a C4 project the canvasController is preset. This shouldn't change unless the entire project structure is changing.
- 
- @param canvasController A controller which will be set at the window's root view controller.
- */
+  */
 @property (readwrite, strong) C4CanvasController *canvasController;
 @end

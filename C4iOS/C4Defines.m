@@ -38,3 +38,20 @@ NSString * const ALIGNLEFT = @"left";
 NSString * const ALIGNRIGHT = @"right";
 NSString * const ALIGNCENTER = @"center";
 NSString * const ALIGNJUSTIFIED = @"justified";
+
+/* `fillRule` values.*/
+
+NSString *const FILLNORMAL = @"non-zero";
+NSString *const FILLEVENODD = @"even-odd";
+
+/* `lineJoin' values. */
+
+NSString *const JOINMITRE = @"mitre";
+NSString *const JOINROUND = @"round";
+NSString *const JOINBEVEL = @"bevel";
+
+/* `lineCap' values. */
+
+NSString *const CAPBUTT = @"butt";
+NSString *const CAPROUND = @"round";
+NSString *const CAPSQUARE = @"square";

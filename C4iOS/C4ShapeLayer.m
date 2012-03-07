@@ -14,7 +14,7 @@
 
 @implementation C4ShapeLayer
 @synthesize animationOptions = _animationOptions, currentAnimationEasing, repeatCount, animationDuration = _animationDuration;
-@synthesize allowsInteraction, repeats, isShapeLayer;
+@synthesize allowsInteraction, repeats;
 
 -(id)init {
     self = [super init];
@@ -26,7 +26,6 @@
         self.repeatCount = 0;
         self.autoreverses = NO;
         
-        isShapeLayer = YES;
         currentAnimationEasing = (NSString *)kCAMediaTimingFunctionEaseInEaseOut;
         allowsInteraction = NO;
         repeats = NO;
@@ -158,16 +157,6 @@
     }
     [self addAnimation:animation forKey:@"animateCompositingFilter"];
     [CATransaction commit];
-}
-
-/* in the following method
- if we implement other kinds of options, we'll have to get rid of the returns...
- reversing how i check the values, if linear is at the bottom, then all the other values get called
- */
-
--(void)test {
-    C4Log(@"animationOptions: %@",self.currentAnimationEasing);
-    C4Log(@"autoreverses: %@", self.autoreverses ? @"YES" : @"NO");
 }
 
 -(BOOL)isOpaque {

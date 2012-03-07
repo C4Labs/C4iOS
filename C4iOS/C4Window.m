@@ -39,10 +39,6 @@
 #endif
 }
 
--(void)drawRect:(CGRect)rect {
-    [self.layer display];
-}
-
 -(void)addShape:(C4Shape *)shape {
     [self addSubview:shape];
 }
@@ -55,7 +51,5 @@
  The following method makes sure that the main backing CALayer
  for this UIWindow subclass will be a C4Canvas
  */
-+(Class)layerClass {
-    return [C4Canvas class];
-}
+
 @end

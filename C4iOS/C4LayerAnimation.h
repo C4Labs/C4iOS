@@ -78,8 +78,16 @@
  */
 -(void)animateCompositingFilter:(id)compositingFilter;
 
--(void)test;
+/** Returns whether or not the layer is opaque.
+ */
 -(BOOL)isOpaque;
+
+/** Convenience method for creating a CABasicAnimation.
+ 
+ @warning *NOTE:* You should never call this method directly, it is included in this protocol because all layers need to have the corresponding method for setting up their animations.
+ 
+ @param keyPath A string representation of an animatable property (e.g. @"path", @"fillColor", etc..)
+ */
 -(CABasicAnimation *)setupBasicAnimationWithKeyPath:(NSString *)keyPath;
 
 ///---------------------------------------------------------------------------------------
@@ -87,7 +95,7 @@
 ///---------------------------------------------------------------------------------------
 #pragma mark Properties
 
-/** Sets the duration of the layer's animations.
+/** The duration of the layer's animations.
  
  All animations that occur will use this value as their duration.
  
@@ -95,11 +103,11 @@
  
  Defaults to 0.0f;
  
- @param CGFloat A value in seconds for the length that a layer should set for its animations.
+ @param animationDuration A value in seconds for the length that a layer should set for its animations.
  */
 @property (nonatomic) CGFloat animationDuration;
 
-/** Sets the options for which the layer should use in its animations.
+/** The options for which the layer should use in its animations.
  
  The available animation options are a limited subset of UIViewAnimationOptions and include:
  - ALLOWSINTERACTION
@@ -118,18 +126,29 @@
  layer.animationOptions = AUTOREVERSE;
  layer.animationOptions = REPEAT;
  
- @param NSUInteger An integer which can be constructed from bitmasked values.
+ @param animationOptions An integer which can be constructed from bitmasked values.
  */
 @property (nonatomic) NSUInteger animationOptions;
 
-/** Sets the number of times an animation autorepeats.
+/** The number of times an animation autorepeats.
  
  @warning *NOTE:* This parameter is currently unused.
- 
- @param CGFloat The number of times an animation should repeat.
  */
 @property (nonatomic) CGFloat repeatCount;
 
+/** Type of easing that an animation will use.
+ */
 @property (readonly, strong) NSString *currentAnimationEasing;
-@property (readonly, nonatomic) BOOL allowsInteraction, repeats;
+
+/** The interaction state.
+
+ @return BOOL YES if the layer allows interaction, NO otherwise.
+ */
+@property (readonly, nonatomic) BOOL allowsInteraction;
+
+/** The repeat state.
+ 
+ @return BOOL YES if the layer's animations will repeat, NO otherwise.
+ */
+@property (readonly, nonatomic) BOOL repeats;
 @end

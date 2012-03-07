@@ -13,6 +13,7 @@
 -(void)animateWithBlock:(void (^)(void))blockAnimation completion:(void (^)(BOOL))completionBlock;
 -(void)pressedLong:(id)sender;
 @property (readwrite,strong) NSString *longPressMethodName;
+@property (readonly, strong) NSMutableDictionary *gestureDictionary;
 @end
 
 @implementation C4Control

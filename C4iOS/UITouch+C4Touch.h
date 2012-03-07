@@ -1,15 +1,22 @@
 //
 //  UITouch+C4Touch.h
-//  C4iOSDevelopment
+//  C4iOS
 //
 //  Created by Travis Kirton on 11-10-08.
-//  Copyright (c) 2011 mediart. All rights reserved.
+//  Copyright (c) 2011 POSTFL. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-@class C4Foundation;
 
-@interface UITouch (C4Touch) 
+/** This document describes a category for UITouch that makes available an otherwise hidden variable.
+ */
+@interface UITouch (C4Touch)
+///---------------------------------------------------------------------------------------
+/// @name Accessors
+///---------------------------------------------------------------------------------------
+/** Provides access to the value of the largest radius of a touch;
+ 
+ @return majorRadius A float value measuring the larger radius (generally in a non-circular ellipse).
+ */
 -(CGFloat)majorRadius;
--(NSTimeInterval)timeStamp;
 @end

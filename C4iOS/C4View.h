@@ -11,7 +11,7 @@
  
  Because view objects are the main way your application interacts with the user, they have a number of responsibilities. Here are just a few:
  
- Anything visible in a C4 application is a subclass of C4View. So, in this sense, you should never have to construct a C4View yourself. Instead, choose the appropriate C4 object, which if visible will be a descendant of a C4View, and work from there.
+ You should never have to construct a C4View yourself. Instead, choose the appropriate C4 object and work from there.
 
  C4Views conform to the C4Notification protocol which means that all views will have the ability to post and receive notifications. Furthermore, C4View defines basic methods that deal with basic animations for the following properties:
  
@@ -54,20 +54,18 @@
  
  Use this method instead of addSubview: when adding C4Labels, because if there are special conditions for adding shapes this method will handle those.
  
- @param aShape A C4Label object.
+ @param aLabel A C4Label object.
  */
 -(void)addLabel:(C4Label *)aLabel;
 
 ///---------------------------------------------------------------------------------------
 /// @name Setting A View's Origin Point
 ///---------------------------------------------------------------------------------------
-/** Sets the origin point of the view.
+/** The origin point of the view.
  
  Takes a CGPoint and animates the view's origin position from its current point to the new point.
  
- This method positions the origin point of the current view by calculating the difference between this point and what the view's new center point will be. It then initiates the animation by setting the displaced new center point. 
- 
- @param CGPoint A new point to which the origin should move.
+ This method positions the origin point of the current view by calculating the difference between this point and what the view's new center point will be. It then initiates the animation by setting the displaced new center point.
  */
 @property (nonatomic) CGPoint origin;
 
@@ -76,31 +74,31 @@
 ///---------------------------------------------------------------------------------------
 #pragma mark Animation Properties
 
-/** Sets the duration of the view's animations.
+/** The duration of the view's animations, measured in seconds.
  
  All animations that occur will use this value as their duration.
  
  For immediate animations set this property to 0.0f;
  
  Defaults to 0.0f;
- 
- @param CGFloat A value in seconds for the length that a view should set for its animations.
  */
 @property CGFloat animationDuration;
 
-/** Sets the time to wait before the view's animations begin.
+/** The time to wait before the view's animations begin, measured in seconds.
  
+ A value in seconds for the length that a view should wait before it triggers its animations.
+
  All animations that occur will use this value as their delay.
  
  For immediate animations set this property to 0.0f;
  
  Defaults to 0.0f;
- 
- @param CGFloat A value in seconds for the length that a view should wait before it triggers its animations.
  */
 @property CGFloat animationDelay;
 
-/** Sets the options for which the view should use in its animations.
+/** The options for which the view should use in its animations.
+
+ An integer which can be constructed from bitmasked values.
  
  The available animation options are a limited subset of UIViewAnimationOptions and include:
  - ALLOWSINTERACTION
@@ -118,16 +116,12 @@
  @warning *NOTE:* All animation options should be set at the same time using the | bitmask operator. Animation options should never be set in the following way:
  view.animationOptions = AUTOREVERSE;
  view.animationOptions = REPEAT;
-  
- @param NSUInteger An integer which can be constructed from bitmasked values.
  */
 @property (nonatomic) NSUInteger animationOptions;
 
-/** Sets the number of times an animation autorepeats.
+/** The number of times an animation autorepeats.
  
  @warning *NOTE:* This parameter is currently unused.
- 
- @param CGFloat The number of times an animation should repeat.
- */
+  */
 @property (nonatomic) CGFloat repeatCount;
 @end

@@ -53,15 +53,15 @@
     return self;
 }
 
-+(C4Shape *)ellipse:(CGRect)aRect {
-    C4Shape *newShape = [[C4Shape alloc] initWithFrame:aRect];
-    [newShape ellipse:aRect];
++(C4Shape *)ellipse:(CGRect)rect {
+    C4Shape *newShape = [[C4Shape alloc] initWithFrame:rect];
+    [newShape ellipse:rect];
     return newShape;
 }
 
-+(C4Shape *)rect:(CGRect)aRect {
-    C4Shape *newShape = [[C4Shape alloc] initWithFrame:aRect];
-    [newShape rect:aRect];
++(C4Shape *)rect:(CGRect)rect {
+    C4Shape *newShape = [[C4Shape alloc] initWithFrame:rect];
+    [newShape rect:rect];
     return newShape;
 }
 
@@ -97,8 +97,8 @@
 
 
 /* the technique in both the following methods allows me to change the shape of a shape and change the shape of their view's frame automatically */
--(void)ellipse:(CGRect)aRect {
-    [self performSelector:@selector(_ellipse:) withObject:[NSValue valueWithCGRect:aRect] afterDelay:self.animationDelay];
+-(void)ellipse:(CGRect)rect {
+    [self performSelector:@selector(_ellipse:) withObject:[NSValue valueWithCGRect:rect] afterDelay:self.animationDelay];
 }
 -(void)_ellipse:(NSValue *)ellipseValue {
     _isLine = NO;
@@ -173,8 +173,8 @@
     CGPathRelease(newPath);
 }
 
--(void)rect:(CGRect)aRect {
-    [self performSelector:@selector(_rect:) withObject:[NSValue valueWithCGRect:aRect] afterDelay:self.animationDelay];
+-(void)rect:(CGRect)rect {
+    [self performSelector:@selector(_rect:) withObject:[NSValue valueWithCGRect:rect] afterDelay:self.animationDelay];
 }
 -(void)_rect:(NSValue *)rectValue {
     _isLine = NO;

@@ -28,7 +28,6 @@
 //    [[AVAudioSession sharedInstance] setDelegate:self.canvasController];
 //    [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategorySoloAmbient error: nil];
     [self.canvasController setup];
-
     return YES;
 }
 
