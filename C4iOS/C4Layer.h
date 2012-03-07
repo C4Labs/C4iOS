@@ -8,27 +8,16 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-@interface C4Layer : CALayer {
+/** This document describes the basic C4Layer, a subclass of CALayer which conforms to the C4LayerAnimation protocol.
+ 
+ It is rare that you will need to directly use C4Layers when working with C4. By conforming to the C4LayerAnimation protocol, this class makes it possible to animate basic properties of the layer such as color.
+ 
+ *To understand the animatable properties of a C4Layer please see the documentation for the [C4LayerAnimation](C4LayerAnimation) protocol.*
+ 
+ @warning *NOTE:* At the time of this documentation, the C4Layer class is only used as the backing layer for a C4Window. This provides access to changing the window's background color, and other simple things.
+ */
+
+@interface C4Layer : CALayer <C4LayerAnimation> {
 }
-#pragma mark C4Layer Animation Methods
--(CABasicAnimation *)setupBasicAnimationWithKeyPath:(NSString *)keyPath;
--(void)setAnimationOptions:(NSUInteger)animationOptions;
 
-#pragma mark C4Layer methods
--(void)animateShadowColor:(CGColorRef)shadowColor;
--(void)animateShadowOpacity:(CGFloat)shadowOpacity;
--(void)animateShadowRadius:(CGFloat)shadowRadius;
--(void)animateShadowOffset:(CGSize)shadowOffset;
--(void)animateShadowPath:(CGPathRef)shadowPath;
--(void)animateBackgroundFilters:(NSArray *)backgroundFilters;
--(void)animateCompositingFilter:(id)compositingFilter;
--(void)test;
-
--(BOOL)isOpaque;
-
-#pragma mark C4Layer properties
-@property (nonatomic) NSUInteger animationOptions;
-@property (nonatomic) CGFloat repeatCount, animationDuration;
-@property (readonly, strong) NSString *currentAnimationEasing;
-@property (readonly, nonatomic) BOOL allowsInteraction, repeats;
 @end

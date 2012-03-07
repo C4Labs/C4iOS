@@ -6,9 +6,11 @@
 //  Copyright (c) 2012 POSTFL. All rights reserved.
 //
 
-
-
 #import "C4Font.h"
+
+@interface C4Font ()
+-(id)initWithName:(NSString *)fontName size:(CGFloat)fontSize;
+@end
 
 @implementation C4Font
 @synthesize UIFont = _UIFont, CTFont = _CTFont, CGFont = _CGFont, familyName = _familyName, fontName = _fontName, pointSize = _pointSize, ascender = _ascender, descender = _descender, capHeight = _capHeight, xHeight = _xHeight, lineHeight = _lineHeight;
@@ -17,6 +19,7 @@
     self = [super init];
     if(self != nil) {
         _UIFont = [UIFont systemFontOfSize:12.0f];
+        [self setup];
     }
     return self;
 }
@@ -25,6 +28,7 @@
     self = [super init];
     if(self != nil) {
         _UIFont = [UIFont fontWithName:fontName size:fontSize];
+        [self setup];
     }
     return self;
 }

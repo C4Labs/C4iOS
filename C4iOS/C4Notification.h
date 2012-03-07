@@ -8,15 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-/** C4NotificationMethods protocol groups methods that are fundamental to basic ability for all C4 objects, visible or otherwise, to post, listen and stop listening for notifications.
+/** C4Notification protocol groups methods that are fundamental to basic ability for all C4 objects, visible or otherwise, to post, listen and stop listening for notifications.
  
  If an object conforms to this protocol, it has the ability to create and listen for messages which pass through the NSNotification center.
  
  The C4 Framework is built with the idea that all objects of any kind should be able to broadcast and respond to notifications, and to communicate with one another directly if necessary. All C4 objects conform to the methods defined below. 
  
- *NOTE:* It is assumed that the object which includes this protocol is a subclass of NSObject.
+ @warning *NOTE:* It is assumed that the object which includes this protocol is a subclass of NSObject.
  */
-@protocol C4NotificationMethods <NSObject>
+@protocol C4Notification <NSObject>
 
 ///---------------------------------------------------------------------------------------
 /// @name Listen Methods

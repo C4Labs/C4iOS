@@ -26,7 +26,6 @@
         
         /* makes sure there are no extraneous animation keys lingering about after init */
         [self removeAllAnimations];
-
 #ifdef VERBOSE
         C4Log(@"%@ init",[self class]);
 #endif
@@ -38,6 +37,11 @@
 #ifdef VERBOSE
     C4Log(@"%@ awakeFromNib",[self class]);
 #endif
+}
+
+#pragma mark Safe Initialization Methods
+-(void)setup {
+    
 }
 
 #pragma mark C4Layer Animation Methods
@@ -173,7 +177,7 @@
 -(BOOL)isOpaque {
     /*
      Apple docs say that the frameworks flip this to NO automatically 
-     ...if you do things like set the background color to anything transparent
+     ...if you do things like set the background color to anything transparent (i.e. alpha other than 1.0f)
      */
     return YES;
 }

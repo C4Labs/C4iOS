@@ -16,8 +16,9 @@
 #import <math.h>
 
 #import "C4Defines.h"
-#import "C4NotificationMethods.h"
-#import "C4GestureMethods.h"
+#import "C4Notification.h"
+#import "C4Gesture.h"
+#import "C4LayerAnimation.h"
 
 //#import "C4AudioPlayer.h"
 #import "C4Object.h"

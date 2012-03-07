@@ -33,8 +33,8 @@
     [self addSubview:aShape];
 }
 
--(void)addLabel:(C4Label *)aShape {
-    [self addSubview:aShape];
+-(void)addLabel:(C4Label *)aLabel {
+    [self addSubview:aLabel];
 }
 
 /* don't add this ever...
@@ -60,6 +60,15 @@
             self.animationDelay = oldDelay;
         }
     }];
+}
+
+
+-(void)setOrigin:(CGPoint)origin {
+    _origin = origin;
+    CGPoint difference = self.origin;
+    difference.x += self.frame.size.width/2.0f;
+    difference.y += self.frame.size.height/2.0f;
+    self.center = difference;
 }
 
 -(void)setFrame:(CGRect)frame {
@@ -166,14 +175,6 @@
 
 -(void)setAnimationOptions:(NSUInteger)animationOptions {
     _animationOptions = animationOptions;
-}
-
--(void)setOrigin:(CGPoint)origin {
-    _origin = origin;
-    CGPoint difference = self.origin;
-    difference.x += self.frame.size.width/2.0f;
-    difference.y += self.frame.size.height/2.0f;
-    self.center = difference;
 }
 
 #pragma mark Notification Methods

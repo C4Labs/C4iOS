@@ -74,6 +74,7 @@
         _label.backgroundColor = [UIColor clearColor];
         self.animationDelay = 0.0f;
         self.animationDuration = 0.0f;
+        [self setup];
         [self addSubview:_label];
     }
     return self;

@@ -47,8 +47,8 @@
     [self addSubview:shape];
 }
 
--(void)addText:(C4Text *)text {
-    [self addSubview:text];
+-(void)addLabel:(C4Label *)label {
+    [self addSubview:label];
 }
 
 /*

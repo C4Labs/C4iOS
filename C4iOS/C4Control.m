@@ -42,6 +42,10 @@
  }
  */
 
+-(void)setup {
+    
+}
+
 #pragma mark UIView animatable property overrides
 
 -(void)setCenter:(CGPoint)center {
@@ -326,8 +330,6 @@
 }
 
 #pragma mark Notification Methods
--(void)setup {}
-
 -(void)listenFor:(NSString *)notification andRunMethod:(NSString *)methodName {
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(methodName) name:notification object:nil];
 }

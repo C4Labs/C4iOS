@@ -1,5 +1,5 @@
 //
-//  C4GestureMethods.h
+//  C4Gesture.h
 //  C4iOS
 //
 //  Created by Travis Kirton on 12-02-28.
@@ -29,15 +29,15 @@ typedef UISwipeGestureRecognizerDirection C4SwipeDirection;
 
 #import <Foundation/Foundation.h>
 
-/** C4GestureMethods protocol groups methods that are fundamental to basic interaction with all C4 objects which have a visible, on-screen presence.
+/** C4Gesture protocol groups methods that are fundamental to basic interaction with all C4 objects which have a visible, on-screen presence.
  
  If an object conforms to this protocol, it can be considered as an interactive object which can respond to gestures.
  
- The C4 Framework is built with the idea that all visible objects have the ability to be interactive. In doing so, all visible objects will be subclasses of C4Control. Furthermore, because C4Control implements the C4GestureMethods protocol, all visible objects within C4 also conform to the methods defined below. 
+ The C4 Framework is built with the idea that all visible objects have the ability to be interactive. In doing so, all visible objects will be subclasses of C4Control. Furthermore, because C4Control implements the C4Gesture protocol, all visible objects within C4 also conform to the methods defined below. 
  
- *NOTE:* It is assumed that the object which includes this protocol is a subclass of UIView.
+ @warning *NOTE:* It is assumed that the object which includes this protocol is a subclass of [UIView](UIView).
 */
-@protocol C4GestureMethods <NSObject>
+@protocol C4Gesture <NSObject>
 ///---------------------------------------------------------------------------------------
 /// @Gesture Methods
 ///---------------------------------------------------------------------------------------

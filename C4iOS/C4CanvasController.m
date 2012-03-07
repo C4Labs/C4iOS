@@ -11,41 +11,81 @@
 C4Label *newLabel;
 C4Shape *what;
 CALayer *rLayer;
+UIImageView *imgView;
 
 @implementation C4CanvasController
 @synthesize canvas;
+
+UIImageView *imgView;
+UIBezierPath *animationPath;
+
 -(void)setup {
     canvas = (C4View *)self.view;
-
-    newLabel = [C4Label new];
-    newLabel.frame = CGRectMake(100, 100, 100, 100);
-    newLabel.font = [C4Font fontWithName:@"arial" size:40];
-    newLabel.text = @"travis";
-    newLabel.shadowOffset = CGSizeMake(1, 1);
-    newLabel.center = CGPointMake(100, 200);
-    newLabel.shadowColor = [UIColor magentaColor];
-    newLabel.backgroundColor = [UIColor orangeColor];
-    [canvas addSubview:newLabel];
-
-    C4Shape *rect = [C4Shape rect:CGRectMake(500, 500, 100, 100)];
-    [canvas addShape:rect];
-    [canvas addSubview:newLabel];
-    [newLabel sizeToFit];
-    [newLabel listenFor:@"touchesBegan" fromObject:rect andRunMethod:@"test"]; 
+    imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"candahar256.png"]];
+    imgView.frame = CGRectMake(0, 0, 128, 128);
+    imgView.center = CGPointMake(384, 128);
+    [canvas addSubview:imgView];
+    
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    newLabel.animationDuration = 1.0f;
-    newLabel.animationDelay = 1.0f;
-    newLabel.animationOptions = AUTOREVERSE | REPEAT;
-    newLabel.backgroundColor = [UIColor whiteColor];
-    newLabel.shadowOffset = CGSizeMake(10, 10);
-    newLabel.shadowOpacity = 0.5;
-    newLabel.textShadowOffset = CGSizeMake(2, 2);
-    newLabel.text = @"kirton";
-    [newLabel sizeToFit];
-    newLabel.center = CGPointMake(300, 300);
+    [UIImageView animateWithDuration:2.0f animations:^{
+        [CATransaction begin];        
+        CAKeyframeAnimation *pathAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+        pathAnimation.duration = 2.0f;
+        pathAnimation.calculationMode = kCAAnimationPaced;
+        animationPath = [UIBezierPath bezierPath];
+        [animationPath moveToPoint:imgView.center];
+        [animationPath addLineToPoint:CGPointMake(128, 512)];
+        [animationPath addLineToPoint:CGPointMake(384, 896)];
+        pathAnimation.path = animationPath.CGPath;
+        pathAnimation.fillMode = kCAFillModeForwards;
+        pathAnimation.removedOnCompletion = NO;
+        [imgView.layer addAnimation:pathAnimation forKey:@"animatePosition"];
+        [CATransaction commit];
+
+        CGFloat scaleFactor = 2.0f;
+        CGRect newFrame = imgView.frame;
+        newFrame.size.width *= scaleFactor;
+        newFrame.size.height *= scaleFactor;
+        newFrame.origin = CGPointMake(256, 0);
+        imgView.frame = newFrame;
+        imgView.transform = CGAffineTransformRotate(imgView.transform,90.0*M_PI/180);
+    }];
 }
+
+//-(void)setup {
+//    canvas = (C4View *)self.view;
+//
+//    newLabel = [C4Label new];
+//    newLabel.frame = CGRectMake(100, 100, 100, 100);
+//    newLabel.font = [C4Font fontWithName:@"arial" size:40];
+//    newLabel.text = @"travis";
+//    newLabel.shadowOffset = CGSizeMake(1, 1);
+//    newLabel.center = CGPointMake(100, 200);
+//    newLabel.shadowColor = [UIColor magentaColor];
+//    newLabel.backgroundColor = [UIColor orangeColor];
+//    [canvas addSubview:newLabel];
+//
+//    C4Shape *rect = [C4Shape rect:CGRectMake(500, 500, 100, 100)];
+//    [canvas addShape:rect];
+//    [canvas addSubview:newLabel];
+//    [newLabel sizeToFit];
+//    [newLabel listenFor:@"touchesBegan" fromObject:rect andRunMethod:@"test"]; 
+//}
+//
+//-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+//    newLabel.animationDuration = 1.0f;
+//    newLabel.animationDelay = 1.0f;
+//    newLabel.animationOptions = AUTOREVERSE | REPEAT;
+//    newLabel.backgroundColor = [UIColor whiteColor];
+//    newLabel.shadowOffset = CGSizeMake(10, 10);
+//    newLabel.shadowOpacity = 0.5;
+//    newLabel.textShadowOffset = CGSizeMake(2, 2);
+//    newLabel.text = @"kirton";
+//    [newLabel sizeToFit];
+//    newLabel.center = CGPointMake(300, 300);
+//}
 
 @end
 

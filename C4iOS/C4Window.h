@@ -8,10 +8,52 @@
 
 #import <UIKit/UIKit.h>
 
-@interface C4Window : UIWindow 
-    
--(void)addShape:(C4Shape *)shape;
--(void)addText:(C4Text *)text;
+/**The C4Window class is a subclass of UIWindow. The two principal functions of a window are to provide an area for displaying its views and to distribute events to the views. The window is the root view in the view hierarchy. Typically, there is only one window in an iOS application.
 
+For more information about how to use windows, see View Programming Guide for iOS.
+ 
+ The C4Window is a subclass of UIWindow, which is also a subclass of UIView. Because we cannot create chains of subclasses i.e. C4Window : C4View, the addShape: and addLabel: methods are coded directly into this class for sake of convenience.
+
+ @warning *NOTE:* in C4 you should never have to worry about constructing windows.
+*/
+@interface C4Window : UIWindow 
+///---------------------------------------------------------------------------------------
+/// @name Adding Object Methods
+///---------------------------------------------------------------------------------------
+#pragma mark Adding Objects
+
+/** Adds a C4Shape to the window.
+ 
+ Takes a C4Shape object and adds it to the view hierarchy.
+ 
+ Use this method instead of addSubview: when adding C4Shapes, because if there are special conditions for adding shapes this method will handle those.
+ 
+ @param aShape A C4Shape object.
+ */
+-(void)addShape:(C4Shape *)aShape;
+
+/** Adds a C4Label to the window.
+ 
+ Takes a C4Label object and adds it to the view hierarchy.
+ 
+ Use this method instead of addSubview: when adding C4Labels, because if there are special conditions for adding shapes this method will handle those.
+ 
+ @param aShape A C4Label object.
+ */
+-(void)addLabel:(C4Label *)aLabel;
+
+///---------------------------------------------------------------------------------------
+/// @name Accessing the Root View Controller
+///---------------------------------------------------------------------------------------
+#pragma mark Root View Controller
+
+/** This property provides access for setting a C4Window's root view controller. 
+ 
+ The C4CanvasController is a subclass of UIViewController and is the principle object within C4 in which programmers will set up and control their applications.
+ 
+ @warning *NOTE:* When programming a C4 project the canvasController is preset. This shouldn't change unless the entire project structure is changing.
+ 
+ @param canvasController A controller which will be set at the window's root view controller.
+ */
 @property (readwrite, strong) C4CanvasController *canvasController;
 @end

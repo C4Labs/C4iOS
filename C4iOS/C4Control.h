@@ -12,9 +12,10 @@
  and animating along a path 
  */
 
-@interface C4Control : UIControl <C4NotificationMethods, C4GestureMethods> {
+@interface C4Control : UIControl <C4Notification, C4Gesture> {
 }
 
+-(void)setup;
 -(void)test;
 
 @property CGFloat animationDuration, animationDelay;
