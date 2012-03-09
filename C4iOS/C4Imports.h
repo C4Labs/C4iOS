@@ -19,6 +19,7 @@
 #import "C4Notification.h"
 #import "C4Gesture.h"
 #import "C4LayerAnimation.h"
+#import "C4EAGLESRenderer.h"
 
 //#import "C4AudioPlayer.h"
 #import "C4Object.h"
@@ -38,6 +39,8 @@
 //#import "C4String.h"
 //#import "C4TextLayer.h"
 //#import "C4Vector.h"
+#import "C4EAGLES1Renderer.h"
+
 #import "C4View.h"
 #import "C4CanvasController.h"
 #import "C4Window.h"

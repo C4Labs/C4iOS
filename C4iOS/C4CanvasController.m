@@ -7,6 +7,7 @@
 //
 
 #import "C4CanvasController.h"
+#import "C4GL.h"
 //C4Label *newLabel;
 //C4Shape *what;
 //CALayer *rLayer;
@@ -17,14 +18,27 @@
 
 //UIImageView *imgView;
 //UIBezierPath *animationPath;
-
+C4GL *gl;
 -(void)setup {
     canvas = (C4View *)self.view;
+    
+    gl = [C4GL new];
+    gl.frame = CGRectMake(100, 100, 400, 400);
+    gl.backgroundColor = [UIColor clearColor];
+    [canvas addSubview:gl];
+    [gl startAnimation];
+    
 //    imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"candahar256.png"]];
 //    imgView.frame = CGRectMake(0, 0, 128, 128);
 //    imgView.center = CGPointMake(384, 128);
 //    canvas.layer.backgroundColor = [UIColor blueColor].CGColor;
 //    [canvas addSubview:imgView];
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    gl.animationDuration = 2.0f;
+    gl.frame = CGRectMake(100, 100, 200, 200);
+    gl.center = [[touches anyObject] locationInView:canvas];
 }
 
 //-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

@@ -21,9 +21,7 @@
 }
 
 #pragma mark Changing a Shape's Path
-///---------------------------------------------------------------------------------------
 /// @name Creating Shapes
-///---------------------------------------------------------------------------------------
 
 /**Creates and returns an instance of C4Shape, whose path is an ellipse.
  
@@ -41,7 +39,7 @@
 
 /**Creates and returns an instance of C4Shape, whose path is a line.
  
- @warning *NOTE:* Lines are the only shape objects which are not touchable, draggable, etc.
+ @warning *Note:* Lines are the only shape objects which are not touchable, draggable, etc.
  
  @param pointArray A C-Array containing 2 CGPoints like: {CGpoint,CGPoint}.
  @return The initialized C4Shape object created with a line path or nil if initialization is not successful.
@@ -93,9 +91,7 @@
 
 
 #pragma mark Changing a Shape's Path
-///---------------------------------------------------------------------------------------
 /// @name Changing a Shape's Path
-///---------------------------------------------------------------------------------------
 
 /**Changes the object's current shape to an ellipse
 
@@ -186,9 +182,7 @@ The change will happen based on the shape's current animation options, duration 
 -(void)setDashPattern:(CGFloat *)dashPattern pointCount:(NSUInteger)pointCount;
 
 #pragma mark Properties
-///---------------------------------------------------------------------------------------
 /// @name Properties
-///---------------------------------------------------------------------------------------
 
 /**The color used to fill the shape’s path. Animatable.
  

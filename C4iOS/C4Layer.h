@@ -14,7 +14,7 @@
  
  *To understand the animatable properties of a C4Layer please see the documentation for the [C4LayerAnimation](C4LayerAnimation) protocol.*
  
- @warning *NOTE:* At the time of this documentation, the C4Layer class is only used as the backing layer for a C4Window. This provides access to changing the window's background color, and other simple things.
+ @warning *Note:* At the time of this documentation, the C4Layer class is only used as the backing layer for a C4Window. This provides access to changing the window's background color, and other simple things.
  */
 
 @interface C4Layer : CALayer <C4LayerAnimation> {

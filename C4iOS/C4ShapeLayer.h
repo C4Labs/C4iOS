@@ -16,7 +16,7 @@
  
  *To understand the animatable properties of a C4ShapeLayer please see the documentation for the [C4LayerAnimation](C4LayerAnimation) protocol.*
  
- @warning *NOTE:* With the current implementation of C4 you shouldn't ever have to access or use this class.
+ @warning *Note:* With the current implementation of C4 you shouldn't ever have to access or use this class.
  */
 
 @interface C4ShapeLayer : CAShapeLayer <C4LayerAnimation> {
@@ -25,9 +25,7 @@
 
 #pragma mark Animation Methods
 
-///---------------------------------------------------------------------------------------
 /// @name Animation Methods
-///---------------------------------------------------------------------------------------
 
 /**Changes the current path to a new path.
  

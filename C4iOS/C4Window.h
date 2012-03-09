@@ -14,12 +14,10 @@ For more information about how to use windows, see View Programming Guide for iO
  
  The C4Window is a subclass of UIWindow, which is also a subclass of UIView. Because we cannot create chains of subclasses i.e. C4Window : C4View, the addShape: and addLabel: methods are coded directly into this class for sake of convenience.
 
- @warning *NOTE:* in C4 you should never have to worry about constructing windows.
+ @warning *Note:* in C4 you should never have to worry about constructing windows.
 */
 @interface C4Window : UIWindow 
-///---------------------------------------------------------------------------------------
 /// @name Adding Object Methods
-///---------------------------------------------------------------------------------------
 #pragma mark Adding Objects
 
 /** Adds a C4Shape to the window.
@@ -42,9 +40,7 @@ For more information about how to use windows, see View Programming Guide for iO
  */
 -(void)addLabel:(C4Label *)label;
 
-///---------------------------------------------------------------------------------------
 /// @name Accessing the Root View Controller
-///---------------------------------------------------------------------------------------
 #pragma mark Root View Controller
 
 /** A controller which will be set at the window's root view controller.
@@ -53,7 +49,7 @@ For more information about how to use windows, see View Programming Guide for iO
  
  The C4CanvasController is a subclass of UIViewController and is the principle object within C4 in which programmers will set up and control their applications.
  
- @warning *NOTE:* When programming a C4 project the canvasController is preset. This shouldn't change unless the entire project structure is changing.
+ @warning *Note:* When programming a C4 project the canvasController is preset. This shouldn't change unless the entire project structure is changing.
   */
 @property (readwrite, strong) C4CanvasController *canvasController;
 @end

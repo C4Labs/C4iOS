@@ -17,15 +17,11 @@
 @interface C4Label : C4Control {
 }
 
-///---------------------------------------------------------------------------------------
 /// @name Custom
-///---------------------------------------------------------------------------------------
 #pragma mark Custom
 -(void)sizeToFit;
 
-///---------------------------------------------------------------------------------------
 /// @name Properties
-///---------------------------------------------------------------------------------------
 #pragma mark Properties
 @property (readonly, strong, nonatomic) UILabel *label;
 /**The text displayed by the label.
@@ -148,7 +144,7 @@
  
  This property accessor provides access to the backing layer which is cast to a C4Layer.
  
- @warning *NOTE:* Instead of calling label.layer, call label.backingLayer
+ @warning *Note:* Instead of calling label.layer, call label.backingLayer
  */
 @property (readonly, weak, nonatomic) C4Layer *backingLayer;
 

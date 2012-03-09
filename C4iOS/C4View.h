@@ -23,7 +23,7 @@
  @property backgroundColor
  @property contentStretch
  
- @warning *NOTE:* For more information on the above properties, consult the UIView class documentation.
+ @warning *Note:* For more information on the above properties, consult the UIView class documentation.
  
  C4Views also have a custom animation options property which allows for setting of basic characteristics such as AUTOREVERSE, REPEAT, as well as delays and durations. These properties are:
  
@@ -34,9 +34,7 @@
 @interface C4View : UIView <C4Notification> {
 }
 
-///---------------------------------------------------------------------------------------
 /// @name Adding Object Methods
-///---------------------------------------------------------------------------------------
 #pragma mark Adding Objects
 /** Adds a C4Shape to the view.
  
@@ -58,9 +56,7 @@
  */
 -(void)addLabel:(C4Label *)aLabel;
 
-///---------------------------------------------------------------------------------------
 /// @name Setting A View's Origin Point
-///---------------------------------------------------------------------------------------
 /** The origin point of the view.
  
  Takes a CGPoint and animates the view's origin position from its current point to the new point.
@@ -69,9 +65,7 @@
  */
 @property (nonatomic) CGPoint origin;
 
-///---------------------------------------------------------------------------------------
 /// @name Configuring A View's Animation Properties
-///---------------------------------------------------------------------------------------
 #pragma mark Animation Properties
 
 /** The duration of the view's animations, measured in seconds.
@@ -113,7 +107,7 @@
  This value can have a variety of options attached to it by using integer bitmasks. For example, to set an animation which will auto reverse and repeat:
  view.animationOptions = AUTOREVERSE | REPEAT;
  
- @warning *NOTE:* All animation options should be set at the same time using the | bitmask operator. Animation options should never be set in the following way:
+ @warning *Note:* All animation options should be set at the same time using the | bitmask operator. Animation options should never be set in the following way:
  view.animationOptions = AUTOREVERSE;
  view.animationOptions = REPEAT;
  */
@@ -121,7 +115,7 @@
 
 /** The number of times an animation autorepeats.
  
- @warning *NOTE:* This parameter is currently unused.
+ @warning *Note:* This parameter is currently unused.
   */
 @property (nonatomic) CGFloat repeatCount;
 @end

@@ -14,14 +14,12 @@
  
  The C4 Framework is built with the idea that all objects of any kind should be able to broadcast and respond to notifications, and to communicate with one another directly if necessary. All C4 objects conform to the methods defined below. 
  
- @warning *NOTE:* It is assumed that the object which includes this protocol is a subclass of NSObject.
+ @warning *Note:* It is assumed that the object which includes this protocol is a subclass of NSObject.
  */
 @protocol C4Notification <NSObject>
 
-///---------------------------------------------------------------------------------------
-/// @name Listen Methods
-///---------------------------------------------------------------------------------------
 #pragma mark Listen Methods
+/// @name Listen Methods
 
 /** Sets up a given object to listen for a given notification, and run a specific method.
  
@@ -32,7 +30,7 @@
  @param notification the name of a notification for which the object should listen
  @param methodName a string which represents the name of a method defined in the object's class or any of its superclasses, this parameter should be written as a string (e.g. @"test", @"changePosition:")
 
- @warning *NOTE:* To listen for messages coming from a specific object, use listenFor:fromObject:andRunMethod 
+ @warning *Note:* To listen for messages coming from a specific object, use listenFor:fromObject:andRunMethod 
  */
 -(void)listenFor:(NSString *)notification andRunMethod:(NSString *)methodName;
 
@@ -46,7 +44,7 @@
  @param object a specific object to listen to
  @param methodName a string which represents the name of a method defined in the object's class or any of its superclasses, this parameter should be written as a string (e.g. @"test", @"changePosition:")
  
- @warning *NOTE:* To listen for messages coming from a specific object, use listenFor:fromObject:andRunMethod 
+ @warning *Note:* To listen for messages coming from a specific object, use listenFor:fromObject:andRunMethod 
  */
 -(void)listenFor:(NSString *)notification fromObject:(id)object andRunMethod:(NSString *)methodName;
 
@@ -71,10 +69,8 @@
  */
 -(void)stopListeningFor:(NSString *)methodName object:(id)object;
 
-///---------------------------------------------------------------------------------------
-/// @name Broadcast Methods
-///---------------------------------------------------------------------------------------
 #pragma mark Broadcast Methods
+/// @name Broadcast Methods
 
 /** Creates a notification with a given string and posts it to the default notification center.
   

@@ -23,9 +23,7 @@
 +(C4Math *)sharedManager;
 
 #pragma mark Arithmetic
-///---------------------------------------------------------------------------------------
 /// @Arithmetic
-///---------------------------------------------------------------------------------------
 /** Computes the absolute value of an integer number
 
  @param value The number to be converted to its absolute value
@@ -210,9 +208,7 @@
 +(CGFloat)sqrt:(CGFloat)value;
 
 #pragma mark Trigonometry
-///---------------------------------------------------------------------------------------
 /// @Trigonometry
-///---------------------------------------------------------------------------------------
 
 /**Calculates the arc cosine of a given value.
  
@@ -265,9 +261,7 @@
 +(CGFloat)tan:(CGFloat)value;
 
 #pragma mark Random
-///---------------------------------------------------------------------------------------
 /// @Random
-///---------------------------------------------------------------------------------------
 
 /**Calculates a random value 
  
@@ -285,9 +279,7 @@
 +(NSInteger)randomIntBetweenA:(NSInteger)a andB:(NSInteger)b;
 
 #pragma mark Math Conversion Functions
-///---------------------------------------------------------------------------------------
 /// @Conversion
-///---------------------------------------------------------------------------------------
 
 /**Converts a radian value to an equivalent in degrees 
  

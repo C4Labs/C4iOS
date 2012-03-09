@@ -14,13 +14,11 @@
  
  The C4 Framework is built with the idea that all visible objects should be animatable to as much a degree as the Core Animation frameworks allow.
  
- @warning *NOTE:* For the current version of C4 you should NEVER have to deal with any kind of C4Layer because any instance of this kind of layer will be instantiated as the backing layer of a specific view. You should interact only with the layer's superview. For instance, work with C4Shape objects and NOT C4ShapeLayer objects (C4Shape is backed by C4ShapeLayer).
+ @warning *Note:* For the current version of C4 you should NEVER have to deal with any kind of C4Layer because any instance of this kind of layer will be instantiated as the backing layer of a specific view. You should interact only with the layer's superview. For instance, work with C4Shape objects and NOT C4ShapeLayer objects (C4Shape is backed by C4ShapeLayer).
  */
 @protocol C4LayerAnimation <NSObject>
-///---------------------------------------------------------------------------------------
-/// @name Animation Methods
-///---------------------------------------------------------------------------------------
 #pragma mark Animation Methods
+/// @name Animation Methods
 
 /** Animates the layer's shadowColor from it's current color to a new one.
  
@@ -84,16 +82,14 @@
 
 /** Convenience method for creating a CABasicAnimation.
  
- @warning *NOTE:* You should never call this method directly, it is included in this protocol because all layers need to have the corresponding method for setting up their animations.
+ @warning *Note:* You should never call this method directly, it is included in this protocol because all layers need to have the corresponding method for setting up their animations.
  
  @param keyPath A string representation of an animatable property (e.g. @"path", @"fillColor", etc..)
  */
 -(CABasicAnimation *)setupBasicAnimationWithKeyPath:(NSString *)keyPath;
 
-///---------------------------------------------------------------------------------------
-/// @name Properties
-///---------------------------------------------------------------------------------------
 #pragma mark Properties
+/// @name Properties
 
 /** The duration of the layer's animations.
  
@@ -122,7 +118,7 @@
  This value can have a variety of options attached to it by using integer bitmasks. For example, to set an animation which will auto reverse and repeat:
  layer.animationOptions = AUTOREVERSE | REPEAT;
  
- @warning *NOTE:* All animation options should be set at the same time using the | bitmask operator. Animation options should never be set in the following way:
+ @warning *Note:* All animation options should be set at the same time using the | bitmask operator. Animation options should never be set in the following way:
  layer.animationOptions = AUTOREVERSE;
  layer.animationOptions = REPEAT;
  
@@ -132,7 +128,7 @@
 
 /** The number of times an animation autorepeats.
  
- @warning *NOTE:* This parameter is currently unused.
+ @warning *Note:* This parameter is currently unused.
  */
 @property (nonatomic) CGFloat repeatCount;
 

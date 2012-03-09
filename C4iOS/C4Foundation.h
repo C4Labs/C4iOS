@@ -15,9 +15,7 @@
     NSComparator floatSortComparator;
 }
 
-///---------------------------------------------------------------------------------------
 /// @name Foundation Methods
-///---------------------------------------------------------------------------------------
 #pragma mark Foundation Methods
 
 +(C4Foundation *)sharedManager;
@@ -51,7 +49,7 @@ NSInteger   basicSort(id obj1, id obj2, void *context);
  This function was taken from the book: Learning Core Audio: A Hands-On Guide to Audio Programming for Mac and iOS
  http://my.safaribooksonline.com/book/audio/9780321636973
  
- @warning *NOTE:* The current implementation does nothing with the _info_ and _size_ parameters. 
+ @warning *Note:* The current implementation does nothing with the _info_ and _size_ parameters. 
  
 */
 void        free_data(void *info, const void *data, size_t size);

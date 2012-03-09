@@ -19,31 +19,30 @@
  
  Anything visible in a C4 application is a subclass of C4Control. So, in this sense, you should never have to construct a C4Control yourself. Instead, choose the appropriate C4 object, which if visible will be a descendant of a C4Control, and work from there.
  
- C4Control conform to the C4Notification protocol which means that all controls will have the ability to post and receive notifications. Furthermore, C4Control defines basic methods that deal with basic animations for the following properties:
+ C4Controls have custom animation options property which allows for setting of basic characteristics such as AUTOREVERSE, REPEAT, as well as delays and durations. These properties are:
  
- @property center
- @property frame
- @property bounds
- @property transform
- @property alpha
- @property backgroundColor
- @property contentStretch
+ - animationDelay
+ - animationDuration
+ - animationOptions
+
+ C4Control conforms to the C4Notification protocol which means that all controls will have the ability to post and receive notifications. Furthermore, C4Control defines basic methods that deal with basic animations for the following properties:
  
- @warning *NOTE:* For more information on the above properties, consult the UIView class documentation.
+ - center
+ - frame
+ - bounds
+ - transform
+ - alpha
+ - backgroundColor
+ - contentStretch
  
- C4Views also have a custom animation options property which allows for setting of basic characteristics such as AUTOREVERSE, REPEAT, as well as delays and durations. These properties are:
- 
- @property animationDelay
- @property animationDuration
- @property animationOptions
+ @warning For more information on the above properties, consult the [UIView](UIView) class documentation.
+
  */
 
 @interface C4Control : UIControl <C4Notification, C4Gesture> {
 }
 
-///---------------------------------------------------------------------------------------
 /// @name Convenience Methods
-///---------------------------------------------------------------------------------------
 
 /** A method to call instead of overriding any of the standard initializers.
  
@@ -61,9 +60,7 @@
  */
 -(void)test;
 
-///---------------------------------------------------------------------------------------
 /// @name Setting A Control's Origin Point
-///---------------------------------------------------------------------------------------
 /** The origin point of the view.
 
  Takes a CGPoint and animates the view's origin position from its current point to the new point.
@@ -73,10 +70,8 @@
 @property (nonatomic) CGPoint origin;
 
 #pragma mark Animation Properties
-
-///---------------------------------------------------------------------------------------
 /// @name Configuring A Control's Animation Properties
-///---------------------------------------------------------------------------------------
+
 /** The duration of the view's animations, measured in seconds.
   
  All animations that occur will use this value as their duration.
@@ -115,7 +110,7 @@
  This value can have a variety of options attached to it by using integer bitmasks. For example, to set an animation which will auto reverse and repeat:
  view.animationOptions = AUTOREVERSE | REPEAT;
  
- @warning *NOTE:* All animation options should be set at the same time using the | bitmask operator. Animation options should never be set in the following way:
+ @warning *Note:* All animation options should be set at the same time using the | bitmask operator. Animation options should never be set in the following way:
  view.animationOptions = AUTOREVERSE;
  view.animationOptions = REPEAT;
  */
@@ -123,8 +118,11 @@
 
 /** The number of times an animation autorepeats.
  
- @warning *NOTE:* This parameter is currently unused.
+ @warning *Note:* This parameter is currently unused.
  */
 @property (nonatomic) CGFloat repeatCount;
+
+#pragma mark Inherited methods
+///@name Inherited Methods
 
 @end
