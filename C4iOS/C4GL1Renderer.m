@@ -11,22 +11,62 @@
 @implementation C4GL1Renderer
 
 -(void)setup {
-    
 }
 
 -(void)render {
-    const GLfloat squareVertices[] = {
-        -0.5f, -0.5f,
-        0.5f,  -0.5f,
-        -0.5f,  0.5f,
-        0.5f,   0.5f,
+    const GLfloat vertices[] = {
+        -1.0, -1.0,
+        -1.0,  1.0,
+        -0.33, 1.0,
+        0.0, 1.0,
+        0.0, 0.5,
+        0.0, 0.0,
+        0.33, 0.0,
+        0.33, 1.0,
+        0.66, 1.0,
+        0.66, 0.0,
+        1.0, 0.0,
+        1.0, -0.5,
+        0.66, -0.5,
+        0.66, -1.0,
+        0.33, -1.0,
+        0.33, -0.5,
+        -0.33, -0.5,
+        -0.33, 0.0,
+        -0.33, 0.5,
+        -0.66, 0.5,
+        -0.66, -0.5,
+        0.0,-0.5,
+        0.0,-1.0,
+        -1.0,-1.0
     };
-    const GLubyte squareColors[] = {
-        255, 255,   0, 255,
-        0,   255, 255, 255,
-        0,     0,   0,   0,
-        255,   0, 255, 255,
-    };
+    /* number of colors should match the number of vertices, otherwise will create an alpha color to fill in */
+    const GLubyte colors[] = {
+        255, 51, 51, 255,
+        255, 51, 51, 255,
+        255, 51, 51, 255,
+        51, 51, 51, 255,
+        51, 102, 255, 255,
+        51, 102, 255, 255,
+        51, 102, 255, 255,
+        51, 102, 255, 255,
+        51, 102, 255, 255,
+        51, 102, 255, 255,
+        51, 102, 255, 255,
+        51, 102, 255, 255,
+        51, 102, 255, 255,
+        51, 102, 255, 255,
+        51, 102, 255, 255,
+        51, 102, 255, 255,
+        51, 102, 255, 255,
+        51, 102, 255, 255,
+        51, 51, 51, 255,
+        255, 51, 51, 255,
+        255, 51, 51, 255,
+        255, 51, 51, 255,
+        255, 51, 51, 255,
+        255, 51, 51, 255
+};
     
     [EAGLContext setCurrentContext:self.eaglContext];
     
@@ -37,17 +77,16 @@
     glLoadIdentity();
     glOrthof(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f);
 	glMatrixMode(GL_MODELVIEW);
-    glRotatef(3.0f, 0.0f, 0.0f, 1.0f);
     
-    glClearColor(0.5f, 0.5f, 0.5f, 0.0f);
+    glClearColor(0,0,0,0);
     glClear(GL_COLOR_BUFFER_BIT);
     
-    glVertexPointer(2, GL_FLOAT, 0, squareVertices);
+    glVertexPointer(2, GL_FLOAT, 0, vertices);
     glEnableClientState(GL_VERTEX_ARRAY);
-    glColorPointer(4, GL_UNSIGNED_BYTE, 0, squareColors);
+    glColorPointer(4, GL_UNSIGNED_BYTE, 0, colors);
     glEnableClientState(GL_COLOR_ARRAY);
-    
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+    glDrawArrays(GL_LINE_LOOP, 0, 24);
     
     glBindRenderbufferOES(GL_RENDERBUFFER_OES, self.renderBuffer);
     [self.eaglContext presentRenderbuffer:GL_RENDERBUFFER_OES];

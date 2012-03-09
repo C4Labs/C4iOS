@@ -21,11 +21,11 @@
 C4GL *gl;
 -(void)setup {
     canvas = (C4View *)self.view;
-    
+        
     gl = [C4GL new];
-    gl.frame = CGRectMake(100, 100, 400, 400);
-    gl.backgroundColor = [UIColor clearColor];
+    gl.frame = CGRectMake(101, 243, 600, 400);
     [canvas addSubview:gl];
+    gl.drawOnce = YES;
     [gl startAnimation];
     
 //    imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"candahar256.png"]];
@@ -36,8 +36,8 @@ C4GL *gl;
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    gl.animationDuration = 2.0f;
-    gl.frame = CGRectMake(100, 100, 200, 200);
+    gl.animationDuration = 1.0f;
+    gl.frame = CGRectMake(100, 100, 300, 200);
     gl.center = [[touches anyObject] locationInView:canvas];
 }
 

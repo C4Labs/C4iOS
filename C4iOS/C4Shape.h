@@ -10,7 +10,7 @@
 
 /**The C4Shape class implements a modifiable view that handles shapes. You can use this class to create almost any kind of basic shape, as well as more complicated polygons.
  
- C4Shape is a subclass of C4Control and inherits all its gesture and notification abilities.
+ C4Shape is a subclass of C4Control and inherits all its gesture, animation and notification abilities.
  
  This is the class that you should use to construct and add any shapes to C4's canvas.
  

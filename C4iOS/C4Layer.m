@@ -15,7 +15,7 @@
 - (id)init
 {
     self = [super init];
-    if (self) {
+    if (self != nil) {
         self.name = @"backingLayer";
         self.repeatCount = 0;
         self.autoreverses = NO;

@@ -3,6 +3,7 @@
 //  C4iOS
 //
 //  Created by Travis Kirton on 12-03-08.
+//  A modified version of Apple's GLES2Sample project.
 //  Copyright (c) 2012 POSTFL. All rights reserved.
 //
 
@@ -44,16 +45,13 @@
 - (void) render {
 }
 
-- (BOOL) resizeFromLayer:(C4EAGLLayer *)layer
-{	
-	// Allocate color buffer backing based on the current layer size
+- (BOOL) resizeFromLayer:(C4EAGLLayer *)layer{
     glBindRenderbufferOES(GL_RENDERBUFFER_OES, renderBuffer);
     [eaglContext renderbufferStorage:GL_RENDERBUFFER_OES fromDrawable:layer];
 	glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_WIDTH_OES, &width);
     glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_HEIGHT_OES, &height);
 	
-    if (glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES) != GL_FRAMEBUFFER_COMPLETE_OES)
-	{
+    if (glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES) != GL_FRAMEBUFFER_COMPLETE_OES) {
 		NSLog(@"Failed to make complete framebuffer object %x", glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES));
         return NO;
     }
@@ -63,19 +61,16 @@
 
 - (void) dealloc
 {
-	if (frameBuffer)
-	{
+	if (frameBuffer) {
 		glDeleteFramebuffersOES(1, &frameBuffer);
 		frameBuffer = 0;
 	}
 	
-	if (renderBuffer)
-	{
+	if (renderBuffer) {
 		glDeleteRenderbuffersOES(1, &renderBuffer);
 		renderBuffer = 0;
 	}
 	
-	// Tear down context
 	if ([EAGLContext currentContext] == eaglContext)
         [EAGLContext setCurrentContext:nil];
 	eaglContext = nil;

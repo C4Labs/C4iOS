@@ -12,6 +12,11 @@
 
 @interface C4GL () 
 -(void)render;
+-(void)_setShadowOffset:(NSValue *)shadowOffset;
+-(void)_setShadowRadius:(NSNumber *)shadowRadius;
+-(void)_setShadowOpacity:(NSNumber *)shadowOpacity;
+-(void)_setShadowColor:(UIColor *)shadowColor;
+-(void)_setShadowPath:(id)shadowPath;
 @property (readonly, nonatomic, getter = isDisplayLinkSupported) BOOL displayLinkSupported;
 @property (readonly, strong, nonatomic) C4EAGLLayer *eaglLayer;
 @property (readwrite, strong, nonatomic) id displayLink;
@@ -24,6 +29,11 @@
 @synthesize eaglLayer;
 @synthesize displayLink;
 @synthesize animationTimer;
+@synthesize shadowColor = _shadowColor;
+@synthesize shadowOffset = _shadowOffset;
+@synthesize shadowOpacity = _shadowOpacity;
+@synthesize shadowRadius = _shadowRadius;
+@synthesize drawOnce;
 
 -(id)init {
     return [self initWithRenderer:[[C4GL1Renderer alloc] init]];
@@ -44,6 +54,8 @@
 			}
 		}
         
+        self.backgroundColor = [UIColor clearColor];
+        
 		animating = NO;
 		displayLinkSupported = NO;
 		animationFrameInterval = 1;
@@ -61,6 +73,10 @@
 
 -(void)render {
     [renderer render];
+    if (YES == self.drawOnce) {
+        [self stopAnimation];
+        self.drawOnce = NO;
+    }
 }
 
 - (void) layoutSubviews {
@@ -68,13 +84,7 @@
     [self render];
 }
 
-- (void) setAnimationFrameIntervalm:(NSInteger)frameInterval {
-	// Frame interval defines how many display frames must pass between each time the
-	// display link fires. The display link will only fire 30 times a second when the
-	// frame internal is two on a display that refreshes 60 times a second. The default
-	// frame interval setting of one will fire 60 times a second when the display refreshes
-	// at 60 times a second. A frame interval setting of less than one results in undefined
-	// behavior.
+- (void) setAnimationFrameInterval:(NSInteger)frameInterval {
 	if (frameInterval >= 1) {
 	animationFrameInterval = frameInterval;
 		if (self.isAnimating) {
@@ -132,5 +142,44 @@
 
 + (Class) layerClass {
     return [C4EAGLLayer class];
+}
+
+-(void)setShadowOffset:(CGSize)shadowOffset {
+    [self performSelector:@selector(_setShadowOffset:) withObject:[NSValue valueWithCGSize:shadowOffset] afterDelay:self.animationDelay];
+}
+-(void)_setShadowOffset:(NSValue *)shadowOffset {
+    [self.eaglLayer animateShadowOffset:[shadowOffset CGSizeValue]];
+}
+
+-(void)setShadowRadius:(CGFloat)shadowRadius {
+    [self performSelector:@selector(_setShadowRadius:) withObject:[NSNumber numberWithFloat:shadowRadius] afterDelay:self.animationDelay];
+}
+-(void)_setShadowRadius:(NSNumber *)shadowRadius {
+    [self.eaglLayer animateShadowRadius:[shadowRadius floatValue]];
+}
+
+-(void)setShadowOpacity:(CGFloat)shadowOpacity {
+    [self performSelector:@selector(_setShadowOpacity:) withObject:[NSNumber numberWithFloat:shadowOpacity] afterDelay:self.animationDelay];
+}
+-(void)_setShadowOpacity:(NSNumber *)shadowOpacity {
+    [self.eaglLayer animateShadowOpacity:[shadowOpacity floatValue]];
+}
+
+-(void)setShadowColor:(UIColor *)shadowColor {
+    [self performSelector:@selector(_setShadowColor:) withObject:shadowColor afterDelay:self.animationDelay];
+}
+-(void)_setShadowColor:(UIColor *)shadowColor {
+    [self.eaglLayer animateShadowColor:shadowColor.CGColor];
+}
+
+-(void)setShadowPath:(CGPathRef)shadowPath {
+    [self performSelector:@selector(_setShadowPath:) withObject:(__bridge id)shadowPath afterDelay:self.animationDelay];
+}
+-(void)_setShadowPath:(id)shadowPath {
+    [self.eaglLayer animateShadowPath:(__bridge CGPathRef)shadowPath];
+}
+
+-(void)setBackgroundColor:(UIColor *)backgroundColor {
+    [super setBackgroundColor:[UIColor clearColor]];
 }
 @end
