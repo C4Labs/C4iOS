@@ -11,7 +11,7 @@
 //C4Shape *what;
 //CALayer *rLayer;
 //UIImageView *imgView;
-C4Image *image, *inverted;
+C4Image *image, *inverted, *descartes;
 
 @implementation C4CanvasController
 @synthesize canvas;
@@ -23,6 +23,11 @@ C4GL *gl;
 -(void)setup {
     canvas = (C4Window *)self.view;
 
+    image = [C4Image imageNamed:@"candahar256.png"];
+    [canvas addImage:image];
+    descartes = [C4Image imageNamed:@"descartes.jpeg"];
+    descartes.frame = CGRectMake(0, 0, 256, 256);
+    
 //    NSArray *filterCategorArray = [NSArray arrayWithObjects:
 //                                   kCICategoryDistortionEffect,
 //                                   kCICategoryGeometryAdjustment,
@@ -52,7 +57,10 @@ C4GL *gl;
 //        }
 //    }
 //    
-//    for(NSString *filterName in filterNameSet) {
+//    NSMutableArray *filterNameArray = [[NSMutableArray alloc] initWithArray:[filterNameSet allObjects]];
+//    [filterNameArray sortUsingSelector:@selector(compare:)];
+//    
+//    for(NSString *filterName in filterNameArray) {
 //        C4Log(@"%@",filterName);
 //    }
 //    C4Log(@"Filter Count: %d",[filterNameSet count]);
@@ -108,12 +116,12 @@ C4GL *gl;
      [C4Log] CIAffineTransform
      */
     
-    image = [C4Image imageNamed:@"candahar256.png"];
-    [canvas addImage:image];
-    
-    inverted = [C4Image imageNamed:@"candahar256Inverted.jpg"];
-    [canvas addImage:inverted];
-    inverted.origin = CGPointMake(0, 768);
+//    image = [C4Image imageNamed:@"candahar256.png"];
+//    [canvas addImage:image];
+//    
+//    inverted = [C4Image imageNamed:@"candahar256Inverted.jpg"];
+//    [canvas addImage:inverted];
+//    inverted.origin = CGPointMake(0, 768);
 //    gl = [C4GL new];
 //    gl.frame = CGRectMake(101, 243, 600, 400);
 //    [canvas addSubview:gl];
@@ -129,7 +137,16 @@ C4GL *gl;
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     image.animationDuration = 1.0f;
-    [image invert];
+//    [image minimumComposite:descartes];
+    [image maximumComposite:descartes];
+//    [image additionComposite:descartes];
+//    image.origin = CGPointMake(512, 768);
+//    [image additionComposite:descartes];
+//    image.animationOptions = AUTOREVERSE | REPEAT;
+//    [image setImage:descartes];
+//    image.animationDuration = 1.0f;
+//    [image setImage:inverted];
+//    [image invert];
 //    image.animationDuration = 2.0f;
 //    image.shadowOpacity = 0.8f;
 //    image.shadowOffset = CGSizeMake(15.0, 15.0);
