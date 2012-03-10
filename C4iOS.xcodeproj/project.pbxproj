@@ -48,6 +48,7 @@
 		ED979F3914F8D13400645114 /* TestView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED979F3814F8D13400645114 /* TestView.m */; };
 		ED979F3F14F95EFF00645114 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED979F3E14F95EFF00645114 /* CoreImage.framework */; };
 		EDA7014914FC496300A0D77D /* C4Label.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA7014814FC496300A0D77D /* C4Label.m */; };
+		EDAB8969150BCFF100B9F9AC /* descartes.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = EDAB8968150BCFF100B9F9AC /* descartes.jpeg */; };
 		EDAFFAF014F7602F00CA356A /* C4Control.m in Sources */ = {isa = PBXBuildFile; fileRef = EDAFFAEF14F7602F00CA356A /* C4Control.m */; };
 		EDAFFAFC14F77E1400CA356A /* CustomShape.m in Sources */ = {isa = PBXBuildFile; fileRef = EDAFFAFB14F77E1400CA356A /* CustomShape.m */; };
 		EDECBF6C14EAE26700D9A446 /* C4Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = EDECBF6B14EAE26600D9A446 /* C4Shape.m */; };
@@ -119,6 +120,7 @@
 		ED979F3E14F95EFF00645114 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		EDA7014714FC496300A0D77D /* C4Label.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Label.h; sourceTree = "<group>"; };
 		EDA7014814FC496300A0D77D /* C4Label.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Label.m; sourceTree = "<group>"; };
+		EDAB8968150BCFF100B9F9AC /* descartes.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = descartes.jpeg; sourceTree = "<group>"; };
 		EDAFFAD714F70D5F00CA356A /* C4Notification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Notification.h; sourceTree = "<group>"; };
 		EDAFFAEE14F7602F00CA356A /* C4Control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Control.h; sourceTree = "<group>"; };
 		EDAFFAEF14F7602F00CA356A /* C4Control.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Control.m; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				ED3C1C44150AC59F00AB288D /* C4Image.m */,
 				ED1CA77915052214000520EB /* candahar256.png */,
 				ED3C1C6F150B24A500AB288D /* candahar256Inverted.jpg */,
+				EDAB8968150BCFF100B9F9AC /* descartes.jpeg */,
 				ED900CEB14FBF286006C2AED /* Test Files */,
 				ED50C8D314EACA0E0040D844 /* Source */,
 				ED50C88C14EAC2010040D844 /* App */,
@@ -353,6 +356,7 @@
 				ED50C8B914EAC2A10040D844 /* C4LogoiPad-Portrait.png in Resources */,
 				ED1CA77A15052214000520EB /* candahar256.png in Resources */,
 				ED3C1C70150B24A600AB288D /* candahar256Inverted.jpg in Resources */,
+				EDAB8969150BCFF100B9F9AC /* descartes.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

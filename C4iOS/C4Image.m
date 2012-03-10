@@ -14,6 +14,10 @@
 -(void)_setShadowOpacity:(NSNumber *)shadowOpacity;
 -(void)_setShadowColor:(UIColor *)shadowColor;
 -(void)_setShadowPath:(id)shadowPath;
+@property (readwrite, strong, nonatomic) CIContext *filterContext;
+@property (readwrite, strong, nonatomic) UIImage *originalImage;
+@property (readwrite, strong, nonatomic) CIImage *visibleImage;
+@property (readwrite, nonatomic) CGImageRef contents;
 @property (readwrite, strong, nonatomic) C4Layer *imageLayer;
 @end
 
@@ -24,6 +28,13 @@
 @synthesize shadowRadius = _shadowRadius;
 @synthesize shadowOpacity = _shadowOpacity;
 @synthesize shadowPath = _shadowPath;
+@synthesize contents = _contents;
+@synthesize originalImage = _originalImage;
+@synthesize visibleImage = _visibleImage;
+@synthesize filterContext = _filterContext;
+@synthesize UIImage = _UIImage;
+@synthesize CIImage = _CIImage;
+@synthesize CGImage = _CGImage;
 
 +(C4Image *)imageNamed:(NSString *)name {
     return [[C4Image alloc] initWithImageName:name];
@@ -36,14 +47,13 @@
 -(id)initWithImage:(C4Image *)image {
     self = [super init];
     if(nil != self) {
-        _uiImage = image.UIImage;
-        _ciImage = image.CIImage;
-        assert(_uiImage != nil);
-        assert(_uiImage.CGImage != nil);
-        _ciImage = [[CIImage alloc] initWithCGImage:_uiImage.CGImage];
-        assert(_ciImage != nil);
-        self.frame = _ciImage.extent;
-        self.imageLayer.contents = (id)[self CGImage];
+        self.originalImage = image.UIImage;
+        assert(_originalImage != nil);
+        assert(_originalImage.CGImage != nil);
+        _visibleImage = [[CIImage alloc] initWithCGImage:_originalImage.CGImage];
+        assert(_visibleImage != nil);
+        self.frame = _visibleImage.extent;
+        self.imageLayer.contents = (id)_originalImage.CGImage;
     }
     return self;
 }
@@ -51,49 +61,38 @@
 -(id)initWithImageName:(NSString *)name {
     self = [super init];
     if(self != nil) {
-        _uiImage = [UIImage imageNamed:name];
-        assert(_uiImage != nil);
-        assert(_uiImage.CGImage != nil);
-        _ciImage = [[CIImage alloc] initWithCGImage:_uiImage.CGImage];
-        assert(_ciImage != nil);
+        self.originalImage = [UIImage imageNamed:name];
+        assert(_originalImage != nil);
+        assert(_originalImage.CGImage != nil);
+        self.visibleImage = [[CIImage alloc] initWithCGImage:_originalImage.CGImage];
+        assert(_visibleImage != nil);
 
         self.frame = self.CIImage.extent;
-        [self.imageLayer setContents:(id)[self CGImage]];
+        [self.imageLayer setContents:(id)_originalImage.CGImage];
     }
     return self;
 }
 
 -(UIImage *)UIImage {
-    return _uiImage;
+    return [UIImage imageWithCIImage:_visibleImage];
 }
 
 -(CIImage *)CIImage {
-    return _ciImage;
+    return self.visibleImage;
 }
 
 -(CGImageRef)CGImage {
-    return _uiImage.CGImage;
-}
-
--(void)invert {
-    if (filterContext == nil) filterContext = [CIContext contextWithOptions:nil];
-    CIFilter *invertFilter = [CIFilter filterWithName:@"CIColorInvert"];
-    [invertFilter setDefaults];
-    [invertFilter setValue:_ciImage forKey:@"inputImage"];
-    _ciImage = [invertFilter outputImage];
-    assert(_ciImage != nil);
-    CGImageRef imageRef = [filterContext createCGImage:_ciImage fromRect:_ciImage.extent];
-    _uiImage = [UIImage imageWithCGImage:imageRef];
-    CFRelease(imageRef);
-    assert(_uiImage != nil);
-    assert(_uiImage.CGImage != nil);
-    [self.imageLayer animateContents:_uiImage.CGImage];
+    if (_filterContext == nil) self.filterContext = [CIContext contextWithOptions:nil];
+    return [self.filterContext createCGImage:_visibleImage fromRect:_visibleImage.extent];
 }
 
 -(void)setImage:(C4Image *)image {
-    _uiImage = image.UIImage;
-    _ciImage = image.CIImage;
-    self.imageLayer.contents = (id)[self CGImage];
+    self.originalImage = image.UIImage;
+    assert(_originalImage != nil);
+    self.visibleImage = image.CIImage;
+    assert(_visibleImage != nil);
+    self.frame = _visibleImage.extent;
+    [self.imageLayer animateContents:self.CGImage];
 }
 
 -(C4Layer *)imageLayer {
@@ -150,8 +149,410 @@
 }
 
 -(void)setContents:(CGImageRef)image {
+    [self performSelector:@selector(_setContents:) withObject:(__bridge id)image afterDelay:self.animationDelay];
+}
+
+-(void)_setContents:(id)image {
+    [self.imageLayer animateContents:(__bridge CGImageRef)image];
+}
+
+#pragma mark Filters
+-(void)additionComposite:(C4Image *)backgroundImage {
+    CIFilter *filter = [CIFilter filterWithName:@"CIAdditionCompositing"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
+-(void)colorBlend:(C4Image *)backgroundImage {
+    CIFilter *filter = [CIFilter filterWithName:@"CIColorBlendMode"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
+-(void)colorBurn:(C4Image *)backgroundImage {
+    CIFilter *filter = [CIFilter filterWithName:@"CIColorBurnBlendMode"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
+-(void)colorControlSaturation:(CGFloat)saturation brightness:(CGFloat)brightness contrast:(CGFloat)contrast {
+    CIFilter *filter = [CIFilter filterWithName:@"CIColorControls"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:[NSNumber numberWithFloat:saturation] forKey:@"inputSaturation"];
+    [filter setValue:[NSNumber numberWithFloat:brightness] forKey:@"inputBrightness"];
+    [filter setValue:[NSNumber numberWithFloat:contrast] forKey:@"inputContrast"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
+-(void)colorDodge:(C4Image *)backgroundImage {
+    CIFilter *filter = [CIFilter filterWithName:@"CIColorDodgeBlendMode"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
+-(void)colorInvert {
+    CIFilter *filter = [CIFilter filterWithName:@"CIColorInvert"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
+
+-(void)colorMatrix:(UIColor *)color bias:(CGFloat)bias {
+    CIFilter *filter = [CIFilter filterWithName:@"CIColorMatrix"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    CGFloat red, green, blue, alpha;
+    [color getRed:&red green:&green blue:&blue alpha:&alpha];
     
+    [filter setValue:[CIVector vectorWithX:red Y:0 Z:0 W:0] forKey:@"inputRVector"];
+    [filter setValue:[CIVector vectorWithX:0 Y:green Z:0 W:0] forKey:@"inputGVector"];
+    [filter setValue:[CIVector vectorWithX:0 Y:0 Z:blue W:0] forKey:@"inputBVector"];
+    [filter setValue:[CIVector vectorWithX:0 Y:0 Z:0 W:alpha] forKey:@"inputAVector"];
+    [filter setValue:[CIVector vectorWithX:bias Y:bias Z:bias W:bias] forKey:@"inputBiasVector"];
+    
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
 }
--(void)_setContents:(CGImageRef)image {
+
+-(void)colorMonochrome:(UIColor *)color inputIntensity:(CGFloat)intensity {
+    CIFilter *filter = [CIFilter filterWithName:@"CIColorMonochrome"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:color.CIColor forKey:@"inputColor"];
+    [filter setValue:[NSNumber numberWithFloat:intensity] forKey:@"inputIntensity"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
 }
+
+-(void)darkenBlend:(C4Image *)backgroundImage {
+    CIFilter *filter = [CIFilter filterWithName:@"CIDarkenBlendMode"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
+-(void)differenceBlend:(C4Image *)backgroundImage {
+    CIFilter *filter = [CIFilter filterWithName:@"CIDifferenceBlendMode"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
+-(void)exclusionBlend:(C4Image *)backgroundImage {
+    CIFilter *filter = [CIFilter filterWithName:@"CIExclusionBlendMode"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
+-(void)exposureAdjust:(CGFloat)adjustment {
+    CIFilter *filter = [CIFilter filterWithName:@"CIExposureAdjust"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:[NSNumber numberWithFloat:adjustment] forKey:@"inputEV"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
+-(void)falseColor:(UIColor *)color1 color2:(UIColor *)color2 {
+    CIFilter *filter = [CIFilter filterWithName:@"CIFalseColor"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:color1 forKey:@"inputColor0"];
+    [filter setValue:color2 forKey:@"inputColor1"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
+-(void)gammaAdjustment:(CGFloat)adjustment {
+    CIFilter *filter = [CIFilter filterWithName:@"CIGammaAdjust"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:[NSNumber numberWithFloat:adjustment] forKey:@"inputPower"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
+-(void)hardLightBlend:(C4Image *)backgroundImage {
+    CIFilter *filter = [CIFilter filterWithName:@"CIHardLightBlendMode"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
+-(void)highlightShadowAdjust:(CGFloat)highlightAmount shadowAmount:(CGFloat)shadowAmount {
+    CIFilter *filter = [CIFilter filterWithName:@"CIHighlightShadowAdjust"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:[NSNumber numberWithFloat:highlightAmount] forKey:@"inputHighlightAmount"];
+    [filter setValue:[NSNumber numberWithFloat:shadowAmount] forKey:@"inputShadowAmount"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
+-(void)hueAdjust:(CGFloat)angle {
+    CIFilter *filter = [CIFilter filterWithName:@"CIHueAdjust"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:[NSNumber numberWithFloat:angle] forKey:@"inputAngle"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
+-(void)hueBlend:(C4Image *)backgroundImage {
+    CIFilter *filter = [CIFilter filterWithName:@"CIHueBlendMode"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
+-(void)lightenBlend:(C4Image *)backgroundImage {
+    CIFilter *filter = [CIFilter filterWithName:@"CILightenBlendMode"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
+-(void)luminosityBlend:(C4Image *)backgroundImage {
+    CIFilter *filter = [CIFilter filterWithName:@"CILuminosityBlendMode"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
+-(void)maximumComposite:(C4Image *)backgroundImage {
+    CIFilter *filter = [CIFilter filterWithName:@"CIMaximumCompositing"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
+-(void)minimumComposite:(C4Image *)backgroundImage {    
+    CIFilter *filter = [CIFilter filterWithName:@"CIMinimumCompositing"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
+-(void)multiplyBlend:(C4Image *)backgroundImage {
+    CIFilter *filter = [CIFilter filterWithName:@"CIMultiplyBlendMode"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
+-(void)multiplyComposite:(C4Image *)backgroundImage {
+    CIFilter *filter = [CIFilter filterWithName:@"CIMultiplyCompositing"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
+-(void)overlayBlend:(C4Image *)backgroundImage {
+    CIFilter *filter = [CIFilter filterWithName:@"CIOverlayBlendMode"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
+-(void)saturationBlend:(C4Image *)backgroundImage {
+    CIFilter *filter = [CIFilter filterWithName:@"CISaturationBlendMode"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
+-(void)screenBlend:(C4Image *)backgroundImage {
+    CIFilter *filter = [CIFilter filterWithName:@"CIScreenBlendMode"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
+-(void)sepiaTone:(CGFloat)intensity {
+    CIFilter *filter = [CIFilter filterWithName:@"CISepiaTone"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:[NSNumber numberWithFloat:intensity] forKey:@"inputIntensity"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
+-(void)softLightBlend:(C4Image *)backgroundImage {
+    CIFilter *filter = [CIFilter filterWithName:@"CISoftLightBlendMode"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
+-(void)sourceAtopComposite:(C4Image *)backgroundImage {
+    CIFilter *filter = [CIFilter filterWithName:@"CISourceAtopCompositing"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
+-(void)sourceInComposite:(C4Image *)backgroundImage {
+    CIFilter *filter = [CIFilter filterWithName:@"CISourceInCompositing"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
+-(void)sourceOutComposite:(C4Image *)backgroundImage {
+    CIFilter *filter = [CIFilter filterWithName:@"CISourceOutCompositing"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
+-(void)sourceOverComposite:(C4Image *)backgroundImage {
+    CIFilter *filter = [CIFilter filterWithName:@"CISourceOverCompositing"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
+-(void)straighten:(CGFloat)angle {
+    CIFilter *filter = [CIFilter filterWithName:@"CIStraightenFilter"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:[NSNumber numberWithFloat:angle] forKey:@"inputAngle"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
+-(void)tempartureAndTint:(CGSize)neutral target:(CGSize)targetNeutral {
+    CIFilter *filter = [CIFilter filterWithName:@"CITemperatureAndTint"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:[CIVector vectorWithX:neutral.width Y:neutral.height] forKey:@"inputNeutral"];
+    [filter setValue:[CIVector vectorWithX:targetNeutral.width Y:targetNeutral.height] forKey:@"inputTargetNeutral"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
+-(void)toneCurve:(CGPoint *)pointArray {
+    CIFilter *filter = [CIFilter filterWithName:@"CIToneCurve"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:[CIVector vectorWithCGPoint:pointArray[0]] forKey:@"inputPoint0"];
+    [filter setValue:[CIVector vectorWithCGPoint:pointArray[1]] forKey:@"inputPoint1"];
+    [filter setValue:[CIVector vectorWithCGPoint:pointArray[2]] forKey:@"inputPoint2"];
+    [filter setValue:[CIVector vectorWithCGPoint:pointArray[3]] forKey:@"inputPoint3"];
+    [filter setValue:[CIVector vectorWithCGPoint:pointArray[4]] forKey:@"inputPoint4"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
+-(void)vibranceAdjust:(CGFloat)amount {
+    CIFilter *filter = [CIFilter filterWithName:@"CIVibrance"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:[NSNumber numberWithFloat:amount] forKey:@"inputAmount"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
+-(void)whitePointAdjust:(UIColor *)color {
+    CIFilter *filter = [CIFilter filterWithName:@"CIWhitePointAdjust"];
+    [filter setDefaults];
+    [filter setValue:_visibleImage forKey:@"inputImage"];
+    [filter setValue:color.CIColor forKey:@"inputColor"];
+    self.visibleImage = [filter outputImage];
+    assert(_visibleImage != nil);
+    [self.imageLayer animateContents:self.CGImage];
+}
+
 @end
