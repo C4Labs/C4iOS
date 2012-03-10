@@ -40,11 +40,23 @@
 }
 
 -(void)addShape:(C4Shape *)shape {
+    assert([shape isKindOfClass:[C4Shape class]]);
     [self addSubview:shape];
 }
 
 -(void)addLabel:(C4Label *)label {
+    assert([label isKindOfClass:[C4Label class]]);
     [self addSubview:label];
+}
+
+-(void)addGL:(C4GL *)gl {
+    assert([gl isKindOfClass:[C4GL class]]);
+    [self addSubview:gl];
+}
+
+-(void)addImage:(C4Image *)image {
+    assert([image isKindOfClass:[C4Image class]]);
+    [self addSubview:image];
 }
 
 /*

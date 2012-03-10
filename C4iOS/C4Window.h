@@ -24,7 +24,7 @@ For more information about how to use windows, see View Programming Guide for iO
  
  Takes a C4Shape object and adds it to the view hierarchy.
  
- Use this method instead of addSubview: when adding C4Shapes, because if there are special conditions for adding shapes this method will handle those.
+ Use this method instead of addSubview: when adding C4Shape objects, because if there are special conditions for adding shapes this method will handle those.
  
  @param shape A C4Shape object.
  */
@@ -34,11 +34,32 @@ For more information about how to use windows, see View Programming Guide for iO
  
  Takes a C4Label object and adds it to the view hierarchy.
  
- Use this method instead of addSubview: when adding C4Labels, because if there are special conditions for adding shapes this method will handle those.
+ Use this method instead of addSubview: when adding C4Label objects, because if there are special conditions for adding shapes this method will handle those.
  
  @param label A C4Label object.
  */
+
 -(void)addLabel:(C4Label *)label;
+
+/** Adds a C4GL to the window.
+ 
+ Takes a C4GL object and adds it to the view hierarchy.
+ 
+ Use this method instead of addSubview: when adding C4GL objects, because if there are special conditions for adding shapes this method will handle those.
+ 
+ @param gl A C4GL object.
+ */
+-(void)addGL:(C4GL *)gl;
+
+/** Adds a C4Image to the window.
+ 
+ Takes a C4Image object and adds it to the view hierarchy.
+ 
+ Use this method instead of addSubview: when adding C4Image objects, because if there are special conditions for adding shapes this method will handle those.
+ 
+ @param image A C4Image object.
+ */
+-(void)addImage:(C4Image *)image;
 
 /// @name Accessing the Root View Controller
 #pragma mark Root View Controller

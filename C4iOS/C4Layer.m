@@ -12,8 +12,7 @@
 @synthesize animationOptions = _animationOptions, currentAnimationEasing, repeatCount, animationDuration = _animationDuration;
 @synthesize allowsInteraction, repeats;
 
-- (id)init
-{
+- (id)init {
     self = [super init];
     if (self != nil) {
         self.name = @"backingLayer";
@@ -164,6 +163,17 @@
     [CATransaction commit];
 }
 
+-(void)animateContents:(CGImageRef)_image {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"contents"];
+    animation.fromValue = self.contents;
+    animation.toValue = (__bridge id)_image;
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { self.contents = (__bridge id)_image; }];
+    }
+    [self addAnimation:animation forKey:@"animateContents"];
+    [CATransaction commit];
+}
 /* in the following method
  if we implement other kinds of options, we'll have to get rid of the returns...
  reversing how i check the values, if linear is at the bottom, then all the other values get called
@@ -182,8 +192,4 @@
     return YES;
 }
 
--(void)setAnimationDuration:(CGFloat)duration {
-    if (duration <= 0.0f) duration = 0.001f;
-    _animationDuration = duration;
-}
 @end

@@ -92,4 +92,15 @@
  */
 @property (readwrite, nonatomic) CGSize shadowOffset;
 
+/**Defines the shape of the shadow. Animatable.
+ 
+ Unlike most animatable properties, shadowPath does not support implicit animation. 
+ 
+ If the value in this property is non-nil, the shadow is created using the specified path instead of the layer’s composited alpha channel. The path defines the outline of the shadow. It is filled using the non-zero winding rule and the current shadow color, opacity, and blur radius.
+ 
+ Specifying an explicit path usually improves rendering performance.
+ 
+ The default value of this property is NULL.
+ */
+@property (readwrite, nonatomic) CGPathRef shadowPath;
 @end

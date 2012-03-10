@@ -151,4 +151,8 @@
     _animationDuration = duration;
 }
 
+-(void)animateContents:(CGImageRef)image {
+    C4Log(@"C4ShapeLayer animateContents not currently available");
+}
+
 @end

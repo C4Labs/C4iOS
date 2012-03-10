@@ -7,11 +7,11 @@
 //
 
 #import "C4CanvasController.h"
-#import "C4GL.h"
 //C4Label *newLabel;
 //C4Shape *what;
 //CALayer *rLayer;
 //UIImageView *imgView;
+C4Image *image, *inverted;
 
 @implementation C4CanvasController
 @synthesize canvas;
@@ -19,14 +19,106 @@
 //UIImageView *imgView;
 //UIBezierPath *animationPath;
 C4GL *gl;
+
 -(void)setup {
-    canvas = (C4View *)self.view;
-        
-    gl = [C4GL new];
-    gl.frame = CGRectMake(101, 243, 600, 400);
-    [canvas addSubview:gl];
-    gl.drawOnce = YES;
-    [gl startAnimation];
+    canvas = (C4Window *)self.view;
+
+//    NSArray *filterCategorArray = [NSArray arrayWithObjects:
+//                                   kCICategoryDistortionEffect,
+//                                   kCICategoryGeometryAdjustment,
+//                                   kCICategoryCompositeOperation,
+//                                   kCICategoryHalftoneEffect,
+//                                   kCICategoryColorAdjustment,
+//                                   kCICategoryColorEffect,
+//                                   kCICategoryTransition,
+//                                   kCICategoryTileEffect,
+//                                   kCICategoryGenerator,
+//                                   kCICategoryReduction,
+//                                   kCICategoryGradient,
+//                                   kCICategoryStylize,
+//                                   kCICategorySharpen,
+//                                   kCICategoryBlur,
+//                                   kCICategoryVideo,
+//                                   kCICategoryStillImage,
+//                                   kCICategoryInterlaced,
+//                                   kCICategoryNonSquarePixels,
+//                                   kCICategoryHighDynamicRange,
+//                                   kCICategoryBuiltIn,
+//                                   nil];
+//    NSMutableSet *filterNameSet = [[NSMutableSet alloc] initWithCapacity:0];
+//    for (NSString *category in filterCategorArray) {
+//        for(NSString *filterName in [CIFilter filterNamesInCategory:category]) {
+//            [filterNameSet addObject:filterName];
+//        }
+//    }
+//    
+//    for(NSString *filterName in filterNameSet) {
+//        C4Log(@"%@",filterName);
+//    }
+//    C4Log(@"Filter Count: %d",[filterNameSet count]);
+
+    /*
+     [C4Log] CIHighlightShadowAdjust
+     [C4Log] CITemperatureAndTint
+     [C4Log] CISourceOverCompositing
+     [C4Log] CIAdditionCompositing
+     [C4Log] CIToneCurve
+     [C4Log] CIColorBlendMode
+     [C4Log] CICheckerboardGenerator
+     [C4Log] CIColorInvert
+     [C4Log] CIOverlayBlendMode
+     [C4Log] CIVibrance
+     [C4Log] CILinearGradient
+     [C4Log] CIDarkenBlendMode
+     [C4Log] CIColorMatrix
+     [C4Log] CISepiaTone
+     [C4Log] CIHueAdjust
+     [C4Log] CIColorCube
+     [C4Log] CIHueBlendMode
+     [C4Log] CIStraightenFilter
+     [C4Log] CIRadialGradient
+     [C4Log] CIColorDodgeBlendMode
+     [C4Log] CIColorBurnBlendMode
+     [C4Log] CIDifferenceBlendMode
+     [C4Log] CIScreenBlendMode
+     [C4Log] CICrop
+     [C4Log] CIColorMonochrome
+     [C4Log] CISourceOutCompositing
+     [C4Log] CIExclusionBlendMode
+     [C4Log] CISourceAtopCompositing
+     [C4Log] CIFalseColor
+     [C4Log] CIExposureAdjust
+     [C4Log] CISoftLightBlendMode
+     [C4Log] CIMaximumCompositing
+     [C4Log] CIHardLightBlendMode
+     [C4Log] CIMultiplyBlendMode
+     [C4Log] CIColorControls
+     [C4Log] CIMinimumCompositing
+     [C4Log] CIStripesGenerator
+     [C4Log] CIWhitePointAdjust
+     [C4Log] CIVignette
+     [C4Log] CIConstantColorGenerator
+     [C4Log] CIGaussianGradient
+     [C4Log] CIGammaAdjust
+     [C4Log] CIMultiplyCompositing
+     [C4Log] CISaturationBlendMode
+     [C4Log] CILightenBlendMode
+     [C4Log] CILuminosityBlendMode
+     [C4Log] CISourceInCompositing
+     [C4Log] CIAffineTransform
+     */
+    
+    image = [C4Image imageNamed:@"candahar256.png"];
+    [canvas addImage:image];
+    
+    inverted = [C4Image imageNamed:@"candahar256Inverted.jpg"];
+    [canvas addImage:inverted];
+    inverted.origin = CGPointMake(0, 768);
+//    gl = [C4GL new];
+//    gl.frame = CGRectMake(101, 243, 600, 400);
+//    [canvas addSubview:gl];
+//    gl.drawOnce = YES;
+//    [gl startAnimation];
     
 //    imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"candahar256.png"]];
 //    imgView.frame = CGRectMake(0, 0, 128, 128);
@@ -36,9 +128,21 @@ C4GL *gl;
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    gl.animationDuration = 1.0f;
-    gl.frame = CGRectMake(100, 100, 300, 200);
-    gl.center = [[touches anyObject] locationInView:canvas];
+    image.animationDuration = 1.0f;
+    [image invert];
+//    image.animationDuration = 2.0f;
+//    image.shadowOpacity = 0.8f;
+//    image.shadowOffset = CGSizeMake(15.0, 15.0);
+//    image.animationOptions = AUTOREVERSE;
+//    image.center = CGPointMake(384, 512);
+//    imageWithImage.animationOptions = REPEAT;
+//    imageWithImage.animationDuration = 2.0f;
+//    imageWithImage.frame = CGRectMake(0, 0, 512, 256);
+//    imageWithImage.transform = CGAffineTransformRotate(imageWithImage.transform, TWO_PI);
+//    imageWithImage.alpha = 0.0f;
+//    imageWithImage.center = CGPointMake(384, 512);
+
+
 }
 
 //-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -213,7 +317,6 @@ C4GL *gl;
 //
 //C4Shape *greyrect;
 //NSMutableArray *shapes;
-//
 //
 //-(void)setup {
 //    greyrect = [[CustomShape alloc] init];

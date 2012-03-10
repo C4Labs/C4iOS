@@ -39,8 +39,8 @@
 @end
 
 @implementation C4Label
-@synthesize animationDuration = _animationDuration;
-@synthesize animationDelay = _animationDelay;
+//@synthesize animationDuration = _animationDuration;
+//@synthesize animationDelay = _animationDelay;
 @synthesize adjustsFontSizeToFitWidth = _adjustsFontSizeToFitWidth;
 @synthesize baselineAdjustment = _baselineAdjustment;
 @synthesize font = _font;
@@ -53,6 +53,7 @@
 @synthesize shadowOffset = _shadowOffset;
 @synthesize shadowOpacity = _shadowOpacity;
 @synthesize shadowRadius = _shadowRadius;
+@synthesize shadowPath = _shadowPath;
 @synthesize textAlignment = _textAlignment;
 @synthesize textColor = _textColor;
 @synthesize textShadowColor = _textShadowColor;
@@ -268,7 +269,8 @@
 
 #pragma mark C4Layer animation accessor methods
 -(void)setAnimationDuration:(CGFloat)animationDuration {
-    _animationDuration = animationDuration;
+//    _animationDuration = animationDuration;
+    [super setAnimationDuration:animationDuration];
     self.backingLayer.animationDuration = animationDuration;
 }
 

@@ -24,7 +24,7 @@
  
  Creates a CABasicAnimation contained within a CATransaction. This method also handles setting a completion block if the animation needs it. 
  
- @param shadowColor The color to which will be animated;
+ @param shadowColor The color to which will be animated
  */
 -(void)animateShadowColor:(CGColorRef)shadowColor;
 
@@ -32,7 +32,7 @@
  
  Creates a CABasicAnimation contained within a CATransaction. This method also handles setting a completion block if the animation needs it. 
  
- @param shadowOpacity The opacity to which will be animated;
+ @param shadowOpacity The opacity to which will be animated
  */
 -(void)animateShadowOpacity:(CGFloat)shadowOpacity;
 
@@ -40,7 +40,7 @@
  
  Creates a CABasicAnimation contained within a CATransaction. This method also handles setting a completion block if the animation needs it. 
  
- @param shadowRadius The radius to which will be animated;
+ @param shadowRadius The radius to which will be animated
  */
 -(void)animateShadowRadius:(CGFloat)shadowRadius;
 
@@ -48,7 +48,7 @@
  
  Creates a CABasicAnimation contained within a CATransaction. This method also handles setting a completion block if the animation needs it. 
  
- @param shadowOffset The offset size to which will be animated;
+ @param shadowOffset The offset size to which will be animated
  */
 -(void)animateShadowOffset:(CGSize)shadowOffset;
 
@@ -56,7 +56,7 @@
  
  Creates a CABasicAnimation contained within a CATransaction. This method also handles setting a completion block if the animation needs it. 
  
- @param shadowPath The path to which will be animated;
+ @param shadowPath The path to which will be animated
  */
 -(void)animateShadowPath:(CGPathRef)shadowPath;
 
@@ -64,15 +64,23 @@
  
  Creates a CABasicAnimation contained within a CATransaction. This method also handles setting a completion block if the animation needs it. 
  
- @param backgroundFilters The set of filters to which will be animated;
+ @param backgroundFilters The set of filters to which will be animated
  */
 -(void)animateBackgroundFilters:(NSArray *)backgroundFilters;
+
+/** Animates the layer's contents.
+ 
+ Creates a CABasicAnimation contained within a CATransaction. This method also handles setting a completion block if the animation needs it. 
+ 
+ @param image The new image to set as the layer's contents
+ */
+-(void)animateContents:(CGImageRef)image;
 
 /** Animates the layer's compositingFilters from it's current set of compositing filters to a new one.
  
  Creates a CABasicAnimation contained within a CATransaction. This method also handles setting a completion block if the animation needs it. 
  
- @param compositingFilters The set of compositing filters to which will be animated;
+ @param compositingFilters The set of compositing filters to which will be animated
  */
 -(void)animateCompositingFilter:(id)compositingFilter;
 

@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class C4Window;
 
 @interface C4CanvasController : UIViewController {
 }
 -(void)setup;
-@property (readonly, strong, nonatomic) C4View *canvas;
+@property (readonly, strong, nonatomic) C4Window *canvas;
 @end

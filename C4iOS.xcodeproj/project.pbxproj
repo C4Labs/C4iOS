@@ -14,6 +14,8 @@
 		ED009FA81509545100086987 /* C4GL1Renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED009FA71509545000086987 /* C4GL1Renderer.m */; };
 		ED10F17214FC0BDE00B54390 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED10F17114FC0BDE00B54390 /* CoreText.framework */; };
 		ED1CA77A15052214000520EB /* candahar256.png in Resources */ = {isa = PBXBuildFile; fileRef = ED1CA77915052214000520EB /* candahar256.png */; };
+		ED3C1C45150AC59F00AB288D /* C4Image.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3C1C44150AC59F00AB288D /* C4Image.m */; };
+		ED3C1C70150B24A600AB288D /* candahar256Inverted.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ED3C1C6F150B24A500AB288D /* candahar256Inverted.jpg */; };
 		ED50C88614EAC2010040D844 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED50C88514EAC2010040D844 /* UIKit.framework */; };
 		ED50C88814EAC2010040D844 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED50C88714EAC2010040D844 /* Foundation.framework */; };
 		ED50C88A14EAC2010040D844 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED50C88914EAC2010040D844 /* CoreGraphics.framework */; };
@@ -65,6 +67,9 @@
 		ED009FA71509545000086987 /* C4GL1Renderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4GL1Renderer.m; sourceTree = "<group>"; };
 		ED10F17114FC0BDE00B54390 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		ED1CA77915052214000520EB /* candahar256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = candahar256.png; sourceTree = "<group>"; };
+		ED3C1C43150AC59E00AB288D /* C4Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Image.h; sourceTree = "<group>"; };
+		ED3C1C44150AC59F00AB288D /* C4Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Image.m; sourceTree = "<group>"; };
+		ED3C1C6F150B24A500AB288D /* candahar256Inverted.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = candahar256Inverted.jpg; sourceTree = "<group>"; };
 		ED50C88114EAC2010040D844 /* C4iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = C4iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED50C88514EAC2010040D844 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		ED50C88714EAC2010040D844 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -183,7 +188,10 @@
 			children = (
 				ED50C8C314EAC4F70040D844 /* C4CanvasController.h */,
 				ED50C8C414EAC4F70040D844 /* C4CanvasController.m */,
+				ED3C1C43150AC59E00AB288D /* C4Image.h */,
+				ED3C1C44150AC59F00AB288D /* C4Image.m */,
 				ED1CA77915052214000520EB /* candahar256.png */,
+				ED3C1C6F150B24A500AB288D /* candahar256Inverted.jpg */,
 				ED900CEB14FBF286006C2AED /* Test Files */,
 				ED50C8D314EACA0E0040D844 /* Source */,
 				ED50C88C14EAC2010040D844 /* App */,
@@ -344,6 +352,7 @@
 				ED50C8B814EAC2A10040D844 /* C4LogoiPad-Landscape.png in Resources */,
 				ED50C8B914EAC2A10040D844 /* C4LogoiPad-Portrait.png in Resources */,
 				ED1CA77A15052214000520EB /* candahar256.png in Resources */,
+				ED3C1C70150B24A600AB288D /* candahar256Inverted.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,6 +385,7 @@
 				ED009F9415091FFD00086987 /* C4GL.m in Sources */,
 				ED009F9E1509242100086987 /* C4EAGLES1Renderer.m in Sources */,
 				ED009FA81509545100086987 /* C4GL1Renderer.m in Sources */,
+				ED3C1C45150AC59F00AB288D /* C4Image.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

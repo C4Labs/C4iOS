@@ -37,6 +37,16 @@
     [self addSubview:aLabel];
 }
 
+-(void)addGL:(C4GL *)gl {
+    assert([gl isKindOfClass:[C4GL class]]);
+    [self addSubview:gl];
+}
+
+-(void)addImage:(C4Image *)image {
+    assert([image isKindOfClass:[C4Image class]]);
+    [self addSubview:image];
+}
+
 /* don't add this ever...
  creates a:
  CoreAnimation: failed to allocate 3145760 bytes

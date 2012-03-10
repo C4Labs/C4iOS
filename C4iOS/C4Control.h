@@ -81,7 +81,7 @@
  Defaults to 0.0f
  
  */
-@property CGFloat animationDuration;
+@property (nonatomic) CGFloat animationDuration;
 
 /** The time to wait before the view's animations begin, measured in seconds.
  

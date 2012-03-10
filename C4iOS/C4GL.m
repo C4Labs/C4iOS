@@ -24,6 +24,8 @@
 @end
 
 @implementation C4GL
+//@synthesize animationOptions = _animationOptions;
+//@synthesize animationDuration = _animationDuration;
 @synthesize animating, animationFrameInterval;
 @synthesize renderer, displayLinkSupported;
 @synthesize eaglLayer;
@@ -33,6 +35,7 @@
 @synthesize shadowOffset = _shadowOffset;
 @synthesize shadowOpacity = _shadowOpacity;
 @synthesize shadowRadius = _shadowRadius;
+@synthesize shadowPath = _shadowPath;
 @synthesize drawOnce;
 
 -(id)init {
@@ -182,4 +185,15 @@
 -(void)setBackgroundColor:(UIColor *)backgroundColor {
     [super setBackgroundColor:[UIColor clearColor]];
 }
+
+-(void)setAnimationDuration:(CGFloat)animationDuration {
+    [super setAnimationDuration:animationDuration];
+    self.eaglLayer.animationDuration = animationDuration;
+}
+
+-(void)setAnimationOptions:(NSUInteger)animationOptions {
+    [super setAnimationOptions:animationOptions];
+    self.eaglLayer.animationOptions = animationOptions;
+}
+
 @end

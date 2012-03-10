@@ -322,4 +322,9 @@
 -(void)setZPosition:(CGFloat)zPosition {
     C4Log(@"C4ShapeLayer setZPosition not currently available");
 }
+
+-(void)animateContents:(CGImageRef)image {
+    C4Log(@"C4ShapeLayer animateContents not currently available");
+}
+
 @end

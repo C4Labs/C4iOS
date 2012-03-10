@@ -63,6 +63,27 @@
  
  This method positions the origin point of the current view by calculating the difference between this point and what the view's new center point will be. It then initiates the animation by setting the displaced new center point.
  */
+
+/** Adds a C4GL to the window.
+ 
+ Takes a C4GL object and adds it to the view hierarchy.
+ 
+ Use this method instead of addSubview: when adding C4GL objects, because if there are special conditions for adding shapes this method will handle those.
+ 
+ @param gl A C4GL object.
+ */
+-(void)addGL:(C4GL *)gl;
+
+/** Adds a C4Image to the window.
+ 
+ Takes a C4Image object and adds it to the view hierarchy.
+ 
+ Use this method instead of addSubview: when adding C4Image objects, because if there are special conditions for adding shapes this method will handle those.
+ 
+ @param image A C4Image object.
+ */
+-(void)addImage:(C4Image *)image;
+
 @property (nonatomic) CGPoint origin;
 
 /// @name Configuring A View's Animation Properties

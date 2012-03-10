@@ -36,7 +36,7 @@
 @end
 
 @implementation C4Shape
-@synthesize animationDuration = _animationDuration;
+//@synthesize animationDuration = _animationDuration;
 @synthesize isLine =_isLine, shapeLayer, pointA = _pointA, pointB = _pointB;
 @synthesize fillColor, fillRule, lineCap, lineDashPattern, lineDashPhase, lineJoin, lineWidth, miterLimit, origin = _origin, strokeColor, strokeEnd, strokeStart, shadowOffset, shadowOpacity, shadowRadius, shadowPath, shadowColor;
 
@@ -47,7 +47,6 @@
 -(id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if(self != nil) {
-        _animationDuration = 0.001f;
         _isLine = NO;
     }
     return self;
@@ -103,7 +102,7 @@
 -(void)_ellipse:(NSValue *)ellipseValue {
     _isLine = NO;
     CGRect aRect = [ellipseValue CGRectValue];
-    CGMutablePathRef newPath = CGPathCreateMutable();//(self.shapeLayer.path);
+    CGMutablePathRef newPath = CGPathCreateMutable();
     CGRect newPathRect = CGRectMake(0, 0, aRect.size.width, aRect.size.height);
     CGPathAddEllipseInRect(newPath, nil, newPathRect);
 
@@ -121,7 +120,7 @@
 }
 
 -(void)_arc:(NSDictionary *)arcDict {
-    CGMutablePathRef newPath = CGPathCreateMutable();//(self.shapeLayer.path);
+    CGMutablePathRef newPath = CGPathCreateMutable();
     CGPoint centerPoint = [[arcDict valueForKey:@"centerPoint"] CGPointValue];
     CGPathAddArc(newPath, nil, centerPoint.x, centerPoint.y, [[arcDict objectForKey:@"radius"] floatValue], [[arcDict objectForKey:@"startAngle"] floatValue], [[arcDict objectForKey:@"endAngle"] floatValue], YES);
     CGRect tempFrame = CGPathGetBoundingBox(newPath);
@@ -147,7 +146,7 @@
     [self _curve:curveDict];
 }
 -(void)_curve:(NSDictionary *)curveDict{
-    CGMutablePathRef newPath = CGPathCreateMutable();//(self.shapeLayer.path);
+    CGMutablePathRef newPath = CGPathCreateMutable();
     CGPoint beginPoint = [[curveDict valueForKey:@"beginPoint"] CGPointValue];
     CGPoint endPoint = [[curveDict valueForKey:@"endPoint"] CGPointValue];
     CGPoint controlPoint1 = [[curveDict valueForKey:@"controlPoint1"] CGPointValue];
@@ -179,7 +178,7 @@
 -(void)_rect:(NSValue *)rectValue {
     _isLine = NO;
     CGRect aRect = [rectValue CGRectValue];
-    CGMutablePathRef newPath = CGPathCreateMutable();//(self.shapeLayer.path);
+    CGMutablePathRef newPath = CGPathCreateMutable();
     CGRect newPathRect = CGRectMake(0, 0, aRect.size.width, aRect.size.height);
     CGPathAddRect(newPath, nil, newPathRect);
     [self.shapeLayer animatePath:newPath];
@@ -258,7 +257,7 @@
     for (int i = 0; i < [pointArray count]; i++) {
         points[i] = [[pointArray objectAtIndex:i] CGPointValue];
     }
-    CGMutablePathRef newPath = CGPathCreateMutable();//(self.shapeLayer.path);
+    CGMutablePathRef newPath = CGPathCreateMutable();
     CGPathMoveToPoint(newPath, nil, points[0].x, points[0].y);
     for(int i = 1; i < pointCount; i++) {
         CGPathAddLineToPoint(newPath, nil, points[i].x, points[i].y);
@@ -459,7 +458,7 @@
 }
 
 -(void)setAnimationDuration:(CGFloat)animationDuration {
-    _animationDuration = animationDuration;
+    [super setAnimationDuration:animationDuration];
     self.shapeLayer.animationDuration = animationDuration;
 }
 
