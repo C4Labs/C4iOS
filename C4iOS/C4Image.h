@@ -7,7 +7,7 @@
 //
 
 /* Filters
- For not I am leaving out the following filters:
+ For now I am leaving out the following filters:
  - affineTransform -> easy to put in at a later date, i don't want to bother with semantics of naming the filter method so that it's distinct from image.transform, and i'm lazy today
  - checkerBoardGenerator -> easy to put in at a later date, creating images isn't something i'm interested in atm
  - cicolorcube -> unnecessary for now
