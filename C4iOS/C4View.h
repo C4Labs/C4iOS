@@ -96,8 +96,8 @@
 
 @property (nonatomic) CGPoint origin;
 
-/// @name Configuring A View's Animation Properties
 #pragma mark Animation Properties
+/// @name Configuring A View's Animation Properties
 
 /** The duration of the view's animations, measured in seconds.
  

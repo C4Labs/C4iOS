@@ -26,7 +26,7 @@
 		ED50C89014EAC2010040D844 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ED50C88E14EAC2010040D844 /* InfoPlist.strings */; };
 		ED50C89214EAC2010040D844 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ED50C89114EAC2010040D844 /* main.m */; };
 		ED50C89614EAC2010040D844 /* C4AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ED50C89514EAC2010040D844 /* C4AppDelegate.m */; };
-		ED50C89C14EAC2010040D844 /* C4CanvasController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED50C89A14EAC2010040D844 /* C4CanvasController.xib */; };
+		ED50C89C14EAC2010040D844 /* C4Canvas.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED50C89A14EAC2010040D844 /* C4Canvas.xib */; };
 		ED50C8B014EAC2A10040D844 /* C4LogoiPad-01.png in Resources */ = {isa = PBXBuildFile; fileRef = ED50C8A614EAC2A10040D844 /* C4LogoiPad-01.png */; };
 		ED50C8B114EAC2A10040D844 /* C4LogoiPad-02.png in Resources */ = {isa = PBXBuildFile; fileRef = ED50C8A714EAC2A10040D844 /* C4LogoiPad-02.png */; };
 		ED50C8B214EAC2A10040D844 /* C4LogoiPad-03.png in Resources */ = {isa = PBXBuildFile; fileRef = ED50C8A814EAC2A10040D844 /* C4LogoiPad-03.png */; };
@@ -54,6 +54,9 @@
 		EDAB8969150BCFF100B9F9AC /* descartes.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = EDAB8968150BCFF100B9F9AC /* descartes.jpeg */; };
 		EDAFFAF014F7602F00CA356A /* C4Control.m in Sources */ = {isa = PBXBuildFile; fileRef = EDAFFAEF14F7602F00CA356A /* C4Control.m */; };
 		EDECBF6C14EAE26700D9A446 /* C4Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = EDECBF6B14EAE26600D9A446 /* C4Shape.m */; };
+		EDF6544A150DEF3300194671 /* C4WorkSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF65449150DEF3300194671 /* C4WorkSpace.m */; };
+		EDF65454150E103400194671 /* C4Loop.aif in Resources */ = {isa = PBXBuildFile; fileRef = EDF65453150E103400194671 /* C4Loop.aif */; };
+		EDF65458150E104100194671 /* C4Sampler.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF65457150E104100194671 /* C4Sampler.m */; };
 		EDF7734F14F361B00094E656 /* C4Math.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF7734E14F361B00094E656 /* C4Math.m */; };
 /* End PBXBuildFile section */
 
@@ -89,7 +92,7 @@
 		ED50C89314EAC2010040D844 /* C4iOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "C4iOS-Prefix.pch"; sourceTree = "<group>"; };
 		ED50C89414EAC2010040D844 /* C4AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = C4AppDelegate.h; sourceTree = "<group>"; };
 		ED50C89514EAC2010040D844 /* C4AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = C4AppDelegate.m; sourceTree = "<group>"; };
-		ED50C89B14EAC2010040D844 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/C4CanvasController.xib; sourceTree = "<group>"; };
+		ED50C89B14EAC2010040D844 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/C4Canvas.xib; sourceTree = "<group>"; };
 		ED50C8A614EAC2A10040D844 /* C4LogoiPad-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "C4LogoiPad-01.png"; sourceTree = "<group>"; };
 		ED50C8A714EAC2A10040D844 /* C4LogoiPad-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "C4LogoiPad-02.png"; sourceTree = "<group>"; };
 		ED50C8A814EAC2A10040D844 /* C4LogoiPad-03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "C4LogoiPad-03.png"; sourceTree = "<group>"; };
@@ -134,6 +137,11 @@
 		EDCEA5A514FD7567009969F2 /* C4Gesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Gesture.h; sourceTree = "<group>"; };
 		EDECBF6A14EAE26600D9A446 /* C4Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Shape.h; sourceTree = "<group>"; };
 		EDECBF6B14EAE26600D9A446 /* C4Shape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Shape.m; sourceTree = "<group>"; };
+		EDF65448150DEF3300194671 /* C4WorkSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; path = C4WorkSpace.h; sourceTree = "<group>"; };
+		EDF65449150DEF3300194671 /* C4WorkSpace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4WorkSpace.m; sourceTree = "<group>"; };
+		EDF65453150E103400194671 /* C4Loop.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = C4Loop.aif; sourceTree = "<group>"; };
+		EDF65456150E104100194671 /* C4Sampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Sampler.h; sourceTree = "<group>"; };
+		EDF65457150E104100194671 /* C4Sampler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Sampler.m; sourceTree = "<group>"; };
 		EDF7734D14F361B00094E656 /* C4Math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Math.h; sourceTree = "<group>"; };
 		EDF7734E14F361B00094E656 /* C4Math.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Math.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -194,9 +202,12 @@
 		ED50C88B14EAC2010040D844 /* C4iOS */ = {
 			isa = PBXGroup;
 			children = (
-				ED50C8C314EAC4F70040D844 /* C4CanvasController.h */,
-				ED50C8C414EAC4F70040D844 /* C4CanvasController.m */,
+				EDF65448150DEF3300194671 /* C4WorkSpace.h */,
+				EDF65449150DEF3300194671 /* C4WorkSpace.m */,
+				EDF65456150E104100194671 /* C4Sampler.h */,
+				EDF65457150E104100194671 /* C4Sampler.m */,
 				ED307681150D2AE3001D689C /* inception.m4v */,
+				EDF65453150E103400194671 /* C4Loop.aif */,
 				ED1CA77915052214000520EB /* candahar256.png */,
 				ED3C1C6F150B24A500AB288D /* candahar256Inverted.jpg */,
 				EDAB8968150BCFF100B9F9AC /* descartes.jpeg */,
@@ -209,7 +220,7 @@
 		ED50C88C14EAC2010040D844 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				ED50C89A14EAC2010040D844 /* C4CanvasController.xib */,
+				ED50C89A14EAC2010040D844 /* C4Canvas.xib */,
 				ED50C8BD14EAC3B80040D844 /* Supporting Files */,
 				ED50C88D14EAC2010040D844 /* C4iOS-Info.plist */,
 				ED50C88E14EAC2010040D844 /* InfoPlist.strings */,
@@ -247,6 +258,8 @@
 				EDAFFAD714F70D5F00CA356A /* C4Notification.h */,
 				ED50C89414EAC2010040D844 /* C4AppDelegate.h */,
 				ED50C89514EAC2010040D844 /* C4AppDelegate.m */,
+				ED50C8C314EAC4F70040D844 /* C4CanvasController.h */,
+				ED50C8C414EAC4F70040D844 /* C4CanvasController.m */,
 				EDAFFAEE14F7602F00CA356A /* C4Control.h */,
 				EDAFFAEF14F7602F00CA356A /* C4Control.m */,
 				ED009F9C1509242100086987 /* C4EAGLES1Renderer.h */,
@@ -342,7 +355,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED50C89014EAC2010040D844 /* InfoPlist.strings in Resources */,
-				ED50C89C14EAC2010040D844 /* C4CanvasController.xib in Resources */,
+				ED50C89C14EAC2010040D844 /* C4Canvas.xib in Resources */,
 				ED50C8B014EAC2A10040D844 /* C4LogoiPad-01.png in Resources */,
 				ED50C8B114EAC2A10040D844 /* C4LogoiPad-02.png in Resources */,
 				ED50C8B214EAC2A10040D844 /* C4LogoiPad-03.png in Resources */,
@@ -357,6 +370,7 @@
 				ED3C1C70150B24A600AB288D /* candahar256Inverted.jpg in Resources */,
 				EDAB8969150BCFF100B9F9AC /* descartes.jpeg in Resources */,
 				ED307682150D2AE3001D689C /* inception.m4v in Resources */,
+				EDF65454150E103400194671 /* C4Loop.aif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,6 +404,8 @@
 				ED3C1C45150AC59F00AB288D /* C4Image.m in Sources */,
 				ED30769C150D400C001D689C /* C4Movie.m in Sources */,
 				ED3076A2150D51F0001D689C /* C4PlayerLayer.m in Sources */,
+				EDF6544A150DEF3300194671 /* C4WorkSpace.m in Sources */,
+				EDF65458150E104100194671 /* C4Sampler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,12 +420,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		ED50C89A14EAC2010040D844 /* C4CanvasController.xib */ = {
+		ED50C89A14EAC2010040D844 /* C4Canvas.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				ED50C89B14EAC2010040D844 /* en */,
 			);
-			name = C4CanvasController.xib;
+			name = C4Canvas.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

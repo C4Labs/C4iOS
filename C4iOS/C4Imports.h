@@ -35,6 +35,7 @@
 #import "C4Label.h"
 #import "C4GL.h"
 #import "C4Movie.h"
+#import "C4Sampler.h"
 //#import "C4Noise.h"
 //#import "C4Shape.h"
 //#import "C4String.h"
@@ -44,6 +45,7 @@
 
 #import "C4View.h"
 #import "C4CanvasController.h"
+#import "C4WorkSpace.h"
 #import "C4Window.h"
 
 

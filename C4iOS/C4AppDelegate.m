@@ -12,14 +12,16 @@
 
 @synthesize window = _window;
 @synthesize canvasController = _canvasController;
+@synthesize canvas = _canvas;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     application.statusBarHidden = YES;
     self.window = [[C4Window alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    self.canvasController = [[C4CanvasController alloc] initWithNibName:@"C4CanvasController" bundle:nil];
-    self.window.rootViewController = self.canvasController;
+//    self.canvasController = [[C4CanvasController alloc] initWithNibName:@"C4Canvas" bundle:nil];
+    self.canvas = [[C4WorkSpace alloc] initWithNibName:@"C4Canvas" bundle:nil];
+    self.window.rootViewController = self.canvas;
     /* don't do the following !
      self.canvasController.view = self.window;
      */
@@ -27,7 +29,7 @@
     [self.window makeKeyAndVisible];
 //    [[AVAudioSession sharedInstance] setDelegate:self.canvasController];
 //    [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategorySoloAmbient error: nil];
-    [self.canvasController setup];
+    [self.canvas setup];
     return YES;
 }
 

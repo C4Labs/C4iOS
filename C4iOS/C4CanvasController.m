@@ -8,27 +8,49 @@
 
 #import "C4CanvasController.h"
 
-C4Movie *inception;
-
 @implementation C4CanvasController
 @synthesize canvas;
+@synthesize origin;
 
+-(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if(self != nil) {
+        
+    }
+    return self;
+}
 
 -(void)setup {
-    canvas = (C4Window *)self.view;
-    inception = [C4Movie movieNamed:@"inception.m4v"];
-    inception.width = 512;
-    inception.alpha = 0.0f;
-    inception.center = CGPointMake(384, inception.height/2);
-    [canvas addMovie:inception];
+
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    inception.animationDuration = 2.0f;
-    inception.animationOptions = AUTOREVERSE | REPEAT;
-    inception.width = 768;
-    inception.alpha = 1.0f;
-    inception.center = CGPointMake(384, 512);
+-(void)addShape:(C4Shape *)shape {
+    NSAssert([shape isKindOfClass:[C4Shape class]],
+             @"You tried to add something other than a C4Shape object using [canvas addShape:]");
+    [self.view addSubview:shape];
 }
 
+-(void)addLabel:(C4Label *)label {
+    NSAssert([label isKindOfClass:[C4Label class]], 
+             @"You tried to add something other than a C4Label object using [canvas addLabel:]");
+    [self.view addSubview:label];
+}
+
+-(void)addGL:(C4GL *)gl {
+    NSAssert([gl isKindOfClass:[C4GL class]], 
+             @"You tried to add something other than a C4GL object using [canvas addGL:]");
+    [self.view addSubview:gl];
+}
+
+-(void)addImage:(C4Image *)image {
+    NSAssert([image isKindOfClass:[C4Image class]],
+             @"You tried to add something other than a C4Image object using [canvas addImage:]");
+    [self.view addSubview:image];
+}
+
+-(void)addMovie:(C4Movie *)movie {
+    NSAssert([movie isKindOfClass:[C4Movie class]],
+             @"You tried to add something other than a C4Movie object using [canvas addMovie:]");
+    [self.view addSubview:movie];
+}
 @end
