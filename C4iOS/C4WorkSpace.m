@@ -8,17 +8,17 @@
 
 #import "C4WorkSpace.h"
 
-C4Sampler *ap;
+C4Sample *sample;
 
 @implementation C4WorkSpace
 
 -(void)setup {    
-    ap = [[C4Sampler alloc] initWithFileNamed:@"C4Loop.aif"];
-    [ap prepareToPlay];
+    sample = [C4Sample sampleNamed:@"C4Loop.aif"];
+    [sample prepareToPlay];
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [ap play];
+    [sample play];
 }
 
 /*

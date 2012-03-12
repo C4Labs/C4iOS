@@ -1,27 +1,38 @@
 //
-//  C4AudioPlayer.m
-//  C4iOSDevelopment
+//  C4Sample.m
+//  C4iOS
 //
-//  Created by Travis Kirton on 11-10-13.
-//  Copyright (c) 2011 mediart. All rights reserved.
+//  Created by Travis Kirton on 12-03-12.
+//  Copyright (c) 2012 POSTFL. All rights reserved.
 //
 
-#import "C4Sampler.h"
+#import "C4Sample.h"
 
-@interface C4Sampler ()
+@interface C4Sample ()
 @property (readonly, strong) AVAudioPlayer *player;
 @end
 
-@implementation C4Sampler
-@synthesize player = _player, currentTime, pan, rate, volume, playing, duration, enableRate, numberOfLoops, deviceCurrentTime;
+@implementation C4Sample
+@synthesize player = _player;
+@synthesize currentTime;
+@synthesize pan;
+@synthesize rate;
+@synthesize volume;
+@synthesize playing;
+@synthesize duration;
+@synthesize enableRate;
+@synthesize numberOfLoops;
+@synthesize deviceCurrentTime;
 @synthesize loops = _loops;
 
--(id)initWithFileNamed:(NSString *)_filename {
++(C4Sample *)sampleNamed:(NSString *)sampleName {
+    return [[C4Sample alloc] initWithSampleName:sampleName];
+}
+
+-(id)initWithSampleName:(NSString *)sampleName {
     self = [super init];
     if(self != nil) {
-
-        NSString *filename = _filename;
-        NSArray *filenameComponents = [filename componentsSeparatedByString:@"."];
+        NSArray *filenameComponents = [sampleName componentsSeparatedByString:@"."];
         
         NSURL *soundFileURL = [[NSBundle mainBundle] URLForResource:[filenameComponents objectAtIndex:0]
                                                       withExtension:[filenameComponents objectAtIndex:1]];
@@ -128,82 +139,6 @@
 -(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
     [self postNotification:@"endedNormally"];
     [self endedNormally];
-=======
--(BOOL)play {
-    return [player play];
-}
-
--(void)stop {
-    [player stop];
-}
-
--(void)pause {
-    [player pause];
-}
-
--(BOOL)prepareToPlay {
-    return [player prepareToPlay];
-}
-
--(BOOL)isPlaying {
-    return player.isPlaying;
-}
-
--(CGFloat)pan {
-    return player.pan;
-}
-
--(void)setPan:(CGFloat)_pan {
-    player.pan = _pan;
-}
-
--(CGFloat)volume {
-    return player.volume;
-}
-
--(void)setVolume:(CGFloat)_volume {
-    player.volume = _volume;
-}
-
--(CGFloat)rate {
-    return player.rate;
-}
-
--(void)setRate:(CGFloat)_rate {
-    player.rate = _rate;
-}
-
--(BOOL)enableRate {
-    return player.enableRate;
-}
-
--(void)setEnableRate:(BOOL)_enableRate {
-    player.enableRate = _enableRate;
-}
-
--(NSTimeInterval)currentTime {
-    return player.currentTime;
-}
-
--(void)setCurrentTime:(NSTimeInterval)_currentTime {
-    player.currentTime = _currentTime;
-}
-
--(NSTimeInterval)duration {
-    return player.duration;
-}
-
--(NSTimeInterval)deviceCurrentTime {
-    return player.deviceCurrentTime;
-}
-
--(NSInteger)numberOfLoops {
-    return player.numberOfLoops;
-}
-
--(void)setNumberOfLoops:(NSInteger)_numberOfLoops {
-    player.numberOfLoops = _numberOfLoops;
->>>>>>> origin/master
 }
 
 @end

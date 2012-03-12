@@ -56,7 +56,7 @@
 		EDECBF6C14EAE26700D9A446 /* C4Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = EDECBF6B14EAE26600D9A446 /* C4Shape.m */; };
 		EDF6544A150DEF3300194671 /* C4WorkSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF65449150DEF3300194671 /* C4WorkSpace.m */; };
 		EDF65454150E103400194671 /* C4Loop.aif in Resources */ = {isa = PBXBuildFile; fileRef = EDF65453150E103400194671 /* C4Loop.aif */; };
-		EDF65458150E104100194671 /* C4Sampler.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF65457150E104100194671 /* C4Sampler.m */; };
+		EDF65458150E104100194671 /* C4Sample.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF65457150E104100194671 /* C4Sample.m */; };
 		EDF7734F14F361B00094E656 /* C4Math.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF7734E14F361B00094E656 /* C4Math.m */; };
 /* End PBXBuildFile section */
 
@@ -140,8 +140,8 @@
 		EDF65448150DEF3300194671 /* C4WorkSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; path = C4WorkSpace.h; sourceTree = "<group>"; };
 		EDF65449150DEF3300194671 /* C4WorkSpace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4WorkSpace.m; sourceTree = "<group>"; };
 		EDF65453150E103400194671 /* C4Loop.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = C4Loop.aif; sourceTree = "<group>"; };
-		EDF65456150E104100194671 /* C4Sampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Sampler.h; sourceTree = "<group>"; };
-		EDF65457150E104100194671 /* C4Sampler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Sampler.m; sourceTree = "<group>"; };
+		EDF65456150E104100194671 /* C4Sample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Sample.h; sourceTree = "<group>"; };
+		EDF65457150E104100194671 /* C4Sample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Sample.m; sourceTree = "<group>"; };
 		EDF7734D14F361B00094E656 /* C4Math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Math.h; sourceTree = "<group>"; };
 		EDF7734E14F361B00094E656 /* C4Math.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Math.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -204,8 +204,6 @@
 			children = (
 				EDF65448150DEF3300194671 /* C4WorkSpace.h */,
 				EDF65449150DEF3300194671 /* C4WorkSpace.m */,
-				EDF65456150E104100194671 /* C4Sampler.h */,
-				EDF65457150E104100194671 /* C4Sampler.m */,
 				ED307681150D2AE3001D689C /* inception.m4v */,
 				EDF65453150E103400194671 /* C4Loop.aif */,
 				ED1CA77915052214000520EB /* candahar256.png */,
@@ -285,10 +283,12 @@
 				EDF7734E14F361B00094E656 /* C4Math.m */,
 				ED307697150D400C001D689C /* C4Movie.h */,
 				ED307698150D400C001D689C /* C4Movie.m */,
-				ED3076A0150D51F0001D689C /* C4PlayerLayer.h */,
-				ED3076A1150D51F0001D689C /* C4PlayerLayer.m */,
 				ED89849614EF1C8700BB7AB0 /* C4Object.h */,
 				ED89849714EF1C8700BB7AB0 /* C4Object.m */,
+				ED3076A0150D51F0001D689C /* C4PlayerLayer.h */,
+				ED3076A1150D51F0001D689C /* C4PlayerLayer.m */,
+				EDF65456150E104100194671 /* C4Sample.h */,
+				EDF65457150E104100194671 /* C4Sample.m */,
 				EDECBF6A14EAE26600D9A446 /* C4Shape.h */,
 				EDECBF6B14EAE26600D9A446 /* C4Shape.m */,
 				ED89848514EE180400BB7AB0 /* C4ShapeLayer.h */,
@@ -405,7 +405,7 @@
 				ED30769C150D400C001D689C /* C4Movie.m in Sources */,
 				ED3076A2150D51F0001D689C /* C4PlayerLayer.m in Sources */,
 				EDF6544A150DEF3300194671 /* C4WorkSpace.m in Sources */,
-				EDF65458150E104100194671 /* C4Sampler.m in Sources */,
+				EDF65458150E104100194671 /* C4Sample.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

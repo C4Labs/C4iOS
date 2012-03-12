@@ -7,8 +7,6 @@
 //
 
 #import "C4GL.h"
-#import "C4EAGLLayer.h"
-#import "C4GL1Renderer.h"
 
 @interface C4GL () 
 -(void)render;
