@@ -84,6 +84,16 @@
  */
 -(void)addImage:(C4Image *)image;
 
+/** Adds a C4Movie to the view.
+ 
+ Takes a C4Movie object and adds it to the view hierarchy.
+ 
+ Use this method instead of addSubview: when adding C4Movie objects, because if there are special conditions for adding shapes this method will handle those.
+ 
+ @param image A C4Movie object.
+ */
+-(void)addMovie:(C4Movie *)movie;
+
 @property (nonatomic) CGPoint origin;
 
 /// @name Configuring A View's Animation Properties

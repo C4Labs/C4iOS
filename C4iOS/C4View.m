@@ -53,6 +53,12 @@
     [self addSubview:image];
 }
 
+-(void)addMovie:(C4Movie *)movie {
+    NSAssert([movie isKindOfClass:[C4Movie class]],
+             @"You tried to add something other than a C4Movie object using [canvas addMovie:]");
+    [self addSubview:movie];
+}
+
 /* don't add this ever...
  creates a:
  CoreAnimation: failed to allocate 3145760 bytes

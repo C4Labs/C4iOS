@@ -63,6 +63,12 @@
     [self addSubview:image];
 }
 
+-(void)addMovie:(C4Movie *)movie {
+    NSAssert([movie isKindOfClass:[C4Movie class]],
+             @"You tried to add something other than a C4Movie object using [canvas addMovie:]");
+    [self addSubview:movie];
+}
+
 /*
  The following method makes sure that the main backing CALayer
  for this UIWindow subclass will be a C4Canvas

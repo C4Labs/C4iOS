@@ -74,7 +74,7 @@
         }
 
         _rate = 1.0f;
-        self.backgroundColor = [UIColor blackColor];
+        self.backgroundColor = [UIColor clearColor];
         CGRect newFrame = CGRectZero;
         newFrame.size = _originalMovieSize;
         self.frame = newFrame;
@@ -379,12 +379,20 @@
     return [self.playerLayer containsPoint:point];
 }
 
+-(CGFloat)width {
+    return self.frame.size.width;
+}
+
 -(void)setWidth:(CGFloat)width {
     _width = width;
     CGRect newFrame = self.frame;
     newFrame.size.width = width;
     newFrame.size.height = width/self.originalMovieRatio;
     self.frame = newFrame;
+}
+
+-(CGFloat)height {
+    return self.frame.size.height;
 }
 
 -(void)setHeight:(CGFloat)height {
