@@ -48,10 +48,10 @@
     self = [super init];
     if(nil != self) {
         self.originalImage = image.UIImage;
-        assert(_originalImage != nil);
-        assert(_originalImage.CGImage != nil);
+        NSAssert(_originalImage != nil, @"The C4Image you tried to load returned nil for it's UIImage");
+        NSAssert(_originalImage.CGImage != nil, @"The C4Image you tried to load returned nil for it's CGImage");
         _visibleImage = [[CIImage alloc] initWithCGImage:_originalImage.CGImage];
-        assert(_visibleImage != nil);
+        NSAssert(_visibleImage != nil, @"The CIImage you tried to create returned a nil object");
         self.frame = _visibleImage.extent;
         self.imageLayer.contents = (id)_originalImage.CGImage;
     }
@@ -62,10 +62,10 @@
     self = [super init];
     if(self != nil) {
         self.originalImage = [UIImage imageNamed:name];
-        assert(_originalImage != nil);
-        assert(_originalImage.CGImage != nil);
+        NSAssert(_originalImage != nil, @"The C4Image you tried to load returned nil for it's UIImage");
+        NSAssert(_originalImage.CGImage != nil, @"The C4Image you tried to load returned nil for it's CGImage");
         self.visibleImage = [[CIImage alloc] initWithCGImage:_originalImage.CGImage];
-        assert(_visibleImage != nil);
+        NSAssert(_visibleImage != nil, @"The CIImage you tried to create returned a nil object");
 
         self.frame = self.CIImage.extent;
         [self.imageLayer setContents:(id)_originalImage.CGImage];
@@ -88,9 +88,9 @@
 
 -(void)setImage:(C4Image *)image {
     self.originalImage = image.UIImage;
-    assert(_originalImage != nil);
+    NSAssert(_originalImage != nil, @"The C4Image you tried to load returned nil for its UIImage");
     self.visibleImage = image.CIImage;
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The C4Image you tried to load returned nil for its CIImage");
     self.frame = _visibleImage.extent;
     [self.imageLayer animateContents:self.CGImage];
 }
@@ -163,7 +163,7 @@
     [filter setValue:_visibleImage forKey:@"inputImage"];
     [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -173,7 +173,7 @@
     [filter setValue:_visibleImage forKey:@"inputImage"];
     [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -183,7 +183,7 @@
     [filter setValue:_visibleImage forKey:@"inputImage"];
     [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -195,7 +195,7 @@
     [filter setValue:[NSNumber numberWithFloat:brightness] forKey:@"inputBrightness"];
     [filter setValue:[NSNumber numberWithFloat:contrast] forKey:@"inputContrast"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -205,7 +205,7 @@
     [filter setValue:_visibleImage forKey:@"inputImage"];
     [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -214,7 +214,7 @@
     [filter setDefaults];
     [filter setValue:_visibleImage forKey:@"inputImage"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -233,7 +233,7 @@
     [filter setValue:[CIVector vectorWithX:bias Y:bias Z:bias W:bias] forKey:@"inputBiasVector"];
     
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -244,7 +244,7 @@
     [filter setValue:color.CIColor forKey:@"inputColor"];
     [filter setValue:[NSNumber numberWithFloat:intensity] forKey:@"inputIntensity"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -254,7 +254,7 @@
     [filter setValue:_visibleImage forKey:@"inputImage"];
     [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -264,7 +264,7 @@
     [filter setValue:_visibleImage forKey:@"inputImage"];
     [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -274,7 +274,7 @@
     [filter setValue:_visibleImage forKey:@"inputImage"];
     [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -284,7 +284,7 @@
     [filter setValue:_visibleImage forKey:@"inputImage"];
     [filter setValue:[NSNumber numberWithFloat:adjustment] forKey:@"inputEV"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -295,7 +295,7 @@
     [filter setValue:color1 forKey:@"inputColor0"];
     [filter setValue:color2 forKey:@"inputColor1"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -305,7 +305,7 @@
     [filter setValue:_visibleImage forKey:@"inputImage"];
     [filter setValue:[NSNumber numberWithFloat:adjustment] forKey:@"inputPower"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -315,7 +315,7 @@
     [filter setValue:_visibleImage forKey:@"inputImage"];
     [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -326,7 +326,7 @@
     [filter setValue:[NSNumber numberWithFloat:highlightAmount] forKey:@"inputHighlightAmount"];
     [filter setValue:[NSNumber numberWithFloat:shadowAmount] forKey:@"inputShadowAmount"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -336,7 +336,7 @@
     [filter setValue:_visibleImage forKey:@"inputImage"];
     [filter setValue:[NSNumber numberWithFloat:angle] forKey:@"inputAngle"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -346,7 +346,7 @@
     [filter setValue:_visibleImage forKey:@"inputImage"];
     [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -356,7 +356,7 @@
     [filter setValue:_visibleImage forKey:@"inputImage"];
     [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -366,7 +366,7 @@
     [filter setValue:_visibleImage forKey:@"inputImage"];
     [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -376,7 +376,7 @@
     [filter setValue:_visibleImage forKey:@"inputImage"];
     [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -386,7 +386,7 @@
     [filter setValue:_visibleImage forKey:@"inputImage"];
     [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -396,7 +396,7 @@
     [filter setValue:_visibleImage forKey:@"inputImage"];
     [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -406,7 +406,7 @@
     [filter setValue:_visibleImage forKey:@"inputImage"];
     [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -416,7 +416,7 @@
     [filter setValue:_visibleImage forKey:@"inputImage"];
     [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -426,7 +426,7 @@
     [filter setValue:_visibleImage forKey:@"inputImage"];
     [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -436,7 +436,7 @@
     [filter setValue:_visibleImage forKey:@"inputImage"];
     [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -446,7 +446,7 @@
     [filter setValue:_visibleImage forKey:@"inputImage"];
     [filter setValue:[NSNumber numberWithFloat:intensity] forKey:@"inputIntensity"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -456,7 +456,7 @@
     [filter setValue:_visibleImage forKey:@"inputImage"];
     [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -466,7 +466,7 @@
     [filter setValue:_visibleImage forKey:@"inputImage"];
     [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -476,7 +476,7 @@
     [filter setValue:_visibleImage forKey:@"inputImage"];
     [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -486,7 +486,7 @@
     [filter setValue:_visibleImage forKey:@"inputImage"];
     [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -496,7 +496,7 @@
     [filter setValue:_visibleImage forKey:@"inputImage"];
     [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -506,7 +506,7 @@
     [filter setValue:_visibleImage forKey:@"inputImage"];
     [filter setValue:[NSNumber numberWithFloat:angle] forKey:@"inputAngle"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -517,7 +517,7 @@
     [filter setValue:[CIVector vectorWithX:neutral.width Y:neutral.height] forKey:@"inputNeutral"];
     [filter setValue:[CIVector vectorWithX:targetNeutral.width Y:targetNeutral.height] forKey:@"inputTargetNeutral"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -531,7 +531,7 @@
     [filter setValue:[CIVector vectorWithCGPoint:pointArray[3]] forKey:@"inputPoint3"];
     [filter setValue:[CIVector vectorWithCGPoint:pointArray[4]] forKey:@"inputPoint4"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -541,7 +541,7 @@
     [filter setValue:_visibleImage forKey:@"inputImage"];
     [filter setValue:[NSNumber numberWithFloat:amount] forKey:@"inputAmount"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -551,7 +551,7 @@
     [filter setValue:_visibleImage forKey:@"inputImage"];
     [filter setValue:color.CIColor forKey:@"inputColor"];
     self.visibleImage = [filter outputImage];
-    assert(_visibleImage != nil);
+    NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
 }
 

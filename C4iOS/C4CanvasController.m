@@ -7,9 +7,10 @@
 //
 
 #import "C4CanvasController.h"
+#import "C4VideoPlayerView.h"
 
 C4Image *image, *inverted, *descartes;
-C4GL *gl;
+C4VideoPlayerView *inceptionView;
 
 @implementation C4CanvasController
 @synthesize canvas;
@@ -18,23 +19,14 @@ C4GL *gl;
 -(void)setup {
     canvas = (C4Window *)self.view;
 
-    image = [C4Image imageNamed:@"candahar256.png"];
-    [canvas addImage:image];
-
-    gl = [[C4GL alloc] init];
-    [canvas addGL:gl];
+    inceptionView = [[C4VideoPlayerView alloc] initWithMovieName:@"inception.m4v"];
+    inceptionView.width = 768.0f;
+    inceptionView.loops = YES;
+    [canvas addSubview:inceptionView];
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    image.animationDuration = 2.0f;
-    image.shadowOpacity = 0.8f;
-    image.shadowOffset = CGSizeMake(15.0, 15.0);
-    image.animationOptions = AUTOREVERSE | REPEAT;
-    image.center = CGPointMake(384, 512);
-    image.transform = CGAffineTransformMakeRotation(PI);
-    [image colorInvert];
-
-    gl.animationDuration = 1.0f;
-    gl.frame = CGRectMake(0, 812, 300, 200);
+    [inceptionView seekToTime:205.0f];
+    [inceptionView play];
 }
 @end

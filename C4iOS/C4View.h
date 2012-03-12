@@ -44,7 +44,7 @@
  
  @param aShape A C4Shape object.
  */
--(void)addShape:(C4Shape *)aShape;
+-(void)addShape:(C4Shape *)shape;
 
 /** Adds a C4Label to the view.
  
@@ -54,7 +54,7 @@
  
  @param aLabel A C4Label object.
  */
--(void)addLabel:(C4Label *)aLabel;
+-(void)addLabel:(C4Label *)label;
 
 /// @name Setting A View's Origin Point
 /** The origin point of the view.
@@ -64,7 +64,7 @@
  This method positions the origin point of the current view by calculating the difference between this point and what the view's new center point will be. It then initiates the animation by setting the displaced new center point.
  */
 
-/** Adds a C4GL to the window.
+/** Adds a C4GL to the view.
  
  Takes a C4GL object and adds it to the view hierarchy.
  
@@ -74,7 +74,7 @@
  */
 -(void)addGL:(C4GL *)gl;
 
-/** Adds a C4Image to the window.
+/** Adds a C4Image to the view.
  
  Takes a C4Image object and adds it to the view hierarchy.
  

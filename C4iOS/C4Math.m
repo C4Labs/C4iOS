@@ -167,7 +167,7 @@ static C4Math *sharedC4Math = nil;
     else {
         NSInteger max = a > b ? a : b;
         NSInteger min = a < b ? a : b;
-        assert(max-min > 0);
+        NSAssert(max-min > 0, @"Your expression returned true for max-min <= 0 for some reason");
         srandomdev();
         returnVal = (((NSInteger)random())%(max-min) + min);
     }

@@ -478,7 +478,7 @@
 //    self.fillColor = C4GREY;
 }
 
-/* NOTE: YOU CAN'T HIT TEST A CGPATH */
+/* NOTE: YOU CAN'T HIT TEST A CGPATH which is a line */
 -(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
     return CGPathContainsPoint(self.shapeLayer.path, nil, point, nil) ? YES : NO;
 }

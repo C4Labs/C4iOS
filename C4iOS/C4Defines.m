@@ -55,3 +55,7 @@ NSString *const JOINBEVEL = @"bevel";
 NSString *const CAPBUTT = @"butt";
 NSString *const CAPROUND = @"round";
 NSString *const CAPSQUARE = @"square";
+
+NSString *const RESIZEASPECT = @"AVLayerVideoGravityResizeAspect";
+NSString *const RESIZEFILL = @"AVLayerVideoGravityResizeAspectFill";
+NSString *const RESIZEFRAME = @"AVLayerVideoGravityResize";

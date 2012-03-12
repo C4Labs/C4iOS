@@ -40,22 +40,26 @@
 }
 
 -(void)addShape:(C4Shape *)shape {
-    assert([shape isKindOfClass:[C4Shape class]]);
+    NSAssert([shape isKindOfClass:[C4Shape class]],
+             @"You tried to add something other than a C4Shape object using [canvas addShape:]");
     [self addSubview:shape];
 }
 
 -(void)addLabel:(C4Label *)label {
-    assert([label isKindOfClass:[C4Label class]]);
+    NSAssert([label isKindOfClass:[C4Label class]], 
+             @"You tried to add something other than a C4Label object using [canvas addLabel:]");
     [self addSubview:label];
 }
 
 -(void)addGL:(C4GL *)gl {
-    assert([gl isKindOfClass:[C4GL class]]);
+    NSAssert([gl isKindOfClass:[C4GL class]], 
+             @"You tried to add something other than a C4GL object using [canvas addGL:]");
     [self addSubview:gl];
 }
 
 -(void)addImage:(C4Image *)image {
-    assert([image isKindOfClass:[C4Image class]]);
+    NSAssert([image isKindOfClass:[C4Image class]],
+             @"You tried to add something other than a C4Image object using [canvas addImage:]");
     [self addSubview:image];
 }
 
