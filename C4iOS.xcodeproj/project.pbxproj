@@ -16,7 +16,7 @@
 		ED1CA77A15052214000520EB /* candahar256.png in Resources */ = {isa = PBXBuildFile; fileRef = ED1CA77915052214000520EB /* candahar256.png */; };
 		ED307680150D2A36001D689C /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED30767F150D2A36001D689C /* CoreMedia.framework */; };
 		ED307682150D2AE3001D689C /* inception.m4v in Resources */ = {isa = PBXBuildFile; fileRef = ED307681150D2AE3001D689C /* inception.m4v */; };
-		ED30769C150D400C001D689C /* C4VideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED307698150D400C001D689C /* C4VideoPlayerView.m */; };
+		ED30769C150D400C001D689C /* C4Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = ED307698150D400C001D689C /* C4Movie.m */; };
 		ED3076A2150D51F0001D689C /* C4PlayerLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3076A1150D51F0001D689C /* C4PlayerLayer.m */; };
 		ED3C1C45150AC59F00AB288D /* C4Image.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3C1C44150AC59F00AB288D /* C4Image.m */; };
 		ED3C1C70150B24A600AB288D /* candahar256Inverted.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ED3C1C6F150B24A500AB288D /* candahar256Inverted.jpg */; };
@@ -72,8 +72,8 @@
 		ED1CA77915052214000520EB /* candahar256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = candahar256.png; sourceTree = "<group>"; };
 		ED30767F150D2A36001D689C /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		ED307681150D2AE3001D689C /* inception.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = inception.m4v; sourceTree = "<group>"; };
-		ED307697150D400C001D689C /* C4VideoPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4VideoPlayerView.h; sourceTree = "<group>"; };
-		ED307698150D400C001D689C /* C4VideoPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4VideoPlayerView.m; sourceTree = "<group>"; };
+		ED307697150D400C001D689C /* C4Movie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Movie.h; sourceTree = "<group>"; };
+		ED307698150D400C001D689C /* C4Movie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Movie.m; sourceTree = "<group>"; };
 		ED3076A0150D51F0001D689C /* C4PlayerLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4PlayerLayer.h; sourceTree = "<group>"; };
 		ED3076A1150D51F0001D689C /* C4PlayerLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4PlayerLayer.m; sourceTree = "<group>"; };
 		ED3C1C43150AC59E00AB288D /* C4Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Image.h; sourceTree = "<group>"; };
@@ -196,10 +196,6 @@
 			children = (
 				ED50C8C314EAC4F70040D844 /* C4CanvasController.h */,
 				ED50C8C414EAC4F70040D844 /* C4CanvasController.m */,
-				ED307697150D400C001D689C /* C4VideoPlayerView.h */,
-				ED307698150D400C001D689C /* C4VideoPlayerView.m */,
-				ED3076A0150D51F0001D689C /* C4PlayerLayer.h */,
-				ED3076A1150D51F0001D689C /* C4PlayerLayer.m */,
 				ED307681150D2AE3001D689C /* inception.m4v */,
 				ED1CA77915052214000520EB /* candahar256.png */,
 				ED3C1C6F150B24A500AB288D /* candahar256Inverted.jpg */,
@@ -274,6 +270,10 @@
 				ED50C8CA14EAC5990040D844 /* C4Layer.m */,
 				EDF7734D14F361B00094E656 /* C4Math.h */,
 				EDF7734E14F361B00094E656 /* C4Math.m */,
+				ED307697150D400C001D689C /* C4Movie.h */,
+				ED307698150D400C001D689C /* C4Movie.m */,
+				ED3076A0150D51F0001D689C /* C4PlayerLayer.h */,
+				ED3076A1150D51F0001D689C /* C4PlayerLayer.m */,
 				ED89849614EF1C8700BB7AB0 /* C4Object.h */,
 				ED89849714EF1C8700BB7AB0 /* C4Object.m */,
 				EDECBF6A14EAE26600D9A446 /* C4Shape.h */,
@@ -388,7 +388,7 @@
 				ED009F9E1509242100086987 /* C4EAGLES1Renderer.m in Sources */,
 				ED009FA81509545100086987 /* C4GL1Renderer.m in Sources */,
 				ED3C1C45150AC59F00AB288D /* C4Image.m in Sources */,
-				ED30769C150D400C001D689C /* C4VideoPlayerView.m in Sources */,
+				ED30769C150D400C001D689C /* C4Movie.m in Sources */,
 				ED3076A2150D51F0001D689C /* C4PlayerLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

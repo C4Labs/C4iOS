@@ -11,10 +11,13 @@
 
 @class C4PlayerLayer;
 
-@interface C4VideoPlayerView : C4Control {
+@interface C4Movie : C4Control {
     NSURL *movieURL;
     void *rateContext, *currentItemContext, *playerItemStatusContext;
 }
++(C4Movie *)movieNamed:(NSString *)movieName;
++(C4Movie *)movieNamed:(NSString *)movieName inFrame:(CGRect)movieFrame;
+
 -(id)initWithMovieName:(NSString *)movieName;
 -(id)initWithMovieName:(NSString *)movieName andFrame:(CGRect)movieFrame;
 -(void)play;

@@ -6,9 +6,9 @@
 //  Copyright (c) 2011 mediart. All rights reserved.
 //
 
-#import "C4VideoPlayerView.h"
+#import "C4Movie.h"
 
-@interface C4VideoPlayerView()
+@interface C4Movie()
 - (CMTime)playerItemDuration;
 - (void)assetFailedToPrepareForPlayback:(NSError *)error;
 - (void)prepareToPlayAsset:(AVURLAsset *)asset withKeys:(NSArray *)requestedKeys;
@@ -23,7 +23,7 @@
 @property (strong) AVPlayerItem *playerItem;
 @end
 
-@implementation C4VideoPlayerView
+@implementation C4Movie
 @synthesize player;
 @synthesize playerItem;
 @synthesize rate = _rate;
@@ -39,6 +39,15 @@
 @synthesize isPlaying;
 @synthesize loops;
 @synthesize shouldAutoplay;
+
++(C4Movie *)movieNamed:(NSString *)movieName {
+    return [[C4Movie alloc] initWithMovieName:movieName];
+}
+
++(C4Movie *)movieNamed:(NSString *)movieName inFrame:(CGRect)movieFrame {
+    return [C4Movie movieNamed:movieName inFrame:movieFrame];
+}
+
 
 -(id)initWithMovieName:(NSString *)movieName {
     self = [super init];
