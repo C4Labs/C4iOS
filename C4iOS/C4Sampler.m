@@ -128,6 +128,82 @@
 -(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
     [self postNotification:@"endedNormally"];
     [self endedNormally];
+=======
+-(BOOL)play {
+    return [player play];
+}
+
+-(void)stop {
+    [player stop];
+}
+
+-(void)pause {
+    [player pause];
+}
+
+-(BOOL)prepareToPlay {
+    return [player prepareToPlay];
+}
+
+-(BOOL)isPlaying {
+    return player.isPlaying;
+}
+
+-(CGFloat)pan {
+    return player.pan;
+}
+
+-(void)setPan:(CGFloat)_pan {
+    player.pan = _pan;
+}
+
+-(CGFloat)volume {
+    return player.volume;
+}
+
+-(void)setVolume:(CGFloat)_volume {
+    player.volume = _volume;
+}
+
+-(CGFloat)rate {
+    return player.rate;
+}
+
+-(void)setRate:(CGFloat)_rate {
+    player.rate = _rate;
+}
+
+-(BOOL)enableRate {
+    return player.enableRate;
+}
+
+-(void)setEnableRate:(BOOL)_enableRate {
+    player.enableRate = _enableRate;
+}
+
+-(NSTimeInterval)currentTime {
+    return player.currentTime;
+}
+
+-(void)setCurrentTime:(NSTimeInterval)_currentTime {
+    player.currentTime = _currentTime;
+}
+
+-(NSTimeInterval)duration {
+    return player.duration;
+}
+
+-(NSTimeInterval)deviceCurrentTime {
+    return player.deviceCurrentTime;
+}
+
+-(NSInteger)numberOfLoops {
+    return player.numberOfLoops;
+}
+
+-(void)setNumberOfLoops:(NSInteger)_numberOfLoops {
+    player.numberOfLoops = _numberOfLoops;
+>>>>>>> origin/master
 }
 
 @end
