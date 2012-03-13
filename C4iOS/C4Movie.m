@@ -331,6 +331,10 @@
     self.player.rate = _rate;
 }
 
+-(void)pause {
+    [self.player pause];
+}
+
 -(void)setShadowOffset:(CGSize)shadowOffset {
     [self performSelector:@selector(_setShadowOffset:) withObject:[NSValue valueWithCGSize:shadowOffset] afterDelay:self.animationDelay];
 }

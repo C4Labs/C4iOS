@@ -17,6 +17,12 @@
 @interface C4Label : C4Control {
 }
 
++(C4Label *)labelWithText:(NSString *)text;
++(C4Label *)labelWithText:(NSString *)text andFont:(C4Font *)font;
+
+-(id)initWithText:(NSString *)text;
+-(id)initWithText:(NSString *)text andFont:(C4Font *)font;
+
 /// @name Custom
 #pragma mark Custom
 -(void)sizeToFit;

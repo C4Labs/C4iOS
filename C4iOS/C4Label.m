@@ -66,6 +66,34 @@
     return [self initWithFrame:CGRectZero];
 }
 
++(C4Label *)labelWithText:(NSString *)text {
+    return [[C4Label alloc] initWithText:text];
+}
+
++(C4Label *)labelWithText:(NSString *)text andFont:(C4Font *)font {
+    return [[C4Label alloc] initWithText:text andFont:font];
+}
+
+-(id)initWithText:(NSString *)text {
+    self = [self initWithFrame:CGRectZero];
+    if(self != nil) {
+        self.text = text;
+        self.font = [C4Font systemFontOfSize:12.0f];
+        [self sizeToFit];
+    }
+    return self;
+}
+
+-(id)initWithText:(NSString *)text andFont:(C4Font *)font {
+    self = [self initWithFrame:CGRectZero];
+    if(self != nil) {
+        self.text = text;
+        self.font = font;
+        [self sizeToFit];
+    }
+    return self;
+}
+
 -(id)initWithFrame:(CGRect)frame {
     if(CGRectEqualToRect(frame, CGRectZero)) frame = CGRectMake(0, 0, 1, 1);
     self = [super initWithFrame:frame];

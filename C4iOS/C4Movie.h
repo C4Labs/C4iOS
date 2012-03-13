@@ -61,6 +61,10 @@
  */
 -(void)play;
 
+/**Pauses the movie.
+ */
+-(void)pause;
+
 /**The duration of the movie, in seconds.
  */
 -(CGFloat)duration;
