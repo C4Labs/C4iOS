@@ -82,7 +82,7 @@
 -(CGFloat)rate {
     return self.player.rate;
 }
-
+/* isn't working */
 -(void)setRate:(CGFloat)_rate {
     if(_rate >= 0)
         self.player.rate = _rate;
