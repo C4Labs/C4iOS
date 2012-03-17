@@ -42,6 +42,8 @@
 		ED50C8D014EAC77C0040D844 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED50C8CF14EAC77C0040D844 /* AVFoundation.framework */; };
 		ED50C8D214EAC92F0040D844 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED50C8D114EAC92F0040D844 /* QuartzCore.framework */; };
 		ED50C8D614EACA340040D844 /* C4View.m in Sources */ = {isa = PBXBuildFile; fileRef = ED50C8D514EACA340040D844 /* C4View.m */; };
+		ED7513AB15150FB60076317F /* inception.mov in Resources */ = {isa = PBXBuildFile; fileRef = ED7513AA15150FB60076317F /* inception.mov */; };
+		ED751492151519890076317F /* C4Sky.png in Resources */ = {isa = PBXBuildFile; fileRef = ED751491151519890076317F /* C4Sky.png */; };
 		ED80BBC014F0648800AAD49C /* C4Defines.m in Sources */ = {isa = PBXBuildFile; fileRef = ED80BBBF14F0648800AAD49C /* C4Defines.m */; };
 		ED89848714EE180400BB7AB0 /* C4ShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED89848614EE180400BB7AB0 /* C4ShapeLayer.m */; };
 		ED89849814EF1C8800BB7AB0 /* C4Object.m in Sources */ = {isa = PBXBuildFile; fileRef = ED89849714EF1C8700BB7AB0 /* C4Object.m */; };
@@ -67,6 +69,10 @@
 		ED009FA61509545000086987 /* C4GL1Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4GL1Renderer.h; sourceTree = "<group>"; };
 		ED009FA71509545000086987 /* C4GL1Renderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4GL1Renderer.m; sourceTree = "<group>"; };
 		ED10F17114FC0BDE00B54390 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		ED1B5BA31514024E0027365F /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		ED1B5BA71514024E0027365F /* C4-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "C4-Info.plist"; sourceTree = "<group>"; };
+		ED1B5BA91514024E0027365F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		ED1B5BAB1514024E0027365F /* C4-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "C4-Prefix.pch"; sourceTree = "<group>"; };
 		ED30767F150D2A36001D689C /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		ED307697150D400C001D689C /* C4Movie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Movie.h; sourceTree = "<group>"; };
 		ED307698150D400C001D689C /* C4Movie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Movie.m; sourceTree = "<group>"; };
@@ -111,6 +117,8 @@
 		ED50C8D114EAC92F0040D844 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		ED50C8D414EACA340040D844 /* C4View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4View.h; sourceTree = "<group>"; };
 		ED50C8D514EACA340040D844 /* C4View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4View.m; sourceTree = "<group>"; };
+		ED7513AA15150FB60076317F /* inception.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = inception.mov; sourceTree = "<group>"; };
+		ED751491151519890076317F /* C4Sky.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = C4Sky.png; sourceTree = "<group>"; };
 		ED80BBBF14F0648800AAD49C /* C4Defines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Defines.m; sourceTree = "<group>"; };
 		ED89848514EE180400BB7AB0 /* C4ShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4ShapeLayer.h; sourceTree = "<group>"; };
 		ED89848614EE180400BB7AB0 /* C4ShapeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4ShapeLayer.m; sourceTree = "<group>"; };
@@ -156,10 +164,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ED1B5BA51514024E0027365F /* C4 */ = {
+			isa = PBXGroup;
+			children = (
+				ED1B5BA61514024E0027365F /* Supporting Files */,
+			);
+			path = C4;
+			sourceTree = "<group>";
+		};
+		ED1B5BA61514024E0027365F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				ED1B5BA71514024E0027365F /* C4-Info.plist */,
+				ED1B5BA81514024E0027365F /* InfoPlist.strings */,
+				ED1B5BAB1514024E0027365F /* C4-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		ED50C87614EAC2010040D844 = {
 			isa = PBXGroup;
 			children = (
 				ED50C88B14EAC2010040D844 /* C4iOS */,
+				ED1B5BA51514024E0027365F /* C4 */,
 				ED50C88414EAC2010040D844 /* Frameworks */,
 				ED50C88214EAC2010040D844 /* Products */,
 			);
@@ -185,6 +212,7 @@
 				ED009F9F1509253500086987 /* OpenGLES.framework */,
 				ED50C8D114EAC92F0040D844 /* QuartzCore.framework */,
 				ED50C88514EAC2010040D844 /* UIKit.framework */,
+				ED1B5BA31514024E0027365F /* CoreFoundation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -194,6 +222,8 @@
 			children = (
 				EDF65448150DEF3300194671 /* C4WorkSpace.h */,
 				EDF65449150DEF3300194671 /* C4WorkSpace.m */,
+				ED751491151519890076317F /* C4Sky.png */,
+				ED7513AA15150FB60076317F /* inception.mov */,
 				ED50C8D314EACA0E0040D844 /* Source */,
 				ED50C88C14EAC2010040D844 /* App */,
 			);
@@ -351,6 +381,8 @@
 				ED50C8B714EAC2A10040D844 /* C4LogoiPad-08.png in Resources */,
 				ED50C8B814EAC2A10040D844 /* C4LogoiPad-Landscape.png in Resources */,
 				ED50C8B914EAC2A10040D844 /* C4LogoiPad-Portrait.png in Resources */,
+				ED7513AB15150FB60076317F /* inception.mov in Resources */,
+				ED751492151519890076317F /* C4Sky.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,6 +424,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		ED1B5BA81514024E0027365F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ED1B5BA91514024E0027365F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		ED50C88E14EAC2010040D844 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

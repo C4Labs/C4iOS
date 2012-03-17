@@ -11,6 +11,8 @@
 @implementation C4WorkSpace 
 
 -(void)setup {
+    C4Movie *inception = [C4Movie movieNamed:@"inception.mov"];
+    [self addMovie:inception];
 }
 
 @end

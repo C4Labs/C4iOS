@@ -22,7 +22,6 @@
 
 #import "C4Object.h"
 #import "C4Math.h"
-//#import "C4DateTime.h"
 #import "C4Font.h"
 #import "C4Foundation.h"
 #import "C4Image.h"
@@ -38,18 +37,11 @@
 #import "C4PlayerLayer.h"
 #import "C4Movie.h"
 #import "C4Sample.h"
-//#import "C4Noise.h"
-//#import "C4Vector.h"
 #import "C4EAGLES1Renderer.h"
 
 #import "C4View.h"
 #import "C4CanvasController.h"
 #import "C4WorkSpace.h"
 #import "C4Window.h"
-
-
-//#import "C4GlobalShapeAttributes.h"
-//#import "C4GlobalStringAttributes.h"
-//#import "C4GlobalTypeAttributes.h"
 
 #endif
