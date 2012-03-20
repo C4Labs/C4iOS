@@ -8,28 +8,35 @@
 
 #import "C4AppDelegate.h"
 
+@interface C4AppDelegate ()
+/* The main view of the application.
+  
+ Need to have this in here so that we can associate the C4View in our C4Canvas.xib file with something. The main reason is that a static lib will discard and not recognize any class that isn't called or referenced in some part of some implementation.
+                         */
+@property (readonly, weak, nonatomic) C4View *mainView;
+@end
+
 @implementation C4AppDelegate
 
 @synthesize window = _window;
-@synthesize canvasController = _canvasController;
-@synthesize canvas = _canvas;
+@synthesize workspace = _workspace;
+@synthesize mainView;
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     application.statusBarHidden = YES;
     self.window = [[C4Window alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-//    self.canvasController = [[C4CanvasController alloc] initWithNibName:@"C4Canvas" bundle:nil];
-    self.canvas = [[C4WorkSpace alloc] initWithNibName:@"C4Canvas" bundle:nil];
-    self.window.rootViewController = self.canvas;
-    /* don't do the following !
+    self.workspace = [[C4WorkSpace alloc] initWithNibName:@"C4Canvas" bundle:nil];
+    self.window.rootViewController = self.workspace;
+    /* don't ever do the following !
      self.canvasController.view = self.window;
      */
     
     [self.window makeKeyAndVisible];
-//    [[AVAudioSession sharedInstance] setDelegate:self.canvasController];
-//    [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategorySoloAmbient error: nil];
-    [self.canvas setup];
+    [[AVAudioSession sharedInstance] setDelegate:self.workspace];
+    [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategorySoloAmbient error: nil];
+    [self.workspace setup];
+    mainView = (C4View *)self.workspace.view;
     return YES;
 }
 

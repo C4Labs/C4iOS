@@ -25,12 +25,6 @@
  
  @return C4CanvasController a subclass of UIViewController customized specifically for the C4 Framework
  */
-@property (strong, nonatomic) C4CanvasController *canvasController;
-
-/** The root view controller of the main application window.
- 
- @return C4CanvasController a subclass of UIViewController customized specifically for the C4 Framework
- */
-@property (strong, nonatomic) C4WorkSpace *canvas;
+@property (strong, nonatomic) IBOutlet C4WorkSpace *workspace;
 
 @end

@@ -9,19 +9,23 @@
 #import "C4CanvasController.h"
 
 @implementation C4CanvasController
-@synthesize canvas;
+@synthesize canvas = _canvas;
 @synthesize origin;
 
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if(self != nil) {
-        
+        _canvas = (C4Window *)self.view;
     }
     return self;
 }
 
 -(void)setup {
 
+}
+
+-(C4Window *)canvas {
+    return (C4Window *)self.view;
 }
 
 -(void)addShape:(C4Shape *)shape {

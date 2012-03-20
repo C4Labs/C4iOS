@@ -70,9 +70,6 @@
 		ED009FA71509545000086987 /* C4GL1Renderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4GL1Renderer.m; sourceTree = "<group>"; };
 		ED10F17114FC0BDE00B54390 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		ED1B5BA31514024E0027365F /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
-		ED1B5BA71514024E0027365F /* C4-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "C4-Info.plist"; sourceTree = "<group>"; };
-		ED1B5BA91514024E0027365F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		ED1B5BAB1514024E0027365F /* C4-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "C4-Prefix.pch"; sourceTree = "<group>"; };
 		ED30767F150D2A36001D689C /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		ED307697150D400C001D689C /* C4Movie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Movie.h; sourceTree = "<group>"; };
 		ED307698150D400C001D689C /* C4Movie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Movie.m; sourceTree = "<group>"; };
@@ -164,29 +161,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		ED1B5BA51514024E0027365F /* C4 */ = {
-			isa = PBXGroup;
-			children = (
-				ED1B5BA61514024E0027365F /* Supporting Files */,
-			);
-			path = C4;
-			sourceTree = "<group>";
-		};
-		ED1B5BA61514024E0027365F /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				ED1B5BA71514024E0027365F /* C4-Info.plist */,
-				ED1B5BA81514024E0027365F /* InfoPlist.strings */,
-				ED1B5BAB1514024E0027365F /* C4-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		ED50C87614EAC2010040D844 = {
 			isa = PBXGroup;
 			children = (
 				ED50C88B14EAC2010040D844 /* C4iOS */,
-				ED1B5BA51514024E0027365F /* C4 */,
 				ED50C88414EAC2010040D844 /* Frameworks */,
 				ED50C88214EAC2010040D844 /* Products */,
 			);
@@ -424,14 +402,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		ED1B5BA81514024E0027365F /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				ED1B5BA91514024E0027365F /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		ED50C88E14EAC2010040D844 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

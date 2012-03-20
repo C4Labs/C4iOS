@@ -11,8 +11,11 @@
 @implementation C4WorkSpace 
 
 -(void)setup {
-    C4Movie *inception = [C4Movie movieNamed:@"inception.mov"];
-    [self addMovie:inception];
+    [self addImage:[C4Image imageNamed:@"C4Sky.png"]];
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    C4Log(@"hi");
 }
 
 @end
