@@ -175,6 +175,7 @@
 -(void)rect:(CGRect)rect {
     [self performSelector:@selector(_rect:) withObject:[NSValue valueWithCGRect:rect] afterDelay:self.animationDelay];
 }
+
 -(void)_rect:(NSValue *)rectValue {
     _isLine = NO;
     CGRect aRect = [rectValue CGRectValue];

@@ -54,7 +54,8 @@ void C4Log(NSString *logString,...) {
     va_list args;
 	
     va_start (args, logString);
-    NSString *finalString = [[NSString alloc] initWithFormat:[logString stringByAppendingString: @"\n"] arguments:args];
+    NSString *finalString = [[NSString alloc] initWithFormat:
+                             [logString stringByAppendingString: @"\n"] arguments:args];
     va_end (args);
     
 	fprintf(stderr,"[C4Log] %s",[finalString UTF8String]);

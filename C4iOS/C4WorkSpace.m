@@ -11,11 +11,6 @@
 @implementation C4WorkSpace 
 
 -(void)setup {
-    [self addImage:[C4Image imageNamed:@"C4Sky.png"]];
-}
-
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    C4Log(@"hi");
 }
 
 @end

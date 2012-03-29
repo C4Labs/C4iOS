@@ -1,0 +1,11 @@
+This is the README for the C4iOS project.
+
+C4iOS is an early alpha release of a new programming API for iOS (currently only iPad).
+
+I finished the first release on March 19th, 2012 and am currently running workshops with students at an art college. 
+
+Between now and May I will not be developing the core of C4iOS, instead I am working on teaching, finding bugs and pushing the limits of the current state of the project. For me this is sort of like an extended design phase, and when that is over, I'll assess how to go about best implementing any needed changes and how to manage major improvements to the way things work. 
+
+If you don't see any commit activity for the next 5 weeks this is why.
+
+T
