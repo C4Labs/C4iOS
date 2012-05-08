@@ -8,7 +8,12 @@
 
 #import "C4Image.h"
 
-@interface C4Image ()
+@interface C4Image () {
+    unsigned char *rawData;
+    NSUInteger bytesPerPixel;
+    NSUInteger bytesPerRow;
+}
+
 -(void)_setShadowOffset:(NSValue *)shadowOffset;
 -(void)_setShadowRadius:(NSNumber *)shadowRadius;
 -(void)_setShadowOpacity:(NSNumber *)shadowOpacity;
@@ -553,6 +558,42 @@
     self.visibleImage = [filter outputImage];
     NSAssert(_visibleImage != nil, @"The filter you tried to create returned nil for its outputImage");
     [self.imageLayer animateContents:self.CGImage];
+}
+
+-(void)loadPixelData {
+    NSUInteger width = CGImageGetWidth(self.CGImage);
+    NSUInteger height = CGImageGetHeight(self.CGImage);
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    
+    bytesPerPixel = 4;
+    bytesPerRow = bytesPerPixel * width;
+    rawData = malloc(height * bytesPerRow);
+    
+    NSUInteger bitsPerComponent = 8;
+    CGContextRef context = CGBitmapContextCreate(rawData, width, height, bitsPerComponent, bytesPerRow, colorSpace, kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big);
+    CGColorSpaceRelease(colorSpace);
+    CGContextDrawImage(context, CGRectMake(0, 0, width, height), self.CGImage);
+    CGContextRelease(context);
+}
+
+-(UIColor *)colorAt:(CGPoint)point {
+    if(rawData == nil) {
+        [self loadPixelData];
+    }
+    NSUInteger byteIndex = bytesPerPixel * point.x + bytesPerRow * point.y;
+    CGFloat r, g, b, a;
+    r = rawData[byteIndex];
+    g = rawData[byteIndex + 1];
+    b = rawData[byteIndex + 2];
+    a = rawData[byteIndex + 3];
+    
+    return [UIColor colorWithRed:RGBToFloat(r) green:RGBToFloat(g) blue:RGBToFloat(b) alpha:RGBToFloat(a)];
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *t = [touches anyObject];
+    CGPoint p = [t locationInView:self];
+    C4Log(@"%@",[self colorAt:p]);
 }
 
 @end

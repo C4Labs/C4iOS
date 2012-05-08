@@ -481,4 +481,7 @@
  */
 @property (readwrite, nonatomic) CGPathRef shadowPath;
 
+-(void)loadPixelData;
+-(UIColor *)colorAt:(CGPoint)point;
+
 @end

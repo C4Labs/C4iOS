@@ -322,7 +322,7 @@
 		ED50C87814EAC2010040D844 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 				ORGANIZATIONNAME = POSTFL;
 			};
 			buildConfigurationList = ED50C87B14EAC2010040D844 /* Build configuration list for PBXProject "C4iOS" */;

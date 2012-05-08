@@ -8,9 +8,13 @@
 
 #import "C4WorkSpace.h"
 
-@implementation C4WorkSpace 
+@implementation C4WorkSpace {
+    C4Image *myImage;
+}
 
 -(void)setup {
+    myImage = [C4Image imageNamed:@"C4Sky.png"];
+    [self.canvas addImage:myImage];
 }
 
 @end
