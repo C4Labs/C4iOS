@@ -485,10 +485,10 @@
 }
 
 #pragma mark C4Shapelayer-backed object methods
--(void)addSubview:(UIView *)view {
-    /* NEVER ADD A SUBVIEW TO A SHAPE */
-    C4Log(@"NEVER ADD A SUBVIEW TO A SHAPE");
-}
+//-(void)addSubview:(UIView *)view {
+//    /* NEVER ADD A SUBVIEW TO A SHAPE */
+//    C4Log(@"NEVER ADD A SUBVIEW TO A SHAPE");
+//}
 
 #pragma mark Layer class methods
 -(C4ShapeLayer *)shapeLayer {

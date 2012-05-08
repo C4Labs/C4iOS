@@ -483,5 +483,4 @@
 
 -(void)loadPixelData;
 -(UIColor *)colorAt:(CGPoint)point;
-
 @end

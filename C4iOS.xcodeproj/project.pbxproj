@@ -51,6 +51,7 @@
 		ED979F3F14F95EFF00645114 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED979F3E14F95EFF00645114 /* CoreImage.framework */; };
 		EDA7014914FC496300A0D77D /* C4Label.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA7014814FC496300A0D77D /* C4Label.m */; };
 		EDAFFAF014F7602F00CA356A /* C4Control.m in Sources */ = {isa = PBXBuildFile; fileRef = EDAFFAEF14F7602F00CA356A /* C4Control.m */; };
+		EDC367AC1559DD1300A0C676 /* MyShape.m in Sources */ = {isa = PBXBuildFile; fileRef = EDC367AB1559DD1300A0C676 /* MyShape.m */; };
 		EDECBF6C14EAE26700D9A446 /* C4Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = EDECBF6B14EAE26600D9A446 /* C4Shape.m */; };
 		EDF6544A150DEF3300194671 /* C4WorkSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF65449150DEF3300194671 /* C4WorkSpace.m */; };
 		EDF65458150E104100194671 /* C4Sample.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF65457150E104100194671 /* C4Sample.m */; };
@@ -129,6 +130,8 @@
 		EDAFFAD714F70D5F00CA356A /* C4Notification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Notification.h; sourceTree = "<group>"; };
 		EDAFFAEE14F7602F00CA356A /* C4Control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Control.h; sourceTree = "<group>"; };
 		EDAFFAEF14F7602F00CA356A /* C4Control.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Control.m; sourceTree = "<group>"; };
+		EDC367AA1559DD1300A0C676 /* MyShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyShape.h; sourceTree = "<group>"; };
+		EDC367AB1559DD1300A0C676 /* MyShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyShape.m; sourceTree = "<group>"; };
 		EDC75ED81506D7D2002D82A1 /* C4LayerAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4LayerAnimation.h; sourceTree = "<group>"; };
 		EDCEA5A514FD7567009969F2 /* C4Gesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Gesture.h; sourceTree = "<group>"; };
 		EDECBF6A14EAE26600D9A446 /* C4Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Shape.h; sourceTree = "<group>"; };
@@ -200,6 +203,10 @@
 			children = (
 				EDF65448150DEF3300194671 /* C4WorkSpace.h */,
 				EDF65449150DEF3300194671 /* C4WorkSpace.m */,
+				EDC367AA1559DD1300A0C676 /* MyShape.h */,
+				EDC367AB1559DD1300A0C676 /* MyShape.m */,
+				EDECBF6A14EAE26600D9A446 /* C4Shape.h */,
+				EDECBF6B14EAE26600D9A446 /* C4Shape.m */,
 				ED751491151519890076317F /* C4Sky.png */,
 				ED7513AA15150FB60076317F /* inception.mov */,
 				ED50C8D314EACA0E0040D844 /* Source */,
@@ -282,8 +289,6 @@
 				ED3076A1150D51F0001D689C /* C4PlayerLayer.m */,
 				EDF65456150E104100194671 /* C4Sample.h */,
 				EDF65457150E104100194671 /* C4Sample.m */,
-				EDECBF6A14EAE26600D9A446 /* C4Shape.h */,
-				EDECBF6B14EAE26600D9A446 /* C4Shape.m */,
 				ED89848514EE180400BB7AB0 /* C4ShapeLayer.h */,
 				ED89848614EE180400BB7AB0 /* C4ShapeLayer.m */,
 				ED50C8D414EACA340040D844 /* C4View.h */,
@@ -396,6 +401,7 @@
 				ED3076A2150D51F0001D689C /* C4PlayerLayer.m in Sources */,
 				EDF6544A150DEF3300194671 /* C4WorkSpace.m in Sources */,
 				EDF65458150E104100194671 /* C4Sample.m in Sources */,
+				EDC367AC1559DD1300A0C676 /* MyShape.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

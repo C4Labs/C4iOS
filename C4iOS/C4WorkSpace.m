@@ -7,14 +7,15 @@
 //
 
 #import "C4WorkSpace.h"
+#import "MyShape.h"
 
 @implementation C4WorkSpace {
-    C4Image *myImage;
+    MyShape *m;
 }
 
 -(void)setup {
-    myImage = [C4Image imageNamed:@"C4Sky.png"];
-    [self.canvas addImage:myImage];
+    m = [MyShape new];
+    [self.canvas addShape:m];
 }
 
 @end
