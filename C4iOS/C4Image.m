@@ -7,11 +7,13 @@
 //
 
 #import "C4Image.h"
+#import "C4Layer.h"
 
 @interface C4Image () {
     unsigned char *rawData;
     NSUInteger bytesPerPixel;
     NSUInteger bytesPerRow;
+    NSUInteger currentAnimatedImage;
 }
 
 -(void)_setShadowOffset:(NSValue *)shadowOffset;
@@ -19,11 +21,13 @@
 -(void)_setShadowOpacity:(NSNumber *)shadowOpacity;
 -(void)_setShadowColor:(UIColor *)shadowColor;
 -(void)_setShadowPath:(id)shadowPath;
+
 @property (readwrite, strong, nonatomic) CIContext *filterContext;
 @property (readwrite, strong, nonatomic) UIImage *originalImage;
 @property (readwrite, strong, nonatomic) CIImage *visibleImage;
 @property (readwrite, nonatomic) CGImageRef contents;
 @property (readwrite, strong, nonatomic) C4Layer *imageLayer;
+@property (readwrite, strong) NSTimer *animatedImageTimer;
 @end
 
 @implementation C4Image
@@ -40,6 +44,7 @@
 @synthesize UIImage = _UIImage;
 @synthesize CIImage = _CIImage;
 @synthesize CGImage = _CGImage;
+@synthesize animatedImageTimer;
 
 +(C4Image *)imageNamed:(NSString *)name {
     return [[C4Image alloc] initWithImageName:name];
@@ -596,4 +601,51 @@
     C4Log(@"%@",[self colorAt:p]);
 }
 
+@synthesize animatedImageDuration, animatedImage, animatedImages;
+
++(C4Image *)animatedImageWithNames:(NSArray *)imageNames {
+    C4Image *animImg = [[C4Image alloc] initAnimatedImageWithNames:imageNames];
+    return animImg;
+}
+
+-(id)initAnimatedImageWithNames:(NSArray *)imageNames {
+    self = [super init];
+    if(nil != self) {
+
+        //        self.animatedImageDuration = 2.0f;
+        self.animatedImages = CFArrayCreateMutable(kCFAllocatorDefault, 0, nil);
+        for(NSString *s in imageNames) {
+            UIImage *img = [UIImage imageNamed:s];
+            CFArrayAppendValue(self.animatedImages,img.CGImage);
+        }
+        
+        UIImage *image = [UIImage imageNamed:[imageNames objectAtIndex:0]];
+        self.originalImage = image;
+        NSAssert(_originalImage != nil, @"The C4Image you tried to load returned nil for it's UIImage");
+        NSAssert(_originalImage.CGImage != nil, @"The C4Image you tried to load returned nil for it's CGImage");
+        _visibleImage = [[CIImage alloc] initWithCGImage:_originalImage.CGImage];
+        NSAssert(_visibleImage != nil, @"The CIImage you tried to create returned a nil object");
+        self.frame = _visibleImage.extent;
+        currentAnimatedImage = 0;
+        self.imageLayer.contents = (__bridge id)CFArrayGetValueAtIndex(self.animatedImages,currentAnimatedImage);
+    }
+    return  self;
+}
+
+-(void)play { 
+    if(CFArrayGetCount(self.animatedImages) > 1) {
+        self.animatedImageTimer = [NSTimer timerWithTimeInterval:0.15 target:self selector:@selector(animateImages) userInfo:nil repeats:YES];
+        [[NSRunLoop mainRunLoop] addTimer:self.animatedImageTimer forMode:NSDefaultRunLoopMode];
+    }
+}
+
+-(void)stop {
+    [self.animatedImageTimer invalidate];
+}
+
+-(void)animateImages {
+    currentAnimatedImage++;
+    if(currentAnimatedImage >= CFArrayGetCount(self.animatedImages)) currentAnimatedImage = 0;
+    self.imageLayer.contents = (__bridge id)CFArrayGetValueAtIndex(self.animatedImages,currentAnimatedImage);
+}
 @end

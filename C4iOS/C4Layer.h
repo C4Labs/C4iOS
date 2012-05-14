@@ -7,6 +7,7 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
+#import "C4LayerAnimation.h"
 
 /** This document describes the basic C4Layer, a subclass of CALayer which conforms to the C4LayerAnimation protocol.
  
@@ -19,5 +20,4 @@
 
 @interface C4Layer : CALayer <C4LayerAnimation> {
 }
-
 @end

@@ -49,7 +49,6 @@
     return [C4Movie movieNamed:movieName inFrame:movieFrame];
 }
 
-
 -(id)initWithMovieName:(NSString *)movieName {
     self = [super init];
     if(self != nil) {        

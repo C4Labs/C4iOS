@@ -483,4 +483,14 @@
 
 -(void)loadPixelData;
 -(UIColor *)colorAt:(CGPoint)point;
+
++(C4Image *)animatedImageWithNames:(NSArray *)imageNames;
+-(id)initAnimatedImageWithNames:(NSArray *)imageNames;
+-(void)play;
+-(void)stop;
+
+@property (readwrite) CFMutableArrayRef animatedImages;
+@property (readonly, getter = isAnimatedImage) BOOL animatedImage;
+@property (readwrite) CGFloat animatedImageDuration;
+
 @end

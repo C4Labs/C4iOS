@@ -8,6 +8,13 @@
 
 #import "C4Shape.h"
 
-@interface MyShape : C4Shape 
-@property (readwrite, strong) C4Shape *playhead;
+@interface PlayheadView : C4Shape 
+-(id)initWithSample:(C4Sample *)newSample;
+-(id)initWithSample:(C4Sample *)newSample frame:(CGRect)rect;
+-(void)play;
+-(void)pause;
+-(void)stop;
+@property (readwrite, strong, nonatomic) C4Sample *sample;
+@property (readwrite, nonatomic) BOOL loops;
+@property (readonly, nonatomic) BOOL isPlaying;
 @end
