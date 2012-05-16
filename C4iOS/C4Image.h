@@ -481,6 +481,7 @@
  */
 @property (readwrite, nonatomic) CGPathRef shadowPath;
 
+#pragma mark New Stuff
 -(void)loadPixelData;
 -(UIColor *)colorAt:(CGPoint)point;
 
@@ -493,4 +494,6 @@
 @property (readonly, getter = isAnimatedImage) BOOL animatedImage;
 @property (readwrite) CGFloat animatedImageDuration;
 
++(C4Image *)imageWithData:(NSData *)imageData;
+-(id)initWithData:(NSData *)imageData;
 @end

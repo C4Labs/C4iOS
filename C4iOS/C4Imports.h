@@ -38,8 +38,10 @@
 #import "C4Movie.h"
 #import "C4Sample.h"
 #import "C4EAGLES1Renderer.h"
-
 #import "C4View.h"
+
+#import "C4ViewController.h"
+#import "C4Camera.h"
 #import "C4CanvasController.h"
 #import "C4WorkSpace.h"
 #import "C4Window.h"

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class C4Window;
 
-@interface C4CanvasController : UIViewController {
+@interface C4CanvasController : UIViewController <C4Notification> {
 }
 -(void)setup;
 
@@ -75,4 +75,8 @@
 @property (nonatomic) CGPoint origin;
 
 @property (readonly, strong, nonatomic) C4Window *canvas;
+
+#pragma mark New Stuff
+-(void)addCamera:(C4Camera *)camera;
+-(void)imageWasCaptured;
 @end

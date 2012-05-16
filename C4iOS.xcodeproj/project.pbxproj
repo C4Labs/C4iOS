@@ -63,6 +63,10 @@
 		EDC774F91561A532005C88F6 /* whiteCircle08.png in Resources */ = {isa = PBXBuildFile; fileRef = EDC774EF1561A532005C88F6 /* whiteCircle08.png */; };
 		EDC774FA1561A532005C88F6 /* whiteCircle09.png in Resources */ = {isa = PBXBuildFile; fileRef = EDC774F01561A532005C88F6 /* whiteCircle09.png */; };
 		EDC774FB1561A532005C88F6 /* whiteCircle10.png in Resources */ = {isa = PBXBuildFile; fileRef = EDC774F11561A532005C88F6 /* whiteCircle10.png */; };
+		EDCE42641564044000C7356E /* C4Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCE425F1564044000C7356E /* C4Camera.m */; };
+		EDCE42651564044000C7356E /* C4CameraController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCE42611564044000C7356E /* C4CameraController.m */; };
+		EDCE42661564044000C7356E /* C4CaptureVideoPreviewLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCE42631564044000C7356E /* C4CaptureVideoPreviewLayer.m */; };
+		EDCE426D1564174000C7356E /* C4ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCE426C1564174000C7356E /* C4ViewController.m */; };
 		EDECBF6C14EAE26700D9A446 /* C4Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = EDECBF6B14EAE26600D9A446 /* C4Shape.m */; };
 		EDF6544A150DEF3300194671 /* C4WorkSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF65449150DEF3300194671 /* C4WorkSpace.m */; };
 		EDF65458150E104100194671 /* C4Sample.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF65457150E104100194671 /* C4Sample.m */; };
@@ -155,6 +159,14 @@
 		EDC774EF1561A532005C88F6 /* whiteCircle08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteCircle08.png; sourceTree = "<group>"; };
 		EDC774F01561A532005C88F6 /* whiteCircle09.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteCircle09.png; sourceTree = "<group>"; };
 		EDC774F11561A532005C88F6 /* whiteCircle10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteCircle10.png; sourceTree = "<group>"; };
+		EDCE425E1564044000C7356E /* C4Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Camera.h; sourceTree = "<group>"; };
+		EDCE425F1564044000C7356E /* C4Camera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Camera.m; sourceTree = "<group>"; };
+		EDCE42601564044000C7356E /* C4CameraController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4CameraController.h; sourceTree = "<group>"; };
+		EDCE42611564044000C7356E /* C4CameraController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4CameraController.m; sourceTree = "<group>"; };
+		EDCE42621564044000C7356E /* C4CaptureVideoPreviewLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4CaptureVideoPreviewLayer.h; sourceTree = "<group>"; };
+		EDCE42631564044000C7356E /* C4CaptureVideoPreviewLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4CaptureVideoPreviewLayer.m; sourceTree = "<group>"; };
+		EDCE426B1564174000C7356E /* C4ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4ViewController.h; sourceTree = "<group>"; };
+		EDCE426C1564174000C7356E /* C4ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4ViewController.m; sourceTree = "<group>"; };
 		EDCEA5A514FD7567009969F2 /* C4Gesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Gesture.h; sourceTree = "<group>"; };
 		EDECBF6A14EAE26600D9A446 /* C4Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Shape.h; sourceTree = "<group>"; };
 		EDECBF6B14EAE26600D9A446 /* C4Shape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Shape.m; sourceTree = "<group>"; };
@@ -224,27 +236,20 @@
 			isa = PBXGroup;
 			children = (
 				EDF65448150DEF3300194671 /* C4WorkSpace.h */,
-				ED45EC80155A33C400D28213 /* loop1.wav */,
 				EDF65449150DEF3300194671 /* C4WorkSpace.m */,
-				EDC367AA1559DD1300A0C676 /* PlayheadView.h */,
-				EDC367AB1559DD1300A0C676 /* PlayheadView.m */,
-				EDECBF6A14EAE26600D9A446 /* C4Shape.h */,
-				EDECBF6B14EAE26600D9A446 /* C4Shape.m */,
-				ED89848514EE180400BB7AB0 /* C4ShapeLayer.h */,
-				ED89848614EE180400BB7AB0 /* C4ShapeLayer.m */,
-				ED751491151519890076317F /* C4Sky.png */,
-				ED7513AA15150FB60076317F /* inception.mov */,
-				EDC774E81561A531005C88F6 /* whiteCircle01.png */,
-				EDC774E91561A531005C88F6 /* whiteCircle02.png */,
-				EDC774EA1561A531005C88F6 /* whiteCircle03.png */,
-				EDC774EB1561A531005C88F6 /* whiteCircle04.png */,
-				EDC774EC1561A532005C88F6 /* whiteCircle05.png */,
-				EDC774ED1561A532005C88F6 /* whiteCircle06.png */,
-				EDC774EE1561A532005C88F6 /* whiteCircle07.png */,
-				EDC774EF1561A532005C88F6 /* whiteCircle08.png */,
-				EDC774F01561A532005C88F6 /* whiteCircle09.png */,
-				EDC774F11561A532005C88F6 /* whiteCircle10.png */,
+				EDCE425E1564044000C7356E /* C4Camera.h */,
+				EDCE425F1564044000C7356E /* C4Camera.m */,
+				EDCE42601564044000C7356E /* C4CameraController.h */,
+				EDCE42611564044000C7356E /* C4CameraController.m */,
+				EDCE426B1564174000C7356E /* C4ViewController.h */,
+				EDCE426C1564174000C7356E /* C4ViewController.m */,
+				EDCE42621564044000C7356E /* C4CaptureVideoPreviewLayer.h */,
+				EDCE42631564044000C7356E /* C4CaptureVideoPreviewLayer.m */,
+				ED3C1C43150AC59E00AB288D /* C4Image.h */,
+				ED3C1C44150AC59F00AB288D /* C4Image.m */,
+				EDCE425D1564020F00C7356E /* 4Greg */,
 				ED50C8D314EACA0E0040D844 /* Source */,
+				EDCE425C156401F000C7356E /* Media */,
 				ED50C88C14EAC2010040D844 /* App */,
 			);
 			path = C4iOS;
@@ -286,6 +291,10 @@
 		ED50C8D314EACA0E0040D844 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				EDECBF6A14EAE26600D9A446 /* C4Shape.h */,
+				EDECBF6B14EAE26600D9A446 /* C4Shape.m */,
+				ED89848514EE180400BB7AB0 /* C4ShapeLayer.h */,
+				ED89848614EE180400BB7AB0 /* C4ShapeLayer.m */,
 				EDCEA5A514FD7567009969F2 /* C4Gesture.h */,
 				EDC75ED81506D7D2002D82A1 /* C4LayerAnimation.h */,
 				EDAFFAD714F70D5F00CA356A /* C4Notification.h */,
@@ -308,8 +317,6 @@
 				ED009F9315091FFD00086987 /* C4GL.m */,
 				ED009FA61509545000086987 /* C4GL1Renderer.h */,
 				ED009FA71509545000086987 /* C4GL1Renderer.m */,
-				ED3C1C43150AC59E00AB288D /* C4Image.h */,
-				ED3C1C44150AC59F00AB288D /* C4Image.m */,
 				EDA7014714FC496300A0D77D /* C4Label.h */,
 				EDA7014814FC496300A0D77D /* C4Label.m */,
 				ED50C8C914EAC5990040D844 /* C4Layer.h */,
@@ -332,6 +339,35 @@
 				ED50C8BB14EAC3B10040D844 /* UITouch+C4Touch.m */,
 			);
 			name = Source;
+			sourceTree = "<group>";
+		};
+		EDCE425C156401F000C7356E /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				ED45EC80155A33C400D28213 /* loop1.wav */,
+				ED751491151519890076317F /* C4Sky.png */,
+				ED7513AA15150FB60076317F /* inception.mov */,
+				EDC774E81561A531005C88F6 /* whiteCircle01.png */,
+				EDC774E91561A531005C88F6 /* whiteCircle02.png */,
+				EDC774EA1561A531005C88F6 /* whiteCircle03.png */,
+				EDC774EB1561A531005C88F6 /* whiteCircle04.png */,
+				EDC774EC1561A532005C88F6 /* whiteCircle05.png */,
+				EDC774ED1561A532005C88F6 /* whiteCircle06.png */,
+				EDC774EE1561A532005C88F6 /* whiteCircle07.png */,
+				EDC774EF1561A532005C88F6 /* whiteCircle08.png */,
+				EDC774F01561A532005C88F6 /* whiteCircle09.png */,
+				EDC774F11561A532005C88F6 /* whiteCircle10.png */,
+			);
+			name = Media;
+			sourceTree = "<group>";
+		};
+		EDCE425D1564020F00C7356E /* 4Greg */ = {
+			isa = PBXGroup;
+			children = (
+				EDC367AA1559DD1300A0C676 /* PlayheadView.h */,
+				EDC367AB1559DD1300A0C676 /* PlayheadView.m */,
+			);
+			name = 4Greg;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -446,6 +482,10 @@
 				EDF6544A150DEF3300194671 /* C4WorkSpace.m in Sources */,
 				EDF65458150E104100194671 /* C4Sample.m in Sources */,
 				EDC367AC1559DD1300A0C676 /* PlayheadView.m in Sources */,
+				EDCE42641564044000C7356E /* C4Camera.m in Sources */,
+				EDCE42651564044000C7356E /* C4CameraController.m in Sources */,
+				EDCE42661564044000C7356E /* C4CaptureVideoPreviewLayer.m in Sources */,
+				EDCE426D1564174000C7356E /* C4ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

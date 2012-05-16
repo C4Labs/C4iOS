@@ -57,4 +57,39 @@
              @"You tried to add something other than a C4Movie object using [canvas addMovie:]");
     [self.view addSubview:movie];
 }
+
+#pragma mark Notification Methods
+-(void)listenFor:(NSString *)notification andRunMethod:(NSString *)methodName {
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(methodName) name:notification object:nil];
+}
+
+-(void)listenFor:(NSString *)notification fromObject:(id)object andRunMethod:(NSString *)methodName {
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(methodName) name:notification object:object];
+}
+
+-(void)stopListeningFor:(NSString *)methodName {
+    [self stopListeningFor:methodName object:nil];
+}
+
+-(void)stopListeningFor:(NSString *)methodName object:(id)object {
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:methodName object:object];
+}
+
+-(void)postNotification:(NSString *)notification {
+	[[NSNotificationCenter defaultCenter] postNotificationName:notification object:self];
+}
+
+#pragma mark New Stuff
+-(void)addCamera:(C4Camera *)camera {
+    NSAssert([camera isKindOfClass:[C4Camera class]],
+             @"You tried to add something other than a C4Camera object using [canvas addCamera:]");
+    [self.canvas addSubview:camera];
+    [camera initCapture];
+    [self listenFor:@"imageWasCaptured" fromObject:camera andRunMethod:@"imageWasCaptured"];
+}
+
+-(void)imageWasCaptured {
+    
+}
+
 @end

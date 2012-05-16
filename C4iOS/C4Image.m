@@ -21,6 +21,7 @@
 -(void)_setShadowOpacity:(NSNumber *)shadowOpacity;
 -(void)_setShadowColor:(UIColor *)shadowColor;
 -(void)_setShadowPath:(id)shadowPath;
+-(UIImage *)fixOrientationFromCamera:(UIImage *)image;
 
 @property (readwrite, strong, nonatomic) CIContext *filterContext;
 @property (readwrite, strong, nonatomic) UIImage *originalImage;
@@ -595,12 +596,7 @@
     return [UIColor colorWithRed:RGBToFloat(r) green:RGBToFloat(g) blue:RGBToFloat(b) alpha:RGBToFloat(a)];
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    UITouch *t = [touches anyObject];
-    CGPoint p = [t locationInView:self];
-    C4Log(@"%@",[self colorAt:p]);
-}
-
+#pragma mark New Stuff
 @synthesize animatedImageDuration, animatedImage, animatedImages;
 
 +(C4Image *)animatedImageWithNames:(NSArray *)imageNames {
@@ -647,5 +643,80 @@
     currentAnimatedImage++;
     if(currentAnimatedImage >= CFArrayGetCount(self.animatedImages)) currentAnimatedImage = 0;
     self.imageLayer.contents = (__bridge id)CFArrayGetValueAtIndex(self.animatedImages,currentAnimatedImage);
+}
+
++(C4Image *)imageWithData:(NSData *)imageData {
+    C4Image *img = [[C4Image alloc] initWithData:imageData];
+    return img;
+}
+
+-(id)initWithData:(NSData *)imageData {
+    self = [super init];
+    if(self != nil) {
+        UIImage *img = [UIImage imageWithData:imageData];
+        img = [self fixOrientationFromCamera:img];
+        self.originalImage = img;
+        NSAssert(_originalImage != nil, @"The C4Image you tried to load returned nil for it's UIImage");
+        NSAssert(_originalImage.CGImage != nil, @"The C4Image you tried to load returned nil for it's CGImage");
+        _visibleImage = [[CIImage alloc] initWithCGImage:_originalImage.CGImage];
+        NSAssert(_visibleImage != nil, @"The CIImage you tried to create returned a nil object");
+        self.frame = _visibleImage.extent;
+        self.imageLayer.contents = (id)_originalImage.CGImage;
+    }
+    return self;
+}
+
+/*
+ FUCK TERRRRRRRRRIBLE HACK...
+ Problem is creating C4Images from NSData provided by AVFoundation...
+ Because it's taking video frames it remaps it to fit the appropriate resolution (i.e. wide not tall)
+ */
+-(UIImage *)fixOrientationFromCamera:(UIImage *)_image {
+    CGAffineTransform transform = CGAffineTransformIdentity;
+    switch ([_image imageOrientation]) {
+        case UIImageOrientationUp:
+            C4Log(@"up");
+            break;
+        case UIImageOrientationUpMirrored:
+            C4Log(@"upm");
+            break;
+        case UIImageOrientationDown:
+            C4Log(@"down");
+            break;
+        case UIImageOrientationDownMirrored:
+            C4Log(@"downm");
+            break;
+        case UIImageOrientationLeft:
+            C4Log(@"left");
+            break;
+        case UIImageOrientationLeftMirrored:
+            C4Log(@"leftm");
+            break;
+        case UIImageOrientationRight:
+            C4Log(@"right");
+            break;
+        case UIImageOrientationRightMirrored:
+            C4Log(@"rightm");
+            break;
+    }
+//    transform = CGAffineTransformRotate(transform, M_PI/2);
+//    transform = CGAffineTransformTranslate(transform, 1.5,1);
+//    transform = CGAffineTransformScale(transform, 1, 1);
+//    transform = CGAffineTransformInvert(transform);
+//    transform = CGAffineTransformTranslate(transform, 2.5, 0);
+//    transform = CGAffineTransformRotate(transform, M_PI/2);
+    CGContextRef ctx = CGBitmapContextCreate(NULL, _image.size.width, _image.size.height,
+                                             CGImageGetBitsPerComponent(_image.CGImage), 0,
+                                             CGImageGetColorSpace(_image.CGImage),
+                                             CGImageGetBitmapInfo(_image.CGImage));
+    CGContextConcatCTM(ctx, transform);
+
+    CGContextDrawImage(ctx, CGRectMake(-1*_image.size.height,0,_image.size.height, _image.size.width), _image.CGImage);
+    
+    CGImageRef cgimg = CGBitmapContextCreateImage(ctx);
+    UIImage *img = [UIImage imageWithCGImage:cgimg];
+    CGContextRelease(ctx);
+    CGImageRelease(cgimg);
+    return img;
 }
 @end
