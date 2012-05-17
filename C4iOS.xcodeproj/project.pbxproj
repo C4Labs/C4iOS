@@ -50,6 +50,7 @@
 		ED89849814EF1C8800BB7AB0 /* C4Object.m in Sources */ = {isa = PBXBuildFile; fileRef = ED89849714EF1C8700BB7AB0 /* C4Object.m */; };
 		ED900CEF14FBF2B4006C2AED /* C4Font.m in Sources */ = {isa = PBXBuildFile; fileRef = ED900CEE14FBF2B3006C2AED /* C4Font.m */; };
 		ED979F3F14F95EFF00645114 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED979F3E14F95EFF00645114 /* CoreImage.framework */; };
+		ED9D5FA51564A927009C5175 /* C4Vector.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9D5FA41564A927009C5175 /* C4Vector.m */; };
 		EDA7014914FC496300A0D77D /* C4Label.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA7014814FC496300A0D77D /* C4Label.m */; };
 		EDAFFAF014F7602F00CA356A /* C4Control.m in Sources */ = {isa = PBXBuildFile; fileRef = EDAFFAEF14F7602F00CA356A /* C4Control.m */; };
 		EDC367AC1559DD1300A0C676 /* PlayheadView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDC367AB1559DD1300A0C676 /* PlayheadView.m */; };
@@ -141,6 +142,8 @@
 		ED900CED14FBF2B3006C2AED /* C4Font.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Font.h; sourceTree = "<group>"; };
 		ED900CEE14FBF2B3006C2AED /* C4Font.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Font.m; sourceTree = "<group>"; };
 		ED979F3E14F95EFF00645114 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		ED9D5FA31564A927009C5175 /* C4Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Vector.h; sourceTree = "<group>"; };
+		ED9D5FA41564A927009C5175 /* C4Vector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Vector.m; sourceTree = "<group>"; };
 		EDA7014714FC496300A0D77D /* C4Label.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Label.h; sourceTree = "<group>"; };
 		EDA7014814FC496300A0D77D /* C4Label.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Label.m; sourceTree = "<group>"; };
 		EDAFFAD714F70D5F00CA356A /* C4Notification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Notification.h; sourceTree = "<group>"; };
@@ -237,6 +240,8 @@
 			children = (
 				EDF65448150DEF3300194671 /* C4WorkSpace.h */,
 				EDF65449150DEF3300194671 /* C4WorkSpace.m */,
+				EDF65456150E104100194671 /* C4Sample.h */,
+				EDF65457150E104100194671 /* C4Sample.m */,
 				EDCE425E1564044000C7356E /* C4Camera.h */,
 				EDCE425F1564044000C7356E /* C4Camera.m */,
 				EDCE42601564044000C7356E /* C4CameraController.h */,
@@ -247,6 +252,8 @@
 				EDCE42631564044000C7356E /* C4CaptureVideoPreviewLayer.m */,
 				ED3C1C43150AC59E00AB288D /* C4Image.h */,
 				ED3C1C44150AC59F00AB288D /* C4Image.m */,
+				ED9D5FA31564A927009C5175 /* C4Vector.h */,
+				ED9D5FA41564A927009C5175 /* C4Vector.m */,
 				EDCE425D1564020F00C7356E /* 4Greg */,
 				ED50C8D314EACA0E0040D844 /* Source */,
 				EDCE425C156401F000C7356E /* Media */,
@@ -329,8 +336,6 @@
 				ED89849714EF1C8700BB7AB0 /* C4Object.m */,
 				ED3076A0150D51F0001D689C /* C4PlayerLayer.h */,
 				ED3076A1150D51F0001D689C /* C4PlayerLayer.m */,
-				EDF65456150E104100194671 /* C4Sample.h */,
-				EDF65457150E104100194671 /* C4Sample.m */,
 				ED50C8D414EACA340040D844 /* C4View.h */,
 				ED50C8D514EACA340040D844 /* C4View.m */,
 				ED50C8BE14EAC4920040D844 /* C4Window.h */,
@@ -486,6 +491,7 @@
 				EDCE42651564044000C7356E /* C4CameraController.m in Sources */,
 				EDCE42661564044000C7356E /* C4CaptureVideoPreviewLayer.m in Sources */,
 				EDCE426D1564174000C7356E /* C4ViewController.m in Sources */,
+				ED9D5FA51564A927009C5175 /* C4Vector.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

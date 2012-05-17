@@ -149,4 +149,9 @@
  A value of 0, which is the default, means to play the sound once. Set a positive integer value to specify the number of times to return to the start and play again. For example, specifying a value of 1 results in a total of two plays of the sound. Set any negative integer value to loop the sound indefinitely until you call the stop method.
  */
 @property (readwrite, nonatomic) NSInteger numberOfLoops;
+
+#pragma mark New Stuff
+@property (readwrite, nonatomic, getter = isMeteringEnabled) BOOL meteringEnabled;
+@property (readonly, strong) AVAudioPlayer *player;
+
 @end

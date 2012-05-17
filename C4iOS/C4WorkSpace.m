@@ -8,32 +8,97 @@
 
 #import "C4WorkSpace.h"
 //#import "PlayheadView.h"
+@interface C4WorkSpace ()
+-(void)printMeters;
+@end
 
 @implementation C4WorkSpace {
-    C4Camera *cam;
-    C4Image *capturedImage;
+    C4Sample *s;
+    C4Shape *l1, *r1, *l2, *r2;
 }
 
 -(void)setup {
-    cam = [C4Camera cameraWithFrame:CGRectMake(0, 0, 100, 100)];
-    C4Shape *s = [C4Shape ellipse:cam.frame];
-    s.lineWidth = 0.0f;
-    [self addCamera:cam];
+    s = [C4Sample sampleNamed:@"loop1.wav"];
+    s.loops = YES;
+    s.meteringEnabled = YES;
+    [s prepareToPlay];
+    [s play];
+    
+    C4Log(@"%d",s.player.numberOfChannels);
+
+    CGPoint linePoints[2] = {CGPointMake(384/2, 1024),CGPointMake(384/2, 0)};
+    l1 = [C4Shape line:linePoints];
+    [self.canvas addShape:l1];
+
+    linePoints[0].x += 20;
+    linePoints[1].x += 20;
+    l2 = [C4Shape line:linePoints];
+    [self.canvas addShape:l2];
+    
+    linePoints[0].x += 364;
+    linePoints[1].x += 364;
+    r1 = [C4Shape line:linePoints];
+    [self.canvas addShape:r1];
+
+    linePoints[0].x += 20;
+    linePoints[1].x += 20;
+    r2 = [C4Shape line:linePoints];
+    [self.canvas addShape:r2];
+        
+    l1.lineWidth = 20.0;
+    l2.lineWidth = 20.0;
+    r1.lineWidth = 20.0;
+    r2.lineWidth = 20.0;
+
+    l1.animationDuration = 0.0;
+    r1.animationDuration = 0.0;
+    l2.animationDuration = 0.0;
+    r2.animationDuration = 0.0;
+    
+    NSTimer *t = [NSTimer timerWithTimeInterval:1.0/60.0f target:self selector:@selector(printMeters) userInfo:nil repeats:YES];
+    [[NSRunLoop mainRunLoop] addTimer:t forMode:NSDefaultRunLoopMode];
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [cam captureImage];
+    [self printMeters];
 }
 
--(void)imageWasCaptured {
-    [capturedImage removeFromSuperview];
-    capturedImage = nil;
-    capturedImage = cam.capturedImage;
-    NSAssert(capturedImage != nil, @"image is nil");
-    capturedImage.origin = CGPointMake(0, 100);
-    [self.canvas addImage:capturedImage];
+-(void)printMeters {
+    [s.player updateMeters];
+
+    l1.strokeEnd = pow (10, (0.05 *[s.player peakPowerForChannel:0]));
+    l2.strokeEnd = pow (10, (0.05 *[s.player averagePowerForChannel:0]));
+
+    r1.strokeEnd = pow (10, (0.05 *[s.player peakPowerForChannel:1]));
+    r2.strokeEnd = pow (10, (0.05 *[s.player averagePowerForChannel:1]));
 }
 @end
+
+//@implementation C4WorkSpace {
+//    C4Camera *cam;
+//    C4Image *capturedImage;
+//}
+//
+//-(void)setup {
+//    cam = [C4Camera cameraWithFrame:CGRectMake(0, 0, 100, 100)];
+//    C4Shape *s = [C4Shape ellipse:cam.frame];
+//    s.lineWidth = 0.0f;
+//    [self addCamera:cam];
+//}
+//
+//-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+//    [cam captureImage];
+//}
+//
+//-(void)imageWasCaptured {
+//    [capturedImage removeFromSuperview];
+//    capturedImage = nil;
+//    capturedImage = cam.capturedImage;
+//    NSAssert(capturedImage != nil, @"image is nil");
+//    capturedImage.origin = CGPointMake(0, 100);
+//    [self.canvas addImage:capturedImage];
+//}
+//@end
 
 //4Lindsay
 //@implementation C4WorkSpace {

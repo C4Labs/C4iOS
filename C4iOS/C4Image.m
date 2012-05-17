@@ -699,12 +699,7 @@
             C4Log(@"rightm");
             break;
     }
-//    transform = CGAffineTransformRotate(transform, M_PI/2);
-//    transform = CGAffineTransformTranslate(transform, 1.5,1);
-//    transform = CGAffineTransformScale(transform, 1, 1);
-//    transform = CGAffineTransformInvert(transform);
-//    transform = CGAffineTransformTranslate(transform, 2.5, 0);
-//    transform = CGAffineTransformRotate(transform, M_PI/2);
+    transform = CGAffineTransformRotate(transform, -M_PI/2);
     CGContextRef ctx = CGBitmapContextCreate(NULL, _image.size.width, _image.size.height,
                                              CGImageGetBitsPerComponent(_image.CGImage), 0,
                                              CGImageGetColorSpace(_image.CGImage),

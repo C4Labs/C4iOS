@@ -9,7 +9,6 @@
 #import "C4Sample.h"
 
 @interface C4Sample ()
-@property (readonly, strong) AVAudioPlayer *player;
 @end
 
 @implementation C4Sample
@@ -24,6 +23,7 @@
 @synthesize numberOfLoops;
 @synthesize deviceCurrentTime;
 @synthesize loops = _loops;
+@synthesize meteringEnabled = _meteringEnabled;
 
 +(C4Sample *)sampleNamed:(NSString *)sampleName {
     return [[C4Sample alloc] initWithSampleName:sampleName];
@@ -139,6 +139,14 @@
 -(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
     [self postNotification:@"endedNormally"];
     [self endedNormally];
+}
+
+-(void)setMeteringEnabled:(BOOL)meteringEnabled {
+    self.player.meteringEnabled = meteringEnabled;
+}
+
+-(BOOL)isMeteringEnabled {
+    return self.player.isMeteringEnabled;
 }
 
 @end
