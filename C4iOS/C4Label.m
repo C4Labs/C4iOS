@@ -25,15 +25,15 @@
 -(void)_setText:(NSString *)text;
 -(void)_setTextShadowColor:(UIColor *)shadowColor;
 -(void)_setTextShadowOffset:(NSValue *)shadowOffset;
--(void)_setEnabled:(NSValue *)enabled;
+-(void)_setEnabled:(NSNumber *)enabled;
 -(void)_setFont:(C4Font *)font;
 -(void)_setTextColor:(UIColor *)textColor;
--(void)_setAdjustsFontSizeToFitWidth:(NSValue *)adjustsFontSizeToFitWidth;
--(void)_setBaselineAdjustment:(NSValue *)baselineAdjustment;
--(void)_setTextAlignment:(NSValue *)textAlignment;
--(void)_setLineBreakMode:(NSValue *)lineBreakMode;
--(void)_setMinimumFontSize:(NSValue *)minimumFontSize;
--(void)_setNumberOfLines:(NSValue *)numberOfLines;
+-(void)_setAdjustsFontSizeToFitWidth:(NSNumber *)adjustsFontSizeToFitWidth;
+-(void)_setBaselineAdjustment:(NSNumber *)baselineAdjustment;
+-(void)_setTextAlignment:(NSNumber *)textAlignment;
+-(void)_setLineBreakMode:(NSNumber *)lineBreakMode;
+-(void)_setMinimumFontSize:(NSNumber *)minimumFontSize;
+-(void)_setNumberOfLines:(NSNumber *)numberOfLines;
 -(void)_setHighlightedTextColor:(UIColor *)highlightedTextColor;
 -(void)_sizeToFit;
 @end
@@ -245,7 +245,8 @@
 }
 
 -(void)setLineBreakMode:(C4LineBreakMode)lineBreakMode {
-    [self performSelector:@selector(_setLineBreakMode:) withObject:[NSNumber numberWithInt:lineBreakMode] afterDelay:self.animationDelay];
+    NSNumber *n = [NSNumber numberWithInt:lineBreakMode];
+    [self performSelector:@selector(_setLineBreakMode:) withObject:n afterDelay:self.animationDelay];
 }
 -(void)_setLineBreakMode:(NSNumber *)lineBreakMode {
     if(self.animationDelay == 0.0f) self.label.lineBreakMode = (UILineBreakMode)lineBreakMode;
