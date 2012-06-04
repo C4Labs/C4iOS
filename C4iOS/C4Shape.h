@@ -312,7 +312,7 @@ The change will happen based on the shape's current animation options, duration 
 
 /**Specifies whether or not the shape is a line.
  */
-@property (readonly) BOOL isLine;
+@property (readonly, atomic) BOOL isLine;
 
 /**Specifies the origin point of a line. Animatable.
  */
@@ -328,6 +328,6 @@ The change will happen based on the shape's current animation options, duration 
  
  Accessing the shape layer is allowed, but modifying it is not. Changing properties of the shape will automatically inform and apply them to shapeLayer.
  */
-@property (readonly, weak) C4ShapeLayer *shapeLayer;
+@property (readonly, atomic, weak) C4ShapeLayer *shapeLayer;
 
 @end

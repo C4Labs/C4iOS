@@ -91,7 +91,7 @@
  
  Defaults to 0.0f
  */
-@property CGFloat animationDelay;
+@property (atomic) CGFloat animationDelay;
 
 /** The options for which the view should use in its animations.
  

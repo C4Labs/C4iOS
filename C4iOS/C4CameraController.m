@@ -10,8 +10,8 @@
 
 @interface C4CameraController ()
 @property (readwrite, strong, nonatomic) AVCaptureSession *captureSession;
-@property (readwrite, strong) AVCaptureStillImageOutput *stillImageOutput;
-@property (readwrite, strong) AVAssetWriter *assetWriter;
+@property (readwrite, strong, atomic) AVCaptureStillImageOutput *stillImageOutput;
+@property (readwrite, strong, atomic) AVAssetWriter *assetWriter;
 @end
 
 @implementation C4CameraController

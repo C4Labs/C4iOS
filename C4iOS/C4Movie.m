@@ -21,7 +21,7 @@
 
 @property (nonatomic, strong, readonly) C4PlayerLayer *playerLayer;
 @property (strong, nonatomic) AVPlayer *player;
-@property (strong) AVPlayerItem *playerItem;
+@property (strong, nonatomic) AVPlayerItem *playerItem;
 @end
 
 @implementation C4Movie

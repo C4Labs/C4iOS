@@ -28,7 +28,7 @@
 @property (readwrite, strong, nonatomic) CIImage *visibleImage;
 @property (readwrite, nonatomic) CGImageRef contents;
 @property (readwrite, strong, nonatomic) C4Layer *imageLayer;
-@property (readwrite, strong) NSTimer *animatedImageTimer;
+@property (readwrite, strong, atomic) NSTimer *animatedImageTimer;
 @end
 
 @implementation C4Image

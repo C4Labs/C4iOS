@@ -132,15 +132,15 @@
 
 /**Specifies whether the movie is playing or not.
  */
-@property (readonly) BOOL isPlaying;
+@property (readonly, nonatomic) BOOL isPlaying;
 
 /**Specifies whether the movie will loop or not.
  */
-@property BOOL loops;
+@property (atomic) BOOL loops;
 
 /**Specifies whether the movies should play automatically after being loaded into the view.
  */
-@property BOOL shouldAutoplay;
+@property (atomic) BOOL shouldAutoplay;
 
 /**Specifies the blur radius used to render the receiver’s shadow. 
  

@@ -152,6 +152,6 @@
 
 #pragma mark New Stuff
 @property (readwrite, nonatomic, getter = isMeteringEnabled) BOOL meteringEnabled;
-@property (readonly, strong) AVAudioPlayer *player;
+@property (readonly, nonatomic, strong) AVAudioPlayer *player;
 
 @end

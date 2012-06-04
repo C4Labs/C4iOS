@@ -491,9 +491,9 @@
 -(void)play;
 -(void)stop;
 
-@property (readwrite) CFMutableArrayRef animatedImages;
-@property (readonly, getter = isAnimatedImage) BOOL animatedImage;
-@property (readwrite) CGFloat animatedImageDuration;
+@property (readwrite, atomic) CFMutableArrayRef animatedImages;
+@property (readonly, nonatomic, getter = isAnimatedImage) BOOL animatedImage;
+@property (readwrite, atomic) CGFloat animatedImageDuration;
 
 +(C4Image *)imageWithData:(NSData *)imageData;
 -(id)initWithData:(NSData *)imageData;
@@ -502,5 +502,5 @@
 -(UIColor *)colorAt:(CGPoint)point;
 -(C4Vector *)rgbVectorAt:(CGPoint)point;
 
-@property (readonly) BOOL pixelDataLoaded;
+@property (readonly, nonatomic) BOOL pixelDataLoaded;
 @end

@@ -15,7 +15,7 @@
 }
 -(void)initCapture;
 -(void)captureImage;
-@property (readonly, strong) C4Image *capturedImage;
+@property (readonly, strong, nonatomic) C4Image *capturedImage;
 @property (readwrite, strong, nonatomic) C4View *view;
 @property (readwrite, strong, nonatomic) C4CaptureVideoPreviewLayer *previewLayer;
 @end

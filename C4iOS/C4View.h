@@ -107,7 +107,7 @@
  
  Defaults to 0.0f;
  */
-@property CGFloat animationDuration;
+@property (atomic) CGFloat animationDuration;
 
 /** The time to wait before the view's animations begin, measured in seconds.
  
@@ -119,7 +119,7 @@
  
  Defaults to 0.0f;
  */
-@property CGFloat animationDelay;
+@property (atomic) CGFloat animationDelay;
 
 /** The options for which the view should use in its animations.
 

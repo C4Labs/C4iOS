@@ -142,7 +142,7 @@
 
 /** Type of easing that an animation will use.
  */
-@property (readonly, strong) NSString *currentAnimationEasing;
+@property (readonly, atomic, strong) NSString *currentAnimationEasing;
 
 /** The interaction state.
 

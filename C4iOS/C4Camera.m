@@ -17,7 +17,7 @@
 -(void)imageWasCaptured;
 //-(void)_setCapturedImage:(C4Image *)capturedImage;
 
-@property (readwrite, strong) C4CameraController *cameraController;
+@property (readwrite, strong, nonatomic) C4CameraController *cameraController;
 @property (readwrite, strong, nonatomic) C4CaptureVideoPreviewLayer *previewLayer;
 @end
 

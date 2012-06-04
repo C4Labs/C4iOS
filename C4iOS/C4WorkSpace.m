@@ -1,11 +1,10 @@
 //
 //  C4WorkSpace.m
-//  mwylegly_0503_01
+//  C4iOS
 //
-//  Created by MADT.Student on 12-05-03.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Created by Travis Kirton on 12-03-12.
+//  Copyright (c) 2012 POSTFL. All rights reserved.
 //
-
 #import "C4WorkSpace.h"
 
 @implementation C4WorkSpace 
