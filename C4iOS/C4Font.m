@@ -37,6 +37,14 @@
     return [[C4Font alloc] initWithName:fontName size:fontSize];
 }
 
+-(void)dealloc {
+    _UIFont = nil;
+    _CTFont = nil;
+    _CGFont = nil;
+    _familyName = nil;
+    _fontName = nil;
+}
+
 // Returns an array of font family names for all installed fonts
 + (NSArray *)familyNames {
     return [UIFont familyNames];

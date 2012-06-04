@@ -38,6 +38,7 @@
 	return self;
 }
 
+
 -(void)setup {
     
 }
@@ -73,6 +74,6 @@
 	
 	if ([EAGLContext currentContext] == eaglContext)
         [EAGLContext setCurrentContext:nil];
-	eaglContext = nil;
+	self.eaglContext = nil;
 }
 @end

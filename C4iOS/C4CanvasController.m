@@ -20,6 +20,10 @@
     return self;
 }
 
+-(void)dealloc {
+    _canvas = nil;
+}
+
 -(void)setup {
 
 }

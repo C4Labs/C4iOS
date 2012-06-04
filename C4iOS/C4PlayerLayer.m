@@ -38,6 +38,10 @@
 #endif
 }
 
+-(void)dealloc {
+    [self removeAllAnimations];
+}
+
 #pragma mark Safe Initialization Methods
 -(void)setup {
     

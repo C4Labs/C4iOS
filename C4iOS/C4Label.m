@@ -109,6 +109,12 @@
     return self;
 }
 
+-(void)dealloc {
+    self.text = nil;
+    [_label removeFromSuperview];
+    _label = nil;
+}
+
 -(void)sizeToFit {
     if(self.animationDelay == 0) [self _sizeToFit];
     [self performSelector:@selector(_sizeToFit) withObject:nil afterDelay:self.animationDelay];

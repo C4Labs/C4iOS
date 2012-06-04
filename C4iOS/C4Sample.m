@@ -43,6 +43,11 @@
     return self;
 }
 
+-(void)dealloc {
+    [_player stop];
+    _player = nil;
+}
+
 -(void)play {
     [self.player play];
 }

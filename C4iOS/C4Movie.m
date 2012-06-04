@@ -19,9 +19,9 @@
 -(void)_setShadowColor:(UIColor *)shadowColor;
 -(void)_setShadowPath:(id)shadowPath;
 
-@property (nonatomic, strong, readonly) C4PlayerLayer *playerLayer;
-@property (strong, nonatomic) AVPlayer *player;
-@property (strong, nonatomic) AVPlayerItem *playerItem;
+@property (readonly, nonatomic, strong) C4PlayerLayer *playerLayer;
+@property (readwrite, nonatomic, strong) AVPlayer *player;
+@property (readwrite, nonatomic, strong) AVPlayerItem *playerItem;
 @end
 
 @implementation C4Movie
@@ -107,6 +107,11 @@
         self.frame = movieFrame;
     }
     return self;
+}
+
+-(void)dealloc {
+    self.player = nil;
+    self.playerItem = nil;
 }
 
 - (CMTime)playerItemDuration {

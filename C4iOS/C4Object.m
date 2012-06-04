@@ -13,6 +13,10 @@
 #pragma mark Notification Methods
 -(void)setup {}
 
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 -(void)listenFor:(NSString *)notification andRunMethod:(NSString *)methodName{
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(methodName) name:notification object:nil];
 }

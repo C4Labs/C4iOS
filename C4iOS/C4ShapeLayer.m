@@ -40,6 +40,10 @@
     return self;
 }
 
+-(void)dealloc {
+    [self removeAllAnimations];
+}
+
 #pragma mark C4Layer Animation Methods
 -(CABasicAnimation *)setupBasicAnimationWithKeyPath:(NSString *)keyPath {
     double duration = (double)self.animationDuration;

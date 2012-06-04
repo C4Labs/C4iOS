@@ -72,6 +72,11 @@
     return self;
 }
 
+-(void)dealloc {
+    _shadowColor = nil;
+    self.renderer = nil;
+}
+
 -(void)render {
     [renderer render];
     if (YES == self.drawOnce) {

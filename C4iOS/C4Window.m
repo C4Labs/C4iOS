@@ -33,6 +33,19 @@
     return self;
 }
 
+-(void)dealloc {
+    for(UIView *v in self.subviews) {
+        [v removeFromSuperview];
+    }
+
+    NSArray *gestureRecognizerArray = self.gestureRecognizers;
+    
+    for(UIGestureRecognizer *g in gestureRecognizerArray) {
+        [self removeGestureRecognizer:g];
+    }
+    gestureRecognizerArray = nil;
+}
+
 -(void)awakeFromNib {
 #ifdef VERBOSE
     C4Log(@"%@ awakeFromNib",[self class]);

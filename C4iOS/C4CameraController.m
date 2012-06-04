@@ -25,16 +25,23 @@
 - (id)init {
 	self = [super init];
 	if (self) {
-		/*We initialize some variables (they might be not initialized depending on what is commented or not)*/
 		self.previewLayer = nil;
 	}
 	return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
 	[self initCapture];
+}
+
+-(void)dealloc {
+    self.captureSession = nil;
+    self.stillImageOutput = nil;
+    self.assetWriter = nil;
+
+    _capturedImage = nil;
+    _previewLayer = nil;
 }
 
 -(void)setPreviewLayer:(C4CaptureVideoPreviewLayer *)previewLayer {
@@ -130,10 +137,6 @@
 
 - (void)viewDidUnload {
 	self.previewLayer = nil;
-    self.captureSession = nil;
-}
-
-- (void)dealloc {
     self.captureSession = nil;
 }
 @end

@@ -50,6 +50,15 @@
     return self;
 }
 
+-(void)dealloc {
+    self.previewLayer = nil;
+    self.cameraController = nil;
+    self.shadowColor = nil;
+    self.shadowPath = nil;
+    _capturedImage = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 -(void)initCapture {
     [self.cameraController initCapture];
 }
