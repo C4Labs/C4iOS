@@ -46,6 +46,7 @@
 @synthesize CIImage = _CIImage;
 @synthesize CGImage = _CGImage;
 @synthesize animatedImageTimer;
+@synthesize pixelDataLoaded = _pixelDataLoaded;
 
 +(C4Image *)imageNamed:(NSString *)name {
     return [[C4Image alloc] initWithImageName:name];
@@ -64,6 +65,7 @@
         _visibleImage = [[CIImage alloc] initWithCGImage:_originalImage.CGImage];
         NSAssert(_visibleImage != nil, @"The CIImage you tried to create returned a nil object");
         self.frame = _visibleImage.extent;
+        _pixelDataLoaded = NO;
         self.imageLayer.contents = (id)_originalImage.CGImage;
     }
     return self;
@@ -77,7 +79,7 @@
         NSAssert(_originalImage.CGImage != nil, @"The C4Image you tried to load returned nil for it's CGImage");
         self.visibleImage = [[CIImage alloc] initWithCGImage:_originalImage.CGImage];
         NSAssert(_visibleImage != nil, @"The CIImage you tried to create returned a nil object");
-
+        _pixelDataLoaded = NO;
         self.frame = self.CIImage.extent;
         [self.imageLayer setContents:(id)_originalImage.CGImage];
     }
@@ -580,8 +582,10 @@
     CGColorSpaceRelease(colorSpace);
     CGContextDrawImage(context, CGRectMake(0, 0, width, height), self.CGImage);
     CGContextRelease(context);
+    _pixelDataLoaded = YES;
 }
 
+#pragma mark New Stuff
 -(UIColor *)colorAt:(CGPoint)point {
     if(rawData == nil) {
         [self loadPixelData];
@@ -596,7 +600,19 @@
     return [UIColor colorWithRed:RGBToFloat(r) green:RGBToFloat(g) blue:RGBToFloat(b) alpha:RGBToFloat(a)];
 }
 
-#pragma mark New Stuff
+-(C4Vector *)rgbVectorAt:(CGPoint)point {
+    if(self.pixelDataLoaded == NO) {
+        [self loadPixelData];
+    }
+    NSUInteger byteIndex = bytesPerPixel * point.x + bytesPerRow * point.y;
+    CGFloat r, g, b;
+    r = rawData[byteIndex];
+    g = rawData[byteIndex + 1];
+    b = rawData[byteIndex + 2];
+    
+    return [C4Vector vectorWithX:r Y:g Z:b];
+}
+
 @synthesize animatedImageDuration, animatedImage, animatedImages;
 
 +(C4Image *)animatedImageWithNames:(NSArray *)imageNames {

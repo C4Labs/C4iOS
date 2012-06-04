@@ -42,24 +42,4 @@ void C4Log(NSString *logString,...);
  */
 NSInteger   basicSort(id obj1, id obj2, void *context);
 
-/** Frees a given body of data.
- 
- Calls free() on the given data.
-
- This function was taken from the book: Learning Core Audio: A Hands-On Guide to Audio Programming for Mac and iOS
- http://my.safaribooksonline.com/book/audio/9780321636973
- 
- @warning *Note:* The current implementation does nothing with the _info_ and _size_ parameters. 
- 
-*/
-void        free_data(void *info, const void *data, size_t size);
-
-/** Checks whether an error is valid and needs printing to the console.
- 
- This function was taken from the book: Learning Core Audio: A Hands-On Guide to Audio Programming for Mac and iOS
- http://my.safaribooksonline.com/book/audio/9780321636973
- 
- */
-void        CheckError(OSStatus error, const char *operation);
-
 @end

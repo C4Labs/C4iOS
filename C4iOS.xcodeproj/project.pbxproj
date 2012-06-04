@@ -13,6 +13,9 @@
 		ED009FA01509253500086987 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED009F9F1509253500086987 /* OpenGLES.framework */; };
 		ED009FA81509545100086987 /* C4GL1Renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED009FA71509545000086987 /* C4GL1Renderer.m */; };
 		ED10F17214FC0BDE00B54390 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED10F17114FC0BDE00B54390 /* CoreText.framework */; };
+		ED1253FD15657D810003AFAF /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED1253FC15657D810003AFAF /* Accelerate.framework */; };
+		ED14948E15658DB700E6E892 /* test_3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ED14948C15658DB700E6E892 /* test_3.jpg */; };
+		ED14948F15658DB700E6E892 /* test_img.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ED14948D15658DB700E6E892 /* test_img.jpg */; };
 		ED307680150D2A36001D689C /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED30767F150D2A36001D689C /* CoreMedia.framework */; };
 		ED30769C150D400C001D689C /* C4Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = ED307698150D400C001D689C /* C4Movie.m */; };
 		ED3076A2150D51F0001D689C /* C4PlayerLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3076A1150D51F0001D689C /* C4PlayerLayer.m */; };
@@ -86,6 +89,9 @@
 		ED009FA61509545000086987 /* C4GL1Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4GL1Renderer.h; sourceTree = "<group>"; };
 		ED009FA71509545000086987 /* C4GL1Renderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4GL1Renderer.m; sourceTree = "<group>"; };
 		ED10F17114FC0BDE00B54390 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		ED1253FC15657D810003AFAF /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		ED14948C15658DB700E6E892 /* test_3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test_3.jpg; sourceTree = "<group>"; };
+		ED14948D15658DB700E6E892 /* test_img.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test_img.jpg; sourceTree = "<group>"; };
 		ED1B5BA31514024E0027365F /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		ED30767F150D2A36001D689C /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		ED307697150D400C001D689C /* C4Movie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Movie.h; sourceTree = "<group>"; };
@@ -186,6 +192,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED1253FD15657D810003AFAF /* Accelerate.framework in Frameworks */,
 				ED307680150D2A36001D689C /* CoreMedia.framework in Frameworks */,
 				ED009FA01509253500086987 /* OpenGLES.framework in Frameworks */,
 				ED10F17214FC0BDE00B54390 /* CoreText.framework in Frameworks */,
@@ -221,6 +228,7 @@
 		ED50C88414EAC2010040D844 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ED1253FC15657D810003AFAF /* Accelerate.framework */,
 				ED50C8CF14EAC77C0040D844 /* AVFoundation.framework */,
 				ED50C88914EAC2010040D844 /* CoreGraphics.framework */,
 				ED979F3E14F95EFF00645114 /* CoreImage.framework */,
@@ -240,6 +248,8 @@
 			children = (
 				EDF65448150DEF3300194671 /* C4WorkSpace.h */,
 				EDF65449150DEF3300194671 /* C4WorkSpace.m */,
+				ED14948C15658DB700E6E892 /* test_3.jpg */,
+				ED14948D15658DB700E6E892 /* test_img.jpg */,
 				EDF65456150E104100194671 /* C4Sample.h */,
 				EDF65457150E104100194671 /* C4Sample.m */,
 				EDCE425E1564044000C7356E /* C4Camera.h */,
@@ -451,6 +461,8 @@
 				EDC774F91561A532005C88F6 /* whiteCircle08.png in Resources */,
 				EDC774FA1561A532005C88F6 /* whiteCircle09.png in Resources */,
 				EDC774FB1561A532005C88F6 /* whiteCircle10.png in Resources */,
+				ED14948E15658DB700E6E892 /* test_3.jpg in Resources */,
+				ED14948F15658DB700E6E892 /* test_img.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

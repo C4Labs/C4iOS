@@ -21,6 +21,7 @@
  */
 
 #import "C4Control.h"
+#import "C4Vector.h"
 
 /**This document describes the C4Image class. A C4Image object provides access for creating, showing, interacting and manipulating images. C4Image is a subclass of C4Control and so inherits its animation, gesture and notification abilities.
   
@@ -496,4 +497,10 @@
 
 +(C4Image *)imageWithData:(NSData *)imageData;
 -(id)initWithData:(NSData *)imageData;
+
+-(void)loadPixelData;
+-(UIColor *)colorAt:(CGPoint)point;
+-(C4Vector *)rgbVectorAt:(CGPoint)point;
+
+@property (readonly) BOOL pixelDataLoaded;
 @end

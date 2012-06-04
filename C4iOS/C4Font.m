@@ -98,7 +98,7 @@
 }
 
 -(CGFontRef)CGFont {
-    return CTFontCopyGraphicsFont(self.CTFont, nil);
+    return (__bridge CGFontRef)self.UIFont;
 }
 
 -(CTFontRef)CTFont {

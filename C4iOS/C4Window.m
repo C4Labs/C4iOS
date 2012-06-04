@@ -69,6 +69,15 @@
     [self addSubview:movie];
 }
 
+
+-(void)addCamera:(C4Camera *)camera {
+    NSAssert([camera isKindOfClass:[C4Camera class]],
+             @"You tried to add something other than a C4Camera object using [canvas addCamera:]");
+    [self addSubview:camera];
+    [camera initCapture];
+    [self.canvasController listenFor:@"imageWasCaptured" fromObject:camera andRunMethod:@"imageWasCaptured"];
+}
+
 /*
  The following method makes sure that the main backing CALayer
  for this UIWindow subclass will be a C4Canvas

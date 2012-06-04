@@ -83,4 +83,7 @@ For more information about how to use windows, see View Programming Guide for iO
  @warning *Note:* When programming a C4 project the canvasController is preset. This shouldn't change unless the entire project structure is changing.
   */
 @property (readwrite, strong) C4CanvasController *canvasController;
+
+#pragma mark New Stuff
+-(void)addCamera:(C4Camera *)camera;
 @end

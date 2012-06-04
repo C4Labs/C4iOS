@@ -99,6 +99,7 @@
 -(void)ellipse:(CGRect)rect {
     [self performSelector:@selector(_ellipse:) withObject:[NSValue valueWithCGRect:rect] afterDelay:self.animationDelay];
 }
+
 -(void)_ellipse:(NSValue *)ellipseValue {
     _isLine = NO;
     CGRect aRect = [ellipseValue CGRectValue];
@@ -108,6 +109,7 @@
 
     [self.shapeLayer animatePath:newPath];
     self.frame = aRect;
+    CFRelease(newPath);
 }
 
 -(void)arcWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle {
@@ -198,6 +200,7 @@
     NSStringEncoding encoding = [NSString defaultCStringEncoding];
     CFStringRef stringRef = CFStringCreateWithCString(kCFAllocatorDefault, [string cStringUsingEncoding:encoding], encoding);
     CFIndex length = CFStringGetLength(stringRef);
+    CFRelease(stringRef);
     CGAffineTransform afft = CGAffineTransformMakeScale(1, -1);
     CGMutablePathRef glyphPaths = CGPathCreateMutable();
     CGPathMoveToPoint(glyphPaths, nil, 0, 0);
@@ -214,6 +217,7 @@
         CGPathAddPath(glyphPaths, &t, path);
         CTFontGetAdvancesForGlyphs(ctFont, kCTFontDefaultOrientation, &currentGlyph, &advance, 1);
         currentOrigin.x += advance.width;
+        CFRelease(path);
     }
     [self.shapeLayer animatePath:glyphPaths];
     CGRect pathRect = CGPathGetBoundingBox(self.shapeLayer.path);
@@ -255,7 +259,7 @@
 -(void)_polygon:(NSArray *)pointArray {
     NSInteger pointCount = [pointArray count];
     CGPoint points[pointCount];
-    for (int i = 0; i < [pointArray count]; i++) {
+    for (int i = 0; i < pointCount; i++) {
         points[i] = [[pointArray objectAtIndex:i] CGPointValue];
     }
     CGMutablePathRef newPath = CGPathCreateMutable();

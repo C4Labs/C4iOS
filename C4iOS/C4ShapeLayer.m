@@ -31,9 +31,11 @@
         repeats = NO;
         
         /* create basic attributes after setting animation attributes above */
-        self.path = CGPathCreateWithRect(CGRectZero, nil);
+        CGPathRef newPath = CGPathCreateWithRect(CGRectZero, nil);
+        self.path = newPath;
         /* makes sure there are no extraneous animation keys lingering about after init */
         [self removeAllAnimations];
+        CFRelease(newPath);
     }
     return self;
 }

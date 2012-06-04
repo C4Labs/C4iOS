@@ -24,6 +24,7 @@
 #import "C4Math.h"
 #import "C4Font.h"
 #import "C4Foundation.h"
+#import "C4Vector.h"
 #import "C4Image.h"
 #import "C4Control.h"
 #import "C4Layer.h"
