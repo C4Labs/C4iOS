@@ -63,7 +63,7 @@
 		displayLink = nil;
 		animationTimer = nil;
 		
-		CGFloat minimumSystemVersion = 3.1;
+		CGFloat minimumSystemVersion = 3.1f;
         CGFloat currentSystemVersion = [[[UIDevice currentDevice] systemVersion] floatValue];
 		if (currentSystemVersion >= minimumSystemVersion) {
 			displayLinkSupported = YES;

@@ -24,23 +24,23 @@
 #import "C4Vector.h"
 
 /**This document describes the C4Image class. A C4Image object provides access for creating, showing, interacting and manipulating images. C4Image is a subclass of C4Control and so inherits its animation, gesture and notification abilities.
-  
+ 
  C4Image also takes advantage of its underlying C4Layer to allow for filtering the content of an image. You can apply filters that affect only the image (e.g. hueAdjust, vibranceAdjust, etc.) or use another image as the background for a particular blend or composite filter (e.g. additionComposite:, overlayBlend:, etc). 
  
  When working with blends and composite methods, it is recommended that the images you use are of the same size.
  
-*/
+ */
 @interface C4Image : C4Control {
 }
 
 /**Creates and returns a new image using a file with the given name.
  
  @param name A string representation of the file name (e.g. photo.jpg, image.png, etc.)
-  */
+ */
 +(C4Image *)imageNamed:(NSString *)name;
 
 /**Creates and returns a new image using a pre-existing C4Image object.
-
+ 
  @param image A C4Image whose contents will be used to create a new C4Image object.
  */
 +(C4Image *)imageWithImage:(C4Image *)image;
@@ -48,19 +48,19 @@
 /**Initializes an image using a file with the given name.
  
  This method will look for a file with the given name in the application's local directory. If it cannot find the image it will cause an assertion error.
-
+ 
  @param name A string representation of the file name (e.g. photo.jpg, image.png, etc.)
-*/
+ */
 -(id)initWithImageName:(NSString *)name;
 
 /**Initializes a C4Image using the contents of another C4Image
-
+ 
  @param image A C4Image whose contents will be used to create a new C4Image object.
  */
 -(id)initWithImage:(C4Image *)image;
 
 /**Sets the current visible representation of a C4Image to that of another image.
-
+ 
  @param image A C4Image whose contents will be used to set the visible representation of the receiver.
  */
 -(void)setImage:(C4Image *)image;
@@ -72,7 +72,7 @@
  This filter is typically used to add highlights and lens flare effects. The formula used to create this filter is described in Thomas Porter and Tom Duff. 1984. Compositing Digital Images. Computer Graphics, 18 (3): 253-259.
  
  @param backgroundImage The image that will provide the background for this filter.
-*/
+ */
 -(void)additionComposite:(C4Image *)backgroundImage;
 
 /**Color blend filter
@@ -85,14 +85,14 @@
  Darkens the background image samples to reflect the source image samples.
  
  Source image sample values that specify white do not produce a change. The formula used to create this filter is described in the PDF specification, which is available online from the Adobe Developer Center. See PDF Reference and Adobe Extensions to the PDF Specification.
-
+ 
  @param backgroundImage The image that will provide the background for this filter.
  */
 -(void)colorBurn:(C4Image *)backgroundImage;
 
 /**Color control filter.
  Adjusts saturation, brightness, and contrast values.
-
+ 
  To calculate saturation, this filter linearly interpolates between a grayscale image (saturation = 0.0) and the original image (saturation = 1.0). The filter supports extrapolation: For values large than 1.0, it increases saturation.
  
  To calculate contrast, this filter uses the following formula:
@@ -102,7 +102,7 @@
  This filter calculates brightness by adding a bias value:
  
  color.rgb + vec3(brightness)
-
+ 
  @param saturation Saturation value defaults to 1.0f, minimum 0.0f, maximum 2.0f
  @param brightness Brightness value defaults to 0.0f, minimum -1.0f, maximum 1.0f
  @param contrast Contrast value defaults to 1.0f, minimum 0.0f, maximum 4.0f
@@ -114,9 +114,9 @@
  Brightens the background image samples to reflect the source image samples.
  
  Source image sample values that specify black do not produce a change. The formula used to create this filter is described in the PDF specification, which is available online from the Adobe Developer Center.
-
+ 
  @param backgroundImage The image that will provide the background for this filter.
-*/
+ */
 -(void)colorDodge:(C4Image *)backgroundImage;
 
 /**Color invert filter.
@@ -136,7 +136,7 @@
  s.b = dot(s, blueVector)
  s.a = dot(s, alphaVector)
  s = s + bias
-
+ 
  @param color The color whose components will be used in the matrix multiplication
  @param bias The bias value to be used in the matrix multiplication
  */
@@ -144,7 +144,7 @@
 
 /**Color monochrome filter.
  Remaps colors so they fall within shades of a single color.
-
+ 
  @param color The color to which the image will be mapped.
  @param intensity The intensity of the mapping, defaults to 1.0f, minimum 0.0f, maximum 1.0f
  */
@@ -152,9 +152,9 @@
 
 /**Darken blend filter
  Creates composite image samples by choosing the darker samples (from either the source image or the background).
-
+ 
  The result is that the background image samples are replaced by any source image samples that are darker. Otherwise, the background image samples are left unchanged. The formula used to create this filter is described in the PDF specification, which is available online from the Adobe Developer Center. See PDF Reference and Adobe Extensions to the PDF Specification.
-
+ 
  @param backgroundImage The image that will provide the background for this filter.
  */
 -(void)darkenBlend:(C4Image *)backgroundImage;
@@ -163,34 +163,34 @@
  Subtracts either the source image sample color from the background image sample color, or the reverse, depending on which sample has the greater brightness value.
  
  Source image sample values that are black produce no change; white inverts the background color values. The formula used to create this filter is described in the PDF specification, which is available online from the Adobe Developer Center. See PDF Reference and Adobe Extensions to the PDF Specification.
-
+ 
  @param backgroundImage The image that will provide the background for this filter.
  */
 -(void)differenceBlend:(C4Image *)backgroundImage;
 
 /**Exclusion blend filter
  Produces an effect similar to that produced by the Difference Blend filter but with lower contrast.
-
+ 
  Source image sample values that are black do not produce a change; white inverts the background color values. The formula used to create this filter is described in the PDF specification, which is available online from the Adobe Developer Center. See PDF Reference and Adobe Extensions to the PDF Specification.
-
+ 
  @param backgroundImage The image that will provide the background for this filter.
  */
 -(void)exclusionBlend:(C4Image *)backgroundImage;
 
 /**Exposure adjustment filter
  Adjusts the exposure setting for an image similar to the way you control exposure for a camera when you change the F-stop.
-
+ 
  This filter multiplies the color values, as follows, to simulate exposure change by the specified F-stops:
  
  s.rgb * pow(2.0, ev)
-
+ 
  @param adjustment The level of exposure adjustment, defaults to 0.5, minimum -10.0, maximum 10.0
-*/
+ */
 -(void)exposureAdjust:(CGFloat)adjustment;
 
 /**False color filter
  Maps luminance to a color ramp of two colors.
-
+ 
  False color is often used to process astronomical and other scientific data, such as ultraviolet and x-ray images.
  
  @param color1 A UIColor.
@@ -200,7 +200,7 @@
 
 /**Gamma adjustment filter
  Adjusts midtone brightness.
-
+ 
  This filter is typically used to compensate for nonlinear effects of displays. Adjusting the gamma effectively changes the slope of the transition between black and white. It uses the following formula:
  
  pow(s.rgb, vec3(power))
@@ -218,7 +218,7 @@
 
 /**Highlight and shadow adjustment filter
  Adjust the tonal mapping of an image while preserving spatial detail.
-
+ 
  @param highlightAmount The adjustment value for image highlights, defaults to 1.0, minimum 0.0, maximum 1.0
  @param shadowAmount The adjustment value for image shadows, defaults to 0.0, minimum -1.0, maximum 1.0
  */
@@ -226,7 +226,7 @@
 
 /**Hue adjustment filter
  Changes the overall hue, or tint, of the source pixels.
-
+ 
  This filter essentially rotates the color cube around the neutral axis.
  
  @param angle The angular value to calculate the adjustment, defaults to 0.0, minimum -PI, maximum PI
@@ -325,7 +325,7 @@
 
 /**Sepia tone filter
  Maps the colors of an image to various shades of brown.
-
+ 
  @param intensity The level of intensity for which to apply the sepia tone, defaults to 1.0, minimum 0.0, maximum 1.0 
  */
 -(void)sepiaTone:(CGFloat)intensity;
@@ -377,11 +377,11 @@
 
 /**Straighten filter
  Rotates the source image by the specified angle in radians.
-
+ 
  The image is scaled and cropped so that the rotated image fits the extent of the source image.
-
+ 
  @param angle The angular value to calculate the adjustment, defaults to 0.0, minimum -PI, maximum PI
-*/
+ */
 -(void)straighten:(CGFloat)angle;
 
 /**Temperature and tint filter 
@@ -396,11 +396,11 @@
  Adjusts tone response of the R, G, and B channels of an image.
  
  The input points are five x,y values that are interpolated using a spline curve. The curve is applied in a perceptual (gamma 2) version of the working space.
-
+ 
  An example of how to construct the point array : CGPoint *pointArray = {CGPointMake(),CGPointMake(),CGPointMake(),CGPointMake(),CGPointMake()};
  
  The five points default to the following:
-
+ 
  - point1: { 0.0, 0.0}
  - point2: {0.25, 0.25}
  - point3: { 0.5, 0.5};
@@ -409,18 +409,18 @@
  
  @param pointArray A C-Array of CGPoints which will be used to construct the tone curve
  */
- -(void)toneCurve:(CGPoint *)pointArray;
+-(void)toneCurve:(CGPoint *)pointArray;
 
 /**Vibrance adjustment filter
  Adjusts the saturation of an image while keeping pleasing skin tones.
-
+ 
  @param amount The amount to adjust the image's vibrance, defaults to 0.0, minimum -1.0, maximum 1.0
  */
 -(void)vibranceAdjust:(CGFloat)amount;
 
 /*White point adjustment filter
  Adjusts the reference white point for an image and maps all colors in the source using the new reference.
-
+ 
  @param color The reference color for the new mapping.
  */
 -(void)whitePointAdjust:(UIColor *)color;
@@ -432,11 +432,11 @@
  The initial value of this property is the image passed into the initWithImage: method or nil if you initialized the receiver using a different method.
  
  @warning The object returned from this property was made with a CIImage, so calling returnedUIImage.CGImage on the returned object will return NULL.
-  */
+ */
 @property (readonly, weak, nonatomic) UIImage *UIImage;
 
 /**Returns a Core Image representation of the current image.
-
+ 
  If the image data has been purged because of memory constraints, invoking this method forces that data to be loaded back into memory. Reloading the image data may incur a performance penalty.
  
  @warning: The CIImage is the object off of which we base all other image manipulations and returns.
@@ -444,7 +444,7 @@
 @property (readonly, weak, nonatomic) CIImage *CIImage;
 
 /**The underlying Core Image data. (read-only)
-  */
+ */
 @property (readonly, nonatomic) CGImageRef CGImage;
 
 /**Specifies the blur radius used to render the receiver’s shadow. 

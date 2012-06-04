@@ -73,7 +73,7 @@ NSInteger basicSort(id obj1, id obj2, void *context) {
 }
 
 NSInteger numSort(id num1, id num2, void *context) {
-	return [num1 compare:num2];
+	return [(NSNumber *)num1 compare:(NSNumber *)num2];
 }
 
 NSInteger strSort(id str1, id str2, void *context) {

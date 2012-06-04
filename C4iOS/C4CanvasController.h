@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class C4Window;
 
-@interface C4CanvasController : UIViewController <C4Notification> {
+@interface C4CanvasController : UIViewController <C4Notification, AVAudioSessionDelegate> {
 }
 -(void)setup;
 

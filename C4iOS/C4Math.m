@@ -68,7 +68,7 @@ static C4Math *sharedC4Math = nil;
 }
 
 +(NSInteger)floor:(CGFloat)value {
-	return floor((double)value);
+	return (NSInteger)floor((double)value);
 }
 
 +(CGFloat)lerpBetweenA:(CGFloat)a B:(CGFloat)b byAmount:(CGFloat)amount {
@@ -167,7 +167,7 @@ static C4Math *sharedC4Math = nil;
     else {
         NSInteger max = a > b ? a : b;
         NSInteger min = a < b ? a : b;
-        NSAssert(max-min > 0, @"Your expression returned true for max-min <= 0 for some reason");
+        NSAssert(max-min > 0, @"Your expression returned true for max-min <= 0 for some reason... max = %d, min = %d", max, min);
         srandomdev();
         returnVal = (((NSInteger)random())%(max-min) + min);
     }
@@ -176,7 +176,7 @@ static C4Math *sharedC4Math = nil;
 
 #pragma mark Math Conversion Functions
 NSInteger RadiansToDegrees(CGFloat radianValue) {
-    NSInteger degreeValue = ((radianValue) * 180.0f / PI);
+    NSInteger degreeValue = (NSInteger)((radianValue) * 180.0f / PI);
     return degreeValue;
 }
 
@@ -186,7 +186,7 @@ CGFloat DegreesToRadians(NSInteger degreeValue) {
 }
 
 NSInteger FloatToRGB(CGFloat floatValue) {
-    NSInteger rgbValue = floatValue > 1.0f ? 255 : floatValue * 255.0f;
+    NSInteger rgbValue = (NSInteger)(floatValue > 1.0f ? 255 : floatValue * 255.0f);
     return rgbValue;
 }
 

@@ -33,7 +33,7 @@
      */
     
     [self.window makeKeyAndVisible];
-    [[AVAudioSession sharedInstance] setDelegate:self.workspace];
+    [(AVAudioSession*)[AVAudioSession sharedInstance] setDelegate:self.workspace];
     [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategorySoloAmbient error: nil];
     [self.workspace setup];
     mainView = (C4View *)self.workspace.view;

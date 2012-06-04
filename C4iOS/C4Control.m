@@ -165,7 +165,7 @@
 #pragma mark Animation methods
 -(void)animateWithBlock:(void (^)(void))animationBlock {
     [self animateWithBlock:animationBlock completion:nil];
-};
+}
 
 -(void)animateWithBlock:(void (^)(void))animationBlock completion:(void (^)(BOOL))completionBlock {
     [UIView animateWithDuration:self.animationDuration
@@ -173,7 +173,7 @@
                         options:self.animationOptions
                      animations:animationBlock
                      completion:completionBlock];
-};
+}
 
 -(void)setAnimationOptions:(NSUInteger)animationOptions {
     _animationOptions = animationOptions | BEGINCURRENT;

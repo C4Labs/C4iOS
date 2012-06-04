@@ -258,7 +258,7 @@
 
 -(void)setMinimumFontSize:(CGFloat)minimumFontSize {
     if(self.animationDelay == 0.0f) self.label.minimumFontSize = minimumFontSize;
-    [self performSelector:@selector(_setMinimum:) withObject:[NSNumber numberWithFloat:minimumFontSize] afterDelay:self.animationDelay];
+    [self performSelector:@selector(_setMinimumFontSize:) withObject:[NSNumber numberWithFloat:minimumFontSize] afterDelay:self.animationDelay];
 }
 -(void)_setMinimumFontSize:(NSNumber *)minimumFontSize {
     self.label.minimumFontSize = [minimumFontSize floatValue];
@@ -270,7 +270,7 @@
 
 -(void)setNumberOfLines:(NSUInteger)numberOfLines {
     if(self.animationDelay == 0.0f) self.label.numberOfLines = numberOfLines;
-    [self performSelector:@selector(_setNumberOfItems:) withObject:[NSNumber numberWithInt:numberOfLines] afterDelay:self.animationDelay];
+    [self performSelector:@selector(_setNumberOfLines:) withObject:[NSNumber numberWithInt:numberOfLines] afterDelay:self.animationDelay];
 }
 -(void)_setNumberOfLines:(NSNumber *)numberOfLines {
     self.label.numberOfLines = [numberOfLines intValue];

@@ -41,38 +41,38 @@
 
 -(void)addShape:(C4Shape *)shape {
     NSAssert([shape isKindOfClass:[C4Shape class]],
-             @"You tried to add something other than a C4Shape object using [canvas addShape:]");
+             @"You tried to add a %@ using [canvas addShape:]", [shape class]);
     [self addSubview:shape];
 }
 
 -(void)addLabel:(C4Label *)label {
     NSAssert([label isKindOfClass:[C4Label class]], 
-             @"You tried to add something other than a C4Label object using [canvas addLabel:]");
+             @"You tried to add a %@ using [canvas addLabel:]", [label class]);
     [self addSubview:label];
 }
 
 -(void)addGL:(C4GL *)gl {
     NSAssert([gl isKindOfClass:[C4GL class]], 
-             @"You tried to add something other than a C4GL object using [canvas addGL:]");
+             @"You tried to add a %@ using [canvas addGL:]", [gl class]);
     [self addSubview:gl];
 }
 
 -(void)addImage:(C4Image *)image {
     NSAssert([image isKindOfClass:[C4Image class]],
-             @"You tried to add something other than a C4Image object using [canvas addImage:]");
+             @"You tried to add a %@ using [canvas addImage:]", [image class]);
     [self addSubview:image];
 }
 
 -(void)addMovie:(C4Movie *)movie {
     NSAssert([movie isKindOfClass:[C4Movie class]],
-             @"You tried to add something other than a C4Movie object using [canvas addMovie:]");
+             @"You tried to add a %@ using [canvas addMovie:]", [movie class]);
     [self addSubview:movie];
 }
 
 
 -(void)addCamera:(C4Camera *)camera {
     NSAssert([camera isKindOfClass:[C4Camera class]],
-             @"You tried to add something other than a C4Camera object using [canvas addCamera:]");
+             @"You tried to add a %@ using [canvas addCamera:]", [camera class]);
     [self addSubview:camera];
     [camera initCapture];
     [self.canvasController listenFor:@"imageWasCaptured" fromObject:camera andRunMethod:@"imageWasCaptured"];

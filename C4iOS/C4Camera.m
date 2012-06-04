@@ -41,7 +41,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.previewLayer.backgroundColor = [UIColor redColor].CGColor;
-        self.cameraController = [C4CameraController new];
+        self.cameraController = [[C4CameraController alloc] init];
         self.cameraController.view = (C4View *)self;
         self.cameraController.previewLayer = self.previewLayer;
         self.frame = self.previewLayer.frame;

@@ -58,7 +58,7 @@
                                                                                       ofType:[movieNameComponents objectAtIndex:1]]];
         if([movieURL scheme]) {
             AVURLAsset *asset = [AVURLAsset URLAssetWithURL:movieURL options:nil];
-            NSAssert(asset != nil, @"The asset you tried to create couldn't be initialized");
+            NSAssert(asset != nil, @"The asset (%@) you tried to create couldn't be initialized", movieName);
             NSArray *requestedKeys = [NSArray arrayWithObjects:@"duration", @"playable", nil];
             [asset loadValuesAsynchronouslyForKeys:requestedKeys completionHandler: ^(void) {		 
                 dispatch_async( dispatch_get_main_queue(), ^(void) {
@@ -90,7 +90,7 @@
                                                                                       ofType:[movieNameComponents objectAtIndex:1]]];
         if([movieURL scheme]) {
             AVURLAsset *asset = [AVURLAsset URLAssetWithURL:movieURL options:nil];
-            NSAssert(asset != nil, @"The asset you tried to create couldn't be initialized");
+            NSAssert(asset != nil, @"The asset (%@) you tried to create couldn't be initialized", movieName);
             NSArray *requestedKeys = [NSArray arrayWithObjects:@"duration", @"playable", nil];
             [asset loadValuesAsynchronouslyForKeys:requestedKeys completionHandler: ^(void) {		 
                 dispatch_async( dispatch_get_main_queue(), ^(void) {

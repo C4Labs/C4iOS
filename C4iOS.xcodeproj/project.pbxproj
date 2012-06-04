@@ -14,12 +14,10 @@
 		ED009FA81509545100086987 /* C4GL1Renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED009FA71509545000086987 /* C4GL1Renderer.m */; };
 		ED10F17214FC0BDE00B54390 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED10F17114FC0BDE00B54390 /* CoreText.framework */; };
 		ED1253FD15657D810003AFAF /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED1253FC15657D810003AFAF /* Accelerate.framework */; };
-		ED14948E15658DB700E6E892 /* test_3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ED14948C15658DB700E6E892 /* test_3.jpg */; };
-		ED14948F15658DB700E6E892 /* test_img.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ED14948D15658DB700E6E892 /* test_img.jpg */; };
 		ED307680150D2A36001D689C /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED30767F150D2A36001D689C /* CoreMedia.framework */; };
 		ED30769C150D400C001D689C /* C4Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = ED307698150D400C001D689C /* C4Movie.m */; };
 		ED3076A2150D51F0001D689C /* C4PlayerLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3076A1150D51F0001D689C /* C4PlayerLayer.m */; };
-		ED3C1C45150AC59F00AB288D /* C4Image.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3C1C44150AC59F00AB288D /* C4Image.m */; };
+		ED36D9EC157C935500C3AEE7 /* C4Image.m in Sources */ = {isa = PBXBuildFile; fileRef = ED36D9EB157C935400C3AEE7 /* C4Image.m */; };
 		ED45EC81155A33C400D28213 /* loop1.wav in Resources */ = {isa = PBXBuildFile; fileRef = ED45EC80155A33C400D28213 /* loop1.wav */; };
 		ED50C88614EAC2010040D844 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED50C88514EAC2010040D844 /* UIKit.framework */; };
 		ED50C88814EAC2010040D844 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED50C88714EAC2010040D844 /* Foundation.framework */; };
@@ -56,7 +54,6 @@
 		ED9D5FA51564A927009C5175 /* C4Vector.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9D5FA41564A927009C5175 /* C4Vector.m */; };
 		EDA7014914FC496300A0D77D /* C4Label.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA7014814FC496300A0D77D /* C4Label.m */; };
 		EDAFFAF014F7602F00CA356A /* C4Control.m in Sources */ = {isa = PBXBuildFile; fileRef = EDAFFAEF14F7602F00CA356A /* C4Control.m */; };
-		EDC367AC1559DD1300A0C676 /* PlayheadView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDC367AB1559DD1300A0C676 /* PlayheadView.m */; };
 		EDC774F21561A532005C88F6 /* whiteCircle01.png in Resources */ = {isa = PBXBuildFile; fileRef = EDC774E81561A531005C88F6 /* whiteCircle01.png */; };
 		EDC774F31561A532005C88F6 /* whiteCircle02.png in Resources */ = {isa = PBXBuildFile; fileRef = EDC774E91561A531005C88F6 /* whiteCircle02.png */; };
 		EDC774F41561A532005C88F6 /* whiteCircle03.png in Resources */ = {isa = PBXBuildFile; fileRef = EDC774EA1561A531005C88F6 /* whiteCircle03.png */; };
@@ -90,16 +87,14 @@
 		ED009FA71509545000086987 /* C4GL1Renderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4GL1Renderer.m; sourceTree = "<group>"; };
 		ED10F17114FC0BDE00B54390 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		ED1253FC15657D810003AFAF /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
-		ED14948C15658DB700E6E892 /* test_3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test_3.jpg; sourceTree = "<group>"; };
-		ED14948D15658DB700E6E892 /* test_img.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test_img.jpg; sourceTree = "<group>"; };
 		ED1B5BA31514024E0027365F /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		ED30767F150D2A36001D689C /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		ED307697150D400C001D689C /* C4Movie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Movie.h; sourceTree = "<group>"; };
 		ED307698150D400C001D689C /* C4Movie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Movie.m; sourceTree = "<group>"; };
 		ED3076A0150D51F0001D689C /* C4PlayerLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4PlayerLayer.h; sourceTree = "<group>"; };
 		ED3076A1150D51F0001D689C /* C4PlayerLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4PlayerLayer.m; sourceTree = "<group>"; };
-		ED3C1C43150AC59E00AB288D /* C4Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Image.h; sourceTree = "<group>"; };
-		ED3C1C44150AC59F00AB288D /* C4Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = C4Image.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		ED36D9EA157C935400C3AEE7 /* C4Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Image.h; sourceTree = "<group>"; };
+		ED36D9EB157C935400C3AEE7 /* C4Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Image.m; sourceTree = "<group>"; };
 		ED45EC80155A33C400D28213 /* loop1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = loop1.wav; sourceTree = "<group>"; };
 		ED50C88114EAC2010040D844 /* C4iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = C4iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED50C88514EAC2010040D844 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -155,8 +150,6 @@
 		EDAFFAD714F70D5F00CA356A /* C4Notification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Notification.h; sourceTree = "<group>"; };
 		EDAFFAEE14F7602F00CA356A /* C4Control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Control.h; sourceTree = "<group>"; };
 		EDAFFAEF14F7602F00CA356A /* C4Control.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Control.m; sourceTree = "<group>"; };
-		EDC367AA1559DD1300A0C676 /* PlayheadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayheadView.h; sourceTree = "<group>"; };
-		EDC367AB1559DD1300A0C676 /* PlayheadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayheadView.m; sourceTree = "<group>"; };
 		EDC75ED81506D7D2002D82A1 /* C4LayerAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4LayerAnimation.h; sourceTree = "<group>"; };
 		EDC774E81561A531005C88F6 /* whiteCircle01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteCircle01.png; sourceTree = "<group>"; };
 		EDC774E91561A531005C88F6 /* whiteCircle02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteCircle02.png; sourceTree = "<group>"; };
@@ -208,6 +201,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ED36D9E9157C91E900C3AEE7 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				EDCEA5A514FD7567009969F2 /* C4Gesture.h */,
+				EDC75ED81506D7D2002D82A1 /* C4LayerAnimation.h */,
+				EDAFFAD714F70D5F00CA356A /* C4Notification.h */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
 		ED50C87614EAC2010040D844 = {
 			isa = PBXGroup;
 			children = (
@@ -248,23 +251,8 @@
 			children = (
 				EDF65448150DEF3300194671 /* C4WorkSpace.h */,
 				EDF65449150DEF3300194671 /* C4WorkSpace.m */,
-				ED14948C15658DB700E6E892 /* test_3.jpg */,
-				ED14948D15658DB700E6E892 /* test_img.jpg */,
-				EDF65456150E104100194671 /* C4Sample.h */,
-				EDF65457150E104100194671 /* C4Sample.m */,
-				EDCE425E1564044000C7356E /* C4Camera.h */,
-				EDCE425F1564044000C7356E /* C4Camera.m */,
-				EDCE42601564044000C7356E /* C4CameraController.h */,
-				EDCE42611564044000C7356E /* C4CameraController.m */,
-				EDCE426B1564174000C7356E /* C4ViewController.h */,
-				EDCE426C1564174000C7356E /* C4ViewController.m */,
-				EDCE42621564044000C7356E /* C4CaptureVideoPreviewLayer.h */,
-				EDCE42631564044000C7356E /* C4CaptureVideoPreviewLayer.m */,
-				ED3C1C43150AC59E00AB288D /* C4Image.h */,
-				ED3C1C44150AC59F00AB288D /* C4Image.m */,
-				ED9D5FA31564A927009C5175 /* C4Vector.h */,
-				ED9D5FA41564A927009C5175 /* C4Vector.m */,
-				EDCE425D1564020F00C7356E /* 4Greg */,
+				ED36D9EA157C935400C3AEE7 /* C4Image.h */,
+				ED36D9EB157C935400C3AEE7 /* C4Image.m */,
 				ED50C8D314EACA0E0040D844 /* Source */,
 				EDCE425C156401F000C7356E /* Media */,
 				ED50C88C14EAC2010040D844 /* App */,
@@ -308,17 +296,17 @@
 		ED50C8D314EACA0E0040D844 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				EDECBF6A14EAE26600D9A446 /* C4Shape.h */,
-				EDECBF6B14EAE26600D9A446 /* C4Shape.m */,
-				ED89848514EE180400BB7AB0 /* C4ShapeLayer.h */,
-				ED89848614EE180400BB7AB0 /* C4ShapeLayer.m */,
-				EDCEA5A514FD7567009969F2 /* C4Gesture.h */,
-				EDC75ED81506D7D2002D82A1 /* C4LayerAnimation.h */,
-				EDAFFAD714F70D5F00CA356A /* C4Notification.h */,
+				ED36D9E9157C91E900C3AEE7 /* Protocols */,
 				ED50C89414EAC2010040D844 /* C4AppDelegate.h */,
 				ED50C89514EAC2010040D844 /* C4AppDelegate.m */,
+				EDCE425E1564044000C7356E /* C4Camera.h */,
+				EDCE425F1564044000C7356E /* C4Camera.m */,
+				EDCE42601564044000C7356E /* C4CameraController.h */,
+				EDCE42611564044000C7356E /* C4CameraController.m */,
 				ED50C8C314EAC4F70040D844 /* C4CanvasController.h */,
 				ED50C8C414EAC4F70040D844 /* C4CanvasController.m */,
+				EDCE42621564044000C7356E /* C4CaptureVideoPreviewLayer.h */,
+				EDCE42631564044000C7356E /* C4CaptureVideoPreviewLayer.m */,
 				EDAFFAEE14F7602F00CA356A /* C4Control.h */,
 				EDAFFAEF14F7602F00CA356A /* C4Control.m */,
 				ED009F9C1509242100086987 /* C4EAGLES1Renderer.h */,
@@ -346,8 +334,18 @@
 				ED89849714EF1C8700BB7AB0 /* C4Object.m */,
 				ED3076A0150D51F0001D689C /* C4PlayerLayer.h */,
 				ED3076A1150D51F0001D689C /* C4PlayerLayer.m */,
+				EDF65456150E104100194671 /* C4Sample.h */,
+				EDF65457150E104100194671 /* C4Sample.m */,
+				EDECBF6A14EAE26600D9A446 /* C4Shape.h */,
+				EDECBF6B14EAE26600D9A446 /* C4Shape.m */,
+				ED89848514EE180400BB7AB0 /* C4ShapeLayer.h */,
+				ED89848614EE180400BB7AB0 /* C4ShapeLayer.m */,
+				ED9D5FA31564A927009C5175 /* C4Vector.h */,
+				ED9D5FA41564A927009C5175 /* C4Vector.m */,
 				ED50C8D414EACA340040D844 /* C4View.h */,
 				ED50C8D514EACA340040D844 /* C4View.m */,
+				EDCE426B1564174000C7356E /* C4ViewController.h */,
+				EDCE426C1564174000C7356E /* C4ViewController.m */,
 				ED50C8BE14EAC4920040D844 /* C4Window.h */,
 				ED50C8BF14EAC4920040D844 /* C4Window.m */,
 				ED50C8BA14EAC3B10040D844 /* UITouch+C4Touch.h */,
@@ -374,15 +372,6 @@
 				EDC774F11561A532005C88F6 /* whiteCircle10.png */,
 			);
 			name = Media;
-			sourceTree = "<group>";
-		};
-		EDCE425D1564020F00C7356E /* 4Greg */ = {
-			isa = PBXGroup;
-			children = (
-				EDC367AA1559DD1300A0C676 /* PlayheadView.h */,
-				EDC367AB1559DD1300A0C676 /* PlayheadView.m */,
-			);
-			name = 4Greg;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -461,8 +450,6 @@
 				EDC774F91561A532005C88F6 /* whiteCircle08.png in Resources */,
 				EDC774FA1561A532005C88F6 /* whiteCircle09.png in Resources */,
 				EDC774FB1561A532005C88F6 /* whiteCircle10.png in Resources */,
-				ED14948E15658DB700E6E892 /* test_3.jpg in Resources */,
-				ED14948F15658DB700E6E892 /* test_img.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,17 +480,16 @@
 				ED009F9415091FFD00086987 /* C4GL.m in Sources */,
 				ED009F9E1509242100086987 /* C4EAGLES1Renderer.m in Sources */,
 				ED009FA81509545100086987 /* C4GL1Renderer.m in Sources */,
-				ED3C1C45150AC59F00AB288D /* C4Image.m in Sources */,
 				ED30769C150D400C001D689C /* C4Movie.m in Sources */,
 				ED3076A2150D51F0001D689C /* C4PlayerLayer.m in Sources */,
 				EDF6544A150DEF3300194671 /* C4WorkSpace.m in Sources */,
 				EDF65458150E104100194671 /* C4Sample.m in Sources */,
-				EDC367AC1559DD1300A0C676 /* PlayheadView.m in Sources */,
 				EDCE42641564044000C7356E /* C4Camera.m in Sources */,
 				EDCE42651564044000C7356E /* C4CameraController.m in Sources */,
 				EDCE42661564044000C7356E /* C4CaptureVideoPreviewLayer.m in Sources */,
 				EDCE426D1564174000C7356E /* C4ViewController.m in Sources */,
 				ED9D5FA51564A927009C5175 /* C4Vector.m in Sources */,
+				ED36D9EC157C935500C3AEE7 /* C4Image.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -579,8 +565,19 @@
 		ED50C8A014EAC2010040D844 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "C4iOS/C4iOS-Prefix.pch";
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_PEDANTIC = YES;
+				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
 				INFOPLIST_FILE = "C4iOS/C4iOS-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -590,8 +587,19 @@
 		ED50C8A114EAC2010040D844 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "C4iOS/C4iOS-Prefix.pch";
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_PEDANTIC = YES;
+				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
 				INFOPLIST_FILE = "C4iOS/C4iOS-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
