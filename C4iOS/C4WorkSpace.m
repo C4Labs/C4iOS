@@ -8,20 +8,14 @@
 
 #import "C4WorkSpace.h"
 
-@implementation C4WorkSpace {
-    C4Movie *m;
-}
+@implementation C4WorkSpace 
 
 -(void)setup {
-    m = [C4Movie movieNamed:@"inception.mov"];
-    m.shouldAutoplay = YES;
-    m.loops = YES;
-    [self.canvas addMovie:m];
+    [self addGesture:SWIPEUP name:@"swipeUpGesture" action:@"swipedUp"];
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    CGPoint currentTouchPoint = [[touches anyObject] locationInView:self.canvas];
-    m.rate = (currentTouchPoint.x-384)/384;
+-(void)swipedUp {
+    C4Log(@"hello gesture");
 }
 
 @end

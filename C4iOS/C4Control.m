@@ -44,8 +44,8 @@
  */
 
 -(void)dealloc {
-    self.longPressMethodName = nil;
     self.backgroundColor = nil;
+    self.longPressMethodName = nil;
     NSEnumerator *enumerator = [self.gestureDictionary keyEnumerator];
     id key;
     while ((key = [enumerator nextObject])) {
