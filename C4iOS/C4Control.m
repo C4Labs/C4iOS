@@ -368,5 +368,9 @@
 -(void)postNotification:(NSString *)notification {
 	[[NSNotificationCenter defaultCenter] postNotificationName:notification object:self];
 }
+
+-(id)copyWithZone:(NSZone *)zone {
+    return self;
+}
 @end
 

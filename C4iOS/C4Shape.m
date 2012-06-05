@@ -502,4 +502,9 @@
 +(Class)layerClass {
     return [C4ShapeLayer class];
 }
+
+-(id)copyWithZone:(NSZone *)zone {
+    
+    return self;
+}
 @end

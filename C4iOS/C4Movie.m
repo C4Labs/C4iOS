@@ -52,7 +52,7 @@
 -(id)initWithMovieName:(NSString *)movieName {
     self = [super init];
     if(self != nil) {        
-        self.shouldAutoplay = YES;
+        self.shouldAutoplay = NO;
         NSArray *movieNameComponents = [movieName componentsSeparatedByString:@"."];
         movieURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:[movieNameComponents objectAtIndex:0]
                                                                                       ofType:[movieNameComponents objectAtIndex:1]]];
@@ -123,7 +123,7 @@
 }
 
 - (BOOL)isPlaying {
-	return (self.rate == 0.0f);
+	return (self.player.rate != 0.0f);
 }
 
 -(CGFloat)rate {
@@ -131,9 +131,14 @@
 }
 
 -(void)setRate:(CGFloat)rate {
+    BOOL wasPlaying = self.isPlaying;
+    if(wasPlaying == YES) {
+        [self pause];
+    }
     _rate = rate;
-    if(self.isPlaying)
-        self.player.rate = rate;
+    if(wasPlaying == YES) {
+        [self play];
+    }
 }
 
 + (Class)layerClass
@@ -246,7 +251,6 @@
         /* Replace the player item with a new player item. The item replacement occurs 
          asynchronously; observe the currentItem property to find out when the 
          replacement will/did occur*/
-        //        C4Log(@"replaceCurrentItemWithPlayerItem");
         [[self player] replaceCurrentItemWithPlayerItem:self.playerItem];
     }
 }
@@ -325,7 +329,10 @@
 - (void) playerItemDidReachEnd:(NSNotification*) aNotification {
     [self postNotification:@"reachedEnd"];
     if(self.loops) {
-        [self seekToTime:0.0f];
+        if(self.player.rate < 0.0f)
+            [self seekToTime:self.duration];
+        else
+            [self seekToTime:0.0f];
         [self play];
     }
     [self reachedEnd];

@@ -46,6 +46,7 @@
 		ED50C8D614EACA340040D844 /* C4View.m in Sources */ = {isa = PBXBuildFile; fileRef = ED50C8D514EACA340040D844 /* C4View.m */; };
 		ED7513AB15150FB60076317F /* inception.mov in Resources */ = {isa = PBXBuildFile; fileRef = ED7513AA15150FB60076317F /* inception.mov */; };
 		ED751492151519890076317F /* C4Sky.png in Resources */ = {isa = PBXBuildFile; fileRef = ED751491151519890076317F /* C4Sky.png */; };
+		ED7C9C5E157D721E0095289F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED7C9C5D157D721E0095289F /* Security.framework */; };
 		ED80BBC014F0648800AAD49C /* C4Defines.m in Sources */ = {isa = PBXBuildFile; fileRef = ED80BBBF14F0648800AAD49C /* C4Defines.m */; };
 		ED89848714EE180400BB7AB0 /* C4ShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED89848614EE180400BB7AB0 /* C4ShapeLayer.m */; };
 		ED89849814EF1C8800BB7AB0 /* C4Object.m in Sources */ = {isa = PBXBuildFile; fileRef = ED89849714EF1C8700BB7AB0 /* C4Object.m */; };
@@ -135,6 +136,7 @@
 		ED50C8D514EACA340040D844 /* C4View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4View.m; sourceTree = "<group>"; };
 		ED7513AA15150FB60076317F /* inception.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = inception.mov; sourceTree = "<group>"; };
 		ED751491151519890076317F /* C4Sky.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = C4Sky.png; sourceTree = "<group>"; };
+		ED7C9C5D157D721E0095289F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		ED80BBBF14F0648800AAD49C /* C4Defines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Defines.m; sourceTree = "<group>"; };
 		ED89848514EE180400BB7AB0 /* C4ShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4ShapeLayer.h; sourceTree = "<group>"; };
 		ED89848614EE180400BB7AB0 /* C4ShapeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4ShapeLayer.m; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED7C9C5E157D721E0095289F /* Security.framework in Frameworks */,
 				ED1253FD15657D810003AFAF /* Accelerate.framework in Frameworks */,
 				ED307680150D2A36001D689C /* CoreMedia.framework in Frameworks */,
 				ED009FA01509253500086987 /* OpenGLES.framework in Frameworks */,
@@ -214,6 +217,7 @@
 		ED50C87614EAC2010040D844 = {
 			isa = PBXGroup;
 			children = (
+				ED7C9C5D157D721E0095289F /* Security.framework */,
 				ED50C88B14EAC2010040D844 /* C4iOS */,
 				ED50C88414EAC2010040D844 /* Frameworks */,
 				ED50C88214EAC2010040D844 /* Products */,
@@ -251,8 +255,6 @@
 			children = (
 				EDF65448150DEF3300194671 /* C4WorkSpace.h */,
 				EDF65449150DEF3300194671 /* C4WorkSpace.m */,
-				ED36D9EA157C935400C3AEE7 /* C4Image.h */,
-				ED36D9EB157C935400C3AEE7 /* C4Image.m */,
 				ED50C8D314EACA0E0040D844 /* Source */,
 				EDCE425C156401F000C7356E /* Media */,
 				ED50C88C14EAC2010040D844 /* App */,
@@ -322,6 +324,8 @@
 				ED009F9315091FFD00086987 /* C4GL.m */,
 				ED009FA61509545000086987 /* C4GL1Renderer.h */,
 				ED009FA71509545000086987 /* C4GL1Renderer.m */,
+				ED36D9EA157C935400C3AEE7 /* C4Image.h */,
+				ED36D9EB157C935400C3AEE7 /* C4Image.m */,
 				EDA7014714FC496300A0D77D /* C4Label.h */,
 				EDA7014814FC496300A0D77D /* C4Label.m */,
 				ED50C8C914EAC5990040D844 /* C4Layer.h */,

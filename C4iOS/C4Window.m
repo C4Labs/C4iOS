@@ -44,6 +44,8 @@
         [self removeGestureRecognizer:g];
     }
     gestureRecognizerArray = nil;
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void)awakeFromNib {
@@ -96,4 +98,23 @@
  for this UIWindow subclass will be a C4Canvas
  */
 
+-(void)listenFor:(NSString *)notification andRunMethod:(NSString *)methodName{
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(methodName) name:notification object:nil];
+}
+
+-(void)listenFor:(NSString *)notification fromObject:(id)object andRunMethod:(NSString *)methodName {
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(methodName) name:notification object:object];
+}
+
+-(void)stopListeningFor:(NSString *)methodName {
+    [self stopListeningFor:methodName object:nil];
+}
+
+-(void)stopListeningFor:(NSString *)methodName object:(id)object {
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:methodName object:object];
+}
+
+-(void)postNotification:(NSString *)notification {
+	[[NSNotificationCenter defaultCenter] postNotificationName:notification object:self];
+}
 @end

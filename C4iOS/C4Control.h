@@ -39,7 +39,7 @@
 
  */
 
-@interface C4Control : UIControl <C4Notification, C4Gesture> {
+@interface C4Control : UIControl <C4Notification, C4Gesture, NSCopying> {
 }
 
 /// @name Convenience Methods
