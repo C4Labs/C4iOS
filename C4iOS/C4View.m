@@ -19,6 +19,11 @@
 @synthesize origin = _origin;
 @synthesize width, height;
 
+-(id)init {
+    self = [self initWithFrame:CGRectZero];
+    return self;
+}
+
 -(id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if(self != nil) {
@@ -26,6 +31,7 @@
         self.animationDelay = 0.0f;
         self.animationOptions = BEGINCURRENT;
         self.repeatCount = 0;
+        [self setup];
     }
     return self;
 }

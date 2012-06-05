@@ -78,6 +78,7 @@
         CGRect newFrame = CGRectZero;
         newFrame.size = _originalMovieSize;
         self.frame = newFrame;
+        [self setup];
     }
     return self;
 }
@@ -105,6 +106,7 @@
 
         self.backgroundColor = [UIColor blackColor];        
         self.frame = movieFrame;
+        [self setup];
     }
     return self;
 }

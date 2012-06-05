@@ -11,6 +11,14 @@
 @implementation C4Object
 
 #pragma mark Notification Methods
+-(id)init {
+    self = [super init];
+    if (self != nil) {
+        [self setup];
+    }
+    return self;
+}
+
 -(void)setup {}
 
 -(void)dealloc {

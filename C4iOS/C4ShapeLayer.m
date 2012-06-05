@@ -292,9 +292,9 @@
     C4Log(@"C4ShapeLayer setCornerRadius not currently available");
 }
 
--(void)setMasksToBounds:(BOOL)masksToBounds {
-    C4Log(@"C4ShapeLayer setMasksToBounds not currently available");
-}
+//-(void)setMasksToBounds:(BOOL)masksToBounds {
+//    C4Log(@"C4ShapeLayer setMasksToBounds not currently available");
+//}
 
 -(void)setContentsGravity:(NSString *)contentsGravity {
     C4Log(@"C4ShapeLayer setContentsGravity not currently available");

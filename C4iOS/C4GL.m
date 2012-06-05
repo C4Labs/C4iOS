@@ -68,6 +68,7 @@
 		if (currentSystemVersion >= minimumSystemVersion) {
 			displayLinkSupported = YES;
         }
+        [self setup];
     }
     return self;
 }

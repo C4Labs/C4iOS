@@ -8,11 +8,24 @@
 
 #import "C4WorkSpace.h"
 
-@implementation C4WorkSpace 
+@interface MyShape : C4Shape {
+}
+@end
+
+@implementation MyShape
+-(void)setup {
+    self.fillColor = C4GREY;
+}
+@end
+
+@implementation C4WorkSpace {
+    MyShape *shape;
+}
 
 -(void)setup {
-    C4Log(@"size: (%4.2f,%4.2f)",self.canvas.width, self.canvas.height);
-    C4Log(@"center: (%4.2f,%4.2f)",self.canvas.center.x,self.canvas.center.y);
+    shape = [MyShape new];
+    [shape ellipse:CGRectMake(100, 100, 100, 100)];
+    [self.canvas addShape:shape];
 }
 
 @end

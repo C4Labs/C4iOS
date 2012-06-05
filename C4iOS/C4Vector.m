@@ -39,6 +39,7 @@
         pVec3[2] = 0;
         
         pDisplacedHeading = 0;
+        [self setup];
 	}
 	return self;
 }

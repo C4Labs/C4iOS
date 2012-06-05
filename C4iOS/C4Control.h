@@ -126,4 +126,6 @@
 ///@name Inherited Methods
 
 @property (readonly, nonatomic) CGFloat width, height;
+
+@property (readwrite, nonatomic, assign) C4Control *mask;
 @end

@@ -67,6 +67,7 @@
         self.frame = _visibleImage.extent;
         _pixelDataLoaded = NO;
         self.imageLayer.contents = (id)_originalImage.CGImage;
+        [self setup];
     }
     return self;
 }
@@ -82,6 +83,7 @@
         _pixelDataLoaded = NO;
         self.frame = self.CIImage.extent;
         [self.imageLayer setContents:(id)_originalImage.CGImage];
+        [self setup];
     }
     return self;
 }

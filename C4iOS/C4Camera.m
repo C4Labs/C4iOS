@@ -46,6 +46,7 @@
         self.cameraController.previewLayer = self.previewLayer;
         self.frame = self.previewLayer.frame;
         [self listenFor:@"imageWasCaptured" fromObject:self.cameraController andRunMethod:@"imageWasCaptured"];
+        [self setup];
     }
     return self;
 }

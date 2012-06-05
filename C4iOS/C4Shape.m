@@ -48,6 +48,7 @@
     self = [super initWithFrame:frame];
     if(self != nil) {
         _isLine = NO;
+        [self setup];
     }
     return self;
 }

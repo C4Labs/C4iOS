@@ -39,6 +39,7 @@
                                     
         _player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
         self.player.delegate = self;
+        [self setup];
     }
     return self;
 }

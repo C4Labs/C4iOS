@@ -13,7 +13,7 @@
 @synthesize width, height, center = _center;
 
 - (id)init {
-    self = [super init];
+    self = [self initWithFrame:CGRectZero];
     if (self) {
 #ifdef VERBOSE
         C4Log(@"%@ init",[self class]);
@@ -27,7 +27,8 @@
     if(self != nil) {
 #ifdef VERBOSE
         C4Log(@"%@ initWithFrame",[self class]);
-        _center = CGPointMake(self.width/2.0f,self.height/2.0f);        
+        _center = CGPointMake(self.width/2.0f,self.height/2.0f); 
+        //[self setup] //need to comment this out right here, because there will be a conflict with calling [canvas setup] from the main app delegate
 #endif
     }
     return self;

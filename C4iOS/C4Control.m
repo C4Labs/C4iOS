@@ -22,6 +22,14 @@
 @synthesize gestureDictionary = _gestureDictionary;
 @synthesize origin = _origin;
 @synthesize width, height;
+@synthesize mask;
+
+-(id)init {
+    self = [super initWithFrame:CGRectZero];
+    if(self != nil) {
+    }
+    return self;
+}
 
 -(id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -30,6 +38,7 @@
         _animationDelay = 0.0f;
         _animationOptions = BEGINCURRENT;
         _repeatCount = 0;
+        [self setup];
     }
     return self;
 }
@@ -380,6 +389,10 @@
 
 -(CGFloat)height {
     return self.frame.size.height;
+}
+
+-(void)setMask:(C4Control *)maskObject {
+    self.layer.mask = maskObject.layer;
 }
 @end
 
