@@ -349,12 +349,18 @@
 -(void)_setFillColor:(UIColor *)_fillColor {
     [self.shapeLayer animateFillColor:_fillColor.CGColor];
 }
+-(UIColor *)fillColor {
+    return [UIColor colorWithCGColor:self.shapeLayer.fillColor];
+}
 
 -(void)setFillRule:(NSString *)_fillRule {
     [self performSelector:@selector(setFillRule:) withObject:_fillRule afterDelay:self.animationDelay];
 }
 -(void)_setFillRule:(NSString *)_fillRule {
     self.shapeLayer.fillRule = _fillRule;
+}
+-(NSString *)fillRule {
+    return self.shapeLayer.fillRule;
 }
 
 -(void)setLineCap:(NSString *)_lineCap {
@@ -363,11 +369,15 @@
 -(void)_setLineCap:(NSString *)_lineCap {
     self.shapeLayer.lineCap = _lineCap;
 }
+-(NSString *)lineCap {
+    return self.shapeLayer.lineCap;
+}
 
 -(void)setDashPattern:(CGFloat *)dashPattern pointCount:(NSUInteger)pointCount {
     NSMutableArray *patternArray = [[NSMutableArray alloc] initWithCapacity:0];
     for(int i = 0; i < pointCount; i++) [patternArray addObject:[NSNumber numberWithFloat:dashPattern[i]]];
     [self performSelector:@selector(_setLineDashPattern:) withObject:patternArray afterDelay:self.animationDelay];
+    patternArray = nil;
 }
 
 -(void)setLineDashPattern:(NSArray *)_lineDashPattern {
@@ -376,12 +386,18 @@
 -(void)_setLineDashPattern:(NSArray *)_lineDashPattern {
     self.shapeLayer.lineDashPattern = _lineDashPattern;
 }
+-(NSArray *)lineDashPattern {
+    return self.shapeLayer.lineDashPattern;
+}
 
 -(void)setLineDashPhase:(CGFloat)_lineDashPhase {
     [self performSelector:@selector(_setLineDashPhase:) withObject:[NSNumber numberWithFloat:_lineDashPhase] afterDelay:self.animationDelay];
 }
 -(void)_setLineDashPhase:(NSNumber *)_lineDashPhase {
     self.shapeLayer.lineDashPhase = [_lineDashPhase floatValue];
+}
+-(CGFloat)lineDashPhase {
+    return self.shapeLayer.lineDashPhase;
 }
 
 -(void)setLineJoin:(NSString *)_lineJoin {
@@ -390,12 +406,18 @@
 -(void)_setLineJoin:(NSString *)_lineJoin {
     self.shapeLayer.lineJoin = _lineJoin;
 }
+-(NSString *)lineJoin {
+    return self.shapeLayer.lineJoin;
+}
 
 -(void)setLineWidth:(CGFloat)_lineWidth {
     [self performSelector:@selector(_setLineWidth:) withObject:[NSNumber numberWithFloat:_lineWidth] afterDelay:self.animationDelay];
 }
 -(void)_setLineWidth:(NSNumber *)_lineWidth {
     [self.shapeLayer animateLineWidth:[_lineWidth floatValue]];
+}
+-(CGFloat)lineWidth {
+    return self.shapeLayer.lineWidth;
 }
 
 -(void)setMiterLimit:(CGFloat)_miterLimit {
@@ -404,12 +426,18 @@
 -(void)_setMiterLimit:(NSNumber *)_miterLimit {
     [self.shapeLayer animateMiterLimit:[_miterLimit floatValue]];
 }
+-(CGFloat)miterLimit {
+    return self.shapeLayer.miterLimit;
+}
 
 -(void)setStrokeColor:(UIColor *)_strokeColor {
     [self performSelector:@selector(_setStrokeColor:) withObject:_strokeColor afterDelay:self.animationDelay];
 }
 -(void)_setStrokeColor:(UIColor *)_strokeColor {
     [self.shapeLayer animateStrokeColor:_strokeColor.CGColor];
+}
+-(UIColor *)strokeColor {
+    return [UIColor colorWithCGColor:self.shapeLayer.strokeColor];
 }
 
 -(void)setStrokeEnd:(CGFloat)_strokeEnd {
@@ -418,6 +446,9 @@
 -(void)_setStrokeEnd:(NSNumber *)_strokeEnd {
     [self.shapeLayer animateStrokeEnd:[_strokeEnd floatValue]];
 }
+-(CGFloat)strokeEnd {
+    return self.shapeLayer.strokeEnd;
+}
 
 -(void)setStrokeStart:(CGFloat)_strokeStart {
     [self performSelector:@selector(_setStrokeStart:) withObject:[NSNumber numberWithFloat:_strokeStart] afterDelay:self.animationDelay];
@@ -425,13 +456,18 @@
 -(void)_setStrokeStart:(NSNumber *)_strokeStart {
     [self.shapeLayer animateStrokeStart:[_strokeStart floatValue]];
 }
+-(CGFloat)strokeStart {
+    return self.shapeLayer.strokeStart;
+}
 
 -(void)setShadowColor:(UIColor *)_shadowColor {
     [self performSelector:@selector(_setShadowColor:) withObject:_shadowColor afterDelay:self.animationDelay];
 }
-
 -(void)_setShadowColor:(UIColor *)_shadowColor {
     [self.shapeLayer animateShadowColor:_shadowColor.CGColor];
+}
+-(UIColor *)shadowColor {
+    return [UIColor colorWithCGColor:self.shapeLayer.shadowColor];
 }
 
 -(void)setShadowOffset:(CGSize)_shadowOffset {
@@ -440,12 +476,18 @@
 -(void)_setShadowOffSet:(NSValue *)_shadowOffset {
     [self.shapeLayer animateShadowOffset:[_shadowOffset CGSizeValue]];
 }
+-(CGSize)shadowOffset {
+    return self.shapeLayer.shadowOffset;
+}
 
 -(void)setShadowOpacity:(CGFloat)_shadowOpacity {
     [self performSelector:@selector(_setShadowOpacity:) withObject:[NSNumber numberWithFloat:_shadowOpacity] afterDelay:self.animationDelay];
 }
 -(void)_setShadowOpacity:(NSNumber *)_shadowOpacity {
     [self.shapeLayer animateShadowOpacity:[_shadowOpacity floatValue]];
+}
+-(CGFloat)shadowOpacity {
+    return self.shapeLayer.shadowOpacity;
 }
 
 -(void)setShadowPath:(CGPathRef)_shadowPath {
@@ -454,12 +496,18 @@
 -(void)_setShadowPath:(id)_shadowPath {
     [self.shapeLayer animateShadowPath:(__bridge CGPathRef)_shadowPath];
 }
+-(CGPathRef)shadowPath {
+    return self.shapeLayer.shadowPath;
+}
 
 -(void)setShadowRadius:(CGFloat)_shadowRadius {
     [self performSelector:@selector(_setShadowRadius:) withObject:[NSNumber numberWithFloat:_shadowRadius] afterDelay:self.animationDelay];
 }
 -(void)_setShadowRadius:(NSNumber *)_shadowRadius {
     [self.shapeLayer animateShadowRadius:[_shadowRadius floatValue]];
+}
+-(CGFloat)shadowRadius {
+    return self.shapeLayer.shadowRadius;
 }
 
 -(void)setAnimationDuration:(CGFloat)animationDuration {
