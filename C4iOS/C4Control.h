@@ -125,4 +125,5 @@
 #pragma mark Inherited methods
 ///@name Inherited Methods
 
+@property (readonly, nonatomic) CGFloat width, height;
 @end

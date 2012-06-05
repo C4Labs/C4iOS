@@ -10,15 +10,14 @@
 
 @implementation C4Window
 @synthesize canvasController;
+@synthesize width, height, center = _center;
 
-- (id)init
-{
+- (id)init {
     self = [super init];
     if (self) {
 #ifdef VERBOSE
         C4Log(@"%@ init",[self class]);
 #endif
-
     }
     return self;
 }
@@ -28,6 +27,7 @@
     if(self != nil) {
 #ifdef VERBOSE
         C4Log(@"%@ initWithFrame",[self class]);
+        _center = CGPointMake(self.width/2.0f,self.height/2.0f);        
 #endif
     }
     return self;
@@ -84,7 +84,6 @@
     [self addSubview:movie];
 }
 
-
 -(void)addCamera:(C4Camera *)camera {
     NSAssert([camera isKindOfClass:[C4Camera class]],
              @"You tried to add a %@ using [canvas addCamera:]", [camera class]);
@@ -117,4 +116,13 @@
 -(void)postNotification:(NSString *)notification {
 	[[NSNotificationCenter defaultCenter] postNotificationName:notification object:self];
 }
+
+-(CGFloat)width {
+    return self.frame.size.width;
+}
+
+-(CGFloat)height {
+    return self.frame.size.height;
+}
+
 @end

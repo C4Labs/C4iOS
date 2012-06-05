@@ -86,4 +86,7 @@ For more information about how to use windows, see View Programming Guide for iO
 
 #pragma mark New Stuff
 -(void)addCamera:(C4Camera *)camera;
+
+@property (readonly, nonatomic) CGFloat width, height;
+@property (readonly, nonatomic) CGPoint center;
 @end

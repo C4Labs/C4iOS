@@ -149,4 +149,7 @@
  @warning *Note:* This parameter is currently unused.
   */
 @property (nonatomic) CGFloat repeatCount;
+
+@property (readonly, nonatomic) CGFloat width, height;
+
 @end

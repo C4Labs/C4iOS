@@ -11,11 +11,8 @@
 @implementation C4WorkSpace 
 
 -(void)setup {
-    [self addGesture:SWIPEUP name:@"swipeUpGesture" action:@"swipedUp"];
-}
-
--(void)swipedUp {
-    C4Log(@"hello gesture");
+    C4Log(@"size: (%4.2f,%4.2f)",self.canvas.width, self.canvas.height);
+    C4Log(@"center: (%4.2f,%4.2f)",self.canvas.center.x,self.canvas.center.y);
 }
 
 @end

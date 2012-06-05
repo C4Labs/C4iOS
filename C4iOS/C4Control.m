@@ -21,6 +21,7 @@
 @synthesize animationDuration = _animationDuration, animationDelay = _animationDelay, animationOptions = _animationOptions, repeatCount = _repeatCount;
 @synthesize gestureDictionary = _gestureDictionary;
 @synthesize origin = _origin;
+@synthesize width, height;
 
 -(id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -371,6 +372,14 @@
 
 -(id)copyWithZone:(NSZone *)zone {
     return self;
+}
+
+-(CGFloat)width {
+    return self.frame.size.width;
+}
+
+-(CGFloat)height {
+    return self.frame.size.height;
 }
 @end
 
