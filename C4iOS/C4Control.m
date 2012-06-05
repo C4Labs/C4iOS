@@ -34,10 +34,10 @@
 -(id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if(self != nil) {
-        _animationDuration = 0.0f;
-        _animationDelay = 0.0f;
-        _animationOptions = BEGINCURRENT;
-        _repeatCount = 0;
+        self.animationDuration = 0.0f;
+        self.animationDelay = 0.0f;
+        self.animationOptions = BEGINCURRENT;
+        self.repeatCount = 0;
         [self setup];
     }
     return self;

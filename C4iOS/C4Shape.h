@@ -330,4 +330,5 @@ The change will happen based on the shape's current animation options, duration 
  */
 @property (readonly, atomic, weak) C4ShapeLayer *shapeLayer;
 
+@property (readonly, atomic, getter = isClosed) BOOL closed;
 @end

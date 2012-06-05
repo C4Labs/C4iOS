@@ -8,24 +8,18 @@
 
 #import "C4WorkSpace.h"
 
-@interface MyShape : C4Shape {
-}
-@end
-
-@implementation MyShape
--(void)setup {
-    self.fillColor = C4GREY;
-}
-@end
-
 @implementation C4WorkSpace {
-    MyShape *shape;
+    C4Shape *polygon;
 }
 
 -(void)setup {
-    shape = [MyShape new];
-    [shape ellipse:CGRectMake(100, 100, 100, 100)];
-    [self.canvas addShape:shape];
+    CGPoint polyPoints[3] = {CGPointMake(100, 100), CGPointMake(200, 150), CGPointMake(100, 200)};
+    polygon = [C4Shape polygon:polyPoints pointCount:3];
+    [self.canvas addShape:polygon];
 }
 
+-(void)touchesBegan {
+    polygon.animationDuration = 3.0f;
+    [polygon closeShape];
+}
 @end

@@ -33,12 +33,14 @@
 -(void)_setShadowOpacity:(NSNumber *)_shadowOpacity;
 -(void)_setShadowPath:(id)shadowPath;
 -(void)_setShadowRadius:(NSNumber *)_shadowRadius;
+
+@property (atomic) BOOL isTriangle;
 @end
 
 @implementation C4Shape
-//@synthesize animationDuration = _animationDuration;
 @synthesize isLine =_isLine, shapeLayer, pointA = _pointA, pointB = _pointB;
 @synthesize fillColor, fillRule, lineCap, lineDashPattern, lineDashPhase, lineJoin, lineWidth, miterLimit, origin = _origin, strokeColor, strokeEnd, strokeStart, shadowOffset, shadowOpacity, shadowRadius, shadowPath, shadowColor;
+@synthesize closed = _closed, isTriangle = _isTriangle;
 
 -(id)init {
     return [self initWithFrame:CGRectZero];
@@ -48,6 +50,8 @@
     self = [super initWithFrame:frame];
     if(self != nil) {
         _isLine = NO;
+        _isTriangle = NO;
+        _closed = NO;
         [self setup];
     }
     return self;
@@ -103,6 +107,7 @@
 
 -(void)_ellipse:(NSValue *)ellipseValue {
     _isLine = NO;
+    _closed = YES;
     CGRect aRect = [ellipseValue CGRectValue];
     CGMutablePathRef newPath = CGPathCreateMutable();
     CGRect newPathRect = CGRectMake(0, 0, aRect.size.width, aRect.size.height);
@@ -181,6 +186,7 @@
 
 -(void)_rect:(NSValue *)rectValue {
     _isLine = NO;
+    _closed = YES;
     CGRect aRect = [rectValue CGRectValue];
     CGMutablePathRef newPath = CGPathCreateMutable();
     CGRect newPathRect = CGRectMake(0, 0, aRect.size.width, aRect.size.height);
@@ -231,6 +237,7 @@
 }
 -(void)_line:(NSArray *)pointArray {
     _isLine = YES;
+    _closed = YES;
     [self _polygon:pointArray];
 }
 
@@ -239,8 +246,8 @@
 }
 -(void)_triangle:(NSArray *)pointArray {
     _isLine = NO;
+    _isTriangle = YES;
     [self _polygon:pointArray];
-    [self closeShape];
 }
 
 /* 
@@ -257,6 +264,7 @@
     }
     [self performSelector:@selector(_polygon:) withObject:points afterDelay:self.animationDelay];
 }
+
 -(void)_polygon:(NSArray *)pointArray {
     NSInteger pointCount = [pointArray count];
     CGPoint points[pointCount];
@@ -284,22 +292,26 @@
     for(int i = 1; i < pointCount; i++) {
         CGPathAddLineToPoint(newPath, nil, points[i].x, points[i].y);
     }
+    if (_isTriangle == YES && _closed == NO) {
+        CGPathCloseSubpath(newPath);
+        _closed = YES;
+    }
     [self.shapeLayer animatePath:newPath];
     self.frame = shapeRect;
     CGPathRelease(newPath);
 }
 
 -(void)closeShape {
-    [self performSelector:@selector(closeShape) withObject:nil afterDelay:self.animationDelay];
+    if(_closed == NO) {
+        [self performSelector:@selector(_closeShape) withObject:nil afterDelay:self.animationDelay];
+    }
 }
 -(void)_closeShape {
-    CGFloat tempDuration = self.animationDuration;
-    self.animationDuration = 0.0f;
     CGMutablePathRef newPath = CGPathCreateMutableCopy(self.shapeLayer.path);
     CGPathCloseSubpath(newPath);
     [self.shapeLayer animatePath:newPath];
     CGPathRelease(newPath);
-    self.animationDuration = tempDuration;
+    _closed = YES;
 }
 
 -(CGPoint)pointA {
@@ -528,12 +540,11 @@
 }
 
 -(void)setup {
-//    self.animationDuration = 2.0f;
-//    self.fillColor = C4GREY;
 }
 
 /* NOTE: YOU CAN'T HIT TEST A CGPATH which is a line */
 -(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
+    if (_isLine == YES) return NO;
     return CGPathContainsPoint(self.shapeLayer.path, nil, point, nil) ? YES : NO;
 }
 
