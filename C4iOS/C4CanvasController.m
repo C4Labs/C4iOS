@@ -254,4 +254,12 @@
     //does nothing
 }
 
+-(void)runMethod:(NSString *)methodName afterDelay:(CGFloat)seconds {
+    [self performSelector:NSSelectorFromString(methodName) withObject:self afterDelay:seconds];
+}
+
+-(void)runMethod:(NSString *)methodName withObject:(id)object afterDelay:(CGFloat)seconds {
+    [self performSelector:NSSelectorFromString(methodName) withObject:object afterDelay:seconds];
+}
+
 @end

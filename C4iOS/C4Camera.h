@@ -9,7 +9,7 @@
 #import "C4Control.h"
 #import "C4CameraController.h"
 
-@interface C4Camera : C4Control <AVCaptureVideoDataOutputSampleBufferDelegate>
+@interface C4Camera : C4Control <AVCaptureVideoDataOutputSampleBufferDelegate, C4MethodDelay>
 +(C4Camera *)cameraWithFrame:(CGRect)frame;
 -(void)initCapture;
 -(void)captureImage;

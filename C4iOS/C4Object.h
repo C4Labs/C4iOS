@@ -14,7 +14,7 @@
 C4Objects conform to the C4Notification protocol which means that all objects will have the ability to post and receive notifications.
  */
 
-@interface C4Object : NSObject <C4Notification>
+@interface C4Object : NSObject <C4MethodDelay, C4Notification>
 
 /** A basic method within which basic variable and parameter setup can happen outside of an object's initialization methods.
  

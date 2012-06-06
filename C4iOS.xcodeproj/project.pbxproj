@@ -175,6 +175,7 @@
 		EDCEA5A514FD7567009969F2 /* C4Gesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Gesture.h; sourceTree = "<group>"; };
 		EDECBF6A14EAE26600D9A446 /* C4Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Shape.h; sourceTree = "<group>"; };
 		EDECBF6B14EAE26600D9A446 /* C4Shape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Shape.m; sourceTree = "<group>"; };
+		EDEF69AF157ED95A00E280B9 /* C4MethodDelay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = C4MethodDelay.h; sourceTree = "<group>"; };
 		EDF65448150DEF3300194671 /* C4WorkSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4WorkSpace.h; sourceTree = "<group>"; };
 		EDF65449150DEF3300194671 /* C4WorkSpace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4WorkSpace.m; sourceTree = "<group>"; };
 		EDF65456150E104100194671 /* C4Sample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Sample.h; sourceTree = "<group>"; };
@@ -210,6 +211,7 @@
 				EDCEA5A514FD7567009969F2 /* C4Gesture.h */,
 				EDC75ED81506D7D2002D82A1 /* C4LayerAnimation.h */,
 				EDAFFAD714F70D5F00CA356A /* C4Notification.h */,
+				EDEF69AF157ED95A00E280B9 /* C4MethodDelay.h */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
