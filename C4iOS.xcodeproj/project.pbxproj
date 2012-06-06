@@ -14,6 +14,7 @@
 		ED009FA81509545100086987 /* C4GL1Renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED009FA71509545000086987 /* C4GL1Renderer.m */; };
 		ED10F17214FC0BDE00B54390 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED10F17114FC0BDE00B54390 /* CoreText.framework */; };
 		ED1253FD15657D810003AFAF /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED1253FC15657D810003AFAF /* Accelerate.framework */; };
+		ED24F2C5157EB62800BC73B5 /* C4Timer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED24F2C4157EB62700BC73B5 /* C4Timer.m */; };
 		ED307680150D2A36001D689C /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED30767F150D2A36001D689C /* CoreMedia.framework */; };
 		ED30769C150D400C001D689C /* C4Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = ED307698150D400C001D689C /* C4Movie.m */; };
 		ED3076A2150D51F0001D689C /* C4PlayerLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3076A1150D51F0001D689C /* C4PlayerLayer.m */; };
@@ -88,6 +89,8 @@
 		ED10F17114FC0BDE00B54390 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		ED1253FC15657D810003AFAF /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		ED1B5BA31514024E0027365F /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		ED24F2C3157EB62700BC73B5 /* C4Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Timer.h; sourceTree = "<group>"; };
+		ED24F2C4157EB62700BC73B5 /* C4Timer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Timer.m; sourceTree = "<group>"; };
 		ED30767F150D2A36001D689C /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		ED307697150D400C001D689C /* C4Movie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Movie.h; sourceTree = "<group>"; };
 		ED307698150D400C001D689C /* C4Movie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Movie.m; sourceTree = "<group>"; };
@@ -251,6 +254,8 @@
 			children = (
 				EDF65448150DEF3300194671 /* C4WorkSpace.h */,
 				EDF65449150DEF3300194671 /* C4WorkSpace.m */,
+				ED24F2C3157EB62700BC73B5 /* C4Timer.h */,
+				ED24F2C4157EB62700BC73B5 /* C4Timer.m */,
 				ED50C8D314EACA0E0040D844 /* Source */,
 				EDCE425C156401F000C7356E /* Media */,
 				ED50C88C14EAC2010040D844 /* App */,
@@ -490,6 +495,7 @@
 				EDCE426D1564174000C7356E /* C4ViewController.m in Sources */,
 				ED9D5FA51564A927009C5175 /* C4Vector.m in Sources */,
 				ED36D9EC157C935500C3AEE7 /* C4Image.m in Sources */,
+				ED24F2C5157EB62800BC73B5 /* C4Timer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

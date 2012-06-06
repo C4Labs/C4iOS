@@ -21,6 +21,7 @@
 #import "C4LayerAnimation.h"
 
 #import "C4Object.h"
+#import "C4Timer.h"
 #import "C4Math.h"
 #import "C4Font.h"
 #import "C4Foundation.h"
