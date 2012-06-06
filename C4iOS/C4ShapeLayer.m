@@ -87,7 +87,10 @@
     animation.fromValue = (id)self.shadowColor;
     animation.toValue = (__bridge id)_shadowColor;
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { self.shadowColor = _shadowColor; }];
+        [CATransaction setCompletionBlock:^ { 
+            self.shadowColor = _shadowColor; 
+            [self removeAnimationForKey:@"shadowColor"];
+        }];
     }
     [self addAnimation:animation forKey:@"animateShadowColor"];
     [CATransaction commit];
@@ -99,7 +102,10 @@
     animation.fromValue = [NSNumber numberWithFloat:self.shadowOpacity];
     animation.toValue = [NSNumber numberWithFloat:_shadowOpacity];
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { self.shadowOpacity = _shadowOpacity; }];
+        [CATransaction setCompletionBlock:^ { 
+            self.shadowOpacity = _shadowOpacity; 
+            [self removeAnimationForKey:@"shadowOpacity"];
+        }];
     }
     [self addAnimation:animation forKey:@"animateShadowOpacity"];
     [CATransaction commit];
@@ -111,7 +117,10 @@
     animation.fromValue = [NSNumber numberWithFloat:self.shadowRadius];
     animation.toValue = [NSNumber numberWithFloat:_shadowRadius];
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { self.shadowRadius = _shadowRadius; }];
+        [CATransaction setCompletionBlock:^ { 
+            self.shadowRadius = _shadowRadius; 
+            [self removeAnimationForKey:@"shadowRadius"];
+        }];
     }
     [self addAnimation:animation forKey:@"animateShadowOpacity"];
     [CATransaction commit];
@@ -123,7 +132,10 @@
     animation.fromValue = [NSValue valueWithCGSize:self.shadowOffset];
     animation.toValue = [NSValue valueWithCGSize:_shadowOffset];
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { self.shadowOffset = _shadowOffset; }];
+        [CATransaction setCompletionBlock:^ { 
+            self.shadowOffset = _shadowOffset; 
+            [self removeAnimationForKey:@"shadowOffset"];
+        }];
     }
     [self addAnimation:animation forKey:@"animateShadowOffset"];
     [CATransaction commit];
@@ -135,7 +147,10 @@
     animation.fromValue = (id)self.path;
     animation.toValue = (__bridge id)_shadowPath;    
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { self.shadowPath = _shadowPath; }];
+        [CATransaction setCompletionBlock:^ { 
+            self.shadowPath = _shadowPath; 
+            [self removeAnimationForKey:@"shadowPath"];
+        }];
     }
     [self addAnimation:animation forKey:@"animateShadowPath"];
     [CATransaction commit];
@@ -147,7 +162,10 @@
     animation.fromValue = self.backgroundFilters;
     animation.toValue = _backgroundFilters;
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { self.backgroundFilters = _backgroundFilters; }];
+        [CATransaction setCompletionBlock:^ { 
+            self.backgroundFilters = _backgroundFilters; 
+            [self removeAnimationForKey:@"backgroundFilters"];
+        }];
     }
     [self addAnimation:animation forKey:@"animateBackgroundFilters"];
     [CATransaction commit];
@@ -159,7 +177,10 @@
     animation.fromValue = self.compositingFilter;
     animation.toValue = _compositingFilter;
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { self.compositingFilter = _compositingFilter; }];
+        [CATransaction setCompletionBlock:^ { 
+            self.compositingFilter = _compositingFilter; 
+            [self removeAnimationForKey:@"compositingFilter"];
+        }];
     }
     [self addAnimation:animation forKey:@"animateCompositingFilter"];
     [CATransaction commit];
@@ -184,7 +205,10 @@
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"path"];
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { self.path = _path; }];
+        [CATransaction setCompletionBlock:^ { 
+            self.path = _path; 
+            [self removeAnimationForKey:@"path"]; 
+        }];
     }
     animation.fromValue = (id)self.path;
     animation.toValue = (__bridge id)_path;    
@@ -198,7 +222,10 @@
     animation.fromValue = (id)self.fillColor;
     animation.toValue = (__bridge id)_fillColor;
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { self.fillColor = _fillColor; }];
+        [CATransaction setCompletionBlock:^ { 
+            self.fillColor = _fillColor; 
+            [self removeAnimationForKey:@"fillColor"]; 
+        }];
     }
     [self addAnimation:animation forKey:@"animateFillColor"];
     [CATransaction commit];
@@ -220,7 +247,10 @@
     animation.fromValue = [NSNumber numberWithFloat:self.lineWidth];
     animation.toValue = [NSNumber numberWithFloat:_lineWidth];
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { self.lineWidth = _lineWidth; }];
+        [CATransaction setCompletionBlock:^ { 
+            self.lineWidth = _lineWidth; 
+            [self removeAnimationForKey:@"lineWidth"]; 
+        }];
     }
     [self addAnimation:animation forKey:@"animateLineWidth"];
     [CATransaction commit];
@@ -232,7 +262,10 @@
     animation.fromValue = [NSNumber numberWithFloat:self.miterLimit];
     animation.toValue = [NSNumber numberWithFloat:_miterLimit];
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { self.miterLimit = _miterLimit; }];
+        [CATransaction setCompletionBlock:^ { 
+            self.miterLimit = _miterLimit;
+            [self removeAnimationForKey:@"miterLimit"]; 
+        }];
     }
     [self addAnimation:animation forKey:@"animateMiterLimit"];
     [CATransaction commit];
@@ -244,7 +277,10 @@
     animation.fromValue = (id)self.strokeColor;
     animation.toValue = (__bridge id)_strokeColor;   
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { self.strokeColor = _strokeColor; }];
+        [CATransaction setCompletionBlock:^ { 
+            self.strokeColor = _strokeColor; 
+            [self removeAnimationForKey:@"strokeColor"];
+        }];
     }
     
     [self addAnimation:animation forKey:@"animateStrokeColor"];
@@ -257,7 +293,10 @@
     animation.fromValue = [NSNumber numberWithFloat:self.strokeEnd];
     animation.toValue = [NSNumber numberWithFloat:_strokeEnd];
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { self.strokeEnd = _strokeEnd; }];
+        [CATransaction setCompletionBlock:^ { 
+            self.strokeEnd = _strokeEnd;
+            [self removeAnimationForKey:@"strokeEnd"];
+        }];
     }
     [self addAnimation:animation forKey:@"animateStrokeEnd"];
     [CATransaction commit];
@@ -269,7 +308,10 @@
     animation.fromValue = [NSNumber numberWithFloat:self.strokeStart];
     animation.toValue = [NSNumber numberWithFloat:_strokeStart];
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { self.strokeStart = _strokeStart; }];
+        [CATransaction setCompletionBlock:^ { 
+            self.strokeStart = _strokeStart; 
+            [self removeAnimationForKey:@"strokeStart"];
+        }];
     }
     [self addAnimation:animation forKey:@"animateStrokeStart"];
     [CATransaction commit];
