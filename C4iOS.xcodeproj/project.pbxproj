@@ -55,16 +55,6 @@
 		ED9D5FA51564A927009C5175 /* C4Vector.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9D5FA41564A927009C5175 /* C4Vector.m */; };
 		EDA7014914FC496300A0D77D /* C4Label.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA7014814FC496300A0D77D /* C4Label.m */; };
 		EDAFFAF014F7602F00CA356A /* C4Control.m in Sources */ = {isa = PBXBuildFile; fileRef = EDAFFAEF14F7602F00CA356A /* C4Control.m */; };
-		EDC774F21561A532005C88F6 /* whiteCircle01.png in Resources */ = {isa = PBXBuildFile; fileRef = EDC774E81561A531005C88F6 /* whiteCircle01.png */; };
-		EDC774F31561A532005C88F6 /* whiteCircle02.png in Resources */ = {isa = PBXBuildFile; fileRef = EDC774E91561A531005C88F6 /* whiteCircle02.png */; };
-		EDC774F41561A532005C88F6 /* whiteCircle03.png in Resources */ = {isa = PBXBuildFile; fileRef = EDC774EA1561A531005C88F6 /* whiteCircle03.png */; };
-		EDC774F51561A532005C88F6 /* whiteCircle04.png in Resources */ = {isa = PBXBuildFile; fileRef = EDC774EB1561A531005C88F6 /* whiteCircle04.png */; };
-		EDC774F61561A532005C88F6 /* whiteCircle05.png in Resources */ = {isa = PBXBuildFile; fileRef = EDC774EC1561A532005C88F6 /* whiteCircle05.png */; };
-		EDC774F71561A532005C88F6 /* whiteCircle06.png in Resources */ = {isa = PBXBuildFile; fileRef = EDC774ED1561A532005C88F6 /* whiteCircle06.png */; };
-		EDC774F81561A532005C88F6 /* whiteCircle07.png in Resources */ = {isa = PBXBuildFile; fileRef = EDC774EE1561A532005C88F6 /* whiteCircle07.png */; };
-		EDC774F91561A532005C88F6 /* whiteCircle08.png in Resources */ = {isa = PBXBuildFile; fileRef = EDC774EF1561A532005C88F6 /* whiteCircle08.png */; };
-		EDC774FA1561A532005C88F6 /* whiteCircle09.png in Resources */ = {isa = PBXBuildFile; fileRef = EDC774F01561A532005C88F6 /* whiteCircle09.png */; };
-		EDC774FB1561A532005C88F6 /* whiteCircle10.png in Resources */ = {isa = PBXBuildFile; fileRef = EDC774F11561A532005C88F6 /* whiteCircle10.png */; };
 		EDCE42641564044000C7356E /* C4Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCE425F1564044000C7356E /* C4Camera.m */; };
 		EDCE42651564044000C7356E /* C4CameraController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCE42611564044000C7356E /* C4CameraController.m */; };
 		EDCE42661564044000C7356E /* C4CaptureVideoPreviewLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCE42631564044000C7356E /* C4CaptureVideoPreviewLayer.m */; };
@@ -154,16 +144,6 @@
 		EDAFFAEE14F7602F00CA356A /* C4Control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Control.h; sourceTree = "<group>"; };
 		EDAFFAEF14F7602F00CA356A /* C4Control.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Control.m; sourceTree = "<group>"; };
 		EDC75ED81506D7D2002D82A1 /* C4LayerAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4LayerAnimation.h; sourceTree = "<group>"; };
-		EDC774E81561A531005C88F6 /* whiteCircle01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteCircle01.png; sourceTree = "<group>"; };
-		EDC774E91561A531005C88F6 /* whiteCircle02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteCircle02.png; sourceTree = "<group>"; };
-		EDC774EA1561A531005C88F6 /* whiteCircle03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteCircle03.png; sourceTree = "<group>"; };
-		EDC774EB1561A531005C88F6 /* whiteCircle04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteCircle04.png; sourceTree = "<group>"; };
-		EDC774EC1561A532005C88F6 /* whiteCircle05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteCircle05.png; sourceTree = "<group>"; };
-		EDC774ED1561A532005C88F6 /* whiteCircle06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteCircle06.png; sourceTree = "<group>"; };
-		EDC774EE1561A532005C88F6 /* whiteCircle07.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteCircle07.png; sourceTree = "<group>"; };
-		EDC774EF1561A532005C88F6 /* whiteCircle08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteCircle08.png; sourceTree = "<group>"; };
-		EDC774F01561A532005C88F6 /* whiteCircle09.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteCircle09.png; sourceTree = "<group>"; };
-		EDC774F11561A532005C88F6 /* whiteCircle10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteCircle10.png; sourceTree = "<group>"; };
 		EDCE425E1564044000C7356E /* C4Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Camera.h; sourceTree = "<group>"; };
 		EDCE425F1564044000C7356E /* C4Camera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Camera.m; sourceTree = "<group>"; };
 		EDCE42601564044000C7356E /* C4CameraController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4CameraController.h; sourceTree = "<group>"; };
@@ -367,16 +347,6 @@
 				ED45EC80155A33C400D28213 /* loop1.wav */,
 				ED751491151519890076317F /* C4Sky.png */,
 				ED7513AA15150FB60076317F /* inception.mov */,
-				EDC774E81561A531005C88F6 /* whiteCircle01.png */,
-				EDC774E91561A531005C88F6 /* whiteCircle02.png */,
-				EDC774EA1561A531005C88F6 /* whiteCircle03.png */,
-				EDC774EB1561A531005C88F6 /* whiteCircle04.png */,
-				EDC774EC1561A532005C88F6 /* whiteCircle05.png */,
-				EDC774ED1561A532005C88F6 /* whiteCircle06.png */,
-				EDC774EE1561A532005C88F6 /* whiteCircle07.png */,
-				EDC774EF1561A532005C88F6 /* whiteCircle08.png */,
-				EDC774F01561A532005C88F6 /* whiteCircle09.png */,
-				EDC774F11561A532005C88F6 /* whiteCircle10.png */,
 			);
 			name = Media;
 			sourceTree = "<group>";
@@ -447,16 +417,6 @@
 				ED7513AB15150FB60076317F /* inception.mov in Resources */,
 				ED751492151519890076317F /* C4Sky.png in Resources */,
 				ED45EC81155A33C400D28213 /* loop1.wav in Resources */,
-				EDC774F21561A532005C88F6 /* whiteCircle01.png in Resources */,
-				EDC774F31561A532005C88F6 /* whiteCircle02.png in Resources */,
-				EDC774F41561A532005C88F6 /* whiteCircle03.png in Resources */,
-				EDC774F51561A532005C88F6 /* whiteCircle04.png in Resources */,
-				EDC774F61561A532005C88F6 /* whiteCircle05.png in Resources */,
-				EDC774F71561A532005C88F6 /* whiteCircle06.png in Resources */,
-				EDC774F81561A532005C88F6 /* whiteCircle07.png in Resources */,
-				EDC774F91561A532005C88F6 /* whiteCircle08.png in Resources */,
-				EDC774FA1561A532005C88F6 /* whiteCircle09.png in Resources */,
-				EDC774FB1561A532005C88F6 /* whiteCircle10.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
