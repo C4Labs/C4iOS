@@ -318,21 +318,21 @@
 }
 
 #pragma mark Blocked Methods
--(void)setBorderWidth:(CGFloat)borderWidth{
-    C4Log(@"C4ShapeLayer setBorderWidth not currently available");
-}
+//-(void)setBorderWidth:(CGFloat)borderWidth{
+//    C4Log(@"C4ShapeLayer setBorderWidth not currently available");
+//}
 
--(void)setBorderColor:(CGColorRef)borderColor{
-    C4Log(@"C4ShapeLayer setBorderColor not currently available");
-}
+//-(void)setBorderColor:(CGColorRef)borderColor{
+//    C4Log(@"C4ShapeLayer setBorderColor not currently available");
+//}
 
--(void)setBackgroundColor:(CGColorRef)backgroundColor {
-    C4Log(@"C4ShapeLayer setBackgroundColor not currently available");
-}
-
--(void)setCornerRadius:(CGFloat)cornerRadius {
-    C4Log(@"C4ShapeLayer setCornerRadius not currently available");
-}
+//-(void)setBackgroundColor:(CGColorRef)backgroundColor {
+//    C4Log(@"C4ShapeLayer setBackgroundColor not currently available");
+//}
+//
+//-(void)setCornerRadius:(CGFloat)cornerRadius {
+//    C4Log(@"C4ShapeLayer setCornerRadius not currently available");
+//}
 
 //-(void)setMasksToBounds:(BOOL)masksToBounds {
 //    C4Log(@"C4ShapeLayer setMasksToBounds not currently available");

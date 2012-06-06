@@ -433,7 +433,7 @@
  
  @warning The object returned from this property was made with a CIImage, so calling returnedUIImage.CGImage on the returned object will return NULL.
  */
-@property (readonly, weak, nonatomic) UIImage *UIImage;
+@property (readonly, nonatomic, weak) UIImage *UIImage;
 
 /**Returns a Core Image representation of the current image.
  
@@ -441,7 +441,7 @@
  
  @warning: The CIImage is the object off of which we base all other image manipulations and returns.
  */
-@property (readonly, weak, nonatomic) CIImage *CIImage;
+@property (readonly, nonatomic, weak) CIImage *CIImage;
 
 /**The underlying Core Image data. (read-only)
  */

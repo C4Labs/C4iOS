@@ -128,4 +128,9 @@
 @property (readonly, nonatomic) CGFloat width, height;
 
 @property (readwrite, nonatomic, assign) C4Control *mask;
+
+@property (readwrite, nonatomic) CGFloat borderWidth, cornerRadius, opacity, zPosition;
+@property (readwrite, nonatomic, weak) UIColor *borderColor;
+@property (readwrite, nonatomic) BOOL masksToBounds;
+
 @end

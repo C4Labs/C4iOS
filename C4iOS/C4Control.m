@@ -23,6 +23,9 @@
 @synthesize origin = _origin;
 @synthesize width, height;
 @synthesize mask;
+@synthesize opacity;
+@synthesize borderColor;
+@synthesize masksToBounds;
 
 -(id)init {
     self = [super initWithFrame:CGRectZero];
@@ -401,6 +404,51 @@
 
 -(void)runMethod:(NSString *)methodName withObject:(id)object afterDelay:(CGFloat)seconds {
     [self performSelector:NSSelectorFromString(methodName) withObject:object afterDelay:seconds];
+}
+
+-(void)setOpacity:(CGFloat)_opacity {
+    self.layer.opacity = _opacity;
+}
+
+-(CGFloat)opacity {
+    return self.layer.opacity;
+}
+-(void)setMasksToBounds:(BOOL)_masksToBounds {
+    self.layer.masksToBounds = _masksToBounds;
+}
+-(BOOL)masksToBounds {
+    return self.layer.masksToBounds;
+}
+
+-(void)setBorderColor:(UIColor *)_borderColor {
+    self.layer.borderColor = _borderColor.CGColor;
+}
+-(UIColor *)borderColor {
+    return [UIColor colorWithCGColor:self.layer.borderColor];
+}
+
+-(void)setBorderWidth:(CGFloat)_borderWidth {
+    self.layer.borderWidth = _borderWidth;
+}
+
+-(CGFloat)borderWidth {
+    return self.layer.borderWidth;
+}
+
+-(void)setCornerRadius:(CGFloat)_cornerRadius {
+    self.layer.cornerRadius = _cornerRadius;
+}
+
+-(CGFloat)cornerRadius {
+    return self.layer.cornerRadius;
+}
+
+-(void)setZPosition:(CGFloat)_zPosition {
+    self.layer.zPosition = _zPosition;
+}
+
+-(CGFloat)zPosition {
+    return self.layer.zPosition;
 }
 
 @end

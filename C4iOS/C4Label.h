@@ -164,6 +164,6 @@
  
  @warning *Note:* Instead of calling label.layer, call label.backingLayer
  */
-@property (readonly, weak, nonatomic) C4Layer *backingLayer;
+@property (readonly, nonatomic, weak) C4Layer *backingLayer;
 
 @end

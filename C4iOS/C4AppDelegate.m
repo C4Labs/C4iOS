@@ -13,7 +13,7 @@
   
  Need to have this in here so that we can associate the C4View in our C4Canvas.xib file with something. The main reason is that a static lib will discard and not recognize any class that isn't called or referenced in some part of some implementation.
                          */
-@property (readonly, weak, nonatomic) C4View *mainView;
+@property (readonly, nonatomic, weak) C4View *mainView;
 @end
 
 @implementation C4AppDelegate
