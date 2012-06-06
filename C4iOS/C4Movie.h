@@ -176,4 +176,7 @@
  The default value of this property is NULL.
  */
 @property (readwrite, nonatomic) CGPathRef shadowPath;
+
+@property (readonly, nonatomic, strong) AVMutableAudioMix *audioMix;
+@property (readwrite, nonatomic) CGFloat volume;
 @end

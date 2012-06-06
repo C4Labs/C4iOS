@@ -40,16 +40,25 @@
 @synthesize isPlaying;
 @synthesize loops;
 @synthesize shouldAutoplay;
+@synthesize audioMix = _audioMix;
+@synthesize volume = _volume;
 
 +(C4Movie *)movieNamed:(NSString *)movieName {
-    return [[C4Movie alloc] initWithMovieName:movieName];
+    C4Movie *newMovie = [[C4Movie alloc] initWithMovieName:movieName andFrame:CGRectZero];
+    return newMovie;
 }
 
 +(C4Movie *)movieNamed:(NSString *)movieName inFrame:(CGRect)movieFrame {
-    return [C4Movie movieNamed:movieName inFrame:movieFrame];
+    C4Movie *newMovie = [[C4Movie alloc] initWithMovieName:movieName andFrame:movieFrame];
+    return newMovie;
 }
 
 -(id)initWithMovieName:(NSString *)movieName {
+    self = [self initWithMovieName:movieName andFrame:CGRectZero];
+    return self;
+}
+
+-(id)initWithMovieName:(NSString *)movieName andFrame:(CGRect)movieFrame {
     self = [super init];
     if(self != nil) {        
         self.shouldAutoplay = NO;
@@ -65,46 +74,19 @@
                     [self prepareToPlayAsset:asset withKeys:requestedKeys];
                 });
             }];
-
+            
             AVAssetTrack *videoTrack = [[asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
             _originalMovieSize = videoTrack.naturalSize;
             _originalMovieRatio = _originalMovieSize.width / _originalMovieSize.height;
             self.player.actionAtItemEnd = AVPlayerActionAtItemEndPause; // currently C4Movie doesn't handle queues
             self.player.allowsAirPlayVideo = NO;
         }
-
+        
         _rate = 1.0f;
-        self.backgroundColor = [UIColor clearColor];
-        CGRect newFrame = CGRectZero;
-        newFrame.size = _originalMovieSize;
-        self.frame = newFrame;
-        [self setup];
-    }
-    return self;
-}
-
--(id)initWithMovieName:(NSString *)movieName andFrame:(CGRect)movieFrame {
-    self = [super init];
-    if(self != nil) {        
-        NSArray *movieNameComponents = [movieName componentsSeparatedByString:@"."];
-        movieURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:[movieNameComponents objectAtIndex:0]
-                                                                                      ofType:[movieNameComponents objectAtIndex:1]]];
-        if([movieURL scheme]) {
-            AVURLAsset *asset = [AVURLAsset URLAssetWithURL:movieURL options:nil];
-            NSAssert(asset != nil, @"The asset (%@) you tried to create couldn't be initialized", movieName);
-            NSArray *requestedKeys = [NSArray arrayWithObjects:@"duration", @"playable", nil];
-            [asset loadValuesAsynchronouslyForKeys:requestedKeys completionHandler: ^(void) {		 
-                dispatch_async( dispatch_get_main_queue(), ^(void) {
-                    [self prepareToPlayAsset:asset withKeys:requestedKeys];
-                });
-            }];
-
-            AVAssetTrack *videoTrack = [[asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
-            _originalMovieSize = videoTrack.naturalSize;
-            _originalMovieRatio = _originalMovieSize.width / _originalMovieSize.height;
+        self.backgroundColor = [UIColor clearColor];      
+        if(CGRectEqualToRect(movieFrame, CGRectZero)) {
+            movieFrame.size = _originalMovieSize;
         }
-
-        self.backgroundColor = [UIColor blackColor];        
         self.frame = movieFrame;
         [self setup];
     }
@@ -153,72 +135,39 @@
 	return (C4PlayerLayer *)self.layer;
 }
 
--(void)assetFailedToPrepareForPlayback:(NSError *)error
-{
-    /* Display the error. */
-	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
-														message:[error localizedFailureReason]
-													   delegate:nil
-											  cancelButtonTitle:@"OK"
-											  otherButtonTitles:nil];
-	[alertView show];
+-(void)assetFailedToPrepareForPlayback:(NSError *)error {
+    C4Log(@"The movie you tried to load failed: %@",error);
 }
 
-- (void)prepareToPlayAsset:(AVURLAsset *)asset withKeys:(NSArray *)requestedKeys
-{
+- (void)prepareToPlayAsset:(AVURLAsset *)asset withKeys:(NSArray *)requestedKeys {
     rateContext = &rateContext;
     currentItemContext = &currentItemContext;
     playerItemStatusContext = &playerItemStatusContext;
     
-    /* Make sure that the value of each key has loaded successfully. */
-	for (NSString *thisKey in requestedKeys)
-	{
+	for (NSString *key in requestedKeys) {
 		NSError *error = nil;
-		AVKeyValueStatus keyStatus = [asset statusOfValueForKey:thisKey error:&error];
-		if (keyStatus == AVKeyValueStatusFailed)
-		{
+		AVKeyValueStatus keyStatus = [asset statusOfValueForKey:key error:&error];
+		if (keyStatus == AVKeyValueStatusFailed) {
 			[self assetFailedToPrepareForPlayback:error];
 			return;
 		}
-		/* If you are also implementing the use of -[AVAsset cancelLoading], add your code here to bail 
-         out properly in the case of cancellation. */
 	}
     
-    /* Use the AVAsset playable property to detect whether the asset can be played. */
-    if (!asset.playable) 
-    {
-        /* Generate an error describing the failure. */
-		NSString *localizedDescription = NSLocalizedString(@"Item cannot be played", @"Item cannot be played description");
-		NSString *localizedFailureReason = NSLocalizedString(@"The assets tracks were loaded, but could not be made playable.", @"Item cannot be played failure reason");
-		NSDictionary *errorDict = [NSDictionary dictionaryWithObjectsAndKeys:
-								   localizedDescription, NSLocalizedDescriptionKey, 
-								   localizedFailureReason, NSLocalizedFailureReasonErrorKey, 
-								   nil];
-		NSError *assetCannotBePlayedError = [NSError errorWithDomain:@"C4VideoPlayerController" code:0 userInfo:errorDict];
-        
-        /* Display the error to the user. */
-        [self assetFailedToPrepareForPlayback:assetCannotBePlayedError];
-        
+    if (asset.playable == NO) {
+        NSError *error = [NSError errorWithDomain:@"C4Movie asset cannot be played" code:0 userInfo:nil];
+        [self assetFailedToPrepareForPlayback:error];
         return;
     }
 	
-	/* At this point we're ready to set up for playback of the asset. */	
-    /* Stop observing our prior AVPlayerItem, if we have one. */
-    if (self.playerItem)
-    {
-        /* Remove existing player item key value observers and notifications. */
-        
+    if (self.playerItem != nil) {
         [self.playerItem removeObserver:self forKeyPath:@"status"];            
-        
         [[NSNotificationCenter defaultCenter] removeObserver:self
                                                         name:AVPlayerItemDidPlayToEndTimeNotification
                                                       object:self.playerItem];
     }
 	
-    /* Create a new instance of AVPlayerItem from the now successfully loaded AVAsset. */
     self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
     
-    /* Observe the player item "status" key to determine when it is ready to play. */
     [self.playerItem addObserver:self 
                       forKeyPath:@"status" 
                          options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
@@ -226,33 +175,34 @@
 
     [self listenFor:AVPlayerItemTimeJumpedNotification andRunMethod:@"currentTimeChanged"];
     
-    /* When the player item has played to its end time we'll toggle
-     the movie controller Pause button to be the Play button */
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(playerItemDidReachEnd:)
                                                  name:AVPlayerItemDidPlayToEndTimeNotification
                                                object:self.playerItem];
     
-    /* Create new player, if we don't already have one. */
     if (self.player == nil) {
-        /* Get a new AVPlayer initialized to play the specified player item. */
         [self setPlayer:[AVPlayer playerWithPlayerItem:self.playerItem]];	
 		player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
-        /* Observe the AVPlayer "currentItem" property to find out when any 
-         AVPlayer replaceCurrentItemWithPlayerItem: replacement will/did 
-         occur.*/
         [self.player addObserver:self 
                       forKeyPath:@"currentItem" 
                          options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
                          context:currentItemContext];
     }
+
+    NSArray *audioTracks = [asset tracksWithMediaType:AVMediaTypeAudio];
+    NSMutableArray *allAudioTrackInputParameters = [NSMutableArray array];
+    for (AVAssetTrack *track in audioTracks) {
+        AVMutableAudioMixInputParameters *trackInputParameters =[AVMutableAudioMixInputParameters audioMixInputParameters];
+        [trackInputParameters setTrackID:[track trackID]];
+        [allAudioTrackInputParameters addObject:trackInputParameters];
+    }
     
-    /* Make our new AVPlayerItem the AVPlayer's current item. */
-    if (self.player.currentItem != self.playerItem)
-    {
-        /* Replace the player item with a new player item. The item replacement occurs 
-         asynchronously; observe the currentItem property to find out when the 
-         replacement will/did occur*/
+    AVMutableAudioMix *newAudioMix = [AVMutableAudioMix audioMix];
+    [newAudioMix setInputParameters:allAudioTrackInputParameters];
+    _audioMix = newAudioMix;
+    self.playerItem.audioMix = self.audioMix;
+    
+    if (self.player.currentItem != self.playerItem) {
         [[self player] replaceCurrentItemWithPlayerItem:self.playerItem];
     }
 }
@@ -445,6 +395,14 @@
 }
 
 -(void)currentTimeChanged {
+}
+
+-(void)setVolume:(CGFloat)volume {
+    _volume = volume;
+    for(AVMutableAudioMixInputParameters *avmam in self.audioMix.inputParameters) {
+        [avmam setVolume:volume atTime:kCMTimeZero];
+    }
+    self.player.currentItem.audioMix = self.audioMix;
 }
 
 @end
