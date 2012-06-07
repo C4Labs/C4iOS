@@ -134,4 +134,7 @@
     [self performSelector:NSSelectorFromString(methodName) withObject:object afterDelay:seconds];
 }
 
+-(void)removeObject:(C4Control *)visibleObject {
+    [visibleObject removeFromSuperview];
+}
 @end

@@ -155,4 +155,12 @@
  @return BOOL YES if the layer's animations will repeat, NO otherwise.
  */
 @property (readonly, nonatomic) BOOL repeats;
+
+#pragma mark New Stuff
+-(void)animateBackgroundColor:(CGColorRef)_backgroundColor;
+-(void)animateBorderColor:(CGColorRef)_borderColor;
+-(void)animateBorderWidth:(CGFloat)_borderWidth;
+-(void)animateCornerRadius:(CGFloat)_cornerRadius;
+-(void)animateZPosition:(CGFloat)_zPosition;
+
 @end

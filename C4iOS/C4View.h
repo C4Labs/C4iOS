@@ -152,4 +152,5 @@
 
 @property (readonly, nonatomic) CGFloat width, height;
 
+-(void)removeObject:(C4Control *)visibleObject;
 @end

@@ -129,8 +129,9 @@
 
 @property (readwrite, nonatomic, assign) C4Control *mask;
 
-@property (readwrite, nonatomic) CGFloat borderWidth, cornerRadius, opacity, zPosition;
+@property (readwrite, nonatomic) CGFloat borderWidth, cornerRadius, zPosition;
 @property (readwrite, nonatomic, weak) UIColor *borderColor;
 @property (readwrite, nonatomic) BOOL masksToBounds;
+-(void)removeObject:(C4Control *)visibleObject;
 
 @end

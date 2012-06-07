@@ -367,7 +367,7 @@
 }
 
 -(void)setFillRule:(NSString *)_fillRule {
-    [self performSelector:@selector(setFillRule:) withObject:_fillRule afterDelay:self.animationDelay];
+    [self performSelector:@selector(_setFillRule:) withObject:_fillRule afterDelay:self.animationDelay];
 }
 -(void)_setFillRule:(NSString *)_fillRule {
     self.shapeLayer.fillRule = _fillRule;
@@ -377,7 +377,7 @@
 }
 
 -(void)setLineCap:(NSString *)_lineCap {
-    [self performSelector:@selector(setLineCap:) withObject:_lineCap afterDelay:self.animationDelay];
+    [self performSelector:@selector(_setLineCap:) withObject:_lineCap afterDelay:self.animationDelay];
 }
 -(void)_setLineCap:(NSString *)_lineCap {
     self.shapeLayer.lineCap = _lineCap;

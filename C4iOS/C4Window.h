@@ -89,4 +89,6 @@ For more information about how to use windows, see View Programming Guide for iO
 
 @property (readonly, nonatomic) CGFloat width, height;
 @property (readonly, nonatomic) CGPoint center;
+
+-(void)removeObject:(C4Control *)visibleObject;
 @end

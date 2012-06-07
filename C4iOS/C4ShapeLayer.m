@@ -358,21 +358,93 @@
     C4Log(@"C4ShapeLayer setMinificationFilterBias not currently available");
 }
 
--(void)setOpacity:(float)opacity {
-    C4Log(@"C4ShapeLayer setOpacity not currently available");
-}
-
 -(void)setStyle:(NSDictionary *)style {
     C4Log(@"C4ShapeLayer setStyle not currently available");
     
 }
 
--(void)setZPosition:(CGFloat)zPosition {
-    C4Log(@"C4ShapeLayer setZPosition not currently available");
-}
+//-(void)setZPosition:(CGFloat)zPosition {
+//    C4Log(@"C4ShapeLayer setZPosition not currently available");
+//}
 
 -(void)animateContents:(CGImageRef)image {
     C4Log(@"C4ShapeLayer animateContents not currently available");
+}
+
+#pragma mark New Stuff
+-(void)animateBackgroundColor:(CGColorRef)_backgroundColor {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"backgroundColor"];
+    animation.fromValue = (id)self.backgroundColor;
+    animation.toValue = (__bridge id)_backgroundColor;
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { 
+            self.backgroundColor = _backgroundColor; 
+            [self removeAnimationForKey:@"animateBackgroundColor"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"animateBackgroundColor"];
+    [CATransaction commit];
+}
+
+-(void)animateBorderWidth:(CGFloat)_borderWidth {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"borderWidth"];
+    animation.fromValue = [NSNumber numberWithFloat:self.borderWidth];
+    animation.toValue = [NSNumber numberWithFloat:_borderWidth];
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { 
+            self.borderWidth = _borderWidth; 
+            [self removeAnimationForKey:@"animateBorderWidth"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"animateBorderWidth"];
+    [CATransaction commit];
+}
+
+-(void)animateBorderColor:(CGColorRef)_borderColor {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"borderColor"];
+    animation.fromValue = (id)self.borderColor;
+    animation.toValue = (__bridge id)_borderColor;
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { 
+            self.borderColor = _borderColor; 
+            [self removeAnimationForKey:@"animateBorderColor"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"animateBorderColor"];
+    [CATransaction commit];
+}
+
+-(void)animateCornerRadius:(CGFloat)_cornerRadius {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"cornerRadius"];
+    animation.fromValue = [NSNumber numberWithFloat:self.cornerRadius];
+    animation.toValue = [NSNumber numberWithFloat:_cornerRadius];
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { 
+            self.cornerRadius = _cornerRadius; 
+            [self removeAnimationForKey:@"animateCornerRadius"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"animateCornerRadius"];
+    [CATransaction commit];
+}
+
+-(void)animateZPosition:(CGFloat)_zPosition {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"zPosition"];
+    animation.fromValue = [NSNumber numberWithFloat:self.zPosition];
+    animation.toValue = [NSNumber numberWithFloat:_zPosition];
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { 
+            self.zPosition = _zPosition; 
+            [self removeAnimationForKey:@"animateZPosition"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"animateZPosition"];
+    [CATransaction commit];
 }
 
 @end

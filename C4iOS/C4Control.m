@@ -23,7 +23,6 @@
 @synthesize origin = _origin;
 @synthesize width, height;
 @synthesize mask;
-@synthesize opacity;
 @synthesize borderColor;
 @synthesize masksToBounds;
 
@@ -316,11 +315,9 @@
 }
 
 -(void)touchesEnded {
-    
 }
 
 -(void)touchesMoved {
-    
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -382,6 +379,7 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName:notification object:self];
 }
 
+#pragma mark New Stuff
 -(id)copyWithZone:(NSZone *)zone {
     return self;
 }
@@ -406,13 +404,7 @@
     [self performSelector:NSSelectorFromString(methodName) withObject:object afterDelay:seconds];
 }
 
--(void)setOpacity:(CGFloat)_opacity {
-    self.layer.opacity = _opacity;
-}
-
--(CGFloat)opacity {
-    return self.layer.opacity;
-}
+//note, this is a strange hack... opacity can be controlled via 
 -(void)setMasksToBounds:(BOOL)_masksToBounds {
     self.layer.masksToBounds = _masksToBounds;
 }
@@ -421,35 +413,35 @@
 }
 
 -(void)setBorderColor:(UIColor *)_borderColor {
-    self.layer.borderColor = _borderColor.CGColor;
+    [(C4Layer *)self.layer animateBorderColor:_borderColor.CGColor];
 }
 -(UIColor *)borderColor {
     return [UIColor colorWithCGColor:self.layer.borderColor];
 }
 
 -(void)setBorderWidth:(CGFloat)_borderWidth {
-    self.layer.borderWidth = _borderWidth;
+    [(C4Layer *)self.layer animateBorderWidth:_borderWidth];
 }
-
 -(CGFloat)borderWidth {
     return self.layer.borderWidth;
 }
 
 -(void)setCornerRadius:(CGFloat)_cornerRadius {
-    self.layer.cornerRadius = _cornerRadius;
+    [(C4Layer *)self.layer animateCornerRadius:_cornerRadius];
 }
-
 -(CGFloat)cornerRadius {
     return self.layer.cornerRadius;
 }
 
 -(void)setZPosition:(CGFloat)_zPosition {
-    self.layer.zPosition = _zPosition;
+    [(C4Layer *)self.layer animateZPosition:_zPosition];
 }
-
 -(CGFloat)zPosition {
     return self.layer.zPosition;
 }
 
+-(void)removeObject:(C4Control *)visibleObject {
+    NSAssert(self != visibleObject, @"You tried to remove %@ from itself, don't be silly", visibleObject);
+    [visibleObject removeFromSuperview];
+}
 @end
-

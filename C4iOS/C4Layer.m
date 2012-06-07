@@ -85,7 +85,10 @@
     animation.fromValue = (id)self.shadowColor;
     animation.toValue = (__bridge id)_shadowColor;
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { self.shadowColor = _shadowColor; }];
+        [CATransaction setCompletionBlock:^ { 
+            self.shadowColor = _shadowColor; 
+            [self removeAnimationForKey:@"animateShadowColor"];
+        }];
     }
     [self addAnimation:animation forKey:@"animateShadowColor"];
     [CATransaction commit];
@@ -97,7 +100,10 @@
     animation.fromValue = [NSNumber numberWithFloat:self.shadowOpacity];
     animation.toValue = [NSNumber numberWithFloat:_shadowOpacity];
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { self.shadowOpacity = _shadowOpacity; }];
+        [CATransaction setCompletionBlock:^ { 
+            self.shadowOpacity = _shadowOpacity; 
+            [self removeAnimationForKey:@"animateShadowOpacity"];
+        }];
     }
     [self addAnimation:animation forKey:@"animateShadowOpacity"];
     [CATransaction commit];
@@ -109,9 +115,12 @@
     animation.fromValue = [NSNumber numberWithFloat:self.shadowRadius];
     animation.toValue = [NSNumber numberWithFloat:_shadowRadius];
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { self.shadowRadius = _shadowRadius; }];
+        [CATransaction setCompletionBlock:^ { 
+            self.shadowRadius = _shadowRadius; 
+            [self removeAnimationForKey:@"animateShadowRadius"];
+        }];
     }
-    [self addAnimation:animation forKey:@"animateShadowOpacity"];
+    [self addAnimation:animation forKey:@"animateShadowRadius"];
     [CATransaction commit];
 }
 
@@ -121,7 +130,10 @@
     animation.fromValue = [NSValue valueWithCGSize:self.shadowOffset];
     animation.toValue = [NSValue valueWithCGSize:_shadowOffset];
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { self.shadowOffset = _shadowOffset; }];
+        [CATransaction setCompletionBlock:^ { 
+            self.shadowOffset = _shadowOffset; 
+            [self removeAnimationForKey:@"animateShadowOffset"];
+        }];
     }
     [self addAnimation:animation forKey:@"animateShadowOffset"];
     [CATransaction commit];
@@ -133,7 +145,10 @@
     animation.fromValue = (id)self.shadowPath;
     animation.toValue = (__bridge id)_shadowPath;
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { self.shadowPath = _shadowPath; }];
+        [CATransaction setCompletionBlock:^ { 
+            self.shadowPath = _shadowPath;
+            [self removeAnimationForKey:@"animateShadowPath"];
+        }];
     }
     [self addAnimation:animation forKey:@"animateShadowPath"];
     [CATransaction commit];
@@ -145,7 +160,10 @@
     animation.fromValue = self.backgroundFilters;
     animation.toValue = _backgroundFilters;
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { self.backgroundFilters = _backgroundFilters; }];
+        [CATransaction setCompletionBlock:^ { 
+            self.backgroundFilters = _backgroundFilters; 
+            [self removeAnimationForKey:@"animateBackgroundFilters"];
+        }];
     }
     [self addAnimation:animation forKey:@"animateBackgroundFilters"];
     [CATransaction commit];
@@ -157,7 +175,10 @@
     animation.fromValue = self.compositingFilter;
     animation.toValue = _compositingFilter;
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { self.compositingFilter = _compositingFilter; }];
+        [CATransaction setCompletionBlock:^ { 
+            self.compositingFilter = _compositingFilter; 
+            [self removeAnimationForKey:@"animateCompositingFilter"];
+        }];
     }
     [self addAnimation:animation forKey:@"animateCompositingFilter"];
     [CATransaction commit];
@@ -169,7 +190,10 @@
     animation.fromValue = self.contents;
     animation.toValue = (__bridge id)_image;
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { self.contents = (__bridge id)_image; }];
+        [CATransaction setCompletionBlock:^ { 
+            self.contents = (__bridge id)_image; 
+            [self removeAnimationForKey:@"animateContents"];
+        }];
     }
     [self addAnimation:animation forKey:@"animateContents"];
     [CATransaction commit];
@@ -190,6 +214,82 @@
      ...if you do things like set the background color to anything transparent (i.e. alpha other than 1.0f)
      */
     return YES;
+}
+
+#pragma mark New Stuff
+-(void)animateBackgroundColor:(CGColorRef)_backgroundColor {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"backgroundColor"];
+    animation.fromValue = (id)self.backgroundColor;
+    animation.toValue = (__bridge id)_backgroundColor;
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { 
+            self.backgroundColor = _backgroundColor; 
+            [self removeAnimationForKey:@"animateBackgroundColor"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"animateBackgroundColor"];
+    [CATransaction commit];
+}
+
+-(void)animateBorderWidth:(CGFloat)_borderWidth {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"borderWidth"];
+    animation.fromValue = [NSNumber numberWithFloat:self.borderWidth];
+    animation.toValue = [NSNumber numberWithFloat:_borderWidth];
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { 
+            self.borderWidth = _borderWidth; 
+            [self removeAnimationForKey:@"animateBorderWidth"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"animateBorderWidth"];
+    [CATransaction commit];
+}
+
+-(void)animateBorderColor:(CGColorRef)_borderColor {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"borderColor"];
+    animation.fromValue = (id)self.borderColor;
+    animation.toValue = (__bridge id)_borderColor;
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { 
+            self.borderColor = _borderColor; 
+            [self removeAnimationForKey:@"animateBorderColor"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"animateBorderColor"];
+    [CATransaction commit];
+}
+
+-(void)animateCornerRadius:(CGFloat)_cornerRadius {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"cornerRadius"];
+    animation.fromValue = [NSNumber numberWithFloat:self.cornerRadius];
+    animation.toValue = [NSNumber numberWithFloat:_cornerRadius];
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { 
+            self.cornerRadius = _cornerRadius; 
+            [self removeAnimationForKey:@"animateCornerRadius"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"animateCornerRadius"];
+    [CATransaction commit];
+}
+
+-(void)animateZPosition:(CGFloat)_zPosition {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"zPosition"];
+    animation.fromValue = [NSNumber numberWithFloat:self.zPosition];
+    animation.toValue = [NSNumber numberWithFloat:_zPosition];
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { 
+            self.zPosition = _zPosition; 
+            [self removeAnimationForKey:@"animateZPosition"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"animateZPosition"];
+    [CATransaction commit];
 }
 
 @end

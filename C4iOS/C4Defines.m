@@ -46,7 +46,7 @@ NSString *const FILLEVENODD = @"even-odd";
 
 /* `lineJoin' values. */
 
-NSString *const JOINMITRE = @"mitre";
+NSString *const JOINMITER = @"miter";
 NSString *const JOINROUND = @"round";
 NSString *const JOINBEVEL = @"bevel";
 
