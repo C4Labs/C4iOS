@@ -133,5 +133,6 @@
 @property (readwrite, nonatomic, weak) UIColor *borderColor;
 @property (readwrite, nonatomic) BOOL masksToBounds;
 -(void)removeObject:(C4Control *)visibleObject;
-
+@property (readwrite, nonatomic) CGFloat rotation;
+-(void)rotationDidFinish:(CGFloat)rotation;
 @end

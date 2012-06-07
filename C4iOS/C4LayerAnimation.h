@@ -162,5 +162,5 @@
 -(void)animateBorderWidth:(CGFloat)_borderWidth;
 -(void)animateCornerRadius:(CGFloat)_cornerRadius;
 -(void)animateZPosition:(CGFloat)_zPosition;
-
+-(void)animateRotation:(CGFloat)_rotationAngle;
 @end

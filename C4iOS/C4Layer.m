@@ -8,9 +8,14 @@
 
 #import "C4Layer.h"
 
+@interface C4Layer ()
+@property (readwrite, nonatomic) CGFloat rotationAngle;
+@end
+
 @implementation C4Layer
 @synthesize animationOptions = _animationOptions, currentAnimationEasing, repeatCount, animationDuration = _animationDuration;
 @synthesize allowsInteraction, repeats;
+@synthesize rotationAngle;
 
 - (id)init {
     self = [super init];
@@ -18,7 +23,7 @@
         self.name = @"backingLayer";
         self.repeatCount = 0;
         self.autoreverses = NO;
-        
+        self.rotationAngle = 0;
         currentAnimationEasing = (NSString *)kCAMediaTimingFunctionEaseInEaseOut;
         allowsInteraction = NO;
         repeats = NO;
@@ -289,6 +294,22 @@
         }];
     }
     [self addAnimation:animation forKey:@"animateZPosition"];
+    [CATransaction commit];
+}
+
+-(void)animateRotation:(CGFloat)_rotationAngle {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"transform.rotation.z"];
+    animation.fromValue = [NSNumber numberWithFloat:self.rotationAngle];
+    animation.toValue = [NSNumber numberWithFloat:_rotationAngle];
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { 
+            self.rotationAngle = _rotationAngle; 
+            ((C4Control *)self.delegate).transform = CGAffineTransformMakeRotation(self.rotationAngle);
+            [self removeAnimationForKey:@"animateTransform.rotation.z"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"animateTransform.rotation.z"];
     [CATransaction commit];
 }
 

@@ -25,9 +25,10 @@
 @synthesize mask;
 @synthesize borderColor;
 @synthesize masksToBounds;
+@synthesize rotation = _rotation;
 
 -(id)init {
-    self = [super initWithFrame:CGRectZero];
+    self = [self initWithFrame:CGRectZero];
     if(self != nil) {
     }
     return self;
@@ -41,6 +42,7 @@
         self.animationOptions = BEGINCURRENT;
         self.repeatCount = 0;
         [self setup];
+        self.layer.delegate = self;
     }
     return self;
 }
@@ -440,8 +442,17 @@
     return self.layer.zPosition;
 }
 
+-(void)setRotation:(CGFloat)rotation {
+    _rotation = rotation;
+    [(C4Layer *)self.layer animateRotation:_rotation];
+}
+
 -(void)removeObject:(C4Control *)visibleObject {
     NSAssert(self != visibleObject, @"You tried to remove %@ from itself, don't be silly", visibleObject);
     [visibleObject removeFromSuperview];
+}
+
+-(void)rotationDidFinish:(CGFloat)rotation {
+    [super setTransform:CGAffineTransformMakeRotation(rotation)];
 }
 @end

@@ -8,9 +8,14 @@
 
 #import "C4CaptureVideoPreviewLayer.h"
 
+@interface C4CaptureVideoPreviewLayer ()
+@property (readwrite, nonatomic) CGFloat rotationAngle;
+@end
+
 @implementation C4CaptureVideoPreviewLayer
 @synthesize animationOptions = _animationOptions, currentAnimationEasing, repeatCount, animationDuration = _animationDuration;
 @synthesize allowsInteraction, repeats;
+@synthesize rotationAngle;
 
 - (id)init {
     self = [super init];
@@ -263,4 +268,18 @@
     [CATransaction commit];
 }
 
+-(void)animateRotation:(CGFloat)_rotationAngle {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"transform.rotation.z"];
+    animation.fromValue = [NSNumber numberWithFloat:self.rotationAngle];
+    animation.toValue = [NSNumber numberWithFloat:_rotationAngle];
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { 
+            self.rotationAngle = _rotationAngle; 
+            [self removeAnimationForKey:@"animateRotation"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"animateRotation"];
+    [CATransaction commit];
+}
 @end
