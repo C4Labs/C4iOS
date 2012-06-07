@@ -80,4 +80,7 @@
  */
 -(void)postNotification:(NSString *)notification;
 
+#pragma mark New Stuff
+-(void)listenFor:(NSString *)notification fromObjects:(NSArray *)objectArray andRunMethod:(NSString *)methodName;
+-(void)stopListeningFor:(NSString *)methodName objects:(NSArray *)objectArray;
 @end

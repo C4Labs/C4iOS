@@ -361,10 +361,13 @@
     C4Log(@"C4ShapeLayer setMinificationFilterBias not currently available");
 }
 
--(void)setStyle:(NSDictionary *)style {
-    C4Log(@"C4ShapeLayer setStyle not currently available");
-    
-}
+//-(void)setStyle:(NSDictionary *)style {
+//    C4Log(@"C4ShapeLayer setStyle not currently available");
+//    for(NSString *s in [style allKeys]) {
+//        C4Log(@"%@, %@", [style objectForKey:s], s);
+//    }
+//    [super setStyle:style];
+//}
 
 //-(void)setZPosition:(CGFloat)zPosition {
 //    C4Log(@"C4ShapeLayer setZPosition not currently available");

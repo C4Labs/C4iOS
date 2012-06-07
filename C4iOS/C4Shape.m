@@ -99,23 +99,20 @@
     return newShape;
 }
 
-
 /* the technique in both the following methods allows me to change the shape of a shape and change the shape of their view's frame automatically */
 -(void)ellipse:(CGRect)rect {
     [self performSelector:@selector(_ellipse:) withObject:[NSValue valueWithCGRect:rect] afterDelay:self.animationDelay];
 }
 
 -(void)_ellipse:(NSValue *)ellipseValue {
+    C4Log(@"_ellipse");
     _isLine = NO;
     _closed = YES;
     CGRect aRect = [ellipseValue CGRectValue];
     CGMutablePathRef newPath = CGPathCreateMutable();
-    CGRect newPathRect = CGRectMake(0, 0, aRect.size.width, aRect.size.height);
-    CGPathAddEllipseInRect(newPath, nil, newPathRect);
-
+    CGPathAddEllipseInRect(newPath, nil, aRect);
     [self.shapeLayer animatePath:newPath];
-    self.frame = aRect;
-    CFRelease(newPath);
+    CGPathRelease(newPath);
 }
 
 -(void)arcWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle {
@@ -189,10 +186,8 @@
     _closed = YES;
     CGRect aRect = [rectValue CGRectValue];
     CGMutablePathRef newPath = CGPathCreateMutable();
-    CGRect newPathRect = CGRectMake(0, 0, aRect.size.width, aRect.size.height);
-    CGPathAddRect(newPath, nil, newPathRect);
+    CGPathAddRect(newPath, nil, aRect);
     [self.shapeLayer animatePath:newPath];
-    self.frame = aRect;
     CGPathRelease(newPath);
 }
 
@@ -227,9 +222,10 @@
         CFRelease(path);
     }
     [self.shapeLayer animatePath:glyphPaths];
-    CGRect pathRect = CGPathGetBoundingBox(self.shapeLayer.path);
-    pathRect.origin = self.frame.origin;
-    self.frame = pathRect;
+    CGRect pathRect = CGPathGetBoundingBox(glyphPaths);
+    self.bounds = pathRect; //Need this step to sync the appearance of the paths to the frame of the shape
+    pathRect.origin = CGPointZero;
+    self.frame = pathRect; 
     CGPathRelease(glyphPaths);
 }
 -(void)line:(CGPoint *)pointArray {
@@ -266,38 +262,33 @@
 }
 
 -(void)_polygon:(NSArray *)pointArray {
+    //create a c-array of points 
     NSInteger pointCount = [pointArray count];
     CGPoint points[pointCount];
     for (int i = 0; i < pointCount; i++) {
         points[i] = [[pointArray objectAtIndex:i] CGPointValue];
     }
+    
+    //iterate and add the points into a mutable path
     CGMutablePathRef newPath = CGPathCreateMutable();
     CGPathMoveToPoint(newPath, nil, points[0].x, points[0].y);
     for(int i = 1; i < pointCount; i++) {
         CGPathAddLineToPoint(newPath, nil, points[i].x, points[i].y);
     }
+    
+    //if this is a line, set properties 
     if(self.isLine) {
         _pointA = CGPointMake(points[0].x, points[0].y);
         _pointB = CGPointMake(points[1].x, points[1].y);
     }
+    
     CGRect shapeRect = CGPathGetBoundingBox(newPath);
-    CGPoint origin = shapeRect.origin;
-    for(int i = 0; i < pointCount; i++) {
-        points[i].x -= origin.x;
-        points[i].y -= origin.y;
-    }
-    CGPathRelease(newPath);
-    newPath = CGPathCreateMutable();
-    CGPathMoveToPoint(newPath, nil, points[0].x, points[0].y);
-    for(int i = 1; i < pointCount; i++) {
-        CGPathAddLineToPoint(newPath, nil, points[i].x, points[i].y);
-    }
+    self.bounds = shapeRect;
     if (_isTriangle == YES && _closed == NO) {
         CGPathCloseSubpath(newPath);
         _closed = YES;
     }
     [self.shapeLayer animatePath:newPath];
-    self.frame = shapeRect;
     CGPathRelease(newPath);
 }
 
