@@ -8,12 +8,28 @@
 
 #import "C4WorkSpace.h"
 
-@implementation C4WorkSpace
+@interface C4WorkSpace ()
+-(void)startClock;
+@end
+
+@implementation C4WorkSpace {
+    C4Shape *line;
+    
+}
 
 -(void)setup {
-    C4Movie *m = [C4Movie movieNamed:@"inception.mov"];
-    m.shouldAutoplay = YES;
-    [self.canvas addMovie:m];
+    CGPoint linePoints[2] = {CGPointZero, CGPointMake(0, 100)};
+    line = [C4Shape line:linePoints];
+    line.origin = self.canvas.center;
+    line.layer.anchorPoint = CGPointMake(1, 1);
+    [self.canvas addShape:line];
+    [self runMethod:@"startClock" afterDelay:0.1f];
+} 
+
+-(void)startClock {
+    line.animationDuration = 60.0f;
+    line.animationOptions = LINEAR | REPEAT;
+    line.rotation = TWO_PI;
 }
 
 @end
