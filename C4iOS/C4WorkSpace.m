@@ -17,6 +17,11 @@
 }
 
 -(void)setup {
+    CGPoint endPoints[2] = {CGPointZero,CGPointMake(200, 200)};
+    CGPoint controlPoints[2] = {CGPointMake(100, -100),CGPointMake(100, 300)};
+    curve = [C4Shape curve:endPoints controlPoints:controlPoints];
+    curve.backgroundColor = C4GREY;
+    curve.center = self.canvas.center;
     [self.canvas addShape:curve];
 } 
 
