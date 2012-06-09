@@ -9,27 +9,19 @@
 #import "C4WorkSpace.h"
 
 @interface C4WorkSpace ()
--(void)startClock;
+    //declare custom methods and properties here
 @end
 
 @implementation C4WorkSpace {
-    C4Shape *line;
-    
+    //declare custom variables here
+    C4Shape *arc;
 }
 
 -(void)setup {
-    CGPoint linePoints[2] = {CGPointZero, CGPointMake(0, 100)};
-    line = [C4Shape line:linePoints];
-    line.origin = self.canvas.center;
-    line.layer.anchorPoint = CGPointMake(1, 1);
-    [self.canvas addShape:line];
-    [self runMethod:@"startClock" afterDelay:0.1f];
+    arc = [C4Shape arcWithCenter:self.canvas.center radius:100 startAngle:0 endAngle:PI]; //works
+    [arc closeShape]; //works
+    arc.center = self.canvas.center; //works
+    [self.canvas addShape:arc];
 } 
-
--(void)startClock {
-    line.animationDuration = 60.0f;
-    line.animationOptions = LINEAR | REPEAT;
-    line.rotation = TWO_PI;
-}
 
 @end

@@ -42,4 +42,7 @@ void C4Log(NSString *logString,...);
  */
 NSInteger   basicSort(id obj1, id obj2, void *context);
 
+#pragma mark New Stuff
+CGRect CGRectFromPointArray(CGPoint *pointArray, int pointCount);
+
 @end

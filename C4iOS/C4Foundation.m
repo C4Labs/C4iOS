@@ -108,4 +108,16 @@ NSInteger floatSort(id obj1, id obj2, void *context) {
     return self;
 }
 
+#pragma mark New Stuff
+CGRect CGRectFromPointArray(CGPoint *pointArray, int pointCount) {
+    //iterate and add the points into a mutable path
+    CGMutablePathRef newPath = CGPathCreateMutable();
+    CGPathMoveToPoint(newPath, nil, pointArray[0].x, pointArray[0].y);
+    for(int i = 1; i < pointCount; i++) {
+        CGPathAddLineToPoint(newPath, nil, pointArray[i].x, pointArray[i].y);
+    }
+    CGRect pathRect = CGPathGetBoundingBox(newPath);
+    CGPathRelease(newPath);
+    return pathRect;
+}
 @end
