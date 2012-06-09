@@ -76,29 +76,31 @@
 }
 
 +(C4Shape *)line:(CGPoint *)pointArray {
-    CGRect lineFrame = CGRectFromPointArray(pointArray, 2);
+    CGRect lineFrame = CGRectMakeFromPointArray(pointArray, 2);
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:lineFrame];
     [newShape line:pointArray];
     return newShape;
 }
 
 +(C4Shape *)triangle:(CGPoint *)pointArray {
-    CGRect polygonFrame = CGRectFromPointArray(pointArray, 3);
+    CGRect polygonFrame = CGRectMakeFromPointArray(pointArray, 3);
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:polygonFrame];
     [newShape triangle:pointArray];
     return newShape;
 }
 
 +(C4Shape *)polygon:(CGPoint *)pointArray pointCount:(NSInteger)pointCount {
-    CGRect polygonFrame = CGRectFromPointArray(pointArray, pointCount);
+    CGRect polygonFrame = CGRectMakeFromPointArray(pointArray, pointCount);
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:polygonFrame];
     [newShape polygon:pointArray pointCount:pointCount];
     return newShape;
 }
 
-+(C4Shape *)arcWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle {
-    C4Shape *newShape = [[C4Shape alloc] initWithFrame:CGRectZero];
-    [newShape arcWithCenter:centerPoint radius:radius startAngle:startAngle endAngle:endAngle];
++(C4Shape *)arcWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise {
+    //I'm not sure what's going on here, but i have to invert clockwise to get the 
+    CGRect arcRect = CGRectMakeFromArcComponents(centerPoint,radius,startAngle,endAngle,!clockwise);
+    C4Shape *newShape = [[C4Shape alloc] initWithFrame:arcRect];
+    [newShape arcWithCenter:centerPoint radius:radius startAngle:startAngle endAngle:endAngle clockwise:!clockwise];
     return newShape;
 }
 
@@ -124,25 +126,28 @@
     CGPathRelease(newPath);
 }
 
--(void)arcWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle {
+-(void)arcWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise{
     NSMutableDictionary *arcDict = [[NSMutableDictionary alloc] initWithCapacity:0];
     [arcDict setValue:[NSValue valueWithCGPoint:centerPoint] forKey:@"centerPoint"];
     [arcDict setObject:[NSNumber numberWithFloat:radius] forKey:@"radius"];
     [arcDict setObject:[NSNumber numberWithFloat:startAngle] forKey:@"startAngle"];
     [arcDict setObject:[NSNumber numberWithFloat:endAngle] forKey:@"endAngle"];
+    [arcDict setObject:[NSNumber numberWithBool:clockwise] forKey:@"clockwise"];
     [self performSelector:@selector(_arc:) withObject:arcDict afterDelay:self.animationDelay];
 }
 
 -(void)_arc:(NSDictionary *)arcDict {
     CGMutablePathRef newPath = CGPathCreateMutable();
     CGPoint centerPoint = [[arcDict valueForKey:@"centerPoint"] CGPointValue];
-    CGPathAddArc(newPath, nil, centerPoint.x, centerPoint.y, [[arcDict objectForKey:@"radius"] floatValue], [[arcDict objectForKey:@"startAngle"] floatValue], [[arcDict objectForKey:@"endAngle"] floatValue], YES);
-    CGRect tempFrame = CGPathGetBoundingBox(newPath);
-    CGPathRelease(newPath);
-    newPath = CGPathCreateMutable();
-    CGPathAddArc(newPath, nil, tempFrame.size.width/2.0f, tempFrame.size.height, [[arcDict objectForKey:@"radius"] floatValue], [[arcDict objectForKey:@"startAngle"] floatValue], [[arcDict objectForKey:@"endAngle"] floatValue], YES);
-    self.frame = tempFrame;
-    [self.shapeLayer animatePath:newPath];
+    CGPathAddArc(newPath, nil, centerPoint.x, centerPoint.y, [[arcDict objectForKey:@"radius"] floatValue], [[arcDict objectForKey:@"startAngle"] floatValue], [[arcDict objectForKey:@"endAngle"] floatValue], [[arcDict objectForKey:@"clockwise"] boolValue]);
+    CGRect arcRect = CGPathGetBoundingBox(newPath);
+    const CGAffineTransform translation = CGAffineTransformMakeTranslation(arcRect.origin.x *-1, arcRect.origin.y *-1);
+    CGMutablePathRef translatedPath = CGPathCreateMutableCopyByTransformingPath(newPath, &translation);
+//    CGRect tempFrame = CGPathGetBoundingBox(newPath);
+//    CGPathRelease(newPath);
+//    newPath = CGPathCreateMutable();
+//    CGPathAddArc(newPath, nil, tempFrame.size.width/2.0f, tempFrame.size.height, [[arcDict objectForKey:@"radius"] floatValue], [[arcDict objectForKey:@"startAngle"] floatValue], [[arcDict objectForKey:@"endAngle"] floatValue], YES);
+    [self.shapeLayer animatePath:translatedPath];
     if (_shouldClose == YES) {
         CGPathCloseSubpath(newPath);
     }
@@ -265,7 +270,7 @@
         points[i] = [[pointArray objectAtIndex:i] CGPointValue];
     }
 
-    CGRect lineRect = CGRectFromPointArray(points, 2);
+    CGRect lineRect = CGRectMakeFromPointArray(points, 2);
     CGPoint translation = lineRect.origin;
     translation.x *= -1;
     translation.y *= -1;

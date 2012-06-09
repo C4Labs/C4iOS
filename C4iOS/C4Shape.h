@@ -71,7 +71,7 @@
  @param endAngle The ending angle of the arc, in radians in the range of (0 .. 2*PI)
  @return The initialized C4Shape object created with an arc path or nil if initialization is not successful.
  */
-+(C4Shape *)arcWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle;
++(C4Shape *)arcWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise;
 
 /**Creates and returns an instance of C4Shape, whose path is an arc.
  
@@ -142,7 +142,7 @@ The change will happen based on the shape's current animation options, duration 
  @param startAngle The starting angle of the arc, in radians in the range of (0 .. 2*PI)
  @param endAngle The ending angle of the arc, in radians in the range of (0 .. 2*PI)
  */
--(void)arcWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle;
+-(void)arcWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise;
 
 /**Changes the object's current shape to a curve
  

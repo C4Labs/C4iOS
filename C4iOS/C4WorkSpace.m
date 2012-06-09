@@ -13,15 +13,11 @@
 @end
 
 @implementation C4WorkSpace {
-    //declare custom variables here
-    C4Shape *arc;
+    C4Shape *curve;
 }
 
 -(void)setup {
-    arc = [C4Shape arcWithCenter:self.canvas.center radius:100 startAngle:0 endAngle:PI]; //works
-    [arc closeShape]; //works
-    arc.center = self.canvas.center; //works
-    [self.canvas addShape:arc];
+    [self.canvas addShape:curve];
 } 
 
 @end
