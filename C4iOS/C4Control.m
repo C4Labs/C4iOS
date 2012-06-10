@@ -79,17 +79,16 @@
 
 -(void)setCenter:(CGPoint)center {
     CGPoint oldCenter = CGPointMake(self.center.x, self.center.y);
-    [self animateWithBlock:^{
-        [super setCenter:center];
-    } completion:^(BOOL completed) {
-        if ((self.animationOptions & AUTOREVERSE) == AUTOREVERSE && completed) {
-            CGFloat oldDuration = self.animationDuration;
-            CGFloat oldDelay = self.animationDelay;
-            [super setCenter:oldCenter];
-            self.animationDuration = oldDuration;
-            self.animationDelay = oldDelay;
+
+    void (^animationBlock) (void) = ^ { super.center = center; };
+    
+    void (^completionBlock) (BOOL) = ^ (BOOL animationIsComplete) {
+        if ((self.animationOptions & AUTOREVERSE) == AUTOREVERSE && animationIsComplete) {
+            super.center = oldCenter;
         }
-    }];
+    };
+    
+    [self animateWithBlock:animationBlock completion:completionBlock];
 }
 
 -(void)setOrigin:(CGPoint)origin {
@@ -102,92 +101,86 @@
 
 -(void)setFrame:(CGRect)frame {
     CGRect oldFrame = self.frame;
-    [self animateWithBlock:^{
-        [super setFrame:frame];
-    } completion:^(BOOL completed) {
-        if ((self.animationOptions & AUTOREVERSE) == AUTOREVERSE && completed) {
-            CGFloat oldDuration = self.animationDuration;
-            CGFloat oldDelay = self.animationDelay;
-            [super setFrame:oldFrame];
-            self.animationDuration = oldDuration;
-            self.animationDelay = oldDelay;
+    
+    void (^animationBlock) (void) = ^ { super.frame = frame; };
+    
+    void (^completionBlock) (BOOL) = ^ (BOOL animationIsComplete) {
+        if ((self.animationOptions & AUTOREVERSE) == AUTOREVERSE && animationIsComplete) {
+            super.frame = oldFrame;
         }
-    }];
+    };
+
+    [self animateWithBlock:animationBlock completion:completionBlock];
 }
 
 -(void)setBounds:(CGRect)bounds {
     CGRect oldBounds = self.bounds;
-    [self animateWithBlock:^{
-        [super setBounds:bounds];
-    } completion:^(BOOL completed) {
-        if ((self.animationOptions & AUTOREVERSE) == AUTOREVERSE && completed) {
-            CGFloat oldDuration = self.animationDuration;
-            CGFloat oldDelay = self.animationDelay;
-            [super setBounds:oldBounds];
-            self.animationDuration = oldDuration;
-            self.animationDelay = oldDelay;
+    
+    void (^animationBlock) (void) = ^ { super.bounds = bounds; };
+    
+    void (^completionBlock) (BOOL) = ^ (BOOL animationIsComplete) {
+        if ((self.animationOptions & AUTOREVERSE) == AUTOREVERSE && animationIsComplete) {
+            super.bounds = oldBounds;
         }
-    }];
+    };
+    
+    [self animateWithBlock:animationBlock completion:completionBlock];
 }
 
 -(void)setTransform:(CGAffineTransform)transform {
     CGAffineTransform oldTransform = self.transform;
-    [self animateWithBlock:^{
-        [super setTransform:transform];
-    } completion:^(BOOL completed) {
-        if ((self.animationOptions & AUTOREVERSE) == AUTOREVERSE && completed) {
-            CGFloat oldDuration = self.animationDuration;
-            CGFloat oldDelay = self.animationDelay;
-            [super setTransform:oldTransform];
-            self.animationDuration = oldDuration;
-            self.animationDelay = oldDelay;
+
+    void (^animationBlock) (void) = ^ { super.transform = transform; };
+    
+    void (^completionBlock) (BOOL) = ^ (BOOL animationIsComplete) {
+        if ((self.animationOptions & AUTOREVERSE) == AUTOREVERSE && animationIsComplete) {
+            super.transform = oldTransform;
         }
-    }];
+    };
+    
+    [self animateWithBlock:animationBlock completion:completionBlock];
 }
 
 -(void)setAlpha:(CGFloat)alpha {
     CGFloat oldAlpha = self.alpha;
-    [self animateWithBlock:^{
-        [super setAlpha:alpha];
-    } completion:^(BOOL completed) {
-        if ((self.animationOptions & AUTOREVERSE) == AUTOREVERSE && completed) {
-            CGFloat oldDuration = self.animationDuration;
-            CGFloat oldDelay = self.animationDelay;
-            [super setAlpha:oldAlpha];
-            self.animationDuration = oldDuration;
-            self.animationDelay = oldDelay;
+    
+    void (^animationBlock) (void) = ^ { super.alpha = alpha; };
+    
+    void (^completionBlock) (BOOL) = ^ (BOOL animationIsComplete) {
+        if ((self.animationOptions & AUTOREVERSE) == AUTOREVERSE && animationIsComplete) {
+            super.alpha = oldAlpha;
         }
-    }];
+    };
+    
+    [self animateWithBlock:animationBlock completion:completionBlock];
 }
 
 -(void)setBackgroundColor:(UIColor *)backgroundColor {
     UIColor *oldBackgroundColor = self.backgroundColor;
-    [self animateWithBlock:^{
-        [super setBackgroundColor:backgroundColor];
-    } completion:^(BOOL completed) {
-        if ((self.animationOptions & AUTOREVERSE) == AUTOREVERSE && completed) {
-            CGFloat oldDuration = self.animationDuration;
-            CGFloat oldDelay = self.animationDelay;
-            [super setBackgroundColor:oldBackgroundColor];
-            self.animationDuration = oldDuration;
-            self.animationDelay = oldDelay;
+    
+    void (^animationBlock) (void) = ^ { super.backgroundColor = backgroundColor; };
+    
+    void (^completionBlock) (BOOL) = ^ (BOOL animationIsComplete) {
+        if ((self.animationOptions & AUTOREVERSE) == AUTOREVERSE && animationIsComplete) {
+            super.backgroundColor = oldBackgroundColor;
         }
-    }];
+    };
+    
+    [self animateWithBlock:animationBlock completion:completionBlock];
 }
 
 -(void)setContentStretch:(CGRect)contentStretch {
     CGRect oldContentStretch = self.contentStretch;
-    [self animateWithBlock:^{
-        [super setContentStretch:contentStretch];
-    } completion:^(BOOL completed) {
-        if ((self.animationOptions & AUTOREVERSE) == AUTOREVERSE && completed) {
-            CGFloat oldDuration = self.animationDuration;
-            CGFloat oldDelay = self.animationDelay;
-            [super setContentStretch:oldContentStretch];
-            self.animationDuration = oldDuration;
-            self.animationDelay = oldDelay;
+
+    void (^animationBlock) (void) = ^ { super.contentStretch = contentStretch; };
+    
+    void (^completionBlock) (BOOL) = ^ (BOOL animationIsComplete) {
+        if ((self.animationOptions & AUTOREVERSE) == AUTOREVERSE && animationIsComplete) {
+            super.contentStretch = oldc;
         }
-    }];
+    };
+    
+    [self animateWithBlock:animationBlock completion:completionBlock];
 }
 
 #pragma mark Animation methods

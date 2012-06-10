@@ -9,20 +9,32 @@
 #import "C4WorkSpace.h"
 
 @interface C4WorkSpace ()
-    //declare custom methods and properties here
 @end
 
 @implementation C4WorkSpace {
-    C4Shape *curve;
+    C4Shape *translateRect, *transformRect;
 }
 
 -(void)setup {
-    CGPoint endPoints[2] = {CGPointZero,CGPointMake(200, 200)};
-    CGPoint controlPoints[2] = {CGPointMake(100, -100),CGPointMake(100, 300)};
-    curve = [C4Shape curve:endPoints controlPoints:controlPoints];
-    curve.backgroundColor = C4GREY;
-    curve.center = self.canvas.center;
-    [self.canvas addShape:curve];
+    translateRect = [C4Shape rect:CGRectMake(100, 100, 100,100)];
+    [self.canvas addShape:translateRect];
+    
+    transformRect = [C4Shape rect:CGRectMake(100, 300, 100, 100)];
+    [self.canvas addShape:transformRect];
 } 
+
+-(void)test {
+    translateRect.animationDuration = 1.0f;
+    translateRect.animationOptions = AUTOREVERSE;
+    translateRect.center = CGPointMake(384,150);
+
+    transformRect.animationDuration = 1.0f;
+    transformRect.animationOptions = AUTOREVERSE;
+    transformRect.transform = CGAffineTransformMakeRotation(QUARTER_PI);
+}
+
+-(void)touchesBegan {
+    [self test];
+}
 
 @end

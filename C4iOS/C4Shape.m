@@ -143,15 +143,13 @@
     CGRect arcRect = CGPathGetBoundingBox(newPath);
     const CGAffineTransform translation = CGAffineTransformMakeTranslation(arcRect.origin.x *-1, arcRect.origin.y *-1);
     CGMutablePathRef translatedPath = CGPathCreateMutableCopyByTransformingPath(newPath, &translation);
-//    CGRect tempFrame = CGPathGetBoundingBox(newPath);
-//    CGPathRelease(newPath);
-//    newPath = CGPathCreateMutable();
-//    CGPathAddArc(newPath, nil, tempFrame.size.width/2.0f, tempFrame.size.height, [[arcDict objectForKey:@"radius"] floatValue], [[arcDict objectForKey:@"startAngle"] floatValue], [[arcDict objectForKey:@"endAngle"] floatValue], YES);
+    CGPathRelease(newPath);
+    
     [self.shapeLayer animatePath:translatedPath];
     if (_shouldClose == YES) {
         CGPathCloseSubpath(newPath);
     }
-    CGPathRelease(newPath);
+    CGPathRelease(translatedPath);
     _initialized = YES;
 }
 
@@ -194,7 +192,7 @@
         CGPathCloseSubpath(newPath);
     }
     [self.shapeLayer animatePath:newPath];
-    self.frame = tempFrame;
+    self.frame = tempFrame; // not sure why this doesn't affect curves the same way it affects other shapes (i.e. by not allowing .center to be set during setup{}
     CGPathRelease(newPath);
     _initialized = YES;
 }
@@ -207,11 +205,9 @@
     _isLine = NO;
     _closed = YES;
     CGRect aRect = [rectValue CGRectValue];
+    aRect.origin = CGPointZero;
     CGMutablePathRef newPath = CGPathCreateMutable();
     CGPathAddRect(newPath, nil, aRect);
-    if (_shouldClose == YES) {
-        CGPathCloseSubpath(newPath);
-    }
     [self.shapeLayer animatePath:newPath];
     CGPathRelease(newPath);
     _initialized = YES;
