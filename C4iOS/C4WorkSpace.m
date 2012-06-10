@@ -8,33 +8,16 @@
 
 #import "C4WorkSpace.h"
 
-@interface C4WorkSpace ()
-@end
-
 @implementation C4WorkSpace {
-    C4Shape *translateRect, *transformRect;
+    C4Shape *s;
 }
 
 -(void)setup {
-    translateRect = [C4Shape rect:CGRectMake(100, 100, 100,100)];
-    [self.canvas addShape:translateRect];
-    
-    transformRect = [C4Shape rect:CGRectMake(100, 300, 100, 100)];
-    [self.canvas addShape:transformRect];
-} 
-
--(void)test {
-    translateRect.animationDuration = 1.0f;
-    translateRect.animationOptions = AUTOREVERSE;
-    translateRect.center = CGPointMake(384,150);
-
-    transformRect.animationDuration = 1.0f;
-    transformRect.animationOptions = AUTOREVERSE;
-    transformRect.transform = CGAffineTransformMakeRotation(QUARTER_PI);
+    s = [C4Shape rect:CGRectMake(100, 100, 100, 100)];
+    s = [C4Shape rect:CGRectMake(100, 100, 200, 200)];
+    [self.canvas addShape:s];
 }
 
 -(void)touchesBegan {
-    [self test];
 }
-
 @end

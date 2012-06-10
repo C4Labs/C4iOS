@@ -21,7 +21,7 @@
 -(void)sizeToFit;
 
 #pragma mark C4Label Methods
--(void)_setBackgroundColor:(UIColor *)backgroundColor;
+//-(void)_setBackgroundColor:(UIColor *)backgroundColor;
 -(void)_setText:(NSString *)text;
 -(void)_setTextShadowColor:(UIColor *)shadowColor;
 -(void)_setTextShadowOffset:(NSValue *)shadowOffset;
@@ -61,6 +61,7 @@
 @synthesize text = _text;
 @synthesize label = _label;
 @synthesize backingLayer;
+@synthesize width = _width, height = _height;
 
 -(id)init {
     return [self initWithFrame:CGRectZero];
@@ -70,26 +71,31 @@
     return [[C4Label alloc] initWithText:text];
 }
 
-+(C4Label *)labelWithText:(NSString *)text andFont:(C4Font *)font {
-    return [[C4Label alloc] initWithText:text andFont:font];
++(C4Label *)labelWithText:(NSString *)text font:(C4Font *)font {
+    return [[C4Label alloc] initWithText:text font:font];
+}
+
++(C4Label *)labelWithText:(NSString *)text font:(C4Font *)font frame:(CGRect)frame {
+    return [[C4Label alloc] initWithText:text font:font frame:frame];
 }
 
 -(id)initWithText:(NSString *)text {
-    self = [self initWithFrame:CGRectZero];
-    if(self != nil) {
-        self.text = text;
-        self.font = [C4Font systemFontOfSize:12.0f];
-        [self sizeToFit];
-    }
-    return self;
+    return [self initWithText:text font:[C4Font systemFontOfSize:12.0f]];
 }
 
--(id)initWithText:(NSString *)text andFont:(C4Font *)font {
-    self = [self initWithFrame:CGRectZero];
+-(id)initWithText:(NSString *)text font:(C4Font *)font {
+    UILabel *newLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    newLabel.text = text;
+    newLabel.font = font.UIFont;
+    [newLabel sizeToFit];
+    return [self initWithText:text font:font frame:newLabel.frame];
+}
+
+-(id)initWithText:(NSString *)text font:(C4Font *)font frame:(CGRect)frame {
+    self = [self initWithFrame:frame];
     if(self != nil) {
         self.text = text;
         self.font = font;
-        [self sizeToFit];
     }
     return self;
 }
@@ -126,13 +132,13 @@
 }
 
 #pragma mark C4Label Methods
--(void)setBackgroundColor:(UIColor *)backgroundColor {
-    if(self.animationDelay == 0) _label.backgroundColor = backgroundColor;
-    [self performSelector:@selector(_setBackgroundColor:) withObject:backgroundColor afterDelay:self.animationDelay];
-}
--(void)_setBackgroundColor:(UIColor *)backgroundColor {
-    _label.backgroundColor = backgroundColor;
-}
+//-(void)setBackgroundColor:(UIColor *)backgroundColor {
+//    if(self.animationDelay == 0) _label.backgroundColor = backgroundColor;
+//    [self performSelector:@selector(_setBackgroundColor:) withObject:backgroundColor afterDelay:self.animationDelay];
+//}
+//-(void)_setBackgroundColor:(UIColor *)backgroundColor {
+//    _label.backgroundColor = backgroundColor;
+//}
 
 -(UIColor *)backroundColor {
     return _label.backgroundColor;
@@ -195,6 +201,11 @@
 }
 -(void)_setFont:(C4Font *)font {
     self.label.font = font.UIFont;
+}
+
+-(void)setFrame:(CGRect)frame {
+    super.frame = frame;
+    self.label.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
 }
 
 -(void)setTextColor:(UIColor *)textColor {
@@ -276,7 +287,6 @@
 }
 
 -(void)setNumberOfLines:(NSUInteger)numberOfLines {
-    if(self.animationDelay == 0.0f) self.label.numberOfLines = numberOfLines;
     [self performSelector:@selector(_setNumberOfLines:) withObject:[NSNumber numberWithInt:numberOfLines] afterDelay:self.animationDelay];
 }
 -(void)_setNumberOfLines:(NSNumber *)numberOfLines {
@@ -372,4 +382,13 @@
     return [C4Layer class];
 }
 
+-(void)setWidth:(CGFloat)width {
+    _width = width;
+    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, width, self.frame.size.height);
+}
+
+-(void)setHeight:(CGFloat)height {
+    _height = height;
+    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, height);
+}
 @end

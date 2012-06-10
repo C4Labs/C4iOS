@@ -176,7 +176,7 @@
     
     void (^completionBlock) (BOOL) = ^ (BOOL animationIsComplete) {
         if ((self.animationOptions & AUTOREVERSE) == AUTOREVERSE && animationIsComplete) {
-            super.contentStretch = oldc;
+            super.contentStretch = oldContentStretch;
         }
     };
     

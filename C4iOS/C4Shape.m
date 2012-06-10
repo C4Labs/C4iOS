@@ -192,7 +192,9 @@
         CGPathCloseSubpath(newPath);
     }
     [self.shapeLayer animatePath:newPath];
-    self.frame = tempFrame; // not sure why this doesn't affect curves the same way it affects other shapes (i.e. by not allowing .center to be set during setup{}
+    // not sure why the following doesn't affect curves the same way it affects other shapes 
+    // (i.e. by not allowing .center to be set during setup{})
+    self.frame = tempFrame; 
     CGPathRelease(newPath);
     _initialized = YES;
 }

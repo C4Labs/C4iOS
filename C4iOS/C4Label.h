@@ -18,10 +18,12 @@
 }
 
 +(C4Label *)labelWithText:(NSString *)text;
-+(C4Label *)labelWithText:(NSString *)text andFont:(C4Font *)font;
++(C4Label *)labelWithText:(NSString *)text font:(C4Font *)font;
++(C4Label *)labelWithText:(NSString *)text font:(C4Font *)font frame:(CGRect)frame;
 
 -(id)initWithText:(NSString *)text;
--(id)initWithText:(NSString *)text andFont:(C4Font *)font;
+-(id)initWithText:(NSString *)text font:(C4Font *)font;
+-(id)initWithText:(NSString *)text font:(C4Font *)font frame:(CGRect)frame;
 
 /// @name Custom
 #pragma mark Custom
@@ -166,4 +168,6 @@
  */
 @property (readonly, nonatomic, weak) C4Layer *backingLayer;
 
+
+@property (readwrite, nonatomic) CGFloat width, height;
 @end
