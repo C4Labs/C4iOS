@@ -8,16 +8,28 @@
 
 #import "C4WorkSpace.h"
 
+@interface C4WorkSpace ()
+-(void)startClock;
+@end
+
 @implementation C4WorkSpace {
-    C4Shape *s;
+    C4Shape *line;
+    
 }
 
 -(void)setup {
-    s = [C4Shape rect:CGRectMake(100, 100, 100, 100)];
-    s = [C4Shape rect:CGRectMake(100, 100, 200, 200)];
-    [self.canvas addShape:s];
+    CGPoint linePoints[2] = {CGPointZero, CGPointMake(0, 100)};
+    line = [C4Shape line:linePoints];
+    line.origin = self.canvas.center;
+    line.layer.anchorPoint = CGPointMake(1, 1);
+    [self.canvas addShape:line];
+    [self runMethod:@"startClock" afterDelay:0.1f];
+} 
+
+-(void)startClock {
+    line.animationDuration = 60.0f;
+    line.animationOptions = LINEAR | REPEAT;
+    line.rotation = TWO_PI;
 }
 
--(void)touchesBegan {
-}
 @end

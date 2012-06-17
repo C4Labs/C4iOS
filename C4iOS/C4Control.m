@@ -58,6 +58,7 @@
  */
 
 -(void)dealloc {
+    [[NSRunLoop mainRunLoop] cancelPerformSelectorsWithTarget:self];
     self.backgroundColor = nil;
     self.longPressMethodName = nil;
     NSEnumerator *enumerator = [self.gestureDictionary keyEnumerator];
