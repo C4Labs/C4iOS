@@ -63,7 +63,7 @@
     [self.cameraController initCapture];
 }
 
-+ (Class)layerClass {
++(Class)layerClass {
 	return [C4CaptureVideoPreviewLayer class];
 }
 

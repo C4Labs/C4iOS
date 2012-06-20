@@ -70,7 +70,7 @@
      */
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application
+-(void)applicationWillTerminate:(UIApplication *)application
 {
     /*
      Called when the application is about to terminate.
