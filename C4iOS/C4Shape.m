@@ -116,14 +116,15 @@
 }
 
 -(void)_ellipse:(NSValue *)ellipseValue {
-    C4Log(@"_ellipse");
     _isLine = NO;
     _closed = YES;
     CGRect aRect = [ellipseValue CGRectValue];
+    aRect.origin = CGPointZero;
     CGMutablePathRef newPath = CGPathCreateMutable();
     CGPathAddEllipseInRect(newPath, nil, aRect);
     [self.shapeLayer animatePath:newPath];
     CGPathRelease(newPath);
+    _initialized = YES;
 }
 
 -(void)arcWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise{
@@ -354,9 +355,10 @@
         CGPathCloseSubpath(newPath);
     }
     [self.shapeLayer animatePath:newPath];
+    CGRect pathRect = CGPathGetBoundingBox(newPath);
+    self.bounds = pathRect; //Need this step to sync the appearance of the paths to the frame of the shape
     CGPathRelease(newPath);
     _initialized = YES;
-
 }
 
 -(void)closeShape {

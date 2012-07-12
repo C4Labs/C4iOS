@@ -13,7 +13,7 @@
  The C4AppDelegate class is used to define the main window of an application as a C4Window, and to specify the a canvas controller of the C4CanvasController type (rather than the defaults for both).
  */
 
-@interface C4AppDelegate : UIResponder <UIApplicationDelegate>
+@interface C4AppDelegate : UIResponder <UIApplicationDelegate, UIScrollViewDelegate>
 
 /** The main application window.
 
