@@ -178,12 +178,15 @@
 
 -(void)numberOfTouchesRequired:(NSInteger)touchCount forGesture:(NSString *)gestureName {
     UIGestureRecognizer *recognizer = [_gestureDictionary objectForKey:gestureName];
-    if([recognizer isKindOfClass:[UITapGestureRecognizer class]])
+    if([recognizer isKindOfClass:[UITapGestureRecognizer class]]) {
         ((UITapGestureRecognizer *) recognizer).numberOfTouchesRequired = touchCount;
-    else if([recognizer isKindOfClass:[UISwipeGestureRecognizer class]])
+    }
+    else if([recognizer isKindOfClass:[UISwipeGestureRecognizer class]]) {
         ((UISwipeGestureRecognizer *) recognizer).numberOfTouchesRequired = touchCount;
-    else if([recognizer isKindOfClass:[UILongPressGestureRecognizer class]])
+    }
+    else if([recognizer isKindOfClass:[UILongPressGestureRecognizer class]]) {
         ((UILongPressGestureRecognizer *) recognizer).numberOfTouchesRequired = touchCount;
+    }
 }
 
 -(void)setMinimumPressDuration:(CGFloat)duration forGesture:(NSString *)gestureName {
@@ -194,8 +197,9 @@
 
 -(void)setMinimumNumberOfTouches:(NSInteger)touchCount forGesture:(NSString *)gestureName {
     UIGestureRecognizer *recognizer = [_gestureDictionary objectForKey:gestureName];
-    if([recognizer isKindOfClass:[UIPanGestureRecognizer class]])
+    if([recognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
         ((UIPanGestureRecognizer *) recognizer).minimumNumberOfTouches = touchCount;
+    }
 }
 
 -(void)setMaximumNumberOfTouches:(NSInteger)touchCount forGesture:(NSString *)gestureName {

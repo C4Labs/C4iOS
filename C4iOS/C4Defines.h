@@ -11,9 +11,9 @@
 
 /* NOT SUPPOSED TO USE #DEFINES, BUT HERE WE DON'T WANT PEOPLE TO CHANGE THE VALUE OF THESE VARIABLES */
 #ifndef C4_DEFAULT_COLORS
-#define C4RED [UIColor colorWithRed:1.0f green:0.196 blue:0.196 alpha:1.0f]
-#define C4BLUE [UIColor colorWithRed:0.196 green:0.392 blue:1.0f alpha:1.0f]
-#define C4GREY [UIColor colorWithRed:0.125 green:0.125 blue:0.125 alpha:1.0f]
+#define C4RED [UIColor colorWithRed:0.94f green:0.0f blue:0.26f alpha:1.0f]
+#define C4BLUE [UIColor colorWithRed:0.14f green:0.58f blue:0.81f alpha:1.0f]
+#define C4GREY [UIColor colorWithRed:0.13f green:0.13f blue:0.13f alpha:1.0f]
 #endif
 
 #ifndef C4_DEFAULT_FONTNAMES
