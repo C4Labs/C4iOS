@@ -45,14 +45,11 @@
 		ED50C8D014EAC77C0040D844 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED50C8CF14EAC77C0040D844 /* AVFoundation.framework */; };
 		ED50C8D214EAC92F0040D844 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED50C8D114EAC92F0040D844 /* QuartzCore.framework */; };
 		ED50C8D614EACA340040D844 /* C4View.m in Sources */ = {isa = PBXBuildFile; fileRef = ED50C8D514EACA340040D844 /* C4View.m */; };
-		ED57DE3415AC8A4F00C232B4 /* code1.png in Resources */ = {isa = PBXBuildFile; fileRef = ED57DE3315AC8A4F00C232B4 /* code1.png */; };
-		ED6B44ED15928D68007A7BBC /* LabelShape.m in Sources */ = {isa = PBXBuildFile; fileRef = ED6B44EC15928D68007A7BBC /* LabelShape.m */; };
 		ED7513AB15150FB60076317F /* inception.mov in Resources */ = {isa = PBXBuildFile; fileRef = ED7513AA15150FB60076317F /* inception.mov */; };
 		ED751492151519890076317F /* C4Sky.png in Resources */ = {isa = PBXBuildFile; fileRef = ED751491151519890076317F /* C4Sky.png */; };
 		ED80BBC014F0648800AAD49C /* C4Defines.m in Sources */ = {isa = PBXBuildFile; fileRef = ED80BBBF14F0648800AAD49C /* C4Defines.m */; };
 		ED89848714EE180400BB7AB0 /* C4ShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED89848614EE180400BB7AB0 /* C4ShapeLayer.m */; };
 		ED89849814EF1C8800BB7AB0 /* C4Object.m in Sources */ = {isa = PBXBuildFile; fileRef = ED89849714EF1C8700BB7AB0 /* C4Object.m */; };
-		ED8A1BDA1592368B00EDE43F /* C4ScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8A1BD91592368B00EDE43F /* C4ScrollView.m */; };
 		ED900CEF14FBF2B4006C2AED /* C4Font.m in Sources */ = {isa = PBXBuildFile; fileRef = ED900CEE14FBF2B3006C2AED /* C4Font.m */; };
 		ED979F3F14F95EFF00645114 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED979F3E14F95EFF00645114 /* CoreImage.framework */; };
 		ED9D5FA51564A927009C5175 /* C4Vector.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9D5FA41564A927009C5175 /* C4Vector.m */; };
@@ -129,9 +126,6 @@
 		ED50C8D114EAC92F0040D844 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		ED50C8D414EACA340040D844 /* C4View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4View.h; sourceTree = "<group>"; };
 		ED50C8D514EACA340040D844 /* C4View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4View.m; sourceTree = "<group>"; };
-		ED57DE3315AC8A4F00C232B4 /* code1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = code1.png; sourceTree = "<group>"; };
-		ED6B44EB15928D68007A7BBC /* LabelShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelShape.h; sourceTree = "<group>"; };
-		ED6B44EC15928D68007A7BBC /* LabelShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelShape.m; sourceTree = "<group>"; };
 		ED7513AA15150FB60076317F /* inception.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = inception.mov; sourceTree = "<group>"; };
 		ED751491151519890076317F /* C4Sky.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = C4Sky.png; sourceTree = "<group>"; };
 		ED80BBBF14F0648800AAD49C /* C4Defines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Defines.m; sourceTree = "<group>"; };
@@ -139,8 +133,6 @@
 		ED89848614EE180400BB7AB0 /* C4ShapeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4ShapeLayer.m; sourceTree = "<group>"; };
 		ED89849614EF1C8700BB7AB0 /* C4Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Object.h; sourceTree = "<group>"; };
 		ED89849714EF1C8700BB7AB0 /* C4Object.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Object.m; sourceTree = "<group>"; };
-		ED8A1BD81592368B00EDE43F /* C4ScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4ScrollView.h; sourceTree = "<group>"; };
-		ED8A1BD91592368B00EDE43F /* C4ScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4ScrollView.m; sourceTree = "<group>"; };
 		ED900CED14FBF2B3006C2AED /* C4Font.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Font.h; sourceTree = "<group>"; };
 		ED900CEE14FBF2B3006C2AED /* C4Font.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Font.m; sourceTree = "<group>"; };
 		ED979F3E14F95EFF00645114 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
@@ -242,15 +234,7 @@
 		ED50C88B14EAC2010040D844 /* C4iOS */ = {
 			isa = PBXGroup;
 			children = (
-				ED50C89414EAC2010040D844 /* C4AppDelegate.h */,
-				ED50C89514EAC2010040D844 /* C4AppDelegate.m */,
-				EDF65448150DEF3300194671 /* C4WorkSpace.h */,
 				EDF65449150DEF3300194671 /* C4WorkSpace.m */,
-				ED8A1BD81592368B00EDE43F /* C4ScrollView.h */,
-				ED8A1BD91592368B00EDE43F /* C4ScrollView.m */,
-				ED6B44EB15928D68007A7BBC /* LabelShape.h */,
-				ED6B44EC15928D68007A7BBC /* LabelShape.m */,
-				ED57DE3315AC8A4F00C232B4 /* code1.png */,
 				ED50C8D314EACA0E0040D844 /* Source */,
 				EDCE425C156401F000C7356E /* Media */,
 				ED50C88C14EAC2010040D844 /* App */,
@@ -266,9 +250,12 @@
 				ED50C88D14EAC2010040D844 /* C4iOS-Info.plist */,
 				ED50C88E14EAC2010040D844 /* InfoPlist.strings */,
 				ED50C89114EAC2010040D844 /* main.m */,
+				ED50C89414EAC2010040D844 /* C4AppDelegate.h */,
+				ED50C89514EAC2010040D844 /* C4AppDelegate.m */,
 				ED50C8C114EAC4A40040D844 /* C4Defines.h */,
 				ED80BBBF14F0648800AAD49C /* C4Defines.m */,
 				ED50C8C214EAC4A40040D844 /* C4Imports.h */,
+				EDF65448150DEF3300194671 /* C4WorkSpace.h */,
 				ED50C89314EAC2010040D844 /* C4iOS-Prefix.pch */,
 			);
 			name = App;
@@ -430,7 +417,6 @@
 				ED7513AB15150FB60076317F /* inception.mov in Resources */,
 				ED751492151519890076317F /* C4Sky.png in Resources */,
 				ED45EC81155A33C400D28213 /* loop1.wav in Resources */,
-				ED57DE3415AC8A4F00C232B4 /* code1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,8 +458,6 @@
 				ED9D5FA51564A927009C5175 /* C4Vector.m in Sources */,
 				ED36D9EC157C935500C3AEE7 /* C4Image.m in Sources */,
 				ED24F2C5157EB62800BC73B5 /* C4Timer.m in Sources */,
-				ED8A1BDA1592368B00EDE43F /* C4ScrollView.m in Sources */,
-				ED6B44ED15928D68007A7BBC /* LabelShape.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
