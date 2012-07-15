@@ -8,10 +8,20 @@
 
 #import "C4WorkSpace.h"
 
-@implementation C4WorkSpace 
+@implementation C4WorkSpace {
+    C4Shape *s1, *s2;
+}
 
 -(void)setup {
-    //work your magic here
+    s1 = [C4Shape ellipse:CGRectMake(0, 0, 100, 100)];
+    [self.canvas addShape:s1];
+}
+
+-(void)touchesBegan {
+    s1.animationDuration = 2.0f;
+    s1.animationOptions = EASEOUT;
+    s1.backgroundColor = C4GREY;
+    s1.center = self.canvas.center;
 }
 
 @end

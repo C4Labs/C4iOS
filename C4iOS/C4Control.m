@@ -11,7 +11,9 @@
 @interface C4Control() 
 -(void)animateWithBlock:(void (^)(void))blockAnimation;
 -(void)animateWithBlock:(void (^)(void))blockAnimation completion:(void (^)(BOOL))completionBlock;
+-(void)autoreverseAnimation:(void (^)(void))animationBlock;
 -(void)pressedLong:(id)sender;
+@property (readwrite, atomic) BOOL shouldAutoreverse;
 @property (readwrite, atomic, strong) NSString *longPressMethodName;
 @property (readwrite, atomic, strong) NSMutableDictionary *gestureDictionary;
 @end
@@ -26,12 +28,10 @@
 @synthesize borderColor;
 @synthesize masksToBounds;
 @synthesize rotation = _rotation;
+@synthesize shouldAutoreverse;
 
 -(id)init {
-    self = [self initWithFrame:CGRectZero];
-    if(self != nil) {
-    }
-    return self;
+    return [self initWithFrame:CGRectZero];
 }
 
 -(id)initWithFrame:(CGRect)frame {
@@ -41,6 +41,7 @@
         self.animationDelay = 0.0f;
         self.animationOptions = BEGINCURRENT;
         self.repeatCount = 0;
+        self.shouldAutoreverse = NO;
         [self setup];
         self.layer.delegate = self;
     }
@@ -82,13 +83,14 @@
     CGPoint oldCenter = CGPointMake(self.center.x, self.center.y);
 
     void (^animationBlock) (void) = ^ { super.center = center; };
-    
-    void (^completionBlock) (BOOL) = ^ (BOOL animationIsComplete) {
-        if ((self.animationOptions & AUTOREVERSE) == AUTOREVERSE && animationIsComplete) {
-            super.center = oldCenter;
-        }
-    };
-    
+    void (^completionBlock) (BOOL) = nil;
+
+    BOOL animationShouldNotRepeat = (self.animationOptions & REPEAT) !=  REPEAT;
+    if(self.shouldAutoreverse && animationShouldNotRepeat) {
+        completionBlock = ^ (BOOL animationIsComplete) {
+            [self autoreverseAnimation:^ { super.center = oldCenter;}];
+        };
+    }
     [self animateWithBlock:animationBlock completion:completionBlock];
 }
 
@@ -104,13 +106,14 @@
     CGRect oldFrame = self.frame;
     
     void (^animationBlock) (void) = ^ { super.frame = frame; };
+    void (^completionBlock) (BOOL) = nil;
     
-    void (^completionBlock) (BOOL) = ^ (BOOL animationIsComplete) {
-        if ((self.animationOptions & AUTOREVERSE) == AUTOREVERSE && animationIsComplete) {
-            super.frame = oldFrame;
-        }
-    };
-
+    BOOL animationShouldNotRepeat = (self.animationOptions & REPEAT) !=  REPEAT;
+    if(self.shouldAutoreverse && animationShouldNotRepeat) {
+        completionBlock = ^ (BOOL animationIsComplete) {
+            [self autoreverseAnimation:^ { super.frame = oldFrame;}];
+        };
+    }
     [self animateWithBlock:animationBlock completion:completionBlock];
 }
 
@@ -118,12 +121,14 @@
     CGRect oldBounds = self.bounds;
     
     void (^animationBlock) (void) = ^ { super.bounds = bounds; };
+    void (^completionBlock) (BOOL) = nil;
     
-    void (^completionBlock) (BOOL) = ^ (BOOL animationIsComplete) {
-        if ((self.animationOptions & AUTOREVERSE) == AUTOREVERSE && animationIsComplete) {
-            super.bounds = oldBounds;
-        }
-    };
+    BOOL animationShouldNotRepeat = (self.animationOptions & REPEAT) !=  REPEAT;
+    if(self.shouldAutoreverse && animationShouldNotRepeat) {
+        completionBlock = ^ (BOOL animationIsComplete) {
+            [self autoreverseAnimation:^ { super.bounds = oldBounds;}];
+        };
+    }
     
     [self animateWithBlock:animationBlock completion:completionBlock];
 }
@@ -132,12 +137,14 @@
     CGAffineTransform oldTransform = self.transform;
 
     void (^animationBlock) (void) = ^ { super.transform = transform; };
+    void (^completionBlock) (BOOL) = nil;
     
-    void (^completionBlock) (BOOL) = ^ (BOOL animationIsComplete) {
-        if ((self.animationOptions & AUTOREVERSE) == AUTOREVERSE && animationIsComplete) {
-            super.transform = oldTransform;
-        }
-    };
+    BOOL animationShouldNotRepeat = (self.animationOptions & REPEAT) !=  REPEAT;
+    if(self.shouldAutoreverse && animationShouldNotRepeat) {
+        completionBlock = ^ (BOOL animationIsComplete) {
+            [self autoreverseAnimation:^ { super.transform = oldTransform;}];
+        };
+    }
     
     [self animateWithBlock:animationBlock completion:completionBlock];
 }
@@ -146,12 +153,14 @@
     CGFloat oldAlpha = self.alpha;
     
     void (^animationBlock) (void) = ^ { super.alpha = alpha; };
+    void (^completionBlock) (BOOL) = nil;
     
-    void (^completionBlock) (BOOL) = ^ (BOOL animationIsComplete) {
-        if ((self.animationOptions & AUTOREVERSE) == AUTOREVERSE && animationIsComplete) {
-            super.alpha = oldAlpha;
-        }
-    };
+    BOOL animationShouldNotRepeat = (self.animationOptions & REPEAT) !=  REPEAT;
+    if(self.shouldAutoreverse && animationShouldNotRepeat) {
+        completionBlock = ^ (BOOL animationIsComplete) {
+            [self autoreverseAnimation:^ { super.alpha = oldAlpha;}];
+        };
+    }
     
     [self animateWithBlock:animationBlock completion:completionBlock];
 }
@@ -160,12 +169,14 @@
     UIColor *oldBackgroundColor = self.backgroundColor;
     
     void (^animationBlock) (void) = ^ { super.backgroundColor = backgroundColor; };
+    void (^completionBlock) (BOOL) = nil;
     
-    void (^completionBlock) (BOOL) = ^ (BOOL animationIsComplete) {
-        if ((self.animationOptions & AUTOREVERSE) == AUTOREVERSE && animationIsComplete) {
-            super.backgroundColor = oldBackgroundColor;
-        }
-    };
+    BOOL animationShouldNotRepeat = (self.animationOptions & REPEAT) !=  REPEAT;
+    if(self.shouldAutoreverse && animationShouldNotRepeat) {
+        completionBlock = ^ (BOOL animationIsComplete) {
+            [self autoreverseAnimation:^ { super.backgroundColor = oldBackgroundColor;}];
+        };
+    }
     
     [self animateWithBlock:animationBlock completion:completionBlock];
 }
@@ -174,12 +185,14 @@
     CGRect oldContentStretch = self.contentStretch;
 
     void (^animationBlock) (void) = ^ { super.contentStretch = contentStretch; };
+    void (^completionBlock) (BOOL) = nil;
     
-    void (^completionBlock) (BOOL) = ^ (BOOL animationIsComplete) {
-        if ((self.animationOptions & AUTOREVERSE) == AUTOREVERSE && animationIsComplete) {
-            super.contentStretch = oldContentStretch;
-        }
-    };
+    BOOL animationShouldNotRepeat = (self.animationOptions & REPEAT) !=  REPEAT;
+    if(self.shouldAutoreverse && animationShouldNotRepeat) {
+        completionBlock = ^ (BOOL animationIsComplete) {
+            [self autoreverseAnimation:^ { super.contentStretch = oldContentStretch;}];
+        };
+    }
     
     [self animateWithBlock:animationBlock completion:completionBlock];
 }
@@ -190,17 +203,43 @@
 }
 
 -(void)animateWithBlock:(void (^)(void))animationBlock completion:(void (^)(BOOL))completionBlock {
+    C4AnimationOptions autoReverseOptions = self.animationOptions;
+    //we insert the autoreverse options here, only if it should repeat and autoreverse
+    if(self.shouldAutoreverse && (self.animationOptions & REPEAT) == REPEAT) autoReverseOptions |= AUTOREVERSE;
+    
     [UIView animateWithDuration:self.animationDuration
                           delay:(NSTimeInterval)self.animationDelay
-                        options:self.animationOptions
+                        options:autoReverseOptions
                      animations:animationBlock
                      completion:completionBlock];
 }
 
--(void)setAnimationOptions:(NSUInteger)animationOptions {
-    _animationOptions = animationOptions | BEGINCURRENT;
+-(void)autoreverseAnimation:(void (^)(void))animationBlock {
+        C4AnimationOptions autoreverseOptions = BEGINCURRENT;
+        if((self.animationOptions & LINEAR) == LINEAR) autoreverseOptions |= LINEAR;
+        else if((self.animationOptions & EASEIN) == EASEIN) autoreverseOptions |= EASEOUT;
+        else if((self.animationOptions & EASEOUT) == EASEOUT) autoreverseOptions |= EASEIN;
+        
+        [UIView animateWithDuration:self.animationDuration
+                              delay:0
+                            options:autoreverseOptions
+                         animations:animationBlock
+                         completion:nil];
 }
 
+-(void)setAnimationOptions:(NSUInteger)animationOptions {
+    /*
+     important: we have to intercept the setting of AUTOREVERSE for the case of reversing 1 time
+     i.e. reversing without having set REPEAT
+     
+     UIView animation will flicker if we don't do this...
+     */
+    if ((animationOptions & AUTOREVERSE) == AUTOREVERSE) {
+        self.shouldAutoreverse = YES;
+        animationOptions &= ~AUTOREVERSE;
+    }
+    _animationOptions = animationOptions | BEGINCURRENT;
+}
 
 #pragma mark Move
 -(void)move:(id)sender {
