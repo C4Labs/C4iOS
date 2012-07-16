@@ -39,7 +39,7 @@
 
  */
 
-@interface C4Control : UIControl <C4Notification, C4Gesture, C4MethodDelay, NSCopying> {
+@interface C4Control : UIControl <C4Notification, C4Gesture, C4MethodDelay, NSCopying, C4AddSubview> {
 }
 
 /// @name Convenience Methods

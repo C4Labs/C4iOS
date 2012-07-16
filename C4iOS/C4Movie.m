@@ -67,7 +67,7 @@
                                                                                       ofType:[movieNameComponents objectAtIndex:1]]];
         if([movieURL scheme]) {
             AVURLAsset *asset = [AVURLAsset URLAssetWithURL:movieURL options:nil];
-            NSAssert(asset != nil, @"The asset (%@) you tried to create couldn't be initialized", movieName);
+            C4Assert(asset != nil, @"The asset (%@) you tried to create couldn't be initialized", movieName);
             NSArray *requestedKeys = [NSArray arrayWithObjects:@"duration", @"playable", nil];
             [asset loadValuesAsynchronouslyForKeys:requestedKeys completionHandler: ^(void) {		 
                 dispatch_async( dispatch_get_main_queue(), ^(void) {
@@ -222,11 +222,9 @@
                 /* Indicates that the status of the player is not yet known because 
                  it has not tried to load new media resources for playback */
             case AVPlayerStatusUnknown:
-                //                C4Log(@"AVPlayerStatusUnknown");
+                    C4Log(@"AVPlayerStatusUnknown");
                 break;
-                
             case AVPlayerStatusReadyToPlay:
-            {
                 /* Once the AVPlayerItem becomes ready to play, i.e. 
                  [playerItem status] == AVPlayerItemStatusReadyToPlay,
                  its duration can be fetched from the item. */
@@ -239,15 +237,15 @@
                 if(self.shouldAutoplay == YES) {
                     [self play];
                 }
-            }
                 break;
-                
-            case AVPlayerStatusFailed:
-            {
-                C4Log(@"AVPlayerStatusFailed");
+            case AVPlayerStatusFailed:{
                 AVPlayerItem *thePlayerItem = (AVPlayerItem *)object;
                 [self assetFailedToPrepareForPlayback:thePlayerItem.error];
+                C4Assert(NO,@"The asset you tried to load couldn't be prepared for playback, check its filename and type, maybe the compression is wrong...");
             }
+                break;
+            default:
+                C4Assert(NO,@"Strange... the player's status is none of: AVPlayerStatusUnknown, AVPlayerStatusReadyToPlay, AVPlayerStatusFailed");
                 break;
         }
 	}

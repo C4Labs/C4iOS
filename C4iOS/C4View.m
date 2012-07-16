@@ -37,33 +37,42 @@
 }
 
 -(void)addShape:(C4Shape *)shape {
-    NSAssert([shape isKindOfClass:[C4Shape class]], 
+    C4Assert([shape isKindOfClass:[C4Shape class]], 
              @"You tried to add a %@ using [canvas addShape:]", [shape class]);
-    [self addSubview:shape];
+    [super addSubview:shape];
+}
+
+-(void)addSubview:(UIView *)subview {
+    C4Assert([[subview class] isKindOfClass:[C4Shape class]], @"You just tried to add a C4Shape using the addSubview: method, please use addShape:");
+    C4Assert([[subview class] isKindOfClass:[C4Movie class]], @"You just tried to add a C4Movie using the addSubview: method, please use addMovie:");
+    C4Assert([[subview class] isKindOfClass:[C4Image class]], @"You just tried to add a C4Image using the addSubview: method, please use addImage:");
+    C4Assert([[subview class] isKindOfClass:[C4GL class]], @"You just tried to add a C4GL using the addSubview: method, please use addGL:");
+    C4Assert([[subview class] isKindOfClass:[C4Label class]], @"You just tried to add a C4Label using the addSubview: method, please use addLabel:");
+    [super addSubview:subview];
 }
 
 -(void)addLabel:(C4Label *)label {
-    NSAssert([label isKindOfClass:[C4Label class]], 
+    C4Assert([label isKindOfClass:[C4Label class]], 
              @"You tried to add a %@ using [canvas addLabel:]", [label class]);
-    [self addSubview:label];
+    [super addSubview:label];
 }
 
 -(void)addGL:(C4GL *)gl {
-    NSAssert([gl isKindOfClass:[C4GL class]], 
+    C4Assert([gl isKindOfClass:[C4GL class]], 
              @"You tried to add a %@ using [canvas addGL:]", [gl class]);
-    [self addSubview:gl];
+    [super addSubview:gl];
 }
 
 -(void)addImage:(C4Image *)image {
-    NSAssert([image isKindOfClass:[C4Image class]],
+    C4Assert([image isKindOfClass:[C4Image class]],
              @"You tried to add a %@ using [canvas addImage:]", [image class]);
-    [self addSubview:image];
+    [super addSubview:image];
 }
 
 -(void)addMovie:(C4Movie *)movie {
-    NSAssert([movie isKindOfClass:[C4Movie class]],
+    C4Assert([movie isKindOfClass:[C4Movie class]],
              @"You tried to add a %@ using [canvas addMovie:]", [movie class]);
-    [self addSubview:movie];
+    [super addSubview:movie];
 }
 
 /* don't add this ever...

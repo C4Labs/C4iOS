@@ -45,5 +45,5 @@ NSInteger   basicSort(id obj1, id obj2, void *context);
 #pragma mark New Stuff
 CGRect CGRectMakeFromPointArray(CGPoint *pointArray, int pointCount);
 CGRect CGRectMakeFromArcComponents(CGPoint centerPoint, CGFloat radius, CGFloat startAngle, CGFloat endAngle, BOOL clockwise);
-                               
+void uncaughtExceptionHandler(NSException *exception);
 @end

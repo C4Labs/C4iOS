@@ -9,6 +9,17 @@
 #ifndef C4iOSDevelopment_C4Defines_h
 #define C4iOSDevelopment_C4Defines_h
 
+#if !defined(_C4AssertBody)
+#define C4Assert(condition, desc, ...) \
+do {			\
+if (!(condition)) {	\
+[[C4AssertionHandler currentHandler] handleFailureInMethod:_cmd \
+object:self file:[NSString stringWithUTF8String:__FILE__] \
+lineNumber:__LINE__ description:(desc), ##__VA_ARGS__]; \
+}			\
+} while(0)
+#endif
+
 /* NOT SUPPOSED TO USE #DEFINES, BUT HERE WE DON'T WANT PEOPLE TO CHANGE THE VALUE OF THESE VARIABLES */
 #ifndef C4_DEFAULT_COLORS
 #define C4RED [UIColor colorWithRed:0.94f green:0.0f blue:0.26f alpha:1.0f]

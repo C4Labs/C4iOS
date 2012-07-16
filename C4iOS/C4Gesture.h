@@ -19,6 +19,17 @@ enum {
 };
 typedef NSUInteger C4GestureType;
 
+
+#if !defined(_C4AssertGestureType)
+#define C4AssertGestureType() \
+do {			\
+[(C4AssertionHandler *)[C4AssertionHandler currentHandler] \
+handleGestureTypeFailureInMethod:_cmd object:self \
+file:[NSString stringWithUTF8String:__FILE__] \
+lineNumber:__LINE__];\
+}while(0)
+#endif
+
 enum {
     SWIPEDIRRIGHT = UISwipeGestureRecognizerDirectionRight,
     SWIPEDIRLEFT = UISwipeGestureRecognizerDirectionLeft,
@@ -81,7 +92,7 @@ typedef UISwipeGestureRecognizerDirection C4SwipeDirection;
  @param touchCount the desired minimum number of touches
  @param gestureName a string identifying the gesture upon which this method should act. The value of _gestureName_ should correspond to the name of a gesture already added using the addGesture:name:action: method
  */
--(void)setMinimumNumberOfTouches:(NSInteger)touchCount forGesture:(NSString *)gestureName;
+-(void)minimumNumberOfTouches:(NSInteger)touchCount forGesture:(NSString *)gestureName;
 
 /** Specifies the maximum number of touches required for a given gesture. 
  
@@ -90,7 +101,7 @@ typedef UISwipeGestureRecognizerDirection C4SwipeDirection;
  @param touchCount the desired maximum number of touches
  @param gestureName a string identifying the gesture upon which this method should act. The value of _gestureName_ should correspond to the name of a gesture already added using the addGesture:name:action: method
  */
--(void)setMaximumNumberOfTouches:(NSInteger)touchCount forGesture:(NSString *)gestureName;
+-(void)maximumNumberOfTouches:(NSInteger)touchCount forGesture:(NSString *)gestureName;
 
 /** Specifies the direction for a given swipe gesture. 
  
@@ -102,7 +113,7 @@ typedef UISwipeGestureRecognizerDirection C4SwipeDirection;
  @warning *Note:* There can be only 1 direction associated with a given gesture and are set up by default. For example, the default direction for a gesture created with the type SWIPELEFT is SWIPEDIRLEFT. You should not have to call this method explicitly.
  
  */
--(void)setSwipeDirection:(C4SwipeDirection)direction forGesture:(NSString *)gestureName;
+-(void)swipeDirection:(C4SwipeDirection)direction forGesture:(NSString *)gestureName;
 
 /** Specifies the direction for a given swipe gesture. 
  
@@ -111,7 +122,7 @@ typedef UISwipeGestureRecognizerDirection C4SwipeDirection;
  @param duration the desired number of seconds (defaults to 0.5)
  @param gestureName a string identifying the gesture upon which this method should act. The value of _gestureName_ should correspond to the name of a gesture already added using the addGesture:name:action: method
  */
--(void)setMinimumPressDuration:(CGFloat)duration forGesture:(NSString *)gestureName;
+-(void)minimumPressDuration:(CGFloat)duration forGesture:(NSString *)gestureName;
 
 #pragma mark Basic Touch Methods
 /// @name Basic Touch Methods

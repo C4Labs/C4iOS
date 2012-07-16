@@ -290,6 +290,7 @@
                 self.longPressMethodName = methodName;
                 recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(pressedLong:)];
             default:
+                C4Assert(NO,@"The gesture you tried to use is not one of: TAP, PINCH, SWIPERIGHT, SWIPELEFT, SWIPEUP, SWIPEDOWN, ROTATION, PAN, or LONGPRESS");
                 break;
         }
         [self addGestureRecognizer:recognizer];
@@ -299,45 +300,59 @@
 
 -(void)numberOfTapsRequired:(NSInteger)tapCount forGesture:(NSString *)gestureName {
     UIGestureRecognizer *recognizer = [_gestureDictionary objectForKey:gestureName];
-    if([recognizer isKindOfClass:[UITapGestureRecognizer class]])
-        ((UITapGestureRecognizer *) recognizer).numberOfTapsRequired = tapCount;
-    else if([recognizer isKindOfClass:[UILongPressGestureRecognizer class]]) {
-        ((UILongPressGestureRecognizer *) recognizer).numberOfTapsRequired = tapCount;
-    }
+    
+    C4Assert([recognizer isKindOfClass:[UITapGestureRecognizer class]] ||
+             [recognizer isKindOfClass:[UILongPressGestureRecognizer class]],
+             @"The gesture type(%@) you tried to configure does not respond to the method: %s",[recognizer class],_cmd);
+
+    ((UILongPressGestureRecognizer *) recognizer).numberOfTapsRequired = tapCount;
 }
 
 -(void)numberOfTouchesRequired:(NSInteger)touchCount forGesture:(NSString *)gestureName {
     UIGestureRecognizer *recognizer = [_gestureDictionary objectForKey:gestureName];
-    if([recognizer isKindOfClass:[UITapGestureRecognizer class]])
-        ((UITapGestureRecognizer *) recognizer).numberOfTouchesRequired = touchCount;
-    else if([recognizer isKindOfClass:[UISwipeGestureRecognizer class]])
-        ((UISwipeGestureRecognizer *) recognizer).numberOfTouchesRequired = touchCount;
-    else if([recognizer isKindOfClass:[UILongPressGestureRecognizer class]])
-        ((UILongPressGestureRecognizer *) recognizer).numberOfTouchesRequired = touchCount;
+    
+    C4Assert([recognizer isKindOfClass:[UITapGestureRecognizer class]] || 
+             [recognizer isKindOfClass:[UISwipeGestureRecognizer class]] ||
+             [recognizer isKindOfClass:[UILongPressGestureRecognizer class]],
+             @"The gesture type(%@) you tried to configure does not respond to the method: %s",[recognizer class],_cmd);
+
+    ((UITapGestureRecognizer *) recognizer).numberOfTouchesRequired = touchCount;
 }
 
--(void)setMinimumPressDuration:(CGFloat)duration forGesture:(NSString *)gestureName {
+-(void)minimumPressDuration:(CGFloat)duration forGesture:(NSString *)gestureName {
     UIGestureRecognizer *recognizer = [_gestureDictionary objectForKey:gestureName];
-    if([recognizer isKindOfClass:[UITapGestureRecognizer class]])
-        ((UILongPressGestureRecognizer *) recognizer).minimumPressDuration = duration;
+
+    C4Assert([recognizer isKindOfClass:[UITapGestureRecognizer class]],
+             @"The gesture type(%@) you tried to configure does not respond to the method %s",[recognizer class],_cmd);
+    
+    ((UILongPressGestureRecognizer *) recognizer).minimumPressDuration = duration;
 }
   
--(void)setMinimumNumberOfTouches:(NSInteger)touchCount forGesture:(NSString *)gestureName {
+-(void)minimumNumberOfTouches:(NSInteger)touchCount forGesture:(NSString *)gestureName {
     UIGestureRecognizer *recognizer = [_gestureDictionary objectForKey:gestureName];
-    if([recognizer isKindOfClass:[UIPanGestureRecognizer class]])
-        ((UIPanGestureRecognizer *) recognizer).minimumNumberOfTouches = touchCount;
+
+    C4Assert([recognizer isKindOfClass:[UIPanGestureRecognizer class]],
+             @"The gesture type(%@) you tried to configure does not respond to the method: %s",[recognizer class],_cmd);
+
+    ((UIPanGestureRecognizer *) recognizer).minimumNumberOfTouches = touchCount;
 }
 
--(void)setMaximumNumberOfTouches:(NSInteger)touchCount forGesture:(NSString *)gestureName {
+-(void)maximumNumberOfTouches:(NSInteger)touchCount forGesture:(NSString *)gestureName {
     UIGestureRecognizer *recognizer = [_gestureDictionary objectForKey:gestureName];
-    if([recognizer isKindOfClass:[UIPanGestureRecognizer class]])
-        ((UIPanGestureRecognizer *) recognizer).maximumNumberOfTouches = touchCount;
+    
+    C4Assert([recognizer isKindOfClass:[UIPanGestureRecognizer class]],
+             @"The gesture type(%@) you tried to configure does not respond to the method: %s",[recognizer class],_cmd);
+
+    ((UIPanGestureRecognizer *) recognizer).maximumNumberOfTouches = touchCount;
 }
 
--(void)setSwipeDirection:(C4SwipeDirection)direction forGesture:(NSString *)gestureName {
+-(void)swipeDirection:(C4SwipeDirection)direction forGesture:(NSString *)gestureName {
     UIGestureRecognizer *recognizer = [_gestureDictionary objectForKey:gestureName];
-    if([recognizer isKindOfClass:[UISwipeGestureRecognizer class]])
-        ((UISwipeGestureRecognizer *) recognizer).direction = direction;
+
+    C4Assert([recognizer isKindOfClass:[UISwipeGestureRecognizer class]],
+             @"The gesture type(%@) you tried to configure does not respond to the method: %s",[recognizer class],_cmd);
+
+    ((UISwipeGestureRecognizer *) recognizer).direction = direction;
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -493,11 +508,51 @@
 }
 
 -(void)removeObject:(C4Control *)visibleObject {
-    NSAssert(self != visibleObject, @"You tried to remove %@ from itself, don't be silly", visibleObject);
+    C4Assert(self != visibleObject, @"You tried to remove %@ from itself, don't be silly", visibleObject);
     [visibleObject removeFromSuperview];
 }
 
 -(void)rotationDidFinish:(CGFloat)rotation {
     [super setTransform:CGAffineTransformMakeRotation(rotation)];
+}
+
+#pragma mark C4AddSubview
+-(void)addShape:(C4Shape *)shape {
+    C4Assert([shape isKindOfClass:[C4Shape class]], 
+             @"You tried to add a %@ using [canvas addShape:]", [shape class]);
+    [super addSubview:shape];
+}
+
+-(void)addSubview:(UIView *)subview {
+    C4Assert([[subview class] isKindOfClass:[C4Shape class]], @"You just tried to add a C4Shape using the addSubview: method, please use addShape:");
+    C4Assert([[subview class] isKindOfClass:[C4Movie class]], @"You just tried to add a C4Movie using the addSubview: method, please use addMovie:");
+    C4Assert([[subview class] isKindOfClass:[C4Image class]], @"You just tried to add a C4Image using the addSubview: method, please use addImage:");
+    C4Assert([[subview class] isKindOfClass:[C4GL class]], @"You just tried to add a C4GL using the addSubview: method, please use addGL:");
+    C4Assert([[subview class] isKindOfClass:[C4Label class]], @"You just tried to add a C4Label using the addSubview: method, please use addLabel:");
+    [super addSubview:subview];
+}
+
+-(void)addLabel:(C4Label *)label {
+    C4Assert([label isKindOfClass:[C4Label class]], 
+             @"You tried to add a %@ using [canvas addLabel:]", [label class]);
+    [super addSubview:label];
+}
+
+-(void)addGL:(C4GL *)gl {
+    C4Assert([gl isKindOfClass:[C4GL class]], 
+             @"You tried to add a %@ using [canvas addGL:]", [gl class]);
+    [super addSubview:gl];
+}
+
+-(void)addImage:(C4Image *)image {
+    C4Assert([image isKindOfClass:[C4Image class]],
+             @"You tried to add a %@ using [canvas addImage:]", [image class]);
+    [super addSubview:image];
+}
+
+-(void)addMovie:(C4Movie *)movie {
+    C4Assert([movie isKindOfClass:[C4Movie class]],
+             @"You tried to add a %@ using [canvas addMovie:]", [movie class]);
+    [super addSubview:movie];
 }
 @end

@@ -16,7 +16,7 @@ For more information about how to use windows, see View Programming Guide for iO
 
  @warning *Note:* in C4 you should never have to worry about constructing windows.
 */
-@interface C4Window : UIWindow <C4MethodDelay, C4Notification>
+@interface C4Window : UIWindow <C4MethodDelay, C4Notification, C4AddSubview>
 /// @name Adding Object Methods
 #pragma mark Adding Objects
 

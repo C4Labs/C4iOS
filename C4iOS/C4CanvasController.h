@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class C4Window;
 
-@interface C4CanvasController : UIViewController <AVAudioSessionDelegate, C4Gesture, C4Notification, C4MethodDelay> {
+@interface C4CanvasController : UIViewController <AVAudioSessionDelegate, C4Gesture, C4Notification, C4MethodDelay, C4AddSubview> {
 }
 -(void)setup;
 

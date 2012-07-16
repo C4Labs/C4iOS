@@ -129,4 +129,7 @@ CGRect CGRectMakeFromArcComponents(CGPoint centerPoint, CGFloat radius, CGFloat 
     return arcRect;
 }
 
+void uncaughtExceptionHandler(NSException *exception) {
+    C4Log(@"EXCEPTION: %@", exception);
+}
 @end

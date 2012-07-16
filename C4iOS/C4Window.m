@@ -56,43 +56,42 @@
 }
 
 -(void)addShape:(C4Shape *)shape {
-    NSAssert([shape isKindOfClass:[C4Shape class]],
+    C4Assert([shape isKindOfClass:[C4Shape class]], 
              @"You tried to add a %@ using [canvas addShape:]", [shape class]);
-    [self addSubview:shape];
+    [super addSubview:shape];
 }
 
 -(void)addLabel:(C4Label *)label {
-    NSAssert([label isKindOfClass:[C4Label class]], 
+    C4Assert([label isKindOfClass:[C4Label class]], 
              @"You tried to add a %@ using [canvas addLabel:]", [label class]);
-    [self addSubview:label];
+    [super addSubview:label];
 }
 
 -(void)addGL:(C4GL *)gl {
-    NSAssert([gl isKindOfClass:[C4GL class]], 
+    C4Assert([gl isKindOfClass:[C4GL class]], 
              @"You tried to add a %@ using [canvas addGL:]", [gl class]);
-    [self addSubview:gl];
+    [super addSubview:gl];
 }
 
 -(void)addImage:(C4Image *)image {
-    NSAssert([image isKindOfClass:[C4Image class]],
+    C4Assert([image isKindOfClass:[C4Image class]],
              @"You tried to add a %@ using [canvas addImage:]", [image class]);
-    [self addSubview:image];
+    [super addSubview:image];
 }
 
 -(void)addMovie:(C4Movie *)movie {
-    NSAssert([movie isKindOfClass:[C4Movie class]],
+    C4Assert([movie isKindOfClass:[C4Movie class]],
              @"You tried to add a %@ using [canvas addMovie:]", [movie class]);
-    [self addSubview:movie];
+    [super addSubview:movie];
 }
 
 -(void)addCamera:(C4Camera *)camera {
-    NSAssert([camera isKindOfClass:[C4Camera class]],
+    C4Assert([camera isKindOfClass:[C4Camera class]],
              @"You tried to add a %@ using [canvas addCamera:]", [camera class]);
     [self addSubview:camera];
     [camera initCapture];
     [self.canvasController listenFor:@"imageWasCaptured" fromObject:camera andRunMethod:@"imageWasCaptured"];
 }
-
 /*
  The following method makes sure that the main backing CALayer
  for this UIWindow subclass will be a C4Canvas

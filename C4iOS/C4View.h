@@ -31,7 +31,7 @@
  @property animationDuration
  @property animationOptions
  */
-@interface C4View : UIView <C4MethodDelay, C4Notification> {
+@interface C4View : UIView <C4MethodDelay, C4Notification, C4AddSubview> {
 }
 
 /// @name Adding Object Methods

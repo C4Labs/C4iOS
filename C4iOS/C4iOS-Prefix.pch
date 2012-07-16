@@ -17,12 +17,17 @@
 #import <AVFoundation/AVFoundation.h>
 #import <math.h>
 
+#import "C4AssertionHandler.h"
+
+//protocols
+#import "C4AddSubview.h"
 #import "C4Defines.h"
 #import "C4Notification.h"
 #import "C4Gesture.h"
 #import "C4LayerAnimation.h"
 #import "C4MethodDelay.h"
 
+//classes
 #import "C4Object.h"
 #import "C4Math.h"
 #import "C4Font.h"

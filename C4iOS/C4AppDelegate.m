@@ -7,6 +7,7 @@
 //
 
 #import "C4AppDelegate.h"
+#import "C4AssertionHandler.h"
 
 @interface C4AppDelegate ()
 /* The main view of the application.
@@ -22,7 +23,12 @@
 @synthesize workspace = _workspace;
 @synthesize mainView;
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
+    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+	C4AssertionHandler* customAssertionHandler = [[C4AssertionHandler alloc] init];
+	[[[NSThread currentThread] threadDictionary] setValue:customAssertionHandler forKey:NSAssertionHandlerKey];
+	// NB: your windowing code goes here - e.g. self.window.rootViewController = self.viewController;
+    
     application.statusBarHidden = YES;
     self.window = [[C4Window alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.workspace = [[C4WorkSpace alloc] initWithNibName:@"C4Canvas" bundle:nil];    
@@ -40,6 +46,7 @@
     [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategorySoloAmbient error: nil];
     [self.workspace setup];
     mainView = (C4View *)self.workspace.view;
+    //    
     return YES;
 }
 

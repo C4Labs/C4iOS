@@ -13,8 +13,12 @@
 }
 
 -(void)setup {
-    s1 = [C4Shape ellipse:CGRectMake(0, 0, 100, 100)];
+    s1 = [C4Shape ellipse:CGRectMake(0, 0, 200, 200)];
+    [s1 addGesture:PAN name:@"pang" action:@"move:"];
     [self.canvas addShape:s1];
+    
+    s2 = [C4Shape rect:CGRectMake(30,30,30,30)];
+    [s1 addShape:s2];
 }
 
 -(void)touchesBegan {

@@ -51,33 +51,27 @@
 }
 
 -(void)addShape:(C4Shape *)shape {
-    NSAssert([shape isKindOfClass:[C4Shape class]], 
-             @"You tried to add a %@ using [self.canvas addShape:]", [shape class]);
-    [self.view addSubview:shape];
+    [(C4View *)self.view addShape:shape];
+}
+
+-(void)addSubview:(UIView *)subview {
+    [(C4View *)self.view addSubview:subview];
 }
 
 -(void)addLabel:(C4Label *)label {
-    NSAssert([label isKindOfClass:[C4Label class]], 
-             @"You tried to add a %@ using [self.canvas addLabel:]", [label class]);
-    [self.view addSubview:label];
+    [(C4View *)self.view addLabel:label];
 }
 
 -(void)addGL:(C4GL *)gl {
-    NSAssert([gl isKindOfClass:[C4GL class]], 
-             @"You tried to add a %@ using [self.canvas addGL:]", [gl class]);
-    [self.view addSubview:gl];
+    [(C4View *)self.view addGL:gl];
 }
 
 -(void)addImage:(C4Image *)image {
-    NSAssert([image isKindOfClass:[C4Image class]],
-             @"You tried to add a %@ using [self.canvas addImage:]", [image class]);
-    [self.view addSubview:image];
+    [(C4View *)self.view addImage:image];
 }
 
 -(void)addMovie:(C4Movie *)movie {
-    NSAssert([movie isKindOfClass:[C4Movie class]],
-             @"You tried to add a %@ using [self.canvas addMovie:]", [movie class]);
-    [self.view addSubview:movie];
+    [(C4View *)self.view addMovie:movie];
 }
 
 #pragma mark Notification Methods
@@ -115,7 +109,7 @@
 
 #pragma mark New Stuff
 -(void)addCamera:(C4Camera *)camera {
-    NSAssert([camera isKindOfClass:[C4Camera class]],
+    C4Assert([camera isKindOfClass:[C4Camera class]],
              @"You tried to add a %@ using [canvas addCamera:]", [camera class]);
     [self.canvas addSubview:camera];
     [camera initCapture];
@@ -160,6 +154,7 @@
                 self.longPressMethodName = methodName;
                 recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(pressedLong:)];
             default:
+                C4Assert(NO,@"The gesture you tried to use is not one of: TAP, PINCH, SWIPERIGHT, SWIPELEFT, SWIPEUP, SWIPEDOWN, ROTATION, PAN, or LONGPRESS");
                 break;
         }
         [self.canvas addGestureRecognizer:recognizer];
@@ -189,26 +184,26 @@
     }
 }
 
--(void)setMinimumPressDuration:(CGFloat)duration forGesture:(NSString *)gestureName {
+-(void)minimumPressDuration:(CGFloat)duration forGesture:(NSString *)gestureName {
     UIGestureRecognizer *recognizer = [_gestureDictionary objectForKey:gestureName];
     if([recognizer isKindOfClass:[UITapGestureRecognizer class]])
         ((UILongPressGestureRecognizer *) recognizer).minimumPressDuration = duration;
 }
 
--(void)setMinimumNumberOfTouches:(NSInteger)touchCount forGesture:(NSString *)gestureName {
+-(void)minimumNumberOfTouches:(NSInteger)touchCount forGesture:(NSString *)gestureName {
     UIGestureRecognizer *recognizer = [_gestureDictionary objectForKey:gestureName];
     if([recognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
         ((UIPanGestureRecognizer *) recognizer).minimumNumberOfTouches = touchCount;
     }
 }
 
--(void)setMaximumNumberOfTouches:(NSInteger)touchCount forGesture:(NSString *)gestureName {
+-(void)maximumNumberOfTouches:(NSInteger)touchCount forGesture:(NSString *)gestureName {
     UIGestureRecognizer *recognizer = [_gestureDictionary objectForKey:gestureName];
     if([recognizer isKindOfClass:[UIPanGestureRecognizer class]])
         ((UIPanGestureRecognizer *) recognizer).maximumNumberOfTouches = touchCount;
 }
 
--(void)setSwipeDirection:(C4SwipeDirection)direction forGesture:(NSString *)gestureName {
+-(void)swipeDirection:(C4SwipeDirection)direction forGesture:(NSString *)gestureName {
     UIGestureRecognizer *recognizer = [_gestureDictionary objectForKey:gestureName];
     if([recognizer isKindOfClass:[UISwipeGestureRecognizer class]])
         ((UISwipeGestureRecognizer *) recognizer).direction = direction;
