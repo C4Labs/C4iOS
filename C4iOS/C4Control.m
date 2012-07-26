@@ -243,16 +243,22 @@
 
 #pragma mark Move
 -(void)move:(id)sender {
-    CGFloat _ani = self.animationOptions;
+    [self postNotification:@"moved"];
+    NSUInteger _ani = self.animationOptions;
     CGFloat _dur = self.animationDuration;
     CGFloat _del = self.animationDelay;
     self.animationDuration = 0;
     self.animationDelay = 0;
-    self.animationOptions = 0;
-    CGPoint translatedPoint = [(UIPanGestureRecognizer *)sender locationInView:self];
-    self.center = CGPointMake(self.center.x + translatedPoint.x - self.frame.size.width/2.0f, self.center.y+translatedPoint.y-self.frame.size.height/2.0f);
-    self.animationDuration = _dur;
+    self.animationOptions = DEFAULT;
+    
+    CGPoint translatedPoint = [(UIPanGestureRecognizer *)sender translationInView:self];
+    translatedPoint.x += self.center.x;
+    translatedPoint.y += self.center.y;
+    self.center = translatedPoint;
+    [(UIPanGestureRecognizer *)sender setTranslation:CGPointZero inView:self];
+    
     self.animationDelay = _del;
+    self.animationDuration = _dur;
     self.animationOptions = _ani;
 }
 
@@ -356,12 +362,14 @@
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    C4Log(@"-(void)touchesBegan:withEvent: {} %@ %d",[NSString stringWithUTF8String:__FILE__],__LINE__);
     [super touchesBegan:touches withEvent:event];
     [self postNotification:@"touchesBegan"];
     [self touchesBegan];
 }
 
 -(void)touchesBegan {
+    C4Log(@"-(void)touchesBegan {} %@ %d",[NSString stringWithUTF8String:__FILE__],__LINE__);
 }
 
 -(void)touchesEnded {
@@ -524,11 +532,11 @@
 }
 
 -(void)addSubview:(UIView *)subview {
-    C4Assert([[subview class] isKindOfClass:[C4Shape class]], @"You just tried to add a C4Shape using the addSubview: method, please use addShape:");
-    C4Assert([[subview class] isKindOfClass:[C4Movie class]], @"You just tried to add a C4Movie using the addSubview: method, please use addMovie:");
-    C4Assert([[subview class] isKindOfClass:[C4Image class]], @"You just tried to add a C4Image using the addSubview: method, please use addImage:");
-    C4Assert([[subview class] isKindOfClass:[C4GL class]], @"You just tried to add a C4GL using the addSubview: method, please use addGL:");
-    C4Assert([[subview class] isKindOfClass:[C4Label class]], @"You just tried to add a C4Label using the addSubview: method, please use addLabel:");
+    C4Assert(![[subview class] isKindOfClass:[C4Shape class]], @"You just tried to add a C4Shape using the addSubview: method, please use addShape:");
+    C4Assert(![[subview class] isKindOfClass:[C4Movie class]], @"You just tried to add a C4Movie using the addSubview: method, please use addMovie:");
+    C4Assert(![[subview class] isKindOfClass:[C4Image class]], @"You just tried to add a C4Image using the addSubview: method, please use addImage:");
+    C4Assert(![[subview class] isKindOfClass:[C4GL class]], @"You just tried to add a C4GL using the addSubview: method, please use addGL:");
+    C4Assert(![[subview class] isKindOfClass:[C4Label class]], @"You just tried to add a C4Label using the addSubview: method, please use addLabel:");
     [super addSubview:subview];
 }
 

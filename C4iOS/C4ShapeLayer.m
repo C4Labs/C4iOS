@@ -28,7 +28,7 @@
         self.lineWidth = 5.0f;
         self.repeatCount = 0;
         self.autoreverses = NO;
-        
+        currentAnimationEasing = [[NSString alloc] init];
         currentAnimationEasing = (NSString *)kCAMediaTimingFunctionEaseInEaseOut;
         allowsInteraction = NO;
         repeats = NO;
@@ -52,6 +52,7 @@
     double duration = (double)self.animationDuration;
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:keyPath];
     animation.duration = duration;
+    currentAnimationEasing = (NSString *)kCAMediaTimingFunctionEaseInEaseOut;
     animation.timingFunction = [CAMediaTimingFunction functionWithName:self.currentAnimationEasing];
     animation.autoreverses = self.autoreverses;
     animation.repeatCount = self.repeats ? FOREVER : 0;
@@ -234,13 +235,18 @@
     [CATransaction commit];
 }
 
--(void)setLineDashPhase:(CGFloat)_lineDashPhase {
+-(void)animateLineDashPhase:(CGFloat)_lineDashPhase {
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"lineDashPhase"];
     animation.fromValue = [NSNumber numberWithFloat:self.lineDashPhase];
     animation.toValue = [NSNumber numberWithFloat:_lineDashPhase];
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { 
+            self.lineDashPhase = _lineDashPhase; 
+            [self removeAnimationForKey:@"lineDashPhase"]; 
+        }];
+    }
     [self addAnimation:animation forKey:@"animateLineDashPhase"];
-    if(!self.autoreverses) [super setLineDashPhase:_lineDashPhase];
     [CATransaction commit];
 }
 

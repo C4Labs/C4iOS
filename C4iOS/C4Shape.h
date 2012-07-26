@@ -73,13 +73,32 @@
  */
 +(C4Shape *)arcWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise;
 
-/**Creates and returns an instance of C4Shape, whose path is an arc.
+/**Creates and returns an instance of C4Shape, whose path is a wedge.
+ 
+ @param centerPoint The center point of the wedge.
+ @param radius The radius of the wedge.
+ @param startAngle The starting angle of the wedge, in radians in the range of (0 .. 2*PI)
+ @param endAngle The ending angle of the wedge, in radians in the range of (0 .. 2*PI)
+ @return The initialized C4Shape object created with a wedge path or nil if initialization is not successful.
+ */
++(C4Shape *)wedgeWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise;
+
+/**Creates and returns an instance of C4Shape, whose path is a bezier curve.
  
  @param beginEndPointArray A C-Array consisting of two points, like: {CGPoint,CGPoint}, which mark the beginning and end of the curve.
  @param controlPointArray A C-Array consisting of two points, like: {CGPoint,CGPoint}, which mark the control points that distort the curve.
  @return The initialized C4Shape object created with a curve path or nil if initialization is not successful.
  */
 +(C4Shape *)curve:(CGPoint *)beginEndPointArray controlPoints:(CGPoint *)controlPointArray;
+
+
+/**Creates and returns an instance of C4Shape, whose path is a quadratic curve
+  
+ @param beginEndPointArray A C-Array consisting of two points, like: {CGPoint,CGPoint}, which mark the beginning and end of the curve.
+ @param controlPoint A CGPoint used to defined the quadratic curve.
+ @return The initialized C4Shape object created with a curve path or nil if initialization is not successful.
+ */
++(C4Shape *)quadCurve:(CGPoint *)beginEndPointArray controlPoint:(CGPoint)controlPoint;
 
 /**Creates and returns an instance of C4Shape, whose path is a combination of curves made up from a string of text.
  
@@ -144,14 +163,34 @@ The change will happen based on the shape's current animation options, duration 
  */
 -(void)arcWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise;
 
+/**Changes the object's current shape to a wedge
+ 
+ The change will happen based on the shape's current animation options, duration and delay. 
+ 
+ @param centerPoint The center point of the wedge.
+ @param radius The radius of the wedge.
+ @param startAngle The starting angle of the wedge, in radians in the range of (0 .. 2*PI)
+ @param endAngle The ending angle of the wedge, in radians in the range of (0 .. 2*PI)
+ */
+-(void)wedgeWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise;
+
 /**Changes the object's current shape to a curve
  
-The change will happen based on the shape's current animation options, duration and delay. 
-
+ The change will happen based on the shape's current animation options, duration and delay. 
+ 
  @param beginEndPointArray A C-Array consisting of two points, like: {CGPoint,CGPoint}, which mark the beginning and end of the curve.
  @param controlPointArray A C-Array consisting of two points, like: {CGPoint,CGPoint}, which mark the control points that distort the curve.
  */
 -(void)curve:(CGPoint *)beginEndPointArray controlPoints:(CGPoint *)controlPointArray;
+
+/**Changes the object's current shape to a quadratic curve
+ 
+ The change will happen based on the shape's current animation options, duration and delay. 
+ 
+ @param beginEndPointArray A C-Array consisting of two points, like: {CGPoint,CGPoint}, which mark the beginning and end of the curve.
+ @param controlPoint A CGPoint used to defined the quadratic curve.
+ */
+-(void)quadCurve:(CGPoint *)beginEndPointArray controlPoint:(CGPoint)controlPoint;
 
 /**Changes the object's current shape to one made from the paths of a given string
  
@@ -314,6 +353,10 @@ The change will happen based on the shape's current animation options, duration 
  */
 @property (readonly, atomic) BOOL isLine;
 
+/**Specifies whether or not the shape is a line.
+ */
+@property (readonly, atomic) BOOL isArc;
+
 /**Specifies the origin point of a line. Animatable.
  */
 @property (readwrite, nonatomic) CGPoint pointA;
@@ -321,6 +364,14 @@ The change will happen based on the shape's current animation options, duration 
 /**Specifies the end point of a line. Animatable.
  */
 @property (readwrite, nonatomic) CGPoint pointB;
+
+/**Specifies the first control point of a curve, both bezier and quad curves. Animatable.
+ */
+@property (readwrite, nonatomic) CGPoint controlPointA;
+
+/**Specifies the second control point (bezier curves only). Animatable.
+ */
+@property (readwrite, nonatomic) CGPoint controlPointB;
 
 /**The shape's view backing layer.
  
@@ -331,4 +382,9 @@ The change will happen based on the shape's current animation options, duration 
 @property (readonly, atomic, weak) C4ShapeLayer *shapeLayer;
 
 @property (readonly, atomic, getter = isClosed) BOOL closed;
+
+@property (readonly, nonatomic, getter = isWedge) BOOL wedge;
+
+@property (readonly, atomic, getter = isBezierCurve) BOOL bezierCurve;
+@property (readonly, atomic, getter = isQuadCurve) BOOL quadCurve;
 @end

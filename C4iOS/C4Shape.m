@@ -19,7 +19,9 @@
 -(void)_triangle:(NSArray *)pointArray;
 -(void)_polygon:(NSArray *)pointArray;
 -(void)_arc:(NSDictionary *)arcDict;
+-(void)_wedge:(NSDictionary *)wedgeDict;
 -(void)_curve:(NSDictionary *)curveDict;
+-(void)_quadCurve:(NSDictionary *)curveDict;
 -(void)_shapeFromString:(NSDictionary *)stringAndFontDictionary;
 -(void)_closeShape;
 -(void)_setFillColor:(UIColor *)_fillColor;
@@ -37,12 +39,12 @@
 -(void)_setShadowOpacity:(NSNumber *)_shadowOpacity;
 -(void)_setShadowPath:(id)shadowPath;
 -(void)_setShadowRadius:(NSNumber *)_shadowRadius;
-
+-(void)willChangeShape;
 @property (atomic) BOOL isTriangle;
 @end
 
 @implementation C4Shape
-@synthesize isLine =_isLine, shapeLayer, pointA = _pointA, pointB = _pointB;
+@synthesize controlPointA = _controlPointA, controlPointB = _controlPointB, isArc = _isArc, bezierCurve = _bezierCurve, quadCurve = _quadCurve, isLine =_isLine, shapeLayer, pointA = _pointA, pointB = _pointB, wedge = _wedge;
 @synthesize fillColor, fillRule, lineCap, lineDashPattern, lineDashPhase, lineJoin, lineWidth, miterLimit, origin = _origin, strokeColor, strokeEnd, strokeStart, shadowOffset, shadowOpacity, shadowRadius, shadowPath, shadowColor;
 @synthesize closed = _closed, shouldClose = _shouldClose, initialized = _initialized, isTriangle = _isTriangle;
 
@@ -53,46 +55,63 @@
 -(id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if(self != nil) {
-        _isLine = NO;
-        _isTriangle = NO;
-        _closed = NO;
-        _shouldClose = NO;
         _initialized = NO;
+        self.animationOptions = BEGINCURRENT | EASEINOUT;
+        [self willChangeShape];
         [self setup];
     }
     return self;
 }
 
+-(void)willChangeShape {
+    _isArc = NO;
+    _isLine = NO;
+    _isTriangle = NO;
+    _bezierCurve = NO;
+    _quadCurve = NO;
+    _closed = NO;
+    _shouldClose = NO;
+}
+
 +(C4Shape *)ellipse:(CGRect)rect {
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:rect];
-    [newShape ellipse:rect];
+    [newShape _ellipse:[NSValue valueWithCGRect:rect]];
     return newShape;
 }
 
 +(C4Shape *)rect:(CGRect)rect {
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:rect];
-    [newShape rect:rect];
+    [newShape _rect:[NSValue valueWithCGRect:rect]];
     return newShape;
 }
 
 +(C4Shape *)line:(CGPoint *)pointArray {
     CGRect lineFrame = CGRectMakeFromPointArray(pointArray, 2);
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:lineFrame];
-    [newShape line:pointArray];
+    [newShape _line:[NSArray arrayWithObjects:
+                     [NSValue valueWithCGPoint:pointArray[0]],
+                     [NSValue valueWithCGPoint:pointArray[1]], nil]];
     return newShape;
 }
 
 +(C4Shape *)triangle:(CGPoint *)pointArray {
     CGRect polygonFrame = CGRectMakeFromPointArray(pointArray, 3);
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:polygonFrame];
-    [newShape triangle:pointArray];
+    [newShape _triangle:[NSArray arrayWithObjects:
+                         [NSValue valueWithCGPoint:pointArray[0]],
+                         [NSValue valueWithCGPoint:pointArray[1]],
+                         [NSValue valueWithCGPoint:pointArray[2]], nil]];
     return newShape;
 }
 
 +(C4Shape *)polygon:(CGPoint *)pointArray pointCount:(NSInteger)pointCount {
     CGRect polygonFrame = CGRectMakeFromPointArray(pointArray, pointCount);
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:polygonFrame];
-    [newShape polygon:pointArray pointCount:pointCount];
+    NSMutableArray *points = [[NSMutableArray alloc] initWithCapacity:0];
+    for(int i = 0; i < pointCount; i++) {
+        [points addObject:[NSValue valueWithCGPoint:pointArray[i]]];
+    }
+    [newShape _polygon:points];
     return newShape;
 }
 
@@ -100,13 +119,34 @@
     //I'm not sure what's going on here, but i have to invert clockwise to get the 
     CGRect arcRect = CGRectMakeFromArcComponents(centerPoint,radius,startAngle,endAngle,!clockwise);
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:arcRect];
-    [newShape arcWithCenter:centerPoint radius:radius startAngle:startAngle endAngle:endAngle clockwise:!clockwise];
+    NSMutableDictionary *arcDict = [[NSMutableDictionary alloc] initWithCapacity:0];
+    [arcDict setValue:[NSValue valueWithCGPoint:centerPoint] forKey:@"centerPoint"];
+    [arcDict setObject:[NSNumber numberWithFloat:radius] forKey:@"radius"];
+    [arcDict setObject:[NSNumber numberWithFloat:startAngle] forKey:@"startAngle"];
+    [arcDict setObject:[NSNumber numberWithFloat:endAngle] forKey:@"endAngle"];
+    [arcDict setObject:[NSNumber numberWithBool:clockwise] forKey:@"clockwise"];
+    [newShape _arc:arcDict];
     return newShape;
 }
 
++(C4Shape *)wedgeWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise {
+    //I'm not sure what's going on here, but i have to invert clockwise to get the 
+    CGRect wedgeRect = CGRectMakeFromWedgeComponents(centerPoint,radius,startAngle,endAngle,!clockwise);
+    C4Shape *newShape = [[C4Shape alloc] initWithFrame:wedgeRect];
+    
+    NSMutableDictionary *wedgeDict = [[NSMutableDictionary alloc] initWithCapacity:0];
+    [wedgeDict setValue:[NSValue valueWithCGPoint:centerPoint] forKey:@"centerPoint"];
+    [wedgeDict setObject:[NSNumber numberWithFloat:radius] forKey:@"radius"];
+    [wedgeDict setObject:[NSNumber numberWithFloat:startAngle] forKey:@"startAngle"];
+    [wedgeDict setObject:[NSNumber numberWithFloat:endAngle] forKey:@"endAngle"];
+    [wedgeDict setObject:[NSNumber numberWithBool:clockwise] forKey:@"clockwise"];
+    [newShape _wedge:wedgeDict];
+    return newShape;
+}
 +(C4Shape *)shapeFromString:(NSString *)string withFont:(C4Font *)font {
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
-    [newShape shapeFromString:string withFont:font];
+    NSDictionary *stringAndFontDictionary = [NSDictionary dictionaryWithObjectsAndKeys:string,@"string",font,@"font", nil];
+    [newShape _shapeFromString:stringAndFontDictionary];
     return newShape;
 }
 
@@ -116,7 +156,7 @@
 }
 
 -(void)_ellipse:(NSValue *)ellipseValue {
-    _isLine = NO;
+    [self willChangeShape];
     _closed = YES;
     CGRect aRect = [ellipseValue CGRectValue];
     aRect.origin = CGPointZero;
@@ -138,41 +178,105 @@
 }
 
 -(void)_arc:(NSDictionary *)arcDict {
+    [self willChangeShape];
+    _isArc = YES;
     CGMutablePathRef newPath = CGPathCreateMutable();
     CGPoint centerPoint = [[arcDict valueForKey:@"centerPoint"] CGPointValue];
     CGPathAddArc(newPath, nil, centerPoint.x, centerPoint.y, [[arcDict objectForKey:@"radius"] floatValue], [[arcDict objectForKey:@"startAngle"] floatValue], [[arcDict objectForKey:@"endAngle"] floatValue], [[arcDict objectForKey:@"clockwise"] boolValue]);
     CGRect arcRect = CGPathGetBoundingBox(newPath);
+    
     const CGAffineTransform translation = CGAffineTransformMakeTranslation(arcRect.origin.x *-1, arcRect.origin.y *-1);
     CGMutablePathRef translatedPath = CGPathCreateMutableCopyByTransformingPath(newPath, &translation);
     CGPathRelease(newPath);
     
-    [self.shapeLayer animatePath:translatedPath];
     if (_shouldClose == YES) {
-        CGPathCloseSubpath(newPath);
+        CGPathCloseSubpath(translatedPath);
+        _closed = YES;
     }
+    
+    [self.shapeLayer animatePath:translatedPath];
+    CGPathRelease(translatedPath);
+    _initialized = YES;
+}
+
+-(void)wedgeWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise{
+    [self arcWithCenter:centerPoint radius:radius startAngle:startAngle endAngle:endAngle clockwise:clockwise];
+}
+
+-(void)_wedge:(NSDictionary *)arcDict {
+    [self willChangeShape];
+    _wedge = YES;
+    CGMutablePathRef newPath = CGPathCreateMutable();
+    CGPoint centerPoint = [[arcDict valueForKey:@"centerPoint"] CGPointValue];
+    CGPathAddArc(newPath, nil, centerPoint.x, centerPoint.y, [[arcDict objectForKey:@"radius"] floatValue], [[arcDict objectForKey:@"startAngle"] floatValue], [[arcDict objectForKey:@"endAngle"] floatValue], [[arcDict objectForKey:@"clockwise"] boolValue]);
+
+    CGPathAddLineToPoint(newPath, nil, centerPoint.x, centerPoint.y);
+
+    CGRect arcRect = CGPathGetBoundingBox(newPath);
+    
+    const CGAffineTransform translation = CGAffineTransformMakeTranslation(arcRect.origin.x *-1, arcRect.origin.y *-1);
+    CGMutablePathRef translatedPath = CGPathCreateMutableCopyByTransformingPath(newPath, &translation);
+    CGPathRelease(newPath);
+    
+    _shouldClose = YES;
+    CGPathCloseSubpath(translatedPath);
+    _closed = YES;
+    
+    [self.shapeLayer animatePath:translatedPath];
     CGPathRelease(translatedPath);
     _initialized = YES;
 }
 
 +(C4Shape *)curve:(CGPoint *)beginEndPointArray controlPoints:(CGPoint *)controlPointArray{
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:CGRectZero];
-    [newShape curve:beginEndPointArray controlPoints:controlPointArray];
+    NSMutableDictionary *curveDict = [[NSMutableDictionary alloc] initWithCapacity:0];
+    [curveDict setValue:[NSValue valueWithCGPoint:beginEndPointArray[0]] forKey:@"beginPoint"];
+    [curveDict setValue:[NSValue valueWithCGPoint:beginEndPointArray[1]] forKey:@"endPoint"];
+    [curveDict setValue:[NSValue valueWithCGPoint:controlPointArray[0]] forKey:@"controlPoint1"];
+    [curveDict setValue:[NSValue valueWithCGPoint:controlPointArray[1]] forKey:@"controlPoint2"];
+    [newShape _curve:curveDict];
     return newShape;
 }
+
++(C4Shape *)quadCurve:(CGPoint *)beginEndPointArray controlPoint:(CGPoint)controlPoint{
+    C4Shape *newShape = [[C4Shape alloc] initWithFrame:CGRectZero];
+    NSMutableDictionary *curveDict = [[NSMutableDictionary alloc] initWithCapacity:0];
+    [curveDict setValue:[NSValue valueWithCGPoint:beginEndPointArray[0]] forKey:@"beginPoint"];
+    [curveDict setValue:[NSValue valueWithCGPoint:beginEndPointArray[1]] forKey:@"endPoint"];
+    [curveDict setValue:[NSValue valueWithCGPoint:controlPoint] forKey:@"controlPoint"];
+    [newShape _quadCurve:curveDict];
+    return newShape;
+}
+
 -(void)curve:(CGPoint *)beginEndPointArray controlPoints:(CGPoint *)controlPointArray{
     NSMutableDictionary *curveDict = [[NSMutableDictionary alloc] initWithCapacity:0];
     [curveDict setValue:[NSValue valueWithCGPoint:beginEndPointArray[0]] forKey:@"beginPoint"];
     [curveDict setValue:[NSValue valueWithCGPoint:beginEndPointArray[1]] forKey:@"endPoint"];
     [curveDict setValue:[NSValue valueWithCGPoint:controlPointArray[0]] forKey:@"controlPoint1"];
     [curveDict setValue:[NSValue valueWithCGPoint:controlPointArray[1]] forKey:@"controlPoint2"];
-    [self _curve:curveDict];
+    [self performSelector:@selector(_curve:) withObject:curveDict afterDelay:self.animationDelay];
 }
+
+-(void)quadCurve:(CGPoint *)beginEndPointArray controlPoint:(CGPoint)controlPoint{
+    NSMutableDictionary *curveDict = [[NSMutableDictionary alloc] initWithCapacity:0];
+    [curveDict setValue:[NSValue valueWithCGPoint:beginEndPointArray[0]] forKey:@"beginPoint"];
+    [curveDict setValue:[NSValue valueWithCGPoint:beginEndPointArray[1]] forKey:@"endPoint"];
+    [curveDict setValue:[NSValue valueWithCGPoint:controlPoint] forKey:@"controlPoint"];
+    [self performSelector:@selector(_quadCurve:) withObject:curveDict afterDelay:self.animationDelay];
+}
+
 -(void)_curve:(NSDictionary *)curveDict{
+    [self willChangeShape];
+    _bezierCurve = YES;
     CGMutablePathRef newPath = CGPathCreateMutable();
     CGPoint beginPoint = [[curveDict valueForKey:@"beginPoint"] CGPointValue];
     CGPoint endPoint = [[curveDict valueForKey:@"endPoint"] CGPointValue];
     CGPoint controlPoint1 = [[curveDict valueForKey:@"controlPoint1"] CGPointValue];
     CGPoint controlPoint2 = [[curveDict valueForKey:@"controlPoint2"] CGPointValue];
+    _pointA = beginPoint;
+    _pointB = endPoint;
+    _controlPointA = controlPoint1;
+    _controlPointB = controlPoint2;
     CGPathMoveToPoint(newPath, nil, beginPoint.x, beginPoint.y);
     CGPathAddCurveToPoint(newPath, nil, controlPoint1.x, controlPoint1.y, controlPoint2.x, controlPoint2.y, endPoint.x, endPoint.y);
     CGRect tempFrame = CGPathGetPathBoundingBox(newPath);
@@ -200,12 +304,47 @@
     _initialized = YES;
 }
 
+-(void)_quadCurve:(NSDictionary *)curveDict{
+    [self willChangeShape];
+    _quadCurve = YES;
+    CGMutablePathRef newPath = CGPathCreateMutable();
+    CGPoint beginPoint = [[curveDict valueForKey:@"beginPoint"] CGPointValue];
+    CGPoint endPoint = [[curveDict valueForKey:@"endPoint"] CGPointValue];
+    CGPoint controlPoint = [[curveDict valueForKey:@"controlPoint"] CGPointValue];
+    _pointA = beginPoint;
+    _pointB = endPoint;
+    _controlPointA = controlPoint;
+    CGPathMoveToPoint(newPath, nil, beginPoint.x, beginPoint.y);
+    CGPathAddQuadCurveToPoint(newPath, nil, controlPoint.x,controlPoint.y, endPoint.x, endPoint.y);
+    CGRect tempFrame = CGPathGetPathBoundingBox(newPath);
+    CGPoint tempFrameOrigin = tempFrame.origin;
+    beginPoint.x -= tempFrameOrigin.x;
+    beginPoint.y -= tempFrameOrigin.y;
+    endPoint.x -= tempFrameOrigin.x;
+    endPoint.y -= tempFrameOrigin.y;
+    controlPoint.x -= tempFrameOrigin.x;
+    controlPoint.y -= tempFrameOrigin.y;
+    CGPathRelease(newPath);
+    newPath = CGPathCreateMutable();
+    CGPathMoveToPoint(newPath, nil, beginPoint.x, beginPoint.y);
+    CGPathAddQuadCurveToPoint(newPath, nil, controlPoint.x,controlPoint.y, endPoint.x, endPoint.y);
+    if (_shouldClose == YES) {
+        CGPathCloseSubpath(newPath);
+    }
+    [self.shapeLayer animatePath:newPath];
+    // not sure why the following doesn't affect curves the same way it affects other shapes 
+    // (i.e. by not allowing .center to be set during setup{})
+    self.frame = tempFrame; 
+    CGPathRelease(newPath);
+    _initialized = YES;
+}
+
 -(void)rect:(CGRect)rect {
     [self performSelector:@selector(_rect:) withObject:[NSValue valueWithCGRect:rect] afterDelay:self.animationDelay];
 }
 
 -(void)_rect:(NSValue *)rectValue {
-    _isLine = NO;
+    [self willChangeShape];
     _closed = YES;
     CGRect aRect = [rectValue CGRectValue];
     aRect.origin = CGPointZero;
@@ -222,6 +361,8 @@
 }
 
 -(void)_shapeFromString:(NSDictionary *)stringAndFontDictionary {
+    [self willChangeShape];
+    _closed = YES;
     NSString *string = [stringAndFontDictionary objectForKey:@"string"];
     C4Font *font = [stringAndFontDictionary objectForKey:@"font"];
     NSStringEncoding encoding = [NSString defaultCStringEncoding];
@@ -253,23 +394,25 @@
     self.frame = pathRect; 
     CGPathRelease(glyphPaths);
     _initialized = YES;
-    _closed = YES;
 }
 -(void)line:(CGPoint *)pointArray {
     [self performSelector:@selector(_line:) withObject:[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointArray[0]],[NSValue valueWithCGPoint:pointArray[1]], nil] afterDelay:self.animationDelay];
 }
 -(void)_line:(NSArray *)pointArray {
+    [self willChangeShape];
     _isLine = YES;
     _closed = YES;
-
-    NSInteger pointCount = [pointArray count];
-    CGPoint points[pointCount];
     
-    for (int i = 0; i < pointCount; i++) {
-        points[i] = [[pointArray objectAtIndex:i] CGPointValue];
-    }
+    CGPoint points[2];
 
+    points[0] = [[pointArray objectAtIndex:0] CGPointValue];
+    points[1] = [[pointArray objectAtIndex:1] CGPointValue];
+  
+    _pointA = points[0];
+    _pointB = points[1];
+    
     CGRect lineRect = CGRectMakeFromPointArray(points, 2);
+    if(_initialized == YES) self.frame = lineRect;
     CGPoint translation = lineRect.origin;
     translation.x *= -1;
     translation.y *= -1;
@@ -278,36 +421,34 @@
         points[i].x += translation.x;
         points[i].y += translation.y;
     }
-    
-    _pointA = CGPointMake(points[0].x, points[0].y);
-    _pointB = CGPointMake(points[1].x, points[1].y);
         
     CGMutablePathRef newPath = CGPathCreateMutable();
-    CGPathMoveToPoint(newPath, nil, points[0].x, points[0].y);
-    for(int i = 1; i < pointCount; i++) {
-        CGPathAddLineToPoint(newPath, nil, points[i].x, points[i].y);
-    }
+    CGPathMoveToPoint(newPath, nil, points[0].x,points[0].y);
+    CGPathAddLineToPoint(newPath, nil, points[1].x, points[1].y);
+//    CGPathMoveToPoint(newPath, nil, points[1].x,points[1].y);
+//    CGPathAddLineToPoint(newPath, nil, points[0].x, points[0].y);
     
-    if (_isTriangle == YES && _closed == NO) {
-        CGPathCloseSubpath(newPath);
-        _closed = YES;
-    }
 
-    
     [self.shapeLayer animatePath:newPath];
     CGRect newBounds = self.bounds;
     newBounds.origin = CGPointZero;
     self.bounds = newBounds;
-    self.backgroundColor = [UIColor lightGrayColor];
     CGPathRelease(newPath);
     _initialized = YES;
 }
 
 -(void)triangle:(CGPoint *)pointArray {
-    [self performSelector:@selector(_triangle:) withObject:[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointArray[0]],[NSValue valueWithCGPoint:pointArray[1]],[NSValue valueWithCGPoint:pointArray[2]], nil] afterDelay:self.animationDelay];
+    [self performSelector:@selector(_triangle:) 
+               withObject:[NSArray arrayWithObjects:
+                           [NSValue valueWithCGPoint:pointArray[0]],
+                           [NSValue valueWithCGPoint:pointArray[1]],
+                           [NSValue valueWithCGPoint:pointArray[2]], 
+                           nil] 
+               afterDelay:self.animationDelay];
 }
+
 -(void)_triangle:(NSArray *)pointArray {
-    _isLine = NO;
+    [self willChangeShape];
     _isTriangle = YES;
     _shouldClose = YES;
     [self _polygon:pointArray];
@@ -329,6 +470,7 @@
 }
 
 -(void)_polygon:(NSArray *)pointArray {
+    [self willChangeShape];
     //create a c-array of points 
     NSInteger pointCount = [pointArray count];
     CGPoint points[pointCount];
@@ -353,6 +495,7 @@
     
     if (_shouldClose == YES) {
         CGPathCloseSubpath(newPath);
+        _closed = YES;
     }
     [self.shapeLayer animatePath:newPath];
     CGRect pathRect = CGPathGetBoundingBox(newPath);
@@ -378,37 +521,83 @@
 }
 
 -(CGPoint)pointA {
-    if (self.isLine == YES) {
-        return _pointA;
-    }
-    return CGPointZero;
+    C4Assert(self.isLine || self.isBezierCurve || self.isQuadCurve, @"You tried to access pointA from a shape that isn't a line or a curve");
+    return _pointA;
 }
 
 -(CGPoint)pointB {
-    if (self.isLine == YES) {
-        return _pointB;
-    }
-    return CGPointZero;
+    C4Assert(self.isLine || self.isBezierCurve || self.isQuadCurve, @"You tried to access pointA from a shape that isn't a line or a curve");
+    return _pointB;
 }
 
 -(void)test {
 }
 
 -(void)setPointA:(CGPoint)pointA {
-    /* there should be some option to deal with points in lines if the view has already been transformed */
-    if(self.isLine == YES) {
-        _pointA = pointA;
-        CGPoint points[2] = {_pointA, _pointB};
-        [self line:points];
+    C4Assert(self.isLine || self.isBezierCurve || self.isQuadCurve, @"You tried to set the value of pointA for a shape that isn't a line or a curve");
+    _pointA = pointA;
+    CGPoint points[2] = {_pointA,_pointB};
+    if(self.isLine) [self line:points];
+    else if(self.isBezierCurve) {
+        CGPoint controlPoints[2] = {_controlPointA,_controlPointB};
+        [self curve:points controlPoints:controlPoints];
+    } else {
+        [self quadCurve:points controlPoint:_controlPointA];
     }
 }
 
 -(void)setPointB:(CGPoint)pointB {
-    if(self.isLine == YES) {
-        _pointB = pointB;
-        CGPoint points[2] = {_pointA, _pointB};
-        [self line:points];
+    C4Assert(self.isLine || self.isBezierCurve || self.isQuadCurve, @"You tried to set the value of pointB for a shape that isn't a line or a curve");
+    _pointB = pointB;
+    CGPoint points[2] = {_pointA, _pointB};
+    if(self.isLine) [self line:points];
+    else if(self.isBezierCurve) {
+        CGPoint controlPoints[2] = {_controlPointA,_controlPointB};
+        [self curve:points controlPoints:controlPoints];
+    } else {
+        [self quadCurve:points controlPoint:_controlPointA];
     }
+}
+
+-(void)setControlPointA:(CGPoint)controlPointA {
+    C4Assert(self.isBezierCurve || self.isQuadCurve, @"You tried to set the value of controlPointA for a shape that isn't a curve");
+    _controlPointA = controlPointA;
+    CGPoint points[2] = {_pointA, _pointB};
+    if(self.isBezierCurve) {
+        CGPoint controlPoints[2] = {_controlPointA,_controlPointB};
+        [self curve:points controlPoints:controlPoints];
+    } else {
+        [self quadCurve:points controlPoint:_controlPointA];
+    }
+}
+
+-(void)setControlPointB:(CGPoint)controlPointB {
+    C4Assert(self.isBezierCurve, @"You tried to set the value of controlPointB for a shape that isn't a bezier curve");
+    _controlPointB = controlPointB;
+    CGPoint points[2] = {_pointA, _pointB};
+    CGPoint controlPoints[2] = {_controlPointA,_controlPointB};
+    [self curve:points controlPoints:controlPoints];
+}
+
+-(void)setCenter:(CGPoint)center {
+    if(self.isLine || self.isBezierCurve || self.isQuadCurve) {
+        
+        CGFloat dx = center.x - self.center.x;
+        CGFloat dy = center.y - self.center.y;
+
+        _pointA.x += dx;
+        _pointA.y += dy;
+        _pointB.x += dx;
+        _pointB.y += dy;
+
+        if(self.isBezierCurve || self.isQuadCurve) {
+            _controlPointA.x += dx;
+            _controlPointA.y += dy;
+            _controlPointB.x += dx;
+            _controlPointB.y += dy;
+        }
+    }
+    [super setCenter:center];
 }
 
 -(void)setOrigin:(CGPoint)origin {
@@ -453,7 +642,6 @@
     NSMutableArray *patternArray = [[NSMutableArray alloc] initWithCapacity:0];
     for(int i = 0; i < pointCount; i++) [patternArray addObject:[NSNumber numberWithFloat:dashPattern[i]]];
     [self performSelector:@selector(_setLineDashPattern:) withObject:patternArray afterDelay:self.animationDelay];
-    patternArray = nil;
 }
 
 -(void)setLineDashPattern:(NSArray *)_lineDashPattern {
@@ -461,6 +649,7 @@
 }
 -(void)_setLineDashPattern:(NSArray *)_lineDashPattern {
     self.shapeLayer.lineDashPattern = _lineDashPattern;
+
 }
 -(NSArray *)lineDashPattern {
     return self.shapeLayer.lineDashPattern;
@@ -470,7 +659,7 @@
     [self performSelector:@selector(_setLineDashPhase:) withObject:[NSNumber numberWithFloat:_lineDashPhase] afterDelay:self.animationDelay];
 }
 -(void)_setLineDashPhase:(NSNumber *)_lineDashPhase {
-    self.shapeLayer.lineDashPhase = [_lineDashPhase floatValue];
+    [self.shapeLayer animateLineDashPhase:[_lineDashPhase floatValue]];
 }
 -(CGFloat)lineDashPhase {
     return self.shapeLayer.lineDashPhase;
@@ -627,7 +816,6 @@
 }
 
 -(id)copyWithZone:(NSZone *)zone {
-    
     return self;
 }
 

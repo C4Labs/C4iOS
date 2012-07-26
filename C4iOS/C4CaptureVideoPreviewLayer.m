@@ -276,10 +276,10 @@
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
         [CATransaction setCompletionBlock:^ { 
             self.rotationAngle = _rotationAngle; 
-            [self removeAnimationForKey:@"animateRotation"];
+            [self removeAnimationForKey:@"animateTransform.rotation.z"];
         }];
     }
-    [self addAnimation:animation forKey:@"animateRotation"];
+    [self addAnimation:animation forKey:@"animateTransform.rotation.z"];
     [CATransaction commit];
 }
 @end

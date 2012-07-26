@@ -105,12 +105,12 @@
     self = [super initWithFrame:frame];
     if(self != nil) {
         _label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-        _label.textColor = [UIColor blackColor];
+        _label.textColor = C4GREY;
         _label.backgroundColor = [UIColor clearColor];
         self.animationDelay = 0.0f;
         self.animationDuration = 0.0f;
+        [self addSubview:(UILabel *)_label];
         [self setup];
-        [self addSubview:_label];
     }
     return self;
 }
@@ -181,6 +181,7 @@
 }
 
 -(void)touchesBegan {
+    C4Log(@"touchesBegan:withEvent: %@ %d",[NSString stringWithUTF8String:__FILE__],__LINE__);
 }
 
 -(void)setEnabled:(BOOL)enabled {

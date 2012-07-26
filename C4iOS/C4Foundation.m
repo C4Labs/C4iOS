@@ -129,7 +129,16 @@ CGRect CGRectMakeFromArcComponents(CGPoint centerPoint, CGFloat radius, CGFloat 
     return arcRect;
 }
 
-void uncaughtExceptionHandler(NSException *exception) {
-    C4Log(@"EXCEPTION: %@", exception);
+CGRect CGRectMakeFromWedgeComponents(CGPoint centerPoint, CGFloat radius, CGFloat startAngle, CGFloat endAngle, BOOL clockwise) {
+    CGMutablePathRef arcPath = CGPathCreateMutable();
+    CGPathAddArc(arcPath, nil, centerPoint.x, centerPoint.y, radius, startAngle, endAngle, clockwise);
+    CGPathAddLineToPoint(arcPath, nil, centerPoint.x, centerPoint.y);
+    CGRect arcRect = CGPathGetBoundingBox(arcPath);
+    CGPathRelease(arcPath);
+    return arcRect;
 }
+
+//void uncaughtExceptionHandler(NSException *exception) {
+////    C4Log(@"EXCEPTION: %@", exception);
+//}
 @end

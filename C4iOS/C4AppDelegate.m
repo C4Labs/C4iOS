@@ -24,7 +24,7 @@
 @synthesize mainView;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
-    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+//    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
 	C4AssertionHandler* customAssertionHandler = [[C4AssertionHandler alloc] init];
 	[[[NSThread currentThread] threadDictionary] setValue:customAssertionHandler forKey:NSAssertionHandlerKey];
 	// NB: your windowing code goes here - e.g. self.window.rootViewController = self.viewController;

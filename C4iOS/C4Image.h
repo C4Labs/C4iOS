@@ -483,9 +483,6 @@
 @property (readwrite, nonatomic) CGPathRef shadowPath;
 
 #pragma mark New Stuff
--(void)loadPixelData;
--(UIColor *)colorAt:(CGPoint)point;
-
 +(C4Image *)animatedImageWithNames:(NSArray *)imageNames;
 -(id)initAnimatedImageWithNames:(NSArray *)imageNames;
 -(void)play;
@@ -501,6 +498,13 @@
 -(void)loadPixelData;
 -(UIColor *)colorAt:(CGPoint)point;
 -(C4Vector *)rgbVectorAt:(CGPoint)point;
+
+/* to add
+ @property (readonly, nonatomic) CGSize originalMovieSize;
+ @property (readonly, nonatomic) CGFloat originalMovieRatio;
+ @property (nonatomic) CGFloat width;
+ @property (nonatomic) CGFloat height;
+*/
 
 @property (readonly, nonatomic) BOOL pixelDataLoaded;
 @end

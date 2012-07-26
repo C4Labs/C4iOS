@@ -83,6 +83,6 @@
  */
 -(void)animateStrokeStart:(CGFloat)strokeStart;
 
-
+-(void)animateLineDashPhase:(CGFloat)lineDashPhase;
 
 @end

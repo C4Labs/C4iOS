@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED008D3A15BF5DE80005E8D3 /* pattern.png in Resources */ = {isa = PBXBuildFile; fileRef = ED008D3915BF5DE80005E8D3 /* pattern.png */; };
 		ED009F9015091FE300086987 /* C4EAGLLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED009F8F15091FE300086987 /* C4EAGLLayer.m */; };
 		ED009F9415091FFD00086987 /* C4GL.m in Sources */ = {isa = PBXBuildFile; fileRef = ED009F9315091FFD00086987 /* C4GL.m */; };
 		ED009F9E1509242100086987 /* C4EAGLES1Renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED009F9D1509242100086987 /* C4EAGLES1Renderer.m */; };
 		ED009FA01509253500086987 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED009F9F1509253500086987 /* OpenGLES.framework */; };
 		ED009FA81509545100086987 /* C4GL1Renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED009FA71509545000086987 /* C4GL1Renderer.m */; };
+		ED03727815B4713800034CDA /* MyShape.m in Sources */ = {isa = PBXBuildFile; fileRef = ED03727715B4713800034CDA /* MyShape.m */; };
 		ED10F17214FC0BDE00B54390 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED10F17114FC0BDE00B54390 /* CoreText.framework */; };
 		ED1253FD15657D810003AFAF /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED1253FC15657D810003AFAF /* Accelerate.framework */; };
 		ED24F2C5157EB62800BC73B5 /* C4Timer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED24F2C4157EB62700BC73B5 /* C4Timer.m */; };
@@ -19,7 +21,7 @@
 		ED30769C150D400C001D689C /* C4Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = ED307698150D400C001D689C /* C4Movie.m */; };
 		ED3076A2150D51F0001D689C /* C4PlayerLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3076A1150D51F0001D689C /* C4PlayerLayer.m */; };
 		ED36D9EC157C935500C3AEE7 /* C4Image.m in Sources */ = {isa = PBXBuildFile; fileRef = ED36D9EB157C935400C3AEE7 /* C4Image.m */; };
-		ED45EC81155A33C400D28213 /* loop1.wav in Resources */ = {isa = PBXBuildFile; fileRef = ED45EC80155A33C400D28213 /* loop1.wav */; };
+		ED4702D715C052CA004B75D1 /* pyramid.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4702D615C052CA004B75D1 /* pyramid.png */; };
 		ED50C88614EAC2010040D844 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED50C88514EAC2010040D844 /* UIKit.framework */; };
 		ED50C88814EAC2010040D844 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED50C88714EAC2010040D844 /* Foundation.framework */; };
 		ED50C88A14EAC2010040D844 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED50C88914EAC2010040D844 /* CoreGraphics.framework */; };
@@ -46,8 +48,6 @@
 		ED50C8D214EAC92F0040D844 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED50C8D114EAC92F0040D844 /* QuartzCore.framework */; };
 		ED50C8D614EACA340040D844 /* C4View.m in Sources */ = {isa = PBXBuildFile; fileRef = ED50C8D514EACA340040D844 /* C4View.m */; };
 		ED5FB05115B38894002987EA /* C4AssertionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5FB05015B38894002987EA /* C4AssertionHandler.m */; };
-		ED7513AB15150FB60076317F /* inception.mov in Resources */ = {isa = PBXBuildFile; fileRef = ED7513AA15150FB60076317F /* inception.mov */; };
-		ED751492151519890076317F /* C4Sky.png in Resources */ = {isa = PBXBuildFile; fileRef = ED751491151519890076317F /* C4Sky.png */; };
 		ED80BBC014F0648800AAD49C /* C4Defines.m in Sources */ = {isa = PBXBuildFile; fileRef = ED80BBBF14F0648800AAD49C /* C4Defines.m */; };
 		ED89848714EE180400BB7AB0 /* C4ShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED89848614EE180400BB7AB0 /* C4ShapeLayer.m */; };
 		ED89849814EF1C8800BB7AB0 /* C4Object.m in Sources */ = {isa = PBXBuildFile; fileRef = ED89849714EF1C8700BB7AB0 /* C4Object.m */; };
@@ -67,6 +67,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		ED008D3915BF5DE80005E8D3 /* pattern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pattern.png; sourceTree = "<group>"; };
 		ED009F8E15091FE300086987 /* C4EAGLLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4EAGLLayer.h; sourceTree = "<group>"; };
 		ED009F8F15091FE300086987 /* C4EAGLLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4EAGLLayer.m; sourceTree = "<group>"; };
 		ED009F9215091FFD00086987 /* C4GL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4GL.h; sourceTree = "<group>"; };
@@ -77,6 +78,8 @@
 		ED009FA515094E5200086987 /* C4EAGLESRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4EAGLESRenderer.h; sourceTree = "<group>"; };
 		ED009FA61509545000086987 /* C4GL1Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4GL1Renderer.h; sourceTree = "<group>"; };
 		ED009FA71509545000086987 /* C4GL1Renderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4GL1Renderer.m; sourceTree = "<group>"; };
+		ED03727615B4713800034CDA /* MyShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyShape.h; sourceTree = "<group>"; };
+		ED03727715B4713800034CDA /* MyShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyShape.m; sourceTree = "<group>"; };
 		ED10F17114FC0BDE00B54390 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		ED1253FC15657D810003AFAF /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		ED1B5BA31514024E0027365F /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -90,6 +93,7 @@
 		ED36D9EA157C935400C3AEE7 /* C4Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Image.h; sourceTree = "<group>"; };
 		ED36D9EB157C935400C3AEE7 /* C4Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Image.m; sourceTree = "<group>"; };
 		ED45EC80155A33C400D28213 /* loop1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = loop1.wav; sourceTree = "<group>"; };
+		ED4702D615C052CA004B75D1 /* pyramid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pyramid.png; sourceTree = "<group>"; };
 		ED50C88114EAC2010040D844 /* C4iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = C4iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED50C88514EAC2010040D844 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		ED50C88714EAC2010040D844 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -240,9 +244,12 @@
 			isa = PBXGroup;
 			children = (
 				EDF65449150DEF3300194671 /* C4WorkSpace.m */,
+				ED03727615B4713800034CDA /* MyShape.h */,
+				ED03727715B4713800034CDA /* MyShape.m */,
+				ED4702D615C052CA004B75D1 /* pyramid.png */,
+				ED008D3915BF5DE80005E8D3 /* pattern.png */,
 				ED50C8D314EACA0E0040D844 /* Source */,
 				EDCE425C156401F000C7356E /* Media */,
-				ED50C88C14EAC2010040D844 /* App */,
 			);
 			path = C4iOS;
 			sourceTree = "<group>";
@@ -354,6 +361,7 @@
 				ED45EC80155A33C400D28213 /* loop1.wav */,
 				ED751491151519890076317F /* C4Sky.png */,
 				ED7513AA15150FB60076317F /* inception.mov */,
+				ED50C88C14EAC2010040D844 /* App */,
 			);
 			name = Media;
 			sourceTree = "<group>";
@@ -421,9 +429,8 @@
 				ED50C8B714EAC2A10040D844 /* C4LogoiPad-08.png in Resources */,
 				ED50C8B814EAC2A10040D844 /* C4LogoiPad-Landscape.png in Resources */,
 				ED50C8B914EAC2A10040D844 /* C4LogoiPad-Portrait.png in Resources */,
-				ED7513AB15150FB60076317F /* inception.mov in Resources */,
-				ED751492151519890076317F /* C4Sky.png in Resources */,
-				ED45EC81155A33C400D28213 /* loop1.wav in Resources */,
+				ED008D3A15BF5DE80005E8D3 /* pattern.png in Resources */,
+				ED4702D715C052CA004B75D1 /* pyramid.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,6 +473,7 @@
 				ED36D9EC157C935500C3AEE7 /* C4Image.m in Sources */,
 				ED24F2C5157EB62800BC73B5 /* C4Timer.m in Sources */,
 				ED5FB05115B38894002987EA /* C4AssertionHandler.m in Sources */,
+				ED03727815B4713800034CDA /* MyShape.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

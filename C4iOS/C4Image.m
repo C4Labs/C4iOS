@@ -60,11 +60,11 @@
     self = [super init];
     if(nil != self) {
         self.originalImage = image.UIImage;
-        C4Assert(_originalImage != nil, @"The C4Image you tried to load (%@) returned nil for its UIImage", image);
-        C4Assert(_originalImage.CGImage != nil, @"The C4Image you tried to load (%@) returned nil for its CGImage", image);
-        _visibleImage = [[CIImage alloc] initWithCGImage:_originalImage.CGImage];
-        C4Assert(_visibleImage != nil, @"The CIImage you tried to create (%@) returned a nil object", _visibleImage);
-        self.frame = _visibleImage.extent;
+        C4Assert(self.originalImage != nil, @"The C4Image you tried to load (%@) returned nil for its UIImage", image);
+        C4Assert(self.originalImage.CGImage != nil, @"The C4Image you tried to load (%@) returned nil for its CGImage", image);
+        self.visibleImage = [[CIImage alloc] initWithCGImage:self.originalImage.CGImage];
+        C4Assert(self.visibleImage != nil, @"The CIImage you tried to create (%@) returned a nil object", _visibleImage);
+        self.frame = self.visibleImage.extent;
         _pixelDataLoaded = NO;
         self.imageLayer.contents = (id)_originalImage.CGImage;
         [self setup];
@@ -76,20 +76,22 @@
     self = [super init];
     if(self != nil) {
         self.originalImage = [UIImage imageNamed:name];
-        C4Assert(_originalImage != nil, @"The C4Image you tried to load (%@) returned nil for its UIImage", name);
-        C4Assert(_originalImage.CGImage != nil, @"The C4Image you tried to load (%@) returned nil for its CGImage", name);
-        self.visibleImage = [[CIImage alloc] initWithCGImage:_originalImage.CGImage];
-        C4Assert(_visibleImage != nil, @"The CIImage you tried to create (%@) returned a nil object", self.visibleImage);
+        C4Assert(self.originalImage != nil, @"The C4Image you tried to load (%@) returned nil for its UIImage", name);
+        C4Assert(self.originalImage.CGImage != nil, @"The C4Image you tried to load (%@) returned nil for its CGImage", name);
+        self.visibleImage = [[CIImage alloc] initWithImage:self.originalImage];
+        C4Assert(self.visibleImage != nil, @"The CIImage you tried to create (%@) returned a nil object", self.visibleImage);
         _pixelDataLoaded = NO;
         self.frame = self.CIImage.extent;
-        [self.imageLayer setContents:(id)_originalImage.CGImage];
+        self.imageLayer.contents = (id)_originalImage.CGImage;
         [self setup];
     }
     return self;
 }
 
 -(UIImage *)UIImage {
-    return [UIImage imageWithCIImage:_visibleImage];
+    CIContext *c = [CIContext contextWithOptions:nil];
+    UIImage *visibleUIImage = [UIImage imageWithCGImage:[c createCGImage:self.visibleImage fromRect:self.visibleImage.extent]];
+    return visibleUIImage;
 }
 
 -(CIImage *)CIImage {
