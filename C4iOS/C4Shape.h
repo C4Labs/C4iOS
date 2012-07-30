@@ -108,7 +108,6 @@
  */
 +(C4Shape *)shapeFromString:(NSString *)string withFont:(C4Font *)font;
 
-
 #pragma mark Changing a Shape's Path
 /// @name Changing a Shape's Path
 
@@ -239,15 +238,6 @@ The change will happen based on the shape's current animation options, duration 
  */
 @property (readwrite, strong, nonatomic) UIColor *strokeColor;
 
-/**The color used to stroke the shape’s shadow. Animatable.
- 
- Setting shadowColor to nil results in no shadow being rendered.
- 
- Default is nil.
-
- */
-@property (readwrite, strong, nonatomic) UIColor *shadowColor;
-
 /**The dash phase applied to the shape’s path when stroked. Animatable.
  
  Line dash phase specifies how far into the dash pattern the line starts.
@@ -286,34 +276,6 @@ The change will happen based on the shape's current animation options, duration 
  Combined with the strokeEnd property, this property defines the subregion of the path to stroke. The value in this property indicates the relative point along the path at which to begin stroking while the strokeEnd property defines the end point. A value of 0.0 represents the beginning of the path while a value of 1.0 represents the end of the path. Values in between are interpreted linearly along the path length.
  */
 @property (readwrite, nonatomic) CGFloat strokeStart;
-
-/**Specifies the opacity of the receiver’s shadow. Animatable.
- 
- The value of this property must be in the range 0.0 to 1.0. The default value of this property is 0.0.
- */
-@property (readwrite, nonatomic) CGFloat shadowOpacity;
-
-/**Specifies the blur radius used to render the receiver’s shadow. Animatable.
- 
- The value of this property must be in the range 0.0 to 1.0. The default value of this property is 0.0.
- */
-@property (readwrite, nonatomic) CGFloat shadowRadius;
-
-/**
- */
-@property (readwrite, nonatomic) CGSize shadowOffset;
-
-/**Defines the shape of the shadow. Animatable.
- 
- Unlike most animatable properties, shadowPath does not support implicit animation. 
- 
- If the value in this property is non-nil, the shadow is created using the specified path instead of the layer’s composited alpha channel. The path defines the outline of the shadow. It is filled using the non-zero winding rule and the current shadow color, opacity, and blur radius.
- 
- Specifying an explicit path usually improves rendering performance.
- 
- The default value of this property is NULL.
- */
-@property (readwrite, nonatomic) CGPathRef shadowPath;
 
 /**The dash pattern applied to the shape’s path when stroked.
  
@@ -379,7 +341,7 @@ The change will happen based on the shape's current animation options, duration 
  
  Accessing the shape layer is allowed, but modifying it is not. Changing properties of the shape will automatically inform and apply them to shapeLayer.
  */
-@property (readonly, atomic, weak) C4ShapeLayer *shapeLayer;
+@property (readonly, atomic, strong) C4ShapeLayer *shapeLayer;
 
 @property (readonly, atomic, getter = isClosed) BOOL closed;
 

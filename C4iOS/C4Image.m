@@ -16,11 +16,6 @@
     NSUInteger currentAnimatedImage;
 }
 
--(void)_setShadowOffset:(NSValue *)shadowOffset;
--(void)_setShadowRadius:(NSNumber *)shadowRadius;
--(void)_setShadowOpacity:(NSNumber *)shadowOpacity;
--(void)_setShadowColor:(UIColor *)shadowColor;
--(void)_setShadowPath:(id)shadowPath;
 -(UIImage *)fixOrientationFromCamera:(UIImage *)image;
 
 @property (readwrite, strong, nonatomic) CIContext *filterContext;
@@ -33,11 +28,6 @@
 
 @implementation C4Image
 @synthesize imageLayer;
-@synthesize shadowColor = _shadowColor;
-@synthesize shadowOffset = _shadowOffset;
-@synthesize shadowRadius = _shadowRadius;
-@synthesize shadowOpacity = _shadowOpacity;
-@synthesize shadowPath = _shadowPath;
 @synthesize contents = _contents;
 @synthesize originalImage = _originalImage;
 @synthesize visibleImage = _visibleImage;
@@ -118,51 +108,6 @@
 
 +(Class)layerClass {
     return [C4Layer class];
-}
-
--(void)setShadowOffset:(CGSize)shadowOffset {
-    [self performSelector:@selector(_setShadowOffset:) withObject:[NSValue valueWithCGSize:shadowOffset] afterDelay:self.animationDelay];
-}
--(void)_setShadowOffset:(NSValue *)shadowOffset {
-    [self.imageLayer animateShadowOffset:[shadowOffset CGSizeValue]];
-}
-
--(void)setShadowRadius:(CGFloat)shadowRadius {
-    [self performSelector:@selector(_setShadowRadius:) withObject:[NSNumber numberWithFloat:shadowRadius] afterDelay:self.animationDelay];
-}
--(void)_setShadowRadius:(NSNumber *)shadowRadius {
-    [self.imageLayer animateShadowRadius:[shadowRadius floatValue]];
-}
-
--(void)setShadowOpacity:(CGFloat)shadowOpacity {
-    [self performSelector:@selector(_setShadowOpacity:) withObject:[NSNumber numberWithFloat:shadowOpacity] afterDelay:self.animationDelay];
-}
--(void)_setShadowOpacity:(NSNumber *)shadowOpacity {
-    [self.imageLayer animateShadowOpacity:[shadowOpacity floatValue]];
-}
-
--(void)setShadowColor:(UIColor *)shadowColor {
-    [self performSelector:@selector(_setShadowColor:) withObject:shadowColor afterDelay:self.animationDelay];
-}
--(void)_setShadowColor:(UIColor *)shadowColor {
-    [self.imageLayer animateShadowColor:shadowColor.CGColor];
-}
-
--(void)setShadowPath:(CGPathRef)shadowPath {
-    [self performSelector:@selector(_setShadowPath:) withObject:(__bridge id)shadowPath afterDelay:self.animationDelay];
-}
--(void)_setShadowPath:(id)shadowPath {
-    [self.imageLayer animateShadowPath:(__bridge CGPathRef)shadowPath];
-}
-
--(void)setAnimationDuration:(CGFloat)animationDuration {
-    [super setAnimationDuration:animationDuration];
-    self.imageLayer.animationDuration = animationDuration;
-}
-
--(void)setAnimationOptions:(NSUInteger)animationOptions {
-    [super setAnimationOptions:animationOptions];
-    self.imageLayer.animationOptions = animationOptions;
 }
 
 -(void)setContents:(CGImageRef)image {

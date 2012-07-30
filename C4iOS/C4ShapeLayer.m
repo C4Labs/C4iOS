@@ -11,13 +11,14 @@
 
 @interface C4ShapeLayer()
 -(CABasicAnimation *)setupBasicAnimationWithKeyPath:(NSString *)keyPath;
-@property (readwrite, nonatomic) CGFloat rotationAngle;
+@property (readwrite, nonatomic) CGFloat rotationAngle, rotationAngleX, rotationAngleY;
 @end
 
 @implementation C4ShapeLayer
 @synthesize animationOptions = _animationOptions, currentAnimationEasing, repeatCount, animationDuration = _animationDuration;
 @synthesize allowsInteraction, repeats;
-@synthesize rotationAngle;
+@synthesize rotationAngle, rotationAngleX, rotationAngleY;
+@synthesize perspectiveDistance;
 
 -(id)init {
     self = [super init];
@@ -190,13 +191,13 @@
     [CATransaction commit];
 }
 
--(BOOL)isOpaque {
-    /*
-     Apple docs say that the frameworks flip this to NO automatically 
-     ...if you do things like set the background color to anything transparent
-     */
-    return YES;
-}
+//-(BOOL)isOpaque {
+//    /*
+//     Apple docs say that the frameworks flip this to NO automatically 
+//     ...if you do things like set the background color to anything transparent
+//     */
+//    return YES;
+//}
 
 -(void)setAnimationDuration:(CGFloat)duration {
     if (duration <= 0.0f) duration = 0.001f;
@@ -461,17 +462,74 @@
 
 -(void)animateRotation:(CGFloat)_rotationAngle {
     [CATransaction begin];
+    CATransform3D t = self.transform;
+    t.m34 = 1/self.perspectiveDistance;
+    self.transform = t;
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"transform.rotation.z"];
     animation.fromValue = [NSNumber numberWithFloat:self.rotationAngle];
     animation.toValue = [NSNumber numberWithFloat:_rotationAngle];
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
         [CATransaction setCompletionBlock:^ { 
             self.rotationAngle = _rotationAngle; 
-            [(C4Control *)self.delegate rotationDidFinish:self.rotationAngle];
+// 
+//            [(C4Control *)self.delegate rotationDidFinish:self.rotationAngle];
             [self removeAnimationForKey:@"animateRotation"];
         }];
     }
     [self addAnimation:animation forKey:@"animateRotation"];
     [CATransaction commit];
 }
+
+-(void)animateRotationX:(CGFloat)_rotationAngle {
+    [CATransaction begin];
+    CATransform3D t = self.transform;
+    t.m34 = self.perspectiveDistance;
+    self.transform = t;
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"transform.rotation.x"];
+    animation.fromValue = [NSNumber numberWithFloat:self.rotationAngleX];
+    animation.toValue = [NSNumber numberWithFloat:_rotationAngle];
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { 
+            self.rotationAngleX = _rotationAngle; 
+            [self removeAnimationForKey:@"animateRotation"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"animateRotation"];
+    [CATransaction commit];
+}
+
+-(void)animateRotationY:(CGFloat)_rotationAngle {
+    [CATransaction begin];
+    CATransform3D t = self.transform;
+    t.m34 = self.perspectiveDistance;
+    self.transform = t;
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"transform.rotation.y"];
+    animation.fromValue = [NSNumber numberWithFloat:self.rotationAngleY];
+    animation.toValue = [NSNumber numberWithFloat:_rotationAngle];
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { 
+            self.rotationAngleY = _rotationAngle; 
+            [self removeAnimationForKey:@"animateRotation"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"animateRotation"];
+    [CATransaction commit];
+}
+
+-(void)animateLayerTransform:(CATransform3D)_transform {
+    C4Log(@"animateLayerTransform shapelayer");
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"transform"];
+    animation.fromValue = [NSValue valueWithCATransform3D:self.sublayerTransform];
+    animation.toValue = [NSValue valueWithCATransform3D:_transform];
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { 
+            self.transform = _transform; 
+            [self removeAnimationForKey:@"animateTransform"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"animateTransform"];
+    [CATransaction commit];
+}
+
 @end

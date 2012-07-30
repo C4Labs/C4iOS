@@ -17,6 +17,10 @@
 +(C4Timer *)timerWithFireDate:(NSDate *)date interval:(CGFloat)seconds target:(id)object method:(NSString *)methodName repeats:(BOOL)repeats;
 +(C4Timer *)timerWithFireDate:(NSDate *)date interval:(CGFloat)seconds target:(id)target method:(NSString *)methodName userInfo:(id)infoObject repeats:(BOOL)repeats;
 
+-(id)initScheduledTimerWithInterval:(CGFloat)seconds target:(id)object method:(NSString *)methodName userInfo:(id)infoObject repeats:(BOOL)repeats;
+-(id)initWithInterval:(CGFloat)seconds target:(id)object method:(NSString *)methodName userInfo:(id)infoObject repeats:(BOOL)repeats;
+-(id)initWithFireDate:(NSDate *)date interval:(CGFloat)seconds target:(id)target method:(NSString *)methodName userInfo:(id)userInfo repeats:(BOOL)repeats;
+
 -(void)fire;
 -(void)start;
 -(void)stop;

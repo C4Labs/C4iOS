@@ -10,9 +10,6 @@
 
 @interface C4Shape() 
 @property (readonly, nonatomic) BOOL initialized, shouldClose;
-@end
-
-@interface C4Shape()
 -(void)_ellipse:(NSValue *)ellipseValue;
 -(void)_rect:(NSValue *)rectValue;
 -(void)_line:(NSArray *)pointArray;
@@ -32,22 +29,18 @@
 -(void)_setLineJoin:(NSString *)_lineJoin;
 -(void)_setLineWidth:(NSNumber *)_lineWidth;
 -(void)_setMiterLimit:(NSNumber *)_miterLimit;
--(void)_setShadowColor:(UIColor *)_shadowColor;
 -(void)_setStrokeColor:(UIColor *)_strokeColor;
 -(void)_setStrokeStart:(NSNumber *)_strokeStart;
--(void)_setShadowOffSet:(NSValue *)_shadowOffset;
--(void)_setShadowOpacity:(NSNumber *)_shadowOpacity;
--(void)_setShadowPath:(id)shadowPath;
--(void)_setShadowRadius:(NSNumber *)_shadowRadius;
 -(void)willChangeShape;
 @property (atomic) BOOL isTriangle;
 @end
 
 @implementation C4Shape
 @synthesize controlPointA = _controlPointA, controlPointB = _controlPointB, isArc = _isArc, bezierCurve = _bezierCurve, quadCurve = _quadCurve, isLine =_isLine, shapeLayer, pointA = _pointA, pointB = _pointB, wedge = _wedge;
-@synthesize fillColor, fillRule, lineCap, lineDashPattern, lineDashPhase, lineJoin, lineWidth, miterLimit, origin = _origin, strokeColor, strokeEnd, strokeStart, shadowOffset, shadowOpacity, shadowRadius, shadowPath, shadowColor;
+@synthesize fillColor, fillRule, lineCap, lineDashPattern, lineDashPhase, lineJoin, lineWidth, miterLimit, origin = _origin, strokeColor, strokeEnd, strokeStart;
 @synthesize closed = _closed, shouldClose = _shouldClose, initialized = _initialized, isTriangle = _isTriangle;
-
+@synthesize layerTransform = _layerTransform;
+@synthesize rotationX = _rotationX;
 -(id)init {
     return [self initWithFrame:CGRectZero];
 }
@@ -164,6 +157,8 @@
     CGPathAddEllipseInRect(newPath, nil, aRect);
     [self.shapeLayer animatePath:newPath];
     CGPathRelease(newPath);
+    CGRect pathRect = CGPathGetBoundingBox(newPath);
+    self.bounds = pathRect; //Need this step to sync the appearance of the paths to the frame of the shape
     _initialized = YES;
 }
 
@@ -195,12 +190,20 @@
     }
     
     [self.shapeLayer animatePath:translatedPath];
+    CGRect pathRect = CGPathGetBoundingBox(translatedPath);
+    self.bounds = pathRect; //Need this step to sync the appearance of the paths to the frame of the shape
     CGPathRelease(translatedPath);
     _initialized = YES;
 }
 
 -(void)wedgeWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise{
-    [self arcWithCenter:centerPoint radius:radius startAngle:startAngle endAngle:endAngle clockwise:clockwise];
+    NSMutableDictionary *wedgeDict = [[NSMutableDictionary alloc] initWithCapacity:0];
+    [wedgeDict setValue:[NSValue valueWithCGPoint:centerPoint] forKey:@"centerPoint"];
+    [wedgeDict setObject:[NSNumber numberWithFloat:radius] forKey:@"radius"];
+    [wedgeDict setObject:[NSNumber numberWithFloat:startAngle] forKey:@"startAngle"];
+    [wedgeDict setObject:[NSNumber numberWithFloat:endAngle] forKey:@"endAngle"];
+    [wedgeDict setObject:[NSNumber numberWithBool:clockwise] forKey:@"clockwise"];
+    [self performSelector:@selector(_wedge:) withObject:wedgeDict afterDelay:self.animationDelay];
 }
 
 -(void)_wedge:(NSDictionary *)arcDict {
@@ -223,6 +226,8 @@
     _closed = YES;
     
     [self.shapeLayer animatePath:translatedPath];
+    CGRect pathRect = CGPathGetBoundingBox(translatedPath);
+    self.bounds = pathRect; //Need this step to sync the appearance of the paths to the frame of the shape
     CGPathRelease(translatedPath);
     _initialized = YES;
 }
@@ -297,9 +302,8 @@
         CGPathCloseSubpath(newPath);
     }
     [self.shapeLayer animatePath:newPath];
-    // not sure why the following doesn't affect curves the same way it affects other shapes 
-    // (i.e. by not allowing .center to be set during setup{})
-    self.frame = tempFrame; 
+    CGRect pathRect = CGPathGetBoundingBox(newPath);
+    self.bounds = pathRect;
     CGPathRelease(newPath);
     _initialized = YES;
 }
@@ -332,9 +336,8 @@
         CGPathCloseSubpath(newPath);
     }
     [self.shapeLayer animatePath:newPath];
-    // not sure why the following doesn't affect curves the same way it affects other shapes 
-    // (i.e. by not allowing .center to be set during setup{})
-    self.frame = tempFrame; 
+    CGRect pathRect = CGPathGetBoundingBox(newPath);
+    self.bounds = pathRect;
     CGPathRelease(newPath);
     _initialized = YES;
 }
@@ -351,6 +354,8 @@
     CGMutablePathRef newPath = CGPathCreateMutable();
     CGPathAddRect(newPath, nil, aRect);
     [self.shapeLayer animatePath:newPath];
+    CGRect pathRect = CGPathGetBoundingBox(newPath);
+    self.bounds = pathRect; //Need this step to sync the appearance of the paths to the frame of the shape
     CGPathRelease(newPath);
     _initialized = YES;
 }
@@ -450,8 +455,37 @@
 -(void)_triangle:(NSArray *)pointArray {
     [self willChangeShape];
     _isTriangle = YES;
-    _shouldClose = YES;
-    [self _polygon:pointArray];
+    //create a c-array of points 
+    NSInteger pointCount = [pointArray count];
+    CGPoint points[pointCount];
+    
+    CGPoint translation = CGPointMake(self.frame.size.width,self.frame.size.height);
+    if(translation.x == 0) translation.x = self.frame.origin.x;
+    if(translation.y == 0) translation.y = self.frame.origin.y;
+    translation.x *= -1;
+    translation.y *= -1;
+    
+    for (int i = 0; i < pointCount; i++) {
+        points[i] = [[pointArray objectAtIndex:i] CGPointValue];
+        points[i].x += translation.x;
+        points[i].y += translation.y;
+    }
+    
+    CGMutablePathRef newPath = CGPathCreateMutable();
+    CGPathMoveToPoint(newPath, nil, points[0].x, points[0].y);
+    for(int i = 1; i < pointCount; i++) {
+        CGPathAddLineToPoint(newPath, nil, points[i].x, points[i].y);
+    }
+    
+    //the only difference between this and _arc
+    CGPathCloseSubpath(newPath);
+    _closed = YES;
+    
+    [self.shapeLayer animatePath:newPath];
+    CGRect pathRect = CGPathGetBoundingBox(newPath);
+    self.bounds = pathRect; //Need this step to sync the appearance of the paths to the frame of the shape
+    CGPathRelease(newPath);
+    _initialized = YES;
 }
 
 /* 
@@ -500,6 +534,7 @@
     [self.shapeLayer animatePath:newPath];
     CGRect pathRect = CGPathGetBoundingBox(newPath);
     self.bounds = pathRect; //Need this step to sync the appearance of the paths to the frame of the shape
+//    self.frame = pathRect;
     CGPathRelease(newPath);
     _initialized = YES;
 }
@@ -676,13 +711,14 @@
 }
 
 -(void)setLineWidth:(CGFloat)_lineWidth {
+    lineWidth = _lineWidth;
     [self performSelector:@selector(_setLineWidth:) withObject:[NSNumber numberWithFloat:_lineWidth] afterDelay:self.animationDelay];
 }
 -(void)_setLineWidth:(NSNumber *)_lineWidth {
     [self.shapeLayer animateLineWidth:[_lineWidth floatValue]];
 }
 -(CGFloat)lineWidth {
-    return self.shapeLayer.lineWidth;
+    return lineWidth;
 }
 
 -(void)setMiterLimit:(CGFloat)_miterLimit {
@@ -725,66 +761,6 @@
     return self.shapeLayer.strokeStart;
 }
 
--(void)setShadowColor:(UIColor *)_shadowColor {
-    [self performSelector:@selector(_setShadowColor:) withObject:_shadowColor afterDelay:self.animationDelay];
-}
--(void)_setShadowColor:(UIColor *)_shadowColor {
-    [self.shapeLayer animateShadowColor:_shadowColor.CGColor];
-}
--(UIColor *)shadowColor {
-    return [UIColor colorWithCGColor:self.shapeLayer.shadowColor];
-}
-
--(void)setShadowOffset:(CGSize)_shadowOffset {
-    [self performSelector:@selector(_setShadowOffSet:) withObject:[NSValue valueWithCGSize:_shadowOffset] afterDelay:self.animationDelay];
-}
--(void)_setShadowOffSet:(NSValue *)_shadowOffset {
-    [self.shapeLayer animateShadowOffset:[_shadowOffset CGSizeValue]];
-}
--(CGSize)shadowOffset {
-    return self.shapeLayer.shadowOffset;
-}
-
--(void)setShadowOpacity:(CGFloat)_shadowOpacity {
-    [self performSelector:@selector(_setShadowOpacity:) withObject:[NSNumber numberWithFloat:_shadowOpacity] afterDelay:self.animationDelay];
-}
--(void)_setShadowOpacity:(NSNumber *)_shadowOpacity {
-    [self.shapeLayer animateShadowOpacity:[_shadowOpacity floatValue]];
-}
--(CGFloat)shadowOpacity {
-    return self.shapeLayer.shadowOpacity;
-}
-
--(void)setShadowPath:(CGPathRef)_shadowPath {
-    [self performSelector:@selector(_setShadowPath:) withObject:(__bridge id)_shadowPath afterDelay:self.animationDelay];
-}
--(void)_setShadowPath:(id)_shadowPath {
-    [self.shapeLayer animateShadowPath:(__bridge CGPathRef)_shadowPath];
-}
--(CGPathRef)shadowPath {
-    return self.shapeLayer.shadowPath;
-}
-
--(void)setShadowRadius:(CGFloat)_shadowRadius {
-    [self performSelector:@selector(_setShadowRadius:) withObject:[NSNumber numberWithFloat:_shadowRadius] afterDelay:self.animationDelay];
-}
--(void)_setShadowRadius:(NSNumber *)_shadowRadius {
-    [self.shapeLayer animateShadowRadius:[_shadowRadius floatValue]];
-}
--(CGFloat)shadowRadius {
-    return self.shapeLayer.shadowRadius;
-}
-
--(void)setAnimationDuration:(CGFloat)animationDuration {
-    [super setAnimationDuration:animationDuration];
-    self.shapeLayer.animationDuration = animationDuration;
-}
-
--(void)setAnimationOptions:(NSUInteger)animationOptions {
-    [super setAnimationOptions:animationOptions];
-    self.shapeLayer.animationOptions = animationOptions;
-}
-
 /* leaving out repeat count for now... it's a bit awkward */
 -(void)setRepeatCount:(CGFloat)repeatCount {
 //    [super setRepeatCount:repeatCount];
@@ -817,6 +793,16 @@
 
 -(id)copyWithZone:(NSZone *)zone {
     return self;
+}
+
+-(void)setLayerTransform:(CATransform3D)layerTransform {
+    _layerTransform = layerTransform;
+    [(C4Layer *)self.layer animateLayerTransform:_layerTransform];
+}
+
+-(void)setRotationX:(CGFloat)rotationX {
+    _rotationX = rotationX;
+    [(C4ShapeLayer *)self.layer animateRotationX:rotationX];
 }
 
 @end

@@ -86,7 +86,7 @@
 
 /** Returns whether or not the layer is opaque.
  */
--(BOOL)isOpaque;
+//-(BOOL)isOpaque;
 
 /** Convenience method for creating a CABasicAnimation.
  
@@ -163,4 +163,9 @@
 -(void)animateCornerRadius:(CGFloat)_cornerRadius;
 -(void)animateZPosition:(CGFloat)_zPosition;
 -(void)animateRotation:(CGFloat)_rotationAngle;
+-(void)animateRotationX:(CGFloat)_rotationAngle;
+-(void)animateRotationY:(CGFloat)_rotationAngle;
+-(void)animateLayerTransform:(CATransform3D)layerTransform;
+@property (readwrite, nonatomic) CGFloat perspectiveDistance;
+
 @end

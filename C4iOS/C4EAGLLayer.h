@@ -14,5 +14,4 @@
  */
 
 @interface C4EAGLLayer : CAEAGLLayer <C4LayerAnimation>
-
 @end

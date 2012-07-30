@@ -22,7 +22,7 @@
 @synthesize x, y, z, magnitude, heading, displacedHeading;
 @synthesize CGPoint;
 
-+(id)vectorWithX:(CGFloat)x Y:(CGFloat)y Z:(CGFloat)z {
++(C4Vector *)vectorWithX:(CGFloat)x Y:(CGFloat)y Z:(CGFloat)z {
     C4Vector *v = [[C4Vector alloc] initWithX:x Y:y Z:z];
 	return v;
 }

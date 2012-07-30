@@ -13,6 +13,11 @@
 -(void)animateWithBlock:(void (^)(void))blockAnimation completion:(void (^)(BOOL))completionBlock;
 -(void)autoreverseAnimation:(void (^)(void))animationBlock;
 -(void)pressedLong:(id)sender;
+-(void)_setShadowColor:(UIColor *)_shadowColor;
+-(void)_setShadowOffSet:(NSValue *)_shadowOffset;
+-(void)_setShadowOpacity:(NSNumber *)_shadowOpacity;
+-(void)_setShadowPath:(id)_shadowPath;
+-(void)_setShadowRadius:(NSNumber *)_shadowRadius;
 @property (readwrite, atomic) BOOL shouldAutoreverse;
 @property (readwrite, atomic, strong) NSString *longPressMethodName;
 @property (readwrite, atomic, strong) NSMutableDictionary *gestureDictionary;
@@ -27,8 +32,11 @@
 @synthesize mask;
 @synthesize borderColor;
 @synthesize masksToBounds;
-@synthesize rotation = _rotation;
-@synthesize shouldAutoreverse;
+@synthesize rotation = _rotation, rotationX = _rotationX, rotationY = _rotationY;
+@synthesize shouldAutoreverse = _shouldAutoreverse;
+@synthesize layerTransform;
+@synthesize anchorPoint = _anchorPoint;
+@synthesize perspectiveDistance = _perspectiveDistance;
 
 -(id)init {
     return [self initWithFrame:CGRectZero];
@@ -37,11 +45,11 @@
 -(id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if(self != nil) {
-        self.animationDuration = 0.0f;
-        self.animationDelay = 0.0f;
-        self.animationOptions = BEGINCURRENT;
-        self.repeatCount = 0;
-        self.shouldAutoreverse = NO;
+        _animationDuration = 0.0f;
+        _animationDelay = 0.0f;
+        _animationOptions = BEGINCURRENT;
+        _repeatCount = 0;
+        _shouldAutoreverse = NO;
         [self setup];
         self.layer.delegate = self;
     }
@@ -227,6 +235,11 @@
                          completion:nil];
 }
 
+-(void)setAnimationDuration:(CGFloat)duration {
+    _animationDuration = duration;
+    ((C4Layer *)self.layer).animationDuration = duration;
+}
+
 -(void)setAnimationOptions:(NSUInteger)animationOptions {
     /*
      important: we have to intercept the setting of AUTOREVERSE for the case of reversing 1 time
@@ -239,6 +252,7 @@
         animationOptions &= ~AUTOREVERSE;
     }
     _animationOptions = animationOptions | BEGINCURRENT;
+    ((C4Layer *)self.layer).animationOptions = _animationOptions;
 }
 
 #pragma mark Move
@@ -362,14 +376,12 @@
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    C4Log(@"-(void)touchesBegan:withEvent: {} %@ %d",[NSString stringWithUTF8String:__FILE__],__LINE__);
     [super touchesBegan:touches withEvent:event];
     [self postNotification:@"touchesBegan"];
     [self touchesBegan];
 }
 
 -(void)touchesBegan {
-    C4Log(@"-(void)touchesBegan {} %@ %d",[NSString stringWithUTF8String:__FILE__],__LINE__);
 }
 
 -(void)touchesEnded {
@@ -515,6 +527,16 @@
     [(C4Layer *)self.layer animateRotation:_rotation];
 }
 
+-(void)setRotationX:(CGFloat)rotation {
+    _rotationX = rotation;
+    [(C4Layer *)self.layer animateRotationX:_rotationX];
+}
+
+-(void)setRotationY:(CGFloat)rotation {
+    _rotationY = rotation;
+    [(C4Layer *)self.layer animateRotationY:_rotationY];
+}
+
 -(void)removeObject:(C4Control *)visibleObject {
     C4Assert(self != visibleObject, @"You tried to remove %@ from itself, don't be silly", visibleObject);
     [visibleObject removeFromSuperview];
@@ -522,6 +544,9 @@
 
 -(void)rotationDidFinish:(CGFloat)rotation {
     [super setTransform:CGAffineTransformMakeRotation(rotation)];
+}
+-(void)rotationXDidFinish:(CGFloat)rotation {
+//    [super setTransform:CGAffineTransfor];
 }
 
 #pragma mark C4AddSubview
@@ -562,5 +587,76 @@
     C4Assert([movie isKindOfClass:[C4Movie class]],
              @"You tried to add a %@ using [canvas addMovie:]", [movie class]);
     [super addSubview:movie];
+}
+
+-(void)setLayerTransform:(CATransform3D)_transform {
+    layerTransform = _transform;
+    [(C4Layer *)self.layer animateLayerTransform:_transform];
+}
+
+-(void)setAnchorPoint:(CGPoint)anchorPoint {
+    _anchorPoint = anchorPoint;
+    CGRect oldFrame = self.frame;
+    self.layer.anchorPoint = anchorPoint;
+    super.frame = oldFrame;
+}
+
+-(void)setPerspectiveDistance:(CGFloat)distance {
+    _perspectiveDistance = distance;
+    [(C4Layer *)self.layer setPerspectiveDistance:distance];
+}
+
+-(void)setShadowColor:(UIColor *)_shadowColor {
+    [self performSelector:@selector(_setShadowColor:) withObject:_shadowColor afterDelay:self.animationDelay];
+}
+-(void)_setShadowColor:(UIColor *)_shadowColor {
+    [(C4Layer *)self.layer animateShadowColor:_shadowColor.CGColor];
+}
+-(UIColor *)shadowColor {
+    return [UIColor colorWithCGColor:self.layer.shadowColor];
+}
+
+-(void)setShadowOffset:(CGSize)_shadowOffset {
+    [self performSelector:@selector(_setShadowOffSet:) withObject:[NSValue valueWithCGSize:_shadowOffset] afterDelay:self.animationDelay];
+}
+-(void)_setShadowOffSet:(NSValue *)_shadowOffset {
+    [(C4Layer *)self.layer animateShadowOffset:[_shadowOffset CGSizeValue]];
+}
+-(CGSize)shadowOffset {
+    return self.layer.shadowOffset;
+}
+
+-(void)setShadowOpacity:(CGFloat)_shadowOpacity {
+    [self performSelector:@selector(_setShadowOpacity:) withObject:[NSNumber numberWithFloat:_shadowOpacity] afterDelay:self.animationDelay];
+}
+-(void)_setShadowOpacity:(NSNumber *)_shadowOpacity {
+    [(C4Layer *)self.layer animateShadowOpacity:[_shadowOpacity floatValue]];
+}
+-(CGFloat)shadowOpacity {
+    return self.layer.shadowOpacity;
+}
+
+-(void)setShadowPath:(CGPathRef)_shadowPath {
+    [self performSelector:@selector(_setShadowPath:) withObject:(__bridge id)_shadowPath afterDelay:self.animationDelay];
+}
+-(void)_setShadowPath:(id)_shadowPath {
+    [(C4Layer *)self.layer animateShadowPath:(__bridge CGPathRef)_shadowPath];
+}
+-(CGPathRef)shadowPath {
+    return self.layer.shadowPath;
+}
+
+-(void)setShadowRadius:(CGFloat)_shadowRadius {
+    [self performSelector:@selector(_setShadowRadius:) withObject:[NSNumber numberWithFloat:_shadowRadius] afterDelay:self.animationDelay];
+}
+-(void)_setShadowRadius:(NSNumber *)_shadowRadius {
+    [(C4Layer *)self.layer animateShadowRadius:[_shadowRadius floatValue]];
+}
+-(CGFloat)shadowRadius {
+    return self.layer.shadowRadius;
+}
+
++(Class)layerClass {
+    return [C4Layer class];
 }
 @end

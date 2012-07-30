@@ -151,4 +151,7 @@
 /** The height of text lines (measured in points). (read-only)
  */
 @property(nonatomic,readonly)           CGFloat   lineHeight;
+
+#pragma mark New Stuff
+-(id)initWithName:(NSString *)fontName size:(CGFloat)fontSize;
 @end

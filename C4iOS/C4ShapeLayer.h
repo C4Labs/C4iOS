@@ -85,4 +85,6 @@
 
 -(void)animateLineDashPhase:(CGFloat)lineDashPhase;
 
+@property (readwrite, nonatomic) CGFloat perspectiveDistance;
+
 @end

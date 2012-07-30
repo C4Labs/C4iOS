@@ -13,11 +13,11 @@
 - (void)assetFailedToPrepareForPlayback:(NSError *)error;
 - (void)prepareToPlayAsset:(AVURLAsset *)asset withKeys:(NSArray *)requestedKeys;
 
--(void)_setShadowOffset:(NSValue *)shadowOffset;
--(void)_setShadowRadius:(NSNumber *)shadowRadius;
--(void)_setShadowOpacity:(NSNumber *)shadowOpacity;
--(void)_setShadowColor:(UIColor *)shadowColor;
--(void)_setShadowPath:(id)shadowPath;
+//-(void)_setShadowOffset:(NSValue *)shadowOffset;
+//-(void)_setShadowRadius:(NSNumber *)shadowRadius;
+//-(void)_setShadowOpacity:(NSNumber *)shadowOpacity;
+//-(void)_setShadowColor:(UIColor *)shadowColor;
+//-(void)_setShadowPath:(id)shadowPath;
 
 @property (readonly, nonatomic, strong) C4PlayerLayer *playerLayer;
 @property (readwrite, nonatomic, strong) AVPlayer *player;
@@ -28,11 +28,11 @@
 @synthesize player;
 @synthesize playerItem;
 @synthesize rate = _rate;
-@synthesize shadowColor = _shadowColor;
-@synthesize shadowOffset = _shadowOffset;
-@synthesize shadowRadius = _shadowRadius;
-@synthesize shadowOpacity = _shadowOpacity;
-@synthesize shadowPath = _shadowPath;
+//@synthesize shadowColor = _shadowColor;
+//@synthesize shadowOffset = _shadowOffset;
+//@synthesize shadowRadius = _shadowRadius;
+//@synthesize shadowOpacity = _shadowOpacity;
+//@synthesize shadowPath = _shadowPath;
 @synthesize originalMovieSize = _originalMovieSize;
 @synthesize originalMovieRatio = _originalMovieRatio;
 @synthesize width = _width;
@@ -61,6 +61,7 @@
 -(id)initWithMovieName:(NSString *)movieName andFrame:(CGRect)movieFrame {
     self = [super init];
     if(self != nil) {        
+        _volume = 1.0f;
         self.shouldAutoplay = NO;
         NSArray *movieNameComponents = [movieName componentsSeparatedByString:@"."];
         movieURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:[movieNameComponents objectAtIndex:0]
@@ -90,6 +91,7 @@
         self.frame = movieFrame;
         [self setup];
     }
+    self.volume = _volume;
     return self;
 }
 
@@ -205,6 +207,8 @@
     if (self.player.currentItem != self.playerItem) {
         [[self player] replaceCurrentItemWithPlayerItem:self.playerItem];
     }
+    //explicitly set the volume here, it needs to be set after the audio mix has been created
+    self.volume = self.volume;
 }
 
 - (void)observeValueForKeyPath:(NSString*) path 
@@ -222,7 +226,7 @@
                 /* Indicates that the status of the player is not yet known because 
                  it has not tried to load new media resources for playback */
             case AVPlayerStatusUnknown:
-                    C4Log(@"AVPlayerStatusUnknown");
+//                    C4Log(@"AVPlayerStatusUnknown");
                 break;
             case AVPlayerStatusReadyToPlay:
                 /* Once the AVPlayerItem becomes ready to play, i.e. 
@@ -296,50 +300,66 @@
     [self.player pause];
 }
 
--(void)setShadowOffset:(CGSize)shadowOffset {
-    [self performSelector:@selector(_setShadowOffset:) withObject:[NSValue valueWithCGSize:shadowOffset] afterDelay:self.animationDelay];
-}
--(void)_setShadowOffset:(NSValue *)shadowOffset {
-    [self.playerLayer animateShadowOffset:[shadowOffset CGSizeValue]];
-}
+//-(void)setShadowOffset:(CGSize)shadowOffset {
+//    super.shadowOffset = shadowOffset;
+//}
+//-(void)setShadowRadius:(CGFloat)shadowRadius {
+//    super.shadowRadius = shadowRadius;
+//}
+//-(void)setShadowOpacity:(CGFloat)shadowOpacity {
+//    super.shadowOpacity = shadowOpacity;
+//}
+//-(void)setShadowColor:(UIColor *)shadowColor {
+//    super.shadowColor = shadowColor;
+//}
+//-(void)setShadowPath:(CGPathRef)shadowPath {
+//    super.shadowPath = shadowPath;
+//}
 
--(void)setShadowRadius:(CGFloat)shadowRadius {
-    [self performSelector:@selector(_setShadowRadius:) withObject:[NSNumber numberWithFloat:shadowRadius] afterDelay:self.animationDelay];
-}
--(void)_setShadowRadius:(NSNumber *)shadowRadius {
-    [self.playerLayer animateShadowRadius:[shadowRadius floatValue]];
-}
+//-(void)setShadowOffset:(CGSize)shadowOffset {
+//    [self performSelector:@selector(_setShadowOffset:) withObject:[NSValue valueWithCGSize:shadowOffset] afterDelay:self.animationDelay];
+//}
+//-(void)_setShadowOffset:(NSValue *)shadowOffset {
+//    [self.playerLayer animateShadowOffset:[shadowOffset CGSizeValue]];
+//}
+//
+//-(void)setShadowRadius:(CGFloat)shadowRadius {
+//    [self performSelector:@selector(_setShadowRadius:) withObject:[NSNumber numberWithFloat:shadowRadius] afterDelay:self.animationDelay];
+//}
+//-(void)_setShadowRadius:(NSNumber *)shadowRadius {
+//    [self.playerLayer animateShadowRadius:[shadowRadius floatValue]];
+//}
+//
+//-(void)setShadowOpacity:(CGFloat)shadowOpacity {
+//    [self performSelector:@selector(_setShadowOpacity:) withObject:[NSNumber numberWithFloat:shadowOpacity] afterDelay:self.animationDelay];
+//}
+//-(void)_setShadowOpacity:(NSNumber *)shadowOpacity {
+//    [self.playerLayer animateShadowOpacity:[shadowOpacity floatValue]];
+//}
+//
+//-(void)setShadowColor:(UIColor *)shadowColor {
+//    [self performSelector:@selector(_setShadowColor:) withObject:shadowColor afterDelay:self.animationDelay];
+//}
+//-(void)_setShadowColor:(UIColor *)shadowColor {
+//    [self.playerLayer animateShadowColor:shadowColor.CGColor];
+//}
+//
+//-(void)setShadowPath:(CGPathRef)shadowPath {
+//    [self performSelector:@selector(_setShadowPath:) withObject:(__bridge id)shadowPath afterDelay:self.animationDelay];
+//}
+//-(void)_setShadowPath:(id)shadowPath {
+//    [self.playerLayer animateShadowPath:(__bridge CGPathRef)shadowPath];
+//}
 
--(void)setShadowOpacity:(CGFloat)shadowOpacity {
-    [self performSelector:@selector(_setShadowOpacity:) withObject:[NSNumber numberWithFloat:shadowOpacity] afterDelay:self.animationDelay];
-}
--(void)_setShadowOpacity:(NSNumber *)shadowOpacity {
-    [self.playerLayer animateShadowOpacity:[shadowOpacity floatValue]];
-}
+//-(void)setAnimationDuration:(CGFloat)animationDuration {
+//    [super setAnimationDuration:animationDuration];
+//    self.playerLayer.animationDuration = animationDuration;
+//}
 
--(void)setShadowColor:(UIColor *)shadowColor {
-    [self performSelector:@selector(_setShadowColor:) withObject:shadowColor afterDelay:self.animationDelay];
-}
--(void)_setShadowColor:(UIColor *)shadowColor {
-    [self.playerLayer animateShadowColor:shadowColor.CGColor];
-}
-
--(void)setShadowPath:(CGPathRef)shadowPath {
-    [self performSelector:@selector(_setShadowPath:) withObject:(__bridge id)shadowPath afterDelay:self.animationDelay];
-}
--(void)_setShadowPath:(id)shadowPath {
-    [self.playerLayer animateShadowPath:(__bridge CGPathRef)shadowPath];
-}
-
--(void)setAnimationDuration:(CGFloat)animationDuration {
-    [super setAnimationDuration:animationDuration];
-    self.playerLayer.animationDuration = animationDuration;
-}
-
--(void)setAnimationOptions:(NSUInteger)animationOptions {
-    [super setAnimationOptions:animationOptions];
-    self.playerLayer.animationOptions = animationOptions;
-}
+//-(void)setAnimationOptions:(NSUInteger)animationOptions {
+//    [super setAnimationOptions:animationOptions];
+//    self.playerLayer.animationOptions = animationOptions;
+//}
 
 -(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
     return [self.playerLayer containsPoint:point];

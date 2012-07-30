@@ -9,15 +9,8 @@
 #import "C4Label.h"
 
 @interface C4Label()
-
--(void)_setShadowOffset:(NSValue *)shadowOffset;
--(void)_setShadowRadius:(NSNumber *)shadowRadius;
--(void)_setShadowOpacity:(NSNumber *)shadowOpacity;
--(void)_setShadowColor:(UIColor *)shadowColor;
--(void)_setShadowPath:(id)shadowPath;
 -(void)_setBackgroundFilters:(NSArray *)backgroundFilters;
 -(void)_setCompositingFilter:(id)compositingFilter;
-
 -(void)sizeToFit;
 
 #pragma mark C4Label Methods
@@ -39,8 +32,6 @@
 @end
 
 @implementation C4Label
-//@synthesize animationDuration = _animationDuration;
-//@synthesize animationDelay = _animationDelay;
 @synthesize adjustsFontSizeToFitWidth = _adjustsFontSizeToFitWidth;
 @synthesize baselineAdjustment = _baselineAdjustment;
 @synthesize font = _font;
@@ -49,11 +40,6 @@
 @synthesize lineBreakMode = _lineBreakMode;
 @synthesize minimumFontSize = _minimumFontSize;
 @synthesize numberOfLines = _numberOfLines;
-@synthesize shadowColor = _shadowColor;
-@synthesize shadowOffset = _shadowOffset;
-@synthesize shadowOpacity = _shadowOpacity;
-@synthesize shadowRadius = _shadowRadius;
-@synthesize shadowPath = _shadowPath;
 @synthesize textAlignment = _textAlignment;
 @synthesize textColor = _textColor;
 @synthesize textShadowColor = _textShadowColor;
@@ -107,8 +93,6 @@
         _label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         _label.textColor = C4GREY;
         _label.backgroundColor = [UIColor clearColor];
-        self.animationDelay = 0.0f;
-        self.animationDuration = 0.0f;
         [self addSubview:(UILabel *)_label];
         [self setup];
     }
@@ -158,30 +142,24 @@
 
 -(void)setTextShadowColor:(UIColor *)shadowColor {
     if(self.animationDelay == 0) {
-        _shadowColor = shadowColor;
         self.label.shadowColor = shadowColor;
     }
     [self performSelector:@selector(_setTextShadowColor:) withObject:shadowColor afterDelay:self.animationDelay];
 }
 -(void)_setTextShadowColor:(UIColor *)shadowColor {
-    _shadowColor = shadowColor;
+    _textShadowColor = shadowColor;
     self.label.shadowColor = shadowColor;
 }
 
 -(void)setTextShadowOffset:(CGSize)shadowOffset {
-    if(self.animationDelay == 0.0f) {
-        _shadowOffset = shadowOffset;
-        self.label.shadowOffset = shadowOffset;
-    }
     [self performSelector:@selector(_setTextShadowOffset:) withObject:[NSValue valueWithCGSize:shadowOffset] afterDelay:self.animationDelay];
 }
 -(void)_setTextShadowOffset:(NSValue *)shadowOffset {
-    _shadowOffset = [shadowOffset CGSizeValue];
+    _textShadowOffset = [shadowOffset CGSizeValue];
     self.label.shadowOffset = [shadowOffset CGSizeValue];
 }
 
 -(void)touchesBegan {
-    C4Log(@"touchesBegan:withEvent: %@ %d",[NSString stringWithUTF8String:__FILE__],__LINE__);
 }
 
 -(void)setEnabled:(BOOL)enabled {
@@ -314,51 +292,6 @@
 }
 
 #pragma mark C4Layer animation accessor methods
--(void)setAnimationDuration:(CGFloat)animationDuration {
-//    _animationDuration = animationDuration;
-    [super setAnimationDuration:animationDuration];
-    self.backingLayer.animationDuration = animationDuration;
-}
-
--(void)setAnimationOptions:(NSUInteger)animationOptions {
-    [super setAnimationOptions:animationOptions];
-    self.backingLayer.animationOptions = animationOptions;
-}
-
--(void)setShadowOffset:(CGSize)shadowOffset {
-    [self performSelector:@selector(_setShadowOffset:) withObject:[NSValue valueWithCGSize:shadowOffset] afterDelay:self.animationDelay];
-}
--(void)_setShadowOffset:(NSValue *)shadowOffset {
-    [self.backingLayer animateShadowOffset:[shadowOffset CGSizeValue]];
-}
-
--(void)setShadowRadius:(CGFloat)shadowRadius {
-    [self performSelector:@selector(_setShadowRadius:) withObject:[NSNumber numberWithFloat:shadowRadius] afterDelay:self.animationDelay];
-}
--(void)_setShadowRadius:(NSNumber *)shadowRadius {
-    [self.backingLayer animateShadowRadius:[shadowRadius floatValue]];
-}
-
--(void)setShadowOpacity:(CGFloat)shadowOpacity {
-    [self performSelector:@selector(_setShadowOpacity:) withObject:[NSNumber numberWithFloat:shadowOpacity] afterDelay:self.animationDelay];
-}
--(void)_setShadowOpacity:(NSNumber *)shadowOpacity {
-    [self.backingLayer animateShadowOpacity:[shadowOpacity floatValue]];
-}
-
--(void)setShadowColor:(UIColor *)shadowColor {
-    [self performSelector:@selector(_setShadowColor:) withObject:shadowColor afterDelay:self.animationDelay];
-}
--(void)_setShadowColor:(UIColor *)shadowColor {
-    [self.backingLayer animateShadowColor:shadowColor.CGColor];
-}
-
--(void)setShadowPath:(CGPathRef)shadowPath {
-    [self performSelector:@selector(_setShadowPath:) withObject:(__bridge id)shadowPath afterDelay:self.animationDelay];
-}
--(void)_setShadowPath:(id)shadowPath {
-    [self.backingLayer animateShadowPath:(__bridge CGPathRef)shadowPath];
-}
 
 -(void)setBackgroundFilters:(NSArray *)backgroundFilters {
     [self performSelector:@selector(_setBackgroundFilters:) withObject:backgroundFilters afterDelay:self.animationDelay];
@@ -391,5 +324,13 @@
 -(void)setHeight:(CGFloat)height {
     _height = height;
     self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, height);
+}
+
+-(CGFloat)width {
+    return self.frame.size.width;
+}
+
+-(CGFloat)height {
+    return self.frame.size.height;
 }
 @end

@@ -14,7 +14,7 @@
 +(CGFloat)distanceBetweenA:(CGPoint)pointA andB:(CGPoint)pointB;
 +(CGFloat)angleBetweenA:(CGPoint)pointA andB:(CGPoint)pointB;
 
-+(id)vectorWithX:(CGFloat)x Y:(CGFloat)y Z:(CGFloat)z;
++(C4Vector *)vectorWithX:(CGFloat)x Y:(CGFloat)y Z:(CGFloat)z;
 
 -(id)initWithX:(CGFloat)x Y:(CGFloat)y Z:(CGFloat)z;
 -(void)setX:(CGFloat)x Y:(CGFloat)y Z:(CGFloat)z;

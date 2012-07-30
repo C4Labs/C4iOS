@@ -13,7 +13,6 @@
 		ED009F9E1509242100086987 /* C4EAGLES1Renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED009F9D1509242100086987 /* C4EAGLES1Renderer.m */; };
 		ED009FA01509253500086987 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED009F9F1509253500086987 /* OpenGLES.framework */; };
 		ED009FA81509545100086987 /* C4GL1Renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED009FA71509545000086987 /* C4GL1Renderer.m */; };
-		ED03727815B4713800034CDA /* MyShape.m in Sources */ = {isa = PBXBuildFile; fileRef = ED03727715B4713800034CDA /* MyShape.m */; };
 		ED10F17214FC0BDE00B54390 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED10F17114FC0BDE00B54390 /* CoreText.framework */; };
 		ED1253FD15657D810003AFAF /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED1253FC15657D810003AFAF /* Accelerate.framework */; };
 		ED24F2C5157EB62800BC73B5 /* C4Timer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED24F2C4157EB62700BC73B5 /* C4Timer.m */; };
@@ -78,8 +77,6 @@
 		ED009FA515094E5200086987 /* C4EAGLESRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4EAGLESRenderer.h; sourceTree = "<group>"; };
 		ED009FA61509545000086987 /* C4GL1Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4GL1Renderer.h; sourceTree = "<group>"; };
 		ED009FA71509545000086987 /* C4GL1Renderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4GL1Renderer.m; sourceTree = "<group>"; };
-		ED03727615B4713800034CDA /* MyShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyShape.h; sourceTree = "<group>"; };
-		ED03727715B4713800034CDA /* MyShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyShape.m; sourceTree = "<group>"; };
 		ED10F17114FC0BDE00B54390 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		ED1253FC15657D810003AFAF /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		ED1B5BA31514024E0027365F /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -244,8 +241,6 @@
 			isa = PBXGroup;
 			children = (
 				EDF65449150DEF3300194671 /* C4WorkSpace.m */,
-				ED03727615B4713800034CDA /* MyShape.h */,
-				ED03727715B4713800034CDA /* MyShape.m */,
 				ED4702D615C052CA004B75D1 /* pyramid.png */,
 				ED008D3915BF5DE80005E8D3 /* pattern.png */,
 				ED50C8D314EACA0E0040D844 /* Source */,
@@ -473,7 +468,6 @@
 				ED36D9EC157C935500C3AEE7 /* C4Image.m in Sources */,
 				ED24F2C5157EB62800BC73B5 /* C4Timer.m in Sources */,
 				ED5FB05115B38894002987EA /* C4AssertionHandler.m in Sources */,
-				ED03727815B4713800034CDA /* MyShape.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

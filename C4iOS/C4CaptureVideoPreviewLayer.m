@@ -9,13 +9,14 @@
 #import "C4CaptureVideoPreviewLayer.h"
 
 @interface C4CaptureVideoPreviewLayer ()
-@property (readwrite, nonatomic) CGFloat rotationAngle;
+@property (readwrite, nonatomic) CGFloat rotationAngle, rotationAngleX, rotationAngleY;
 @end
 
 @implementation C4CaptureVideoPreviewLayer
 @synthesize animationOptions = _animationOptions, currentAnimationEasing, repeatCount, animationDuration = _animationDuration;
 @synthesize allowsInteraction, repeats;
-@synthesize rotationAngle;
+@synthesize rotationAngle, rotationAngleX, rotationAngleY;
+@synthesize perspectiveDistance;
 
 - (id)init {
     self = [super init];
@@ -184,13 +185,13 @@
  reversing how i check the values, if linear is at the bottom, then all the other values get called
  */
 
--(BOOL)isOpaque {
-    /*
-     Apple docs say that the frameworks flip this to NO automatically 
-     ...if you do things like set the background color to anything transparent (i.e. alpha other than 1.0f)
-     */
-    return YES;
-}
+//-(BOOL)isOpaque {
+//    /*
+//     Apple docs say that the frameworks flip this to NO automatically 
+//     ...if you do things like set the background color to anything transparent (i.e. alpha other than 1.0f)
+//     */
+//    return YES;
+//}
 
 #pragma mark New Stuff
 -(void)animateBackgroundColor:(CGColorRef)_backgroundColor {
@@ -282,4 +283,56 @@
     [self addAnimation:animation forKey:@"animateTransform.rotation.z"];
     [CATransaction commit];
 }
+
+-(void)animateRotationX:(CGFloat)_rotationAngle {
+    [CATransaction begin];
+    CATransform3D t = self.transform;
+    t.m34 = self.perspectiveDistance;
+    self.transform = t;
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"transform.rotation.x"];
+    animation.fromValue = [NSNumber numberWithFloat:self.rotationAngleX];
+    animation.toValue = [NSNumber numberWithFloat:_rotationAngle];
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { 
+            self.rotationAngleX = _rotationAngle; 
+            [self removeAnimationForKey:@"animateRotation"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"animateRotation"];
+    [CATransaction commit];
+}
+
+-(void)animateRotationY:(CGFloat)_rotationAngle {
+    [CATransaction begin];
+    CATransform3D t = self.transform;
+    t.m34 = self.perspectiveDistance;
+    self.transform = t;
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"transform.rotation.y"];
+    animation.fromValue = [NSNumber numberWithFloat:self.rotationAngleY];
+    animation.toValue = [NSNumber numberWithFloat:_rotationAngle];
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { 
+            self.rotationAngleY = _rotationAngle; 
+            [self removeAnimationForKey:@"animateRotation"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"animateRotation"];
+    [CATransaction commit];
+}
+
+-(void)animateLayerTransform:(CATransform3D)_transform {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"sublayerTransform"];
+    animation.fromValue = [NSValue valueWithCATransform3D:self.sublayerTransform];
+    animation.toValue = [NSValue valueWithCATransform3D:_transform];
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ { 
+            self.sublayerTransform = _transform; 
+            [self removeAnimationForKey:@"sublayerTransform"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"sublayerTransform"];
+    [CATransaction commit];
+}
+
 @end

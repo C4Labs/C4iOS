@@ -8,10 +8,6 @@
 
 #import "C4Font.h"
 
-@interface C4Font ()
--(id)initWithName:(NSString *)fontName size:(CGFloat)fontSize;
-@end
-
 @implementation C4Font
 @synthesize UIFont = _UIFont, CTFont = _CTFont, CGFont = _CGFont, familyName = _familyName, fontName = _fontName, pointSize = _pointSize, ascender = _ascender, descender = _descender, capHeight = _capHeight, xHeight = _xHeight, lineHeight = _lineHeight;
 

@@ -20,4 +20,5 @@
 
 @interface C4Layer : CALayer <C4LayerAnimation> {
 }
+@property (readwrite, nonatomic) CGFloat perspectiveDistance;
 @end
