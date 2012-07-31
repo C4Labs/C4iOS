@@ -111,7 +111,8 @@
 }
 
 -(void)setContents:(CGImageRef)image {
-    [self performSelector:@selector(_setContents:) withObject:(__bridge id)image afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f) [self _setContents:(__bridge id)image];
+    else [self performSelector:@selector(_setContents:) withObject:(__bridge id)image afterDelay:self.animationDelay];
 }
 
 -(void)_setContents:(id)image {

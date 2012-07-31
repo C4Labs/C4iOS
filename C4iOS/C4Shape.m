@@ -37,7 +37,7 @@
 
 @implementation C4Shape
 @synthesize controlPointA = _controlPointA, controlPointB = _controlPointB, isArc = _isArc, bezierCurve = _bezierCurve, quadCurve = _quadCurve, isLine =_isLine, shapeLayer, pointA = _pointA, pointB = _pointB, wedge = _wedge;
-@synthesize fillColor, fillRule, lineCap, lineDashPattern, lineDashPhase, lineJoin, lineWidth, miterLimit, origin = _origin, strokeColor, strokeEnd, strokeStart;
+@synthesize fillColor = _fillColor, fillRule, lineCap, lineDashPattern, lineDashPhase, lineJoin, lineWidth, miterLimit, origin = _origin, strokeColor, strokeEnd, strokeStart;
 @synthesize closed = _closed, shouldClose = _shouldClose, initialized = _initialized, isTriangle = _isTriangle;
 @synthesize layerTransform = _layerTransform;
 @synthesize rotationX = _rotationX;
@@ -145,7 +145,8 @@
 
 /* the technique in both the following methods allows me to change the shape of a shape and change the shape of their view's frame automatically */
 -(void)ellipse:(CGRect)rect {
-    [self performSelector:@selector(_ellipse:) withObject:[NSValue valueWithCGRect:rect] afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f) [self _ellipse:[NSValue valueWithCGRect:rect]];
+    else [self performSelector:@selector(_ellipse:) withObject:[NSValue valueWithCGRect:rect] afterDelay:self.animationDelay];
 }
 
 -(void)_ellipse:(NSValue *)ellipseValue {
@@ -169,7 +170,8 @@
     [arcDict setObject:[NSNumber numberWithFloat:startAngle] forKey:@"startAngle"];
     [arcDict setObject:[NSNumber numberWithFloat:endAngle] forKey:@"endAngle"];
     [arcDict setObject:[NSNumber numberWithBool:clockwise] forKey:@"clockwise"];
-    [self performSelector:@selector(_arc:) withObject:arcDict afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f) [self _arc:arcDict];
+    else [self performSelector:@selector(_arc:) withObject:arcDict afterDelay:self.animationDelay];
 }
 
 -(void)_arc:(NSDictionary *)arcDict {
@@ -203,7 +205,8 @@
     [wedgeDict setObject:[NSNumber numberWithFloat:startAngle] forKey:@"startAngle"];
     [wedgeDict setObject:[NSNumber numberWithFloat:endAngle] forKey:@"endAngle"];
     [wedgeDict setObject:[NSNumber numberWithBool:clockwise] forKey:@"clockwise"];
-    [self performSelector:@selector(_wedge:) withObject:wedgeDict afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f) [self _wedge:wedgeDict];
+    else [self performSelector:@selector(_wedge:) withObject:wedgeDict afterDelay:self.animationDelay];
 }
 
 -(void)_wedge:(NSDictionary *)arcDict {
@@ -259,15 +262,17 @@
     [curveDict setValue:[NSValue valueWithCGPoint:beginEndPointArray[1]] forKey:@"endPoint"];
     [curveDict setValue:[NSValue valueWithCGPoint:controlPointArray[0]] forKey:@"controlPoint1"];
     [curveDict setValue:[NSValue valueWithCGPoint:controlPointArray[1]] forKey:@"controlPoint2"];
-    [self performSelector:@selector(_curve:) withObject:curveDict afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f) [self _curve:curveDict];
+    else [self performSelector:@selector(_curve:) withObject:curveDict afterDelay:self.animationDelay];
 }
 
 -(void)quadCurve:(CGPoint *)beginEndPointArray controlPoint:(CGPoint)controlPoint{
-    NSMutableDictionary *curveDict = [[NSMutableDictionary alloc] initWithCapacity:0];
-    [curveDict setValue:[NSValue valueWithCGPoint:beginEndPointArray[0]] forKey:@"beginPoint"];
-    [curveDict setValue:[NSValue valueWithCGPoint:beginEndPointArray[1]] forKey:@"endPoint"];
-    [curveDict setValue:[NSValue valueWithCGPoint:controlPoint] forKey:@"controlPoint"];
-    [self performSelector:@selector(_quadCurve:) withObject:curveDict afterDelay:self.animationDelay];
+    NSMutableDictionary *quadCurveDict = [[NSMutableDictionary alloc] initWithCapacity:0];
+    [quadCurveDict setValue:[NSValue valueWithCGPoint:beginEndPointArray[0]] forKey:@"beginPoint"];
+    [quadCurveDict setValue:[NSValue valueWithCGPoint:beginEndPointArray[1]] forKey:@"endPoint"];
+    [quadCurveDict setValue:[NSValue valueWithCGPoint:controlPoint] forKey:@"controlPoint"];
+    if (self.animationDelay == 0.0f) [self _quadCurve:quadCurveDict];
+    else [self performSelector:@selector(_quadCurve:) withObject:quadCurveDict afterDelay:self.animationDelay];
 }
 
 -(void)_curve:(NSDictionary *)curveDict{
@@ -343,7 +348,8 @@
 }
 
 -(void)rect:(CGRect)rect {
-    [self performSelector:@selector(_rect:) withObject:[NSValue valueWithCGRect:rect] afterDelay:self.animationDelay];
+    if (self.animationDelay == 0.0f) [self _rect:[NSValue valueWithCGRect:rect]];
+    else [self performSelector:@selector(_rect:) withObject:[NSValue valueWithCGRect:rect] afterDelay:self.animationDelay];
 }
 
 -(void)_rect:(NSValue *)rectValue {
@@ -362,7 +368,8 @@
 
 -(void)shapeFromString:(NSString *)string withFont:(C4Font *)font {
     NSDictionary *stringAndFontDictionary = [NSDictionary dictionaryWithObjectsAndKeys:string,@"string",font,@"font", nil];
-    [self performSelector:@selector(_shapeFromString:) withObject:stringAndFontDictionary];
+    if(self.animationDelay == 0.0f) [self _shapeFromString:stringAndFontDictionary];
+    else [self performSelector:@selector(_shapeFromString:) withObject:stringAndFontDictionary];
 }
 
 -(void)_shapeFromString:(NSDictionary *)stringAndFontDictionary {
@@ -401,7 +408,9 @@
     _initialized = YES;
 }
 -(void)line:(CGPoint *)pointArray {
-    [self performSelector:@selector(_line:) withObject:[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointArray[0]],[NSValue valueWithCGPoint:pointArray[1]], nil] afterDelay:self.animationDelay];
+    NSArray *linePointArray = [NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointArray[0]],[NSValue valueWithCGPoint:pointArray[1]], nil];
+    if(self.animationDelay == 0.0f) [self _line:linePointArray];
+    else [self performSelector:@selector(_line:) withObject:linePointArray afterDelay:self.animationDelay];
 }
 -(void)_line:(NSArray *)pointArray {
     [self willChangeShape];
@@ -443,13 +452,13 @@
 }
 
 -(void)triangle:(CGPoint *)pointArray {
-    [self performSelector:@selector(_triangle:) 
-               withObject:[NSArray arrayWithObjects:
-                           [NSValue valueWithCGPoint:pointArray[0]],
-                           [NSValue valueWithCGPoint:pointArray[1]],
-                           [NSValue valueWithCGPoint:pointArray[2]], 
-                           nil] 
-               afterDelay:self.animationDelay];
+    NSArray *trianglPointArray = [NSArray arrayWithObjects:
+                                  [NSValue valueWithCGPoint:pointArray[0]],
+                                  [NSValue valueWithCGPoint:pointArray[1]],
+                                  [NSValue valueWithCGPoint:pointArray[2]],
+                                  nil];
+    if(self.animationDuration == 0.0f) [self _triangle:trianglPointArray];
+    else [self performSelector:@selector(_triangle:) withObject:trianglPointArray afterDelay:self.animationDelay];
 }
 
 -(void)_triangle:(NSArray *)pointArray {
@@ -500,7 +509,8 @@
     for(int i = 0; i < pointCount; i++) {
         [points addObject:[NSValue valueWithCGPoint:pointArray[i]]];
     }
-    [self performSelector:@selector(_polygon:) withObject:points afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f) [self _polygon:points];
+    else [self performSelector:@selector(_polygon:) withObject:points afterDelay:self.animationDelay];
 }
 
 -(void)_polygon:(NSArray *)pointArray {
@@ -542,7 +552,8 @@
 -(void)closeShape {
     _shouldClose = YES;
     if(_initialized == YES) {
-        [self performSelector:@selector(_closeShape) withObject:nil afterDelay:self.animationDelay];
+        if(self.animationDuration == 0.0f) [self _closeShape];
+        else [self performSelector:@selector(_closeShape) withObject:nil afterDelay:self.animationDelay];
     }
 }
 -(void)_closeShape {
@@ -643,18 +654,28 @@
     self.center = difference;
 }
 
--(void)setFillColor:(UIColor *)_fillColor {
-    [self performSelector:@selector(_setFillColor:) withObject:_fillColor afterDelay:self.animationDelay];
+-(void)setFillColor:(UIColor *)fillColor {
+    if(self.animationDuration == 0.0f) [self _setFillColor:fillColor];
+    else [self performSelector:@selector(_setFillColor:) withObject:fillColor afterDelay:self.animationDelay];
 }
--(void)_setFillColor:(UIColor *)_fillColor {
+-(void)_setFillColor:(UIColor *)fillColor {
+    _fillColor = fillColor;
+    CGFloat components[4];
+    [self.fillColor getRed:&components[0]
+                    green:&components[1]
+                     blue:&components[2]
+                    alpha:&components[3]];
+    C4Log(@"%4.2f,%4.2f,%4.2f,%4.2f",components[0],components[1],components[2],components[3]);
     [self.shapeLayer animateFillColor:_fillColor.CGColor];
 }
+
 -(UIColor *)fillColor {
-    return [UIColor colorWithCGColor:self.shapeLayer.fillColor];
+    return _fillColor;
 }
 
 -(void)setFillRule:(NSString *)_fillRule {
-    [self performSelector:@selector(_setFillRule:) withObject:_fillRule afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f) [self _setFillRule:_fillRule];
+    else [self performSelector:@selector(_setFillRule:) withObject:_fillRule afterDelay:self.animationDelay];
 }
 -(void)_setFillRule:(NSString *)_fillRule {
     self.shapeLayer.fillRule = _fillRule;
@@ -664,7 +685,8 @@
 }
 
 -(void)setLineCap:(NSString *)_lineCap {
-    [self performSelector:@selector(_setLineCap:) withObject:_lineCap afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f) [self _setLineCap:_lineCap];
+    else [self performSelector:@selector(_setLineCap:) withObject:_lineCap afterDelay:self.animationDelay];
 }
 -(void)_setLineCap:(NSString *)_lineCap {
     self.shapeLayer.lineCap = _lineCap;
@@ -676,22 +698,24 @@
 -(void)setDashPattern:(CGFloat *)dashPattern pointCount:(NSUInteger)pointCount {
     NSMutableArray *patternArray = [[NSMutableArray alloc] initWithCapacity:0];
     for(int i = 0; i < pointCount; i++) [patternArray addObject:[NSNumber numberWithFloat:dashPattern[i]]];
-    [self performSelector:@selector(_setLineDashPattern:) withObject:patternArray afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f) [self _setLineDashPattern:patternArray];
+    else [self performSelector:@selector(_setLineDashPattern:) withObject:patternArray afterDelay:self.animationDelay];
 }
 
 -(void)setLineDashPattern:(NSArray *)_lineDashPattern {
-    [self performSelector:@selector(_setLineDashPattern:) withObject:_lineDashPattern afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f) [self _setLineDashPattern:_lineDashPattern];
+    else [self performSelector:@selector(_setLineDashPattern:) withObject:_lineDashPattern afterDelay:self.animationDelay];
 }
 -(void)_setLineDashPattern:(NSArray *)_lineDashPattern {
     self.shapeLayer.lineDashPattern = _lineDashPattern;
-
 }
 -(NSArray *)lineDashPattern {
     return self.shapeLayer.lineDashPattern;
 }
 
 -(void)setLineDashPhase:(CGFloat)_lineDashPhase {
-    [self performSelector:@selector(_setLineDashPhase:) withObject:[NSNumber numberWithFloat:_lineDashPhase] afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f) [self _setLineDashPhase:[NSNumber numberWithFloat:_lineDashPhase]];
+    else [self performSelector:@selector(_setLineDashPhase:) withObject:[NSNumber numberWithFloat:_lineDashPhase] afterDelay:self.animationDelay];
 }
 -(void)_setLineDashPhase:(NSNumber *)_lineDashPhase {
     [self.shapeLayer animateLineDashPhase:[_lineDashPhase floatValue]];
@@ -701,7 +725,8 @@
 }
 
 -(void)setLineJoin:(NSString *)_lineJoin {
-    [self performSelector:@selector(_setLineJoin:) withObject:_lineJoin afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f) [self _setLineJoin:_lineJoin];
+    else [self performSelector:@selector(_setLineJoin:) withObject:_lineJoin afterDelay:self.animationDelay];
 }
 -(void)_setLineJoin:(NSString *)_lineJoin {
     self.shapeLayer.lineJoin = _lineJoin;
@@ -711,10 +736,11 @@
 }
 
 -(void)setLineWidth:(CGFloat)_lineWidth {
-    lineWidth = _lineWidth;
-    [self performSelector:@selector(_setLineWidth:) withObject:[NSNumber numberWithFloat:_lineWidth] afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f) [self _setLineWidth:[NSNumber numberWithFloat:_lineWidth]];
+    else [self performSelector:@selector(_setLineWidth:) withObject:[NSNumber numberWithFloat:_lineWidth] afterDelay:self.animationDelay];
 }
 -(void)_setLineWidth:(NSNumber *)_lineWidth {
+    lineWidth = [_lineWidth floatValue];
     [self.shapeLayer animateLineWidth:[_lineWidth floatValue]];
 }
 -(CGFloat)lineWidth {
@@ -722,7 +748,8 @@
 }
 
 -(void)setMiterLimit:(CGFloat)_miterLimit {
-    [self performSelector:@selector(_setMiterLimit:) withObject:[NSNumber numberWithFloat:_miterLimit] afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f) [self _setMiterLimit:[NSNumber numberWithFloat:_miterLimit]];
+    else [self performSelector:@selector(_setMiterLimit:) withObject:[NSNumber numberWithFloat:_miterLimit] afterDelay:self.animationDelay];
 }
 -(void)_setMiterLimit:(NSNumber *)_miterLimit {
     [self.shapeLayer animateMiterLimit:[_miterLimit floatValue]];
@@ -732,7 +759,8 @@
 }
 
 -(void)setStrokeColor:(UIColor *)_strokeColor {
-    [self performSelector:@selector(_setStrokeColor:) withObject:_strokeColor afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f) [self _setStrokeColor:_strokeColor];
+    else [self performSelector:@selector(_setStrokeColor:) withObject:_strokeColor afterDelay:self.animationDelay];
 }
 -(void)_setStrokeColor:(UIColor *)_strokeColor {
     [self.shapeLayer animateStrokeColor:_strokeColor.CGColor];
@@ -742,7 +770,8 @@
 }
 
 -(void)setStrokeEnd:(CGFloat)_strokeEnd {
-    [self performSelector:@selector(_setStrokeEnd:) withObject:[NSNumber numberWithFloat:_strokeEnd] afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f ) [self _setStrokeEnd:[NSNumber numberWithFloat:_strokeEnd]];
+    else [self performSelector:@selector(_setStrokeEnd:) withObject:[NSNumber numberWithFloat:_strokeEnd] afterDelay:self.animationDelay];
 }
 -(void)_setStrokeEnd:(NSNumber *)_strokeEnd {
     [self.shapeLayer animateStrokeEnd:[_strokeEnd floatValue]];
@@ -752,7 +781,8 @@
 }
 
 -(void)setStrokeStart:(CGFloat)_strokeStart {
-    [self performSelector:@selector(_setStrokeStart:) withObject:[NSNumber numberWithFloat:_strokeStart] afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f) [self _setStrokeStart:[NSNumber numberWithFloat:_strokeStart]];
+    else [self performSelector:@selector(_setStrokeStart:) withObject:[NSNumber numberWithFloat:_strokeStart] afterDelay:self.animationDelay];
 }
 -(void)_setStrokeStart:(NSNumber *)_strokeStart {
     [self.shapeLayer animateStrokeStart:[_strokeStart floatValue]];

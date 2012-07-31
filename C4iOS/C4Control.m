@@ -323,7 +323,7 @@
     
     C4Assert([recognizer isKindOfClass:[UITapGestureRecognizer class]] ||
              [recognizer isKindOfClass:[UILongPressGestureRecognizer class]],
-             @"The gesture type(%@) you tried to configure does not respond to the method: %s",[recognizer class],_cmd);
+             @"The gesture type(%@) you tried to configure does not respond to the method: %@",[recognizer class],NSStringFromSelector(_cmd));
 
     ((UILongPressGestureRecognizer *) recognizer).numberOfTapsRequired = tapCount;
 }
@@ -334,7 +334,7 @@
     C4Assert([recognizer isKindOfClass:[UITapGestureRecognizer class]] || 
              [recognizer isKindOfClass:[UISwipeGestureRecognizer class]] ||
              [recognizer isKindOfClass:[UILongPressGestureRecognizer class]],
-             @"The gesture type(%@) you tried to configure does not respond to the method: %s",[recognizer class],_cmd);
+             @"The gesture type(%@) you tried to configure does not respond to the method: %@",[recognizer class],NSStringFromSelector(_cmd));
 
     ((UITapGestureRecognizer *) recognizer).numberOfTouchesRequired = touchCount;
 }
@@ -343,7 +343,7 @@
     UIGestureRecognizer *recognizer = [_gestureDictionary objectForKey:gestureName];
 
     C4Assert([recognizer isKindOfClass:[UITapGestureRecognizer class]],
-             @"The gesture type(%@) you tried to configure does not respond to the method %s",[recognizer class],_cmd);
+             @"The gesture type(%@) you tried to configure does not respond to the method %@",[recognizer class],NSStringFromSelector(_cmd));
     
     ((UILongPressGestureRecognizer *) recognizer).minimumPressDuration = duration;
 }
@@ -352,7 +352,7 @@
     UIGestureRecognizer *recognizer = [_gestureDictionary objectForKey:gestureName];
 
     C4Assert([recognizer isKindOfClass:[UIPanGestureRecognizer class]],
-             @"The gesture type(%@) you tried to configure does not respond to the method: %s",[recognizer class],_cmd);
+             @"The gesture type(%@) you tried to configure does not respond to the method: %@",[recognizer class],NSStringFromSelector(_cmd));
 
     ((UIPanGestureRecognizer *) recognizer).minimumNumberOfTouches = touchCount;
 }
@@ -361,7 +361,7 @@
     UIGestureRecognizer *recognizer = [_gestureDictionary objectForKey:gestureName];
     
     C4Assert([recognizer isKindOfClass:[UIPanGestureRecognizer class]],
-             @"The gesture type(%@) you tried to configure does not respond to the method: %s",[recognizer class],_cmd);
+             @"The gesture type(%@) you tried to configure does not respond to the method: %@",[recognizer class],NSStringFromSelector(_cmd));
 
     ((UIPanGestureRecognizer *) recognizer).maximumNumberOfTouches = touchCount;
 }
@@ -370,7 +370,7 @@
     UIGestureRecognizer *recognizer = [_gestureDictionary objectForKey:gestureName];
 
     C4Assert([recognizer isKindOfClass:[UISwipeGestureRecognizer class]],
-             @"The gesture type(%@) you tried to configure does not respond to the method: %s",[recognizer class],_cmd);
+             @"The gesture type(%@) you tried to configure does not respond to the method: %@",[recognizer class],NSStringFromSelector(_cmd));
 
     ((UISwipeGestureRecognizer *) recognizer).direction = direction;
 }
@@ -607,7 +607,8 @@
 }
 
 -(void)setShadowColor:(UIColor *)_shadowColor {
-    [self performSelector:@selector(_setShadowColor:) withObject:_shadowColor afterDelay:self.animationDelay];
+    if(self.animationDelay == 0) [self _setShadowColor:_shadowColor];
+    else [self performSelector:@selector(_setShadowColor:) withObject:_shadowColor afterDelay:self.animationDelay];
 }
 -(void)_setShadowColor:(UIColor *)_shadowColor {
     [(C4Layer *)self.layer animateShadowColor:_shadowColor.CGColor];
@@ -617,7 +618,8 @@
 }
 
 -(void)setShadowOffset:(CGSize)_shadowOffset {
-    [self performSelector:@selector(_setShadowOffSet:) withObject:[NSValue valueWithCGSize:_shadowOffset] afterDelay:self.animationDelay];
+    if(self.animationDelay == 0) [self _setShadowOffSet:[NSValue valueWithCGSize:_shadowOffset]];
+    else [self performSelector:@selector(_setShadowOffSet:) withObject:[NSValue valueWithCGSize:_shadowOffset] afterDelay:self.animationDelay];
 }
 -(void)_setShadowOffSet:(NSValue *)_shadowOffset {
     [(C4Layer *)self.layer animateShadowOffset:[_shadowOffset CGSizeValue]];
@@ -627,7 +629,8 @@
 }
 
 -(void)setShadowOpacity:(CGFloat)_shadowOpacity {
-    [self performSelector:@selector(_setShadowOpacity:) withObject:[NSNumber numberWithFloat:_shadowOpacity] afterDelay:self.animationDelay];
+    if(self.animationDelay == 0) [self _setShadowOpacity:[NSNumber numberWithFloat:_shadowOpacity]];
+    else [self performSelector:@selector(_setShadowOpacity:) withObject:[NSNumber numberWithFloat:_shadowOpacity] afterDelay:self.animationDelay];
 }
 -(void)_setShadowOpacity:(NSNumber *)_shadowOpacity {
     [(C4Layer *)self.layer animateShadowOpacity:[_shadowOpacity floatValue]];
@@ -637,7 +640,8 @@
 }
 
 -(void)setShadowPath:(CGPathRef)_shadowPath {
-    [self performSelector:@selector(_setShadowPath:) withObject:(__bridge id)_shadowPath afterDelay:self.animationDelay];
+    if(self.animationDelay == 0) [self _setShadowPath:(__bridge id)_shadowPath];
+    else [self performSelector:@selector(_setShadowPath:) withObject:(__bridge id)_shadowPath afterDelay:self.animationDelay];
 }
 -(void)_setShadowPath:(id)_shadowPath {
     [(C4Layer *)self.layer animateShadowPath:(__bridge CGPathRef)_shadowPath];
@@ -647,6 +651,7 @@
 }
 
 -(void)setShadowRadius:(CGFloat)_shadowRadius {
+    if(self.animationDelay == 0) [self _setShadowRadius:[NSNumber numberWithFloat:_shadowRadius]];
     [self performSelector:@selector(_setShadowRadius:) withObject:[NSNumber numberWithFloat:_shadowRadius] afterDelay:self.animationDelay];
 }
 -(void)_setShadowRadius:(NSNumber *)_shadowRadius {
