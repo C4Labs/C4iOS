@@ -45,11 +45,12 @@
 -(id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if(self != nil) {
-        _animationDuration = 0.0f;
-        _animationDelay = 0.0f;
-        _animationOptions = BEGINCURRENT;
-        _repeatCount = 0;
-        _shouldAutoreverse = NO;
+        //these need to be self.anim... etc., rather than _anim = because the setters are overridden
+        self.animationDuration = 0.0f;
+        self.animationDelay = 0.0f;
+        self.animationOptions = BEGINCURRENT;
+        self.repeatCount = 0;
+        self.shouldAutoreverse = NO;
         [self setup];
         self.layer.delegate = self;
     }

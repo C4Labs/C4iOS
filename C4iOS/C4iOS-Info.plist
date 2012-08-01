@@ -8,19 +8,47 @@
 	<string>${PRODUCT_NAME}</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
+	<key>UILaunchImageFile</key>
+	<string>C4_LaunchImage_iPhone.png</string>
 	<key>CFBundleIconFiles</key>
 	<array>
-		<string>C4LogoiPad-01.png</string>
-		<string>C4LogoiPad-02.png</string>
-		<string>C4LogoiPad-03.png</string>
-		<string>C4LogoiPad-04.png</string>
-		<string>C4LogoiPad-05.png</string>
-		<string>C4LogoiPad-06.png</string>
-		<string>C4LogoiPad-07.png</string>
-		<string>C4LogoiPad-08.png</string>
+		<string>C4_AppIcon_iPhone.png</string>
+		<string>C4_AppIcon_iPhone@2x.png</string>
+		<string>C4_AppStoreIcon.png</string>
+		<string>C4_AppStoreIcon@2x.png</string>
+		<string>C4_LaunchImage_iPhone.png</string>
+		<string>C4_LaunchImage_iPhone@2x.png</string>
+		<string>C4_SpotlightIcon.png</string>
+		<string>C4_SpotlightIcon@2x.png</string>
+		<string>C4_TabbarIcon.png</string>
+		<string>C4_TabbarIcon@2x.png</string>
+		<string>C4_ToolbarIcon.png</string>
+		<string>C4_ToolbarIcon@2x.png</string>
 	</array>
-	<key>UILaunchImageFile</key>
-	<string>C4LogoiPad.png</string>
+	<key>CFBundleIcons</key>
+	<dict>
+		<key>CFBundlePrimaryIcon</key>
+		<dict>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>C4_AppIcon_iPhone.png</string>
+				<string>C4_AppIcon_iPhone@2x.png</string>
+			</array>
+			<key>UIPrerenderedIcon</key>
+			<true/>
+		</dict>
+		<key>UINewsstandIcon</key>
+		<dict>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>iTunesArtwork.png</string>
+			</array>
+			<key>UINewsstandBindingEdge</key>
+			<string>UINewsstandBindingEdgeLeft</string>
+			<key>UINewsstandBindingType</key>
+			<string>UINewsstandBindingTypeMagazine</string>
+		</dict>
+	</dict>
 	<key>CFBundleIdentifier</key>
 	<string>C4.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>

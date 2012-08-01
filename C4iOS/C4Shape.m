@@ -660,12 +660,6 @@
 }
 -(void)_setFillColor:(UIColor *)fillColor {
     _fillColor = fillColor;
-    CGFloat components[4];
-    [self.fillColor getRed:&components[0]
-                    green:&components[1]
-                     blue:&components[2]
-                    alpha:&components[3]];
-    C4Log(@"%4.2f,%4.2f,%4.2f,%4.2f",components[0],components[1],components[2],components[3]);
     [self.shapeLayer animateFillColor:_fillColor.CGColor];
 }
 
