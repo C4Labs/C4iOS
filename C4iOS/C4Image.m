@@ -24,6 +24,7 @@
 @property (readwrite, nonatomic) CGImageRef contents;
 @property (readwrite, strong, nonatomic) C4Layer *imageLayer;
 @property (readwrite, strong, atomic) NSTimer *animatedImageTimer;
+@property (readwrite, atomic) BOOL shouldAutoreverse;
 @end
 
 @implementation C4Image
@@ -37,6 +38,8 @@
 @synthesize CGImage = _CGImage;
 @synthesize animatedImageTimer;
 @synthesize pixelDataLoaded = _pixelDataLoaded;
+@synthesize shouldAutoreverse = _shouldAutoreverse;
+@synthesize animationOptions = _animationOptions;
 
 +(C4Image *)imageNamed:(NSString *)name {
     return [[C4Image alloc] initWithImageName:name];
@@ -57,6 +60,50 @@
         self.frame = self.visibleImage.extent;
         _pixelDataLoaded = NO;
         self.imageLayer.contents = (id)_originalImage.CGImage;
+        [self setup];
+    }
+    return self;
+}
+
+-(id)initWithRawData:(unsigned char*)data width:(NSInteger)width height:(NSInteger)height {
+    self = [super init];
+    if (self != nil) {
+
+        CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+
+        NSUInteger bitsPerComponent = 8;
+
+        CGContextRef context = CGBitmapContextCreate(data, width, height, bitsPerComponent, 4*width, colorSpace, kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big);
+        CGImageRef image = CGBitmapContextCreateImage(context);
+        
+        self.originalImage = [UIImage imageWithCGImage:image];
+        C4Assert(self.originalImage != nil, @"The C4Image you tried to load (%@) returned nil for its UIImage", image);
+//        C4Assert(self.originalImage.CGImage != nil, @"The C4Image you tried to load (%@) returned nil for its CGImage", image);
+        self.visibleImage = [[CIImage alloc] initWithCGImage:image];
+        C4Assert(self.visibleImage != nil, @"The CIImage you tried to create (%@) returned a nil object", _visibleImage);
+        self.frame = self.visibleImage.extent;
+        _pixelDataLoaded = NO;
+        self.imageLayer.contents = (__bridge id)image;
+        [self setup];
+        
+        CGColorSpaceRelease(colorSpace);
+        CGContextRelease(context);
+    }
+    return self;
+}
+
+-(id)initWithCGImage:(CGImageRef)image {
+    self = [super init];
+    if (self != nil) {
+        self.originalImage = [UIImage imageWithCGImage:image];
+//        _visibleImage = [CIImage imageWithCGImage:image];
+        C4Assert(self.originalImage != nil, @"The C4Image you tried to load (%@) returned nil for its UIImage", image);
+        C4Assert(self.originalImage.CGImage != nil, @"The C4Image you tried to load (%@) returned nil for its CGImage", image);
+        self.visibleImage = [[CIImage alloc] initWithCGImage:image];
+        C4Assert(self.visibleImage != nil, @"The CIImage you tried to create (%@) returned a nil object", _visibleImage);
+        self.frame = self.visibleImage.extent;
+        _pixelDataLoaded = NO;
+        self.imageLayer.contents = (__bridge id)image;
         [self setup];
     }
     return self;
@@ -525,6 +572,7 @@
     
     bytesPerPixel = 4;
     bytesPerRow = bytesPerPixel * width;
+    free(rawData);
     rawData = malloc(height * bytesPerRow);
     
     NSUInteger bitsPerComponent = 8;
@@ -690,6 +738,25 @@
     CGImageRelease(cgimg);
     
     return img;
+}
+
+-(void)setAnimationOptions:(NSUInteger)animationOptions {
+    /*
+     important: we have to intercept the setting of AUTOREVERSE for the case of reversing 1 time
+     i.e. reversing without having set REPEAT
+     
+     UIView animation will flicker if we don't do this...
+     */
+    
+    //shapelayer animation options should be set first
+    ((C4Layer *)self.layer).animationOptions = animationOptions;
+    
+    //strip the autoreverse from the control's animation options if needed
+    if ((animationOptions & AUTOREVERSE) == AUTOREVERSE) {
+        self.shouldAutoreverse = YES;
+        animationOptions &= ~AUTOREVERSE;
+    }
+    _animationOptions = animationOptions | BEGINCURRENT;
 }
 
 @end

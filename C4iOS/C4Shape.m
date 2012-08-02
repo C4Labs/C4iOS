@@ -8,7 +8,7 @@
 
 #import "C4Shape.h"
 
-@interface C4Shape() 
+@interface C4Shape()
 @property (readonly, nonatomic) BOOL initialized, shouldClose;
 -(void)_ellipse:(NSValue *)ellipseValue;
 -(void)_rect:(NSValue *)rectValue;
@@ -33,9 +33,12 @@
 -(void)_setStrokeStart:(NSNumber *)_strokeStart;
 -(void)willChangeShape;
 @property (atomic) BOOL isTriangle;
+@property (readwrite, atomic) BOOL shouldAutoreverse;
 @end
 
 @implementation C4Shape
+@synthesize shouldAutoreverse = _shouldAutoreverse;
+@synthesize animationOptions = _animationOptions;
 @synthesize controlPointA = _controlPointA, controlPointB = _controlPointB, isArc = _isArc, bezierCurve = _bezierCurve, quadCurve = _quadCurve, isLine =_isLine, shapeLayer, pointA = _pointA, pointB = _pointB, wedge = _wedge;
 @synthesize fillColor = _fillColor, fillRule, lineCap, lineDashPattern, lineDashPhase, lineJoin, lineWidth, miterLimit, origin = _origin, strokeColor, strokeEnd, strokeStart;
 @synthesize closed = _closed, shouldClose = _shouldClose, initialized = _initialized, isTriangle = _isTriangle;
@@ -824,9 +827,22 @@
     [(C4Layer *)self.layer animateLayerTransform:_layerTransform];
 }
 
--(void)setRotationX:(CGFloat)rotationX {
-    _rotationX = rotationX;
-    [(C4ShapeLayer *)self.layer animateRotationX:rotationX];
-}
+-(void)setAnimationOptions:(NSUInteger)animationOptions {
+    /*
+     important: we have to intercept the setting of AUTOREVERSE for the case of reversing 1 time
+     i.e. reversing without having set REPEAT
+     
+     UIView animation will flicker if we don't do this...
+     */
+    
+    //shapelayer animation options should be set first
+    self.shapeLayer.animationOptions = animationOptions;
 
+    //strip the autoreverse from the control's animation options if needed
+    if ((animationOptions & AUTOREVERSE) == AUTOREVERSE) {
+        self.shouldAutoreverse = YES;
+        animationOptions &= ~AUTOREVERSE;
+    }
+    _animationOptions = animationOptions | BEGINCURRENT;
+}
 @end

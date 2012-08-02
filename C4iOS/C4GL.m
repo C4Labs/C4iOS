@@ -14,15 +14,24 @@
 @property (readonly, strong, nonatomic) C4EAGLLayer *eaglLayer;
 @property (readwrite, strong, nonatomic) id displayLink;
 @property (readwrite, strong, nonatomic) NSTimer *animationTimer;
+@property (readwrite, atomic) BOOL shouldAutoreverse;
 @end
 
 @implementation C4GL
+@synthesize animationOptions = _animationOptions;
 @synthesize animating, animationFrameInterval;
 @synthesize renderer, displayLinkSupported;
 @synthesize eaglLayer;
 @synthesize displayLink;
 @synthesize animationTimer;
 @synthesize drawOnce;
+@synthesize shouldAutoreverse = _shouldAutoreverse;
+
++(C4GL *)glWithFrame:(CGRect)frame {
+    C4GL *gl = [[C4GL alloc] init];
+    gl.frame = frame;
+    return gl;
+}
 
 -(id)init {
     return [self initWithRenderer:[[C4GL1Renderer alloc] init]];
@@ -55,6 +64,7 @@
 		if (currentSystemVersion >= minimumSystemVersion) {
 			displayLinkSupported = YES;
         }
+        self.masksToBounds = NO;
         [self setup];
     }
     return self;
@@ -139,6 +149,25 @@
 
 -(void)setBackgroundColor:(UIColor *)backgroundColor {
     [super setBackgroundColor:[UIColor clearColor]];
+}
+
+-(void)setAnimationOptions:(NSUInteger)animationOptions {
+    /*
+     important: we have to intercept the setting of AUTOREVERSE for the case of reversing 1 time
+     i.e. reversing without having set REPEAT
+     
+     UIView animation will flicker if we don't do this...
+     */
+    
+    //shapelayer animation options should be set first
+    self.eaglLayer.animationOptions = animationOptions;
+    
+    //strip the autoreverse from the control's animation options if needed
+    if ((animationOptions & AUTOREVERSE) == AUTOREVERSE) {
+        self.shouldAutoreverse = YES;
+        animationOptions &= ~AUTOREVERSE;
+    }
+    _animationOptions = animationOptions | BEGINCURRENT;
 }
 
 @end

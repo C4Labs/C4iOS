@@ -8,87 +8,108 @@
 
 #import "C4GL1Renderer.h"
 
-@implementation C4GL1Renderer
+const GLfloat vertices[] = {
+    -1.0, -1.0,
+    -1.0,  1.0,
+    -0.33f, 1.0,
+    0.0, 1.0,
+    0.0, 0.5,
+    0.0, 0.0,
+    0.33f, 0.0,
+    0.33f, 1.0,
+    0.66f, 1.0,
+    0.66f, 0.0,
+    1.0, 0.0,
+    1.0, -0.5,
+    0.66f, -0.5,
+    0.66f, -1.0,
+    0.33f, -1.0,
+    0.33f, -0.5,
+    -0.33f, -0.5,
+    -0.33f, 0.0,
+    -0.33f, 0.5,
+    -0.66f, 0.5,
+    -0.66f, -0.5,
+    0.0,-0.5,
+    0.0,-1.0,
+    -1.0,-1.0
+};
+
+const GLubyte colors[] = {
+    50, 55, 60, 255,
+    50, 55, 60, 255,
+    50, 55, 60, 255,
+    12, 160, 230, 255,
+    255, 26, 26, 255,
+    255, 26, 26, 255,
+    255, 26, 26, 255,
+    255, 26, 26, 255,
+    255, 26, 26, 255,
+    255, 26, 26, 255,
+    255, 26, 26, 255,
+    255, 26, 26, 255,
+    255, 26, 26, 255,
+    255, 26, 26, 255,
+    255, 26, 26, 255,
+    255, 26, 26, 255,
+    255, 26, 26, 255,
+    255, 26, 26, 255,
+    12, 160, 230, 255,
+    50, 55, 60, 255,
+    50, 55, 60, 255,
+    50, 55, 60, 255,
+    50, 55, 60, 255,
+    50, 55, 60, 255,
+};
+
+@implementation C4GL1Renderer {
+    int startPoint;
+}
 
 -(void)setup {
+    startPoint = 0;
 }
 
 -(void)render {
-    const GLfloat vertices[] = {
-        -1.0, -1.0,
-        -1.0,  1.0,
-        -0.33f, 1.0,
-        0.0, 1.0,
-        0.0, 0.5,
-        0.0, 0.0,
-        0.33f, 0.0,
-        0.33f, 1.0,
-        0.66f, 1.0,
-        0.66f, 0.0,
-        1.0, 0.0,
-        1.0, -0.5,
-        0.66f, -0.5,
-        0.66f, -1.0,
-        0.33f, -1.0,
-        0.33f, -0.5,
-        -0.33f, -0.5,
-        -0.33f, 0.0,
-        -0.33f, 0.5,
-        -0.66f, 0.5,
-        -0.66f, -0.5,
-        0.0,-0.5,
-        0.0,-1.0,
-        -1.0,-1.0
-    };
-    /* number of colors should match the number of vertices, otherwise will create an alpha color to fill in */
-    const GLubyte colors[] = {
-        255, 51, 51, 255,
-        255, 51, 51, 255,
-        255, 51, 51, 255,
-        51, 51, 51, 255,
-        51, 102, 255, 255,
-        51, 102, 255, 255,
-        51, 102, 255, 255,
-        51, 102, 255, 255,
-        51, 102, 255, 255,
-        51, 102, 255, 255,
-        51, 102, 255, 255,
-        51, 102, 255, 255,
-        51, 102, 255, 255,
-        51, 102, 255, 255,
-        51, 102, 255, 255,
-        51, 102, 255, 255,
-        51, 102, 255, 255,
-        51, 102, 255, 255,
-        51, 51, 51, 255,
-        255, 51, 51, 255,
-        255, 51, 51, 255,
-        255, 51, 51, 255,
-        255, 51, 51, 255,
-        255, 51, 51, 255
-};
+
+    GLfloat currentVerts[48];
+    for(int i = 0; i < 48; i++){
+//        currentVerts[i] = vertices[i];
+        currentVerts[i] = 0.99f * vertices[i];
+    }
     
+    GLubyte currentColors[96];
+    int j = startPoint;
+    for (int i = 0; i < 96; i++, j++) {
+        currentColors[i] = colors[j];
+        if(j == 96) j = 0;
+    }
+
     [EAGLContext setCurrentContext:self.eaglContext];
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    //reigns in the drawing area because the layer will clip to its viewport
+    glOrthof(-1.03f, 1.03f, -1.03f, 1.03f, -1.0f, 1.0f);
+    glMatrixMode(GL_MODELVIEW);
     
     glBindFramebufferOES(GL_FRAMEBUFFER_OES, self.frameBuffer);
     glViewport(0, 0, self.width, self.height);
-	
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glOrthof(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f);
-	glMatrixMode(GL_MODELVIEW);
     
-    glClearColor(0,0,0,0);
-    glClear(GL_COLOR_BUFFER_BIT);
-    
-    glVertexPointer(2, GL_FLOAT, 0, vertices);
+    glVertexPointer(2, GL_FLOAT, 0, currentVerts);
     glEnableClientState(GL_VERTEX_ARRAY);
-    glColorPointer(4, GL_UNSIGNED_BYTE, 0, colors);
+    
+    glColorPointer(4, GL_UNSIGNED_BYTE, 0, currentColors);
     glEnableClientState(GL_COLOR_ARRAY);
-
+    
+    glLineWidth(20.0f);
     glDrawArrays(GL_LINE_LOOP, 0, 24);
     
     glBindRenderbufferOES(GL_RENDERBUFFER_OES, self.renderBuffer);
     [self.eaglContext presentRenderbuffer:GL_RENDERBUFFER_OES];
+    
+    glFinish();
+    startPoint+=4;
+    if(startPoint >= 96) startPoint = 0;
 }
 @end

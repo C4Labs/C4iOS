@@ -18,6 +18,9 @@
 -(void)_setShadowOpacity:(NSNumber *)_shadowOpacity;
 -(void)_setShadowPath:(id)_shadowPath;
 -(void)_setShadowRadius:(NSNumber *)_shadowRadius;
+-(void)_setRotation:(NSNumber *)_rotationAngle;
+-(void)_setRotationX:(NSNumber *)_rotationAngle;
+-(void)_setRotationY:(NSNumber *)_rotationAngle;
 @property (readwrite, atomic) BOOL shouldAutoreverse;
 @property (readwrite, atomic, strong) NSString *longPressMethodName;
 @property (readwrite, atomic, strong) NSMutableDictionary *gestureDictionary;
@@ -248,12 +251,14 @@
      
      UIView animation will flicker if we don't do this...
      */
+    ((C4Layer *)self.layer).animationOptions = _animationOptions;
+
     if ((animationOptions & AUTOREVERSE) == AUTOREVERSE) {
         self.shouldAutoreverse = YES;
         animationOptions &= ~AUTOREVERSE;
     }
+    
     _animationOptions = animationOptions | BEGINCURRENT;
-    ((C4Layer *)self.layer).animationOptions = _animationOptions;
 }
 
 #pragma mark Move
@@ -524,18 +529,33 @@
 }
 
 -(void)setRotation:(CGFloat)rotation {
-    _rotation = rotation;
+    if(self.animationDelay == 0.0f) [self _setRotation:[NSNumber numberWithFloat:rotation]];
+    else [self performSelector:@selector(_setRotation:) withObject:[NSNumber numberWithFloat:rotation] afterDelay:self.animationDelay];
+}
+
+-(void)_setRotation:(NSNumber *)rotation {
+    _rotation = [rotation floatValue];
     [(C4Layer *)self.layer animateRotation:_rotation];
 }
 
 -(void)setRotationX:(CGFloat)rotation {
-    _rotationX = rotation;
-    [(C4Layer *)self.layer animateRotationX:_rotationX];
+    if(self.animationDelay == 0.0f) [self _setRotationX:[NSNumber numberWithFloat:rotation]];
+    else [self performSelector:@selector(_setRotationX:) withObject:[NSNumber numberWithFloat:rotation] afterDelay:self.animationDelay];
+}
+
+-(void)_setRotationX:(NSNumber *)rotation {
+    _rotationX = [rotation floatValue];
+    [(C4Layer *)self.layer animateRotationX:_rotation];
 }
 
 -(void)setRotationY:(CGFloat)rotation {
-    _rotationY = rotation;
-    [(C4Layer *)self.layer animateRotationY:_rotationY];
+    if(self.animationDelay == 0.0f) [self _setRotationY:[NSNumber numberWithFloat:rotation]];
+    else [self performSelector:@selector(_setRotationY:) withObject:[NSNumber numberWithFloat:rotation] afterDelay:self.animationDelay];
+}
+
+-(void)_setRotationY:(NSNumber *)rotation {
+    _rotationY = [rotation floatValue];
+    [(C4Layer *)self.layer animateRotationY:_rotation];
 }
 
 -(void)removeObject:(C4Control *)visibleObject {
@@ -662,7 +682,4 @@
     return self.layer.shadowRadius;
 }
 
-+(Class)layerClass {
-    return [C4Layer class];
-}
 @end

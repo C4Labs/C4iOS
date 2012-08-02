@@ -22,6 +22,7 @@
 @property (readonly, nonatomic, strong) C4PlayerLayer *playerLayer;
 @property (readwrite, nonatomic, strong) AVPlayer *player;
 @property (readwrite, nonatomic, strong) AVPlayerItem *playerItem;
+@property (readwrite, atomic) BOOL shouldAutoreverse;
 @end
 
 @implementation C4Movie
@@ -42,6 +43,8 @@
 @synthesize shouldAutoplay;
 @synthesize audioMix = _audioMix;
 @synthesize volume = _volume;
+@synthesize shouldAutoreverse = _shouldAutoreverse;
+@synthesize animationOptions = _animationOptions;
 
 +(C4Movie *)movieNamed:(NSString *)movieName {
     C4Movie *newMovie = [[C4Movie alloc] initWithMovieName:movieName andFrame:CGRectZero];
@@ -360,6 +363,26 @@
 //    [super setAnimationOptions:animationOptions];
 //    self.playerLayer.animationOptions = animationOptions;
 //}
+
+-(void)setAnimationOptions:(NSUInteger)animationOptions {
+    /*
+     important: we have to intercept the setting of AUTOREVERSE for the case of reversing 1 time
+     i.e. reversing without having set REPEAT
+     
+     UIView animation will flicker if we don't do this...
+     */
+    
+    //shapelayer animation options should be set first
+    self.playerLayer.animationOptions = animationOptions;
+    
+    //strip the autoreverse from the control's animation options if needed
+    if ((animationOptions & AUTOREVERSE) == AUTOREVERSE) {
+        self.shouldAutoreverse = YES;
+        animationOptions &= ~AUTOREVERSE;
+    }
+    _animationOptions = animationOptions | BEGINCURRENT;
+}
+
 
 -(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
     return [self.playerLayer containsPoint:point];

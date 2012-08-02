@@ -29,6 +29,7 @@
 -(void)_setNumberOfLines:(NSNumber *)numberOfLines;
 -(void)_setHighlightedTextColor:(UIColor *)highlightedTextColor;
 -(void)_sizeToFit;
+@property (readwrite, atomic) BOOL shouldAutoreverse;
 @end
 
 @implementation C4Label
@@ -48,6 +49,8 @@
 @synthesize label = _label;
 @synthesize backingLayer;
 @synthesize width = _width, height = _height;
+@synthesize animationOptions = _animationOptions;
+@synthesize shouldAutoreverse = _shouldAutoreverse;
 
 -(id)init {
     return [self initWithFrame:CGRectZero];
@@ -336,4 +339,24 @@
 -(CGFloat)height {
     return self.frame.size.height;
 }
+
+-(void)setAnimationOptions:(NSUInteger)animationOptions {
+    /*
+     important: we have to intercept the setting of AUTOREVERSE for the case of reversing 1 time
+     i.e. reversing without having set REPEAT
+     
+     UIView animation will flicker if we don't do this...
+     */
+    
+    //shapelayer animation options should be set first
+    self.backingLayer.animationOptions = animationOptions;
+    
+    //strip the autoreverse from the control's animation options if needed
+    if ((animationOptions & AUTOREVERSE) == AUTOREVERSE) {
+        self.shouldAutoreverse = YES;
+        animationOptions &= ~AUTOREVERSE;
+    }
+    _animationOptions = animationOptions | BEGINCURRENT;
+}
+
 @end

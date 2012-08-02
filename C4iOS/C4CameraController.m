@@ -119,7 +119,6 @@
         NSData *d = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:buf];
         _capturedImage = nil;
         _capturedImage = [C4Image imageWithData:d];
-        C4Log(@"image:(%4.2f,%4.2f)",self.capturedImage.frame.size.width,self.capturedImage.frame.size.height);
         [self postNotification:@"imageWasCaptured"];
     };
     [self.stillImageOutput captureStillImageAsynchronouslyFromConnection:av

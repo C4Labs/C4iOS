@@ -53,12 +53,12 @@
     double duration = (double)self.animationDuration;
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:keyPath];
     animation.duration = duration;
-    currentAnimationEasing = (NSString *)kCAMediaTimingFunctionEaseInEaseOut;
     animation.timingFunction = [CAMediaTimingFunction functionWithName:self.currentAnimationEasing];
     animation.autoreverses = self.autoreverses;
     animation.repeatCount = self.repeats ? FOREVER : 0;
     animation.removedOnCompletion = NO;
     animation.fillMode = kCAFillModeBoth;
+    
     return animation;
 }
 
@@ -328,25 +328,6 @@
 }
 
 #pragma mark Blocked Methods
-//-(void)setBorderWidth:(CGFloat)borderWidth{
-//    C4Log(@"C4ShapeLayer setBorderWidth not currently available");
-//}
-
-//-(void)setBorderColor:(CGColorRef)borderColor{
-//    C4Log(@"C4ShapeLayer setBorderColor not currently available");
-//}
-
-//-(void)setBackgroundColor:(CGColorRef)backgroundColor {
-//    C4Log(@"C4ShapeLayer setBackgroundColor not currently available");
-//}
-//
-//-(void)setCornerRadius:(CGFloat)cornerRadius {
-//    C4Log(@"C4ShapeLayer setCornerRadius not currently available");
-//}
-
-//-(void)setMasksToBounds:(BOOL)masksToBounds {
-//    C4Log(@"C4ShapeLayer setMasksToBounds not currently available");
-//}
 
 -(void)setContentsGravity:(NSString *)contentsGravity {
     C4Log(@"C4ShapeLayer setContentsGravity not currently available");
@@ -462,17 +443,17 @@
 
 -(void)animateRotation:(CGFloat)_rotationAngle {
     [CATransaction begin];
-    CATransform3D t = self.transform;
-    t.m34 = 1/self.perspectiveDistance;
-    self.transform = t;
+        if(perspectiveDistance > 0){
+        CATransform3D t = self.transform;
+        t.m34 = 1/self.perspectiveDistance;
+        self.transform = t;
+    }
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"transform.rotation.z"];
     animation.fromValue = [NSNumber numberWithFloat:self.rotationAngle];
     animation.toValue = [NSNumber numberWithFloat:_rotationAngle];
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
         [CATransaction setCompletionBlock:^ { 
             self.rotationAngle = _rotationAngle; 
-// 
-//            [(C4Control *)self.delegate rotationDidFinish:self.rotationAngle];
             [self removeAnimationForKey:@"animateRotation"];
         }];
     }
@@ -482,9 +463,11 @@
 
 -(void)animateRotationX:(CGFloat)_rotationAngle {
     [CATransaction begin];
-    CATransform3D t = self.transform;
-    t.m34 = self.perspectiveDistance;
-    self.transform = t;
+    if(perspectiveDistance > 0){
+        CATransform3D t = self.transform;
+        t.m34 = 1/self.perspectiveDistance;
+        self.transform = t;
+    }
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"transform.rotation.x"];
     animation.fromValue = [NSNumber numberWithFloat:self.rotationAngleX];
     animation.toValue = [NSNumber numberWithFloat:_rotationAngle];
@@ -500,9 +483,11 @@
 
 -(void)animateRotationY:(CGFloat)_rotationAngle {
     [CATransaction begin];
-    CATransform3D t = self.transform;
-    t.m34 = self.perspectiveDistance;
-    self.transform = t;
+    if(perspectiveDistance > 0){
+        CATransform3D t = self.transform;
+        t.m34 = 1/self.perspectiveDistance;
+        self.transform = t;
+    }
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"transform.rotation.y"];
     animation.fromValue = [NSNumber numberWithFloat:self.rotationAngleY];
     animation.toValue = [NSNumber numberWithFloat:_rotationAngle];
@@ -517,7 +502,6 @@
 }
 
 -(void)animateLayerTransform:(CATransform3D)_transform {
-    C4Log(@"animateLayerTransform shapelayer");
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"transform"];
     animation.fromValue = [NSValue valueWithCATransform3D:self.sublayerTransform];

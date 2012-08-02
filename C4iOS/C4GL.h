@@ -23,6 +23,8 @@
 @interface C4GL : C4Control {    
 }
 
++(C4GL *)glWithFrame:(CGRect)frame;
+
 /**Initializes a C4GL object with a specific renderer.
  @param renderer A rendering object which conforms to the C4EAGLESRenderer protocol.
  */

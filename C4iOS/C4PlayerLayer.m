@@ -275,12 +275,17 @@
 
 -(void)animateRotation:(CGFloat)_rotationAngle {
     [CATransaction begin];
+    if(perspectiveDistance > 0){
+        CATransform3D t = self.transform;
+        t.m34 = 1/self.perspectiveDistance;
+        self.transform = t;
+    }
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"transform.rotation.z"];
     animation.fromValue = [NSNumber numberWithFloat:self.rotationAngle];
     animation.toValue = [NSNumber numberWithFloat:_rotationAngle];
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { 
-            self.rotationAngle = _rotationAngle; 
+        [CATransaction setCompletionBlock:^ {
+            self.rotationAngle = _rotationAngle;
             [self removeAnimationForKey:@"animateRotation"];
         }];
     }
@@ -290,15 +295,17 @@
 
 -(void)animateRotationX:(CGFloat)_rotationAngle {
     [CATransaction begin];
-    CATransform3D t = self.transform;
-    t.m34 = self.perspectiveDistance;
-    self.transform = t;
+    if(perspectiveDistance > 0){
+        CATransform3D t = self.transform;
+        t.m34 = 1/self.perspectiveDistance;
+        self.transform = t;
+    }
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"transform.rotation.x"];
     animation.fromValue = [NSNumber numberWithFloat:self.rotationAngleX];
     animation.toValue = [NSNumber numberWithFloat:_rotationAngle];
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { 
-            self.rotationAngleX = _rotationAngle; 
+        [CATransaction setCompletionBlock:^ {
+            self.rotationAngleX = _rotationAngle;
             [self removeAnimationForKey:@"animateRotation"];
         }];
     }
@@ -308,15 +315,17 @@
 
 -(void)animateRotationY:(CGFloat)_rotationAngle {
     [CATransaction begin];
-    CATransform3D t = self.transform;
-    t.m34 = self.perspectiveDistance;
-    self.transform = t;
+    if(perspectiveDistance > 0){
+        CATransform3D t = self.transform;
+        t.m34 = 1/self.perspectiveDistance;
+        self.transform = t;
+    }
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"transform.rotation.y"];
     animation.fromValue = [NSNumber numberWithFloat:self.rotationAngleY];
     animation.toValue = [NSNumber numberWithFloat:_rotationAngle];
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { 
-            self.rotationAngleY = _rotationAngle; 
+        [CATransaction setCompletionBlock:^ {
+            self.rotationAngleY = _rotationAngle;
             [self removeAnimationForKey:@"animateRotation"];
         }];
     }

@@ -471,5 +471,7 @@
  @property (nonatomic) CGFloat height;
 */
 
+-(id)initWithRawData:(unsigned char *)data width:(NSInteger)width height:(NSInteger)height;
+-(id)initWithCGImage:(CGImageRef)image;
 @property (readonly, nonatomic) BOOL pixelDataLoaded;
 @end
