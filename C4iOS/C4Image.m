@@ -40,6 +40,8 @@
 @synthesize pixelDataLoaded = _pixelDataLoaded;
 @synthesize shouldAutoreverse = _shouldAutoreverse;
 @synthesize animationOptions = _animationOptions;
+@synthesize width = _width, height = _height;
+@synthesize originalRatio = _originalRatio, originalSize = _originalSize;
 
 +(C4Image *)imageNamed:(NSString *)name {
     return [[C4Image alloc] initWithImageName:name];
@@ -113,6 +115,8 @@
     self = [super init];
     if(self != nil) {
         self.originalImage = [UIImage imageNamed:name];
+        _originalSize = self.originalImage.size;
+        _originalRatio = self.originalSize.width/self.originalSize.height;
         C4Assert(self.originalImage != nil, @"The C4Image you tried to load (%@) returned nil for its UIImage", name);
         C4Assert(self.originalImage.CGImage != nil, @"The C4Image you tried to load (%@) returned nil for its CGImage", name);
         self.visibleImage = [[CIImage alloc] initWithImage:self.originalImage];
@@ -757,6 +761,30 @@
         animationOptions &= ~AUTOREVERSE;
     }
     _animationOptions = animationOptions | BEGINCURRENT;
+}
+
+-(CGFloat)width {
+    return self.frame.size.width;
+}
+
+-(void)setWidth:(CGFloat)width {
+    _width = width;
+    CGRect newFrame = self.frame;
+    newFrame.size.width = width;
+    newFrame.size.height = width/self.originalRatio;
+    self.frame = newFrame;
+}
+
+-(CGFloat)height {
+    return self.frame.size.height;
+}
+
+-(void)setHeight:(CGFloat)height {
+    _height = height;
+    CGRect newFrame = self.frame;
+    newFrame.size.height = height;
+    newFrame.size.width = height * self.originalRatio;
+    self.frame = newFrame;
 }
 
 @end

@@ -464,12 +464,11 @@
 -(UIColor *)colorAt:(CGPoint)point;
 -(C4Vector *)rgbVectorAt:(CGPoint)point;
 
-/* to add
- @property (readonly, nonatomic) CGSize originalMovieSize;
- @property (readonly, nonatomic) CGFloat originalMovieRatio;
- @property (nonatomic) CGFloat width;
- @property (nonatomic) CGFloat height;
-*/
+@property (nonatomic) CGFloat width;
+@property (nonatomic) CGFloat height;
+
+@property (readonly, nonatomic) CGSize originalSize;
+@property (readonly, nonatomic) CGFloat originalRatio;
 
 -(id)initWithRawData:(unsigned char *)data width:(NSInteger)width height:(NSInteger)height;
 -(id)initWithCGImage:(CGImageRef)image;

@@ -241,7 +241,7 @@
 
 -(void)setAnimationDuration:(CGFloat)duration {
     _animationDuration = duration;
-    ((C4Layer *)self.layer).animationDuration = duration;
+    ((id <C4LayerAnimation>)self.layer).animationDuration = duration;
 }
 
 -(void)setAnimationOptions:(NSUInteger)animationOptions {
@@ -251,7 +251,7 @@
      
      UIView animation will flicker if we don't do this...
      */
-    ((C4Layer *)self.layer).animationOptions = _animationOptions;
+    ((id <C4LayerAnimation>)self.layer).animationOptions = _animationOptions;
 
     if ((animationOptions & AUTOREVERSE) == AUTOREVERSE) {
         self.shouldAutoreverse = YES;
@@ -501,28 +501,28 @@
 }
 
 -(void)setBorderColor:(UIColor *)_borderColor {
-    [(C4Layer *)self.layer animateBorderColor:_borderColor.CGColor];
+    [(id <C4LayerAnimation>)self.layer animateBorderColor:_borderColor.CGColor];
 }
 -(UIColor *)borderColor {
     return [UIColor colorWithCGColor:self.layer.borderColor];
 }
 
 -(void)setBorderWidth:(CGFloat)_borderWidth {
-    [(C4Layer *)self.layer animateBorderWidth:_borderWidth];
+    [(id <C4LayerAnimation>)self.layer animateBorderWidth:_borderWidth];
 }
 -(CGFloat)borderWidth {
     return self.layer.borderWidth;
 }
 
 -(void)setCornerRadius:(CGFloat)_cornerRadius {
-    [(C4Layer *)self.layer animateCornerRadius:_cornerRadius];
+    [(id <C4LayerAnimation>)self.layer animateCornerRadius:_cornerRadius];
 }
 -(CGFloat)cornerRadius {
     return self.layer.cornerRadius;
 }
 
 -(void)setZPosition:(CGFloat)_zPosition {
-    [(C4Layer *)self.layer animateZPosition:_zPosition];
+    [(id <C4LayerAnimation>)self.layer animateZPosition:_zPosition];
 }
 -(CGFloat)zPosition {
     return self.layer.zPosition;
@@ -535,7 +535,7 @@
 
 -(void)_setRotation:(NSNumber *)rotation {
     _rotation = [rotation floatValue];
-    [(C4Layer *)self.layer animateRotation:_rotation];
+    [(id <C4LayerAnimation>)self.layer animateRotation:_rotation];
 }
 
 -(void)setRotationX:(CGFloat)rotation {
@@ -545,7 +545,7 @@
 
 -(void)_setRotationX:(NSNumber *)rotation {
     _rotationX = [rotation floatValue];
-    [(C4Layer *)self.layer animateRotationX:_rotation];
+    [(id <C4LayerAnimation>)self.layer animateRotationX:_rotationX];
 }
 
 -(void)setRotationY:(CGFloat)rotation {
@@ -555,7 +555,7 @@
 
 -(void)_setRotationY:(NSNumber *)rotation {
     _rotationY = [rotation floatValue];
-    [(C4Layer *)self.layer animateRotationY:_rotation];
+    [(id <C4LayerAnimation>)self.layer animateRotationY:_rotationY];
 }
 
 -(void)removeObject:(C4Control *)visibleObject {
@@ -567,7 +567,7 @@
     [super setTransform:CGAffineTransformMakeRotation(rotation)];
 }
 -(void)rotationXDidFinish:(CGFloat)rotation {
-//    [super setTransform:CGAffineTransfor];
+//    [super setTransform:CGAffineTransformM]
 }
 
 #pragma mark C4AddSubview
@@ -612,7 +612,7 @@
 
 -(void)setLayerTransform:(CATransform3D)_transform {
     layerTransform = _transform;
-    [(C4Layer *)self.layer animateLayerTransform:_transform];
+    [(id <C4LayerAnimation>)self.layer animateLayerTransform:_transform];
 }
 
 -(void)setAnchorPoint:(CGPoint)anchorPoint {
@@ -624,7 +624,7 @@
 
 -(void)setPerspectiveDistance:(CGFloat)distance {
     _perspectiveDistance = distance;
-    [(C4Layer *)self.layer setPerspectiveDistance:distance];
+    [(id <C4LayerAnimation>)self.layer setPerspectiveDistance:distance];
 }
 
 -(void)setShadowColor:(UIColor *)_shadowColor {
@@ -632,7 +632,7 @@
     else [self performSelector:@selector(_setShadowColor:) withObject:_shadowColor afterDelay:self.animationDelay];
 }
 -(void)_setShadowColor:(UIColor *)_shadowColor {
-    [(C4Layer *)self.layer animateShadowColor:_shadowColor.CGColor];
+    [(id <C4LayerAnimation>)self.layer animateShadowColor:_shadowColor.CGColor];
 }
 -(UIColor *)shadowColor {
     return [UIColor colorWithCGColor:self.layer.shadowColor];
@@ -643,7 +643,7 @@
     else [self performSelector:@selector(_setShadowOffSet:) withObject:[NSValue valueWithCGSize:_shadowOffset] afterDelay:self.animationDelay];
 }
 -(void)_setShadowOffSet:(NSValue *)_shadowOffset {
-    [(C4Layer *)self.layer animateShadowOffset:[_shadowOffset CGSizeValue]];
+    [(id <C4LayerAnimation>)self.layer animateShadowOffset:[_shadowOffset CGSizeValue]];
 }
 -(CGSize)shadowOffset {
     return self.layer.shadowOffset;
@@ -654,7 +654,7 @@
     else [self performSelector:@selector(_setShadowOpacity:) withObject:[NSNumber numberWithFloat:_shadowOpacity] afterDelay:self.animationDelay];
 }
 -(void)_setShadowOpacity:(NSNumber *)_shadowOpacity {
-    [(C4Layer *)self.layer animateShadowOpacity:[_shadowOpacity floatValue]];
+    [(id <C4LayerAnimation>)self.layer animateShadowOpacity:[_shadowOpacity floatValue]];
 }
 -(CGFloat)shadowOpacity {
     return self.layer.shadowOpacity;
@@ -665,7 +665,7 @@
     else [self performSelector:@selector(_setShadowPath:) withObject:(__bridge id)_shadowPath afterDelay:self.animationDelay];
 }
 -(void)_setShadowPath:(id)_shadowPath {
-    [(C4Layer *)self.layer animateShadowPath:(__bridge CGPathRef)_shadowPath];
+    [(id <C4LayerAnimation>)self.layer animateShadowPath:(__bridge CGPathRef)_shadowPath];
 }
 -(CGPathRef)shadowPath {
     return self.layer.shadowPath;
@@ -676,7 +676,7 @@
     [self performSelector:@selector(_setShadowRadius:) withObject:[NSNumber numberWithFloat:_shadowRadius] afterDelay:self.animationDelay];
 }
 -(void)_setShadowRadius:(NSNumber *)_shadowRadius {
-    [(C4Layer *)self.layer animateShadowRadius:[_shadowRadius floatValue]];
+    [(id <C4LayerAnimation>)self.layer animateShadowRadius:[_shadowRadius floatValue]];
 }
 -(CGFloat)shadowRadius {
     return self.layer.shadowRadius;
