@@ -144,4 +144,5 @@
 
 @property (readonly, nonatomic, strong) AVMutableAudioMix *audioMix;
 @property (readwrite, nonatomic) CGFloat volume;
+@property (readwrite, nonatomic) CGSize size;
 @end

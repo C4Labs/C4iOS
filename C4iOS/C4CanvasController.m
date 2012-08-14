@@ -10,6 +10,7 @@
 #import <objc/message.h>
 
 @interface C4CanvasController ()
+-(void)movieIsReadyForPlayback:(NSNotification *)notification;
 @property (readwrite, atomic, strong) NSString *longPressMethodName;
 @property (readwrite, atomic, strong) NSMutableDictionary *gestureDictionary;
 @end
@@ -24,6 +25,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if(self != nil) {
         _canvas = (C4Window *)self.view;
+        [self listenFor:@"movieIsReadyForPlayback" andRunMethod:@"movieIsReadyForPlayback:"];
     }
     return self;
 }
@@ -270,6 +272,14 @@
 
 -(void)runMethod:(NSString *)methodName withObject:(id)object afterDelay:(CGFloat)seconds {
     [self performSelector:NSSelectorFromString(methodName) withObject:object afterDelay:seconds];
+}
+
+-(void)movieIsReadyForPlayback:(NSNotification *)notification {
+    [self movieIsReady:(C4Movie *)[notification object]];
+}
+
+-(void)movieIsReady:(C4Movie *)movie {
+    
 }
 
 @end

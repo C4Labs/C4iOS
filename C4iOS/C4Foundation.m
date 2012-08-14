@@ -131,7 +131,7 @@ CGRect CGRectMakeFromArcComponents(CGPoint centerPoint, CGFloat radius, CGFloat 
 
 CGRect CGRectMakeFromWedgeComponents(CGPoint centerPoint, CGFloat radius, CGFloat startAngle, CGFloat endAngle, BOOL clockwise) {
     CGMutablePathRef arcPath = CGPathCreateMutable();
-    CGPathAddArc(arcPath, nil, centerPoint.x, centerPoint.y, radius, startAngle, endAngle, clockwise);
+    CGPathAddArc(arcPath, nil, centerPoint.x, centerPoint.y, radius, startAngle, endAngle, !clockwise);
     CGPathAddLineToPoint(arcPath, nil, centerPoint.x, centerPoint.y);
     CGRect arcRect = CGPathGetBoundingBox(arcPath);
     CGPathRelease(arcPath);

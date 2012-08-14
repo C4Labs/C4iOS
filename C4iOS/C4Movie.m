@@ -45,6 +45,7 @@
 @synthesize volume = _volume;
 @synthesize shouldAutoreverse = _shouldAutoreverse;
 @synthesize animationOptions = _animationOptions;
+@synthesize size = _size;
 
 +(C4Movie *)movieNamed:(NSString *)movieName {
     C4Movie *newMovie = [[C4Movie alloc] initWithMovieName:movieName andFrame:CGRectZero];
@@ -244,6 +245,7 @@
                 if(self.shouldAutoplay == YES) {
                     [self play];
                 }
+                [self postNotification:@"movieIsReadyForPlayback"];
                 break;
             case AVPlayerStatusFailed:{
                 AVPlayerItem *thePlayerItem = (AVPlayerItem *)object;
@@ -412,6 +414,17 @@
     self.frame = newFrame;
 }
 
+-(CGSize)size {
+    return self.frame.size;
+}
+
+-(void)setSize:(CGSize)size {
+    CGRect newFrame = CGRectZero;
+    newFrame.origin = self.origin;
+    newFrame.size = size;
+    self.frame = newFrame;
+}
+
 -(CGFloat)currentTime {
     return (CGFloat)CMTimeGetSeconds(self.player.currentTime);
 }
@@ -420,12 +433,13 @@
     return (CGFloat)CMTimeGetSeconds(self.playerItem.duration);
 }
 
-/* clamps to the nearest second */
+/* clamps to the nearest frame, based on the movie's time scale */
 -(void)seekToTime:(CGFloat)time {
-    CMTime newTime = CMTimeMakeWithSeconds(time, 1);
-    CMTimeRange timeRange = CMTimeRangeMake(CMTimeMakeWithSeconds(0, 1), self.playerItem.duration);
+    CMTime current = self.player.currentTime;
+    CMTime newTime = CMTimeMakeWithSeconds(time, current.timescale);
+    CMTimeRange timeRange = CMTimeRangeMake(CMTimeMakeWithSeconds(0, current.timescale), self.playerItem.duration);
     CMTimeClampToRange(newTime, timeRange);
-    [self.player seekToTime:newTime];
+    [self.player seekToTime:newTime toleranceBefore:CMTimeMake(1, current.timescale) toleranceAfter:CMTimeMake(1, current.timescale)];
 }
 
 -(void)seekByAddingTime:(CGFloat)time {

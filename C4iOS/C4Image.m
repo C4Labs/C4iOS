@@ -41,7 +41,7 @@
 @synthesize shouldAutoreverse = _shouldAutoreverse;
 @synthesize animationOptions = _animationOptions;
 @synthesize width = _width, height = _height;
-@synthesize originalRatio = _originalRatio, originalSize = _originalSize;
+@synthesize originalRatio = _originalRatio, originalSize = _originalSize, size = _size;
 
 +(C4Image *)imageNamed:(NSString *)name {
     return [[C4Image alloc] initWithImageName:name];
@@ -145,11 +145,14 @@
 }
 
 -(void)setImage:(C4Image *)image {
+    CGPoint oldOrigin = self.frame.origin;
     self.originalImage = image.UIImage;
     C4Assert(_originalImage != nil, @"The C4Image you tried to load (%@) returned nil for its UIImage", image);
     self.visibleImage = image.CIImage;
     C4Assert(_visibleImage != nil, @"The C4Image you tried to load (%@) returned nil for its CIImage", image);
-    self.frame = _visibleImage.extent;
+    CGRect newFrame = _visibleImage.extent;
+    newFrame.origin = oldOrigin;
+    self.frame = newFrame;
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -787,4 +790,14 @@
     self.frame = newFrame;
 }
 
+-(CGSize)size {
+    return self.frame.size;
+}
+
+-(void)setSize:(CGSize)size {
+    CGRect newFrame = CGRectZero;
+    newFrame.origin = self.origin;
+    newFrame.size = size;
+    self.frame = newFrame;
+}
 @end

@@ -464,8 +464,9 @@
 -(UIColor *)colorAt:(CGPoint)point;
 -(C4Vector *)rgbVectorAt:(CGPoint)point;
 
-@property (nonatomic) CGFloat width;
-@property (nonatomic) CGFloat height;
+@property (readwrite, nonatomic) CGFloat width;
+@property (readwrite, nonatomic) CGFloat height;
+@property (readwrite, nonatomic) CGSize size;
 
 @property (readonly, nonatomic) CGSize originalSize;
 @property (readonly, nonatomic) CGFloat originalRatio;
@@ -473,4 +474,5 @@
 -(id)initWithRawData:(unsigned char *)data width:(NSInteger)width height:(NSInteger)height;
 -(id)initWithCGImage:(CGImageRef)image;
 @property (readonly, nonatomic) BOOL pixelDataLoaded;
+
 @end

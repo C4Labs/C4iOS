@@ -9,7 +9,6 @@
 #import "C4Shape.h"
 
 @interface C4Shape()
-@property (readonly, nonatomic) BOOL initialized, shouldClose;
 -(void)_ellipse:(NSValue *)ellipseValue;
 -(void)_rect:(NSValue *)rectValue;
 -(void)_line:(NSArray *)pointArray;
@@ -32,6 +31,7 @@
 -(void)_setStrokeColor:(UIColor *)_strokeColor;
 -(void)_setStrokeStart:(NSNumber *)_strokeStart;
 -(void)willChangeShape;
+@property (readonly, nonatomic) BOOL initialized, shouldClose;
 @property (atomic) BOOL isTriangle;
 @property (readwrite, atomic) BOOL shouldAutoreverse;
 @end
@@ -43,7 +43,6 @@
 @synthesize fillColor = _fillColor, fillRule, lineCap, lineDashPattern, lineDashPhase, lineJoin, lineWidth, miterLimit, origin = _origin, strokeColor, strokeEnd, strokeStart;
 @synthesize closed = _closed, shouldClose = _shouldClose, initialized = _initialized, isTriangle = _isTriangle;
 @synthesize layerTransform = _layerTransform;
-@synthesize rotationX = _rotationX;
 -(id)init {
     return [self initWithFrame:CGRectZero];
 }
@@ -126,8 +125,7 @@
 }
 
 +(C4Shape *)wedgeWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise {
-    //I'm not sure what's going on here, but i have to invert clockwise to get the 
-    CGRect wedgeRect = CGRectMakeFromWedgeComponents(centerPoint,radius,startAngle,endAngle,!clockwise);
+    CGRect wedgeRect = CGRectMakeFromWedgeComponents(centerPoint,radius,startAngle,endAngle,clockwise);
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:wedgeRect];
     
     NSMutableDictionary *wedgeDict = [[NSMutableDictionary alloc] initWithCapacity:0];
@@ -182,7 +180,8 @@
     _isArc = YES;
     CGMutablePathRef newPath = CGPathCreateMutable();
     CGPoint centerPoint = [[arcDict valueForKey:@"centerPoint"] CGPointValue];
-    CGPathAddArc(newPath, nil, centerPoint.x, centerPoint.y, [[arcDict objectForKey:@"radius"] floatValue], [[arcDict objectForKey:@"startAngle"] floatValue], [[arcDict objectForKey:@"endAngle"] floatValue], [[arcDict objectForKey:@"clockwise"] boolValue]);
+    //strage, i have to invert the Bool value for clockwise
+    CGPathAddArc(newPath, nil, centerPoint.x, centerPoint.y, [[arcDict objectForKey:@"radius"] floatValue], [[arcDict objectForKey:@"startAngle"] floatValue], [[arcDict objectForKey:@"endAngle"] floatValue], ![[arcDict objectForKey:@"clockwise"] boolValue]);
     CGRect arcRect = CGPathGetBoundingBox(newPath);
     
     const CGAffineTransform translation = CGAffineTransformMakeTranslation(arcRect.origin.x *-1, arcRect.origin.y *-1);
@@ -195,8 +194,6 @@
     }
     
     [self.shapeLayer animatePath:translatedPath];
-    CGRect pathRect = CGPathGetBoundingBox(translatedPath);
-    self.bounds = pathRect; //Need this step to sync the appearance of the paths to the frame of the shape
     CGPathRelease(translatedPath);
     _initialized = YES;
 }
@@ -217,7 +214,8 @@
     _wedge = YES;
     CGMutablePathRef newPath = CGPathCreateMutable();
     CGPoint centerPoint = [[arcDict valueForKey:@"centerPoint"] CGPointValue];
-    CGPathAddArc(newPath, nil, centerPoint.x, centerPoint.y, [[arcDict objectForKey:@"radius"] floatValue], [[arcDict objectForKey:@"startAngle"] floatValue], [[arcDict objectForKey:@"endAngle"] floatValue], [[arcDict objectForKey:@"clockwise"] boolValue]);
+    //strage, i have to invert the Bool value for clockwise
+    CGPathAddArc(newPath, nil, centerPoint.x, centerPoint.y, [[arcDict objectForKey:@"radius"] floatValue], [[arcDict objectForKey:@"startAngle"] floatValue], [[arcDict objectForKey:@"endAngle"] floatValue], ![[arcDict objectForKey:@"clockwise"] boolValue]);
 
     CGPathAddLineToPoint(newPath, nil, centerPoint.x, centerPoint.y);
 
@@ -232,14 +230,12 @@
     _closed = YES;
     
     [self.shapeLayer animatePath:translatedPath];
-    CGRect pathRect = CGPathGetBoundingBox(translatedPath);
-    self.bounds = pathRect; //Need this step to sync the appearance of the paths to the frame of the shape
     CGPathRelease(translatedPath);
     _initialized = YES;
 }
 
 +(C4Shape *)curve:(CGPoint *)beginEndPointArray controlPoints:(CGPoint *)controlPointArray{
-    C4Shape *newShape = [[C4Shape alloc] initWithFrame:CGRectZero];
+    C4Shape *newShape = [[C4Shape alloc] initWithFrame:CGRectMakeFromPointArray(beginEndPointArray, 2)];
     NSMutableDictionary *curveDict = [[NSMutableDictionary alloc] initWithCapacity:0];
     [curveDict setValue:[NSValue valueWithCGPoint:beginEndPointArray[0]] forKey:@"beginPoint"];
     [curveDict setValue:[NSValue valueWithCGPoint:beginEndPointArray[1]] forKey:@"endPoint"];
@@ -250,7 +246,7 @@
 }
 
 +(C4Shape *)quadCurve:(CGPoint *)beginEndPointArray controlPoint:(CGPoint)controlPoint{
-    C4Shape *newShape = [[C4Shape alloc] initWithFrame:CGRectZero];
+    C4Shape *newShape = [[C4Shape alloc] initWithFrame:CGRectMakeFromPointArray(beginEndPointArray, 2)];
     NSMutableDictionary *curveDict = [[NSMutableDictionary alloc] initWithCapacity:0];
     [curveDict setValue:[NSValue valueWithCGPoint:beginEndPointArray[0]] forKey:@"beginPoint"];
     [curveDict setValue:[NSValue valueWithCGPoint:beginEndPointArray[1]] forKey:@"endPoint"];
@@ -290,28 +286,29 @@
     _pointB = endPoint;
     _controlPointA = controlPoint1;
     _controlPointB = controlPoint2;
-    CGPathMoveToPoint(newPath, nil, beginPoint.x, beginPoint.y);
-    CGPathAddCurveToPoint(newPath, nil, controlPoint1.x, controlPoint1.y, controlPoint2.x, controlPoint2.y, endPoint.x, endPoint.y);
-    CGRect tempFrame = CGPathGetPathBoundingBox(newPath);
-    CGPoint tempFrameOrigin = tempFrame.origin;
-    beginPoint.x -= tempFrameOrigin.x;
-    beginPoint.y -= tempFrameOrigin.y;
-    endPoint.x -= tempFrameOrigin.x;
-    endPoint.y -= tempFrameOrigin.y;
-    controlPoint1.x -= tempFrameOrigin.x;
-    controlPoint1.y -= tempFrameOrigin.y;
-    controlPoint2.x -= tempFrameOrigin.x;
-    controlPoint2.y -= tempFrameOrigin.y;    
-    CGPathRelease(newPath);
-    newPath = CGPathCreateMutable();
-    CGPathMoveToPoint(newPath, nil, beginPoint.x, beginPoint.y);
-    CGPathAddCurveToPoint(newPath, NULL, controlPoint1.x, controlPoint1.y, controlPoint2.x, controlPoint2.y, endPoint.x, endPoint.y);
-    if (_shouldClose == YES) {
-        CGPathCloseSubpath(newPath);
-    }
+    CGPathMoveToPoint(newPath, nil, 0,0);
+    const CGAffineTransform translation = CGAffineTransformMakeTranslation(-1*beginPoint.x, -1*beginPoint.y);
+    CGPathAddCurveToPoint(newPath, &translation, controlPoint1.x, controlPoint1.y, controlPoint2.x, controlPoint2.y, endPoint.x, endPoint.y);
+//    CGRect tempFrame = CGPathGetPathBoundingBox(newPath);
+//    CGPoint tempFrameOrigin = tempFrame.origin;
+//    beginPoint.x -= tempFrameOrigin.x;
+//    beginPoint.y -= tempFrameOrigin.y;
+//    endPoint.x -= tempFrameOrigin.x;
+//    endPoint.y -= tempFrameOrigin.y;
+//    controlPoint1.x -= tempFrameOrigin.x;
+//    controlPoint1.y -= tempFrameOrigin.y;
+//    controlPoint2.x -= tempFrameOrigin.x;
+//    controlPoint2.y -= tempFrameOrigin.y;    
+//    CGPathRelease(newPath);
+//    newPath = CGPathCreateMutable();
+//    CGPathMoveToPoint(newPath, nil, beginPoint.x, beginPoint.y);
+//    CGPathAddCurveToPoint(newPath, NULL, controlPoint1.x, controlPoint1.y, controlPoint2.x, controlPoint2.y, endPoint.x, endPoint.y);
+//    if (_shouldClose == YES) {
+//        CGPathCloseSubpath(newPath);
+//    }
     [self.shapeLayer animatePath:newPath];
-    CGRect pathRect = CGPathGetBoundingBox(newPath);
-    self.bounds = pathRect;
+//    CGRect pathRect = CGPathGetBoundingBox(newPath);
+//    self.bounds = pathRect;
     CGPathRelease(newPath);
     _initialized = YES;
 }
@@ -326,26 +323,10 @@
     _pointA = beginPoint;
     _pointB = endPoint;
     _controlPointA = controlPoint;
-    CGPathMoveToPoint(newPath, nil, beginPoint.x, beginPoint.y);
-    CGPathAddQuadCurveToPoint(newPath, nil, controlPoint.x,controlPoint.y, endPoint.x, endPoint.y);
-    CGRect tempFrame = CGPathGetPathBoundingBox(newPath);
-    CGPoint tempFrameOrigin = tempFrame.origin;
-    beginPoint.x -= tempFrameOrigin.x;
-    beginPoint.y -= tempFrameOrigin.y;
-    endPoint.x -= tempFrameOrigin.x;
-    endPoint.y -= tempFrameOrigin.y;
-    controlPoint.x -= tempFrameOrigin.x;
-    controlPoint.y -= tempFrameOrigin.y;
-    CGPathRelease(newPath);
-    newPath = CGPathCreateMutable();
-    CGPathMoveToPoint(newPath, nil, beginPoint.x, beginPoint.y);
-    CGPathAddQuadCurveToPoint(newPath, nil, controlPoint.x,controlPoint.y, endPoint.x, endPoint.y);
-    if (_shouldClose == YES) {
-        CGPathCloseSubpath(newPath);
-    }
+    CGPathMoveToPoint(newPath, nil,0,0);
+    const CGAffineTransform translation = CGAffineTransformMakeTranslation(-1*beginPoint.x, -1*beginPoint.y);
+    CGPathAddQuadCurveToPoint(newPath, &translation, controlPoint.x,controlPoint.y, endPoint.x, endPoint.y);
     [self.shapeLayer animatePath:newPath];
-    CGRect pathRect = CGPathGetBoundingBox(newPath);
-    self.bounds = pathRect;
     CGPathRelease(newPath);
     _initialized = YES;
 }
@@ -554,10 +535,8 @@
 
 -(void)closeShape {
     _shouldClose = YES;
-    if(_initialized == YES) {
         if(self.animationDuration == 0.0f) [self _closeShape];
         else [self performSelector:@selector(_closeShape) withObject:nil afterDelay:self.animationDelay];
-    }
 }
 -(void)_closeShape {
     if(_initialized == YES && _shouldClose == YES && _closed == NO) {

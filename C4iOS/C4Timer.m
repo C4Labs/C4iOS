@@ -119,19 +119,21 @@
 }
 
 +(C4Timer *)timerWithFireDate:(NSDate *)date interval:(CGFloat)seconds target:(id)object method:(NSString *)methodName repeats:(BOOL)repeats {
-    return [C4Timer timerWithFireDate:date interval:seconds
-                               target:object 
-                               method:methodName
-                             userInfo:nil 
-                              repeats:repeats];
+    C4Timer *timer = [[C4Timer alloc] initWithFireDate:date
+                                              interval:seconds
+                                                target:object
+                                                method:methodName
+                                              userInfo:nil
+                                               repeats:repeats];
+    return timer;
 }
 +(C4Timer *)timerWithFireDate:(NSDate *)date interval:(CGFloat)seconds target:(id)object method:(NSString *)methodName userInfo:(id)infoObject repeats:(BOOL)repeats {
-    C4Timer *timer = [C4Timer timerWithFireDate:date
-                                       interval:seconds 
-                                         target:object
-                                         method:methodName 
-                                       userInfo:infoObject 
-                                        repeats:repeats];
+    C4Timer *timer = [[C4Timer alloc] initWithFireDate:date
+                                              interval:seconds
+                                                target:object
+                                                method:methodName
+                                              userInfo:infoObject
+                                               repeats:repeats];
     return timer;
 }
 
@@ -146,14 +148,15 @@
 -(id)initWithFireDate:(NSDate *)date interval:(CGFloat)seconds target:(id)object method:(NSString *)methodName userInfo:(id)infoObject repeats:(BOOL)repeats {
     self = [super init];
     if(self != nil) {
-        if([self.timer isValid]) 
-            [self.timer invalidate];
-        self.timer = [[NSTimer alloc] initWithFireDate:date 
-                                              interval:seconds 
-                                                target:object 
-                                              selector:NSSelectorFromString(methodName) 
-                                              userInfo:infoObject repeats:repeats];
+        self.timer = [[NSTimer  alloc] initWithFireDate:date
+                                               interval:seconds
+                                                 target:object
+                                               selector:NSSelectorFromString(methodName)
+                                               userInfo:infoObject
+                                                repeats:repeats];
 
+        [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
+        
         if (self.propertiesDictionary != nil) {
             [self.propertiesDictionary removeAllObjects];
             self.propertiesDictionary = nil;

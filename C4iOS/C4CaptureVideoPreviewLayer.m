@@ -16,7 +16,7 @@
 @synthesize animationOptions = _animationOptions, currentAnimationEasing, repeatCount, animationDuration = _animationDuration;
 @synthesize allowsInteraction, repeats;
 @synthesize rotationAngle, rotationAngleX, rotationAngleY;
-@synthesize perspectiveDistance;
+@synthesize perspectiveDistance = _perspectiveDistance;
 
 - (id)init {
     self = [super init];
@@ -269,13 +269,16 @@
     [CATransaction commit];
 }
 
--(void)animateRotation:(CGFloat)_rotationAngle {
-    [CATransaction begin];
+-(void)setPerspectiveDistance:(CGFloat)perspectiveDistance {
+    _perspectiveDistance = perspectiveDistance;
     CATransform3D t = self.transform;
     if(perspectiveDistance != 0.0f) t.m34 = 1/self.perspectiveDistance;
     else t.m34 = 0.0f;
     self.transform = t;
-    
+}
+
+-(void)animateRotation:(CGFloat)_rotationAngle {
+    [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"transform.rotation.z"];
     animation.fromValue = [NSNumber numberWithFloat:self.rotationAngle];
     animation.toValue = [NSNumber numberWithFloat:_rotationAngle];
@@ -292,11 +295,6 @@
 
 -(void)animateRotationX:(CGFloat)_rotationAngle {
     [CATransaction begin];
-    CATransform3D t = self.transform;
-    if(perspectiveDistance != 0.0f) t.m34 = 1/self.perspectiveDistance;
-    else t.m34 = 0.0f;
-    self.transform = t;
-    
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"transform.rotation.x"];
     animation.fromValue = [NSNumber numberWithFloat:self.rotationAngleX];
     animation.toValue = [NSNumber numberWithFloat:_rotationAngle];
@@ -313,11 +311,6 @@
 
 -(void)animateRotationY:(CGFloat)_rotationAngle {
     [CATransaction begin];
-    CATransform3D t = self.transform;
-    if(perspectiveDistance != 0.0f) t.m34 = 1/self.perspectiveDistance;
-    else t.m34 = 0.0f;
-    self.transform = t;
-    
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"transform.rotation.y"];
     animation.fromValue = [NSNumber numberWithFloat:self.rotationAngleY];
     animation.toValue = [NSNumber numberWithFloat:_rotationAngle];

@@ -7,39 +7,29 @@
 
 #import "C4Workspace.h"
 
-@interface C4WorkSpace ()
-@end
-
 @implementation C4WorkSpace {
-    C4Image *x, *y, *z;
+    C4GL *gl;
 }
 
-
+//this example uses a default renderer
 -(void)setup {
-    x = [C4Image imageNamed:@"C4Sky.png"];
-    x.width = 200;
-    x.center = CGPointMake(self.canvas.center.x, self.canvas.height / 4);
-    [self.canvas addImage:x];
-
-    y = [C4Image imageNamed:@"C4Sky.png"];
-    y.width = 200;
-    y.center = self.canvas.center;
-    [self.canvas addImage:y];
-
-    z = [C4Image imageNamed:@"C4Sky.png"];
-    z.width = 200;
-    z.center = CGPointMake(self.canvas.center.x, self.canvas.height * 3 / 4);
-    [self.canvas addImage:z];
+    //create a frame based on the width of the canvas
+    CGFloat width = self.canvas.width*0.9f;
+    CGRect frame = CGRectMake(0, 0, width, width*.66f);
+    
+    //create the gl object with the frame
+    gl = [C4GL glWithFrame:frame];
+    gl.center = self.canvas.center;
+    gl.userInteractionEnabled = NO;
+    [self.canvas addGL:gl];
+    
+    [gl startAnimation];
 }
 
+//toggle the animation based on touching the canvas
 -(void)touchesBegan {
-    x.animationDuration = 1.0f;
-    y.animationDuration = 1.0f;
-    z.animationDuration = 1.0f;
-
-    x.rotationX += PI / 3;
-    y.rotationY += TWO_PI;
-    z.rotation += PI / 3;
+    if (gl.isAnimating) [gl stopAnimation];
+    else [gl startAnimation];
 }
 
 @end
