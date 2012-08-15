@@ -20,6 +20,12 @@
 		ED30769C150D400C001D689C /* C4Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = ED307698150D400C001D689C /* C4Movie.m */; };
 		ED3076A2150D51F0001D689C /* C4PlayerLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3076A1150D51F0001D689C /* C4PlayerLayer.m */; };
 		ED36D9EC157C935500C3AEE7 /* C4Image.m in Sources */ = {isa = PBXBuildFile; fileRef = ED36D9EB157C935400C3AEE7 /* C4Image.m */; };
+		ED3A32AC15DB7BDD00BFDAE5 /* C4_AppIcon_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = ED3A32AB15DB7BDD00BFDAE5 /* C4_AppIcon_iPad.png */; };
+		ED3A32AE15DB7BE000BFDAE5 /* C4_AppIcon_iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED3A32AD15DB7BE000BFDAE5 /* C4_AppIcon_iPad@2x.png */; };
+		ED3A32B015DB7BE800BFDAE5 /* C4_LaunchImage_iPhone-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ED3A32AF15DB7BE800BFDAE5 /* C4_LaunchImage_iPhone-Landscape~ipad.png */; };
+		ED3A32B215DB7BED00BFDAE5 /* C4_LaunchImage_iPhone-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ED3A32B115DB7BED00BFDAE5 /* C4_LaunchImage_iPhone-Landscape@2x~ipad.png */; };
+		ED3A32B415DB7BF200BFDAE5 /* C4_LaunchImage_iPhone-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ED3A32B315DB7BF200BFDAE5 /* C4_LaunchImage_iPhone-Portrait~ipad.png */; };
+		ED3A32B615DB7BF600BFDAE5 /* C4_LaunchImage_iPhone-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ED3A32B515DB7BF600BFDAE5 /* C4_LaunchImage_iPhone-Portrait@2x~ipad.png */; };
 		ED4702D715C052CA004B75D1 /* pyramid.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4702D615C052CA004B75D1 /* pyramid.png */; };
 		ED50C88614EAC2010040D844 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED50C88514EAC2010040D844 /* UIKit.framework */; };
 		ED50C88814EAC2010040D844 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED50C88714EAC2010040D844 /* Foundation.framework */; };
@@ -38,12 +44,8 @@
 		ED50C8D614EACA340040D844 /* C4View.m in Sources */ = {isa = PBXBuildFile; fileRef = ED50C8D514EACA340040D844 /* C4View.m */; };
 		ED5FB05115B38894002987EA /* C4AssertionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5FB05015B38894002987EA /* C4AssertionHandler.m */; };
 		ED7C0C0F15C88B9F009107A6 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = ED7C0C0215C88B9F009107A6 /* iTunesArtwork.png */; };
-		ED7C0C1015C88B9F009107A6 /* C4_AppIcon_iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = ED7C0C0315C88B9F009107A6 /* C4_AppIcon_iPhone.png */; };
-		ED7C0C1115C88B9F009107A6 /* C4_AppIcon_iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED7C0C0415C88B9F009107A6 /* C4_AppIcon_iPhone@2x.png */; };
 		ED7C0C1215C88B9F009107A6 /* C4_AppStoreIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = ED7C0C0515C88B9F009107A6 /* C4_AppStoreIcon.png */; };
 		ED7C0C1315C88B9F009107A6 /* C4_AppStoreIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED7C0C0615C88B9F009107A6 /* C4_AppStoreIcon@2x.png */; };
-		ED7C0C1415C88B9F009107A6 /* C4_LaunchImage_iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = ED7C0C0715C88B9F009107A6 /* C4_LaunchImage_iPhone.png */; };
-		ED7C0C1515C88B9F009107A6 /* C4_LaunchImage_iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED7C0C0815C88B9F009107A6 /* C4_LaunchImage_iPhone@2x.png */; };
 		ED7C0C1615C88B9F009107A6 /* C4_SpotlightIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = ED7C0C0915C88B9F009107A6 /* C4_SpotlightIcon.png */; };
 		ED7C0C1715C88B9F009107A6 /* C4_SpotlightIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED7C0C0A15C88B9F009107A6 /* C4_SpotlightIcon@2x.png */; };
 		ED7C0C1815C88B9F009107A6 /* C4_TabbarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = ED7C0C0B15C88B9F009107A6 /* C4_TabbarIcon.png */; };
@@ -92,6 +94,12 @@
 		ED3076A1150D51F0001D689C /* C4PlayerLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4PlayerLayer.m; sourceTree = "<group>"; };
 		ED36D9EA157C935400C3AEE7 /* C4Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Image.h; sourceTree = "<group>"; };
 		ED36D9EB157C935400C3AEE7 /* C4Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Image.m; sourceTree = "<group>"; };
+		ED3A32AB15DB7BDD00BFDAE5 /* C4_AppIcon_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = C4_AppIcon_iPad.png; path = ../C4_AppIcon_iPad.png; sourceTree = "<group>"; };
+		ED3A32AD15DB7BE000BFDAE5 /* C4_AppIcon_iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "C4_AppIcon_iPad@2x.png"; path = "../C4_AppIcon_iPad@2x.png"; sourceTree = "<group>"; };
+		ED3A32AF15DB7BE800BFDAE5 /* C4_LaunchImage_iPhone-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "C4_LaunchImage_iPhone-Landscape~ipad.png"; path = "../C4_LaunchImage_iPhone-Landscape~ipad.png"; sourceTree = "<group>"; };
+		ED3A32B115DB7BED00BFDAE5 /* C4_LaunchImage_iPhone-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "C4_LaunchImage_iPhone-Landscape@2x~ipad.png"; path = "../C4_LaunchImage_iPhone-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
+		ED3A32B315DB7BF200BFDAE5 /* C4_LaunchImage_iPhone-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "C4_LaunchImage_iPhone-Portrait~ipad.png"; path = "../C4_LaunchImage_iPhone-Portrait~ipad.png"; sourceTree = "<group>"; };
+		ED3A32B515DB7BF600BFDAE5 /* C4_LaunchImage_iPhone-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "C4_LaunchImage_iPhone-Portrait@2x~ipad.png"; path = "../C4_LaunchImage_iPhone-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
 		ED45EC80155A33C400D28213 /* loop1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = loop1.wav; sourceTree = "<group>"; };
 		ED4702D615C052CA004B75D1 /* pyramid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pyramid.png; sourceTree = "<group>"; };
 		ED50C88114EAC2010040D844 /* C4iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = C4iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,12 +134,8 @@
 		ED7513AA15150FB60076317F /* inception.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = inception.mov; sourceTree = "<group>"; };
 		ED751491151519890076317F /* C4Sky.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = C4Sky.png; sourceTree = "<group>"; };
 		ED7C0C0215C88B9F009107A6 /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
-		ED7C0C0315C88B9F009107A6 /* C4_AppIcon_iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = C4_AppIcon_iPhone.png; sourceTree = "<group>"; };
-		ED7C0C0415C88B9F009107A6 /* C4_AppIcon_iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "C4_AppIcon_iPhone@2x.png"; sourceTree = "<group>"; };
 		ED7C0C0515C88B9F009107A6 /* C4_AppStoreIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = C4_AppStoreIcon.png; sourceTree = "<group>"; };
 		ED7C0C0615C88B9F009107A6 /* C4_AppStoreIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "C4_AppStoreIcon@2x.png"; sourceTree = "<group>"; };
-		ED7C0C0715C88B9F009107A6 /* C4_LaunchImage_iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = C4_LaunchImage_iPhone.png; sourceTree = "<group>"; };
-		ED7C0C0815C88B9F009107A6 /* C4_LaunchImage_iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "C4_LaunchImage_iPhone@2x.png"; sourceTree = "<group>"; };
 		ED7C0C0915C88B9F009107A6 /* C4_SpotlightIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = C4_SpotlightIcon.png; sourceTree = "<group>"; };
 		ED7C0C0A15C88B9F009107A6 /* C4_SpotlightIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "C4_SpotlightIcon@2x.png"; sourceTree = "<group>"; };
 		ED7C0C0B15C88B9F009107A6 /* C4_TabbarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = C4_TabbarIcon.png; sourceTree = "<group>"; };
@@ -199,6 +203,7 @@
 		ED36D9E9157C91E900C3AEE7 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				ED009FA515094E5200086987 /* C4EAGLESRenderer.h */,
 				EDCEA5A514FD7567009969F2 /* C4Gesture.h */,
 				EDC75ED81506D7D2002D82A1 /* C4LayerAnimation.h */,
 				EDAFFAD714F70D5F00CA356A /* C4Notification.h */,
@@ -212,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				ED50C88B14EAC2010040D844 /* C4iOS */,
+				ED50C88C14EAC2010040D844 /* App */,
 				ED50C88414EAC2010040D844 /* Frameworks */,
 				ED50C88214EAC2010040D844 /* Products */,
 			);
@@ -274,18 +280,21 @@
 				ED50C89314EAC2010040D844 /* C4iOS-Prefix.pch */,
 			);
 			name = App;
+			path = C4iOS;
 			sourceTree = "<group>";
 		};
 		ED50C8BD14EAC3B80040D844 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
 				ED7C0C0215C88B9F009107A6 /* iTunesArtwork.png */,
-				ED7C0C0315C88B9F009107A6 /* C4_AppIcon_iPhone.png */,
-				ED7C0C0415C88B9F009107A6 /* C4_AppIcon_iPhone@2x.png */,
+				ED3A32B515DB7BF600BFDAE5 /* C4_LaunchImage_iPhone-Portrait@2x~ipad.png */,
+				ED3A32B315DB7BF200BFDAE5 /* C4_LaunchImage_iPhone-Portrait~ipad.png */,
+				ED3A32B115DB7BED00BFDAE5 /* C4_LaunchImage_iPhone-Landscape@2x~ipad.png */,
+				ED3A32AF15DB7BE800BFDAE5 /* C4_LaunchImage_iPhone-Landscape~ipad.png */,
+				ED3A32AD15DB7BE000BFDAE5 /* C4_AppIcon_iPad@2x.png */,
+				ED3A32AB15DB7BDD00BFDAE5 /* C4_AppIcon_iPad.png */,
 				ED7C0C0515C88B9F009107A6 /* C4_AppStoreIcon.png */,
 				ED7C0C0615C88B9F009107A6 /* C4_AppStoreIcon@2x.png */,
-				ED7C0C0715C88B9F009107A6 /* C4_LaunchImage_iPhone.png */,
-				ED7C0C0815C88B9F009107A6 /* C4_LaunchImage_iPhone@2x.png */,
 				ED7C0C0915C88B9F009107A6 /* C4_SpotlightIcon.png */,
 				ED7C0C0A15C88B9F009107A6 /* C4_SpotlightIcon@2x.png */,
 				ED7C0C0B15C88B9F009107A6 /* C4_TabbarIcon.png */,
@@ -314,7 +323,6 @@
 				ED009F9D1509242100086987 /* C4EAGLES1Renderer.m */,
 				ED009F8E15091FE300086987 /* C4EAGLLayer.h */,
 				ED009F8F15091FE300086987 /* C4EAGLLayer.m */,
-				ED009FA515094E5200086987 /* C4EAGLESRenderer.h */,
 				ED900CED14FBF2B3006C2AED /* C4Font.h */,
 				ED900CEE14FBF2B3006C2AED /* C4Font.m */,
 				ED50C8CC14EAC61C0040D844 /* C4Foundation.h */,
@@ -365,7 +373,6 @@
 				ED45EC80155A33C400D28213 /* loop1.wav */,
 				ED751491151519890076317F /* C4Sky.png */,
 				ED7513AA15150FB60076317F /* inception.mov */,
-				ED50C88C14EAC2010040D844 /* App */,
 			);
 			name = Media;
 			sourceTree = "<group>";
@@ -426,18 +433,20 @@
 				ED008D3A15BF5DE80005E8D3 /* lines.png in Resources */,
 				ED4702D715C052CA004B75D1 /* pyramid.png in Resources */,
 				ED7C0C0F15C88B9F009107A6 /* iTunesArtwork.png in Resources */,
-				ED7C0C1015C88B9F009107A6 /* C4_AppIcon_iPhone.png in Resources */,
-				ED7C0C1115C88B9F009107A6 /* C4_AppIcon_iPhone@2x.png in Resources */,
 				ED7C0C1215C88B9F009107A6 /* C4_AppStoreIcon.png in Resources */,
 				ED7C0C1315C88B9F009107A6 /* C4_AppStoreIcon@2x.png in Resources */,
-				ED7C0C1415C88B9F009107A6 /* C4_LaunchImage_iPhone.png in Resources */,
-				ED7C0C1515C88B9F009107A6 /* C4_LaunchImage_iPhone@2x.png in Resources */,
 				ED7C0C1615C88B9F009107A6 /* C4_SpotlightIcon.png in Resources */,
 				ED7C0C1715C88B9F009107A6 /* C4_SpotlightIcon@2x.png in Resources */,
 				ED7C0C1815C88B9F009107A6 /* C4_TabbarIcon.png in Resources */,
 				ED7C0C1915C88B9F009107A6 /* C4_TabbarIcon@2x.png in Resources */,
 				ED7C0C1A15C88B9F009107A6 /* C4_ToolbarIcon.png in Resources */,
 				ED7C0C1B15C88B9F009107A6 /* C4_ToolbarIcon@2x.png in Resources */,
+				ED3A32AC15DB7BDD00BFDAE5 /* C4_AppIcon_iPad.png in Resources */,
+				ED3A32AE15DB7BE000BFDAE5 /* C4_AppIcon_iPad@2x.png in Resources */,
+				ED3A32B015DB7BE800BFDAE5 /* C4_LaunchImage_iPhone-Landscape~ipad.png in Resources */,
+				ED3A32B215DB7BED00BFDAE5 /* C4_LaunchImage_iPhone-Landscape@2x~ipad.png in Resources */,
+				ED3A32B415DB7BF200BFDAE5 /* C4_LaunchImage_iPhone-Portrait~ipad.png in Resources */,
+				ED3A32B615DB7BF600BFDAE5 /* C4_LaunchImage_iPhone-Portrait@2x~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

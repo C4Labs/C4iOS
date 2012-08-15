@@ -10,7 +10,7 @@
 
 @implementation C4Window
 @synthesize canvasController;
-@synthesize width, height, center = _center;
+@synthesize width, height;
 
 - (id)init {
     self = [self initWithFrame:CGRectZero];

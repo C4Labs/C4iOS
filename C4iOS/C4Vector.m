@@ -22,6 +22,28 @@
 @synthesize x, y, z, magnitude, heading, displacedHeading;
 @synthesize CGPoint;
 
++(CGFloat)distanceBetweenA:(CGPoint)pointA andB:(CGPoint)pointB {
+    __block CGFloat value;
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_sync(queue, ^(void) {
+        C4Vector *a = [C4Vector vectorWithX:pointA.x Y:pointA.y Z:0];
+        C4Vector *b = [C4Vector vectorWithX:pointB.x Y:pointB.y Z:0];
+        value = [a distance:b];
+    });
+    return value;
+}
+
++(CGFloat)angleBetweenA:(CGPoint)pointA andB:(CGPoint)pointB {
+    __block CGFloat value;
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_sync(queue, ^(void) {
+        C4Vector *a = [C4Vector vectorWithX:pointA.x Y:pointA.y Z:0];
+        C4Vector *b = [C4Vector vectorWithX:pointB.x Y:pointB.y Z:0];
+        value =  [a angleBetween:b];
+    });
+    return value;
+}
+
 +(C4Vector *)vectorWithX:(CGFloat)x Y:(CGFloat)y Z:(CGFloat)z {
     C4Vector *v = [[C4Vector alloc] initWithX:x Y:y Z:z];
 	return v;
@@ -42,28 +64,6 @@
         [self setup];
 	}
 	return self;
-}
-
-+(CGFloat)distanceBetweenA:(CGPoint)pointA andB:(CGPoint)pointB {
-    __block CGFloat value;
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_sync(queue, ^(void) { 
-        C4Vector *a = [C4Vector vectorWithX:pointA.x Y:pointA.y Z:0];
-        C4Vector *b = [C4Vector vectorWithX:pointB.x Y:pointB.y Z:0];
-        value = [a distance:b];
-    });
-    return value;
-}
-
-+(CGFloat)angleBetweenA:(CGPoint)pointA andB:(CGPoint)pointB {
-    __block CGFloat value;
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_sync(queue, ^(void) { 
-        C4Vector *a = [C4Vector vectorWithX:pointA.x Y:pointA.y Z:0];
-        C4Vector *b = [C4Vector vectorWithX:pointB.x Y:pointB.y Z:0];
-        value =  [a angleBetween:b];
-    });
-    return value;
 }
 
 -(void)update {

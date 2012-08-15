@@ -73,13 +73,7 @@
 	/*While a frame is processes in -captureOutput:didOutputSampleBuffer:fromConnection: delegate methods no other frames are added in the queue.
 	 If you don't want this behaviour set the property to NO */
 	captureOutput.alwaysDiscardsLateVideoFrames = YES; 
-	
-    /*We specify a minimum duration for each frame (play with this settings to avoid having too many frames waiting
-	 in the queue because it can cause memory issues). It is similar to the inverse of the maximum framerate.
-	 In this example we set a min frame duration of 1/10 seconds so a maximum framerate of 10fps. We say that
-	 we are not able to process more than 10 frames per second.*/
-	//captureOutput.minFrameDuration = CMTimeMake(1, 10);
-	
+
 	/*We create a serial queue to handle the processing of our frames*/
 	dispatch_queue_t queue;
 	queue = dispatch_queue_create("cameraQueue", NULL);

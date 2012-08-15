@@ -80,13 +80,81 @@
  
  Creates a CABasicAnimation contained within a CATransaction. This method also handles setting a completion block if the animation needs it. 
  
- @param compositingFilters The set of compositing filters to which will be animated
+ @param compositingFilter The set of compositing filters to which will be animated
  */
 -(void)animateCompositingFilter:(id)compositingFilter;
 
-/** Returns whether or not the layer is opaque.
+/** Animates the layer's background color from it's current color to a new one.
+ 
+ Creates a CABasicAnimation contained within a CATransaction. This method also handles setting a completion block if the animation needs it.
+ 
+ @param backgroundColor A CGColorRef to which the background color will animate
  */
-//-(BOOL)isOpaque;
+-(void)animateBackgroundColor:(CGColorRef)backgroundColor;
+
+/** Animates the layer's border color from it's current color to a new one.
+ 
+ Creates a CABasicAnimation contained within a CATransaction. This method also handles setting a completion block if the animation needs it.
+ 
+ @param borderColor A CGColorRef to which the border color will animate
+ */
+-(void)animateBorderColor:(CGColorRef)borderColor;
+
+/** Animates the layer's border width from it's current width to a new one.
+ 
+ Creates a CABasicAnimation contained within a CATransaction. This method also handles setting a completion block if the animation needs it.
+ 
+ @param borderWidth A CGFloat to which the border width will animate
+ */
+-(void)animateBorderWidth:(CGFloat)borderWidth;
+
+/** Animates the layer's corner radius from it's current width to a new one.
+ 
+ Creates a CABasicAnimation contained within a CATransaction. This method also handles setting a completion block if the animation needs it.
+ 
+ @param cornerRadius A CGFloat to which the corner radius width will animate
+ */
+-(void)animateCornerRadius:(CGFloat)cornerRadius;
+
+/** Animates the layer's z-position from it's current width to a new one.
+ 
+ Creates a CABasicAnimation contained within a CATransaction. This method also handles setting a completion block if the animation needs it.
+ 
+ @param zPosition A CGFloat to which the z-position will animate
+ */
+-(void)animateZPosition:(CGFloat)zPosition;
+
+/** Animates the layer's rotation angle (z-axis) from it's current width to a new one.
+ 
+ Creates a CABasicAnimation contained within a CATransaction. This method also handles setting a completion block if the animation needs it.
+ 
+ @param rotationAngle A CGFloat to which the z-axis rotation angle will animate
+ */
+-(void)animateRotation:(CGFloat)rotationAngle;
+
+/** Animates the layer's rotation angle (x-axis) from it's current width to a new one.
+ 
+ Creates a CABasicAnimation contained within a CATransaction. This method also handles setting a completion block if the animation needs it.
+ 
+ @param rotationAngle A CGFloat to which the x-axis rotation angle will animate
+ */
+-(void)animateRotationX:(CGFloat)rotationAngle;
+
+/** Animates the layer's rotation angle (y-axis) from it's current width to a new one.
+ 
+ Creates a CABasicAnimation contained within a CATransaction. This method also handles setting a completion block if the animation needs it.
+ 
+ @param rotationAngle A CGFloat to which the y-axis rotation angle will animate
+ */
+-(void)animateRotationY:(CGFloat)rotationAngle;
+
+/** Animates the layer's sublayer transform from it's current value to a new one.
+ 
+ Creates a CABasicAnimation contained within a CATransaction. This method also handles setting a completion block if the animation needs it.
+ 
+ @param layerTransform A CATransform3D structure to which the sublayer transform will animate
+ */
+-(void)animateLayerTransform:(CATransform3D)layerTransform;
 
 /** Convenience method for creating a CABasicAnimation.
  
@@ -106,8 +174,6 @@
  For immediate animations set this property to 0.0f;
  
  Defaults to 0.0f;
- 
- @param animationDuration A value in seconds for the length that a layer should set for its animations.
  */
 @property (nonatomic) CGFloat animationDuration;
 
@@ -121,16 +187,14 @@
  - EASEINOUT
  - EASEIN
  - EASEOUT
- - LINEAR 
+ - LINEAR
  
  This value can have a variety of options attached to it by using integer bitmasks. For example, to set an animation which will auto reverse and repeat:
  layer.animationOptions = AUTOREVERSE | REPEAT;
  
- @warning *Note:* All animation options should be set at the same time using the | bitmask operator. Animation options should never be set in the following way:
+ @warning *Note:* All animation options should be set at the same time using the | operator. Animation options should never be set in the following way:
  layer.animationOptions = AUTOREVERSE;
  layer.animationOptions = REPEAT;
- 
- @param animationOptions An integer which can be constructed from bitmasked values.
  */
 @property (nonatomic) NSUInteger animationOptions;
 
@@ -156,16 +220,17 @@
  */
 @property (readonly, nonatomic) BOOL repeats;
 
-#pragma mark New Stuff
--(void)animateBackgroundColor:(CGColorRef)_backgroundColor;
--(void)animateBorderColor:(CGColorRef)_borderColor;
--(void)animateBorderWidth:(CGFloat)_borderWidth;
--(void)animateCornerRadius:(CGFloat)_cornerRadius;
--(void)animateZPosition:(CGFloat)_zPosition;
--(void)animateRotation:(CGFloat)_rotationAngle;
--(void)animateRotationX:(CGFloat)_rotationAngle;
--(void)animateRotationY:(CGFloat)_rotationAngle;
--(void)animateLayerTransform:(CATransform3D)layerTransform;
+/**Specifies the perspective distance for x and y axis rotations.
+ 
+ Technically, this will set the perspective transform component of the receiver's transform to 1/value (i.e. the new value that is set). It will perform the following action:
+ 
+ `CATransform3D t = self.transform;
+ if(perspectiveDistance != 0.0f) t.m34 = 1/self.perspectiveDistance;
+ else t.m34 = 0.0f;
+ self.transform = t;`
+ 
+ Defaults to 0.
+ */
 @property (readwrite, nonatomic) CGFloat perspectiveDistance;
 
 @end

@@ -12,6 +12,5 @@
  
  @warning You should never have to access this object directly.
  */
-
 @interface C4EAGLLayer : CAEAGLLayer <C4LayerAnimation>
 @end

@@ -19,17 +19,6 @@ enum {
 };
 typedef NSUInteger C4GestureType;
 
-
-#if !defined(_C4AssertGestureType)
-#define C4AssertGestureType() \
-do {			\
-[(C4AssertionHandler *)[C4AssertionHandler currentHandler] \
-handleGestureTypeFailureInMethod:_cmd object:self \
-file:[NSString stringWithUTF8String:__FILE__] \
-lineNumber:__LINE__];\
-}while(0)
-#endif
-
 enum {
     SWIPEDIRRIGHT = UISwipeGestureRecognizerDirectionRight,
     SWIPEDIRLEFT = UISwipeGestureRecognizerDirectionLeft,

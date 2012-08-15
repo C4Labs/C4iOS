@@ -17,61 +17,7 @@ For more information about how to use windows, see View Programming Guide for iO
  @warning *Note:* in C4 you should never have to worry about constructing windows.
 */
 @interface C4Window : UIWindow <C4MethodDelay, C4Notification, C4AddSubview>
-/// @name Adding Object Methods
-#pragma mark Adding Objects
 
-/** Adds a C4Shape to the window.
- 
- Takes a C4Shape object and adds it to the view hierarchy.
- 
- Use this method instead of addSubview: when adding C4Shape objects, because if there are special conditions for adding shapes this method will handle those.
- 
- @param shape A C4Shape object.
- */
--(void)addShape:(C4Shape *)shape;
-
-/** Adds a C4Label to the window.
- 
- Takes a C4Label object and adds it to the view hierarchy.
- 
- Use this method instead of addSubview: when adding C4Label objects, because if there are special conditions for adding shapes this method will handle those.
- 
- @param label A C4Label object.
- */
-
--(void)addLabel:(C4Label *)label;
-
-/** Adds a C4GL to the window.
- 
- Takes a C4GL object and adds it to the view hierarchy.
- 
- Use this method instead of addSubview: when adding C4GL objects, because if there are special conditions for adding shapes this method will handle those.
- 
- @param gl A C4GL object.
- */
--(void)addGL:(C4GL *)gl;
-
-/** Adds a C4Image to the window.
- 
- Takes a C4Image object and adds it to the view hierarchy.
- 
- Use this method instead of addSubview: when adding C4Image objects, because if there are special conditions for adding shapes this method will handle those.
- 
- @param image A C4Image object.
- */
--(void)addImage:(C4Image *)image;
-
-/** Adds a C4Movie to the window.
- 
- Takes a C4Movie object and adds it to the view hierarchy.
- 
- Use this method instead of addSubview: when adding C4Movie objects, because if there are special conditions for adding shapes this method will handle those.
- 
- @param image A C4Movie object.
- */
--(void)addMovie:(C4Movie *)movie;
-
-/// @name Accessing the Root View Controller
 #pragma mark Root View Controller
 
 /** A controller which will be set at the window's root view controller.
@@ -85,10 +31,20 @@ For more information about how to use windows, see View Programming Guide for iO
 @property (readwrite, atomic, strong) C4CanvasController *canvasController;
 
 #pragma mark New Stuff
--(void)addCamera:(C4Camera *)camera;
 
-@property (readonly, nonatomic) CGFloat width, height;
-@property (readonly, nonatomic) CGPoint center;
+/** The width of the receiver's frame.
+ */
+@property (readonly, nonatomic) CGFloat width;
 
+/** The height of the receiver's frame.
+ */
+@property (readonly, nonatomic) CGFloat height;
+
+/** A method to remove another object from its subviews.
+ 
+ For the object in question, use this method to remove any visible object that was previously added to it as a subview.
+ 
+ @param visibleObject the visible object to remove from its parent view
+ */
 -(void)removeObject:(C4Control *)visibleObject;
 @end

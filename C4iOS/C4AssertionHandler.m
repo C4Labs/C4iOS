@@ -35,27 +35,4 @@
     C4Log(@"REASON: %@",reason);
     abort();
 }
-
--(void)handleGestureTypeAssertion:(int)givenType {
-    C4Log(@"The gesture type you tried to use (%d) is not TAP, PINCH, SWIPERIGHT, SWIPELEFT, SWIPEUP, SWIPEDOWN, ROTATION, PAN, or  LONGPRESS", givenType);
-    abort();
-}
-
--(void)handleGestureTypeFailureInFunction:(NSString *)functionName object:(id)object file:(NSString *)fileName lineNumber:(NSInteger)line {
-    C4Log(@"GESTURE TYPE ERROR");
-    C4Log(@"IN:     %@",[fileName lastPathComponent]);
-    C4Log(@"LINE:   %d",line);
-    C4Log(@"METHOD: %@",functionName);
-    C4Log(@"The gesture type you tried to use (%d) is not TAP, PINCH, SWIPERIGHT, SWIPELEFT, SWIPEUP, SWIPEDOWN, ROTATION, PAN, or LONGPRESS");
-    abort();
-}
-
--(void)handleGestureTypeFailureInMethod:(SEL)selector object:(id)object file:(NSString *)fileName lineNumber:(NSInteger)line {
-    C4Log(@"GESTURE TYPE ERROR");
-    C4Log(@"IN:     %@",[fileName lastPathComponent]);
-    C4Log(@"LINE:   %d",line);
-    C4Log(@"METHOD: %@",NSStringFromSelector(selector));
-    C4Log(@"The gesture you tried to use is not one of: TAP, PINCH, SWIPERIGHT, SWIPELEFT, SWIPEUP, SWIPEDOWN, ROTATION, PAN, or LONGPRESS");
-    abort();
-}
 @end

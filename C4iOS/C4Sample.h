@@ -150,8 +150,16 @@
  */
 @property (readwrite, nonatomic) NSInteger numberOfLoops;
 
-#pragma mark New Stuff
+/**A Boolean value that specifies the audio-level metering on/off state for the audio player.
+ 
+ The default value for the meteringEnabled property is off (Boolean NO). Before using metering for an audio player, you need to enable it by setting this property to YES. If player is an audio player instance variable of your controller class, you enable metering as shown here:
+ 
+ `[self.player setMeteringEnabled: YES];`
+ */
 @property (readwrite, nonatomic, getter = isMeteringEnabled) BOOL meteringEnabled;
+
+/**Specifies the player object for the audio sample.
+ */
 @property (readonly, nonatomic, strong) AVAudioPlayer *player;
 
 @end

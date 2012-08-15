@@ -83,8 +83,27 @@
  */
 -(void)animateStrokeStart:(CGFloat)strokeStart;
 
+/**The dash phase applied to the shape’s path when stroked. Animatable.
+ 
+ Line dash phase specifies how far into the dash pattern the line starts.
+ 
+ Default is 0.
+ 
+ @param lineDashPhase The new value to which the lineDashPhase will change.
+ */
 -(void)animateLineDashPhase:(CGFloat)lineDashPhase;
 
+/**Specifies the perspective distance for x and y axis rotations.
+ 
+ Technically, this will set the perspective transform component of the receiver's transform to 1/value (i.e. the new value that is set). It will perform the following action:
+ 
+ `CATransform3D t = self.transform;
+ if(perspectiveDistance != 0.0f) t.m34 = 1/self.perspectiveDistance;
+ else t.m34 = 0.0f;
+ self.transform = t;`
+ 
+ Defaults to 0.
+ */
 @property (readwrite, nonatomic) CGFloat perspectiveDistance;
 
 @end

@@ -36,13 +36,20 @@
     return self;
 }
 
+-(void)addCamera:(C4Camera *)camera {
+    C4Assert([camera isKindOfClass:[C4Camera class]],
+             @"You tried to add a %@ using [canvas addCamera:]", [camera class]);
+    [super addSubview:camera];
+}
+
 -(void)addShape:(C4Shape *)shape {
-    C4Assert([shape isKindOfClass:[C4Shape class]], 
+    C4Assert([shape isKindOfClass:[C4Shape class]],
              @"You tried to add a %@ using [canvas addShape:]", [shape class]);
     [super addSubview:shape];
 }
 
 -(void)addSubview:(UIView *)subview {
+    C4Assert(![[subview class] isKindOfClass:[C4Camera class]], @"You just tried to add a C4Camera using the addSubview: method, please use addCamera:");
     C4Assert(![[subview class] isKindOfClass:[C4Shape class]], @"You just tried to add a C4Shape using the addSubview: method, please use addShape:");
     C4Assert(![[subview class] isKindOfClass:[C4Movie class]], @"You just tried to add a C4Movie using the addSubview: method, please use addMovie:");
     C4Assert(![[subview class] isKindOfClass:[C4Image class]], @"You just tried to add a C4Image using the addSubview: method, please use addImage:");
@@ -231,7 +238,6 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(methodName) name:notification object:object];
     }
 }
-
 
 -(void)stopListeningFor:(NSString *)methodName {
     [self stopListeningFor:methodName object:nil];

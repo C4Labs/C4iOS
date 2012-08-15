@@ -142,7 +142,17 @@
  */
 @property (atomic) BOOL shouldAutoplay;
 
+/**Specifies the audio mix for the movie.
+ */
 @property (readonly, nonatomic, strong) AVMutableAudioMix *audioMix;
+
+/**Specifies the volume of the movie.
+ 
+ This value ranges from 0 to 1.
+ */
 @property (readwrite, nonatomic) CGFloat volume;
+
+/**Specifies the size of the movie. Animatable.
+ */
 @property (readwrite, nonatomic) CGSize size;
 @end

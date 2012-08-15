@@ -7,10 +7,10 @@
 //
 
 #import "C4Camera.h"
+#import "C4CameraController.h"
 
 @interface C4Camera ()
 -(void)imageWasCaptured;
-//-(void)_setCapturedImage:(C4Image *)capturedImage;
 
 @property (readwrite, strong, nonatomic) C4CameraController *cameraController;
 @property (readwrite, strong, nonatomic) C4CaptureVideoPreviewLayer *previewLayer;

@@ -20,5 +20,17 @@
 
 @interface C4Layer : CALayer <C4LayerAnimation> {
 }
+
+/**Specifies the perspective distance for x and y axis rotations.
+ 
+ Technically, this will set the perspective transform component of the receiver's transform to 1/value (i.e. the new value that is set). It will perform the following action:
+ 
+ `CATransform3D t = self.transform;
+ if(perspectiveDistance != 0.0f) t.m34 = 1/self.perspectiveDistance;
+ else t.m34 = 0.0f;
+ self.transform = t;`
+ 
+ Defaults to 0.
+ */
 @property (readwrite, nonatomic) CGFloat perspectiveDistance;
 @end

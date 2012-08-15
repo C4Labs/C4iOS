@@ -45,6 +45,18 @@
  */
 +(C4Image *)imageWithImage:(C4Image *)image;
 
+/**Creates and returns a new image using an array of image names.
+
+ @param imageNames A C4Image whose contents will be used to create a new C4Image object.
+ */
++(C4Image *)animatedImageWithNames:(NSArray *)imageNames;
+
+/**Creates and returns a new image using an NSData object.
+ 
+ @param imageData An NSData object.
+ */
++(C4Image *)imageWithData:(NSData *)imageData;
+
 /**Initializes an image using a file with the given name.
  
  This method will look for a file with the given name in the application's local directory. If it cannot find the image it will cause an assertion error.
@@ -59,11 +71,67 @@
  */
 -(id)initWithImage:(C4Image *)image;
 
+/**Initializes a C4Image using an NSData object
+ 
+ @param imageData an NSData object
+ */
+-(id)initWithData:(NSData *)imageData;
+
+/**Initializes a C4Image using an array of raw data.
+ 
+ The raw data is assumed to be RGBA with 8 bits per component.
+ 
+ @param data An `unsigned char` data array of values
+ @param width The width of the image to create
+ @param height The height of the image to create
+ */
+-(id)initWithRawData:(unsigned char *)data width:(NSInteger)width height:(NSInteger)height;
+
+/**Initializes a C4Image using a CGImageRef object
+ 
+ @param image A CGImageRef whose contents will be used to create a new C4Image object.
+ */
+-(id)initWithCGImage:(CGImageRef)image;
+
+/**Initializes an animated image using a set of files with the specified names.
+ 
+ This method will look for a series of files with the given names in the application's local directory. If it cannot find the image it will cause an assertion error.
+ 
+ @param imageNames An array of image names to be used to construct the animated image
+ */
+-(id)initAnimatedImageWithNames:(NSArray *)imageNames;
+
 /**Sets the current visible representation of a C4Image to that of another image.
  
  @param image A C4Image whose contents will be used to set the visible representation of the receiver.
  */
 -(void)setImage:(C4Image *)image;
+
+/**Causes an animatedImage to start playing.
+ */
+-(void)play;
+
+/**Causes an animatedImage to stop playing.
+ */
+-(void)stop;
+
+/**Loads a raw character array with color data.
+ 
+ This will load the array one time, and must be called before colorAt: or rgbVectorAt:
+ */
+-(void)loadPixelData;
+
+/**Creates and returns a UIColor object from the specified coordinate in the image.
+ 
+ @param point The coordinate in the image from which to pull color values
+ */
+-(UIColor *)colorAt:(CGPoint)point;
+
+/**Creates and returns a C4Vector object containing 4 points mapping to the RGBA value from the specified coordinate in the image.
+ 
+ @param point The coordinate in the image from which to pull color values
+ */
+-(C4Vector *)rgbVectorAt:(CGPoint)point;
 
 #pragma mark Filters
 /// @name Filters
@@ -447,32 +515,52 @@
  */
 @property (readonly, nonatomic) CGImageRef CGImage;
 
-#pragma mark New Stuff
-+(C4Image *)animatedImageWithNames:(NSArray *)imageNames;
--(id)initAnimatedImageWithNames:(NSArray *)imageNames;
--(void)play;
--(void)stop;
-
-@property (readwrite, atomic) CFMutableArrayRef animatedImages;
+/**Specifies whether or not an image is animated.
+ */
 @property (readonly, nonatomic, getter = isAnimatedImage) BOOL animatedImage;
+
+/**Specifies the array of CGImageRef images used for animating.
+ 
+ This array is filled when the animatedImage is created using the appropriate constructor.
+ */
+@property (readwrite, atomic) CFMutableArrayRef animatedImages;
+
+/**Specifies the duration for the entire animation.
+ 
+ Setting this value, the animatedImage will automatically calculate how long each image in its array will be visible. 
+ 
+ The duration for each image is consistent, for example a 2-second animation consisting of 10 frames will display each image for 0.2 seconds. 
+ */
 @property (readwrite, atomic) CGFloat animatedImageDuration;
 
-+(C4Image *)imageWithData:(NSData *)imageData;
--(id)initWithData:(NSData *)imageData;
-
--(void)loadPixelData;
--(UIColor *)colorAt:(CGPoint)point;
--(C4Vector *)rgbVectorAt:(CGPoint)point;
-
-@property (readwrite, nonatomic) CGFloat width;
-@property (readwrite, nonatomic) CGFloat height;
-@property (readwrite, nonatomic) CGSize size;
-
-@property (readonly, nonatomic) CGSize originalSize;
+/**Specifies the original ratio (width / height) of the image.
+ */
 @property (readonly, nonatomic) CGFloat originalRatio;
 
--(id)initWithRawData:(unsigned char *)data width:(NSInteger)width height:(NSInteger)height;
--(id)initWithCGImage:(CGImageRef)image;
+/**Specifies the height of the image. Animatable.
+ 
+ Setting this property will actually change the frame of the object.
+ */
+@property (readwrite, nonatomic) CGFloat height;
+
+/**Specifies the width of the image. Animatable.
+ 
+ Setting this property will actually change the frame of the object.
+ */
+@property (readwrite, nonatomic) CGFloat width;
+
+/**Specifies the size of the image. Animatable.
+ 
+ Setting this property will actually change the frame of the object.
+ */
+@property (readwrite, nonatomic) CGSize size;
+
+/**Specifies the original size of the of the image.
+ */
+@property (readonly, nonatomic) CGSize originalSize;
+
+/**Specifies whether or not the image has loaded its pixel data.
+ */
 @property (readonly, nonatomic) BOOL pixelDataLoaded;
 
 @end

@@ -60,12 +60,28 @@
  */
 -(void)test;
 
+/** A method to remove another object from its subviews.
+ 
+ For the object in question, use this method to remove any visible object that was previously added to it as a subview.
+
+ @param visibleObject the visible object to remove from its parent view
+ */
+-(void)removeObject:(C4Control *)visibleObject;
+
+/** A convenience method used for handling the rotation of a visual object's view after its z-rotation has changed.
+ 
+ You shouldn't use this method, it will be deprecated in future versions.
+
+ @param rotation the value (in radians) to rotate the receiver
+ */
+-(void)rotationDidFinish:(CGFloat)rotation;
+
 /// @name Setting A Control's Origin Point
 /** The origin point of the view.
 
  Takes a CGPoint and animates the view's origin position from its current point to the new point.
  
- This method positions the origin point of the current view by calculating the difference between this point and what the view's new center point will be. It then initiates the animation by setting the displaced new center point. 
+ This method positions the origin point of the current view by calculating the difference between this point and what the view's new center point will be. It then initiates the animation by setting the displaced new center point.
  */
 @property (nonatomic) CGPoint origin;
 
@@ -122,23 +138,8 @@
  */
 @property (nonatomic) CGFloat repeatCount;
 
-#pragma mark Inherited methods
-///@name Inherited Methods
-
-@property (readonly, nonatomic) CGFloat width, height;
-
-@property (readwrite, nonatomic, assign) C4Control *mask;
-
-@property (readwrite, nonatomic) CGFloat borderWidth, cornerRadius, zPosition;
-@property (readwrite, nonatomic, weak) UIColor *borderColor;
-@property (readwrite, nonatomic) BOOL masksToBounds;
--(void)removeObject:(C4Control *)visibleObject;
-@property (readwrite, nonatomic) CGFloat rotation, rotationX, rotationY;
--(void)rotationDidFinish:(CGFloat)rotation;
--(void)rotationXDidFinish:(CGFloat)rotation;
-@property (readwrite, nonatomic) CATransform3D layerTransform;
-@property (readwrite, nonatomic) CGPoint anchorPoint;
-@property (readwrite, nonatomic) CGFloat perspectiveDistance;
+#pragma mark Shadow Properties
+///@name ShadowProperties
 
 /**Specifies the blur radius used to render the receiver’s shadow. 
  
@@ -175,5 +176,97 @@
  */
 @property (readwrite, nonatomic) CGPathRef shadowPath;
 
+#pragma mark Other Properties
+///@name Other Properties
+/**Determines if the sublayers are clipped to the receiver’s bounds. Animatable.
+
+ If YES, an implicit mask matching the layer bounds is applied to the layer, including the effects of the cornerRadius property. If YES and a mask property is specified, the two masks are multiplied to get the actual mask values. Defaults to NO.
+ */
+@property (readwrite, nonatomic) BOOL masksToBounds;
+
+/**Specifies a transform applied to each sublayer when rendering. Animatable.
+ 
+ This property is typically used as the projection matrix to add perspective and other viewing effects to the receiver. Defaults to the identity transform.
+ */
+@property (readwrite, nonatomic) CATransform3D layerTransform;
+
+/**An optional layer whose alpha channel is used as a mask to select between the layer's background and the result of compositing the layer's contents with its filtered background.
+
+ Defaults to nil.
+ */
+@property (readwrite, nonatomic, assign) C4Control *mask;
+
+/** The width of the receiver's frame.
+ */
+@property (readonly, nonatomic) CGFloat width;
+
+/** The height of the receiver's frame.
+ */
+@property (readonly, nonatomic) CGFloat height;
+
+/**Specifies the width of the receiver’s border. Animatable.
+ 
+ The border is drawn inset from the receiver’s bounds by borderWidth. It is composited above the receiver’s contents and sublayers and includes the effects of the cornerRadius property. The default is 0.0.
+ */
+@property (readwrite, nonatomic) CGFloat borderWidth;
+
+/**Specifies a radius used to draw the rounded corners of the receiver’s background. Animatable.
+ 
+ If the radius is greater than 0 the background is drawn with rounded corners. The default value is 0.0.
+ */
+@property (readwrite, nonatomic) CGFloat cornerRadius;
+
+/**Specifies the receiver’s position on the z axis. Animatable.
+ 
+ Defaults to 0.
+ */
+@property (readwrite, nonatomic) CGFloat zPosition;
+
+/**Specifies the receiver's z-axis rotation value. Animatable.
+ 
+ Setting this value will rotate the receiver around its anchorPoint.
+ */
+@property (readwrite, nonatomic) CGFloat rotation;
+
+/**Specifies the receiver's x-axis rotation value. Animatable.
+ 
+ Setting this value will rotate the receiver around its anchorPoint.
+ */
+@property (readwrite, nonatomic) CGFloat rotationX;
+
+/**Specifies the receiver's y-axis rotation value. Animatable.
+ 
+ Setting this value will rotate the receiver around its anchorPoint.
+ */
+@property (readwrite, nonatomic) CGFloat rotationY;
+
+/**Specifies the perspective distance for x and y axis rotations.
+ 
+ Technically, this will set the perspective transform component of the receiver's transform to 1/value (i.e. the new value that is set). It will perform the following action:
+ 
+ `CATransform3D t = self.transform;
+ if(perspectiveDistance != 0.0f) t.m34 = 1/self.perspectiveDistance;
+ else t.m34 = 0.0f;
+ self.transform = t;`
+ 
+ Defaults to 0.
+ */
+@property (readwrite, nonatomic) CGFloat perspectiveDistance;
+
+/**Defines the anchor point of the layer's bounds rectangle. Animatable.
+ 
+ Described in the unit coordinate space. The value of this property is specified in points. Defaults to (0.5, 0.5), the center of the bounds rectangle.
+ 
+ See “Layer Geometry and Transforms” in Core Animation Programming Guide for more information on the relationship between the bounds, anchorPoint and position properties.
+ */
+@property (readwrite, nonatomic) CGPoint anchorPoint;
+
+/**The color of the receiver’s border. Animatable.
+ 
+ Defaults to opaque black.
+ 
+ The value of this property is retained using the Core Foundation retain/release semantics. This behavior occurs despite the fact that the property declaration appears to use the default assign semantics for object retention.
+ */
+@property (readwrite, nonatomic, weak) UIColor *borderColor;
 
 @end

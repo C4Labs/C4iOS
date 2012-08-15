@@ -69,6 +69,7 @@
  @param radius The radius of the arc.
  @param startAngle The starting angle of the arc, in radians in the range of (0 .. 2*PI)
  @param endAngle The ending angle of the arc, in radians in the range of (0 .. 2*PI)
+ @param clockwise A Boolean value specifying whether or not the arc will draw in a clockwise direction from the start to end angle
  @return The initialized C4Shape object created with an arc path or nil if initialization is not successful.
  */
 +(C4Shape *)arcWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise;
@@ -79,6 +80,7 @@
  @param radius The radius of the wedge.
  @param startAngle The starting angle of the wedge, in radians in the range of (0 .. 2*PI)
  @param endAngle The ending angle of the wedge, in radians in the range of (0 .. 2*PI)
+ @param clockwise A Boolean value specifying whether or not the wedge will draw in a clockwise direction from the start to end angle
  @return The initialized C4Shape object created with a wedge path or nil if initialization is not successful.
  */
 +(C4Shape *)wedgeWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise;
@@ -158,6 +160,7 @@ The change will happen based on the shape's current animation options, duration 
  @param centerPoint The center point of the arc.
  @param radius The radius of the arc.
  @param startAngle The starting angle of the arc, in radians in the range of (0 .. 2*PI)
+ @param clockwise A Boolean value specifying whether or not the arc will draw in a clockwise direction from the start to end angle
  @param endAngle The ending angle of the arc, in radians in the range of (0 .. 2*PI)
  */
 -(void)arcWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise;
@@ -169,6 +172,7 @@ The change will happen based on the shape's current animation options, duration 
  @param centerPoint The center point of the wedge.
  @param radius The radius of the wedge.
  @param startAngle The starting angle of the wedge, in radians in the range of (0 .. 2*PI)
+ @param clockwise A Boolean value specifying whether or not the wedge will draw in a clockwise direction from the start to end angle
  @param endAngle The ending angle of the wedge, in radians in the range of (0 .. 2*PI)
  */
 -(void)wedgeWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise;

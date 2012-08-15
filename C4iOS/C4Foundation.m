@@ -138,7 +138,4 @@ CGRect CGRectMakeFromWedgeComponents(CGPoint centerPoint, CGFloat radius, CGFloa
     return arcRect;
 }
 
-//void uncaughtExceptionHandler(NSException *exception) {
-////    C4Log(@"EXCEPTION: %@", exception);
-//}
 @end

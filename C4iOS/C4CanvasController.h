@@ -9,74 +9,51 @@
 #import <UIKit/UIKit.h>
 @class C4Window;
 
+/** The C4CanvasController class provides control over the main canvas in C4.
+ 
+ This class is the superclass of C4WorkSpace and handles all the dirty work that isn't present therein.
+ 
+ @warning This class should only be used internally by the C4WorkSpace object and not subclassed or used explicitly.
+ */
 @interface C4CanvasController : UIViewController <AVAudioSessionDelegate, C4Gesture, C4Notification, C4MethodDelay, C4AddSubview> {
 }
+
+///@name Instance Methods
+/** The setup method for the canvas.
+ 
+ This method is called at the end of the application's launch cycle.
+ 
+ You should code everything you want your application to do, prior to loading, in this method.
+ */
 -(void)setup;
 
-#pragma mark Adding Objects
-/** Adds a C4Shape to the view.
+#pragma mark C4Camera Callback
+
+/** A callback method for the current C4Camera object.
  
- Takes a C4Shape object and adds it to the view hierarchy.
+ After a C4Camera captures an image it posts a notification. The canvas listens for when the camera's image is ready to use and then automatically triggers this method.
  
- Use this method instead of addSubview: when adding C4Shapes, because if there are special conditions for adding shapes this method will handle those.
+ For instance, if you call:
  
- @param aShape A C4Shape object.
+ `[camera captureImage];`
+ 
+ ... a few moments later, when the captured image is ready to use, the canvas will *automatically* call:
+ 
+ `[self imageWasCaptured];`
  */
--(void)addShape:(C4Shape *)shape;
+-(void)imageWasCaptured;
 
-/** Adds a C4Label to the view.
+///@name Properties
+/** The application's main canvas.
  
- Takes a C4Label object and adds it to the view hierarchy.
+ This property references the main canvas for the application, you can access the canvas to perform actions such as:
  
- Use this method instead of addSubview: when adding C4Labels, because if there are special conditions for adding shapes this method will handle those.
+ `[self.canvas addShape:s];`
  
- @param aLabel A C4Label object.
+ or to set properties such as:
+ 
+ `self.canvas.backgroundColor = [UIColor ...];`
  */
--(void)addLabel:(C4Label *)label;
-
-/// @name Setting A View's Origin Point
-/** The origin point of the view.
- 
- Takes a CGPoint and animates the view's origin position from its current point to the new point.
- 
- This method positions the origin point of the current view by calculating the difference between this point and what the view's new center point will be. It then initiates the animation by setting the displaced new center point.
- */
-
-/** Adds a C4GL to the view.
- 
- Takes a C4GL object and adds it to the view hierarchy.
- 
- Use this method instead of addSubview: when adding C4GL objects, because if there are special conditions for adding shapes this method will handle those.
- 
- @param gl A C4GL object.
- */
--(void)addGL:(C4GL *)gl;
-
-/** Adds a C4Image to the view.
- 
- Takes a C4Image object and adds it to the view hierarchy.
- 
- Use this method instead of addSubview: when adding C4Image objects, because if there are special conditions for adding shapes this method will handle those.
- 
- @param image A C4Image object.
- */
--(void)addImage:(C4Image *)image;
-
-/** Adds a C4Movie to the view.
- 
- Takes a C4Movie object and adds it to the view hierarchy.
- 
- Use this method instead of addSubview: when adding C4Movie objects, because if there are special conditions for adding shapes this method will handle those.
- 
- @param image A C4Movie object.
- */
--(void)addMovie:(C4Movie *)movie;
-
-@property (nonatomic) CGPoint origin;
-
 @property (readonly, strong, nonatomic) C4Window *canvas;
 
-#pragma mark New Stuff
--(void)addCamera:(C4Camera *)camera;
--(void)imageWasCaptured;
 @end

@@ -19,7 +19,7 @@
 @protocol C4Notification <NSObject>
 
 #pragma mark Listen Methods
-/// @name Listen Methods
+///@name Notification Methods
 
 /** Sets up a given object to listen for a given notification, and run a specific method.
  
@@ -48,6 +48,18 @@
  */
 -(void)listenFor:(NSString *)notification fromObject:(id)object andRunMethod:(NSString *)methodName;
 
+/** Sets up a given object to listen for a given notification _from an array of objects_, and runs a specific method.
+ 
+ This method is a basic wrapper for setting up an observer which listens for a specific notification from a specified set of objects.
+ 
+ This method calls the addObserver:selector:name:object method of the default NotificationCenter for all the objects in the array.
+ 
+ @param notification the name of a notification for which the object should listen
+ @param objectArray a set of object to listen to
+ @param methodName a string which represents the name of a method defined in the object's class or any of its superclasses, this parameter should be written as a string (e.g. @"test", @"changePosition:")
+ */
+-(void)listenFor:(NSString *)notification fromObjects:(NSArray *)objectArray andRunMethod:(NSString *)methodName;
+
 /** Stops an object from listening for a given notification.
  
  This method is a basic wrapper for removing an observer from the notification center.
@@ -69,6 +81,17 @@
  */
 -(void)stopListeningFor:(NSString *)methodName object:(id)object;
 
+/** Stops an object from listening for a given notification which originates from a set of specific objects.
+ 
+ This method is a basic wrapper for removing an observer from the notification center.
+ 
+ This method calls the removeObserver:name:object: method of the default notification center passing all of the specific objects in the given array.
+ 
+ @param methodName the name of a notification for which the object should stop listening
+ @param objectArray the set of objects for which to stop listening
+ */
+-(void)stopListeningFor:(NSString *)methodName objects:(NSArray *)objectArray;
+
 #pragma mark Broadcast Methods
 /// @name Broadcast Methods
 
@@ -80,7 +103,4 @@
  */
 -(void)postNotification:(NSString *)notification;
 
-#pragma mark New Stuff
--(void)listenFor:(NSString *)notification fromObjects:(NSArray *)objectArray andRunMethod:(NSString *)methodName;
--(void)stopListeningFor:(NSString *)methodName objects:(NSArray *)objectArray;
 @end

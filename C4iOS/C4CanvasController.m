@@ -19,7 +19,6 @@
 @synthesize canvas = _canvas;
 @synthesize longPressMethodName;
 @synthesize gestureDictionary = _gestureDictionary;
-@synthesize origin;
 
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -50,6 +49,14 @@
 
 -(C4Window *)canvas {
     return (C4Window *)self.view;
+}
+
+-(void)addCamera:(C4Camera *)camera {
+    C4Assert([camera isKindOfClass:[C4Camera class]],
+             @"You tried to add a %@ using [canvas addCamera:]", [camera class]);
+    [self.canvas addSubview:camera];
+    [camera initCapture];
+    [self listenFor:@"imageWasCaptured" fromObject:camera andRunMethod:@"imageWasCaptured"];
 }
 
 -(void)addShape:(C4Shape *)shape {
@@ -110,13 +117,6 @@
 }
 
 #pragma mark New Stuff
--(void)addCamera:(C4Camera *)camera {
-    C4Assert([camera isKindOfClass:[C4Camera class]],
-             @"You tried to add a %@ using [canvas addCamera:]", [camera class]);
-    [self.canvas addSubview:camera];
-    [camera initCapture];
-    [self listenFor:@"imageWasCaptured" fromObject:camera andRunMethod:@"imageWasCaptured"];
-}
 
 -(void)imageWasCaptured {
     

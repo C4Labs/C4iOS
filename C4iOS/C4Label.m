@@ -51,6 +51,7 @@
 @synthesize width = _width, height = _height;
 @synthesize animationOptions = _animationOptions;
 @synthesize shouldAutoreverse = _shouldAutoreverse;
+@synthesize size = _size;
 
 -(id)init {
     return [self initWithFrame:CGRectZero];
@@ -327,6 +328,8 @@
     return [C4Layer class];
 }
 
+
+/*
 -(void)setWidth:(CGFloat)width {
     _width = width;
     self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, width, self.frame.size.height);
@@ -343,6 +346,41 @@
 
 -(CGFloat)height {
     return self.frame.size.height;
+}
+*/
+
+-(CGFloat)width {
+    return self.frame.size.width;
+}
+
+-(void)setWidth:(CGFloat)width {
+    _width = width;
+    CGRect newFrame = self.frame;
+    newFrame.size.width = width;
+    self.frame = newFrame;
+}
+
+-(CGFloat)height {
+    return self.frame.size.height;
+}
+
+-(void)setHeight:(CGFloat)height {
+    _height = height;
+    CGRect newFrame = self.frame;
+    newFrame.size.height = height;
+    self.frame = newFrame;
+}
+
+-(CGSize)size {
+    return self.frame.size;
+}
+
+-(void)setSize:(CGSize)size {
+    _size = size;
+    CGRect newFrame = CGRectZero;
+    newFrame.origin = self.origin;
+    newFrame.size = size;
+    self.frame = newFrame;
 }
 
 -(void)setAnimationOptions:(NSUInteger)animationOptions {

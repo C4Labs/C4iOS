@@ -23,6 +23,10 @@
 - (void)setup;
 
 /**Default method for handling layer size changes.
+ 
+ The default implementation is in C4EAGLES1Renderer.m, have a look there if you need to write your own.
+ 
+ @param layer The underlying CAEAGLLayer from which to resize.
  */
 - (BOOL)resizeFromLayer:(CAEAGLLayer*)layer;
 

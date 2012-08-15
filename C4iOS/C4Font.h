@@ -40,6 +40,14 @@
  */
 - (C4Font *)fontWithSize:(CGFloat)fontSize;
 
+/** Initializes a font object using the specified font name and size.
+ 
+ @param fontName The fully specified name of the font. This name incorporates both the font family name and the specific style information for the font.
+ @param fontSize The size (in points) to which the font is scaled. This value must be greater than 0.0.
+ @return A C4Font object of the specified size;
+ */
+-(id)initWithName:(NSString *)fontName size:(CGFloat)fontSize;
+
 /** Returns an array of font family names available on the system.
 
  Font family names correspond to the base name of a font, such as Times New Roman. You can pass the returned strings to the fontNamesForFamilyName: method to retrieve a list of font names available for that family. You can then use the corresponding font name to retrieve an actual font object.
@@ -80,7 +88,6 @@
 
 /// @name Properties
 #pragma mark Properties
-
 
 /** The main font object from which all other methods refer. 
  
@@ -151,7 +158,4 @@
 /** The height of text lines (measured in points). (read-only)
  */
 @property(nonatomic,readonly)           CGFloat   lineHeight;
-
-#pragma mark New Stuff
--(id)initWithName:(NSString *)fontName size:(CGFloat)fontSize;
 @end

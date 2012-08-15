@@ -566,11 +566,14 @@
 -(void)rotationDidFinish:(CGFloat)rotation {
     [super setTransform:CGAffineTransformMakeRotation(rotation)];
 }
--(void)rotationXDidFinish:(CGFloat)rotation {
-//    [super setTransform:CGAffineTransformM]
-}
 
 #pragma mark C4AddSubview
+-(void)addCamera:(C4Camera *)camera {
+    C4Assert([camera isKindOfClass:[C4Camera class]],
+             @"You tried to add a %@ using [canvas addShape:]", [camera class]);
+    [super addSubview:camera];
+}
+
 -(void)addShape:(C4Shape *)shape {
     C4Assert([shape isKindOfClass:[C4Shape class]], 
              @"You tried to add a %@ using [canvas addShape:]", [shape class]);
@@ -578,6 +581,7 @@
 }
 
 -(void)addSubview:(UIView *)subview {
+    C4Assert(![[subview class] isKindOfClass:[C4Camera class]], @"You just tried to add a C4Camera using the addSubview: method, please use addCamera:");
     C4Assert(![[subview class] isKindOfClass:[C4Shape class]], @"You just tried to add a C4Shape using the addSubview: method, please use addShape:");
     C4Assert(![[subview class] isKindOfClass:[C4Movie class]], @"You just tried to add a C4Movie using the addSubview: method, please use addMovie:");
     C4Assert(![[subview class] isKindOfClass:[C4Image class]], @"You just tried to add a C4Image using the addSubview: method, please use addImage:");

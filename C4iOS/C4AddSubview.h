@@ -12,8 +12,23 @@
 @class C4Label;
 @class C4Movie;
 @class C4Shape;
+@class C4Camera;
 
+/** The C4AddSubview protocol defines a set of methods for adding objects to the canvas and to one another.
+ 
+ All visual objects in C4 conform to this protocol, its purpose is to make sure that the proper method is used for adding a given object to the canvas or to another object.
+ */
 @protocol C4AddSubview <NSObject>
+/** Adds a C4Camera to the view.
+ 
+ Takes a C4Camera object and adds it to the view hierarchy.
+ 
+ Use this method instead of addSubview: when adding C4Objects, because if there are special conditions for adding cameras this method will handle those.
+ 
+ @param camera A C4Camera object.
+ */
+-(void)addCamera:(C4Camera *)camera;
+
 /** Adds a C4GL to the view.
  
  Takes a C4GL object and adds it to the view hierarchy.
@@ -60,7 +75,7 @@
  
  Use this method instead of addSubview: when adding C4Shapes, because if there are special conditions for adding shapes this method will handle those.
  
- @param aShape A C4Shape object.
+ @param shape A C4Shape object.
  */
 -(void)addShape:(C4Shape *)shape;
 
