@@ -7,6 +7,7 @@
 //
 
 #import "C4Movie.h"
+#import "C4YouTubeURLParser.h"
 
 @interface C4Movie()
 - (CMTime)playerItemDuration;
@@ -48,33 +49,114 @@
 @synthesize size = _size;
 
 +(C4Movie *)movieNamed:(NSString *)movieName {
-    C4Movie *newMovie = [[C4Movie alloc] initWithMovieName:movieName andFrame:CGRectZero];
+    C4Movie *newMovie = [[C4Movie alloc] initWithMovieName:movieName frame:CGRectZero];
     return newMovie;
 }
 
 +(C4Movie *)movieNamed:(NSString *)movieName inFrame:(CGRect)movieFrame {
-    C4Movie *newMovie = [[C4Movie alloc] initWithMovieName:movieName andFrame:movieFrame];
+    C4Movie *newMovie = [[C4Movie alloc] initWithMovieName:movieName frame:movieFrame];
     return newMovie;
 }
 
--(id)initWithMovieName:(NSString *)movieName {
-    self = [self initWithMovieName:movieName andFrame:CGRectZero];
++(C4Movie *)movieWithURL:(NSString *)url {
+    C4Movie *newMovie = [[C4Movie alloc] initWithURL:[NSURL URLWithString:url] frame:CGRectZero];
+    return newMovie;
+}
+
++(C4Movie *)movieWithURL:(NSString *)url frame:(CGRect)movieFrame {
+    C4Movie *newMovie = [[C4Movie alloc] initWithURL:[NSURL URLWithString:url] frame:movieFrame];
+    return newMovie;
+}
+
++(C4Movie *)movieWithYouTubeURL:(NSString *)youtubeURL {
+    C4Movie *newMovie = [[C4Movie alloc] initWithYouTubeURL:youtubeURL];
+    return newMovie;
+}
+
++(C4Movie *)movieWithYouTubeURL:(NSString *)youtubeURL size:(C4YouTubeSize)movieSize {
+    C4Movie *newMovie = [[C4Movie alloc] initWithYouTubeURL:youtubeURL size:movieSize];
+    return newMovie;
+}
+
++(C4Movie *)movieWithYouTubeURL:(NSString *)youtubeURL frame:(CGRect)movieFrame {
+    C4Movie *newMovie = [[C4Movie alloc] initWithYouTubeURL:youtubeURL frame:movieFrame];
+    return newMovie;
+}
+
++(C4Movie *)movieWithYouTubeURL:(NSString *)youtubeURL size:(C4YouTubeSize)movieSize frame:(CGRect)movieFrame {
+    C4Movie *newMovie = [[C4Movie alloc] initWithYouTubeURL:youtubeURL size:movieSize frame:movieFrame];
+    return newMovie;
+}
+
+-(id)initWithYouTubeURL:(NSString *)url {
+    self = [self initWithYouTubeURL:url size:YT1080 frame:CGRectZero];
+    return  self;
+}
+
+-(id)initWithYouTubeURL:(NSString *)url frame:(CGRect)movieFrame {
+    self = [self initWithYouTubeURL:url size:YT1080 frame:movieFrame];
     return self;
 }
 
--(id)initWithMovieName:(NSString *)movieName andFrame:(CGRect)movieFrame {
+-(id)initWithYouTubeURL:(NSString *)url size:(C4YouTubeSize)ytMovieSize {
+    self = [self initWithYouTubeURL:url size:ytMovieSize frame:CGRectZero];
+    return self;
+}
+-(id)initWithYouTubeURL:(NSString *)url size:(C4YouTubeSize)ytMovieSize frame:(CGRect)movieFrame {
+    NSURL *newURL = [NSURL URLWithString:url];
+    C4YouTubeURLParser *parser = [C4YouTubeURLParser parserWithURL:newURL];
+    NSURL *actualURL;
+    for (int i = ytMovieSize; i >= 0; i--) {
+        switch (i) {
+            case YT1080:
+                actualURL = parser.large1080;
+                break;
+            case YT720:
+                actualURL = parser.large720;
+                break;
+            case YTMEDIUM:
+                actualURL = parser.medium;
+                break;
+            default:
+                actualURL = parser.small;
+                break;
+        }
+        if(actualURL != nil) break;
+    }
+    C4Assert(actualURL != nil, @"The C4YouTubeURLParser could not find a valid url for any of the sizes: small, medium, 720p, or 1080p");
+    self = [self initWithURL:actualURL frame:movieFrame];
+    return self;
+}
+
+-(id)initWithMovieName:(NSString *)movieName {
+    self = [self initWithMovieName:movieName frame:CGRectZero];
+    return self;
+}
+
+-(id)initWithMovieName:(NSString *)movieName frame:(CGRect)movieFrame {
+    NSArray *movieNameComponents = [movieName componentsSeparatedByString:@"."];
+    movieURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:[movieNameComponents objectAtIndex:0]
+                                                                                  ofType:[movieNameComponents objectAtIndex:1]]];
+    self = [self initWithURL:movieURL frame:movieFrame];
+    return self;
+}
+
+-(id)initWithURL:(NSURL *)url {
+    self = [self initWithURL:url frame:CGRectZero];
+    return self;
+}
+
+-(id)initWithURL:(NSURL *)url frame:(CGRect)movieFrame {
     self = [super init];
-    if(self != nil) {        
+    if(self != nil) {
         _volume = 1.0f;
         self.shouldAutoplay = NO;
-        NSArray *movieNameComponents = [movieName componentsSeparatedByString:@"."];
-        movieURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:[movieNameComponents objectAtIndex:0]
-                                                                                      ofType:[movieNameComponents objectAtIndex:1]]];
+        movieURL = url;
         if([movieURL scheme]) {
             AVURLAsset *asset = [AVURLAsset URLAssetWithURL:movieURL options:nil];
-            C4Assert(asset != nil, @"The asset (%@) you tried to create couldn't be initialized", movieName);
+            C4Assert(asset != nil, @"The asset (%@) you tried to create couldn't be initialized", movieURL);
             NSArray *requestedKeys = [NSArray arrayWithObjects:@"duration", @"playable", nil];
-            [asset loadValuesAsynchronouslyForKeys:requestedKeys completionHandler: ^(void) {		 
+            [asset loadValuesAsynchronouslyForKeys:requestedKeys completionHandler: ^(void) {
                 dispatch_async( dispatch_get_main_queue(), ^(void) {
                     [self prepareToPlayAsset:asset withKeys:requestedKeys];
                 });
@@ -88,7 +170,7 @@
         }
         
         _rate = 1.0f;
-        self.backgroundColor = [UIColor clearColor];      
+        self.backgroundColor = [UIColor clearColor];
         if(CGRectEqualToRect(movieFrame, CGRectZero)) {
             movieFrame.size = _originalMovieSize;
         }
@@ -304,67 +386,6 @@
 -(void)pause {
     [self.player pause];
 }
-
-//-(void)setShadowOffset:(CGSize)shadowOffset {
-//    super.shadowOffset = shadowOffset;
-//}
-//-(void)setShadowRadius:(CGFloat)shadowRadius {
-//    super.shadowRadius = shadowRadius;
-//}
-//-(void)setShadowOpacity:(CGFloat)shadowOpacity {
-//    super.shadowOpacity = shadowOpacity;
-//}
-//-(void)setShadowColor:(UIColor *)shadowColor {
-//    super.shadowColor = shadowColor;
-//}
-//-(void)setShadowPath:(CGPathRef)shadowPath {
-//    super.shadowPath = shadowPath;
-//}
-
-//-(void)setShadowOffset:(CGSize)shadowOffset {
-//    [self performSelector:@selector(_setShadowOffset:) withObject:[NSValue valueWithCGSize:shadowOffset] afterDelay:self.animationDelay];
-//}
-//-(void)_setShadowOffset:(NSValue *)shadowOffset {
-//    [self.playerLayer animateShadowOffset:[shadowOffset CGSizeValue]];
-//}
-//
-//-(void)setShadowRadius:(CGFloat)shadowRadius {
-//    [self performSelector:@selector(_setShadowRadius:) withObject:[NSNumber numberWithFloat:shadowRadius] afterDelay:self.animationDelay];
-//}
-//-(void)_setShadowRadius:(NSNumber *)shadowRadius {
-//    [self.playerLayer animateShadowRadius:[shadowRadius floatValue]];
-//}
-//
-//-(void)setShadowOpacity:(CGFloat)shadowOpacity {
-//    [self performSelector:@selector(_setShadowOpacity:) withObject:[NSNumber numberWithFloat:shadowOpacity] afterDelay:self.animationDelay];
-//}
-//-(void)_setShadowOpacity:(NSNumber *)shadowOpacity {
-//    [self.playerLayer animateShadowOpacity:[shadowOpacity floatValue]];
-//}
-//
-//-(void)setShadowColor:(UIColor *)shadowColor {
-//    [self performSelector:@selector(_setShadowColor:) withObject:shadowColor afterDelay:self.animationDelay];
-//}
-//-(void)_setShadowColor:(UIColor *)shadowColor {
-//    [self.playerLayer animateShadowColor:shadowColor.CGColor];
-//}
-//
-//-(void)setShadowPath:(CGPathRef)shadowPath {
-//    [self performSelector:@selector(_setShadowPath:) withObject:(__bridge id)shadowPath afterDelay:self.animationDelay];
-//}
-//-(void)_setShadowPath:(id)shadowPath {
-//    [self.playerLayer animateShadowPath:(__bridge CGPathRef)shadowPath];
-//}
-
-//-(void)setAnimationDuration:(CGFloat)animationDuration {
-//    [super setAnimationDuration:animationDuration];
-//    self.playerLayer.animationDuration = animationDuration;
-//}
-
-//-(void)setAnimationOptions:(NSUInteger)animationOptions {
-//    [super setAnimationOptions:animationOptions];
-//    self.playerLayer.animationOptions = animationOptions;
-//}
 
 -(void)setAnimationOptions:(NSUInteger)animationOptions {
     /*

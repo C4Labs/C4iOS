@@ -25,6 +25,6 @@
  
  @return C4CanvasController a subclass of UIViewController customized specifically for the C4 Framework
  */
-@property (strong, nonatomic) IBOutlet C4WorkSpace *workspace;
+@property (strong, nonatomic) C4WorkSpace *workspace;
 
 @end

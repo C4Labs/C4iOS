@@ -53,7 +53,7 @@
  @param movieName The filename of a video located in the application's main bundle.
  @param movieFrame The frame for the new movie
  */
--(id)initWithMovieName:(NSString *)movieName andFrame:(CGRect)movieFrame;
+-(id)initWithMovieName:(NSString *)movieName frame:(CGRect)movieFrame;
 
 /**Starts playing the movie.
  
@@ -155,4 +155,19 @@
 /**Specifies the size of the movie. Animatable.
  */
 @property (readwrite, nonatomic) CGSize size;
+
+#pragma mark New Stuff
++(C4Movie *)movieWithURL:(NSString *)url;
++(C4Movie *)movieWithURL:(NSString *)url frame:(CGRect)movieFrame;
++(C4Movie *)movieWithYouTubeURL:(NSString *)youtubeURL;
++(C4Movie *)movieWithYouTubeURL:(NSString *)youtubeURL size:(C4YouTubeSize)movieSize;
++(C4Movie *)movieWithYouTubeURL:(NSString *)youtubeURL frame:(CGRect)movieFrame;
++(C4Movie *)movieWithYouTubeURL:(NSString *)youtubeURL size:(C4YouTubeSize)movieSize frame:(CGRect)movieFrame;
+
+-(id)initWithYouTubeURL:(NSString *)movieURL;
+-(id)initWithYouTubeURL:(NSString *)movieURL size:(C4YouTubeSize)movieSize;
+-(id)initWithYouTubeURL:(NSString *)movieURL size:(C4YouTubeSize)movieSize frame:(CGRect)movieFrame;
+-(id)initWithYouTubeURL:(NSString *)movieURL frame:(CGRect)movieFrame;
+-(id)initWithURL:(NSURL *)movieURL;
+-(id)initWithURL:(NSURL *)movieURL frame:(CGRect)movieFrame;
 @end

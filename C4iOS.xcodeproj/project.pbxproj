@@ -20,12 +20,6 @@
 		ED30769C150D400C001D689C /* C4Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = ED307698150D400C001D689C /* C4Movie.m */; };
 		ED3076A2150D51F0001D689C /* C4PlayerLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3076A1150D51F0001D689C /* C4PlayerLayer.m */; };
 		ED36D9EC157C935500C3AEE7 /* C4Image.m in Sources */ = {isa = PBXBuildFile; fileRef = ED36D9EB157C935400C3AEE7 /* C4Image.m */; };
-		ED3A32AC15DB7BDD00BFDAE5 /* C4_AppIcon_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = ED3A32AB15DB7BDD00BFDAE5 /* C4_AppIcon_iPad.png */; };
-		ED3A32AE15DB7BE000BFDAE5 /* C4_AppIcon_iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED3A32AD15DB7BE000BFDAE5 /* C4_AppIcon_iPad@2x.png */; };
-		ED3A32B015DB7BE800BFDAE5 /* C4_LaunchImage_iPhone-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ED3A32AF15DB7BE800BFDAE5 /* C4_LaunchImage_iPhone-Landscape~ipad.png */; };
-		ED3A32B215DB7BED00BFDAE5 /* C4_LaunchImage_iPhone-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ED3A32B115DB7BED00BFDAE5 /* C4_LaunchImage_iPhone-Landscape@2x~ipad.png */; };
-		ED3A32B415DB7BF200BFDAE5 /* C4_LaunchImage_iPhone-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ED3A32B315DB7BF200BFDAE5 /* C4_LaunchImage_iPhone-Portrait~ipad.png */; };
-		ED3A32B615DB7BF600BFDAE5 /* C4_LaunchImage_iPhone-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ED3A32B515DB7BF600BFDAE5 /* C4_LaunchImage_iPhone-Portrait@2x~ipad.png */; };
 		ED4702D715C052CA004B75D1 /* pyramid.png in Resources */ = {isa = PBXBuildFile; fileRef = ED4702D615C052CA004B75D1 /* pyramid.png */; };
 		ED50C88614EAC2010040D844 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED50C88514EAC2010040D844 /* UIKit.framework */; };
 		ED50C88814EAC2010040D844 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED50C88714EAC2010040D844 /* Foundation.framework */; };
@@ -57,6 +51,7 @@
 		ED89849814EF1C8800BB7AB0 /* C4Object.m in Sources */ = {isa = PBXBuildFile; fileRef = ED89849714EF1C8700BB7AB0 /* C4Object.m */; };
 		ED900CEF14FBF2B4006C2AED /* C4Font.m in Sources */ = {isa = PBXBuildFile; fileRef = ED900CEE14FBF2B3006C2AED /* C4Font.m */; };
 		ED979F3F14F95EFF00645114 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED979F3E14F95EFF00645114 /* CoreImage.framework */; };
+		ED99AB7315DE01D7002A7D6C /* C4YouTubeURLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = ED99AB7215DE01D7002A7D6C /* C4YouTubeURLParser.m */; };
 		ED9D5FA51564A927009C5175 /* C4Vector.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9D5FA41564A927009C5175 /* C4Vector.m */; };
 		EDA7014914FC496300A0D77D /* C4Label.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA7014814FC496300A0D77D /* C4Label.m */; };
 		EDAFFAF014F7602F00CA356A /* C4Control.m in Sources */ = {isa = PBXBuildFile; fileRef = EDAFFAEF14F7602F00CA356A /* C4Control.m */; };
@@ -94,12 +89,6 @@
 		ED3076A1150D51F0001D689C /* C4PlayerLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4PlayerLayer.m; sourceTree = "<group>"; };
 		ED36D9EA157C935400C3AEE7 /* C4Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Image.h; sourceTree = "<group>"; };
 		ED36D9EB157C935400C3AEE7 /* C4Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Image.m; sourceTree = "<group>"; };
-		ED3A32AB15DB7BDD00BFDAE5 /* C4_AppIcon_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = C4_AppIcon_iPad.png; path = ../C4_AppIcon_iPad.png; sourceTree = "<group>"; };
-		ED3A32AD15DB7BE000BFDAE5 /* C4_AppIcon_iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "C4_AppIcon_iPad@2x.png"; path = "../C4_AppIcon_iPad@2x.png"; sourceTree = "<group>"; };
-		ED3A32AF15DB7BE800BFDAE5 /* C4_LaunchImage_iPhone-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "C4_LaunchImage_iPhone-Landscape~ipad.png"; path = "../C4_LaunchImage_iPhone-Landscape~ipad.png"; sourceTree = "<group>"; };
-		ED3A32B115DB7BED00BFDAE5 /* C4_LaunchImage_iPhone-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "C4_LaunchImage_iPhone-Landscape@2x~ipad.png"; path = "../C4_LaunchImage_iPhone-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
-		ED3A32B315DB7BF200BFDAE5 /* C4_LaunchImage_iPhone-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "C4_LaunchImage_iPhone-Portrait~ipad.png"; path = "../C4_LaunchImage_iPhone-Portrait~ipad.png"; sourceTree = "<group>"; };
-		ED3A32B515DB7BF600BFDAE5 /* C4_LaunchImage_iPhone-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "C4_LaunchImage_iPhone-Portrait@2x~ipad.png"; path = "../C4_LaunchImage_iPhone-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
 		ED45EC80155A33C400D28213 /* loop1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = loop1.wav; sourceTree = "<group>"; };
 		ED4702D615C052CA004B75D1 /* pyramid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pyramid.png; sourceTree = "<group>"; };
 		ED50C88114EAC2010040D844 /* C4iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = C4iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,6 +139,8 @@
 		ED900CED14FBF2B3006C2AED /* C4Font.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Font.h; sourceTree = "<group>"; };
 		ED900CEE14FBF2B3006C2AED /* C4Font.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Font.m; sourceTree = "<group>"; };
 		ED979F3E14F95EFF00645114 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		ED99AB6F15DDF714002A7D6C /* C4YouTubeURLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4YouTubeURLParser.h; sourceTree = "<group>"; };
+		ED99AB7215DE01D7002A7D6C /* C4YouTubeURLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4YouTubeURLParser.m; sourceTree = "<group>"; };
 		ED9D5FA31564A927009C5175 /* C4Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Vector.h; sourceTree = "<group>"; };
 		ED9D5FA41564A927009C5175 /* C4Vector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Vector.m; sourceTree = "<group>"; };
 		EDA7014714FC496300A0D77D /* C4Label.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Label.h; sourceTree = "<group>"; };
@@ -253,6 +244,8 @@
 			isa = PBXGroup;
 			children = (
 				EDF65449150DEF3300194671 /* C4WorkSpace.m */,
+				ED99AB6F15DDF714002A7D6C /* C4YouTubeURLParser.h */,
+				ED99AB7215DE01D7002A7D6C /* C4YouTubeURLParser.m */,
 				ED4702D615C052CA004B75D1 /* pyramid.png */,
 				ED008D3915BF5DE80005E8D3 /* lines.png */,
 				ED50C8D314EACA0E0040D844 /* Source */,
@@ -287,12 +280,6 @@
 			isa = PBXGroup;
 			children = (
 				ED7C0C0215C88B9F009107A6 /* iTunesArtwork.png */,
-				ED3A32B515DB7BF600BFDAE5 /* C4_LaunchImage_iPhone-Portrait@2x~ipad.png */,
-				ED3A32B315DB7BF200BFDAE5 /* C4_LaunchImage_iPhone-Portrait~ipad.png */,
-				ED3A32B115DB7BED00BFDAE5 /* C4_LaunchImage_iPhone-Landscape@2x~ipad.png */,
-				ED3A32AF15DB7BE800BFDAE5 /* C4_LaunchImage_iPhone-Landscape~ipad.png */,
-				ED3A32AD15DB7BE000BFDAE5 /* C4_AppIcon_iPad@2x.png */,
-				ED3A32AB15DB7BDD00BFDAE5 /* C4_AppIcon_iPad.png */,
 				ED7C0C0515C88B9F009107A6 /* C4_AppStoreIcon.png */,
 				ED7C0C0615C88B9F009107A6 /* C4_AppStoreIcon@2x.png */,
 				ED7C0C0915C88B9F009107A6 /* C4_SpotlightIcon.png */,
@@ -441,12 +428,6 @@
 				ED7C0C1915C88B9F009107A6 /* C4_TabbarIcon@2x.png in Resources */,
 				ED7C0C1A15C88B9F009107A6 /* C4_ToolbarIcon.png in Resources */,
 				ED7C0C1B15C88B9F009107A6 /* C4_ToolbarIcon@2x.png in Resources */,
-				ED3A32AC15DB7BDD00BFDAE5 /* C4_AppIcon_iPad.png in Resources */,
-				ED3A32AE15DB7BE000BFDAE5 /* C4_AppIcon_iPad@2x.png in Resources */,
-				ED3A32B015DB7BE800BFDAE5 /* C4_LaunchImage_iPhone-Landscape~ipad.png in Resources */,
-				ED3A32B215DB7BED00BFDAE5 /* C4_LaunchImage_iPhone-Landscape@2x~ipad.png in Resources */,
-				ED3A32B415DB7BF200BFDAE5 /* C4_LaunchImage_iPhone-Portrait~ipad.png in Resources */,
-				ED3A32B615DB7BF600BFDAE5 /* C4_LaunchImage_iPhone-Portrait@2x~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,6 +470,7 @@
 				ED36D9EC157C935500C3AEE7 /* C4Image.m in Sources */,
 				ED24F2C5157EB62800BC73B5 /* C4Timer.m in Sources */,
 				ED5FB05115B38894002987EA /* C4AssertionHandler.m in Sources */,
+				ED99AB7315DE01D7002A7D6C /* C4YouTubeURLParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

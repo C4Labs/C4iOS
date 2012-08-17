@@ -6,30 +6,28 @@
 //
 
 #import "C4Workspace.h"
+#import "C4YouTubeURLParser.h"
 
 @implementation C4WorkSpace {
-    C4GL *gl;
+    C4Movie *m;
 }
 
 //this example uses a default renderer
 -(void)setup {
-    //create a frame based on the width of the canvas
-    CGFloat width = self.canvas.width*0.9f;
-    CGRect frame = CGRectMake(0, 0, width, width*.66f);
-    
-    //create the gl object with the frame
-    gl = [C4GL glWithFrame:frame];
-    gl.center = self.canvas.center;
-    gl.userInteractionEnabled = NO;
-    [self.canvas addGL:gl];
-    
-    [gl startAnimation];
+    m = [C4Movie movieWithYouTubeURL:@"http://www.youtube.com/watch?v=R5ipefVnw3g"];
+    m.center = self.canvas.center;
+    m.shouldAutoplay = YES;
+    m.loops = YES;
+    m.userInteractionEnabled = NO;
+    [self.canvas addMovie:m];
 }
 
 //toggle the animation based on touching the canvas
 -(void)touchesBegan {
-    if (gl.isAnimating) [gl stopAnimation];
-    else [gl startAnimation];
+    m.animationDuration = 1.0f;
+    m.perspectiveDistance = 200.0f;
+    m.rotationX += TWO_PI;
+    m.width = 500;
 }
 
 @end

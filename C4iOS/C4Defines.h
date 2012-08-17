@@ -127,6 +127,15 @@ enum {
 };
 typedef NSUInteger C4BaselineAdjustment;
 
+enum {
+    YTSMALL = 0,
+    YTMEDIUM,
+    YT720,
+    YT1080
+};
+typedef NSUInteger C4YouTubeSize;
+
+
 /* `fillRule' values. */
 
 C4_EXTERN NSString *const FILLNORMAL
