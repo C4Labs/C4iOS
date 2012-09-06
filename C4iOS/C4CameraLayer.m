@@ -6,13 +6,13 @@
 //  Copyright (c) 2012 POSTFL. All rights reserved.
 //
 
-#import "C4CaptureVideoPreviewLayer.h"
+#import "C4CameraLayer.h"
 
-@interface C4CaptureVideoPreviewLayer ()
+@interface C4CameraLayer ()
 @property (readwrite, nonatomic) CGFloat rotationAngle, rotationAngleX, rotationAngleY;
 @end
 
-@implementation C4CaptureVideoPreviewLayer
+@implementation C4CameraLayer
 @synthesize animationOptions = _animationOptions, currentAnimationEasing, repeatCount, animationDuration = _animationDuration;
 @synthesize allowsInteraction, repeats;
 @synthesize rotationAngle, rotationAngleX, rotationAngleY;
