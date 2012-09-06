@@ -163,9 +163,6 @@
     self.label.shadowOffset = [shadowOffset CGSizeValue];
 }
 
--(void)touchesBegan {
-}
-
 -(void)setEnabled:(BOOL)enabled {
     if(self.animationDelay == 0.0f) [self _setEnabled:[NSNumber numberWithBool:enabled]];
     else [self performSelector:@selector(_setEnabled:) withObject:[NSNumber numberWithBool:enabled] afterDelay:self.animationDelay];

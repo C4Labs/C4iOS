@@ -275,7 +275,9 @@
 }
 
 -(void)movieIsReadyForPlayback:(NSNotification *)notification {
-    [self movieIsReady:(C4Movie *)[notification object]];
+    C4Movie *currentMovie = (C4Movie *)[notification object];
+    [self movieIsReady:currentMovie];
+    [self stopListeningFor:@"movieIsReadyForPlayback" object:currentMovie];
 }
 
 -(void)movieIsReady:(C4Movie *)movie {

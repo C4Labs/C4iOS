@@ -43,7 +43,7 @@
 #import "C4GL1Renderer.h"
 #import "C4EAGLLayer.h"
 #import "C4GL.h"
-#import "C4PlayerLayer.h"
+#import "C4MovieLayer.h"
 #import "C4Movie.h"
 #import "C4Sample.h"
 #import "C4EAGLES1Renderer.h"

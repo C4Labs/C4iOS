@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "C4CaptureVideoPreviewLayer.h"
+#import "C4CameraLayer.h"
 
 /** The C4CameraController class provides control over the image, view and preview layer for a C4Camera object.
  
@@ -39,5 +39,5 @@
 
 /** The receiver’s view's backing layer.
  */
-@property (readwrite, strong, nonatomic) C4CaptureVideoPreviewLayer *previewLayer;
+@property (readwrite, strong, nonatomic) C4CameraLayer *previewLayer;
 @end

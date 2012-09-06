@@ -8,12 +8,12 @@
 
 #import <AVFoundation/AVFoundation.h>
 
-/**This document describes the C4CaptureVideoPreviewLayer class.
+/**This document describes the C4CameraLayer class.
  
- C4CaptureVideoPreviewLayer is a subclass of AVCaptureVideoPreviewLayer and conforms to the C4LayerAnimation protocol. It is the default backing layer for a C4Movie object.
+ C4CameraLayer is a subclass of AVCaptureVideoPreviewLayer and conforms to the C4LayerAnimation protocol. It is the default backing layer for a C4Camera object.
  
  @warning You should never access this object directly.
  */
-@interface C4CaptureVideoPreviewLayer : AVCaptureVideoPreviewLayer <C4LayerAnimation>
+@interface C4CameraLayer : AVCaptureVideoPreviewLayer <C4LayerAnimation>
 
 @end

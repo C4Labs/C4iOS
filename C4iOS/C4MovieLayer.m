@@ -6,13 +6,13 @@
 //  Copyright (c) 2012 POSTFL. All rights reserved.
 //
 
-#import "C4PlayerLayer.h"
+#import "C4MovieLayer.h"
 
-@interface C4PlayerLayer ()
+@interface C4MovieLayer ()
 @property (readwrite, nonatomic) CGFloat rotationAngle, rotationAngleX, rotationAngleY;
 @end
 
-@implementation C4PlayerLayer
+@implementation C4MovieLayer
 @synthesize animationOptions = _animationOptions, currentAnimationEasing, repeatCount, animationDuration = _animationDuration;
 @synthesize allowsInteraction, repeats;
 @synthesize rotationAngle, rotationAngleX, rotationAngleY;

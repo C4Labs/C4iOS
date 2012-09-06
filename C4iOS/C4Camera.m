@@ -13,7 +13,7 @@
 -(void)imageWasCaptured;
 
 @property (readwrite, strong, nonatomic) C4CameraController *cameraController;
-@property (readwrite, strong, nonatomic) C4CaptureVideoPreviewLayer *previewLayer;
+@property (readwrite, strong, nonatomic) C4CameraLayer *previewLayer;
 @property (readwrite, atomic) BOOL shouldAutoreverse;
 @end
 
@@ -57,11 +57,11 @@
 }
 
 +(Class)layerClass {
-	return [C4CaptureVideoPreviewLayer class];
+	return [C4CameraLayer class];
 }
 
-- (C4CaptureVideoPreviewLayer *)previewLayer {
-	return (C4CaptureVideoPreviewLayer *)self.layer;
+- (C4CameraLayer *)previewLayer {
+	return (C4CameraLayer *)self.layer;
 }
 
 -(void)captureImage {

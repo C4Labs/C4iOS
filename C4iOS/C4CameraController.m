@@ -44,7 +44,7 @@
     _previewLayer = nil;
 }
 
--(void)setPreviewLayer:(C4CaptureVideoPreviewLayer *)previewLayer {
+-(void)setPreviewLayer:(C4CameraLayer *)previewLayer {
     _previewLayer = previewLayer;
 }
 

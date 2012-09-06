@@ -686,4 +686,7 @@
     return self.layer.shadowRadius;
 }
 
++(Class)layerClass {
+    return [C4Layer class];
+}
 @end

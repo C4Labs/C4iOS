@@ -20,7 +20,7 @@
 //-(void)_setShadowColor:(UIColor *)shadowColor;
 //-(void)_setShadowPath:(id)shadowPath;
 
-@property (readonly, nonatomic, strong) C4PlayerLayer *playerLayer;
+@property (readonly, nonatomic, strong) C4MovieLayer *playerLayer;
 @property (readwrite, nonatomic, strong) AVPlayer *player;
 @property (readwrite, nonatomic, strong) AVPlayerItem *playerItem;
 @property (readwrite, atomic) BOOL shouldAutoreverse;
@@ -215,19 +215,19 @@
 
 + (Class)layerClass
 {
-	return [C4PlayerLayer class];
+	return [C4MovieLayer class];
 }
 
-- (C4PlayerLayer *)playerLayer
+- (C4MovieLayer *)playerLayer
 {
-	return (C4PlayerLayer *)self.layer;
+	return (C4MovieLayer *)self.layer;
 }
 
 -(void)assetFailedToPrepareForPlayback:(NSError *)error {
     C4Log(@"The movie you tried to load failed: %@",error);
 }
 
-- (void)prepareToPlayAsset:(AVURLAsset *)asset withKeys:(NSArray *)requestedKeys {
+-(void)prepareToPlayAsset:(AVURLAsset *)asset withKeys:(NSArray *)requestedKeys {
     rateContext = &rateContext;
     currentItemContext = &currentItemContext;
     playerItemStatusContext = &playerItemStatusContext;
