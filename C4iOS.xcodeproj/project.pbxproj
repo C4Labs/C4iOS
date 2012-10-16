@@ -28,7 +28,6 @@
 		ED50C89214EAC2010040D844 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ED50C89114EAC2010040D844 /* main.m */; };
 		ED50C89614EAC2010040D844 /* C4AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ED50C89514EAC2010040D844 /* C4AppDelegate.m */; };
 		ED50C89C14EAC2010040D844 /* C4Canvas.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED50C89A14EAC2010040D844 /* C4Canvas.xib */; };
-		ED50C8BC14EAC3B10040D844 /* UITouch+C4Touch.m in Sources */ = {isa = PBXBuildFile; fileRef = ED50C8BB14EAC3B10040D844 /* UITouch+C4Touch.m */; };
 		ED50C8C014EAC4920040D844 /* C4Window.m in Sources */ = {isa = PBXBuildFile; fileRef = ED50C8BF14EAC4920040D844 /* C4Window.m */; };
 		ED50C8C514EAC4F70040D844 /* C4CanvasController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED50C8C414EAC4F70040D844 /* C4CanvasController.m */; };
 		ED50C8CB14EAC5990040D844 /* C4Layer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED50C8CA14EAC5990040D844 /* C4Layer.m */; };
@@ -102,8 +101,6 @@
 		ED50C89414EAC2010040D844 /* C4AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = C4AppDelegate.h; sourceTree = "<group>"; };
 		ED50C89514EAC2010040D844 /* C4AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = C4AppDelegate.m; sourceTree = "<group>"; };
 		ED50C89B14EAC2010040D844 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/C4Canvas.xib; sourceTree = "<group>"; };
-		ED50C8BA14EAC3B10040D844 /* UITouch+C4Touch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITouch+C4Touch.h"; sourceTree = "<group>"; };
-		ED50C8BB14EAC3B10040D844 /* UITouch+C4Touch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITouch+C4Touch.m"; sourceTree = "<group>"; };
 		ED50C8BE14EAC4920040D844 /* C4Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Window.h; sourceTree = "<group>"; };
 		ED50C8BF14EAC4920040D844 /* C4Window.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Window.m; sourceTree = "<group>"; };
 		ED50C8C114EAC4A40040D844 /* C4Defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Defines.h; sourceTree = "<group>"; };
@@ -348,8 +345,6 @@
 				EDCE426C1564174000C7356E /* C4ViewController.m */,
 				ED50C8BE14EAC4920040D844 /* C4Window.h */,
 				ED50C8BF14EAC4920040D844 /* C4Window.m */,
-				ED50C8BA14EAC3B10040D844 /* UITouch+C4Touch.h */,
-				ED50C8BB14EAC3B10040D844 /* UITouch+C4Touch.m */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -440,7 +435,6 @@
 			files = (
 				ED50C89214EAC2010040D844 /* main.m in Sources */,
 				ED50C89614EAC2010040D844 /* C4AppDelegate.m in Sources */,
-				ED50C8BC14EAC3B10040D844 /* UITouch+C4Touch.m in Sources */,
 				ED50C8C014EAC4920040D844 /* C4Window.m in Sources */,
 				ED50C8C514EAC4F70040D844 /* C4CanvasController.m in Sources */,
 				ED50C8CB14EAC5990040D844 /* C4Layer.m in Sources */,
