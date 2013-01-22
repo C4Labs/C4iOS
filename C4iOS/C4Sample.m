@@ -143,6 +143,7 @@
 }
 
 -(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
+    player = player; flag = flag;
     [self postNotification:@"endedNormally"];
     [self endedNormally];
 }

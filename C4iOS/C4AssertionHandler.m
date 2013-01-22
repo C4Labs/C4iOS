@@ -28,6 +28,7 @@
     C4Log(@"IN:     %@",[fileName lastPathComponent]);
     C4Log(@"LINE:   %d",line);
     C4Log(@"METHOD: %@",NSStringFromSelector(selector));
+    C4Log(@"OBJECT: %@",object);
     va_list args;
     va_start (args, format);
     NSString *reason = [[NSString alloc] initWithFormat:format arguments:args];

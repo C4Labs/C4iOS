@@ -9,30 +9,23 @@
 
 #import "C4GL1Renderer.h"
 #import "C4EAGLLayer.h"
-@interface C4EAGLES1Renderer ()
-
--(BOOL)resizeFromLayer:(C4EAGLLayer*)layer;
-
-@end
 
 @implementation C4EAGLES1Renderer
-@synthesize width, height, frameBuffer, renderBuffer;
-@synthesize eaglContext;
 
 // Create an ES 1.1 context
 - (id <C4EAGLESRenderer>) init
 {
 	if (self = [super init])
 	{
-		eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
-        if (nil == eaglContext || NO == [EAGLContext setCurrentContext:eaglContext]) return nil;
+		_eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
+        if (nil == _eaglContext || NO == [EAGLContext setCurrentContext:_eaglContext]) return nil;
 		
 		// Create default framebuffer object. The backing will be allocated for the current layer in -resizeFromLayer
-		glGenFramebuffersOES(1, &frameBuffer);
-		glGenRenderbuffersOES(1, &renderBuffer);
-		glBindFramebufferOES(GL_FRAMEBUFFER_OES, frameBuffer);
-		glBindRenderbufferOES(GL_RENDERBUFFER_OES, renderBuffer);
-		glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_COLOR_ATTACHMENT0_OES, GL_RENDERBUFFER_OES, renderBuffer);
+		glGenFramebuffersOES(1, &_frameBuffer);
+		glGenRenderbuffersOES(1, &_renderBuffer);
+		glBindFramebufferOES(GL_FRAMEBUFFER_OES, _frameBuffer);
+		glBindRenderbufferOES(GL_RENDERBUFFER_OES, _renderBuffer);
+		glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_COLOR_ATTACHMENT0_OES, GL_RENDERBUFFER_OES, _renderBuffer);
         [self setup];
 	}
 	return self;
@@ -47,10 +40,10 @@
 }
 
 - (BOOL) resizeFromLayer:(C4EAGLLayer *)layer{
-    glBindRenderbufferOES(GL_RENDERBUFFER_OES, renderBuffer);
-    [eaglContext renderbufferStorage:GL_RENDERBUFFER_OES fromDrawable:layer];
-	glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_WIDTH_OES, &width);
-    glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_HEIGHT_OES, &height);
+    glBindRenderbufferOES(GL_RENDERBUFFER_OES, _renderBuffer);
+    [_eaglContext renderbufferStorage:GL_RENDERBUFFER_OES fromDrawable:layer];
+	glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_WIDTH_OES, &_width);
+    glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_HEIGHT_OES, &_height);
 	
     if (glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES) != GL_FRAMEBUFFER_COMPLETE_OES) {
 		NSLog(@"Failed to make complete framebuffer object %x", glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES));
@@ -62,18 +55,18 @@
 
 - (void) dealloc
 {
-	if (frameBuffer) {
-		glDeleteFramebuffersOES(1, &frameBuffer);
-		frameBuffer = 0;
+	if (_frameBuffer) {
+		glDeleteFramebuffersOES(1, &_frameBuffer);
+		_frameBuffer = 0;
 	}
 	
-	if (renderBuffer) {
-		glDeleteRenderbuffersOES(1, &renderBuffer);
-		renderBuffer = 0;
+	if (_renderBuffer) {
+		glDeleteRenderbuffersOES(1, &_renderBuffer);
+		_renderBuffer = 0;
 	}
 	
-	if ([EAGLContext currentContext] == eaglContext)
+	if ([EAGLContext currentContext] == _eaglContext)
         [EAGLContext setCurrentContext:nil];
-	self.eaglContext = nil;
+	_eaglContext = nil;
 }
 @end

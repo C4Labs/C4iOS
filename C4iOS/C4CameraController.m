@@ -9,23 +9,17 @@
 #import "C4CameraController.h"
 
 @interface C4CameraController ()
-@property (readwrite, strong, nonatomic) AVCaptureSession *captureSession;
+@property (readwrite, strong, atomic) AVCaptureSession *captureSession;
 @property (readwrite, strong, atomic) AVCaptureStillImageOutput *stillImageOutput;
 @property (readwrite, strong, atomic) AVAssetWriter *assetWriter;
 @end
 
 @implementation C4CameraController
-@synthesize captureSession;
-@synthesize previewLayer = _previewLayer;
-@synthesize view;
-@synthesize stillImageOutput;
-@synthesize assetWriter;
-@synthesize capturedImage = _capturedImage;
 
 - (id)init {
 	self = [super init];
 	if (self) {
-		self.previewLayer = nil;
+		_previewLayer = nil;
 	}
 	return self;
 }
@@ -36,9 +30,9 @@
 }
 
 -(void)dealloc {
-    self.captureSession = nil;
-    self.stillImageOutput = nil;
-    self.assetWriter = nil;
+    _captureSession = nil;
+    _stillImageOutput = nil;
+    _assetWriter = nil;
 
     _capturedImage = nil;
     _previewLayer = nil;
@@ -103,6 +97,7 @@
     AVCaptureConnection *av = [self.stillImageOutput connectionWithMediaType:AVMediaTypeVideo];
     typedef void (^AVBufferBlock)(CMSampleBufferRef, NSError *);
     AVBufferBlock avb = ^(CMSampleBufferRef buf, NSError *err) {
+        err = [NSError errorWithDomain:@"captureImage error" code:0 userInfo:nil];
         NSData *d = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:buf];
         _capturedImage = nil;
         _capturedImage = [C4Image imageWithData:d];
@@ -114,8 +109,10 @@
 
 #pragma mark -
 #pragma mark AVCaptureSession delegate
-- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection { 
-
+- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
+    captureOutput = captureOutput;
+    sampleBuffer = sampleBuffer;
+    connection = connection;
 } 
 
 @end

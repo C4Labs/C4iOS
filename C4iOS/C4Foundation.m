@@ -73,14 +73,17 @@ NSInteger basicSort(id obj1, id obj2, void *context) {
 }
 
 NSInteger numSort(id num1, id num2, void *context) {
+    context = context;
 	return [(NSNumber *)num1 compare:(NSNumber *)num2];
 }
 
 NSInteger strSort(id str1, id str2, void *context) {
+    context = context;
 	return [str1 localizedStandardCompare:str2];
 }
 
 NSInteger floatSort(id obj1, id obj2, void *context) {
+    context = context;
 	float flt1 = [obj1 floatValue];
 	float flt2 = [obj2 floatValue];
 	if (flt1 < flt2)
@@ -98,13 +101,13 @@ NSInteger floatSort(id obj1, id obj2, void *context) {
     return [[self sharedManager] floatComparator];
 }
 
-+ (id)allocWithZone:(NSZone *)zone
-{
++(id)allocWithZone:(NSZone *)zone {
+    zone = zone;
     return [self sharedManager];
 }
 
-- (id)copyWithZone:(NSZone *)zone
-{
+-(id)copyWithZone:(NSZone *)zone {
+    zone = zone;
     return self;
 }
 

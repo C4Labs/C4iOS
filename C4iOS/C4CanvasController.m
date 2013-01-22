@@ -10,15 +10,12 @@
 #import <objc/message.h>
 
 @interface C4CanvasController ()
--(void)movieIsReadyForPlayback:(NSNotification *)notification;
 @property (readwrite, atomic, strong) NSString *longPressMethodName;
 @property (readwrite, atomic, strong) NSMutableDictionary *gestureDictionary;
 @end
 
 @implementation C4CanvasController
 @synthesize canvas = _canvas;
-@synthesize longPressMethodName;
-@synthesize gestureDictionary = _gestureDictionary;
 
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -263,7 +260,7 @@
 }
 
 -(void)move:(id)sender {
-    //does nothing
+    sender = sender;
 }
 
 -(void)runMethod:(NSString *)methodName afterDelay:(CGFloat)seconds {
@@ -281,7 +278,7 @@
 }
 
 -(void)movieIsReady:(C4Movie *)movie {
-    
+    movie = movie;
 }
 
 @end

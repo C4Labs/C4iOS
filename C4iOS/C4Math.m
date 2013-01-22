@@ -25,10 +25,12 @@ static C4Math *sharedC4Math = nil;
 }
 
 + (id)allocWithZone:(NSZone *)zone {
+    zone = zone;
     return [self sharedManager];
 }
 
 - (id)copyWithZone:(NSZone *)zone {
+    zone = zone;
     return self;
 }
 
@@ -105,6 +107,9 @@ static C4Math *sharedC4Math = nil;
 }
 
 +(CGFloat)norm:(CGFloat)value fromMin:(CGFloat)min toMax:(CGFloat)max {
+    value = value;
+    min = min;
+    max = max;
 	return 0;
 }
 

@@ -9,35 +9,12 @@
 #import "C4Shape.h"
 
 @interface C4Shape()
--(void)_ellipse:(NSValue *)ellipseValue;
--(void)_rect:(NSValue *)rectValue;
--(void)_line:(NSArray *)pointArray;
--(void)_triangle:(NSArray *)pointArray;
--(void)_polygon:(NSArray *)pointArray;
--(void)_arc:(NSDictionary *)arcDict;
--(void)_wedge:(NSDictionary *)wedgeDict;
--(void)_curve:(NSDictionary *)curveDict;
--(void)_quadCurve:(NSDictionary *)curveDict;
--(void)_shapeFromString:(NSDictionary *)stringAndFontDictionary;
--(void)_closeShape;
--(void)_setFillColor:(UIColor *)_fillColor;
--(void)_setFillRule:(NSString *)_fillRule;
--(void)_setLineCap:(NSString *)_lineCap;
--(void)_setLineDashPattern:(NSArray *)_lineDashPattern;
--(void)_setLineDashPhase:(NSNumber *)_lineDashPhase;
--(void)_setLineJoin:(NSString *)_lineJoin;
--(void)_setLineWidth:(NSNumber *)_lineWidth;
--(void)_setMiterLimit:(NSNumber *)_miterLimit;
--(void)_setStrokeColor:(UIColor *)_strokeColor;
--(void)_setStrokeStart:(NSNumber *)_strokeStart;
--(void)willChangeShape;
 @property (readonly, nonatomic) BOOL initialized, shouldClose;
 @property (atomic) BOOL isTriangle;
 @property (readwrite, atomic) BOOL shouldAutoreverse;
 @end
 
 @implementation C4Shape
-@synthesize shouldAutoreverse = _shouldAutoreverse;
 @synthesize animationOptions = _animationOptions;
 @synthesize controlPointA = _controlPointA, controlPointB = _controlPointB, isArc = _isArc, bezierCurve = _bezierCurve, quadCurve = _quadCurve, isLine =_isLine, shapeLayer, pointA = _pointA, pointB = _pointB, wedge = _wedge;
 @synthesize fillColor = _fillColor, fillRule, lineCap, lineDashPattern, lineDashPhase, lineJoin, lineWidth, miterLimit, origin = _origin, strokeColor, strokeEnd, strokeStart;
@@ -102,7 +79,7 @@
 +(C4Shape *)polygon:(CGPoint *)pointArray pointCount:(NSInteger)pointCount {
     CGRect polygonFrame = CGRectMakeFromPointArray(pointArray, pointCount);
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:polygonFrame];
-    NSMutableArray *points = [[NSMutableArray alloc] initWithCapacity:0];
+    NSMutableArray *points = [@[] mutableCopy];
     for(int i = 0; i < pointCount; i++) {
         [points addObject:[NSValue valueWithCGPoint:pointArray[i]]];
     }
@@ -114,7 +91,7 @@
     //I'm not sure what's going on here, but i have to invert clockwise to get the 
     CGRect arcRect = CGRectMakeFromArcComponents(centerPoint,radius,startAngle,endAngle,!clockwise);
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:arcRect];
-    NSMutableDictionary *arcDict = [[NSMutableDictionary alloc] initWithCapacity:0];
+    NSMutableDictionary *arcDict = [@[] mutableCopy];
     [arcDict setValue:[NSValue valueWithCGPoint:centerPoint] forKey:@"centerPoint"];
     arcDict[@"radius"] = @(radius);
     arcDict[@"startAngle"] = @(startAngle);
@@ -128,7 +105,7 @@
     CGRect wedgeRect = CGRectMakeFromWedgeComponents(centerPoint,radius,startAngle,endAngle,clockwise);
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:wedgeRect];
     
-    NSMutableDictionary *wedgeDict = [[NSMutableDictionary alloc] initWithCapacity:0];
+    NSMutableDictionary *wedgeDict = [@[] mutableCopy];
     [wedgeDict setValue:[NSValue valueWithCGPoint:centerPoint] forKey:@"centerPoint"];
     wedgeDict[@"radius"] = @(radius);
     wedgeDict[@"startAngle"] = @(startAngle);
@@ -436,11 +413,11 @@
 }
 
 -(void)triangle:(CGPoint *)pointArray {
-    NSArray *trianglPointArray = @[[NSValue valueWithCGPoint:pointArray[0]],
+    NSArray *trianglePointArray = @[[NSValue valueWithCGPoint:pointArray[0]],
                                   [NSValue valueWithCGPoint:pointArray[1]],
                                   [NSValue valueWithCGPoint:pointArray[2]]];
-    if(self.animationDuration == 0.0f) [self _triangle:trianglPointArray];
-    else [self performSelector:@selector(_triangle:) withObject:trianglPointArray afterDelay:self.animationDelay];
+    if(self.animationDuration == 0.0f) [self _triangle:trianglePointArray];
+    else [self performSelector:@selector(_triangle:) withObject:trianglePointArray afterDelay:self.animationDelay];
 }
 
 -(void)_triangle:(NSArray *)pointArray {
@@ -487,7 +464,7 @@
  */
 
 -(void)polygon:(CGPoint *)pointArray pointCount:(NSInteger)pointCount {
-    NSMutableArray *points = [[NSMutableArray alloc] initWithCapacity:0];
+    NSMutableArray *points = [@[] mutableCopy];
     for(int i = 0; i < pointCount; i++) {
         [points addObject:[NSValue valueWithCGPoint:pointArray[i]]];
     }
@@ -674,7 +651,7 @@
 }
 
 -(void)setDashPattern:(CGFloat *)dashPattern pointCount:(NSUInteger)pointCount {
-    NSMutableArray *patternArray = [[NSMutableArray alloc] initWithCapacity:0];
+    NSMutableArray *patternArray = [@[] mutableCopy];
     for(int i = 0; i < pointCount; i++) [patternArray addObject:@(dashPattern[i])];
     if(self.animationDelay == 0.0f) [self _setLineDashPattern:patternArray];
     else [self performSelector:@selector(_setLineDashPattern:) withObject:patternArray afterDelay:self.animationDelay];
@@ -769,17 +746,18 @@
     return self.shapeLayer.strokeStart;
 }
 
-/* leaving out repeat count for now... it's a bit awkward */
--(void)setRepeatCount:(CGFloat)repeatCount {
+///* leaving out repeat count for now... it's a bit awkward */
+//-(void)setRepeatCount:(CGFloat)repeatCount {
 //    [super setRepeatCount:repeatCount];
 //    self.shapeLayer.repeatCount = repeatCount;
-}
+//}
 
 -(void)setup {
 }
 
 /* NOTE: YOU CAN'T HIT TEST A CGPATH which is a line */
 -(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
+    event = event;
     if (_isLine == YES) return NO;
     return CGPathContainsPoint(self.shapeLayer.path, nil, point, nil) ? YES : NO;
 }
@@ -800,6 +778,7 @@
 }
 
 -(id)copyWithZone:(NSZone *)zone {
+    zone = zone;
     return self;
 }
 
@@ -810,20 +789,20 @@
 
 -(void)setAnimationOptions:(NSUInteger)animationOptions {
     /*
+     This method needs to be in all C4Control subclasses, not sure why it doesn't inherit properly
+     
      important: we have to intercept the setting of AUTOREVERSE for the case of reversing 1 time
      i.e. reversing without having set REPEAT
      
      UIView animation will flicker if we don't do this...
      */
+    ((id <C4LayerAnimation>)self.layer).animationOptions = _animationOptions;
     
-    //shapelayer animation options should be set first
-    self.shapeLayer.animationOptions = animationOptions;
-
-    //strip the autoreverse from the control's animation options if needed
     if ((animationOptions & AUTOREVERSE) == AUTOREVERSE) {
         self.shouldAutoreverse = YES;
         animationOptions &= ~AUTOREVERSE;
     }
+    
     _animationOptions = animationOptions | BEGINCURRENT;
 }
 @end

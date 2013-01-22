@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 POSTFL. All rights reserved.
 //
 
-enum {
+typedef enum C4GestureType : NSUInteger {
     TAP = 0,
     PINCH,
     SWIPERIGHT,
@@ -16,16 +16,14 @@ enum {
     ROTATION,
     PAN,
     LONGPRESS
-};
-typedef NSUInteger C4GestureType;
+} C4GestureType;
 
-enum {
+typedef enum C4SwipeDirection : UISwipeGestureRecognizerDirection {
     SWIPEDIRRIGHT = UISwipeGestureRecognizerDirectionRight,
     SWIPEDIRLEFT = UISwipeGestureRecognizerDirectionLeft,
     SWIPEDIRUP = UISwipeGestureRecognizerDirectionUp ,
     SWIPEDIRDOWN = UISwipeGestureRecognizerDirectionDown
-};
-typedef UISwipeGestureRecognizerDirection C4SwipeDirection;
+} C4SwipeDirection;
 
 #import <Foundation/Foundation.h>
 

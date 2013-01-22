@@ -46,7 +46,7 @@ C4_EXTERN BOOL VERBOSELOAD;
 /* more lexical names for common mathematic variables, e.g. QUARTER_PI instead of M_PI_4 */
 C4_EXTERN const CGFloat QUARTER_PI, HALF_PI, PI, TWO_PI, ONE_OVER_PI, TWO_OVER_PI, TWO_OVER_ROOT_PI, E, LOG2E, LOG10E, LN2, LN10, SQRT_TWO, SQRT_ONE_OVER_TWO;
 
-enum {
+typedef enum C4AnimationOptions : NSUInteger {
     
     ALLOWSINTERACTION = UIViewAnimationOptionAllowUserInteraction,
     BEGINCURRENT = UIViewAnimationOptionBeginFromCurrentState,
@@ -75,10 +75,10 @@ enum {
 //    UIViewAnimationOptionTransitionFlipFromTop     = 6 << 20,
 //    UIViewAnimationOptionTransitionFlipFromBottom  = 7 << 20,
     DEFAULT = 0 | UIViewAnimationOptionBeginFromCurrentState,
-};
-typedef NSUInteger C4AnimationOptions;
+} C4AnimationOptions;
 
-enum {
+
+typedef enum C4ShapeLayerAnimationType : NSUInteger {
     PATH = 0,
     FILLCOLOR,
     LINEDASHPHASE,
@@ -87,8 +87,7 @@ enum {
     STROKECOLOR,
     STROKEEND,
     STROKESTART
-};
-typedef NSUInteger C4ShapeLayerAnimationType;
+} C4ShapeLayerAnimationType;
 
 typedef enum C4LineBreakMode : NSUInteger {
     LABELWORDWRAP = 0,
@@ -124,13 +123,12 @@ typedef enum C4BaselineAdjustment : NSUInteger {
     ALIGNBASELINENONE = UIBaselineAdjustmentNone
 } C4BaselineAdjustment;
 
-enum {
+typedef enum C4YouTubeSize : NSUInteger{
     YTSMALL = 0,
     YTMEDIUM,
     YT720,
     YT1080
-};
-typedef NSUInteger C4YouTubeSize;
+} C4YouTubeSize;
 
 
 /* `fillRule' values. */

@@ -10,15 +10,12 @@
 #import "C4CameraController.h"
 
 @interface C4Camera ()
--(void)imageWasCaptured;
-
 @property (readwrite, strong, nonatomic) C4CameraController *cameraController;
 @property (readwrite, strong, nonatomic) C4CameraLayer *previewLayer;
 @property (readwrite, atomic) BOOL shouldAutoreverse;
 @end
 
 @implementation C4Camera
-@synthesize cameraController;
 @synthesize animationOptions = _animationOptions;
 @synthesize capturedImage = _capturedImage;
 @synthesize previewLayer = _previewLayer;
@@ -44,10 +41,8 @@
 }
 
 -(void)dealloc {
-    self.previewLayer = nil;
-    self.cameraController = nil;
-    self.shadowColor = nil;
-    self.shadowPath = nil;
+    _previewLayer = nil;
+    _cameraController = nil;
     _capturedImage = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -86,20 +81,20 @@
 
 -(void)setAnimationOptions:(NSUInteger)animationOptions {
     /*
+     This method needs to be in all C4Control subclasses, not sure why it doesn't inherit properly
+     
      important: we have to intercept the setting of AUTOREVERSE for the case of reversing 1 time
      i.e. reversing without having set REPEAT
      
      UIView animation will flicker if we don't do this...
      */
+    ((id <C4LayerAnimation>)self.layer).animationOptions = _animationOptions;
     
-    //shapelayer animation options should be set first
-    self.previewLayer.animationOptions = animationOptions;
-    
-    //strip the autoreverse from the control's animation options if needed
     if ((animationOptions & AUTOREVERSE) == AUTOREVERSE) {
         self.shouldAutoreverse = YES;
         animationOptions &= ~AUTOREVERSE;
     }
+    
     _animationOptions = animationOptions | BEGINCURRENT;
 }
 

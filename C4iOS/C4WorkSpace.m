@@ -5,7 +5,24 @@
 //  Created by moi on 12-09-01.
 //  Copyright (c) 2012 moi. All rights reserved.
 //
+#import "C4WorkSpace.h"
 
+@implementation C4WorkSpace {
+    C4Image *i;
+}
+
+-(void)setup {
+    i = [C4Image imageNamed:@"C4Sky"];
+    [self.canvas addImage:i];
+}
+
+-(void)touchesBegan {
+    i.animationOptions = AUTOREVERSE | REPEAT;
+    i.animationDuration = 1.0f;
+    i.center = self.canvas.center;
+}
+@end
+/*
 #import "C4WorkSpace.h"
 #import "HiddenNav.h"
 #import "OuterShape.h"
@@ -116,3 +133,4 @@
 }
 
 @end
+ */

@@ -219,7 +219,20 @@
 }
 
 -(void)setAnimationOptions:(NSUInteger)animationOptions {
-    _animationOptions = animationOptions;
+    /*
+     important: we have to intercept the setting of AUTOREVERSE for the case of reversing 1 time
+     i.e. reversing without having set REPEAT
+     
+     UIView animation will flicker if we don't do this...
+     */
+    ((id <C4LayerAnimation>)self.layer).animationOptions = _animationOptions;
+    
+    if ((animationOptions & AUTOREVERSE) == AUTOREVERSE) {
+//        self.shouldAutoreverse = YES;
+        animationOptions &= ~AUTOREVERSE;
+    }
+    
+    _animationOptions = animationOptions | BEGINCURRENT;
 }
 
 #pragma mark Notification Methods
