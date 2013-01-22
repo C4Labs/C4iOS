@@ -135,8 +135,8 @@
 
 -(id)initWithMovieName:(NSString *)movieName frame:(CGRect)movieFrame {
     NSArray *movieNameComponents = [movieName componentsSeparatedByString:@"."];
-    movieURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:[movieNameComponents objectAtIndex:0]
-                                                                                  ofType:[movieNameComponents objectAtIndex:1]]];
+    movieURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:movieNameComponents[0]
+                                                                                  ofType:movieNameComponents[1]]];
     self = [self initWithURL:movieURL frame:movieFrame];
     return self;
 }
@@ -155,18 +155,18 @@
         if([movieURL scheme]) {
             AVURLAsset *asset = [AVURLAsset URLAssetWithURL:movieURL options:nil];
             C4Assert(asset != nil, @"The asset (%@) you tried to create couldn't be initialized", movieURL);
-            NSArray *requestedKeys = [NSArray arrayWithObjects:@"duration", @"playable", nil];
+            NSArray *requestedKeys = @[@"duration", @"playable"];
             [asset loadValuesAsynchronouslyForKeys:requestedKeys completionHandler: ^(void) {
                 dispatch_async( dispatch_get_main_queue(), ^(void) {
                     [self prepareToPlayAsset:asset withKeys:requestedKeys];
                 });
             }];
             
-            AVAssetTrack *videoTrack = [[asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
+            AVAssetTrack *videoTrack = [asset tracksWithMediaType:AVMediaTypeVideo][0];
             _originalMovieSize = videoTrack.naturalSize;
             _originalMovieRatio = _originalMovieSize.width / _originalMovieSize.height;
             self.player.actionAtItemEnd = AVPlayerActionAtItemEndPause; // currently C4Movie doesn't handle queues
-            self.player.allowsAirPlayVideo = NO;
+//            self.player.allowsAirPlayVideo = NO;
         }
         
         _rate = 1.0f;
@@ -306,7 +306,7 @@
 	if (context == playerItemStatusContext)
 	{
         
-        AVPlayerStatus status = [[change objectForKey:NSKeyValueChangeNewKey] integerValue];
+        AVPlayerStatus status = [change[NSKeyValueChangeNewKey] integerValue];
         switch (status)
         {
                 /* Indicates that the status of the player is not yet known because 
@@ -345,7 +345,7 @@
      replacement will/did occur. */
 	else if (context == currentItemContext)
 	{
-        AVPlayerItem *newPlayerItem = [change objectForKey:NSKeyValueChangeNewKey];
+        AVPlayerItem *newPlayerItem = change[NSKeyValueChangeNewKey];
         //        C4Log(@"currentItemContext");
         
         /* New player item null? */

@@ -48,11 +48,6 @@
     _previewLayer = previewLayer;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-	return interfaceOrientation;
-}
-
 - (void)initCapture {
 	/*We setup the input*/
     NSArray *cameras = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
@@ -78,12 +73,10 @@
 	dispatch_queue_t queue;
 	queue = dispatch_queue_create("cameraQueue", NULL);
 	[captureOutput setSampleBufferDelegate:self queue:queue];
-	dispatch_release(queue);
     
 	// Set the video output to store frame in BGRA (It is supposed to be faster)
     self.stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
-    NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                    AVVideoCodecJPEG, AVVideoCodecKey, nil];
+    NSDictionary *outputSettings = @{AVVideoCodecKey: AVVideoCodecJPEG};
     [self.stillImageOutput setOutputSettings:outputSettings];
     
 	/*And we create a capture session*/
@@ -125,11 +118,4 @@
 
 } 
 
-#pragma mark -
-#pragma mark Memory management
-
-- (void)viewDidUnload {
-	self.previewLayer = nil;
-    self.captureSession = nil;
-}
 @end

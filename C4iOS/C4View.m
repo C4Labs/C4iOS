@@ -191,20 +191,20 @@
     }];
 }
 
--(void)setContentStretch:(CGRect)contentStretch {
-    CGRect oldContentStretch = self.contentStretch;
-    [self animateWithBlock:^{
-        [super setContentStretch:contentStretch];
-    } completion:^(BOOL completed) {
-        if ((self.animationOptions & AUTOREVERSE) == AUTOREVERSE && completed) {
-            CGFloat oldDuration = self.animationDuration;
-            CGFloat oldDelay = self.animationDelay;
-            [super setContentStretch:oldContentStretch];
-            self.animationDuration = oldDuration;
-            self.animationDelay = oldDelay;
-        }
-    }];
-}
+//-(void)setContentStretch:(CGRect)contentStretch {
+//    CGRect oldContentStretch = self.contentStretch;
+//    [self animateWithBlock:^{
+//        [super setContentStretch:contentStretch];
+//    } completion:^(BOOL completed) {
+//        if ((self.animationOptions & AUTOREVERSE) == AUTOREVERSE && completed) {
+//            CGFloat oldDuration = self.animationDuration;
+//            CGFloat oldDelay = self.animationDelay;
+//            [super setContentStretch:oldContentStretch];
+//            self.animationDuration = oldDuration;
+//            self.animationDelay = oldDelay;
+//        }
+//    }];
+//}
 
 -(void)animateWithBlock:(void (^)(void))animationBlock {
     [self animateWithBlock:animationBlock completion:nil];

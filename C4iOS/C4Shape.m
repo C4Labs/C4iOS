@@ -43,6 +43,8 @@
 @synthesize fillColor = _fillColor, fillRule, lineCap, lineDashPattern, lineDashPhase, lineJoin, lineWidth, miterLimit, origin = _origin, strokeColor, strokeEnd, strokeStart;
 @synthesize closed = _closed, shouldClose = _shouldClose, initialized = _initialized, isTriangle = _isTriangle;
 @synthesize layerTransform = _layerTransform;
+@synthesize path;
+
 -(id)init {
     return [self initWithFrame:CGRectZero];
 }
@@ -83,19 +85,17 @@
 +(C4Shape *)line:(CGPoint *)pointArray {
     CGRect lineFrame = CGRectMakeFromPointArray(pointArray, 2);
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:lineFrame];
-    [newShape _line:[NSArray arrayWithObjects:
-                     [NSValue valueWithCGPoint:pointArray[0]],
-                     [NSValue valueWithCGPoint:pointArray[1]], nil]];
+    [newShape _line:@[[NSValue valueWithCGPoint:pointArray[0]],
+                     [NSValue valueWithCGPoint:pointArray[1]]]];
     return newShape;
 }
 
 +(C4Shape *)triangle:(CGPoint *)pointArray {
     CGRect polygonFrame = CGRectMakeFromPointArray(pointArray, 3);
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:polygonFrame];
-    [newShape _triangle:[NSArray arrayWithObjects:
-                         [NSValue valueWithCGPoint:pointArray[0]],
+    [newShape _triangle:@[[NSValue valueWithCGPoint:pointArray[0]],
                          [NSValue valueWithCGPoint:pointArray[1]],
-                         [NSValue valueWithCGPoint:pointArray[2]], nil]];
+                         [NSValue valueWithCGPoint:pointArray[2]]]];
     return newShape;
 }
 
@@ -116,10 +116,10 @@
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:arcRect];
     NSMutableDictionary *arcDict = [[NSMutableDictionary alloc] initWithCapacity:0];
     [arcDict setValue:[NSValue valueWithCGPoint:centerPoint] forKey:@"centerPoint"];
-    [arcDict setObject:[NSNumber numberWithFloat:radius] forKey:@"radius"];
-    [arcDict setObject:[NSNumber numberWithFloat:startAngle] forKey:@"startAngle"];
-    [arcDict setObject:[NSNumber numberWithFloat:endAngle] forKey:@"endAngle"];
-    [arcDict setObject:[NSNumber numberWithBool:clockwise] forKey:@"clockwise"];
+    arcDict[@"radius"] = @(radius);
+    arcDict[@"startAngle"] = @(startAngle);
+    arcDict[@"endAngle"] = @(endAngle);
+    arcDict[@"clockwise"] = @(clockwise);
     [newShape _arc:arcDict];
     return newShape;
 }
@@ -130,16 +130,16 @@
     
     NSMutableDictionary *wedgeDict = [[NSMutableDictionary alloc] initWithCapacity:0];
     [wedgeDict setValue:[NSValue valueWithCGPoint:centerPoint] forKey:@"centerPoint"];
-    [wedgeDict setObject:[NSNumber numberWithFloat:radius] forKey:@"radius"];
-    [wedgeDict setObject:[NSNumber numberWithFloat:startAngle] forKey:@"startAngle"];
-    [wedgeDict setObject:[NSNumber numberWithFloat:endAngle] forKey:@"endAngle"];
-    [wedgeDict setObject:[NSNumber numberWithBool:clockwise] forKey:@"clockwise"];
+    wedgeDict[@"radius"] = @(radius);
+    wedgeDict[@"startAngle"] = @(startAngle);
+    wedgeDict[@"endAngle"] = @(endAngle);
+    wedgeDict[@"clockwise"] = @(clockwise);
     [newShape _wedge:wedgeDict];
     return newShape;
 }
 +(C4Shape *)shapeFromString:(NSString *)string withFont:(C4Font *)font {
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
-    NSDictionary *stringAndFontDictionary = [NSDictionary dictionaryWithObjectsAndKeys:string,@"string",font,@"font", nil];
+    NSDictionary *stringAndFontDictionary = @{@"string": string,@"font": font};
     [newShape _shapeFromString:stringAndFontDictionary];
     return newShape;
 }
@@ -167,10 +167,10 @@
 -(void)arcWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise{
     NSMutableDictionary *arcDict = [[NSMutableDictionary alloc] initWithCapacity:0];
     [arcDict setValue:[NSValue valueWithCGPoint:centerPoint] forKey:@"centerPoint"];
-    [arcDict setObject:[NSNumber numberWithFloat:radius] forKey:@"radius"];
-    [arcDict setObject:[NSNumber numberWithFloat:startAngle] forKey:@"startAngle"];
-    [arcDict setObject:[NSNumber numberWithFloat:endAngle] forKey:@"endAngle"];
-    [arcDict setObject:[NSNumber numberWithBool:clockwise] forKey:@"clockwise"];
+    arcDict[@"radius"] = @(radius);
+    arcDict[@"startAngle"] = @(startAngle);
+    arcDict[@"endAngle"] = @(endAngle);
+    arcDict[@"clockwise"] = @(clockwise);
     if(self.animationDelay == 0.0f) [self _arc:arcDict];
     else [self performSelector:@selector(_arc:) withObject:arcDict afterDelay:self.animationDelay];
 }
@@ -181,7 +181,7 @@
     CGMutablePathRef newPath = CGPathCreateMutable();
     CGPoint centerPoint = [[arcDict valueForKey:@"centerPoint"] CGPointValue];
     //strage, i have to invert the Bool value for clockwise
-    CGPathAddArc(newPath, nil, centerPoint.x, centerPoint.y, [[arcDict objectForKey:@"radius"] floatValue], [[arcDict objectForKey:@"startAngle"] floatValue], [[arcDict objectForKey:@"endAngle"] floatValue], ![[arcDict objectForKey:@"clockwise"] boolValue]);
+    CGPathAddArc(newPath, nil, centerPoint.x, centerPoint.y, [arcDict[@"radius"] floatValue], [arcDict[@"startAngle"] floatValue], [arcDict[@"endAngle"] floatValue], ![arcDict[@"clockwise"] boolValue]);
     CGRect arcRect = CGPathGetBoundingBox(newPath);
     
     const CGAffineTransform translation = CGAffineTransformMakeTranslation(arcRect.origin.x *-1, arcRect.origin.y *-1);
@@ -201,10 +201,10 @@
 -(void)wedgeWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise{
     NSMutableDictionary *wedgeDict = [[NSMutableDictionary alloc] initWithCapacity:0];
     [wedgeDict setValue:[NSValue valueWithCGPoint:centerPoint] forKey:@"centerPoint"];
-    [wedgeDict setObject:[NSNumber numberWithFloat:radius] forKey:@"radius"];
-    [wedgeDict setObject:[NSNumber numberWithFloat:startAngle] forKey:@"startAngle"];
-    [wedgeDict setObject:[NSNumber numberWithFloat:endAngle] forKey:@"endAngle"];
-    [wedgeDict setObject:[NSNumber numberWithBool:clockwise] forKey:@"clockwise"];
+    wedgeDict[@"radius"] = @(radius);
+    wedgeDict[@"startAngle"] = @(startAngle);
+    wedgeDict[@"endAngle"] = @(endAngle);
+    wedgeDict[@"clockwise"] = @(clockwise);
     if(self.animationDelay == 0.0f) [self _wedge:wedgeDict];
     else [self performSelector:@selector(_wedge:) withObject:wedgeDict afterDelay:self.animationDelay];
 }
@@ -215,7 +215,7 @@
     CGMutablePathRef newPath = CGPathCreateMutable();
     CGPoint centerPoint = [[arcDict valueForKey:@"centerPoint"] CGPointValue];
     //strage, i have to invert the Bool value for clockwise
-    CGPathAddArc(newPath, nil, centerPoint.x, centerPoint.y, [[arcDict objectForKey:@"radius"] floatValue], [[arcDict objectForKey:@"startAngle"] floatValue], [[arcDict objectForKey:@"endAngle"] floatValue], ![[arcDict objectForKey:@"clockwise"] boolValue]);
+    CGPathAddArc(newPath, nil, centerPoint.x, centerPoint.y, [arcDict[@"radius"] floatValue], [arcDict[@"startAngle"] floatValue], [arcDict[@"endAngle"] floatValue], ![arcDict[@"clockwise"] boolValue]);
 
     CGPathAddLineToPoint(newPath, nil, centerPoint.x, centerPoint.y);
 
@@ -351,7 +351,7 @@
 }
 
 -(void)shapeFromString:(NSString *)string withFont:(C4Font *)font {
-    NSDictionary *stringAndFontDictionary = [NSDictionary dictionaryWithObjectsAndKeys:string,@"string",font,@"font", nil];
+    NSDictionary *stringAndFontDictionary = @{@"string": string,@"font": font};
     if(self.animationDelay == 0.0f) [self _shapeFromString:stringAndFontDictionary];
     else [self performSelector:@selector(_shapeFromString:) withObject:stringAndFontDictionary];
 }
@@ -359,8 +359,8 @@
 -(void)_shapeFromString:(NSDictionary *)stringAndFontDictionary {
     [self willChangeShape];
     _closed = YES;
-    NSString *string = [stringAndFontDictionary objectForKey:@"string"];
-    C4Font *font = [stringAndFontDictionary objectForKey:@"font"];
+    NSString *string = stringAndFontDictionary[@"string"];
+    C4Font *font = stringAndFontDictionary[@"font"];
     NSStringEncoding encoding = [NSString defaultCStringEncoding];
     CFStringRef stringRef = CFStringCreateWithCString(kCFAllocatorDefault, [string cStringUsingEncoding:encoding], encoding);
     CFIndex length = CFStringGetLength(stringRef);
@@ -375,13 +375,13 @@
         CGGlyph currentGlyph;
         const unichar c = [string characterAtIndex:i];
         CTFontGetGlyphsForCharacters(ctFont, &c, &currentGlyph, 1);
-        CGPathRef path = CTFontCreatePathForGlyph(ctFont, currentGlyph, &afft);
+        CGPathRef fontPath = CTFontCreatePathForGlyph(ctFont, currentGlyph, &afft);
         CGSize advance = CGSizeZero;
         CGAffineTransform t = CGAffineTransformMakeTranslation(currentOrigin.x, currentOrigin.y);
-        CGPathAddPath(glyphPaths, &t, path);
+        CGPathAddPath(glyphPaths, &t, fontPath);
         CTFontGetAdvancesForGlyphs(ctFont, kCTFontDefaultOrientation, &currentGlyph, &advance, 1);
         currentOrigin.x += advance.width;
-        CFRelease(path);
+        CFRelease(fontPath);
     }
     [self.shapeLayer animatePath:glyphPaths];
     CGRect pathRect = CGPathGetBoundingBox(glyphPaths);
@@ -392,7 +392,7 @@
     _initialized = YES;
 }
 -(void)line:(CGPoint *)pointArray {
-    NSArray *linePointArray = [NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointArray[0]],[NSValue valueWithCGPoint:pointArray[1]], nil];
+    NSArray *linePointArray = @[[NSValue valueWithCGPoint:pointArray[0]],[NSValue valueWithCGPoint:pointArray[1]]];
     if(self.animationDelay == 0.0f) [self _line:linePointArray];
     else [self performSelector:@selector(_line:) withObject:linePointArray afterDelay:self.animationDelay];
 }
@@ -403,8 +403,8 @@
     
     CGPoint points[2];
 
-    points[0] = [[pointArray objectAtIndex:0] CGPointValue];
-    points[1] = [[pointArray objectAtIndex:1] CGPointValue];
+    points[0] = [pointArray[0] CGPointValue];
+    points[1] = [pointArray[1] CGPointValue];
   
     _pointA = points[0];
     _pointB = points[1];
@@ -436,11 +436,9 @@
 }
 
 -(void)triangle:(CGPoint *)pointArray {
-    NSArray *trianglPointArray = [NSArray arrayWithObjects:
-                                  [NSValue valueWithCGPoint:pointArray[0]],
+    NSArray *trianglPointArray = @[[NSValue valueWithCGPoint:pointArray[0]],
                                   [NSValue valueWithCGPoint:pointArray[1]],
-                                  [NSValue valueWithCGPoint:pointArray[2]],
-                                  nil];
+                                  [NSValue valueWithCGPoint:pointArray[2]]];
     if(self.animationDuration == 0.0f) [self _triangle:trianglPointArray];
     else [self performSelector:@selector(_triangle:) withObject:trianglPointArray afterDelay:self.animationDelay];
 }
@@ -459,7 +457,7 @@
     translation.y *= -1;
     
     for (int i = 0; i < pointCount; i++) {
-        points[i] = [[pointArray objectAtIndex:i] CGPointValue];
+        points[i] = [pointArray[i] CGPointValue];
         points[i].x += translation.x;
         points[i].y += translation.y;
     }
@@ -510,7 +508,7 @@
     translation.y *= -1;
  
     for (int i = 0; i < pointCount; i++) {
-        points[i] = [[pointArray objectAtIndex:i] CGPointValue];
+        points[i] = [pointArray[i] CGPointValue];
         points[i].x += translation.x;
         points[i].y += translation.y;
     }
@@ -559,6 +557,10 @@
 }
 
 -(void)test {
+}
+
+-(CGPathRef)path {
+    return self.shapeLayer.path;
 }
 
 -(void)setPointA:(CGPoint)pointA {
@@ -673,7 +675,7 @@
 
 -(void)setDashPattern:(CGFloat *)dashPattern pointCount:(NSUInteger)pointCount {
     NSMutableArray *patternArray = [[NSMutableArray alloc] initWithCapacity:0];
-    for(int i = 0; i < pointCount; i++) [patternArray addObject:[NSNumber numberWithFloat:dashPattern[i]]];
+    for(int i = 0; i < pointCount; i++) [patternArray addObject:@(dashPattern[i])];
     if(self.animationDelay == 0.0f) [self _setLineDashPattern:patternArray];
     else [self performSelector:@selector(_setLineDashPattern:) withObject:patternArray afterDelay:self.animationDelay];
 }
@@ -690,8 +692,8 @@
 }
 
 -(void)setLineDashPhase:(CGFloat)_lineDashPhase {
-    if(self.animationDelay == 0.0f) [self _setLineDashPhase:[NSNumber numberWithFloat:_lineDashPhase]];
-    else [self performSelector:@selector(_setLineDashPhase:) withObject:[NSNumber numberWithFloat:_lineDashPhase] afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f) [self _setLineDashPhase:@(_lineDashPhase)];
+    else [self performSelector:@selector(_setLineDashPhase:) withObject:@(_lineDashPhase) afterDelay:self.animationDelay];
 }
 -(void)_setLineDashPhase:(NSNumber *)_lineDashPhase {
     [self.shapeLayer animateLineDashPhase:[_lineDashPhase floatValue]];
@@ -712,8 +714,8 @@
 }
 
 -(void)setLineWidth:(CGFloat)_lineWidth {
-    if(self.animationDelay == 0.0f) [self _setLineWidth:[NSNumber numberWithFloat:_lineWidth]];
-    else [self performSelector:@selector(_setLineWidth:) withObject:[NSNumber numberWithFloat:_lineWidth] afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f) [self _setLineWidth:@(_lineWidth)];
+    else [self performSelector:@selector(_setLineWidth:) withObject:@(_lineWidth) afterDelay:self.animationDelay];
 }
 -(void)_setLineWidth:(NSNumber *)_lineWidth {
     lineWidth = [_lineWidth floatValue];
@@ -724,8 +726,8 @@
 }
 
 -(void)setMiterLimit:(CGFloat)_miterLimit {
-    if(self.animationDelay == 0.0f) [self _setMiterLimit:[NSNumber numberWithFloat:_miterLimit]];
-    else [self performSelector:@selector(_setMiterLimit:) withObject:[NSNumber numberWithFloat:_miterLimit] afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f) [self _setMiterLimit:@(_miterLimit)];
+    else [self performSelector:@selector(_setMiterLimit:) withObject:@(_miterLimit) afterDelay:self.animationDelay];
 }
 -(void)_setMiterLimit:(NSNumber *)_miterLimit {
     [self.shapeLayer animateMiterLimit:[_miterLimit floatValue]];
@@ -746,8 +748,8 @@
 }
 
 -(void)setStrokeEnd:(CGFloat)_strokeEnd {
-    if(self.animationDelay == 0.0f ) [self _setStrokeEnd:[NSNumber numberWithFloat:_strokeEnd]];
-    else [self performSelector:@selector(_setStrokeEnd:) withObject:[NSNumber numberWithFloat:_strokeEnd] afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f ) [self _setStrokeEnd:@(_strokeEnd)];
+    else [self performSelector:@selector(_setStrokeEnd:) withObject:@(_strokeEnd) afterDelay:self.animationDelay];
 }
 -(void)_setStrokeEnd:(NSNumber *)_strokeEnd {
     [self.shapeLayer animateStrokeEnd:[_strokeEnd floatValue]];
@@ -757,8 +759,8 @@
 }
 
 -(void)setStrokeStart:(CGFloat)_strokeStart {
-    if(self.animationDelay == 0.0f) [self _setStrokeStart:[NSNumber numberWithFloat:_strokeStart]];
-    else [self performSelector:@selector(_setStrokeStart:) withObject:[NSNumber numberWithFloat:_strokeStart] afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f) [self _setStrokeStart:@(_strokeStart)];
+    else [self performSelector:@selector(_setStrokeStart:) withObject:@(_strokeStart) afterDelay:self.animationDelay];
 }
 -(void)_setStrokeStart:(NSNumber *)_strokeStart {
     [self.shapeLayer animateStrokeStart:[_strokeStart floatValue]];

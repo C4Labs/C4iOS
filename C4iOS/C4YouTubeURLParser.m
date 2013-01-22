@@ -40,16 +40,16 @@
             continue;
         }
         
-        NSString *key = [keyValueArray objectAtIndex:0];
+        NSString *key = keyValueArray[0];
         key = [self stringByDecodingYoutubeURLFormat:key];
-        NSString *value = [keyValueArray objectAtIndex:1];
+        NSString *value = keyValueArray[1];
         value = [self stringByDecodingYoutubeURLFormat:value];
         
-        NSMutableArray *results = [parameters objectForKey:key];
+        NSMutableArray *results = parameters[key];
         
         if(!results) {
             results = [NSMutableArray arrayWithCapacity:1];
-            [parameters setObject:results forKey:key];
+            parameters[key] = results;
         }
         
         [results addObject:value];
@@ -68,7 +68,7 @@
     self = [super init];
     if(self != nil) {
         NSMutableDictionary *dictionary = [self dictionaryForQueryURL:youtubeURL];
-        NSString *youtubeID = [[dictionary objectForKey:@"v"] objectAtIndex:0];
+        NSString *youtubeID = dictionary[@"v"][0];
         
         if (youtubeID) {
             NSURL *fullYoutubeURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", youtubeVideoIDUrlHeader, youtubeID]];
@@ -86,7 +86,7 @@
                 
                 if (parts) {
                     
-                    NSString *fmtStreamMapString = [[parts objectForKey:@"url_encoded_fmt_stream_map"] objectAtIndex:0];
+                    NSString *fmtStreamMapString = parts[@"url_encoded_fmt_stream_map"][0];
                     NSArray *fmtStreamMapArray = [fmtStreamMapString componentsSeparatedByString:@","];
                     
                     if(self.videoDictionary != nil) {
@@ -97,16 +97,16 @@
                     
                     for (NSString *videoEncodedString in fmtStreamMapArray) {
                         NSMutableDictionary *videoComponents = [self dictionaryFromQueryStringComponents:videoEncodedString];
-                        NSString *videoComponentsType = [[videoComponents objectForKey:@"type"] objectAtIndex:0];
+                        NSString *videoComponentsType = videoComponents[@"type"][0];
                         NSString *type = [self stringByDecodingYoutubeURLFormat:videoComponentsType];
                         if ([type rangeOfString:@"mp4"].length > 0) {
-                            NSString *url = [[videoComponents objectForKey:@"url"] objectAtIndex:0];
+                            NSString *url = videoComponents[@"url"][0];
                             url = [self stringByDecodingYoutubeURLFormat:url];
                             
-                            NSString *quality = [[videoComponents objectForKey:@"quality"] objectAtIndex:0];
+                            NSString *quality = videoComponents[@"quality"][0];
                             quality = [self stringByDecodingYoutubeURLFormat:quality];
                             
-                            [self.videoDictionary setObject:[NSURL URLWithString:url] forKey:quality];
+                            (self.videoDictionary)[quality] = [NSURL URLWithString:url];
                         }
                     }
                     C4Assert([[self.videoDictionary allKeys] count] > 0, @"The YouTube video you tried to requeset could not be found in any size format");

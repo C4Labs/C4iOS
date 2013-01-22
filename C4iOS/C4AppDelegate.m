@@ -41,7 +41,7 @@
     
     //strangely, if the following call to set the background color isn't made, then the view doesn't receive touch events...
     self.workspace.view.backgroundColor = [UIColor whiteColor]; 
-    [(AVAudioSession*)[AVAudioSession sharedInstance] setDelegate:self.workspace];
+//    [(AVAudioSession*)[AVAudioSession sharedInstance] setDelegate:self.workspace];
     [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategorySoloAmbient error: nil];
     [self.workspace setup];
     mainView = (C4View *)self.workspace.view;

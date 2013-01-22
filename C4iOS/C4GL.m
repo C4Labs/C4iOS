@@ -41,8 +41,7 @@
     self = [super init];
     if (self != nil) {        
         eaglLayer = (C4EAGLLayer *)self.layer;
-        eaglLayer.drawableProperties = [NSDictionary dictionaryWithObjectsAndKeys:
-                                        [NSNumber numberWithBool:NO], kEAGLDrawablePropertyRetainedBacking, kEAGLColorFormatRGBA8, kEAGLDrawablePropertyColorFormat, nil];
+        eaglLayer.drawableProperties = @{kEAGLDrawablePropertyRetainedBacking: @NO, kEAGLDrawablePropertyColorFormat: kEAGLColorFormatRGBA8};
 
 		if (nil == renderer) {
 			renderer = _renderer;

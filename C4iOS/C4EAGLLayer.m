@@ -84,8 +84,8 @@
 -(void)animateShadowOpacity:(CGFloat)_shadowOpacity {
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowOpacity"];
-    animation.fromValue = [NSNumber numberWithFloat:self.shadowOpacity];
-    animation.toValue = [NSNumber numberWithFloat:_shadowOpacity];
+    animation.fromValue = @(self.shadowOpacity);
+    animation.toValue = @(_shadowOpacity);
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
         [CATransaction setCompletionBlock:^ { self.shadowOpacity = _shadowOpacity; }];
     }
@@ -96,8 +96,8 @@
 -(void)animateShadowRadius:(CGFloat)_shadowRadius {
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowRadius"];
-    animation.fromValue = [NSNumber numberWithFloat:self.shadowRadius];
-    animation.toValue = [NSNumber numberWithFloat:_shadowRadius];
+    animation.fromValue = @(self.shadowRadius);
+    animation.toValue = @(_shadowRadius);
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
         [CATransaction setCompletionBlock:^ { self.shadowRadius = _shadowRadius; }];
     }
@@ -181,8 +181,8 @@
 -(void)animateBorderWidth:(CGFloat)_borderWidth {
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"borderWidth"];
-    animation.fromValue = [NSNumber numberWithFloat:self.borderWidth];
-    animation.toValue = [NSNumber numberWithFloat:_borderWidth];
+    animation.fromValue = @(self.borderWidth);
+    animation.toValue = @(_borderWidth);
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
         [CATransaction setCompletionBlock:^ { 
             self.borderWidth = _borderWidth; 
@@ -211,8 +211,8 @@
 -(void)animateCornerRadius:(CGFloat)_cornerRadius {
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"cornerRadius"];
-    animation.fromValue = [NSNumber numberWithFloat:self.cornerRadius];
-    animation.toValue = [NSNumber numberWithFloat:_cornerRadius];
+    animation.fromValue = @(self.cornerRadius);
+    animation.toValue = @(_cornerRadius);
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
         [CATransaction setCompletionBlock:^ { 
             self.cornerRadius = _cornerRadius; 
@@ -226,8 +226,8 @@
 -(void)animateZPosition:(CGFloat)_zPosition {
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"zPosition"];
-    animation.fromValue = [NSNumber numberWithFloat:self.zPosition];
-    animation.toValue = [NSNumber numberWithFloat:_zPosition];
+    animation.fromValue = @(self.zPosition);
+    animation.toValue = @(_zPosition);
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
         [CATransaction setCompletionBlock:^ { 
             self.zPosition = _zPosition; 
@@ -249,8 +249,8 @@
 -(void)animateRotation:(CGFloat)_rotationAngle {
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"transform.rotation.z"];
-    animation.fromValue = [NSNumber numberWithFloat:self.rotationAngle];
-    animation.toValue = [NSNumber numberWithFloat:_rotationAngle];
+    animation.fromValue = @(self.rotationAngle);
+    animation.toValue = @(_rotationAngle);
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
         [CATransaction setCompletionBlock:^ {
             self.rotationAngle = _rotationAngle;
@@ -265,8 +265,8 @@
 -(void)animateRotationX:(CGFloat)_rotationAngle {
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"transform.rotation.x"];
-    animation.fromValue = [NSNumber numberWithFloat:self.rotationAngleX];
-    animation.toValue = [NSNumber numberWithFloat:_rotationAngle];
+    animation.fromValue = @(self.rotationAngleX);
+    animation.toValue = @(_rotationAngle);
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
         [CATransaction setCompletionBlock:^ {
             self.transform = CATransform3DRotate(self.transform, _rotationAngle - self.rotationAngleX, 1, 0, 0);
@@ -281,8 +281,8 @@
 -(void)animateRotationY:(CGFloat)_rotationAngle {
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"transform.rotation.y"];
-    animation.fromValue = [NSNumber numberWithFloat:self.rotationAngleY];
-    animation.toValue = [NSNumber numberWithFloat:_rotationAngle];
+    animation.fromValue = @(self.rotationAngleY);
+    animation.toValue = @(_rotationAngle);
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
         [CATransaction setCompletionBlock:^ {
             self.transform =    CATransform3DRotate(self.transform, _rotationAngle - self.rotationAngleY, 0, 1, 0);

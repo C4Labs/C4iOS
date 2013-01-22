@@ -208,9 +208,9 @@
     CIFilter *filter = [CIFilter filterWithName:@"CIColorControls"];
     [filter setDefaults];
     [filter setValue:_visibleImage forKey:@"inputImage"];
-    [filter setValue:[NSNumber numberWithFloat:saturation] forKey:@"inputSaturation"];
-    [filter setValue:[NSNumber numberWithFloat:brightness] forKey:@"inputBrightness"];
-    [filter setValue:[NSNumber numberWithFloat:contrast] forKey:@"inputContrast"];
+    [filter setValue:@(saturation) forKey:@"inputSaturation"];
+    [filter setValue:@(brightness) forKey:@"inputBrightness"];
+    [filter setValue:@(contrast) forKey:@"inputContrast"];
     self.visibleImage = [filter outputImage];
     C4Assert(_visibleImage != nil, @"The filter you tried to create (%@) returned nil for its outputImage", filter.name);
     [self.imageLayer animateContents:self.CGImage];
@@ -259,7 +259,7 @@
     [filter setDefaults];
     [filter setValue:_visibleImage forKey:@"inputImage"];
     [filter setValue:color.CIColor forKey:@"inputColor"];
-    [filter setValue:[NSNumber numberWithFloat:intensity] forKey:@"inputIntensity"];
+    [filter setValue:@(intensity) forKey:@"inputIntensity"];
     self.visibleImage = [filter outputImage];
     C4Assert(_visibleImage != nil, @"The filter you tried to create (%@) returned nil for its outputImage", filter.name);
     [self.imageLayer animateContents:self.CGImage];
@@ -299,7 +299,7 @@
     CIFilter *filter = [CIFilter filterWithName:@"CIExposureAdjust"];
     [filter setDefaults];
     [filter setValue:_visibleImage forKey:@"inputImage"];
-    [filter setValue:[NSNumber numberWithFloat:adjustment] forKey:@"inputEV"];
+    [filter setValue:@(adjustment) forKey:@"inputEV"];
     self.visibleImage = [filter outputImage];
     C4Assert(_visibleImage != nil, @"The filter you tried to create (%@) returned nil for its outputImage", filter.name);
     [self.imageLayer animateContents:self.CGImage];
@@ -320,7 +320,7 @@
     CIFilter *filter = [CIFilter filterWithName:@"CIGammaAdjust"];
     [filter setDefaults];
     [filter setValue:_visibleImage forKey:@"inputImage"];
-    [filter setValue:[NSNumber numberWithFloat:adjustment] forKey:@"inputPower"];
+    [filter setValue:@(adjustment) forKey:@"inputPower"];
     self.visibleImage = [filter outputImage];
     C4Assert(_visibleImage != nil, @"The filter you tried to create (%@) returned nil for its outputImage", filter.name);
     [self.imageLayer animateContents:self.CGImage];
@@ -340,8 +340,8 @@
     CIFilter *filter = [CIFilter filterWithName:@"CIHighlightShadowAdjust"];
     [filter setDefaults];
     [filter setValue:_visibleImage forKey:@"inputImage"];
-    [filter setValue:[NSNumber numberWithFloat:highlightAmount] forKey:@"inputHighlightAmount"];
-    [filter setValue:[NSNumber numberWithFloat:shadowAmount] forKey:@"inputShadowAmount"];
+    [filter setValue:@(highlightAmount) forKey:@"inputHighlightAmount"];
+    [filter setValue:@(shadowAmount) forKey:@"inputShadowAmount"];
     self.visibleImage = [filter outputImage];
     C4Assert(_visibleImage != nil, @"The filter you tried to create (%@) returned nil for its outputImage", filter.name);
     [self.imageLayer animateContents:self.CGImage];
@@ -351,7 +351,7 @@
     CIFilter *filter = [CIFilter filterWithName:@"CIHueAdjust"];
     [filter setDefaults];
     [filter setValue:_visibleImage forKey:@"inputImage"];
-    [filter setValue:[NSNumber numberWithFloat:angle] forKey:@"inputAngle"];
+    [filter setValue:@(angle) forKey:@"inputAngle"];
     self.visibleImage = [filter outputImage];
     C4Assert(_visibleImage != nil, @"The filter you tried to create (%@) returned nil for its outputImage", filter.name);
     [self.imageLayer animateContents:self.CGImage];
@@ -461,7 +461,7 @@
     CIFilter *filter = [CIFilter filterWithName:@"CISepiaTone"];
     [filter setDefaults];
     [filter setValue:_visibleImage forKey:@"inputImage"];
-    [filter setValue:[NSNumber numberWithFloat:intensity] forKey:@"inputIntensity"];
+    [filter setValue:@(intensity) forKey:@"inputIntensity"];
     self.visibleImage = [filter outputImage];
     C4Assert(_visibleImage != nil, @"The filter you tried to create (%@) returned nil for its outputImage", filter.name);
     [self.imageLayer animateContents:self.CGImage];
@@ -521,7 +521,7 @@
     CIFilter *filter = [CIFilter filterWithName:@"CIStraightenFilter"];
     [filter setDefaults];
     [filter setValue:_visibleImage forKey:@"inputImage"];
-    [filter setValue:[NSNumber numberWithFloat:angle] forKey:@"inputAngle"];
+    [filter setValue:@(angle) forKey:@"inputAngle"];
     self.visibleImage = [filter outputImage];
     C4Assert(_visibleImage != nil, @"The filter you tried to create (%@) returned nil for its outputImage", filter.name);
     [self.imageLayer animateContents:self.CGImage];
@@ -556,7 +556,7 @@
     CIFilter *filter = [CIFilter filterWithName:@"CIVibrance"];
     [filter setDefaults];
     [filter setValue:_visibleImage forKey:@"inputImage"];
-    [filter setValue:[NSNumber numberWithFloat:amount] forKey:@"inputAmount"];
+    [filter setValue:@(amount) forKey:@"inputAmount"];
     self.visibleImage = [filter outputImage];
     C4Assert(_visibleImage != nil, @"The filter you tried to create (%@) returned nil for its outputImage", filter.name);
     [self.imageLayer animateContents:self.CGImage];
@@ -638,10 +638,10 @@
             CFArrayAppendValue(self.animatedImages,img.CGImage);
         }
         
-        UIImage *image = [UIImage imageNamed:[imageNames objectAtIndex:0]];
+        UIImage *image = [UIImage imageNamed:imageNames[0]];
         self.originalImage = image;
-        C4Assert(_originalImage != nil, @"The C4Image you tried to load (%@) returned nil for its UIImage", [imageNames objectAtIndex:0]);
-        C4Assert(_originalImage.CGImage != nil, @"The C4Image you tried to load (%@) returned nil for its CGImage", [imageNames objectAtIndex:0]);
+        C4Assert(_originalImage != nil, @"The C4Image you tried to load (%@) returned nil for its UIImage", imageNames[0]);
+        C4Assert(_originalImage.CGImage != nil, @"The C4Image you tried to load (%@) returned nil for its CGImage", imageNames[0]);
         _visibleImage = [[CIImage alloc] initWithCGImage:_originalImage.CGImage];
         C4Assert(_visibleImage != nil, @"The CIImage you tried to create (%@) returned a nil object", _visibleImage);
         self.frame = _visibleImage.extent;

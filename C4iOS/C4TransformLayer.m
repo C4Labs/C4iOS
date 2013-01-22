@@ -1,18 +1,18 @@
 //
-//  C4CaptureVideoPreviewLayer.m
-//  cameraVieweriPhone
+//  C4TransformLayer.m
+//  Clock
 //
-//  Created by Travis Kirton on 12-05-15.
-//  Copyright (c) 2012 POSTFL. All rights reserved.
+//  Created by moi on 12-08-15.
+//  Copyright (c) 2012 moi. All rights reserved.
 //
 
-#import "C4CameraLayer.h"
+#import "C4TransformLayer.h"
 
-@interface C4CameraLayer ()
+@interface C4TransformLayer ()
 @property (readwrite, nonatomic) CGFloat rotationAngle, rotationAngleX, rotationAngleY;
 @end
 
-@implementation C4CameraLayer
+@implementation C4TransformLayer
 @synthesize animationOptions = _animationOptions, currentAnimationEasing, repeatCount, animationDuration = _animationDuration;
 @synthesize allowsInteraction, repeats;
 @synthesize rotationAngle, rotationAngleX, rotationAngleY;
@@ -21,10 +21,10 @@
 - (id)init {
     self = [super init];
     if (self != nil) {
-        self.name = @"playerLayer";
+        self.name = @"backingLayer";
         self.repeatCount = 0;
         self.autoreverses = NO;
-        
+        self.rotationAngle = 0;
         currentAnimationEasing = (NSString *)kCAMediaTimingFunctionEaseInEaseOut;
         allowsInteraction = NO;
         repeats = NO;
@@ -91,7 +91,10 @@
     animation.fromValue = (id)self.shadowColor;
     animation.toValue = (__bridge id)_shadowColor;
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { self.shadowColor = _shadowColor; }];
+        [CATransaction setCompletionBlock:^ {
+            self.shadowColor = _shadowColor;
+            [self removeAnimationForKey:@"animateShadowColor"];
+        }];
     }
     [self addAnimation:animation forKey:@"animateShadowColor"];
     [CATransaction commit];
@@ -103,7 +106,10 @@
     animation.fromValue = @(self.shadowOpacity);
     animation.toValue = @(_shadowOpacity);
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { self.shadowOpacity = _shadowOpacity; }];
+        [CATransaction setCompletionBlock:^ {
+            self.shadowOpacity = _shadowOpacity;
+            [self removeAnimationForKey:@"animateShadowOpacity"];
+        }];
     }
     [self addAnimation:animation forKey:@"animateShadowOpacity"];
     [CATransaction commit];
@@ -115,9 +121,12 @@
     animation.fromValue = @(self.shadowRadius);
     animation.toValue = @(_shadowRadius);
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { self.shadowRadius = _shadowRadius; }];
+        [CATransaction setCompletionBlock:^ {
+            self.shadowRadius = _shadowRadius;
+            [self removeAnimationForKey:@"animateShadowRadius"];
+        }];
     }
-    [self addAnimation:animation forKey:@"animateShadowOpacity"];
+    [self addAnimation:animation forKey:@"animateShadowRadius"];
     [CATransaction commit];
 }
 
@@ -127,7 +136,10 @@
     animation.fromValue = [NSValue valueWithCGSize:self.shadowOffset];
     animation.toValue = [NSValue valueWithCGSize:_shadowOffset];
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { self.shadowOffset = _shadowOffset; }];
+        [CATransaction setCompletionBlock:^ {
+            self.shadowOffset = _shadowOffset;
+            [self removeAnimationForKey:@"animateShadowOffset"];
+        }];
     }
     [self addAnimation:animation forKey:@"animateShadowOffset"];
     [CATransaction commit];
@@ -139,7 +151,10 @@
     animation.fromValue = (id)self.shadowPath;
     animation.toValue = (__bridge id)_shadowPath;
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { self.shadowPath = _shadowPath; }];
+        [CATransaction setCompletionBlock:^ {
+            self.shadowPath = _shadowPath;
+            [self removeAnimationForKey:@"animateShadowPath"];
+        }];
     }
     [self addAnimation:animation forKey:@"animateShadowPath"];
     [CATransaction commit];
@@ -151,7 +166,10 @@
     animation.fromValue = self.backgroundFilters;
     animation.toValue = _backgroundFilters;
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { self.backgroundFilters = _backgroundFilters; }];
+        [CATransaction setCompletionBlock:^ {
+            self.backgroundFilters = _backgroundFilters;
+            [self removeAnimationForKey:@"animateBackgroundFilters"];
+        }];
     }
     [self addAnimation:animation forKey:@"animateBackgroundFilters"];
     [CATransaction commit];
@@ -163,7 +181,10 @@
     animation.fromValue = self.compositingFilter;
     animation.toValue = _compositingFilter;
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { self.compositingFilter = _compositingFilter; }];
+        [CATransaction setCompletionBlock:^ {
+            self.compositingFilter = _compositingFilter;
+            [self removeAnimationForKey:@"animateCompositingFilter"];
+        }];
     }
     [self addAnimation:animation forKey:@"animateCompositingFilter"];
     [CATransaction commit];
@@ -175,7 +196,10 @@
     animation.fromValue = self.contents;
     animation.toValue = (__bridge id)_image;
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { self.contents = (__bridge id)_image; }];
+        [CATransaction setCompletionBlock:^ {
+            self.contents = (__bridge id)_image;
+            [self removeAnimationForKey:@"animateContents"];
+        }];
     }
     [self addAnimation:animation forKey:@"animateContents"];
     [CATransaction commit];
@@ -185,9 +209,12 @@
  reversing how i check the values, if linear is at the bottom, then all the other values get called
  */
 
+-(void)test {
+}
+
 //-(BOOL)isOpaque {
 //    /*
-//     Apple docs say that the frameworks flip this to NO automatically 
+//     Apple docs say that the frameworks flip this to NO automatically
 //     ...if you do things like set the background color to anything transparent (i.e. alpha other than 1.0f)
 //     */
 //    return YES;
@@ -200,8 +227,8 @@
     animation.fromValue = (id)self.backgroundColor;
     animation.toValue = (__bridge id)_backgroundColor;
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { 
-            self.backgroundColor = _backgroundColor; 
+        [CATransaction setCompletionBlock:^ {
+            self.backgroundColor = _backgroundColor;
             [self removeAnimationForKey:@"animateBackgroundColor"];
         }];
     }
@@ -215,8 +242,8 @@
     animation.fromValue = @(self.borderWidth);
     animation.toValue = @(_borderWidth);
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { 
-            self.borderWidth = _borderWidth; 
+        [CATransaction setCompletionBlock:^ {
+            self.borderWidth = _borderWidth;
             [self removeAnimationForKey:@"animateBorderWidth"];
         }];
     }
@@ -230,8 +257,8 @@
     animation.fromValue = (id)self.borderColor;
     animation.toValue = (__bridge id)_borderColor;
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { 
-            self.borderColor = _borderColor; 
+        [CATransaction setCompletionBlock:^ {
+            self.borderColor = _borderColor;
             [self removeAnimationForKey:@"animateBorderColor"];
         }];
     }
@@ -245,8 +272,8 @@
     animation.fromValue = @(self.cornerRadius);
     animation.toValue = @(_cornerRadius);
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { 
-            self.cornerRadius = _cornerRadius; 
+        [CATransaction setCompletionBlock:^ {
+            self.cornerRadius = _cornerRadius;
             [self removeAnimationForKey:@"animateCornerRadius"];
         }];
     }
@@ -260,8 +287,8 @@
     animation.fromValue = @(self.zPosition);
     animation.toValue = @(_zPosition);
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { 
-            self.zPosition = _zPosition; 
+        [CATransaction setCompletionBlock:^ {
+            self.zPosition = _zPosition;
             [self removeAnimationForKey:@"animateZPosition"];
         }];
     }
@@ -317,7 +344,7 @@
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
         [CATransaction setCompletionBlock:^ {
             self.transform =    CATransform3DRotate(self.transform, _rotationAngle - self.rotationAngleY, 0, 1, 0);
-            self.rotationAngleY = _rotationAngle;
+            self.rotationAngleY = 0;
             [self removeAnimationForKey:@"animateRotationY"];
         }];
     }
@@ -331,8 +358,8 @@
     animation.fromValue = [NSValue valueWithCATransform3D:self.sublayerTransform];
     animation.toValue = [NSValue valueWithCATransform3D:_transform];
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ { 
-            self.sublayerTransform = _transform; 
+        [CATransaction setCompletionBlock:^ {
+            self.sublayerTransform = _transform;
             [self removeAnimationForKey:@"sublayerTransform"];
         }];
     }
@@ -340,4 +367,7 @@
     [CATransaction commit];
 }
 
+-(void)setOpaque:(BOOL)opaque {
+    
+}
 @end

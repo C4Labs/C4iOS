@@ -353,4 +353,6 @@ The change will happen based on the shape's current animation options, duration 
 
 @property (readonly, atomic, getter = isBezierCurve) BOOL bezierCurve;
 @property (readonly, atomic, getter = isQuadCurve) BOOL quadCurve;
+
+@property (readonly, atomic) CGPathRef path;
 @end

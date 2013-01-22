@@ -53,15 +53,15 @@
         }
         
         self.propertiesDictionary = [NSMutableDictionary dictionaryWithCapacity:0];
-        [self.propertiesDictionary setValue:[NSNumber numberWithFloat:seconds] forKey:@"seconds"];
-        [self.propertiesDictionary setObject:object forKey:@"target"];
+        [self.propertiesDictionary setValue:@(seconds) forKey:@"seconds"];
+        (self.propertiesDictionary)[@"target"] = object;
         [self.propertiesDictionary setValue:methodName forKey:@"methodName"];
         if (infoObject == nil) {
-            [self.propertiesDictionary setObject:[NSNull null] forKey:@"infoObject"];
+            (self.propertiesDictionary)[@"infoObject"] = [NSNull null];
         } else {
-            [self.propertiesDictionary setObject:infoObject forKey:@"infoObject"];
+            (self.propertiesDictionary)[@"infoObject"] = infoObject;
         }
-        [self.propertiesDictionary setValue:[NSNumber numberWithBool:repeats] forKey:@"repeats"];
+        [self.propertiesDictionary setValue:@(repeats) forKey:@"repeats"];
         
         self.timerCanStart = NO;
     }
@@ -103,15 +103,15 @@
         }
         
         self.propertiesDictionary = [NSMutableDictionary dictionaryWithCapacity:0];
-        [self.propertiesDictionary setValue:[NSNumber numberWithFloat:seconds] forKey:@"seconds"];
-        [self.propertiesDictionary setObject:object forKey:@"target"];
+        [self.propertiesDictionary setValue:@(seconds) forKey:@"seconds"];
+        (self.propertiesDictionary)[@"target"] = object;
         [self.propertiesDictionary setValue:methodName forKey:@"methodName"];
         if (infoObject == nil) {
-            [self.propertiesDictionary setObject:[NSNull null] forKey:@"infoObject"];
+            (self.propertiesDictionary)[@"infoObject"] = [NSNull null];
         } else {
-            [self.propertiesDictionary setObject:infoObject forKey:@"infoObject"];
+            (self.propertiesDictionary)[@"infoObject"] = infoObject;
         }
-        [self.propertiesDictionary setValue:[NSNumber numberWithBool:repeats] forKey:@"repeats"];
+        [self.propertiesDictionary setValue:@(repeats) forKey:@"repeats"];
 
         self.timerCanStart = YES;
     }
@@ -163,15 +163,15 @@
         }
         
         self.propertiesDictionary = [NSMutableDictionary dictionaryWithCapacity:0];
-        [self.propertiesDictionary setValue:[NSNumber numberWithFloat:seconds] forKey:@"seconds"];
-        [self.propertiesDictionary setObject:object forKey:@"target"];
+        [self.propertiesDictionary setValue:@(seconds) forKey:@"seconds"];
+        (self.propertiesDictionary)[@"target"] = object;
         [self.propertiesDictionary setValue:methodName forKey:@"methodName"];
         if (infoObject == nil) {
-            [self.propertiesDictionary setObject:[NSNull null] forKey:@"infoObject"];
+            (self.propertiesDictionary)[@"infoObject"] = [NSNull null];
         } else {
-            [self.propertiesDictionary setObject:infoObject forKey:@"infoObject"];
+            (self.propertiesDictionary)[@"infoObject"] = infoObject;
         }
-        [self.propertiesDictionary setValue:[NSNumber numberWithBool:repeats] forKey:@"repeats"];
+        [self.propertiesDictionary setValue:@(repeats) forKey:@"repeats"];
 
         self.timerCanStart = YES;
     }
@@ -190,9 +190,9 @@
 -(void)start {
     if (self.timerCanStart == YES) {
         CGFloat seconds = [[self.propertiesDictionary valueForKey:@"seconds"] floatValue];
-        id target = [self.propertiesDictionary objectForKey:@"target"];
-        NSString *methodName = [self.propertiesDictionary objectForKey:@"methodName"];
-        id infoObject = [self.propertiesDictionary objectForKey:@"infoObject"];
+        id target = (self.propertiesDictionary)[@"target"];
+        NSString *methodName = (self.propertiesDictionary)[@"methodName"];
+        id infoObject = (self.propertiesDictionary)[@"infoObject"];
         BOOL repeats = [[self.propertiesDictionary valueForKey:@"repeats"] boolValue];
         
         if (self.timer.isValid) {

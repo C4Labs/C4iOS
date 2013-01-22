@@ -34,8 +34,8 @@
     if(self != nil) {
         NSArray *filenameComponents = [sampleName componentsSeparatedByString:@"."];
         
-        NSURL *soundFileURL = [[NSBundle mainBundle] URLForResource:[filenameComponents objectAtIndex:0]
-                                                      withExtension:[filenameComponents objectAtIndex:1]];
+        NSURL *soundFileURL = [[NSBundle mainBundle] URLForResource:filenameComponents[0]
+                                                      withExtension:filenameComponents[1]];
                                     
         _player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
         self.player.delegate = self;

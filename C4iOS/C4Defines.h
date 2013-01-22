@@ -90,15 +90,14 @@ enum {
 };
 typedef NSUInteger C4ShapeLayerAnimationType;
 
-enum {		
-    LABELWORDWRAP = UILineBreakModeWordWrap,
-    LABELCHARWRAP = UILineBreakModeCharacterWrap,
-    LABELCLIP = UILineBreakModeClip,
-    LABELTRUNCATEHEAD = UILineBreakModeHeadTruncation,
-    LABELTRUNCATETAIL = UILineBreakModeTailTruncation,
-    LABELTRUNCATEMIDDLE = UILineBreakModeMiddleTruncation,
-};
-typedef NSUInteger C4LineBreakMode;
+typedef enum C4LineBreakMode : NSUInteger {
+    LABELWORDWRAP = 0,
+    LABELCHARWRAP,
+    LABELCLIP,
+    LABELTRUNCATEHEAD,
+    LABELTRUNCATETAIL,
+    LABELTRUNCATEMIDDLE
+} C4LineBreakMode;
 
 C4_EXTERN NSString * const TRUNCATENONE;
 C4_EXTERN NSString * const TRUNCATESTART;
@@ -113,19 +112,17 @@ C4_EXTERN NSString * const ALIGNRIGHT;
 C4_EXTERN NSString * const ALIGNCENTER;
 C4_EXTERN NSString * const ALIGNJUSTIFIED;
 
-enum {
-    ALIGNTEXTLEFT = UITextAlignmentLeft,
-    ALIGNTEXTCENTER = UITextAlignmentCenter,
-    ALIGNTEXTRIGHT = UITextAlignmentRight
-};
-typedef NSUInteger C4TextAlignment;
+typedef enum C4TextAlignment : NSUInteger {
+    ALIGNTEXTLEFT = 0,
+    ALIGNTEXTCENTER,
+    ALIGNTEXTRIGHT
+} C4TextAlignment;
 
-enum { 
+typedef enum C4BaselineAdjustment : NSUInteger {
     ALIGNBASELINES = UIBaselineAdjustmentAlignBaselines, 
     ALIGNBASELINECENTERS = UIBaselineAdjustmentAlignCenters, 
     ALIGNBASELINENONE = UIBaselineAdjustmentNone
-};
-typedef NSUInteger C4BaselineAdjustment;
+} C4BaselineAdjustment;
 
 enum {
     YTSMALL = 0,

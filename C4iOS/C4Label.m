@@ -25,7 +25,6 @@
 -(void)_setBaselineAdjustment:(NSNumber *)baselineAdjustment;
 -(void)_setTextAlignment:(NSNumber *)textAlignment;
 -(void)_setLineBreakMode:(NSNumber *)lineBreakMode;
--(void)_setMinimumFontSize:(NSNumber *)minimumFontSize;
 -(void)_setNumberOfLines:(NSNumber *)numberOfLines;
 -(void)_setHighlightedTextColor:(UIColor *)highlightedTextColor;
 -(void)_sizeToFit;
@@ -164,8 +163,8 @@
 }
 
 -(void)setEnabled:(BOOL)enabled {
-    if(self.animationDelay == 0.0f) [self _setEnabled:[NSNumber numberWithBool:enabled]];
-    else [self performSelector:@selector(_setEnabled:) withObject:[NSNumber numberWithBool:enabled] afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f) [self _setEnabled:@(enabled)];
+    else [self performSelector:@selector(_setEnabled:) withObject:@(enabled) afterDelay:self.animationDelay];
 }
 -(void)_setEnabled:(NSNumber *)enabled {
     [super setEnabled:[enabled boolValue]];//weeeeeeird bug if this isn't included
@@ -207,9 +206,9 @@
 }
 
 -(void)setAdjustsFontSizeToFitWidth:(BOOL)adjustsFontSizeToFitWidth {
-    if(self.animationDelay == 0.0f) [self _setAdjustsFontSizeToFitWidth:[NSNumber numberWithBool:adjustsFontSizeToFitWidth]];
+    if(self.animationDelay == 0.0f) [self _setAdjustsFontSizeToFitWidth:@(adjustsFontSizeToFitWidth)];
     else [self performSelector:@selector(_setAdjustsFontSizeToFitWidth:)
-                    withObject:[NSNumber numberWithBool:adjustsFontSizeToFitWidth]
+                    withObject:@(adjustsFontSizeToFitWidth)
                     afterDelay:self.animationDelay];
 }
 -(void)_setAdjustsFontSizeToFitWidth:(NSNumber *)adjustsFontSizeToFitWidth {
@@ -221,9 +220,9 @@
 }
 
 -(void)setBaselineAdjustment:(C4BaselineAdjustment)baselineAdjustment {
-    if(self.animationDelay == 0.0f) [self _setBaselineAdjustment:[NSNumber numberWithInteger:baselineAdjustment]];
+    if(self.animationDelay == 0.0f) [self _setBaselineAdjustment:@(baselineAdjustment)];
     else [self performSelector:@selector(_setBaselineAdjustment:)
-                    withObject:[NSNumber numberWithInteger:baselineAdjustment]
+                    withObject:@(baselineAdjustment)
                     afterDelay:self.animationDelay];
 }
 -(void)_setBaselineAdjustment:(NSNumber *)baselineAdjustment {
@@ -235,8 +234,8 @@
 }
 
 -(void)setTextAlignment:(C4TextAlignment)textAlignment {
-    if(self.animationDelay == 0.0f) [self _setTextAlignment:[NSNumber numberWithInteger:textAlignment]];
-    else [self performSelector:@selector(_setTextAlignment:) withObject:[NSNumber numberWithInteger:textAlignment] afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f) [self _setTextAlignment:@(textAlignment)];
+    else [self performSelector:@selector(_setTextAlignment:) withObject:@(textAlignment) afterDelay:self.animationDelay];
 }
 -(void)_setTextAlignment:(NSNumber *)textAlignment {
     self.label.textAlignment = (UITextAlignment)[textAlignment intValue];
@@ -247,8 +246,8 @@
 }
 
 -(void)setLineBreakMode:(C4LineBreakMode)lineBreakMode {
-    if(self.animationDelay == 0.0f) [self _setLineBreakMode:[NSNumber numberWithInteger:lineBreakMode]];
-    else [self performSelector:@selector(_setLineBreakMode:) withObject:[NSNumber numberWithInteger:lineBreakMode] afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f) [self _setLineBreakMode:@(lineBreakMode)];
+    else [self performSelector:@selector(_setLineBreakMode:) withObject:@(lineBreakMode) afterDelay:self.animationDelay];
 }
 -(void)_setLineBreakMode:(NSNumber *)lineBreakMode {
     self.label.lineBreakMode = (UILineBreakMode)[lineBreakMode integerValue];
@@ -258,23 +257,24 @@
     return (C4LineBreakMode)self.label.lineBreakMode;
 }
 
--(void)setMinimumFontSize:(CGFloat)minimumFontSize {
-    if(self.animationDelay == 0.0f) [self _setMinimumFontSize:[NSNumber numberWithFloat:minimumFontSize]];
-    else [self performSelector:@selector(_setMinimumFontSize:)
-                    withObject:[NSNumber numberWithFloat:minimumFontSize]
-                    afterDelay:self.animationDelay];
-}
--(void)_setMinimumFontSize:(NSNumber *)minimumFontSize {
-    self.label.minimumFontSize = [minimumFontSize floatValue];
-}
+//-(void)setMinimumFontSize:(CGFloat)minimumFontSize {
+//    if(self.animationDelay == 0.0f) [self _setMinimumFontSize:@(minimumFontSize)];
+//    else [self performSelector:@selector(_setMinimumFontSize:)
+//                    withObject:@(minimumFontSize)
+//                    afterDelay:self.animationDelay];
+//}
 
--(CGFloat)minimumFontSize {
-    return self.label.minimumFontSize;
-}
+//-(void)_setMinimumFontSize:(NSNumber *)minimumFontSize {
+//    self.label.minimumFontSize = [minimumFontSize floatValue];
+//}
+
+//-(CGFloat)minimumFontSize {
+//    return self.label.minimumFontSize;
+//}
 
 -(void)setNumberOfLines:(NSUInteger)numberOfLines {
-    if(self.animationDelay == 0.0f) [self _setNumberOfLines:[NSNumber numberWithInteger:numberOfLines]];
-    else [self performSelector:@selector(_setNumberOfLines:) withObject:[NSNumber numberWithInt:numberOfLines] afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f) [self _setNumberOfLines:@(numberOfLines)];
+    else [self performSelector:@selector(_setNumberOfLines:) withObject:@(numberOfLines) afterDelay:self.animationDelay];
 }
 -(void)_setNumberOfLines:(NSNumber *)numberOfLines {
     self.label.numberOfLines = [numberOfLines intValue];

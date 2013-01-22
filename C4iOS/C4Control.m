@@ -77,7 +77,7 @@
     NSEnumerator *enumerator = [self.gestureDictionary keyEnumerator];
     id key;
     while ((key = [enumerator nextObject])) {
-        UIGestureRecognizer *g = [self.gestureDictionary objectForKey:key];
+        UIGestureRecognizer *g = (self.gestureDictionary)[key];
         [g removeTarget:self action:nil];
         [self removeGestureRecognizer:g];
     }
@@ -193,21 +193,21 @@
     [self animateWithBlock:animationBlock completion:completionBlock];
 }
 
--(void)setContentStretch:(CGRect)contentStretch {
-    CGRect oldContentStretch = self.contentStretch;
-
-    void (^animationBlock) (void) = ^ { super.contentStretch = contentStretch; };
-    void (^completionBlock) (BOOL) = nil;
-    
-    BOOL animationShouldNotRepeat = (self.animationOptions & REPEAT) !=  REPEAT;
-    if(self.shouldAutoreverse && animationShouldNotRepeat) {
-        completionBlock = ^ (BOOL animationIsComplete) {
-            [self autoreverseAnimation:^ { super.contentStretch = oldContentStretch;}];
-        };
-    }
-    
-    [self animateWithBlock:animationBlock completion:completionBlock];
-}
+//-(void)setContentStretch:(CGRect)contentStretch {
+//    CGRect oldContentStretch = self.contentStretch;
+//
+//    void (^animationBlock) (void) = ^ { super.contentStretch = contentStretch; };
+//    void (^completionBlock) (BOOL) = nil;
+//    
+//    BOOL animationShouldNotRepeat = (self.animationOptions & REPEAT) !=  REPEAT;
+//    if(self.shouldAutoreverse && animationShouldNotRepeat) {
+//        completionBlock = ^ (BOOL animationIsComplete) {
+//            [self autoreverseAnimation:^ { super.contentStretch = oldContentStretch;}];
+//        };
+//    }
+//    
+//    [self animateWithBlock:animationBlock completion:completionBlock];
+//}
 
 #pragma mark Animation methods
 -(void)animateWithBlock:(void (^)(void))animationBlock {
@@ -286,7 +286,7 @@
 
 -(void)addGesture:(C4GestureType)type name:(NSString *)gestureName action:(NSString *)methodName {
     if(self.gestureDictionary == nil) self.gestureDictionary = [[NSMutableDictionary alloc] initWithCapacity:0];
-    BOOL containsGesture = ([self.gestureDictionary objectForKey:gestureName] != nil);
+    BOOL containsGesture = ((self.gestureDictionary)[gestureName] != nil);
     if(containsGesture == NO) {
         UIGestureRecognizer *recognizer;
         switch (type) {
@@ -320,12 +320,12 @@
                 break;
         }
         [self addGestureRecognizer:recognizer];
-        [self.gestureDictionary setObject:recognizer forKey:gestureName];
+        (self.gestureDictionary)[gestureName] = recognizer;
     }
 }
 
 -(void)numberOfTapsRequired:(NSInteger)tapCount forGesture:(NSString *)gestureName {
-    UIGestureRecognizer *recognizer = [_gestureDictionary objectForKey:gestureName];
+    UIGestureRecognizer *recognizer = _gestureDictionary[gestureName];
     
     C4Assert([recognizer isKindOfClass:[UITapGestureRecognizer class]] ||
              [recognizer isKindOfClass:[UILongPressGestureRecognizer class]],
@@ -335,7 +335,7 @@
 }
 
 -(void)numberOfTouchesRequired:(NSInteger)touchCount forGesture:(NSString *)gestureName {
-    UIGestureRecognizer *recognizer = [_gestureDictionary objectForKey:gestureName];
+    UIGestureRecognizer *recognizer = _gestureDictionary[gestureName];
     
     C4Assert([recognizer isKindOfClass:[UITapGestureRecognizer class]] || 
              [recognizer isKindOfClass:[UISwipeGestureRecognizer class]] ||
@@ -346,7 +346,7 @@
 }
 
 -(void)minimumPressDuration:(CGFloat)duration forGesture:(NSString *)gestureName {
-    UIGestureRecognizer *recognizer = [_gestureDictionary objectForKey:gestureName];
+    UIGestureRecognizer *recognizer = _gestureDictionary[gestureName];
 
     C4Assert([recognizer isKindOfClass:[UITapGestureRecognizer class]],
              @"The gesture type(%@) you tried to configure does not respond to the method %@",[recognizer class],NSStringFromSelector(_cmd));
@@ -355,7 +355,7 @@
 }
   
 -(void)minimumNumberOfTouches:(NSInteger)touchCount forGesture:(NSString *)gestureName {
-    UIGestureRecognizer *recognizer = [_gestureDictionary objectForKey:gestureName];
+    UIGestureRecognizer *recognizer = _gestureDictionary[gestureName];
 
     C4Assert([recognizer isKindOfClass:[UIPanGestureRecognizer class]],
              @"The gesture type(%@) you tried to configure does not respond to the method: %@",[recognizer class],NSStringFromSelector(_cmd));
@@ -364,7 +364,7 @@
 }
 
 -(void)maximumNumberOfTouches:(NSInteger)touchCount forGesture:(NSString *)gestureName {
-    UIGestureRecognizer *recognizer = [_gestureDictionary objectForKey:gestureName];
+    UIGestureRecognizer *recognizer = _gestureDictionary[gestureName];
     
     C4Assert([recognizer isKindOfClass:[UIPanGestureRecognizer class]],
              @"The gesture type(%@) you tried to configure does not respond to the method: %@",[recognizer class],NSStringFromSelector(_cmd));
@@ -373,7 +373,7 @@
 }
 
 -(void)swipeDirection:(C4SwipeDirection)direction forGesture:(NSString *)gestureName {
-    UIGestureRecognizer *recognizer = [_gestureDictionary objectForKey:gestureName];
+    UIGestureRecognizer *recognizer = _gestureDictionary[gestureName];
 
     C4Assert([recognizer isKindOfClass:[UISwipeGestureRecognizer class]],
              @"The gesture type(%@) you tried to configure does not respond to the method: %@",[recognizer class],NSStringFromSelector(_cmd));
@@ -529,8 +529,8 @@
 }
 
 -(void)setRotation:(CGFloat)rotation {
-    if(self.animationDelay == 0.0f) [self _setRotation:[NSNumber numberWithFloat:rotation]];
-    else [self performSelector:@selector(_setRotation:) withObject:[NSNumber numberWithFloat:rotation] afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f) [self _setRotation:@(rotation)];
+    else [self performSelector:@selector(_setRotation:) withObject:@(rotation) afterDelay:self.animationDelay];
 }
 
 -(void)_setRotation:(NSNumber *)rotation {
@@ -539,8 +539,8 @@
 }
 
 -(void)setRotationX:(CGFloat)rotation {
-    if(self.animationDelay == 0.0f) [self _setRotationX:[NSNumber numberWithFloat:rotation]];
-    else [self performSelector:@selector(_setRotationX:) withObject:[NSNumber numberWithFloat:rotation] afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f) [self _setRotationX:@(rotation)];
+    else [self performSelector:@selector(_setRotationX:) withObject:@(rotation) afterDelay:self.animationDelay];
 }
 
 -(void)_setRotationX:(NSNumber *)rotation {
@@ -549,8 +549,8 @@
 }
 
 -(void)setRotationY:(CGFloat)rotation {
-    if(self.animationDelay == 0.0f) [self _setRotationY:[NSNumber numberWithFloat:rotation]];
-    else [self performSelector:@selector(_setRotationY:) withObject:[NSNumber numberWithFloat:rotation] afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f) [self _setRotationY:@(rotation)];
+    else [self performSelector:@selector(_setRotationY:) withObject:@(rotation) afterDelay:self.animationDelay];
 }
 
 -(void)_setRotationY:(NSNumber *)rotation {
@@ -654,8 +654,8 @@
 }
 
 -(void)setShadowOpacity:(CGFloat)_shadowOpacity {
-    if(self.animationDelay == 0) [self _setShadowOpacity:[NSNumber numberWithFloat:_shadowOpacity]];
-    else [self performSelector:@selector(_setShadowOpacity:) withObject:[NSNumber numberWithFloat:_shadowOpacity] afterDelay:self.animationDelay];
+    if(self.animationDelay == 0) [self _setShadowOpacity:@(_shadowOpacity)];
+    else [self performSelector:@selector(_setShadowOpacity:) withObject:@(_shadowOpacity) afterDelay:self.animationDelay];
 }
 -(void)_setShadowOpacity:(NSNumber *)_shadowOpacity {
     [(id <C4LayerAnimation>)self.layer animateShadowOpacity:[_shadowOpacity floatValue]];
@@ -676,8 +676,8 @@
 }
 
 -(void)setShadowRadius:(CGFloat)_shadowRadius {
-    if(self.animationDelay == 0) [self _setShadowRadius:[NSNumber numberWithFloat:_shadowRadius]];
-    [self performSelector:@selector(_setShadowRadius:) withObject:[NSNumber numberWithFloat:_shadowRadius] afterDelay:self.animationDelay];
+    if(self.animationDelay == 0) [self _setShadowRadius:@(_shadowRadius)];
+    [self performSelector:@selector(_setShadowRadius:) withObject:@(_shadowRadius) afterDelay:self.animationDelay];
 }
 -(void)_setShadowRadius:(NSNumber *)_shadowRadius {
     [(id <C4LayerAnimation>)self.layer animateShadowRadius:[_shadowRadius floatValue]];
