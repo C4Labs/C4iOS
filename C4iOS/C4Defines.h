@@ -22,10 +22,11 @@ lineNumber:__LINE__ description:(desc), ##__VA_ARGS__]; \
 
 /* NOT SUPPOSED TO USE #DEFINES, BUT HERE WE DON'T WANT PEOPLE TO CHANGE THE VALUE OF THESE VARIABLES */
 #ifndef C4_DEFAULT_COLORS
-#define C4RED [UIColor colorWithRed:1.0f green:0.10f blue:0.10f alpha:1.0f]
-#define C4BLUE [UIColor colorWithRed:0.043f green:0.627f blue:0.902f alpha:1.0f]
-#define C4GREY [UIColor colorWithRed:0.196f green:0.216f blue:0.236f alpha:1.0f];
+#define C4RED (UIColor *)[UIColor colorWithRed:1.0f green:0.10f blue:0.10f alpha:1.0f]
+#define C4BLUE (UIColor *)[UIColor colorWithRed:0.043f green:0.627f blue:0.902f alpha:1.0f]
+#define C4GREY (UIColor *)[UIColor colorWithRed:0.196f green:0.216f blue:0.236f alpha:1.0f]
 #endif
+
 
 #ifndef C4_DEFAULT_FONTNAMES
 #define SYSTEMFONTNAME [[UIFont systemFontOfSize:12.0f] fontName]

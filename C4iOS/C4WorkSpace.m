@@ -14,6 +14,9 @@
 -(void)setup {
     i = [C4Image imageNamed:@"C4Sky"];
     [self.canvas addImage:i];
+
+    i.borderWidth = 10;
+    i.borderColor = [C4GREY colorWithAlphaComponent:0.5];
 }
 
 -(void)touchesBegan {
