@@ -6,11 +6,26 @@
 
 #import "C4WorkSpace.h"
 
-@implementation C4WorkSpace
--(void)setup {
-    C4Image *i = [C4Image imageNamed:@" C4Sky.png"];
-    [self.canvas addImage:i];
+@implementation C4WorkSpace {
+    C4Shape *s;
+    C4Image *i;
+    UIView *v;
 }
+
+-(void)setup {
+    s = [C4Shape rect:CGRectMake(0, 0, 200, 200)];
+    s.center = self.canvas.center;
+//    s.animationDuration = 10.0f;
+//    i = [C4Image imageNamed:@"C4Sky"];
+//    i.center = self.canvas.center;
+}
+
+-(void)touchesBegan {
+    [self.canvas addShape:s];
+//    [self.canvas addImage:i];
+//    [self.canvas addSubview:v];
+}
+
 @end
 /*
 #import "C4WorkSpace.h"

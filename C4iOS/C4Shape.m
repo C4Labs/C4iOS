@@ -15,6 +15,7 @@
 @end
 
 @implementation C4Shape
+@synthesize animationDuration = _animationDuration;
 @synthesize animationOptions = _animationOptions;
 @synthesize controlPointA = _controlPointA, controlPointB = _controlPointB, isArc = _isArc, bezierCurve = _bezierCurve, quadCurve = _quadCurve, isLine =_isLine, shapeLayer, pointA = _pointA, pointB = _pointB, wedge = _wedge;
 @synthesize fillColor = _fillColor, fillRule, lineCap, lineDashPattern, lineDashPhase, lineJoin, lineWidth, miterLimit, origin = _origin, strokeColor, strokeEnd, strokeStart;
@@ -135,7 +136,8 @@
     CGRect newBounds = CGRectMake(0, 0, newFrame.size.width, newFrame.size.height);
     CGMutablePathRef newPath = CGPathCreateMutable();
     CGPathAddEllipseInRect(newPath, nil, newBounds);
-    [self.shapeLayer animatePath:newPath];
+    if(self.animationDuration == 0.0f) self.shapeLayer.path = newPath;
+    else [self.shapeLayer animatePath:newPath];
     CGPathRelease(newPath);
     CGRect pathRect = CGPathGetBoundingBox(newPath);
     self.bounds = pathRect; //Need this step to sync the appearance of the paths to the frame of the shape
@@ -171,8 +173,8 @@
         CGPathCloseSubpath(translatedPath);
         _closed = YES;
     }
-    
-    [self.shapeLayer animatePath:translatedPath];
+    if(self.animationDuration == 0.0f) self.shapeLayer.path = translatedPath;
+    else [self.shapeLayer animatePath:translatedPath];
     CGPathRelease(translatedPath);
     _initialized = YES;
 }
@@ -208,7 +210,8 @@
     CGPathCloseSubpath(translatedPath);
     _closed = YES;
     
-    [self.shapeLayer animatePath:translatedPath];
+    if(self.animationDuration == 0.0f) self.shapeLayer.path = translatedPath;
+    else [self.shapeLayer animatePath:translatedPath];
     CGPathRelease(translatedPath);
     _initialized = YES;
 }
@@ -285,7 +288,8 @@
 //    if (_shouldClose == YES) {
 //        CGPathCloseSubpath(newPath);
 //    }
-    [self.shapeLayer animatePath:newPath];
+    if(self.animationDuration == 0.0f) self.shapeLayer.path = newPath;
+    else [self.shapeLayer animatePath:newPath];
 //    CGRect pathRect = CGPathGetBoundingBox(newPath);
 //    self.bounds = pathRect;
     CGPathRelease(newPath);
@@ -305,7 +309,8 @@
     CGPathMoveToPoint(newPath, nil,0,0);
     const CGAffineTransform translation = CGAffineTransformMakeTranslation(-1*beginPoint.x, -1*beginPoint.y);
     CGPathAddQuadCurveToPoint(newPath, &translation, controlPoint.x,controlPoint.y, endPoint.x, endPoint.y);
-    [self.shapeLayer animatePath:newPath];
+    if(self.animationDuration == 0.0f) self.shapeLayer.path = newPath;
+    else [self.shapeLayer animatePath:newPath];
     CGPathRelease(newPath);
     _initialized = YES;
 }
@@ -322,7 +327,8 @@
     CGRect newBounds = CGRectMake(0, 0, newRect.size.width, newRect.size.height);
     CGMutablePathRef newPath = CGPathCreateMutable();
     CGPathAddRect(newPath, nil, newBounds);
-    [self.shapeLayer animatePath:newPath];
+    if(self.animationDuration == 0.0f) self.shapeLayer.path = newPath;
+    else [self.shapeLayer animatePath:newPath];
     CGRect pathRect = CGPathGetBoundingBox(newPath);
     self.bounds = pathRect; //Need this step to sync the appearance of the paths to the frame of the shape
     self.origin = newRect.origin;
@@ -363,7 +369,8 @@
         currentOrigin.x += advance.width;
         CFRelease(fontPath);
     }
-    [self.shapeLayer animatePath:glyphPaths];
+    if(self.animationDuration == 0.0f) self.shapeLayer.path = glyphPaths;
+    else [self.shapeLayer animatePath:glyphPaths];
     CGRect pathRect = CGPathGetBoundingBox(glyphPaths);
     self.bounds = pathRect; //Need this step to sync the appearance of the paths to the frame of the shape
     pathRect.origin = CGPointZero;
@@ -408,7 +415,8 @@
 //    CGPathAddLineToPoint(newPath, nil, points[0].x, points[0].y);
     
 
-    [self.shapeLayer animatePath:newPath];
+    if(self.animationDuration == 0.0f) self.shapeLayer.path = newPath;
+    else [self.shapeLayer animatePath:newPath];
     CGRect newBounds = self.bounds;
     newBounds.origin = CGPointZero;
     self.bounds = newBounds;
@@ -453,7 +461,8 @@
     CGPathCloseSubpath(newPath);
     _closed = YES;
     
-    [self.shapeLayer animatePath:newPath];
+    if(self.animationDuration == 0.0f) self.shapeLayer.path = newPath;
+    else [self.shapeLayer animatePath:newPath];
     CGRect pathRect = CGPathGetBoundingBox(newPath);
     _origin = self.frame.origin;
     self.bounds = pathRect; //Need this step to sync the appearance of the paths to the frame of the shape
@@ -505,7 +514,8 @@
         CGPathCloseSubpath(newPath);
         _closed = YES;
     }
-    [self.shapeLayer animatePath:newPath];
+    if(self.animationDuration == 0.0f) self.shapeLayer.path = newPath;
+    else [self.shapeLayer animatePath:newPath];
     CGRect pathRect = CGPathGetBoundingBox(newPath);
     self.bounds = pathRect; //Need this step to sync the appearance of the paths to the frame of the shape
     _origin = self.frame.origin;
@@ -522,7 +532,8 @@
     if(_initialized == YES && _shouldClose == YES && _closed == NO) {
         CGMutablePathRef newPath = CGPathCreateMutableCopy(self.shapeLayer.path);
         CGPathCloseSubpath(newPath);
-        [self.shapeLayer animatePath:newPath];
+        if(self.animationDuration == 0.0f) self.shapeLayer.path = newPath;
+        else [self.shapeLayer animatePath:newPath];
         CGPathRelease(newPath);
         _closed = YES;
     }
