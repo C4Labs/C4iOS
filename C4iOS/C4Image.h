@@ -564,6 +564,6 @@
 @property (readonly, nonatomic) BOOL pixelDataLoaded;
 
 #pragma mark JANUARY 2013
-@property (readwrite, atomic) BOOL shouldScale;
+@property (readwrite, atomic) BOOL constrainsProportions;
 
 @end

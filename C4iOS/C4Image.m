@@ -16,8 +16,6 @@
     NSUInteger currentAnimatedImage;
 }
 
--(UIImage *)fixOrientationFromCamera:(UIImage *)image;
-
 @property (readwrite, strong, nonatomic) CIContext *filterContext;
 @property (readwrite, strong, nonatomic) UIImage *originalImage;
 @property (readwrite, strong, nonatomic) CIImage *visibleImage;
@@ -62,7 +60,7 @@
         self.frame = self.visibleImage.extent;
         _pixelDataLoaded = NO;
         self.imageLayer.contents = (id)_originalImage.CGImage;
-        _shouldScale = YES;
+        _constrainsProportions = YES;
         [self setup];
     }
     return self;
@@ -87,7 +85,7 @@
         self.frame = self.visibleImage.extent;
         _pixelDataLoaded = NO;
         self.imageLayer.contents = (__bridge id)image;
-        _shouldScale = YES;
+        _constrainsProportions = YES;
         [self setup];
         
         CGColorSpaceRelease(colorSpace);
@@ -108,7 +106,7 @@
         self.frame = self.visibleImage.extent;
         _pixelDataLoaded = NO;
         self.imageLayer.contents = (__bridge id)image;
-        _shouldScale = YES;
+        _constrainsProportions = YES;
         [self setup];
     }
     return self;
@@ -127,7 +125,7 @@
         _pixelDataLoaded = NO;
         self.frame = self.CIImage.extent;
         self.imageLayer.contents = (id)_originalImage.CGImage;
-        _shouldScale = YES;
+        _constrainsProportions = YES;
         [self setup];
     }
     return self;
@@ -778,7 +776,7 @@
     _width = width;
     CGRect newFrame = self.frame;
     newFrame.size.width = width;
-    if(_shouldScale) newFrame.size.height = width/self.originalRatio;
+    if(_constrainsProportions) newFrame.size.height = width/self.originalRatio;
     self.frame = newFrame;
 }
 
@@ -790,7 +788,7 @@
     _height = height;
     CGRect newFrame = self.frame;
     newFrame.size.height = height;
-    if(_shouldScale) newFrame.size.width = height * self.originalRatio;
+    if(_constrainsProportions) newFrame.size.width = height * self.originalRatio;
     self.frame = newFrame;
 }
 

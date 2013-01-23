@@ -130,14 +130,16 @@
 -(void)_ellipse:(NSValue *)ellipseValue {
     [self willChangeShape];
     _closed = YES;
-    CGRect aRect = [ellipseValue CGRectValue];
-    aRect.origin = CGPointZero;
+    
+    CGRect newFrame = [ellipseValue CGRectValue];
+    CGRect newBounds = CGRectMake(0, 0, newFrame.size.width, newFrame.size.height);
     CGMutablePathRef newPath = CGPathCreateMutable();
-    CGPathAddEllipseInRect(newPath, nil, aRect);
+    CGPathAddEllipseInRect(newPath, nil, newBounds);
     [self.shapeLayer animatePath:newPath];
     CGPathRelease(newPath);
     CGRect pathRect = CGPathGetBoundingBox(newPath);
     self.bounds = pathRect; //Need this step to sync the appearance of the paths to the frame of the shape
+    self.origin = newFrame.origin;
     _initialized = YES;
 }
 
@@ -316,13 +318,14 @@
 -(void)_rect:(NSValue *)rectValue {
     [self willChangeShape];
     _closed = YES;
-    CGRect aRect = [rectValue CGRectValue];
-    aRect.origin = CGPointZero;
+    CGRect newRect = [rectValue CGRectValue];
+    CGRect newBounds = CGRectMake(0, 0, newRect.size.width, newRect.size.height);
     CGMutablePathRef newPath = CGPathCreateMutable();
-    CGPathAddRect(newPath, nil, aRect);
+    CGPathAddRect(newPath, nil, newBounds);
     [self.shapeLayer animatePath:newPath];
     CGRect pathRect = CGPathGetBoundingBox(newPath);
     self.bounds = pathRect; //Need this step to sync the appearance of the paths to the frame of the shape
+    self.origin = newRect.origin;
     CGPathRelease(newPath);
     _initialized = YES;
 }
@@ -807,4 +810,5 @@
     
     _animationOptions = animationOptions | BEGINCURRENT;
 }
+
 @end

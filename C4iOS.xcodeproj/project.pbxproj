@@ -52,6 +52,7 @@
 		ED900CEF14FBF2B4006C2AED /* C4Font.m in Sources */ = {isa = PBXBuildFile; fileRef = ED900CEE14FBF2B3006C2AED /* C4Font.m */; };
 		ED979F3F14F95EFF00645114 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED979F3E14F95EFF00645114 /* CoreImage.framework */; };
 		ED983F1115E2A8B600C0AD81 /* C4CameraLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED983F1015E2A8B600C0AD81 /* C4CameraLayer.m */; };
+		ED98434716AF93DF00F64FAF /* inception.mov in Resources */ = {isa = PBXBuildFile; fileRef = ED7513AA15150FB60076317F /* inception.mov */; };
 		ED98723D167C056B00ADFD3F /* HiddenNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED98723C167C056B00ADFD3F /* HiddenNavView.m */; };
 		ED987241167C0DA100ADFD3F /* OuterShape.m in Sources */ = {isa = PBXBuildFile; fileRef = ED987240167C0DA100ADFD3F /* OuterShape.m */; };
 		ED99AB7315DE01D7002A7D6C /* C4YouTubeURLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = ED99AB7215DE01D7002A7D6C /* C4YouTubeURLParser.m */; };
@@ -347,6 +348,7 @@
 				ED9D5FA31564A927009C5175 /* C4Vector.h */,
 				ED50C8D414EACA340040D844 /* C4View.h */,
 				EDCE426B1564174000C7356E /* C4ViewController.h */,
+				ED50C8BE14EAC4920040D844 /* C4Window.h */,
 				EDCE425F1564044000C7356E /* C4Camera.m */,
 				EDCE42611564044000C7356E /* C4CameraController.m */,
 				ED50C8C414EAC4F70040D844 /* C4CanvasController.m */,
@@ -373,7 +375,6 @@
 				ED50C8D514EACA340040D844 /* C4View.m */,
 				EDCE426C1564174000C7356E /* C4ViewController.m */,
 				ED50C8BF14EAC4920040D844 /* C4Window.m */,
-				ED50C8BE14EAC4920040D844 /* C4Window.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -441,6 +442,7 @@
 			files = (
 				ED50C89014EAC2010040D844 /* InfoPlist.strings in Resources */,
 				ED50C89C14EAC2010040D844 /* C4Canvas.xib in Resources */,
+				ED98434716AF93DF00F64FAF /* inception.mov in Resources */,
 				ED008D3A15BF5DE80005E8D3 /* lines.png in Resources */,
 				ED4702D715C052CA004B75D1 /* pyramid.png in Resources */,
 				ED7C0C0F15C88B9F009107A6 /* iTunesArtwork.png in Resources */,

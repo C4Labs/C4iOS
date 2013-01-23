@@ -106,4 +106,6 @@
  @param visibleObject the visible object to remove from its parent view
  */
 -(void)removeObject:(C4Control *)visibleObject;
+
+-(void)addObjects:(NSArray *)array;
 @end

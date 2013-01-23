@@ -82,6 +82,32 @@
     [super addSubview:movie];
 }
 
+-(void)addObjects:(NSArray *)array {
+    for(id obj in array) {
+        if([obj isKindOfClass:[C4Shape class]]) {
+            [self addShape:obj];
+        }
+        else if([obj isKindOfClass:[C4GL class]]) {
+            [self addGL:obj];
+        }
+        else if([obj isKindOfClass:[C4Image class]]) {
+            [self addImage:obj];
+        }
+        else if([obj isKindOfClass:[C4Movie class]]) {
+            [self addMovie:obj];
+        }
+        else if([obj isKindOfClass:[C4Camera class]]) {
+            [self addCamera:obj];
+        }
+        else if([obj isKindOfClass:[UIView class]]) {
+            [self addSubview:obj];
+        }
+        else {
+            C4Log(@"unable to determine type of class");
+        }
+    }
+}
+
 /* don't add this ever...
  creates a:
  CoreAnimation: failed to allocate 3145760 bytes

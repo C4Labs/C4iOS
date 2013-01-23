@@ -9,25 +9,6 @@
 #import "C4Label.h"
 
 @interface C4Label()
--(void)_setBackgroundFilters:(NSArray *)backgroundFilters;
--(void)_setCompositingFilter:(id)compositingFilter;
--(void)sizeToFit;
-
-#pragma mark C4Label Methods
-//-(void)_setBackgroundColor:(UIColor *)backgroundColor;
--(void)_setText:(NSString *)text;
--(void)_setTextShadowColor:(UIColor *)shadowColor;
--(void)_setTextShadowOffset:(NSValue *)shadowOffset;
--(void)_setEnabled:(NSNumber *)enabled;
--(void)_setFont:(C4Font *)font;
--(void)_setTextColor:(UIColor *)textColor;
--(void)_setAdjustsFontSizeToFitWidth:(NSNumber *)adjustsFontSizeToFitWidth;
--(void)_setBaselineAdjustment:(NSNumber *)baselineAdjustment;
--(void)_setTextAlignment:(NSNumber *)textAlignment;
--(void)_setLineBreakMode:(NSNumber *)lineBreakMode;
--(void)_setNumberOfLines:(NSNumber *)numberOfLines;
--(void)_setHighlightedTextColor:(UIColor *)highlightedTextColor;
--(void)_sizeToFit;
 @property (readwrite, atomic) BOOL shouldAutoreverse;
 @end
 
@@ -46,7 +27,6 @@
 @synthesize textShadowOffset = _textShadowOffset;
 @synthesize text = _text;
 @synthesize label = _label;
-@synthesize backingLayer;
 @synthesize width = _width, height = _height;
 @synthesize animationOptions = _animationOptions;
 @synthesize shouldAutoreverse = _shouldAutoreverse;

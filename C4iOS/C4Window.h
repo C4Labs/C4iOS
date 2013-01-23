@@ -47,4 +47,6 @@ For more information about how to use windows, see View Programming Guide for iO
  @param visibleObject the visible object to remove from its parent view
  */
 -(void)removeObject:(C4Control *)visibleObject;
+
+-(void)addObjects:(NSArray *)array;
 @end

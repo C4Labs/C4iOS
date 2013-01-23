@@ -102,6 +102,33 @@
     [camera initCapture];
     [self.canvasController listenFor:@"imageWasCaptured" fromObject:camera andRunMethod:@"imageWasCaptured"];
 }
+
+-(void)addObjects:(NSArray *)array {
+    for(id obj in array) {
+        if([obj isKindOfClass:[C4Shape class]]) {
+            [self addShape:obj];
+        }
+        else if([obj isKindOfClass:[C4GL class]]) {
+            [self addGL:obj];
+        }
+        else if([obj isKindOfClass:[C4Image class]]) {
+            [self addImage:obj];
+        }
+        else if([obj isKindOfClass:[C4Movie class]]) {
+            [self addMovie:obj];
+        }
+        else if([obj isKindOfClass:[C4Camera class]]) {
+            [self addCamera:obj];
+        }
+        else if([obj isKindOfClass:[UIView class]]) {
+            [self addSubview:obj];
+        }
+        else {
+            C4Log(@"unable to determine type of class");
+        }
+    }
+}
+
 /*
  The following method makes sure that the main backing CALayer
  for this UIWindow subclass will be a C4Canvas

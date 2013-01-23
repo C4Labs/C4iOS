@@ -1,31 +1,34 @@
 //
 //  C4WorkSpace.m
-//  clock1
 //
-//  Created by moi on 12-09-01.
-//  Copyright (c) 2012 moi. All rights reserved.
+//  Created by Travis Kirton
 //
+
 #import "C4WorkSpace.h"
 
 @implementation C4WorkSpace {
-    C4Shape *s;
+    C4Shape *s, *t;
 }
 
 -(void)setup {
-    CGPoint pts[4] = {CGPointMake(0, 50),CGPointMake(100, 100),CGPointMake(0, 200),CGPointMake(100, 200)};
-    for(int i = 0; i < 4; i++) pts[i].x += 150;
-    s = [C4Shape polygon:pts pointCount:4];
+    s = [C4Shape ellipse:CGRectMake(20, 20, 100, 100)];
     [self.canvas addShape:s];
-    C4Log(@"%4.2f",s.frame.origin.x);
-    C4Log(@"%4.2f",s.origin.x);
-    s.backgroundColor = C4GREY;
+
+    t = [C4Shape ellipse:CGRectMake(400, 20, 100, 100)];
+    [self.canvas addShape:t];
+
+    [self runMethod:@"test" afterDelay:1.0f];
 }
 
--(void)touchesBegan {
-    C4Log(@"%4.2f,%4.2f",self.canvas.center.x,self.canvas.center.y);
-    C4Log(@"%4.2f,%4.2f",self.canvas.width,self.canvas.height);
-}
+-(void)test {
+    s.shapeLayer.affineTransform = CGAffineTransformMakeScale(2, 2);
+    s.origin = CGPointMake(20,20);
 
+    CGRect newFrame = t.frame;
+    newFrame.size.width *= 2;
+    newFrame.size.height *= 2;
+    [t ellipse:newFrame];
+}
 @end
 /*
 #import "C4WorkSpace.h"
