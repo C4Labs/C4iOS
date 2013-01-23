@@ -15,7 +15,7 @@
 @implementation C4View
 
 /* leaving animation delay only to views for now */
-@synthesize animationDuration, animationDelay, animationOptions = _animationOptions, repeatCount = _repeatCount;
+@synthesize animationDelay, repeatCount = _repeatCount;
 @synthesize origin = _origin;
 @synthesize width, height;
 
@@ -253,22 +253,22 @@
                      completion:completionBlock];
 }
 
--(void)setAnimationOptions:(NSUInteger)animationOptions {
-    /*
-     important: we have to intercept the setting of AUTOREVERSE for the case of reversing 1 time
-     i.e. reversing without having set REPEAT
-     
-     UIView animation will flicker if we don't do this...
-     */
-    ((id <C4LayerAnimation>)self.layer).animationOptions = _animationOptions;
-    
-    if ((animationOptions & AUTOREVERSE) == AUTOREVERSE) {
-//        self.shouldAutoreverse = YES;
-        animationOptions &= ~AUTOREVERSE;
-    }
-    
-    _animationOptions = animationOptions | BEGINCURRENT;
-}
+//-(void)setAnimationOptions:(NSUInteger)animationOptions {
+//    /*
+//     important: we have to intercept the setting of AUTOREVERSE for the case of reversing 1 time
+//     i.e. reversing without having set REPEAT
+//     
+//     UIView animation will flicker if we don't do this...
+//     */
+//    ((id <C4LayerAnimation>)self.layer).animationOptions = _animationOptions;
+//    
+//    if ((animationOptions & AUTOREVERSE) == AUTOREVERSE) {
+////        self.shouldAutoreverse = YES;
+//        animationOptions &= ~AUTOREVERSE;
+//    }
+//    
+//    _animationOptions = animationOptions | BEGINCURRENT;
+//}
 
 #pragma mark Notification Methods
 -(void)setup {}

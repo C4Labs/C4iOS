@@ -565,5 +565,6 @@
 
 #pragma mark JANUARY 2013
 @property (readwrite, atomic) BOOL constrainsProportions;
+//@property (readwrite, nonatomic) CGFloat animatedImageDuration
 
 @end

@@ -22,7 +22,7 @@
 @property (readwrite, nonatomic) CGImageRef contents;
 @property (readwrite, strong, nonatomic) C4Layer *imageLayer;
 @property (readwrite, strong, atomic) NSTimer *animatedImageTimer;
-@property (readwrite, atomic) BOOL shouldAutoreverse;
+//@property (readwrite, atomic) BOOL shouldAutoreverse;
 @end
 
 @implementation C4Image
@@ -36,8 +36,8 @@
 @synthesize CGImage = _CGImage;
 @synthesize animatedImageTimer;
 @synthesize pixelDataLoaded = _pixelDataLoaded;
-@synthesize shouldAutoreverse = _shouldAutoreverse;
-@synthesize animationOptions = _animationOptions;
+//@synthesize shouldAutoreverse = _shouldAutoreverse;
+//@synthesize animationOptions = _animationOptions;
 @synthesize width = _width, height = _height;
 @synthesize originalRatio = _originalRatio, originalSize = _originalSize, size = _size;
 
@@ -655,9 +655,10 @@
     return  self;
 }
 
--(void)play { 
+-(void)play {
+    if(self.animatedImageTimer.isValid) [self stop];
     if(CFArrayGetCount(self.animatedImages) > 1) {
-        self.animatedImageTimer = [NSTimer timerWithTimeInterval:0.15 target:self selector:@selector(animateImages) userInfo:nil repeats:YES];
+        self.animatedImageTimer = [NSTimer timerWithTimeInterval:self.animatedImageDuration/CFArrayGetCount(self.animatedImages) target:self selector:@selector(animateImages) userInfo:nil repeats:YES];
         [[NSRunLoop mainRunLoop] addTimer:self.animatedImageTimer forMode:NSDefaultRunLoopMode];
     }
 }
@@ -751,24 +752,24 @@
     return img;
 }
 
--(void)setAnimationOptions:(NSUInteger)animationOptions {
-    /*
-     This method needs to be in all C4Control subclasses, not sure why it doesn't inherit properly
-     
-     important: we have to intercept the setting of AUTOREVERSE for the case of reversing 1 time
-     i.e. reversing without having set REPEAT
-     
-     UIView animation will flicker if we don't do this...
-     */
-    ((id <C4LayerAnimation>)self.layer).animationOptions = _animationOptions;
-    
-    if ((animationOptions & AUTOREVERSE) == AUTOREVERSE) {
-        self.shouldAutoreverse = YES;
-        animationOptions &= ~AUTOREVERSE;
-    }
-    
-    _animationOptions = animationOptions | BEGINCURRENT;
-}
+//-(void)setAnimationOptions:(NSUInteger)animationOptions {
+//    /*
+//     This method needs to be in all C4Control subclasses, not sure why it doesn't inherit properly
+//     
+//     important: we have to intercept the setting of AUTOREVERSE for the case of reversing 1 time
+//     i.e. reversing without having set REPEAT
+//     
+//     UIView animation will flicker if we don't do this...
+//     */
+//    ((id <C4LayerAnimation>)self.layer).animationOptions = _animationOptions;
+//    
+//    if ((animationOptions & AUTOREVERSE) == AUTOREVERSE) {
+//        self.shouldAutoreverse = YES;
+//        animationOptions &= ~AUTOREVERSE;
+//    }
+//    
+//    _animationOptions = animationOptions | BEGINCURRENT;
+//}
 
 -(CGFloat)width {
     return self.frame.size.width;

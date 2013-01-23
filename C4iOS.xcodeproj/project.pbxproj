@@ -53,6 +53,7 @@
 		ED979F3F14F95EFF00645114 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED979F3E14F95EFF00645114 /* CoreImage.framework */; };
 		ED983F1115E2A8B600C0AD81 /* C4CameraLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED983F1015E2A8B600C0AD81 /* C4CameraLayer.m */; };
 		ED98434716AF93DF00F64FAF /* inception.mov in Resources */ = {isa = PBXBuildFile; fileRef = ED7513AA15150FB60076317F /* inception.mov */; };
+		ED98434E16AFB8E700F64FAF /* MyShape.m in Sources */ = {isa = PBXBuildFile; fileRef = ED98434D16AFB8E700F64FAF /* MyShape.m */; };
 		ED98723D167C056B00ADFD3F /* HiddenNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED98723C167C056B00ADFD3F /* HiddenNavView.m */; };
 		ED987241167C0DA100ADFD3F /* OuterShape.m in Sources */ = {isa = PBXBuildFile; fileRef = ED987240167C0DA100ADFD3F /* OuterShape.m */; };
 		ED99AB7315DE01D7002A7D6C /* C4YouTubeURLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = ED99AB7215DE01D7002A7D6C /* C4YouTubeURLParser.m */; };
@@ -145,6 +146,8 @@
 		ED900CEE14FBF2B3006C2AED /* C4Font.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Font.m; sourceTree = "<group>"; };
 		ED979F3E14F95EFF00645114 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		ED983F1015E2A8B600C0AD81 /* C4CameraLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4CameraLayer.m; sourceTree = "<group>"; };
+		ED98434C16AFB8E600F64FAF /* MyShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyShape.h; sourceTree = "<group>"; };
+		ED98434D16AFB8E700F64FAF /* MyShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyShape.m; sourceTree = "<group>"; };
 		ED98723B167C056B00ADFD3F /* HiddenNavView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HiddenNavView.h; sourceTree = "<group>"; };
 		ED98723C167C056B00ADFD3F /* HiddenNavView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HiddenNavView.m; sourceTree = "<group>"; };
 		ED98723F167C0DA100ADFD3F /* OuterShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OuterShape.h; sourceTree = "<group>"; };
@@ -260,6 +263,8 @@
 			isa = PBXGroup;
 			children = (
 				EDF65449150DEF3300194671 /* C4WorkSpace.m */,
+				ED98434C16AFB8E600F64FAF /* MyShape.h */,
+				ED98434D16AFB8E700F64FAF /* MyShape.m */,
 				EDF8262B167C179000FE30E4 /* HiddenNav.h */,
 				EDF8262C167C179000FE30E4 /* HiddenNav.m */,
 				EDF8262D167C179000FE30E4 /* HiddenNav.xib */,
@@ -503,6 +508,7 @@
 				ED98723D167C056B00ADFD3F /* HiddenNavView.m in Sources */,
 				ED987241167C0DA100ADFD3F /* OuterShape.m in Sources */,
 				EDF8262E167C179000FE30E4 /* HiddenNav.m in Sources */,
+				ED98434E16AFB8E700F64FAF /* MyShape.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

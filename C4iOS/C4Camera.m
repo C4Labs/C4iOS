@@ -12,14 +12,14 @@
 @interface C4Camera ()
 @property (readwrite, strong, nonatomic) C4CameraController *cameraController;
 @property (readwrite, strong, nonatomic) C4CameraLayer *previewLayer;
-@property (readwrite, atomic) BOOL shouldAutoreverse;
+//@property (readwrite, atomic) BOOL shouldAutoreverse;
 @end
 
 @implementation C4Camera
-@synthesize animationOptions = _animationOptions;
+//@synthesize animationOptions = _animationOptions;
 @synthesize capturedImage = _capturedImage;
 @synthesize previewLayer = _previewLayer;
-@synthesize shouldAutoreverse = _shouldAutoreverse;
+//@synthesize shouldAutoreverse = _shouldAutoreverse;
 
 +(C4Camera *)cameraWithFrame:(CGRect)frame {
     C4Camera *c = [[C4Camera alloc] initWithFrame:frame];
@@ -79,23 +79,23 @@
     [self performSelector:NSSelectorFromString(methodName) withObject:object afterDelay:seconds];
 }
 
--(void)setAnimationOptions:(NSUInteger)animationOptions {
-    /*
-     This method needs to be in all C4Control subclasses, not sure why it doesn't inherit properly
-     
-     important: we have to intercept the setting of AUTOREVERSE for the case of reversing 1 time
-     i.e. reversing without having set REPEAT
-     
-     UIView animation will flicker if we don't do this...
-     */
-    ((id <C4LayerAnimation>)self.layer).animationOptions = _animationOptions;
-    
-    if ((animationOptions & AUTOREVERSE) == AUTOREVERSE) {
-        self.shouldAutoreverse = YES;
-        animationOptions &= ~AUTOREVERSE;
-    }
-    
-    _animationOptions = animationOptions | BEGINCURRENT;
-}
+//-(void)setAnimationOptions:(NSUInteger)animationOptions {
+//    /*
+//     This method needs to be in all C4Control subclasses, not sure why it doesn't inherit properly
+//     
+//     important: we have to intercept the setting of AUTOREVERSE for the case of reversing 1 time
+//     i.e. reversing without having set REPEAT
+//     
+//     UIView animation will flicker if we don't do this...
+//     */
+//    ((id <C4LayerAnimation>)self.layer).animationOptions = _animationOptions;
+//    
+//    if ((animationOptions & AUTOREVERSE) == AUTOREVERSE) {
+//        self.shouldAutoreverse = YES;
+//        animationOptions &= ~AUTOREVERSE;
+//    }
+//    
+//    _animationOptions = animationOptions | BEGINCURRENT;
+//}
 
 @end

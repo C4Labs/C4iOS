@@ -29,7 +29,6 @@
         self.animationOptions = BEGINCURRENT;
         self.repeatCount = 0;
         self.shouldAutoreverse = NO;
-        [self setup];
         self.layer.delegate = self;
     }
     return self;
@@ -101,19 +100,23 @@
 }
 
 -(void)setFrame:(CGRect)frame {
-    CGRect oldFrame = self.frame;
-    
-    void (^animationBlock) (void) = ^ { super.frame = frame; };
-    void (^completionBlock) (BOOL) = nil;
-    
-    BOOL animationShouldNotRepeat = (self.animationOptions & REPEAT) !=  REPEAT;
-    if(self.shouldAutoreverse && animationShouldNotRepeat) {
-        completionBlock = ^ (BOOL animationIsComplete) {
-            if(animationIsComplete){}
-            [self autoreverseAnimation:^ { super.frame = oldFrame;}];
-        };
+    DO THIS FOR ALL OTHER METHODS
+    if(self.animationDuration == 0.0f) super.frame = frame;
+    else {
+        CGRect oldFrame = self.frame;
+        
+        void (^animationBlock) (void) = ^ { super.frame = frame; };
+        void (^completionBlock) (BOOL) = nil;
+        
+        BOOL animationShouldNotRepeat = (self.animationOptions & REPEAT) !=  REPEAT;
+        if(self.shouldAutoreverse && animationShouldNotRepeat) {
+            completionBlock = ^ (BOOL animationIsComplete) {
+                if(animationIsComplete){}
+                [self autoreverseAnimation:^ { super.frame = oldFrame;}];
+            };
+        }
+        [self animateWithBlock:animationBlock completion:completionBlock];
     }
-    [self animateWithBlock:animationBlock completion:completionBlock];
 }
 
 -(void)setBounds:(CGRect)bounds {
@@ -217,6 +220,7 @@
 -(void)setAnimationDuration:(CGFloat)duration {
     if (duration <= 0.0f) duration = 0.001f;
     _animationDuration = duration;
+    C4Log(@"-%4.2f",duration);
     ((id <C4LayerAnimation>)self.layer).animationDuration = duration;
 }
 
@@ -227,7 +231,7 @@
      
      UIView animation will flicker if we don't do this...
      */
-    ((id <C4LayerAnimation>)self.layer).animationOptions = _animationOptions;
+    ((id <C4LayerAnimation>)self.layer).animationOptions = animationOptions;
 
     if ((animationOptions & AUTOREVERSE) == AUTOREVERSE) {
         self.shouldAutoreverse = YES;

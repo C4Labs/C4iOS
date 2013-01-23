@@ -11,12 +11,12 @@
 @interface C4Shape()
 @property (readonly, nonatomic) BOOL initialized, shouldClose;
 @property (atomic) BOOL isTriangle;
-@property (readwrite, atomic) BOOL shouldAutoreverse;
+//@property (readwrite, atomic) BOOL shouldAutoreverse;
 @end
 
 @implementation C4Shape
-@synthesize animationDuration = _animationDuration;
-@synthesize animationOptions = _animationOptions;
+ALSO REMOVE ALL ANIMATION OPTIONS SHIT AND ALL OTHER THINGS THAT SHOULD INHERIT STRAIGHT FROM C4CONTROL 
+//@synthesize animationOptions = _animationOptions;
 @synthesize controlPointA = _controlPointA, controlPointB = _controlPointB, isArc = _isArc, bezierCurve = _bezierCurve, quadCurve = _quadCurve, isLine =_isLine, shapeLayer, pointA = _pointA, pointB = _pointB, wedge = _wedge;
 @synthesize fillColor = _fillColor, fillRule, lineCap, lineDashPattern, lineDashPhase, lineJoin, lineWidth, miterLimit, origin = _origin, strokeColor, strokeEnd, strokeStart;
 @synthesize closed = _closed, shouldClose = _shouldClose, initialized = _initialized, isTriangle = _isTriangle;
@@ -803,23 +803,23 @@
     [(C4Layer *)self.layer animateLayerTransform:_layerTransform];
 }
 
--(void)setAnimationOptions:(NSUInteger)animationOptions {
-    /*
-     This method needs to be in all C4Control subclasses, not sure why it doesn't inherit properly
-     
-     important: we have to intercept the setting of AUTOREVERSE for the case of reversing 1 time
-     i.e. reversing without having set REPEAT
-     
-     UIView animation will flicker if we don't do this...
-     */
-    ((id <C4LayerAnimation>)self.layer).animationOptions = _animationOptions;
-    
-    if ((animationOptions & AUTOREVERSE) == AUTOREVERSE) {
-        self.shouldAutoreverse = YES;
-        animationOptions &= ~AUTOREVERSE;
-    }
-    
-    _animationOptions = animationOptions | BEGINCURRENT;
-}
+//-(void)setAnimationOptions:(NSUInteger)animationOptions {
+//    /*
+//     This method needs to be in all C4Control subclasses, not sure why it doesn't inherit properly
+//     
+//     important: we have to intercept the setting of AUTOREVERSE for the case of reversing 1 time
+//     i.e. reversing without having set REPEAT
+//     
+//     UIView animation will flicker if we don't do this...
+//     */
+//    ((id <C4LayerAnimation>)self.layer).animationOptions = _animationOptions;
+//    
+//    if ((animationOptions & AUTOREVERSE) == AUTOREVERSE) {
+//        self.shouldAutoreverse = YES;
+//        animationOptions &= ~AUTOREVERSE;
+//    }
+//    
+//    _animationOptions = animationOptions | BEGINCURRENT;
+//}
 
 @end
