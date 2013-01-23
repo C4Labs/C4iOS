@@ -64,6 +64,16 @@
     
 }
 
+-(CGPoint)center {
+    CGPoint currentCenter = super.center;
+    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+    if(orientation == UIDeviceOrientationLandscapeLeft || orientation == UIDeviceOrientationLandscapeRight) {
+        currentCenter.x = super.center.y;
+        currentCenter.y = super.center.x;
+    }
+    return currentCenter;
+}
+
 #pragma mark UIView animatable property overrides
 
 -(void)setCenter:(CGPoint)center {
@@ -444,7 +454,7 @@
 }
 
 -(CGFloat)height {
-    return self.frame.size.height;
+    return self.bounds.size.height;
 }
 
 -(void)setMask:(C4Control *)maskObject {

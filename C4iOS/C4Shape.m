@@ -388,6 +388,7 @@
     
     CGRect lineRect = CGRectMakeFromPointArray(points, 2);
     if(_initialized == YES) self.frame = lineRect;
+    _origin = self.frame.origin;
     CGPoint translation = lineRect.origin;
     translation.x *= -1;
     translation.y *= -1;
@@ -451,6 +452,7 @@
     
     [self.shapeLayer animatePath:newPath];
     CGRect pathRect = CGPathGetBoundingBox(newPath);
+    _origin = self.frame.origin;
     self.bounds = pathRect; //Need this step to sync the appearance of the paths to the frame of the shape
     CGPathRelease(newPath);
     _initialized = YES;
@@ -503,7 +505,7 @@
     [self.shapeLayer animatePath:newPath];
     CGRect pathRect = CGPathGetBoundingBox(newPath);
     self.bounds = pathRect; //Need this step to sync the appearance of the paths to the frame of the shape
-//    self.frame = pathRect;
+    _origin = self.frame.origin;
     CGPathRelease(newPath);
     _initialized = YES;
 }

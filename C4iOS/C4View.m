@@ -107,6 +107,15 @@
     }];
 }
 
+-(CGPoint)center {
+    CGPoint currentCenter = super.center;
+    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+    if(orientation == UIDeviceOrientationLandscapeLeft || orientation == UIDeviceOrientationLandscapeRight) {
+        currentCenter.x = super.center.y;
+        currentCenter.y = super.center.x;
+    }
+    return currentCenter;
+}
 
 -(void)setOrigin:(CGPoint)origin {
     _origin = origin;
@@ -271,11 +280,11 @@
 }
 
 -(CGFloat)width {
-    return self.frame.size.width;
+    return self.bounds.size.width;
 }
 
 -(CGFloat)height {
-    return self.frame.size.height;
+    return self.bounds.size.height;
 }
 
 -(void)runMethod:(NSString *)methodName afterDelay:(CGFloat)seconds {

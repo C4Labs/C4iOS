@@ -62,6 +62,7 @@
         self.frame = self.visibleImage.extent;
         _pixelDataLoaded = NO;
         self.imageLayer.contents = (id)_originalImage.CGImage;
+        _shouldScale = YES;
         [self setup];
     }
     return self;
@@ -86,6 +87,7 @@
         self.frame = self.visibleImage.extent;
         _pixelDataLoaded = NO;
         self.imageLayer.contents = (__bridge id)image;
+        _shouldScale = YES;
         [self setup];
         
         CGColorSpaceRelease(colorSpace);
@@ -106,6 +108,7 @@
         self.frame = self.visibleImage.extent;
         _pixelDataLoaded = NO;
         self.imageLayer.contents = (__bridge id)image;
+        _shouldScale = YES;
         [self setup];
     }
     return self;
@@ -124,6 +127,7 @@
         _pixelDataLoaded = NO;
         self.frame = self.CIImage.extent;
         self.imageLayer.contents = (id)_originalImage.CGImage;
+        _shouldScale = YES;
         [self setup];
     }
     return self;
@@ -774,19 +778,19 @@
     _width = width;
     CGRect newFrame = self.frame;
     newFrame.size.width = width;
-    newFrame.size.height = width/self.originalRatio;
+    if(_shouldScale) newFrame.size.height = width/self.originalRatio;
     self.frame = newFrame;
 }
 
 -(CGFloat)height {
-    return self.frame.size.height;
+    return self.bounds.size.height;
 }
 
 -(void)setHeight:(CGFloat)height {
     _height = height;
     CGRect newFrame = self.frame;
     newFrame.size.height = height;
-    newFrame.size.width = height * self.originalRatio;
+    if(_shouldScale) newFrame.size.width = height * self.originalRatio;
     self.frame = newFrame;
 }
 

@@ -8,22 +8,24 @@
 #import "C4WorkSpace.h"
 
 @implementation C4WorkSpace {
-    C4Image *i;
+    C4Shape *s;
 }
 
 -(void)setup {
-    i = [C4Image imageNamed:@"C4Sky"];
-    [self.canvas addImage:i];
-
-    i.borderWidth = 10;
-    i.borderColor = [C4GREY colorWithAlphaComponent:0.5];
+    CGPoint pts[4] = {CGPointMake(0, 50),CGPointMake(100, 100),CGPointMake(0, 200),CGPointMake(100, 200)};
+    for(int i = 0; i < 4; i++) pts[i].x += 150;
+    s = [C4Shape polygon:pts pointCount:4];
+    [self.canvas addShape:s];
+    C4Log(@"%4.2f",s.frame.origin.x);
+    C4Log(@"%4.2f",s.origin.x);
+    s.backgroundColor = C4GREY;
 }
 
 -(void)touchesBegan {
-    i.animationOptions = AUTOREVERSE | REPEAT;
-    i.animationDuration = 1.0f;
-    i.center = self.canvas.center;
+    C4Log(@"%4.2f,%4.2f",self.canvas.center.x,self.canvas.center.y);
+    C4Log(@"%4.2f,%4.2f",self.canvas.width,self.canvas.height);
 }
+
 @end
 /*
 #import "C4WorkSpace.h"
