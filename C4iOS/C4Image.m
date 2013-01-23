@@ -115,6 +115,7 @@
 -(id)initWithImageName:(NSString *)name {
     self = [super init];
     if(self != nil) {
+        name = [name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         self.originalImage = [UIImage imageNamed:name];
         _originalSize = self.originalImage.size;
         _originalRatio = self.originalSize.width/self.originalSize.height;
@@ -632,11 +633,12 @@
 -(id)initAnimatedImageWithNames:(NSArray *)imageNames {
     self = [super init];
     if(nil != self) {
-        
         //        self.animatedImageDuration = 2.0f;
         self.animatedImages = CFArrayCreateMutable(kCFAllocatorDefault, 0, nil);
-        for(NSString *s in imageNames) {
-            UIImage *img = [UIImage imageNamed:s];
+        for(int i = 0; i < [imageNames count]; i++) {
+            NSString *name = imageNames[i];
+            name = [name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            UIImage *img = [UIImage imageNamed:name];
             CFArrayAppendValue(self.animatedImages,img.CGImage);
         }
         

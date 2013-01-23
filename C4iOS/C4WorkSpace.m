@@ -6,28 +6,10 @@
 
 #import "C4WorkSpace.h"
 
-@implementation C4WorkSpace {
-    C4Shape *s, *t;
-}
-
+@implementation C4WorkSpace
 -(void)setup {
-    s = [C4Shape ellipse:CGRectMake(20, 20, 100, 100)];
-    [self.canvas addShape:s];
-
-    t = [C4Shape ellipse:CGRectMake(400, 20, 100, 100)];
-    [self.canvas addShape:t];
-
-    [self runMethod:@"test" afterDelay:1.0f];
-}
-
--(void)test {
-    s.shapeLayer.affineTransform = CGAffineTransformMakeScale(2, 2);
-    s.origin = CGPointMake(20,20);
-
-    CGRect newFrame = t.frame;
-    newFrame.size.width *= 2;
-    newFrame.size.height *= 2;
-    [t ellipse:newFrame];
+    C4Image *i = [C4Image imageNamed:@" C4Sky.png"];
+    [self.canvas addImage:i];
 }
 @end
 /*

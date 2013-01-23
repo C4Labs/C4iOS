@@ -129,6 +129,7 @@
 }
 
 -(id)initWithMovieName:(NSString *)movieName {
+    movieName = [movieName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     self = [self initWithMovieName:movieName frame:CGRectZero];
     return self;
 }
