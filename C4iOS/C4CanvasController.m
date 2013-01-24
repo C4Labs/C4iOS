@@ -80,6 +80,46 @@
     [(C4View *)self.view addMovie:movie];
 }
 
+-(void)addObjects:(NSArray *)array {
+    for(id obj in array) {
+        if([obj isKindOfClass:[C4Shape class]]) {
+            [self addShape:obj];
+        }
+        else if([obj isKindOfClass:[C4GL class]]) {
+            [self addGL:obj];
+        }
+        else if([obj isKindOfClass:[C4Image class]]) {
+            [self addImage:obj];
+        }
+        else if([obj isKindOfClass:[C4Movie class]]) {
+            [self addMovie:obj];
+        }
+        else if([obj isKindOfClass:[C4Camera class]]) {
+            [self addCamera:obj];
+        }
+        else if([obj isKindOfClass:[UIView class]]) {
+            [self addSubview:obj];
+        }
+        else {
+            C4Log(@"unable to determine type of class");
+        }
+    }
+}
+
+-(void)removeObject:(id)visualObject {
+    C4Assert(self != visualObject, @"You tried to remove %@ from itself, don't be silly", visualObject);
+    if([visualObject isKindOfClass:[UIView class]] ||
+       [visualObject isKindOfClass:[C4Control class]])
+        [visualObject removeFromSuperview];
+    else C4Log(@"object (%@) you wish to remove is not a visual object", visualObject);
+}
+
+-(void)removeObjects:(NSArray *)array {
+    for(id obj in array) {
+        [self removeObject:obj];
+    }
+}
+
 #pragma mark Notification Methods
 -(void)listenFor:(NSString *)notification andRunMethod:(NSString *)methodName {
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(methodName) name:notification object:nil];

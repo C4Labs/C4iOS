@@ -14,7 +14,6 @@
 @property (readonly, strong, nonatomic) C4EAGLLayer *eaglLayer;
 @property (readwrite, strong, nonatomic) id displayLink;
 @property (readwrite, strong, nonatomic) NSTimer *animationTimer;
-@property (readwrite, atomic) BOOL shouldAutoreverse;
 @end
 
 @implementation C4GL

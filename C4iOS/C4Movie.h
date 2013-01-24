@@ -17,10 +17,7 @@
  A C4Movie's resizing behaviour is to map itself to the edges of its visible frame. This functionality implicitly uses  AVLayerVideoGravityResize as its layer's default gravity. You can change the frame of the movie from an arbitrary shape back to its original proportion by using its originalMovieSize, originalMovieRatio, or by independently setting either its width or height properties.
  */
 
-@interface C4Movie : C4Control {
-    NSURL *movieURL;
-    void *rateContext, *currentItemContext, *playerItemStatusContext;
-}
+@interface C4Movie : C4Control 
 /**Creates and returns a new C4Movie object with a given file name.
 
  This method will set the frame of the returned object to that of the file's original size.

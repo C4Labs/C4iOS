@@ -9,32 +9,20 @@
 #import "C4Movie.h"
 #import "C4YouTubeURLParser.h"
 
-@interface C4Movie()
-- (CMTime)playerItemDuration;
-- (void)assetFailedToPrepareForPlayback:(NSError *)error;
-- (void)prepareToPlayAsset:(AVURLAsset *)asset withKeys:(NSArray *)requestedKeys;
-
-//-(void)_setShadowOffset:(NSValue *)shadowOffset;
-//-(void)_setShadowRadius:(NSNumber *)shadowRadius;
-//-(void)_setShadowOpacity:(NSNumber *)shadowOpacity;
-//-(void)_setShadowColor:(UIColor *)shadowColor;
-//-(void)_setShadowPath:(id)shadowPath;
+@interface C4Movie() {
+    NSURL *movieURL;
+    void *rateContext, *currentItemContext, *playerItemStatusContext;
+}
 
 @property (readonly, nonatomic, strong) C4MovieLayer *playerLayer;
 @property (readwrite, nonatomic, strong) AVPlayer *player;
 @property (readwrite, nonatomic, strong) AVPlayerItem *playerItem;
-@property (readwrite, atomic) BOOL shouldAutoreverse;
 @end
 
 @implementation C4Movie
 @synthesize player;
 @synthesize playerItem;
 @synthesize rate = _rate;
-//@synthesize shadowColor = _shadowColor;
-//@synthesize shadowOffset = _shadowOffset;
-//@synthesize shadowRadius = _shadowRadius;
-//@synthesize shadowOpacity = _shadowOpacity;
-//@synthesize shadowPath = _shadowPath;
 @synthesize originalMovieSize = _originalMovieSize;
 @synthesize originalMovieRatio = _originalMovieRatio;
 @synthesize width = _width;
@@ -44,8 +32,6 @@
 @synthesize shouldAutoplay;
 @synthesize audioMix = _audioMix;
 @synthesize volume = _volume;
-//@synthesize shouldAutoreverse = _shouldAutoreverse;
-//@synthesize animationOptions = _animationOptions;
 @synthesize size = _size;
 
 +(C4Movie *)movieNamed:(NSString *)movieName {

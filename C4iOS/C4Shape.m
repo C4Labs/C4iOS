@@ -11,12 +11,10 @@
 @interface C4Shape()
 @property (readonly, nonatomic) BOOL initialized, shouldClose;
 @property (atomic) BOOL isTriangle;
-//@property (readwrite, atomic) BOOL shouldAutoreverse;
 @end
 
 @implementation C4Shape
-ALSO REMOVE ALL ANIMATION OPTIONS SHIT AND ALL OTHER THINGS THAT SHOULD INHERIT STRAIGHT FROM C4CONTROL 
-//@synthesize animationOptions = _animationOptions;
+//ALSO REMOVE ALL ANIMATION OPTIONS SHIT AND ALL OTHER THINGS THAT SHOULD INHERIT STRAIGHT FROM C4CONTROL 
 @synthesize controlPointA = _controlPointA, controlPointB = _controlPointB, isArc = _isArc, bezierCurve = _bezierCurve, quadCurve = _quadCurve, isLine =_isLine, shapeLayer, pointA = _pointA, pointB = _pointB, wedge = _wedge;
 @synthesize fillColor = _fillColor, fillRule, lineCap, lineDashPattern, lineDashPhase, lineJoin, lineWidth, miterLimit, origin = _origin, strokeColor, strokeEnd, strokeStart;
 @synthesize closed = _closed, shouldClose = _shouldClose, initialized = _initialized, isTriangle = _isTriangle;

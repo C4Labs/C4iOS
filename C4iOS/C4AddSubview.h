@@ -79,4 +79,22 @@
  */
 -(void)addShape:(C4Shape *)shape;
 
+/** A method to remove another object from its view.
+ 
+ For the object in question, use this method to remove any visible object that was previously added to it as a subview.
+ 
+ @param visibleObject the visible object to remove from its parent view
+ */
+-(void)removeObject:(id)visualObject;
+
+/** A method to remove an array of objects from their view.
+ 
+ This will run the removeObject: method on each object in an array.
+ 
+ @param array the array of visible objects to remove from their parent view
+ */
+-(void)removeObjects:(NSArray *)array;
+
+-(void)addObjects:(NSArray *)array;
+
 @end
