@@ -14,7 +14,6 @@
 @end
 
 @implementation C4Shape
-//ALSO REMOVE ALL ANIMATION OPTIONS SHIT AND ALL OTHER THINGS THAT SHOULD INHERIT STRAIGHT FROM C4CONTROL 
 @synthesize controlPointA = _controlPointA, controlPointB = _controlPointB, isArc = _isArc, bezierCurve = _bezierCurve, quadCurve = _quadCurve, isLine =_isLine, shapeLayer, pointA = _pointA, pointB = _pointB, wedge = _wedge;
 @synthesize fillColor = _fillColor, fillRule, lineCap, lineDashPattern, lineDashPhase, lineJoin, lineWidth, miterLimit, origin = _origin, strokeColor, strokeEnd, strokeStart;
 @synthesize closed = _closed, shouldClose = _shouldClose, initialized = _initialized, isTriangle = _isTriangle;
@@ -269,23 +268,6 @@
     CGPathMoveToPoint(newPath, nil, 0,0);
     const CGAffineTransform translation = CGAffineTransformMakeTranslation(-1*beginPoint.x, -1*beginPoint.y);
     CGPathAddCurveToPoint(newPath, &translation, controlPoint1.x, controlPoint1.y, controlPoint2.x, controlPoint2.y, endPoint.x, endPoint.y);
-//    CGRect tempFrame = CGPathGetPathBoundingBox(newPath);
-//    CGPoint tempFrameOrigin = tempFrame.origin;
-//    beginPoint.x -= tempFrameOrigin.x;
-//    beginPoint.y -= tempFrameOrigin.y;
-//    endPoint.x -= tempFrameOrigin.x;
-//    endPoint.y -= tempFrameOrigin.y;
-//    controlPoint1.x -= tempFrameOrigin.x;
-//    controlPoint1.y -= tempFrameOrigin.y;
-//    controlPoint2.x -= tempFrameOrigin.x;
-//    controlPoint2.y -= tempFrameOrigin.y;    
-//    CGPathRelease(newPath);
-//    newPath = CGPathCreateMutable();
-//    CGPathMoveToPoint(newPath, nil, beginPoint.x, beginPoint.y);
-//    CGPathAddCurveToPoint(newPath, NULL, controlPoint1.x, controlPoint1.y, controlPoint2.x, controlPoint2.y, endPoint.x, endPoint.y);
-//    if (_shouldClose == YES) {
-//        CGPathCloseSubpath(newPath);
-//    }
     if(self.animationDuration == 0.0f) self.shapeLayer.path = newPath;
     else [self.shapeLayer animatePath:newPath];
 //    CGRect pathRect = CGPathGetBoundingBox(newPath);

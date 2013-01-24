@@ -8,7 +8,6 @@
 
 #import "C4ShapeLayer.h"
 
-
 @interface C4ShapeLayer()
 -(CABasicAnimation *)setupBasicAnimationWithKeyPath:(NSString *)keyPath;
 @property (readwrite, nonatomic) CGFloat rotationAngle, rotationAngleX, rotationAngleY;

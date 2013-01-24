@@ -5,22 +5,56 @@
 //
 
 #import "C4WorkSpace.h"
+#import <objc/runtime.h>
 
 @implementation C4WorkSpace {
-    C4Movie *movie;
-}
--(void)setup {
-    //create a movie and play it automatically
-    movie = [C4Movie movieNamed:@"inception.mov"];
-    movie.frame = CGRectMake(0, 0, 300, 200);
-    movie.center = self.canvas.center;
-    movie.shouldAutoplay = YES;
-    [self.canvas addMovie:movie];
 }
 
--(void)touchesBegan {
-    movie.frame = CGRectMake(0, 0, 300, 200);
+-(void)setup {
+    NSArray *classList = @[
+        @"C4Control",
+        @"C4View",
+        @"C4Window",
+        @"C4Camera",
+        @"C4CanvasController",
+        @"C4CameraLayer",
+        @"C4EAGLES1Renderer",
+        @"C4EAGLLayer",
+        @"C4Font",
+        @"C4Foundation",
+        @"C4GL",
+        @"C4GL1Renderer",
+        @"C4Image",
+        @"C4Label",
+        @"C4Layer",
+        @"C4Math",
+        @"C4Movie",
+        @"C4Object",
+        @"C4MovieLayer",
+        @"C4Sample",
+        @"C4Shape",
+        @"C4ShapeLayer",
+        @"C4Timer",
+        @"C4Vector",
+        @"C4ViewController"
+    ];
+    
+    for(NSString *className in classList) {
+        unsigned int count;
+        Class currentClass = NSClassFromString(className);
+        Method *methods = class_copyMethodList(currentClass, &count);
+        printf("%s\n----\n",[className UTF8String]);
+        // iterate over them and print out the method name
+        for (int i=0; i<count; i++) {
+            Method method = methods[i];
+            SEL selector = method_getName(method);
+            printf("- %s\n", [NSStringFromSelector(selector) UTF8String]);
+        }
+        printf("\n\n");
+        free(methods);
+    }
 }
+
 @end
 
 /*
