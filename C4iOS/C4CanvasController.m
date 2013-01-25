@@ -41,7 +41,6 @@
 }
 
 -(void)setup {
-
 }
 
 -(C4Window *)canvas {

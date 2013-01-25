@@ -12,31 +12,7 @@
 
 -(void)setup {
     NSArray *classList = @[
-        @"C4Control",
-        @"C4View",
-        @"C4Window",
-        @"C4Camera",
-        @"C4CanvasController",
-        @"C4CameraLayer",
-        @"C4EAGLES1Renderer",
-        @"C4EAGLLayer",
-        @"C4Font",
-        @"C4Foundation",
-        @"C4GL",
-        @"C4GL1Renderer",
-        @"C4Image",
-        @"C4Label",
-        @"C4Layer",
-        @"C4Math",
-        @"C4Movie",
-        @"C4Object",
-        @"C4MovieLayer",
-        @"C4Sample",
-        @"C4Shape",
-        @"C4ShapeLayer",
-        @"C4Timer",
-        @"C4Vector",
-        @"C4ViewController"
+        @"C4Control"
     ];
     
     for(NSString *className in classList) {

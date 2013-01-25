@@ -64,7 +64,7 @@ static C4Math *sharedC4Math = nil;
 }
 
 +(CGFloat)exp:(CGFloat)value {
-	return [self pow:E raisedTo:value];
+	return expf(value);
 }
 
 +(NSInteger)floor:(CGFloat)value {

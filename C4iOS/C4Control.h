@@ -37,9 +37,10 @@
  
  @warning For more information on the above properties, consult the [UIView](UIView) class documentation.
 
- */
+*/
 
 @interface C4Control : UIControl <C4Notification, C4Gesture, C4MethodDelay, NSCopying, C4AddSubview> {
+    
 }
 
 /// @name Convenience Methods
