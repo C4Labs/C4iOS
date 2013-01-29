@@ -11,6 +11,7 @@
 @interface C4Shape()
 @property (readonly, nonatomic) BOOL initialized, shouldClose;
 @property (atomic) BOOL isTriangle;
+@property (readonly, atomic) NSArray *localValueProperties;
 @end
 
 @implementation C4Shape
@@ -28,6 +29,13 @@
     self = [super initWithFrame:frame];
     if(self != nil) {
         _initialized = NO;
+        _localValueProperties = @[
+        @"lineWidth",
+        @"lineDashPhase",
+        @"miterLimit",
+        @"strokeEnd",
+        @"strokeStart"
+        ];
         self.animationOptions = BEGINCURRENT | EASEINOUT;
         [self willChangeShape];
         [self setup];
@@ -657,9 +665,11 @@
     if(self.animationDelay == 0.0f) [self _setLineDashPattern:_lineDashPattern];
     else [self performSelector:@selector(_setLineDashPattern:) withObject:_lineDashPattern afterDelay:self.animationDelay];
 }
+
 -(void)_setLineDashPattern:(NSArray *)_lineDashPattern {
     self.shapeLayer.lineDashPattern = _lineDashPattern;
 }
+
 -(NSArray *)lineDashPattern {
     return self.shapeLayer.lineDashPattern;
 }
@@ -668,9 +678,11 @@
     if(self.animationDelay == 0.0f) [self _setLineDashPhase:@(_lineDashPhase)];
     else [self performSelector:@selector(_setLineDashPhase:) withObject:@(_lineDashPhase) afterDelay:self.animationDelay];
 }
+
 -(void)_setLineDashPhase:(NSNumber *)_lineDashPhase {
     [self.shapeLayer animateLineDashPhase:[_lineDashPhase floatValue]];
 }
+
 -(CGFloat)lineDashPhase {
     return self.shapeLayer.lineDashPhase;
 }
@@ -682,6 +694,7 @@
 -(void)_setLineJoin:(NSString *)_lineJoin {
     self.shapeLayer.lineJoin = _lineJoin;
 }
+
 -(NSString *)lineJoin {
     return self.shapeLayer.lineJoin;
 }
@@ -783,6 +796,9 @@
     [(C4Layer *)self.layer animateLayerTransform:_layerTransform];
 }
 
++(C4Shape *)defaultStyle {
+    return (C4Shape *)[C4Shape appearance];
+}
 //-(void)setAnimationOptions:(NSUInteger)animationOptions {
 //    /*
 //     This method needs to be in all C4Control subclasses, not sure why it doesn't inherit properly
@@ -793,7 +809,7 @@
 //     UIView animation will flicker if we don't do this...
 //     */
 //    ((id <C4LayerAnimation>)self.layer).animationOptions = _animationOptions;
-//    
+//
 //    if ((animationOptions & AUTOREVERSE) == AUTOREVERSE) {
 //        self.shouldAutoreverse = YES;
 //        animationOptions &= ~AUTOREVERSE;
@@ -802,4 +818,35 @@
 //    _animationOptions = animationOptions | BEGINCURRENT;
 //}
 
+-(void)setStyle:(NSDictionary *)style {
+    for(NSString *key in [style allKeys]) {
+        if([_localValueProperties containsObject:key]) {
+            CGFloat value = [[style objectForKey:key] floatValue];
+            if([key isEqualToString:@"lineWidth"]) {
+                self.lineWidth = value;
+            } else if ([key isEqualToString:@"lineDashPhase"]) {
+                self.lineDashPhase = value;
+            } else if ([key isEqualToString:@"miterLimit"]) {
+                self.miterLimit = value;
+            } else if ([key isEqualToString:@"strokeEnd"]) {
+                self.strokeEnd = value;
+            } else if ([key isEqualToString:@"strokeStart"]) {
+                self.strokeStart = value;
+            }
+        } else {
+            SEL selector = NSSelectorFromString([self convertToSetter:key]);
+            if([self respondsToSelector:selector]) {
+                [self performSelector:selector withObject:[style objectForKey:key] afterDelay:0.0f];
+            };
+        }
+    }
+}
+
+-(NSString *)convertToSetter:(NSString *)methodName {
+    
+    NSString *firstletter = [[methodName substringToIndex:1] capitalizedString];
+    NSString *shortenedName = [methodName substringFromIndex:1];
+    NSString *setterName = [NSString stringWithFormat:@"set%@%@:",firstletter,shortenedName];
+    return setterName;
+}
 @end

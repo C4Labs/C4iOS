@@ -13,6 +13,7 @@
 @end
 
 @implementation C4MovieLayer
+
 @synthesize animationOptions = _animationOptions, currentAnimationEasing = _currentAnimationEasing, repeatCount = _repeatCount, animationDuration = _animationDuration, allowsInteraction = _allowsInteraction, repeats = _repeats;
 @synthesize perspectiveDistance = _perspectiveDistance;
 
@@ -22,7 +23,7 @@
         self.name = @"playerLayer";
         self.repeatCount = 0;
         self.autoreverses = NO;
-        
+
         _currentAnimationEasing = (NSString *)kCAMediaTimingFunctionEaseInEaseOut;
         _allowsInteraction = NO;
         _repeats = NO;
@@ -43,6 +44,7 @@
 }
 
 -(void)dealloc {
+    C4Log(@"-%@ %@",NSStringFromSelector(_cmd), self);
     [self removeAllAnimations];
 }
 
@@ -52,6 +54,7 @@
 
 #pragma mark C4Layer Animation Methods //code from this line forward should be common amongst all C4Layer variations
 -(CABasicAnimation *)setupBasicAnimationWithKeyPath:(NSString *)keyPath {
+    C4Log(@"%@",NSStringFromSelector(_cmd));
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:keyPath];
     animation.duration = self.animationDuration;
     animation.timingFunction = [CAMediaTimingFunction functionWithName:self.currentAnimationEasing];
@@ -63,6 +66,7 @@
 }
 
 -(void)setAnimationOptions:(NSUInteger)animationOptions {
+    C4Log(@"%@",NSStringFromSelector(_cmd));
     if((animationOptions & LINEAR) == LINEAR) {
         _currentAnimationEasing = kCAMediaTimingFunctionLinear;
     } else if((animationOptions & EASEOUT) == EASEOUT) {
@@ -86,6 +90,7 @@
 }
 
 -(void)setPerspectiveDistance:(CGFloat)perspectiveDistance {
+    C4Log(@"%@",NSStringFromSelector(_cmd));
     _perspectiveDistance = perspectiveDistance;
     CATransform3D t = self.transform;
     if(perspectiveDistance != 0.0f) t.m34 = 1/self.perspectiveDistance;
@@ -94,6 +99,7 @@
 }
 
 -(void)animateBackgroundColor:(CGColorRef)_backgroundColor {
+    C4Log(@"%@",NSStringFromSelector(_cmd));
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"backgroundColor"];
     animation.fromValue = (id)self.backgroundColor;
@@ -109,6 +115,7 @@
 }
 
 -(void)animateBorderColor:(CGColorRef)_borderColor {
+    C4Log(@"%@",NSStringFromSelector(_cmd));
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"borderColor"];
     animation.fromValue = (id)self.borderColor;
@@ -124,6 +131,7 @@
 }
 
 -(void)animateBackgroundFilters:(NSArray *)_backgroundFilters {
+    C4Log(@"%@",NSStringFromSelector(_cmd));
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"backgroundFilters"];
     animation.fromValue = self.backgroundFilters;
@@ -139,6 +147,7 @@
 }
 
 -(void)animateBorderWidth:(CGFloat)_borderWidth {
+    C4Log(@"%@",NSStringFromSelector(_cmd));
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"borderWidth"];
     animation.fromValue = @(self.borderWidth);
@@ -154,6 +163,7 @@
 }
 
 -(void)animateCompositingFilter:(id)_compositingFilter {
+    C4Log(@"%@",NSStringFromSelector(_cmd));
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"compositingFilter"];
     animation.fromValue = self.compositingFilter;
@@ -169,6 +179,7 @@
 }
 
 -(void)animateContents:(CGImageRef)_image {
+    C4Log(@"%@",NSStringFromSelector(_cmd));
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"contents"];
     animation.fromValue = self.contents;
@@ -184,6 +195,7 @@
 }
 
 -(void)animateCornerRadius:(CGFloat)_cornerRadius {
+    C4Log(@"%@",NSStringFromSelector(_cmd));
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"cornerRadius"];
     animation.fromValue = @(self.cornerRadius);
@@ -199,6 +211,7 @@
 }
 
 -(void)animateLayerTransform:(CATransform3D)newTransform {
+    C4Log(@"%@",NSStringFromSelector(_cmd));
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"sublayerTransform"];
     animation.fromValue = [NSValue valueWithCATransform3D:self.sublayerTransform];
@@ -214,6 +227,7 @@
 }
 
 -(void)animateRotation:(CGFloat)newRotationAngle {
+    C4Log(@"%@",NSStringFromSelector(_cmd));
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"transform.rotation.z"];
     animation.fromValue = @(self.rotationAngle);
@@ -230,6 +244,7 @@
 }
 
 -(void)animateRotationX:(CGFloat)newRotationAngle {
+    C4Log(@"%@",NSStringFromSelector(_cmd));
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"transform.rotation.x"];
     animation.fromValue = @(self.rotationAngleX);
@@ -246,6 +261,7 @@
 }
 
 -(void)animateRotationY:(CGFloat)newRotationAngle {
+    C4Log(@"%@",NSStringFromSelector(_cmd));
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"transform.rotation.y"];
     animation.fromValue = @(self.rotationAngleY);
@@ -262,6 +278,7 @@
 }
 
 -(void)animateShadowColor:(CGColorRef)_shadowColor {
+    C4Log(@"%@",NSStringFromSelector(_cmd));
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowColor"];
     animation.fromValue = (id)self.shadowColor;
@@ -277,6 +294,7 @@
 }
 
 -(void)animateShadowOffset:(CGSize)_shadowOffset {
+    C4Log(@"%@",NSStringFromSelector(_cmd));
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowOffset"];
     animation.fromValue = [NSValue valueWithCGSize:self.shadowOffset];
@@ -292,6 +310,7 @@
 }
 
 -(void)animateShadowOpacity:(CGFloat)_shadowOpacity {
+    C4Log(@"%@",NSStringFromSelector(_cmd));
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowOpacity"];
     animation.fromValue = @(self.shadowOpacity);
@@ -307,6 +326,7 @@
 }
 
 -(void)animateShadowPath:(CGPathRef)_shadowPath {
+    C4Log(@"%@",NSStringFromSelector(_cmd));
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowPath"];
     animation.fromValue = (id)self.shadowPath;
@@ -322,6 +342,7 @@
 }
 
 -(void)animateShadowRadius:(CGFloat)_shadowRadius {
+    C4Log(@"%@",NSStringFromSelector(_cmd));
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowRadius"];
     animation.fromValue = @(self.shadowRadius);
@@ -337,6 +358,7 @@
 }
 
 -(void)animateZPosition:(CGFloat)_zPosition {
+    C4Log(@"%@",NSStringFromSelector(_cmd));
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"zPosition"];
     animation.fromValue = @(self.zPosition);

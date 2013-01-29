@@ -17,7 +17,7 @@
  In C4, the main role of C4Shape is to provide access to constructing and manipulating the appearance of shapes. Almost all properties of shapes are animatable. The main goal for a C4Shape is to provide interactivity while encapsulating all the methods that act on its underlying shape layer.
 */
 
-@interface C4Shape : C4Control {
+@interface C4Shape : C4Control <UIAppearance> {
 }
 
 #pragma mark Changing a Shape's Path
@@ -355,4 +355,7 @@ The change will happen based on the shape's current animation options, duration 
 @property (readonly, atomic, getter = isQuadCurve) BOOL quadCurve;
 
 @property (readonly, atomic) CGPathRef path;
+@property (readwrite, nonatomic) NSDictionary *style;
+
++(C4Shape *)defaultStyle;
 @end

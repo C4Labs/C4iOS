@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1000506316AF485200310DDA /* C4Sky.png in Resources */ = {isa = PBXBuildFile; fileRef = ED751491151519890076317F /* C4Sky.png */; };
+		105F762116B8558B00610971 /* MyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 105F762016B8558B00610971 /* MyView.m */; };
 		ED008D3A15BF5DE80005E8D3 /* lines.png in Resources */ = {isa = PBXBuildFile; fileRef = ED008D3915BF5DE80005E8D3 /* lines.png */; };
 		ED009F9015091FE300086987 /* C4EAGLLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED009F8F15091FE300086987 /* C4EAGLLayer.m */; };
 		ED009F9415091FFD00086987 /* C4GL.m in Sources */ = {isa = PBXBuildFile; fileRef = ED009F9315091FFD00086987 /* C4GL.m */; };
@@ -73,6 +74,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		105F761F16B8558B00610971 /* MyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyView.h; sourceTree = "<group>"; };
+		105F762016B8558B00610971 /* MyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyView.m; sourceTree = "<group>"; };
 		10E990AC16B09E8700254D30 /* C4VisualObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4VisualObject.h; sourceTree = "<group>"; };
 		ED008D3915BF5DE80005E8D3 /* lines.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lines.png; sourceTree = "<group>"; };
 		ED009F8E15091FE300086987 /* C4EAGLLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4EAGLLayer.h; sourceTree = "<group>"; };
@@ -263,6 +266,8 @@
 			children = (
 				EDF65448150DEF3300194671 /* C4WorkSpace.h */,
 				EDF65449150DEF3300194671 /* C4WorkSpace.m */,
+				105F761F16B8558B00610971 /* MyView.h */,
+				105F762016B8558B00610971 /* MyView.m */,
 				EDF8262B167C179000FE30E4 /* HiddenNav.h */,
 				EDF8262C167C179000FE30E4 /* HiddenNav.m */,
 				EDF8262D167C179000FE30E4 /* HiddenNav.xib */,
@@ -330,10 +335,11 @@
 				ED50C8D514EACA340040D844 /* C4View.m */,
 				ED50C8BE14EAC4920040D844 /* C4Window.h */,
 				ED50C8BF14EAC4920040D844 /* C4Window.m */,
+				ED50C8C314EAC4F70040D844 /* C4CanvasController.h */,
+				ED50C8C414EAC4F70040D844 /* C4CanvasController.m */,
 				ED36D9E9157C91E900C3AEE7 /* Protocols */,
 				EDCE425E1564044000C7356E /* C4Camera.h */,
 				EDCE42601564044000C7356E /* C4CameraController.h */,
-				ED50C8C314EAC4F70040D844 /* C4CanvasController.h */,
 				EDCE42621564044000C7356E /* C4CameraLayer.h */,
 				ED009F9C1509242100086987 /* C4EAGLES1Renderer.h */,
 				ED009F8E15091FE300086987 /* C4EAGLLayer.h */,
@@ -356,7 +362,6 @@
 				EDCE426B1564174000C7356E /* C4ViewController.h */,
 				EDCE425F1564044000C7356E /* C4Camera.m */,
 				EDCE42611564044000C7356E /* C4CameraController.m */,
-				ED50C8C414EAC4F70040D844 /* C4CanvasController.m */,
 				ED983F1015E2A8B600C0AD81 /* C4CameraLayer.m */,
 				ED009F9D1509242100086987 /* C4EAGLES1Renderer.m */,
 				ED009F8F15091FE300086987 /* C4EAGLLayer.m */,
@@ -369,8 +374,8 @@
 				ED50C8CA14EAC5990040D844 /* C4Layer.m */,
 				EDF7734E14F361B00094E656 /* C4Math.m */,
 				ED307698150D400C001D689C /* C4Movie.m */,
-				ED89849714EF1C8700BB7AB0 /* C4Object.m */,
 				ED3076A1150D51F0001D689C /* C4MovieLayer.m */,
+				ED89849714EF1C8700BB7AB0 /* C4Object.m */,
 				EDF65457150E104100194671 /* C4Sample.m */,
 				EDECBF6B14EAE26600D9A446 /* C4Shape.m */,
 				ED89848614EE180400BB7AB0 /* C4ShapeLayer.m */,
@@ -505,6 +510,7 @@
 				ED98723D167C056B00ADFD3F /* HiddenNavView.m in Sources */,
 				ED987241167C0DA100ADFD3F /* OuterShape.m in Sources */,
 				EDF8262E167C179000FE30E4 /* HiddenNav.m in Sources */,
+				105F762116B8558B00610971 /* MyView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

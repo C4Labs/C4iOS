@@ -66,6 +66,12 @@
 
 #pragma mark UIView animatable property overrides
 
+-(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
+    event = event;
+    C4Log(@"%@ %@ %@", NSStringFromSelector(_cmd),self, CGRectContainsPoint(self.layer.frame, point) == YES ? @"YES" : @"NO");
+    return CGRectContainsPoint(self.layer.frame, point);
+}
+
 -(void)setCenter:(CGPoint)center {
     if(self.animationDuration == 0.0f) super.center = center;
     else {
@@ -444,9 +450,22 @@
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [super touchesBegan:touches withEvent:event];
+    if([[self nextResponder] isKindOfClass:[C4WorkSpace class]]) [super touchesBegan:touches withEvent:event];
     [self postNotification:@"touchesBegan"];
     [self touchesBegan];
+}
+
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    if([[self nextResponder] isKindOfClass:[C4WorkSpace class]]) [super touchesMoved:touches withEvent:event];
+    [self postNotification:@"touchesMoved"];
+    [super touchesMoved:touches withEvent:event];
+    [self touchesMoved];
+}
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    if([[self nextResponder] isKindOfClass:[C4WorkSpace class]]) [super touchesEnded:touches withEvent:event];
+    [super touchesEnded:touches withEvent:event];
+    [self touchesEnded];
 }
 
 -(void)touchesBegan {
@@ -457,19 +476,6 @@
 
 -(void)touchesMoved {
 }
-
--(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self postNotification:@"touchesMoved"];
-    [super touchesMoved:touches withEvent:event];
-    [self touchesMoved];
-}
-
--(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self postNotification:@"touchesEnded"];
-    [super touchesEnded:touches withEvent:event];
-    [self touchesEnded];
-}
-
 
 -(void)swipedRight {
 }
@@ -734,4 +740,22 @@
     [self performSelector:NSSelectorFromString(methodName) withObject:object afterDelay:seconds];
 }
 
+//-(NSDictionary *)style {
+//    _style = @{@"borderColor":self.borderColor,
+//    @"":self.animationDuration,
+//    @"":self.animationDelay,
+//    @"":self.animationOptions,
+//    @"":self.appearance,
+//    @"":self.,
+//    @"":self.,
+//    @"":self.,
+//    @"":self.,
+//    @"":self.,
+//    @"":self.,
+//    @"":self.,
+//    @"":self.,
+//    @"":self.,
+//    };
+//    return _style;
+//}
 @end

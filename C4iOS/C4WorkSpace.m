@@ -7,29 +7,48 @@
 #import "C4WorkSpace.h"
 #import <objc/runtime.h>
 
-@implementation C4WorkSpace {
-}
+@implementation C4WorkSpace
 
 -(void)setup {
-    NSArray *classList = @[
-        @"C4Control"
-    ];
+    C4Shape *s = [C4Shape ellipse:CGRectMake(100,100, 50, 50)];
+    [self.canvas addShape:s];
+
+    NSDictionary *style = @{@"lineWidth":@(10.0f),@"strokeStart":@(0.25f),@"strokeEnd":@(0.75f)};
     
-    for(NSString *className in classList) {
-        unsigned int count;
-        Class currentClass = NSClassFromString(className);
-        Method *methods = class_copyMethodList(currentClass, &count);
-        printf("%s\n----\n",[className UTF8String]);
-        // iterate over them and print out the method name
-        for (int i=0; i<count; i++) {
-            Method method = methods[i];
-            SEL selector = method_getName(method);
-            printf("- %s\n", [NSStringFromSelector(selector) UTF8String]);
-        }
-        printf("\n\n");
-        free(methods);
-    }
+    //CONTINUE WORKING ON STYLES
+    
+    s.style = style;
+    C4Log(@"%4.2f",s.lineWidth);
 }
+
+-(void)test {
+    C4Log(@"hi");
+}
+
+-(void)touchesBegan {
+//    C4Log(@"%@ %@",NSStringFromSelector(_cmd),self);
+}
+
+//-(void)setup {
+//    NSArray *classList = @[
+//        @"C4Control"
+//    ];
+//    
+//    for(NSString *className in classList) {
+//        unsigned int count;
+//        Class currentClass = NSClassFromString(className);
+//        Method *methods = class_copyMethodList(currentClass, &count);
+//        printf("%s\n----\n",[className UTF8String]);
+//        // iterate over them and print out the method name
+//        for (int i=0; i<count; i++) {
+//            Method method = methods[i];
+//            SEL selector = method_getName(method);
+//            printf("- %s\n", [NSStringFromSelector(selector) UTF8String]);
+//        }
+//        printf("\n\n");
+//        free(methods);
+//    }
+//}
 
 @end
 

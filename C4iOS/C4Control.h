@@ -280,4 +280,5 @@
 @property (readwrite, nonatomic, weak) UIColor *borderColor;
 
 -(void)addObjects:(NSArray *)array;
+@property (readwrite, nonatomic) NSDictionary *style;
 @end
