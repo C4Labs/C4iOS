@@ -9,27 +9,24 @@
 
 @implementation C4WorkSpace {
     C4Shape *s, *t;
+    C4Image *i;
+    C4Movie *m;
+    C4Label * l1, *l2;
 }
 
 -(void)setup {
-
-    s = [C4Shape ellipse:CGRectMake(100,100, 50, 50)];
-    [self.canvas addShape:s];
+    l1 = [C4Label labelWithText:@"hi" font:[C4Font fontWithName:@"AmericanTypewriter-Bold" size:30]];
+    l2 = [C4Label labelWithText:@"there" font:[C4Font fontWithName:@"Helvetica" size:30]];
+    l1.origin = CGPointMake(30,0);
+    l1.shadowOpacity = 1.0f;
+    l1.shadowOffset = CGSizeMake(2,2);
     
-    t = [C4Shape rect:s.frame];
-    t.origin = CGPointMake(10,10);
-    [self.canvas addShape:t];
-
-    s.shadowOpacity = 0.8f;
-    s.shadowOffset = CGSizeMake(10,10);
-    s.lineWidth = 10.0f;
+    l1.backgroundColor = C4RED;
     
-    NSDictionary *style = @{@"lineWidth":@(10.0f), @"borderWidth":@(2.0f), @"backgroundColor":C4GREY, @"cornerRadius":@(10.0f),@"strokeStart":@(0.25f),@"strokeEnd":@(0.75f)};
-
-    //CONTINUE WORKING ON STYLES
-    
-    s.style = style;
-    C4Log(@"%4.2f",s.lineWidth);
+    i = [C4Image imageNamed:@"C4Sky"];
+    i.origin = CGPointMake(0,50);
+    i.width = 100;
+    [self.canvas addObjects:@[l1,l2, i]];
 }
 
 -(void)test {
@@ -37,9 +34,17 @@
 }
 
 -(void)touchesBegan {
-    t.animationDuration = 1.0f;
-    t.path = s.path;
-    t.style = s.style;
+    l2.style = l1.style;
+    l2.text = @"hi";
+    [l2 sizeToFit];
+    l1.backgroundColor = C4BLUE;
+    i.style = l1.style;
+//    C4Log(@"hi");
+//    t.animationDuration = 1.0f;
+//    t.path = s.path;
+//    t.style = s.style;
+//    m.style = s.style;
+//    i.style = s.style;
 }
 
 //-(void)setup {

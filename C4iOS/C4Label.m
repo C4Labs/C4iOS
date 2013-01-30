@@ -10,6 +10,7 @@
 
 @interface C4Label()
 @property (readwrite, atomic) BOOL shouldAutoreverse;
+@property (readonly, atomic) NSArray *localStylePropertyNames;
 @end
 
 @implementation C4Label
@@ -19,7 +20,7 @@
 @synthesize highlighted = _highlighted;
 @synthesize highlightedTextColor = _highlightedTextColor;
 @synthesize lineBreakMode = _lineBreakMode;
-@synthesize minimumFontSize = _minimumFontSize;
+//@synthesize minimumFontSize = _minimumFontSize;
 @synthesize numberOfLines = _numberOfLines;
 @synthesize textAlignment = _textAlignment;
 @synthesize textColor = _textColor;
@@ -77,6 +78,21 @@
         _label.textColor = C4GREY;
         _label.highlightedTextColor = C4RED;
         _label.backgroundColor = [UIColor clearColor];
+        _label.shadowColor = C4GREY;
+        
+        _localStylePropertyNames = @[
+        @"adjustsFontSizeToFitWidth",
+        @"baselineAdjustment",
+        @"font",
+        @"highlighted",
+        @"highlightedTextColor",
+        @"lineBreakMode",
+        @"numberOfLines",
+        @"textAlignment",
+        @"textShadowColor",
+        @"textShadowOffset"
+        ];
+        
         [self addSubview:(UILabel *)_label];
         [self setup];
     }
@@ -124,6 +140,10 @@
     return self.label.text;
 }
 
+-(UIColor *)textShadowColor {
+    return self.label.shadowColor;
+}
+
 -(void)setTextShadowColor:(UIColor *)shadowColor {
     if(self.animationDelay == 0.0f) self.label.shadowColor = shadowColor;
     else [self performSelector:@selector(_setTextShadowColor:) withObject:shadowColor afterDelay:self.animationDelay];
@@ -146,15 +166,23 @@
     if(self.animationDelay == 0.0f) [self _setEnabled:@(enabled)];
     else [self performSelector:@selector(_setEnabled:) withObject:@(enabled) afterDelay:self.animationDelay];
 }
+
 -(void)_setEnabled:(NSNumber *)enabled {
     [super setEnabled:[enabled boolValue]];//weeeeeeird bug if this isn't included
     self.label.enabled = [enabled boolValue];
+}
+
+-(C4Font *)font {
+    UIFont *ui = self.label.font;
+    C4Font *newFont = [C4Font fontWithName:ui.fontName size:ui.pointSize];
+    return newFont;
 }
 
 -(void)setFont:(C4Font *)font {
     if(self.animationDelay == 0.0f) [self _setFont:font];
     else [self performSelector:@selector(_setFont:) withObject:font afterDelay:self.animationDelay];
 }
+
 -(void)_setFont:(C4Font *)font {
     self.label.font = font.UIFont;
 }
@@ -360,24 +388,55 @@
     self.frame = newFrame;
 }
 
-//-(void)setAnimationOptions:(NSUInteger)animationOptions {
-//    /*
-//     This method needs to be in all C4Control subclasses, not sure why it doesn't inherit properly
-//     
-//     important: we have to intercept the setting of AUTOREVERSE for the case of reversing 1 time
-//     i.e. reversing without having set REPEAT
-//     
-//     UIView animation will flicker if we don't do this...
-//     */
-//    ((id <C4LayerAnimation>)self.layer).animationOptions = _animationOptions;
-//    
-//    if ((animationOptions & AUTOREVERSE) == AUTOREVERSE) {
-//        self.shouldAutoreverse = YES;
-//        animationOptions &= ~AUTOREVERSE;
-//    }
-//    
-//    _animationOptions = animationOptions | BEGINCURRENT;
-//}
-//
+-(NSDictionary *)style {
+    NSDictionary *localStyle = @{
+    @"adjustsFontSizeToFitWidth":@(self.adjustsFontSizeToFitWidth),
+    @"baselineAdjustment":@(self.baselineAdjustment),
+    @"font":self.font,
+    @"highlighted":@(self.highlighted),
+    @"highlightedTextColor":self.highlightedTextColor,
+    @"lineBreakMode":@(self.lineBreakMode),
+    @"numberOfLines":@(self.numberOfLines),
+    @"textAlignment":@(self.textAlignment),
+    @"textShadowColor":self.textShadowColor,
+    @"textShadowOffset":[NSValue valueWithCGSize:self.textShadowOffset]
+    };
+    
+    NSMutableDictionary *localAndSuperStyle = [NSMutableDictionary dictionaryWithDictionary:localStyle];
+    localStyle = nil;
+    
+    [localAndSuperStyle addEntriesFromDictionary:[super style]];
+    return (NSDictionary *)localAndSuperStyle;
+}
+
+-(void)setStyle:(NSDictionary *)style {
+    [super setStyle:style];
+    
+    for(NSString *key in [style allKeys]) {
+        if([_localStylePropertyNames containsObject:key]) {
+            if(key == @"adjustsFontSizeToFitWidth") {
+                self.adjustsFontSizeToFitWidth = [[style valueForKey:key] floatValue];
+            } else if (key == @"baselineAdjustment") {
+                self.baselineAdjustment = (C4BaselineAdjustment)[[style valueForKey:key] integerValue];
+            } else if (key == @"font") {
+                self.font = [style objectForKey:key];
+            } else if (key == @"highlighted") {
+                self.highlighted = [[style valueForKey:key] boolValue];
+            } else if (key == @"highlightedTextColor") {
+                self.highlightedTextColor = [style objectForKey:key];
+            } else if (key == @"lineBreakMode") {
+                self.lineBreakMode = (C4LineBreakMode)[[style valueForKey:key] integerValue];
+            } else if (key == @"numberOfLines") {
+                self.numberOfLines = [[style valueForKey:key] integerValue];
+            } else if (key == @"textAlignment") {
+                self.textAlignment = (C4TextAlignment)[[style valueForKey:key] integerValue];
+            } else if (key == @"textShadowColor") {
+                self.textShadowColor = [style objectForKey:key];
+            } else if (key == @"textShadowOffset") {
+                self.textShadowOffset = [[style valueForKey:key] CGSizeValue];
+            }
+        }
+    }
+}
 
 @end
