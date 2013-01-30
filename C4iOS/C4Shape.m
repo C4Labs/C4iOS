@@ -11,15 +11,13 @@
 @interface C4Shape()
 @property (readonly, nonatomic) BOOL initialized, shouldClose;
 @property (atomic) BOOL isTriangle;
-@property (readonly, atomic) NSArray *localValueProperties;
+@property (readonly, atomic) NSArray *localStylePropertyNames;
 @end
 
 @implementation C4Shape
-@synthesize controlPointA = _controlPointA, controlPointB = _controlPointB, isArc = _isArc, bezierCurve = _bezierCurve, quadCurve = _quadCurve, isLine =_isLine, shapeLayer, pointA = _pointA, pointB = _pointB, wedge = _wedge;
-@synthesize fillColor = _fillColor, fillRule, lineCap, lineDashPattern, lineDashPhase, lineJoin, lineWidth, miterLimit, origin = _origin, strokeColor, strokeEnd, strokeStart;
-@synthesize closed = _closed, shouldClose = _shouldClose, initialized = _initialized, isTriangle = _isTriangle;
+@synthesize pointA = _pointA, pointB = _pointB;
+@synthesize fillColor = _fillColor, lineWidth = _lineWidth, origin = _origin;
 @synthesize layerTransform = _layerTransform;
-@synthesize path;
 
 -(id)init {
     return [self initWithFrame:CGRectZero];
@@ -29,10 +27,16 @@
     self = [super initWithFrame:frame];
     if(self != nil) {
         _initialized = NO;
-        _localValueProperties = @[
-        @"lineWidth",
+        _localStylePropertyNames = @[
+        @"fillColor",
+        @"fillRule",
+        @"lineCap",
+        @"lineDashPattern",
         @"lineDashPhase",
+        @"lineJoin",
+        @"lineWidth",
         @"miterLimit",
+        @"strokeColor",
         @"strokeEnd",
         @"strokeStart"
         ];
@@ -544,6 +548,17 @@
     return self.shapeLayer.path;
 }
 
+
+-(void)setPath:(CGPathRef)newPath {
+    CGRect oldRect = self.frame;
+    if(self.animationDuration == 0.0f) self.shapeLayer.path = newPath;
+    else [self.shapeLayer animatePath:newPath];
+    CGRect pathRect = CGPathGetBoundingBox(newPath);
+    pathRect.origin = CGPointZero;
+    self.bounds = pathRect; //Need this step to sync the appearance of the paths to the frame of the shape
+    self.origin = oldRect.origin;
+}
+
 -(void)setPointA:(CGPoint)pointA {
     C4Assert(self.isLine || self.isBezierCurve || self.isQuadCurve, @"You tried to set the value of pointA for a shape that isn't a line or a curve");
     _pointA = pointA;
@@ -624,31 +639,30 @@
     else [self performSelector:@selector(_setFillColor:) withObject:fillColor afterDelay:self.animationDelay];
 }
 -(void)_setFillColor:(UIColor *)fillColor {
-    _fillColor = fillColor;
-    [self.shapeLayer animateFillColor:_fillColor.CGColor];
+    [self.shapeLayer animateFillColor:(__bridge CGColorRef)fillColor];
 }
 
 -(UIColor *)fillColor {
-    return _fillColor;
+    return (__bridge UIColor *)self.shapeLayer.fillColor;
 }
 
--(void)setFillRule:(NSString *)_fillRule {
-    if(self.animationDelay == 0.0f) [self _setFillRule:_fillRule];
-    else [self performSelector:@selector(_setFillRule:) withObject:_fillRule afterDelay:self.animationDelay];
+-(void)setFillRule:(NSString *)fillRule {
+    if(self.animationDelay == 0.0f) [self _setFillRule:fillRule];
+    else [self performSelector:@selector(_setFillRule:) withObject:fillRule afterDelay:self.animationDelay];
 }
--(void)_setFillRule:(NSString *)_fillRule {
-    self.shapeLayer.fillRule = _fillRule;
+-(void)_setFillRule:(NSString *)fillRule {
+    self.shapeLayer.fillRule = fillRule;
 }
 -(NSString *)fillRule {
     return self.shapeLayer.fillRule;
 }
 
--(void)setLineCap:(NSString *)_lineCap {
-    if(self.animationDelay == 0.0f) [self _setLineCap:_lineCap];
-    else [self performSelector:@selector(_setLineCap:) withObject:_lineCap afterDelay:self.animationDelay];
+-(void)setLineCap:(NSString *)lineCap {
+    if(self.animationDelay == 0.0f) [self _setLineCap:lineCap];
+    else [self performSelector:@selector(_setLineCap:) withObject:lineCap afterDelay:self.animationDelay];
 }
--(void)_setLineCap:(NSString *)_lineCap {
-    self.shapeLayer.lineCap = _lineCap;
+-(void)_setLineCap:(NSString *)lineCap {
+    self.shapeLayer.lineCap = lineCap;
 }
 -(NSString *)lineCap {
     return self.shapeLayer.lineCap;
@@ -661,95 +675,95 @@
     else [self performSelector:@selector(_setLineDashPattern:) withObject:patternArray afterDelay:self.animationDelay];
 }
 
--(void)setLineDashPattern:(NSArray *)_lineDashPattern {
-    if(self.animationDelay == 0.0f) [self _setLineDashPattern:_lineDashPattern];
-    else [self performSelector:@selector(_setLineDashPattern:) withObject:_lineDashPattern afterDelay:self.animationDelay];
+-(void)setLineDashPattern:(NSArray *)lineDashPattern {
+    if(self.animationDelay == 0.0f) [self _setLineDashPattern:lineDashPattern];
+    else [self performSelector:@selector(_setLineDashPattern:) withObject:lineDashPattern afterDelay:self.animationDelay];
 }
 
--(void)_setLineDashPattern:(NSArray *)_lineDashPattern {
-    self.shapeLayer.lineDashPattern = _lineDashPattern;
+-(void)_setLineDashPattern:(NSArray *)lineDashPattern {
+    self.shapeLayer.lineDashPattern = lineDashPattern;
 }
 
 -(NSArray *)lineDashPattern {
     return self.shapeLayer.lineDashPattern;
 }
 
--(void)setLineDashPhase:(CGFloat)_lineDashPhase {
-    if(self.animationDelay == 0.0f) [self _setLineDashPhase:@(_lineDashPhase)];
-    else [self performSelector:@selector(_setLineDashPhase:) withObject:@(_lineDashPhase) afterDelay:self.animationDelay];
+-(void)setLineDashPhase:(CGFloat)lineDashPhase {
+    if(self.animationDelay == 0.0f) [self _setLineDashPhase:@(lineDashPhase)];
+    else [self performSelector:@selector(_setLineDashPhase:) withObject:@(lineDashPhase) afterDelay:self.animationDelay];
 }
 
--(void)_setLineDashPhase:(NSNumber *)_lineDashPhase {
-    [self.shapeLayer animateLineDashPhase:[_lineDashPhase floatValue]];
+-(void)_setLineDashPhase:(NSNumber *)lineDashPhase {
+    [self.shapeLayer animateLineDashPhase:[lineDashPhase floatValue]];
 }
 
 -(CGFloat)lineDashPhase {
     return self.shapeLayer.lineDashPhase;
 }
 
--(void)setLineJoin:(NSString *)_lineJoin {
-    if(self.animationDelay == 0.0f) [self _setLineJoin:_lineJoin];
-    else [self performSelector:@selector(_setLineJoin:) withObject:_lineJoin afterDelay:self.animationDelay];
+-(void)setLineJoin:(NSString *)lineJoin {
+    if(self.animationDelay == 0.0f) [self _setLineJoin:lineJoin];
+    else [self performSelector:@selector(_setLineJoin:) withObject:lineJoin afterDelay:self.animationDelay];
 }
--(void)_setLineJoin:(NSString *)_lineJoin {
-    self.shapeLayer.lineJoin = _lineJoin;
+-(void)_setLineJoin:(NSString *)lineJoin {
+    self.shapeLayer.lineJoin = lineJoin;
 }
 
 -(NSString *)lineJoin {
     return self.shapeLayer.lineJoin;
 }
 
--(void)setLineWidth:(CGFloat)_lineWidth {
-    if(self.animationDelay == 0.0f) [self _setLineWidth:@(_lineWidth)];
-    else [self performSelector:@selector(_setLineWidth:) withObject:@(_lineWidth) afterDelay:self.animationDelay];
+-(void)setLineWidth:(CGFloat)lineWidth {
+    if(self.animationDelay == 0.0f) [self _setLineWidth:@(lineWidth)];
+    else [self performSelector:@selector(_setLineWidth:) withObject:@(lineWidth) afterDelay:self.animationDelay];
 }
--(void)_setLineWidth:(NSNumber *)_lineWidth {
-    lineWidth = [_lineWidth floatValue];
-    [self.shapeLayer animateLineWidth:[_lineWidth floatValue]];
+-(void)_setLineWidth:(NSNumber *)lineWidth {
+    _lineWidth = [lineWidth floatValue];
+    [self.shapeLayer animateLineWidth:[lineWidth floatValue]];
 }
 -(CGFloat)lineWidth {
-    return lineWidth;
+    return _lineWidth;
 }
 
--(void)setMiterLimit:(CGFloat)_miterLimit {
-    if(self.animationDelay == 0.0f) [self _setMiterLimit:@(_miterLimit)];
-    else [self performSelector:@selector(_setMiterLimit:) withObject:@(_miterLimit) afterDelay:self.animationDelay];
+-(void)setMiterLimit:(CGFloat)miterLimit {
+    if(self.animationDelay == 0.0f) [self _setMiterLimit:@(miterLimit)];
+    else [self performSelector:@selector(_setMiterLimit:) withObject:@(miterLimit) afterDelay:self.animationDelay];
 }
--(void)_setMiterLimit:(NSNumber *)_miterLimit {
-    [self.shapeLayer animateMiterLimit:[_miterLimit floatValue]];
+-(void)_setMiterLimit:(NSNumber *)miterLimit {
+    [self.shapeLayer animateMiterLimit:[miterLimit floatValue]];
 }
 -(CGFloat)miterLimit {
     return self.shapeLayer.miterLimit;
 }
 
--(void)setStrokeColor:(UIColor *)_strokeColor {
-    if(self.animationDelay == 0.0f) [self _setStrokeColor:_strokeColor];
-    else [self performSelector:@selector(_setStrokeColor:) withObject:_strokeColor afterDelay:self.animationDelay];
+-(void)setStrokeColor:(UIColor *)strokeColor {
+    if(self.animationDelay == 0.0f) [self _setStrokeColor:strokeColor];
+    else [self performSelector:@selector(_setStrokeColor:) withObject:strokeColor afterDelay:self.animationDelay];
 }
--(void)_setStrokeColor:(UIColor *)_strokeColor {
-    [self.shapeLayer animateStrokeColor:_strokeColor.CGColor];
+-(void)_setStrokeColor:(UIColor *)strokeColor {
+    [self.shapeLayer animateStrokeColor:(__bridge CGColorRef)strokeColor];
 }
 -(UIColor *)strokeColor {
-    return [UIColor colorWithCGColor:self.shapeLayer.strokeColor];
+    return (__bridge UIColor *)self.shapeLayer.strokeColor;
 }
 
--(void)setStrokeEnd:(CGFloat)_strokeEnd {
-    if(self.animationDelay == 0.0f ) [self _setStrokeEnd:@(_strokeEnd)];
-    else [self performSelector:@selector(_setStrokeEnd:) withObject:@(_strokeEnd) afterDelay:self.animationDelay];
+-(void)setStrokeEnd:(CGFloat)strokeEnd {
+    if(self.animationDelay == 0.0f ) [self _setStrokeEnd:@(strokeEnd)];
+    else [self performSelector:@selector(_setStrokeEnd:) withObject:@(strokeEnd) afterDelay:self.animationDelay];
 }
--(void)_setStrokeEnd:(NSNumber *)_strokeEnd {
-    [self.shapeLayer animateStrokeEnd:[_strokeEnd floatValue]];
+-(void)_setStrokeEnd:(NSNumber *)strokeEnd {
+    [self.shapeLayer animateStrokeEnd:[strokeEnd floatValue]];
 }
 -(CGFloat)strokeEnd {
     return self.shapeLayer.strokeEnd;
 }
 
--(void)setStrokeStart:(CGFloat)_strokeStart {
-    if(self.animationDelay == 0.0f) [self _setStrokeStart:@(_strokeStart)];
-    else [self performSelector:@selector(_setStrokeStart:) withObject:@(_strokeStart) afterDelay:self.animationDelay];
+-(void)setStrokeStart:(CGFloat)strokeStart {
+    if(self.animationDelay == 0.0f) [self _setStrokeStart:@(strokeStart)];
+    else [self performSelector:@selector(_setStrokeStart:) withObject:@(strokeStart) afterDelay:self.animationDelay];
 }
--(void)_setStrokeStart:(NSNumber *)_strokeStart {
-    [self.shapeLayer animateStrokeStart:[_strokeStart floatValue]];
+-(void)_setStrokeStart:(NSNumber *)strokeStart {
+    [self.shapeLayer animateStrokeStart:[strokeStart floatValue]];
 }
 -(CGFloat)strokeStart {
     return self.shapeLayer.strokeStart;
@@ -818,35 +832,61 @@
 //    _animationOptions = animationOptions | BEGINCURRENT;
 //}
 
+-(NSDictionary *)style {
+    NSDictionary *localStyle = @{
+    @"fillColor":self.fillColor,
+    @"fillRule":self.fillRule,
+    @"lineCap": self.lineCap,
+    @"lineDashPattern": self.lineDashPattern == nil ? [NSNull null] : self.lineDashPattern,
+    @"lineDashPhase":@(self.lineDashPhase),
+    @"lineJoin":self.lineJoin,
+    @"lineWidth":@(self.lineWidth),
+    @"miterLimit":@(self.miterLimit),
+    @"strokeColor":self.strokeColor,
+    @"strokeEnd":@(self.strokeEnd),
+    @"strokeStart":@(self.strokeStart)
+    };
+    
+    NSMutableDictionary *localAndSuperStyle = [NSMutableDictionary dictionaryWithDictionary:localStyle];
+    localStyle = nil;
+    
+    [localAndSuperStyle addEntriesFromDictionary:[super style]];
+    return (NSDictionary *)localAndSuperStyle;
+}
+
 -(void)setStyle:(NSDictionary *)style {
+    [super setStyle:style];
+    
     for(NSString *key in [style allKeys]) {
-        if([_localValueProperties containsObject:key]) {
-            CGFloat value = [[style objectForKey:key] floatValue];
-            if([key isEqualToString:@"lineWidth"]) {
-                self.lineWidth = value;
-            } else if ([key isEqualToString:@"lineDashPhase"]) {
-                self.lineDashPhase = value;
-            } else if ([key isEqualToString:@"miterLimit"]) {
-                self.miterLimit = value;
-            } else if ([key isEqualToString:@"strokeEnd"]) {
-                self.strokeEnd = value;
-            } else if ([key isEqualToString:@"strokeStart"]) {
-                self.strokeStart = value;
+        if([_localStylePropertyNames containsObject:key]) {
+            if(key == @"fillColor") {
+                self.fillColor = [style objectForKey:key];
+            } else if (key == @"fillRule") {
+                self.fillRule = [style objectForKey:key];
+            } else if (key == @"lineCap") {
+                self.lineCap = [style objectForKey:key];
+            } else if (key == @"lineDashPattern") {
+                if([style objectForKey:key] == [NSNull null])
+                    self.lineDashPattern = nil;
+                else
+                    self.lineDashPattern = [style objectForKey:key];
+            } else if (key == @"lineDashPhase") {
+                self.lineDashPhase = [[style objectForKey:key] floatValue];
+            } else if(key == @"lineJoin") {
+                self.lineJoin = [style valueForKey:key];
+            } else if(key == @"lineWidth") {
+                self.lineWidth = [[style valueForKey:key] floatValue];
+            } else if (key == @"miterLimit") {
+                self.miterLimit = [[style objectForKey:key] floatValue];
+            } else if (key == @"strokeColor") {
+                self.strokeColor = [style objectForKey:key];
+            } else if (key == @"strokeEnd") {
+                self.strokeEnd = [[style objectForKey:key] floatValue];
+            } else if (key == @"strokeStart") {
+                self.strokeStart = [[style objectForKey:key] floatValue];
             }
-        } else {
-            SEL selector = NSSelectorFromString([self convertToSetter:key]);
-            if([self respondsToSelector:selector]) {
-                [self performSelector:selector withObject:[style objectForKey:key] afterDelay:0.0f];
-            };
         }
     }
 }
 
--(NSString *)convertToSetter:(NSString *)methodName {
-    
-    NSString *firstletter = [[methodName substringToIndex:1] capitalizedString];
-    NSString *shortenedName = [methodName substringFromIndex:1];
-    NSString *setterName = [NSString stringWithFormat:@"set%@%@:",firstletter,shortenedName];
-    return setterName;
-}
 @end

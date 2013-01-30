@@ -7,14 +7,25 @@
 #import "C4WorkSpace.h"
 #import <objc/runtime.h>
 
-@implementation C4WorkSpace
+@implementation C4WorkSpace {
+    C4Shape *s, *t;
+}
 
 -(void)setup {
-    C4Shape *s = [C4Shape ellipse:CGRectMake(100,100, 50, 50)];
-    [self.canvas addShape:s];
 
-    NSDictionary *style = @{@"lineWidth":@(10.0f),@"strokeStart":@(0.25f),@"strokeEnd":@(0.75f)};
+    s = [C4Shape ellipse:CGRectMake(100,100, 50, 50)];
+    [self.canvas addShape:s];
     
+    t = [C4Shape rect:s.frame];
+    t.origin = CGPointMake(10,10);
+    [self.canvas addShape:t];
+
+    s.shadowOpacity = 0.8f;
+    s.shadowOffset = CGSizeMake(10,10);
+    s.lineWidth = 10.0f;
+    
+    NSDictionary *style = @{@"lineWidth":@(10.0f), @"borderWidth":@(2.0f), @"backgroundColor":C4GREY, @"cornerRadius":@(10.0f),@"strokeStart":@(0.25f),@"strokeEnd":@(0.75f)};
+
     //CONTINUE WORKING ON STYLES
     
     s.style = style;
@@ -26,7 +37,9 @@
 }
 
 -(void)touchesBegan {
-//    C4Log(@"%@ %@",NSStringFromSelector(_cmd),self);
+    t.animationDuration = 1.0f;
+    t.path = s.path;
+    t.style = s.style;
 }
 
 //-(void)setup {

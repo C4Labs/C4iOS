@@ -232,7 +232,7 @@ The change will happen based on the shape's current animation options, duration 
  
  Default is C4BLUE.
  */
-@property (readwrite, strong, nonatomic) UIColor *fillColor;
+@property (readwrite, strong, atomic) UIColor *fillColor;
 
 /**The color used to stroke the shape’s path. Animatable.
  
@@ -240,7 +240,7 @@ The change will happen based on the shape's current animation options, duration 
  
  Default is nil.
  */
-@property (readwrite, strong, nonatomic) UIColor *strokeColor;
+@property (readwrite, strong, atomic) UIColor *strokeColor;
 
 /**The dash phase applied to the shape’s path when stroked. Animatable.
  
@@ -248,11 +248,11 @@ The change will happen based on the shape's current animation options, duration 
  
  Default is 0.
  */
-@property (readwrite, nonatomic) CGFloat lineDashPhase;
+@property (readwrite, atomic) CGFloat lineDashPhase;
 
 /**Specifies the line width of the shape’s path. Animatable.
  */
-@property (readwrite, nonatomic) CGFloat lineWidth;
+@property (readwrite, atomic) CGFloat lineWidth;
 
 /**The miter limit used when stroking the shape’s path. Animatable.
  
@@ -260,7 +260,7 @@ The change will happen based on the shape's current animation options, duration 
  
  Default is 10.0.
  */
-@property (readwrite, nonatomic) CGFloat miterLimit;
+@property (readwrite, atomic) CGFloat miterLimit;
 
 /**The relative location at which to stop stroking the path. Animatable.
  
@@ -271,7 +271,7 @@ The change will happen based on the shape's current animation options, duration 
  Combined with the strokeStart property, this property defines the subregion of the path to stroke. The value in this property indicates the relative point along the path at which to finish stroking while the strokeStart property defines the starting point. A value of 0.0 represents the beginning of the path while a value of 1.0 represents the end of the path. Values in between are interpreted linearly along the path length.
  
  */
-@property (readwrite, nonatomic) CGFloat strokeEnd;
+@property (readwrite, atomic) CGFloat strokeEnd;
 
 /**The relative location at which to begin stroking the path. Animatable.
  
@@ -279,7 +279,7 @@ The change will happen based on the shape's current animation options, duration 
  
  Combined with the strokeEnd property, this property defines the subregion of the path to stroke. The value in this property indicates the relative point along the path at which to begin stroking while the strokeEnd property defines the end point. A value of 0.0 represents the beginning of the path while a value of 1.0 represents the end of the path. Values in between are interpreted linearly along the path length.
  */
-@property (readwrite, nonatomic) CGFloat strokeStart;
+@property (readwrite, atomic) CGFloat strokeStart;
 
 /**The dash pattern applied to the shape’s path when stroked.
  
@@ -289,13 +289,13 @@ The change will happen based on the shape's current animation options, duration 
  
  Default is nil, a solid line.
  */
-@property (readwrite, strong, nonatomic) NSArray *lineDashPattern;
+@property (readwrite, strong, atomic) NSArray *lineDashPattern;
 
 /**The fill rule used when filling the shape’s path.
  
  The possible values are FILLNORMAL and FILLNONZERO which are equivalent to Cocoa's default winding mode values. See “Winding Rules” in Cocoa Drawing Guide for examples of the two fill rules.
   */
-@property (readwrite, strong, nonatomic) NSString *fillRule;
+@property (readwrite, strong, atomic) NSString *fillRule;
 
 /**Specifies the line cap style for the shape’s path.
  
@@ -305,7 +305,7 @@ The change will happen based on the shape's current animation options, duration 
  
  The default is CAPBUTT.
  */
-@property (readwrite, strong, nonatomic) NSString *lineCap;
+@property (readwrite, strong, atomic) NSString *lineCap;
 
 /**Specifies the line join style for the shape’s path.
  
@@ -313,7 +313,7 @@ The change will happen based on the shape's current animation options, duration 
  
  The default is JOINMITRE.
  */
-@property (readwrite, strong, nonatomic) NSString *lineJoin;
+@property (readwrite, strong, atomic) NSString *lineJoin;
 
 /**Specifies whether or not the shape is a line.
  */
@@ -325,11 +325,11 @@ The change will happen based on the shape's current animation options, duration 
 
 /**Specifies the origin point of a line. Animatable.
  */
-@property (readwrite, nonatomic) CGPoint pointA;
+@property (readwrite, atomic) CGPoint pointA;
 
 /**Specifies the end point of a line. Animatable.
  */
-@property (readwrite, nonatomic) CGPoint pointB;
+@property (readwrite, atomic) CGPoint pointB;
 
 /**Specifies the first control point of a curve, both bezier and quad curves. Animatable.
  */
@@ -349,13 +349,13 @@ The change will happen based on the shape's current animation options, duration 
 
 @property (readonly, atomic, getter = isClosed) BOOL closed;
 
-@property (readonly, nonatomic, getter = isWedge) BOOL wedge;
+@property (readonly, atomic, getter = isWedge) BOOL wedge;
 
 @property (readonly, atomic, getter = isBezierCurve) BOOL bezierCurve;
 @property (readonly, atomic, getter = isQuadCurve) BOOL quadCurve;
 
-@property (readonly, atomic) CGPathRef path;
-@property (readwrite, nonatomic) NSDictionary *style;
+@property (readwrite, atomic) CGPathRef path;
+//@property (readwrite, nonatomic) NSDictionary *style;
 
 +(C4Shape *)defaultStyle;
 @end

@@ -42,7 +42,7 @@
 }
 
 -(void)dealloc {
-    C4Log(@"%@, %@, %@",NSStringFromSelector(_cmd),self,self.delegate);
+//    C4Log(@"%@, %@, %@",NSStringFromSelector(_cmd),self,self.delegate);
     [self removeAllAnimations];
 }
 

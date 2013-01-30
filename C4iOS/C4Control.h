@@ -214,6 +214,8 @@
  */
 @property (readonly, nonatomic) CGFloat height;
 
+
+#pragma mark Style Properties
 /**Specifies the width of the receiver’s border. Animatable.
  
  The border is drawn inset from the receiver’s bounds by borderWidth. It is composited above the receiver’s contents and sublayers and includes the effects of the cornerRadius property. The default is 0.0.

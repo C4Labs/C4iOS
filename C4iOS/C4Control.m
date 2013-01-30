@@ -12,6 +12,7 @@
 @property (readwrite, atomic) BOOL shouldAutoreverse;
 @property (readwrite, atomic, strong) NSString *longPressMethodName;
 @property (readwrite, atomic, strong) NSMutableDictionary *gestureDictionary;
+@property (readonly, atomic) NSArray *stylePropertyNames, *stylePropertyValues;
 @end
 
 @implementation C4Control
@@ -31,6 +32,21 @@
         self.shouldAutoreverse = NO;
         self.longPressMethodName = @"pressedLong";
         self.layer.delegate = self;
+        self.backgroundColor = [UIColor clearColor];
+        
+        _stylePropertyNames = @[
+        @"alpha",
+        @"backgroundColor",
+        @"borderColor",
+        @"borderWidth",
+        @"cornerRadius",
+        @"masksToBounds",
+        @"shadowColor",
+        @"shadowOpacity",
+        @"shadowOffset",
+        @"shadowPath",
+        @"shadowRadius"
+        ];
     }
     return self;
 }
@@ -740,22 +756,54 @@
     [self performSelector:NSSelectorFromString(methodName) withObject:object afterDelay:seconds];
 }
 
-//-(NSDictionary *)style {
-//    _style = @{@"borderColor":self.borderColor,
-//    @"":self.animationDuration,
-//    @"":self.animationDelay,
-//    @"":self.animationOptions,
-//    @"":self.appearance,
-//    @"":self.,
-//    @"":self.,
-//    @"":self.,
-//    @"":self.,
-//    @"":self.,
-//    @"":self.,
-//    @"":self.,
-//    @"":self.,
-//    @"":self.,
-//    };
-//    return _style;
-//}
+-(NSDictionary *)style {
+    NSDictionary *style = @{
+    @"alpha":@(self.alpha),
+    @"backgroundColor":self.backgroundColor,
+    @"borderColor":self.borderColor,
+    @"borderWidth":@(self.borderWidth),
+    @"cornerRadius":@(self.cornerRadius),
+    @"masksToBounds":@(self.masksToBounds),
+    @"shadowColor":self.shadowColor,
+    @"shadowOpacity":@(self.shadowOpacity),
+    @"shadowOffset":[NSValue valueWithCGSize:self.shadowOffset],
+    @"shadowPath": self.shadowPath == nil ? [NSNull null] : (__bridge UIBezierPath *)self.shadowPath,
+    @"shadowRadius":@(self.shadowRadius)
+    };
+    return style;
+}
+
+-(void)setStyle:(NSDictionary *)style {
+    for(NSString *key in [style allKeys]) {
+        if([_stylePropertyNames containsObject:key]) {
+            if([key isEqualToString:@"alpha"]) {
+                self.alpha = [[style valueForKey:key] floatValue];
+            } else if ([key isEqualToString:@"backgroundColor"]) {
+                self.backgroundColor = [style objectForKey:key];
+            } else if ([key isEqualToString:@"borderColor"]) {
+                self.borderColor = [style objectForKey:key];
+            } else if ([key isEqualToString:@"borderWidth"]) {
+                self.borderWidth = [[style valueForKey:key] floatValue];
+            } else if([key isEqualToString:@"cornerRadius"]) {
+                self.cornerRadius = [[style valueForKey:key] floatValue];
+            } else if([key isEqualToString:@"masksToBounds"]) {
+                self.masksToBounds = [[style valueForKey:key] boolValue];
+            } else if([key isEqualToString:@"shadowColor"]) {
+                self.shadowColor = [style objectForKey:key];
+            } else if([key isEqualToString:@"shadowOpacity"]) {
+                self.shadowOpacity = [[style valueForKey:key] floatValue];
+            } else if([key isEqualToString:@"shadowOffset"]) {
+                self.shadowOffset = [[style valueForKey:key] CGSizeValue];
+            } else if([key isEqualToString:@"shadowPath"]) {
+                if([style objectForKey:key] == [NSNull null])
+                    self.shadowPath = nil;
+                else
+                    self.shadowPath = (__bridge CGPathRef)[style objectForKey:key];
+            } else if([key isEqualToString:@"shadowRadius"]) {
+                self.shadowRadius = [[style valueForKey:key] floatValue];
+            }
+        }
+    }
+}
+
 @end
