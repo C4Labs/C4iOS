@@ -595,32 +595,37 @@
 
 #pragma mark New Stuff
 -(UIColor *)colorAt:(CGPoint)point {
-    if(rawData == nil) {
-        [self loadPixelData];
+    if([self pointInside:point withEvent:nil]) {
+        if(rawData == nil) {
+            [self loadPixelData];
+        }
+        NSUInteger byteIndex = (NSUInteger)(bytesPerPixel * point.x + bytesPerRow * point.y);
+        NSInteger r, g, b, a;
+        r = rawData[byteIndex];
+        g = rawData[byteIndex + 1];
+        b = rawData[byteIndex + 2];
+        a = rawData[byteIndex + 3];
+        
+        return [UIColor colorWithRed:RGBToFloat(r) green:RGBToFloat(g) blue:RGBToFloat(b) alpha:RGBToFloat(a)];
+    } else {
+        return [UIColor clearColor];
     }
-    NSUInteger byteIndex = (NSUInteger)(bytesPerPixel * point.x + bytesPerRow * point.y);
-    NSInteger r, g, b, a;
-    r = rawData[byteIndex];
-    g = rawData[byteIndex + 1];
-    b = rawData[byteIndex + 2];
-    a = rawData[byteIndex + 3];
-    
-    
-    
-    return [UIColor colorWithRed:RGBToFloat(r) green:RGBToFloat(g) blue:RGBToFloat(b) alpha:RGBToFloat(a)];
 }
 
 -(C4Vector *)rgbVectorAt:(CGPoint)point {
-    if(self.pixelDataLoaded == NO) {
-        [self loadPixelData];
+    if([self pointInside:point withEvent:nil]) {
+        if(self.pixelDataLoaded == NO) {
+            [self loadPixelData];
+        }
+        NSUInteger byteIndex = (NSUInteger)(bytesPerPixel * point.x + bytesPerRow * point.y);
+        CGFloat r, g, b;
+        r = rawData[byteIndex];
+        g = rawData[byteIndex + 1];
+        b = rawData[byteIndex + 2];
+        return [C4Vector vectorWithX:r Y:g Z:b];
+    } else {
+        return [C4Vector vectorWithX:-1 Y:-1 Z:-1];
     }
-    NSUInteger byteIndex = (NSUInteger)(bytesPerPixel * point.x + bytesPerRow * point.y);
-    CGFloat r, g, b;
-    r = rawData[byteIndex];
-    g = rawData[byteIndex + 1];
-    b = rawData[byteIndex + 2];
-    
-    return [C4Vector vectorWithX:r Y:g Z:b];
 }
 
 @synthesize animatedImageDuration, animatedImage, animatedImages;
