@@ -159,6 +159,7 @@
             _originalMovieRatio = _originalMovieSize.width / _originalMovieSize.height;
             self.player.actionAtItemEnd = AVPlayerActionAtItemEndPause; // currently C4Movie doesn't handle queues
             //            self.player.allowsAirPlayVideo = NO;
+            _constrainsProportions = YES;
         }
         
         _rate = 1.0f;
@@ -418,7 +419,7 @@
     _width = width;
     CGRect newFrame = self.frame;
     newFrame.size.width = width;
-    newFrame.size.height = width/self.originalMovieRatio;
+    if(_constrainsProportions) newFrame.size.height = width/self.originalMovieRatio;
     self.frame = newFrame;
 }
 
@@ -432,7 +433,7 @@
     _height = height;
     CGRect newFrame = self.frame;
     newFrame.size.height = height;
-    newFrame.size.width = height * self.originalMovieRatio;
+    if(_constrainsProportions) newFrame.size.width = height * self.originalMovieRatio;
     self.frame = newFrame;
 }
 

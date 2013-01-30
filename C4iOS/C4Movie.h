@@ -168,5 +168,6 @@
 -(id)initWithURL:(NSURL *)movieURL;
 -(id)initWithURL:(NSURL *)movieURL frame:(CGRect)movieFrame;
 +(C4Movie *)defaultStyle;
+@property (readwrite, atomic) BOOL constrainsProportions;
 
 @end
