@@ -727,4 +727,7 @@
     [self performSelector:NSSelectorFromString(methodName) withObject:object afterDelay:seconds];
 }
 
++(C4View *)defaultStyle {
+    return (C4View *)[C4View appearance];
+}
 @end

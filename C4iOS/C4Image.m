@@ -805,4 +805,8 @@
     newFrame.size = size;
     self.frame = newFrame;
 }
+
++(C4Image *)defaultStyle {
+    return (C4Image *)[C4Image appearance];
+}
 @end

@@ -70,4 +70,6 @@
  Set this property to YES if you want to draw something but aren't animating its contents. If you are not animating and this property is set to NO the rendering call will be made at the specified frame rate (default 60fps) and you'll be wasting a lot of resources.
  */
 @property (atomic) BOOL drawOnce;
++(C4GL *)defaultStyle;
+
 @end

@@ -255,4 +255,6 @@ For more information about how to use windows, see View Programming Guide for iO
 @property (readwrite, nonatomic, weak) UIColor *borderColor;
 
 -(void)addObjects:(NSArray *)array;
++(C4Window *)defaultStyle;
+
 @end

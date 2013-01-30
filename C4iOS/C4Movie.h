@@ -167,4 +167,6 @@
 -(id)initWithYouTubeURL:(NSString *)movieURL frame:(CGRect)movieFrame;
 -(id)initWithURL:(NSURL *)movieURL;
 -(id)initWithURL:(NSURL *)movieURL frame:(CGRect)movieFrame;
++(C4Movie *)defaultStyle;
+
 @end

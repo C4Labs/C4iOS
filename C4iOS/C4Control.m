@@ -806,4 +806,8 @@
     }
 }
 
++(C4Control *)defaultStyle {
+    return (C4Control *)[C4Control appearance];
+}
+
 @end

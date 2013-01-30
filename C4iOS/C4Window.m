@@ -720,4 +720,8 @@
     [self performSelector:NSSelectorFromString(methodName) withObject:object afterDelay:seconds];
 }
 
++(C4Window *)defaultStyle {
+    return (C4Window *)[C4Window appearance];
+}
+
 @end

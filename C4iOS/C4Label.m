@@ -439,4 +439,7 @@
     }
 }
 
++(C4Label *)defaultStyle {
+    return (C4Label *)[C4Label appearance];
+}
 @end

@@ -150,4 +150,7 @@
  Setting this property will actually change the frame of the object.
  */
 @property (readwrite, nonatomic) CGSize size;
+
++(C4Label *)defaultStyle;
+
 @end

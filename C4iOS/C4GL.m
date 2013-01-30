@@ -169,4 +169,8 @@
 //    _animationOptions = animationOptions | BEGINCURRENT;
 //}
 
++(C4GL *)defaultStyle {
+    return (C4GL *)[C4GL appearance];
+}
+
 @end

@@ -272,4 +272,5 @@
 @property (readwrite, nonatomic, weak) UIColor *borderColor;
 
 -(void)addObjects:(NSArray *)array;
++(C4View *)defaultStyle;
 @end

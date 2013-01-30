@@ -98,4 +98,8 @@
 //    _animationOptions = animationOptions | BEGINCURRENT;
 //}
 
++(C4Camera *)defaultStyle {
+    return (C4Camera *)[C4Camera appearance];
+}
+
 @end

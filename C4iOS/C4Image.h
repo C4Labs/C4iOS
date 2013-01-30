@@ -567,4 +567,5 @@
 @property (readwrite, atomic) BOOL constrainsProportions;
 //@property (readwrite, nonatomic) CGFloat animatedImageDuration
 
++(C4Image *)defaultStyle;
 @end

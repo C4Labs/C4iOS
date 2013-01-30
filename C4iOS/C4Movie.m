@@ -491,4 +491,7 @@
     self.player.currentItem.audioMix = self.audioMix;
 }
 
++(C4Movie *)defaultStyle {
+    return (C4Movie *)[C4Movie appearance];
+}
 @end
