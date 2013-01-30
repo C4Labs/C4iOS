@@ -22,24 +22,9 @@
 @property (readwrite, nonatomic) CGImageRef contents;
 @property (readwrite, strong, nonatomic) C4Layer *imageLayer;
 @property (readwrite, strong, atomic) NSTimer *animatedImageTimer;
-//@property (readwrite, atomic) BOOL shouldAutoreverse;
 @end
 
 @implementation C4Image
-@synthesize imageLayer;
-@synthesize contents = _contents;
-@synthesize originalImage = _originalImage;
-@synthesize visibleImage = _visibleImage;
-@synthesize filterContext = _filterContext;
-@synthesize UIImage = _UIImage;
-@synthesize CIImage = _CIImage;
-@synthesize CGImage = _CGImage;
-@synthesize animatedImageTimer;
-@synthesize pixelDataLoaded = _pixelDataLoaded;
-//@synthesize shouldAutoreverse = _shouldAutoreverse;
-//@synthesize animationOptions = _animationOptions;
-@synthesize width = _width, height = _height;
-@synthesize originalRatio = _originalRatio, originalSize = _originalSize, size = _size;
 
 +(C4Image *)imageNamed:(NSString *)name {
     return [[C4Image alloc] initWithImageName:name];
@@ -237,7 +222,6 @@
     C4Assert(_visibleImage != nil, @"The filter you tried to create (%@) returned nil for its outputImage", filter.name);
     [self.imageLayer animateContents:self.CGImage];
 }
-
 
 -(void)colorMatrix:(UIColor *)color bias:(CGFloat)bias {
     CIFilter *filter = [CIFilter filterWithName:@"CIColorMatrix"];
@@ -515,7 +499,7 @@
     [filter setDefaults];
     [filter setValue:_visibleImage forKey:@"inputImage"];
     [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
-    self.visibleImage = [filter outputImage];
+    self.visibleImage = [filter outputImage];  
     C4Assert(_visibleImage != nil, @"The filter you tried to create (%@) returned nil for its outputImage", filter.name);
     [self.imageLayer animateContents:self.CGImage];
 }
@@ -576,21 +560,31 @@
 }
 
 -(void)loadPixelData {
-    NSUInteger width = CGImageGetWidth(self.CGImage);
-    NSUInteger height = CGImageGetHeight(self.CGImage);
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    const char *queueName = [@"pixelDataQueue" UTF8String];
+    dispatch_queue_t pixelDataQueue = dispatch_queue_create(queueName,  DISPATCH_QUEUE_CONCURRENT);
     
-    bytesPerPixel = 4;
-    bytesPerRow = bytesPerPixel * width;
-    free(rawData);
-    rawData = malloc(height * bytesPerRow);
-    
-    NSUInteger bitsPerComponent = 8;
-    CGContextRef context = CGBitmapContextCreate(rawData, width, height, bitsPerComponent, bytesPerRow, colorSpace, kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big);
-    CGColorSpaceRelease(colorSpace);
-    CGContextDrawImage(context, CGRectMake(0, 0, width, height), self.CGImage);
-    CGContextRelease(context);
-    _pixelDataLoaded = YES;
+    dispatch_async(pixelDataQueue, ^{
+        NSUInteger width = CGImageGetWidth(self.CGImage);
+        NSUInteger height = CGImageGetHeight(self.CGImage);
+        CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+        
+        bytesPerPixel = 4;
+        bytesPerRow = bytesPerPixel * width;
+        free(rawData);
+        rawData = malloc(height * bytesPerRow);
+        
+        NSUInteger bitsPerComponent = 8;
+        CGContextRef context = CGBitmapContextCreate(rawData, width, height, bitsPerComponent, bytesPerRow, colorSpace, kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big);
+        CGColorSpaceRelease(colorSpace);
+        CGContextDrawImage(context, CGRectMake(0, 0, width, height), self.CGImage);
+        CGContextRelease(context);
+        _pixelDataLoaded = YES;
+        [self postNotification:@"pixelDataWasLoaded"];
+    });
+}
+
+-(void)test {
+    C4Log(NSStringFromSelector(_cmd));
 }
 
 #pragma mark New Stuff
@@ -757,31 +751,11 @@
     return img;
 }
 
-//-(void)setAnimationOptions:(NSUInteger)animationOptions {
-//    /*
-//     This method needs to be in all C4Control subclasses, not sure why it doesn't inherit properly
-//     
-//     important: we have to intercept the setting of AUTOREVERSE for the case of reversing 1 time
-//     i.e. reversing without having set REPEAT
-//     
-//     UIView animation will flicker if we don't do this...
-//     */
-//    ((id <C4LayerAnimation>)self.layer).animationOptions = _animationOptions;
-//    
-//    if ((animationOptions & AUTOREVERSE) == AUTOREVERSE) {
-//        self.shouldAutoreverse = YES;
-//        animationOptions &= ~AUTOREVERSE;
-//    }
-//    
-//    _animationOptions = animationOptions | BEGINCURRENT;
-//}
-
 -(CGFloat)width {
     return self.frame.size.width;
 }
 
 -(void)setWidth:(CGFloat)width {
-    _width = width;
     CGRect newFrame = self.frame;
     newFrame.size.width = width;
     if(_constrainsProportions) newFrame.size.height = width/self.originalRatio;
@@ -793,7 +767,6 @@
 }
 
 -(void)setHeight:(CGFloat)height {
-    _height = height;
     CGRect newFrame = self.frame;
     newFrame.size.height = height;
     if(_constrainsProportions) newFrame.size.width = height * self.originalRatio;

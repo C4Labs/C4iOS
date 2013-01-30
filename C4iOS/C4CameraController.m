@@ -94,17 +94,17 @@
 }
 
 -(void)captureImage {
-    AVCaptureConnection *av = [self.stillImageOutput connectionWithMediaType:AVMediaTypeVideo];
+    AVCaptureConnection *captureConnection = [self.stillImageOutput connectionWithMediaType:AVMediaTypeVideo];
     typedef void (^AVBufferBlock)(CMSampleBufferRef, NSError *);
-    AVBufferBlock avb = ^(CMSampleBufferRef buf, NSError *err) {
+    AVBufferBlock bufferBlock = ^(CMSampleBufferRef buf, NSError *err) {
         err = [NSError errorWithDomain:@"captureImage error" code:0 userInfo:nil];
         NSData *d = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:buf];
         _capturedImage = nil;
         _capturedImage = [C4Image imageWithData:d];
         [self postNotification:@"imageWasCaptured"];
     };
-    [self.stillImageOutput captureStillImageAsynchronouslyFromConnection:av
-                                                       completionHandler:avb];
+    [self.stillImageOutput captureStillImageAsynchronouslyFromConnection:captureConnection
+                                                       completionHandler:bufferBlock];
 }
 
 #pragma mark -

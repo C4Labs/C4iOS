@@ -8,37 +8,26 @@
 #import <objc/runtime.h>
 
 @implementation C4WorkSpace {
-    C4Shape *s, *t;
     C4Image *i;
-    C4Movie *m;
-    C4Label * l1, *l2;
 }
 
 -(void)setup {
-    l1 = [C4Label labelWithText:@"hi" font:[C4Font fontWithName:@"AmericanTypewriter-Bold" size:30]];
-    l2 = [C4Label labelWithText:@"there" font:[C4Font fontWithName:@"Helvetica" size:30]];
-    l1.origin = CGPointMake(30,0);
-    l1.shadowOpacity = 1.0f;
-    l1.shadowOffset = CGSizeMake(2,2);
-    
-    l1.backgroundColor = C4RED;
-    
     i = [C4Image imageNamed:@"C4Sky"];
     i.origin = CGPointMake(0,50);
-    i.width = 100;
-    [self.canvas addObjects:@[l1,l2, i]];
+    [self.canvas addObjects:@[i]];
 }
 
 -(void)test {
-    C4Log(@"hi");
+    C4Log(@"%@", i.pixelDataLoaded == YES ? @"YES" : @"NO");
 }
 
 -(void)touchesBegan {
-    l2.style = l1.style;
-    l2.text = @"hi";
-    [l2 sizeToFit];
-    l1.backgroundColor = C4BLUE;
-    i.style = l1.style;
+//    i.animationDuration = 1.0f;
+//    i.animationOptions = AUTOREVERSE;
+//    [i colorInvert];
+    [self listenFor:@"pixelDataWasLoaded" fromObject:i andRunMethod:@"test"];
+    [i loadPixelData];
+    
 //    C4Log(@"hi");
 //    t.animationDuration = 1.0f;
 //    t.path = s.path;
