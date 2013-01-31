@@ -34,26 +34,6 @@
     return [[C4Image alloc] initWithImage:image];
 }
 
--(id)initWithImage:(C4Image *)image {
-    self = [super init];
-    if(nil != self) {
-        self.originalImage = image.UIImage;
-        _originalSize = image.size;
-        C4Assert(self.originalImage != nil, @"The C4Image you tried to load (%@) returned nil for its UIImage", image);
-        C4Assert(self.originalImage.CGImage != nil, @"The C4Image you tried to load (%@) returned nil for its CGImage", image);
-        self.visibleImage = [[CIImage alloc] initWithCGImage:self.originalImage.CGImage];
-        C4Assert(self.visibleImage != nil, @"The CIImage you tried to create (%@) returned a nil object", _visibleImage);
-        CGRect scaledImageFrame = self.visibleImage.extent;
-        scaledImageFrame.size = _originalSize;
-        self.frame = scaledImageFrame;
-        _pixelDataLoaded = NO;
-        self.imageLayer.contents = (id)_originalImage.CGImage;
-        _constrainsProportions = YES;
-        [self setup];
-    }
-    return self;
-}
-
 -(id)initWithRawData:(unsigned char*)data width:(NSInteger)width height:(NSInteger)height {
     self = [super init];
     if (self != nil) {
@@ -108,21 +88,43 @@
     self = [super init];
     if(self != nil) {
         name = [name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+
         self.originalImage = [UIImage imageNamed:name];
+
         C4Log(@"%f",self.originalImage.scale);
         _originalSize = self.originalImage.size;
-        
         
         _originalRatio = self.originalSize.width/self.originalSize.height;
         C4Assert(self.originalImage != nil, @"The C4Image you tried to load (%@) returned nil for its UIImage", name);
         C4Assert(self.originalImage.CGImage != nil, @"The C4Image you tried to load (%@) returned nil for its CGImage", name);
-        self.visibleImage = [[CIImage alloc] initWithImage:self.originalImage];
+        self.visibleImage = [CIImage imageWithData:UIImagePNGRepresentation(self.originalImage)];
         C4Assert(self.visibleImage != nil, @"The CIImage you tried to create (%@) returned a nil object", self.visibleImage);
+//        self.originalImage = [[UIImage alloc] initWithCIImage:_visibleImage];
         _pixelDataLoaded = NO;
         CGRect scaledImageFrame = self.CIImage.extent;
         scaledImageFrame.size = _originalSize;
         self.frame = scaledImageFrame;
-        self.imageLayer.contents = (id)_originalImage.CGImage;
+        self.contents = _originalImage.CGImage;
+        _constrainsProportions = YES;
+       [self setup];
+    }
+    return self;
+}
+
+-(id)initWithImage:(C4Image *)image {
+    self = [super init];
+    if(nil != self) {
+        self.originalImage = image.originalImage;
+        _originalSize = image.size;
+        C4Assert(self.originalImage != nil, @"The C4Image you tried to load (%@) returned nil for its UIImage", image);
+        C4Assert(self.originalImage.CGImage != nil, @"The C4Image you tried to load (%@) returned nil for its CGImage", image);
+        self.visibleImage = [[CIImage alloc] initWithCGImage:self.originalImage.CGImage];
+        C4Assert(self.visibleImage != nil, @"The CIImage you tried to create (%@) returned a nil object", _visibleImage);
+        CGRect scaledImageFrame = self.visibleImage.extent;
+        scaledImageFrame.size = _originalSize;
+        self.frame = scaledImageFrame;
+        _pixelDataLoaded = NO;
+        self.contents = _originalImage.CGImage;
         _constrainsProportions = YES;
         [self setup];
     }
@@ -131,7 +133,8 @@
 
 -(UIImage *)UIImage {
     CIContext *c = [CIContext contextWithOptions:nil];
-    UIImage *visibleUIImage = [UIImage imageWithCGImage:[c createCGImage:self.visibleImage fromRect:self.visibleImage.extent]];
+    CGImageRef imageRef = [c createCGImage:self.visibleImage fromRect:self.visibleImage.extent];
+    UIImage *visibleUIImage = [[UIImage alloc ] initWithCGImage:imageRef];
     return visibleUIImage;
 }
 
@@ -140,7 +143,10 @@
 }
 
 -(CGImageRef)CGImage {
-    if (_filterContext == nil) self.filterContext = [CIContext contextWithOptions:nil];
+    CFMutableDictionaryRef options = CFDictionaryCreateMutable(kCFAllocatorDefault, 1, nil, nil);
+    CFDictionaryAddValue(options, (void *)kCIContextWorkingColorSpace, (void *)CGColorSpaceCreateDeviceRGB());
+    if (_filterContext == nil) _filterContext = [CIContext contextWithOptions:(__bridge NSDictionary *)options];
+    
     return [self.filterContext createCGImage:_visibleImage fromRect:_visibleImage.extent];
 }
 
@@ -806,5 +812,9 @@
 
 +(C4Image *)defaultStyle {
     return (C4Image *)[C4Image appearance];
+}
+
+-(C4Image *)copyWithZone:(NSZone *)zone {
+    return [[C4Image allocWithZone:zone] initWithImage:self];
 }
 @end

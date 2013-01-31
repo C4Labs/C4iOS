@@ -121,15 +121,17 @@
  */
 @property(nonatomic,readonly,strong)    NSString *familyName;
 
-/** The font face name. (read-only)
+/** The font face name.
  
  The font name is a name such as HelveticaBold that incorporates the family name and any specific style information for the font. The value in this property is intended for an application’s internal usage only and should not be displayed.
+ 
+ You can find out all the font names available for your device at: www.iosfonts.com
  */
-@property(nonatomic,readonly,strong)    NSString *fontName;
+@property(nonatomic,readwrite,strong)    NSString *fontName;
 
 /** The receiver’s point size, or the effective vertical point size for a font with a nonstandard matrix. (read-only)
  */
-@property(nonatomic,readonly)           CGFloat   pointSize;
+@property(nonatomic,readwrite)           CGFloat   pointSize;
 
 /** The top y-coordinate, offset from the baseline, of the receiver’s longest ascender. (read-only)
  

@@ -24,4 +24,7 @@
 /**The method to override for adding custom drawing calls.
   */
 -(void)render;
+
+-(C4GL1Renderer *)copyWithZone:(NSZone *)zone;
+
 @end

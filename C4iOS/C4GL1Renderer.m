@@ -112,4 +112,9 @@ const GLubyte colors[] = {
     startPoint+=4;
     if(startPoint >= 96) startPoint = 0;
 }
+
+-(C4GL1Renderer *)copyWithZone:(NSZone *)zone {
+    return [[C4GL1Renderer allocWithZone:zone] init];
+}
+
 @end

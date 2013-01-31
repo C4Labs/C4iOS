@@ -568,4 +568,6 @@
 //@property (readwrite, nonatomic) CGFloat animatedImageDuration
 
 +(C4Image *)defaultStyle;
+
+-(C4Image *)copyWithZone:(NSZone *)zone;
 @end

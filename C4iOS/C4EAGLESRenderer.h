@@ -30,4 +30,5 @@
  */
 - (BOOL)resizeFromLayer:(CAEAGLLayer*)layer;
 
+-(id)copyWithZone:(NSZone *)zone;
 @end

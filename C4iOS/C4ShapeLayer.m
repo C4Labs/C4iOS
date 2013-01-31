@@ -51,7 +51,6 @@
 -(void)animatePath:(CGPathRef)_path {
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"path"];
-    C4Log(@"dur:%4.2f",animation.duration);
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
         [CATransaction setCompletionBlock:^ {
             self.path = _path;

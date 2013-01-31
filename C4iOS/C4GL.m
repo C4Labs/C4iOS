@@ -18,12 +18,12 @@
 
 @implementation C4GL
 //@synthesize animationOptions = _animationOptions;
-@synthesize animating, animationFrameInterval;
-@synthesize renderer, displayLinkSupported;
-@synthesize eaglLayer;
-@synthesize displayLink;
-@synthesize animationTimer;
-@synthesize drawOnce;
+//@synthesize animating, animationFrameInterval;
+//@synthesize renderer, displayLinkSupported;
+//@synthesize eaglLayer;
+//@synthesize displayLink;
+//@synthesize animationTimer;
+//@synthesize drawOnce;
 //@synthesize shouldAutoreverse = _shouldAutoreverse;
 
 +(C4GL *)glWithFrame:(CGRect)frame {
@@ -36,14 +36,14 @@
     return [self initWithRenderer:[[C4GL1Renderer alloc] init]];
 }
 
--(id)initWithRenderer:(id <C4EAGLESRenderer>)_renderer {
+-(id)initWithRenderer:(id <C4EAGLESRenderer>)renderer {
     self = [super init];
     if (self != nil) {        
-        eaglLayer = (C4EAGLLayer *)self.layer;
-        eaglLayer.drawableProperties = @{kEAGLDrawablePropertyRetainedBacking: @NO, kEAGLDrawablePropertyColorFormat: kEAGLColorFormatRGBA8};
+        _eaglLayer = (C4EAGLLayer *)self.layer;
+        _eaglLayer.drawableProperties = @{kEAGLDrawablePropertyRetainedBacking: @NO, kEAGLDrawablePropertyColorFormat: kEAGLColorFormatRGBA8};
 
-		if (nil == renderer) {
-			renderer = _renderer;
+		if (nil == _renderer) {
+			_renderer = renderer;
 			if (nil == renderer) {
 				return nil;
 			}
@@ -51,16 +51,16 @@
         
         self.backgroundColor = [UIColor clearColor];
         
-		animating = NO;
-		displayLinkSupported = NO;
-		animationFrameInterval = 1;
-		displayLink = nil;
-		animationTimer = nil;
+		_animating = NO;
+		_displayLinkSupported = NO;
+		_animationFrameInterval = 1;
+		_displayLink = nil;
+		_animationTimer = nil;
 		
 		CGFloat minimumSystemVersion = 3.1f;
         CGFloat currentSystemVersion = [[[UIDevice currentDevice] systemVersion] floatValue];
 		if (currentSystemVersion >= minimumSystemVersion) {
-			displayLinkSupported = YES;
+			_displayLinkSupported = YES;
         }
         self.masksToBounds = NO;
         [self setup];
@@ -73,7 +73,7 @@
 }
 
 -(void)render {
-    [renderer render];
+    [_renderer render];
     if (YES == self.drawOnce) {
         [self stopAnimation];
         self.drawOnce = NO;
@@ -81,13 +81,13 @@
 }
 
 - (void) layoutSubviews {
-	[renderer resizeFromLayer:(C4EAGLLayer*)self.layer];
+	[_renderer resizeFromLayer:(C4EAGLLayer*)self.layer];
     [self render];
 }
 
 - (void) setAnimationFrameInterval:(NSInteger)frameInterval {
 	if (frameInterval >= 1) {
-	animationFrameInterval = frameInterval;
+	_animationFrameInterval = frameInterval;
 		if (self.isAnimating) {
 			[self stopAnimation];
 			[self startAnimation];
@@ -100,19 +100,19 @@
 		if (self.isDisplayLinkSupported) {
 			self.displayLink = [NSClassFromString(@"CADisplayLink") displayLinkWithTarget:self 
                                                                             selector:@selector(render)];
-			[self.displayLink setFrameInterval:animationFrameInterval];
+			[self.displayLink setFrameInterval:_animationFrameInterval];
 			[self.displayLink addToRunLoop:[NSRunLoop currentRunLoop] 
                               forMode:NSDefaultRunLoopMode];
 		} else {
             NSTimeInterval sixtyFramesPerSecond = (NSTimeInterval)(1.0 / 60.0);
-            NSTimeInterval actualFramesPerSecond = sixtyFramesPerSecond * animationFrameInterval;
+            NSTimeInterval actualFramesPerSecond = sixtyFramesPerSecond * _animationFrameInterval;
 			self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:actualFramesPerSecond 
                                                               target:self 
                                                             selector:@selector(render) 
                                                             userInfo:nil 
                                                              repeats:TRUE];
         }
-		animating = YES;
+		_animating = YES;
 	}
 }
 
@@ -125,18 +125,18 @@
 			[self.animationTimer invalidate];
 			self.animationTimer = nil;
 		}
-		animating = NO;
+		_animating = NO;
 	}
 }
 
--(void)setRenderer:(id<C4EAGLESRenderer>)_renderer {
+-(void)setRenderer:(id<C4EAGLESRenderer>)renderer {
     BOOL wasAnimating = NO;
     if(self.isAnimating) {
         wasAnimating = YES;
         [self stopAnimation];
     }
     
-    renderer = _renderer;
+    _renderer = renderer;
     
     if(wasAnimating) [self startAnimation];
 }
@@ -171,6 +171,13 @@
 
 +(C4GL *)defaultStyle {
     return (C4GL *)[C4GL appearance];
+}
+
+-(C4GL *)copyWithZone:(NSZone *)zone {
+    C4GL *newGL = [[C4GL allocWithZone:zone]
+                   initWithRenderer:[(C4GL1Renderer *)self.renderer copy]];
+    newGL.frame = self.frame;
+    return newGL;
 }
 
 @end

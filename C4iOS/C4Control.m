@@ -238,6 +238,7 @@
 }
 
 -(void)setZPosition:(CGFloat)zPosition {
+    if(self.animationDuration == 0.0f) self.layer.zPosition = zPosition;
     [(id <C4LayerAnimation>)self.layer animateZPosition:zPosition];
 }
 
@@ -323,7 +324,7 @@
 }
 
 -(void)setAnimationDuration:(CGFloat)duration {
-    if (duration <= 0.0f) duration = 0.001f;
+    if (duration <= 0.0f) duration = 0.0001f;
     _animationDuration = duration;
     ((id <C4LayerAnimation>)self.layer).animationDuration = duration;
 }
@@ -739,11 +740,6 @@
 }
 
 #pragma mark Basic Methods
--(id)copyWithZone:(NSZone *)zone {
-    zone = zone;
-    return self;
-}
-
 +(Class)layerClass {
     return [C4Layer class];
 }
@@ -810,4 +806,9 @@
     return (C4Control *)[C4Control appearance];
 }
 
+-(C4Control *)copyWithZone:(NSZone *)zone {
+    C4Control *control = [[C4Control allocWithZone:zone] initWithFrame:self.frame];
+    control.style = self.style;
+    return control;
+}
 @end

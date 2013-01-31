@@ -77,8 +77,16 @@
     return _UIFont.fontName;
 }
 
+-(void)setFontName:(NSString *)fontName {
+    _UIFont = [UIFont fontWithName:fontName size:self.pointSize];
+}
+
 -(CGFloat)pointSize {
     return _UIFont.pointSize;
+}
+
+-(void)setPointSize:(CGFloat)pointSize {
+    _UIFont = [UIFont fontWithName:self.fontName size:pointSize];
 }
 
 -(CGFloat)ascender {
@@ -107,6 +115,10 @@
 
 -(CTFontRef)CTFont {
     return CTFontCreateWithName((__bridge CFStringRef)self.fontName, self.pointSize, nil);
+}
+
+-(C4Font *)copyWithZone:(NSZone *)zone {
+    return [[C4Font allocWithZone:zone] initWithName:self.fontName size:self.pointSize];
 }
 
 @end

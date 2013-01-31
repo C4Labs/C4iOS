@@ -59,4 +59,7 @@
 /** The EAGLContext into which the renderer should draw.
  */
 @property (readwrite, atomic, strong) EAGLContext *eaglContext;
+
+-(C4EAGLES1Renderer *)copyWithZone:(NSZone *)zone;
+
 @end

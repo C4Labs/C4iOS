@@ -71,5 +71,5 @@
  */
 @property (atomic) BOOL drawOnce;
 +(C4GL *)defaultStyle;
-
+-(C4GL *)copyWithZone:(NSZone *)zone;
 @end
