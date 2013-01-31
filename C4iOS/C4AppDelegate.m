@@ -38,16 +38,36 @@
     /* don't ever do the following !
      self.canvasController.view = self.window;
      */
-    
+        
     [self.window makeKeyAndVisible];
     
     //strangely, if the following call to set the background color isn't made, then the view doesn't receive touch events...
-    self.workspace.view.backgroundColor = [UIColor whiteColor]; 
+    self.workspace.view.backgroundColor = [UIColor whiteColor];
+
 //    [(AVAudioSession*)[AVAudioSession sharedInstance] setDelegate:self.workspace];
     [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategorySoloAmbient error: nil];
+    [self setDefaultStyles];
     [self.workspace setup];
     mainView = (C4View *)self.workspace.view;
     //    
     return YES;
 }
+
+-(void)setDefaultStyles {
+    [C4Shape defaultStyle].animationOptions = DEFAULT;
+    [C4Shape defaultStyle].fillColor = C4GREY;
+    [C4Shape defaultStyle].fillRule = FILLNORMAL;
+    [C4Shape defaultStyle].lineCap = CAPBUTT;
+    [C4Shape defaultStyle].lineDashPattern = nil;
+    [C4Shape defaultStyle].lineDashPhase = 0.0f;
+    [C4Shape defaultStyle].lineJoin = JOINMITER;
+    [C4Shape defaultStyle].lineWidth = 5.0f;
+    [C4Shape defaultStyle].miterLimit = 5.0f;
+    [C4Shape defaultStyle].repeatCount = 0;
+    [C4Shape defaultStyle].strokeColor = C4BLUE;
+    [C4Shape defaultStyle].shadowOpacity = 0.0f;
+    [C4Shape defaultStyle].strokeEnd = 1.0f;
+    [C4Shape defaultStyle].strokeStart = 0.0f;
+}
+
 @end

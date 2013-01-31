@@ -325,7 +325,7 @@ The change will happen based on the shape's current animation options, duration 
 
 /**Specifies the origin point of a line. Animatable.
  */
-@property (readwrite, atomic) CGPoint pointA;
+@property (readwrite, nonatomic) CGPoint pointA;
 
 /**Specifies the end point of a line. Animatable.
  */

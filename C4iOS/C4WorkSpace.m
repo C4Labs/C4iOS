@@ -8,24 +8,34 @@
 #import <objc/runtime.h>
 
 @implementation C4WorkSpace {
-    C4Image *i;
+    C4Shape *s1, *s2;
+    int state;
 }
 
 -(void)setup {
-    i = [C4Image imageNamed:@"test"];
-    i.center = self.canvas.center;
-    [self.canvas addImage:i];
-}
-
--(void)test {
+    s1 = [C4Shape rect:CGRectMake(100, 100, 200, 200)];
+    s1.lineWidth = 10.0f;
+    [self.canvas addShape:s1];    
 }
 
 -(void)touchesBegan {
+    switch (state) {
+        case 0:
+            s2 = [s1 copy];
+            break;
+        case 1:
+            s1.origin = CGPointMake(300,100);
+            break;
+        case 2:
+            [self.canvas addShape:s2];
+            break;
+    }
+    state++;
+}
+
 //    i.animationDuration = 1.0f;
 //    i.animationOptions = AUTOREVERSE;
 //    [i colorInvert];
-    [self listenFor:@"pixelDataWasLoaded" fromObject:i andRunMethod:@"test"];
-    [i loadPixelData];
     
 //    C4Log(@"hi");
 //    t.animationDuration = 1.0f;
@@ -33,7 +43,7 @@
 //    t.style = s.style;
 //    m.style = s.style;
 //    i.style = s.style;
-}
+
 
 //-(void)setup {
 //    NSArray *classList = @[

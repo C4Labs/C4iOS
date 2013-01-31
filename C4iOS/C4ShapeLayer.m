@@ -21,11 +21,11 @@
     self = [super init];
     if(self != nil) {
         self.name = @"shapeLayer";
-        self.strokeColor = (__bridge CGColorRef)(C4RED.CGColor);
-        self.fillColor = (__bridge CGColorRef)(C4BLUE.CGColor);
-        self.lineWidth = 5.0f;
-        self.repeatCount = 0;
-        self.autoreverses = NO;
+//        self.strokeColor = (__bridge CGColorRef)(C4RED.CGColor);
+//        self.fillColor = (__bridge CGColorRef)(C4BLUE.CGColor);
+//        self.lineWidth = 5.0f;
+//        self.repeatCount = 0;
+//        self.autoreverses = NO;
         _currentAnimationEasing = [[NSString alloc] init];
         _currentAnimationEasing = (NSString *)kCAMediaTimingFunctionEaseInEaseOut;
         _allowsInteraction = NO;
@@ -124,14 +124,14 @@
     [CATransaction commit];
 }
 
--(void)animateStrokeColor:(CGColorRef)_strokeColor {
+-(void)animateStrokeColor:(CGColorRef)strokeColor {
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"strokeColor"];
     animation.fromValue = (id)self.strokeColor;
-    animation.toValue = (__bridge id)_strokeColor;
+    animation.toValue = (__bridge id)strokeColor;
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
         [CATransaction setCompletionBlock:^ {
-            self.strokeColor = _strokeColor;
+            self.strokeColor = strokeColor;
             [self removeAnimationForKey:@"strokeColor"];
         }];
     }

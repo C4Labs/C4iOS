@@ -15,9 +15,7 @@
 @end
 
 @implementation C4Shape
-@synthesize pointA = _pointA, pointB = _pointB;
-@synthesize fillColor = _fillColor, lineWidth = _lineWidth, origin = _origin;
-@synthesize layerTransform = _layerTransform;
+@synthesize pointA = _pointA, pointB = _pointB; //need to synth because we have implemented both the setter and getter
 
 -(id)init {
     return [self initWithFrame:CGRectZero];
@@ -390,7 +388,7 @@
     
     CGRect lineRect = CGRectMakeFromPointArray(points, 2);
     if(_initialized == YES) self.frame = lineRect;
-    _origin = self.frame.origin;
+    self.origin = self.frame.origin;
     CGPoint translation = lineRect.origin;
     translation.x *= -1;
     translation.y *= -1;
@@ -456,7 +454,7 @@
     if(self.animationDuration == 0.0f) self.shapeLayer.path = newPath;
     else [self.shapeLayer animatePath:newPath];
     CGRect pathRect = CGPathGetBoundingBox(newPath);
-    _origin = self.frame.origin;
+//    self.origin = self.frame.origin;
     self.bounds = pathRect; //Need this step to sync the appearance of the paths to the frame of the shape
     CGPathRelease(newPath);
     _initialized = YES;
@@ -510,7 +508,7 @@
     else [self.shapeLayer animatePath:newPath];
     CGRect pathRect = CGPathGetBoundingBox(newPath);
     self.bounds = pathRect; //Need this step to sync the appearance of the paths to the frame of the shape
-    _origin = self.frame.origin;
+//    _origin = self.frame.origin;
     CGPathRelease(newPath);
     _initialized = YES;
 }
@@ -529,16 +527,6 @@
         CGPathRelease(newPath);
         _closed = YES;
     }
-}
-
--(CGPoint)pointA {
-    C4Assert(self.isLine || self.isBezierCurve || self.isQuadCurve, @"You tried to access pointA from a shape that isn't a line or a curve");
-    return _pointA;
-}
-
--(CGPoint)pointB {
-    C4Assert(self.isLine || self.isBezierCurve || self.isQuadCurve, @"You tried to access pointA from a shape that isn't a line or a curve");
-    return _pointB;
 }
 
 -(void)test {
@@ -572,6 +560,11 @@
     }
 }
 
+-(CGPoint)pointA {
+    C4Assert(self.isLine || self.isBezierCurve || self.isQuadCurve, @"You tried to access pointA from a shape that isn't a line or a curve");
+    return _pointA;
+}
+
 -(void)setPointB:(CGPoint)pointB {
     C4Assert(self.isLine || self.isBezierCurve || self.isQuadCurve, @"You tried to set the value of pointB for a shape that isn't a line or a curve");
     _pointB = pointB;
@@ -583,6 +576,11 @@
     } else {
         [self quadCurve:points controlPoint:_controlPointA];
     }
+}
+
+-(CGPoint)pointB {
+    C4Assert(self.isLine || self.isBezierCurve || self.isQuadCurve, @"You tried to access pointA from a shape that isn't a line or a curve");
+    return _pointB;
 }
 
 -(void)setControlPointA:(CGPoint)controlPointA {
@@ -626,24 +624,16 @@
     [super setCenter:center];
 }
 
--(void)setOrigin:(CGPoint)origin {
-    _origin = origin;
-    CGPoint difference = self.origin;
-    difference.x += self.frame.size.width/2.0f;
-    difference.y += self.frame.size.height/2.0f;
-    self.center = difference;
-}
-
 -(void)setFillColor:(UIColor *)fillColor {
     if(self.animationDuration == 0.0f) [self _setFillColor:fillColor];
     else [self performSelector:@selector(_setFillColor:) withObject:fillColor afterDelay:self.animationDelay];
 }
 -(void)_setFillColor:(UIColor *)fillColor {
-    [self.shapeLayer animateFillColor:(__bridge CGColorRef)fillColor];
+    [self.shapeLayer animateFillColor:fillColor.CGColor];
 }
 
 -(UIColor *)fillColor {
-    return (__bridge UIColor *)self.shapeLayer.fillColor;
+    return [UIColor colorWithCGColor:self.shapeLayer.fillColor];
 }
 
 -(void)setFillRule:(NSString *)fillRule {
@@ -718,11 +708,10 @@
     else [self performSelector:@selector(_setLineWidth:) withObject:@(lineWidth) afterDelay:self.animationDelay];
 }
 -(void)_setLineWidth:(NSNumber *)lineWidth {
-    _lineWidth = [lineWidth floatValue];
     [self.shapeLayer animateLineWidth:[lineWidth floatValue]];
 }
 -(CGFloat)lineWidth {
-    return _lineWidth;
+    return self.shapeLayer.lineWidth;
 }
 
 -(void)setMiterLimit:(CGFloat)miterLimit {
@@ -741,10 +730,10 @@
     else [self performSelector:@selector(_setStrokeColor:) withObject:strokeColor afterDelay:self.animationDelay];
 }
 -(void)_setStrokeColor:(UIColor *)strokeColor {
-    [self.shapeLayer animateStrokeColor:(__bridge CGColorRef)strokeColor];
+    [self.shapeLayer animateStrokeColor:strokeColor.CGColor];
 }
 -(UIColor *)strokeColor {
-    return (__bridge UIColor *)self.shapeLayer.strokeColor;
+    return [UIColor colorWithCGColor:self.shapeLayer.strokeColor];
 }
 
 -(void)setStrokeEnd:(CGFloat)strokeEnd {
@@ -800,16 +789,6 @@
     return [C4ShapeLayer class];
 }
 
--(id)copyWithZone:(NSZone *)zone {
-    zone = zone;
-    return self;
-}
-
--(void)setLayerTransform:(CATransform3D)layerTransform {
-    _layerTransform = layerTransform;
-    [(C4Layer *)self.layer animateLayerTransform:_layerTransform];
-}
-
 +(C4Shape *)defaultStyle {
     return (C4Shape *)[C4Shape appearance];
 }
@@ -851,12 +830,12 @@
     localStyle = nil;
     
     [localAndSuperStyle addEntriesFromDictionary:[super style]];
+
     return (NSDictionary *)localAndSuperStyle;
 }
 
 -(void)setStyle:(NSDictionary *)style {
     [super setStyle:style];
-    
     for(NSString *key in [style allKeys]) {
         if([_localStylePropertyNames containsObject:key]) {
             if(key == @"fillColor") {
@@ -889,4 +868,26 @@
     }
 }
 
+//-(void)path:(CGPathRef)newPath {
+//    if(self.animationDelay == 0.0f) [self _path:(__bridge UIBezierPath *)newPath];
+//    else [self performSelector:@selector(_path:) withObject:(__bridge UIBezierPath *)newPath afterDelay:self.animationDelay];
+//}
+//
+//-(void)_path:(UIBezierPath *)newPath {
+//    CGPathRef newCGPath = (__bridge CGPathRef)newPath;
+//    [self willChangeShape];    
+//    if(self.animationDuration == 0.0f) self.shapeLayer.path = newCGPath;
+//    else [self.shapeLayer animatePath:newCGPath];
+//    CGRect pathRect = CGPathGetBoundingBox(newCGPath);
+//    self.bounds = pathRect; //Need this step to sync the appearance of the paths to the frame of the shape
+//    CGPathRelease(newCGPath);
+//    _initialized = YES;
+//}
+
+-(id)copyWithZone:(NSZone *)zone {
+    C4Shape *newCopy = [[C4Shape allocWithZone:zone] initWithFrame:self.frame];
+    newCopy.path = self.path;
+    newCopy.style = self.style;
+    return newCopy;
+}
 @end
