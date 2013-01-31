@@ -812,6 +812,7 @@
 //}
 
 -(NSDictionary *)style {
+    self.strokeColor = [UIColor clearColor];
     NSDictionary *localStyle = @{
     @"fillColor":self.fillColor,
     @"fillRule":self.fillRule,

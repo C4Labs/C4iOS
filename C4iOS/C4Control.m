@@ -324,7 +324,7 @@
 }
 
 -(void)setAnimationDuration:(CGFloat)duration {
-    if (duration <= 0.0f) duration = 0.0001f;
+//    if (duration <= 0.0f) duration = 0.0001f;
     _animationDuration = duration;
     ((id <C4LayerAnimation>)self.layer).animationDuration = duration;
 }
