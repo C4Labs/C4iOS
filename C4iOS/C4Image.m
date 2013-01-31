@@ -38,11 +38,14 @@
     self = [super init];
     if(nil != self) {
         self.originalImage = image.UIImage;
+        _originalSize = image.size;
         C4Assert(self.originalImage != nil, @"The C4Image you tried to load (%@) returned nil for its UIImage", image);
         C4Assert(self.originalImage.CGImage != nil, @"The C4Image you tried to load (%@) returned nil for its CGImage", image);
         self.visibleImage = [[CIImage alloc] initWithCGImage:self.originalImage.CGImage];
         C4Assert(self.visibleImage != nil, @"The CIImage you tried to create (%@) returned a nil object", _visibleImage);
-        self.frame = self.visibleImage.extent;
+        CGRect scaledImageFrame = self.visibleImage.extent;
+        scaledImageFrame.size = _originalSize;
+        self.frame = scaledImageFrame;
         _pixelDataLoaded = NO;
         self.imageLayer.contents = (id)_originalImage.CGImage;
         _constrainsProportions = YES;
@@ -68,6 +71,7 @@
         self.visibleImage = [[CIImage alloc] initWithCGImage:image];
         C4Assert(self.visibleImage != nil, @"The CIImage you tried to create (%@) returned a nil object", _visibleImage);
         self.frame = self.visibleImage.extent;
+        _originalSize = self.frame.size;
         _pixelDataLoaded = NO;
         self.imageLayer.contents = (__bridge id)image;
         _constrainsProportions = YES;
@@ -83,12 +87,15 @@
     self = [super init];
     if (self != nil) {
         self.originalImage = [UIImage imageWithCGImage:image];
+        _originalSize = self.originalImage.size;
 //        _visibleImage = [CIImage imageWithCGImage:image];
         C4Assert(self.originalImage != nil, @"The C4Image you tried to load (%@) returned nil for its UIImage", image);
         C4Assert(self.originalImage.CGImage != nil, @"The C4Image you tried to load (%@) returned nil for its CGImage", image);
         self.visibleImage = [[CIImage alloc] initWithCGImage:image];
         C4Assert(self.visibleImage != nil, @"The CIImage you tried to create (%@) returned a nil object", _visibleImage);
-        self.frame = self.visibleImage.extent;
+        CGRect scaledImageFrame = _visibleImage.extent;
+        scaledImageFrame.size = _originalSize;
+        self.frame = scaledImageFrame;
         _pixelDataLoaded = NO;
         self.imageLayer.contents = (__bridge id)image;
         _constrainsProportions = YES;
@@ -102,14 +109,19 @@
     if(self != nil) {
         name = [name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         self.originalImage = [UIImage imageNamed:name];
+        C4Log(@"%f",self.originalImage.scale);
         _originalSize = self.originalImage.size;
+        
+        
         _originalRatio = self.originalSize.width/self.originalSize.height;
         C4Assert(self.originalImage != nil, @"The C4Image you tried to load (%@) returned nil for its UIImage", name);
         C4Assert(self.originalImage.CGImage != nil, @"The C4Image you tried to load (%@) returned nil for its CGImage", name);
         self.visibleImage = [[CIImage alloc] initWithImage:self.originalImage];
         C4Assert(self.visibleImage != nil, @"The CIImage you tried to create (%@) returned a nil object", self.visibleImage);
         _pixelDataLoaded = NO;
-        self.frame = self.CIImage.extent;
+        CGRect scaledImageFrame = self.CIImage.extent;
+        scaledImageFrame.size = _originalSize;
+        self.frame = scaledImageFrame;
         self.imageLayer.contents = (id)_originalImage.CGImage;
         _constrainsProportions = YES;
         [self setup];
@@ -135,12 +147,12 @@
 -(void)setImage:(C4Image *)image {
     CGPoint oldOrigin = self.frame.origin;
     self.originalImage = image.UIImage;
+    _originalSize = image.size;
     C4Assert(_originalImage != nil, @"The C4Image you tried to load (%@) returned nil for its UIImage", image);
     self.visibleImage = image.CIImage;
     C4Assert(_visibleImage != nil, @"The C4Image you tried to load (%@) returned nil for its CIImage", image);
-    CGRect newFrame = _visibleImage.extent;
-    newFrame.origin = oldOrigin;
-    self.frame = newFrame;
+    CGRect scaledImageFrame = {(CGPoint)oldOrigin,(CGSize)_originalSize};
+    self.frame = scaledImageFrame;
     [self.imageLayer animateContents:self.CGImage];
 }
 
@@ -643,11 +655,16 @@
         
         UIImage *image = [UIImage imageNamed:imageNames[0]];
         self.originalImage = image;
+        _originalSize = self.originalImage.size;
         C4Assert(_originalImage != nil, @"The C4Image you tried to load (%@) returned nil for its UIImage", imageNames[0]);
         C4Assert(_originalImage.CGImage != nil, @"The C4Image you tried to load (%@) returned nil for its CGImage", imageNames[0]);
         _visibleImage = [[CIImage alloc] initWithCGImage:_originalImage.CGImage];
         C4Assert(_visibleImage != nil, @"The CIImage you tried to create (%@) returned a nil object", _visibleImage);
-        self.frame = _visibleImage.extent;
+        
+        CGRect scaledImageFrame = _visibleImage.extent;
+        scaledImageFrame.size = _originalSize;
+        self.frame = scaledImageFrame;
+        
         currentAnimatedImage = 0;
         self.imageLayer.contents = (__bridge id)CFArrayGetValueAtIndex(self.animatedImages,currentAnimatedImage);
     }
@@ -683,11 +700,14 @@
         UIImage *img = [UIImage imageWithData:imageData];
         img = [self fixOrientationFromCamera:img];
         self.originalImage = img;
+        _originalSize = img.size;
         C4Assert(_originalImage != nil, @"The UIImage you tried to create returned %@ for from the NSData you provided", _originalImage);
         C4Assert(_originalImage.CGImage != nil, @"The UIImage you tried to create returned %@ for it's CGImage", _originalImage.CGImage);
         _visibleImage = [[CIImage alloc] initWithCGImage:_originalImage.CGImage];
         C4Assert(_visibleImage != nil, @"The CIImage you tried to create returned a %@ object", _visibleImage);
-        self.frame = _visibleImage.extent;
+        CGRect scaledImageFrame = _visibleImage.extent;
+        scaledImageFrame.size = _originalSize;
+        self.frame = scaledImageFrame;
         self.imageLayer.contents = (id)_originalImage.CGImage;
     }
     return self;

@@ -12,13 +12,12 @@
 }
 
 -(void)setup {
-    i = [C4Image imageNamed:@"C4Sky"];
-    i.origin = CGPointMake(0,50);
-    [self.canvas addObjects:@[i]];
+    i = [C4Image imageNamed:@"test"];
+    i.center = self.canvas.center;
+    [self.canvas addImage:i];
 }
 
 -(void)test {
-    C4Log(@"%@", i.pixelDataLoaded == YES ? @"YES" : @"NO");
 }
 
 -(void)touchesBegan {
