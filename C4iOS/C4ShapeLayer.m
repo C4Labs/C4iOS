@@ -21,10 +21,10 @@
     self = [super init];
     if(self != nil) {
         self.name = @"shapeLayer";
-//        self.strokeColor = (__bridge CGColorRef)(C4RED.CGColor);
-//        self.fillColor = (__bridge CGColorRef)(C4BLUE.CGColor);
-//        self.lineWidth = 5.0f;
-//        self.repeatCount = 0;
+//        self.strokeColor = [C4Shape defaultStyle].strokeColor.CGColor;
+//        self.fillColor = [C4Shape defaultStyle].fillColor.CGColor;
+//        self.lineWidth = [C4Shape defaultStyle].lineWidth;
+//        self.repeatCount = [C4Shape defaultStyle].repeatCount;
 //        self.autoreverses = NO;
         _currentAnimationEasing = [[NSString alloc] init];
         _currentAnimationEasing = (NSString *)kCAMediaTimingFunctionEaseInEaseOut;

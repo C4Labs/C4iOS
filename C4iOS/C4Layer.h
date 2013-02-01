@@ -33,4 +33,5 @@
  Defaults to 0.
  */
 @property (readwrite, nonatomic) CGFloat perspectiveDistance;
+@property (readwrite, nonatomic) CGFloat rotationAngle, rotationAngleX, rotationAngleY;
 @end

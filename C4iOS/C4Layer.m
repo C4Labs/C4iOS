@@ -9,7 +9,6 @@
 #import "C4Layer.h"
 
 @interface C4Layer ()
-@property (readwrite, nonatomic) CGFloat rotationAngle, rotationAngleX, rotationAngleY;
 @end
 
 @implementation C4Layer

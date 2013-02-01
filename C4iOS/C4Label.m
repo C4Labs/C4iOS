@@ -9,25 +9,25 @@
 #import "C4Label.h"
 
 @interface C4Label()
-@property (readwrite, atomic) BOOL shouldAutoreverse;
+//@property (readwrite, atomic) BOOL shouldAutoreverse;
 @property (readonly, atomic) NSArray *localStylePropertyNames;
 @end
 
 @implementation C4Label
-@synthesize adjustsFontSizeToFitWidth = _adjustsFontSizeToFitWidth;
-@synthesize baselineAdjustment = _baselineAdjustment;
-@synthesize font = _font;
-@synthesize highlighted = _highlighted;
-@synthesize highlightedTextColor = _highlightedTextColor;
-@synthesize lineBreakMode = _lineBreakMode;
+//@synthesize adjustsFontSizeToFitWidth = _adjustsFontSizeToFitWidth;
+//@synthesize baselineAdjustment = _baselineAdjustment;
+//@synthesize font = _font;
+//@synthesize highlighted = _highlighted;
+//@synthesize highlightedTextColor = _highlightedTextColor;
+//@synthesize lineBreakMode = _lineBreakMode;
 //@synthesize minimumFontSize = _minimumFontSize;
-@synthesize numberOfLines = _numberOfLines;
-@synthesize textAlignment = _textAlignment;
-@synthesize textColor = _textColor;
+//@synthesize numberOfLines = _numberOfLines;
+//@synthesize textAlignment = _textAlignment;
+//@synthesize textColor = _textColor;
 @synthesize textShadowColor = _textShadowColor;
-@synthesize textShadowOffset = _textShadowOffset;
-@synthesize text = _text;
-@synthesize label = _label;
+//@synthesize textShadowOffset = _textShadowOffset;
+//@synthesize text = _text;
+//@synthesize label = _label;
 @synthesize width = _width, height = _height;
 //@synthesize animationOptions = _animationOptions;
 //@synthesize shouldAutoreverse = _shouldAutoreverse;

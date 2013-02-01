@@ -54,6 +54,8 @@
 }
 
 -(void)setDefaultStyles {
+    [C4Shape defaultStyle].animationDuration = 0;
+    [C4Shape defaultStyle].animationDelay = 0;
     [C4Shape defaultStyle].animationOptions = DEFAULT;
     [C4Shape defaultStyle].fillColor = C4GREY;
     [C4Shape defaultStyle].fillRule = FILLNORMAL;
