@@ -6,6 +6,8 @@
 //  Copyright (c) 2011 mediart. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 #ifndef C4iOSDevelopment_C4Defines_h
 #define C4iOSDevelopment_C4Defines_h
 
@@ -131,6 +133,48 @@ typedef enum C4YouTubeSize : NSUInteger{
     YT1080
 } C4YouTubeSize;
 
+typedef enum C4ControlEvents : NSUInteger {
+    TOUCHDOWN           = 1 <<  0,      // on all touch downs
+    TOUCHDOWNREPEAT     = 1 <<  1,      // on multiple touchdowns (tap count > 1)
+    TOUCHDOWNDRAGINSIDE     = 1 <<  2,
+    TOUCHDOWNDRAGOUTSIDE    = 1 <<  3,
+    TOUCHDOWNDRAGENTER      = 1 <<  4,
+    TOUCHDOWNDRAGEXIT       = 1 <<  5,
+    TOUCHUPINSIDE       = 1 <<  6,
+    TOUCHUPOUTSIDE      = 1 <<  7,
+    TOUCHCANCEL         = 1 <<  8,
+    
+    VALUECHANGED        = 1 << 12,     // sliders, etc.
+    
+    EDITINGDIDBEGIN     = 1 << 16,     // UITextField
+    EDITINGCHANGED      = 1 << 17,
+    EDITINGDIDEND       = 1 << 18,
+    EDITINGDIDENDONEXIT = 1 << 19,     // 'return key' ending editing
+    
+    ALLTOUCHEVENTS      = 0x00000FFF,  // for touch events
+    ALLEDITINGEVENTS    = 0x000F0000,  // for UITextField
+} C4ControlEvents;
+
+typedef enum C4ControlState : NSUInteger {
+    NORMAL       = UIControlStateNormal,
+    HIGHLIGHTED  = 1 << 0,
+    DISABLED     = 1 << 1,
+    SELECTED     = 1 << 2
+} C4ControlState;
+
+typedef enum C4ControlContentHorizontalAlignment : NSUInteger {
+    HORIZONTALALIGNCENTER = 0,
+    HORIZONTALALIGNLEFT    = 1,
+    HORIZONTALALIGNRIGHT = 2,
+    HORIZONTALALIGNFILL   = 3,
+} C4ControlContentHorizontalAlignment;
+
+typedef enum C4ControlVerticalAlignment : NSUInteger {
+    VERTICALALIGNCENTER = 0,
+    VERTICALALIGNLEFT    = 1,
+    VERTICALALIGNRIGHT = 2,
+    VERTICALALIGNFILL   = 3,
+} C4ControlContentVerticalAlignment;
 
 /* `fillRule' values. */
 

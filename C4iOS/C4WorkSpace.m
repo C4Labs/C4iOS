@@ -1,35 +1,30 @@
 //
 //  C4WorkSpace.m
-//  Examples
 //
-//  Created by Greg Debicki.
+//  Created by Travis Kirton.
 //
 
 #import "C4WorkSpace.h"
 
 @implementation C4WorkSpace {
-    C4Shape *s1, *s2;
-    int state;
+    C4Slider *s;
+    UISlider *u;
 }
 
 -(void)setup {
-    s1 = [C4Shape rect:CGRectMake(100, 100, 100, 100)];
-    [self.canvas addShape:s1];
+    s = [[C4Slider alloc] initWithFrame:CGRectMake(100, 100, 400, 44)];
+    s.thumbImage = [C4Image imageNamed:@"pyramid"];
+    s.minimumTrackTintColor = C4RED;
+    [self.canvas addSubview:s];
+    [s runMethod:@"action:" target:self forEvent:VALUECHANGED];
 }
 
 -(void)touchesBegan {
-    switch (state) {
-        case 0:
-            s2 = [s1 copy];
-            break;
-        case 1:
-            s1.center = self.canvas.center;
-            break;
-        case 2:
-            [self.canvas addShape:s2];
-            break;
-    }
-    state++;
+    s.animationDuration = 1.0f;
+}
+
+-(void)action:(id)sender {
+    C4Log(@"%@",sender);
 }
 
 @end

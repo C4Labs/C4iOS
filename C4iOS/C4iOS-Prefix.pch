@@ -48,6 +48,7 @@
 #import "C4Sample.h"
 #import "C4EAGLES1Renderer.h"
 #import "C4View.h"
+#import "C4Slider.h"
 
 #import "C4ViewController.h"
 #import "C4Camera.h"

@@ -19,4 +19,5 @@
  */
 
 @interface C4WorkSpace : C4CanvasController
+-(void)action:(id)sender;
 @end
