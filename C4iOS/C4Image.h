@@ -567,8 +567,11 @@
 @property (readwrite, atomic) BOOL constrainsProportions;
 //@property (readwrite, nonatomic) CGFloat animatedImageDuration
 
+@property (readonly, atomic) CGImageRef filteredImage;
 +(C4Image *)defaultStyle;
 
 -(C4Image *)copyWithZone:(NSZone *)zone;
 -(id)initWithUIImage:(UIImage *)image;
+-(void)showOriginalImage;
+-(void)showFilteredImage;
 @end

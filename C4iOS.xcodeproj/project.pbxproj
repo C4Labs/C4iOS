@@ -37,6 +37,7 @@
 		ED50C8D214EAC92F0040D844 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED50C8D114EAC92F0040D844 /* QuartzCore.framework */; };
 		ED50C8D614EACA340040D844 /* C4View.m in Sources */ = {isa = PBXBuildFile; fileRef = ED50C8D514EACA340040D844 /* C4View.m */; };
 		ED5FB05115B38894002987EA /* C4AssertionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5FB05015B38894002987EA /* C4AssertionHandler.m */; };
+		ED79D05516C0BB1500ACB161 /* UIImage+InitWithCIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = ED79D05416C0BB1500ACB161 /* UIImage+InitWithCIImage.m */; };
 		ED7C0C0F15C88B9F009107A6 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = ED7C0C0215C88B9F009107A6 /* iTunesArtwork.png */; };
 		ED7C0C1215C88B9F009107A6 /* C4_AppStoreIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = ED7C0C0515C88B9F009107A6 /* C4_AppStoreIcon.png */; };
 		ED7C0C1315C88B9F009107A6 /* C4_AppStoreIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED7C0C0615C88B9F009107A6 /* C4_AppStoreIcon@2x.png */; };
@@ -134,6 +135,8 @@
 		ED5FB04F15B38894002987EA /* C4AssertionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4AssertionHandler.h; sourceTree = "<group>"; };
 		ED5FB05015B38894002987EA /* C4AssertionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4AssertionHandler.m; sourceTree = "<group>"; };
 		ED7513AA15150FB60076317F /* inception.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = inception.mov; sourceTree = "<group>"; };
+		ED79D05316C0BB1500ACB161 /* UIImage+InitWithCIImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+InitWithCIImage.h"; sourceTree = "<group>"; };
+		ED79D05416C0BB1500ACB161 /* UIImage+InitWithCIImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+InitWithCIImage.m"; sourceTree = "<group>"; };
 		ED7C0C0215C88B9F009107A6 /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
 		ED7C0C0515C88B9F009107A6 /* C4_AppStoreIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = C4_AppStoreIcon.png; sourceTree = "<group>"; };
 		ED7C0C0615C88B9F009107A6 /* C4_AppStoreIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "C4_AppStoreIcon@2x.png"; sourceTree = "<group>"; };
@@ -275,6 +278,8 @@
 			children = (
 				EDF65448150DEF3300194671 /* C4WorkSpace.h */,
 				EDF65449150DEF3300194671 /* C4WorkSpace.m */,
+				ED36D9EA157C935400C3AEE7 /* C4Image.h */,
+				ED36D9EB157C935400C3AEE7 /* C4Image.m */,
 				ED8D2EC616BC4D9C009E1D1E /* C4Slider.h */,
 				ED8D2EC716BC4D9C009E1D1E /* C4Slider.m */,
 				105F761F16B8558B00610971 /* MyView.h */,
@@ -342,6 +347,8 @@
 			children = (
 				EDAFFAEE14F7602F00CA356A /* C4Control.h */,
 				EDAFFAEF14F7602F00CA356A /* C4Control.m */,
+				ED79D05316C0BB1500ACB161 /* UIImage+InitWithCIImage.h */,
+				ED79D05416C0BB1500ACB161 /* UIImage+InitWithCIImage.m */,
 				ED50C8D414EACA340040D844 /* C4View.h */,
 				ED50C8D514EACA340040D844 /* C4View.m */,
 				ED50C8BE14EAC4920040D844 /* C4Window.h */,
@@ -358,7 +365,6 @@
 				ED50C8CC14EAC61C0040D844 /* C4Foundation.h */,
 				ED009F9215091FFD00086987 /* C4GL.h */,
 				ED009FA61509545000086987 /* C4GL1Renderer.h */,
-				ED36D9EA157C935400C3AEE7 /* C4Image.h */,
 				EDA7014714FC496300A0D77D /* C4Label.h */,
 				ED50C8C914EAC5990040D844 /* C4Layer.h */,
 				EDF7734D14F361B00094E656 /* C4Math.h */,
@@ -380,7 +386,6 @@
 				ED50C8CD14EAC61D0040D844 /* C4Foundation.m */,
 				ED009F9315091FFD00086987 /* C4GL.m */,
 				ED009FA71509545000086987 /* C4GL1Renderer.m */,
-				ED36D9EB157C935400C3AEE7 /* C4Image.m */,
 				EDA7014814FC496300A0D77D /* C4Label.m */,
 				ED50C8CA14EAC5990040D844 /* C4Layer.m */,
 				EDF7734E14F361B00094E656 /* C4Math.m */,
@@ -529,6 +534,7 @@
 				EDF8262E167C179000FE30E4 /* HiddenNav.m in Sources */,
 				105F762116B8558B00610971 /* MyView.m in Sources */,
 				ED8D2EC816BC4D9C009E1D1E /* C4Slider.m in Sources */,
+				ED79D05516C0BB1500ACB161 /* UIImage+InitWithCIImage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

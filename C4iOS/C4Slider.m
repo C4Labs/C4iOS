@@ -60,7 +60,7 @@
         ];
 
         self.style = [C4Control defaultStyle].style;
-        NSDictionary *defaultStyle = [C4Slider defaultStyle].style;
+//        NSDictionary *defaultStyle = [C4Slider defaultStyle].style;
         self.style = [C4Slider defaultStyle].style;
         C4Log(@"?%@", self.thumbImage == nil ? @"YES" : @"NO");
 
