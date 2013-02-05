@@ -531,7 +531,7 @@
  
  The duration for each image is consistent, for example a 2-second animation consisting of 10 frames will display each image for 0.2 seconds. 
  */
-@property (readwrite, atomic) CGFloat animatedImageDuration;
+@property (readwrite, nonatomic) CGFloat animatedImageDuration;
 
 /**Specifies the original ratio (width / height) of the image.
  */

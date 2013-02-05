@@ -579,8 +579,6 @@
     return [C4Vector vectorWithX:-1 Y:-1 Z:-1];
 }
 
-@synthesize animatedImageDuration, animatedImage, animatedImages;
-
 +(C4Image *)animatedImageWithNames:(NSArray *)imageNames {
     C4Image *animImg = [[C4Image alloc] initAnimatedImageWithNames:imageNames];
     return animImg;
@@ -589,31 +587,34 @@
 -(id)initAnimatedImageWithNames:(NSArray *)imageNames {
     self = [super init];
     if(nil != self) {
-        //        self.animatedImageDuration = 2.0f;
-        self.animatedImages = CFArrayCreateMutable(kCFAllocatorDefault, 0, nil);
+        _animatedImages = CFArrayCreateMutable(kCFAllocatorDefault, 0, nil);
         for(int i = 0; i < [imageNames count]; i++) {
             NSString *name = imageNames[i];
             name = [name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
             UIImage *img = [UIImage imageNamed:name];
             CFArrayAppendValue(self.animatedImages,img.CGImage);
+            img = nil; name = nil;
         }
         
-        UIImage *image = [UIImage imageNamed:imageNames[0]];
-        self.originalImage = image;
-        _originalSize = self.originalImage.size;
-        C4Assert(_originalImage != nil, @"The C4Image you tried to load (%@) returned nil for its UIImage", imageNames[0]);
-        C4Assert(_originalImage.CGImage != nil, @"The C4Image you tried to load (%@) returned nil for its CGImage", imageNames[0]);
-        _visibleImage = [CIImage imageWithCGImage:_originalImage.CGImage];
-        C4Assert(_visibleImage != nil, @"The CIImage you tried to create (%@) returned a nil object", _visibleImage);
-        
-        CGRect scaledImageFrame = _visibleImage.extent;
-        scaledImageFrame.size = _originalSize;
-        self.frame = scaledImageFrame;
-        
+        _originalImage = [UIImage imageNamed:imageNames[0]];
+        [self setProperties];
+        _constrainsProportions = YES;
+        _filteredImage = self.contents;
+
         currentAnimatedImage = 0;
         self.imageLayer.contents = (__bridge id)CFArrayGetValueAtIndex(self.animatedImages,currentAnimatedImage);
     }
     return  self;
+}
+
+-(void)setAnimatedImageDuration:(CGFloat)animatedImageDuration {
+    BOOL continuePlaying = NO;
+    if(self.animatedImageTimer.isValid) {
+        [self stop];
+        continuePlaying = YES;
+    }
+    _animatedImageDuration = animatedImageDuration;
+    if(continuePlaying == YES) [self play];
 }
 
 -(void)play {
@@ -633,6 +634,8 @@
     if(currentAnimatedImage >= CFArrayGetCount(self.animatedImages)) currentAnimatedImage = 0;
     self.imageLayer.contents = (__bridge id)CFArrayGetValueAtIndex(self.animatedImages,currentAnimatedImage);
 }
+
+#pragma mark Camera Stuff
 
 +(C4Image *)imageWithData:(NSData *)imageData {
     return [[C4Image alloc] initWithData:imageData];
