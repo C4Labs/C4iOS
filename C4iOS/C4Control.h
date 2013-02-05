@@ -284,4 +284,5 @@
 -(void)addObjects:(NSArray *)array;
 @property (readwrite, nonatomic) NSDictionary *style;
 +(C4Control *)defaultStyle;
+
 @end

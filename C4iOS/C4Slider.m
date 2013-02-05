@@ -47,7 +47,6 @@
         @"maxTrackImageSelected"
         @"thumbTintColor",
         ];
-        
 
         _controlStylePropertyNames = @[
         @"alpha",
@@ -928,7 +927,7 @@
     
     for(NSString *key in [style allKeys]) {
         if([_controlStylePropertyNames containsObject:key]) {
-            if(key ==@"alpha") {
+            if(key == @"alpha") {
                 self.alpha = [[style valueForKey:key] floatValue];
             } else if (key == @"backgroundColor") {
                 self.backgroundColor = [style objectForKey:key];

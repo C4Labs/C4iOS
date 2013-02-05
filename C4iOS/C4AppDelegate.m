@@ -56,23 +56,6 @@
 +(void)initialize {
     //set these before everything else.
     
-    [C4Shape defaultStyle].animationDuration = 0;
-    [C4Shape defaultStyle].animationDelay = 0;
-    [C4Shape defaultStyle].animationOptions = DEFAULT;
-    [C4Shape defaultStyle].fillColor = C4GREY;
-    [C4Shape defaultStyle].fillRule = FILLNORMAL;
-    [C4Shape defaultStyle].lineCap = CAPBUTT;
-    [C4Shape defaultStyle].lineDashPattern = nil;
-    [C4Shape defaultStyle].lineDashPhase = 0.0f;
-    [C4Shape defaultStyle].lineJoin = JOINMITER;
-    [C4Shape defaultStyle].lineWidth = 5.0f;
-    [C4Shape defaultStyle].miterLimit = 5.0f;
-    [C4Shape defaultStyle].repeatCount = 0;
-    [C4Shape defaultStyle].strokeColor = C4BLUE;
-    [C4Shape defaultStyle].shadowOpacity = 0.0f;
-    [C4Shape defaultStyle].strokeEnd = 1.0f;
-    [C4Shape defaultStyle].strokeStart = 0.0f;
-    
     [C4Control defaultStyle].alpha = 1.0f;
     [C4Control defaultStyle].animationDuration = 0.0f;
     [C4Control defaultStyle].animationDelay = 0.0f;
@@ -82,12 +65,37 @@
     [C4Control defaultStyle].layer.delegate = self;
     [C4Control defaultStyle].shadowOpacity = 0.0f;
     [C4Control defaultStyle].shadowOffset = CGSizeZero;
-    [C4Control defaultStyle].repeatCount = 0;
-
+    [C4Control defaultStyle].repeatCount = 0;    
+    
+    NSDictionary *basicStyle = @{
+    @"alpha":@([C4Control defaultStyle].alpha),
+    @"animationDuration":@([C4Control defaultStyle].animationDuration),
+    @"animationDelay":@([C4Control defaultStyle].animationDelay),
+    @"animationOptions":@([C4Control defaultStyle].animationOptions),
+    @"backgroundColor":[C4Control defaultStyle].backgroundColor,
+    @"cornerRadius":@([C4Control defaultStyle].cornerRadius),
+    @"shadowOpacity":@([C4Control defaultStyle].shadowOpacity),
+    @"shadowOffset":[NSValue valueWithCGSize:[C4Control defaultStyle].shadowOffset],
+    @"repeatCount":@([C4Control defaultStyle].repeatCount)
+    };
+    
+    [C4Slider defaultStyle].style = basicStyle;
     [C4Slider defaultStyle].minimumTrackTintColor = C4RED;
     [C4Slider defaultStyle].maximumTrackTintColor = C4GREY;
     [C4Slider defaultStyle].thumbTintColor = C4BLUE;
-    [C4Slider defaultStyle].style = [C4Control defaultStyle].style;
+
+    [C4Shape defaultStyle].style = basicStyle;
+    [C4Shape defaultStyle].fillColor = C4GREY;
+    [C4Shape defaultStyle].fillRule = FILLNORMAL;
+    [C4Shape defaultStyle].lineCap = CAPBUTT;
+    [C4Shape defaultStyle].lineDashPattern = nil;
+    [C4Shape defaultStyle].lineDashPhase = 0.0f;
+    [C4Shape defaultStyle].lineJoin = JOINMITER;
+    [C4Shape defaultStyle].lineWidth = 5.0f;
+    [C4Shape defaultStyle].miterLimit = 5.0f;
+    [C4Shape defaultStyle].strokeColor = C4BLUE;
+    [C4Shape defaultStyle].strokeEnd = 1.0f;
+    [C4Shape defaultStyle].strokeStart = 0.0f;
 }
 
 @end
