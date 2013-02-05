@@ -36,6 +36,10 @@
     return [[C4Image alloc] initWithImage:image];
 }
 
++(C4Image *)imageWithUIImage:(UIImage *)image {
+    return [[C4Image alloc] initWithUIImage:image];
+}
+
 -(id)initWithRawData:(unsigned char*)data width:(NSInteger)width height:(NSInteger)height {
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     NSUInteger bitsPerComponent = 8;
@@ -59,6 +63,7 @@
 }
 
 -(id)initWithUIImage:(UIImage *)image {
+    if(image == nil || image == (UIImage *)[NSNull null]) return nil;
     self = [super init];
     if(self != nil) {
         _originalImage = image;
@@ -90,7 +95,9 @@
 }
 
 -(UIImage *)UIImage {
-    return [UIImage imageWithCGImage:self.contents];
+    CGImageRef cg = self.contents;
+    UIImage *image = [UIImage imageWithCGImage:cg scale:CGImageGetWidth(cg)/self.width orientation:self.originalImage.imageOrientation ];
+    return image;
 }
 
 -(CIImage *)CIImage {

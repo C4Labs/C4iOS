@@ -25,7 +25,7 @@
     self = [super initWithFrame:frame];
     if(self != nil) {
         //these need to be self.anim... etc., rather than _anim = because the setters are overridden
-        self.style = [C4Control defaultStyle].style;
+//        self.style = [C4Control defaultStyle].style;
         self.longPressMethodName = @"pressedLong";
         self.shouldAutoreverse = NO;
 
@@ -42,6 +42,8 @@
         @"shadowPath",
         @"shadowRadius"
         ];
+        self.style = [C4Control defaultStyle].style;
+        C4Log(@"%@,%@",self,NSStringFromSelector(_cmd));
     }
     return self;
 }

@@ -258,11 +258,12 @@
 -(void)addObjects:(NSArray *)array;
 @property (readwrite, nonatomic) NSDictionary *style;
 +(C4Slider *)defaultStyle;
-
++(C4Slider *)slider:(CGRect)rect;
 @property (readwrite, nonatomic, strong) C4Image *minValueImage, *maxValueImage;
 @property (readwrite, nonatomic, strong) C4Image *thumbImage, *thumbImageHighlighted, *thumbImageDisabled, *thumbImageSelected;
 @property (readwrite, nonatomic, strong) C4Image *minTrackImage, *minTrackImageHighlighted, *minTrackImageDisabled, *minTrackImageSelected;
 @property (readwrite, nonatomic, strong) C4Image *maxTrackImage, *maxTrackImageHighlighted, *maxTrackImageDisabled, *maxTrackImageSelected;
+@property (readonly, nonatomic) BOOL usesThumbImage, usesMaxTrackImage, usesMinTrackImage;
 
 
 -(void)runMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event;

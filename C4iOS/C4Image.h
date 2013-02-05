@@ -574,4 +574,6 @@
 -(id)initWithUIImage:(UIImage *)image;
 -(void)showOriginalImage;
 -(void)showFilteredImage;
+
++(C4Image *)imageWithUIImage:(UIImage *)image;
 @end
