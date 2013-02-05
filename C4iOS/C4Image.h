@@ -570,4 +570,5 @@
 +(C4Image *)defaultStyle;
 
 -(C4Image *)copyWithZone:(NSZone *)zone;
+-(id)initWithUIImage:(UIImage *)image;
 @end

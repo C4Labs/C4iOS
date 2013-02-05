@@ -84,17 +84,45 @@
     [C4Control defaultStyle].shadowOffset = CGSizeZero;
     [C4Control defaultStyle].repeatCount = 0;
     
-    [C4Slider defaultStyle].minimumTrackTintColor = C4GREY;
-    [C4Slider defaultStyle].maximumTrackTintColor = C4GREY;
-    [C4Slider defaultStyle].thumbTintColor = C4BLUE;
-    [C4Slider defaultStyle].minTrackImage = nil;
-    [C4Slider defaultStyle].minTrackImageDisabled = nil;
-    [C4Slider defaultStyle].minTrackImageHighlighted = nil;
-    [C4Slider defaultStyle].minTrackImageSelected = nil;
-    [C4Slider defaultStyle].maxTrackImage = nil;
-    [C4Slider defaultStyle].maxTrackImageDisabled = nil;
-    [C4Slider defaultStyle].maxTrackImageHighlighted = nil;
-    [C4Slider defaultStyle].maxTrackImageSelected = nil;
+    C4Image *sliderThumbImage = [C4Image imageNamed:@"pyramid"];
+    NSDictionary *sliderStyle = @{
+    @"minimumTrackTintColor": C4RED,
+    @"maximumTrackTintColor": C4GREY,
+    @"minValueImage": [NSNull null],
+    @"maxValueImage": [NSNull null],
+    @"thumbImage": sliderThumbImage,
+    @"thumbImageHighlighted": sliderThumbImage,
+    @"thumbImageDisabled": sliderThumbImage,
+    @"thumbImageSelected": sliderThumbImage,
+    @"minTrackImage": [NSNull null],
+    @"minTrackImageHighlighted": [NSNull null],
+    @"minTrackImageDisabled": [NSNull null],
+    @"minTrackImageSelected": [NSNull null],
+    @"maxTrackImage": [NSNull null],
+    @"maxTrackImageHighlighted": [NSNull null],
+    @"maxTrackImageDisabled": [NSNull null],
+    @"maxTrackImageSelected": [NSNull null],
+    @"thumbTintColor": [NSNull null]
+    };
+    
+    [C4Slider defaultStyle].style = sliderStyle;
+
+//    C4Image *sliderThumbImage = [C4Image imageNamed:@"pyramid"];
+//    [C4Slider defaultStyle].minimumTrackTintColor = C4RED;
+//    [C4Slider defaultStyle].maximumTrackTintColor = C4GREY;
+//    [C4Slider defaultStyle].thumbTintColor = C4BLUE;
+//    [C4Slider defaultStyle].minTrackImage = nil;
+//    [C4Slider defaultStyle].minTrackImageDisabled = nil;
+//    [C4Slider defaultStyle].minTrackImageHighlighted = nil;
+//    [C4Slider defaultStyle].minTrackImageSelected = nil;
+//    [C4Slider defaultStyle].maxTrackImage = nil;
+//    [C4Slider defaultStyle].maxTrackImageDisabled = nil;
+//    [C4Slider defaultStyle].maxTrackImageHighlighted = nil;
+//    [C4Slider defaultStyle].maxTrackImageSelected = nil;
+//    [C4Slider defaultStyle].thumbImage = sliderThumbImage;
+//    [C4Slider defaultStyle].thumbImageDisabled = sliderThumbImage;
+//    [C4Slider defaultStyle].thumbImageHighlighted = sliderThumbImage;
+//    [C4Slider defaultStyle].thumbImageSelected = sliderThumbImage;
 }
 
 @end

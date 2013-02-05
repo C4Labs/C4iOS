@@ -131,6 +131,27 @@
     return self;
 }
 
+-(id)initWithUIImage:(UIImage *)image {
+    if(image == nil || image == (UIImage *)[NSNull null]) return nil;
+    self = [super init];
+    if(nil != self) {
+        self.originalImage = image;
+        _originalSize = image.size;
+        C4Assert(self.originalImage != nil, @"The C4Image you tried to load (%@) returned nil for its UIImage", image);
+        C4Assert(self.originalImage.CGImage != nil, @"The C4Image you tried to load (%@) returned nil for its CGImage", image);
+        self.visibleImage = [[CIImage alloc] initWithCGImage:self.originalImage.CGImage];
+        C4Assert(self.visibleImage != nil, @"The CIImage you tried to create (%@) returned a nil object", _visibleImage);
+        CGRect scaledImageFrame = self.visibleImage.extent;
+        scaledImageFrame.size = _originalSize;
+        self.frame = scaledImageFrame;
+        _pixelDataLoaded = NO;
+        self.contents = _originalImage.CGImage;
+        _constrainsProportions = YES;
+        [self setup];
+    }
+    return self;
+}
+
 -(UIImage *)UIImage {
     CIContext *c = [CIContext contextWithOptions:nil];
     CGImageRef imageRef = [c createCGImage:self.visibleImage fromRect:self.visibleImage.extent];

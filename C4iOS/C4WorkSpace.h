@@ -7,7 +7,6 @@
 //
 
 #import "C4CanvasController.h"
-#import "MyView.h"
 
 /** The C4WorkSpace class is a subclass of C4CanvasController.
  
@@ -19,5 +18,5 @@
  */
 
 @interface C4WorkSpace : C4CanvasController
--(void)action:(id)sender;
+-(void)adjustPathShape:(C4Slider *)sender;
 @end
