@@ -89,7 +89,6 @@
 }
 
 -(id)initWithYouTubeURL:(NSString *)url size:(C4YouTubeSize)ytMovieSize frame:(CGRect)movieFrame {
-    //C4Log(@"%@",NSStringFromSelector(_cmd));
     NSURL *newURL = [NSURL URLWithString:url];
     C4YouTubeURLParser *parser = [C4YouTubeURLParser parserWithURL:newURL];
     NSURL *actualURL;
@@ -117,14 +116,12 @@
 }
 
 -(id)initWithMovieName:(NSString *)movieName {
-    //C4Log(@"%@",NSStringFromSelector(_cmd));
     movieName = [movieName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     self = [self initWithMovieName:movieName frame:CGRectZero];
     return self;
 }
 
 -(id)initWithMovieName:(NSString *)movieName frame:(CGRect)movieFrame {
-    //C4Log(@"%@",NSStringFromSelector(_cmd));
     NSArray *movieNameComponents = [movieName componentsSeparatedByString:@"."];
     self.movieURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:movieNameComponents[0] ofType:movieNameComponents[1]]];
     self = [self initWithURL:self.movieURL frame:movieFrame];
@@ -132,13 +129,11 @@
 }
 
 -(id)initWithURL:(NSURL *)url {
-    //C4Log(@"%@",NSStringFromSelector(_cmd));
     self = [self initWithURL:url frame:CGRectZero];
     return self;
 }
 
 -(id)initWithURL:(NSURL *)url frame:(CGRect)movieFrame {
-    //C4Log(@"%@",NSStringFromSelector(_cmd));
     self = [super init];
     if(self != nil) {
         _volume = 1.0f;
@@ -174,7 +169,6 @@
 }
 
 - (CMTime)playerItemDuration {
-    //C4Log(@"%@",NSStringFromSelector(_cmd));
 	AVPlayerItem *thePlayerItem = [player currentItem];
 	if (thePlayerItem.status == AVPlayerItemStatusReadyToPlay) {
 		return(playerItem.duration);
@@ -183,17 +177,14 @@
 }
 
 - (BOOL)isPlaying {
-    //C4Log(@"%@",NSStringFromSelector(_cmd));
 	return (self.player.rate != 0.0f);
 }
 
 -(CGFloat)rate {
-    //C4Log(@"%@",NSStringFromSelector(_cmd));
     return self.player.rate;
 }
 
 -(void)setRate:(CGFloat)rate {
-    //C4Log(@"%@",NSStringFromSelector(_cmd));
     BOOL wasPlaying = self.isPlaying;
     if(wasPlaying == YES) {
         [self pause];
@@ -209,17 +200,14 @@
 }
 
 - (C4MovieLayer *)playerLayer {
-    //C4Log(@"%@",NSStringFromSelector(_cmd));
 	return (C4MovieLayer *)self.layer;
 }
 
 -(void)assetFailedToPrepareForPlayback:(NSError *)error {
-    //C4Log(@"%@",NSStringFromSelector(_cmd));
     C4Log(@"The movie you tried to load failed: %@",error);
 }
 
 -(void)prepareToPlayAsset:(AVURLAsset *)asset withKeys:(NSArray *)requestedKeys {
-    //C4Log(@"%@",NSStringFromSelector(_cmd));
     rateContext = &rateContext;
     currentItemContext = &currentItemContext;
     playerItemStatusContext = &playerItemStatusContext;
@@ -294,7 +282,6 @@
                         change:(NSDictionary*)change
                        context:(void*)context
 {
-    //C4Log(@"%@",NSStringFromSelector(_cmd));
 	/* AVPlayerItem "status" property value observer. */
 	if (context == playerItemStatusContext)
 	{
@@ -361,7 +348,6 @@
 }
 
 -(void)playerItemDidReachEnd:(NSNotification*)aNotification {
-    //C4Log(@"%@",NSStringFromSelector(_cmd));
     aNotification = aNotification;
     [self postNotification:@"reachedEnd"];
     if(self.loops) {
@@ -375,47 +361,23 @@
 }
 
 -(void)play {
-    //C4Log(@"%@",NSStringFromSelector(_cmd));
     self.player.rate = _rate;
 }
 
 -(void)pause {
-    //C4Log(@"%@",NSStringFromSelector(_cmd));
     [self.player pause];
 }
 
-//-(void)setAnimationOptions:(NSUInteger)animationOptions {
-//    /*
-//     This method needs to be in all C4Control subclasses, not sure why it doesn't inherit properly
-//
-//     important: we have to intercept the setting of AUTOREVERSE for the case of reversing 1 time
-//     i.e. reversing without having set REPEAT
-//
-//     UIView animation will flicker if we don't do this...
-//     */
-//    ((id <C4LayerAnimation>)self.layer).animationOptions = _animationOptions;
-//
-//    if ((animationOptions & AUTOREVERSE) == AUTOREVERSE) {
-//        self.shouldAutoreverse = YES;
-//        animationOptions &= ~AUTOREVERSE;
-//    }
-//
-//    _animationOptions = animationOptions | BEGINCURRENT;
-//}
-
 -(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
-    //C4Log(@"%@",NSStringFromSelector(_cmd));
     event = event;
     return [self.playerLayer containsPoint:point];
 }
 
 -(CGFloat)width {
-    //C4Log(@"%@",NSStringFromSelector(_cmd));
     return self.bounds.size.width;
 }
 
 -(void)setWidth:(CGFloat)width {
-    //C4Log(@"%@",NSStringFromSelector(_cmd));
     _width = width;
     CGRect newFrame = self.frame;
     newFrame.size.width = width;
@@ -424,12 +386,10 @@
 }
 
 -(CGFloat)height {
-    //C4Log(@"%@",NSStringFromSelector(_cmd));
     return self.frame.size.height;
 }
 
 -(void)setHeight:(CGFloat)height {
-    //C4Log(@"%@",NSStringFromSelector(_cmd));
     _height = height;
     CGRect newFrame = self.frame;
     newFrame.size.height = height;
@@ -438,12 +398,10 @@
 }
 
 -(CGSize)size {
-    //C4Log(@"%@",NSStringFromSelector(_cmd));
     return self.frame.size;
 }
 
 -(void)setSize:(CGSize)size {
-    //C4Log(@"%@",NSStringFromSelector(_cmd));
     CGRect newFrame = CGRectZero;
     newFrame.origin = self.origin;
     newFrame.size = size;
@@ -451,18 +409,15 @@
 }
 
 -(CGFloat)currentTime {
-    //C4Log(@"%@",NSStringFromSelector(_cmd));
     return (CGFloat)CMTimeGetSeconds(self.player.currentTime);
 }
 
 -(CGFloat)duration {
-    //C4Log(@"%@",NSStringFromSelector(_cmd));
     return (CGFloat)CMTimeGetSeconds(self.playerItem.duration);
 }
 
 /* clamps to the nearest frame, based on the movie's time scale */
 -(void)seekToTime:(CGFloat)time {
-    //C4Log(@"%@",NSStringFromSelector(_cmd));
     CMTime current = self.player.currentTime;
     CMTime newTime = CMTimeMakeWithSeconds(time, current.timescale);
     CMTimeRange timeRange = CMTimeRangeMake(CMTimeMakeWithSeconds(0, current.timescale), self.playerItem.duration);
@@ -471,20 +426,16 @@
 }
 
 -(void)seekByAddingTime:(CGFloat)time {
-    //C4Log(@"%@",NSStringFromSelector(_cmd));
     [self seekToTime:time + self.currentTime];
 }
 
 -(void)reachedEnd {
-    //C4Log(@"%@",NSStringFromSelector(_cmd));
 }
 
 -(void)currentTimeChanged {
-    //C4Log(@"%@",NSStringFromSelector(_cmd));
 }
 
 -(void)setVolume:(CGFloat)volume {
-    //C4Log(@"%@",NSStringFromSelector(_cmd));
     _volume = volume;
     for(AVMutableAudioMixInputParameters *avmam in self.audioMix.inputParameters) {
         [avmam setVolume:volume atTime:kCMTimeZero];

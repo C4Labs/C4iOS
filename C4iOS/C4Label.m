@@ -389,18 +389,19 @@
 }
 
 -(NSDictionary *)style {
-    NSDictionary *localStyle = @{
-    @"adjustsFontSizeToFitWidth":@(self.adjustsFontSizeToFitWidth),
-    @"baselineAdjustment":@(self.baselineAdjustment),
-    @"font":self.font,
-    @"highlighted":@(self.highlighted),
-    @"highlightedTextColor":self.highlightedTextColor,
-    @"lineBreakMode":@(self.lineBreakMode),
-    @"numberOfLines":@(self.numberOfLines),
-    @"textAlignment":@(self.textAlignment),
-    @"textShadowColor":self.textShadowColor,
-    @"textShadowOffset":[NSValue valueWithCGSize:self.textShadowOffset]
-    };
+    NSMutableDictionary *localStyle = [NSMutableDictionary dictionaryWithDictionary:
+                                       @{
+                                       @"adjustsFontSizeToFitWidth":@(self.adjustsFontSizeToFitWidth),
+                                       @"baselineAdjustment":@(self.baselineAdjustment),
+                                       @"highlighted":@(self.highlighted),
+                                       @"lineBreakMode":@(self.lineBreakMode),
+                                       @"numberOfLines":@(self.numberOfLines),
+                                       @"textAlignment":@(self.textAlignment),
+                                       @"textShadowOffset":[NSValue valueWithCGSize:self.textShadowOffset]
+                                       }];
+    if (self.font != nil) [localStyle setObject:self.font forKey:@"font"];
+    if (self.highlightedTextColor != nil) [localStyle setObject:self.highlightedTextColor forKey:@"highlightedTextColor"];
+    if (self.textShadowColor != nil) [localStyle setObject:self.textShadowColor forKey:@"textShadowColor"];
     
     NSMutableDictionary *localAndSuperStyle = [NSMutableDictionary dictionaryWithDictionary:localStyle];
     localStyle = nil;

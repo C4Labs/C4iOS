@@ -820,19 +820,21 @@
 //}
 
 -(NSDictionary *)style {
-    NSDictionary *localStyle = @{
-    @"fillColor":self.fillColor,
-    @"fillRule":self.fillRule,
-    @"lineCap": self.lineCap,
-    @"lineDashPattern": self.lineDashPattern == nil ? [NSNull null] : self.lineDashPattern,
-    @"lineDashPhase":@(self.lineDashPhase),
-    @"lineJoin":self.lineJoin,
-    @"lineWidth":@(self.lineWidth),
-    @"miterLimit":@(self.miterLimit),
-    @"strokeColor":self.strokeColor,
-    @"strokeEnd":@(self.strokeEnd),
-    @"strokeStart":@(self.strokeStart)
-    };
+    NSMutableDictionary *localStyle = [NSMutableDictionary dictionaryWithDictionary:
+                                       @{
+                                       @"lineDashPhase":@(self.lineDashPhase),
+                                       @"lineWidth":@(self.lineWidth),
+                                       @"miterLimit":@(self.miterLimit),
+                                       @"strokeEnd":@(self.strokeEnd),
+                                       @"strokeStart":@(self.strokeStart)
+                                       }];
+    if(self.fillColor != nil) [localStyle setObject:self.fillColor forKey:@"fillColor"];
+    if(self.fillRule != nil) [localStyle setObject:self.fillRule forKey:@"fillRule"];
+    if(self.lineCap != nil) [localStyle setObject:self.lineCap forKey:@"lineCap"];
+    if(self.lineJoin != nil) [localStyle setObject:self.lineJoin forKey:@"lineJoin"];
+    if(self.strokeColor != nil) [localStyle setObject:self.strokeColor forKey:@"strokeColor"];
+
+    [localStyle setObject:self.lineDashPattern == nil ? [NSNull null] : self.lineDashPattern forKey:@"lineDashPattern"];
     
     NSMutableDictionary *localAndSuperStyle = [NSMutableDictionary dictionaryWithDictionary:localStyle];
     localStyle = nil;
@@ -853,10 +855,8 @@
             } else if (key == @"lineCap") {
                 self.lineCap = [style objectForKey:key];
             } else if (key == @"lineDashPattern") {
-                if([style objectForKey:key] == [NSNull null])
-                    self.lineDashPattern = nil;
-                else
-                    self.lineDashPattern = [style objectForKey:key];
+                NSObject *object = [style objectForKey:key];
+                self.lineDashPattern = object == [NSNull null] ? nil : (NSArray *)object;
             } else if (key == @"lineDashPhase") {
                 self.lineDashPhase = [[style objectForKey:key] floatValue];
             } else if(key == @"lineJoin") {

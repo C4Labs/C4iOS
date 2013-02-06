@@ -79,7 +79,6 @@
 
 -(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
     event = event;
-    C4Log(@"%@ %@ %@", NSStringFromSelector(_cmd),self, CGRectContainsPoint(self.layer.frame, point) == YES ? @"YES" : @"NO");
     return CGRectContainsPoint(self.layer.frame, point);
 }
 
@@ -238,14 +237,13 @@
 }
 
 -(void)setRotation:(CGFloat)rotation {
-    if(self.animationDelay == 0.0f) [self _setRotation:@(rotation)];
+    if(self.animationDuration == 0.0f) [self _setRotation:@(rotation)];
     else [self performSelector:@selector(_setRotation:) withObject:@(rotation) afterDelay:self.animationDelay];
 }
 
 -(void)_setRotation:(NSNumber *)rotation {
     _rotation = [rotation floatValue];
-    if(self.animationDuration == 0.0f) ((C4Layer *)self.layer).rotationAngle = _rotation;
-    else [(id <C4LayerAnimation>)self.layer animateRotation:_rotation];
+    [(id <C4LayerAnimation>)self.layer animateRotation:_rotation];
 }
 
 -(void)setRotationX:(CGFloat)rotation {
@@ -255,8 +253,7 @@
 
 -(void)_setRotationX:(NSNumber *)rotation {
     _rotationX = [rotation floatValue];
-    if(self.animationDuration == 0.0f) ((C4Layer *)self.layer).rotationAngleX = _rotationX;
-    else [(id <C4LayerAnimation>)self.layer animateRotationX:_rotationX];
+    [(id <C4LayerAnimation>)self.layer animateRotationX:_rotationX];
 }
 
 -(void)setRotationY:(CGFloat)rotation {
@@ -266,8 +263,7 @@
 
 -(void)_setRotationY:(NSNumber *)rotation {
     _rotationY = [rotation floatValue];
-    if(self.animationDuration == 0.0f) ((C4Layer *)self.layer).rotationAngleY = _rotationY;
-    else [(id <C4LayerAnimation>)self.layer animateRotationY:_rotationY];
+    [(id <C4LayerAnimation>)self.layer animateRotationY:_rotationY];
 }
 
 -(void)rotationDidFinish:(CGFloat)rotation {
@@ -276,8 +272,7 @@
 
 -(void)setLayerTransform:(CATransform3D)transform {
     _layerTransform = transform;
-    if(self.animationDuration == 0.0f) self.layer.transform = _layerTransform;
-    else [(id <C4LayerAnimation>)self.layer animateLayerTransform:transform];
+    [(id <C4LayerAnimation>)self.layer animateLayerTransform:transform];
 }
 
 -(void)setAnchorPoint:(CGPoint)anchorPoint {

@@ -1,32 +1,37 @@
 //
-//  C4WorkSpace.m
+// C4WorkSpace.m
 //
-//  Created by Travis Kirton.
+// Created by Travis Kirton and Greg Debicki.
 //
 
 #import "C4WorkSpace.h"
 
 @implementation C4WorkSpace {
-    C4Slider *s1, *s2;
-    C4Shape *s;
+    C4Shape *shape, *shape2;
+    BOOL isStyled;
 }
 
 -(void)setup {
-    s1 = [C4Slider slider:CGRectMake(0, 0, 400, 44)];
-    s1.center = self.canvas.center;
-    s1.maxTrackImage = [C4Image imageNamed:@"lines"];
-    [self.canvas addSubview:s1];
+    shape = [C4Shape rect:CGRectMake(0, 0, 200, 200)];
+    shape.center = CGPointMake(self.canvas.width * 0.33, self.canvas.center.y);
+
+    shape2 = [C4Shape ellipse:shape.frame];
+    shape2.center = CGPointMake(self.canvas.width * 0.66, self.canvas.center.y);
     
-    s = [C4Shape rect:CGRectMake(10, 10, 20, 20)];
-    [self.canvas addShape:s];
+    shape.lineWidth = 10;
+    shape.lineDashPattern = @[@(1),@(15)];
+    shape.lineCap = CAPROUND;
+    shape.shadowOpacity = 0.8;
+    shape.shadowOffset = CGSizeMake(4,4);
+    shape.shadowColor = C4RED;
+    
+    [self.canvas addObjects:@[shape, shape2]];
 }
 
 -(void)touchesBegan {
-    if(s2 == nil) {
-        s2 = [s1 copy];
-        s2.origin = CGPointMake(100,100);
-        s2.thumbTintColor = C4RED;
-        [self.canvas addSubview:s2];
+    if (isStyled == NO) {
+        shape2.style = shape.style;
+        isStyled = YES;
     }
 }
 

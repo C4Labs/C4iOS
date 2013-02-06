@@ -18,5 +18,4 @@
  */
 
 @interface C4WorkSpace : C4CanvasController
-//-(void)adjustPathShape:(C4Slider *)sender;
 @end
