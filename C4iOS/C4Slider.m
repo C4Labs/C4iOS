@@ -7,12 +7,13 @@
 //
 
 #import "C4Slider.h"
+#import <objc/message.h>
 
 @interface C4Slider()
 @property (readwrite, atomic) BOOL shouldAutoreverse;
 @property (readwrite, atomic, strong) NSString *longPressMethodName;
 @property (readwrite, atomic, strong) NSMutableDictionary *gestureDictionary;
-@property (readonly, atomic) NSArray *stylePropertyNames, *controlStylePropertyNames;
+@property (readonly, atomic) NSArray *localStylePropertyNames, *controlStylePropertyNames;
 @end
 
 @implementation C4Slider
@@ -28,7 +29,8 @@
         _usesMinTrackImage = NO;
         _usesThumbImage = NO;
         
-        _stylePropertyNames = @[
+        // FIXME: do we need these lists of names? the setStyle method should be complete enough without it.
+        _localStylePropertyNames = @[
         @"minimumTrackTintColor",
         @"maximumTrackTintColor",
         @"minValueImage",
@@ -882,76 +884,198 @@
     return (NSDictionary *)localAndControlStyle;
 }
 
+-(SEL)setterSelectorFromPropertyName:(NSString *)propertyName {
+    NSString *firstLetter = [propertyName substringToIndex:1];
+    NSRange range = {0,1};
+    NSString *capitalizedPropertyName = [propertyName stringByReplacingCharactersInRange:range withString:[firstLetter uppercaseString]];
+    NSString *selectorName = [NSString stringWithFormat:@"set%@:",capitalizedPropertyName];
+    SEL selector = NSSelectorFromString(selectorName);
+    if([self respondsToSelector:selector]) return selector;
+    return nil;
+}
+
 -(void)setStyle:(NSDictionary *)style {
-    for(NSString *key in [style allKeys]) {
-        if([_stylePropertyNames containsObject:key]) {
-            if (key == @"minValueImage") {
-                self.minValueImage = [style objectForKey:key];
-            } else if (key == @"maxValueImage") {
-                self.maxValueImage = [style objectForKey:key];
-            } else if (key == @"thumbImage") {
-                self.thumbImage = [style objectForKey:key];
-            } else if (key == @"thumbImageDisabled") {
-                self.thumbImageDisabled = [style objectForKey:key];
-            } else if (key == @"thumbImageHighlighted") {
-                self.thumbImageHighlighted = [style objectForKey:key];
-            } else if (key == @"thumbImageSelected") {
-                self.thumbImageSelected = [style objectForKey:key];
-            } else if (key == @"minTrackImage") {
-                self.minTrackImage = [style objectForKey:key];
-            } else if (key == @"minTrackImageHighlighted") {
-                self.minTrackImageHighlighted = [style objectForKey:key];
-            } else if (key == @"minTrackImageDisabled") {
-                self.minTrackImageDisabled = [style objectForKey:key];
-            } else if (key == @"minTrackImageSelected") {
-                self.minTrackImageSelected = [style objectForKey:key];
-            } else if (key == @"maxTrackImage") {
-                self.maxTrackImage = [style objectForKey:key];
-            } else if (key == @"maxTrackImageHighlighted") {
-                self.maxTrackImageHighlighted = [style objectForKey:key];
-            } else if (key == @"maxTrackImageDisabled") {
-                self.maxTrackImageDisabled = [style objectForKey:key];
-            } else if (key == @"maxTrackImageSelected") {
-                self.maxTrackImageSelected = [style objectForKey:key];
-            }
-            
-            if(key == @"minimumTrackTintColor") {
-                self.minimumTrackTintColor = [style objectForKey:key];
-            } else if (key == @"maximumTrackTintColor") {
-                self.maximumTrackTintColor = [style objectForKey:key];
-            } else if (key == @"thumbTintColor") {
-                self.thumbTintColor = [style objectForKey:key];
-            }
-        }
-    }
+    // FIXME: These two loops work, but don't differentiate between "types" of objects
+    // ... they will NOT, for instance, pull a value out of an NSNumber
+    //    for(NSString *propertyName in self.localStylePropertyNames) {
+    //        if([styleKeys containsObject:propertyName]) {
+    //            SEL selector = [self setterSelectorFromPropertyName:propertyName];
+    //            if(selector != nil && [styleKeys containsObject:propertyName]){
+    //                objc_msgSend(self,selector,[style objectForKey:propertyName]);
+    //            }
+    //        }
+    //    }
+    //
+    //    for(NSString *propertyName in self.controlStylePropertyNames) {
+    //        if([styleKeys containsObject:propertyName]) {
+    //            SEL selector = [self setterSelectorFromPropertyName:propertyName];
+    //            if(selector != nil && [styleKeys containsObject:propertyName]){
+    //                objc_msgSend(self,selector,[style objectForKey:propertyName]);
+    //            }
+    //        }
+    //    }
+ 
+    NSArray *styleKeys = [style allKeys];
+    NSString *key;
     
-    for(NSString *key in [style allKeys]) {
-        if([_controlStylePropertyNames containsObject:key]) {
-            if(key == @"alpha") {
-                self.alpha = [[style valueForKey:key] floatValue];
-            } else if (key == @"backgroundColor") {
-                self.backgroundColor = [style objectForKey:key];
-            } else if (key == @"borderColor") {
-                self.borderColor = [style objectForKey:key];
-            } else if (key == @"borderWidth") {
-                self.borderWidth = [[style valueForKey:key] floatValue];
-            } else if(key == @"cornerRadius") {
-                self.cornerRadius = [[style valueForKey:key] floatValue];
-            } else if(key == @"masksToBounds") {
-                self.masksToBounds = [[style valueForKey:key] boolValue];
-            } else if(key == @"shadowColor") {
-                self.shadowColor = [style objectForKey:key];
-            } else if(key == @"shadowOpacity") {
-                self.shadowOpacity = [[style valueForKey:key] floatValue];
-            } else if(key == @"shadowOffset") {
-                self.shadowOffset = [[style valueForKey:key] CGSizeValue];
-            } else if(key == @"shadowPath") {
-                self.shadowPath = [style objectForKey:key] == [NSNull null] ? nil : (__bridge CGPathRef)[style objectForKey:key];
-            } else if(key == @"shadowRadius") {
-                self.shadowRadius = [[style valueForKey:key] floatValue];
-            }
-        }
-    }
+    // Local Style Values
+    key = @"minValueImage";
+    if([styleKeys containsObject:key]) self.minValueImage = [style objectForKey:key];
+    
+    key = @"maxValueImage";
+    if([styleKeys containsObject:key]) self.maxValueImage = [style objectForKey:key];
+    
+    key = @"thumbImage";
+    if([styleKeys containsObject:key]) self.thumbImage = [style objectForKey:key];
+
+    key = @"thumbImageDisabled";
+    if([styleKeys containsObject:key]) self.thumbImageDisabled = [style objectForKey:key];
+
+    key = @"thumbImageSelected";
+    if([styleKeys containsObject:key]) self.thumbImageSelected = [style objectForKey:key];
+
+    key = @"minTrackImage";
+    if([styleKeys containsObject:key]) self.minTrackImage = [style objectForKey:key];
+
+    key = @"minTrackImageHighlighted";
+    if([styleKeys containsObject:key]) self.minTrackImageHighlighted = [style objectForKey:key];
+
+    key = @"minTrackImageDisabled";
+    if([styleKeys containsObject:key]) self.minTrackImageDisabled = [style objectForKey:key];
+
+    key = @"minTrackImageDisabled";
+    if([styleKeys containsObject:key]) self.minTrackImageDisabled = [style objectForKey:key];
+
+    key = @"minTrackImageSelected";
+    if([styleKeys containsObject:key]) self.minTrackImageSelected = [style objectForKey:key];
+
+    key = @"maxTrackImage";
+    if([styleKeys containsObject:key]) self.maxTrackImage = [style objectForKey:key];
+
+    key = @"maxTrackImageHighlighted";
+    if([styleKeys containsObject:key]) self.maxTrackImageHighlighted = [style objectForKey:key];
+
+    key = @"maxTrackImageDisabled";
+    if([styleKeys containsObject:key]) self.maxTrackImageDisabled = [style objectForKey:key];
+
+    key = @"maxTrackImageSelected";
+    if([styleKeys containsObject:key]) self.maxTrackImageSelected = [style objectForKey:key];
+
+    key = @"minimumTrackTintColor";
+    if([styleKeys containsObject:key]) self.minimumTrackTintColor = [style objectForKey:key];
+
+    key = @"maximumTrackTintColor";
+    if([styleKeys containsObject:key]) self.maximumTrackTintColor = [style objectForKey:key];
+
+    key = @"thumbTintColor";
+    if([styleKeys containsObject:key]) self.thumbTintColor = [style objectForKey:key];
+
+    //Control Style Values
+    key = @"alpha";
+    if([styleKeys containsObject:key]) self.alpha = [[style objectForKey:key] floatValue];
+    
+    key = @"backgroundColor";
+    if([styleKeys containsObject:key]) self.backgroundColor = [style objectForKey:key];
+
+    key = @"borderColor";
+    if([styleKeys containsObject:key]) self.borderColor = [style objectForKey:key];
+    
+    key = @"borderWidth";
+    if([styleKeys containsObject:key]) self.borderWidth = [[style objectForKey:key] floatValue];
+    
+    key = @"cornerRadius";
+    if([styleKeys containsObject:key]) self.cornerRadius = [[style objectForKey:key] floatValue];
+    
+    key = @"masksToBounds";
+    if([styleKeys containsObject:key]) self.masksToBounds = [[style objectForKey:key] boolValue];
+    
+    key = @"shadowColor";
+    if([styleKeys containsObject:key]) self.shadowColor = [style objectForKey:key];
+    
+    key = @"shadowOpacity";
+    if([styleKeys containsObject:key]) self.shadowOpacity = [[style objectForKey:key] floatValue];
+    
+    key = @"shadowOffset";
+    if([styleKeys containsObject:key]) self.shadowOffset = [[style objectForKey:key] CGSizeValue];
+    
+    key = @"shadowPath";
+    if([styleKeys containsObject:key]) self.shadowPath = [style objectForKey:key] == [NSNull null] ? nil : (__bridge CGPathRef)[style objectForKey:key];
+    
+    key = @"shadowRadius";
+    if([styleKeys containsObject:key]) self.shadowRadius = [[style objectForKey:key] floatValue];
+    
+    
+
+//Control
+//    for(NSString *key in [style allKeys]) {
+//        if([_stylePropertyNames containsObject:key]) {
+//            if (key == @"minValueImage") {
+//                self.minValueImage = [style objectForKey:key];
+//            } else if (key == @"maxValueImage") {
+//                self.maxValueImage = [style objectForKey:key];
+//            } else if (key == @"thumbImage") {
+//                self.thumbImage = [style objectForKey:key];
+//            } else if (key == @"thumbImageDisabled") {
+//                self.thumbImageDisabled = [style objectForKey:key];
+//            } else if (key == @"thumbImageHighlighted") {
+//                self.thumbImageHighlighted = [style objectForKey:key];
+//            } else if (key == @"thumbImageSelected") {
+//                self.thumbImageSelected = [style objectForKey:key];
+//            } else if (key == @"minTrackImage") {
+//                self.minTrackImage = [style objectForKey:key];
+//            } else if (key == @"minTrackImageHighlighted") {
+//                self.minTrackImageHighlighted = [style objectForKey:key];
+//            } else if (key == @"minTrackImageDisabled") {
+//                self.minTrackImageDisabled = [style objectForKey:key];
+//            } else if (key == @"minTrackImageSelected") {
+//                self.minTrackImageSelected = [style objectForKey:key];
+//            } else if (key == @"maxTrackImage") {
+//                self.maxTrackImage = [style objectForKey:key];
+//            } else if (key == @"maxTrackImageHighlighted") {
+//                self.maxTrackImageHighlighted = [style objectForKey:key];
+//            } else if (key == @"maxTrackImageDisabled") {
+//                self.maxTrackImageDisabled = [style objectForKey:key];
+//            } else if (key == @"maxTrackImageSelected") {
+//                self.maxTrackImageSelected = [style objectForKey:key];
+//            }
+//            
+//            if(key == @"minimumTrackTintColor") {
+//                self.minimumTrackTintColor = [style objectForKey:key];
+//            } else if (key == @"maximumTrackTintColor") {
+//                self.maximumTrackTintColor = [style objectForKey:key];
+//            } else if (key == @"thumbTintColor") {
+//                self.thumbTintColor = [style objectForKey:key];
+//            }
+//        }
+//    }
+    
+//    for(NSString *_key in [style allKeys]) {
+//        if([_controlStylePropertyNames containsObject:_key]) {
+//            if(_key == @"alpha") {
+//                self.alpha = [[style valueForKey:_key] floatValue];
+//            } else if (_key == @"backgroundColor") {
+//                self.backgroundColor = [style objectForKey:_key];
+//            } else if (_key == @"borderColor") {
+//                self.borderColor = [style objectForKey:_key];
+//            } else if (_key == @"borderWidth") {
+//                self.borderWidth = [[style valueForKey:_key] floatValue];
+//            } else if(_key == @"cornerRadius") {
+//                self.cornerRadius = [[style valueForKey:_key] floatValue];
+//            } else if(_key == @"masksToBounds") {
+//                self.masksToBounds = [[style valueForKey:_key] boolValue];
+//            } else if(_key == @"shadowColor") {
+//                self.shadowColor = [style objectForKey:_key];
+//            } else if(_key == @"shadowOpacity") {
+//                self.shadowOpacity = [[style valueForKey:_key] floatValue];
+//            } else if(_key == @"shadowOffset") {
+//                self.shadowOffset = [[style valueForKey:_key] CGSizeValue];
+//            } else if(_key == @"shadowPath") {
+//                self.shadowPath = [style objectForKey:_key] == [NSNull null] ? nil : (__bridge CGPathRef)[style objectForKey:_key];
+//            } else if(_key == @"shadowRadius") {
+//                self.shadowRadius = [[style valueForKey:_key] floatValue];
+//            }
+//        }
+//    }
 }
 
 +(C4Slider *)defaultStyle {
@@ -969,7 +1093,8 @@
 }
 
 -(void)setMinValueImage:(C4Image *)minValueImage {
-    self.minimumValueImage = minValueImage.UIImage;
+    if(minValueImage == (C4Image *)[NSNull null]) self.minValueImage = nil;
+    else self.minimumValueImage = minValueImage.UIImage;
 }
 
 -(C4Image *)maxValueImage {

@@ -333,27 +333,6 @@
     return [C4Layer class];
 }
 
-
-/*
--(void)setWidth:(CGFloat)width {
-    _width = width;
-    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, width, self.frame.size.height);
-}
-
--(void)setHeight:(CGFloat)height {
-    _height = height;
-    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, height);
-}
-
--(CGFloat)width {
-    return self.frame.size.width;
-}
-
--(CGFloat)height {
-    return self.frame.size.height;
-}
-*/
-
 -(CGFloat)width {
     return self.bounds.size.width;
 }
@@ -413,31 +392,39 @@
 -(void)setStyle:(NSDictionary *)style {
     [super setStyle:style];
     
-    for(NSString *key in [style allKeys]) {
-        if([_localStylePropertyNames containsObject:key]) {
-            if(key == @"adjustsFontSizeToFitWidth") {
-                self.adjustsFontSizeToFitWidth = [[style valueForKey:key] floatValue];
-            } else if (key == @"baselineAdjustment") {
-                self.baselineAdjustment = (C4BaselineAdjustment)[[style valueForKey:key] integerValue];
-            } else if (key == @"font") {
-                self.font = [style objectForKey:key];
-            } else if (key == @"highlighted") {
-                self.highlighted = [[style valueForKey:key] boolValue];
-            } else if (key == @"highlightedTextColor") {
-                self.highlightedTextColor = [style objectForKey:key];
-            } else if (key == @"lineBreakMode") {
-                self.lineBreakMode = (C4LineBreakMode)[[style valueForKey:key] integerValue];
-            } else if (key == @"numberOfLines") {
-                self.numberOfLines = [[style valueForKey:key] integerValue];
-            } else if (key == @"textAlignment") {
-                self.textAlignment = (C4TextAlignment)[[style valueForKey:key] integerValue];
-            } else if (key == @"textShadowColor") {
-                self.textShadowColor = [style objectForKey:key];
-            } else if (key == @"textShadowOffset") {
-                self.textShadowOffset = [[style valueForKey:key] CGSizeValue];
-            }
-        }
-    }
+    NSArray *styleKeys = [style allKeys];
+    NSString *key;
+    
+    //Local Style Values
+    key = @"adjustsFontSizeToFitWidth";
+    if([styleKeys containsObject:key]) self.adjustsFontSizeToFitWidth = [[style objectForKey:key] boolValue];
+    
+    key = @"baselineAdjustment";
+    if([styleKeys containsObject:key]) self.baselineAdjustment = (C4BaselineAdjustment)[[style objectForKey:key] integerValue];
+    
+    key = @"font";
+    if([styleKeys containsObject:key]) self.font = [style objectForKey:key];
+    
+    key = @"highlighted";
+    if([styleKeys containsObject:key]) self.highlighted = [[style objectForKey:key] boolValue];
+    
+    key = @"highlightedTextColor";
+    if([styleKeys containsObject:key]) self.highlightedTextColor = [style objectForKey:key];
+    
+    key = @"lineBreakMode";
+    if([styleKeys containsObject:key]) self.lineBreakMode = (C4LineBreakMode)[[style objectForKey:key] integerValue];
+    
+    key = @"numberOfLines";
+    if([styleKeys containsObject:key]) self.numberOfLines = [[style objectForKey:key] integerValue];
+    
+    key = @"textAlignment";
+    if([styleKeys containsObject:key]) self.textAlignment = (C4TextAlignment)[[style objectForKey:key] integerValue];
+    
+    key = @"textShadowColor";
+    if([styleKeys containsObject:key]) self.textShadowColor = [style objectForKey:key];
+    
+    key = @"textShadowOffset";
+    if([styleKeys containsObject:key]) self.textShadowOffset = [[style objectForKey:key] CGSizeValue];
 }
 
 +(C4Label *)defaultStyle {

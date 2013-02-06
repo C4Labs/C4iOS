@@ -673,7 +673,7 @@
 }
 
 -(void)_setLineDashPattern:(NSArray *)lineDashPattern {
-    self.shapeLayer.lineDashPattern = lineDashPattern;
+    self.shapeLayer.lineDashPattern = lineDashPattern == (NSArray *)[NSNull null] ? nil : lineDashPattern;
 }
 
 -(NSArray *)lineDashPattern {
@@ -846,34 +846,43 @@
 
 -(void)setStyle:(NSDictionary *)style {
     [super setStyle:style];
-    for(NSString *key in [style allKeys]) {
-        if([_localStylePropertyNames containsObject:key]) {
-            if(key == @"fillColor") {
-                self.fillColor = [style objectForKey:key];
-            } else if (key == @"fillRule") {
-                self.fillRule = [style objectForKey:key];
-            } else if (key == @"lineCap") {
-                self.lineCap = [style objectForKey:key];
-            } else if (key == @"lineDashPattern") {
-                NSObject *object = [style objectForKey:key];
-                self.lineDashPattern = object == [NSNull null] ? nil : (NSArray *)object;
-            } else if (key == @"lineDashPhase") {
-                self.lineDashPhase = [[style objectForKey:key] floatValue];
-            } else if(key == @"lineJoin") {
-                self.lineJoin = [style valueForKey:key];
-            } else if(key == @"lineWidth") {
-                self.lineWidth = [[style valueForKey:key] floatValue];
-            } else if (key == @"miterLimit") {
-                self.miterLimit = [[style objectForKey:key] floatValue];
-            } else if (key == @"strokeColor") {
-                self.strokeColor = [style objectForKey:key];
-            } else if (key == @"strokeEnd") {
-                self.strokeEnd = [[style objectForKey:key] floatValue];
-            } else if (key == @"strokeStart") {
-                self.strokeStart = [[style objectForKey:key] floatValue];
-            }
-        }
-    }
+
+    NSArray *styleKeys = [style allKeys];
+    NSString *key;
+    
+    //Local Style Values
+    key = @"fillColor";
+    if([styleKeys containsObject:key]) self.fillColor = [style objectForKey:key];
+    
+    key = @"fillRule";
+    if([styleKeys containsObject:key]) self.fillRule = [style objectForKey:key];
+    
+    key = @"lineCap";
+    if([styleKeys containsObject:key]) self.lineCap = [style objectForKey:key];
+    
+    key = @"lineDashPattern";
+    if([styleKeys containsObject:key]) self.lineDashPattern = [style objectForKey:key];
+    
+    key = @"lineDashPhase";
+    if([styleKeys containsObject:key]) self.lineDashPhase = [[style objectForKey:key] floatValue];
+    
+    key = @"lineJoin";
+    if([styleKeys containsObject:key]) self.lineJoin = [style objectForKey:key];
+    
+    key = @"lineWidth";
+    if([styleKeys containsObject:key]) self.lineWidth = [[style objectForKey:key] floatValue];
+    
+    key = @"miterLimit";
+    if([styleKeys containsObject:key]) self.miterLimit = [[style objectForKey:key] floatValue];
+    
+    key = @"strokeColor";
+    if([styleKeys containsObject:key]) self.strokeColor = [style objectForKey:key];
+    
+    key = @"strokeEnd";
+    if([styleKeys containsObject:key]) self.strokeEnd = [[style objectForKey:key] floatValue];
+    
+    key = @"strokeStart";
+    if([styleKeys containsObject:key]) self.strokeStart = [[style objectForKey:key] floatValue];
 }
 
 -(id)copyWithZone:(NSZone *)zone {

@@ -65,8 +65,8 @@
     [C4Control defaultStyle].layer.delegate = self;
     [C4Control defaultStyle].shadowOpacity = 0.0f;
     [C4Control defaultStyle].shadowOffset = CGSizeZero;
-    [C4Control defaultStyle].repeatCount = 0;    
-    
+    [C4Control defaultStyle].repeatCount = 0;
+
     NSDictionary *basicStyle = @{
     @"alpha":@([C4Control defaultStyle].alpha),
     @"animationDuration":@([C4Control defaultStyle].animationDuration),
@@ -78,6 +78,9 @@
     @"shadowOffset":[NSValue valueWithCGSize:[C4Control defaultStyle].shadowOffset],
     @"repeatCount":@([C4Control defaultStyle].repeatCount)
     };
+
+    [C4Control defaultStyle].style = basicStyle;
+
     
     [C4Slider defaultStyle].style = basicStyle;
     [C4Slider defaultStyle].minimumTrackTintColor = C4RED;

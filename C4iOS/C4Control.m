@@ -773,33 +773,65 @@
 }
 
 -(void)setStyle:(NSDictionary *)style {
-    for(NSString *key in [style allKeys]) {
-        if([_stylePropertyNames containsObject:key]) {
-            if(key == @"alpha") {
-                self.alpha = [[style valueForKey:key] floatValue];
-            } else if (key == @"backgroundColor") {
-                self.backgroundColor = [style objectForKey:key];
-            } else if (key == @"borderColor") {
-                self.borderColor = [style objectForKey:key];
-            } else if (key == @"borderWidth") {
-                self.borderWidth = [[style valueForKey:key] floatValue];
-            } else if(key == @"cornerRadius") {
-                self.cornerRadius = [[style valueForKey:key] floatValue];
-            } else if(key == @"masksToBounds") {
-                self.masksToBounds = [[style valueForKey:key] boolValue];
-            } else if(key == @"shadowColor") {
-                self.shadowColor = [style objectForKey:key];
-            } else if(key == @"shadowOpacity") {
-                self.shadowOpacity = [[style valueForKey:key] floatValue];
-            } else if(key == @"shadowOffset") {
-                self.shadowOffset = [[style valueForKey:key] CGSizeValue];
-            } else if(key == @"shadowPath") {
-                self.shadowPath = [style objectForKey:key] == [NSNull null] ? nil : (__bridge CGPathRef)[style objectForKey:key];
-            } else if(key == @"shadowRadius") {
-                self.shadowRadius = [[style valueForKey:key] floatValue];
-            }
-        }
-    }
+    NSArray *styleKeys = [style allKeys];
+    NSString *key;
+    
+    //Control Style Values
+    key = @"alpha";
+    if([styleKeys containsObject:key]) self.alpha = [[style objectForKey:key] floatValue];
+    
+    key = @"backgroundColor";
+    if([styleKeys containsObject:key]) self.backgroundColor = [style objectForKey:key];
+    
+    key = @"borderColor";
+    if([styleKeys containsObject:key]) self.borderColor = [style objectForKey:key];
+    
+    key = @"borderWidth";
+    if([styleKeys containsObject:key]) self.borderWidth = [[style objectForKey:key] floatValue];
+    
+    key = @"cornerRadius";
+    if([styleKeys containsObject:key]) self.cornerRadius = [[style objectForKey:key] floatValue];
+    
+    key = @"masksToBounds";
+    if([styleKeys containsObject:key]) self.masksToBounds = [[style objectForKey:key] boolValue];
+    
+    key = @"shadowColor";
+    if([styleKeys containsObject:key]) self.shadowColor = [style objectForKey:key];
+    
+    key = @"shadowOpacity";
+    if([styleKeys containsObject:key]) self.shadowOpacity = [[style objectForKey:key] floatValue];
+    
+    key = @"shadowOffset";
+    if([styleKeys containsObject:key]) self.shadowOffset = [[style objectForKey:key] CGSizeValue];
+    
+    key = @"shadowPath";
+    if([styleKeys containsObject:key]) self.shadowPath = [style objectForKey:key] == [NSNull null] ? nil : (__bridge CGPathRef)[style objectForKey:key];
+    
+    key = @"shadowRadius";
+    if([styleKeys containsObject:key]) self.shadowRadius = [[style objectForKey:key] floatValue];
+    
+    //  FIXME: might be possible to have these values be part of the basic C4Control object
+    //    key = @"maxTrackImage";
+    //    if([styleKeys containsObject:key]) self.maxTrackImage = [style objectForKey:key];
+    //
+    //    key = @"maxTrackImageHighlighted";
+    //    if([styleKeys containsObject:key]) self.maxTrackImageHighlighted = [style objectForKey:key];
+    //
+    //    key = @"maxTrackImageDisabled";
+    //    if([styleKeys containsObject:key]) self.maxTrackImageDisabled = [style objectForKey:key];
+    //
+    //    key = @"maxTrackImageSelected";
+    //    if([styleKeys containsObject:key]) self.maxTrackImageSelected = [style objectForKey:key];
+    //
+    //    key = @"minimumTrackTintColor";
+    //    if([styleKeys containsObject:key]) self.minimumTrackTintColor = [style objectForKey:key];
+    //
+    //    key = @"maximumTrackTintColor";
+    //    if([styleKeys containsObject:key]) self.maximumTrackTintColor = [style objectForKey:key];
+    //
+    //    key = @"thumbTintColor";
+    //    if([styleKeys containsObject:key]) self.thumbTintColor = [style objectForKey:key];
+
 }
 
 +(C4Control *)defaultStyle {

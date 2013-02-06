@@ -13,7 +13,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "405"
          endingLineNumber = "405"
-         landmarkName = "-pointInside:withEvent:"
+         landmarkName = "-setSize:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
