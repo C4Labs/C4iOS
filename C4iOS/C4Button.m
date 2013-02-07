@@ -1,21 +1,20 @@
 //
-//  C4Control.m
+//  C4Button.m
 //  C4iOS
 //
 //  Created by Travis Kirton on 12-02-23.
-//  Copyright (c) 2012 POSTFL. All rights reserved.
 //
 
-#import "C4Slider.h"
+#import "C4Button.h"
 #import <objc/message.h>
 
-@interface C4Slider()
+@interface C4Button()
 @property (readwrite, atomic) BOOL shouldAutoreverse;
 @property (readwrite, atomic, strong) NSString *longPressMethodName;
 @property (readwrite, atomic, strong) NSMutableDictionary *gestureDictionary;
 @end
 
-@implementation C4Slider
+@implementation C4Button
 
 -(id)init {
     return [self initWithFrame:CGRectZero];
@@ -24,9 +23,9 @@
 -(id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if(self != nil) {
-        _usesMaxTrackImage = NO;
-        _usesMinTrackImage = NO;
-        _usesThumbImage = NO;
+//        _usesMaxTrackImage = NO;
+//        _usesMinTrackImage = NO;
+//        _usesThumbImage = NO;
         
         [self setupFromDefaults];
     }
@@ -34,32 +33,32 @@
 }
 
 -(void)setupFromDefaults {
-    C4Slider *defaultSlider = [C4Slider defaultStyle];
-    if (defaultSlider.usesMaxTrackImage) {
-        self.maxTrackImage = defaultSlider.maxTrackImage;
-        self.maxTrackImageDisabled = defaultSlider.maxTrackImageDisabled;
-        self.maxTrackImageHighlighted = defaultSlider.maxTrackImageHighlighted;
-        self.maxTrackImageSelected = defaultSlider.maxTrackImageSelected;
-    } else {
-        self.maximumTrackTintColor = defaultSlider.maximumTrackTintColor;
-    }
-    if (defaultSlider.usesMinTrackImage) {
-        self.minTrackImage = defaultSlider.minTrackImage;
-        self.minTrackImageDisabled = defaultSlider.minTrackImageDisabled;
-        self.minTrackImageHighlighted = defaultSlider.minTrackImageHighlighted;
-        self.minTrackImageSelected = defaultSlider.minTrackImageSelected;
-    } else {
-        self.minimumTrackTintColor = defaultSlider.minimumTrackTintColor;
-    }
-    
-    if(defaultSlider.usesThumbImage) {
-        self.thumbImage = defaultSlider.thumbImage;
-        self.thumbImageDisabled = defaultSlider.thumbImageDisabled;
-        self.thumbImageHighlighted = defaultSlider.thumbImageHighlighted;
-        self.thumbImageSelected = defaultSlider.thumbImageSelected;
-    } else {
-        self.minimumTrackTintColor = defaultSlider.minimumTrackTintColor;
-    }
+//    C4Slider *defaultSlider = [C4Slider defaultStyle];
+//    if (defaultSlider.usesMaxTrackImage) {
+//        self.maxTrackImage = defaultSlider.maxTrackImage;
+//        self.maxTrackImageDisabled = defaultSlider.maxTrackImageDisabled;
+//        self.maxTrackImageHighlighted = defaultSlider.maxTrackImageHighlighted;
+//        self.maxTrackImageSelected = defaultSlider.maxTrackImageSelected;
+//    } else {
+//        self.maximumTrackTintColor = defaultSlider.maximumTrackTintColor;
+//    }
+//    if (defaultSlider.usesMinTrackImage) {
+//        self.minTrackImage = defaultSlider.minTrackImage;
+//        self.minTrackImageDisabled = defaultSlider.minTrackImageDisabled;
+//        self.minTrackImageHighlighted = defaultSlider.minTrackImageHighlighted;
+//        self.minTrackImageSelected = defaultSlider.minTrackImageSelected;
+//    } else {
+//        self.minimumTrackTintColor = defaultSlider.minimumTrackTintColor;
+//    }
+//    
+//    if(defaultSlider.usesThumbImage) {
+//        self.thumbImage = defaultSlider.thumbImage;
+//        self.thumbImageDisabled = defaultSlider.thumbImageDisabled;
+//        self.thumbImageHighlighted = defaultSlider.thumbImageHighlighted;
+//        self.thumbImageSelected = defaultSlider.thumbImageSelected;
+//    } else {
+//        self.minimumTrackTintColor = defaultSlider.minimumTrackTintColor;
+//    }
 }
 
 /* don't add this ever...
@@ -768,365 +767,365 @@
 
 #pragma mark style methods
 
--(void)setMinimumTrackTintColor:(UIColor *)minimumTrackTintColor {
-    _usesMinTrackImage = NO;
-    if (minimumTrackTintColor == (UIColor *)[NSNull null]) minimumTrackTintColor = nil;
-    [super setMinimumTrackTintColor:minimumTrackTintColor];
-}
-
--(UIColor *)minimumTrackTintColor {
-    return [super minimumTrackTintColor];
-}
-
--(void)setMaximumTrackTintColor:(UIColor *)maximumTrackTintColor {
-    _usesMinTrackImage = NO;
-    if(maximumTrackTintColor == (UIColor *)[NSNull null]) maximumTrackTintColor = nil;
-    super.maximumTrackTintColor = maximumTrackTintColor;
-}
-
--(UIColor *)maximumTrackTintColor {
-    return [super maximumTrackTintColor];
-}
-
--(NSDictionary *)style {
-    //mutable local styles
-    NSMutableDictionary *localStyle = [[NSMutableDictionary alloc] initWithCapacity:0];
-    if(_usesMaxTrackImage) {
-        if(self.maxTrackImage != nil) [localStyle setObject:self.maxTrackImage forKey:@"maxTrackImage"];
-        if(self.maxTrackImageDisabled != nil) [localStyle setObject:self.maxTrackImageDisabled forKey:@"maxTrackImageDisabled"];
-        if(self.maxTrackImageHighlighted != nil) [localStyle setObject:self.maxTrackImageHighlighted forKey:@"maxTrackImageHighlighted"];
-        if(self.maxTrackImageSelected != nil) [localStyle setObject:self.maxTrackImageSelected forKey:@"maxTrackImageSelected"];
-    } else {
-        if(self.maximumTrackTintColor != nil) [localStyle setObject:self.maximumTrackTintColor forKey:@"maximumTrackTintColor"];
-    }
-    
-    if(_usesMinTrackImage) {
-        if(self.minTrackImage != nil) [localStyle setObject:self.minTrackImage forKey:@"minTrackImage"];
-        if(self.minTrackImageDisabled != nil) [localStyle setObject:self.minTrackImageDisabled forKey:@"minTrackImageDisabled"];
-        if(self.minTrackImageHighlighted != nil) [localStyle setObject:self.minTrackImageHighlighted forKey:@"minTrackImageHighlighted"];
-        if(self.minTrackImageSelected != nil) [localStyle setObject:self.minTrackImageSelected forKey:@"minTrackImageSelected"];
-    } else {
-        if(self.minimumTrackTintColor == nil) [localStyle setObject:self.minimumTrackTintColor forKey:@"minimumTrackTintColor"];
-    }
-    
-    if(_usesThumbImage) {
-        if(self.thumbImage != nil) [localStyle setObject:self.thumbImage forKey:@"thumbImage"];
-        if(self.thumbImageDisabled != nil) [localStyle setObject:self.thumbImageDisabled forKey:@"thumbImageDisabled"];
-        if(self.thumbImageHighlighted != nil) [localStyle setObject:self.thumbImageHighlighted forKey:@"thumbImageHighlighted"];
-        if(self.thumbImageSelected != nil) [localStyle setObject:self.thumbImageSelected forKey:@"thumbImageSelected"];
-    } else {
-        if(self.thumbTintColor != nil) [localStyle setObject:self.thumbTintColor forKey:@"thumbTintColor"];
-    }
-    
-    NSMutableDictionary *controlStyle = [NSMutableDictionary dictionaryWithDictionary:
-                                         @{
-                                         @"alpha":@(self.alpha),
-                                         @"borderColor":self.borderColor,
-                                         @"borderWidth":@(self.borderWidth),
-                                         @"cornerRadius":@(self.cornerRadius),
-                                         @"masksToBounds":@(self.masksToBounds),
-                                         @"shadowOpacity":@(self.shadowOpacity),
-                                         @"shadowOffset":[NSValue valueWithCGSize:self.shadowOffset],
-                                         @"shadowRadius":@(self.shadowRadius)
-                                         }];
-    if (self.backgroundColor != nil) [controlStyle setObject:self.backgroundColor forKey:@"backgroundColor"];
-    if (self.shadowColor != nil) [controlStyle setObject:self.shadowColor forKey:@"shadowColor"];
-    if (self.shadowPath != nil) [controlStyle setObject:(__bridge UIBezierPath *)self.shadowPath forKey:@"shadowPath"];
-    else [controlStyle setObject:[NSNull null] forKey:@"shadowPath"];
-    
-    NSMutableDictionary *localAndControlStyle = [NSMutableDictionary dictionaryWithDictionary:localStyle];
-    [localAndControlStyle addEntriesFromDictionary:controlStyle];
-    
-    localStyle = nil;
-    controlStyle = nil;
-    
-    return (NSDictionary *)localAndControlStyle;
-}
-
--(SEL)setterSelectorFromPropertyName:(NSString *)propertyName {
-    NSString *firstLetter = [propertyName substringToIndex:1];
-    NSRange range = {0,1};
-    NSString *capitalizedPropertyName = [propertyName stringByReplacingCharactersInRange:range withString:[firstLetter uppercaseString]];
-    NSString *selectorName = [NSString stringWithFormat:@"set%@:",capitalizedPropertyName];
-    SEL selector = NSSelectorFromString(selectorName);
-    if([self respondsToSelector:selector]) return selector;
-    return nil;
-}
-
--(void)setStyle:(NSDictionary *)style {
-    // FIXME: These two loops work, but don't differentiate between "types" of objects
-    // ... they will NOT, for instance, pull a value out of an NSNumber
-    //    for(NSString *propertyName in self.localStylePropertyNames) {
-    //        if([styleKeys containsObject:propertyName]) {
-    //            SEL selector = [self setterSelectorFromPropertyName:propertyName];
-    //            if(selector != nil && [styleKeys containsObject:propertyName]){
-    //                objc_msgSend(self,selector,[style objectForKey:propertyName]);
-    //            }
-    //        }
-    //    }
-    //
-    //    for(NSString *propertyName in self.controlStylePropertyNames) {
-    //        if([styleKeys containsObject:propertyName]) {
-    //            SEL selector = [self setterSelectorFromPropertyName:propertyName];
-    //            if(selector != nil && [styleKeys containsObject:propertyName]){
-    //                objc_msgSend(self,selector,[style objectForKey:propertyName]);
-    //            }
-    //        }
-    //    }
-    
-    NSArray *styleKeys = [style allKeys];
-    NSString *key;
-    
-    // Local Style Values
-    key = @"minValueImage";
-    if([styleKeys containsObject:key]) self.minValueImage = [style objectForKey:key];
-    
-    key = @"maxValueImage";
-    if([styleKeys containsObject:key]) self.maxValueImage = [style objectForKey:key];
-    
-    key = @"thumbImage";
-    if([styleKeys containsObject:key]) self.thumbImage = [style objectForKey:key];
-    
-    key = @"thumbImageDisabled";
-    if([styleKeys containsObject:key]) self.thumbImageDisabled = [style objectForKey:key];
-    
-    key = @"thumbImageSelected";
-    if([styleKeys containsObject:key]) self.thumbImageSelected = [style objectForKey:key];
-    
-    key = @"minTrackImage";
-    if([styleKeys containsObject:key]) self.minTrackImage = [style objectForKey:key];
-    
-    key = @"minTrackImageHighlighted";
-    if([styleKeys containsObject:key]) self.minTrackImageHighlighted = [style objectForKey:key];
-    
-    key = @"minTrackImageDisabled";
-    if([styleKeys containsObject:key]) self.minTrackImageDisabled = [style objectForKey:key];
-    
-    key = @"minTrackImageDisabled";
-    if([styleKeys containsObject:key]) self.minTrackImageDisabled = [style objectForKey:key];
-    
-    key = @"minTrackImageSelected";
-    if([styleKeys containsObject:key]) self.minTrackImageSelected = [style objectForKey:key];
-    
-    key = @"maxTrackImage";
-    if([styleKeys containsObject:key]) self.maxTrackImage = [style objectForKey:key];
-    
-    key = @"maxTrackImageHighlighted";
-    if([styleKeys containsObject:key]) self.maxTrackImageHighlighted = [style objectForKey:key];
-    
-    key = @"maxTrackImageDisabled";
-    if([styleKeys containsObject:key]) self.maxTrackImageDisabled = [style objectForKey:key];
-    
-    key = @"maxTrackImageSelected";
-    if([styleKeys containsObject:key]) self.maxTrackImageSelected = [style objectForKey:key];
-    
-    key = @"minimumTrackTintColor";
-    if([styleKeys containsObject:key]) self.minimumTrackTintColor = [style objectForKey:key];
-    
-    key = @"maximumTrackTintColor";
-    if([styleKeys containsObject:key]) self.maximumTrackTintColor = [style objectForKey:key];
-    
-    key = @"thumbTintColor";
-    if([styleKeys containsObject:key]) self.thumbTintColor = [style objectForKey:key];
-    
-    //Control Style Values
-    key = @"alpha";
-    if([styleKeys containsObject:key]) self.alpha = [[style objectForKey:key] floatValue];
-    
-    key = @"backgroundColor";
-    if([styleKeys containsObject:key]) self.backgroundColor = [style objectForKey:key];
-    
-    key = @"borderColor";
-    if([styleKeys containsObject:key]) self.borderColor = [style objectForKey:key];
-    
-    key = @"borderWidth";
-    if([styleKeys containsObject:key]) self.borderWidth = [[style objectForKey:key] floatValue];
-    
-    key = @"cornerRadius";
-    if([styleKeys containsObject:key]) self.cornerRadius = [[style objectForKey:key] floatValue];
-    
-    key = @"masksToBounds";
-    if([styleKeys containsObject:key]) self.masksToBounds = [[style objectForKey:key] boolValue];
-    
-    key = @"shadowColor";
-    if([styleKeys containsObject:key]) self.shadowColor = [style objectForKey:key];
-    
-    key = @"shadowOpacity";
-    if([styleKeys containsObject:key]) self.shadowOpacity = [[style objectForKey:key] floatValue];
-    
-    key = @"shadowOffset";
-    if([styleKeys containsObject:key]) self.shadowOffset = [[style objectForKey:key] CGSizeValue];
-    
-    key = @"shadowPath";
-    if([styleKeys containsObject:key]) self.shadowPath = [style objectForKey:key] == [NSNull null] ? nil : (__bridge CGPathRef)[style objectForKey:key];
-    
-    key = @"shadowRadius";
-    if([styleKeys containsObject:key]) self.shadowRadius = [[style objectForKey:key] floatValue];
-}
-
--(C4Image *)minValueImage {
-    return self.minimumValueImage == nil ? nil : [C4Image imageWithUIImage:self.minimumValueImage];
-}
-
--(void)setMinValueImage:(C4Image *)minValueImage {
-    if(minValueImage == (C4Image *)[NSNull null]) self.minValueImage = nil;
-    else self.minimumValueImage = minValueImage.UIImage;
-}
-
--(C4Image *)maxValueImage {
-    return self.maximumValueImage == nil ? nil : [C4Image imageWithUIImage:self.maximumValueImage];
-}
-
--(void)setMaxValueImage:(C4Image *)maxValueImage {
-    if(maxValueImage == (C4Image *)[NSNull null]) self.maximumValueImage = nil;
-    else self.maximumValueImage = maxValueImage.UIImage;
-}
-
--(void)setThumbTintColor:(UIColor *)thumbTintColor {
-    _usesThumbImage = NO;
-    self.thumbImage = nil;
-    self.thumbImageDisabled = nil;
-    self.thumbImageHighlighted = nil;
-    self.thumbImageSelected = nil;
-    [super setThumbTintColor:thumbTintColor];
-}
-
--(C4Image *)thumbImage {
-    UIImage *image = [super thumbImageForState:UIControlStateNormal];
-    return [C4Image imageWithUIImage:image];
-}
-
--(void)setThumbImage:(C4Image *)image {
-    if (image != nil) {
-        _usesThumbImage = YES;
-        [super setThumbImage:image.UIImage forState:UIControlStateNormal];
-    }
-}
-
--(C4Image *)thumbImageHighlighted {
-    UIImage *image = [super thumbImageForState:UIControlStateHighlighted];
-    return [C4Image imageWithUIImage:image];
-}
-
--(void)setThumbImageHighlighted:(C4Image *)image {
-    if (image != nil) {
-        _usesThumbImage = YES;
-        [super setThumbImage:image.UIImage forState:UIControlStateHighlighted];
-    }
-}
-
--(C4Image *)thumbImageDisabled {
-    UIImage *image = [super thumbImageForState:UIControlStateDisabled];
-    return [C4Image imageWithUIImage:image];
-}
-
--(void)setThumbImageDisabled:(C4Image *)image {
-    if (image != nil) {
-        _usesThumbImage = YES;
-        [super setThumbImage:image.UIImage forState:UIControlStateDisabled];
-    }
-}
-
--(C4Image *)thumbImageSelected {
-    UIImage *image = [super thumbImageForState:UIControlStateSelected];
-    return [C4Image imageWithUIImage:image];
-}
--(void)setThumbImageSelected:(C4Image *)image {
-    if (image != nil) {
-        _usesThumbImage = YES;
-        [super setThumbImage:image.UIImage forState:UIControlStateHighlighted];
-    }
-}
-
--(C4Image *)minTrackImage {
-    UIImage *image = [super minimumTrackImageForState:UIControlStateNormal];
-    return [C4Image imageWithUIImage:image];
-}
--(void)setMinTrackImage:(C4Image *)image {
-    if (image != nil) {
-        _usesMinTrackImage = YES;
-        [super setMinimumTrackImage:image.UIImage forState:UIControlStateNormal];
-    }
-}
-
--(C4Image *)minTrackImageHighlighted {
-    UIImage *image = [super minimumTrackImageForState:UIControlStateHighlighted];
-    return [C4Image imageWithUIImage:image];
-}
--(void)setMinTrackImageHighlighted:(C4Image *)image {
-    if (image != nil) {
-        _usesMinTrackImage = YES;
-        [super setMinimumTrackImage:image.UIImage forState:UIControlStateHighlighted];
-    }
-}
-
--(C4Image *)minTrackImageDisabled {
-    UIImage *image = [super minimumTrackImageForState:UIControlStateDisabled];
-    return [C4Image imageWithUIImage:image];
-}
--(void)setMinTrackImageDisabled:(C4Image *)image {
-    if (image != nil) {
-        _usesMinTrackImage = YES;
-        [super setMinimumTrackImage:image.UIImage forState:UIControlStateDisabled];
-    }
-}
-
--(C4Image *)minTrackImageSelected {
-    UIImage *image = [super minimumTrackImageForState:UIControlStateSelected];
-    return [C4Image imageWithUIImage:image];
-}
-
--(void)setMinTrackImageSelected:(C4Image *)image {
-    if (image != nil) {
-        _usesMinTrackImage = YES;
-        [super setMinimumTrackImage:image.UIImage forState:UIControlStateSelected];
-    }
-}
-
--(C4Image *)maxTrackImage {
-    UIImage *image = [super maximumTrackImageForState:UIControlStateNormal];
-    return [C4Image imageWithUIImage:image];
-}
--(void)setMaxTrackImage:(C4Image *)image {
-    if (image != nil) {
-        _usesMaxTrackImage = YES;
-        [super setMaximumTrackImage:image.UIImage forState:UIControlStateNormal];
-    }
-}
-
--(C4Image *)maxTrackImageHighlighted {
-    _usesMaxTrackImage = YES;
-    UIImage *image = [super maximumTrackImageForState:UIControlStateHighlighted];
-    return [C4Image imageWithUIImage:image];
-}
--(void)setMaxTrackImageHighlighted:(C4Image *)image {
-    if (image != nil) {
-        _usesMaxTrackImage = YES;
-        [super setMaximumTrackImage:image.UIImage forState:UIControlStateHighlighted];
-    }
-}
-
--(C4Image *)maxTrackImageDisabled {
-    UIImage *image = [super maximumTrackImageForState:UIControlStateDisabled];
-    return [C4Image imageWithUIImage:image];
-}
--(void)setMaxTrackImageDisabled:(C4Image *)image {
-    if (image != nil) {
-        _usesMaxTrackImage = YES;
-        [super setMaximumTrackImage:image.UIImage forState:UIControlStateDisabled];
-    }
-}
-
--(C4Image *)maxTrackImageSelected {
-    UIImage *image = [super maximumTrackImageForState:UIControlStateSelected];
-    return [C4Image imageWithUIImage:image];
-}
--(void)setMaxTrackImageSelected:(C4Image *)image {
-    if (image != nil) {
-        _usesMaxTrackImage = YES;
-        [super setMaximumTrackImage:image.UIImage forState:UIControlStateSelected];
-    }
-}
+//-(void)setMinimumTrackTintColor:(UIColor *)minimumTrackTintColor {
+//    _usesMinTrackImage = NO;
+//    if (minimumTrackTintColor == (UIColor *)[NSNull null]) minimumTrackTintColor = nil;
+//    [super setMinimumTrackTintColor:minimumTrackTintColor];
+//}
+//
+//-(UIColor *)minimumTrackTintColor {
+//    return [super minimumTrackTintColor];
+//}
+//
+//-(void)setMaximumTrackTintColor:(UIColor *)maximumTrackTintColor {
+//    _usesMinTrackImage = NO;
+//    if(maximumTrackTintColor == (UIColor *)[NSNull null]) maximumTrackTintColor = nil;
+//    super.maximumTrackTintColor = maximumTrackTintColor;
+//}
+//
+//-(UIColor *)maximumTrackTintColor {
+//    return [super maximumTrackTintColor];
+//}
+//
+//-(NSDictionary *)style {
+//    //mutable local styles
+//    NSMutableDictionary *localStyle = [[NSMutableDictionary alloc] initWithCapacity:0];
+//    if(_usesMaxTrackImage) {
+//        if(self.maxTrackImage != nil) [localStyle setObject:self.maxTrackImage forKey:@"maxTrackImage"];
+//        if(self.maxTrackImageDisabled != nil) [localStyle setObject:self.maxTrackImageDisabled forKey:@"maxTrackImageDisabled"];
+//        if(self.maxTrackImageHighlighted != nil) [localStyle setObject:self.maxTrackImageHighlighted forKey:@"maxTrackImageHighlighted"];
+//        if(self.maxTrackImageSelected != nil) [localStyle setObject:self.maxTrackImageSelected forKey:@"maxTrackImageSelected"];
+//    } else {
+//        if(self.maximumTrackTintColor != nil) [localStyle setObject:self.maximumTrackTintColor forKey:@"maximumTrackTintColor"];
+//    }
+//    
+//    if(_usesMinTrackImage) {
+//        if(self.minTrackImage != nil) [localStyle setObject:self.minTrackImage forKey:@"minTrackImage"];
+//        if(self.minTrackImageDisabled != nil) [localStyle setObject:self.minTrackImageDisabled forKey:@"minTrackImageDisabled"];
+//        if(self.minTrackImageHighlighted != nil) [localStyle setObject:self.minTrackImageHighlighted forKey:@"minTrackImageHighlighted"];
+//        if(self.minTrackImageSelected != nil) [localStyle setObject:self.minTrackImageSelected forKey:@"minTrackImageSelected"];
+//    } else {
+//        if(self.minimumTrackTintColor == nil) [localStyle setObject:self.minimumTrackTintColor forKey:@"minimumTrackTintColor"];
+//    }
+//    
+//    if(_usesThumbImage) {
+//        if(self.thumbImage != nil) [localStyle setObject:self.thumbImage forKey:@"thumbImage"];
+//        if(self.thumbImageDisabled != nil) [localStyle setObject:self.thumbImageDisabled forKey:@"thumbImageDisabled"];
+//        if(self.thumbImageHighlighted != nil) [localStyle setObject:self.thumbImageHighlighted forKey:@"thumbImageHighlighted"];
+//        if(self.thumbImageSelected != nil) [localStyle setObject:self.thumbImageSelected forKey:@"thumbImageSelected"];
+//    } else {
+//        if(self.thumbTintColor != nil) [localStyle setObject:self.thumbTintColor forKey:@"thumbTintColor"];
+//    }
+//    
+//    NSMutableDictionary *controlStyle = [NSMutableDictionary dictionaryWithDictionary:
+//                                         @{
+//                                         @"alpha":@(self.alpha),
+//                                         @"borderColor":self.borderColor,
+//                                         @"borderWidth":@(self.borderWidth),
+//                                         @"cornerRadius":@(self.cornerRadius),
+//                                         @"masksToBounds":@(self.masksToBounds),
+//                                         @"shadowOpacity":@(self.shadowOpacity),
+//                                         @"shadowOffset":[NSValue valueWithCGSize:self.shadowOffset],
+//                                         @"shadowRadius":@(self.shadowRadius)
+//                                         }];
+//    if (self.backgroundColor != nil) [controlStyle setObject:self.backgroundColor forKey:@"backgroundColor"];
+//    if (self.shadowColor != nil) [controlStyle setObject:self.shadowColor forKey:@"shadowColor"];
+//    if (self.shadowPath != nil) [controlStyle setObject:(__bridge UIBezierPath *)self.shadowPath forKey:@"shadowPath"];
+//    else [controlStyle setObject:[NSNull null] forKey:@"shadowPath"];
+//    
+//    NSMutableDictionary *localAndControlStyle = [NSMutableDictionary dictionaryWithDictionary:localStyle];
+//    [localAndControlStyle addEntriesFromDictionary:controlStyle];
+//    
+//    localStyle = nil;
+//    controlStyle = nil;
+//    
+//    return (NSDictionary *)localAndControlStyle;
+//}
+//
+//-(SEL)setterSelectorFromPropertyName:(NSString *)propertyName {
+//    NSString *firstLetter = [propertyName substringToIndex:1];
+//    NSRange range = {0,1};
+//    NSString *capitalizedPropertyName = [propertyName stringByReplacingCharactersInRange:range withString:[firstLetter uppercaseString]];
+//    NSString *selectorName = [NSString stringWithFormat:@"set%@:",capitalizedPropertyName];
+//    SEL selector = NSSelectorFromString(selectorName);
+//    if([self respondsToSelector:selector]) return selector;
+//    return nil;
+//}
+//
+//-(void)setStyle:(NSDictionary *)style {
+//    // FIXME: These two loops work, but don't differentiate between "types" of objects
+//    // ... they will NOT, for instance, pull a value out of an NSNumber
+//    //    for(NSString *propertyName in self.localStylePropertyNames) {
+//    //        if([styleKeys containsObject:propertyName]) {
+//    //            SEL selector = [self setterSelectorFromPropertyName:propertyName];
+//    //            if(selector != nil && [styleKeys containsObject:propertyName]){
+//    //                objc_msgSend(self,selector,[style objectForKey:propertyName]);
+//    //            }
+//    //        }
+//    //    }
+//    //
+//    //    for(NSString *propertyName in self.controlStylePropertyNames) {
+//    //        if([styleKeys containsObject:propertyName]) {
+//    //            SEL selector = [self setterSelectorFromPropertyName:propertyName];
+//    //            if(selector != nil && [styleKeys containsObject:propertyName]){
+//    //                objc_msgSend(self,selector,[style objectForKey:propertyName]);
+//    //            }
+//    //        }
+//    //    }
+//    
+//    NSArray *styleKeys = [style allKeys];
+//    NSString *key;
+//    
+//    // Local Style Values
+//    key = @"minValueImage";
+//    if([styleKeys containsObject:key]) self.minValueImage = [style objectForKey:key];
+//    
+//    key = @"maxValueImage";
+//    if([styleKeys containsObject:key]) self.maxValueImage = [style objectForKey:key];
+//    
+//    key = @"thumbImage";
+//    if([styleKeys containsObject:key]) self.thumbImage = [style objectForKey:key];
+//    
+//    key = @"thumbImageDisabled";
+//    if([styleKeys containsObject:key]) self.thumbImageDisabled = [style objectForKey:key];
+//    
+//    key = @"thumbImageSelected";
+//    if([styleKeys containsObject:key]) self.thumbImageSelected = [style objectForKey:key];
+//    
+//    key = @"minTrackImage";
+//    if([styleKeys containsObject:key]) self.minTrackImage = [style objectForKey:key];
+//    
+//    key = @"minTrackImageHighlighted";
+//    if([styleKeys containsObject:key]) self.minTrackImageHighlighted = [style objectForKey:key];
+//    
+//    key = @"minTrackImageDisabled";
+//    if([styleKeys containsObject:key]) self.minTrackImageDisabled = [style objectForKey:key];
+//    
+//    key = @"minTrackImageDisabled";
+//    if([styleKeys containsObject:key]) self.minTrackImageDisabled = [style objectForKey:key];
+//    
+//    key = @"minTrackImageSelected";
+//    if([styleKeys containsObject:key]) self.minTrackImageSelected = [style objectForKey:key];
+//    
+//    key = @"maxTrackImage";
+//    if([styleKeys containsObject:key]) self.maxTrackImage = [style objectForKey:key];
+//    
+//    key = @"maxTrackImageHighlighted";
+//    if([styleKeys containsObject:key]) self.maxTrackImageHighlighted = [style objectForKey:key];
+//    
+//    key = @"maxTrackImageDisabled";
+//    if([styleKeys containsObject:key]) self.maxTrackImageDisabled = [style objectForKey:key];
+//    
+//    key = @"maxTrackImageSelected";
+//    if([styleKeys containsObject:key]) self.maxTrackImageSelected = [style objectForKey:key];
+//    
+//    key = @"minimumTrackTintColor";
+//    if([styleKeys containsObject:key]) self.minimumTrackTintColor = [style objectForKey:key];
+//    
+//    key = @"maximumTrackTintColor";
+//    if([styleKeys containsObject:key]) self.maximumTrackTintColor = [style objectForKey:key];
+//    
+//    key = @"thumbTintColor";
+//    if([styleKeys containsObject:key]) self.thumbTintColor = [style objectForKey:key];
+//    
+//    //Control Style Values
+//    key = @"alpha";
+//    if([styleKeys containsObject:key]) self.alpha = [[style objectForKey:key] floatValue];
+//    
+//    key = @"backgroundColor";
+//    if([styleKeys containsObject:key]) self.backgroundColor = [style objectForKey:key];
+//    
+//    key = @"borderColor";
+//    if([styleKeys containsObject:key]) self.borderColor = [style objectForKey:key];
+//    
+//    key = @"borderWidth";
+//    if([styleKeys containsObject:key]) self.borderWidth = [[style objectForKey:key] floatValue];
+//    
+//    key = @"cornerRadius";
+//    if([styleKeys containsObject:key]) self.cornerRadius = [[style objectForKey:key] floatValue];
+//    
+//    key = @"masksToBounds";
+//    if([styleKeys containsObject:key]) self.masksToBounds = [[style objectForKey:key] boolValue];
+//    
+//    key = @"shadowColor";
+//    if([styleKeys containsObject:key]) self.shadowColor = [style objectForKey:key];
+//    
+//    key = @"shadowOpacity";
+//    if([styleKeys containsObject:key]) self.shadowOpacity = [[style objectForKey:key] floatValue];
+//    
+//    key = @"shadowOffset";
+//    if([styleKeys containsObject:key]) self.shadowOffset = [[style objectForKey:key] CGSizeValue];
+//    
+//    key = @"shadowPath";
+//    if([styleKeys containsObject:key]) self.shadowPath = [style objectForKey:key] == [NSNull null] ? nil : (__bridge CGPathRef)[style objectForKey:key];
+//    
+//    key = @"shadowRadius";
+//    if([styleKeys containsObject:key]) self.shadowRadius = [[style objectForKey:key] floatValue];
+//}
+//
+//-(C4Image *)minValueImage {
+//    return self.minimumValueImage == nil ? nil : [C4Image imageWithUIImage:self.minimumValueImage];
+//}
+//
+//-(void)setMinValueImage:(C4Image *)minValueImage {
+//    if(minValueImage == (C4Image *)[NSNull null]) self.minValueImage = nil;
+//    else self.minimumValueImage = minValueImage.UIImage;
+//}
+//
+//-(C4Image *)maxValueImage {
+//    return self.maximumValueImage == nil ? nil : [C4Image imageWithUIImage:self.maximumValueImage];
+//}
+//
+//-(void)setMaxValueImage:(C4Image *)maxValueImage {
+//    if(maxValueImage == (C4Image *)[NSNull null]) self.maximumValueImage = nil;
+//    else self.maximumValueImage = maxValueImage.UIImage;
+//}
+//
+//-(void)setThumbTintColor:(UIColor *)thumbTintColor {
+//    _usesThumbImage = NO;
+//    self.thumbImage = nil;
+//    self.thumbImageDisabled = nil;
+//    self.thumbImageHighlighted = nil;
+//    self.thumbImageSelected = nil;
+//    [super setThumbTintColor:thumbTintColor];
+//}
+//
+//-(C4Image *)thumbImage {
+//    UIImage *image = [super thumbImageForState:UIControlStateNormal];
+//    return [C4Image imageWithUIImage:image];
+//}
+//
+//-(void)setThumbImage:(C4Image *)image {
+//    if (image != nil) {
+//        _usesThumbImage = YES;
+//        [super setThumbImage:image.UIImage forState:UIControlStateNormal];
+//    }
+//}
+//
+//-(C4Image *)thumbImageHighlighted {
+//    UIImage *image = [super thumbImageForState:UIControlStateHighlighted];
+//    return [C4Image imageWithUIImage:image];
+//}
+//
+//-(void)setThumbImageHighlighted:(C4Image *)image {
+//    if (image != nil) {
+//        _usesThumbImage = YES;
+//        [super setThumbImage:image.UIImage forState:UIControlStateHighlighted];
+//    }
+//}
+//
+//-(C4Image *)thumbImageDisabled {
+//    UIImage *image = [super thumbImageForState:UIControlStateDisabled];
+//    return [C4Image imageWithUIImage:image];
+//}
+//
+//-(void)setThumbImageDisabled:(C4Image *)image {
+//    if (image != nil) {
+//        _usesThumbImage = YES;
+//        [super setThumbImage:image.UIImage forState:UIControlStateDisabled];
+//    }
+//}
+//
+//-(C4Image *)thumbImageSelected {
+//    UIImage *image = [super thumbImageForState:UIControlStateSelected];
+//    return [C4Image imageWithUIImage:image];
+//}
+//-(void)setThumbImageSelected:(C4Image *)image {
+//    if (image != nil) {
+//        _usesThumbImage = YES;
+//        [super setThumbImage:image.UIImage forState:UIControlStateHighlighted];
+//    }
+//}
+//
+//-(C4Image *)minTrackImage {
+//    UIImage *image = [super minimumTrackImageForState:UIControlStateNormal];
+//    return [C4Image imageWithUIImage:image];
+//}
+//-(void)setMinTrackImage:(C4Image *)image {
+//    if (image != nil) {
+//        _usesMinTrackImage = YES;
+//        [super setMinimumTrackImage:image.UIImage forState:UIControlStateNormal];
+//    }
+//}
+//
+//-(C4Image *)minTrackImageHighlighted {
+//    UIImage *image = [super minimumTrackImageForState:UIControlStateHighlighted];
+//    return [C4Image imageWithUIImage:image];
+//}
+//-(void)setMinTrackImageHighlighted:(C4Image *)image {
+//    if (image != nil) {
+//        _usesMinTrackImage = YES;
+//        [super setMinimumTrackImage:image.UIImage forState:UIControlStateHighlighted];
+//    }
+//}
+//
+//-(C4Image *)minTrackImageDisabled {
+//    UIImage *image = [super minimumTrackImageForState:UIControlStateDisabled];
+//    return [C4Image imageWithUIImage:image];
+//}
+//-(void)setMinTrackImageDisabled:(C4Image *)image {
+//    if (image != nil) {
+//        _usesMinTrackImage = YES;
+//        [super setMinimumTrackImage:image.UIImage forState:UIControlStateDisabled];
+//    }
+//}
+//
+//-(C4Image *)minTrackImageSelected {
+//    UIImage *image = [super minimumTrackImageForState:UIControlStateSelected];
+//    return [C4Image imageWithUIImage:image];
+//}
+//
+//-(void)setMinTrackImageSelected:(C4Image *)image {
+//    if (image != nil) {
+//        _usesMinTrackImage = YES;
+//        [super setMinimumTrackImage:image.UIImage forState:UIControlStateSelected];
+//    }
+//}
+//
+//-(C4Image *)maxTrackImage {
+//    UIImage *image = [super maximumTrackImageForState:UIControlStateNormal];
+//    return [C4Image imageWithUIImage:image];
+//}
+//-(void)setMaxTrackImage:(C4Image *)image {
+//    if (image != nil) {
+//        _usesMaxTrackImage = YES;
+//        [super setMaximumTrackImage:image.UIImage forState:UIControlStateNormal];
+//    }
+//}
+//
+//-(C4Image *)maxTrackImageHighlighted {
+//    _usesMaxTrackImage = YES;
+//    UIImage *image = [super maximumTrackImageForState:UIControlStateHighlighted];
+//    return [C4Image imageWithUIImage:image];
+//}
+//-(void)setMaxTrackImageHighlighted:(C4Image *)image {
+//    if (image != nil) {
+//        _usesMaxTrackImage = YES;
+//        [super setMaximumTrackImage:image.UIImage forState:UIControlStateHighlighted];
+//    }
+//}
+//
+//-(C4Image *)maxTrackImageDisabled {
+//    UIImage *image = [super maximumTrackImageForState:UIControlStateDisabled];
+//    return [C4Image imageWithUIImage:image];
+//}
+//-(void)setMaxTrackImageDisabled:(C4Image *)image {
+//    if (image != nil) {
+//        _usesMaxTrackImage = YES;
+//        [super setMaximumTrackImage:image.UIImage forState:UIControlStateDisabled];
+//    }
+//}
+//
+//-(C4Image *)maxTrackImageSelected {
+//    UIImage *image = [super maximumTrackImageForState:UIControlStateSelected];
+//    return [C4Image imageWithUIImage:image];
+//}
+//-(void)setMaxTrackImageSelected:(C4Image *)image {
+//    if (image != nil) {
+//        _usesMaxTrackImage = YES;
+//        [super setMaximumTrackImage:image.UIImage forState:UIControlStateSelected];
+//    }
+//}
 
 #pragma mark other Control Methods (target:action)
 -(void)runMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
@@ -1173,18 +1172,18 @@
 -(void)cancelTracking {
 }
 
-+(C4Slider *)slider:(CGRect)rect {
-    return [[C4Slider alloc] initWithFrame:rect];
++(C4Button *)button:(CGRect)rect {
+    return [[C4Button alloc] initWithFrame:rect];
 }
 
-+(C4Slider *)defaultStyle {
-    return (C4Slider *)[C4Slider appearance];
++(C4Button *)defaultStyle {
+    return (C4Button *)[C4Button appearance];
 }
 
--(C4Slider *)copyWithZone:(NSZone *)zone {
-    C4Slider *slider = [[C4Slider allocWithZone:zone] initWithFrame:self.frame];
-    slider.style = self.style;
-    return slider;
+-(C4Button *)copyWithZone:(NSZone *)zone {
+    C4Button *button = [[C4Button allocWithZone:zone] initWithFrame:self.frame];
+    button.style = self.style;
+    return button;
 }
 
 @end

@@ -109,7 +109,7 @@
  
  Setting to 0.0f is like calling pause.
  */
-@property (nonatomic) CGFloat rate;
+@property (readwrite, nonatomic) CGFloat rate;
 
 /**The width of the movie.
  

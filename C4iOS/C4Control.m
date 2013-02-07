@@ -28,19 +28,6 @@
         self.longPressMethodName = @"pressedLong";
         self.shouldAutoreverse = NO;
 
-        _stylePropertyNames = @[
-        @"alpha",
-        @"backgroundColor",
-        @"borderColor",
-        @"borderWidth",
-        @"cornerRadius",
-        @"masksToBounds",
-        @"shadowColor",
-        @"shadowOpacity",
-        @"shadowOffset",
-        @"shadowPath",
-        @"shadowRadius"
-        ];
         self.style = [C4Control defaultStyle].style;
     }
     return self;
@@ -754,6 +741,8 @@
 }
 
 -(NSDictionary *)style {
+    //FIXME: Will never transfer nil for some properties
+    //(let's deal with it later rather than solve a "potential" problem)
     NSMutableDictionary *controlStyle = [NSMutableDictionary dictionaryWithDictionary:
                                          @{
                                          @"alpha":@(self.alpha),
@@ -767,8 +756,8 @@
                                          }];
     if (self.backgroundColor != nil) [controlStyle setObject:self.backgroundColor forKey:@"backgroundColor"];
     if (self.shadowColor != nil) [controlStyle setObject:self.shadowColor forKey:@"shadowColor"];
-    if (self.shadowPath != nil) [controlStyle setObject:(__bridge UIBezierPath *)self.shadowPath forKey:@"shadowPath"];
-    else [controlStyle setObject:[NSNull null] forKey:@"shadowPath"];
+    [controlStyle setObject:self.shadowPath == nil ? [NSNull null] : (__bridge UIBezierPath *)self.shadowPath forKey:@"shadowPath"];
+    
     return (NSDictionary *)controlStyle;
 }
 
@@ -810,7 +799,7 @@
     key = @"shadowRadius";
     if([styleKeys containsObject:key]) self.shadowRadius = [[style objectForKey:key] floatValue];
     
-    //  FIXME: might be possible to have these values be part of the basic C4Control object
+    //  FIXME: should the following be part of C4Control?
     //    key = @"maxTrackImage";
     //    if([styleKeys containsObject:key]) self.maxTrackImage = [style objectForKey:key];
     //
@@ -843,4 +832,5 @@
     control.style = self.style;
     return control;
 }
+
 @end

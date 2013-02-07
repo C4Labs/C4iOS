@@ -19,19 +19,10 @@
 @end
 
 @implementation C4Movie
-@synthesize player;
-@synthesize playerItem;
+@synthesize player = _player;
 @synthesize rate = _rate;
-@synthesize originalMovieSize = _originalMovieSize;
-@synthesize originalMovieRatio = _originalMovieRatio;
 @synthesize width = _width;
 @synthesize height = _height;
-@synthesize isPlaying;
-@synthesize loops;
-@synthesize shouldAutoplay;
-@synthesize audioMix = _audioMix;
-@synthesize volume = _volume;
-@synthesize size = _size;
 
 +(C4Movie *)movieNamed:(NSString *)movieName {
     C4Movie *newMovie = [[C4Movie alloc] initWithMovieName:movieName frame:CGRectZero];
@@ -169,9 +160,9 @@
 }
 
 - (CMTime)playerItemDuration {
-	AVPlayerItem *thePlayerItem = [player currentItem];
+	AVPlayerItem *thePlayerItem = [_player currentItem];
 	if (thePlayerItem.status == AVPlayerItemStatusReadyToPlay) {
-		return(playerItem.duration);
+		return(_playerItem.duration);
 	}
 	return(kCMTimeInvalid);
 }
@@ -250,7 +241,7 @@
     
     if (self.player == nil) {
         [self setPlayer:[AVPlayer playerWithPlayerItem:self.playerItem]];
-		player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
+		_player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
         [self.player addObserver:self
                       forKeyPath:@"currentItem"
                          options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
@@ -303,7 +294,7 @@
                 
                 /* Set the C4PlayerLayer on the view to allow the AVPlayer object to display
                  its content. */
-                [self.playerLayer setPlayer:player];
+                [self.playerLayer setPlayer:_player];
                 if(self.shouldAutoplay == YES) {
                     [self play];
                 }

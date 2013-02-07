@@ -6,11 +6,6 @@
 //  Copyright (c) 2012 POSTFL. All rights reserved.
 //
 
-/*
- should add https://developer.apple.com/library/ios/#qa/qa1673/_index.html
- and animating along a path
- */
-
 #import <UIKit/UIKit.h>
 
 @interface C4Slider : UISlider <C4Notification, C4Gesture, C4MethodDelay, NSCopying, C4AddSubview> {

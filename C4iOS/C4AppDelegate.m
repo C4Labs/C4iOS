@@ -19,9 +19,9 @@
 
 @implementation C4AppDelegate
 
-@synthesize window = _window;
-@synthesize workspace = _workspace;
-@synthesize mainView;
+//@synthesize window = _window;
+//@synthesize workspace = _workspace;
+//@synthesize mainView;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     launchOptions = launchOptions;
@@ -44,11 +44,9 @@
     //strangely, if the following call to set the background color isn't made, then the view doesn't receive touch events...
     self.workspace.view.backgroundColor = [UIColor whiteColor];
 
-//    [(AVAudioSession*)[AVAudioSession sharedInstance] setDelegate:self.workspace];
     [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategorySoloAmbient error: nil];
-    mainView = (C4View *)self.workspace.view;
+    _mainView = (C4View *)self.workspace.view;
 
-//    [self.workspace runMethod:@"setup" afterDelay:0.05f];
     [self.workspace setup];
     return YES;
 }
