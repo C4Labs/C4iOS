@@ -25,19 +25,7 @@
     self = [super initWithFrame:frame];
     if(self != nil) {
         _initialized = NO;
-        _localStylePropertyNames = @[
-        @"fillColor",
-        @"fillRule",
-        @"lineCap",
-        @"lineDashPattern",
-        @"lineDashPhase",
-        @"lineJoin",
-        @"lineWidth",
-        @"miterLimit",
-        @"strokeColor",
-        @"strokeEnd",
-        @"strokeStart"
-        ];
+        
         self.animationOptions = BEGINCURRENT | EASEINOUT;
         [self willChangeShape];
         self.style = [C4Shape defaultStyle].style;

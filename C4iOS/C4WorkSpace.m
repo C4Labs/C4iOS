@@ -7,22 +7,25 @@
 #import "C4WorkSpace.h"
 
 @implementation C4WorkSpace {
-    C4Slider *s1, *s2;
+    C4Label *l1, *l2;
 }
 
 -(void)setup {
-    s1 = [C4Slider slider:CGRectMake(44, 44,368,44)];
-    [self.canvas addSubview:s1];
+    l1 = [C4Label labelWithText:@"hi"];
+    l1.textColor = C4RED;
+    l1.shadowOpacity = 0.8f;
+    l1.shadowOffset = CGSizeMake(2,2);
+    l1.shadowRadius = 2.0f;
+    l1.textShadowOffset = CGSizeMake(1,1);
+    l1.textShadowColor = l1.shadowColor;
+    [self.canvas addLabel:l1];
 }
 
 -(void)touchesBegan {
-    if(s2 == nil) {
-        s1.maximumTrackTintColor = C4BLUE;
-        s1.shadowOpacity = 0.8f;
-        s1.shadowOffset = CGSizeMake(2, 2);
-        s2 = [C4Slider slider:CGRectMake(10,100,368,44)];
-        s2.style = s1.style;
-        [self.canvas addSubview:s2];
+    if(l2 == nil) {
+        l2 = [l1 copy];
+        l2.origin = CGPointMake(100,0);
+        [self.canvas addLabel:l2];
     }
 }
 

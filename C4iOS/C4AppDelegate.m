@@ -63,6 +63,7 @@
     [C4Control defaultStyle].backgroundColor = [UIColor clearColor];
     [C4Control defaultStyle].cornerRadius = 0.0f;
     [C4Control defaultStyle].layer.delegate = self;
+    [C4Control defaultStyle].shadowColor = C4GREY;
     [C4Control defaultStyle].shadowOpacity = 0.0f;
     [C4Control defaultStyle].shadowOffset = CGSizeZero;
     [C4Control defaultStyle].repeatCount = 0;
@@ -74,6 +75,7 @@
     @"animationOptions":@([C4Control defaultStyle].animationOptions),
     @"backgroundColor":[C4Control defaultStyle].backgroundColor,
     @"cornerRadius":@([C4Control defaultStyle].cornerRadius),
+    @"shadowColor":[C4Control defaultStyle].shadowColor,
     @"shadowOpacity":@([C4Control defaultStyle].shadowOpacity),
     @"shadowOffset":[NSValue valueWithCGSize:[C4Control defaultStyle].shadowOffset],
     @"repeatCount":@([C4Control defaultStyle].repeatCount)
@@ -99,6 +101,12 @@
     [C4Shape defaultStyle].strokeColor = C4BLUE;
     [C4Shape defaultStyle].strokeEnd = 1.0f;
     [C4Shape defaultStyle].strokeStart = 0.0f;
+    
+    [C4Label defaultStyle].style = basicStyle;
+    [C4Label defaultStyle].textColor = C4GREY;
+    [C4Label defaultStyle].highlightedTextColor = C4RED;
+    [C4Label defaultStyle].backgroundColor = [UIColor clearColor];
+
 }
 
 @end

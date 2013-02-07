@@ -14,23 +14,8 @@
 @end
 
 @implementation C4Label
-//@synthesize adjustsFontSizeToFitWidth = _adjustsFontSizeToFitWidth;
-//@synthesize baselineAdjustment = _baselineAdjustment;
-//@synthesize font = _font;
-//@synthesize highlighted = _highlighted;
-//@synthesize highlightedTextColor = _highlightedTextColor;
-//@synthesize lineBreakMode = _lineBreakMode;
-//@synthesize minimumFontSize = _minimumFontSize;
-//@synthesize numberOfLines = _numberOfLines;
-//@synthesize textAlignment = _textAlignment;
-//@synthesize textColor = _textColor;
 @synthesize textShadowColor = _textShadowColor;
-//@synthesize textShadowOffset = _textShadowOffset;
-//@synthesize text = _text;
-//@synthesize label = _label;
 @synthesize width = _width, height = _height;
-//@synthesize animationOptions = _animationOptions;
-//@synthesize shouldAutoreverse = _shouldAutoreverse;
 @synthesize size = _size;
 
 -(id)init {
@@ -50,7 +35,7 @@
 }
 
 -(id)initWithText:(NSString *)text {
-    return [self initWithText:text font:[C4Font systemFontOfSize:12.0f]];
+    return [self initWithText:text font:[C4Font systemFontOfSize:24.0f]];
 }
 
 -(id)initWithText:(NSString *)text font:(C4Font *)font {
@@ -74,25 +59,18 @@
     if(CGRectEqualToRect(frame, CGRectZero)) frame = CGRectMake(0, 0, 1, 1);
     self = [super initWithFrame:frame];
     if(self != nil) {
-        _label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-        _label.textColor = C4GREY;
-        _label.highlightedTextColor = C4RED;
+        _label = [[UILabel alloc] initWithFrame:self.bounds];
+        _label.textColor = self.textColor;
+        _label.highlightedTextColor = self.highlightedTextColor;
         _label.backgroundColor = [UIColor clearColor];
-        _label.shadowColor = C4GREY;
-        
-        _localStylePropertyNames = @[
-        @"adjustsFontSizeToFitWidth",
-        @"baselineAdjustment",
-        @"font",
-        @"highlighted",
-        @"highlightedTextColor",
-        @"lineBreakMode",
-        @"numberOfLines",
-        @"textAlignment",
-        @"textShadowColor",
-        @"textShadowOffset"
-        ];
-        
+        _label.shadowColor = [UIColor clearColor];
+
+        /*
+         _label.textColor = C4GREY;
+         _label.highlightedTextColor = C4RED;
+         _label.backgroundColor = [UIColor clearColor];
+         _label.shadowColor = C4GREY;
+         */
         [self addSubview:(UILabel *)_label];
         [self setup];
     }
@@ -380,6 +358,7 @@
                                        }];
     if (self.font != nil) [localStyle setObject:self.font forKey:@"font"];
     if (self.highlightedTextColor != nil) [localStyle setObject:self.highlightedTextColor forKey:@"highlightedTextColor"];
+    if (self.textColor != nil) [localStyle setObject:self.textColor forKey:@"textColor"];
     if (self.textShadowColor != nil) [localStyle setObject:self.textShadowColor forKey:@"textShadowColor"];
     
     NSMutableDictionary *localAndSuperStyle = [NSMutableDictionary dictionaryWithDictionary:localStyle];
@@ -420,14 +399,23 @@
     key = @"textAlignment";
     if([styleKeys containsObject:key]) self.textAlignment = (C4TextAlignment)[[style objectForKey:key] integerValue];
     
+    key = @"textColor";
+    if([styleKeys containsObject:key]) self.textColor = [style objectForKey:key];
+
     key = @"textShadowColor";
     if([styleKeys containsObject:key]) self.textShadowColor = [style objectForKey:key];
-    
+
     key = @"textShadowOffset";
     if([styleKeys containsObject:key]) self.textShadowOffset = [[style objectForKey:key] CGSizeValue];
 }
 
 +(C4Label *)defaultStyle {
     return (C4Label *)[C4Label appearance];
+}
+
+-(C4Label *)copyWithZone:(NSZone *)zone {
+    C4Label *label = [[C4Label allocWithZone:zone] initWithText:self.text font:self.font frame:self.frame];
+    label.style = self.style;
+    return label;
 }
 @end
