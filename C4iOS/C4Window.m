@@ -442,21 +442,24 @@
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    if([[self nextResponder] isKindOfClass:[C4WorkSpace class]]) [super touchesBegan:touches withEvent:event];
+    //    if([[self nextResponder] isKindOfClass:[C4WorkSpace class]]) [super touchesBegan:touches withEvent:event];
+    [super touchesBegan:touches withEvent:event];
     [self postNotification:@"touchesBegan"];
     [self touchesBegan];
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    if([[self nextResponder] isKindOfClass:[C4WorkSpace class]]) [super touchesMoved:touches withEvent:event];
+    //    if([[self nextResponder] isKindOfClass:[C4WorkSpace class]]) [super touchesMoved:touches withEvent:event];
+    [super touchesMoved:touches withEvent:event];
     [self postNotification:@"touchesMoved"];
     [super touchesMoved:touches withEvent:event];
     [self touchesMoved];
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    if([[self nextResponder] isKindOfClass:[C4WorkSpace class]]) [super touchesEnded:touches withEvent:event];
+    //    if([[self nextResponder] isKindOfClass:[C4WorkSpace class]]) [super touchesEnded:touches withEvent:event];
     [super touchesEnded:touches withEvent:event];
+    [self postNotification:@"touchesEnded"];
     [self touchesEnded];
 }
 

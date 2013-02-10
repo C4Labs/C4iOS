@@ -64,10 +64,11 @@
 
 #pragma mark UIView animatable property overrides
 
--(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
-    event = event;
-    return CGRectContainsPoint(self.layer.frame, point);
-}
+//-(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
+//    event = event;
+//    return [super pointInside:point withEvent:event];
+//    return CGRectContainsPoint(self.layer.frame, point);
+//}
 
 -(void)setCenter:(CGPoint)center {
     if(self.animationDuration == 0.0f) super.center = center;
@@ -329,7 +330,6 @@
 
 #pragma mark Move
 -(void)move:(id)sender {
-    [self postNotification:@"moved"];
     NSUInteger _ani = self.animationOptions;
     CGFloat _dur = self.animationDuration;
     CGFloat _del = self.animationDelay;
@@ -342,6 +342,7 @@
     translatedPoint.y += self.center.y;
     self.center = translatedPoint;
     [(UIPanGestureRecognizer *)sender setTranslation:CGPointZero inView:self];
+    [self postNotification:@"moved"];
     
     self.animationDelay = _del;
     self.animationDuration = _dur;
@@ -448,19 +449,23 @@
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    if([[self nextResponder] isKindOfClass:[C4WorkSpace class]]) [super touchesBegan:touches withEvent:event];
+    C4Log(@"hi");
+//    if([[self nextResponder] isKindOfClass:[C4WorkSpace class]]) [super touchesBegan:touches withEvent:event];
+    [super touchesBegan:touches withEvent:event];
     [self postNotification:@"touchesBegan"];
     [self touchesBegan];
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    if([[self nextResponder] isKindOfClass:[C4WorkSpace class]]) [super touchesMoved:touches withEvent:event];
+//    if([[self nextResponder] isKindOfClass:[C4WorkSpace class]]) [super touchesMoved:touches withEvent:event];
+    [super touchesMoved:touches withEvent:event];
     [self postNotification:@"touchesMoved"];
     [self touchesMoved];
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     if([[self nextResponder] isKindOfClass:[C4WorkSpace class]]) [super touchesEnded:touches withEvent:event];
+    [super touchesEnded:touches withEvent:event];
     [self postNotification:@"touchesEnded"];
     [self touchesEnded];
 }
