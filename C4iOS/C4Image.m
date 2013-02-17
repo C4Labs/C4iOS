@@ -512,7 +512,8 @@
 
 -(void)setContentsWithFilterOutput:(CIImage *)output filterName:(NSString *)filterName {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self setContents:[self.filterContext createCGImage:output fromRect:self.bounds]];
+        //create the image based on its original size, contents will automatically scale
+        [self setContents:[self.filterContext createCGImage:output fromRect:(CGRect){CGPointZero,self.originalSize}]];
         _filteredImage = self.contents;
         [self postNotification:[filterName stringByAppendingString:@"Complete"]];
     });
@@ -711,7 +712,7 @@
 }
 
 -(CGFloat)width {
-    return self.frame.size.width;
+    return self.bounds.size.width;
 }
 
 -(void)setWidth:(CGFloat)width {
@@ -733,7 +734,7 @@
 }
 
 -(CGSize)size {
-    return self.frame.size;
+    return self.bounds.size;
 }
 
 -(void)setSize:(CGSize)size {

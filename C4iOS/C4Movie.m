@@ -359,11 +359,6 @@
     [self.player pause];
 }
 
--(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
-    event = event;
-    return [self.playerLayer containsPoint:point];
-}
-
 -(CGFloat)width {
     return self.bounds.size.width;
 }

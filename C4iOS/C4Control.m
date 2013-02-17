@@ -64,12 +64,6 @@
 
 #pragma mark UIView animatable property overrides
 
-//-(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
-//    event = event;
-//    return [super pointInside:point withEvent:event];
-//    return CGRectContainsPoint(self.layer.frame, point);
-//}
-
 -(void)setCenter:(CGPoint)center {
     if(self.animationDuration == 0.0f) super.center = center;
     else {

@@ -83,12 +83,6 @@
     }
 }
 
-//-(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
-//    event = event;
-//    for(UIView *v in self.subviews) if([v pointInside:point withEvent:event]) return NO;
-//    return [self.layer containsPoint:point];
-//}
-
 -(CGPoint)center {
     CGPoint currentCenter = super.center;
     UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;

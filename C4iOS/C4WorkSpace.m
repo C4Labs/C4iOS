@@ -12,18 +12,13 @@
 }
 
 -(void)setup {
-    s = [C4Shape rect:CGRectMake(0, 0, 100, 100)];
-    s.userInteractionEnabled = YES;
-    
     i = [C4Image imageNamed:@"C4Sky"];
-    i.userInteractionEnabled = YES;
     [self.canvas addImage:i];
-    [self.canvas addShape:s];
+    i.width = 200;
 }
 
--(void)touchBegan {
-    i.userInteractionEnabled = YES;
-    s.userInteractionEnabled = YES;
+-(void)touchesBegan {
+    [i colorInvert];
 }
 
 @end
