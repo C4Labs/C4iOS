@@ -55,7 +55,7 @@
  
  @param image A C4Image whose contents will be used to create a new C4Image object.
  */
--(id)initWithImage:(C4Image *)image;
+-(id)initWithImage:(NewImage *)image;
 
 /**Initializes a C4Image using an NSData object
  
@@ -86,12 +86,12 @@
 // @param imageNames An array of image names to be used to construct the animated image
 // */
 //-(id)initAnimatedImageWithNames:(NSArray *)imageNames;
-//
-///**Sets the current visible representation of a C4Image to that of another image.
-// 
-// @param image A C4Image whose contents will be used to set the visible representation of the receiver.
-// */
-//-(void)setImage:(C4Image *)image;
+
+/**Sets the current visible representation of a C4Image to that of another image.
+ 
+ @param image A C4Image whose contents will be used to set the visible representation of the receiver.
+ */
+-(void)setImage:(NewImage *)image;
 //
 ///**Causes an animatedImage to start playing.
 // */
@@ -100,24 +100,24 @@
 ///**Causes an animatedImage to stop playing.
 // */
 //-(void)stop;
-//
-///**Loads a raw character array with color data.
-// 
-// This will load the array one time, and must be called before colorAt: or rgbVectorAt:
-// */
-//-(void)loadPixelData;
-//
-///**Creates and returns a UIColor object from the specified coordinate in the image.
-// 
-// @param point The coordinate in the image from which to pull color values
-// */
-//-(UIColor *)colorAt:(CGPoint)point;
-//
-///**Creates and returns a C4Vector object containing 4 points mapping to the RGBA value from the specified coordinate in the image.
-// 
-// @param point The coordinate in the image from which to pull color values
-// */
-//-(C4Vector *)rgbVectorAt:(CGPoint)point;
+
+/**Loads a raw character array with color data.
+ 
+ This will load the array one time, and must be called before colorAt: or rgbVectorAt:
+ */
+-(void)loadPixelData;
+
+/**Creates and returns a UIColor object from the specified coordinate in the image.
+ 
+ @param point The coordinate in the image from which to pull color values
+ */
+-(UIColor *)colorAt:(CGPoint)point;
+
+/**Creates and returns a C4Vector object containing 4 points mapping to the RGBA value from the specified coordinate in the image.
+ 
+ @param point The coordinate in the image from which to pull color values
+ */
+-(C4Vector *)rgbVectorAt:(CGPoint)point;
 //
 //#pragma mark Filters
 ///// @name Filters
@@ -172,11 +172,11 @@
 // @param backgroundImage The image that will provide the background for this filter.
 // */
 //-(void)colorDodge:(C4Image *)backgroundImage;
-//
-///**Color invert filter.
-// Inverts the colors in an image.
-// */
-//-(void)colorInvert;
+
+/**Color invert filter.
+ Inverts the colors in an image.
+ */
+-(void)colorInvert;
 //
 ///**Color matrix filter
 // Multiplies source color values and adds a bias factor to each color component.
@@ -195,14 +195,14 @@
 // @param bias The bias value to be used in the matrix multiplication
 // */
 //-(void)colorMatrix:(UIColor *)color bias:(CGFloat)bias;
-//
-///**Color monochrome filter.
-// Remaps colors so they fall within shades of a single color.
-// 
-// @param color The color to which the image will be mapped.
-// @param intensity The intensity of the mapping, defaults to 1.0f, minimum 0.0f, maximum 1.0f
-// */
-//-(void)colorMonochrome:(UIColor *)color inputIntensity:(CGFloat)intensity;
+
+/**Color monochrome filter.
+ Remaps colors so they fall within shades of a single color.
+ 
+ @param color The color to which the image will be mapped.
+ @param intensity The intensity of the mapping, defaults to 1.0f, minimum 0.0f, maximum 1.0f
+ */
+-(void)colorMonochrome:(UIColor *)color inputIntensity:(CGFloat)intensity;
 //
 ///**Darken blend filter
 // Creates composite image samples by choosing the darker samples (from either the source image or the background).
@@ -479,27 +479,27 @@
 // */
 //-(void)whitePointAdjust:(UIColor *)color;
 //
-//#pragma mark Properties
-///// @name Properties
-///**The image displayed in the image view.
-// 
-// The initial value of this property is the image passed into the initWithImage: method or nil if you initialized the receiver using a different method.
-// 
-// @warning The object returned from this property was made with a CIImage, so calling returnedUIImage.CGImage on the returned object will return NULL.
-// */
-//@property (readonly, nonatomic, weak) UIImage *UIImage;
-//
-///**Returns a Core Image representation of the current image.
-// 
-// If the image data has been purged because of memory constraints, invoking this method forces that data to be loaded back into memory. Reloading the image data may incur a performance penalty.
-// 
-// @warning: The CIImage is the object off of which we base all other image manipulations and returns.
-// */
-//@property (readonly, nonatomic, weak) CIImage *CIImage;
-//
-///**The underlying Core Image data. (read-only)
-// */
-//@property (readonly, nonatomic) CGImageRef CGImage;
+#pragma mark Properties
+/// @name Properties
+/**The image displayed in the image view.
+ 
+ The initial value of this property is the image passed into the initWithImage: method or nil if you initialized the receiver using a different method.
+ 
+ @warning The object returned from this property was made with a CIImage, so calling returnedUIImage.CGImage on the returned object will return NULL.
+ */
+@property (readonly, nonatomic, weak) UIImage *UIImage;
+
+/**Returns a Core Image representation of the current image.
+ 
+ If the image data has been purged because of memory constraints, invoking this method forces that data to be loaded back into memory. Reloading the image data may incur a performance penalty.
+ 
+ @warning: The CIImage is the object off of which we base all other image manipulations and returns.
+ */
+@property (readonly, nonatomic, weak) CIImage *CIImage;
+
+/**The underlying Core Image data. (read-only)
+ */
+@property (readonly, nonatomic) CGImageRef CGImage;
 //
 ///**Specifies whether or not an image is animated.
 // */
@@ -519,49 +519,52 @@
 // */
 //@property (readwrite, nonatomic) CGFloat animatedImageDuration;
 //
-///**Specifies the original ratio (width / height) of the image.
-// */
-//@property (readonly, nonatomic) CGFloat originalRatio;
-//
-///**Specifies the height of the image. Animatable.
-// 
-// Setting this property will actually change the frame of the object.
-// */
-//@property (readwrite, nonatomic) CGFloat height;
-//
-///**Specifies the width of the image. Animatable.
-// 
-// Setting this property will actually change the frame of the object.
-// */
-//@property (readwrite, nonatomic) CGFloat width;
-//
-///**Specifies the size of the image. Animatable.
-// 
-// Setting this property will actually change the frame of the object.
-// */
-//@property (readwrite, nonatomic) CGSize size;
-//
-///**Specifies the original size of the of the image.
-// */
-//@property (readonly, nonatomic) CGSize originalSize;
-//
-///**Specifies whether or not the image has loaded its pixel data.
-// */
-//@property (readonly, nonatomic) BOOL pixelDataLoaded;
-//
-//#pragma mark JANUARY 2013
-//@property (readwrite, atomic) BOOL constrainsProportions;
+
+/**Specifies the height of the image. Animatable.
+ 
+ Setting this property will actually change the frame of the object.
+ */
+@property (readwrite, nonatomic) CGFloat height;
+
+/**Specifies the width of the image. Animatable.
+ 
+ Setting this property will actually change the frame of the object.
+ */
+@property (readwrite, nonatomic) CGFloat width;
+
+/**Specifies the size of the image. Animatable.
+ 
+ Setting this property will actually change the frame of the object.
+ */
+@property (readwrite, nonatomic) CGSize size;
+
+/**Specifies the original size of the of the image.
+ */
+@property (readonly, nonatomic) CGSize originalSize;
+
+/**Specifies the original ratio (width / height) of the image.
+ */
+@property (readonly, nonatomic) CGFloat originalRatio;
+
+/**Specifies whether or not the image has loaded its pixel data.
+ */
+@property (readonly, nonatomic) BOOL pixelDataLoaded;
+
+#pragma mark JANUARY 2013
+@property (readwrite, atomic) BOOL constrainsProportions;
 ////@property (readwrite, nonatomic) CGFloat animatedImageDuration
 //
 //@property (readonly, atomic) CGImageRef filteredImage;
-//+(C4Image *)defaultStyle;
-//
-//-(C4Image *)copyWithZone:(NSZone *)zone;
++(NewImage *)defaultStyle;
+@property (readonly, nonatomic, getter = isMultipleFilterEnabled) BOOL multipleFilterEnabled;
+
+-(C4Image *)copyWithZone:(NSZone *)zone;
 //-(id)initWithUIImage:(UIImage *)image;
 //-(void)showOriginalImage;
 //-(void)showFilteredImage;
 //
 //+(C4Image *)imageWithUIImage:(UIImage *)image;
-//-(void)startMultipleFilter;
-//-(void)renderFilteredImage;
+-(void)startFiltering;
+-(void)renderFilteredImage;
+@property (readwrite, nonatomic) CGImageRef contents;
 @end

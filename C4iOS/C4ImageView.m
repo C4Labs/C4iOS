@@ -10,15 +10,6 @@
 
 @implementation C4ImageView
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
-
 -(C4Layer *)imageLayer {
     return (C4Layer *)self.layer;
 }
@@ -27,4 +18,18 @@
     return [C4Layer class];
 }
 
+-(void)animateContents:(CGImageRef)_image {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self.imageLayer setupBasicAnimationWithKeyPath:@"contents"];
+    animation.fromValue = self.imageLayer.contents;
+    animation.toValue = (__bridge id)_image;
+    if (animation.repeatCount != FOREVER && !self.imageLayer.autoreverses) {
+        [CATransaction setCompletionBlock:^ {
+            self.imageLayer.contents = (__bridge id)_image;
+            [self.imageLayer removeAnimationForKey:@"animateContents"];
+        }];
+    }
+    [self.imageLayer addAnimation:animation forKey:@"animateContents"];
+    [CATransaction commit];
+}
 @end

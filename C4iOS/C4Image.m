@@ -541,7 +541,7 @@
 
 -(void)loadPixelData {
     const char *queueName = [@"pixelDataQueue" UTF8String];
-    dispatch_queue_t pixelDataQueue = dispatch_queue_create(queueName,  DISPATCH_QUEUE_CONCURRENT);
+    __block dispatch_queue_t pixelDataQueue = dispatch_queue_create(queueName,  DISPATCH_QUEUE_CONCURRENT);
     
     dispatch_async(pixelDataQueue, ^{
         NSUInteger width = CGImageGetWidth(self.CGImage);
@@ -560,6 +560,7 @@
         CGContextRelease(context);
         _pixelDataLoaded = YES;
         [self postNotification:@"pixelDataWasLoaded"];
+        pixelDataQueue = nil;
     });
 }
 

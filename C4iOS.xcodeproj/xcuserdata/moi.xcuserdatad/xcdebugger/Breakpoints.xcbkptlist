@@ -6,54 +6,24 @@
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "C4iOS/C4Control.m"
-         timestampString = "382769376.415256"
+         continueAfterRunningActions = "Yes"
+         filePath = "C4iOS/NewImage.m"
+         timestampString = "382903607.779223"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "446"
-         endingLineNumber = "446"
-         landmarkName = "-touchesBegan:withEvent:"
+         startingLineNumber = "212"
+         endingLineNumber = "212"
+         landmarkName = "-renderImageWithFilterName:"
          landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "C4iOS/C4Control.m"
-         timestampString = "382769376.415256"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "454"
-         endingLineNumber = "454"
-         landmarkName = "-touchesMoved:withEvent:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "C4iOS/C4Control.m"
-         timestampString = "382769376.415256"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "461"
-         endingLineNumber = "461"
-         landmarkName = "-touchesEnded:withEvent:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "C4iOS/C4Image.m"
-         timestampString = "382817848.33227"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "154"
-         endingLineNumber = "154"
-         landmarkName = "-renderFilteredImage"
-         landmarkType = "5">
+         <Actions>
+            <BreakpointActionProxy
+               ActionType = "Xcode.BreakpointAction.Log">
+               <ActionContent
+                  message = "%H"
+                  conveyanceType = "0">
+               </ActionContent>
+            </BreakpointActionProxy>
+         </Actions>
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

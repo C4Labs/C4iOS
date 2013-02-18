@@ -13,15 +13,11 @@
 /* The main view of the application.
   
  Need to have this in here so that we can associate the CAZZ4View in our C4Canvas.xib file with something. The main reason is that a static lib will discard and not recognize any class that isn't called or referenced in some part of some implementation.
-                         */
+ */
 @property (readonly, nonatomic, weak) C4View *mainView;
 @end
 
 @implementation C4AppDelegate
-
-//@synthesize window = _window;
-//@synthesize workspace = _workspace;
-//@synthesize mainView;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     launchOptions = launchOptions;
@@ -104,7 +100,6 @@
     [C4Label defaultStyle].textColor = C4GREY;
     [C4Label defaultStyle].highlightedTextColor = C4RED;
     [C4Label defaultStyle].backgroundColor = [UIColor clearColor];
-
 }
 
 @end

@@ -202,7 +202,7 @@
 
 #pragma mark Position, Rotation, Transform
 -(CGFloat)width {
-    return self.frame.size.width;
+    return self.bounds.size.width;
 }
 
 -(CGFloat)height {
@@ -211,6 +211,10 @@
 
 -(CGFloat)zPosition {
     return self.layer.zPosition;
+}
+
+-(CGSize)size {
+    return self.bounds.size;
 }
 
 -(void)setZPosition:(CGFloat)zPosition {
@@ -443,7 +447,6 @@
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    C4Log(@"hi");
 //    if([[self nextResponder] isKindOfClass:[C4WorkSpace class]]) [super touchesBegan:touches withEvent:event];
     [super touchesBegan:touches withEvent:event];
     [self postNotification:@"touchesBegan"];
