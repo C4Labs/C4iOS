@@ -19,8 +19,9 @@
 }
 
 @property (readwrite, strong, nonatomic) CIContext *filterContext;
+@property (readwrite, atomic) BOOL multipleFilterEnabled;
 @property (readwrite, strong, nonatomic) UIImage *originalImage;
-@property (readwrite, strong, nonatomic) CIImage *visibleImage;
+@property (readwrite, strong, nonatomic) CIImage *visibleImage, *output;
 @property (readwrite, nonatomic) CGImageRef contents;
 @property (readwrite, strong, nonatomic) C4Layer *imageLayer;
 @property (readwrite, strong, atomic) NSTimer *animatedImageTimer;
@@ -71,6 +72,7 @@
         self.contents = _originalImage.CGImage;
         _constrainsProportions = YES;
         _filteredImage = self.contents;
+        _multipleFilterEnabled = NO;
     }
     return self;
 }
@@ -142,6 +144,18 @@
 }
 
 #pragma mark Filters
+-(void)startMultipleFilter {
+    _output = nil;
+    self.multipleFilterEnabled = YES;
+}
+
+-(void)renderFilteredImage {
+    if(self.multipleFilterEnabled == YES) {
+        [self setContentsWithFilterOutput:self.output filterName:@"Multiple"];
+        self.multipleFilterEnabled = NO;
+        _output = nil;
+    }
+}
 
 -(void)additionComposite:(C4Image *)backgroundImage {
     dispatch_async([self filterQueue], ^{
@@ -193,8 +207,9 @@
 -(void)colorInvert {
     dispatch_async([self filterQueue], ^{
         CIFilter *filter = [self prepareFilterWithName:@"CIColorInvert"];
-        CIImage* output = [filter outputImage];
-        [self setContentsWithFilterOutput:output filterName:filter.name];
+        if(_output == nil) _output = [CIImage alloc];
+        _output = [filter outputImage];
+        if(_multipleFilterEnabled == NO) [self setContentsWithFilterOutput:_output filterName:filter.name];
     });
 }
 
@@ -219,10 +234,14 @@
 -(void)colorMonochrome:(UIColor *)color inputIntensity:(CGFloat)intensity {
     dispatch_async([self filterQueue], ^{
         CIFilter *filter = [self prepareFilterWithName:@"CIColorMonochrome"];
-        [filter setValue:color.CIColor forKey:@"inputColor"];
+        CGFloat rgba[4];
+        [color getRed:&rgba[0] green:&rgba[1] blue:&rgba[2] alpha:&rgba[3]];
+        [filter setValue:[CIColor colorWithRed:rgba[0] green:rgba[1] blue:rgba[2] alpha:rgba[3]] forKey:@"inputColor"];
         [filter setValue:@(intensity) forKey:@"inputIntensity"];
-        CIImage* output = [filter outputImage];
-        [self setContentsWithFilterOutput:output filterName:filter.name];
+        if(_output == nil) _output = [CIImage alloc];
+        _output = [filter outputImage];
+        if(_multipleFilterEnabled == NO) [self setContentsWithFilterOutput:_output filterName:filter.name];
+        filter = nil;
     });
 }
 
@@ -257,8 +276,9 @@
     dispatch_async([self filterQueue], ^{
         CIFilter *filter = [self prepareFilterWithName:@"CIExposureAdjust"];
         [filter setValue:@(adjustment) forKey:@"inputEV"];
-        CIImage* output = [filter outputImage];
-        [self setContentsWithFilterOutput:output filterName:filter.name];
+        if(_output == nil) _output = [CIImage alloc];
+        _output = [filter outputImage];
+        if(_multipleFilterEnabled == NO) [self setContentsWithFilterOutput:_output filterName:filter.name];
     });
 }
 

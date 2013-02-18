@@ -576,4 +576,6 @@
 -(void)showFilteredImage;
 
 +(C4Image *)imageWithUIImage:(UIImage *)image;
+-(void)startMultipleFilter;
+-(void)renderFilteredImage;
 @end
