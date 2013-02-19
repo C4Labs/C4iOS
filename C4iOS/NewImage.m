@@ -163,12 +163,17 @@
 
 #pragma mark Filters
 //FIXME: Add all other filters in the following way!
+-(void)additionComposite:(C4Image *)backgroundImage {
+    CIFilter *filter = [self prepareFilterWithName:@"CIAdditionCompositing"];
+    [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+    _output = filter.outputImage;
+    if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+    filter = nil;
+}
+
 -(void)colorInvert {
     @autoreleasepool {
-        CIFilter *filter = [CIFilter filterWithName:@"CIColorInvert"];
-        [filter setDefaults];
-        CIImage *inputImage = _output == nil ? self.CIImage : _output;
-        [filter setValue:inputImage forKey:@"inputImage"];
+        CIFilter *filter = [self prepareFilterWithName:@"CIColorInvert"];
         _output = filter.outputImage;
         if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
         filter = nil;

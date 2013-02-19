@@ -118,83 +118,83 @@
  @param point The coordinate in the image from which to pull color values
  */
 -(C4Vector *)rgbVectorAt:(CGPoint)point;
-//
-//#pragma mark Filters
-///// @name Filters
-///**Addition composite filter
-// 
-// This filter is typically used to add highlights and lens flare effects. The formula used to create this filter is described in Thomas Porter and Tom Duff. 1984. Compositing Digital Images. Computer Graphics, 18 (3): 253-259.
-// 
-// @param backgroundImage The image that will provide the background for this filter.
-// */
-//-(void)additionComposite:(C4Image *)backgroundImage;
-//
-///**Color blend filter
-// Uses the luminance values of the background with the hue and saturation values of the source image.
-// @param backgroundImage The image that will provide the background for this filter.
-// */
-//-(void)colorBlend:(C4Image *)backgroundImage;
-//
-///**Color burn filter
-// Darkens the background image samples to reflect the source image samples.
-// 
-// Source image sample values that specify white do not produce a change. The formula used to create this filter is described in the PDF specification, which is available online from the Adobe Developer Center. See PDF Reference and Adobe Extensions to the PDF Specification.
-// 
-// @param backgroundImage The image that will provide the background for this filter.
-// */
-//-(void)colorBurn:(C4Image *)backgroundImage;
-//
-///**Color control filter.
-// Adjusts saturation, brightness, and contrast values.
-// 
-// To calculate saturation, this filter linearly interpolates between a grayscale image (saturation = 0.0) and the original image (saturation = 1.0). The filter supports extrapolation: For values large than 1.0, it increases saturation.
-// 
-// To calculate contrast, this filter uses the following formula:
-// 
-// (color.rgb - vec3(0.5)) * contrast + vec3(0.5)
-// 
-// This filter calculates brightness by adding a bias value:
-// 
-// color.rgb + vec3(brightness)
-// 
-// @param saturation Saturation value defaults to 1.0f, minimum 0.0f, maximum 2.0f
-// @param brightness Brightness value defaults to 0.0f, minimum -1.0f, maximum 1.0f
-// @param contrast Contrast value defaults to 1.0f, minimum 0.0f, maximum 4.0f
-// */
-//-(void)colorControlSaturation:(CGFloat)saturation brightness:(CGFloat)brightness contrast:(CGFloat)contrast;
-//
-///**Color dodge filter.
-// 
-// Brightens the background image samples to reflect the source image samples.
-// 
-// Source image sample values that specify black do not produce a change. The formula used to create this filter is described in the PDF specification, which is available online from the Adobe Developer Center.
-// 
-// @param backgroundImage The image that will provide the background for this filter.
-// */
-//-(void)colorDodge:(C4Image *)backgroundImage;
+
+#pragma mark Filters
+/// @name Filters
+/**Addition composite filter
+ 
+ This filter is typically used to add highlights and lens flare effects. The formula used to create this filter is described in Thomas Porter and Tom Duff. 1984. Compositing Digital Images. Computer Graphics, 18 (3): 253-259.
+ 
+ @param backgroundImage The image that will provide the background for this filter.
+ */
+-(void)additionComposite:(C4Image *)backgroundImage;
+
+/**Color blend filter
+ Uses the luminance values of the background with the hue and saturation values of the source image.
+ @param backgroundImage The image that will provide the background for this filter.
+ */
+-(void)colorBlend:(C4Image *)backgroundImage;
+
+/**Color burn filter
+ Darkens the background image samples to reflect the source image samples.
+ 
+ Source image sample values that specify white do not produce a change. The formula used to create this filter is described in the PDF specification, which is available online from the Adobe Developer Center. See PDF Reference and Adobe Extensions to the PDF Specification.
+ 
+ @param backgroundImage The image that will provide the background for this filter.
+ */
+-(void)colorBurn:(C4Image *)backgroundImage;
+
+/**Color control filter.
+ Adjusts saturation, brightness, and contrast values.
+ 
+ To calculate saturation, this filter linearly interpolates between a grayscale image (saturation = 0.0) and the original image (saturation = 1.0). The filter supports extrapolation: For values large than 1.0, it increases saturation.
+ 
+ To calculate contrast, this filter uses the following formula:
+ 
+ (color.rgb - vec3(0.5)) * contrast + vec3(0.5)
+ 
+ This filter calculates brightness by adding a bias value:
+ 
+ color.rgb + vec3(brightness)
+ 
+ @param saturation Saturation value defaults to 1.0f, minimum 0.0f, maximum 2.0f
+ @param brightness Brightness value defaults to 0.0f, minimum -1.0f, maximum 1.0f
+ @param contrast Contrast value defaults to 1.0f, minimum 0.0f, maximum 4.0f
+ */
+-(void)colorControlSaturation:(CGFloat)saturation brightness:(CGFloat)brightness contrast:(CGFloat)contrast;
+
+/**Color dodge filter.
+ 
+ Brightens the background image samples to reflect the source image samples.
+ 
+ Source image sample values that specify black do not produce a change. The formula used to create this filter is described in the PDF specification, which is available online from the Adobe Developer Center.
+ 
+ @param backgroundImage The image that will provide the background for this filter.
+ */
+-(void)colorDodge:(C4Image *)backgroundImage;
 
 /**Color invert filter.
  Inverts the colors in an image.
  */
 -(void)colorInvert;
-//
-///**Color matrix filter
-// Multiplies source color values and adds a bias factor to each color component.
-// 
-// Given colors are translated to corresponding vectors.
-// 
-// This filter performs a matrix multiplication, as follows, to transform the color vector:
-// 
-// s.r = dot(s, redVector)
-// s.g = dot(s, greenVector)
-// s.b = dot(s, blueVector)
-// s.a = dot(s, alphaVector)
-// s = s + bias
-// 
-// @param color The color whose components will be used in the matrix multiplication
-// @param bias The bias value to be used in the matrix multiplication
-// */
-//-(void)colorMatrix:(UIColor *)color bias:(CGFloat)bias;
+
+/**Color matrix filter
+ Multiplies source color values and adds a bias factor to each color component.
+ 
+ Given colors are translated to corresponding vectors.
+ 
+ This filter performs a matrix multiplication, as follows, to transform the color vector:
+ 
+ s.r = dot(s, redVector)
+ s.g = dot(s, greenVector)
+ s.b = dot(s, blueVector)
+ s.a = dot(s, alphaVector)
+ s = s + bias
+ 
+ @param color The color whose components will be used in the matrix multiplication
+ @param bias The bias value to be used in the matrix multiplication
+ */
+-(void)colorMatrix:(UIColor *)color bias:(CGFloat)bias;
 
 /**Color monochrome filter.
  Remaps colors so they fall within shades of a single color.
@@ -203,282 +203,282 @@
  @param intensity The intensity of the mapping, defaults to 1.0f, minimum 0.0f, maximum 1.0f
  */
 -(void)colorMonochrome:(UIColor *)color inputIntensity:(CGFloat)intensity;
-//
-///**Darken blend filter
-// Creates composite image samples by choosing the darker samples (from either the source image or the background).
-// 
-// The result is that the background image samples are replaced by any source image samples that are darker. Otherwise, the background image samples are left unchanged. The formula used to create this filter is described in the PDF specification, which is available online from the Adobe Developer Center. See PDF Reference and Adobe Extensions to the PDF Specification.
-// 
-// @param backgroundImage The image that will provide the background for this filter.
-// */
-//-(void)darkenBlend:(C4Image *)backgroundImage;
-//
-///**Difference blend filter
-// Subtracts either the source image sample color from the background image sample color, or the reverse, depending on which sample has the greater brightness value.
-// 
-// Source image sample values that are black produce no change; white inverts the background color values. The formula used to create this filter is described in the PDF specification, which is available online from the Adobe Developer Center. See PDF Reference and Adobe Extensions to the PDF Specification.
-// 
-// @param backgroundImage The image that will provide the background for this filter.
-// */
-//-(void)differenceBlend:(C4Image *)backgroundImage;
-//
-///**Exclusion blend filter
-// Produces an effect similar to that produced by the Difference Blend filter but with lower contrast.
-// 
-// Source image sample values that are black do not produce a change; white inverts the background color values. The formula used to create this filter is described in the PDF specification, which is available online from the Adobe Developer Center. See PDF Reference and Adobe Extensions to the PDF Specification.
-// 
-// @param backgroundImage The image that will provide the background for this filter.
-// */
-//-(void)exclusionBlend:(C4Image *)backgroundImage;
-//
-///**Exposure adjustment filter
-// Adjusts the exposure setting for an image similar to the way you control exposure for a camera when you change the F-stop.
-// 
-// This filter multiplies the color values, as follows, to simulate exposure change by the specified F-stops:
-// 
-// s.rgb * pow(2.0, ev)
-// 
-// @param adjustment The level of exposure adjustment, defaults to 0.5, minimum -10.0, maximum 10.0
-// */
-//-(void)exposureAdjust:(CGFloat)adjustment;
-//
-///**False color filter
-// Maps luminance to a color ramp of two colors.
-// 
-// False color is often used to process astronomical and other scientific data, such as ultraviolet and x-ray images.
-// 
-// @param color1 A UIColor.
-// @param color2 A UIColor.
-// */
-//-(void)falseColor:(UIColor *)color1 color2:(UIColor *)color2;
-//
-///**Gamma adjustment filter
-// Adjusts midtone brightness.
-// 
-// This filter is typically used to compensate for nonlinear effects of displays. Adjusting the gamma effectively changes the slope of the transition between black and white. It uses the following formula:
-// 
-// pow(s.rgb, vec3(power))
-// 
-// @param adjustment The level of gamma adjustment, defaults to 0.75, minimum 0.10, maximum 3.0
-// */
-//-(void)gammaAdjustment:(CGFloat)adjustment;
-//
-///**Hard light blend filter
-// Either multiplies or screens colors, depending on the source image sample color.
-// 
-// @param backgroundImage The image that will provide the background for this filter.
-// */
-//-(void)hardLightBlend:(C4Image *)backgroundImage;
-//
-///**Highlight and shadow adjustment filter
-// Adjust the tonal mapping of an image while preserving spatial detail.
-// 
-// @param highlightAmount The adjustment value for image highlights, defaults to 1.0, minimum 0.0, maximum 1.0
-// @param shadowAmount The adjustment value for image shadows, defaults to 0.0, minimum -1.0, maximum 1.0
-// */
-//-(void)highlightShadowAdjust:(CGFloat)highlightAmount shadowAmount:(CGFloat)shadowAmount;
-//
-///**Hue adjustment filter
-// Changes the overall hue, or tint, of the source pixels.
-// 
-// This filter essentially rotates the color cube around the neutral axis.
-// 
-// @param angle The angular value to calculate the adjustment, defaults to 0.0, minimum -PI, maximum PI
-// */
-//-(void)hueAdjust:(CGFloat)angle;
-//
-///**Hue blend filter
-// Uses the luminance and saturation values of the background with the hue of the source image.
-// 
-// The formula used to create this filter is described in the PDF specification, which is available online from the Adobe Developer Center. See PDF Reference and Adobe Extensions to the PDF Specification.
-// 
-// @param backgroundImage The image that will provide the background for this filter.
-// */
-//-(void)hueBlend:(C4Image *)backgroundImage;
-//
-///**Lighten blend filter
-// Creates composite image samples by choosing the lighter samples (either from the source image or the background).
-// 
-// The result is that the background image samples are replaced by any source image samples that are lighter. Otherwise, the background image samples are left unchanged. The formula used to create this filter is described in the PDF specification, which is available online from the Adobe Developer Center. See PDF Reference and Adobe Extensions to the PDF Specification.
-// 
-// @param backgroundImage The image that will provide the background for this filter.
-// */
-//-(void)lightenBlend:(C4Image *)backgroundImage;
-//
-///**Luminosity blend filter
-// Uses the hue and saturation of the background with the luminance of the source image.
-// 
-// This mode creates an effect that is inverse to the effect created by the CIColorBlendMode filter. The formula used to create this filter is described in the PDF specification, which is available online from the Adobe Developer Center. See PDF Reference and Adobe Extensions to the PDF Specification.
-// 
-// @param backgroundImage The image that will provide the background for this filter.
-// */
-//-(void)luminosityBlend:(C4Image *)backgroundImage;
-//
-///**Maximum compositing filter
-// Computes the maximum value, by color component, of two input images and creates an output image using the maximum values.
-// 
-// This is similar to dodging. The formula used to create this filter is described in Thomas Porter and Tom Duff. 1984. Compositing Digital Images. Computer Graphics, 18 (3): 253-259.
-// 
-// @param backgroundImage The image that will provide the background for this filter.
-// */
-//-(void)maximumComposite:(C4Image *)backgroundImage;
-//
-///**Minimum compositing filter
-// Computes the minimum value, by color component, of two input images and creates an output image using the minimum values.
-// 
-// This is similar to burning. The formula used to create this filter is described in Thomas Porter and Tom Duff. 1984. Compositing Digital Images. Computer Graphics, 18 (3): 253-259.
-// 
-// @param backgroundImage The image that will provide the background for this filter.
-// */
-//-(void)minimumComposite:(C4Image *)backgroundImage;
-//
-///**Multiply blend filter
-// Multiplies the source image samples with the background image samples.
-// 
-// This results in colors that are at least as dark as either of the two contributing sample colors. The formula used to create this filter is described in the PDF specification, which is available online from the Adobe Developer Center. See PDF Reference and Adobe Extensions to the PDF Specification.
-// 
-// @param backgroundImage The image that will provide the background for this filter.
-// */
-//-(void)multiplyBlend:(C4Image *)backgroundImage;
-//
-///**Multiply compositing filter
-// Multiplies the color component of two input images and creates an output image using the multiplied values.
-// 
-// This filter is typically used to add a spotlight or similar lighting effect to an image. The formula used to create this filter is described in Thomas Porter and Tom Duff. 1984. Compositing Digital Images. Computer Graphics, 18 (3): 253-259.
-// 
-// @param backgroundImage The image that will provide the background for this filter.
-// */
-//-(void)multiplyComposite:(C4Image *)backgroundImage;
-//
-///**Overlay blend filter
-// Either multiplies or screens the source image samples with the background image samples, depending on the background color.
-// 
-// The result is to overlay the existing image samples while preserving the highlights and shadows of the background. The background color mixes with the source image to reflect the lightness or darkness of the background. The formula used to create this filter is described in the PDF specification, which is available online from the Adobe Developer Center. See PDF Reference and Adobe Extensions to the PDF Specification.
-// 
-// @param backgroundImage The image that will provide the background for this filter.
-// */
-//-(void)overlayBlend:(C4Image *)backgroundImage;
-//
-///**Saturation blend filter
-// Uses the luminance and hue values of the background with the saturation of the source image.
-// 
-// Areas of the background that have no saturation (that is, pure gray areas) do not produce a change. The formula used to create this filter is described in the PDF specification, which is available online from the Adobe Developer Center. See PDF Reference and Adobe Extensions to the PDF Specification.
-// 
-// @param backgroundImage The image that will provide the background for this filter.
-// */
-//-(void)saturationBlend:(C4Image *)backgroundImage;
-//
-///**Screen blend filter
-// Multiplies the inverse of the source image samples with the inverse of the background image samples.
-// 
-// This results in colors that are at least as light as either of the two contributing sample colors. The formula used to create this filter is described in the PDF specification, which is available online from the Adobe Developer Center. See PDF Reference and Adobe Extensions to the PDF Specification.
-// 
-// @param backgroundImage The image that will provide the background for this filter.
-// */
-//-(void)screenBlend:(C4Image *)backgroundImage;
-//
-///**Sepia tone filter
-// Maps the colors of an image to various shades of brown.
-// 
-// @param intensity The level of intensity for which to apply the sepia tone, defaults to 1.0, minimum 0.0, maximum 1.0
-// */
-//-(void)sepiaTone:(CGFloat)intensity;
-//
-///**Soft light blend filter
-// Either darkens or lightens colors, depending on the source image sample color.
-// 
-// If the source image sample color is lighter than 50% gray, the background is lightened, similar to dodging. If the source image sample color is darker than 50% gray, the background is darkened, similar to burning. If the source image sample color is equal to 50% gray, the background is not changed. Image samples that are equal to pure black or pure white produce darker or lighter areas, but do not result in pure black or white. The overall effect is similar to what you would achieve by shining a diffuse spotlight on the source image. The formula used to create this filter is described in the PDF specification, which is available online from the Adobe Developer Center. See PDF Reference and Adobe Extensions to the PDF Specification.
-// 
-// @param backgroundImage The image that will provide the background for this filter.
-// */
-//-(void)softLightBlend:(C4Image *)backgroundImage;
-//
-///**Source-atop compositing filter
-// Places the source image over the background image, then uses the luminance of the background image to determine what to show.
-// 
-// The composite shows the background image and only those portions of the source image that are over visible parts of the background. The formula used to create this filter is described in Thomas Porter and Tom Duff. 1984. Compositing Digital Images. Computer Graphics, 18 (3): 253-259.
-// 
-// @param backgroundImage The image that will provide the background for this filter.
-// */
-//-(void)sourceAtopComposite:(C4Image *)backgroundImage;
-//
-///**Source-in compositing filter
-// Uses the background image to define what to leave in the source image, effectively cropping the image.
-// 
-// The formula used to create this filter is described in Thomas Porter and Tom Duff. 1984. Compositing Digital Images. Computer Graphics, 18 (3): 253-259.
-// 
-// @param backgroundImage The image that will provide the background for this filter.
-// */
-//-(void)sourceInComposite:(C4Image *)backgroundImage;
-//
-///**Source-out compositing filter
-// Uses the background image to define what to take out of the first image.
-// 
-// The formula used to create this filter is described in Thomas Porter and Tom Duff. 1984. Compositing Digital Images. Computer Graphics, 18 (3): 253-259.
-// 
-// @param backgroundImage The image that will provide the background for this filter.
-// */
-//-(void)sourceOutComposite:(C4Image *)backgroundImage;
-//
-///**Source-over compositing filter
-// Places the background image over the source image.
-// 
-// The formula used to create this filter is described in Thomas Porter and Tom Duff. 1984. Compositing Digital Images. Computer Graphics, 18 (3): 253-259.
-// 
-// @param backgroundImage The image that will provide the background for this filter.
-// */
-//-(void)sourceOverComposite:(C4Image *)backgroundImage;
-//
-///**Straighten filter
-// Rotates the source image by the specified angle in radians.
-// 
-// The image is scaled and cropped so that the rotated image fits the extent of the source image.
-// 
-// @param angle The angular value to calculate the adjustment, defaults to 0.0, minimum -PI, maximum PI
-// */
-//-(void)straighten:(CGFloat)angle;
-//
-///**Temperature and tint filter
-// Adapts the reference white point for an image.
-// 
-// @param neutral An offset value, defaults to {6500,0}
-// @param targetNeutral An target offset value, defaults to {6500,0}
-// */
-//-(void)tempartureAndTint:(CGSize)neutral target:(CGSize)targetNeutral;
-//
-///**Tone curve filter
-// Adjusts tone response of the R, G, and B channels of an image.
-// 
-// The input points are five x,y values that are interpolated using a spline curve. The curve is applied in a perceptual (gamma 2) version of the working space.
-// 
-// An example of how to construct the point array : CGPoint *pointArray = {CGPointMake(),CGPointMake(),CGPointMake(),CGPointMake(),CGPointMake()};
-// 
-// The five points default to the following:
-// 
-// - point1: { 0.0, 0.0}
-// - point2: {0.25, 0.25}
-// - point3: { 0.5, 0.5};
-// - point4: {0.75, 0.75};
-// - point5: { 1.0, 1.0};
-// 
-// @param pointArray A C-Array of CGPoints which will be used to construct the tone curve
-// */
-//-(void)toneCurve:(CGPoint *)pointArray;
-//
-///**Vibrance adjustment filter
-// Adjusts the saturation of an image while keeping pleasing skin tones.
-// 
-// @param amount The amount to adjust the image's vibrance, defaults to 0.0, minimum -1.0, maximum 1.0
-// */
-//-(void)vibranceAdjust:(CGFloat)amount;
-//
-///*White point adjustment filter
-// Adjusts the reference white point for an image and maps all colors in the source using the new reference.
-// 
-// @param color The reference color for the new mapping.
-// */
-//-(void)whitePointAdjust:(UIColor *)color;
-//
+
+/**Darken blend filter
+ Creates composite image samples by choosing the darker samples (from either the source image or the background).
+ 
+ The result is that the background image samples are replaced by any source image samples that are darker. Otherwise, the background image samples are left unchanged. The formula used to create this filter is described in the PDF specification, which is available online from the Adobe Developer Center. See PDF Reference and Adobe Extensions to the PDF Specification.
+ 
+ @param backgroundImage The image that will provide the background for this filter.
+ */
+-(void)darkenBlend:(C4Image *)backgroundImage;
+
+/**Difference blend filter
+ Subtracts either the source image sample color from the background image sample color, or the reverse, depending on which sample has the greater brightness value.
+ 
+ Source image sample values that are black produce no change; white inverts the background color values. The formula used to create this filter is described in the PDF specification, which is available online from the Adobe Developer Center. See PDF Reference and Adobe Extensions to the PDF Specification.
+ 
+ @param backgroundImage The image that will provide the background for this filter.
+ */
+-(void)differenceBlend:(C4Image *)backgroundImage;
+
+/**Exclusion blend filter
+ Produces an effect similar to that produced by the Difference Blend filter but with lower contrast.
+ 
+ Source image sample values that are black do not produce a change; white inverts the background color values. The formula used to create this filter is described in the PDF specification, which is available online from the Adobe Developer Center. See PDF Reference and Adobe Extensions to the PDF Specification.
+ 
+ @param backgroundImage The image that will provide the background for this filter.
+ */
+-(void)exclusionBlend:(C4Image *)backgroundImage;
+
+/**Exposure adjustment filter
+ Adjusts the exposure setting for an image similar to the way you control exposure for a camera when you change the F-stop.
+ 
+ This filter multiplies the color values, as follows, to simulate exposure change by the specified F-stops:
+ 
+ s.rgb * pow(2.0, ev)
+ 
+ @param adjustment The level of exposure adjustment, defaults to 0.5, minimum -10.0, maximum 10.0
+ */
+-(void)exposureAdjust:(CGFloat)adjustment;
+
+/**False color filter
+ Maps luminance to a color ramp of two colors.
+ 
+ False color is often used to process astronomical and other scientific data, such as ultraviolet and x-ray images.
+ 
+ @param color1 A UIColor.
+ @param color2 A UIColor.
+ */
+-(void)falseColor:(UIColor *)color1 color2:(UIColor *)color2;
+
+/**Gamma adjustment filter
+ Adjusts midtone brightness.
+ 
+ This filter is typically used to compensate for nonlinear effects of displays. Adjusting the gamma effectively changes the slope of the transition between black and white. It uses the following formula:
+ 
+ pow(s.rgb, vec3(power))
+ 
+ @param adjustment The level of gamma adjustment, defaults to 0.75, minimum 0.10, maximum 3.0
+ */
+-(void)gammaAdjustment:(CGFloat)adjustment;
+
+/**Hard light blend filter
+ Either multiplies or screens colors, depending on the source image sample color.
+ 
+ @param backgroundImage The image that will provide the background for this filter.
+ */
+-(void)hardLightBlend:(C4Image *)backgroundImage;
+
+/**Highlight and shadow adjustment filter
+ Adjust the tonal mapping of an image while preserving spatial detail.
+ 
+ @param highlightAmount The adjustment value for image highlights, defaults to 1.0, minimum 0.0, maximum 1.0
+ @param shadowAmount The adjustment value for image shadows, defaults to 0.0, minimum -1.0, maximum 1.0
+ */
+-(void)highlightShadowAdjust:(CGFloat)highlightAmount shadowAmount:(CGFloat)shadowAmount;
+
+/**Hue adjustment filter
+ Changes the overall hue, or tint, of the source pixels.
+ 
+ This filter essentially rotates the color cube around the neutral axis.
+ 
+ @param angle The angular value to calculate the adjustment, defaults to 0.0, minimum -PI, maximum PI
+ */
+-(void)hueAdjust:(CGFloat)angle;
+
+/**Hue blend filter
+ Uses the luminance and saturation values of the background with the hue of the source image.
+ 
+ The formula used to create this filter is described in the PDF specification, which is available online from the Adobe Developer Center. See PDF Reference and Adobe Extensions to the PDF Specification.
+ 
+ @param backgroundImage The image that will provide the background for this filter.
+ */
+-(void)hueBlend:(C4Image *)backgroundImage;
+
+/**Lighten blend filter
+ Creates composite image samples by choosing the lighter samples (either from the source image or the background).
+ 
+ The result is that the background image samples are replaced by any source image samples that are lighter. Otherwise, the background image samples are left unchanged. The formula used to create this filter is described in the PDF specification, which is available online from the Adobe Developer Center. See PDF Reference and Adobe Extensions to the PDF Specification.
+ 
+ @param backgroundImage The image that will provide the background for this filter.
+ */
+-(void)lightenBlend:(C4Image *)backgroundImage;
+
+/**Luminosity blend filter
+ Uses the hue and saturation of the background with the luminance of the source image.
+ 
+ This mode creates an effect that is inverse to the effect created by the CIColorBlendMode filter. The formula used to create this filter is described in the PDF specification, which is available online from the Adobe Developer Center. See PDF Reference and Adobe Extensions to the PDF Specification.
+ 
+ @param backgroundImage The image that will provide the background for this filter.
+ */
+-(void)luminosityBlend:(C4Image *)backgroundImage;
+
+/**Maximum compositing filter
+ Computes the maximum value, by color component, of two input images and creates an output image using the maximum values.
+ 
+ This is similar to dodging. The formula used to create this filter is described in Thomas Porter and Tom Duff. 1984. Compositing Digital Images. Computer Graphics, 18 (3): 253-259.
+ 
+ @param backgroundImage The image that will provide the background for this filter.
+ */
+-(void)maximumComposite:(C4Image *)backgroundImage;
+
+/**Minimum compositing filter
+ Computes the minimum value, by color component, of two input images and creates an output image using the minimum values.
+ 
+ This is similar to burning. The formula used to create this filter is described in Thomas Porter and Tom Duff. 1984. Compositing Digital Images. Computer Graphics, 18 (3): 253-259.
+ 
+ @param backgroundImage The image that will provide the background for this filter.
+ */
+-(void)minimumComposite:(C4Image *)backgroundImage;
+
+/**Multiply blend filter
+ Multiplies the source image samples with the background image samples.
+ 
+ This results in colors that are at least as dark as either of the two contributing sample colors. The formula used to create this filter is described in the PDF specification, which is available online from the Adobe Developer Center. See PDF Reference and Adobe Extensions to the PDF Specification.
+ 
+ @param backgroundImage The image that will provide the background for this filter.
+ */
+-(void)multiplyBlend:(C4Image *)backgroundImage;
+
+/**Multiply compositing filter
+ Multiplies the color component of two input images and creates an output image using the multiplied values.
+ 
+ This filter is typically used to add a spotlight or similar lighting effect to an image. The formula used to create this filter is described in Thomas Porter and Tom Duff. 1984. Compositing Digital Images. Computer Graphics, 18 (3): 253-259.
+ 
+ @param backgroundImage The image that will provide the background for this filter.
+ */
+-(void)multiplyComposite:(C4Image *)backgroundImage;
+
+/**Overlay blend filter
+ Either multiplies or screens the source image samples with the background image samples, depending on the background color.
+ 
+ The result is to overlay the existing image samples while preserving the highlights and shadows of the background. The background color mixes with the source image to reflect the lightness or darkness of the background. The formula used to create this filter is described in the PDF specification, which is available online from the Adobe Developer Center. See PDF Reference and Adobe Extensions to the PDF Specification.
+ 
+ @param backgroundImage The image that will provide the background for this filter.
+ */
+-(void)overlayBlend:(C4Image *)backgroundImage;
+
+/**Saturation blend filter
+ Uses the luminance and hue values of the background with the saturation of the source image.
+ 
+ Areas of the background that have no saturation (that is, pure gray areas) do not produce a change. The formula used to create this filter is described in the PDF specification, which is available online from the Adobe Developer Center. See PDF Reference and Adobe Extensions to the PDF Specification.
+ 
+ @param backgroundImage The image that will provide the background for this filter.
+ */
+-(void)saturationBlend:(C4Image *)backgroundImage;
+
+/**Screen blend filter
+ Multiplies the inverse of the source image samples with the inverse of the background image samples.
+ 
+ This results in colors that are at least as light as either of the two contributing sample colors. The formula used to create this filter is described in the PDF specification, which is available online from the Adobe Developer Center. See PDF Reference and Adobe Extensions to the PDF Specification.
+ 
+ @param backgroundImage The image that will provide the background for this filter.
+ */
+-(void)screenBlend:(C4Image *)backgroundImage;
+
+/**Sepia tone filter
+ Maps the colors of an image to various shades of brown.
+ 
+ @param intensity The level of intensity for which to apply the sepia tone, defaults to 1.0, minimum 0.0, maximum 1.0
+ */
+-(void)sepiaTone:(CGFloat)intensity;
+
+/**Soft light blend filter
+ Either darkens or lightens colors, depending on the source image sample color.
+ 
+ If the source image sample color is lighter than 50% gray, the background is lightened, similar to dodging. If the source image sample color is darker than 50% gray, the background is darkened, similar to burning. If the source image sample color is equal to 50% gray, the background is not changed. Image samples that are equal to pure black or pure white produce darker or lighter areas, but do not result in pure black or white. The overall effect is similar to what you would achieve by shining a diffuse spotlight on the source image. The formula used to create this filter is described in the PDF specification, which is available online from the Adobe Developer Center. See PDF Reference and Adobe Extensions to the PDF Specification.
+ 
+ @param backgroundImage The image that will provide the background for this filter.
+ */
+-(void)softLightBlend:(C4Image *)backgroundImage;
+
+/**Source-atop compositing filter
+ Places the source image over the background image, then uses the luminance of the background image to determine what to show.
+ 
+ The composite shows the background image and only those portions of the source image that are over visible parts of the background. The formula used to create this filter is described in Thomas Porter and Tom Duff. 1984. Compositing Digital Images. Computer Graphics, 18 (3): 253-259.
+ 
+ @param backgroundImage The image that will provide the background for this filter.
+ */
+-(void)sourceAtopComposite:(C4Image *)backgroundImage;
+
+/**Source-in compositing filter
+ Uses the background image to define what to leave in the source image, effectively cropping the image.
+ 
+ The formula used to create this filter is described in Thomas Porter and Tom Duff. 1984. Compositing Digital Images. Computer Graphics, 18 (3): 253-259.
+ 
+ @param backgroundImage The image that will provide the background for this filter.
+ */
+-(void)sourceInComposite:(C4Image *)backgroundImage;
+
+/**Source-out compositing filter
+ Uses the background image to define what to take out of the first image.
+ 
+ The formula used to create this filter is described in Thomas Porter and Tom Duff. 1984. Compositing Digital Images. Computer Graphics, 18 (3): 253-259.
+ 
+ @param backgroundImage The image that will provide the background for this filter.
+ */
+-(void)sourceOutComposite:(C4Image *)backgroundImage;
+
+/**Source-over compositing filter
+ Places the background image over the source image.
+ 
+ The formula used to create this filter is described in Thomas Porter and Tom Duff. 1984. Compositing Digital Images. Computer Graphics, 18 (3): 253-259.
+ 
+ @param backgroundImage The image that will provide the background for this filter.
+ */
+-(void)sourceOverComposite:(C4Image *)backgroundImage;
+
+/**Straighten filter
+ Rotates the source image by the specified angle in radians.
+ 
+ The image is scaled and cropped so that the rotated image fits the extent of the source image.
+ 
+ @param angle The angular value to calculate the adjustment, defaults to 0.0, minimum -PI, maximum PI
+ */
+-(void)straighten:(CGFloat)angle;
+
+/**Temperature and tint filter
+ Adapts the reference white point for an image.
+ 
+ @param neutral An offset value, defaults to {6500,0}
+ @param targetNeutral An target offset value, defaults to {6500,0}
+ */
+-(void)tempartureAndTint:(CGSize)neutral target:(CGSize)targetNeutral;
+
+/**Tone curve filter
+ Adjusts tone response of the R, G, and B channels of an image.
+ 
+ The input points are five x,y values that are interpolated using a spline curve. The curve is applied in a perceptual (gamma 2) version of the working space.
+ 
+ An example of how to construct the point array : CGPoint *pointArray = {CGPointMake(),CGPointMake(),CGPointMake(),CGPointMake(),CGPointMake()};
+ 
+ The five points default to the following:
+ 
+ - point1: { 0.0, 0.0}
+ - point2: {0.25, 0.25}
+ - point3: { 0.5, 0.5};
+ - point4: {0.75, 0.75};
+ - point5: { 1.0, 1.0};
+ 
+ @param pointArray A C-Array of CGPoints which will be used to construct the tone curve
+ */
+-(void)toneCurve:(CGPoint *)pointArray;
+
+/**Vibrance adjustment filter
+ Adjusts the saturation of an image while keeping pleasing skin tones.
+ 
+ @param amount The amount to adjust the image's vibrance, defaults to 0.0, minimum -1.0, maximum 1.0
+ */
+-(void)vibranceAdjust:(CGFloat)amount;
+
+/*White point adjustment filter
+ Adjusts the reference white point for an image and maps all colors in the source using the new reference.
+ 
+ @param color The reference color for the new mapping.
+ */
+-(void)whitePointAdjust:(UIColor *)color;
+
 #pragma mark Properties
 /// @name Properties
 /**The image displayed in the image view.
@@ -567,4 +567,85 @@
 -(void)startFiltering;
 -(void)renderFilteredImage;
 @property (readwrite, nonatomic) CGImageRef contents;
+
+-(void)affineClamp:(CGAffineTransform)transform;
+-(void)affineTile:(CGAffineTransform)transform;
+-(void)affineTransform:(CGAffineTransform)transform;
+-(void)areaAverage:(CGRect)area;
+-(void)areaHistogram:(CGRect)area count:(NSInteger)width scale:(CGFloat)factor;
+-(void)areaMaximum:(CGRect)area;
+-(void)areaMaximumAlpha:(CGRect)area;
+-(void)areaMinimum:(CGRect)area;
+-(void)areaMinimumAlpha:(CGRect)area;
+-(void)blendWithMask:(C4Image *)backgroundImage mask:(C4Image *)maskImage;
+-(void)bloom:(CGFloat)radius intensity:(CGFloat)intensity;
+-(void)boxBlur:(CGFloat)radius;
+-(void)bumpDistortion:(CGPoint)center radius:(CGFloat)radius scale:(CGFloat)factor;
+-(void)bumpDistortionLinear:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle scale:(CGFloat)factor;
+-(void)circleSplashDistortion:(CGPoint)center radius:(CGFloat)radius;
+-(void)circularScreen:(CGPoint)center width:(CGFloat)width sharpness:(CGFloat)sharpness;
+-(void)circularWarp:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle;
+-(void)halftoneCMYK:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle sharpness:(CGFloat)sharpness gcr:(CGFloat)gcr ucr:(CGFloat)ucr;
+-(void)colorCube:(CGFloat)dimension cubeData:(NSData *)data;
+-(void)colorMap:(C4Image *)gradientImage;
+-(void)colorPosterize:(CGFloat)levels;
+-(void)columnAverage:(CGRect)area;
+-(void)comicEffect;
+-(void)crop:(CGRect)area;
+-(void)crystallize:(CGFloat)radius center:(CGPoint)center;
+-(void)depthOfField:(CGPoint)point1 point2:(CGPoint)point2 saturation:(CGFloat)saturation maskRadius:(CGFloat)maskRadius maskIntensity:(CGFloat)maskIntensity blurRadius:(CGFloat)radius;
+-(void)discBlur:(CGFloat)radius;
+-(void)displacementDistortion:(C4Image *)displacementImage scale:(CGFloat)scale;
+-(void)dotScreen:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width sharpness:(CGFloat)sharpness;
+-(void)droste:(CGPoint)inset1 inset2:(CGPoint)inset2 strandRadius:(CGFloat)radius periodicity:(CGFloat)periodicity rotation:(CGFloat)rotation zoom:(CGFloat)zoom;
+-(void)edges:(CGFloat)intensity;
+-(void)edgeWork:(CGFloat)radius;
+-(void)eightFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGPoint)width;
+-(void)fourFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle acuteAngle:(CGFloat)acuteAngle width:(CGPoint)width;
+-(void)fourFoldRotatedTile:(CGPoint)center angle:(CGFloat)angle width:(CGPoint)width;
+-(void)fourFoldTranslatedTile:(CGPoint)center angle:(CGFloat)angle acuteAngle:(CGFloat)acuteAngle width:(CGPoint)width;
+-(void)gaussianBlur:(CGFloat)radius;
+-(void)glassDistortion:(C4Image *)texture center:(CGPoint)center scale:(CGFloat)scale;
+-(void)glassLozenge:(CGPoint)point1 point2:(CGPoint)point2 radius:(CGFloat)radius refraction:(CGFloat)refraction;
+-(void)glideReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGPoint)width;
+-(void)gloom:(CGFloat)radius intensity:(CGFloat)intensity;
+-(void)hatchedScreen:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width sharpness:(CGFloat)sharpness;
+-(void)heightShieldFromMask:(CGFloat)radius;
+-(void)hexagonalPixellate:(CGPoint)center scale:(CGPoint)factor;
+-(void)holeDistortion:(CGPoint)center radius:(CGFloat)radius;
+-(void)kaleidescope:(CGFloat)count center:(CGPoint)center angle:(CGFloat)angle;
+-(void)lanczosScaleTransform:(CGFloat)scale aspectRatio:(CGFloat)ratio;
+-(void)lightTunnel:(CGPoint)center rotation:(CGFloat)rotation radius:(CGFloat)radius;
+-(void)lineOverlay:(CGFloat)noiseLevel sharpness:(CGFloat)sharpness edgeIntensity:(CGFloat)edgeIntensity threshold:(CGFloat)threshold contrast:(CGFloat)contrast;
+-(void)lineScreen:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width sharpness:(CGFloat)sharpness;
+-(void)maskToAlpha;
+-(void)maximumComponent;
+-(void)medianFilter;
+-(void)minimumComponent;
+-(void)motionBlur:(CGFloat)radius angle:(CGFloat)angle;
+-(void)noiseRedution:(CGFloat)level sharpness:(CGFloat)sharpness;
+-(void)opTile:(CGPoint)center scale:(CGFloat)scale angle:(CGFloat)angle width:(CGFloat)width;
+-(void)parallelogramTile:(CGPoint)center angle:(CGFloat)angle acuteAngle:(CGFloat)acuteAngle width:(CGPoint)width;
+-(void)perspectiveTile:(CGPoint *)points;
+-(void)perspectiveTransform:(CGPoint *)points;
+-(void)pinchDistortion:(CGPoint)center radius:(CGFloat)radius scale:(CGFloat)scale;
+-(void)pixellate:(CGPoint)center scale:(CGFloat)scale;
+-(void)pointillize:(CGFloat)radius center:(CGPoint)center;
+-(void)rowAverage:(CGRect)area;
+-(void)shadedMaterial:(C4Image *)shadingImage scale:(CGFloat)scale;
+-(void)sharpenLuminance:(CGFloat)sharpness;
+-(void)sixFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGPoint)width;
+-(void)sixFoldRotatedTile:(CGPoint)center angle:(CGFloat)angle width:(CGPoint)width;
+-(void)spotColor:(UIColor *)colorsets closenessAndContrast:(CGFloat *)values;
+-(void)spotLight:(C4Vector *)position lightPointsAt:(C4Vector *)spot brightness:(CGFloat)brightness concentration:(CGFloat)concentration color:(UIColor *)color;
+-(void)stretchCrop:(CGSize)size cropAmount:(CGFloat)cropAmount stretchAmount:(CGFloat)stretchAmount;
+-(void)torusLensDistortion:(CGPoint)center radius:(CGFloat)radius width:(CGFloat)width refraction:(CGFloat)refraction;
+-(void)triangleKaleidescope:(CGPoint)point size:(CGSize)size rotation:(CGFloat)rotation decay:(CGFloat)decay;
+-(void)triangleTile:(CGPoint)center scale:(CGFloat)scale angle:(CGFloat)angle width:(CGFloat)width;
+-(void)twelveFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGPoint)width;
+-(void)twirlDistortion:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle;
+-(void)unsharpMask:(CGFloat)radius intensity:(CGFloat)intensity;
+-(void)vignette:(CGFloat)radius intensity:(CGFloat)intensity;
+-(void)vortexDistortion:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle;
+-(void)zoomBlur:(CGPoint)center amount:(CGFloat)amount;
 @end
