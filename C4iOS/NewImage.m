@@ -163,36 +163,6 @@
 
 #pragma mark Filters
 //FIXME: Add all other filters in the following way!
--(void)additionComposite:(C4Image *)backgroundImage {
-    CIFilter *filter = [self prepareFilterWithName:@"CIAdditionCompositing"];
-    [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
-    _output = filter.outputImage;
-    if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
-    filter = nil;
-}
-
--(void)colorInvert {
-    @autoreleasepool {
-        CIFilter *filter = [self prepareFilterWithName:@"CIColorInvert"];
-        _output = filter.outputImage;
-        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
-        filter = nil;
-    }
-}
-
--(void)colorMonochrome:(UIColor *)color inputIntensity:(CGFloat)intensity {
-    @autoreleasepool {
-        CIFilter *filter = [self prepareFilterWithName:@"CIColorMonochrome"];
-        CGFloat rgba[4];
-        [color getRed:&rgba[0] green:&rgba[1] blue:&rgba[2] alpha:&rgba[3]];
-        [filter setValue:[CIColor colorWithRed:rgba[0] green:rgba[1] blue:rgba[2] alpha:rgba[3]] forKey:@"inputColor"];
-        [filter setValue:@(intensity) forKey:@"inputIntensity"];
-        _output = filter.outputImage;
-        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
-        filter = nil;
-    }
-}
-
 -(void)startFiltering {
     _multipleFilterEnabled = YES;
 }
@@ -225,6 +195,407 @@
             _output = nil;
         });
     });
+}
+
+#pragma mark Old Filters
+-(void)additionComposite:(C4Image *)backgroundImage {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIAdditionCompositing"];
+        [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)colorBlend:(C4Image *)backgroundImage {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIColorBlendMode"];
+        [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)colorBurn:(C4Image *)backgroundImage {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIColorBurnBlendMode"];
+        [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)colorControlSaturation:(CGFloat)saturation brightness:(CGFloat)brightness contrast:(CGFloat)contrast {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIColorControls"];
+        [filter setValue:@(saturation) forKey:@"inputSaturation"];
+        [filter setValue:@(brightness) forKey:@"inputBrightness"];
+        [filter setValue:@(contrast) forKey:@"inputContrast"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)colorDodge:(C4Image *)backgroundImage {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIColorDodgeBlendMode"];
+        [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)colorInvert {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIColorInvert"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)colorMatrix:(UIColor *)color bias:(CGFloat)bias {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIColorMatrix"];
+        
+        CGFloat red, green, blue, alpha;
+        [color getRed:&red green:&green blue:&blue alpha:&alpha];
+        
+        [filter setValue:[CIVector vectorWithX:red Y:0 Z:0 W:0] forKey:@"inputRVector"];
+        [filter setValue:[CIVector vectorWithX:0 Y:green Z:0 W:0] forKey:@"inputGVector"];
+        [filter setValue:[CIVector vectorWithX:0 Y:0 Z:blue W:0] forKey:@"inputBVector"];
+        [filter setValue:[CIVector vectorWithX:0 Y:0 Z:0 W:alpha] forKey:@"inputAVector"];
+        [filter setValue:[CIVector vectorWithX:bias Y:bias Z:bias W:bias] forKey:@"inputBiasVector"];
+        
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)colorMonochrome:(UIColor *)color inputIntensity:(CGFloat)intensity {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIColorMonochrome"];
+        CGFloat rgba[4];
+        [color getRed:&rgba[0] green:&rgba[1] blue:&rgba[2] alpha:&rgba[3]];
+        [filter setValue:[CIColor colorWithRed:rgba[0] green:rgba[1] blue:rgba[2] alpha:rgba[3]] forKey:@"inputColor"];
+        [filter setValue:@(intensity) forKey:@"inputIntensity"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)darkenBlend:(C4Image *)backgroundImage {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIDarkenBlendMode"];
+        [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)differenceBlend:(C4Image *)backgroundImage {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIDifferenceBlendMode"];
+        [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)exclusionBlend:(C4Image *)backgroundImage {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIExclusionBlendMode"];
+        [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)exposureAdjust:(CGFloat)adjustment {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIExposureAdjust"];
+        [filter setValue:@(adjustment) forKey:@"inputEV"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)falseColor:(UIColor *)color1 color2:(UIColor *)color2 {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIFalseColor"];
+        [filter setValue:color1.CIColor forKey:@"inputColor0"];
+        [filter setValue:color2.CIColor forKey:@"inputColor1"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)gammaAdjustment:(CGFloat)adjustment {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIGammaAdjust"];
+        [filter setValue:@(adjustment) forKey:@"inputPower"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)hardLightBlend:(C4Image *)backgroundImage {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIHardLightBlendMode"];
+        [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)highlightShadowAdjust:(CGFloat)highlightAmount shadowAmount:(CGFloat)shadowAmount {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIHighlightShadowAdjust"];
+        [filter setValue:@(highlightAmount) forKey:@"inputHighlightAmount"];
+        [filter setValue:@(shadowAmount) forKey:@"inputShadowAmount"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)hueAdjust:(CGFloat)angle {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIHueAdjust"];
+        [filter setValue:@(angle) forKey:@"inputAngle"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)hueBlend:(C4Image *)backgroundImage {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIHueBlendMode"];
+        [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)lightenBlend:(C4Image *)backgroundImage {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CILightenBlendMode"];
+        [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)luminosityBlend:(C4Image *)backgroundImage {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CILuminosityBlendMode"];
+        [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)maximumComposite:(C4Image *)backgroundImage {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIMaximumCompositing"];
+        [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)minimumComposite:(C4Image *)backgroundImage {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIMinimumCompositing"];
+        [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)multiplyBlend:(C4Image *)backgroundImage {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIMultiplyBlendMode"];
+        [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)multiplyComposite:(C4Image *)backgroundImage {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIMultiplyCompositing"];
+        [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)overlayBlend:(C4Image *)backgroundImage {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIOverlayBlendMode"];
+        [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)saturationBlend:(C4Image *)backgroundImage {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CISaturationBlendMode"];
+        [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)screenBlend:(C4Image *)backgroundImage {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIScreenBlendMode"];
+        [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)sepiaTone:(CGFloat)intensity {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CISepiaTone"];
+        [filter setValue:@(intensity) forKey:@"inputIntensity"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)softLightBlend:(C4Image *)backgroundImage {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CISoftLightBlendMode"];
+        [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)sourceAtopComposite:(C4Image *)backgroundImage {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CISourceAtopCompositing"];
+        [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)sourceInComposite:(C4Image *)backgroundImage {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CISourceInCompositing"];
+        [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)sourceOutComposite:(C4Image *)backgroundImage {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CISourceOutCompositing"];
+        [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)sourceOverComposite:(C4Image *)backgroundImage {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CISourceOverCompositing"];
+        [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)straighten:(CGFloat)angle {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIStraightenFilter"];
+        [filter setValue:@(angle) forKey:@"inputAngle"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)tempartureAndTint:(CGSize)neutral target:(CGSize)targetNeutral {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CITemperatureAndTint"];
+        [filter setValue:[CIVector vectorWithX:neutral.width Y:neutral.height] forKey:@"inputNeutral"];
+        [filter setValue:[CIVector vectorWithX:targetNeutral.width Y:targetNeutral.height] forKey:@"inputTargetNeutral"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)toneCurve:(CGPoint *)pointArray {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIToneCurve"];
+        [filter setValue:[CIVector vectorWithCGPoint:pointArray[0]] forKey:@"inputPoint0"];
+        [filter setValue:[CIVector vectorWithCGPoint:pointArray[1]] forKey:@"inputPoint1"];
+        [filter setValue:[CIVector vectorWithCGPoint:pointArray[2]] forKey:@"inputPoint2"];
+        [filter setValue:[CIVector vectorWithCGPoint:pointArray[3]] forKey:@"inputPoint3"];
+        [filter setValue:[CIVector vectorWithCGPoint:pointArray[4]] forKey:@"inputPoint4"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)vibranceAdjust:(CGFloat)amount {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIVibrance"];
+        [filter setValue:@(amount) forKey:@"inputAmount"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)whitePointAdjust:(UIColor *)color {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIWhitePointAdjust"];
+        [filter setValue:color.CIColor forKey:@"inputColor"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
 }
 
 #pragma mark Pixels
@@ -307,5 +678,915 @@
 -(C4Layer *)layer {
     return self.imageLayer;
 }
+
+#pragma mark New Filters
+-(void)affineClamp:(CGAffineTransform)transform {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIAffineClamp"];
+        [filter setValue:[NSValue valueWithBytes:&transform objCType:@encode(CGAffineTransform)]
+                  forKey:@"inputTransform"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)affineTile:(CGAffineTransform)transform {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIAffineTile"];
+        [filter setValue:[NSValue valueWithBytes:&transform objCType:@encode(CGAffineTransform)]
+                  forKey:@"inputTransform"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+};
+
+-(void)affineTransform:(CGAffineTransform)transform {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIAffineTransform"];
+        [filter setValue:[NSValue valueWithBytes:&transform objCType:@encode(CGAffineTransform)]
+                  forKey:@"inputTransform"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)areaAverage:(CGRect)area {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIAreaAverage"];
+        [filter setValue:[NSValue valueWithCGRect:area] forKey:@"inputExtent"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)areaHistogram:(CGRect)area count:(NSInteger)width scale:(CGFloat)scale {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIAreaHistogram"];
+        [filter setValue:[NSValue valueWithCGRect:area] forKey:@"inputExtent"];
+        [filter setValue:@(width) forKey:@"inputCount"];
+        [filter setValue:@(scale) forKey:@"inputScale"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)areaMaximum:(CGRect)area {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIAreaMaximum"];
+        [filter setValue:[NSValue valueWithCGRect:area] forKey:@"inputExtent"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)areaMaximumAlpha:(CGRect)area {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIAreaMaximumAlpha"];
+        [filter setValue:[NSValue valueWithCGRect:area] forKey:@"inputExtent"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)areaMinimum:(CGRect)area {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIAreaMinimum"];
+        [filter setValue:[NSValue valueWithCGRect:area] forKey:@"inputExtent"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)areaMinimumAlpha:(CGRect)area {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIAreaMinimumAlpha"];
+        [filter setValue:[NSValue valueWithCGRect:area] forKey:@"inputExtent"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)blendWithMask:(C4Image *)backgroundImage mask:(C4Image *)maskImage {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIBlendWithMask"];
+        [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+        [filter setValue:maskImage.CIImage forKey:@"inputMaskImage"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)bloom:(CGFloat)radius intensity:(CGFloat)intensity {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIBloom"];
+        [filter setValue:@(radius) forKey:@"inputRadius"];
+        [filter setValue:@(intensity) forKey:@"inputIntensity"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)boxBlur:(CGFloat)radius {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIBloom"];
+        [filter setValue:@(radius) forKey:@"inputRadius"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)bumpDistortion:(CGPoint)center radius:(CGFloat)radius scale:(CGFloat)scale {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIBumpDistortion"];
+        [filter setValue:[NSValue valueWithCGPoint:center] forKey:@"inputCenter"];
+        [filter setValue:@(radius) forKey:@"inputRadius"];
+        [filter setValue:@(scale) forKey:@"inputScale"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)bumpDistortionLinear:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle scale:(CGFloat)scale {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIBumpDistortionLinear"];
+        [filter setValue:[NSValue valueWithCGPoint:center] forKey:@"inputCenter"];
+        [filter setValue:@(radius) forKey:@"inputRadius"];
+        [filter setValue:@(angle) forKey:@"inputAngle"];
+        [filter setValue:@(scale) forKey:@"inputScale"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)circleSplashDistortion:(CGPoint)center radius:(CGFloat)radius {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CICircleSplashDistortion"];
+        [filter setValue:[NSValue valueWithCGPoint:center] forKey:@"inputCenter"];
+        [filter setValue:@(radius) forKey:@"inputRadius"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)circularScreen:(CGPoint)center width:(CGFloat)width sharpness:(CGFloat)sharpness {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CICircularScreen"];
+        [filter setValue:[NSValue valueWithCGPoint:center] forKey:@"inputCenter"];
+        [filter setValue:@(width) forKey:@"inputWidth"];
+        [filter setValue:@(sharpness) forKey:@"inputSharpness"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)circularWrap:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CICircularWrap"];
+        [filter setValue:[NSValue valueWithCGPoint:center] forKey:@"inputCenter"];
+        [filter setValue:@(radius) forKey:@"inputRadius"];
+        [filter setValue:@(angle) forKey:@"inputAngle"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+-(void)halftoneCMYK:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle sharpness:(CGFloat)sharpness gcr:(CGFloat)gcr ucr:(CGFloat)ucr {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CICMYKHalftone"];
+        [filter setValue:[NSValue valueWithCGPoint:center] forKey:@"inputCenter"];
+        [filter setValue:@(radius) forKey:@"inputRadius"];
+        [filter setValue:@(angle) forKey:@"inputAngle"];
+        [filter setValue:@(sharpness) forKey:@"inputSharpness"];
+        [filter setValue:@(gcr) forKey:@"inputGCR"];
+        [filter setValue:@(ucr) forKey:@"inputUCR"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)colorCube:(CGFloat)dimension cubeData:(NSData *)data {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIColorCube"];
+        [filter setValue:@(dimension) forKey:@"inputCubeDimension"];
+        [filter setValue:data forKey:@"inputCubeData"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)colorMap:(C4Image *)gradientImage {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIColorMap"];
+        [filter setValue:gradientImage.CIImage forKey:@"inputGradientImage"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)colorPosterize:(CGFloat)levels {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIColorPosterize"];
+        [filter setValue:@(levels) forKey:@"inputLevels"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)columnAverage:(CGRect)area {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIColumnAverage"];
+        [filter setValue:[NSValue valueWithCGRect:area] forKey:@"inputExtent"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)comicEffect {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIComicEffect"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)crop:(CGRect)area {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CICrop"];
+        [filter setValue:[NSValue valueWithCGRect:area] forKey:@"inputRectangle"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)crystallize:(CGFloat)radius center:(CGPoint)center {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CICrystallize"];
+        [filter setValue:@(radius) forKey:@"inputRadius"];
+        [filter setValue:[NSValue valueWithCGPoint:center] forKey:@"inputCenter"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)depthOfField:(CGPoint)point1 point2:(CGPoint)point2 saturation:(CGFloat)saturation maskRadius:(CGFloat)maskRadius maskIntensity:(CGFloat)maskIntensity blurRadius:(CGFloat)radius {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIDepthOfField"];
+        [filter setValue:[NSValue valueWithCGPoint:point1] forKey:@"inputPoint1"];
+        [filter setValue:[NSValue valueWithCGPoint:point2] forKey:@"inputPoint2"];
+        [filter setValue:@(saturation) forKey:@"inputSaturation"];
+        [filter setValue:@(maskRadius) forKey:@"inputUnsharpMaskRadius"];
+        [filter setValue:@(maskIntensity) forKey:@"inputUnsharpMaskIntensity"];
+        [filter setValue:@(radius) forKey:@"inputRadius"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)discBlur:(CGFloat)radius {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIDiscBlur"];
+        [filter setValue:@(radius) forKey:@"inputRadius"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)displacementDistortion:(C4Image *)displacementImage scale:(CGFloat)scale {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIDisplacementDistortion"];
+        [filter setValue:displacementImage.CIImage forKey:@"inputDisplacementImage"];
+        [filter setValue:@(scale) forKey:@"inputScale"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)dotScreen:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width sharpness:(CGFloat)sharpness {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIDotScreen"];
+        [filter setValue:[NSValue valueWithCGPoint:center] forKey:@"inputCenter"];
+        [filter setValue:@(angle) forKey:@"inputAngle"];
+        [filter setValue:@(width) forKey:@"inputWidth"];
+        [filter setValue:@(sharpness) forKey:@"inputSharpness"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)droste:(CGPoint)inset1 inset2:(CGPoint)inset2 strandRadius:(CGFloat)radius periodicity:(CGFloat)periodicity rotation:(CGFloat)rotation zoom:(CGFloat)zoom {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIDroste"];
+        [filter setValue:[NSValue valueWithCGPoint:inset1] forKey:@"inputInsetPoint0"];
+        [filter setValue:[NSValue valueWithCGPoint:inset2] forKey:@"inputInsetPoint1"];
+        [filter setValue:@(radius) forKey:@"inputStrands"];
+        [filter setValue:@(periodicity) forKey:@"inputPeriodicity"];
+        [filter setValue:@(rotation) forKey:@"inputRotation"];
+        [filter setValue:@(zoom) forKey:@"inputZoom"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+-(void)edges:(CGFloat)intensity {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIEdges"];
+        [filter setValue:@(intensity) forKey:@"inputIntensity"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)edgeWork:(CGFloat)radius {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIEdgeWork"];
+        [filter setValue:@(radius) forKey:@"inputRadius"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)eightFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIEightFoldReflectedTile"];
+        [filter setValue:[NSValue valueWithCGPoint:center] forKey:@"inputCenter"];
+        [filter setValue:@(angle) forKey:@"inputAngle"];
+        [filter setValue:@(width) forKey:@"inputWidth"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)fourFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle acuteAngle:(CGFloat)acuteAngle width:(CGFloat)width {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIFourFoldReflectedTile"];
+        [filter setValue:[NSValue valueWithCGPoint:center] forKey:@"inputCenter"];
+        [filter setValue:@(angle) forKey:@"inputAngle"];
+        [filter setValue:@(acuteAngle) forKey:@"inputAcuteAngle"];
+        [filter setValue:@(width) forKey:@"inputWidth"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)fourFoldRotatedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIFourFoldRotatedTile"];
+        [filter setValue:[NSValue valueWithCGPoint:center] forKey:@"inputCenter"];
+        [filter setValue:@(angle) forKey:@"inputAngle"];
+        [filter setValue:@(width) forKey:@"inputWidth"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)fourFoldTranslatedTile:(CGPoint)center angle:(CGFloat)angle acuteAngle:(CGFloat)acuteAngle width:(CGFloat)width {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIFourFoldTranslatedTile"];
+        [filter setValue:[NSValue valueWithCGPoint:center] forKey:@"inputCenter"];
+        [filter setValue:@(angle) forKey:@"inputAngle"];
+        [filter setValue:@(acuteAngle) forKey:@"inputAcuteAngle"];
+        [filter setValue:@(width) forKey:@"inputWidth"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)gaussianBlur:(CGFloat)radius {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIGaussianBlur"];
+        [filter setValue:@(radius) forKey:@"inputRadius"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)glassDistortion:(C4Image *)texture center:(CGPoint)center scale:(CGFloat)scale {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIGlassDistortion"];
+        [filter setValue:texture.CIImage forKey:@"inputTexture"];
+        [filter setValue:[NSValue valueWithCGPoint:center] forKey:@"inputCenter"];
+        [filter setValue:@(scale) forKey:@"inputScale"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)glassLozenge:(CGPoint)point1 point2:(CGPoint)point2 radius:(CGFloat)radius refraction:(CGFloat)refraction {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIGlassLozenge"];
+        [filter setValue:[NSValue valueWithCGPoint:point1] forKey:@"inputPoint0"];
+        [filter setValue:[NSValue valueWithCGPoint:point2] forKey:@"inputPoint1"];
+        [filter setValue:@(radius) forKey:@"inputRadius"];
+        [filter setValue:@(refraction) forKey:@"inputRefraction"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)glideReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIGlideReflectedTile"];
+        [filter setValue:[NSValue valueWithCGPoint:center] forKey:@"inputCenter"];
+        [filter setValue:@(angle) forKey:@"inputAngle"];
+        [filter setValue:@(width) forKey:@"inputWidth"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)gloom:(CGFloat)radius intensity:(CGFloat)intensity {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIGloom"];
+        [filter setValue:@(radius) forKey:@"inputRadius"];
+        [filter setValue:@(intensity) forKey:@"inputIntensity"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)hatchedScreen:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width sharpness:(CGFloat)sharpness {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIHatchedScreen"];
+        [filter setValue:[NSValue valueWithCGPoint:center] forKey:@"inputCenter"];
+        [filter setValue:@(angle) forKey:@"inputAngle"];
+        [filter setValue:@(width) forKey:@"inputWidth"];
+        [filter setValue:@(sharpness) forKey:@"inputSharpness"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)heightShieldFromMask:(CGFloat)radius {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIHeightSheildFromMask"];
+        [filter setValue:@(radius) forKey:@"inputRadius"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)hexagonalPixellate:(CGPoint)center scale:(CGFloat)scale {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIHexagonalPixellate"];
+        [filter setValue:[NSValue valueWithCGPoint:center] forKey:@"inputCenter"];
+        [filter setValue:@(scale) forKey:@"inputScale"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)holeDistortion:(CGPoint)center radius:(CGFloat)radius {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIHoleDistortion"];
+        [filter setValue:[NSValue valueWithCGPoint:center] forKey:@"inputCenter"];
+        [filter setValue:@(radius) forKey:@"inputRadius"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)kaleidescope:(CGFloat)count center:(CGPoint)center angle:(CGFloat)angle {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIKaleidescope"];
+        [filter setValue:@(count) forKey:@"inputCount"];
+        [filter setValue:[NSValue valueWithCGPoint:center] forKey:@"inputCenter"];
+        [filter setValue:@(angle) forKey:@"inputAngle"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)lanczosScaleTransform:(CGFloat)scale aspectRatio:(CGFloat)ratio {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CILanczosScaleTransform"];
+        [filter setValue:@(scale) forKey:@"inputScale"];
+        [filter setValue:@(ratio) forKey:@"inputAspectRatio"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)lightTunnel:(CGPoint)center rotation:(CGFloat)rotation radius:(CGFloat)radius {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CILightTunnel"];
+        [filter setValue:[NSValue valueWithCGPoint:center] forKey:@"inputCenter"];
+        [filter setValue:@(rotation) forKey:@"inputRotation"];
+        [filter setValue:@(radius) forKey:@"inputRadius"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)lineOverlay:(CGFloat)noiseLevel sharpness:(CGFloat)sharpness edgeIntensity:(CGFloat)edgeIntensity threshold:(CGFloat)threshold contrast:(CGFloat)contrast {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CILightTunnel"];
+        [filter setValue:@(noiseLevel) forKey:@"inputRotation"];
+        [filter setValue:@(sharpness) forKey:@"inputRadius"];
+        [filter setValue:@(edgeIntensity) forKey:@"inputRotation"];
+        [filter setValue:@(threshold) forKey:@"inputRadius"];
+        [filter setValue:@(contrast) forKey:@"inputRotation"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)lineScreen:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width sharpness:(CGFloat)sharpness{
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CICircularScreen"];
+        [filter setValue:[NSValue valueWithCGPoint:center] forKey:@"inputCenter"];
+        [filter setValue:@(angle) forKey:@"inputAngle"];
+        [filter setValue:@(width) forKey:@"inputWidth"];
+        [filter setValue:@(sharpness) forKey:@"inputSharpness"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)maskToAlpha {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIMaskToAlpha"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)maximumComponent {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIMaximumComponent"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)medianFilter {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIMedianFilter"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)minimumComponent {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIMinimumComponent"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)motionBlur:(CGFloat)radius angle:(CGFloat)angle {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIMotionBlur"];
+        [filter setValue:@(radius) forKey:@"inputRadius"];
+        [filter setValue:@(angle) forKey:@"inputAngle"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)noiseRedution:(CGFloat)level sharpness:(CGFloat)sharpness {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CINoiseReduction"];
+        [filter setValue:@(level) forKey:@"inputLevel"];
+        [filter setValue:@(sharpness) forKey:@"inputSharpness"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)opTile:(CGPoint)center scale:(CGFloat)scale angle:(CGFloat)angle width:(CGFloat)width {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIOpTile"];
+        [filter setValue:[NSValue valueWithCGPoint:center] forKey:@"inputCenter"];
+        [filter setValue:@(scale) forKey:@"inputScale"];
+        [filter setValue:@(angle) forKey:@"inputAngle"];
+        [filter setValue:@(width) forKey:@"inputWidth"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)parallelogramTile:(CGPoint)center angle:(CGFloat)angle acuteAngle:(CGFloat)acuteAngle width:(CGFloat)width {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIParallelogramTile"];
+        [filter setValue:[NSValue valueWithCGPoint:center] forKey:@"inputCenter"];
+        [filter setValue:@(angle) forKey:@"inputAngle"];
+        [filter setValue:@(acuteAngle) forKey:@"inputAcuteAngle"];
+        [filter setValue:@(width) forKey:@"inputWidth"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)perspectiveTile:(CGPoint *)points {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIParallelogramTile"];
+        [filter setValue:[NSValue valueWithCGPoint:points[0]] forKey:@"TopLeft"];
+        [filter setValue:[NSValue valueWithCGPoint:points[1]] forKey:@"TopRight"];
+        [filter setValue:[NSValue valueWithCGPoint:points[2]] forKey:@"BottomRight"];
+        [filter setValue:[NSValue valueWithCGPoint:points[3]] forKey:@"BottomLeft"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)perspectiveTransform:(CGPoint *)points {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIPerspectiveTransform"];
+        [filter setValue:[NSValue valueWithCGPoint:points[0]] forKey:@"TopLeft"];
+        [filter setValue:[NSValue valueWithCGPoint:points[1]] forKey:@"TopRight"];
+        [filter setValue:[NSValue valueWithCGPoint:points[2]] forKey:@"BottomRight"];
+        [filter setValue:[NSValue valueWithCGPoint:points[3]] forKey:@"BottomLeft"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)pinchDistortion:(CGPoint)center radius:(CGFloat)radius scale:(CGFloat)scale {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIPinchDistortion"];
+        [filter setValue:[NSValue valueWithCGPoint:center] forKey:@"inputCenter"];
+        [filter setValue:@(radius) forKey:@"inputRadius"];
+        [filter setValue:@(scale) forKey:@"inputScale"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)pixellate:(CGPoint)center scale:(CGFloat)scale {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIPixellate"];
+        [filter setValue:[NSValue valueWithCGPoint:center] forKey:@"inputCenter"];
+        [filter setValue:@(scale) forKey:@"inputScale"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)pointillize:(CGFloat)radius center:(CGPoint)center {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIPointillize"];
+        [filter setValue:@(radius) forKey:@"inputRadius"];
+        [filter setValue:[NSValue valueWithCGPoint:center] forKey:@"inputCenter"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)rowAverage:(CGRect)area {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIRowAverage"];
+        [filter setValue:[NSValue valueWithCGRect:area] forKey:@"inputExtent"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)shadedMaterial:(C4Image *)shadingImage scale:(CGFloat)scale {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIShadedMaterial"];
+        [filter setValue:shadingImage.CIImage forKey:@"inputShadingImage"];
+        [filter setValue:@(scale) forKey:@"inputScale"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)sharpenLuminance:(CGFloat)sharpness {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CISharpenLuminance"];
+        [filter setValue:@(sharpness) forKey:@"inputSharpness"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)sixFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CISixFoldReflectedTile"];
+        [filter setValue:[NSValue valueWithCGPoint:center] forKey:@"inputCenter"];
+        [filter setValue:@(angle) forKey:@"inputAngle"];
+        [filter setValue:@(width) forKey:@"inputWidth"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)sixFoldRotatedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CISixFoldRotatedTile"];
+        [filter setValue:[NSValue valueWithCGPoint:center] forKey:@"inputCenter"];
+        [filter setValue:@(angle) forKey:@"inputAngle"];
+        [filter setValue:@(width) forKey:@"inputWidth"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)spotColor:(NSArray *)colorsets closenessAndContrast:(CGFloat *)values {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CISpotColor"];
+        [filter setValue:((UIColor *)colorsets[0]).CIColor forKey:@"inputCenterColor1"];
+        [filter setValue:((UIColor *)colorsets[1]).CIColor forKey:@"inputReplacementColor1"];
+        [filter setValue:@(values[0]) forKey:@"inputCloseness1"];
+        [filter setValue:@(values[1]) forKey:@"inputContrast1"];
+        [filter setValue:((UIColor *)colorsets[2]).CIColor forKey:@"inputCenterColor2"];
+        [filter setValue:((UIColor *)colorsets[3]).CIColor forKey:@"inputReplacementColor2"];
+        [filter setValue:@(values[2]) forKey:@"inputCloseness2"];
+        [filter setValue:@(values[3]) forKey:@"inputContrast2"];
+        [filter setValue:((UIColor *)colorsets[4]).CIColor forKey:@"inputCenterColor3"];
+        [filter setValue:((UIColor *)colorsets[5]).CIColor forKey:@"inputReplacementColor3"];
+        [filter setValue:@(values[4]) forKey:@"inputCloseness3"];
+        [filter setValue:@(values[5]) forKey:@"inputContrast3"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+-(void)spotLight:(C4Vector *)position lightPointsAt:(C4Vector *)spot brightness:(CGFloat)brightness concentration:(CGFloat)concentration color:(UIColor *)color {
+    CIFilter *filter = [self prepareFilterWithName:@"CISpotLight"];
+    [filter setValue:[CIVector vectorWithX:position.x Y:position.y Z:position.z] forKey:@"inputLightPosition"];
+    [filter setValue:[CIVector vectorWithX:spot.x Y:spot.y Z:spot.z] forKey:@"inputLightPointsAt"];
+    [filter setValue:@(brightness) forKey:@"inputBrightness"];
+    [filter setValue:@(concentration) forKey:@"inputConcentration"];
+    [filter setValue:color.CIColor forKey:@"inputColor"];
+    _output = filter.outputImage;
+    if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+    filter = nil;
+}
+
+-(void)stretchCrop:(CGSize)size cropAmount:(CGFloat)cropAmount stretchAmount:(CGFloat)stretchAmount {
+    CIFilter *filter = [self prepareFilterWithName:@"CIStretchCrop"];
+    [filter setValue:[NSValue valueWithCGSize:size] forKey:@"inputSize"];
+    [filter setValue:@(cropAmount) forKey:@"inputCropAmount"];
+    [filter setValue:@(stretchAmount) forKey:@"inputCenterStretchAmount"];
+    _output = filter.outputImage;
+    if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+    filter = nil;
+}
+
+-(void)torusLensDistortion:(CGPoint)center radius:(CGFloat)radius width:(CGFloat)width refraction:(CGFloat)refraction {
+    CIFilter *filter = [self prepareFilterWithName:@"CITorusLensDistortion"];
+    [filter setValue:[NSValue valueWithCGPoint:center] forKey:@"inputCenter"];
+    [filter setValue:@(radius) forKey:@"inputRadius"];
+    [filter setValue:@(width) forKey:@"inputWidth"];
+    [filter setValue:@(refraction) forKey:@"inputRefraction"];
+    _output = filter.outputImage;
+    if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+    filter = nil;
+}
+
+-(void)triangleKaleidescope:(CGPoint)point size:(CGSize)size rotation:(CGFloat)rotation decay:(CGFloat)decay {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CITriangleKaleidescope"];
+        [filter setValue:[NSValue valueWithCGPoint:point] forKey:@"inputPoint"];
+        [filter setValue:[NSValue valueWithCGSize:size] forKey:@"inputSize"];
+        [filter setValue:@(rotation) forKey:@"inputRotation"];
+        [filter setValue:@(decay) forKey:@"inputDecay"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)triangleTile:(CGPoint)center scale:(CGFloat)scale angle:(CGFloat)angle width:(CGFloat)width {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CITriangleTile"];
+        [filter setValue:[NSValue valueWithCGPoint:center] forKey:@"inputCenter"];
+        [filter setValue:@(scale) forKey:@"inputScale"];
+        [filter setValue:@(angle) forKey:@"inputAngle"];
+        [filter setValue:@(width) forKey:@"inputWidth"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)twelveFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CITwelveFoldReflectedTile"];
+        [filter setValue:[NSValue valueWithCGPoint:center] forKey:@"inputCenter"];
+        [filter setValue:@(angle) forKey:@"inputAngle"];
+        [filter setValue:@(width) forKey:@"inputWidth"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
+-(void)twirlDistortion:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle {
+    CIFilter *filter = [self prepareFilterWithName:@"CITwirlDistortion"];
+    [filter setValue:[NSValue valueWithCGPoint:center] forKey:@"inputCenter"];
+    [filter setValue:@(radius) forKey:@"inputRadius"];
+    [filter setValue:@(angle) forKey:@"inputAngle"];
+    _output = filter.outputImage;
+    if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+    filter = nil;
+}
+
+-(void)unsharpMask:(CGFloat)radius intensity:(CGFloat)intensity {
+    CIFilter *filter = [self prepareFilterWithName:@"CIUnsharpMask"];
+    [filter setValue:@(radius) forKey:@"inputRadius"];
+    [filter setValue:@(intensity) forKey:@"inputIntensity"];
+    _output = filter.outputImage;
+    if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+    filter = nil;
+}
+
+-(void)vignette:(CGFloat)radius intensity:(CGFloat)intensity {
+    CIFilter *filter = [self prepareFilterWithName:@"CIVignette"];
+    [filter setValue:@(radius) forKey:@"inputRadius"];
+    [filter setValue:@(intensity) forKey:@"inputIntensity"];
+    _output = filter.outputImage;
+    if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+    filter = nil;
+}
+
+-(void)vortexDistortion:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle {
+    CIFilter *filter = [self prepareFilterWithName:@"CIVortexDistortion"];
+    [filter setValue:[NSValue valueWithCGPoint:center] forKey:@"inputCenter"];
+    [filter setValue:@(radius) forKey:@"inputRadius"];
+    [filter setValue:@(angle) forKey:@"inputAngle"];
+    _output = filter.outputImage;
+    if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+    filter = nil;
+}
+
+-(void)zoomBlur:(CGPoint)center amount:(CGFloat)amount {
+    CIFilter *filter = [self prepareFilterWithName:@"CIZoomBlur"];
+    [filter setValue:[NSValue valueWithCGPoint:center] forKey:@"inputCenter"];
+    [filter setValue:@(amount) forKey:@"inputAmount"];
+    _output = filter.outputImage;
+    if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+    filter = nil;
+}
+
+#pragma mark Old Filters
 
 @end
