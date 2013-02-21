@@ -648,4 +648,12 @@
 -(void)vignette:(CGFloat)radius intensity:(CGFloat)intensity;
 -(void)vortexDistortion:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle;
 -(void)zoomBlur:(CGPoint)center amount:(CGFloat)amount;
+
++(C4Image *)checkerboard:(CGSize)size center:(CGPoint)center color1:(UIColor *)color1 color2:(UIColor *)color2 squareWidth:(CGFloat)width sharpness:(CGFloat)sharpness;
++(C4Image *)constantColor:(CGSize)size color:(UIColor *)color;
++(C4Image *)lenticularHalo:(CGSize)size center:(CGPoint)center color:(UIColor *)color haloRadius:(CGFloat)radius haloWidth:(CGFloat)haloWidth haloOverlap:(CGFloat)overlap striationStrength:(CGFloat)strength striationContrast:(CGFloat)contrast time:(CGFloat)time;
++(C4Image *)random:(CGSize)size;
++(C4Image *)starShineGenerator:(CGSize)size center:(CGPoint)center color:(UIColor *)color radius:(CGFloat)radius crossScale:(CGFloat)scale crossAngle:(CGFloat)angle crossOpacity:(CGFloat)opacity crossWidth:(CGFloat)width epsilon:(CGFloat)epsilon;
++(C4Image *)stripes:(CGSize)size center:(CGPoint)center color1:(UIColor *)color1 color2:(UIColor *)color2 stripeWidth:(CGFloat)width sharpness:(CGFloat)sharpness;
++(C4Image *)sunbeams:(CGSize)size center:(CGPoint)center color:(UIColor *)color sunRadius:(CGFloat)sunRadius maxStriationRadius:(CGFloat)striationRadius striationStrength:(CGFloat)striationStrength striationContrast:(CGFloat)striationContrast time:(CGFloat)time;
 @end

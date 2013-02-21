@@ -36,6 +36,7 @@
 		ED50C8D214EAC92F0040D844 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED50C8D114EAC92F0040D844 /* QuartzCore.framework */; };
 		ED50C8D614EACA340040D844 /* C4View.m in Sources */ = {isa = PBXBuildFile; fileRef = ED50C8D514EACA340040D844 /* C4View.m */; };
 		ED5FB05115B38894002987EA /* C4AssertionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5FB05015B38894002987EA /* C4AssertionHandler.m */; };
+		ED63257716D6943C000DF4B2 /* UIColor+CIColorFix.m in Sources */ = {isa = PBXBuildFile; fileRef = ED63257616D6943C000DF4B2 /* UIColor+CIColorFix.m */; };
 		ED7C0C0F15C88B9F009107A6 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = ED7C0C0215C88B9F009107A6 /* iTunesArtwork.png */; };
 		ED7C0C1215C88B9F009107A6 /* C4_AppStoreIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = ED7C0C0515C88B9F009107A6 /* C4_AppStoreIcon.png */; };
 		ED7C0C1315C88B9F009107A6 /* C4_AppStoreIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED7C0C0615C88B9F009107A6 /* C4_AppStoreIcon@2x.png */; };
@@ -132,6 +133,8 @@
 		ED50C8D514EACA340040D844 /* C4View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4View.m; sourceTree = "<group>"; };
 		ED5FB04F15B38894002987EA /* C4AssertionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4AssertionHandler.h; sourceTree = "<group>"; };
 		ED5FB05015B38894002987EA /* C4AssertionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4AssertionHandler.m; sourceTree = "<group>"; };
+		ED63257516D6943C000DF4B2 /* UIColor+CIColorFix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+CIColorFix.h"; sourceTree = "<group>"; };
+		ED63257616D6943C000DF4B2 /* UIColor+CIColorFix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CIColorFix.m"; sourceTree = "<group>"; };
 		ED7513AA15150FB60076317F /* inception.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = inception.mov; sourceTree = "<group>"; };
 		ED7C0C0215C88B9F009107A6 /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
 		ED7C0C0515C88B9F009107A6 /* C4_AppStoreIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = C4_AppStoreIcon.png; sourceTree = "<group>"; };
@@ -303,6 +306,8 @@
 				EDA27D2E1679BD0800B75522 /* C4TransformLayer.m */,
 				ED99AB6F15DDF714002A7D6C /* C4YouTubeURLParser.h */,
 				ED99AB7215DE01D7002A7D6C /* C4YouTubeURLParser.m */,
+				ED63257516D6943C000DF4B2 /* UIColor+CIColorFix.h */,
+				ED63257616D6943C000DF4B2 /* UIColor+CIColorFix.m */,
 				ED4702D615C052CA004B75D1 /* pyramid.png */,
 				ED008D3915BF5DE80005E8D3 /* lines.png */,
 				ED50C8D314EACA0E0040D844 /* Source */,
@@ -535,6 +540,7 @@
 				ED8D2EC816BC4D9C009E1D1E /* C4Slider.m in Sources */,
 				EDBCDFBE16D26D4C000E4A55 /* NewImage.m in Sources */,
 				EDBCDFC116D26EFE000E4A55 /* C4ImageView.m in Sources */,
+				ED63257716D6943C000DF4B2 /* UIColor+CIColorFix.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1587,6 +1587,82 @@
     filter = nil;
 }
 
-#pragma mark Old Filters
+#pragma mark Generators
++(C4Image *)checkerboard:(CGSize)size center:(CGPoint)center color1:(UIColor *)color1 color2:(UIColor *)color2 squareWidth:(CGFloat)width sharpness:(CGFloat)sharpness {
+    CIContext *context = [CIContext contextWithOptions:nil];
+    CIFilter *filter = [CIFilter filterWithName:@"CICheckerboardGenerator"];
+    [filter setDefaults];
+    [filter setValue:[CIVector vectorWithCGPoint:center] forKey:@"inputCenter"];
+    [filter setValue:color1.CIColor forKey:@"inputColor0"];
+    [filter setValue:color2.CIColor forKey:@"inputColor1"];
+    [filter setValue:@(width) forKey:@"inputWidth"];
+    [filter setValue:@(sharpness) forKey:@"inputSharpness"];
+    CIImage *image = filter.outputImage;
+    CGImageRef filteredImage = [context createCGImage:image fromRect:(CGRect){CGPointZero,size}];
+    filter = nil;
+    return [[C4Image alloc] initWithCGImage:filteredImage];
+}
 
++(C4Image *)constantColor:(CGSize)size color:(UIColor *)color{
+    @autoreleasepool {
+        CIContext *context = [CIContext contextWithOptions:nil];
+        CIFilter *filter = [CIFilter filterWithName:@"CIConstantColorGenerator"];
+        [filter setDefaults];
+        [filter setValue:color.CIColor forKey:@"inputColor"];
+        CGImageRef filteredImage = [context createCGImage:filter.outputImage
+                                                 fromRect:(CGRect){CGPointZero,size}];
+        return [[C4Image alloc] initWithCGImage:filteredImage];
+    }
+};
+
++(C4Image *)lenticularHalo:(CGSize)size center:(CGPoint)center color:(UIColor *)color haloRadius:(CGFloat)radius haloWidth:(CGFloat)haloWidth haloOverlap:(CGFloat)overlap striationStrength:(CGFloat)strength striationContrast:(CGFloat)contrast time:(CGFloat)time{
+    @autoreleasepool {
+        CIContext *context = [CIContext contextWithOptions:nil];
+        CIFilter *filter = [CIFilter filterWithName:@"CILenticularHaloGenerator"];
+        [filter setDefaults];
+        [filter setValue:[CIVector vectorWithCGPoint:center] forKey:@"inputCenter"];
+        [filter setValue:color.CIColor forKey:@"inputColor"];
+        [filter setValue:@(radius) forKey:@"inputHaloRadius"];
+        [filter setValue:@(haloWidth) forKey:@"inputHaloWidth"];
+        [filter setValue:@(overlap) forKey:@"inputHaloOverlap"];
+        [filter setValue:@(strength) forKey:@"inputStriationStrength"];
+        [filter setValue:@(contrast) forKey:@"inputStriationContrast"];
+        [filter setValue:@(time) forKey:@"inputTime"];
+        CIImage *image = filter.outputImage;
+        CGImageRef filteredImage = [context createCGImage:image fromRect:(CGRect){CGPointZero,size}];
+        filter = nil;
+        return [[C4Image alloc] initWithCGImage:filteredImage];
+    }
+};
+
++(C4Image *)random:(CGSize)size{
+    @autoreleasepool {
+        CIContext *context = [CIContext contextWithOptions:nil];
+        CIFilter *filter = [CIFilter filterWithName:@"CIRandomGenerator"];
+        [filter setDefaults];
+        CGImageRef filteredImage = [context createCGImage:filter.outputImage
+                                                 fromRect:(CGRect){CGPointZero,size}];
+        return [[C4Image alloc] initWithCGImage:filteredImage];
+    }
+}
+
++(C4Image *)starShineGenerator:(CGSize)size center:(CGPoint)center color:(UIColor *)color radius:(CGFloat)radius crossScale:(CGFloat)scale crossAngle:(CGFloat)angle crossOpacity:(CGFloat)opacity crossWidth:(CGFloat)width epsilon:(CGFloat)epsilon{return nil;};
+
++(C4Image *)stripes:(CGSize)size center:(CGPoint)center color1:(UIColor *)color1 color2:(UIColor *)color2 stripeWidth:(CGFloat)width sharpness:(CGFloat)sharpness{
+    @autoreleasepool {
+        CIContext *context = [CIContext contextWithOptions:nil];
+        CIFilter *filter = [CIFilter filterWithName:@"CIStripesGenerator"];
+        [filter setDefaults];
+        [filter setValue:[CIVector vectorWithCGPoint:center] forKey:@"inputCenter"];
+        [filter setValue:color1.CIColor forKey:@"inputColor0"];
+        [filter setValue:color2.CIColor forKey:@"inputColor1"];
+        [filter setValue:@(width) forKey:@"inputWidth"];
+        [filter setValue:@(sharpness) forKey:@"inputSharpness"];
+        CIImage *image = filter.outputImage;
+        CGImageRef filteredImage = [context createCGImage:image fromRect:(CGRect){CGPointZero,size}];
+        filter = nil;
+        return [[C4Image alloc] initWithCGImage:filteredImage];
+    }
+};
++(C4Image *)sunbeams:(CGSize)size center:(CGPoint)center color:(UIColor *)color sunRadius:(CGFloat)sunRadius maxStriationRadius:(CGFloat)striationRadius striationStrength:(CGFloat)striationStrength striationContrast:(CGFloat)striationContrast time:(CGFloat)time{return nil;};
 @end
