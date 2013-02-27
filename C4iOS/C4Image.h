@@ -16,20 +16,20 @@
  When working with blends and composite methods, it is recommended that the images you use are of the same size.
  
  */
-@interface NewImage : C4Control {
+@interface C4Image : C4Control {
 }
 
 /**Creates and returns a new image using a file with the given name.
  
  @param name A string representation of the file name (e.g. photo.jpg, image.png, etc.)
  */
-+(NewImage *)imageNamed:(NSString *)name;
++(C4Image *)imageNamed:(NSString *)name;
 
 /**Creates and returns a new image using a pre-existing C4Image object.
  
  @param image A C4Image whose contents will be used to create a new C4Image object.
  */
-+(NewImage *)imageWithImage:(C4Image *)image;
++(C4Image *)imageWithImage:(C4Image *)image;
 
 ///**Creates and returns a new image using an array of image names.
 // 
@@ -41,7 +41,7 @@
  
  @param imageData An NSData object.
  */
-+(NewImage *)imageWithData:(NSData *)imageData;
++(C4Image *)imageWithData:(NSData *)imageData;
 
 /**Initializes an image using a file with the given name.
  
@@ -55,7 +55,7 @@
  
  @param image A C4Image whose contents will be used to create a new C4Image object.
  */
--(id)initWithImage:(NewImage *)image;
+-(id)initWithImage:(C4Image *)image;
 
 /**Initializes a C4Image using an NSData object
  
@@ -91,7 +91,7 @@
  
  @param image A C4Image whose contents will be used to set the visible representation of the receiver.
  */
--(void)setImage:(NewImage *)image;
+-(void)setImage:(C4Image *)image;
 //
 ///**Causes an animatedImage to start playing.
 // */
@@ -555,15 +555,14 @@
 ////@property (readwrite, nonatomic) CGFloat animatedImageDuration
 //
 //@property (readonly, atomic) CGImageRef filteredImage;
-+(NewImage *)defaultStyle;
++(C4Image *)defaultStyle;
 @property (readonly, nonatomic, getter = isMultipleFilterEnabled) BOOL multipleFilterEnabled;
 
 -(C4Image *)copyWithZone:(NSZone *)zone;
-//-(id)initWithUIImage:(UIImage *)image;
+-(id)initWithUIImage:(UIImage *)image;
 //-(void)showOriginalImage;
 //-(void)showFilteredImage;
 //
-//+(C4Image *)imageWithUIImage:(UIImage *)image;
 -(void)startFiltering;
 -(void)renderFilteredImage;
 @property (readwrite, nonatomic) CGImageRef contents;
@@ -679,7 +678,8 @@
 -(void)play;
 -(void)pause;
 
-+(NewImage *)animatedImageWithNames:(NSArray *)imageNames;
++(C4Image *)animatedImageWithNames:(NSArray *)imageNames;
 -(id)initAnimatedImageWithNames:(NSArray *)imageNames;
 
++(C4Image *)imageWithUIImage:(UIImage *)image;
 @end

@@ -58,6 +58,7 @@
 		ED7C0C1A15C88B9F009107A6 /* C4_ToolbarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = ED7C0C0D15C88B9F009107A6 /* C4_ToolbarIcon.png */; };
 		ED7C0C1B15C88B9F009107A6 /* C4_ToolbarIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED7C0C0E15C88B9F009107A6 /* C4_ToolbarIcon@2x.png */; };
 		ED80BBC014F0648800AAD49C /* C4Defines.m in Sources */ = {isa = PBXBuildFile; fileRef = ED80BBBF14F0648800AAD49C /* C4Defines.m */; };
+		ED84FDDE16DE8102009E6975 /* C4Image.m in Sources */ = {isa = PBXBuildFile; fileRef = ED84FDDD16DE8102009E6975 /* C4Image.m */; };
 		ED89848714EE180400BB7AB0 /* C4ShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED89848614EE180400BB7AB0 /* C4ShapeLayer.m */; };
 		ED89849814EF1C8800BB7AB0 /* C4Object.m in Sources */ = {isa = PBXBuildFile; fileRef = ED89849714EF1C8700BB7AB0 /* C4Object.m */; };
 		ED8D2EBA16BB9421009E1D1E /* C4Table.png in Resources */ = {isa = PBXBuildFile; fileRef = ED8D2EB616BB9421009E1D1E /* C4Table.png */; };
@@ -77,7 +78,6 @@
 		EDA27D301679BD0800B75522 /* C4TransformLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA27D2E1679BD0800B75522 /* C4TransformLayer.m */; };
 		EDA7014914FC496300A0D77D /* C4Label.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA7014814FC496300A0D77D /* C4Label.m */; };
 		EDAFFAF014F7602F00CA356A /* C4Control.m in Sources */ = {isa = PBXBuildFile; fileRef = EDAFFAEF14F7602F00CA356A /* C4Control.m */; };
-		EDBCDFBE16D26D4C000E4A55 /* NewImage.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBCDFBD16D26D4C000E4A55 /* NewImage.m */; };
 		EDBCDFC116D26EFE000E4A55 /* C4ImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBCDFC016D26EFE000E4A55 /* C4ImageView.m */; };
 		EDCE42641564044000C7356E /* C4Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCE425F1564044000C7356E /* C4Camera.m */; };
 		EDCE42651564044000C7356E /* C4CameraController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCE42611564044000C7356E /* C4CameraController.m */; };
@@ -167,6 +167,7 @@
 		ED7C0C0D15C88B9F009107A6 /* C4_ToolbarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = C4_ToolbarIcon.png; sourceTree = "<group>"; };
 		ED7C0C0E15C88B9F009107A6 /* C4_ToolbarIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "C4_ToolbarIcon@2x.png"; sourceTree = "<group>"; };
 		ED80BBBF14F0648800AAD49C /* C4Defines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Defines.m; sourceTree = "<group>"; };
+		ED84FDDD16DE8102009E6975 /* C4Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Image.m; sourceTree = "<group>"; };
 		ED89848514EE180400BB7AB0 /* C4ShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4ShapeLayer.h; sourceTree = "<group>"; };
 		ED89848614EE180400BB7AB0 /* C4ShapeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4ShapeLayer.m; sourceTree = "<group>"; };
 		ED89849614EF1C8700BB7AB0 /* C4Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Object.h; sourceTree = "<group>"; };
@@ -199,8 +200,7 @@
 		EDAFFAD714F70D5F00CA356A /* C4Notification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Notification.h; sourceTree = "<group>"; };
 		EDAFFAEE14F7602F00CA356A /* C4Control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Control.h; sourceTree = "<group>"; };
 		EDAFFAEF14F7602F00CA356A /* C4Control.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Control.m; sourceTree = "<group>"; };
-		EDBCDFBC16D26D4C000E4A55 /* NewImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewImage.h; sourceTree = "<group>"; };
-		EDBCDFBD16D26D4C000E4A55 /* NewImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewImage.m; sourceTree = "<group>"; };
+		EDBCDFBC16D26D4C000E4A55 /* C4Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Image.h; sourceTree = "<group>"; };
 		EDBCDFBF16D26EFE000E4A55 /* C4ImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4ImageView.h; sourceTree = "<group>"; };
 		EDBCDFC016D26EFE000E4A55 /* C4ImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4ImageView.m; sourceTree = "<group>"; };
 		EDC75ED81506D7D2002D82A1 /* C4LayerAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4LayerAnimation.h; sourceTree = "<group>"; };
@@ -306,8 +306,8 @@
 				ED50C89514EAC2010040D844 /* C4AppDelegate.m */,
 				EDAFFAEE14F7602F00CA356A /* C4Control.h */,
 				EDAFFAEF14F7602F00CA356A /* C4Control.m */,
-				EDBCDFBC16D26D4C000E4A55 /* NewImage.h */,
-				EDBCDFBD16D26D4C000E4A55 /* NewImage.m */,
+				EDBCDFBC16D26D4C000E4A55 /* C4Image.h */,
+				ED84FDDD16DE8102009E6975 /* C4Image.m */,
 				EDBCDFBF16D26EFE000E4A55 /* C4ImageView.h */,
 				EDBCDFC016D26EFE000E4A55 /* C4ImageView.m */,
 				ED8D2EC616BC4D9C009E1D1E /* C4Slider.h */,
@@ -580,9 +580,9 @@
 				ED987241167C0DA100ADFD3F /* OuterShape.m in Sources */,
 				EDF8262E167C179000FE30E4 /* HiddenNav.m in Sources */,
 				ED8D2EC816BC4D9C009E1D1E /* C4Slider.m in Sources */,
-				EDBCDFBE16D26D4C000E4A55 /* NewImage.m in Sources */,
 				EDBCDFC116D26EFE000E4A55 /* C4ImageView.m in Sources */,
 				ED63257716D6943C000DF4B2 /* UIColor+CIColorFix.m in Sources */,
+				ED84FDDE16DE8102009E6975 /* C4Image.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

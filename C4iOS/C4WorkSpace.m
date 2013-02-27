@@ -5,11 +5,11 @@
 //
 
 #import "C4WorkSpace.h"
-#import "NewImage.h"
+#import "C4Image.h"
 
 @implementation C4WorkSpace {
     C4Image *still;
-    NewImage *animated;
+    C4Image *animated;
     UIImageView *uiiv;
 }
 
@@ -31,7 +31,7 @@
     still.center = self.canvas.center;
     [self.canvas addImage:still];
     
-    animated = [NewImage animatedImageWithNames:@[
+    animated = [C4Image animatedImageWithNames:@[
                 @"C4Spin00.png",
                 @"C4Spin01.png",
                 @"C4Spin02.png",

@@ -1,14 +1,13 @@
 //
-//  NewImage.m
+//  C4Image.m
 //  C4iOS
 //
-//  Created by moi on 13-02-18.
-//  Copyright (c) 2013 POSTFL. All rights reserved.
+//  Created by Travis Kirton on 13-02-27.
 //
 
-#import "NewImage.h"
+#import "C4Image.h"
 
-@interface NewImage ()
+@interface C4Image ()
 
 @property (readwrite, strong, nonatomic) C4ImageView *imageView;
 @property (readwrite, strong, nonatomic) UIImage *originalImage;
@@ -20,20 +19,20 @@
 
 @end
 
-@implementation NewImage
+@implementation C4Image
 @synthesize filterQueue = _filterQueue, rawData = _rawData;
 
 #pragma mark Initialization
-+(NewImage *)imageNamed:(NSString *)name {
-    return [[NewImage alloc] initWithImageName:name];
++(C4Image *)imageNamed:(NSString *)name {
+    return [[C4Image alloc] initWithImageName:name];
 }
 
-+(NewImage *)imageWithImage:(NewImage *)image {
-    return [[NewImage alloc] initWithImage:image];
++(C4Image *)imageWithImage:(C4Image *)image {
+    return [[C4Image alloc] initWithImage:image];
 }
 
-+(NewImage *)imageWithUIImage:(UIImage *)image {
-    return [[NewImage alloc] initWithUIImage:image];
++(C4Image *)imageWithUIImage:(UIImage *)image {
+    return [[C4Image alloc] initWithUIImage:image];
 }
 
 -(id)initWithRawData:(unsigned char*)data width:(NSInteger)width height:(NSInteger)height {
@@ -78,8 +77,8 @@
     return self;
 }
 
-+(NewImage *)imageWithData:(NSData *)imageData {
-    return [[NewImage alloc] initWithData:imageData];
++(C4Image *)imageWithData:(NSData *)imageData {
+    return [[C4Image alloc] initWithData:imageData];
 }
 
 -(id)initWithData:(NSData *)imageData {
@@ -142,7 +141,7 @@
     else [self.imageLayer animateContents:image];
 }
 
--(void)setImage:(NewImage *)image {
+-(void)setImage:(C4Image *)image {
     _originalImage = image.UIImage;
     [self setProperties];
     [self setContents:_originalImage.CGImage];
@@ -1616,13 +1615,13 @@
 //+(C4Image *)sunbeams:(CGSize)size center:(CGPoint)center color:(UIColor *)color sunRadius:(CGFloat)sunRadius maxStriationRadius:(CGFloat)striationRadius striationStrength:(CGFloat)striationStrength striationContrast:(CGFloat)striationContrast time:(CGFloat)time{return nil;};
 
 #pragma mark Animated Image 
-+(NewImage *)animatedImageWithNames:(NSArray *)imageNames {
-    NewImage *animImg = [[NewImage alloc] initAnimatedImageWithNames:imageNames];
++(C4Image *)animatedImageWithNames:(NSArray *)imageNames {
+    C4Image *animImg = [[C4Image alloc] initAnimatedImageWithNames:imageNames];
     return animImg;
 }
 
 -(id)initAnimatedImageWithNames:(NSArray *)imageNames {
-    self = [NewImage imageNamed:imageNames[0]];
+    self = [C4Image imageNamed:imageNames[0]];
     if(nil != self) {
         NSMutableArray *animatedImages = [[NSMutableArray alloc] initWithCapacity:0];
         for(int i = 0; i < [imageNames count]; i++) {
@@ -1740,13 +1739,13 @@
 }
 
 #pragma mark Copying
--(NewImage *)copyWithZone:(NSZone *)zone {
-    return [[NewImage allocWithZone:zone] initWithImage:self];
+-(C4Image *)copyWithZone:(NSZone *)zone {
+    return [[C4Image allocWithZone:zone] initWithImage:self];
 }
 
 #pragma mark Default Style
-+(NewImage *)defaultStyle {
-    return (NewImage *)[NewImage appearance];
++(C4Image *)defaultStyle {
+    return (C4Image *)[C4Image appearance];
 }
 
 #pragma mark Layer Access Overrides
