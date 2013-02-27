@@ -161,7 +161,7 @@
  @param brightness Brightness value defaults to 0.0f, minimum -1.0f, maximum 1.0f
  @param contrast Contrast value defaults to 1.0f, minimum 0.0f, maximum 4.0f
  */
--(void)colorControlSaturation:(CGFloat)saturation brightness:(CGFloat)brightness contrast:(CGFloat)contrast;
+-(void)colorControlSaturation:(CGFloat)saturation brightness:(CGFloat)brightness contrast:(CGFloat)contrast  NS_AVAILABLE_IOS(5_0);
 
 /**Color dodge filter.
  
@@ -568,6 +568,7 @@
 -(void)renderFilteredImage;
 @property (readwrite, nonatomic) CGImageRef contents;
 
+//FIXME: There are some filters that return nil images... like perspectiveTile, check with iOS 6.1
 -(void)affineClamp:(CGAffineTransform)transform;
 -(void)affineTile:(CGAffineTransform)transform;
 -(void)affineTransform:(CGAffineTransform)transform;
@@ -653,7 +654,32 @@
 +(C4Image *)constantColor:(CGSize)size color:(UIColor *)color;
 +(C4Image *)lenticularHalo:(CGSize)size center:(CGPoint)center color:(UIColor *)color haloRadius:(CGFloat)radius haloWidth:(CGFloat)haloWidth haloOverlap:(CGFloat)overlap striationStrength:(CGFloat)strength striationContrast:(CGFloat)contrast time:(CGFloat)time;
 +(C4Image *)random:(CGSize)size;
-+(C4Image *)starShineGenerator:(CGSize)size center:(CGPoint)center color:(UIColor *)color radius:(CGFloat)radius crossScale:(CGFloat)scale crossAngle:(CGFloat)angle crossOpacity:(CGFloat)opacity crossWidth:(CGFloat)width epsilon:(CGFloat)epsilon;
-+(C4Image *)stripes:(CGSize)size center:(CGPoint)center color1:(UIColor *)color1 color2:(UIColor *)color2 stripeWidth:(CGFloat)width sharpness:(CGFloat)sharpness;
-+(C4Image *)sunbeams:(CGSize)size center:(CGPoint)center color:(UIColor *)color sunRadius:(CGFloat)sunRadius maxStriationRadius:(CGFloat)striationRadius striationStrength:(CGFloat)striationStrength striationContrast:(CGFloat)striationContrast time:(CGFloat)time;
+//FIXME: I don't think these filters work right now... There's no code online to check
+//+(C4Image *)starShineGenerator:(CGSize)size center:(CGPoint)center color:(UIColor *)color radius:(CGFloat)radius crossScale:(CGFloat)scale crossAngle:(CGFloat)angle crossOpacity:(CGFloat)opacity crossWidth:(CGFloat)width epsilon:(CGFloat)epsilon;
+//+(C4Image *)stripes:(CGSize)size center:(CGPoint)center color1:(UIColor *)color1 color2:(UIColor *)color2 stripeWidth:(CGFloat)width sharpness:(CGFloat)sharpness;
+//+(C4Image *)sunbeams:(CGSize)size center:(CGPoint)center color:(UIColor *)color sunRadius:(CGFloat)sunRadius maxStriationRadius:(CGFloat)striationRadius striationStrength:(CGFloat)striationStrength striationContrast:(CGFloat)striationContrast time:(CGFloat)time;
+
++(NSArray *)availableFilters;
+
+/**Specifies the array of CGImageRef images used for animating.
+ 
+ This array is filled when the animatedImage is created using the appropriate constructor.
+ */
+@property (readwrite, atomic) NSArray *animationImages;
+
+/**Specifies the duration for the entire animation.
+ 
+ Setting this value, the animatedImage will automatically calculate how long each image in its array will be visible.
+ 
+ The duration for each image is consistent, for example a 2-second animation consisting of 10 frames will display each image for 0.2 seconds.
+ */
+@property (readwrite, nonatomic) CGFloat animatedImageDuration;
+@property (readwrite, nonatomic) NSInteger animationRepeatCount;
+@property (readonly, nonatomic, getter = isAnimating) BOOL animating;
+-(void)play;
+-(void)pause;
+
++(NewImage *)animatedImageWithNames:(NSArray *)imageNames;
+-(id)initAnimatedImageWithNames:(NSArray *)imageNames;
+
 @end

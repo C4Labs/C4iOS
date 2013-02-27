@@ -148,21 +148,7 @@
     [self setContents:_originalImage.CGImage];
 }
 
--(CIContext *)filterContext {
-    if(_filterContext == nil) _filterContext = [CIContext contextWithOptions:nil];
-    return _filterContext;
-}
-
--(dispatch_queue_t)filterQueue {
-    if(_filterQueue == nil) {
-        const char *label = [[@"FILTER_QUEUE_" stringByAppendingString:[self description]]UTF8String];
-        _filterQueue = dispatch_queue_create(label, DISPATCH_QUEUE_CONCURRENT);
-    }
-    return _filterQueue;
-}
-
-#pragma mark Filters
-//FIXME: Add all other filters in the following way!
+#pragma mark Filter Basics
 -(void)startFiltering {
     _multipleFilterEnabled = YES;
 }
@@ -195,6 +181,19 @@
             _output = nil;
         });
     });
+}
+
+-(CIContext *)filterContext {
+    if(_filterContext == nil) _filterContext = [CIContext contextWithOptions:nil];
+    return _filterContext;
+}
+
+-(dispatch_queue_t)filterQueue {
+    if(_filterQueue == nil) {
+        const char *label = [[@"FILTER_QUEUE_" stringByAppendingString:[self description]]UTF8String];
+        _filterQueue = dispatch_queue_create(label, DISPATCH_QUEUE_CONCURRENT);
+    }
+    return _filterQueue;
 }
 
 #pragma mark Old Filters
@@ -596,87 +595,6 @@
         if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
         filter = nil;
     }
-}
-
-#pragma mark Pixels
--(void)loadPixelData {
-    const char *queueName = [@"pixelDataQueue" UTF8String];
-    __block dispatch_queue_t pixelDataQueue = dispatch_queue_create(queueName,  DISPATCH_QUEUE_CONCURRENT);
-    
-    dispatch_async(pixelDataQueue, ^{
-        NSUInteger width = CGImageGetWidth(self.CGImage);
-        NSUInteger height = CGImageGetHeight(self.CGImage);
-        CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-        
-        _bytesPerPixel = 4;
-        _bytesPerRow = _bytesPerPixel * width;
-        free(_rawData);
-        _rawData = malloc(height * _bytesPerRow);
-        
-        NSUInteger bitsPerComponent = 8;
-        CGContextRef context = CGBitmapContextCreate(_rawData, width, height, bitsPerComponent, _bytesPerRow, colorSpace, kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big);
-        CGColorSpaceRelease(colorSpace);
-        CGContextDrawImage(context, CGRectMake(0, 0, width, height), self.CGImage);
-        CGContextRelease(context);
-        _pixelDataLoaded = YES;
-        [self postNotification:@"pixelDataWasLoaded"];
-        pixelDataQueue = nil;
-    });
-}
-
--(UIColor *)colorAt:(CGPoint)point {
-    if(_pixelDataLoaded == NO) {
-        C4Log(@"You must first load pixel data");
-    } else  if ([self pointInside:point withEvent:nil]) {
-        if(_rawData == nil) {
-            [self loadPixelData];
-        }
-        NSUInteger byteIndex = (NSUInteger)(_bytesPerPixel * point.x + _bytesPerRow * point.y);
-        NSInteger r, g, b, a;
-        r = _rawData[byteIndex];
-        g = _rawData[byteIndex + 1];
-        b = _rawData[byteIndex + 2];
-        a = _rawData[byteIndex + 3];
-        
-        return [UIColor colorWithRed:RGBToFloat(r) green:RGBToFloat(g) blue:RGBToFloat(b) alpha:RGBToFloat(a)];
-    }
-    return [UIColor clearColor];
-}
-
--(C4Vector *)rgbVectorAt:(CGPoint)point {
-    if(_pixelDataLoaded == NO) {
-        C4Log(@"You must first load pixel data");
-    } else if([self pointInside:point withEvent:nil]) {
-        if(self.pixelDataLoaded == NO) {
-            [self loadPixelData];
-        }
-        NSUInteger byteIndex = (NSUInteger)(_bytesPerPixel * point.x + _bytesPerRow * point.y);
-        CGFloat r, g, b;
-        r = _rawData[byteIndex];
-        g = _rawData[byteIndex + 1];
-        b = _rawData[byteIndex + 2];
-        return [C4Vector vectorWithX:r Y:g Z:b];
-    }
-    return [C4Vector vectorWithX:-1 Y:-1 Z:-1];
-}
-
-#pragma mark Copying
--(NewImage *)copyWithZone:(NSZone *)zone {
-    return [[NewImage allocWithZone:zone] initWithImage:self];
-}
-
-#pragma mark Default Style
-+(NewImage *)defaultStyle {
-    return (NewImage *)[NewImage appearance];
-}
-
-#pragma mark Layer Access Overrides
--(C4Layer *)imageLayer {
-    return self.imageView.imageLayer;
-}
-
--(C4Layer *)layer {
-    return self.imageLayer;
 }
 
 #pragma mark New Filters
@@ -1646,23 +1564,198 @@
     }
 }
 
-+(C4Image *)starShineGenerator:(CGSize)size center:(CGPoint)center color:(UIColor *)color radius:(CGFloat)radius crossScale:(CGFloat)scale crossAngle:(CGFloat)angle crossOpacity:(CGFloat)opacity crossWidth:(CGFloat)width epsilon:(CGFloat)epsilon{return nil;};
++(NSArray *)availableFilters {
+    NSArray *filterCategories = @[
+    kCICategoryDistortionEffect,
+    kCICategoryGeometryAdjustment,
+    kCICategoryCompositeOperation,
+    kCICategoryHalftoneEffect,
+    kCICategoryColorAdjustment,
+    kCICategoryColorEffect,
+    kCICategoryTransition,
+    kCICategoryTileEffect,
+    kCICategoryGenerator,
+    kCICategoryReduction,
+    kCICategoryGradient,
+    kCICategoryStylize,
+    kCICategorySharpen,
+    kCICategoryBlur,
+    kCICategoryVideo,
+    kCICategoryStillImage,
+    kCICategoryInterlaced,
+    kCICategoryNonSquarePixels,
+    kCICategoryHighDynamicRange ,
+    kCICategoryBuiltIn
+    ];
+    
+    NSMutableSet *allFilters = [[NSMutableSet alloc] initWithCapacity:0];
+    
+    for(NSString *s in filterCategories) [allFilters addObjectsFromArray:[CIFilter filterNamesInCategory:s]];
+    NSArray *sortedFilterList = [[allFilters allObjects] sortedArrayUsingFunction:basicSort context:NULL];
+    return sortedFilterList;
+}
 
-+(C4Image *)stripes:(CGSize)size center:(CGPoint)center color1:(UIColor *)color1 color2:(UIColor *)color2 stripeWidth:(CGFloat)width sharpness:(CGFloat)sharpness{
-    @autoreleasepool {
-        CIContext *context = [CIContext contextWithOptions:nil];
-        CIFilter *filter = [CIFilter filterWithName:@"CIStripesGenerator"];
-        [filter setDefaults];
-        [filter setValue:[CIVector vectorWithCGPoint:center] forKey:@"inputCenter"];
-        [filter setValue:color1.CIColor forKey:@"inputColor0"];
-        [filter setValue:color2.CIColor forKey:@"inputColor1"];
-        [filter setValue:@(width) forKey:@"inputWidth"];
-        [filter setValue:@(sharpness) forKey:@"inputSharpness"];
-        CIImage *image = filter.outputImage;
-        CGImageRef filteredImage = [context createCGImage:image fromRect:(CGRect){CGPointZero,size}];
-        filter = nil;
-        return [[C4Image alloc] initWithCGImage:filteredImage];
+//+(C4Image *)starShineGenerator:(CGSize)size center:(CGPoint)center color:(UIColor *)color radius:(CGFloat)radius crossScale:(CGFloat)scale crossAngle:(CGFloat)angle crossOpacity:(CGFloat)opacity crossWidth:(CGFloat)width epsilon:(CGFloat)epsilon{return nil;};
+//
+//+(C4Image *)stripes:(CGSize)size center:(CGPoint)center color1:(UIColor *)color1 color2:(UIColor *)color2 stripeWidth:(CGFloat)width sharpness:(CGFloat)sharpness{
+//    @autoreleasepool {
+//        CIContext *context = [CIContext contextWithOptions:nil];
+//        CIFilter *filter = [CIFilter filterWithName:@"CIStripesGenerator"];
+//        [filter setDefaults];
+//        [filter setValue:[CIVector vectorWithCGPoint:center] forKey:@"inputCenter"];
+//        [filter setValue:color1.CIColor forKey:@"inputColor0"];
+//        [filter setValue:color2.CIColor forKey:@"inputColor1"];
+//        [filter setValue:@(width) forKey:@"inputWidth"];
+//        [filter setValue:@(sharpness) forKey:@"inputSharpness"];
+//        CIImage *image = filter.outputImage;
+//        CGImageRef filteredImage = [context createCGImage:image fromRect:(CGRect){CGPointZero,size}];
+//        filter = nil;
+//        return [[C4Image alloc] initWithCGImage:filteredImage];
+//    }
+//};
+//+(C4Image *)sunbeams:(CGSize)size center:(CGPoint)center color:(UIColor *)color sunRadius:(CGFloat)sunRadius maxStriationRadius:(CGFloat)striationRadius striationStrength:(CGFloat)striationStrength striationContrast:(CGFloat)striationContrast time:(CGFloat)time{return nil;};
+
+#pragma mark Animated Image 
++(NewImage *)animatedImageWithNames:(NSArray *)imageNames {
+    NewImage *animImg = [[NewImage alloc] initAnimatedImageWithNames:imageNames];
+    return animImg;
+}
+
+-(id)initAnimatedImageWithNames:(NSArray *)imageNames {
+    self = [NewImage imageNamed:imageNames[0]];
+    if(nil != self) {
+        NSMutableArray *animatedImages = [[NSMutableArray alloc] initWithCapacity:0];
+        for(int i = 0; i < [imageNames count]; i++) {
+            NSString *name = imageNames[i];
+            name = [name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            UIImage *img = [UIImage imageNamed:name];
+            [animatedImages addObject:img];
+            img = nil; name = nil;
+        }
+        
+        self.animationImages = animatedImages;
+        animatedImages = nil;
+        [self setProperties];
+        _constrainsProportions = YES;
     }
-};
-+(C4Image *)sunbeams:(CGSize)size center:(CGPoint)center color:(UIColor *)color sunRadius:(CGFloat)sunRadius maxStriationRadius:(CGFloat)striationRadius striationStrength:(CGFloat)striationStrength striationContrast:(CGFloat)striationContrast time:(CGFloat)time{return nil;};
+    return  self;
+}
+
+-(void)setAnimationRepeatCount:(NSInteger)animationRepeatCount {
+    self.imageView.animationRepeatCount = animationRepeatCount;
+}
+
+-(NSInteger)animationRepeatCount {
+    return self.imageView.animationRepeatCount;
+}
+
+-(void)play {
+    [self.imageView startAnimating];
+}
+
+-(void)pause {
+    [self.imageView stopAnimating];
+}
+
+-(void)setAnimatedImageDuration:(CGFloat)animatedImageDuration {
+    self.imageView.animationDuration = (NSTimeInterval)animatedImageDuration;
+}
+
+-(CGFloat)animatedImageDuration {
+    return (CGFloat)self.imageView.animationDuration;
+}
+
+-(void)setAnimationImages:(NSArray *)animationImages {
+    self.imageView.animationImages = animationImages;
+}
+
+-(NSArray *)animationImages {
+    return self.imageView.animationImages;
+}
+
+-(BOOL)isAnimating {
+    return self.imageView.isAnimating;
+}
+
+#pragma mark Pixels
+-(void)loadPixelData {
+    const char *queueName = [@"pixelDataQueue" UTF8String];
+    __block dispatch_queue_t pixelDataQueue = dispatch_queue_create(queueName,  DISPATCH_QUEUE_CONCURRENT);
+    
+    dispatch_async(pixelDataQueue, ^{
+        NSUInteger width = CGImageGetWidth(self.CGImage);
+        NSUInteger height = CGImageGetHeight(self.CGImage);
+        CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+        
+        _bytesPerPixel = 4;
+        _bytesPerRow = _bytesPerPixel * width;
+        free(_rawData);
+        _rawData = malloc(height * _bytesPerRow);
+        
+        NSUInteger bitsPerComponent = 8;
+        CGContextRef context = CGBitmapContextCreate(_rawData, width, height, bitsPerComponent, _bytesPerRow, colorSpace, kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big);
+        CGColorSpaceRelease(colorSpace);
+        CGContextDrawImage(context, CGRectMake(0, 0, width, height), self.CGImage);
+        CGContextRelease(context);
+        _pixelDataLoaded = YES;
+        [self postNotification:@"pixelDataWasLoaded"];
+        pixelDataQueue = nil;
+    });
+}
+
+-(UIColor *)colorAt:(CGPoint)point {
+    if(_pixelDataLoaded == NO) {
+        C4Log(@"You must first load pixel data");
+    } else  if ([self pointInside:point withEvent:nil]) {
+        if(_rawData == nil) {
+            [self loadPixelData];
+        }
+        NSUInteger byteIndex = (NSUInteger)(_bytesPerPixel * point.x + _bytesPerRow * point.y);
+        NSInteger r, g, b, a;
+        r = _rawData[byteIndex];
+        g = _rawData[byteIndex + 1];
+        b = _rawData[byteIndex + 2];
+        a = _rawData[byteIndex + 3];
+        
+        return [UIColor colorWithRed:RGBToFloat(r) green:RGBToFloat(g) blue:RGBToFloat(b) alpha:RGBToFloat(a)];
+    }
+    return [UIColor clearColor];
+}
+
+-(C4Vector *)rgbVectorAt:(CGPoint)point {
+    if(_pixelDataLoaded == NO) {
+        C4Log(@"You must first load pixel data");
+    } else if([self pointInside:point withEvent:nil]) {
+        if(self.pixelDataLoaded == NO) {
+            [self loadPixelData];
+        }
+        NSUInteger byteIndex = (NSUInteger)(_bytesPerPixel * point.x + _bytesPerRow * point.y);
+        CGFloat r, g, b;
+        r = _rawData[byteIndex];
+        g = _rawData[byteIndex + 1];
+        b = _rawData[byteIndex + 2];
+        return [C4Vector vectorWithX:r Y:g Z:b];
+    }
+    return [C4Vector vectorWithX:-1 Y:-1 Z:-1];
+}
+
+#pragma mark Copying
+-(NewImage *)copyWithZone:(NSZone *)zone {
+    return [[NewImage allocWithZone:zone] initWithImage:self];
+}
+
+#pragma mark Default Style
++(NewImage *)defaultStyle {
+    return (NewImage *)[NewImage appearance];
+}
+
+#pragma mark Layer Access Overrides
+-(C4Layer *)imageLayer {
+    return self.imageView.imageLayer;
+}
+
+-(C4Layer *)layer {
+    return self.imageLayer;
+}
+
 @end

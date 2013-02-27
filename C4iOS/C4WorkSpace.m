@@ -8,32 +8,53 @@
 #import "NewImage.h"
 
 @implementation C4WorkSpace {
-    NewImage *n, *o;
+    C4Image *still;
+    NewImage *animated;
+    UIImageView *uiiv;
 }
 
 -(void)setup {
-//    C4Image *img = [NewImage lenticularHalo:CGSizeMake(400, 400) center:CGPointMake(200, 200) color:C4RED haloRadius:70.0f haloWidth:87.0 haloOverlap:0.5 striationStrength:0.5 striationContrast:1 time:0];
+    [self setupImages];
+    still.mask = animated;
+    [self rotate];
+}
+
+-(void)rotate {
+    animated.animationOptions = REPEAT | LINEAR;
+    animated.animationDuration = 6.0f;
+    animated.rotation = TWO_PI;
+}
+
+-(void)setupImages {
+    still = [C4Image imageNamed:@"C4Sky"];
+    still.height = 240.0f;
+    still.center = self.canvas.center;
+    [self.canvas addImage:still];
     
-    @autoreleasepool {
-        CIContext *context = [CIContext contextWithOptions:nil];
-        CIFilter *filter = [CIFilter filterWithName:@"CILenticularHaloGenerator"];
-        [filter setValue:[CIVector vectorWithCGPoint:CGPointMake(150, 150)] forKey:@"inputCenter"];
-        [filter setValue:[CIColor colorWithRed:1 green:0 blue:0] forKey:@"inputColor"];
-        [filter setValue:@(70.0f) forKey:@"inputHaloRadius"];
-        [filter setValue:@(87.0f) forKey:@"inputHaloWidth"];
-        [filter setValue:@(0.77) forKey:@"inputHaloOverlap"];
-        [filter setValue:@(0.5) forKey:@"inputStriationStrength"];
-        [filter setValue:@(1.0f) forKey:@"inputStriationContrast"];
-        [filter setValue:@(0.0f) forKey:@"inputTime"];
-        CGImageRef filteredImage = [context createCGImage:filter.outputImage fromRect:CGRectMake(0, 0, 300, 300)];
-    
-        C4Image *img = [[C4Image alloc] initWithCGImage:filteredImage];
-        self.canvas.backgroundColor = C4GREY;
-        img.borderWidth = 2.0f;
-        img.borderColor = C4RED;
-        C4Log(@"%4.2f",CGImageGetHeight(filteredImage));
-        [self.canvas addImage:img];
-    }
+    animated = [NewImage animatedImageWithNames:@[
+                @"C4Spin00.png",
+                @"C4Spin01.png",
+                @"C4Spin02.png",
+                @"C4Spin03.png",
+                @"C4Spin04.png",
+                @"C4Spin05.png",
+                @"C4Spin06.png",
+                @"C4Spin07.png",
+                @"C4Spin08.png",
+                @"C4Spin09.png",
+                @"C4Spin10.png",
+                @"C4Spin11.png"
+                ]];
+//    animated = [NewImage imageNamed:@"C4Spin00"];
+    animated.center = CGPointMake(still.width/2,still.height/2);
+    animated.animatedImageDuration = 1.0f;
+    [self.canvas addSubview:animated];
+    [animated play];
+}
+
+-(void)touchesBegan {
+    if(animated.isAnimating == YES) [animated pause];
+    else [animated play];
 }
 
 @end
