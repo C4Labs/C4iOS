@@ -19,7 +19,6 @@
 		ED307680150D2A36001D689C /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED30767F150D2A36001D689C /* CoreMedia.framework */; };
 		ED30769C150D400C001D689C /* C4Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = ED307698150D400C001D689C /* C4Movie.m */; };
 		ED3076A2150D51F0001D689C /* C4MovieLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3076A1150D51F0001D689C /* C4MovieLayer.m */; };
-		ED36D9EC157C935500C3AEE7 /* C4Image.m in Sources */ = {isa = PBXBuildFile; fileRef = ED36D9EB157C935400C3AEE7 /* C4Image.m */; };
 		ED43517916DD78D000340298 /* C4Spin00.png in Resources */ = {isa = PBXBuildFile; fileRef = ED43516D16DD78CF00340298 /* C4Spin00.png */; };
 		ED43517A16DD78D000340298 /* C4Spin01.png in Resources */ = {isa = PBXBuildFile; fileRef = ED43516E16DD78CF00340298 /* C4Spin01.png */; };
 		ED43517B16DD78D000340298 /* C4Spin02.png in Resources */ = {isa = PBXBuildFile; fileRef = ED43516F16DD78CF00340298 /* C4Spin02.png */; };
@@ -114,8 +113,6 @@
 		ED307698150D400C001D689C /* C4Movie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Movie.m; sourceTree = "<group>"; };
 		ED3076A0150D51F0001D689C /* C4MovieLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4MovieLayer.h; sourceTree = "<group>"; };
 		ED3076A1150D51F0001D689C /* C4MovieLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4MovieLayer.m; sourceTree = "<group>"; };
-		ED36D9EA157C935400C3AEE7 /* C4Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Image.h; sourceTree = "<group>"; };
-		ED36D9EB157C935400C3AEE7 /* C4Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Image.m; sourceTree = "<group>"; };
 		ED43516D16DD78CF00340298 /* C4Spin00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = C4Spin00.png; sourceTree = "<group>"; };
 		ED43516E16DD78CF00340298 /* C4Spin01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = C4Spin01.png; sourceTree = "<group>"; };
 		ED43516F16DD78CF00340298 /* C4Spin02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = C4Spin02.png; sourceTree = "<group>"; };
@@ -309,8 +306,6 @@
 				ED50C89514EAC2010040D844 /* C4AppDelegate.m */,
 				EDAFFAEE14F7602F00CA356A /* C4Control.h */,
 				EDAFFAEF14F7602F00CA356A /* C4Control.m */,
-				ED36D9EA157C935400C3AEE7 /* C4Image.h */,
-				ED36D9EB157C935400C3AEE7 /* C4Image.m */,
 				EDBCDFBC16D26D4C000E4A55 /* NewImage.h */,
 				EDBCDFBD16D26D4C000E4A55 /* NewImage.m */,
 				EDBCDFBF16D26EFE000E4A55 /* C4ImageView.h */,
@@ -575,7 +570,6 @@
 				EDCE42651564044000C7356E /* C4CameraController.m in Sources */,
 				EDCE426D1564174000C7356E /* C4ViewController.m in Sources */,
 				ED9D5FA51564A927009C5175 /* C4Vector.m in Sources */,
-				ED36D9EC157C935500C3AEE7 /* C4Image.m in Sources */,
 				ED24F2C5157EB62800BC73B5 /* C4Timer.m in Sources */,
 				ED5FB05115B38894002987EA /* C4AssertionHandler.m in Sources */,
 				ED99AB7315DE01D7002A7D6C /* C4YouTubeURLParser.m in Sources */,
