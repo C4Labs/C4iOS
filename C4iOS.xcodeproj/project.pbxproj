@@ -57,25 +57,17 @@
 		ED979F3F14F95EFF00645114 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED979F3E14F95EFF00645114 /* CoreImage.framework */; };
 		ED983F1115E2A8B600C0AD81 /* C4CameraLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED983F1015E2A8B600C0AD81 /* C4CameraLayer.m */; };
 		ED98434716AF93DF00F64FAF /* inception.mov in Resources */ = {isa = PBXBuildFile; fileRef = ED7513AA15150FB60076317F /* inception.mov */; };
-		ED98723D167C056B00ADFD3F /* HiddenNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED98723C167C056B00ADFD3F /* HiddenNavView.m */; };
-		ED987241167C0DA100ADFD3F /* OuterShape.m in Sources */ = {isa = PBXBuildFile; fileRef = ED987240167C0DA100ADFD3F /* OuterShape.m */; };
 		ED99AB7315DE01D7002A7D6C /* C4YouTubeURLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = ED99AB7215DE01D7002A7D6C /* C4YouTubeURLParser.m */; };
 		ED9D5FA51564A927009C5175 /* C4Vector.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9D5FA41564A927009C5175 /* C4Vector.m */; };
-		EDA27D2F1679BD0800B75522 /* C4TransformableControl.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA27D2C1679BD0800B75522 /* C4TransformableControl.m */; };
-		EDA27D301679BD0800B75522 /* C4TransformLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA27D2E1679BD0800B75522 /* C4TransformLayer.m */; };
 		EDA7014914FC496300A0D77D /* C4Label.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA7014814FC496300A0D77D /* C4Label.m */; };
-		EDAF8F3016C3792E00812A4A /* AnimatedShape.m in Sources */ = {isa = PBXBuildFile; fileRef = EDAF8F2F16C3792E00812A4A /* AnimatedShape.m */; };
 		EDAFFAF014F7602F00CA356A /* C4Control.m in Sources */ = {isa = PBXBuildFile; fileRef = EDAFFAEF14F7602F00CA356A /* C4Control.m */; };
 		EDCE42641564044000C7356E /* C4Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCE425F1564044000C7356E /* C4Camera.m */; };
 		EDCE42651564044000C7356E /* C4CameraController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCE42611564044000C7356E /* C4CameraController.m */; };
 		EDCE426D1564174000C7356E /* C4ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCE426C1564174000C7356E /* C4ViewController.m */; };
-		EDD227C016C34E07002078CD /* C4Button.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD227BF16C34E07002078CD /* C4Button.m */; };
 		EDECBF6C14EAE26700D9A446 /* C4Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = EDECBF6B14EAE26600D9A446 /* C4Shape.m */; };
 		EDF6544A150DEF3300194671 /* C4WorkSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF65449150DEF3300194671 /* C4WorkSpace.m */; };
 		EDF65458150E104100194671 /* C4Sample.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF65457150E104100194671 /* C4Sample.m */; };
 		EDF7734F14F361B00094E656 /* C4Math.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF7734E14F361B00094E656 /* C4Math.m */; };
-		EDF8262E167C179000FE30E4 /* HiddenNav.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF8262C167C179000FE30E4 /* HiddenNav.m */; };
-		EDF8262F167C179000FE30E4 /* HiddenNav.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDF8262D167C179000FE30E4 /* HiddenNav.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -157,22 +149,12 @@
 		ED900CEE14FBF2B3006C2AED /* C4Font.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Font.m; sourceTree = "<group>"; };
 		ED979F3E14F95EFF00645114 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		ED983F1015E2A8B600C0AD81 /* C4CameraLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4CameraLayer.m; sourceTree = "<group>"; };
-		ED98723B167C056B00ADFD3F /* HiddenNavView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HiddenNavView.h; sourceTree = "<group>"; };
-		ED98723C167C056B00ADFD3F /* HiddenNavView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HiddenNavView.m; sourceTree = "<group>"; };
-		ED98723F167C0DA100ADFD3F /* OuterShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OuterShape.h; sourceTree = "<group>"; };
-		ED987240167C0DA100ADFD3F /* OuterShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OuterShape.m; sourceTree = "<group>"; };
 		ED99AB6F15DDF714002A7D6C /* C4YouTubeURLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4YouTubeURLParser.h; sourceTree = "<group>"; };
 		ED99AB7215DE01D7002A7D6C /* C4YouTubeURLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4YouTubeURLParser.m; sourceTree = "<group>"; };
 		ED9D5FA31564A927009C5175 /* C4Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Vector.h; sourceTree = "<group>"; };
 		ED9D5FA41564A927009C5175 /* C4Vector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Vector.m; sourceTree = "<group>"; };
-		EDA27D2B1679BD0800B75522 /* C4TransformableControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4TransformableControl.h; sourceTree = "<group>"; };
-		EDA27D2C1679BD0800B75522 /* C4TransformableControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4TransformableControl.m; sourceTree = "<group>"; };
-		EDA27D2D1679BD0800B75522 /* C4TransformLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4TransformLayer.h; sourceTree = "<group>"; };
-		EDA27D2E1679BD0800B75522 /* C4TransformLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4TransformLayer.m; sourceTree = "<group>"; };
 		EDA7014714FC496300A0D77D /* C4Label.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Label.h; sourceTree = "<group>"; };
 		EDA7014814FC496300A0D77D /* C4Label.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Label.m; sourceTree = "<group>"; };
-		EDAF8F2E16C3792E00812A4A /* AnimatedShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatedShape.h; sourceTree = "<group>"; };
-		EDAF8F2F16C3792E00812A4A /* AnimatedShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedShape.m; sourceTree = "<group>"; };
 		EDAFAAA215B3D2A20024FDEE /* C4AddSubview.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = C4AddSubview.h; sourceTree = "<group>"; };
 		EDAFFAD714F70D5F00CA356A /* C4Notification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Notification.h; sourceTree = "<group>"; };
 		EDAFFAEE14F7602F00CA356A /* C4Control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Control.h; sourceTree = "<group>"; };
@@ -186,8 +168,6 @@
 		EDCE426B1564174000C7356E /* C4ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4ViewController.h; sourceTree = "<group>"; };
 		EDCE426C1564174000C7356E /* C4ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4ViewController.m; sourceTree = "<group>"; };
 		EDCEA5A514FD7567009969F2 /* C4Gesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Gesture.h; sourceTree = "<group>"; };
-		EDD227BE16C34E07002078CD /* C4Button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Button.h; sourceTree = "<group>"; };
-		EDD227BF16C34E07002078CD /* C4Button.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Button.m; sourceTree = "<group>"; };
 		EDECBF6A14EAE26600D9A446 /* C4Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Shape.h; sourceTree = "<group>"; };
 		EDECBF6B14EAE26600D9A446 /* C4Shape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Shape.m; sourceTree = "<group>"; };
 		EDEF69AF157ED95A00E280B9 /* C4MethodDelay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = C4MethodDelay.h; sourceTree = "<group>"; };
@@ -197,9 +177,6 @@
 		EDF65457150E104100194671 /* C4Sample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Sample.m; sourceTree = "<group>"; };
 		EDF7734D14F361B00094E656 /* C4Math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Math.h; sourceTree = "<group>"; };
 		EDF7734E14F361B00094E656 /* C4Math.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Math.m; sourceTree = "<group>"; };
-		EDF8262B167C179000FE30E4 /* HiddenNav.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HiddenNav.h; sourceTree = "<group>"; };
-		EDF8262C167C179000FE30E4 /* HiddenNav.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HiddenNav.m; sourceTree = "<group>"; };
-		EDF8262D167C179000FE30E4 /* HiddenNav.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HiddenNav.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -278,29 +255,7 @@
 			children = (
 				EDF65448150DEF3300194671 /* C4WorkSpace.h */,
 				EDF65449150DEF3300194671 /* C4WorkSpace.m */,
-				EDAF8F2E16C3792E00812A4A /* AnimatedShape.h */,
-				EDAF8F2F16C3792E00812A4A /* AnimatedShape.m */,
-				ED50C89414EAC2010040D844 /* C4AppDelegate.h */,
-				ED50C89514EAC2010040D844 /* C4AppDelegate.m */,
-				ED8D2EC616BC4D9C009E1D1E /* C4Slider.h */,
-				ED8D2EC716BC4D9C009E1D1E /* C4Slider.m */,
-				EDD227BE16C34E07002078CD /* C4Button.h */,
-				EDD227BF16C34E07002078CD /* C4Button.m */,
-				ED36D9EA157C935400C3AEE7 /* C4Image.h */,
-				ED36D9EB157C935400C3AEE7 /* C4Image.m */,
-				EDF8262B167C179000FE30E4 /* HiddenNav.h */,
-				EDF8262C167C179000FE30E4 /* HiddenNav.m */,
-				EDF8262D167C179000FE30E4 /* HiddenNav.xib */,
-				ED98723B167C056B00ADFD3F /* HiddenNavView.h */,
-				ED98723C167C056B00ADFD3F /* HiddenNavView.m */,
-				ED98723F167C0DA100ADFD3F /* OuterShape.h */,
-				ED987240167C0DA100ADFD3F /* OuterShape.m */,
-				EDA27D2B1679BD0800B75522 /* C4TransformableControl.h */,
-				EDA27D2C1679BD0800B75522 /* C4TransformableControl.m */,
-				EDA27D2D1679BD0800B75522 /* C4TransformLayer.h */,
-				EDA27D2E1679BD0800B75522 /* C4TransformLayer.m */,
-				ED99AB6F15DDF714002A7D6C /* C4YouTubeURLParser.h */,
-				ED99AB7215DE01D7002A7D6C /* C4YouTubeURLParser.m */,
+				EDBE639416DFE6E600FB0962 /* Experimental */,
 				ED4702D615C052CA004B75D1 /* pyramid.png */,
 				ED008D3915BF5DE80005E8D3 /* lines.png */,
 				ED50C8D314EACA0E0040D844 /* Source */,
@@ -312,11 +267,13 @@
 		ED50C88C14EAC2010040D844 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				ED50C89A14EAC2010040D844 /* C4Canvas.xib */,
 				ED50C8BD14EAC3B80040D844 /* Supporting Files */,
+				ED50C89A14EAC2010040D844 /* C4Canvas.xib */,
 				ED50C88D14EAC2010040D844 /* C4iOS-Info.plist */,
 				ED50C88E14EAC2010040D844 /* InfoPlist.strings */,
 				ED50C89114EAC2010040D844 /* main.m */,
+				ED50C89414EAC2010040D844 /* C4AppDelegate.h */,
+				ED50C89514EAC2010040D844 /* C4AppDelegate.m */,
 				ED5FB04F15B38894002987EA /* C4AssertionHandler.h */,
 				ED5FB05015B38894002987EA /* C4AssertionHandler.m */,
 				ED50C8C114EAC4A40040D844 /* C4Defines.h */,
@@ -347,59 +304,72 @@
 		ED50C8D314EACA0E0040D844 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				EDAFFAEE14F7602F00CA356A /* C4Control.h */,
-				EDAFFAEF14F7602F00CA356A /* C4Control.m */,
-				ED50C8D414EACA340040D844 /* C4View.h */,
-				ED50C8D514EACA340040D844 /* C4View.m */,
-				ED50C8BE14EAC4920040D844 /* C4Window.h */,
-				ED50C8BF14EAC4920040D844 /* C4Window.m */,
-				ED50C8C314EAC4F70040D844 /* C4CanvasController.h */,
-				ED50C8C414EAC4F70040D844 /* C4CanvasController.m */,
 				ED36D9E9157C91E900C3AEE7 /* Protocols */,
 				EDCE425E1564044000C7356E /* C4Camera.h */,
-				EDCE42601564044000C7356E /* C4CameraController.h */,
-				EDCE42621564044000C7356E /* C4CameraLayer.h */,
-				ED009F9C1509242100086987 /* C4EAGLES1Renderer.h */,
-				ED009F8E15091FE300086987 /* C4EAGLLayer.h */,
-				ED900CED14FBF2B3006C2AED /* C4Font.h */,
-				ED50C8CC14EAC61C0040D844 /* C4Foundation.h */,
-				ED009F9215091FFD00086987 /* C4GL.h */,
-				ED009FA61509545000086987 /* C4GL1Renderer.h */,
-				EDA7014714FC496300A0D77D /* C4Label.h */,
-				ED50C8C914EAC5990040D844 /* C4Layer.h */,
-				EDF7734D14F361B00094E656 /* C4Math.h */,
-				ED307697150D400C001D689C /* C4Movie.h */,
-				ED89849614EF1C8700BB7AB0 /* C4Object.h */,
-				ED3076A0150D51F0001D689C /* C4MovieLayer.h */,
-				EDF65456150E104100194671 /* C4Sample.h */,
-				EDECBF6A14EAE26600D9A446 /* C4Shape.h */,
-				ED89848514EE180400BB7AB0 /* C4ShapeLayer.h */,
-				ED24F2C3157EB62700BC73B5 /* C4Timer.h */,
-				ED9D5FA31564A927009C5175 /* C4Vector.h */,
-				EDCE426B1564174000C7356E /* C4ViewController.h */,
 				EDCE425F1564044000C7356E /* C4Camera.m */,
+				EDCE42601564044000C7356E /* C4CameraController.h */,
 				EDCE42611564044000C7356E /* C4CameraController.m */,
+				EDCE42621564044000C7356E /* C4CameraLayer.h */,
 				ED983F1015E2A8B600C0AD81 /* C4CameraLayer.m */,
+				ED50C8C314EAC4F70040D844 /* C4CanvasController.h */,
+				ED50C8C414EAC4F70040D844 /* C4CanvasController.m */,
+				EDAFFAEE14F7602F00CA356A /* C4Control.h */,
+				EDAFFAEF14F7602F00CA356A /* C4Control.m */,
+				ED009F9C1509242100086987 /* C4EAGLES1Renderer.h */,
 				ED009F9D1509242100086987 /* C4EAGLES1Renderer.m */,
+				ED009F8E15091FE300086987 /* C4EAGLLayer.h */,
 				ED009F8F15091FE300086987 /* C4EAGLLayer.m */,
+				ED900CED14FBF2B3006C2AED /* C4Font.h */,
 				ED900CEE14FBF2B3006C2AED /* C4Font.m */,
+				ED50C8CC14EAC61C0040D844 /* C4Foundation.h */,
 				ED50C8CD14EAC61D0040D844 /* C4Foundation.m */,
+				ED009F9215091FFD00086987 /* C4GL.h */,
 				ED009F9315091FFD00086987 /* C4GL.m */,
+				ED009FA61509545000086987 /* C4GL1Renderer.h */,
 				ED009FA71509545000086987 /* C4GL1Renderer.m */,
+				ED36D9EA157C935400C3AEE7 /* C4Image.h */,
+				ED36D9EB157C935400C3AEE7 /* C4Image.m */,
+				EDA7014714FC496300A0D77D /* C4Label.h */,
 				EDA7014814FC496300A0D77D /* C4Label.m */,
+				ED50C8C914EAC5990040D844 /* C4Layer.h */,
 				ED50C8CA14EAC5990040D844 /* C4Layer.m */,
+				EDF7734D14F361B00094E656 /* C4Math.h */,
 				EDF7734E14F361B00094E656 /* C4Math.m */,
+				ED307697150D400C001D689C /* C4Movie.h */,
 				ED307698150D400C001D689C /* C4Movie.m */,
-				ED3076A1150D51F0001D689C /* C4MovieLayer.m */,
+				ED89849614EF1C8700BB7AB0 /* C4Object.h */,
 				ED89849714EF1C8700BB7AB0 /* C4Object.m */,
+				ED3076A0150D51F0001D689C /* C4MovieLayer.h */,
+				ED3076A1150D51F0001D689C /* C4MovieLayer.m */,
+				EDF65456150E104100194671 /* C4Sample.h */,
 				EDF65457150E104100194671 /* C4Sample.m */,
+				EDECBF6A14EAE26600D9A446 /* C4Shape.h */,
 				EDECBF6B14EAE26600D9A446 /* C4Shape.m */,
+				ED89848514EE180400BB7AB0 /* C4ShapeLayer.h */,
 				ED89848614EE180400BB7AB0 /* C4ShapeLayer.m */,
+				ED8D2EC616BC4D9C009E1D1E /* C4Slider.h */,
+				ED8D2EC716BC4D9C009E1D1E /* C4Slider.m */,
+				ED24F2C3157EB62700BC73B5 /* C4Timer.h */,
 				ED24F2C4157EB62700BC73B5 /* C4Timer.m */,
+				ED9D5FA31564A927009C5175 /* C4Vector.h */,
 				ED9D5FA41564A927009C5175 /* C4Vector.m */,
+				ED50C8D414EACA340040D844 /* C4View.h */,
+				ED50C8D514EACA340040D844 /* C4View.m */,
+				EDCE426B1564174000C7356E /* C4ViewController.h */,
 				EDCE426C1564174000C7356E /* C4ViewController.m */,
+				ED50C8BE14EAC4920040D844 /* C4Window.h */,
+				ED50C8BF14EAC4920040D844 /* C4Window.m */,
 			);
 			name = Source;
+			sourceTree = "<group>";
+		};
+		EDBE639416DFE6E600FB0962 /* Experimental */ = {
+			isa = PBXGroup;
+			children = (
+				ED99AB6F15DDF714002A7D6C /* C4YouTubeURLParser.h */,
+				ED99AB7215DE01D7002A7D6C /* C4YouTubeURLParser.m */,
+			);
+			name = Experimental;
 			sourceTree = "<group>";
 		};
 		EDCE425C156401F000C7356E /* Media */ = {
@@ -480,7 +450,6 @@
 				ED7C0C1915C88B9F009107A6 /* C4_TabbarIcon@2x.png in Resources */,
 				ED7C0C1A15C88B9F009107A6 /* C4_ToolbarIcon.png in Resources */,
 				ED7C0C1B15C88B9F009107A6 /* C4_ToolbarIcon@2x.png in Resources */,
-				EDF8262F167C179000FE30E4 /* HiddenNav.xib in Resources */,
 				ED8D2EBA16BB9421009E1D1E /* C4Table.png in Resources */,
 				ED8D2EBB16BB9421009E1D1E /* C4Table@2x.png in Resources */,
 				ED8D2EBC16BB9421009E1D1E /* C4Sky.png in Resources */,
@@ -527,14 +496,7 @@
 				ED5FB05115B38894002987EA /* C4AssertionHandler.m in Sources */,
 				ED99AB7315DE01D7002A7D6C /* C4YouTubeURLParser.m in Sources */,
 				ED983F1115E2A8B600C0AD81 /* C4CameraLayer.m in Sources */,
-				EDA27D2F1679BD0800B75522 /* C4TransformableControl.m in Sources */,
-				EDA27D301679BD0800B75522 /* C4TransformLayer.m in Sources */,
-				ED98723D167C056B00ADFD3F /* HiddenNavView.m in Sources */,
-				ED987241167C0DA100ADFD3F /* OuterShape.m in Sources */,
-				EDF8262E167C179000FE30E4 /* HiddenNav.m in Sources */,
 				ED8D2EC816BC4D9C009E1D1E /* C4Slider.m in Sources */,
-				EDD227C016C34E07002078CD /* C4Button.m in Sources */,
-				EDAF8F3016C3792E00812A4A /* AnimatedShape.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
