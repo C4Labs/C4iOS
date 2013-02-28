@@ -66,7 +66,6 @@
 		ED8D2EBB16BB9421009E1D1E /* C4Table@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED8D2EB716BB9421009E1D1E /* C4Table@2x.png */; };
 		ED8D2EBC16BB9421009E1D1E /* C4Sky.png in Resources */ = {isa = PBXBuildFile; fileRef = ED8D2EB816BB9421009E1D1E /* C4Sky.png */; };
 		ED8D2EBD16BB9421009E1D1E /* C4Sky@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED8D2EB916BB9421009E1D1E /* C4Sky@2x.png */; };
-		ED8D2EC816BC4D9C009E1D1E /* C4Slider.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8D2EC716BC4D9C009E1D1E /* C4Slider.m */; };
 		ED900CEF14FBF2B4006C2AED /* C4Font.m in Sources */ = {isa = PBXBuildFile; fileRef = ED900CEE14FBF2B3006C2AED /* C4Font.m */; };
 		ED979F3F14F95EFF00645114 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED979F3E14F95EFF00645114 /* CoreImage.framework */; };
 		ED983F1115E2A8B600C0AD81 /* C4CameraLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED983F1015E2A8B600C0AD81 /* C4CameraLayer.m */; };
@@ -89,7 +88,6 @@
 		EDF7734F14F361B00094E656 /* C4Math.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF7734E14F361B00094E656 /* C4Math.m */; };
 		EDF8262E167C179000FE30E4 /* HiddenNav.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF8262C167C179000FE30E4 /* HiddenNav.m */; };
 		EDF8262F167C179000FE30E4 /* HiddenNav.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDF8262D167C179000FE30E4 /* HiddenNav.xib */; };
-		EDFE79C416DEFC77002072EB /* C4UISlider.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFE79C316DEFC77002072EB /* C4UISlider.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -180,8 +178,6 @@
 		ED8D2EB716BB9421009E1D1E /* C4Table@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "C4Table@2x.png"; sourceTree = "<group>"; };
 		ED8D2EB816BB9421009E1D1E /* C4Sky.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = C4Sky.png; sourceTree = "<group>"; };
 		ED8D2EB916BB9421009E1D1E /* C4Sky@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "C4Sky@2x.png"; sourceTree = "<group>"; };
-		ED8D2EC616BC4D9C009E1D1E /* C4Slider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Slider.h; sourceTree = "<group>"; };
-		ED8D2EC716BC4D9C009E1D1E /* C4Slider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Slider.m; sourceTree = "<group>"; };
 		ED900CED14FBF2B3006C2AED /* C4Font.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Font.h; sourceTree = "<group>"; };
 		ED900CEE14FBF2B3006C2AED /* C4Font.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Font.m; sourceTree = "<group>"; };
 		ED979F3E14F95EFF00645114 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
@@ -228,8 +224,6 @@
 		EDF8262B167C179000FE30E4 /* HiddenNav.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HiddenNav.h; sourceTree = "<group>"; };
 		EDF8262C167C179000FE30E4 /* HiddenNav.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HiddenNav.m; sourceTree = "<group>"; };
 		EDF8262D167C179000FE30E4 /* HiddenNav.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HiddenNav.xib; sourceTree = "<group>"; };
-		EDFE79C216DEFC76002072EB /* C4UISlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4UISlider.h; sourceTree = "<group>"; };
-		EDFE79C316DEFC77002072EB /* C4UISlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4UISlider.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -318,10 +312,6 @@
 				EDBCDFC016D26EFE000E4A55 /* C4ImageView.m */,
 				ED0AB05016DE8828004258A7 /* NewSlider.h */,
 				ED0AB05116DE8828004258A7 /* NewSlider.m */,
-				ED8D2EC616BC4D9C009E1D1E /* C4Slider.h */,
-				ED8D2EC716BC4D9C009E1D1E /* C4Slider.m */,
-				EDFE79C216DEFC76002072EB /* C4UISlider.h */,
-				EDFE79C316DEFC77002072EB /* C4UISlider.m */,
 				EDF8262B167C179000FE30E4 /* HiddenNav.h */,
 				EDF8262C167C179000FE30E4 /* HiddenNav.m */,
 				EDF8262D167C179000FE30E4 /* HiddenNav.xib */,
@@ -589,12 +579,10 @@
 				ED98723D167C056B00ADFD3F /* HiddenNavView.m in Sources */,
 				ED987241167C0DA100ADFD3F /* OuterShape.m in Sources */,
 				EDF8262E167C179000FE30E4 /* HiddenNav.m in Sources */,
-				ED8D2EC816BC4D9C009E1D1E /* C4Slider.m in Sources */,
 				EDBCDFC116D26EFE000E4A55 /* C4ImageView.m in Sources */,
 				ED63257716D6943C000DF4B2 /* UIColor+CIColorFix.m in Sources */,
 				ED84FDDE16DE8102009E6975 /* C4Image.m in Sources */,
 				ED0AB05216DE8828004258A7 /* NewSlider.m in Sources */,
-				EDFE79C416DEFC77002072EB /* C4UISlider.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

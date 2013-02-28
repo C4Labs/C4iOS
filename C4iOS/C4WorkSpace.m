@@ -14,6 +14,7 @@
 -(void)setup {
     s = [NewSlider slider:CGRectMake(0,0,400,44)];
     s.thumbImageHighlighted = [C4Image imageNamed:@"pyramid"];
+    [s runMethod:@"test:" target:self forEvent:VALUECHANGED];
     [self.canvas addSubview:s];
 }
 
