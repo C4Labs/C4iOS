@@ -1,31 +1,17 @@
 //
-//  C4Image.h
+//  NewImage.h
 //  C4iOS
 //
-//  Created by Travis Kirton on 12-03-09.
-//  Copyright (c) 2012 POSTFL. All rights reserved.
+//  Created by moi on 13-02-18.
+//  Copyright (c) 2013 POSTFL. All rights reserved.
 //
 
-/* Filters
- For now I am leaving out the following filters:
- - affineTransform -> easy to put in at a later date, i don't want to bother with semantics of naming the filter method so that it's distinct from image.transform, and i'm lazy today
- - checkerBoardGenerator -> easy to put in at a later date, creating images isn't something i'm interested in atm
- - cicolorcube -> unnecessary for now
- - ciconstantcolorgenerator -> not interested in generators
- - cicrop -> not interested in dealing with cropping and resizing an image right now...
- - cigaussiangradient -> not interested in dealing with generators
- - cilineargradient -> not interested in dealing with generators
- - ciradialgradient -> not interested in dealing with generators
- - cistripesgenerator -> not interested in dealing with generators
- - civignette -> currently undocumented in the ios Core Image Filter Reference
- */
-
 #import "C4Control.h"
-#import "C4Vector.h"
+#import "C4ImageView.h"
 
 /**This document describes the C4Image class. A C4Image object provides access for creating, showing, interacting and manipulating images. C4Image is a subclass of C4Control and so inherits its animation, gesture and notification abilities.
  
- C4Image also takes advantage of its underlying C4Layer to allow for filtering the content of an image. You can apply filters that affect only the image (e.g. hueAdjust, vibranceAdjust, etc.) or use another image as the background for a particular blend or composite filter (e.g. additionComposite:, overlayBlend:, etc). 
+ C4Image also takes advantage of its underlying C4Layer to allow for filtering the content of an image. You can apply filters that affect only the image (e.g. hueAdjust, vibranceAdjust, etc.) or use another image as the background for a particular blend or composite filter (e.g. additionComposite:, overlayBlend:, etc).
  
  When working with blends and composite methods, it is recommended that the images you use are of the same size.
  
@@ -45,11 +31,11 @@
  */
 +(C4Image *)imageWithImage:(C4Image *)image;
 
-/**Creates and returns a new image using an array of image names.
-
- @param imageNames A C4Image whose contents will be used to create a new C4Image object.
- */
-+(C4Image *)animatedImageWithNames:(NSArray *)imageNames;
+///**Creates and returns a new image using an array of image names.
+// 
+// @param imageNames A C4Image whose contents will be used to create a new C4Image object.
+// */
+//+(NewImage *)animatedImageWithNames:(NSArray *)imageNames;
 
 /**Creates and returns a new image using an NSData object.
  
@@ -93,27 +79,27 @@
  */
 -(id)initWithCGImage:(CGImageRef)image;
 
-/**Initializes an animated image using a set of files with the specified names.
- 
- This method will look for a series of files with the given names in the application's local directory. If it cannot find the image it will cause an assertion error.
- 
- @param imageNames An array of image names to be used to construct the animated image
- */
--(id)initAnimatedImageWithNames:(NSArray *)imageNames;
+///**Initializes an animated image using a set of files with the specified names.
+// 
+// This method will look for a series of files with the given names in the application's local directory. If it cannot find the image it will cause an assertion error.
+// 
+// @param imageNames An array of image names to be used to construct the animated image
+// */
+//-(id)initAnimatedImageWithNames:(NSArray *)imageNames;
 
 /**Sets the current visible representation of a C4Image to that of another image.
  
  @param image A C4Image whose contents will be used to set the visible representation of the receiver.
  */
 -(void)setImage:(C4Image *)image;
-
-/**Causes an animatedImage to start playing.
- */
--(void)play;
-
-/**Causes an animatedImage to stop playing.
- */
--(void)stop;
+//
+///**Causes an animatedImage to start playing.
+// */
+//-(void)play;
+//
+///**Causes an animatedImage to stop playing.
+// */
+//-(void)stop;
 
 /**Loads a raw character array with color data.
  
@@ -175,7 +161,7 @@
  @param brightness Brightness value defaults to 0.0f, minimum -1.0f, maximum 1.0f
  @param contrast Contrast value defaults to 1.0f, minimum 0.0f, maximum 4.0f
  */
--(void)colorControlSaturation:(CGFloat)saturation brightness:(CGFloat)brightness contrast:(CGFloat)contrast;
+-(void)colorControlSaturation:(CGFloat)saturation brightness:(CGFloat)brightness contrast:(CGFloat)contrast  NS_AVAILABLE_IOS(5_0);
 
 /**Color dodge filter.
  
@@ -304,7 +290,7 @@
 /**Hue blend filter
  Uses the luminance and saturation values of the background with the hue of the source image.
  
- The formula used to create this filter is described in the PDF specification, which is available online from the Adobe Developer Center. See PDF Reference and Adobe Extensions to the PDF Specification. 
+ The formula used to create this filter is described in the PDF specification, which is available online from the Adobe Developer Center. See PDF Reference and Adobe Extensions to the PDF Specification.
  
  @param backgroundImage The image that will provide the background for this filter.
  */
@@ -394,7 +380,7 @@
 /**Sepia tone filter
  Maps the colors of an image to various shades of brown.
  
- @param intensity The level of intensity for which to apply the sepia tone, defaults to 1.0, minimum 0.0, maximum 1.0 
+ @param intensity The level of intensity for which to apply the sepia tone, defaults to 1.0, minimum 0.0, maximum 1.0
  */
 -(void)sepiaTone:(CGFloat)intensity;
 
@@ -452,7 +438,7 @@
  */
 -(void)straighten:(CGFloat)angle;
 
-/**Temperature and tint filter 
+/**Temperature and tint filter
  Adapts the reference white point for an image.
  
  @param neutral An offset value, defaults to {6500,0}
@@ -514,28 +500,25 @@
 /**The underlying Core Image data. (read-only)
  */
 @property (readonly, nonatomic) CGImageRef CGImage;
-
-/**Specifies whether or not an image is animated.
- */
-@property (readonly, nonatomic, getter = isAnimatedImage) BOOL animatedImage;
-
-/**Specifies the array of CGImageRef images used for animating.
- 
- This array is filled when the animatedImage is created using the appropriate constructor.
- */
-@property (readwrite, atomic) CFMutableArrayRef animatedImages;
-
-/**Specifies the duration for the entire animation.
- 
- Setting this value, the animatedImage will automatically calculate how long each image in its array will be visible. 
- 
- The duration for each image is consistent, for example a 2-second animation consisting of 10 frames will display each image for 0.2 seconds. 
- */
-@property (readwrite, nonatomic) CGFloat animatedImageDuration;
-
-/**Specifies the original ratio (width / height) of the image.
- */
-@property (readonly, nonatomic) CGFloat originalRatio;
+//
+///**Specifies whether or not an image is animated.
+// */
+//@property (readonly, nonatomic, getter = isAnimatedImage) BOOL animatedImage;
+//
+///**Specifies the array of CGImageRef images used for animating.
+// 
+// This array is filled when the animatedImage is created using the appropriate constructor.
+// */
+//@property (readwrite, atomic) CFMutableArrayRef animatedImages;
+//
+///**Specifies the duration for the entire animation.
+// 
+// Setting this value, the animatedImage will automatically calculate how long each image in its array will be visible.
+// 
+// The duration for each image is consistent, for example a 2-second animation consisting of 10 frames will display each image for 0.2 seconds.
+// */
+//@property (readwrite, nonatomic) CGFloat animatedImageDuration;
+//
 
 /**Specifies the height of the image. Animatable.
  
@@ -559,21 +542,144 @@
  */
 @property (readonly, nonatomic) CGSize originalSize;
 
+/**Specifies the original ratio (width / height) of the image.
+ */
+@property (readonly, nonatomic) CGFloat originalRatio;
+
 /**Specifies whether or not the image has loaded its pixel data.
  */
 @property (readonly, nonatomic) BOOL pixelDataLoaded;
 
 #pragma mark JANUARY 2013
 @property (readwrite, atomic) BOOL constrainsProportions;
-//@property (readwrite, nonatomic) CGFloat animatedImageDuration
-
-@property (readonly, atomic) CGImageRef filteredImage;
+////@property (readwrite, nonatomic) CGFloat animatedImageDuration
+//
+//@property (readonly, atomic) CGImageRef filteredImage;
 +(C4Image *)defaultStyle;
+@property (readonly, nonatomic, getter = isMultipleFilterEnabled) BOOL multipleFilterEnabled;
 
 -(C4Image *)copyWithZone:(NSZone *)zone;
 -(id)initWithUIImage:(UIImage *)image;
--(void)showOriginalImage;
--(void)showFilteredImage;
+//-(void)showOriginalImage;
+//-(void)showFilteredImage;
+//
+-(void)startFiltering;
+-(void)renderFilteredImage;
+@property (readwrite, nonatomic) CGImageRef contents;
+
+//FIXME: There are some filters that return nil images... like perspectiveTile, check with iOS 6.1
+-(void)affineClamp:(CGAffineTransform)transform;
+-(void)affineTile:(CGAffineTransform)transform;
+-(void)affineTransform:(CGAffineTransform)transform;
+-(void)areaAverage:(CGRect)area;
+-(void)areaHistogram:(CGRect)area count:(NSInteger)width scale:(CGFloat)scale;
+-(void)areaMaximum:(CGRect)area;
+-(void)areaMaximumAlpha:(CGRect)area;
+-(void)areaMinimum:(CGRect)area;
+-(void)areaMinimumAlpha:(CGRect)area;
+-(void)blendWithMask:(C4Image *)backgroundImage mask:(C4Image *)maskImage;
+-(void)bloom:(CGFloat)radius intensity:(CGFloat)intensity;
+-(void)boxBlur:(CGFloat)radius;
+-(void)bumpDistortion:(CGPoint)center radius:(CGFloat)radius scale:(CGFloat)scale;
+-(void)bumpDistortionLinear:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle scale:(CGFloat)scale;
+-(void)circleSplashDistortion:(CGPoint)center radius:(CGFloat)radius;
+-(void)circularScreen:(CGPoint)center width:(CGFloat)width sharpness:(CGFloat)sharpness;
+-(void)circularWrap:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle;
+-(void)halftoneCMYK:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle sharpness:(CGFloat)sharpness gcr:(CGFloat)gcr ucr:(CGFloat)ucr;
+-(void)colorCube:(CGFloat)dimension cubeData:(NSData *)data;
+-(void)colorMap:(C4Image *)gradientImage;
+-(void)colorPosterize:(CGFloat)levels;
+-(void)columnAverage:(CGRect)area;
+-(void)comicEffect;
+-(void)crop:(CGRect)area;
+-(void)crystallize:(CGFloat)radius center:(CGPoint)center;
+-(void)depthOfField:(CGPoint)point1 point2:(CGPoint)point2 saturation:(CGFloat)saturation maskRadius:(CGFloat)maskRadius maskIntensity:(CGFloat)maskIntensity blurRadius:(CGFloat)radius;
+-(void)discBlur:(CGFloat)radius;
+-(void)displacementDistortion:(C4Image *)displacementImage scale:(CGFloat)scale;
+-(void)dotScreen:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width sharpness:(CGFloat)sharpness;
+-(void)droste:(CGPoint)inset1 inset2:(CGPoint)inset2 strandRadius:(CGFloat)radius periodicity:(CGFloat)periodicity rotation:(CGFloat)rotation zoom:(CGFloat)zoom;
+-(void)edges:(CGFloat)intensity;
+-(void)edgeWork:(CGFloat)radius;
+-(void)eightFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
+-(void)fourFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle acuteAngle:(CGFloat)acuteAngle width:(CGFloat)width;
+-(void)fourFoldRotatedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
+-(void)fourFoldTranslatedTile:(CGPoint)center angle:(CGFloat)angle acuteAngle:(CGFloat)acuteAngle width:(CGFloat)width;
+-(void)gaussianBlur:(CGFloat)radius;
+-(void)glassDistortion:(C4Image *)texture center:(CGPoint)center scale:(CGFloat)scale;
+-(void)glassLozenge:(CGPoint)point1 point2:(CGPoint)point2 radius:(CGFloat)radius refraction:(CGFloat)refraction;
+-(void)glideReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
+-(void)gloom:(CGFloat)radius intensity:(CGFloat)intensity;
+-(void)hatchedScreen:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width sharpness:(CGFloat)sharpness;
+-(void)heightShieldFromMask:(CGFloat)radius;
+-(void)hexagonalPixellate:(CGPoint)center scale:(CGFloat)scale;
+-(void)holeDistortion:(CGPoint)center radius:(CGFloat)radius;
+-(void)kaleidescope:(CGFloat)count center:(CGPoint)center angle:(CGFloat)angle;
+-(void)lanczosScaleTransform:(CGFloat)scale aspectRatio:(CGFloat)ratio;
+-(void)lightTunnel:(CGPoint)center rotation:(CGFloat)rotation radius:(CGFloat)radius;
+-(void)lineOverlay:(CGFloat)noiseLevel sharpness:(CGFloat)sharpness edgeIntensity:(CGFloat)edgeIntensity threshold:(CGFloat)threshold contrast:(CGFloat)contrast;
+-(void)lineScreen:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width sharpness:(CGFloat)sharpness;
+-(void)maskToAlpha;
+-(void)maximumComponent;
+-(void)medianFilter;
+-(void)minimumComponent;
+-(void)motionBlur:(CGFloat)radius angle:(CGFloat)angle;
+-(void)noiseRedution:(CGFloat)level sharpness:(CGFloat)sharpness;
+-(void)opTile:(CGPoint)center scale:(CGFloat)scale angle:(CGFloat)angle width:(CGFloat)width;
+-(void)parallelogramTile:(CGPoint)center angle:(CGFloat)angle acuteAngle:(CGFloat)acuteAngle width:(CGFloat)width;
+-(void)perspectiveTile:(CGPoint *)points;
+-(void)perspectiveTransform:(CGPoint *)points;
+-(void)pinchDistortion:(CGPoint)center radius:(CGFloat)radius scale:(CGFloat)scale;
+-(void)pixellate:(CGPoint)center scale:(CGFloat)scale;
+-(void)pointillize:(CGFloat)radius center:(CGPoint)center;
+-(void)rowAverage:(CGRect)area;
+-(void)shadedMaterial:(C4Image *)shadingImage scale:(CGFloat)scale;
+-(void)sharpenLuminance:(CGFloat)sharpness;
+-(void)sixFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
+-(void)sixFoldRotatedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
+-(void)spotColor:(NSArray *)colorsets closenessAndContrast:(CGFloat *)values;
+-(void)spotLight:(C4Vector *)position lightPointsAt:(C4Vector *)spot brightness:(CGFloat)brightness concentration:(CGFloat)concentration color:(UIColor *)color;
+-(void)stretchCrop:(CGSize)size cropAmount:(CGFloat)cropAmount stretchAmount:(CGFloat)stretchAmount;
+-(void)torusLensDistortion:(CGPoint)center radius:(CGFloat)radius width:(CGFloat)width refraction:(CGFloat)refraction;
+-(void)triangleKaleidescope:(CGPoint)point size:(CGSize)size rotation:(CGFloat)rotation decay:(CGFloat)decay;
+-(void)triangleTile:(CGPoint)center scale:(CGFloat)scale angle:(CGFloat)angle width:(CGFloat)width;
+-(void)twelveFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
+-(void)twirlDistortion:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle;
+-(void)unsharpMask:(CGFloat)radius intensity:(CGFloat)intensity;
+-(void)vignette:(CGFloat)radius intensity:(CGFloat)intensity;
+-(void)vortexDistortion:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle;
+-(void)zoomBlur:(CGPoint)center amount:(CGFloat)amount;
+
++(C4Image *)checkerboard:(CGSize)size center:(CGPoint)center color1:(UIColor *)color1 color2:(UIColor *)color2 squareWidth:(CGFloat)width sharpness:(CGFloat)sharpness;
++(C4Image *)constantColor:(CGSize)size color:(UIColor *)color;
++(C4Image *)lenticularHalo:(CGSize)size center:(CGPoint)center color:(UIColor *)color haloRadius:(CGFloat)radius haloWidth:(CGFloat)haloWidth haloOverlap:(CGFloat)overlap striationStrength:(CGFloat)strength striationContrast:(CGFloat)contrast time:(CGFloat)time;
++(C4Image *)random:(CGSize)size;
+//FIXME: I don't think these filters work right now... There's no code online to check
+//+(C4Image *)starShineGenerator:(CGSize)size center:(CGPoint)center color:(UIColor *)color radius:(CGFloat)radius crossScale:(CGFloat)scale crossAngle:(CGFloat)angle crossOpacity:(CGFloat)opacity crossWidth:(CGFloat)width epsilon:(CGFloat)epsilon;
+//+(C4Image *)stripes:(CGSize)size center:(CGPoint)center color1:(UIColor *)color1 color2:(UIColor *)color2 stripeWidth:(CGFloat)width sharpness:(CGFloat)sharpness;
+//+(C4Image *)sunbeams:(CGSize)size center:(CGPoint)center color:(UIColor *)color sunRadius:(CGFloat)sunRadius maxStriationRadius:(CGFloat)striationRadius striationStrength:(CGFloat)striationStrength striationContrast:(CGFloat)striationContrast time:(CGFloat)time;
+
++(NSArray *)availableFilters;
+
+/**Specifies the array of CGImageRef images used for animating.
+ 
+ This array is filled when the animatedImage is created using the appropriate constructor.
+ */
+@property (readwrite, atomic) NSArray *animationImages;
+
+/**Specifies the duration for the entire animation.
+ 
+ Setting this value, the animatedImage will automatically calculate how long each image in its array will be visible.
+ 
+ The duration for each image is consistent, for example a 2-second animation consisting of 10 frames will display each image for 0.2 seconds.
+ */
+@property (readwrite, nonatomic) CGFloat animatedImageDuration;
+@property (readwrite, nonatomic) NSInteger animationRepeatCount;
+@property (readonly, nonatomic, getter = isAnimating) BOOL animating;
+-(void)play;
+-(void)pause;
+
++(C4Image *)animatedImageWithNames:(NSArray *)imageNames;
+-(id)initAnimatedImageWithNames:(NSArray *)imageNames;
 
 +(C4Image *)imageWithUIImage:(UIImage *)image;
 @end

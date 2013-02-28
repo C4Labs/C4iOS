@@ -18,8 +18,7 @@ NSInteger floatSort(id obj1, id obj2, void *context);
 
 @implementation C4Foundation
 
-- (id)init
-{
+- (id)init {
     self = [super init];
     if (self) {
 #ifdef VERBOSE

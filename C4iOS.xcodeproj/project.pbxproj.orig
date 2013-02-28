@@ -285,6 +285,9 @@
 			children = (
 				EDF65448150DEF3300194671 /* C4WorkSpace.h */,
 				EDF65449150DEF3300194671 /* C4WorkSpace.m */,
+<<<<<<< HEAD
+				EDBE639416DFE6E600FB0962 /* Experimental */,
+=======
 				ED50C89414EAC2010040D844 /* C4AppDelegate.h */,
 				ED50C89514EAC2010040D844 /* C4AppDelegate.m */,
 				EDAFFAEE14F7602F00CA356A /* C4Control.h */,
@@ -310,6 +313,7 @@
 				ED99AB7215DE01D7002A7D6C /* C4YouTubeURLParser.m */,
 				ED63257516D6943C000DF4B2 /* UIColor+CIColorFix.h */,
 				ED63257616D6943C000DF4B2 /* UIColor+CIColorFix.m */,
+>>>>>>> HiddenNav-Experiment
 				ED4702D615C052CA004B75D1 /* pyramid.png */,
 				ED008D3915BF5DE80005E8D3 /* lines.png */,
 				ED43516D16DD78CF00340298 /* C4Spin00.png */,
@@ -370,12 +374,15 @@
 		ED50C8D314EACA0E0040D844 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
+=======
 				ED50C8D414EACA340040D844 /* C4View.h */,
 				ED50C8D514EACA340040D844 /* C4View.m */,
 				ED50C8BE14EAC4920040D844 /* C4Window.h */,
 				ED50C8BF14EAC4920040D844 /* C4Window.m */,
 				ED50C8C314EAC4F70040D844 /* C4CanvasController.h */,
 				ED50C8C414EAC4F70040D844 /* C4CanvasController.m */,
+>>>>>>> HiddenNav-Experiment
 				ED36D9E9157C91E900C3AEE7 /* Protocols */,
 				EDCE425E1564044000C7356E /* C4Camera.h */,
 				EDCE425F1564044000C7356E /* C4Camera.m */,
@@ -579,6 +586,9 @@
 				ED5FB05115B38894002987EA /* C4AssertionHandler.m in Sources */,
 				ED99AB7315DE01D7002A7D6C /* C4YouTubeURLParser.m in Sources */,
 				ED983F1115E2A8B600C0AD81 /* C4CameraLayer.m in Sources */,
+<<<<<<< HEAD
+				ED8D2EC816BC4D9C009E1D1E /* C4Slider.m in Sources */,
+=======
 				EDA27D2F1679BD0800B75522 /* C4TransformableControl.m in Sources */,
 				EDA27D301679BD0800B75522 /* C4TransformLayer.m in Sources */,
 				ED98723D167C056B00ADFD3F /* HiddenNavView.m in Sources */,
@@ -588,6 +598,7 @@
 				ED63257716D6943C000DF4B2 /* UIColor+CIColorFix.m in Sources */,
 				ED84FDDE16DE8102009E6975 /* C4Image.m in Sources */,
 				ED786AB416DF03330076C79D /* C4Slider.m in Sources */,
+>>>>>>> HiddenNav-Experiment
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

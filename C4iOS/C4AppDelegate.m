@@ -8,20 +8,17 @@
 
 #import "C4AppDelegate.h"
 #import "C4AssertionHandler.h"
+#import "C4Slider.h"
 
 @interface C4AppDelegate ()
 /* The main view of the application.
   
  Need to have this in here so that we can associate the CAZZ4View in our C4Canvas.xib file with something. The main reason is that a static lib will discard and not recognize any class that isn't called or referenced in some part of some implementation.
-                         */
+ */
 @property (readonly, nonatomic, weak) C4View *mainView;
 @end
 
 @implementation C4AppDelegate
-
-//@synthesize window = _window;
-//@synthesize workspace = _workspace;
-//@synthesize mainView;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     launchOptions = launchOptions;
@@ -78,15 +75,14 @@
     @"shadowOffset":[NSValue valueWithCGSize:[C4Control defaultStyle].shadowOffset],
     @"repeatCount":@([C4Control defaultStyle].repeatCount)
     };
-
+    
     [C4Control defaultStyle].style = basicStyle;
 
-    
     [C4Slider defaultStyle].style = basicStyle;
-    [C4Slider defaultStyle].minimumTrackTintColor = C4RED;
-    [C4Slider defaultStyle].maximumTrackTintColor = C4GREY;
-    [C4Slider defaultStyle].thumbTintColor = C4BLUE;
-
+    [C4Slider defaultStyle].thumbColor = C4BLUE;
+    [C4Slider defaultStyle].minimumTrackColor = C4RED;
+    [C4Slider defaultStyle].maximumTrackColor = C4GREY;
+    
     [C4Shape defaultStyle].style = basicStyle;
     [C4Shape defaultStyle].fillColor = C4GREY;
     [C4Shape defaultStyle].fillRule = FILLNORMAL;
@@ -104,7 +100,6 @@
     [C4Label defaultStyle].textColor = C4GREY;
     [C4Label defaultStyle].highlightedTextColor = C4RED;
     [C4Label defaultStyle].backgroundColor = [UIColor clearColor];
-
 }
 
 @end

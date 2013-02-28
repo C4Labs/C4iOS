@@ -214,6 +214,9 @@
  */
 @property (readonly, nonatomic) CGFloat height;
 
+/** The size of the receiver's frame.
+ */
+@property (readonly, nonatomic) CGSize size;
 
 #pragma mark Style Properties
 /**Specifies the width of the receiver’s border. Animatable.
@@ -284,4 +287,7 @@
 -(void)addObjects:(NSArray *)array;
 @property (readwrite, nonatomic) NSDictionary *style;
 +(C4Control *)defaultStyle;
+
+-(id)nullForNilObject:(id)object;
+-(id)nilForNullObject:(id)object;
 @end

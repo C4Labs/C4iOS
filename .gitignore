@@ -8,4 +8,6 @@
 
 *.xcuserstate
 
-C4iOS.xcodeproj/project.xcworkspace/xcuserdata/moi.xcuserdatad/UserInterfaceState.xcuserstate
+*.xcuserstate
+
+*.pbxproj
