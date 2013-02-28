@@ -835,4 +835,13 @@
     return control;
 }
 
+-(id)nullForNilObject:(id)object {
+    if(object == nil) return [NSNull null];
+    return object;
+}
+
+-(id)nilForNullObject:(id)object {
+    if(object == [NSNull null]) return nil;
+    return object;
+}
 @end

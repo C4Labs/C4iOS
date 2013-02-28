@@ -260,7 +260,6 @@
 @property (readwrite, nonatomic, strong) C4Image *maxTrackImage, *maxTrackImageHighlighted, *maxTrackImageDisabled, *maxTrackImageSelected;
 @property (readonly, nonatomic) BOOL usesThumbImage, usesMaxTrackImage, usesMinTrackImage;
 
-
 -(void)runMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event;
 -(void)stopRunningMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event;
 @end
