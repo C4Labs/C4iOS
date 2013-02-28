@@ -8,7 +8,7 @@
 
 #import "C4AppDelegate.h"
 #import "C4AssertionHandler.h"
-#import "NewSlider.h"
+#import "C4Slider.h"
 
 @interface C4AppDelegate ()
 /* The main view of the application.
@@ -77,16 +77,11 @@
     };
     
     [C4Control defaultStyle].style = basicStyle;
-    
-    [C4Slider defaultStyle].style = basicStyle;
-    [C4Slider defaultStyle].minimumTrackTintColor = C4RED;
-    [C4Slider defaultStyle].maximumTrackTintColor = C4GREY;
-    [C4Slider defaultStyle].thumbTintColor = C4BLUE;
 
-    [NewSlider defaultStyle].style = basicStyle;
-    [NewSlider defaultStyle].thumbColor = C4BLUE;
-    [NewSlider defaultStyle].minimumTrackColor = C4RED;
-    [NewSlider defaultStyle].maximumTrackColor = C4GREY;
+    [C4Slider defaultStyle].style = basicStyle;
+    [C4Slider defaultStyle].thumbColor = C4BLUE;
+    [C4Slider defaultStyle].minimumTrackColor = C4RED;
+    [C4Slider defaultStyle].maximumTrackColor = C4GREY;
     
     [C4Shape defaultStyle].style = basicStyle;
     [C4Shape defaultStyle].fillColor = C4GREY;

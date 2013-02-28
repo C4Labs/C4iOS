@@ -5,13 +5,12 @@
 //  Created by moi on 13-02-27.
 //  Copyright (c) 2013 POSTFL. All rights reserved.
 //
-@class C4UISlider;
 #import "C4Control.h"
 
-@interface NewSlider : C4Control
+@interface C4Slider : C4Control
 
-+(NewSlider *)defaultStyle;
-+(NewSlider *)slider:(CGRect)rect;
++(C4Slider *)defaultStyle;
++(C4Slider *)slider:(CGRect)rect;
 -(id)initWithFrame:(CGRect)frame defaults:(BOOL)useDefaults;
 
 -(void)runMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event;

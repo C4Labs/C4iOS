@@ -6,16 +6,16 @@
 //  Copyright (c) 2013 POSTFL. All rights reserved.
 //
 
-#import "NewSlider.h"
+#import "C4Slider.h"
 
-@interface NewSlider ()
+@interface C4Slider ()
 @property (readonly, atomic) BOOL usesThumbImage, usesThumbImageDisabled, usesThumbImageHighlighted, usesThumbImageSelected;
 @property (readonly, atomic) BOOL usesMaxiumumTrackImage, usesMaxiumumTrackImageDisabled, usesMaxiumumTrackImageHighlighted, usesMaxiumumTrackImageSelected;
 @property (readonly, atomic) BOOL usesMiniumumTrackImage, usesMiniumumTrackImageDisabled, usesMiniumumTrackImageHighlighted, usesMiniumumTrackImageSelected;
 @property (readonly, atomic) BOOL usesMaximumValueImage, usesMinimumValueImage;
 @end
 
-@implementation NewSlider
+@implementation C4Slider
 @synthesize thumbColor = _thumbColor, minimumTrackColor = _minimumTrackColor, maximumTrackColor = _maximumTrackColor;
 @synthesize thumbImage = _thumbImage, thumbImageDisabled = _thumbImageDisabled, thumbImageSelected = _thumbImageSelected;
 @synthesize maximumTrackImage = _maximumTrackImage, maximumTrackImageDisabled = _maximumTrackImageDisabled, maximumTrackImageHighlighted = _maximumTrackImageHighlighted, maximumTrackImageSelected = _maximumTrackImageSelected;
@@ -52,7 +52,7 @@
 }
 
 -(void)setupFromDefaults {
-    NewSlider *defaultSlider = [NewSlider defaultStyle];
+    C4Slider *defaultSlider = [C4Slider defaultStyle];
 
     self.thumbColor = defaultSlider.thumbColor;
     self.minimumTrackColor = defaultSlider.minimumTrackColor;
@@ -357,16 +357,16 @@
 -(void)cancelTracking {
 }
 
-+(NewSlider *)slider:(CGRect)rect {
-    return [[NewSlider alloc] initWithFrame:rect];
++(C4Slider *)slider:(CGRect)rect {
+    return [[C4Slider alloc] initWithFrame:rect];
 }
 
-+(NewSlider *)defaultStyle {
-    return (NewSlider *)[NewSlider appearance];
++(C4Slider *)defaultStyle {
+    return (C4Slider *)[C4Slider appearance];
 }
 
--(NewSlider *)copyWithZone:(NSZone *)zone {
-    NewSlider *slider = [[NewSlider allocWithZone:zone] initWithFrame:self.frame defaults:NO];
+-(C4Slider *)copyWithZone:(NSZone *)zone {
+    C4Slider *slider = [[C4Slider allocWithZone:zone] initWithFrame:self.frame defaults:NO];
     slider.style = self.style;
     return slider;
 }
