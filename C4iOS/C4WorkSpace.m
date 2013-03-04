@@ -7,25 +7,32 @@
 #import "C4WorkSpace.h"
 
 @implementation C4WorkSpace {
-    C4Slider *s;
+    C4Shape *s;
 }
 
 -(void)setup {
-    s = [C4Slider slider:CGRectMake(0,0,400,44)];
-    s.thumbImage = [C4Image imageNamed:@"pyramid"];
-    [s runMethod:@"test:" target:self forEvent:VALUECHANGED];
-    [self.canvas addSubview:s];
+    CGPoint linePoints[2] = {CGPointZero,CGPointMake(0, -200)};
+	s = [C4Shape line:linePoints];
+    s.animationDuration = 0.0f;
+    s.anchorPoint = CGPointMake(0.5, 1);
+    s.center = self.canvas.center;
+    NSDateComponents *dateComponents = [[NSCalendar currentCalendar] components:(NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit) fromDate:[NSDate date]];
+    CGFloat seconds = [dateComponents second];
+    CGFloat currentRotation = seconds / 60.0f * TWO_PI;
+    s.rotation = currentRotation;
+    
+    [self runMethod:@"startRotation" afterDelay:0.4f];
+    [self.canvas addShape:s];
 }
 
--(void)test:(C4Slider *)sender {
-    C4Log(@"%4.2f",sender.value);
+-(void)startRotation {
+    C4Log(@"hi");
+    s.animationDuration = 60.0f;
+    s.animationOptions = REPEAT | LINEAR;
+    s.rotation += TWO_PI;
 }
 
 -(void)touchesBegan {
-    C4Slider *s2 = [s copy];
-    s2.center = self.canvas.center;
-    [self.canvas addSubview:s2];
-    [s runMethod:@"test:" target:self forEvent:VALUECHANGED];
+    [self startRotation];
 }
-
 @end

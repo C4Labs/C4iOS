@@ -16,11 +16,6 @@
 @end
 
 @implementation C4Slider
-@synthesize thumbColor = _thumbColor, minimumTrackColor = _minimumTrackColor, maximumTrackColor = _maximumTrackColor;
-@synthesize thumbImage = _thumbImage, thumbImageDisabled = _thumbImageDisabled, thumbImageSelected = _thumbImageSelected;
-@synthesize maximumTrackImage = _maximumTrackImage, maximumTrackImageDisabled = _maximumTrackImageDisabled, maximumTrackImageHighlighted = _maximumTrackImageHighlighted, maximumTrackImageSelected = _maximumTrackImageSelected;
-@synthesize minimumTrackImage = _minimumTrackImage, minimumTrackImageDisabled = _minimumTrackImageDisabled, minimumTrackImageHighlighted = _minimumTrackImageHighlighted, minimumTrackImageSelected = _minimumTrackImageSelected;
-@synthesize minimumValueImage = _minimumValueImage, maximumValueImage = _maximumValueImage;
 
 #pragma mark style methods
 -(id)init {
@@ -38,13 +33,9 @@
         _UISlider.userInteractionEnabled = NO;
         if(useDefaults) [self setupFromDefaults];
         [self addSubview:_UISlider];
-        [self setupActions];
+        [self setup];
     }
     return self;
-}
-
--(void)setupActions {
-    [self.UISlider addTarget:self action:@selector(touchEvent:) forControlEvents:UIControlEventAllTouchEvents];
 }
 
 -(void)touchEvent:(id)sender {
@@ -312,7 +303,32 @@
     [self.UISlider setMaximumTrackImage:image.UIImage forState:UIControlStateSelected];
 }
 
-#pragma mark other Control Methods (target:action)
+#pragma mark Getter Setter methods for various states
+-(C4Image *)maximumTrackImageForState:(C4ControlState)state {
+    return [C4Image imageWithUIImage:[self.UISlider maximumTrackImageForState:(UIControlState)state]];
+}
+
+-(void)setMaximumTrackImage:(C4Image *)image forState:(C4ControlState)state {
+    [self.UISlider setMaximumTrackImage:image.UIImage forState:(UIControlState)state];
+}
+
+-(C4Image *)minimumTrackImageForState:(C4ControlState)state {
+    return [C4Image imageWithUIImage:[self.UISlider minimumTrackImageForState:(UIControlState)state]];
+}
+
+-(void)setMinimumTrackImage:(C4Image *)image forState:(C4ControlState)state {
+    [self.UISlider setMinimumTrackImage:image.UIImage forState:(UIControlState)state];
+}
+
+-(C4Image *)thumbImageForState:(C4ControlState)state {
+    return [C4Image imageWithUIImage:[self.UISlider thumbImageForState:(UIControlState)state]];
+}
+
+-(void)setThumbImage:(C4Image *)image forState:(C4ControlState)state {
+    [self.UISlider setThumbImage:image.UIImage forState:(UIControlState)state];
+}
+
+#pragma mark other C4UIElement (target:action)
 -(void)runMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
     [self.UISlider addTarget:object action:NSSelectorFromString(methodName) forControlEvents:(UIControlEvents)event];
 }
@@ -320,6 +336,8 @@
 -(void)stopRunningMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
     [self.UISlider removeTarget:object action:NSSelectorFromString(methodName) forControlEvents:(UIControlEvents)event];
 }
+
+#pragma mark Tracking
 
 -(BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
     [self postNotification:@"trackingBegan"];
@@ -382,6 +400,44 @@
 
 -(void)setValue:(CGFloat)value animated:(BOOL)animated {
     [self.UISlider setValue:value animated:animated];
+}
+
+#pragma mark ControlState
+
+-(UIControlState)state {
+    return self.UISlider.state;
+}
+
+-(void)setEnabled:(BOOL)enabled {
+    self.UISlider.enabled = enabled;
+}
+
+-(BOOL)enabled {
+    return self.UISlider.enabled;
+}
+
+-(void)setHighlighted:(BOOL)highlighted {
+    self.UISlider.highlighted = highlighted;
+}
+
+-(BOOL)highlighted {
+    return self.UISlider.highlighted;
+}
+
+-(void)setSelected:(BOOL)selected {
+    self.UISlider.selected = selected;
+}
+
+-(BOOL)selected {
+    return self.UISlider.selected;
+}
+
+-(void)setContentVerticalAlignment:(UIControlContentVerticalAlignment)contentVerticalAlignment {
+    self.UISlider.contentVerticalAlignment = contentVerticalAlignment;
+}
+
+-(void)setContentHorizontalAlignment:(UIControlContentHorizontalAlignment)contentHorizontalAlignment {
+    self.UISlider.contentVerticalAlignment = contentHorizontalAlignment;
 }
 
 @end

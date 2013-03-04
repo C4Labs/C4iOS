@@ -155,6 +155,17 @@ typedef enum C4ControlEvents : NSUInteger {
     ALLEDITINGEVENTS    = 0x000F0000,  // for UITextField
 } C4ControlEvents;
 
+
+typedef enum C4ButtonType : NSUInteger{
+    CUSTOM = 0,
+    ROUNDEDRECT,
+    DETAILDISCLOSURE,
+    INFOLIGHT,
+    INDARK,
+    CONTACTADD,
+} C4ButtonType;
+
+
 typedef enum C4ControlState : NSUInteger {
     NORMAL       = UIControlStateNormal,
     HIGHLIGHTED  = 1 << 0,
@@ -163,17 +174,17 @@ typedef enum C4ControlState : NSUInteger {
 } C4ControlState;
 
 typedef enum C4ControlContentHorizontalAlignment : NSUInteger {
-    HORIZONTALALIGNCENTER = 0,
-    HORIZONTALALIGNLEFT    = 1,
-    HORIZONTALALIGNRIGHT = 2,
-    HORIZONTALALIGNFILL   = 3,
+    HORIZONTALCENTER = 0,
+    HORIZONTALLEFT,
+    HORIZONTALRIGHT,
+    HORIZONTALFILL
 } C4ControlContentHorizontalAlignment;
 
-typedef enum C4ControlVerticalAlignment : NSUInteger {
-    VERTICALALIGNCENTER = 0,
-    VERTICALALIGNLEFT    = 1,
-    VERTICALALIGNRIGHT = 2,
-    VERTICALALIGNFILL   = 3,
+typedef enum C4ControlContentVerticalAlignment : NSUInteger {
+    VERTICALCENTER = 0,
+    VERTICALLEFT,
+    VERTICALRIGHT,
+    VERTICALFILL
 } C4ControlContentVerticalAlignment;
 
 /* `fillRule' values. */

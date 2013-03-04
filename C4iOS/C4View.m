@@ -219,6 +219,7 @@
 
 -(void)setRotation:(CGFloat)rotation {
     if(self.animationDelay == 0.0f) [self _setRotation:@(rotation)];
+    else if(self.animationDuration == 0.0f) [self _setRotation:@(rotation)];
     else [self performSelector:@selector(_setRotation:) withObject:@(rotation) afterDelay:self.animationDelay];
 }
 

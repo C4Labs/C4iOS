@@ -290,4 +290,5 @@
 
 -(id)nullForNilObject:(id)object;
 -(id)nilForNullObject:(id)object;
+
 @end

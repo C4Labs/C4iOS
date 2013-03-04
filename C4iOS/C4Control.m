@@ -223,8 +223,9 @@
 }
 
 -(void)setRotation:(CGFloat)rotation {
-    if(self.animationDuration == 0.0f) [self _setRotation:@(rotation)];
-    else [self performSelector:@selector(_setRotation:) withObject:@(rotation) afterDelay:self.animationDelay];
+    if(self.animationDuration == 0.0f) {
+        [self _setRotation:@(rotation)];
+    }else [self performSelector:@selector(_setRotation:) withObject:@(rotation) afterDelay:self.animationDelay];
 }
 
 -(void)_setRotation:(NSNumber *)rotation {
@@ -844,4 +845,5 @@
     if(object == [NSNull null]) return nil;
     return object;
 }
+
 @end

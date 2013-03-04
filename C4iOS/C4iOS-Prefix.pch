@@ -26,6 +26,7 @@
 #import "C4Gesture.h"
 #import "C4LayerAnimation.h"
 #import "C4MethodDelay.h"
+#import "C4UIElement.h"
 
 //classes
 #import "C4Object.h"
