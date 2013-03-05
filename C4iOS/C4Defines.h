@@ -161,7 +161,7 @@ typedef enum C4ButtonType : NSUInteger{
     ROUNDEDRECT,
     DETAILDISCLOSURE,
     INFOLIGHT,
-    INDARK,
+    INFODARK,
     CONTACTADD,
 } C4ButtonType;
 

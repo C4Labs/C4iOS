@@ -58,6 +58,11 @@
     //NOTE: UISlider only recognizes colors for its UIAppearance (check UISlider.h)
 }
 
+-(void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    self.UISlider.frame = frame;
+}
+
 -(NSDictionary *)style {
     //mutable local styles
     NSMutableDictionary *localStyle = [[NSMutableDictionary alloc] initWithCapacity:0];

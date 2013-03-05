@@ -77,6 +77,9 @@
     };
     
     [C4Control defaultStyle].style = basicStyle;
+    
+    [C4Button defaultStyle].style = basicStyle;
+    [C4Button defaultStyle].tintColor = C4GREY;
 
     [C4Slider defaultStyle].style = basicStyle;
     [C4Slider defaultStyle].thumbTintColor = C4BLUE;

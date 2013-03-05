@@ -41,6 +41,5 @@
 @property(nonatomic,readonly, weak) NSAttributedString *currentAttributedTitle NS_AVAILABLE_IOS(6_0);
 @property(nonatomic,readonly, weak) UIColor *currentTitleColor, *currentTitleShadowColor;
 @property(nonatomic,readonly, weak) C4Image *currentImage, *currentBackgroundImage;
-@property(nonatomic,readonly, weak) C4Label *titleLabel NS_AVAILABLE_IOS(5_0);
 
 @end

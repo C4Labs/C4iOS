@@ -5,23 +5,22 @@
 //
 
 #import "C4WorkSpace.h"
+#import "C4Button.h"
 
 @implementation C4WorkSpace {
-    C4Slider *s1, *s2;
+    C4Button *b1, *b2;
 }
 
 -(void)setup {
-    s1 = [C4Slider slider:CGRectMake(0, 0, 368, 44)];
-    s1.minimumTrackTintColor = C4GREY;
-    [s1 setThumbImage:[C4Image imageNamed:@"pyramid"] forState:HIGHLIGHTED];
-    [s1 setMaximumTrackImage:[C4Image imageNamed:@"lines"] forState:NORMAL];
-    [self.canvas addSubview:s1];
+    b1 = [C4Button buttonWithType:ROUNDEDRECT];
+    [self.canvas addSubview:b1];
+    [b1.UIButton addTarget:self action:@selector(test) forControlEvents:UIControlEventTouchDown];
 }
 
--(void)touchesBegan {
-    s2 = [s1 copy];
-    s2.center = self.canvas.center;
-    [self.canvas addSubview:s2];
+-(void)test {
+    b2 = [b1 copy];
+    b2.center = self.canvas.center;
+    [self.canvas addSubview:b2];
 }
 
 @end
