@@ -12,7 +12,6 @@
 +(C4Slider *)defaultStyle;
 +(C4Slider *)slider:(CGRect)rect;
 -(id)initWithFrame:(CGRect)frame defaults:(BOOL)useDefaults;
--(id)initWithUISlider:(UISlider *)slider;
 
 -(C4Image *)maximumTrackImageForState:(C4ControlState)state;
 -(void)setMaximumTrackImage:(C4Image *)image forState:(C4ControlState)state;

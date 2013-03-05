@@ -33,17 +33,6 @@
     return self;
 }
 
--(id)initWithUISlider:(UISlider *)slider {
-    self = [super initWithFrame:slider.frame];
-    if(self != nil) {
-        _UISlider = [slider copy];
-        _UISlider.userInteractionEnabled = NO;
-        [self addSubview:_UISlider];
-        [self setup];
-    }
-    return self;
-}
-
 -(void)touchEvent:(id)sender {
     sender = sender;
 }

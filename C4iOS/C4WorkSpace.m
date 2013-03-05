@@ -5,29 +5,28 @@
 //
 
 #import "C4WorkSpace.h"
-#import "C4Button.h"
+#import "C4Switch.h"
 
 @implementation C4WorkSpace {
-    C4Button *b1, *b2;
+    C4Switch *s;
+    C4Shape *shape;
 }
 
 -(void)setup {
-    b1 = [C4Button buttonWithType:ROUNDEDRECT];
-    [self.canvas addSubview:b1];
-    [b1.UIButton addTarget:self action:@selector(test) forControlEvents:UIControlEventTouchDown];
+    s = [C4Switch switch];
+    [s runMethod:@"switchShape:" target:self forEvent:VALUECHANGED];
+    [self.canvas addSubview:s];
+        
+    s.center = self.canvas.center;
 }
 
--(void)test {
-    b2 = [b1 copy];
-    b2.origin = CGPointMake(0,50);
-    [b2 setTitle:@"Travis" forState:NORMAL];
-    [self.canvas addSubview:b2];
-    [b2 runMethod:@"randomBackground" target:self forEvent:TOUCHDOWN];
-}
-
--(void)randomBackground {
-    self.canvas.animationDuration = 1.0f;
-    self.canvas.backgroundColor = [UIColor colorWithRed:[C4Math randomInt:100]/100.0f green:[C4Math randomInt:100]/100.0f blue:[C4Math randomInt:100]/100.0f alpha:1.0f];
+-(void)switchShape:(C4Switch *)sender {
+    s.animationDuration = 0.5f;
+    if(sender.isOn) {
+        s.center = CGPointMake([C4Math randomInt:self.canvas.width-200]+100, [C4Math randomInt:self.canvas.height-200]+100);
+    } else {
+        s.center = self.canvas.center;
+    }
 }
 
 @end

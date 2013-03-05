@@ -33,16 +33,6 @@
     return self;
 }
 
-/* don't add this ever...
- creates a:
- CoreAnimation: failed to allocate 3145760 bytes
- wait_fences: failed to receive reply: 10004003
- 
- -(void)drawRect:(CGRect)rect {
- [self.layer display];
- }
- */
-
 -(void)dealloc {
     [[NSRunLoop mainRunLoop] cancelPerformSelectorsWithTarget:self];
     self.backgroundColor = nil;

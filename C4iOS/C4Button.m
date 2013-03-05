@@ -22,6 +22,7 @@
     if(self != nil) {
         _UIButton = button;
         _UIButton.frame = self.frame;
+        _UIButton.layer.masksToBounds = YES;
         [self setupFromDefaults];
         [self addSubview:_UIButton];
         [self setup];
@@ -76,6 +77,11 @@
     self.UIButton.frame = frame;
 }
 
+-(void)setCornerRadius:(CGFloat)cornerRadius {
+    [super setCornerRadius:cornerRadius];
+    [self.UIButton.layer setCornerRadius:cornerRadius];
+}
+
 -(NSDictionary *)style {
     //mutable local styles
     NSMutableDictionary *localStyle = [[NSMutableDictionary alloc] initWithCapacity:0];
@@ -98,7 +104,7 @@
     
     UIButton *b = [newStyle objectForKey:@"button"];
     if(b != nil) {
-        self.frame = b.frame;
+        self.frame = (CGRect){self.origin,b.frame.size};
         [self.UIButton setTitle:[b titleForState:UIControlStateDisabled] forState:UIControlStateDisabled];
         [self.UIButton setTitle:[b titleForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
         [self.UIButton setTitle:[b titleForState:UIControlStateNormal] forState:UIControlStateNormal];

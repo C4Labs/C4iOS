@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		103ECAF416E5668900F1E92F /* UISlider+CopyWithZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 103ECAF316E5668900F1E92F /* UISlider+CopyWithZone.m */; };
 		104C87D416E5480D008EAA37 /* C4AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 104C87D316E5480D008EAA37 /* C4AppDelegate.m */; };
 		ED008D3A15BF5DE80005E8D3 /* lines.png in Resources */ = {isa = PBXBuildFile; fileRef = ED008D3915BF5DE80005E8D3 /* lines.png */; };
 		ED009F9015091FE300086987 /* C4EAGLLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED009F8F15091FE300086987 /* C4EAGLLayer.m */; };
@@ -26,6 +25,7 @@
 		ED0EBA6F16DFEE2300212B03 /* C4Button.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0EBA6E16DFEE2300212B03 /* C4Button.m */; };
 		ED10F17214FC0BDE00B54390 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED10F17114FC0BDE00B54390 /* CoreText.framework */; };
 		ED1253FD15657D810003AFAF /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED1253FC15657D810003AFAF /* Accelerate.framework */; };
+		ED185A5416E66304002528AE /* C4Switch.m in Sources */ = {isa = PBXBuildFile; fileRef = ED185A5316E66304002528AE /* C4Switch.m */; };
 		ED24F2C5157EB62800BC73B5 /* C4Timer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED24F2C4157EB62700BC73B5 /* C4Timer.m */; };
 		ED307680150D2A36001D689C /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED30767F150D2A36001D689C /* CoreMedia.framework */; };
 		ED30769C150D400C001D689C /* C4Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = ED307698150D400C001D689C /* C4Movie.m */; };
@@ -93,8 +93,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		103ECAF216E5668900F1E92F /* UISlider+CopyWithZone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISlider+CopyWithZone.h"; sourceTree = "<group>"; };
-		103ECAF316E5668900F1E92F /* UISlider+CopyWithZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISlider+CopyWithZone.m"; sourceTree = "<group>"; };
 		104C87D216E5480D008EAA37 /* C4AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4AppDelegate.h; sourceTree = "<group>"; };
 		104C87D316E5480D008EAA37 /* C4AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4AppDelegate.m; sourceTree = "<group>"; };
 		10E990AC16B09E8700254D30 /* C4VisualObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4VisualObject.h; sourceTree = "<group>"; };
@@ -125,6 +123,8 @@
 		ED0EBA7016DFF0B000212B03 /* C4UIElement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = C4UIElement.h; sourceTree = "<group>"; };
 		ED10F17114FC0BDE00B54390 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		ED1253FC15657D810003AFAF /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		ED185A5216E66304002528AE /* C4Switch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Switch.h; sourceTree = "<group>"; };
+		ED185A5316E66304002528AE /* C4Switch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Switch.m; sourceTree = "<group>"; };
 		ED1B5BA31514024E0027365F /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		ED24F2C3157EB62700BC73B5 /* C4Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Timer.h; sourceTree = "<group>"; };
 		ED24F2C4157EB62700BC73B5 /* C4Timer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Timer.m; sourceTree = "<group>"; };
@@ -260,8 +260,8 @@
 				ED0EBA5A16DFED6700212B03 /* C4Control.m */,
 				ED0AB05016DE8828004258A7 /* C4Slider.h */,
 				ED786AB316DF03330076C79D /* C4Slider.m */,
-				103ECAF216E5668900F1E92F /* UISlider+CopyWithZone.h */,
-				103ECAF316E5668900F1E92F /* UISlider+CopyWithZone.m */,
+				ED185A5216E66304002528AE /* C4Switch.h */,
+				ED185A5316E66304002528AE /* C4Switch.m */,
 				ED0EBA7016DFF0B000212B03 /* C4UIElement.h */,
 			);
 			name = Experimental;
@@ -596,7 +596,7 @@
 				ED0EBA5F16DFED7A00212B03 /* C4View.m in Sources */,
 				ED0EBA6F16DFEE2300212B03 /* C4Button.m in Sources */,
 				104C87D416E5480D008EAA37 /* C4AppDelegate.m in Sources */,
-				103ECAF416E5668900F1E92F /* UISlider+CopyWithZone.m in Sources */,
+				ED185A5416E66304002528AE /* C4Switch.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
