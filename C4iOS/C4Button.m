@@ -36,11 +36,24 @@
 
 -(void)setupFromDefaults {
     C4Button *defaultButton = [C4Button defaultStyle];
+    self.UIButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Heavy" size:18.0f];
+    [self setTitleColor:C4GREY forState:NORMAL];
+    [self setTitleColor:[UIColor whiteColor] forState:HIGHLIGHTED];
+
     if(self.buttonType == ROUNDEDRECT) {
         self.tintColor = defaultButton.tintColor;
         self.frame = CGRectMake(0,0,132,44);
-        [self setTitle:@"button" forState:NORMAL];
-        [self setTitleColor:C4GREY forState:NORMAL];
+        NSMutableDictionary *attribs = [[NSMutableDictionary alloc] initWithCapacity:0];
+        [attribs addEntriesFromDictionary:@{
+                      NSKernAttributeName:@(-0.25),
+           NSForegroundColorAttributeName:C4GREY
+         }];
+        NSAttributedString *title = [[NSAttributedString alloc] initWithString:@"Button" attributes:attribs];
+        [self setAttributedTitle:title forState:NORMAL];
+        
+        [attribs setValue:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
+        title = [[NSAttributedString alloc] initWithString:@"Button" attributes:attribs];
+        [self setAttributedTitle:title forState:HIGHLIGHTED];
     } else if (self.buttonType == DETAILDISCLOSURE) {
         C4Image *img = [self backgroundImageForState:NORMAL];
         [img colorMonochrome:C4GREY inputIntensity:1.0f];
@@ -69,7 +82,6 @@
     [localStyle addEntriesFromDictionary:@{@"button":self.UIButton}];
     
     NSDictionary *controlStyle = [super style];
-    
     NSMutableDictionary *localAndControlStyle = [NSMutableDictionary dictionaryWithDictionary:localStyle];
     [localAndControlStyle addEntriesFromDictionary:controlStyle];
     
@@ -87,15 +99,15 @@
     UIButton *b = [newStyle objectForKey:@"button"];
     if(b != nil) {
         self.frame = b.frame;
-        [self.UIButton setAttributedTitle:[b attributedTitleForState:UIControlStateDisabled] forState:UIControlStateDisabled];
-        [self.UIButton setAttributedTitle:[b attributedTitleForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
-        [self.UIButton setAttributedTitle:[b attributedTitleForState:UIControlStateNormal] forState:UIControlStateNormal];
-        [self.UIButton setAttributedTitle:[b attributedTitleForState:UIControlStateSelected] forState:UIControlStateSelected];
-
         [self.UIButton setTitle:[b titleForState:UIControlStateDisabled] forState:UIControlStateDisabled];
         [self.UIButton setTitle:[b titleForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
         [self.UIButton setTitle:[b titleForState:UIControlStateNormal] forState:UIControlStateNormal];
         [self.UIButton setTitle:[b titleForState:UIControlStateSelected] forState:UIControlStateSelected];
+
+        [self.UIButton setAttributedTitle:[b attributedTitleForState:UIControlStateDisabled] forState:UIControlStateDisabled];
+        [self.UIButton setAttributedTitle:[b attributedTitleForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
+        [self.UIButton setAttributedTitle:[b attributedTitleForState:UIControlStateNormal] forState:UIControlStateNormal];
+        [self.UIButton setAttributedTitle:[b attributedTitleForState:UIControlStateSelected] forState:UIControlStateSelected];
 
         [self.UIButton setTitleColor:[b titleColorForState:UIControlStateDisabled] forState:UIControlStateDisabled];
         [self.UIButton setTitleColor:[b titleColorForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
@@ -126,10 +138,20 @@
         self.UIButton.adjustsImageWhenHighlighted = b.adjustsImageWhenHighlighted;
         self.UIButton.showsTouchWhenHighlighted = b.showsTouchWhenHighlighted;
         
+        self.UIButton.titleLabel.font = b.titleLabel.font;
+        
         self.UIButton.tintColor = b.tintColor;
 
         b = nil;
     }
+}
+
+-(C4Font *)font {
+    return [C4Font fontWithName:self.UIButton.titleLabel.font.fontName size:self.UIButton.titleLabel.font.pointSize];
+}
+
+-(void)setFont:(C4Font *)font {
+    self.UIButton.titleLabel.font = font.UIFont;
 }
 
 -(NSString *)titleForState:(C4ControlState)state {
@@ -138,6 +160,7 @@
 
 -(void)setTitle:(NSString *)title forState:(C4ControlState)state {
     [self.UIButton setTitle:title forState:(UIControlState)state];
+    [self.UIButton setAttributedTitle:nil forState:(UIControlState)state];
 }
 
 -(UIColor *)titleColorForState:(C4ControlState)state {

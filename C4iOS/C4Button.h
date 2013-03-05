@@ -32,14 +32,15 @@
 -(NSAttributedString *)attributedTitleForState:(C4ControlState)state NS_AVAILABLE_IOS(6_0);
 -(void)setAttributedTitle:(NSAttributedString *)title forState:(C4ControlState)state NS_AVAILABLE_IOS(6_0);
 
+@property (readwrite, nonatomic, weak) C4Font *font;
 @property (readonly, strong, nonatomic) UIButton *UIButton;
-@property(nonatomic) UIEdgeInsets contentEdgeInsets, titleEdgeInsets, imageEdgeInsets;
-@property(nonatomic) BOOL reversesTitleShadowWhenHighlighted, adjustsImageWhenHighlighted,adjustsImageWhenDisabled,showsTouchWhenHighlighted;
-@property(nonatomic,retain) UIColor *tintColor NS_AVAILABLE_IOS(5_0) UI_APPEARANCE_SELECTOR; 
-@property(nonatomic,readonly) C4ButtonType buttonType;
-@property(nonatomic,readonly, weak) NSString *currentTitle;
-@property(nonatomic,readonly, weak) NSAttributedString *currentAttributedTitle NS_AVAILABLE_IOS(6_0);
-@property(nonatomic,readonly, weak) UIColor *currentTitleColor, *currentTitleShadowColor;
-@property(nonatomic,readonly, weak) C4Image *currentImage, *currentBackgroundImage;
+@property (readwrite, nonatomic) UIEdgeInsets contentEdgeInsets, titleEdgeInsets, imageEdgeInsets;
+@property (readwrite, nonatomic) BOOL reversesTitleShadowWhenHighlighted, adjustsImageWhenHighlighted,adjustsImageWhenDisabled,showsTouchWhenHighlighted;
+@property (readwrite, nonatomic, strong) UIColor *tintColor NS_AVAILABLE_IOS(5_0) UI_APPEARANCE_SELECTOR;
+@property (readonly, nonatomic) C4ButtonType buttonType;
+@property (readonly, nonatomic, weak) NSString *currentTitle;
+@property (readonly, nonatomic, weak) NSAttributedString *currentAttributedTitle NS_AVAILABLE_IOS(6_0);
+@property (readonly, nonatomic, weak) UIColor *currentTitleColor, *currentTitleShadowColor;
+@property (readonly, nonatomic, weak) C4Image *currentImage, *currentBackgroundImage;
 
 @end
