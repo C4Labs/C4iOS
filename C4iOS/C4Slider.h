@@ -12,7 +12,6 @@
 +(C4Slider *)defaultStyle;
 +(C4Slider *)slider:(CGRect)rect;
 -(id)initWithFrame:(CGRect)frame defaults:(BOOL)useDefaults;
-+(C4Slider *)sliderWithUISlider:(UISlider *)slider;
 -(id)initWithUISlider:(UISlider *)slider;
 
 -(C4Image *)maximumTrackImageForState:(C4ControlState)state;
@@ -21,19 +20,25 @@
 -(void)setMinimumTrackImage:(C4Image *)image forState:(C4ControlState)state;
 -(C4Image *)thumbImageForState:(C4ControlState)state;
 -(void)setThumbImage:(C4Image *)image forState:(C4ControlState)state;
-
-@property (readonly, weak, nonatomic) C4Image *currentMaximumTrackImage, *currentMinimumTrackImage, *currentThumbImage;
-@property (readwrite, nonatomic, strong) UIColor *thumbColor, *minimumTrackColor, *maximumTrackColor;
-
-//FIXME: Decide whether or not to keep the majority of these properties...
-//NOTE: realized that it's silly to have properties for each "kind" of image... when it comes to buttons there's soooo many options
-@property (readwrite, nonatomic, strong) C4Image *maximumValueImage, *minimumValueImage;
-@property (readwrite, nonatomic, strong) C4Image *thumbImage, *thumbImageHighlighted, *thumbImageDisabled, *thumbImageSelected;
-@property (readwrite, nonatomic, strong) C4Image *minimumTrackImage, *minimumTrackImageHighlighted, *minimumTrackImageDisabled, *minimumTrackImageSelected;
-@property (readwrite, nonatomic, strong) C4Image *maximumTrackImage, *maximumTrackImageHighlighted, *maximumTrackImageDisabled, *maximumTrackImageSelected;
-@property (readonly, nonatomic) UISlider *UISlider;
-@property (readonly, nonatomic) CGFloat value, minimumValue, maximumValue;
 -(void)setValue:(CGFloat)value animated:(BOOL)animated;
-@property (readwrite, nonatomic) NSDictionary *style;
+
+@property (readwrite, nonatomic, strong) UIColor *thumbColor, *minimumTrackColor, *maximumTrackColor;
+@property (readonly, nonatomic) UISlider *UISlider;
+@property (readwrite, nonatomic) CGFloat maximumValue, minimumValue, value;
+
+////////////////
+
+@property(nonatomic, weak) C4Image *minimumValueImage;          // default is nil. image that appears to left of control (e.g. speaker off)
+@property(nonatomic, weak) C4Image *maximumValueImage;          // default is nil. image that appears to right of control (e.g. speaker max)
+
+@property(nonatomic,getter=isContinuous) BOOL continuous;        // if set, value change events are generated any time the value changes due to dragging. default = YES
+
+@property(readwrite, nonatomic,weak) UIColor *minimumTrackTintColor NS_AVAILABLE_IOS(5_0) UI_APPEARANCE_SELECTOR;
+@property(readwrite, nonatomic,weak) UIColor *maximumTrackTintColor NS_AVAILABLE_IOS(5_0) UI_APPEARANCE_SELECTOR;
+@property(readwrite, nonatomic,weak) UIColor *thumbTintColor NS_AVAILABLE_IOS(5_0) UI_APPEARANCE_SELECTOR;
+
+@property(readonly, nonatomic, weak) C4Image* currentThumbImage;
+@property(readonly, nonatomic, weak) C4Image* currentMinimumTrackImage;
+@property(readonly, nonatomic, weak) C4Image* currentMaximumTrackImage;
 
 @end

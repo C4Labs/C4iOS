@@ -7,28 +7,6 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "Yes"
-         filePath = "C4iOS/C4Control.m"
-         timestampString = "384072521.983914"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "227"
-         endingLineNumber = "227"
-         landmarkName = "-setRotation:"
-         landmarkType = "5">
-         <Actions>
-            <BreakpointActionProxy
-               ActionType = "Xcode.BreakpointAction.Log">
-               <ActionContent
-                  message = "%B %H"
-                  conveyanceType = "0">
-               </ActionContent>
-            </BreakpointActionProxy>
-         </Actions>
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "Yes"
          filePath = "C4iOS/C4ShapeLayer.m"
          timestampString = "384072844.290854"
          startingColumnNumber = "9223372036854775807"

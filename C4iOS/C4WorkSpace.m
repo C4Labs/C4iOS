@@ -12,7 +12,9 @@
 
 -(void)setup {
     s1 = [C4Slider slider:CGRectMake(0, 0, 368, 44)];
-    [s1 setThumbImage:[C4Image imageNamed:@"pyramid"] forState:NORMAL];
+    s1.minimumTrackTintColor = C4GREY;
+    [s1 setThumbImage:[C4Image imageNamed:@"pyramid"] forState:HIGHLIGHTED];
+    [s1 setMaximumTrackImage:[C4Image imageNamed:@"lines"] forState:NORMAL];
     [self.canvas addSubview:s1];
 }
 

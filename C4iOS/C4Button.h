@@ -13,59 +13,34 @@
 +(C4Button *)defaultStyle;
 +(C4Button *)buttonWithType:(C4ButtonType)type;
 -(id)initWithType:(C4ButtonType)type;
+
+-(NSString *)titleForState:(C4ControlState)state; // these getters only take a single state value
+-(void)setTitle:(NSString *)title forState:(C4ControlState)state;
+
+-(UIColor *)titleColorForState:(C4ControlState)state;
+-(void)setTitleColor:(UIColor *)color forState:(C4ControlState)state;
+
+-(UIColor *)titleShadowColorForState:(C4ControlState)state;
+-(void)setTitleShadowColor:(UIColor *)color forState:(C4ControlState)state;
+
+-(C4Image *)imageForState:(C4ControlState)state;
+-(void)setImage:(C4Image *)image forState:(C4ControlState)state;
+
+-(C4Image *)backgroundImageForState:(C4ControlState)state;
+-(void)setBackgroundImage:(C4Image *)image forState:(C4ControlState)state;
+
+-(NSAttributedString *)attributedTitleForState:(C4ControlState)state NS_AVAILABLE_IOS(6_0);
+-(void)setAttributedTitle:(NSAttributedString *)title forState:(C4ControlState)state NS_AVAILABLE_IOS(6_0);
+
 @property (readonly, strong, nonatomic) UIButton *UIButton;
-@property (readonly, weak, nonatomic) C4Label *titleLabel;
-@property (readwrite, nonatomic) BOOL reversesTitleShadowWhenHighlighted;
-
-//contentVerticalAlignment  property
-//contentHorizontalAlignment  property
-//
-//tracking  property
-//touchInside  property
-
-//Tasks
-//
-//Configuring the Button Title
-//titleLabel  property
-//reversesTitleShadowWhenHighlighted  property
-//– setTitle:forState:
-//– setAttributedTitle:forState:
-//– setTitleColor:forState:
-//– setTitleShadowColor:forState:
-//– titleColorForState:
-//– titleForState:
-//– attributedTitleForState:
-//– titleShadowColorForState:
-//Configuring Button Presentation
-//adjustsImageWhenHighlighted  property
-//adjustsImageWhenDisabled  property
-//showsTouchWhenHighlighted  property
-//– backgroundImageForState:
-//– imageForState:
-//– setBackgroundImage:forState:
-//– setImage:forState:
-//tintColor  property
-//Configuring Edge Insets
-//contentEdgeInsets  property
-//titleEdgeInsets  property
-//imageEdgeInsets  property
-//Getting the Current State
-//buttonType  property
-//currentTitle  property
-//currentAttributedTitle  property
-//currentTitleColor  property
-//currentTitleShadowColor  property
-//currentImage  property
-//currentBackgroundImage  property
-//imageView  property
-//Getting Dimensions
-//– backgroundRectForBounds:
-//– contentRectForBounds:
-//– titleRectForContentRect:
-//– imageRectForContentRect:
-//Deprecated Properties
-//font  property Deprecated in iOS 3.0
-//lineBreakMode  property Deprecated in iOS 3.0
-//titleShadowOffset  property Deprecated in iOS 3.0
+@property(nonatomic) UIEdgeInsets contentEdgeInsets, titleEdgeInsets, imageEdgeInsets;
+@property(nonatomic) BOOL reversesTitleShadowWhenHighlighted, adjustsImageWhenHighlighted,adjustsImageWhenDisabled,showsTouchWhenHighlighted;
+@property(nonatomic,retain) UIColor *tintColor NS_AVAILABLE_IOS(5_0) UI_APPEARANCE_SELECTOR; 
+@property(nonatomic,readonly) C4ButtonType buttonType;
+@property(nonatomic,readonly, weak) NSString *currentTitle;
+@property(nonatomic,readonly, weak) NSAttributedString *currentAttributedTitle NS_AVAILABLE_IOS(6_0);
+@property(nonatomic,readonly, weak) UIColor *currentTitleColor, *currentTitleShadowColor;
+@property(nonatomic,readonly, weak) C4Image *currentImage, *currentBackgroundImage;
+@property(nonatomic,readonly, weak) C4Label *titleLabel NS_AVAILABLE_IOS(5_0);
 
 @end
