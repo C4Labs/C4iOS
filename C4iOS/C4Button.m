@@ -104,7 +104,6 @@
     
     UIButton *b = [newStyle objectForKey:@"button"];
     if(b != nil) {
-        self.frame = (CGRect){self.origin,b.frame.size};
         [self.UIButton setTitle:[b titleForState:UIControlStateDisabled] forState:UIControlStateDisabled];
         [self.UIButton setTitle:[b titleForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
         [self.UIButton setTitle:[b titleForState:UIControlStateNormal] forState:UIControlStateNormal];

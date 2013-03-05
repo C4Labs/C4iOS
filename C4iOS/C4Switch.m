@@ -25,12 +25,18 @@
     self = [super initWithFrame:frame];
     if(self != nil) {
         _UISwitch = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 63, 23)];
-        [self setFrameFromUISwitch:_UISwitch];
+        self.frame = _UISwitch.frame;
         [self setupFromDefaults];
         [self addSubview:_UISwitch];
         [self setup];
     }
     return self;
+}
+
+-(void)setCenter:(CGPoint)center {
+    center.x = floorf(center.x)+0.5f;
+    center.y = floorf(center.y)+0.5f;
+    [super setCenter:center];
 }
 
 -(void)setupFromDefaults {
@@ -123,13 +129,11 @@
 -(void)setStyle:(NSDictionary *)newStyle {
     self.tintColor = self.thumbTintColor = self.onTintColor = nil;
     self.offImage = self.onImage = nil;
-    self.on = NO;
     
     [super setStyle:newStyle];
     
     UISwitch *s = [newStyle objectForKey:@"switch"];
     if(s != nil) {
-        self.frame = (CGRect){self.origin,s.frame.size};
         _UISwitch.tintColor = s.tintColor;
         _UISwitch.onTintColor = s.onTintColor;
         _UISwitch.thumbTintColor = s.thumbTintColor;
@@ -139,10 +143,12 @@
     }
 }
 
--(void)setFrameFromUISwitch:(UISwitch *)s {
-    CGRect frame = s.frame;
-    self.frame = frame;
-    _UISwitch.center = CGPointMake(floorf(self.width/2),floorf(self.height/2));
+-(void)setFrame:(CGRect)frame {
+    CGPoint origin = frame.origin;
+    origin.x = floorf(origin.x);
+    origin.y = floorf(origin.y);
+    frame.origin = origin;
+    [super setFrame:frame];
 }
 
 #pragma mark other C4UIElement (target:action)
