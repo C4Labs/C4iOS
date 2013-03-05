@@ -21,11 +21,7 @@
     self = [super init];
     if(self != nil) {
         self.name = @"shapeLayer";
-//        self.strokeColor = [C4Shape defaultStyle].strokeColor.CGColor;
-//        self.fillColor = [C4Shape defaultStyle].fillColor.CGColor;
-//        self.lineWidth = [C4Shape defaultStyle].lineWidth;
-//        self.repeatCount = [C4Shape defaultStyle].repeatCount;
-//        self.autoreverses = NO;
+        _animationDuration = 0.0f;
         _currentAnimationEasing = [[NSString alloc] init];
         _currentAnimationEasing = (NSString *)kCAMediaTimingFunctionEaseInEaseOut;
         _allowsInteraction = NO;
@@ -34,10 +30,12 @@
         /* create basic attributes after setting animation attributes above */
         CGPathRef newPath = CGPathCreateWithRect(CGRectZero, nil);
         self.path = newPath;
+        [self setActions:@{@"animateRotation":[NSNull null]}];
+
         /* makes sure there are no extraneous animation keys lingering about after init */
         [self removeAllAnimations];
         CFRelease(newPath);
-    }
+   }
     return self;
 }
 
@@ -167,6 +165,15 @@
     }
     [self addAnimation:animation forKey:@"animateStrokeStart"];
     [CATransaction commit];
+}
+
+- (id<CAAction>)actionForKey:(NSString *)event {
+    if([event isEqualToString:@"transform.rotation.z"]) {
+        CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:event];
+        [animation setDuration:0.0f];
+        return animation;
+    }
+    return nil;
 }
 
 #pragma mark Blocked Methods
@@ -373,6 +380,7 @@
             [self removeAnimationForKey:@"animateRotationZ"];
         }];
     }
+    C4Log(@"%4.2f",animation.duration);
     [self addAnimation:animation forKey:@"animateRotationZ"];
     [CATransaction commit];
 }

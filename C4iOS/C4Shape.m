@@ -25,7 +25,6 @@
     self = [super initWithFrame:frame];
     if(self != nil) {
         _initialized = NO;
-        
         self.animationOptions = BEGINCURRENT | EASEINOUT;
         [self willChangeShape];
         self.style = [C4Shape defaultStyle].style;

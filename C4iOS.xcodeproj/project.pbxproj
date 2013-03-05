@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		103ECAF416E5668900F1E92F /* UISlider+CopyWithZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 103ECAF316E5668900F1E92F /* UISlider+CopyWithZone.m */; };
+		104C87D416E5480D008EAA37 /* C4AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 104C87D316E5480D008EAA37 /* C4AppDelegate.m */; };
 		ED008D3A15BF5DE80005E8D3 /* lines.png in Resources */ = {isa = PBXBuildFile; fileRef = ED008D3915BF5DE80005E8D3 /* lines.png */; };
 		ED009F9015091FE300086987 /* C4EAGLLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED009F8F15091FE300086987 /* C4EAGLLayer.m */; };
 		ED009F9415091FFD00086987 /* C4GL.m in Sources */ = {isa = PBXBuildFile; fileRef = ED009F9315091FFD00086987 /* C4GL.m */; };
@@ -21,7 +23,6 @@
 		ED0EBA6916DFED9B00212B03 /* C4_LaunchImage_iPhone-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ED0EBA6316DFED9B00212B03 /* C4_LaunchImage_iPhone-Landscape~ipad.png */; };
 		ED0EBA6A16DFED9B00212B03 /* C4_LaunchImage_iPhone-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ED0EBA6416DFED9B00212B03 /* C4_LaunchImage_iPhone-Portrait@2x~ipad.png */; };
 		ED0EBA6B16DFED9B00212B03 /* C4_LaunchImage_iPhone-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ED0EBA6516DFED9B00212B03 /* C4_LaunchImage_iPhone-Portrait~ipad.png */; };
-		ED0EBA6C16DFEDC500212B03 /* C4AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ED50C89514EAC2010040D844 /* C4AppDelegate.m */; };
 		ED0EBA6F16DFEE2300212B03 /* C4Button.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0EBA6E16DFEE2300212B03 /* C4Button.m */; };
 		ED10F17214FC0BDE00B54390 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED10F17114FC0BDE00B54390 /* CoreText.framework */; };
 		ED1253FD15657D810003AFAF /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED1253FC15657D810003AFAF /* Accelerate.framework */; };
@@ -92,6 +93,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		103ECAF216E5668900F1E92F /* UISlider+CopyWithZone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISlider+CopyWithZone.h"; sourceTree = "<group>"; };
+		103ECAF316E5668900F1E92F /* UISlider+CopyWithZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISlider+CopyWithZone.m"; sourceTree = "<group>"; };
+		104C87D216E5480D008EAA37 /* C4AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4AppDelegate.h; sourceTree = "<group>"; };
+		104C87D316E5480D008EAA37 /* C4AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4AppDelegate.m; sourceTree = "<group>"; };
 		10E990AC16B09E8700254D30 /* C4VisualObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4VisualObject.h; sourceTree = "<group>"; };
 		ED008D3915BF5DE80005E8D3 /* lines.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lines.png; sourceTree = "<group>"; };
 		ED009F8E15091FE300086987 /* C4EAGLLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4EAGLLayer.h; sourceTree = "<group>"; };
@@ -150,8 +155,6 @@
 		ED50C88F14EAC2010040D844 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		ED50C89114EAC2010040D844 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		ED50C89314EAC2010040D844 /* C4iOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "C4iOS-Prefix.pch"; sourceTree = "<group>"; };
-		ED50C89414EAC2010040D844 /* C4AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = C4AppDelegate.h; path = /Users/moi/Development/C4iOS/C4iOS/C4AppDelegate.h; sourceTree = "<absolute>"; };
-		ED50C89514EAC2010040D844 /* C4AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = C4AppDelegate.m; path = /Users/moi/Development/C4iOS/C4iOS/C4AppDelegate.m; sourceTree = "<absolute>"; };
 		ED50C89B14EAC2010040D844 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/C4Canvas.xib; sourceTree = "<group>"; };
 		ED50C8C114EAC4A40040D844 /* C4Defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Defines.h; sourceTree = "<group>"; };
 		ED50C8C214EAC4A40040D844 /* C4Imports.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Imports.h; sourceTree = "<group>"; };
@@ -257,6 +260,8 @@
 				ED0EBA5A16DFED6700212B03 /* C4Control.m */,
 				ED0AB05016DE8828004258A7 /* C4Slider.h */,
 				ED786AB316DF03330076C79D /* C4Slider.m */,
+				103ECAF216E5668900F1E92F /* UISlider+CopyWithZone.h */,
+				103ECAF316E5668900F1E92F /* UISlider+CopyWithZone.m */,
 				ED0EBA7016DFF0B000212B03 /* C4UIElement.h */,
 			);
 			name = Experimental;
@@ -332,8 +337,8 @@
 				ED50C88D14EAC2010040D844 /* C4iOS-Info.plist */,
 				ED50C88E14EAC2010040D844 /* InfoPlist.strings */,
 				ED50C89114EAC2010040D844 /* main.m */,
-				ED50C89414EAC2010040D844 /* C4AppDelegate.h */,
-				ED50C89514EAC2010040D844 /* C4AppDelegate.m */,
+				104C87D216E5480D008EAA37 /* C4AppDelegate.h */,
+				104C87D316E5480D008EAA37 /* C4AppDelegate.m */,
 				ED5FB04F15B38894002987EA /* C4AssertionHandler.h */,
 				ED5FB05015B38894002987EA /* C4AssertionHandler.m */,
 				ED50C8C114EAC4A40040D844 /* C4Defines.h */,
@@ -589,8 +594,9 @@
 				ED8CB73216DFEC6D000A2D59 /* UIColor+CIColorFix.m in Sources */,
 				ED0EBA5C16DFED6700212B03 /* C4Control.m in Sources */,
 				ED0EBA5F16DFED7A00212B03 /* C4View.m in Sources */,
-				ED0EBA6C16DFEDC500212B03 /* C4AppDelegate.m in Sources */,
 				ED0EBA6F16DFEE2300212B03 /* C4Button.m in Sources */,
+				104C87D416E5480D008EAA37 /* C4AppDelegate.m in Sources */,
+				103ECAF416E5668900F1E92F /* UISlider+CopyWithZone.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

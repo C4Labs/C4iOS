@@ -38,6 +38,17 @@
     return self;
 }
 
+-(id)initWithUISlider:(UISlider *)slider {
+    self = [super initWithFrame:slider.frame];
+    if(self != nil) {
+        _UISlider = [slider copy];
+        _UISlider.userInteractionEnabled = NO;
+        [self addSubview:_UISlider];
+        [self setup];
+    }
+    return self;
+}
+
 -(void)touchEvent:(id)sender {
     sender = sender;
 }
@@ -55,24 +66,28 @@
 -(NSDictionary *)style {
     //mutable local styles
     NSMutableDictionary *localStyle = [[NSMutableDictionary alloc] initWithCapacity:0];
-    if(self.usesMaxiumumTrackImage) [localStyle addEntriesFromDictionary:@{@"maximumTrackImage":self.maximumTrackImage}];
-    if(self.usesMaxiumumTrackImageDisabled) [localStyle addEntriesFromDictionary:@{@"maximumTrackImageDisabled":self.maximumTrackImageDisabled}];
-    if(self.usesMaxiumumTrackImageHighlighted) [localStyle addEntriesFromDictionary:@{@"maximumTrackImageHighlighted":self.maximumTrackImageHighlighted}];
-    if(self.usesMaxiumumTrackImageSelected) [localStyle addEntriesFromDictionary:@{@"maximumTrackImageSelected":self.maximumTrackImageSelected}];
-
-    if(self.usesMiniumumTrackImage) [localStyle addEntriesFromDictionary:@{@"minimumTrackImage":self.minimumTrackImage}];
-    if(self.usesMiniumumTrackImageDisabled) [localStyle addEntriesFromDictionary:@{@"minimumTrackImageDisabled":self.minimumTrackImageDisabled}];
-    if(self.usesMiniumumTrackImageHighlighted) [localStyle addEntriesFromDictionary:@{@"minimumTrackImageHighlighted":self.minimumTrackImageHighlighted}];
-    if(self.usesMiniumumTrackImageSelected) [localStyle addEntriesFromDictionary:@{@"minimumTrackImageSelected":self.minimumTrackImageSelected}];
-
-    if(self.usesThumbImage) [localStyle addEntriesFromDictionary:@{@"thumbImage":self.thumbImage}];
-    if(self.usesThumbImageDisabled) [localStyle addEntriesFromDictionary:@{@"thumbImageDisabled":self.thumbImageDisabled}];
-    if(self.usesThumbImageHighlighted) [localStyle addEntriesFromDictionary:@{@"thumbImageHighlighted":self.thumbImageHighlighted}];
-    if(self.usesThumbImageSelected) [localStyle addEntriesFromDictionary:@{@"thumbImageSelected":self.thumbImageSelected}];
-
-    [localStyle addEntriesFromDictionary:@{@"thumbColor" : self.thumbColor}];
-    [localStyle addEntriesFromDictionary:@{@"maximumTrackColor" : self.maximumTrackColor}];
-    [localStyle addEntriesFromDictionary:@{@"minimumTrackColor" : self.minimumTrackColor}];
+    [localStyle addEntriesFromDictionary:@{@"slider":self.UISlider}];
+//    [localStyle addEntriesFromDictionary:@{@"maximumTrackImage":[self.UISlider maximumTrackImageForState:UIControlStateNormal]}];
+//    [localStyle addEntriesFromDictionary:@{@"maximumTrackImageDisabled":[self.UISlider maximumTrackImageForState:UIControlStateDisabled]}];
+//    [localStyle addEntriesFromDictionary:@{@"maximumTrackImageHighlighted":[self.UISlider maximumTrackImageForState:UIControlStateHighlighted]}];
+//    [localStyle addEntriesFromDictionary:@{@"maximumTrackImageSelected":[self.UISlider maximumTrackImageForState:UIControlStateSelected]}];
+//
+//    [localStyle addEntriesFromDictionary:@{@"minimumTrackImage":[self.UISlider minimumTrackImageForState:UIControlStateNormal]}];
+//    [localStyle addEntriesFromDictionary:@{@"minimumTrackImageDisabled":[self.UISlider minimumTrackImageForState:UIControlStateDisabled]}];
+//    [localStyle addEntriesFromDictionary:@{@"minimumTrackImageHighlighted":[self.UISlider minimumTrackImageForState:UIControlStateHighlighted]}];
+//    [localStyle addEntriesFromDictionary:@{@"minimumTrackImageSelected":[self.UISlider minimumTrackImageForState:UIControlStateSelected]}];
+//
+//    [localStyle addEntriesFromDictionary:@{@"thumbImage":[self.UISlider thumbImageForState:UIControlStateNormal]}];
+//    [localStyle addEntriesFromDictionary:@{@"thumbImageDisabled":[self.UISlider thumbImageForState:UIControlStateDisabled]}];
+//    [localStyle addEntriesFromDictionary:@{@"thumbImageHighlighted":[self.UISlider thumbImageForState:UIControlStateHighlighted]}];
+//    [localStyle addEntriesFromDictionary:@{@"thumbImageSelected":[self.UISlider thumbImageForState:UIControlStateSelected]}];
+//    
+//    [localStyle addEntriesFromDictionary:@{@"maximumValueImage":[self.UISlider maximumValueImage]}];
+//    [localStyle addEntriesFromDictionary:@{@"minimumValueImage":[self.UISlider minimumValueImage]}];
+//
+//    [localStyle addEntriesFromDictionary:@{@"thumbColor" : self.thumbColor}];
+//    [localStyle addEntriesFromDictionary:@{@"maximumTrackColor" : self.maximumTrackColor}];
+//    [localStyle addEntriesFromDictionary:@{@"minimumTrackColor" : self.minimumTrackColor}];
 
     NSDictionary *controlStyle = [super style];
     
@@ -106,79 +121,30 @@
 -(void)setStyle:(NSDictionary *)newStyle {
     [self clearStyle];
     [super setStyle:newStyle];
-    // FIXME: These two loops work, but don't differentiate between "types" of objects
-    // ... they will NOT, for instance, pull a value out of an NSNumber
-    //    for(NSString *propertyName in self.localStylePropertyNames) {
-    //        if([styleKeys containsObject:propertyName]) {
-    //            SEL selector = [self setterSelectorFromPropertyName:propertyName];
-    //            if(selector != nil && [styleKeys containsObject:propertyName]){
-    //                objc_msgSend(self,selector,[style objectForKey:propertyName]);
-    //            }
-    //        }
-    //    }
-    //
-    //    for(NSString *propertyName in self.controlStylePropertyNames) {
-    //        if([styleKeys containsObject:propertyName]) {
-    //            SEL selector = [self setterSelectorFromPropertyName:propertyName];
-    //            if(selector != nil && [styleKeys containsObject:propertyName]){
-    //                objc_msgSend(self,selector,[style objectForKey:propertyName]);
-    //            }
-    //        }
-    //    }
-    
-    NSString *key;
 
-    key = @"thumbColor";
-    if([newStyle objectForKey:key] != nil) self.thumbColor = [newStyle objectForKey:key];
+    UISlider *s = [newStyle objectForKey:@"slider"];
+    [self.UISlider setMaximumTrackImage:[s maximumTrackImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
+    [self.UISlider setMaximumTrackImage:[s maximumTrackImageForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
+    [self.UISlider setMaximumTrackImage:[s maximumTrackImageForState:UIControlStateNormal] forState:UIControlStateNormal];
+    [self.UISlider setMaximumTrackImage:[s maximumTrackImageForState:UIControlStateSelected] forState:UIControlStateSelected];
 
-    key = @"minimumTrackColor";
-    if([newStyle objectForKey:key] != nil)self.minimumTrackColor = [newStyle objectForKey:key];
-    
-    key = @"maximumTrackColor";
-    if([newStyle objectForKey:key] != nil)self.maximumTrackColor = [newStyle objectForKey:key];
+    [self.UISlider setMinimumTrackImage:[s minimumTrackImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
+    [self.UISlider setMinimumTrackImage:[s minimumTrackImageForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
+    [self.UISlider setMinimumTrackImage:[s minimumTrackImageForState:UIControlStateNormal] forState:UIControlStateNormal];
+    [self.UISlider setMinimumTrackImage:[s minimumTrackImageForState:UIControlStateSelected] forState:UIControlStateSelected];
 
-    // Local Style Values
-    key = @"minimumValueImage";
-    if([newStyle objectForKey:key] != nil)self.minimumValueImage = [newStyle objectForKey:key];
-    
-    key = @"maximumValueImage";
-    if([newStyle objectForKey:key] != nil)self.maximumValueImage = [newStyle objectForKey:key];
-    
-    key = @"thumbImage";
-    if([newStyle objectForKey:key] != nil)self.thumbImage = [newStyle objectForKey:key];
-    
-    key = @"thumbImageDisabled";
-    if([newStyle objectForKey:key] != nil)self.thumbImageDisabled = [newStyle objectForKey:key];
+    [self.UISlider setThumbImage:[s thumbImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
+    [self.UISlider setThumbImage:[s thumbImageForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
+    [self.UISlider setThumbImage:[s thumbImageForState:UIControlStateNormal] forState:UIControlStateNormal];
+    [self.UISlider setThumbImage:[s thumbImageForState:UIControlStateSelected] forState:UIControlStateSelected];
 
-    key = @"thumbImageSelected";
-    if([newStyle objectForKey:key] != nil)self.thumbImageSelected = [newStyle objectForKey:key];
+    [self.UISlider setMaximumValueImage:[s maximumValueImage]];
+    [self.UISlider setMinimumValueImage:[s minimumValueImage]];
     
-    key = @"thumbImageHighlighted";
-    if([newStyle objectForKey:key] != nil)self.thumbImageHighlighted = [newStyle objectForKey:key];
-
-    key = @"minimumTrackImage";
-    if([newStyle objectForKey:key] != nil)self.minimumTrackImage = [newStyle objectForKey:key];
-    
-    key = @"minimumTrackImageHighlighted";
-    if([newStyle objectForKey:key] != nil)self.minimumTrackImageHighlighted = [newStyle objectForKey:key];
-        
-    key = @"minimumTrackImageDisabled";
-    if([newStyle objectForKey:key] != nil)self.minimumTrackImageDisabled = [newStyle objectForKey:key];
-    
-    key = @"minimumTrackImageSelected";
-    if([newStyle objectForKey:key] != nil)self.minimumTrackImageSelected = [newStyle objectForKey:key];
-    
-    key = @"maximumTrackImage";
-    if([newStyle objectForKey:key] != nil)self.minimumTrackImage = [newStyle objectForKey:key];
-    
-    key = @"maximumTrackImageHighlighted";
-    self.maximumTrackImageHighlighted = [newStyle objectForKey:key];
-    
-    key = @"maximumTrackImageDisabled";
-    if([newStyle objectForKey:key] != nil)self.maximumTrackImageDisabled = [newStyle objectForKey:key];
-    
-    key = @"maximumTrackImageSelected";
-    if([newStyle objectForKey:key] != nil)self.maximumTrackImageSelected = [newStyle objectForKey:key];
+    [self.UISlider setThumbTintColor:[s thumbTintColor]];
+    [self.UISlider setMaximumTrackTintColor:[s maximumTrackTintColor]];
+    [self.UISlider setMinimumTrackTintColor:[s minimumTrackTintColor]];
+    s = nil;
 }
 
 -(void)setMinimumValueImage:(C4Image *)image {
