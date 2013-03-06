@@ -24,7 +24,7 @@
 -(id)initWithFrame:(CGRect)frame defaults:(BOOL)useDefaults {
     self = [super initWithFrame:frame];
     if(self != nil) {
-        _UISlider = [[UISlider alloc] initWithFrame:self.frame];
+        _UISlider = [[UISlider alloc] initWithFrame:self.bounds];
         _UISlider.userInteractionEnabled = NO;
         if(useDefaults) [self setupFromDefaults];
         [self addSubview:_UISlider];
@@ -74,20 +74,28 @@
 
     UISlider *s = [newStyle objectForKey:@"slider"];
     if(s != nil) {
-        [self.UISlider setMaximumTrackImage:[s maximumTrackImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
-        [self.UISlider setMaximumTrackImage:[s maximumTrackImageForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
-        [self.UISlider setMaximumTrackImage:[s maximumTrackImageForState:UIControlStateNormal] forState:UIControlStateNormal];
-        [self.UISlider setMaximumTrackImage:[s maximumTrackImageForState:UIControlStateSelected] forState:UIControlStateSelected];
+        
+        UIControlState state[4] = {UIControlStateDisabled, UIControlStateHighlighted, UIControlStateNormal, UIControlStateSelected};
+        for(int i = 0; i < 4; i++) {
+            [self.UISlider setMaximumTrackImage:[s maximumTrackImageForState:state[i]] forState:state[i]];
+            [self.UISlider setMinimumTrackImage:[s minimumTrackImageForState:state[i]] forState:state[i]];
+            [self.UISlider setThumbImage:[s thumbImageForState:state[i]] forState:state[i]];
+        }
 
-        [self.UISlider setMinimumTrackImage:[s minimumTrackImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
-        [self.UISlider setMinimumTrackImage:[s minimumTrackImageForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
-        [self.UISlider setMinimumTrackImage:[s minimumTrackImageForState:UIControlStateNormal] forState:UIControlStateNormal];
-        [self.UISlider setMinimumTrackImage:[s minimumTrackImageForState:UIControlStateSelected] forState:UIControlStateSelected];
+//        [self.UISlider setMaximumTrackImage:[s maximumTrackImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
+//        [self.UISlider setMaximumTrackImage:[s maximumTrackImageForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
+//        [self.UISlider setMaximumTrackImage:[s maximumTrackImageForState:UIControlStateNormal] forState:UIControlStateNormal];
+//        [self.UISlider setMaximumTrackImage:[s maximumTrackImageForState:UIControlStateSelected] forState:UIControlStateSelected];
 
-        [self.UISlider setThumbImage:[s thumbImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
-        [self.UISlider setThumbImage:[s thumbImageForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
-        [self.UISlider setThumbImage:[s thumbImageForState:UIControlStateNormal] forState:UIControlStateNormal];
-        [self.UISlider setThumbImage:[s thumbImageForState:UIControlStateSelected] forState:UIControlStateSelected];
+//        [self.UISlider setMinimumTrackImage:[s minimumTrackImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
+//        [self.UISlider setMinimumTrackImage:[s minimumTrackImageForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
+//        [self.UISlider setMinimumTrackImage:[s minimumTrackImageForState:UIControlStateNormal] forState:UIControlStateNormal];
+//        [self.UISlider setMinimumTrackImage:[s minimumTrackImageForState:UIControlStateSelected] forState:UIControlStateSelected];
+
+//        [self.UISlider setThumbImage:[s thumbImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
+//        [self.UISlider setThumbImage:[s thumbImageForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
+//        [self.UISlider setThumbImage:[s thumbImageForState:UIControlStateNormal] forState:UIControlStateNormal];
+//        [self.UISlider setThumbImage:[s thumbImageForState:UIControlStateSelected] forState:UIControlStateSelected];
 
         [self.UISlider setMaximumValueImage:[s maximumValueImage]];
         [self.UISlider setMinimumValueImage:[s minimumValueImage]];
@@ -179,7 +187,7 @@
     [self.UISlider setThumbImage:image.UIImage forState:(UIControlState)state];
 }
 
-#pragma mark other C4UIElement (target:action)
+#pragma mark C4UIElement (target:action)
 -(void)runMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
     [self.UISlider addTarget:object action:NSSelectorFromString(methodName) forControlEvents:(UIControlEvents)event];
 }
@@ -305,6 +313,14 @@
 
 -(void)setContentHorizontalAlignment:(UIControlContentHorizontalAlignment)contentHorizontalAlignment {
     self.UISlider.contentVerticalAlignment = contentHorizontalAlignment;
+}
+
+#pragma mark isEqual
+
+-(BOOL)isEqual:(id)object {
+    if([object isKindOfClass:[UISlider class]]) return [self.UISlider isEqual:object];
+    else if([object isKindOfClass:[self class]]) return [self.UISlider isEqual:((C4Slider *)object).UISlider];
+    return NO;
 }
 
 @end

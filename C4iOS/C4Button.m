@@ -21,7 +21,7 @@
     self = [super initWithFrame:button.frame];
     if(self != nil) {
         _UIButton = button;
-        _UIButton.frame = self.frame;
+        _UIButton.frame = self.bounds;
         _UIButton.layer.masksToBounds = YES;
         [self setupFromDefaults];
         [self addSubview:_UIButton];
@@ -104,35 +104,46 @@
     
     UIButton *b = [newStyle objectForKey:@"button"];
     if(b != nil) {
-        [self.UIButton setTitle:[b titleForState:UIControlStateDisabled] forState:UIControlStateDisabled];
-        [self.UIButton setTitle:[b titleForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
-        [self.UIButton setTitle:[b titleForState:UIControlStateNormal] forState:UIControlStateNormal];
-        [self.UIButton setTitle:[b titleForState:UIControlStateSelected] forState:UIControlStateSelected];
-
-        [self.UIButton setAttributedTitle:[b attributedTitleForState:UIControlStateDisabled] forState:UIControlStateDisabled];
-        [self.UIButton setAttributedTitle:[b attributedTitleForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
-        [self.UIButton setAttributedTitle:[b attributedTitleForState:UIControlStateNormal] forState:UIControlStateNormal];
-        [self.UIButton setAttributedTitle:[b attributedTitleForState:UIControlStateSelected] forState:UIControlStateSelected];
-
-        [self.UIButton setTitleColor:[b titleColorForState:UIControlStateDisabled] forState:UIControlStateDisabled];
-        [self.UIButton setTitleColor:[b titleColorForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
-        [self.UIButton setTitleColor:[b titleColorForState:UIControlStateNormal] forState:UIControlStateNormal];
-        [self.UIButton setTitleColor:[b titleColorForState:UIControlStateSelected] forState:UIControlStateSelected];
-
-        [self.UIButton setTitleShadowColor:[b titleShadowColorForState:UIControlStateDisabled] forState:UIControlStateDisabled];
-        [self.UIButton setTitleShadowColor:[b titleShadowColorForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
-        [self.UIButton setTitleShadowColor:[b titleShadowColorForState:UIControlStateNormal] forState:UIControlStateNormal];
-        [self.UIButton setTitleShadowColor:[b titleShadowColorForState:UIControlStateSelected] forState:UIControlStateSelected];
         
-        [self.UIButton setImage:[b imageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
-        [self.UIButton setImage:[b imageForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
-        [self.UIButton setImage:[b imageForState:UIControlStateNormal] forState:UIControlStateNormal];
-        [self.UIButton setImage:[b imageForState:UIControlStateSelected] forState:UIControlStateSelected];
+        UIControlState state[4] = {UIControlStateDisabled, UIControlStateHighlighted, UIControlStateNormal, UIControlStateSelected};
+        for(int i = 0; i < 4; i++) {
+            [self.UIButton setTitle:[b titleForState:state[i]] forState:state[i]];
+            [self.UIButton setAttributedTitle:[b attributedTitleForState:state[i]] forState:state[i]];
+            [self.UIButton setTitleColor:[b titleColorForState:state[i]] forState:state[i]];
+            [self.UIButton setTitleShadowColor:[b titleShadowColorForState:state[i]] forState:state[i]];
+            [self.UIButton setImage:[b imageForState:state[i]] forState:state[i]];
+            [self.UIButton setBackgroundImage:[b backgroundImageForState:state[i]] forState:state[i]];
+        }
         
-        [self.UIButton setBackgroundImage:[b backgroundImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
-        [self.UIButton setBackgroundImage:[b backgroundImageForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
-        [self.UIButton setBackgroundImage:[b backgroundImageForState:UIControlStateNormal] forState:UIControlStateNormal];
-        [self.UIButton setBackgroundImage:[b backgroundImageForState:UIControlStateSelected] forState:UIControlStateSelected];
+//        [self.UIButton setTitle:[b titleForState:UIControlStateDisabled] forState:UIControlStateDisabled];
+//        [self.UIButton setTitle:[b titleForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
+//        [self.UIButton setTitle:[b titleForState:UIControlStateNormal] forState:UIControlStateNormal];
+//        [self.UIButton setTitle:[b titleForState:UIControlStateSelected] forState:UIControlStateSelected];
+
+//        [self.UIButton setAttributedTitle:[b attributedTitleForState:UIControlStateDisabled] forState:UIControlStateDisabled];
+//        [self.UIButton setAttributedTitle:[b attributedTitleForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
+//        [self.UIButton setAttributedTitle:[b attributedTitleForState:UIControlStateNormal] forState:UIControlStateNormal];
+//        [self.UIButton setAttributedTitle:[b attributedTitleForState:UIControlStateSelected] forState:UIControlStateSelected];
+
+//        [self.UIButton setTitleColor:[b titleColorForState:UIControlStateDisabled] forState:UIControlStateDisabled];
+//        [self.UIButton setTitleColor:[b titleColorForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
+//        [self.UIButton setTitleColor:[b titleColorForState:UIControlStateNormal] forState:UIControlStateNormal];
+//        [self.UIButton setTitleColor:[b titleColorForState:UIControlStateSelected] forState:UIControlStateSelected];
+
+//        [self.UIButton setTitleShadowColor:[b titleShadowColorForState:UIControlStateDisabled] forState:UIControlStateDisabled];
+//        [self.UIButton setTitleShadowColor:[b titleShadowColorForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
+//        [self.UIButton setTitleShadowColor:[b titleShadowColorForState:UIControlStateNormal] forState:UIControlStateNormal];
+//        [self.UIButton setTitleShadowColor:[b titleShadowColorForState:UIControlStateSelected] forState:UIControlStateSelected];
+        
+//        [self.UIButton setImage:[b imageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
+//        [self.UIButton setImage:[b imageForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
+//        [self.UIButton setImage:[b imageForState:UIControlStateNormal] forState:UIControlStateNormal];
+//        [self.UIButton setImage:[b imageForState:UIControlStateSelected] forState:UIControlStateSelected];
+        
+//        [self.UIButton setBackgroundImage:[b backgroundImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
+//        [self.UIButton setBackgroundImage:[b backgroundImageForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
+//        [self.UIButton setBackgroundImage:[b backgroundImageForState:UIControlStateNormal] forState:UIControlStateNormal];
+//        [self.UIButton setBackgroundImage:[b backgroundImageForState:UIControlStateSelected] forState:UIControlStateSelected];
         
         self.UIButton.contentEdgeInsets = b.contentEdgeInsets;
         self.UIButton.imageEdgeInsets = b.imageEdgeInsets;
@@ -384,5 +395,14 @@
 -(void)setContentHorizontalAlignment:(UIControlContentHorizontalAlignment)contentHorizontalAlignment {
     self.UIButton.contentVerticalAlignment = contentHorizontalAlignment;
 }
+
+#pragma mark isEqual
+
+-(BOOL)isEqual:(id)object {
+    if([object isKindOfClass:[UIButton class]]) return [self.UIButton isEqual:object];
+    else if([object isKindOfClass:[self class]]) return [self.UIButton isEqual:((C4Button *)object).UIButton];
+    return NO;
+}
+
 
 @end

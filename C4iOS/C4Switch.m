@@ -24,7 +24,7 @@
 -(id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if(self != nil) {
-        _UISwitch = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 63, 23)];
+        _UISwitch = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 63, 23)];//not sure if i really need this
         self.frame = _UISwitch.frame;
         [self setupFromDefaults];
         [self addSubview:_UISwitch];
@@ -159,4 +159,13 @@
 -(void)stopRunningMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
     [self.UISwitch removeTarget:object action:NSSelectorFromString(methodName) forControlEvents:(UIControlEvents)event];
 }
+
+#pragma mark isEqual
+
+-(BOOL)isEqual:(id)object {
+    if([object isKindOfClass:[UISwitch class]]) return [self.UISwitch isEqual:object];
+    else if([object isKindOfClass:[self class]]) return [self.UISwitch isEqual:((C4Switch *)object).UISwitch];
+    return NO;
+}
+
 @end

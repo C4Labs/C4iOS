@@ -5,38 +5,29 @@
 //
 
 #import "C4WorkSpace.h"
-#import "C4Switch.h"
+#import "C4Stepper.h"
 
 @implementation C4WorkSpace {
-    C4Switch *s, *t;
-    C4Shape *shape;
+    C4Stepper *s, *t;
 }
 
 -(void)setup {
-    s = [C4Switch switch];
-    [s runMethod:@"switchShape:" target:self forEvent:VALUECHANGED];
-    s.center = self.canvas.center;
-
-    t = [C4Switch switch];
-    t.tintColor = C4GREY;
-    t.thumbTintColor = C4BLUE;
-    t.onImage = [C4Image imageNamed:@"pyramid"];
-    t.offImage = [C4Image imageNamed:@"lines"];
-    t.origin = CGPointMake(100.5,100.5);
-
+    s = [C4Stepper stepper];
+    t = [C4Stepper stepper];
+    
+    s.origin = CGPointMake(100,100);
+    t.origin = CGPointMake(200,200);
+    
+    [s setDecrementImage:[C4Image imageNamed:@"pyramid"] forState:NORMAL];
+    C4Image *divider = [C4Image imageNamed:@"lines"];
+    divider.width = 2;
+    [s setDividerImage:divider forLeftSegmentState:NORMAL rightSegmentState:NORMAL];
+    
     [self.canvas addObjects:@[s,t]];
 }
 
--(void)switchShape:(C4Switch *)sender {
-    s.animationDuration = 0.5f;
-    if(sender.isOn) {
-        s.center = CGPointMake([C4Math randomInt:self.canvas.width-200]+100, [C4Math randomInt:self.canvas.height-200]+100);
-    } else {
-        s.center = self.canvas.center;
-    }
+-(void)touchesBegan {
+    t.style = s.style;
 }
 
--(void)touchesBegan {
-    s.style = t.style;
-}
 @end

@@ -86,6 +86,7 @@
 		EDCE42641564044000C7356E /* C4Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCE425F1564044000C7356E /* C4Camera.m */; };
 		EDCE42651564044000C7356E /* C4CameraController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCE42611564044000C7356E /* C4CameraController.m */; };
 		EDCE426D1564174000C7356E /* C4ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCE426C1564174000C7356E /* C4ViewController.m */; };
+		EDD9CE7A16E6AB0900018ABF /* C4Stepper.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD9CE7916E6AB0900018ABF /* C4Stepper.m */; };
 		EDECBF6C14EAE26700D9A446 /* C4Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = EDECBF6B14EAE26600D9A446 /* C4Shape.m */; };
 		EDF6544A150DEF3300194671 /* C4WorkSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF65449150DEF3300194671 /* C4WorkSpace.m */; };
 		EDF65458150E104100194671 /* C4Sample.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF65457150E104100194671 /* C4Sample.m */; };
@@ -217,6 +218,8 @@
 		EDCE426B1564174000C7356E /* C4ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4ViewController.h; sourceTree = "<group>"; };
 		EDCE426C1564174000C7356E /* C4ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4ViewController.m; sourceTree = "<group>"; };
 		EDCEA5A514FD7567009969F2 /* C4Gesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Gesture.h; sourceTree = "<group>"; };
+		EDD9CE7816E6AB0900018ABF /* C4Stepper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Stepper.h; sourceTree = "<group>"; };
+		EDD9CE7916E6AB0900018ABF /* C4Stepper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Stepper.m; sourceTree = "<group>"; };
 		EDECBF6A14EAE26600D9A446 /* C4Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Shape.h; sourceTree = "<group>"; };
 		EDECBF6B14EAE26600D9A446 /* C4Shape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Shape.m; sourceTree = "<group>"; };
 		EDEF69AF157ED95A00E280B9 /* C4MethodDelay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = C4MethodDelay.h; sourceTree = "<group>"; };
@@ -260,6 +263,8 @@
 				ED0EBA5A16DFED6700212B03 /* C4Control.m */,
 				ED0AB05016DE8828004258A7 /* C4Slider.h */,
 				ED786AB316DF03330076C79D /* C4Slider.m */,
+				EDD9CE7816E6AB0900018ABF /* C4Stepper.h */,
+				EDD9CE7916E6AB0900018ABF /* C4Stepper.m */,
 				ED185A5216E66304002528AE /* C4Switch.h */,
 				ED185A5316E66304002528AE /* C4Switch.m */,
 				ED0EBA7016DFF0B000212B03 /* C4UIElement.h */,
@@ -597,6 +602,7 @@
 				ED0EBA6F16DFEE2300212B03 /* C4Button.m in Sources */,
 				104C87D416E5480D008EAA37 /* C4AppDelegate.m in Sources */,
 				ED185A5416E66304002528AE /* C4Switch.m in Sources */,
+				EDD9CE7A16E6AB0900018ABF /* C4Stepper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
