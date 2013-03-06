@@ -98,16 +98,12 @@
 }
 
 -(void)setTintColor:(UIColor *)tintColor {
-    _tintColor = tintColor;
-    self.UIStepper.tintColor = tintColor;
+    [self.UIStepper setTintColor:tintColor];
 }
 
 //FIXME: these UI_APPEARANCE_SELECTORS might be confusing because they refer to an object, but I don't want to have objects for all of them...
 -(void)setBackgroundImage:(C4Image*)image forState:(C4ControlState)state {
-    image = image;
-    state = state;
-    C4Assert(NO, @"This method shouldn't be used, there is a bug in its UIKit implementation.\n\t\t\t\tAccess the object's UISlider if you really want to use this method.");
-//    [self.UIStepper setBackgroundImage:image.UIImage forState:(UIControlState)state];
+    [self.UIStepper setBackgroundImage:image.UIImage forState:(UIControlState)state];
 }
 
 -(C4Image*)backgroundImageForState:(C4ControlState)state {
@@ -162,59 +158,6 @@
     C4Stepper *s = [[C4Stepper allocWithZone:zone] initWithFrame:self.frame];
     s.style = self.style;
     return s;
-}
-
--(NSDictionary *)style {
-    //mutable local styles
-    NSMutableDictionary *localStyle = [[NSMutableDictionary alloc] initWithCapacity:0];
-    [localStyle addEntriesFromDictionary:@{@"stepper":self.UIStepper}];
-    
-    NSDictionary *controlStyle = [super style];
-    
-    NSMutableDictionary *localAndControlStyle = [NSMutableDictionary dictionaryWithDictionary:localStyle];
-    [localAndControlStyle addEntriesFromDictionary:controlStyle];
-    
-    localStyle = nil;
-    controlStyle = nil;
-    
-    return (NSDictionary *)localAndControlStyle;
-}
-
--(void)setStyle:(NSDictionary *)newStyle {
-    self.tintColor = nil;
-    
-    [super setStyle:newStyle];
-    
-    UIStepper *s = [newStyle objectForKey:@"stepper"];
-    if(s != nil) {
-        _UIStepper.tintColor = s.tintColor;
-        UIControlState state[4] = {UIControlStateDisabled, UIControlStateHighlighted, UIControlStateNormal, UIControlStateSelected};
-
-        UIImage *new, *cur;
-        for(int i = 0; i < 4; i++) {
-            new = [s decrementImageForState:state[i]];
-            cur = [self.UIStepper decrementImageForState:state[i]];
-            if(new != cur) {
-                [_UIStepper setDecrementImage:[s decrementImageForState:state[i]] forState:state[i]];
-            }
-            
-            new = [s incrementImageForState:state[i]];
-            cur = [self.UIStepper incrementImageForState:state[i]];
-            if(new != cur) {
-                [_UIStepper setIncrementImage:[s incrementImageForState:state[i]] forState:state[i]];
-            }
-            
-            for(int j = 0; j < 4; j++) {
-                new = [s dividerImageForLeftSegmentState:state[i] rightSegmentState:state[j]];
-                cur = [_UIStepper dividerImageForLeftSegmentState:state[i] rightSegmentState:state[j]];
-                if(new != cur) {
-                    [_UIStepper setDividerImage:new forLeftSegmentState:state[i] rightSegmentState:state[j]];
-                }
-            }
-        }
-
-        s = nil;
-    }
 }
 
 @end

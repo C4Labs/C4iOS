@@ -21,10 +21,15 @@
     if(self != nil) {
         _UIActivityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:(UIActivityIndicatorViewStyle)style];
         self.frame = _UIActivityIndicatorView.frame;
-        _UIActivityIndicatorView.hidesWhenStopped = YES;
+        [self setupFromDefaults];
         [self addSubview:_UIActivityIndicatorView];
     }
     return self;
+}
+
+-(void)setupFromDefaults {
+    _UIActivityIndicatorView.hidesWhenStopped = YES;
+    _UIActivityIndicatorView.color = [C4ActivityIndicator defaultStyle].color;
 }
 
 -(void)startAnimating {

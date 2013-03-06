@@ -7,17 +7,22 @@
 #import "C4WorkSpace.h"
 
 @implementation C4WorkSpace {
-    C4Image *image;
+    C4Stepper *stepper, *stepper2;
 }
 
 -(void)setup {
-    image = [C4Image imageNamed:@"C4Table"];
-    [self.canvas addImage:image];
-}
+    stepper = [C4Stepper stepper];
+    stepper.center = self.canvas.center;
+    stepper.shadowOffset = CGSizeMake(2,2);
+    stepper.shadowOpacity = 0.8f;
+    [self.canvas addSubview:stepper];
 
--(void)touchesBegan {
-    image.animationDuration = 0.5f;
-    [image gaussianBlur:10.0f];
+    UIStepper *s = [[UIStepper alloc] init];
+    [s setBackgroundImage:[UIImage imageNamed:@"test"] forState:UIControlStateNormal];
+    [self.canvas addSubview:s];
+    C4Image *img = [C4Image imageWithUIImage:[s backgroundImageForState:UIControlStateNormal]];
+    img.origin = CGPointMake(0,30);
+    [self.canvas addImage: img];
 }
 
 @end

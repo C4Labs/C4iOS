@@ -22,7 +22,7 @@ typedef NS_ENUM(NSInteger, C4ActivityIndicatorStyle) {
 -(void)stopAnimating;
 -(BOOL)isAnimating;
 
-+(C4Control *)defaultStyle;
++(C4ActivityIndicator *)defaultStyle;
 
 @property (readonly, nonatomic, strong) UIActivityIndicatorView *UIActivityIndicatorView;
 @property (readwrite, nonatomic) C4ActivityIndicatorStyle activityIndicatorStyle;

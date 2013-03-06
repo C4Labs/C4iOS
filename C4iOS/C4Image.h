@@ -675,6 +675,7 @@
 @property (readwrite, nonatomic) CGFloat animatedImageDuration;
 @property (readwrite, nonatomic) NSInteger animationRepeatCount;
 @property (readonly, nonatomic, getter = isAnimating) BOOL animating;
+@property (readwrite, nonatomic) BOOL showsActivityIndicator;
 -(void)play;
 -(void)pause;
 

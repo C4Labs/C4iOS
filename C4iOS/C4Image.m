@@ -73,6 +73,7 @@
         _imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         [self addSubview:_imageView];
         self.autoresizesSubviews = YES;
+        self.showsActivityIndicator = YES;
         _filterIndicator = [C4ActivityIndicator indicatorWithStyle:WHITE];
         _filterIndicator.center = CGPointMake(self.width/2,self.height/2);
         [_filterIndicator stopAnimating];
@@ -173,7 +174,7 @@
 }
 
 -(void)renderImageWithFilterName:(NSString *)filterName {
-    [_filterIndicator startAnimating];
+    if(self.showsActivityIndicator) [_filterIndicator startAnimating];
     dispatch_async(self.filterQueue, ^{
         //applies create the image based on its original size, contents will automatically scale
         CGImageRef filteredImage = [self.filterContext createCGImage:_output fromRect:(CGRect){CGPointZero,self.originalSize}];
@@ -183,7 +184,7 @@
             [self postNotification:[filterName stringByAppendingString:@"Complete"]];
             _multipleFilterEnabled = NO;
             _output = nil;
-            [_filterIndicator stopAnimating];
+            if(self.showsActivityIndicator) [_filterIndicator stopAnimating];
         });
     });
 }
@@ -1680,6 +1681,14 @@
 
 -(BOOL)isAnimating {
     return self.imageView.isAnimating;
+}
+
+-(void)setShowsActivityIndicator:(BOOL)showsActivityIndicator {
+    _showsActivityIndicator = showsActivityIndicator;
+    if(showsActivityIndicator == NO) {
+        [_filterIndicator stopAnimating];
+        _filterIndicator.hidden = YES;
+    }
 }
 
 #pragma mark Pixels

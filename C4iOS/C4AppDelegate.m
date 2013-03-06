@@ -77,15 +77,16 @@
     };
     
     [C4Control defaultStyle].style = basicStyle;
+    [C4ActivityIndicator defaultStyle].color = C4BLUE;
     
     [C4Button defaultStyle].style = basicStyle;
     [C4Button defaultStyle].tintColor = C4GREY;
-
-    [C4Slider defaultStyle].style = basicStyle;
-    [C4Slider defaultStyle].thumbTintColor = C4BLUE;
-    [C4Slider defaultStyle].minimumTrackTintColor = C4RED;
-    [C4Slider defaultStyle].maximumTrackTintColor = C4GREY;
     
+    [C4Label defaultStyle].style = basicStyle;
+    [C4Label defaultStyle].textColor = C4GREY;
+    [C4Label defaultStyle].highlightedTextColor = C4RED;
+    [C4Label defaultStyle].backgroundColor = [UIColor clearColor];
+
     [C4Shape defaultStyle].style = basicStyle;
     [C4Shape defaultStyle].fillColor = C4GREY;
     [C4Shape defaultStyle].fillRule = FILLNORMAL;
@@ -99,10 +100,24 @@
     [C4Shape defaultStyle].strokeEnd = 1.0f;
     [C4Shape defaultStyle].strokeStart = 0.0f;
     
-    [C4Label defaultStyle].style = basicStyle;
-    [C4Label defaultStyle].textColor = C4GREY;
-    [C4Label defaultStyle].highlightedTextColor = C4RED;
-    [C4Label defaultStyle].backgroundColor = [UIColor clearColor];
+    [C4Slider defaultStyle].style = basicStyle;
+    [C4Slider defaultStyle].thumbTintColor = C4BLUE;
+    [C4Slider defaultStyle].minimumTrackTintColor = C4RED;
+    [C4Slider defaultStyle].maximumTrackTintColor = C4GREY;
+
+    [[C4Stepper defaultStyle] setBackgroundImage:[C4Image imageNamed:@"stepperDisabled"] forState:DISABLED];
+    [[C4Stepper defaultStyle] setBackgroundImage:[C4Image imageNamed:@"stepperHighlighted"] forState:HIGHLIGHTED];
+    [[C4Stepper defaultStyle] setBackgroundImage:[C4Image imageNamed:@"stepperNormal"] forState:NORMAL];
+    [[C4Stepper defaultStyle] setBackgroundImage:[C4Image imageNamed:@"stepperSelected"] forState:SELECTED];
+    
+    [[C4Stepper defaultStyle] setDividerImage:[C4Image imageNamed:@"dividerNormal"] forLeftSegmentState:NORMAL rightSegmentState:NORMAL];
+    [[C4Stepper defaultStyle] setDividerImage:[C4Image imageNamed:@"dividerLeftActive"] forLeftSegmentState:HIGHLIGHTED rightSegmentState:NORMAL];
+    [[C4Stepper defaultStyle] setDividerImage:[C4Image imageNamed:@"dividerRightActive"] forLeftSegmentState:NORMAL rightSegmentState:HIGHLIGHTED];
+    
+    [[C4Stepper defaultStyle] setDividerImage:[C4Image imageNamed:@"dividerDisabled"] forLeftSegmentState:DISABLED rightSegmentState:DISABLED];
+    [[C4Stepper defaultStyle] setDividerImage:[C4Image imageNamed:@"dividerLeftDisabled"] forLeftSegmentState:DISABLED rightSegmentState:NORMAL];
+    [[C4Stepper defaultStyle] setDividerImage:[C4Image imageNamed:@"dividerRightDisabled"] forLeftSegmentState:NORMAL rightSegmentState:DISABLED];
+
 }
 
 @end
