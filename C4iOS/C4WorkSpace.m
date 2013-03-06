@@ -5,17 +5,19 @@
 //
 
 #import "C4WorkSpace.h"
-#import "C4Stepper.h"
 
 @implementation C4WorkSpace {
-    C4Stepper *s, *t;
+    C4Image *image;
 }
 
 -(void)setup {
+    image = [C4Image imageNamed:@"C4Table"];
+    [self.canvas addImage:image];
 }
 
 -(void)touchesBegan {
-    t.style = s.style;
+    image.animationDuration = 0.5f;
+    [image gaussianBlur:10.0f];
 }
 
 @end

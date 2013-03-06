@@ -54,6 +54,7 @@
 		ED50C8CE14EAC61D0040D844 /* C4Foundation.m in Sources */ = {isa = PBXBuildFile; fileRef = ED50C8CD14EAC61D0040D844 /* C4Foundation.m */; };
 		ED50C8D014EAC77C0040D844 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED50C8CF14EAC77C0040D844 /* AVFoundation.framework */; };
 		ED50C8D214EAC92F0040D844 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED50C8D114EAC92F0040D844 /* QuartzCore.framework */; };
+		ED5B172D16E7B5190057BF06 /* C4ActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5B172C16E7B5190057BF06 /* C4ActivityIndicator.m */; };
 		ED5FB05115B38894002987EA /* C4AssertionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5FB05015B38894002987EA /* C4AssertionHandler.m */; };
 		ED786AB416DF03330076C79D /* C4Slider.m in Sources */ = {isa = PBXBuildFile; fileRef = ED786AB316DF03330076C79D /* C4Slider.m */; };
 		ED7C0C0F15C88B9F009107A6 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = ED7C0C0215C88B9F009107A6 /* iTunesArtwork.png */; };
@@ -158,7 +159,6 @@
 		ED50C89314EAC2010040D844 /* C4iOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "C4iOS-Prefix.pch"; sourceTree = "<group>"; };
 		ED50C89B14EAC2010040D844 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/C4Canvas.xib; sourceTree = "<group>"; };
 		ED50C8C114EAC4A40040D844 /* C4Defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Defines.h; sourceTree = "<group>"; };
-		ED50C8C214EAC4A40040D844 /* C4Imports.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Imports.h; sourceTree = "<group>"; };
 		ED50C8C314EAC4F70040D844 /* C4CanvasController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4CanvasController.h; sourceTree = "<group>"; };
 		ED50C8C414EAC4F70040D844 /* C4CanvasController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4CanvasController.m; sourceTree = "<group>"; };
 		ED50C8C914EAC5990040D844 /* C4Layer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Layer.h; sourceTree = "<group>"; };
@@ -167,6 +167,8 @@
 		ED50C8CD14EAC61D0040D844 /* C4Foundation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Foundation.m; sourceTree = "<group>"; };
 		ED50C8CF14EAC77C0040D844 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		ED50C8D114EAC92F0040D844 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		ED5B172B16E7B5190057BF06 /* C4ActivityIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4ActivityIndicator.h; sourceTree = "<group>"; };
+		ED5B172C16E7B5190057BF06 /* C4ActivityIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4ActivityIndicator.m; sourceTree = "<group>"; };
 		ED5FB04F15B38894002987EA /* C4AssertionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4AssertionHandler.h; sourceTree = "<group>"; };
 		ED5FB05015B38894002987EA /* C4AssertionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4AssertionHandler.m; sourceTree = "<group>"; };
 		ED7513AA15150FB60076317F /* inception.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = inception.mov; sourceTree = "<group>"; };
@@ -255,8 +257,6 @@
 		ED0EBA5816DFED0C00212B03 /* Experimental */ = {
 			isa = PBXGroup;
 			children = (
-				ED99AB6F15DDF714002A7D6C /* C4YouTubeURLParser.h */,
-				ED99AB7215DE01D7002A7D6C /* C4YouTubeURLParser.m */,
 				ED0EBA6D16DFEE2300212B03 /* C4Button.h */,
 				ED0EBA6E16DFEE2300212B03 /* C4Button.m */,
 				ED0EBA5916DFED6700212B03 /* C4Control.h */,
@@ -268,6 +268,10 @@
 				ED185A5216E66304002528AE /* C4Switch.h */,
 				ED185A5316E66304002528AE /* C4Switch.m */,
 				ED0EBA7016DFF0B000212B03 /* C4UIElement.h */,
+				ED99AB6F15DDF714002A7D6C /* C4YouTubeURLParser.h */,
+				ED99AB7215DE01D7002A7D6C /* C4YouTubeURLParser.m */,
+				ED5B172B16E7B5190057BF06 /* C4ActivityIndicator.h */,
+				ED5B172C16E7B5190057BF06 /* C4ActivityIndicator.m */,
 			);
 			name = Experimental;
 			sourceTree = "<group>";
@@ -348,7 +352,6 @@
 				ED5FB05015B38894002987EA /* C4AssertionHandler.m */,
 				ED50C8C114EAC4A40040D844 /* C4Defines.h */,
 				ED80BBBF14F0648800AAD49C /* C4Defines.m */,
-				ED50C8C214EAC4A40040D844 /* C4Imports.h */,
 				ED50C89314EAC2010040D844 /* C4iOS-Prefix.pch */,
 			);
 			name = App;
@@ -603,6 +606,7 @@
 				104C87D416E5480D008EAA37 /* C4AppDelegate.m in Sources */,
 				ED185A5416E66304002528AE /* C4Switch.m in Sources */,
 				EDD9CE7A16E6AB0900018ABF /* C4Stepper.m in Sources */,
+				ED5B172D16E7B5190057BF06 /* C4ActivityIndicator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

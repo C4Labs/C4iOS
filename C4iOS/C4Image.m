@@ -16,7 +16,7 @@
 @property (readonly, nonatomic) dispatch_queue_t filterQueue;
 @property (readonly, nonatomic) NSUInteger bytesPerPixel, bytesPerRow;
 @property (readonly, nonatomic) unsigned char *rawData;
-
+@property (readonly, nonatomic) C4ActivityIndicator *filterIndicator;
 @end
 
 @implementation C4Image
@@ -73,6 +73,10 @@
         _imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         [self addSubview:_imageView];
         self.autoresizesSubviews = YES;
+        _filterIndicator = [C4ActivityIndicator indicatorWithStyle:WHITE];
+        _filterIndicator.center = CGPointMake(self.width/2,self.height/2);
+        [_filterIndicator stopAnimating];
+        [self addSubview:_filterIndicator];
     }
     return self;
 }
@@ -169,6 +173,7 @@
 }
 
 -(void)renderImageWithFilterName:(NSString *)filterName {
+    [_filterIndicator startAnimating];
     dispatch_async(self.filterQueue, ^{
         //applies create the image based on its original size, contents will automatically scale
         CGImageRef filteredImage = [self.filterContext createCGImage:_output fromRect:(CGRect){CGPointZero,self.originalSize}];
@@ -178,6 +183,7 @@
             [self postNotification:[filterName stringByAppendingString:@"Complete"]];
             _multipleFilterEnabled = NO;
             _output = nil;
+            [_filterIndicator stopAnimating];
         });
     });
 }
