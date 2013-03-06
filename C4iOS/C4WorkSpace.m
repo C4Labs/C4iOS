@@ -12,18 +12,6 @@
 }
 
 -(void)setup {
-    s = [C4Stepper stepper];
-    t = [C4Stepper stepper];
-    
-    s.origin = CGPointMake(100,100);
-    t.origin = CGPointMake(200,200);
-    
-    [s setDecrementImage:[C4Image imageNamed:@"pyramid"] forState:NORMAL];
-    C4Image *divider = [C4Image imageNamed:@"lines"];
-    divider.width = 2;
-    [s setDividerImage:divider forLeftSegmentState:NORMAL rightSegmentState:NORMAL];
-    
-    [self.canvas addObjects:@[s,t]];
 }
 
 -(void)touchesBegan {
