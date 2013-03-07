@@ -40,7 +40,11 @@
 }
 
 -(void)setupFromDefaults {
-    
+    _UISwitch.onTintColor = [C4Switch defaultStyle].onTintColor;
+    _UISwitch.tintColor = [C4Switch defaultStyle].tintColor;
+    _UISwitch.thumbTintColor = [C4Switch defaultStyle].thumbTintColor;
+    _UISwitch.offImage = [C4Switch defaultStyle].offImage.UIImage;
+    _UISwitch.onImage = [C4Switch defaultStyle].onImage.UIImage;
 }
 
 +(C4Switch *)defaultStyle {

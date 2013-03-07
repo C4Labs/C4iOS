@@ -10,7 +10,7 @@
 
 @interface C4Switch : C4Control <C4UIElement>
 
-+(C4Button *)defaultStyle;
++(C4Switch *)defaultStyle;
 @property (readonly, nonatomic) UISwitch *UISwitch;
 
 +(C4Switch *)switch:(CGRect)frame;

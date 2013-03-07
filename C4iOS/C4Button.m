@@ -36,45 +36,46 @@
 }
 
 -(void)setupFromDefaults {
-    C4Button *defaultButton = [C4Button defaultStyle];
-    self.UIButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Heavy" size:18.0f];
-    [self setTitleColor:C4GREY forState:NORMAL];
-    [self setTitleColor:[UIColor whiteColor] forState:HIGHLIGHTED];
-
-    if(self.buttonType == ROUNDEDRECT) {
-        self.tintColor = defaultButton.tintColor;
-        self.frame = CGRectMake(0,0,132,44);
-        NSMutableDictionary *attribs = [[NSMutableDictionary alloc] initWithCapacity:0];
-        [attribs addEntriesFromDictionary:@{
-                      NSKernAttributeName:@(-0.25),
-           NSForegroundColorAttributeName:C4GREY
-         }];
-        NSAttributedString *title = [[NSAttributedString alloc] initWithString:@"Button" attributes:attribs];
-        [self setAttributedTitle:title forState:NORMAL];
-        
-        [attribs setValue:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
-        title = [[NSAttributedString alloc] initWithString:@"Button" attributes:attribs];
-        [self setAttributedTitle:title forState:HIGHLIGHTED];
-    } else if (self.buttonType == DETAILDISCLOSURE) {
-        C4Image *img = [self backgroundImageForState:NORMAL];
-        [img colorMonochrome:C4GREY inputIntensity:1.0f];
-        [self setBackgroundImage:img forState:NORMAL];
-        img.center = self.origin;
-        [self addSubview:img];
-    }
+    self.UIButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:15.0f];
+    self.tintColor = [C4Button defaultStyle].tintColor;
     
+    if(self.buttonType == ROUNDEDRECT) {
+        self.frame = CGRectMake(0,0,96,27);
+        [self setTitle:@"BUTTON" forState:NORMAL];
+        [self setTitleColor:C4GREY forState:NORMAL];
+        [self setTitleColor:C4GREY forState:HIGHLIGHTED];
+        [self setTitleColor:C4RED forState:DISABLED];
+        [self setTitleShadowColor:[UIColor whiteColor] forState:NORMAL];
+        self.reversesTitleShadowWhenHighlighted = YES;
+        self.UIButton.titleLabel.shadowOffset = CGSizeMake(1,1);
+        
+        [self setBackgroundImage:[C4Image imageNamed:@"buttonDisabled"] forState:DISABLED];
+        [self setBackgroundImage:[C4Image imageNamed:@"buttonHighlighted"] forState:HIGHLIGHTED];
+        [self setBackgroundImage:[C4Image imageNamed:@"buttonNormal"] forState:NORMAL];
+        [self setBackgroundImage:[C4Image imageNamed:@"buttonSelected"] forState:SELECTED];
+    }
     //NOTE: UIButton only recognizes tintColor for its appearance (check UIButton.h)
+}
+
+-(void)setFrame:(CGRect)frame {
+    CGPoint origin = frame.origin;
+    origin.x = floorf(origin.x);
+    origin.y = floorf(origin.y) + 0.5f;
+    frame.origin = origin;
+    [super setFrame:frame];
+    self.UIButton.frame = self.bounds;
+}
+
+-(void)setCenter:(CGPoint)center {
+    center.x = floorf(center.x);
+    center.y = floorf(center.y) + 0.5f;
+    [super setCenter:center];
 }
 
 -(C4Button *)copyWithZone:(NSZone *)zone {
     C4Button *button = [[C4Button allocWithZone:zone] initWithType:self.buttonType];
     button.style = self.style;
     return button;
-}
-
--(void)setFrame:(CGRect)frame {
-    [super setFrame:frame];
-    self.UIButton.frame = frame;
 }
 
 -(void)setCornerRadius:(CGFloat)cornerRadius {
@@ -114,37 +115,7 @@
             [self.UIButton setImage:[b imageForState:state[i]] forState:state[i]];
             [self.UIButton setBackgroundImage:[b backgroundImageForState:state[i]] forState:state[i]];
         }
-        
-//        [self.UIButton setTitle:[b titleForState:UIControlStateDisabled] forState:UIControlStateDisabled];
-//        [self.UIButton setTitle:[b titleForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
-//        [self.UIButton setTitle:[b titleForState:UIControlStateNormal] forState:UIControlStateNormal];
-//        [self.UIButton setTitle:[b titleForState:UIControlStateSelected] forState:UIControlStateSelected];
-
-//        [self.UIButton setAttributedTitle:[b attributedTitleForState:UIControlStateDisabled] forState:UIControlStateDisabled];
-//        [self.UIButton setAttributedTitle:[b attributedTitleForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
-//        [self.UIButton setAttributedTitle:[b attributedTitleForState:UIControlStateNormal] forState:UIControlStateNormal];
-//        [self.UIButton setAttributedTitle:[b attributedTitleForState:UIControlStateSelected] forState:UIControlStateSelected];
-
-//        [self.UIButton setTitleColor:[b titleColorForState:UIControlStateDisabled] forState:UIControlStateDisabled];
-//        [self.UIButton setTitleColor:[b titleColorForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
-//        [self.UIButton setTitleColor:[b titleColorForState:UIControlStateNormal] forState:UIControlStateNormal];
-//        [self.UIButton setTitleColor:[b titleColorForState:UIControlStateSelected] forState:UIControlStateSelected];
-
-//        [self.UIButton setTitleShadowColor:[b titleShadowColorForState:UIControlStateDisabled] forState:UIControlStateDisabled];
-//        [self.UIButton setTitleShadowColor:[b titleShadowColorForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
-//        [self.UIButton setTitleShadowColor:[b titleShadowColorForState:UIControlStateNormal] forState:UIControlStateNormal];
-//        [self.UIButton setTitleShadowColor:[b titleShadowColorForState:UIControlStateSelected] forState:UIControlStateSelected];
-        
-//        [self.UIButton setImage:[b imageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
-//        [self.UIButton setImage:[b imageForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
-//        [self.UIButton setImage:[b imageForState:UIControlStateNormal] forState:UIControlStateNormal];
-//        [self.UIButton setImage:[b imageForState:UIControlStateSelected] forState:UIControlStateSelected];
-        
-//        [self.UIButton setBackgroundImage:[b backgroundImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
-//        [self.UIButton setBackgroundImage:[b backgroundImageForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
-//        [self.UIButton setBackgroundImage:[b backgroundImageForState:UIControlStateNormal] forState:UIControlStateNormal];
-//        [self.UIButton setBackgroundImage:[b backgroundImageForState:UIControlStateSelected] forState:UIControlStateSelected];
-        
+                
         self.UIButton.contentEdgeInsets = b.contentEdgeInsets;
         self.UIButton.imageEdgeInsets = b.imageEdgeInsets;
         self.UIButton.titleEdgeInsets = b.titleEdgeInsets;

@@ -80,7 +80,7 @@
     [C4ActivityIndicator defaultStyle].color = C4BLUE;
     
     [C4Button defaultStyle].style = basicStyle;
-    [C4Button defaultStyle].tintColor = C4GREY;
+    [C4Button defaultStyle].tintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"darkBluePattern@2x"]];
     
     [C4Label defaultStyle].style = basicStyle;
     [C4Label defaultStyle].textColor = C4GREY;
