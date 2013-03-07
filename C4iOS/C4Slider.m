@@ -43,7 +43,6 @@
     self.thumbTintColor = defaultSlider.thumbTintColor;
     self.minimumTrackTintColor = defaultSlider.minimumTrackTintColor;
     self.maximumTrackTintColor = defaultSlider.maximumTrackTintColor;
-    
     //NOTE: UISlider only recognizes colors for its UIAppearance (check UISlider.h)
 }
 

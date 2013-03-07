@@ -50,7 +50,6 @@
 
 +(void)initialize {
     //set these before everything else.
-    
     [C4Control defaultStyle].alpha = 1.0f;
     [C4Control defaultStyle].animationDuration = 0.0f;
     [C4Control defaultStyle].animationDelay = 0.0f;
@@ -63,6 +62,7 @@
     [C4Control defaultStyle].shadowOffset = CGSizeZero;
     [C4Control defaultStyle].repeatCount = 0;
 
+    //Need to have this because the style property doesn't synthesize when setting default appearance
     NSDictionary *basicStyle = @{
     @"alpha":@([C4Control defaultStyle].alpha),
     @"animationDuration":@([C4Control defaultStyle].animationDuration),
@@ -101,23 +101,23 @@
     [C4Shape defaultStyle].strokeStart = 0.0f;
     
     [C4Slider defaultStyle].style = basicStyle;
-    [C4Slider defaultStyle].thumbTintColor = C4BLUE;
-    [C4Slider defaultStyle].minimumTrackTintColor = C4RED;
-    [C4Slider defaultStyle].maximumTrackTintColor = C4GREY;
-
-    [[C4Stepper defaultStyle] setBackgroundImage:[C4Image imageNamed:@"stepperDisabled"] forState:DISABLED];
-    [[C4Stepper defaultStyle] setBackgroundImage:[C4Image imageNamed:@"stepperHighlighted"] forState:HIGHLIGHTED];
-    [[C4Stepper defaultStyle] setBackgroundImage:[C4Image imageNamed:@"stepperNormal"] forState:NORMAL];
-    [[C4Stepper defaultStyle] setBackgroundImage:[C4Image imageNamed:@"stepperSelected"] forState:SELECTED];
+    [C4Slider defaultStyle].thumbTintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"darkBluePattern"]];
+    [C4Slider defaultStyle].minimumTrackTintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"lightRedPattern"]];
+    [C4Slider defaultStyle].maximumTrackTintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"lightGrayPattern"]];
     
-    [[C4Stepper defaultStyle] setDividerImage:[C4Image imageNamed:@"dividerNormal"] forLeftSegmentState:NORMAL rightSegmentState:NORMAL];
-    [[C4Stepper defaultStyle] setDividerImage:[C4Image imageNamed:@"dividerLeftActive"] forLeftSegmentState:HIGHLIGHTED rightSegmentState:NORMAL];
-    [[C4Stepper defaultStyle] setDividerImage:[C4Image imageNamed:@"dividerRightActive"] forLeftSegmentState:NORMAL rightSegmentState:HIGHLIGHTED];
-    
-    [[C4Stepper defaultStyle] setDividerImage:[C4Image imageNamed:@"dividerDisabled"] forLeftSegmentState:DISABLED rightSegmentState:DISABLED];
-    [[C4Stepper defaultStyle] setDividerImage:[C4Image imageNamed:@"dividerLeftDisabled"] forLeftSegmentState:DISABLED rightSegmentState:NORMAL];
-    [[C4Stepper defaultStyle] setDividerImage:[C4Image imageNamed:@"dividerRightDisabled"] forLeftSegmentState:NORMAL rightSegmentState:DISABLED];
+    [C4Stepper defaultStyle].style = basicStyle;
+    [C4Stepper defaultStyle].tintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"lightGrayPattern"]];
+    [[C4Stepper defaultStyle] setDecrementImage:[C4Image imageNamed:@"decrementDisabled"] forState:DISABLED];
+    [[C4Stepper defaultStyle] setDecrementImage:[C4Image imageNamed:@"decrementNormal"] forState:NORMAL];
+    [[C4Stepper defaultStyle] setIncrementImage:[C4Image imageNamed:@"incrementDisabled"] forState:DISABLED];
+    [[C4Stepper defaultStyle] setIncrementImage:[C4Image imageNamed:@"incrementNormal"] forState:NORMAL];
 
+    [C4Switch defaultStyle].style = basicStyle;
+    [C4Switch defaultStyle].onTintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"lightBluePattern"]];
+    [C4Switch defaultStyle].tintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"lightRedPattern"]];
+    [C4Switch defaultStyle].thumbTintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"lightGrayPattern"]];
+    [[C4Switch defaultStyle] setOffImage:[C4Image imageNamed:@"switchOff"]];
+    [[C4Switch defaultStyle] setOnImage:[C4Image imageNamed:@"switchOn"]];
 }
 
 @end

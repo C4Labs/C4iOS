@@ -29,7 +29,6 @@
 @property(nonatomic, weak) C4Image *minimumValueImage, *maximumValueImage;
 @property(nonatomic,getter=isContinuous) BOOL continuous;
 @property(readwrite, nonatomic,weak) UIColor *minimumTrackTintColor, *maximumTrackTintColor, *thumbTintColor NS_AVAILABLE_IOS(5_0) UI_APPEARANCE_SELECTOR;
-
 @property(readonly, nonatomic, weak) C4Image* currentThumbImage;
 @property(readonly, nonatomic, weak) C4Image* currentMinimumTrackImage;
 @property(readonly, nonatomic, weak) C4Image* currentMaximumTrackImage;
