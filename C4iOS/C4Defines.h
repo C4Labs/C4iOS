@@ -187,6 +187,18 @@ typedef enum C4ControlContentVerticalAlignment : NSUInteger {
     VERTICALFILL
 } C4ControlContentVerticalAlignment;
 
+/* 'scrollView' */
+
+typedef enum C4ScrollViewIndicatorStyle : NSUInteger {
+    INDICATORDEFAULT = 0,
+    INDICATORBLACK,
+    INDICATORWHITE
+} C4ScrollViewIndicatorStyle;
+
+C4_EXTERN const float DECELERATENORMAL;
+C4_EXTERN const float DECELERATEFAST;
+C4_EXTERN const CGFloat DECELERATEMEDIUM;
+
 /* `fillRule' values. */
 
 C4_EXTERN NSString *const FILLNORMAL

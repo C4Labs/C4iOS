@@ -15,7 +15,8 @@
 @end
 
 @implementation C4Shape
-@synthesize pointA = _pointA, pointB = _pointB; //need to synth because we have implemented both the setter and getter
+@synthesize pointA = _pointA, pointB = _pointB;
+@synthesize lineWidth = _lineWidth;
 
 -(id)init {
     return [self initWithFrame:CGRectZero];
@@ -26,8 +27,6 @@
     if(self != nil) {
         _initialized = NO;
         self.animationOptions = BEGINCURRENT | EASEINOUT;
-        [self willChangeShape];
-        self.style = [C4Shape defaultStyle].style;
         [self setup];
     }
     return self;
@@ -131,8 +130,7 @@
     CGRect newBounds = CGRectMake(0, 0, newFrame.size.width, newFrame.size.height);
     CGMutablePathRef newPath = CGPathCreateMutable();
     CGPathAddEllipseInRect(newPath, nil, newBounds);
-    if(self.animationDuration == 0.0f) self.shapeLayer.path = newPath;
-    else [self.shapeLayer animatePath:newPath];
+    [self.shapeLayer animatePath:newPath];
     CGPathRelease(newPath);
     CGRect pathRect = CGPathGetBoundingBox(newPath);
     self.bounds = pathRect; //Need this step to sync the appearance of the paths to the frame of the shape
@@ -168,8 +166,7 @@
         CGPathCloseSubpath(translatedPath);
         _closed = YES;
     }
-    if(self.animationDuration == 0.0f) self.shapeLayer.path = translatedPath;
-    else [self.shapeLayer animatePath:translatedPath];
+    [self.shapeLayer animatePath:translatedPath];
     CGPathRelease(translatedPath);
     _initialized = YES;
 }
@@ -205,8 +202,7 @@
     CGPathCloseSubpath(translatedPath);
     _closed = YES;
     
-    if(self.animationDuration == 0.0f) self.shapeLayer.path = translatedPath;
-    else [self.shapeLayer animatePath:translatedPath];
+    [self.shapeLayer animatePath:translatedPath];
     CGPathRelease(translatedPath);
     _initialized = YES;
 }
@@ -266,8 +262,8 @@
     CGPathMoveToPoint(newPath, nil, 0,0);
     const CGAffineTransform translation = CGAffineTransformMakeTranslation(-1*beginPoint.x, -1*beginPoint.y);
     CGPathAddCurveToPoint(newPath, &translation, controlPoint1.x, controlPoint1.y, controlPoint2.x, controlPoint2.y, endPoint.x, endPoint.y);
-    if(self.animationDuration == 0.0f) self.shapeLayer.path = newPath;
-    else [self.shapeLayer animatePath:newPath];
+    
+    [self.shapeLayer animatePath:newPath];
 //    CGRect pathRect = CGPathGetBoundingBox(newPath);
 //    self.bounds = pathRect;
     CGPathRelease(newPath);
@@ -287,8 +283,8 @@
     CGPathMoveToPoint(newPath, nil,0,0);
     const CGAffineTransform translation = CGAffineTransformMakeTranslation(-1*beginPoint.x, -1*beginPoint.y);
     CGPathAddQuadCurveToPoint(newPath, &translation, controlPoint.x,controlPoint.y, endPoint.x, endPoint.y);
-    if(self.animationDuration == 0.0f) self.shapeLayer.path = newPath;
-    else [self.shapeLayer animatePath:newPath];
+    
+    [self.shapeLayer animatePath:newPath];
     CGPathRelease(newPath);
     _initialized = YES;
 }
@@ -305,8 +301,8 @@
     CGRect newBounds = CGRectMake(0, 0, newRect.size.width, newRect.size.height);
     CGMutablePathRef newPath = CGPathCreateMutable();
     CGPathAddRect(newPath, nil, newBounds);
-    if(self.animationDuration == 0.0f) self.shapeLayer.path = newPath;
-    else [self.shapeLayer animatePath:newPath];
+    
+    [self.shapeLayer animatePath:newPath];
     CGRect pathRect = CGPathGetBoundingBox(newPath);
     self.bounds = pathRect; //Need this step to sync the appearance of the paths to the frame of the shape
     self.origin = newRect.origin;
@@ -347,8 +343,8 @@
         currentOrigin.x += advance.width;
         CFRelease(fontPath);
     }
-    if(self.animationDuration == 0.0f) self.shapeLayer.path = glyphPaths;
-    else [self.shapeLayer animatePath:glyphPaths];
+    
+    [self.shapeLayer animatePath:glyphPaths];
     CGRect pathRect = CGPathGetBoundingBox(glyphPaths);
     self.bounds = pathRect; //Need this step to sync the appearance of the paths to the frame of the shape
     pathRect.origin = CGPointZero;
@@ -393,8 +389,7 @@
 //    CGPathAddLineToPoint(newPath, nil, points[0].x, points[0].y);
     
 
-    if(self.animationDuration == 0.0f) self.shapeLayer.path = newPath;
-    else [self.shapeLayer animatePath:newPath];
+    [self.shapeLayer animatePath:newPath];
     CGRect newBounds = self.bounds;
     newBounds.origin = CGPointZero;
     self.bounds = newBounds;
@@ -406,8 +401,7 @@
     NSArray *trianglePointArray = @[[NSValue valueWithCGPoint:pointArray[0]],
                                   [NSValue valueWithCGPoint:pointArray[1]],
                                   [NSValue valueWithCGPoint:pointArray[2]]];
-    if(self.animationDuration == 0.0f) [self _triangle:trianglePointArray];
-    else [self performSelector:@selector(_triangle:) withObject:trianglePointArray afterDelay:self.animationDelay];
+    [self _triangle:trianglePointArray];
 }
 
 -(void)_triangle:(NSArray *)pointArray {
@@ -439,8 +433,7 @@
     CGPathCloseSubpath(newPath);
     _closed = YES;
     
-    if(self.animationDuration == 0.0f) self.shapeLayer.path = newPath;
-    else [self.shapeLayer animatePath:newPath];
+    [self.shapeLayer animatePath:newPath];
     CGRect pathRect = CGPathGetBoundingBox(newPath);
 //    self.origin = self.frame.origin;
     self.bounds = pathRect; //Need this step to sync the appearance of the paths to the frame of the shape
@@ -492,8 +485,8 @@
         CGPathCloseSubpath(newPath);
         _closed = YES;
     }
-    if(self.animationDuration == 0.0f) self.shapeLayer.path = newPath;
-    else [self.shapeLayer animatePath:newPath];
+    
+    [self.shapeLayer animatePath:newPath];
     CGRect pathRect = CGPathGetBoundingBox(newPath);
     self.bounds = pathRect; //Need this step to sync the appearance of the paths to the frame of the shape
 //    _origin = self.frame.origin;
@@ -503,15 +496,14 @@
 
 -(void)closeShape {
     _shouldClose = YES;
-        if(self.animationDuration == 0.0f) [self _closeShape];
+        if(self.animationDelay == 0.0f) [self _closeShape];
         else [self performSelector:@selector(_closeShape) withObject:nil afterDelay:self.animationDelay];
 }
 -(void)_closeShape {
     if(_initialized == YES && _shouldClose == YES && _closed == NO) {
         CGMutablePathRef newPath = CGPathCreateMutableCopy(self.shapeLayer.path);
         CGPathCloseSubpath(newPath);
-        if(self.animationDuration == 0.0f) self.shapeLayer.path = newPath;
-        else [self.shapeLayer animatePath:newPath];
+        [self.shapeLayer animatePath:newPath];
         CGPathRelease(newPath);
         _closed = YES;
     }
@@ -527,8 +519,7 @@
 
 -(void)setPath:(CGPathRef)newPath {
     CGRect oldRect = self.frame;
-    if(self.animationDuration == 0.0f) self.shapeLayer.path = newPath;
-    else [self.shapeLayer animatePath:newPath];
+    [self.shapeLayer animatePath:newPath];
     CGRect pathRect = CGPathGetBoundingBox(newPath);
     pathRect.origin = CGPointZero;
     self.bounds = pathRect; //Need this step to sync the appearance of the paths to the frame of the shape
@@ -613,11 +604,11 @@
 }
 
 -(void)setFillColor:(UIColor *)fillColor {
-    if(self.animationDuration == 0.0f) [self _setFillColor:fillColor];
+    if(self.animationDelay == 0.0f) [self _setFillColor:fillColor];
     else [self performSelector:@selector(_setFillColor:) withObject:fillColor afterDelay:self.animationDelay];
 }
 -(void)_setFillColor:(UIColor *)fillColor {
-    if(self.animationDuration == 0.0f) { self.shapeLayer.fillColor = fillColor.CGColor;}
+    if(self.animationDelay == 0.0f) { self.shapeLayer.fillColor = fillColor.CGColor;}
     else [self.shapeLayer animateFillColor:fillColor.CGColor];
 }
 
@@ -673,8 +664,7 @@
 }
 
 -(void)_setLineDashPhase:(NSNumber *)lineDashPhase {
-    if(self.animationDuration == 0.0f) { self.shapeLayer.lineDashPhase = [lineDashPhase floatValue];}
-    else [self.shapeLayer animateLineDashPhase:[lineDashPhase floatValue]];
+    [self.shapeLayer animateLineDashPhase:[lineDashPhase floatValue]];
 }
 
 -(CGFloat)lineDashPhase {
@@ -693,38 +683,40 @@
     return self.shapeLayer.lineJoin;
 }
 
+-(CGFloat)lineWidth {
+    C4Log(@"%4.2f",_lineWidth);
+    return _lineWidth;
+}
+
 -(void)setLineWidth:(CGFloat)lineWidth {
-    if(self.animationDelay == 0.0f) { [self _setLineWidth:@(lineWidth)];}
+    _lineWidth = lineWidth;
+    if(self.animationDelay == 0.0f) [self _setLineWidth:@(lineWidth)];
     else [self performSelector:@selector(_setLineWidth:) withObject:@(lineWidth) afterDelay:self.animationDelay];
 }
--(void)_setLineWidth:(NSNumber *)lineWidth {
-    if(self.animationDuration == 0.0f) { self.shapeLayer.lineWidth = [lineWidth floatValue];}
-    else [self.shapeLayer animateLineWidth:[lineWidth floatValue]];
-}
--(CGFloat)lineWidth {
-    return self.shapeLayer.lineWidth;
+
+-(void)_setLineWidth:(NSNumber *)value {
+    [self.shapeLayer animateLineWidth:[value floatValue]];
 }
 
 -(void)setMiterLimit:(CGFloat)miterLimit {
+    _miterLimit = miterLimit;
     if(self.animationDelay == 0.0f) [self _setMiterLimit:@(miterLimit)];
     else [self performSelector:@selector(_setMiterLimit:) withObject:@(miterLimit) afterDelay:self.animationDelay];
 }
+
 -(void)_setMiterLimit:(NSNumber *)miterLimit {
-    if(self.animationDuration == 0.0f) { self.shapeLayer.miterLimit = [miterLimit floatValue];}
-    else [self.shapeLayer animateMiterLimit:[miterLimit floatValue]];
-}
--(CGFloat)miterLimit {
-    return self.shapeLayer.miterLimit;
+    [self.shapeLayer animateMiterLimit:[miterLimit floatValue]];
 }
 
 -(void)setStrokeColor:(UIColor *)strokeColor {
     if(self.animationDelay == 0.0f) [self _setStrokeColor:strokeColor];
     else [self performSelector:@selector(_setStrokeColor:) withObject:strokeColor afterDelay:self.animationDelay];
 }
+
 -(void)_setStrokeColor:(UIColor *)strokeColor {
-    if(self.animationDuration == 0.0f) { self.shapeLayer.strokeColor = strokeColor.CGColor;}
-    else [self.shapeLayer animateStrokeColor:strokeColor.CGColor];
+    [self.shapeLayer animateStrokeColor:strokeColor.CGColor];
 }
+
 -(UIColor *)strokeColor {
     return [UIColor colorWithCGColor:self.shapeLayer.strokeColor];
 }
@@ -734,8 +726,7 @@
     else [self performSelector:@selector(_setStrokeEnd:) withObject:@(strokeEnd) afterDelay:self.animationDelay];
 }
 -(void)_setStrokeEnd:(NSNumber *)strokeEnd {
-    if(self.animationDuration == 0.0f) { self.shapeLayer.strokeEnd = [strokeEnd floatValue];}
-    else [self.shapeLayer animateStrokeEnd:[strokeEnd floatValue]];
+    [self.shapeLayer animateStrokeEnd:[strokeEnd floatValue]];
 }
 -(CGFloat)strokeEnd {
     return self.shapeLayer.strokeEnd;
@@ -746,8 +737,7 @@
     else [self performSelector:@selector(_setStrokeStart:) withObject:@(strokeStart) afterDelay:self.animationDelay];
 }
 -(void)_setStrokeStart:(NSNumber *)strokeStart {
-    if(self.animationDuration == 0.0f) { self.shapeLayer.strokeStart = [strokeStart floatValue];}
-    else [self.shapeLayer animateStrokeStart:[strokeStart floatValue]];
+    [self.shapeLayer animateStrokeStart:[strokeStart floatValue]];
 }
 -(CGFloat)strokeStart {
     return self.shapeLayer.strokeStart;
@@ -809,19 +799,9 @@
 -(NSDictionary *)style {
     NSMutableDictionary *localStyle = [NSMutableDictionary dictionaryWithDictionary:
                                        @{
-                                       @"lineDashPhase":@(self.lineDashPhase),
-                                       @"lineWidth":@(self.lineWidth),
-                                       @"miterLimit":@(self.miterLimit),
-                                       @"strokeEnd":@(self.strokeEnd),
-                                       @"strokeStart":@(self.strokeStart)
+                                       @"shape":self
                                        }];
-    if(self.fillColor != nil) [localStyle setObject:self.fillColor forKey:@"fillColor"];
-    if(self.fillRule != nil) [localStyle setObject:self.fillRule forKey:@"fillRule"];
-    if(self.lineCap != nil) [localStyle setObject:self.lineCap forKey:@"lineCap"];
-    if(self.lineJoin != nil) [localStyle setObject:self.lineJoin forKey:@"lineJoin"];
-    if(self.strokeColor != nil) [localStyle setObject:self.strokeColor forKey:@"strokeColor"];
 
-    [localStyle setObject:self.lineDashPattern == nil ? [NSNull null] : self.lineDashPattern forKey:@"lineDashPattern"];
     
     NSMutableDictionary *localAndSuperStyle = [NSMutableDictionary dictionaryWithDictionary:localStyle];
     localStyle = nil;
@@ -834,48 +814,28 @@
 -(void)setStyle:(NSDictionary *)style {
     [super setStyle:style];
 
-    NSArray *styleKeys = [style allKeys];
-    NSString *key;
-    
-    //Local Style Values
-    key = @"fillColor";
-    if([styleKeys containsObject:key]) self.fillColor = [style objectForKey:key];
-    
-    key = @"fillRule";
-    if([styleKeys containsObject:key]) self.fillRule = [style objectForKey:key];
-    
-    key = @"lineCap";
-    if([styleKeys containsObject:key]) self.lineCap = [style objectForKey:key];
-    
-    key = @"lineDashPattern";
-    if([styleKeys containsObject:key]) self.lineDashPattern = [style objectForKey:key];
-    
-    key = @"lineDashPhase";
-    if([styleKeys containsObject:key]) self.lineDashPhase = [[style objectForKey:key] floatValue];
-    
-    key = @"lineJoin";
-    if([styleKeys containsObject:key]) self.lineJoin = [style objectForKey:key];
-    
-    key = @"lineWidth";
-    if([styleKeys containsObject:key]) self.lineWidth = [[style objectForKey:key] floatValue];
-    
-    key = @"miterLimit";
-    if([styleKeys containsObject:key]) self.miterLimit = [[style objectForKey:key] floatValue];
-    
-    key = @"strokeColor";
-    if([styleKeys containsObject:key]) self.strokeColor = [style objectForKey:key];
-    
-    key = @"strokeEnd";
-    if([styleKeys containsObject:key]) self.strokeEnd = [[style objectForKey:key] floatValue];
-    
-    key = @"strokeStart";
-    if([styleKeys containsObject:key]) self.strokeStart = [[style objectForKey:key] floatValue];
+    @autoreleasepool {
+        C4Shape *shape = [style objectForKey:@"shape"];
+        if(shape != nil) {
+            self.path = shape.path;
+            self.fillColor = shape.fillColor;
+            self.fillRule = shape.fillRule;
+            self.lineCap = shape.lineCap;
+            self.lineDashPattern = shape.lineDashPattern;
+            self.lineDashPhase = shape.lineDashPhase;
+            self.lineJoin = shape.lineJoin;
+            self.lineWidth = shape.lineWidth;
+            self.miterLimit = shape.miterLimit;
+            self.strokeColor = shape.strokeColor;
+            self.strokeEnd = shape.strokeEnd;
+            self.strokeStart = shape.strokeStart;
+        }
+    }
 }
 
 -(id)copyWithZone:(NSZone *)zone {
-    C4Shape *newCopy = [[C4Shape allocWithZone:zone] initWithFrame:self.frame];
-    newCopy.path = self.path;
-    newCopy.style = self.style;
-    return newCopy;
+    C4Shape *newShape = [[C4Shape allocWithZone:zone] initWithFrame:self.frame];
+    newShape.style = self.style;
+    return newShape;
 }
 @end

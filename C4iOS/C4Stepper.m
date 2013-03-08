@@ -25,6 +25,7 @@
     if(self != nil) {
         _UIStepper.layer.masksToBounds = YES;
         _UIStepper = [[UIStepper alloc] init];
+        self.maximumValue = 5;
         self.frame = (CGRect){self.origin,_UIStepper.frame.size};
         [self addSubview:_UIStepper];
     }

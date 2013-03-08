@@ -521,6 +521,7 @@
 }
 
 #pragma mark C4AddSubview
+
 -(void)addCamera:(C4Camera *)camera {
     C4Assert([camera isKindOfClass:[C4Camera class]],
              @"You tried to add a %@ using [canvas addShape:]", [camera class]);

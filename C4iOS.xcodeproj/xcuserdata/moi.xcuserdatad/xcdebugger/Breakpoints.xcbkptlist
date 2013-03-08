@@ -4,16 +4,38 @@
    version = "1.0">
    <FileBreakpoints>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "Yes"
-         filePath = "C4iOS/C4ShapeLayer.m"
-         timestampString = "384072844.290854"
+         filePath = "C4iOS/C4Shape.m"
+         timestampString = "384396714.018464"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "376"
-         endingLineNumber = "376"
-         landmarkName = "-animateRotation:"
+         startingLineNumber = "36"
+         endingLineNumber = "36"
+         landmarkName = "-willChangeShape"
+         landmarkType = "5">
+         <Actions>
+            <BreakpointActionProxy
+               ActionType = "Xcode.BreakpointAction.Log">
+               <ActionContent
+                  message = "%B %H"
+                  conveyanceType = "0">
+               </ActionContent>
+            </BreakpointActionProxy>
+         </Actions>
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "Yes"
+         filePath = "C4iOS/C4Shape.m"
+         timestampString = "384396615.279147"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "29"
+         endingLineNumber = "29"
+         landmarkName = "-initWithFrame:"
          landmarkType = "5">
          <Actions>
             <BreakpointActionProxy
