@@ -187,4 +187,9 @@ typedef enum C4SwipeDirection : UISwipeGestureRecognizerDirection {
  @warning *Note:* In its default implementation, it is assumed that PAN is the only kind of gesture which will call this method.
  */
 -(void)move:(id)sender;
+
+-(UIGestureRecognizer *)gestureForName:(NSString *)gestureName;
+-(NSDictionary *)allGestures;
+
+-(void)tapped;
 @end

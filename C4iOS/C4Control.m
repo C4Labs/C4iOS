@@ -374,9 +374,19 @@
                 C4Assert(NO,@"The gesture you tried to use is not one of: TAP, PINCH, SWIPERIGHT, SWIPELEFT, SWIPEUP, SWIPEDOWN, ROTATION, PAN, or LONGPRESS");
                 break;
         }
+        recognizer.delaysTouchesBegan = YES;
+        recognizer.delaysTouchesEnded = YES;
         [self addGestureRecognizer:recognizer];
         (self.gestureDictionary)[gestureName] = recognizer;
     }
+}
+
+-(UIGestureRecognizer *)gestureForName:(NSString *)gestureName {
+    return (self.gestureDictionary)[gestureName];
+}
+
+-(NSDictionary *)allGestures {
+    return self.gestureDictionary;
 }
 
 -(void)numberOfTapsRequired:(NSInteger)tapCount forGesture:(NSString *)gestureName {
@@ -479,6 +489,10 @@
 }
 
 -(void)swipedDown {
+    [self postNotification:NSStringFromSelector(_cmd)];
+}
+
+-(void)tapped {
     [self postNotification:NSStringFromSelector(_cmd)];
 }
 
