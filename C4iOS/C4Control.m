@@ -467,15 +467,19 @@
 }
 
 -(void)swipedRight {
+    [self postNotification:NSStringFromSelector(_cmd)];
 }
 
 -(void)swipedLeft {
+    [self postNotification:NSStringFromSelector(_cmd)];
 }
 
 -(void)swipedUp {
+    [self postNotification:NSStringFromSelector(_cmd)];
 }
 
 -(void)swipedDown {
+    [self postNotification:NSStringFromSelector(_cmd)];
 }
 
 -(void)pressedLong {
@@ -483,8 +487,10 @@
 
 -(void)pressedLong:(id)sender {
     if(((UIGestureRecognizer *)sender).state == UIGestureRecognizerStateBegan
-       && [((UIGestureRecognizer *)sender) isKindOfClass:[UILongPressGestureRecognizer class]])
+       && [((UIGestureRecognizer *)sender) isKindOfClass:[UILongPressGestureRecognizer class]]) {
         [self runMethod:self.longPressMethodName withObject:sender afterDelay:0.0f];
+        [self postNotification:@"pressedLong"];
+    }
 }
 
 #pragma mark Notification Methods
