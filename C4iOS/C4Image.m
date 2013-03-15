@@ -20,7 +20,7 @@
 @end
 
 @implementation C4Image
-@synthesize filterQueue = _filterQueue, rawData = _rawData;
+@synthesize filterQueue = _filterQueue, rawData = _rawData, rotation = _rotation;
 
 #pragma mark Initialization
 +(C4Image *)imageNamed:(NSString *)name {
@@ -121,6 +121,36 @@
     newFrame.size = size;
     self.frame = newFrame;
 }
+
+#pragma mark C4Control Overrides
+/*
+ The C4Image object is slightly different than other C4Controls in that it has an embedded C4ImageView.
+ There are some issues with rotating the view inside the view, and as such we have to do the followign overrides.
+ 
+ */
+-(void)setRotation:(CGFloat)rotation {
+    [self _setRotation:@(rotation)];
+}
+
+-(void)_setRotation:(NSNumber *)rotation {
+    [(id <C4LayerAnimation>)self.layer animateRotation:[rotation floatValue]-_rotation];
+}
+
+-(void)rotationDidFinish:(CGFloat)rotation {
+    _rotation += rotation;
+    CGAffineTransform transform = CGAffineTransformMakeRotation(_rotation);
+    [UIView beginAnimations:@"rotate" context:nil];
+    [UIView setAnimationDuration:0.0001f];
+    [super setTransform:transform];
+    [UIView commitAnimations];
+}
+
+//We override this as well because if we don't it "looks" like the background doesn't rotate.
+-(void)setBackgroundColor:(UIColor *)backgroundColor {
+    self.imageView.backgroundColor = backgroundColor;
+}
+
+
 
 #pragma mark Contents
 -(UIImage *)UIImage {

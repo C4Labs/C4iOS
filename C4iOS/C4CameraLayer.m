@@ -58,6 +58,10 @@
     return animation;
 }
 
+-(CGFloat)animationDuration {
+    return _animationDuration + 0.0001f;
+}
+
 -(void)setAnimationOptions:(NSUInteger)animationOptions {
     if((animationOptions & LINEAR) == LINEAR) {
         _currentAnimationEasing = kCAMediaTimingFunctionLinear;

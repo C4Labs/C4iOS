@@ -56,6 +56,10 @@
     return animation;
 }
 
+-(CGFloat)animationDuration {
+    return _animationDuration + 0.0001f;
+}
+
 -(void)setAnimationOptions:(NSUInteger)animationOptions {
     if((animationOptions & LINEAR) == LINEAR) {
         _currentAnimationEasing = kCAMediaTimingFunctionLinear;
@@ -214,7 +218,7 @@
     animation.toValue = @(newRotationAngle);
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
         [CATransaction setCompletionBlock:^ {
-            self.rotationAngle = newRotationAngle;
+//            self.rotationAngle = newRotationAngle;
             [self.delegate rotationDidFinish:newRotationAngle];
             [self removeAnimationForKey:@"animateRotationZ"];
         }];

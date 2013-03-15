@@ -367,6 +367,8 @@
         [CATransaction commit];
 }
 
+
+
 -(void)animateRotation:(CGFloat)rotationAngle {
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"transform.rotation.z"];
