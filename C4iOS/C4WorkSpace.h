@@ -7,6 +7,8 @@
 //
 
 #import "C4CanvasController.h"
+#import <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVFoundation.h>
 
 /** The C4WorkSpace class is a subclass of C4CanvasController.
  
@@ -17,5 +19,5 @@
  @warning See C4CanvasController for a full list of functionality available in C4WorkSpace.
  */
 
-@interface C4WorkSpace : C4CanvasController
+@interface C4WorkSpace : C4CanvasController <AVAudioPlayerDelegate>
 @end

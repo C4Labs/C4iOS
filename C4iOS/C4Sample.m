@@ -13,17 +13,6 @@
 
 @implementation C4Sample
 @synthesize player = _player;
-@synthesize currentTime;
-@synthesize pan;
-@synthesize rate;
-@synthesize volume;
-@synthesize playing;
-@synthesize duration;
-@synthesize enableRate;
-@synthesize numberOfLoops;
-@synthesize deviceCurrentTime;
-@synthesize loops = _loops;
-@synthesize meteringEnabled = _meteringEnabled;
 
 +(C4Sample *)sampleNamed:(NSString *)sampleName {
     return [[C4Sample alloc] initWithSampleName:sampleName];
@@ -39,15 +28,11 @@
                                                       withExtension:filenameComponents[1]];
                                     
         _player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
+        self.enableRate = YES;
         self.player.delegate = self;
         [self setup];
     }
     return self;
-}
-
--(void)dealloc {
-    [_player stop];
-    _player = nil;
 }
 
 -(void)play {
@@ -74,41 +59,40 @@
     return self.player.pan;
 }
 
--(void)setPan:(CGFloat)_pan {
-    self.player.pan = _pan;
+-(void)setPan:(CGFloat)pan {
+    self.player.pan = pan;
 }
 
 -(CGFloat)volume {
     return self.player.volume;
 }
 
--(void)setVolume:(CGFloat)_volume {
-    self.player.volume = _volume;
+-(void)setVolume:(CGFloat)volume {
+    self.player.volume = volume;
 }
 
 -(CGFloat)rate {
     return self.player.rate;
 }
 /* isn't working */
--(void)setRate:(CGFloat)_rate {
-    if(_rate >= 0)
-        self.player.rate = _rate;
+-(void)setRate:(CGFloat)rate {
+    if(rate >= 0.5f) self.player.rate = rate;
 }
 
 -(BOOL)enableRate {
     return self.player.enableRate;
 }
 
--(void)setEnableRate:(BOOL)_enableRate {
-    self.player.enableRate = _enableRate;
+-(void)setEnableRate:(BOOL)enableRate {
+    self.player.enableRate = enableRate;
 }
 
 -(CGFloat)currentTime {
     return (CGFloat)self.player.currentTime;
 }
 
--(void)setCurrentTime:(CGFloat)_currentTime {
-    self.player.currentTime = (NSTimeInterval)_currentTime;
+-(void)setCurrentTime:(CGFloat)currentTime {
+    self.player.currentTime = (NSTimeInterval)currentTime;
 }
 
 -(CGFloat)duration {
@@ -139,8 +123,12 @@
 -(void)endedNormally {
 }
 
--(void)setNumberOfLoops:(NSInteger)_numberOfLoops {
-    self.player.numberOfLoops = _numberOfLoops;
+-(void)setNumberOfLoops:(NSInteger)numberOfLoops {
+    self.player.numberOfLoops = numberOfLoops;
+}
+
+-(AVAudioPlayer *)player {
+    return _player;
 }
 
 -(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
@@ -155,6 +143,26 @@
 
 -(BOOL)isMeteringEnabled {
     return self.player.isMeteringEnabled;
+}
+
+-(NSUInteger)numberOfChannels {
+    return self.player.numberOfChannels;
+}
+
+-(CGFloat)peakPowerForChannel:(NSUInteger)channelNumber {
+    return [self.player peakPowerForChannel:channelNumber];
+}
+
+-(CGFloat)averagePowerForChannel:(NSUInteger)channelNumber {
+    return [self.player averagePowerForChannel:channelNumber];
+}
+
+-(void)updateMeters {
+    [self.player updateMeters];
+}
+
+-(NSDictionary *)settings {
+    return self.player.settings;
 }
 
 @end

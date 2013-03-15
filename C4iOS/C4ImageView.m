@@ -32,4 +32,9 @@
     [self.imageLayer addAnimation:animation forKey:@"animateContents"];
     [CATransaction commit];
 }
+
+-(void)rotationDidFinish:(CGFloat)rotationAngle {
+    [(C4Image *)self.superview rotationDidFinish:rotationAngle];
+}
+
 @end

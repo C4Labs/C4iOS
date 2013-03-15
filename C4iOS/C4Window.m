@@ -299,7 +299,7 @@
 }
 
 -(void)setAnimationDuration:(CGFloat)duration {
-    if (duration <= 0.0f) duration = 0.001f;
+    if (duration < 0.0f) duration = 0.0f;
     _animationDuration = duration;
     ((id <C4LayerAnimation>)self.layer).animationDuration = duration;
 }
@@ -375,6 +375,7 @@
             case LONGPRESS:
                 self.longPressMethodName = methodName;
                 recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(pressedLong:)];
+                break;
             default:
                 C4Assert(NO,@"The gesture you tried to use is not one of: TAP, PINCH, SWIPERIGHT, SWIPELEFT, SWIPEUP, SWIPEDOWN, ROTATION, PAN, or LONGPRESS");
                 break;

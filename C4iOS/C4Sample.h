@@ -162,4 +162,10 @@
  */
 @property (readonly, nonatomic, strong) AVAudioPlayer *player;
 
+-(NSUInteger)numberOfChannels;
+-(CGFloat)peakPowerForChannel:(NSUInteger)channelNumber;
+-(CGFloat)averagePowerForChannel:(NSUInteger)channelNumber;
+-(void)updateMeters;
+@property(readonly) NSDictionary *settings;
+
 @end

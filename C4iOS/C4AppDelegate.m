@@ -42,6 +42,7 @@
     self.workspace.view.backgroundColor = [UIColor whiteColor];
 
     [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategorySoloAmbient error: nil];
+    [[AVAudioSession sharedInstance] setActive:YES error:nil];
     _mainView = (C4View *)self.workspace.view;
 
     [self.workspace setup];
@@ -102,7 +103,7 @@
     
     [C4Slider defaultStyle].style = basicStyle;
     [C4Slider defaultStyle].thumbTintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"darkBluePattern"]];
-    [C4Slider defaultStyle].minimumTrackTintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"lightRedPattern"]];
+    [C4Slider defaultStyle].minimumTrackTintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"lightGrayPattern"]];
     [C4Slider defaultStyle].maximumTrackTintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"lightGrayPattern"]];
     
     [C4Stepper defaultStyle].style = basicStyle;

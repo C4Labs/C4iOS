@@ -191,6 +191,7 @@
             case LONGPRESS:
                 self.longPressMethodName = methodName;
                 recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(pressedLong:)];
+                break;
             default:
                 C4Assert(NO,@"The gesture you tried to use is not one of: TAP, PINCH, SWIPERIGHT, SWIPELEFT, SWIPEUP, SWIPEDOWN, ROTATION, PAN, or LONGPRESS");
                 break;
@@ -234,7 +235,7 @@
 
 -(void)minimumPressDuration:(CGFloat)duration forGesture:(NSString *)gestureName {
     UIGestureRecognizer *recognizer = _gestureDictionary[gestureName];
-    if([recognizer isKindOfClass:[UITapGestureRecognizer class]])
+    if([recognizer isKindOfClass:[UILongPressGestureRecognizer class]])
         ((UILongPressGestureRecognizer *) recognizer).minimumPressDuration = duration;
 }
 
