@@ -10,6 +10,8 @@
 
 @interface C4ScrollView : C4Control <UIScrollViewDelegate>
 
++(C4ScrollView *)scrollView:(CGRect)rect;
+
 @property (readonly, nonatomic) UIScrollView *UIScrollview;
 @property (assign, nonatomic) id<UIScrollViewDelegate> delegate;
 @property (readwrite, nonatomic,getter=isDirectionalLockEnabled) BOOL directionalLockEnabled;

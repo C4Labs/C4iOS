@@ -8,7 +8,6 @@
 #import "C4Image.h"
 
 @interface C4Image ()
-
 @property (readwrite, strong, nonatomic) C4ImageView *imageView;
 @property (readwrite, strong, nonatomic) UIImage *originalImage;
 @property (readwrite, strong, nonatomic) CIImage *output;

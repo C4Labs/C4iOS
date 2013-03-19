@@ -166,6 +166,5 @@
 -(CGFloat)peakPowerForChannel:(NSUInteger)channelNumber;
 -(CGFloat)averagePowerForChannel:(NSUInteger)channelNumber;
 -(void)updateMeters;
-@property(readonly) NSDictionary *settings;
-
+@property (readonly, nonatomic) NSDictionary *settings;
 @end

@@ -10,6 +10,10 @@
 
 @implementation C4ScrollView
 
++(C4ScrollView *)scrollView:(CGRect)rect {
+    return [[C4ScrollView alloc] initWithFrame:rect];
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];

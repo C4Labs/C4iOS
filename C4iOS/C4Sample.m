@@ -8,9 +8,6 @@
 
 #import "C4Sample.h"
 
-@interface C4Sample ()
-@end
-
 @implementation C4Sample
 @synthesize player = _player;
 

@@ -31,67 +31,95 @@
         CGPathRef newPath = CGPathCreateWithRect(CGRectZero, nil);
         self.path = newPath;
         [self setActions:@{@"animateRotation":[NSNull null]}];
-
+        
         /* makes sure there are no extraneous animation keys lingering about after init */
         [self removeAllAnimations];
         CFRelease(newPath);
-   }
+    }
     return self;
 }
 
 -(void)dealloc {
-//    C4Log(@"%@, %@, %@",NSStringFromSelector(_cmd),self,self.delegate);
+    //    C4Log(@"%@, %@, %@",NSStringFromSelector(_cmd),self,self.delegate);
     [self removeAllAnimations];
 }
 
 #pragma mark ShapeLayer Methods
 /* encapsulating an animation that will correspond to the superview's animation */
 -(void)animatePath:(CGPathRef)path {
-        [CATransaction begin];
-        CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"path"];
-        if (animation.repeatCount != FOREVER && !self.autoreverses) {
-            [CATransaction setCompletionBlock:^ {
-                self.path = path;
-                [self removeAnimationForKey:@"path"];
-            }];
-        }
-        animation.fromValue = (id)self.path;
-        animation.toValue = (__bridge id)path;
-        [self addAnimation:animation forKey:@"animatePath"];
-        [CATransaction commit];
+    //the following if{} makes sure that the property is set immediately, rather than animating...
+    //for small values of animationDuration, property might not have enough time to tighten itself up
+    //uses _animationDuration because self.animationDuration returns + 0.0001f
+    if(_animationDuration == 0.0f) {
+        self.path = path;
+        return;
+    }
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"path"];
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ {
+            self.path = path;
+            [self removeAnimationForKey:@"path"];
+        }];
+    }
+    animation.fromValue = (id)self.path;
+    animation.toValue = (__bridge id)path;
+    [self addAnimation:animation forKey:@"animatePath"];
+    [CATransaction commit];
 }
 
 -(void)animateFillColor:(CGColorRef)fillColor {
-        [CATransaction begin];
-        CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"fillColor"];
-        animation.fromValue = (id)self.fillColor;
-        animation.toValue = (__bridge id)fillColor;
-        if (animation.repeatCount != FOREVER && !self.autoreverses) {
-            [CATransaction setCompletionBlock:^ {
-                self.fillColor = fillColor;
-                [self removeAnimationForKey:@"fillColor"];
-            }];
-        }
-        [self addAnimation:animation forKey:@"animateFillColor"];
-        [CATransaction commit];
+    //the following if{} makes sure that the property is set immediately, rather than animating...
+    //for small values of animationDuration, property might not have enough time to tighten itself up
+    //uses _animationDuration because self.animationDuration returns + 0.0001f
+    if(_animationDuration == 0.0f) {
+        self.fillColor = fillColor;
+        return;
+    }
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"fillColor"];
+    animation.fromValue = (id)self.fillColor;
+    animation.toValue = (__bridge id)fillColor;
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ {
+            self.fillColor = fillColor;
+            [self removeAnimationForKey:@"fillColor"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"animateFillColor"];
+    [CATransaction commit];
 }
 
 -(void)animateLineDashPhase:(CGFloat)lineDashPhase {
-        [CATransaction begin];
-        CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"lineDashPhase"];
-        animation.fromValue = @(self.lineDashPhase);
-        animation.toValue = @(lineDashPhase);
-        if (animation.repeatCount != FOREVER && !self.autoreverses) {
-            [CATransaction setCompletionBlock:^ {
-                self.lineDashPhase = lineDashPhase;
-                [self removeAnimationForKey:@"lineDashPhase"];
-            }];
-        }
-        [self addAnimation:animation forKey:@"animateLineDashPhase"];
-        [CATransaction commit];
+    //the following if{} makes sure that the property is set immediately, rather than animating...
+    //for small values of animationDuration, property might not have enough time to tighten itself up
+    //uses _animationDuration because self.animationDuration returns + 0.0001f
+    if(_animationDuration == 0.0f) {
+        self.lineDashPhase = lineDashPhase;
+        return;
+    }
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"lineDashPhase"];
+    animation.fromValue = @(self.lineDashPhase);
+    animation.toValue = @(lineDashPhase);
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ {
+            self.lineDashPhase = lineDashPhase;
+            [self removeAnimationForKey:@"lineDashPhase"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"animateLineDashPhase"];
+    [CATransaction commit];
 }
 
 -(void)animateLineWidth:(CGFloat)lineWidth {
+    //the following if{} makes sure that the property is set immediately, rather than animating...
+    //for small values of animationDuration, property might not have enough time to tighten itself up
+    //uses _animationDuration because self.animationDuration returns + 0.0001f
+    if(_animationDuration == 0.0f) {
+        self.lineWidth = lineWidth;
+        return;
+    }
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"lineWidth"];
     animation.fromValue = @(self.lineWidth);
@@ -107,64 +135,92 @@
 }
 
 -(void)animateMiterLimit:(CGFloat)miterLimit {
-        [CATransaction begin];
-        CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"miterLimit"];
-        animation.fromValue = @(self.miterLimit);
-        animation.toValue = @(miterLimit);
-        if (animation.repeatCount != FOREVER && !self.autoreverses) {
-            [CATransaction setCompletionBlock:^ {
-                self.miterLimit = miterLimit;
-                [self removeAnimationForKey:@"miterLimit"];
-            }];
-        }
-        [self addAnimation:animation forKey:@"animateMiterLimit"];
-        [CATransaction commit];
+    //the following if{} makes sure that the property is set immediately, rather than animating...
+    //for small values of animationDuration, property might not have enough time to tighten itself up
+    //uses _animationDuration because self.animationDuration returns + 0.0001f
+    if(_animationDuration == 0.0f) {
+        self.miterLimit = miterLimit;
+        return;
+    }
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"miterLimit"];
+    animation.fromValue = @(self.miterLimit);
+    animation.toValue = @(miterLimit);
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ {
+            self.miterLimit = miterLimit;
+            [self removeAnimationForKey:@"miterLimit"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"animateMiterLimit"];
+    [CATransaction commit];
 }
 
 -(void)animateStrokeColor:(CGColorRef)strokeColor {
-        [CATransaction begin];
-        CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"strokeColor"];
-        animation.fromValue = (id)self.strokeColor;
-        animation.toValue = (__bridge id)strokeColor;
-        if (animation.repeatCount != FOREVER && !self.autoreverses) {
-            [CATransaction setCompletionBlock:^ {
-                self.strokeColor = strokeColor;
-                [self removeAnimationForKey:@"strokeColor"];
-            }];
-        }
-        
-        [self addAnimation:animation forKey:@"animateStrokeColor"];
-        [CATransaction commit];
+    //the following if{} makes sure that the property is set immediately, rather than animating...
+    //for small values of animationDuration, property might not have enough time to tighten itself up
+    //uses _animationDuration because self.animationDuration returns + 0.0001f
+    if(_animationDuration == 0.0f) {
+        self.strokeColor = strokeColor;
+        return;
+    }
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"strokeColor"];
+    animation.fromValue = (id)self.strokeColor;
+    animation.toValue = (__bridge id)strokeColor;
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ {
+            self.strokeColor = strokeColor;
+            [self removeAnimationForKey:@"strokeColor"];
+        }];
+    }
+    
+    [self addAnimation:animation forKey:@"animateStrokeColor"];
+    [CATransaction commit];
 }
 
 -(void)animateStrokeEnd:(CGFloat)strokeEnd {
-        [CATransaction begin];
-        CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"strokeEnd"];
-        animation.fromValue = @(self.strokeEnd);
-        animation.toValue = @(strokeEnd);
-        if (animation.repeatCount != FOREVER && !self.autoreverses) {
-            [CATransaction setCompletionBlock:^ {
-                self.strokeEnd = strokeEnd;
-                [self removeAnimationForKey:@"strokeEnd"];
-            }];
-        }
-        [self addAnimation:animation forKey:@"animateStrokeEnd"];
-        [CATransaction commit];
+    //the following if{} makes sure that the property is set immediately, rather than animating...
+    //for small values of animationDuration, property might not have enough time to tighten itself up
+    //uses _animationDuration because self.animationDuration returns + 0.0001f
+    if(_animationDuration == 0.0f) {
+        self.strokeEnd = strokeEnd;
+        return;
+    }
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"strokeEnd"];
+    animation.fromValue = @(self.strokeEnd);
+    animation.toValue = @(strokeEnd);
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ {
+            self.strokeEnd = strokeEnd;
+            [self removeAnimationForKey:@"strokeEnd"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"animateStrokeEnd"];
+    [CATransaction commit];
 }
 
 -(void)animateStrokeStart:(CGFloat)strokeStart {
-        [CATransaction begin];
-        CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"strokeStart"];
-        animation.fromValue = @(self.strokeStart);
-        animation.toValue = @(strokeStart);
-        if (animation.repeatCount != FOREVER && !self.autoreverses) {
-            [CATransaction setCompletionBlock:^ {
-                self.strokeStart = strokeStart;
-                [self removeAnimationForKey:@"strokeStart"];
-            }];
-        }
-        [self addAnimation:animation forKey:@"animateStrokeStart"];
-        [CATransaction commit];
+    //the following if{} makes sure that the property is set immediately, rather than animating...
+    //for small values of animationDuration, property might not have enough time to tighten itself up
+    //uses _animationDuration because self.animationDuration returns + 0.0001f
+    if(_animationDuration == 0.0f) {
+        self.strokeStart = strokeStart;
+        return;
+    }
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"strokeStart"];
+    animation.fromValue = @(self.strokeStart);
+    animation.toValue = @(strokeStart);
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ {
+            self.strokeStart = strokeStart;
+            [self removeAnimationForKey:@"strokeStart"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"animateStrokeStart"];
+    [CATransaction commit];
 }
 
 #pragma mark Blocked Methods
@@ -260,6 +316,13 @@
 }
 
 -(void)animateBackgroundColor:(CGColorRef)backgroundColor {
+    //the following if{} makes sure that the property is set immediately, rather than animating...
+    //for small values of animationDuration, property might not have enough time to tighten itself up
+    //uses _animationDuration because self.animationDuration returns + 0.0001f
+    if(_animationDuration == 0.0f) {
+        self.backgroundColor = backgroundColor;
+        return;
+    }
     if (self.animationDuration == 0.0f) self.backgroundColor = backgroundColor;
     else {
         [CATransaction begin];
@@ -278,93 +341,137 @@
 }
 
 -(void)animateBorderColor:(CGColorRef)borderColor {
-        [CATransaction begin];
-        CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"borderColor"];
-        animation.fromValue = (id)self.borderColor;
-        animation.toValue = (__bridge id)borderColor;
-        if (animation.repeatCount != FOREVER && !self.autoreverses) {
-            [CATransaction setCompletionBlock:^ {
-                self.borderColor = borderColor;
-                [self removeAnimationForKey:@"animateBorderColor"];
-            }];
-        }
-        [self addAnimation:animation forKey:@"animateBorderColor"];
-        [CATransaction commit];
+    //the following if{} makes sure that the property is set immediately, rather than animating...
+    //for small values of animationDuration, property might not have enough time to tighten itself up
+    //uses _animationDuration because self.animationDuration returns + 0.0001f
+    if(_animationDuration == 0.0f) {
+        self.borderColor = borderColor;
+        return;
+    }
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"borderColor"];
+    animation.fromValue = (id)self.borderColor;
+    animation.toValue = (__bridge id)borderColor;
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ {
+            self.borderColor = borderColor;
+            [self removeAnimationForKey:@"animateBorderColor"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"animateBorderColor"];
+    [CATransaction commit];
 }
 
 -(void)animateBackgroundFilters:(NSArray *)backgroundFilters {
-        [CATransaction begin];
-        CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"backgroundFilters"];
-        animation.fromValue = self.backgroundFilters;
-        animation.toValue = backgroundFilters;
-        if (animation.repeatCount != FOREVER && !self.autoreverses) {
-            [CATransaction setCompletionBlock:^ {
-                self.backgroundFilters = backgroundFilters;
-                [self removeAnimationForKey:@"animateBackgroundFilters"];
-            }];
-        }
-        [self addAnimation:animation forKey:@"animateBackgroundFilters"];
-        [CATransaction commit];
+    //the following if{} makes sure that the property is set immediately, rather than animating...
+    //for small values of animationDuration, property might not have enough time to tighten itself up
+    //uses _animationDuration because self.animationDuration returns + 0.0001f
+    if(_animationDuration == 0.0f) {
+        self.backgroundFilters = backgroundFilters;
+        return;
+    }
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"backgroundFilters"];
+    animation.fromValue = self.backgroundFilters;
+    animation.toValue = backgroundFilters;
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ {
+            self.backgroundFilters = backgroundFilters;
+            [self removeAnimationForKey:@"animateBackgroundFilters"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"animateBackgroundFilters"];
+    [CATransaction commit];
 }
 
 -(void)animateBorderWidth:(CGFloat)borderWidth {
-        [CATransaction begin];
-        CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"borderWidth"];
-        animation.fromValue = @(self.borderWidth);
-        animation.toValue = @(borderWidth);
-        if (animation.repeatCount != FOREVER && !self.autoreverses) {
-            [CATransaction setCompletionBlock:^ {
-                self.borderWidth = borderWidth;
-                [self removeAnimationForKey:@"animateBorderWidth"];
-            }];
-        }
-        [self addAnimation:animation forKey:@"animateBorderWidth"];
-        [CATransaction commit];
+    //the following if{} makes sure that the property is set immediately, rather than animating...
+    //for small values of animationDuration, property might not have enough time to tighten itself up
+    //uses _animationDuration because self.animationDuration returns + 0.0001f
+    if(_animationDuration == 0.0f) {
+        self.borderWidth = borderWidth;
+        return;
+    }
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"borderWidth"];
+    animation.fromValue = @(self.borderWidth);
+    animation.toValue = @(borderWidth);
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ {
+            self.borderWidth = borderWidth;
+            [self removeAnimationForKey:@"animateBorderWidth"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"animateBorderWidth"];
+    [CATransaction commit];
 }
 
 -(void)animateCompositingFilter:(id)compositingFilter {
-        [CATransaction begin];
-        CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"compositingFilter"];
-        animation.fromValue = self.compositingFilter;
-        animation.toValue = compositingFilter;
-        if (animation.repeatCount != FOREVER && !self.autoreverses) {
-            [CATransaction setCompletionBlock:^ {
-                self.compositingFilter = compositingFilter;
-                [self removeAnimationForKey:@"animateCompositingFilter"];
-            }];
-        }
-        [self addAnimation:animation forKey:@"animateCompositingFilter"];
-        [CATransaction commit];
+    //the following if{} makes sure that the property is set immediately, rather than animating...
+    //for small values of animationDuration, property might not have enough time to tighten itself up
+    //uses _animationDuration because self.animationDuration returns + 0.0001f
+    if(_animationDuration == 0.0f) {
+        self.compositingFilter = compositingFilter;
+        return;
+    }
+
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"compositingFilter"];
+    animation.fromValue = self.compositingFilter;
+    animation.toValue = compositingFilter;
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ {
+            self.compositingFilter = compositingFilter;
+            [self removeAnimationForKey:@"animateCompositingFilter"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"animateCompositingFilter"];
+    [CATransaction commit];
 }
 
 -(void)animateCornerRadius:(CGFloat)cornerRadius {
-        [CATransaction begin];
-        CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"cornerRadius"];
-        animation.fromValue = @(self.cornerRadius);
-        animation.toValue = @(cornerRadius);
-        if (animation.repeatCount != FOREVER && !self.autoreverses) {
-            [CATransaction setCompletionBlock:^ {
-                self.cornerRadius = cornerRadius;
-                [self removeAnimationForKey:@"animateCornerRadius"];
-            }];
-        }
-        [self addAnimation:animation forKey:@"animateCornerRadius"];
-        [CATransaction commit];
+    //the following if{} makes sure that the property is set immediately, rather than animating...
+    //for small values of animationDuration, property might not have enough time to tighten itself up
+    //uses _animationDuration because self.animationDuration returns + 0.0001f
+    if(_animationDuration == 0.0f) {
+        self.cornerRadius = cornerRadius;
+        return;
+    }
+
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"cornerRadius"];
+    animation.fromValue = @(self.cornerRadius);
+    animation.toValue = @(cornerRadius);
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ {
+            self.cornerRadius = cornerRadius;
+            [self removeAnimationForKey:@"animateCornerRadius"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"animateCornerRadius"];
+    [CATransaction commit];
 }
 
 -(void)animateLayerTransform:(CATransform3D)layerTransform {
-        [CATransaction begin];
-        CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"sublayerTransform"];
-        animation.fromValue = [NSValue valueWithCATransform3D:self.sublayerTransform];
-        animation.toValue = [NSValue valueWithCATransform3D:layerTransform];
-        if (animation.repeatCount != FOREVER && !self.autoreverses) {
-            [CATransaction setCompletionBlock:^ {
-                self.sublayerTransform = layerTransform;
-                [self removeAnimationForKey:@"sublayerTransform"];
-            }];
-        }
-        [self addAnimation:animation forKey:@"sublayerTransform"];
-        [CATransaction commit];
+    //the following if{} makes sure that the property is set immediately, rather than animating...
+    //for small values of animationDuration, property might not have enough time to tighten itself up
+    //uses _animationDuration because self.animationDuration returns + 0.0001f
+    if(_animationDuration == 0.0f) {
+        self.sublayerTransform = layerTransform;
+        return;
+    }
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"sublayerTransform"];
+    animation.fromValue = [NSValue valueWithCATransform3D:self.sublayerTransform];
+    animation.toValue = [NSValue valueWithCATransform3D:layerTransform];
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ {
+            self.sublayerTransform = layerTransform;
+            [self removeAnimationForKey:@"sublayerTransform"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"sublayerTransform"];
+    [CATransaction commit];
 }
 
 
@@ -418,93 +525,135 @@
 }
 
 -(void)animateShadowColor:(CGColorRef)shadowColor {
-        [CATransaction begin];
-        CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowColor"];
-        animation.fromValue = (id)self.shadowColor;
-        animation.toValue = (__bridge id)shadowColor;
-        if (animation.repeatCount != FOREVER && !self.autoreverses) {
-            [CATransaction setCompletionBlock:^ {
-                self.shadowColor = shadowColor;
-                [self removeAnimationForKey:@"animateShadowColor"];
-            }];
-        }
-        [self addAnimation:animation forKey:@"animateShadowColor"];
-        [CATransaction commit];
+    //the following if{} makes sure that the property is set immediately, rather than animating...
+    //for small values of animationDuration, property might not have enough time to tighten itself up
+    //uses _animationDuration because self.animationDuration returns + 0.0001f
+    if(_animationDuration == 0.0f) {
+        self.shadowColor = shadowColor;
+        return;
+    }
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowColor"];
+    animation.fromValue = (id)self.shadowColor;
+    animation.toValue = (__bridge id)shadowColor;
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ {
+            self.shadowColor = shadowColor;
+            [self removeAnimationForKey:@"animateShadowColor"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"animateShadowColor"];
+    [CATransaction commit];
 }
 
 -(void)animateShadowOffset:(CGSize)shadowOffset {
-        [CATransaction begin];
-        CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowOffset"];
-        animation.fromValue = [NSValue valueWithCGSize:self.shadowOffset];
-        animation.toValue = [NSValue valueWithCGSize:shadowOffset];
-        if (animation.repeatCount != FOREVER && !self.autoreverses) {
-            [CATransaction setCompletionBlock:^ {
-                self.shadowOffset = shadowOffset;
-                [self removeAnimationForKey:@"animateShadowOffset"];
-            }];
-        }
-        [self addAnimation:animation forKey:@"animateShadowOffset"];
-        [CATransaction commit];
+    //the following if{} makes sure that the property is set immediately, rather than animating...
+    //for small values of animationDuration, property might not have enough time to tighten itself up
+    //uses _animationDuration because self.animationDuration returns + 0.0001f
+    if(_animationDuration == 0.0f) {
+        self.shadowOffset = shadowOffset;
+        return;
+    }
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowOffset"];
+    animation.fromValue = [NSValue valueWithCGSize:self.shadowOffset];
+    animation.toValue = [NSValue valueWithCGSize:shadowOffset];
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ {
+            self.shadowOffset = shadowOffset;
+            [self removeAnimationForKey:@"animateShadowOffset"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"animateShadowOffset"];
+    [CATransaction commit];
 }
 
 -(void)animateShadowOpacity:(CGFloat)shadowOpacity {
-        [CATransaction begin];
-        CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowOpacity"];
-        animation.fromValue = @(self.shadowOpacity);
-        animation.toValue = @(shadowOpacity);
-        if (animation.repeatCount != FOREVER && !self.autoreverses) {
-            [CATransaction setCompletionBlock:^ {
-                self.shadowOpacity = shadowOpacity;
-                [self removeAnimationForKey:@"animateShadowOpacity"];
-            }];
-        }
-        [self addAnimation:animation forKey:@"animateShadowOpacity"];
-        [CATransaction commit];
+    //the following if{} makes sure that the property is set immediately, rather than animating...
+    //for small values of animationDuration, property might not have enough time to tighten itself up
+    //uses _animationDuration because self.animationDuration returns + 0.0001f
+    if(_animationDuration == 0.0f) {
+        self.shadowOpacity = shadowOpacity;
+        return;
+    }
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowOpacity"];
+    animation.fromValue = @(self.shadowOpacity);
+    animation.toValue = @(shadowOpacity);
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ {
+            self.shadowOpacity = shadowOpacity;
+            [self removeAnimationForKey:@"animateShadowOpacity"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"animateShadowOpacity"];
+    [CATransaction commit];
 }
 
 -(void)animateShadowPath:(CGPathRef)shadowPath {
-        [CATransaction begin];
-        CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowPath"];
-        animation.fromValue = (id)self.shadowPath;
-        animation.toValue = (__bridge id)shadowPath;
-        if (animation.repeatCount != FOREVER && !self.autoreverses) {
-            [CATransaction setCompletionBlock:^ {
-                self.shadowPath = shadowPath;
-                [self removeAnimationForKey:@"animateShadowPath"];
-            }];
-        }
-        [self addAnimation:animation forKey:@"animateShadowPath"];
-        [CATransaction commit];
+    //the following if{} makes sure that the property is set immediately, rather than animating...
+    //for small values of animationDuration, property might not have enough time to tighten itself up
+    //uses _animationDuration because self.animationDuration returns + 0.0001f
+    if(_animationDuration == 0.0f) {
+        self.shadowPath = shadowPath;
+        return;
+    }
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowPath"];
+    animation.fromValue = (id)self.shadowPath;
+    animation.toValue = (__bridge id)shadowPath;
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ {
+            self.shadowPath = shadowPath;
+            [self removeAnimationForKey:@"animateShadowPath"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"animateShadowPath"];
+    [CATransaction commit];
 }
 
 -(void)animateShadowRadius:(CGFloat)shadowRadius {
-        [CATransaction begin];
-        CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowRadius"];
-        animation.fromValue = @(self.shadowRadius);
-        animation.toValue = @(shadowRadius);
-        if (animation.repeatCount != FOREVER && !self.autoreverses) {
-            [CATransaction setCompletionBlock:^ {
-                self.shadowRadius = shadowRadius;
-                [self removeAnimationForKey:@"animateShadowRadius"];
-            }];
-        }
-        [self addAnimation:animation forKey:@"animateShadowRadius"];
-        [CATransaction commit];
+    //the following if{} makes sure that the property is set immediately, rather than animating...
+    //for small values of animationDuration, property might not have enough time to tighten itself up
+    //uses _animationDuration because self.animationDuration returns + 0.0001f
+    if(_animationDuration == 0.0f) {
+        self.shadowRadius = shadowRadius;
+        return;
+    }
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowRadius"];
+    animation.fromValue = @(self.shadowRadius);
+    animation.toValue = @(shadowRadius);
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ {
+            self.shadowRadius = shadowRadius;
+            [self removeAnimationForKey:@"animateShadowRadius"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"animateShadowRadius"];
+    [CATransaction commit];
 }
 
 -(void)animateZPosition:(CGFloat)zPosition {
-        [CATransaction begin];
-        CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"zPosition"];
-        animation.fromValue = @(self.zPosition);
-        animation.toValue = @(zPosition);
-        if (animation.repeatCount != FOREVER && !self.autoreverses) {
-            [CATransaction setCompletionBlock:^ {
-                self.zPosition = zPosition;
-                [self removeAnimationForKey:@"animateZPosition"];
-            }];
-        }
-        [self addAnimation:animation forKey:@"animateZPosition"];
-        [CATransaction commit];
+    //the following if{} makes sure that the property is set immediately, rather than animating...
+    //for small values of animationDuration, property might not have enough time to tighten itself up
+    //uses _animationDuration because self.animationDuration returns + 0.0001f
+    if(_animationDuration == 0.0f) {
+        self.zPosition = zPosition;
+        return;
+    }
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"zPosition"];
+    animation.fromValue = @(self.zPosition);
+    animation.toValue = @(zPosition);
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ {
+            self.zPosition = zPosition;
+            [self removeAnimationForKey:@"animateZPosition"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"animateZPosition"];
+    [CATransaction commit];
 }
 
 @end

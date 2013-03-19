@@ -235,4 +235,8 @@
     if(self.isValid) return _timer.userInfo;
     return nil;
 }
+
+-(void)invalidate {
+    [_timer invalidate];
+}
 @end

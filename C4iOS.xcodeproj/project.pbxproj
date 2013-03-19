@@ -63,7 +63,6 @@
 		ED321FC816E93C6200928EBA /* darkRedPattern@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED321FC616E93C6000928EBA /* darkRedPattern@2x.png */; };
 		ED321FC916E93C6200928EBA /* darkRedPattern.png in Resources */ = {isa = PBXBuildFile; fileRef = ED321FC716E93C6100928EBA /* darkRedPattern.png */; };
 		ED321FD616E9469700928EBA /* C4ScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED321FD516E9469700928EBA /* C4ScrollView.m */; };
-		ED38510616F287A000DB6D95 /* C4AudioRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = ED38510516F287A000DB6D95 /* C4AudioRecorder.m */; };
 		ED38510916F28A5A00DB6D95 /* C4Gradient.png in Resources */ = {isa = PBXBuildFile; fileRef = ED38510716F28A5A00DB6D95 /* C4Gradient.png */; };
 		ED38510A16F28A5A00DB6D95 /* C4Gradient@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED38510816F28A5A00DB6D95 /* C4Gradient@2x.png */; };
 		ED43517916DD78D000340298 /* C4Spin00.png in Resources */ = {isa = PBXBuildFile; fileRef = ED43516D16DD78CF00340298 /* C4Spin00.png */; };
@@ -206,8 +205,6 @@
 		ED321FC716E93C6100928EBA /* darkRedPattern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = darkRedPattern.png; sourceTree = "<group>"; };
 		ED321FD416E9469700928EBA /* C4ScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4ScrollView.h; sourceTree = "<group>"; };
 		ED321FD516E9469700928EBA /* C4ScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4ScrollView.m; sourceTree = "<group>"; };
-		ED38510416F287A000DB6D95 /* C4AudioRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4AudioRecorder.h; sourceTree = "<group>"; };
-		ED38510516F287A000DB6D95 /* C4AudioRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4AudioRecorder.m; sourceTree = "<group>"; };
 		ED38510716F28A5A00DB6D95 /* C4Gradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = C4Gradient.png; sourceTree = "<group>"; };
 		ED38510816F28A5A00DB6D95 /* C4Gradient@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "C4Gradient@2x.png"; sourceTree = "<group>"; };
 		ED43516D16DD78CF00340298 /* C4Spin00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = C4Spin00.png; sourceTree = "<group>"; };
@@ -485,8 +482,6 @@
 				EDBCDFC016D26EFE000E4A55 /* C4ImageView.m */,
 				EDF65456150E104100194671 /* C4Sample.h */,
 				EDF65457150E104100194671 /* C4Sample.m */,
-				ED38510416F287A000DB6D95 /* C4AudioRecorder.h */,
-				ED38510516F287A000DB6D95 /* C4AudioRecorder.m */,
 				EDECBF6A14EAE26600D9A446 /* C4Shape.h */,
 				EDECBF6B14EAE26600D9A446 /* C4Shape.m */,
 				ED89848514EE180400BB7AB0 /* C4ShapeLayer.h */,
@@ -814,7 +809,6 @@
 				EDD9CE7A16E6AB0900018ABF /* C4Stepper.m in Sources */,
 				ED5B172D16E7B5190057BF06 /* C4ActivityIndicator.m in Sources */,
 				ED321FD616E9469700928EBA /* C4ScrollView.m in Sources */,
-				ED38510616F287A000DB6D95 /* C4AudioRecorder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

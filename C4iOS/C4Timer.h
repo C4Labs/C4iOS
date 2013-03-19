@@ -108,4 +108,5 @@
  */
 @property (readonly, nonatomic, weak) id userInfo;
 
+-(void)invalidate;
 @end
