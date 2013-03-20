@@ -83,9 +83,12 @@
     return currentCenter;
 }
 
+-(CGPoint)origin {
+    return self.frame.origin;
+}
+
 -(void)setOrigin:(CGPoint)origin {
-    _origin = origin;
-    CGPoint difference = self.origin;
+    CGPoint difference = origin;
     difference.x += self.frame.size.width/2.0f;
     difference.y += self.frame.size.height/2.0f;
     self.center = difference;

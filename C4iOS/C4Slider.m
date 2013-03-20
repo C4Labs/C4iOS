@@ -269,7 +269,7 @@
 }
 
 -(CGFloat)minimumValue {
-    return self.UISlider.maximumValue;
+    return self.UISlider.minimumValue;
 }
 
 -(void)setMinimumValue:(CGFloat)minimumValue {
