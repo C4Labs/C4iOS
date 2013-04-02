@@ -205,6 +205,21 @@
     [CATransaction commit];
 }
 
+-(void)animateContents:(CGImageRef)_image {
+    [CATransaction begin];
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"contents"];
+    animation.fromValue = self.contents;
+    animation.toValue = (__bridge id)_image;
+    if (animation.repeatCount != FOREVER && !self.autoreverses) {
+        [CATransaction setCompletionBlock:^ {
+            self.contents = (__bridge id)_image;
+            [self removeAnimationForKey:@"animateContents"];
+        }];
+    }
+    [self addAnimation:animation forKey:@"animateContents"];
+    [CATransaction commit];
+}
+
 -(void)animateCornerRadius:(CGFloat)cornerRadius {
     //the following if{} makes sure that the property is set immediately, rather than animating...
     //for small values of animationDuration, property might not have enough time to tighten itself up

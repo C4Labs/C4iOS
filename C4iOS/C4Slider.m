@@ -24,10 +24,13 @@
 -(id)initWithFrame:(CGRect)frame defaults:(BOOL)useDefaults {
     self = [super initWithFrame:frame];
     if(self != nil) {
-        _UISlider = [[UISlider alloc] initWithFrame:self.bounds];
-        _UISlider.userInteractionEnabled = NO;
+        
+        _UISlider = [[UISlider alloc] initWithFrame:frame];
+        
         if(useDefaults) [self setupFromDefaults];
+        
         [self addSubview:_UISlider];
+        self.userInteractionEnabled = YES;
         [self setup];
     }
     return self;
@@ -197,41 +200,41 @@
 
 #pragma mark Tracking
 
--(BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
-    [self postNotification:@"trackingBegan"];
-    [self beginTracking];
-    return [self.UISlider beginTrackingWithTouch:touch withEvent:event];
-}
-
--(BOOL)continueTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
-    [self postNotification:@"trackingContinued"];
-    [self continueTracking];
-    return [self.UISlider continueTrackingWithTouch:touch withEvent:event];
-}
-
--(void)endTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
-    [self postNotification:@"trackingEnded"];
-    [self endTracking];
-    return [self.UISlider endTrackingWithTouch:touch withEvent:event];
-}
-
--(void)cancelTrackingWithEvent:(UIEvent *)event {
-    [self postNotification:@"trackingCancelled"];
-    [self cancelTracking];
-    [self.UISlider cancelTrackingWithEvent:event];
-}
-
--(void)beginTracking {
-}
-
--(void)continueTracking {
-}
-
--(void)endTracking {
-}
-
--(void)cancelTracking {
-}
+//-(BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
+//    [self postNotification:@"trackingBegan"];
+//    [self beginTracking];
+//    return [self.UISlider beginTrackingWithTouch:touch withEvent:event];
+//}
+//
+//-(BOOL)continueTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
+//    [self postNotification:@"trackingContinued"];
+//    [self continueTracking];
+//    return [self.UISlider continueTrackingWithTouch:touch withEvent:event];
+//}
+//
+//-(void)endTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
+//    [self postNotification:@"trackingEnded"];
+//    [self endTracking];
+//    return [self.UISlider endTrackingWithTouch:touch withEvent:event];
+//}
+//
+//-(void)cancelTrackingWithEvent:(UIEvent *)event {
+//    [self postNotification:@"trackingCancelled"];
+//    [self cancelTracking];
+//    [self.UISlider cancelTrackingWithEvent:event];
+//}
+//
+//-(void)beginTracking {
+//}
+//
+//-(void)continueTracking {
+//}
+//
+//-(void)endTracking {
+//}
+//
+//-(void)cancelTracking {
+//}
 
 +(C4Slider *)slider:(CGRect)rect {
     return [[C4Slider alloc] initWithFrame:rect];
