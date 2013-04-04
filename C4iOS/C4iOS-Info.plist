@@ -67,6 +67,8 @@
 	<true/>
 	<key>UIFileSharingEnabled</key>
 	<false/>
+	<key>UIInterfaceOrientation</key>
+	<string>UIInterfaceOrientationLandscapeRight</string>
 	<key>UILaunchImageFile</key>
 	<string>C4_LaunchImage_iPhone.png</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -77,10 +79,10 @@
 	<false/>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
 	</array>
 </dict>
 </plist>

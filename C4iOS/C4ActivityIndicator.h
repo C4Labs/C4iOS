@@ -14,7 +14,7 @@ typedef NS_ENUM(NSInteger, C4ActivityIndicatorStyle) {
     GRAY,
 };
 
-@interface C4ActivityIndicator : C4Control
+@interface C4ActivityIndicator : C4Control <C4UIElement>
 
 +(C4ActivityIndicator *)indicatorWithStyle:(C4ActivityIndicatorStyle)style;
 -(id)initWithActivityIndicatorStyle:(C4ActivityIndicatorStyle)style;

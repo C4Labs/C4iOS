@@ -84,12 +84,9 @@
 }
 
 -(CGPoint)center {
-    CGPoint currentCenter = super.center;
-    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-    if(orientation == UIDeviceOrientationLandscapeLeft || orientation == UIDeviceOrientationLandscapeRight) {
-        currentCenter.x = super.center.y;
-        currentCenter.y = super.center.x;
-    }
+    CGPoint currentCenter = self.origin;
+    currentCenter.x += self.width / 2.0f;
+    currentCenter.y += self.height / 2.0f;
     return currentCenter;
 }
 
@@ -202,7 +199,7 @@
 
 #pragma mark Position, Rotation, Transform
 -(CGFloat)width {
-    return self.frame.size.width;
+    return self.bounds.size.width;
 }
 
 -(CGFloat)height {
@@ -567,7 +564,13 @@
     C4Assert(![[subview class] isKindOfClass:[C4Image class]], @"You just tried to add a C4Image using the addSubview: method, please use addImage:");
     C4Assert(![[subview class] isKindOfClass:[C4GL class]], @"You just tried to add a C4GL using the addSubview: method, please use addGL:");
     C4Assert(![[subview class] isKindOfClass:[C4Label class]], @"You just tried to add a C4Label using the addSubview: method, please use addLabel:");
+    //unsure to keep this method...
+    C4Assert(![subview conformsToProtocol:NSProtocolFromString(@"C4UIElement")], @"You just tried to add a C4UIElement using the addSubview: method, please use addUIElement:");
     [super addSubview:subview];
+}
+
+-(void)addUIElement:(id<C4UIElement>)object {
+    [(C4View *)self addSubview:(UIView *)object];
 }
 
 -(void)addLabel:(C4Label *)label {
@@ -612,6 +615,9 @@
             [self addCamera:obj];
         }
         else if([obj isKindOfClass:[UIView class]]) {
+            [self addSubview:obj];
+        }
+        else if([obj conformsToProtocol:NSProtocolFromString(@"C4UIElement")]) {
             [self addSubview:obj];
         }
         else {

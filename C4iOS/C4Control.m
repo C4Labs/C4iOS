@@ -13,6 +13,7 @@
 @property (readwrite, atomic, strong) NSString *longPressMethodName;
 @property (readwrite, atomic, strong) NSMutableDictionary *gestureDictionary;
 @property (readonly, atomic) NSArray *stylePropertyNames;
+@property (readwrite, atomic) CGPoint firstPositionForMove;
 @end
 
 @implementation C4Control
@@ -55,7 +56,7 @@
 #pragma mark UIView animatable property overrides
 
 -(void)setCenter:(CGPoint)center {
-    if(self.animationDuration == 0.0f) super.center = center;
+    if(_animationDuration == 0.0f) super.center = center;
     else {
         CGPoint oldCenter = CGPointMake(self.center.x, self.center.y);
         
@@ -73,15 +74,19 @@
     }
 }
 
--(CGPoint)center {
-    CGPoint currentCenter = super.center;
-    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-    if(orientation == UIDeviceOrientationLandscapeLeft || orientation == UIDeviceOrientationLandscapeRight) {
-        currentCenter.x = super.center.y;
-        currentCenter.y = super.center.x;
-    }
-    return currentCenter;
-}
+/*
+ Had this in before, but took it out when I was fixing center position issues with labels and shapes
+ There was a bug with this implementation that was sometimes switching the position base on landscape orientation
+ */
+//-(CGPoint)center {
+//    CGPoint currentCenter = super.center;
+//    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+//    if(orientation == UIDeviceOrientationLandscapeLeft || orientation == UIDeviceOrientationLandscapeRight) {
+//        currentCenter.x = super.center.y;
+//        currentCenter.y = super.center.x;
+//    }
+//    return currentCenter;
+//}
 
 -(CGPoint)origin {
     return self.frame.origin;
@@ -95,7 +100,7 @@
 }
 
 -(void)setFrame:(CGRect)frame {
-    if(self.animationDuration == 0.0f) super.frame = frame;
+    if(_animationDuration == 0.0f) super.frame = frame;
     else {
         CGRect oldFrame = self.frame;
         
@@ -114,7 +119,7 @@
 }
 
 -(void)setBounds:(CGRect)bounds {
-    if(self.animationDuration == 0.0f) super.bounds = bounds;
+    if(_animationDuration == 0.0f) super.bounds = bounds;
     else {
         CGRect oldBounds = self.bounds;
         
@@ -134,7 +139,7 @@
 }
 
 -(void)setTransform:(CGAffineTransform)transform {
-    if(self.animationDuration == 0.0f) super.transform = transform;
+    if(_animationDuration == 0.0f) super.transform = transform;
     else {
         CGAffineTransform oldTransform = self.transform;
         
@@ -154,7 +159,7 @@
 }
 
 -(void)setAlpha:(CGFloat)alpha {
-    if(self.animationDuration == 0.0f) super.alpha = alpha;
+    if(_animationDuration == 0.0f) super.alpha = alpha;
     else {
         CGFloat oldAlpha = self.alpha;
         
@@ -174,7 +179,7 @@
 }
 
 -(void)setBackgroundColor:(UIColor *)backgroundColor {
-    if(self.animationDuration == 0.0f) super.backgroundColor = backgroundColor;
+    if(_animationDuration == 0.0f) super.backgroundColor = backgroundColor;
     else {
         UIColor *oldBackgroundColor = self.backgroundColor;
         
@@ -321,6 +326,8 @@
 
 #pragma mark Move
 -(void)move:(id)sender {
+    UIPanGestureRecognizer *p = (UIPanGestureRecognizer *)sender;
+    
     NSUInteger _ani = self.animationOptions;
     CGFloat _dur = self.animationDuration;
     CGFloat _del = self.animationDelay;
@@ -328,11 +335,18 @@
     self.animationDelay = 0;
     self.animationOptions = DEFAULT;
     
-    CGPoint translatedPoint = [(UIPanGestureRecognizer *)sender translationInView:self];
-    translatedPoint.x += self.center.x;
-    translatedPoint.y += self.center.y;
+    CGPoint translatedPoint = [p translationInView:self];
+
+    if(UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation)) {
+        translatedPoint.x += self.center.x;
+        translatedPoint.y += self.center.y;
+    } else {
+        translatedPoint.x += self.center.y;
+        translatedPoint.y += self.center.x;
+    }
+    
     self.center = translatedPoint;
-    [(UIPanGestureRecognizer *)sender setTranslation:CGPointZero inView:self];
+    [p setTranslation:CGPointZero inView:self];
     [self postNotification:@"moved"];
     
     self.animationDelay = _del;
@@ -564,7 +578,12 @@
     C4Assert(![[subview class] isKindOfClass:[C4Image class]], @"You just tried to add a C4Image using the addSubview: method, please use addImage:");
     C4Assert(![[subview class] isKindOfClass:[C4GL class]], @"You just tried to add a C4GL using the addSubview: method, please use addGL:");
     C4Assert(![[subview class] isKindOfClass:[C4Label class]], @"You just tried to add a C4Label using the addSubview: method, please use addLabel:");
+    C4Assert(![subview conformsToProtocol:NSProtocolFromString(@"C4UIElement")], @"You just tried to add a C4UIElement using the addSubview: method, please use addUIElement:");
     [super addSubview:subview];
+}
+
+-(void)addUIElement:(id<C4UIElement>)object {
+    [(C4View *)self addSubview:(UIView *)object];
 }
 
 -(void)addLabel:(C4Label *)label {
@@ -609,6 +628,9 @@
             [self addCamera:obj];
         }
         else if([obj isKindOfClass:[UIView class]]) {
+            [self addSubview:obj];
+        }
+        else if([obj conformsToProtocol:NSProtocolFromString(@"C4UIElement")]) {
             [self addSubview:obj];
         }
         else {

@@ -20,13 +20,13 @@
 #import "C4AssertionHandler.h"
 
 //protocols
-#import "C4AddSubview.h"
 #import "C4Defines.h"
+#import "C4UIElement.h"
+#import "C4AddSubview.h"
 #import "C4Notification.h"
 #import "C4Gesture.h"
 #import "C4LayerAnimation.h"
 #import "C4MethodDelay.h"
-#import "C4UIElement.h"
 
 //classes
 #import "C4Object.h"

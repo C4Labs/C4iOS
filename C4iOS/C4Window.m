@@ -202,7 +202,7 @@
 
 #pragma mark Position, Rotation, Transform
 -(CGFloat)width {
-    return self.frame.size.width;
+    return self.bounds.size.width;
 }
 
 -(CGFloat)height {
@@ -565,6 +565,7 @@
     C4Assert(![[subview class] isKindOfClass:[C4Image class]], @"You just tried to add a C4Image using the addSubview: method, please use addImage:");
     C4Assert(![[subview class] isKindOfClass:[C4GL class]], @"You just tried to add a C4GL using the addSubview: method, please use addGL:");
     C4Assert(![[subview class] isKindOfClass:[C4Label class]], @"You just tried to add a C4Label using the addSubview: method, please use addLabel:");
+    C4Assert(![subview conformsToProtocol:NSProtocolFromString(@"C4UIElement")],@"You just tried to add a C4UIElement using the addSubview: method, please use addUIElement:");
     [super addSubview:subview];
 }
 
@@ -592,6 +593,10 @@
     [super addSubview:movie];
 }
 
+-(void)addUIElement:(id<C4UIElement>)object {
+    [(C4View *)self addSubview:(UIView *)object];
+}
+
 -(void)addObjects:(NSArray *)array {
     for(id obj in array) {
         if([obj isKindOfClass:[C4Shape class]]) {
@@ -610,6 +615,9 @@
             [self addCamera:obj];
         }
         else if([obj isKindOfClass:[UIView class]]) {
+            [self addSubview:obj];
+        }
+        else if([obj conformsToProtocol:NSProtocolFromString(@"C4UIElement")]) {
             [self addSubview:obj];
         }
         else {

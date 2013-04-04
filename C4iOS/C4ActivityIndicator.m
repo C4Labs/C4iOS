@@ -109,4 +109,16 @@
     else if([object isKindOfClass:[self class]]) return [self.UIActivityIndicatorView isEqual:((C4ActivityIndicator *)object).UIActivityIndicatorView];
     return NO;
 }
+
+-(void)runMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event{
+    methodName = methodName;
+    object = object;
+    event = event;
+}
+
+-(void)stopRunningMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
+    methodName = methodName;
+    object = object;
+    event = event;
+}
 @end

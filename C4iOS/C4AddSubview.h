@@ -96,5 +96,6 @@
 -(void)removeObjects:(NSArray *)array;
 
 -(void)addObjects:(NSArray *)array;
+-(void)addUIElement:(id <C4UIElement> )object;
 
 @end

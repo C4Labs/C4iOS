@@ -79,6 +79,10 @@
     [(C4View *)self.view addMovie:movie];
 }
 
+-(void)addUIElement:(id<C4UIElement>)object {
+    [(C4View *)self.view addSubview:(C4Control *)object];
+}
+
 -(void)addObjects:(NSArray *)array {
     for(id obj in array) {
         if([obj isKindOfClass:[C4Shape class]]) {
@@ -97,6 +101,9 @@
             [self addCamera:obj];
         }
         else if([obj isKindOfClass:[UIView class]]) {
+            [self addSubview:obj];
+        }
+        else if([obj conformsToProtocol:NSProtocolFromString(@"C4UIElement")]) {
             [self addSubview:obj];
         }
         else {
