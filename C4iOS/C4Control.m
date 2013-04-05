@@ -337,14 +337,9 @@
     
     CGPoint translatedPoint = [p translationInView:self];
 
-    if(UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation)) {
-        translatedPoint.x += self.center.x;
-        translatedPoint.y += self.center.y;
-    } else {
-        translatedPoint.x += self.center.y;
-        translatedPoint.y += self.center.x;
-    }
-    
+    translatedPoint.x += self.center.x;
+    translatedPoint.y += self.center.y;
+
     self.center = translatedPoint;
     [p setTranslation:CGPointZero inView:self];
     [self postNotification:@"moved"];
@@ -387,6 +382,7 @@
             case LONGPRESS:
                 self.longPressMethodName = methodName;
                 recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(pressedLong:)];
+                break;
             default:
                 C4Assert(NO,@"The gesture you tried to use is not one of: TAP, PINCH, SWIPERIGHT, SWIPELEFT, SWIPEUP, SWIPEDOWN, ROTATION, PAN, or LONGPRESS");
                 break;
@@ -578,12 +574,12 @@
     C4Assert(![[subview class] isKindOfClass:[C4Image class]], @"You just tried to add a C4Image using the addSubview: method, please use addImage:");
     C4Assert(![[subview class] isKindOfClass:[C4GL class]], @"You just tried to add a C4GL using the addSubview: method, please use addGL:");
     C4Assert(![[subview class] isKindOfClass:[C4Label class]], @"You just tried to add a C4Label using the addSubview: method, please use addLabel:");
-    C4Assert(![subview conformsToProtocol:NSProtocolFromString(@"C4UIElement")], @"You just tried to add a C4UIElement using the addSubview: method, please use addUIElement:");
+//    C4Assert(![subview conformsToProtocol:NSProtocolFromString(@"C4UIElement")], @"You just tried to add a C4UIElement using the addSubview: method, please use addUIElement:");
     [super addSubview:subview];
 }
 
 -(void)addUIElement:(id<C4UIElement>)object {
-    [(C4View *)self addSubview:(UIView *)object];
+    [super addSubview:(UIView *)object];
 }
 
 -(void)addLabel:(C4Label *)label {

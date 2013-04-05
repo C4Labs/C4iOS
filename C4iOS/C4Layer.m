@@ -206,6 +206,14 @@
 }
 
 -(void)animateContents:(CGImageRef)_image {
+    //the following if{} makes sure that the property is set immediately, rather than animating...
+    //for small values of animationDuration, property might not have enough time to tighten itself up
+    //uses _animationDuration because self.animationDuration returns + 0.0001f
+    if(_animationDuration == 0.0f) {
+        self.contents = (__bridge id)(_image);
+        return;
+    }
+
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"contents"];
     animation.fromValue = self.contents;

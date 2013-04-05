@@ -565,12 +565,12 @@
     C4Assert(![[subview class] isKindOfClass:[C4GL class]], @"You just tried to add a C4GL using the addSubview: method, please use addGL:");
     C4Assert(![[subview class] isKindOfClass:[C4Label class]], @"You just tried to add a C4Label using the addSubview: method, please use addLabel:");
     //unsure to keep this method...
-    C4Assert(![subview conformsToProtocol:NSProtocolFromString(@"C4UIElement")], @"You just tried to add a C4UIElement using the addSubview: method, please use addUIElement:");
+//    C4Assert(![subview conformsToProtocol:NSProtocolFromString(@"C4UIElement")], @"You just tried to add a C4UIElement using the addSubview: method, please use addUIElement:");
     [super addSubview:subview];
 }
 
 -(void)addUIElement:(id<C4UIElement>)object {
-    [(C4View *)self addSubview:(UIView *)object];
+    [super addSubview:(UIView *)object];
 }
 
 -(void)addLabel:(C4Label *)label {
