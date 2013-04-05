@@ -86,12 +86,12 @@
     //I'm not sure what's going on here, but i have to invert clockwise to get the 
     CGRect arcRect = CGRectMakeFromArcComponents(centerPoint,radius,startAngle,endAngle,!clockwise);
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:arcRect];
-    NSMutableDictionary *arcDict = [@[] mutableCopy];
-    [arcDict setValue:[NSValue valueWithCGPoint:centerPoint] forKey:@"centerPoint"];
-    arcDict[@"radius"] = @(radius);
-    arcDict[@"startAngle"] = @(startAngle);
-    arcDict[@"endAngle"] = @(endAngle);
-    arcDict[@"clockwise"] = @(clockwise);
+    
+    NSDictionary *arcDict = @{@"centerPoint":[NSValue valueWithCGPoint:centerPoint],
+                              @"radius":@(radius),
+                              @"startAngle":@(startAngle),
+                              @"endAngle":@(endAngle),
+                              @"clockwise":@(clockwise)};
     [newShape _arc:arcDict];
     return newShape;
 }
@@ -100,12 +100,11 @@
     CGRect wedgeRect = CGRectMakeFromWedgeComponents(centerPoint,radius,startAngle,endAngle,clockwise);
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:wedgeRect];
     
-    NSMutableDictionary *wedgeDict = [@[] mutableCopy];
-    [wedgeDict setValue:[NSValue valueWithCGPoint:centerPoint] forKey:@"centerPoint"];
-    wedgeDict[@"radius"] = @(radius);
-    wedgeDict[@"startAngle"] = @(startAngle);
-    wedgeDict[@"endAngle"] = @(endAngle);
-    wedgeDict[@"clockwise"] = @(clockwise);
+    NSDictionary *wedgeDict = @{@"centerPoint":[NSValue valueWithCGPoint:centerPoint],
+                              @"radius":@(radius),
+                              @"startAngle":@(startAngle),
+                              @"endAngle":@(endAngle),
+                              @"clockwise":@(clockwise)};
     [newShape _wedge:wedgeDict];
     return newShape;
 }
@@ -139,12 +138,11 @@
 }
 
 -(void)arcWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise{
-    NSMutableDictionary *arcDict = [[NSMutableDictionary alloc] initWithCapacity:0];
-    [arcDict setValue:[NSValue valueWithCGPoint:centerPoint] forKey:@"centerPoint"];
-    arcDict[@"radius"] = @(radius);
-    arcDict[@"startAngle"] = @(startAngle);
-    arcDict[@"endAngle"] = @(endAngle);
-    arcDict[@"clockwise"] = @(clockwise);
+    NSDictionary *arcDict = @{@"centerPoint":[NSValue valueWithCGPoint:centerPoint],
+                              @"radius":@(radius),
+                              @"startAngle":@(startAngle),
+                              @"endAngle":@(endAngle),
+                              @"clockwise":@(clockwise)};
     if(self.animationDelay == 0.0f) [self _arc:arcDict];
     else [self performSelector:@selector(_arc:) withObject:arcDict afterDelay:self.animationDelay];
 }
@@ -172,12 +170,11 @@
 }
 
 -(void)wedgeWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise{
-    NSMutableDictionary *wedgeDict = [[NSMutableDictionary alloc] initWithCapacity:0];
-    [wedgeDict setValue:[NSValue valueWithCGPoint:centerPoint] forKey:@"centerPoint"];
-    wedgeDict[@"radius"] = @(radius);
-    wedgeDict[@"startAngle"] = @(startAngle);
-    wedgeDict[@"endAngle"] = @(endAngle);
-    wedgeDict[@"clockwise"] = @(clockwise);
+    NSDictionary *wedgeDict = @{@"centerPoint":[NSValue valueWithCGPoint:centerPoint],
+                                @"radius":@(radius),
+                                @"startAngle":@(startAngle),
+                                @"endAngle":@(endAngle),
+                                @"clockwise":@(clockwise)};
     if(self.animationDelay == 0.0f) [self _wedge:wedgeDict];
     else [self performSelector:@selector(_wedge:) withObject:wedgeDict afterDelay:self.animationDelay];
 }
@@ -684,7 +681,6 @@
 }
 
 -(CGFloat)lineWidth {
-    C4Log(@"%4.2f",_lineWidth);
     return _lineWidth;
 }
 

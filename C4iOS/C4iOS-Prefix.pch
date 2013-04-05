@@ -57,6 +57,7 @@
 #import "C4Slider.h"
 #import "C4Stepper.h"
 #import "C4Switch.h"
+#import "C4ScrollView.h"
 
 #import "C4ViewController.h"
 #import "C4Camera.h"

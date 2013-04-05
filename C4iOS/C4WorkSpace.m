@@ -1,10 +1,10 @@
 //
-//  C4WorkSpace.m
-//  Examples
+// C4WorkSpace.m
 //
-//  Created by Greg Debicki.
+// Created by Greg Debicki.
 //
 
+<<<<<<< HEAD
 @implementation C4WorkSpace {
     C4Shape *s;
 }
@@ -26,4 +26,25 @@
                                       alpha:1.0f];
 }
 
+=======
+#import "C4WorkSpace.h"
+
+@implementation C4WorkSpace {
+    C4ScrollView *scrollview;
+    C4Image *table;
+}
+
+-(void)setup {
+    table = [C4Image imageNamed:@"C4Table"];
+    scrollview = [C4ScrollView scrollView:CGRectMake(0, 0, 320, 240)];
+    scrollview.contentSize = table.frame.size;
+    scrollview.borderColor = C4GREY;
+    scrollview.borderWidth = 1.0f;
+    scrollview.center = self.canvas.center;
+    
+    [scrollview addImage:table];
+    [self.canvas addSubview:scrollview];
+}
+
+>>>>>>> Fixed some dictionary issues in C4Shape
 @end
