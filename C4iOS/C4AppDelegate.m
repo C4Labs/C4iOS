@@ -96,7 +96,7 @@
     [C4Shape defaultStyle].lineDashPhase = 0.0f;
     [C4Shape defaultStyle].lineJoin = JOINMITER;
     [C4Shape defaultStyle].lineWidth = 5.0f;
-    [C4Shape defaultStyle].miterLimit = 5.0f;
+    [C4Shape defaultStyle].miterLimit = 10.0f; //this doesn't like being set here...
     [C4Shape defaultStyle].strokeColor = C4BLUE;
     [C4Shape defaultStyle].strokeEnd = 1.0f;
     [C4Shape defaultStyle].strokeStart = 0.0f;

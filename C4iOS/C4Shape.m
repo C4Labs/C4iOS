@@ -27,6 +27,8 @@
     if(self != nil) {
         _initialized = NO;
         self.animationOptions = BEGINCURRENT | EASEINOUT;
+        //miterLimit doesn't like being set from defaultStyles, so we just make sure it's set here.
+        self.miterLimit = [C4Shape defaultStyle].miterLimit;
         [self setup];
     }
     return self;
@@ -696,8 +698,7 @@
 
 -(void)setMiterLimit:(CGFloat)miterLimit {
     _miterLimit = miterLimit;
-    if(self.animationDelay == 0.0f) [self _setMiterLimit:@(miterLimit)];
-    else [self performSelector:@selector(_setMiterLimit:) withObject:@(miterLimit) afterDelay:self.animationDelay];
+    [self _setMiterLimit:@(miterLimit)];
 }
 
 -(void)_setMiterLimit:(NSNumber *)miterLimit {
@@ -820,8 +821,8 @@
             self.lineDashPattern = shape.lineDashPattern;
             self.lineDashPhase = shape.lineDashPhase;
             self.lineJoin = shape.lineJoin;
-            self.lineWidth = shape.lineWidth;
             self.miterLimit = shape.miterLimit;
+            self.lineWidth = shape.lineWidth;
             self.strokeColor = shape.strokeColor;
             self.strokeEnd = shape.strokeEnd;
             self.strokeStart = shape.strokeStart;
