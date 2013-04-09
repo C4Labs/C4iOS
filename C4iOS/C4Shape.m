@@ -380,13 +380,10 @@
         points[i].x += translation.x;
         points[i].y += translation.y;
     }
-        
+    
     CGMutablePathRef newPath = CGPathCreateMutable();
     CGPathMoveToPoint(newPath, nil, points[0].x,points[0].y);
     CGPathAddLineToPoint(newPath, nil, points[1].x, points[1].y);
-//    CGPathMoveToPoint(newPath, nil, points[1].x,points[1].y);
-//    CGPathAddLineToPoint(newPath, nil, points[0].x, points[0].y);
-    
 
     [self.shapeLayer animatePath:newPath];
     CGRect newBounds = self.bounds;
@@ -410,16 +407,8 @@
     NSInteger pointCount = [pointArray count];
     CGPoint points[pointCount];
     
-    CGPoint translation = CGPointMake(self.frame.size.width,self.frame.size.height);
-    if(translation.x == 0) translation.x = self.frame.origin.x;
-    if(translation.y == 0) translation.y = self.frame.origin.y;
-    translation.x *= -1;
-    translation.y *= -1;
-    
     for (int i = 0; i < pointCount; i++) {
         points[i] = [pointArray[i] CGPointValue];
-        points[i].x += translation.x;
-        points[i].y += translation.y;
     }
     
     CGMutablePathRef newPath = CGPathCreateMutable();
@@ -452,26 +441,17 @@
     for(int i = 0; i < pointCount; i++) {
         [points addObject:[NSValue valueWithCGPoint:pointArray[i]]];
     }
-    if(self.animationDelay == 0.0f) [self _polygon:points];
-    else [self performSelector:@selector(_polygon:) withObject:points afterDelay:self.animationDelay];
+    [self _polygon:points];
 }
 
 -(void)_polygon:(NSArray *)pointArray {
     [self willChangeShape];
-    //create a c-array of points 
+    //create a c-array of points
     NSInteger pointCount = [pointArray count];
     CGPoint points[pointCount];
-    
-    CGPoint translation = CGPointMake(self.frame.size.width,self.frame.size.height);
-    if(translation.x == 0) translation.x = self.frame.origin.x;
-    if(translation.y == 0) translation.y = self.frame.origin.y;
-    translation.x *= -1;
-    translation.y *= -1;
- 
+     
     for (int i = 0; i < pointCount; i++) {
         points[i] = [pointArray[i] CGPointValue];
-        points[i].x += translation.x;
-        points[i].y += translation.y;
     }
 
     CGMutablePathRef newPath = CGPathCreateMutable();
@@ -774,6 +754,7 @@
 +(C4Shape *)defaultStyle {
     return (C4Shape *)[C4Shape appearance];
 }
+
 //-(void)setAnimationOptions:(NSUInteger)animationOptions {
 //    /*
 //     This method needs to be in all C4Control subclasses, not sure why it doesn't inherit properly
@@ -814,7 +795,6 @@
     @autoreleasepool {
         C4Shape *shape = [style objectForKey:@"shape"];
         if(shape != nil) {
-            self.path = shape.path;
             self.fillColor = shape.fillColor;
             self.fillRule = shape.fillRule;
             self.lineCap = shape.lineCap;
@@ -832,6 +812,7 @@
 
 -(id)copyWithZone:(NSZone *)zone {
     C4Shape *newShape = [[C4Shape allocWithZone:zone] initWithFrame:self.frame];
+    newShape.path = self.path;
     newShape.style = self.style;
     return newShape;
 }
