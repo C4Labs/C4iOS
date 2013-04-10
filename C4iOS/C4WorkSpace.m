@@ -1,11 +1,11 @@
 //
-//  C4WorkSpace.m
-//  Notification Tutorial
+// C4WorkSpace.m
 //
-//  Created by Travis Kirton.
+// Created by Travis Kirton
 //
 
 #import "C4WorkSpace.h"
+<<<<<<< HEAD
 @implementation C4WorkSpace
 
 -(void)setup {
@@ -104,3 +104,27 @@
 //}
 //
 //@end
+=======
+
+@implementation C4WorkSpace
+
+-(void)setup {
+    C4Image *img1 = [C4Image imageNamed:@"C4Sky"];
+    C4Image *img2 = [C4Image imageNamed:@"C4Table"];
+    
+    img1.width = 180;
+    img2.width = 180;
+    
+    img2.anchorPoint = CGPointMake(-1.0f,0.5f);
+    
+    img1.center = self.canvas.center;
+    img2.center = self.canvas.center;
+    
+    [self.canvas addObjects:@[img1,img2]];
+    
+    img1.rotation = QUARTER_PI;
+    img2.rotation = QUARTER_PI;
+}
+
+@end
+>>>>>>> Examples
