@@ -1,77 +1,59 @@
 //
-// C4WorkSpace.m
+//  C4WorkSpace.m
+//  Composite Objects Tutorial
 //
-// Created by Travis Kirton
+//  Created by Travis Kirton.
 //
 
 #import "C4WorkSpace.h"
 
 @implementation C4WorkSpace {
-    NSMutableArray *skyImages, *tableImagesRight, *tableImagesLeft;
-    NSInteger currentImage;
+    C4Shape *mainShape;
 }
 
 -(void)setup {
-    CGFloat h = self.canvas.height / 17.0f;
-    CGFloat padding = h / 16.0f;
+    mainShape = [C4Shape rect:CGRectMake(0, 0, 368, 368)];
+    mainShape.lineWidth = 0.0f;
+    mainShape.fillColor = [UIColor clearColor];
+    
+    CGFloat radius = mainShape.width / 2.0f;
+    CGPoint center = CGPointMake(mainShape.width / 2, mainShape.height / 2);
 
-    skyImages = [@[] mutableCopy];
-    for(int i = 0; i < 16; i++) {
-        C4Image *img = [C4Image imageNamed:@"C4Sky.png"];
-        img.height = h;
-        img.center = CGPointMake(self.canvas.center.x, self.canvas.height * i / 17.0f+i*padding+(h+padding)/2.0f);
-        img.perspectiveDistance = 500.0f;
-        [skyImages addObject:img];
-        [self.canvas addImage:img];
+    for(int i = 0; i < 12; i ++) {
+        C4Shape *shape = [C4Shape ellipse:CGRectMake(0, 0, radius*2, radius*2)];
+        shape.fillColor = [UIColor clearColor];
+        shape.anchorPoint = CGPointMake(0.5,1.0f);
+        shape.center = center;
+        shape.rotation = TWO_PI / 12.0f * i;
+        [mainShape addShape:shape];
+        [self runMethod:@"animateShape:" withObject:shape afterDelay:(i+1)*0.5f];
     }
 
-    tableImagesRight = [@[] mutableCopy];
-    for(int i = 0; i < 16; i++) {
-        C4Image *img = [C4Image imageNamed:@"C4Table.png"];
-        img.height = h;
-        img.anchorPoint = CGPointMake(-2.0f,0.5f);
-        img.center = CGPointMake(self.canvas.center.x, self.canvas.height * i / 17.0f+i*padding+(h+padding)/2.0f);
-        img.perspectiveDistance = 500.0f;
-        [tableImagesRight addObject:img];
-        [self.canvas addImage:img];
-    }
+    C4Shape *mask = [C4Shape ellipse:CGRectMake(0, 0, radius*2, radius*2)];
+    mask.center = center;
+    mainShape.mask = mask;
 
-    tableImagesLeft = [@[] mutableCopy];
-    for(int i = 0; i < 16; i++) {
-        C4Image *img = [C4Image imageNamed:@"C4Table.png"];
-        img.height = h;
-        img.anchorPoint = CGPointMake(3.0f,0.5f);
-        img.center = CGPointMake(self.canvas.center.x, self.canvas.height * i / 17.0f+i*padding+(h+padding)/2.0f);
-        img.perspectiveDistance = 500.0f;
-        [tableImagesLeft addObject:img];
-        [self.canvas addImage:img];
-    }
+    mainShape.center = self.canvas.center;
 
-    currentImage = 0;
-    [self runMethod:@"animate" afterDelay:0.1f];
+    mainShape.animationDuration = 10.0f;
+    mainShape.animationOptions = REPEAT | LINEAR;
+    mainShape.rotation = TWO_PI;
+    
+    [self.canvas addShape:mainShape];
 }
 
--(void)animate {
-    C4Image *sky = skyImages[currentImage];
-    sky.animationDuration = 4.0f;
-    sky.animationOptions = LINEAR | REPEAT;
-    sky.rotationY = TWO_PI;
+-(void)animateShape:(C4Shape *)shape {
+    shape.animationOptions = REPEAT | AUTOREVERSE;
+    shape.animationDuration = 2.0f;
+    shape.strokeColor = C4RED;
+    shape.rotation = PI;
+    
+    [self runMethod:@"animateStrokeEnd:" withObject:shape afterDelay:0.25f];
+}
 
-    C4Image *table;
-    table = tableImagesRight[currentImage];
-    table.animationDuration = 4.0f;
-    table.animationOptions = LINEAR | REPEAT;
-    table.rotationY = TWO_PI;
-
-    table = tableImagesLeft[currentImage];
-    table.animationDuration = 4.0f;
-    table.animationOptions = LINEAR | REPEAT;
-    table.rotationY = TWO_PI;
-
-    currentImage++;
-    if(currentImage < [skyImages count]) {
-        [self runMethod:@"animate" afterDelay:0.25f];
-    }
+-(void)animateStrokeEnd:(C4Shape *)shape {
+    shape.animationDuration = 15.0f;
+    shape.strokeEnd = 0.0f;
 }
 
 @end
