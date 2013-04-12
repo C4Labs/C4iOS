@@ -317,11 +317,11 @@ The change will happen based on the shape's current animation options, duration 
 
 /**Specifies whether or not the shape is a line.
  */
-@property (readonly, atomic) BOOL isLine;
+@property (readonly, nonatomic, getter = isLine) BOOL line;
 
-/**Specifies whether or not the shape is a line.
+/**Specifies whether or not the shape is an arc.
  */
-@property (readonly, atomic) BOOL isArc;
+@property (readonly, nonatomic, getter = isArc) BOOL arc;
 
 /**Specifies the origin point of a line. Animatable.
  */
@@ -355,7 +355,6 @@ The change will happen based on the shape's current animation options, duration 
 @property (readonly, atomic, getter = isQuadCurve) BOOL quadCurve;
 
 @property (readwrite, nonatomic) CGPathRef path;
-//@property (readwrite, nonatomic) NSDictionary *style;
 
 +(C4Shape *)defaultStyle;
 @end

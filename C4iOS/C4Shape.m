@@ -36,8 +36,8 @@
 }
 
 -(void)willChangeShape {
-    _isArc = NO;
-    _isLine = NO;
+    _arc = NO;
+    _line = NO;
     _isTriangle = NO;
     _bezierCurve = NO;
     _quadCurve = NO;
@@ -152,7 +152,7 @@
 
 -(void)_arc:(NSDictionary *)arcDict {
     [self willChangeShape];
-    _isArc = YES;
+    _arc = YES;
     CGMutablePathRef newPath = CGPathCreateMutable();
     CGPoint centerPoint = [[arcDict valueForKey:@"centerPoint"] CGPointValue];
     //strage, i have to invert the Bool value for clockwise
@@ -359,7 +359,7 @@
 }
 -(void)_line:(NSArray *)pointArray {
     [self willChangeShape];
-    _isLine = YES;
+    _line = YES;
     _closed = YES;
     
     CGPoint points[2];
@@ -733,7 +733,7 @@
 /* NOTE: YOU CAN'T HIT TEST A CGPATH which is a line */
 -(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
     event = event;
-    if (_isLine == YES) return NO;
+    if (_line == YES) return NO;
     return CGPathContainsPoint(self.shapeLayer.path, nil, point, nil) ? YES : NO;
 }
 
