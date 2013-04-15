@@ -432,4 +432,10 @@
 +(C4Movie *)defaultStyle {
     return (C4Movie *)[C4Movie appearance];
 }
+
+-(id)copyWithZone:(NSZone *)zone {
+    C4Movie *newMovie = [[C4Movie allocWithZone:zone] initWithURL:self.movieURL];
+    newMovie.style = self.style;
+    return newMovie;
+}
 @end
