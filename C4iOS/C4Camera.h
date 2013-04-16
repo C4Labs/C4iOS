@@ -44,6 +44,9 @@
  When a camera object captures an image it overwrites any other image that was previously captured.
  */
 @property (readonly, strong, nonatomic) C4Image *capturedImage;
+@property (readwrite, nonatomic) C4CameraPosition position;
 +(C4Camera *)defaultStyle;
+
+
 
 @end

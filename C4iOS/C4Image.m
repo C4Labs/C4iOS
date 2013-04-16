@@ -210,7 +210,8 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [self setContents:filteredImage];
-            [self postNotification:[filterName stringByAppendingString:@"Complete"]];
+            NSString *notificationName = [filterName stringByAppendingString:@"Complete"];
+            [self postNotification:notificationName];
             _multipleFilterEnabled = NO;
             _output = nil;
             if(self.showsActivityIndicator) [_filterIndicator stopAnimating];

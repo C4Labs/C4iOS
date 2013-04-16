@@ -187,6 +187,13 @@ typedef enum C4ControlContentVerticalAlignment : NSUInteger {
     VERTICALFILL
 } C4ControlContentVerticalAlignment;
 
+/* `cameraPosition` values. */
+typedef enum C4CameraPosition : NSUInteger {
+    C4CameraUnspecified = 0,
+    C4CameraBack,
+    C4CameraFront
+} C4CameraPosition;
+
 /* 'scrollView' */
 
 typedef enum C4ScrollViewIndicatorStyle : NSUInteger {

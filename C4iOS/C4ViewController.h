@@ -12,6 +12,6 @@
  
  @warning This class was designed as a component of the C4Camera object and is not fully implemented yet.
  */
-@interface C4ViewController : UIViewController <C4Notification>
+@interface C4ViewController : UIViewController <C4Notification, C4MethodDelay>
 
 @end

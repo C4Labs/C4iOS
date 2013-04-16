@@ -1,19 +1,38 @@
 //
 //  C4WorkSpace.m
-//  Composite Objects Tutorial
+//  Complex Shapes Tutorial
 //
 //  Created by Travis Kirton.
 //
 
 #import "C4WorkSpace.h"
 
-@implementation C4WorkSpace
+@implementation C4WorkSpace {
+    C4Camera *cam;
+}
 
 -(void)setup {
-    C4Shape *s = [C4Shape rect:CGRectMake(0, 0, 100, 100)];
-    s.center = self.canvas.center;
-    s.fillColor = [C4GREY colorWithAlphaComponent:0.5f];
-    [self.canvas addShape:s];
+    cam = [C4Camera cameraWithFrame:CGRectMake(0, 0, 200, 200)];
+    cam.position = C4CameraBack;
+    [cam initCapture];
+    [self listenFor:@"imageWasCaptured" fromObject:cam andRunMethod:@"imageWasCaptured"];
+    [self.canvas addCamera:cam];
+}
+
+-(void)touchesBegan {
+    if (cam.position == C4CameraBack) {
+        cam.position = C4CameraFront;
+    } else {
+        cam.position = C4CameraBack;
+    }
+    [cam initCapture];
+}
+
+-(void)imageWasCaptured {
+    C4Image *img = cam.capturedImage;
+    img.center = self.canvas.center;
+    img.userInteractionEnabled = NO;
+    [self.canvas addImage:img];
 }
 
 @end

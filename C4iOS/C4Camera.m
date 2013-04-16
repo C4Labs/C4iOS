@@ -30,6 +30,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.previewLayer.backgroundColor = [UIColor redColor].CGColor;
+        self.position = C4CameraFront;
         self.cameraController = [[C4CameraController alloc] init];
         self.cameraController.view = (C4View *)self;
         self.cameraController.previewLayer = self.previewLayer;
@@ -48,7 +49,7 @@
 }
 
 -(void)initCapture {
-    [self.cameraController initCapture];
+    [self.cameraController initCapture:self.position];
 }
 
 +(Class)layerClass {

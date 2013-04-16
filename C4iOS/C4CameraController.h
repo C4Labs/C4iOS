@@ -40,4 +40,8 @@
 /** The receiver’s view's backing layer.
  */
 @property (readwrite, strong, nonatomic) C4CameraLayer *previewLayer;
+
+-(void)initCapture:(C4CameraPosition)position;
+@property (readonly, nonatomic) C4CameraPosition position;
+@property (readonly, nonatomic, getter = isInitializing) BOOL initializing;
 @end
