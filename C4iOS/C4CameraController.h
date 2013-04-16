@@ -42,6 +42,8 @@
 @property (readwrite, strong, nonatomic) C4CameraLayer *previewLayer;
 
 -(void)initCapture:(C4CameraPosition)position;
-@property (readonly, nonatomic) C4CameraPosition position;
-@property (readonly, nonatomic, getter = isInitializing) BOOL initializing;
+@property (readwrite, nonatomic) C4CameraPosition cameraPosition;
+@property (readonly, nonatomic, getter = isInitialized) BOOL initialized;
+@property (readwrite, nonatomic) NSString *captureQuality;
+-(void)switchCameraPosition:(C4CameraPosition)position;
 @end

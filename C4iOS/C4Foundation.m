@@ -7,6 +7,7 @@
 //
 
 #import "C4Foundation.h"
+#import <sys/utsname.h>
 
 static C4Foundation *sharedC4Foundation = nil;
 
@@ -140,4 +141,11 @@ CGRect CGRectMakeFromWedgeComponents(CGPoint centerPoint, CGFloat radius, CGFloa
     return arcRect;
 }
 
+
++(NSString *)currentDeviceModel {
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    
+    return [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
+}
 @end

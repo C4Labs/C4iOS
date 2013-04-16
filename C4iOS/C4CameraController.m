@@ -12,6 +12,10 @@
 @property (readwrite, strong, atomic) AVCaptureSession *captureSession;
 @property (readwrite, strong, atomic) AVCaptureStillImageOutput *stillImageOutput;
 @property (readwrite, strong, atomic) AVAssetWriter *assetWriter;
+@property (readwrite, strong, nonatomic) AVCaptureDevice *currentCamera;
+@property (readwrite, strong, nonatomic) AVCaptureDeviceInput *input;
+@property (readwrite, strong, nonatomic) AVCaptureVideoDataOutput *output;
+@property (readwrite, strong, nonatomic) __block dispatch_queue_t cameraQueue;
 @end
 
 @implementation C4CameraController
@@ -20,6 +24,8 @@
 	self = [super init];
 	if (self) {
 		_previewLayer = nil;
+        _captureQuality = C4CameraQualityPhoto;
+        _cameraPosition = C4CameraFront;
 	}
 	return self;
 }
@@ -46,72 +52,90 @@
     [self initCapture:C4CameraFront];
 }
 
-- (void)initCapture:(C4CameraPosition)position {
-    if(position != self.position && self.initializing == NO) {
-        _initializing = YES;
-        /*We setup the input*/
-        NSArray *cameras = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
-        AVCaptureDevice *camera;
-        _position = position;
-        for(AVCaptureDevice *device in cameras) {
-            if([device position] == (AVCaptureDevicePosition)position) {
-                camera = device;
-            }
+-(AVCaptureDevice *)cameraForPosition:(C4CameraPosition)position {
+    NSArray *cameras = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
+    AVCaptureDevice *camera;
+    _cameraPosition = position;
+    for(AVCaptureDevice *device in cameras) {
+        if([device position] == (AVCaptureDevicePosition)position) {
+            camera = device;
         }
-        
-        AVCaptureDeviceInput *captureInput = [AVCaptureDeviceInput
-                                              deviceInputWithDevice:camera
-                                              error:nil];
-        
-        /*We setupt the output*/
-        AVCaptureVideoDataOutput *captureOutput = [[AVCaptureVideoDataOutput alloc] init];
-        
-        /*While a frame is processes in -captureOutput:didOutputSampleBuffer:fromConnection: delegate methods no other frames are added in the queue.
-         If you don't want this behaviour set the property to NO */
-        captureOutput.alwaysDiscardsLateVideoFrames = YES;
-        
-        /*We create a serial queue to handle the processing of our frames*/
-        __block dispatch_queue_t queue;
+    }
+    return camera;
+}
+
+-(void)initializeInputOutputForCamera:(AVCaptureDevice *)camera {
+    if(self.input == nil) {
+        self.input = [AVCaptureDeviceInput deviceInputWithDevice:camera error:nil];
+    }
+    
+    if(self.output == nil) {
+        self.output = [[AVCaptureVideoDataOutput alloc] init];
+        self.output.alwaysDiscardsLateVideoFrames = YES;
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
-            queue = dispatch_queue_create("cameraQueue", NULL);
+            self.cameraQueue = dispatch_queue_create("cameraQueue", NULL);
         });
-        [captureOutput setSampleBufferDelegate:self queue:queue];
-        
+        [self.output setSampleBufferDelegate:self queue:self.cameraQueue];
+    }
+    
+    if(self.stillImageOutput == nil) {
         // Set the video output to store frame in BGRA (It is supposed to be faster)
         self.stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
         NSDictionary *outputSettings = @{AVVideoCodecKey: AVVideoCodecJPEG};
         [self.stillImageOutput setOutputSettings:outputSettings];
-        
-        /*And we create a capture session*/
-        self.captureSession = [[AVCaptureSession alloc] init];
-        
-        /*We use medium quality, on the iPhone 4 this demo would be laging too much, the conversion in UIImage and CGImage demands too much ressources for a 720p resolution.*/
-        [self.captureSession setSessionPreset:AVCaptureSessionPresetPhoto];
-        
-        /*We add input and output*/
-        [self.captureSession addInput:captureInput];
-        [self.captureSession addOutput:self.stillImageOutput];
-        
-        /*We add the preview layer*/
-        self.previewLayer.session = self.captureSession;
-        self.previewLayer.frame = CGRectMake(0,0,self.view.bounds.size.width,self.view.bounds.size.width);
-        self.previewLayer.backgroundColor = [UIColor clearColor].CGColor;
-        self.previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-        
-        /*We start the capture*/
-        [self.captureSession startRunning];
-        [self runMethod:@"initialized" afterDelay:0.5f];
     }
 }
 
--(void)swapCameraPosition:(C4CameraPosition)position {
-    //FIXME: tweak the switching of camera positions
-    //make sure that you're not always initiailizing if you don't need to.
+-(void)initializeCaptureSession {
+    /*And we create a capture session*/
+    if(self.captureSession == nil) {
+        self.captureSession = [[AVCaptureSession alloc] init];
+    }
+    /*We use medium quality, on the iPhone 4 this demo would be laging too much, the conversion in UIImage and CGImage demands too much ressources for a 720p resolution.*/
+    [self.captureSession setSessionPreset:self.captureQuality];
+    
+    /*We add input and output*/
+    if([self.captureSession.inputs count] > 0) {
+        [self.captureSession removeInput:self.captureSession.inputs[0]];
+    }
+    [self.captureSession addInput:self.input];
+    
+    if([self.captureSession.outputs count] > 0) {
+        [self.captureSession removeOutput:self.captureSession.outputs[0]];
+    }
+    [self.captureSession addOutput:self.stillImageOutput];
 }
 
--(void)initialized {
-    _initializing = NO;
+-(void)initializePreviewLayer {
+    self.previewLayer.session = self.captureSession;
+    self.previewLayer.frame = CGRectMake(0,0,self.view.bounds.size.width,self.view.bounds.size.width);
+    self.previewLayer.backgroundColor = [UIColor clearColor].CGColor;
+    self.previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+}
+
+- (void)initCapture:(C4CameraPosition)position {
+    _cameraPosition = position;
+    self.currentCamera = [self cameraForPosition:self.cameraPosition];
+    [self initializeInputOutputForCamera:self.currentCamera];
+    [self initializeCaptureSession];
+    [self initializePreviewLayer];
+    [self.captureSession startRunning];
+    _initialized = YES;
+}
+
+-(void)switchCameraPosition:(C4CameraPosition)position {
+    if(self.cameraPosition != position) {
+        _cameraPosition = position;
+        if(_initialized == YES) {
+            [self.captureSession stopRunning];
+            self.currentCamera = [self cameraForPosition:self.cameraPosition];
+            self.input = [AVCaptureDeviceInput deviceInputWithDevice:self.currentCamera error:nil];
+            [self initializeCaptureSession];
+            [self initializePreviewLayer];
+            [self.captureSession startRunning ];
+        }
+    }
 }
 
 -(void)captureImage {
@@ -122,7 +146,7 @@
             err = [NSError errorWithDomain:@"captureImage error" code:0 userInfo:nil];
             NSData *d = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:buf];
 
-            if(self.position == C4CameraFront) {
+            if(self.cameraPosition == C4CameraFront) {
                 //Orient the image so its the same as the preview layer
                 UIImage *img = [UIImage imageWithData:d];
                 CGImageRef imgRef = [img CGImage];
@@ -130,7 +154,6 @@
                                                        scale:img.scale
                                                  orientation:UIImageOrientationLeftMirrored];
                 _capturedImage = [C4Image imageWithUIImage:flipped];
-                C4Log(@"%d",img.imageOrientation);
                 img = nil;
                 flipped = nil;
                 CGImageRelease(imgRef);
@@ -142,6 +165,32 @@
         };
         [self.stillImageOutput captureStillImageAsynchronouslyFromConnection:captureConnection
                                                            completionHandler:bufferBlock];
+    }
+}
+
+-(void)setCaptureQuality:(NSString *)captureQuality {
+    if([self.captureSession canSetSessionPreset:captureQuality]) {
+        _captureQuality = captureQuality;
+        if(_initialized == YES) {
+            [self.captureSession stopRunning];
+            [self initializeCaptureSession];
+            [self initializePreviewLayer];
+            [self.captureSession startRunning];
+        }
+    } else {
+        NSString *currentCameraPosition;
+        switch (self.cameraPosition) {
+            case C4CameraBack:
+                currentCameraPosition = @"C4CameraBack";
+                break;
+            case C4CameraFront:
+                currentCameraPosition = @"C4CameraFront";
+                break;
+            default:
+                currentCameraPosition = @"C4CameraUnspecified";
+                break;
+        }
+        C4Log(@"Cannot set capture quality: %@ for current camera: %@ on current device: %@", captureQuality, currentCameraPosition, [C4Foundation currentDeviceModel]);
     }
 }
 

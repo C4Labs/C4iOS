@@ -12,6 +12,7 @@
 @interface C4Camera ()
 @property (readwrite, strong, nonatomic) C4CameraController *cameraController;
 @property (readwrite, strong, nonatomic) C4CameraLayer *previewLayer;
+@property (readonly, nonatomic) BOOL initialized;
 //@property (readwrite, atomic) BOOL shouldAutoreverse;
 @end
 
@@ -49,7 +50,7 @@
 }
 
 -(void)initCapture {
-    [self.cameraController initCapture:self.position];
+    [self.cameraController initCapture:self.cameraPosition];
 }
 
 +(Class)layerClass {
@@ -82,6 +83,22 @@
 
 +(C4Camera *)defaultStyle {
     return (C4Camera *)[C4Camera appearance];
+}
+
+-(void)setPosition:(C4CameraPosition)position {
+    [self.cameraController switchCameraPosition:position];
+}
+
+-(C4CameraPosition)cameraPosition {
+    return self.cameraController.cameraPosition;
+}
+
+-(void)setCaptureQuality:(NSString *)captureQuality {
+    self.cameraController.captureQuality = captureQuality;
+}
+
+-(NSString *)captureQuality {
+    return self.cameraController.captureQuality;
 }
 
 @end

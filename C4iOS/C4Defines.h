@@ -29,7 +29,6 @@ lineNumber:__LINE__ description:(desc), ##__VA_ARGS__]; \
 #define C4GREY (UIColor *)[UIColor colorWithRed:0.196f green:0.216f blue:0.236f alpha:1.0f]
 #endif
 
-
 #ifndef C4_DEFAULT_FONTNAMES
 #define SYSTEMFONTNAME [[UIFont systemFontOfSize:12.0f] fontName]
 #define BOLDSYSTEMFONTNAME [[UIFont boldSystemFontOfSize:12.0f] fontName]
@@ -230,10 +229,23 @@ C4_EXTERN NSString *const CAPROUND
 __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
 C4_EXTERN NSString *const CAPSQUARE
 __OSX_AVAILABLE_STARTING (__MAC_10_6, __IPHONE_3_0);
-#endif
 
 /* `videoGravity' values. */
 
 C4_EXTERN NSString *const RESIZEASPECT NS_AVAILABLE(10_7, 4_0);
 C4_EXTERN NSString *const RESIZEFILL NS_AVAILABLE(10_7, 4_0);
 C4_EXTERN NSString *const RESIZEFRAME NS_AVAILABLE(10_7, 4_0);
+
+/* 'camera quality' values */
+C4_EXTERN NSString *const C4CameraQualityPhoto;     //high resolution photo quality
+C4_EXTERN NSString *const C4CameraQualityHigh;      //high quality video and audio output
+C4_EXTERN NSString *const C4CameraQualityMedium;    //video and audio bitrates suitable for sharing over WiFi
+C4_EXTERN NSString *const C4CameraQualityLow;       //video and audio bitrates suitable for sharing over 3G
+C4_EXTERN NSString *const C4CameraQuality352x288;   //CIF quality (352x288 pixel) video output
+C4_EXTERN NSString *const C4CameraQuality640x480;   //VGA quality (640x480 pixel) video output
+C4_EXTERN NSString *const C4CameraQuality1280x720;  //720p quality (1280x720 pixel) video output
+C4_EXTERN NSString *const C4CameraQuality1920x1080; //1080p quality (1920x1080 pixel) video output
+C4_EXTERN NSString *const C4CameraQualityiFrame960x540;   //iFrame H.264 video at about 30 Mbits/sec with AAC audio
+C4_EXTERN NSString *const C4CameraQualityiFrame1280x720;  //iFrame H.264 video at about 40 Mbits/sec with AAC audio
+
+#endif

@@ -64,3 +64,15 @@ NSString *const RESIZEFRAME = @"AVLayerVideoGravityResize";
 const CGFloat DECELERATENORMAL = 0.99800002574920654296875000000000000000000000000000;
 const CGFloat DECELERATEMEDIUM = 0.99400001764297485351562500000000000000000000000000;
 const CGFloat DECELERATEFAST = 0.99000000953674316406250000000000000000000000000000;
+
+/* 'camera quality' values */
+NSString *const C4CameraQualityPhoto = @"AVCaptureSessionPresetPhoto";
+NSString *const C4CameraQualityHigh = @"AVCaptureSessionPresetHigh";
+NSString *const C4CameraQualityMedium = @"AVCaptureSessionPresetMedium";
+NSString *const C4CameraQualityLow = @"AVCaptureSessionPresetLow";
+NSString *const C4CameraQuality352x288 = @"AVCaptureSessionPreset352x288";
+NSString *const C4CameraQuality640x480 = @"AVCaptureSessionPreset640x480";
+NSString *const C4CameraQuality1280x720 = @"AVCaptureSessionPreset1280x720";
+NSString *const C4CameraQuality1920x1080 = @"AVCaptureSessionPreset1920x1080";
+NSString *const C4CameraQualityiFrame960x540 = @"AVCaptureSessionPresetiFrame960x540";
+NSString *const C4CameraQualityiFrame1280x720 = @"AVCaptureSessionPresetiFrame1280x720";
