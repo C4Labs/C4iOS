@@ -9,6 +9,7 @@
 #import "C4ScrollView.h"
 
 @implementation C4ScrollView
+@synthesize contentOffset = _contentOffset;
 
 +(C4ScrollView *)scrollView:(CGRect)rect {
     return [[C4ScrollView alloc] initWithFrame:rect];
@@ -22,6 +23,7 @@
         _UIScrollview.delegate = self;
         _UIScrollview.backgroundColor = [UIColor clearColor];
         [super addSubview:_UIScrollview];
+        [_UIScrollview addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
     }
     return self;
 }
@@ -87,6 +89,7 @@
 }
 
 -(void)setContentOffset:(CGPoint)contentOffset {
+    _contentOffset = contentOffset;
     _UIScrollview.contentOffset = contentOffset;
 }
 
@@ -259,6 +262,22 @@
     event = event;
     view = view;
     return NO;
+}
+
+#pragma mark ObserverMethods
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context {
+    change = change;
+    context = context;
+    if([keyPath isEqualToString:@"contentOffset"]) {
+        if((UIScrollView *)object == _UIScrollview) {
+            [self willChangeValueForKey:@"contentOffset"];
+            _contentOffset = _UIScrollview.contentOffset;
+            [self didChangeValueForKey:@"contentOffset"];
+        }
+    }
 }
 
 #pragma mark Optional Delegate Methods
