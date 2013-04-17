@@ -46,4 +46,6 @@
 @property (readonly, nonatomic, getter = isInitialized) BOOL initialized;
 @property (readwrite, nonatomic) NSString *captureQuality;
 -(void)switchCameraPosition:(C4CameraPosition)position;
+@property (readwrite, strong, atomic) AVCaptureSession *captureSession;
+
 @end

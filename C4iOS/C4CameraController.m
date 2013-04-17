@@ -9,7 +9,6 @@
 #import "C4CameraController.h"
 
 @interface C4CameraController ()
-@property (readwrite, strong, atomic) AVCaptureSession *captureSession;
 @property (readwrite, strong, atomic) AVCaptureStillImageOutput *stillImageOutput;
 @property (readwrite, strong, atomic) AVAssetWriter *assetWriter;
 @property (readwrite, strong, nonatomic) AVCaptureDevice *currentCamera;
@@ -25,7 +24,7 @@
 	if (self) {
 		_previewLayer = nil;
         _captureQuality = C4CameraQualityPhoto;
-        _cameraPosition = C4CameraFront;
+        _cameraPosition = CAMERAFRONT;
 	}
 	return self;
 }
@@ -49,7 +48,7 @@
 }
 
 - (void)initCapture {
-    [self initCapture:C4CameraFront];
+    [self initCapture:self.cameraPosition];
 }
 
 -(AVCaptureDevice *)cameraForPosition:(C4CameraPosition)position {
@@ -109,7 +108,6 @@
 
 -(void)initializePreviewLayer {
     self.previewLayer.session = self.captureSession;
-    self.previewLayer.frame = CGRectMake(0,0,self.view.bounds.size.width,self.view.bounds.size.width);
     self.previewLayer.backgroundColor = [UIColor clearColor].CGColor;
     self.previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
 }
@@ -146,7 +144,7 @@
             err = [NSError errorWithDomain:@"captureImage error" code:0 userInfo:nil];
             NSData *d = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:buf];
 
-            if(self.cameraPosition == C4CameraFront) {
+            if(self.cameraPosition == CAMERAFRONT) {
                 //Orient the image so its the same as the preview layer
                 UIImage *img = [UIImage imageWithData:d];
                 CGImageRef imgRef = [img CGImage];
@@ -180,14 +178,14 @@
     } else {
         NSString *currentCameraPosition;
         switch (self.cameraPosition) {
-            case C4CameraBack:
-                currentCameraPosition = @"C4CameraBack";
+            case CAMERABACK:
+                currentCameraPosition = @"CAMERABACK";
                 break;
-            case C4CameraFront:
-                currentCameraPosition = @"C4CameraFront";
+            case CAMERAFRONT:
+                currentCameraPosition = @"CAMERAFRONT";
                 break;
             default:
-                currentCameraPosition = @"C4CameraUnspecified";
+                currentCameraPosition = @"CAMERAUNSPECIFIED";
                 break;
         }
         C4Log(@"Cannot set capture quality: %@ for current camera: %@ on current device: %@", captureQuality, currentCameraPosition, [C4Foundation currentDeviceModel]);

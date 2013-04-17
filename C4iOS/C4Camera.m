@@ -30,12 +30,15 @@
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.previewLayer.backgroundColor = [UIColor redColor].CGColor;
-        self.position = C4CameraFront;
         self.cameraController = [[C4CameraController alloc] init];
         self.cameraController.view = (C4View *)self;
+        self.previewLayer = [C4CameraLayer layerWithSession:self.cameraController.captureSession];
         self.cameraController.previewLayer = self.previewLayer;
-        self.frame = self.previewLayer.frame;
+        self.previewLayer.frame = self.layer.bounds;
+
+        [self.layer addSublayer:self.previewLayer];
+        self.cameraPosition = CAMERAFRONT;
+
         [self listenFor:@"imageWasCaptured" fromObject:self.cameraController andRunMethod:@"imageWasCaptured"];
         [self setup];
     }
@@ -50,16 +53,16 @@
 }
 
 -(void)initCapture {
-    [self.cameraController initCapture:self.cameraPosition];
+    [self.cameraController initCapture];
 }
 
 +(Class)layerClass {
-	return [C4CameraLayer class];
+	return [C4Layer class];
 }
 
-- (C4CameraLayer *)previewLayer {
-	return (C4CameraLayer *)self.layer;
-}
+//- (C4CameraLayer *)previewLayer {
+//	return (C4CameraLayer *)self.layer;
+//}
 
 -(void)captureImage {
     [self.cameraController captureImage];
@@ -85,7 +88,7 @@
     return (C4Camera *)[C4Camera appearance];
 }
 
--(void)setPosition:(C4CameraPosition)position {
+-(void)setCameraPosition:(C4CameraPosition)position {
     [self.cameraController switchCameraPosition:position];
 }
 

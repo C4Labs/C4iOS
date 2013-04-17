@@ -141,11 +141,9 @@ CGRect CGRectMakeFromWedgeComponents(CGPoint centerPoint, CGFloat radius, CGFloa
     return arcRect;
 }
 
-
 +(NSString *)currentDeviceModel {
     struct utsname systemInfo;
     uname(&systemInfo);
-    
     return [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
 }
 @end

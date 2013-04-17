@@ -19,7 +19,7 @@
 - (id)init {
     self = [super init];
     if (self != nil) {
-        self.name = @"playerLayer";
+        self.name = @"cameraLayer";
         self.repeatCount = 0;
         self.autoreverses = NO;
         
