@@ -10,7 +10,11 @@
 #import "C4AssertionHandler.h"
 #import "C4Slider.h"
 
-@interface C4AppDelegate ()
+@interface C4AppDelegate () {
+    UINavigationController *controller;
+    //    [self.canvas addSubview:controller.navigationBar];
+}
+
 /* The main view of the application.
   
  Need to have this in here so that we can associate the CAZZ4View in our C4Canvas.xib file with something. The main reason is that a static lib will discard and not recognize any class that isn't called or referenced in some part of some implementation.
