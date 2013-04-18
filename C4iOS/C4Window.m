@@ -754,4 +754,13 @@
     return (C4Window *)[C4Window appearance];
 }
 
+-(void)renderInContext:(CGContextRef)context {
+    if(self.backgroundColor != nil || self.backgroundColor != [UIColor clearColor]) {
+        CGFloat components[4];
+        [self.backgroundColor getRed:&components[0] green:&components[1] blue:&components[2] alpha:&components[3]];
+        CGContextSetFillColor(context, components);
+        CGContextFillRect(context, self.frame);
+    }
+    [self.layer renderInContext:context];
+}
 @end

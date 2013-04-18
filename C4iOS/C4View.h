@@ -273,4 +273,6 @@
 
 -(void)addObjects:(NSArray *)array;
 +(C4View *)defaultStyle;
+
+-(void)renderInContext:(CGContextRef)context;
 @end

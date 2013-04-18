@@ -65,12 +65,6 @@
         _label.backgroundColor = [UIColor clearColor];
         _label.shadowColor = [UIColor clearColor];
 
-        /*
-         _label.textColor = C4GREY;
-         _label.highlightedTextColor = C4RED;
-         _label.backgroundColor = [UIColor clearColor];
-         _label.shadowColor = C4GREY;
-         */
         [self addSubview:(UILabel *)_label];
         [self setup];
     }
@@ -94,13 +88,6 @@
 }
 
 #pragma mark C4Label Methods
-//-(void)setBackgroundColor:(UIColor *)backgroundColor {
-//    if(self.animationDelay == 0.0f) _label.backgroundColor = backgroundColor;
-//    [self performSelector:@selector(_setBackgroundColor:) withObject:backgroundColor afterDelay:self.animationDelay];
-//}
-//-(void)_setBackgroundColor:(UIColor *)backgroundColor {
-//    _label.backgroundColor = backgroundColor;
-//}
 
 -(UIColor *)backroundColor {
     return _label.backgroundColor;

@@ -877,4 +877,11 @@
     return object;
 }
 
+-(void)renderInContext:(CGContextRef)context {
+//    CGContextSaveGState(context);
+//    CGContextConcatCTM(context, self.layer.affineTransform);
+    [self.layer renderInContext:context];
+//    CGContextRestoreGState(context);
+}
+
 @end

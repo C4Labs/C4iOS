@@ -344,14 +344,18 @@
         CFRelease(fontPath);
     }
     
-    [self.shapeLayer animatePath:glyphPaths];
+
     CGRect pathRect = CGPathGetBoundingBox(glyphPaths);
-    self.bounds = pathRect; //Need this step to sync the appearance of the paths to the frame of the shape
+    const CGAffineTransform translate = CGAffineTransformMakeTranslation(-pathRect.origin.x,-pathRect.origin.y);
+    glyphPaths = CGPathCreateMutableCopyByTransformingPath(glyphPaths, &translate);
+
+    [self.shapeLayer animatePath:glyphPaths];
     pathRect.origin = CGPointZero;
-    self.frame = pathRect; 
+    self.frame = pathRect; //Need this step to sync the appearance of the paths to the frame of the shape
     CGPathRelease(glyphPaths);
     _initialized = YES;
 }
+
 -(void)line:(CGPoint *)pointArray {
     NSArray *linePointArray = @[[NSValue valueWithCGPoint:pointArray[0]],[NSValue valueWithCGPoint:pointArray[1]]];
     if(self.animationDelay == 0.0f) [self _line:linePointArray];
@@ -817,4 +821,5 @@
     newShape.style = self.style;
     return newShape;
 }
+
 @end

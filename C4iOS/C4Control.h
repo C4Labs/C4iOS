@@ -291,4 +291,6 @@
 -(id)nullForNilObject:(id)object;
 -(id)nilForNullObject:(id)object;
 
+-(void)renderInContext:(CGContextRef)context;
+
 @end
