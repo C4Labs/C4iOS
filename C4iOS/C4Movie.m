@@ -7,7 +7,6 @@
 //
 
 #import "C4Movie.h"
-#import "C4YouTubeURLParser.h"
 
 @interface C4Movie() {
     void *rateContext, *currentItemContext, *playerItemStatusContext;
@@ -42,68 +41,6 @@
 +(C4Movie *)movieWithURL:(NSString *)url frame:(CGRect)movieFrame {
     C4Movie *newMovie = [[C4Movie alloc] initWithURL:[NSURL URLWithString:url] frame:movieFrame];
     return newMovie;
-}
-
-+(C4Movie *)movieWithYouTubeURL:(NSString *)youtubeURL {
-    C4Movie *newMovie = [[C4Movie alloc] initWithYouTubeURL:youtubeURL];
-    return newMovie;
-}
-
-+(C4Movie *)movieWithYouTubeURL:(NSString *)youtubeURL size:(C4YouTubeSize)movieSize {
-    C4Movie *newMovie = [[C4Movie alloc] initWithYouTubeURL:youtubeURL size:movieSize];
-    return newMovie;
-}
-
-+(C4Movie *)movieWithYouTubeURL:(NSString *)youtubeURL frame:(CGRect)movieFrame {
-    C4Movie *newMovie = [[C4Movie alloc] initWithYouTubeURL:youtubeURL frame:movieFrame];
-    return newMovie;
-}
-
-+(C4Movie *)movieWithYouTubeURL:(NSString *)youtubeURL size:(C4YouTubeSize)movieSize frame:(CGRect)movieFrame {
-    C4Movie *newMovie = [[C4Movie alloc] initWithYouTubeURL:youtubeURL size:movieSize frame:movieFrame];
-    return newMovie;
-}
-
--(id)initWithYouTubeURL:(NSString *)url {
-    self = [self initWithYouTubeURL:url size:YT1080 frame:CGRectZero];
-    return  self;
-}
-
--(id)initWithYouTubeURL:(NSString *)url frame:(CGRect)movieFrame {
-    self = [self initWithYouTubeURL:url size:YT1080 frame:movieFrame];
-    return self;
-}
-
--(id)initWithYouTubeURL:(NSString *)url size:(C4YouTubeSize)ytMovieSize {
-    self = [self initWithYouTubeURL:url size:ytMovieSize frame:CGRectZero];
-    return self;
-}
-
--(id)initWithYouTubeURL:(NSString *)url size:(C4YouTubeSize)ytMovieSize frame:(CGRect)movieFrame {
-    NSURL *newURL = [NSURL URLWithString:url];
-    C4YouTubeURLParser *parser = [C4YouTubeURLParser parserWithURL:newURL];
-    NSURL *actualURL;
-    for (int i = ytMovieSize; i >= 0; i--) {
-        switch (i) {
-            case YT1080:
-                actualURL = parser.large1080;
-                break;
-            case YT720:
-                actualURL = parser.large720;
-                break;
-            case YTMEDIUM:
-                actualURL = parser.medium;
-                break;
-            default:
-                actualURL = parser.small;
-                break;
-        }
-        if(actualURL != nil) break;
-    }
-    C4Assert(actualURL != nil, @"The C4YouTubeURLParser could not find a valid url for any of the sizes: small, medium, 720p, or 1080p");
-    self = [self initWithURL:actualURL frame:movieFrame];
-//    _layer = _playerLayer;
-    return self;
 }
 
 -(id)initWithMovieName:(NSString *)movieName {

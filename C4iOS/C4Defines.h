@@ -125,13 +125,6 @@ typedef enum C4BaselineAdjustment : NSUInteger {
     ALIGNBASELINENONE = UIBaselineAdjustmentNone
 } C4BaselineAdjustment;
 
-typedef enum C4YouTubeSize : NSUInteger{
-    YTSMALL = 0,
-    YTMEDIUM,
-    YT720,
-    YT1080
-} C4YouTubeSize;
-
 typedef enum C4ControlEvents : NSUInteger {
     TOUCHDOWN           = 1 <<  0,      // on all touch downs
     TOUCHDOWNREPEAT     = 1 <<  1,      // on multiple touchdowns (tap count > 1)

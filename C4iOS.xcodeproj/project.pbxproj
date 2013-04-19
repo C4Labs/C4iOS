@@ -122,7 +122,6 @@
 		ED979F3F14F95EFF00645114 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED979F3E14F95EFF00645114 /* CoreImage.framework */; };
 		ED983F1115E2A8B600C0AD81 /* C4CameraLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED983F1015E2A8B600C0AD81 /* C4CameraLayer.m */; };
 		ED98434716AF93DF00F64FAF /* inception.mov in Resources */ = {isa = PBXBuildFile; fileRef = ED7513AA15150FB60076317F /* inception.mov */; };
-		ED99AB7315DE01D7002A7D6C /* C4YouTubeURLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = ED99AB7215DE01D7002A7D6C /* C4YouTubeURLParser.m */; };
 		ED9D5FA51564A927009C5175 /* C4Vector.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9D5FA41564A927009C5175 /* C4Vector.m */; };
 		EDA7014914FC496300A0D77D /* C4Label.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA7014814FC496300A0D77D /* C4Label.m */; };
 		EDBCDFC116D26EFE000E4A55 /* C4ImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBCDFC016D26EFE000E4A55 /* C4ImageView.m */; };
@@ -288,8 +287,6 @@
 		ED900CEE14FBF2B3006C2AED /* C4Font.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Font.m; sourceTree = "<group>"; };
 		ED979F3E14F95EFF00645114 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		ED983F1015E2A8B600C0AD81 /* C4CameraLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4CameraLayer.m; sourceTree = "<group>"; };
-		ED99AB6F15DDF714002A7D6C /* C4YouTubeURLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4YouTubeURLParser.h; sourceTree = "<group>"; };
-		ED99AB7215DE01D7002A7D6C /* C4YouTubeURLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4YouTubeURLParser.m; sourceTree = "<group>"; };
 		ED9D5FA31564A927009C5175 /* C4Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Vector.h; sourceTree = "<group>"; };
 		ED9D5FA41564A927009C5175 /* C4Vector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Vector.m; sourceTree = "<group>"; };
 		EDA7014714FC496300A0D77D /* C4Label.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Label.h; sourceTree = "<group>"; };
@@ -356,8 +353,6 @@
 				ED185A5216E66304002528AE /* C4Switch.h */,
 				ED185A5316E66304002528AE /* C4Switch.m */,
 				ED0EBA7016DFF0B000212B03 /* C4UIElement.h */,
-				ED99AB6F15DDF714002A7D6C /* C4YouTubeURLParser.h */,
-				ED99AB7215DE01D7002A7D6C /* C4YouTubeURLParser.m */,
 				ED5B172B16E7B5190057BF06 /* C4ActivityIndicator.h */,
 				ED5B172C16E7B5190057BF06 /* C4ActivityIndicator.m */,
 				ED321FD416E9469700928EBA /* C4ScrollView.h */,
@@ -821,7 +816,6 @@
 				ED9D5FA51564A927009C5175 /* C4Vector.m in Sources */,
 				ED24F2C5157EB62800BC73B5 /* C4Timer.m in Sources */,
 				ED5FB05115B38894002987EA /* C4AssertionHandler.m in Sources */,
-				ED99AB7315DE01D7002A7D6C /* C4YouTubeURLParser.m in Sources */,
 				ED983F1115E2A8B600C0AD81 /* C4CameraLayer.m in Sources */,
 				EDBCDFC116D26EFE000E4A55 /* C4ImageView.m in Sources */,
 				ED84FDDE16DE8102009E6975 /* C4Image.m in Sources */,
