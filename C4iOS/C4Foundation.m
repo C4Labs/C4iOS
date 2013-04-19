@@ -69,7 +69,7 @@ NSInteger basicSort(id obj1, id obj2, void *context) {
 	if([obj1 class] == [@"" class] || [obj1 class] == [NSString class]){
 		return strSort(obj1, obj2, context);
 	}
-	return floatSort(obj1, obj2, context);
+ 	return floatSort(obj1, obj2, context);
 }
 
 NSInteger numSort(id num1, id num2, void *context) {

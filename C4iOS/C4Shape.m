@@ -819,6 +819,7 @@
     C4Shape *newShape = [[C4Shape allocWithZone:zone] initWithFrame:self.frame];
     newShape.path = self.path;
     newShape.style = self.style;
+
     return newShape;
 }
 

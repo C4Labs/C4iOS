@@ -77,4 +77,7 @@ CGRect CGRectMakeFromArcComponents(CGPoint centerPoint, CGFloat radius, CGFloat 
 CGRect CGRectMakeFromWedgeComponents(CGPoint centerPoint, CGFloat radius, CGFloat startAngle, CGFloat endAngle, BOOL clockwise);
 
 +(NSString *)currentDeviceModel;
+
+NSInteger strSort(id obj1, id obj2, void *context);
+
 @end

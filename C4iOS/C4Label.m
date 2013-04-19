@@ -78,8 +78,7 @@
 }
 
 -(void)sizeToFit {
-    if(self.animationDelay == 0.0) [self _sizeToFit];
-    else [self performSelector:@selector(_sizeToFit) withObject:nil afterDelay:self.animationDelay];
+    [self _sizeToFit];
 }
 
 -(void)_sizeToFit {
