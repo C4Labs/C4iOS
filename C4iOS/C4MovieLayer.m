@@ -44,7 +44,6 @@
 }
 
 -(void)dealloc {
-    C4Log(@"-%@ %@",NSStringFromSelector(_cmd), self);
     [self removeAllAnimations];
 }
 
