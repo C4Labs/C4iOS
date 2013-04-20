@@ -31,20 +31,24 @@
 
     [self.canvas addMovie:robotsMovie];
     
-    [self runMethod:@"play" afterDelay:0.5f];
-
     robotsImageUrl = nil;
     robotsData = nil;
 }
 
--(void)play {
-    robotsMovie.animationDuration = 1.0f;
-    robotsMovie.alpha = 1.0f;
-    [robotsMovie play];
+-(void)touchesBegan {
+    [self play];
+}
 
-    robotsMovie.animationOptions = REPEAT | LINEAR;
-    robotsMovie.animationDuration = robotsMovie.duration;
-    robotsMovie.rotationY += TWO_PI;
+-(void)play {
+    if (robotsMovie.isPlaying == NO) {
+        robotsMovie.animationDuration = 1.0f;
+        robotsMovie.alpha = 1.0f;
+        [robotsMovie play];
+        
+        robotsMovie.animationOptions = REPEAT | LINEAR;
+        robotsMovie.animationDuration = robotsMovie.duration;
+        robotsMovie.rotationY += TWO_PI;
+    }
 }
 
 @end
