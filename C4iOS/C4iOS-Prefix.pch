@@ -9,8 +9,8 @@
 #endif
 
 #ifdef __OBJC__
-    #import <UIKit/UIKit.h>
-    #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 #import <CoreText/CoreText.h>
 #import <Foundation/Foundation.h>
 #import <QuartzCore/QuartzCore.h>
@@ -38,7 +38,6 @@
 #import "C4Layer.h"
 #import "C4Control.h"
 #import "C4Image.h"
-#import "C4Layer.h"
 #import "C4ShapeLayer.h"
 #import "C4Shape.h"
 #import "C4Label.h"

@@ -148,7 +148,6 @@
 		10E8E517171F6C0B001D3F43 /* WorkSpaceC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkSpaceC.m; sourceTree = "<group>"; };
 		10E8E518171F6C0C001D3F43 /* WorkSpaceC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorkSpaceC.xib; sourceTree = "<group>"; };
 		10E8E51B171F7297001D3F43 /* C4Loop.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = C4Loop.aif; sourceTree = "<group>"; };
-		10E990AC16B09E8700254D30 /* C4VisualObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4VisualObject.h; sourceTree = "<group>"; };
 		ED008D3915BF5DE80005E8D3 /* lines.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lines.png; sourceTree = "<group>"; };
 		ED009F8E15091FE300086987 /* C4EAGLLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4EAGLLayer.h; sourceTree = "<group>"; };
 		ED009F8F15091FE300086987 /* C4EAGLLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4EAGLLayer.m; sourceTree = "<group>"; };
@@ -234,7 +233,6 @@
 		ED43517616DD78D000340298 /* C4Spin09.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = C4Spin09.png; sourceTree = "<group>"; };
 		ED43517716DD78D000340298 /* C4Spin10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = C4Spin10.png; sourceTree = "<group>"; };
 		ED43517816DD78D000340298 /* C4Spin11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = C4Spin11.png; sourceTree = "<group>"; };
-		ED45EC80155A33C400D28213 /* loop1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = loop1.wav; sourceTree = "<group>"; };
 		ED4702D615C052CA004B75D1 /* pyramid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pyramid.png; sourceTree = "<group>"; };
 		ED50C88114EAC2010040D844 /* C4iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = C4iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED50C88514EAC2010040D844 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -440,7 +438,6 @@
 				EDAFFAD714F70D5F00CA356A /* C4Notification.h */,
 				EDEF69AF157ED95A00E280B9 /* C4MethodDelay.h */,
 				EDAFAAA215B3D2A20024FDEE /* C4AddSubview.h */,
-				10E990AC16B09E8700254D30 /* C4VisualObject.h */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -650,7 +647,6 @@
 				ED74A49316E7E9DE00160A5B /* AnimatedImageSequence */,
 				ED74A49416E7EA0200160A5B /* BasicImages */,
 				ED321FCA16E93DB300928EBA /* UI Images */,
-				ED45EC80155A33C400D28213 /* loop1.wav */,
 				ED7513AA15150FB60076317F /* inception.mov */,
 			);
 			name = Media;
