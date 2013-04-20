@@ -8,12 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		104C87D416E5480D008EAA37 /* C4AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 104C87D316E5480D008EAA37 /* C4AppDelegate.m */; };
-		10E8E512171F5ECD001D3F43 /* WorkSpaceB.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10E8E50C171F5ECD001D3F43 /* WorkSpaceB.xib */; };
-		10E8E513171F5ECD001D3F43 /* WorkSpaceB.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E8E50D171F5ECD001D3F43 /* WorkSpaceB.m */; };
-		10E8E514171F5ECD001D3F43 /* WorkSpaceA.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10E8E50F171F5ECD001D3F43 /* WorkSpaceA.xib */; };
-		10E8E515171F5ECD001D3F43 /* WorkSpaceA.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E8E510171F5ECD001D3F43 /* WorkSpaceA.m */; };
-		10E8E519171F6C0C001D3F43 /* WorkSpaceC.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E8E517171F6C0B001D3F43 /* WorkSpaceC.m */; };
-		10E8E51A171F6C0C001D3F43 /* WorkSpaceC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10E8E518171F6C0C001D3F43 /* WorkSpaceC.xib */; };
 		10E8E51C171F7297001D3F43 /* C4Loop.aif in Resources */ = {isa = PBXBuildFile; fileRef = 10E8E51B171F7297001D3F43 /* C4Loop.aif */; };
 		ED008D3A15BF5DE80005E8D3 /* lines.png in Resources */ = {isa = PBXBuildFile; fileRef = ED008D3915BF5DE80005E8D3 /* lines.png */; };
 		ED009F9015091FE300086987 /* C4EAGLLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED009F8F15091FE300086987 /* C4EAGLLayer.m */; };
@@ -138,15 +132,6 @@
 /* Begin PBXFileReference section */
 		104C87D216E5480D008EAA37 /* C4AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4AppDelegate.h; sourceTree = "<group>"; };
 		104C87D316E5480D008EAA37 /* C4AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4AppDelegate.m; sourceTree = "<group>"; };
-		10E8E50C171F5ECD001D3F43 /* WorkSpaceB.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorkSpaceB.xib; sourceTree = "<group>"; };
-		10E8E50D171F5ECD001D3F43 /* WorkSpaceB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkSpaceB.m; sourceTree = "<group>"; };
-		10E8E50E171F5ECD001D3F43 /* WorkSpaceB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkSpaceB.h; sourceTree = "<group>"; };
-		10E8E50F171F5ECD001D3F43 /* WorkSpaceA.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorkSpaceA.xib; sourceTree = "<group>"; };
-		10E8E510171F5ECD001D3F43 /* WorkSpaceA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkSpaceA.m; sourceTree = "<group>"; };
-		10E8E511171F5ECD001D3F43 /* WorkSpaceA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkSpaceA.h; sourceTree = "<group>"; };
-		10E8E516171F6C0B001D3F43 /* WorkSpaceC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkSpaceC.h; sourceTree = "<group>"; };
-		10E8E517171F6C0B001D3F43 /* WorkSpaceC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkSpaceC.m; sourceTree = "<group>"; };
-		10E8E518171F6C0C001D3F43 /* WorkSpaceC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorkSpaceC.xib; sourceTree = "<group>"; };
 		10E8E51B171F7297001D3F43 /* C4Loop.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = C4Loop.aif; sourceTree = "<group>"; };
 		ED008D3915BF5DE80005E8D3 /* lines.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lines.png; sourceTree = "<group>"; };
 		ED009F8E15091FE300086987 /* C4EAGLLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4EAGLLayer.h; sourceTree = "<group>"; };
@@ -485,15 +470,6 @@
 				EDF65449150DEF3300194671 /* C4WorkSpace.m */,
 				ED307697150D400C001D689C /* C4Movie.h */,
 				ED307698150D400C001D689C /* C4Movie.m */,
-				10E8E511171F5ECD001D3F43 /* WorkSpaceA.h */,
-				10E8E50F171F5ECD001D3F43 /* WorkSpaceA.xib */,
-				10E8E510171F5ECD001D3F43 /* WorkSpaceA.m */,
-				10E8E50E171F5ECD001D3F43 /* WorkSpaceB.h */,
-				10E8E50D171F5ECD001D3F43 /* WorkSpaceB.m */,
-				10E8E50C171F5ECD001D3F43 /* WorkSpaceB.xib */,
-				10E8E516171F6C0B001D3F43 /* WorkSpaceC.h */,
-				10E8E517171F6C0B001D3F43 /* WorkSpaceC.m */,
-				10E8E518171F6C0C001D3F43 /* WorkSpaceC.xib */,
 				EDCE425E1564044000C7356E /* C4Camera.h */,
 				EDCE425F1564044000C7356E /* C4Camera.m */,
 				EDCE42601564044000C7356E /* C4CameraController.h */,
@@ -773,9 +749,6 @@
 				ED321FC916E93C6200928EBA /* darkRedPattern.png in Resources */,
 				ED38510916F28A5A00DB6D95 /* C4Gradient.png in Resources */,
 				ED38510A16F28A5A00DB6D95 /* C4Gradient@2x.png in Resources */,
-				10E8E512171F5ECD001D3F43 /* WorkSpaceB.xib in Resources */,
-				10E8E514171F5ECD001D3F43 /* WorkSpaceA.xib in Resources */,
-				10E8E51A171F6C0C001D3F43 /* WorkSpaceC.xib in Resources */,
 				10E8E51C171F7297001D3F43 /* C4Loop.aif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -826,9 +799,6 @@
 				EDD9CE7A16E6AB0900018ABF /* C4Stepper.m in Sources */,
 				ED5B172D16E7B5190057BF06 /* C4ActivityIndicator.m in Sources */,
 				ED321FD616E9469700928EBA /* C4ScrollView.m in Sources */,
-				10E8E513171F5ECD001D3F43 /* WorkSpaceB.m in Sources */,
-				10E8E515171F5ECD001D3F43 /* WorkSpaceA.m in Sources */,
-				10E8E519171F6C0C001D3F43 /* WorkSpaceC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
