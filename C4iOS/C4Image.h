@@ -683,4 +683,6 @@
 -(id)initAnimatedImageWithNames:(NSArray *)imageNames;
 
 +(C4Image *)imageWithUIImage:(UIImage *)image;
++(C4Image *)imageWithURL:(NSString *)imageURL;
+-(id)initWithURL:(NSURL *)imageURL;
 @end

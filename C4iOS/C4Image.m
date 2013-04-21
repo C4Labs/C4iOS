@@ -34,6 +34,10 @@
     return [[C4Image alloc] initWithUIImage:image];
 }
 
++(C4Image *)imageWithURL:(NSString *)imageURL {
+    return [[C4Image alloc] initWithURL:[NSURL URLWithString:imageURL]];
+}
+
 -(id)initWithRawData:(unsigned char*)data width:(NSInteger)width height:(NSInteger)height {
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     NSUInteger bitsPerComponent = 8;
@@ -87,6 +91,17 @@
 
 -(id)initWithData:(NSData *)imageData {
     return [self initWithUIImage:[UIImage imageWithData:imageData]];
+}
+
+-(id)initWithURL:(NSURL *)imageURL {
+    NSError *error;
+    NSData *data = [NSData dataWithContentsOfURL:imageURL options:NSDataReadingMappedIfSafe error:&error];
+    if(data) {
+        self = [self initWithData:data];
+        return self;
+    }
+    C4Log(@"There was an error downloading the content from the url you provided.\n%@",[error description]);
+    return nil;
 }
 
 -(void)setProperties {

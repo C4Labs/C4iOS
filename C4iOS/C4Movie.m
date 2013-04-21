@@ -62,7 +62,7 @@
 }
 
 -(id)initWithURL:(NSURL *)url frame:(CGRect)movieFrame {
-    self = [super init];
+    self = [super initWithFrame:movieFrame];
     if(self != nil) {
         _volume = 1.0f;
         self.shouldAutoplay = NO;
@@ -70,30 +70,51 @@
         if([_movieURL scheme]) {
             AVURLAsset *asset = [AVURLAsset URLAssetWithURL:_movieURL options:nil];
             C4Assert(asset != nil, @"The asset (%@) you tried to create couldn't be initialized", _movieURL);
+
             NSArray *requestedKeys = @[@"duration", @"playable"];
+            for (NSString *key in requestedKeys) {
+                NSError *error = nil;
+                AVKeyValueStatus keyStatus = [asset statusOfValueForKey:key error:&error];
+                if (keyStatus == AVKeyValueStatusFailed) {
+                    [self assetFailedToPrepareForPlayback:error];
+                    return nil;
+                }
+            }
+            
+            if (asset.playable == NO) {
+                NSError *error = [NSError errorWithDomain:@"C4Movie asset cannot be played" code:0 userInfo:nil];
+                [self assetFailedToPrepareForPlayback:error];
+                return nil;
+            }
+
             [asset loadValuesAsynchronouslyForKeys:requestedKeys completionHandler: ^(void) {
                 dispatch_async( dispatch_get_main_queue(), ^(void) {
-                    [self prepareToPlayAsset:asset withKeys:requestedKeys];
+                    [self prepareToPlayAsset:asset];
                 });
             }];
-            
-            AVAssetTrack *videoTrack = [asset tracksWithMediaType:AVMediaTypeVideo][0];
-            _originalMovieSize = videoTrack.naturalSize;
-            _originalMovieRatio = _originalMovieSize.width / _originalMovieSize.height;
-            self.player.actionAtItemEnd = AVPlayerActionAtItemEndPause; // currently C4Movie doesn't handle queues
-            //            self.player.allowsAirPlayVideo = NO;
-            _constrainsProportions = YES;
+            [self completeSetupWithAsset:asset frame:movieFrame];
         }
-        
-        _rate = 1.0f;
-        self.backgroundColor = [UIColor clearColor];
-        if(CGRectEqualToRect(movieFrame, CGRectZero)) {
-            movieFrame.size = _originalMovieSize;
-        }
-        self.frame = movieFrame;
-        [self setup];
     }
     return self;
+}
+
+-(void)completeSetupWithAsset:(AVURLAsset *)asset frame:(CGRect)movieFrame {
+    NSArray *assetTracks = [asset tracksWithMediaType:AVMediaTypeVideo];
+    
+    if(CGRectEqualToRect(movieFrame, CGRectZero)) {
+    AVAssetTrack *videoTrack = assetTracks[0];
+        _originalMovieSize = videoTrack.naturalSize;
+        _originalMovieRatio = _originalMovieSize.width / _originalMovieSize.height;
+        movieFrame.size = _originalMovieSize;
+        self.frame = movieFrame;
+    }
+    self.backgroundColor = [UIColor clearColor];
+    _constrainsProportions = YES;
+    self.player.actionAtItemEnd = AVPlayerActionAtItemEndPause; // currently C4Movie doesn't handle queues
+    
+    _rate = 1.0f;
+
+    [self setup];
 }
 
 - (CMTime)playerItemDuration {
@@ -132,28 +153,13 @@
 }
 
 -(void)assetFailedToPrepareForPlayback:(NSError *)error {
-    C4Log(@"The movie you tried to load failed: %@",error);
+    C4Log(@"The movie you tried to load failed...\n\n%@\n\nConfirm the following:\n1)the URL you used is correct.\n2)make sure your device is connected to the internet",error);
 }
 
--(void)prepareToPlayAsset:(AVURLAsset *)asset withKeys:(NSArray *)requestedKeys {
+-(void)prepareToPlayAsset:(AVURLAsset *)asset {
     rateContext = &rateContext;
     currentItemContext = &currentItemContext;
     playerItemStatusContext = &playerItemStatusContext;
-    
-	for (NSString *key in requestedKeys) {
-		NSError *error = nil;
-		AVKeyValueStatus keyStatus = [asset statusOfValueForKey:key error:&error];
-		if (keyStatus == AVKeyValueStatusFailed) {
-			[self assetFailedToPrepareForPlayback:error];
-			return;
-		}
-	}
-    
-    if (asset.playable == NO) {
-        NSError *error = [NSError errorWithDomain:@"C4Movie asset cannot be played" code:0 userInfo:nil];
-        [self assetFailedToPrepareForPlayback:error];
-        return;
-    }
 	
     if (self.playerItem != nil) {
         [self.playerItem removeObserver:self forKeyPath:@"status"];
@@ -202,7 +208,7 @@
         [[self player] replaceCurrentItemWithPlayerItem:self.playerItem];
     }
     //explicitly set the volume here, it needs to be set after the audio mix has been created
-    self.volume = self.volume;
+    self.volume = self.volume;    
 }
 
 - (void)observeValueForKeyPath:(NSString*) path
