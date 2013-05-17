@@ -192,4 +192,10 @@ typedef enum C4SwipeDirection : UISwipeGestureRecognizerDirection {
 -(NSDictionary *)allGestures;
 
 -(void)tapped;
+-(void)tapped:(id)sender;
+
+-(void)swipedUp:(id)sender;
+-(void)swipedDown:(id)sender;
+-(void)swipedLeft:(id)sender;
+-(void)swipedRight:(id)sender;
 @end

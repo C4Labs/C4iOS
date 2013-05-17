@@ -481,24 +481,49 @@
 -(void)touchesMoved {
 }
 
--(void)swipedRight {
-    [self postNotification:NSStringFromSelector(_cmd)];
+-(void)swipedRight:(id)sender {
+    sender = sender;
+    [self postNotification:@"swipedRight"];
+    [self swipedRight];
 }
 
--(void)swipedLeft {
-    [self postNotification:NSStringFromSelector(_cmd)];
+-(void)swipedLeft:(id)sender {
+    sender = sender;
+    [self postNotification:@"swipedLeft"];
+    [self swipedLeft];
 }
 
--(void)swipedUp {
-    [self postNotification:NSStringFromSelector(_cmd)];
+-(void)swipedUp:(id)sender {
+    sender = sender;
+    [self postNotification:@"swipedUp"];
+    [self swipedUp];
 }
 
--(void)swipedDown {
+-(void)swipedDown:(id)sender {
+    sender = sender;
+    [self postNotification:@"swipedDown"];
+    [self swipedDown];
+}
+
+-(void)tapped:(id)sender {
+    sender = sender;
     [self postNotification:NSStringFromSelector(_cmd)];
+    [self tapped];
 }
 
 -(void)tapped {
-    [self postNotification:NSStringFromSelector(_cmd)];
+}
+
+-(void)swipedUp {
+}
+
+-(void)swipedDown {
+}
+
+-(void)swipedLeft {
+}
+
+-(void)swipedRight {
 }
 
 -(void)pressedLong {

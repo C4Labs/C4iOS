@@ -78,6 +78,7 @@
     }
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"fillColor"];
+    
     animation.fromValue = (id)self.fillColor;
     animation.toValue = (__bridge id)fillColor;
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
@@ -277,6 +278,10 @@
     animation.removedOnCompletion = NO;
     animation.fillMode = kCAFillModeBoth;
     return animation;
+}
+
+-(void)setAnimationDuration:(CGFloat)animationDuration {
+    _animationDuration = animationDuration;
 }
 
 -(CGFloat)animationDuration {

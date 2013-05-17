@@ -68,7 +68,7 @@
  
  @param methodName the name of a notification for which the object should stop listening
  */
--(void)stopListeningFor:(NSString *)methodName;
+-(void)stopListeningFor:(NSString *)notification;
 
 /** Stops an object from listening for a given notification which originates from a specific object.
  
@@ -79,7 +79,7 @@
  @param methodName the name of a notification for which the object should stop listening
  @param object the object for which to stop listening
  */
--(void)stopListeningFor:(NSString *)methodName object:(id)object;
+-(void)stopListeningFor:(NSString *)notification object:(id)object;
 
 /** Stops an object from listening for a given notification which originates from a set of specific objects.
  
@@ -90,7 +90,7 @@
  @param methodName the name of a notification for which the object should stop listening
  @param objectArray the set of objects for which to stop listening
  */
--(void)stopListeningFor:(NSString *)methodName objects:(NSArray *)objectArray;
+-(void)stopListeningFor:(NSString *)notification objects:(NSArray *)objectArray;
 
 #pragma mark Broadcast Methods
 /// @name Broadcast Methods

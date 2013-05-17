@@ -1,59 +1,32 @@
 //
 //  C4WorkSpace.m
-//  Getting Media Tutorial
+//  Examples
 //
-//  Created by Travis Kirton.
+//  Created by Travis Kirton on 12-07-23.
 //
 
 #import "C4WorkSpace.h"
 
 @implementation C4WorkSpace {
-    C4Image *robotsImage;
-    C4Movie *robotsMovie;
+    CGPoint trianglePoints[3];
+    C4Shape *triangle;
 }
 
 -(void)setup {
-    self.canvas.backgroundColor = [UIColor blackColor];
-
-    robotsImage = [self createRobotsImage];
-    if(robotsImage != nil) [self.canvas addImage:robotsImage];
-
-    robotsMovie = [self createRobotsMovie];
-    if(robotsMovie != nil) [self.canvas addMovie:robotsMovie];
-}
-
--(C4Image *)createRobotsImage {
-    NSString *robotsImageUrl = @"http://www.c4ios.com/tutorials/gettingMedia/robots.png";
-    C4Image *imageFromURL = [C4Image imageWithURL:robotsImageUrl];
-    imageFromURL.width = self.canvas.width;
-    imageFromURL.center = self.canvas.center;
-
-    return imageFromURL;
-}
-
--(C4Movie *)createRobotsMovie {
-    NSString *vimeoURL = @"https://vimeo.com/64228645/download?t=1366415178&v=158652843&s=01e327470a59c8c98666da0905b8440a";
-//    NSString *anotherURL = @"http://c4ios.com/tutorials/gettingMedia/robots.mp4";
-
-    C4Movie *movieFromURL = [C4Movie movieWithURL:vimeoURL];
-    movieFromURL.zPosition = 200;
-    movieFromURL.perspectiveDistance = 1000.0f;
-    movieFromURL.alpha = 0.0f;
-    movieFromURL.center = CGPointMake(self.canvas.center.x,self.canvas.center.y-10);
-    movieFromURL.loops = YES;
-    movieFromURL.shouldAutoplay = YES;
-    [self runMethod:@"animate" afterDelay:0.5f];
-
-    return movieFromURL;
-}
-
--(void)animate {
-    robotsMovie.animationDuration = 1.0f;
-    robotsMovie.alpha = 1.0f;
+    trianglePoints[0] = CGPointMake(286, 412);
+    trianglePoints[1] = CGPointMake(486, 412);
+    trianglePoints[2] = CGPointMake(386, 612);
     
-    robotsMovie.animationOptions = REPEAT | LINEAR;
-    robotsMovie.animationDuration = robotsMovie.duration;
-    robotsMovie.rotationY += TWO_PI;
+    triangle = [C4Shape triangle:trianglePoints];
+    [self.canvas addShape:triangle];
+}
+
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    event = event;
+    CGPoint p = [[touches anyObject] locationInView:self.canvas];
+    trianglePoints[2] = p;
+    
+    [triangle triangle:trianglePoints];
 }
 
 @end

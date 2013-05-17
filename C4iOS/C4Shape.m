@@ -430,9 +430,22 @@
     CGRect pathRect = CGPathGetBoundingBox(newPath);
 //    self.origin = self.frame.origin;
     self.bounds = pathRect; //Need this step to sync the appearance of the paths to the frame of the shape
+    CGFloat animDur = self.animationDuration;
+    self.animationDuration = 0;
+    self.origin = pathRect.origin;
+    self.animationDuration = animDur;
+    
     CGPathRelease(newPath);
     _initialized = YES;
 }
+/*
+ CGFloat xOrigin = [C4Math minOfA:trianglePoints[0].x B:trianglePoints[1].x C:trianglePoints[2].x];
+ 
+ CGFloat yOrigin = [C4Math minOfA:trianglePoints[0].y B:trianglePoints[1].y C:trianglePoints[2].y];
+ 
+ triangleFrame = CGRectMake(xOrigin, yOrigin, triangle.bounds.size.width, triangle.bounds.size.height);
+ 
+ [triangle setFrame:triangleFrame]; */
 
 /* 
  for polygons, you're not given a rect right away
@@ -591,9 +604,9 @@
     if(self.animationDelay == 0.0f) [self _setFillColor:fillColor];
     else [self performSelector:@selector(_setFillColor:) withObject:fillColor afterDelay:self.animationDelay];
 }
+
 -(void)_setFillColor:(UIColor *)fillColor {
-    if(self.animationDelay == 0.0f) { self.shapeLayer.fillColor = fillColor.CGColor;}
-    else [self.shapeLayer animateFillColor:fillColor.CGColor];
+    [self.shapeLayer animateFillColor:fillColor.CGColor];
 }
 
 -(UIColor *)fillColor {

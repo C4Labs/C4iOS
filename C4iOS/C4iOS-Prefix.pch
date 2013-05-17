@@ -8,7 +8,6 @@
 #warning "This project uses features only available in iOS SDK 5.0 and later."
 #endif
 
-#ifdef __OBJC__
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import <CoreText/CoreText.h>
@@ -63,4 +62,3 @@
 #import "C4CanvasController.h"
 #import "C4WorkSpace.h"
 #import "C4Window.h"
-#endif

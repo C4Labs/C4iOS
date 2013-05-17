@@ -128,30 +128,37 @@
 
 #pragma mark Notification Methods
 -(void)listenFor:(NSString *)notification andRunMethod:(NSString *)methodName {
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(methodName) name:notification object:nil];
+    [self listenFor:notification fromObject:nil andRunMethod:methodName];
 }
 
 -(void)listenFor:(NSString *)notification fromObject:(id)object andRunMethod:(NSString *)methodName {
+    if([methodName isEqualToString:@"swipedUp"] ||
+       [methodName isEqualToString:@"swipedDown"] ||
+       [methodName isEqualToString:@"swipedLeft"] ||
+       [methodName isEqualToString:@"swipedRight"] ||
+       [methodName isEqualToString:@"tapped"]) {
+        methodName = [methodName stringByAppendingString:@":"];
+    }
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(methodName) name:notification object:object];
 }
 
 -(void)listenFor:(NSString *)notification fromObjects:(NSArray *)objectArray andRunMethod:(NSString *)methodName {
     for (id object in objectArray) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(methodName) name:notification object:object];
+        [self listenFor:notification fromObject:object andRunMethod:methodName];
     }
 }
 
--(void)stopListeningFor:(NSString *)methodName {
-    [self stopListeningFor:methodName object:nil];
+-(void)stopListeningFor:(NSString *)notification {
+    [self stopListeningFor:notification object:nil];
 }
 
--(void)stopListeningFor:(NSString *)methodName object:(id)object {
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:methodName object:object];
+-(void)stopListeningFor:(NSString *)notification object:(id)object {
+   	[[NSNotificationCenter defaultCenter] removeObserver:self name:notification object:object];
 }
 
 -(void)stopListeningFor:(NSString *)methodName objects:(NSArray *)objectArray {
     for(id object in objectArray) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:methodName object:object];
+        [self stopListeningFor:methodName object:object];
     }
 }
 
@@ -170,6 +177,15 @@
 -(void)addGesture:(C4GestureType)type name:(NSString *)gestureName action:(NSString *)methodName {
     if(self.gestureDictionary == nil) self.gestureDictionary = [[NSMutableDictionary alloc] initWithCapacity:0];
     BOOL containsGesture = ((self.gestureDictionary)[gestureName] != nil);
+    
+    if([methodName isEqualToString:@"swipedUp"] ||
+       [methodName isEqualToString:@"swipedDown"] ||
+       [methodName isEqualToString:@"swipedLeft"] ||
+       [methodName isEqualToString:@"swipedRight"] ||
+       [methodName isEqualToString:@"tapped"]) {
+        methodName = [methodName stringByAppendingString:@":"];
+    }
+
     if(containsGesture == NO) {
         UIGestureRecognizer *recognizer;
         switch (type) {
@@ -292,28 +308,49 @@
 -(void)touchesMoved {
 }
 
--(void)swipedRight {
-    [self postNotification:NSStringFromSelector(_cmd)];
+-(void)swipedRight:(id)sender {
+    sender = sender;
+    [self postNotification:@"swipedRight"];
+    [self swipedRight];
 }
 
--(void)swipedLeft {
-    [self postNotification:NSStringFromSelector(_cmd)];
+-(void)swipedLeft:(id)sender {
+    sender = sender;
+    [self postNotification:@"swipedLeft"];
+    [self swipedLeft];
 }
 
--(void)swipedUp {
-    [self postNotification:NSStringFromSelector(_cmd)];
+-(void)swipedUp:(id)sender {
+    sender = sender;
+    [self postNotification:@"swipedUp"];
+    [self swipedUp];
 }
 
--(void)swipedDown {
+-(void)swipedDown:(id)sender {
+    sender = sender;
+    [self postNotification:@"swipedDown"];
+    [self swipedDown];
+}
+
+-(void)tapped:(id)sender {
+    sender = sender;
     [self postNotification:NSStringFromSelector(_cmd)];
+    [self tapped];
 }
 
 -(void)tapped {
-    [self postNotification:NSStringFromSelector(_cmd)];
 }
 
+-(void)swipedUp {
+}
 
--(void)pressedLong {
+-(void)swipedDown {
+}
+
+-(void)swipedLeft {
+}
+
+-(void)swipedRight {
 }
 
 -(void)pressedLong:(id)sender {
@@ -321,6 +358,9 @@
        && [((UIGestureRecognizer *)sender) isKindOfClass:[UILongPressGestureRecognizer class]]) {
         objc_msgSend(self, NSSelectorFromString(self.longPressMethodName)); // have to do this manually here... because the WorkSpace doesn't respond to performSelector: or sendAction:
     }
+}
+
+-(void)pressedLong {
 }
 
 -(void)move:(id)sender {
