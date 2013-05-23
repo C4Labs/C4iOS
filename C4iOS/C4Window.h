@@ -10,15 +10,14 @@
 
 /**The C4Window class is a subclass of UIWindow. The two principal functions of a window are to provide an area for displaying its views and to distribute events to the views. The window is the root view in the view hierarchy. Typically, there is only one window in an iOS application.
 
-For more information about how to use windows, see View Programming Guide for iOS.
+ The UIWindow class defines an object known as a window that manages and coordinates the views an app displays on a device screen. Unless an app can display content on an external device screen, an app has only one window.
  
- The C4Window is a subclass of UIWindow, which is also a subclass of UIView. Because we cannot create chains of subclasses i.e. C4Window : C4View, the addShape: and addLabel: methods are coded directly into this class for sake of convenience.
-
- @warning *Note:* in C4 you should never have to worry about constructing windows.
+ The two principal functions of a window are to provide an area for displaying its views and to distribute events to the views. To change the content your app displays, you can change the window’s root view; you don’t create a new window. A window belongs to a level—typically, UIWindowLevelNormal—that represents where it sits on the z-axis relative to other windows. For example, a system alert window appears above normal app windows.
 */
 @interface C4Window : UIWindow <C4Notification, C4Gesture, C4MethodDelay, NSCopying, C4AddSubview>
 
-/// @name Convenience Methods
+#pragma mark - Convenience Methods
+///@name Convenience Methods
 
 /** A method to call instead of overriding any of the standard initializers.
  
@@ -35,23 +34,6 @@ For more information about how to use windows, see View Programming Guide for iO
  }
  */
 -(void)test;
-
-/** A method to remove another object from its view.
- 
- For the object in question, use this method to remove any visible object that was previously added to it as a subview.
- 
- @param visualObject the visible object to remove from its parent view
- */
--(void)removeObject:(id)visualObject;
-
-/** A method to remove an array of objects from their view.
- 
- This will run the removeObject: method on each object in an array.
- 
- @param array the array of visible objects to remove from their parent view
- */
--(void)removeObjects:(NSArray *)array;
-
 
 /** A convenience method used for handling the rotation of a visual object's view after its z-rotation has changed.
  
@@ -71,7 +53,7 @@ For more information about how to use windows, see View Programming Guide for iO
 @property (nonatomic) CGPoint origin;
 
 #pragma mark Animation Properties
-/// @name Configuring A Control's Animation Properties
+/// @name Animation Properties
 
 /** The duration of the view's animations, measured in seconds.
  
@@ -254,8 +236,24 @@ For more information about how to use windows, see View Programming Guide for iO
  */
 @property (readwrite, nonatomic, weak) UIColor *borderColor;
 
--(void)addObjects:(NSArray *)array;
-+(C4Window *)defaultStyle;
-
+#pragma mark - Rendering into a Context
+/**Renders the receiver and its sublayers into the specified context.
+ 
+ This method renders the contents of a C4Window directly from the layer tree, ignoring any animations added to the render tree. It essentially binds to the `renderInContext` method of the underlying C4Layer.
+ 
+ This method is used for rendering objects into a graphics context before either creating an image or saving drawing to external files.
+ 
+ @param context The graphics context to use to render the layer.
+ */
 -(void)renderInContext:(CGContextRef)context;
+
+#pragma mark - Default Style
+///@name Default Style
+/**Returns the appearance proxy for the object, cast as a C4Window rather than the standard (id) cast provided by UIAppearance.
+ 
+ You use this method to grab the appearance object that allows you to change the default style for C4Window objects.
+ 
+ @return The appearance proxy for the receiver, cast as a C4Window.
+ */
++(C4Window *)defaultStyle;
 @end

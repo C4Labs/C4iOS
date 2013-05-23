@@ -43,7 +43,8 @@
     
 }
 
-/// @name Convenience Methods
+#pragma mark - Convenience Methods
+///@name Convenience Methods
 
 /** A method to call instead of overriding any of the standard initializers.
  
@@ -77,7 +78,6 @@
  */
 -(void)removeObjects:(NSArray *)array;
 
-
 /** A convenience method used for handling the rotation of a visual object's view after its z-rotation has changed.
  
  You shouldn't use this method, it will be deprecated in future versions.
@@ -86,18 +86,40 @@
  */
 -(void)rotationDidFinish:(CGFloat)rotation;
 
-/// @name Setting A Control's Origin Point
-/** The origin point of the view.
-
- Takes a CGPoint and animates the view's origin position from its current point to the new point.
+/**This method returns an NSNull object if the current object is nil, otherwise it returns the given object as-is.
  
- This method positions the origin point of the current view by calculating the difference between this point and what the view's new center point will be. It then initiates the animation by setting the displaced new center point.
+ Use this method to check a given object is equal to nil. If so, this method returns an NSNull object.
+ 
+ This method is used for reading out NSNull values from the style dictionaries that are passed as properties.
+ 
+ @param object An object to test if its value is nil
+ @return NSNull or the object being passed.
  */
-@property (nonatomic) CGPoint origin;
+-(id)nullForNilObject:(id)object;
+
+/**This method returns nil if the current object is NSNull, otherwise it returns the given object as-is.
+ 
+ Use this method to check a given object is equal to NSNull. If so, this method returns nil.
+ 
+ This method is used when creating style dictionaries that cannot take nil as object values.
+ 
+ @param object An object to test if its value is NSNull
+ @return nil or the object being passed.
+ */
+-(id)nilForNullObject:(id)object;
+
+/**Renders the receiver and its sublayers into the specified context.
+ 
+ This method renders the contents of a C4Control directly from the layer tree, ignoring any animations added to the render tree. It essentially binds to the `renderInContext` method of the underlying C4Layer.
+ 
+ This method is used for rendering objects into a graphics context before either creating an image or saving drawing to external files.
+ 
+ @param context The graphics context to use to render the layer.
+ */
+-(void)renderInContext:(CGContextRef)context;
 
 #pragma mark Animation Properties
-/// @name Configuring A Control's Animation Properties
-
+///@name Animation Properties
 /** The duration of the view's animations, measured in seconds.
   
  All animations that occur will use this value as their duration.
@@ -206,6 +228,14 @@
  */
 @property (readwrite, nonatomic, assign) C4Control *mask;
 
+/** The origin point of the view.
+ 
+ Takes a CGPoint and animates the view's origin position from its current point to the new point.
+ 
+ This method positions the origin point of the current view by calculating the difference between this point and what the view's new center point will be. It then initiates the animation by setting the displaced new center point.
+ */
+@property (nonatomic) CGPoint origin;
+
 /** The width of the receiver's frame.
  */
 @property (readonly, nonatomic) CGFloat width;
@@ -307,45 +337,13 @@
  */
 @property (readwrite, nonatomic) NSDictionary *style;
 
+#pragma mark - Default Style
+///@name Default Style
 /**Returns the appearance proxy for the object, cast as a C4Control rather than the standard (id) cast provided by UIAppearance.
  
  You use this method to grab the appearance object that allows you to change the default style for C4Control objects.
  
  @return The appearance proxy for the receiver, cast as a C4Control.
  */
-
 +(C4Control *)defaultStyle;
-
-/**This method returns an NSNull object if the current object is nil, otherwise it returns the given object as-is.
- 
- Use this method to check a given object is equal to nil. If so, this method returns an NSNull object.
- 
- This method is used for reading out NSNull values from the style dictionaries that are passed as properties.
- 
- @param object An object to test if its value is nil
- @return NSNull or the object being passed.
- */
--(id)nullForNilObject:(id)object;
-
-/**This method returns nil if the current object is NSNull, otherwise it returns the given object as-is.
- 
- Use this method to check a given object is equal to NSNull. If so, this method returns nil.
- 
- This method is used when creating style dictionaries that cannot take nil as object values.
- 
- @param object An object to test if its value is NSNull
- @return nil or the object being passed.
- */
--(id)nilForNullObject:(id)object;
-
-/**Renders the receiver and its sublayers into the specified context.
- 
- This method renders the contents of a C4Control directly from the layer tree, ignoring any animations added to the render tree. It essentially binds to the `renderInContext` method of the underlying C4Layer.
- 
- This method is used for rendering objects into a graphics context before either creating an image or saving drawing to external files.
- 
- @param context The graphics context to use to render the layer.
- */
--(void)renderInContext:(CGContextRef)context;
-
 @end

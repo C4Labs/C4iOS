@@ -94,7 +94,7 @@ typedef enum C4SwipeDirection : UISwipeGestureRecognizerDirection {
  
  This method should work only for the gesture types: SWIPELEFT, SWIPERIGHT, SWIPEUP, and SWIPEDOWN
  
- @param touchCount the desired maximum number of touches
+ @param direction the desired direction for the swipe gesture
  @param gestureName a string identifying the gesture upon which this method should act. The value of _gestureName_ should correspond to the name of a gesture already added using the addGesture:name:action: method
 
  @warning *Note:* There can be only 1 direction associated with a given gesture and are set up by default. For example, the default direction for a gesture created with the type SWIPELEFT is SWIPEDIRLEFT. You should not have to call this method explicitly.
@@ -151,6 +151,8 @@ typedef enum C4SwipeDirection : UISwipeGestureRecognizerDirection {
  This method can be overridden to receive access to the gesture from which it was called.
  
  If a LONGPRESS gesture has been added to an object, and the object receives a long press notification, this method is triggered and then triggers the object's method as provided by obj.longPressMethodName.
+ 
+ @param sender the object that is sending the pressedLong: message.
  */
 -(void)pressedLong:(id)sender;
 
@@ -162,11 +164,27 @@ typedef enum C4SwipeDirection : UISwipeGestureRecognizerDirection {
 */
 -(void)swipedRight;
 
+/** Method which is called each time an object receives a swipe from left to right
+ 
+ Use this method if you want to have access to the object that sent the tapped message.
+ 
+ @param sender a UIGestureRecognizer object.
+ */
+-(void)swipedRight:(id)sender;
+
 /** Method which is called each time an object receives a swipe from right to left
  
  This method can be overridden to trigger other custom actions or events.
  */
 -(void)swipedLeft;
+
+/**Default method which is called each time an object receives a swipe from right to left
+ 
+ Use this method if you want to have access to the object that sent the tapped message.
+ 
+ @param sender a UIGestureRecognizer object.
+ */
+-(void)swipedLeft:(id)sender;
 
 /** Method which is called each time an object receives a swipe from down to up
  
@@ -174,28 +192,59 @@ typedef enum C4SwipeDirection : UISwipeGestureRecognizerDirection {
  */
 -(void)swipedUp;
 
+/** Method which is called each time an object receives a swipe from down to up
+ 
+ Use this method if you want to have access to the object that sent the tapped message.
+ 
+ @param sender a UIGestureRecognizer object.
+ */
+-(void)swipedUp:(id)sender;
+
 /** Method which is called each time an object receives a swipe from up to down
  
  This method can be overridden to trigger other custom actions or events.
  */
 -(void)swipedDown;
 
+/** Method which is called each time an object receives a swipe from up to down
+ 
+ Use this method if you want to have access to the object that sent the tapped message.
+ 
+ @param sender a UIGestureRecognizer object.
+ */
+-(void)swipedDown:(id)sender;
+
 /** A default method which can be called when using a PAN gesture, if the object is to follow a moving touch
  
  This method can be overridden to trigger other custom actions or events.
+ 
+ @param sender a UIGestureRecognizer object.
  
  @warning *Note:* In its default implementation, it is assumed that PAN is the only kind of gesture which will call this method.
  */
 -(void)move:(id)sender;
 
--(UIGestureRecognizer *)gestureForName:(NSString *)gestureName;
--(NSDictionary *)allGestures;
-
+/**The basic method that gets called when a tap gesture gets recognized.
+ 
+ Use this method if you only need to react to the tap gesture.
+ */
 -(void)tapped;
+
+/**Default method which is called each time an object receives a tap gesture.
+ 
+ Use this method if you want to have access to the object that sent the tapped message.
+ 
+ @param sender a UIGestureRecognizer object.
+ */
 -(void)tapped:(id)sender;
 
--(void)swipedUp:(id)sender;
--(void)swipedDown:(id)sender;
--(void)swipedLeft:(id)sender;
--(void)swipedRight:(id)sender;
+/**Returns the UIGesture associated with a specified gesture name for the receiver.
+ 
+ @param gestureName the name of the gesture to retrieve.
+ */
+-(UIGestureRecognizer *)gestureForName:(NSString *)gestureName;
+
+/**Returns a dictionary of all the gestures associated with the receiver.
+ */
+-(NSDictionary *)allGestures;
 @end

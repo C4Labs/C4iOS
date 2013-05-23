@@ -55,7 +55,7 @@
  
  Use this method instead of addSubview: when adding C4Labels, because if there are special conditions for adding shapes this method will handle those.
  
- @param aLabel A C4Label object.
+ @param label A C4Label object.
  */
 -(void)addLabel:(C4Label *)label;
 
@@ -65,7 +65,7 @@
  
  Use this method instead of addSubview: when adding C4Movie objects, because if there are special conditions for adding shapes this method will handle those.
  
- @param image A C4Movie object.
+ @param movie A C4Movie object.
  */
 -(void)addMovie:(C4Movie *)movie;
 
@@ -101,7 +101,7 @@
  
  For the object in question, use this method to remove any visible object that was previously added to it as a subview.
  
- @param visibleObject the visible object to remove from its parent view
+ @param visualObject the visible object to remove from its parent view
  */
 -(void)removeObject:(id)visualObject;
 

@@ -15,11 +15,26 @@
  */
 @interface C4CameraController : C4ViewController <AVCaptureVideoDataOutputSampleBufferDelegate, C4Notification> {
 }
-
+#pragma mark - Initializing Capture
+///@name Initializing Capture
 /** Initializes a C4Camera object, making it ready to capture images.
+
+ The default is CAMERAFRONT.
  */
 -(void)initCapture;
 
+/** Initializes camera capture for a given camera position.
+
+ @param position The position of the camera to use upon initialization.
+ */
+-(void)initCapture:(C4CameraPosition)position;
+
+/**Specifies whether or not the receiver has already been initialized.
+ */
+@property (readonly, nonatomic, getter = isInitialized) BOOL initialized;
+
+#pragma mark - Capturing Images
+///@name Capturing Images
 /** Captures an image.
  
  This method also posts a notification when an image has been captured.
@@ -32,6 +47,8 @@
  */
 @property (readonly, strong, nonatomic) C4Image *capturedImage;
 
+#pragma mark - View & Layer
+///@name View & Layer
 /** The receiver’s view.
  */
 @property (readwrite, strong, nonatomic) C4View *view;
@@ -40,23 +57,23 @@
  */
 @property (readwrite, strong, nonatomic) C4CameraLayer *previewLayer;
 
-/** Initializes camera capture for a given camera position.
- 
- The default is CAMERAFRONT.
- 
- @param position The position of the camera to use upon initialization.
- */
--(void)initCapture:(C4CameraPosition)position;
-
+#pragma mark - Camera Position & Quality
+///@name Camera Position & Quality
 /**Specifies and returns the current position of the receiver. 
  
  Use this property to set or determine the current position of a given C4Camera object.
  */
 @property (readonly, nonatomic) C4CameraPosition cameraPosition;
 
-/**Specifies whether or not the receiver has already been initialized. 
+/**Switches the camera's position to the front or back.
+ 
+ This method will switch the camera on a given device from the front to the back (e.g. iPhone) depending on the value of the `position` being passed into it.
+ 
+ The camera will switch only if the `position` is different than the camera's actual current position. For example, it will not switch to the front if te camera 
+ 
+ @param position A position (CAMERAFRONT or CAMERABACK) to which the camera should switch.
  */
-@property (readonly, nonatomic, getter = isInitialized) BOOL initialized;
+-(void)switchCameraPosition:(C4CameraPosition)position;
 
 /**Specifies the current capture quality of the receiver. The following list of qualities is available:
  
@@ -74,16 +91,8 @@
  */
 @property (readwrite, nonatomic) NSString *captureQuality;
 
-/**Switches the camera's position to the front or back. 
- 
- This method will switch the camera on a given device from the front to the back (e.g. iPhone) depending on the value of the `position` being passed into it.
- 
- The camera will switch only if the `position` is different than the camera's actual current position. For example, it will not switch to the front if te camera 
- 
- @param position A position (CAMERAFRONT or CAMERABACK) to which the camera should switch.
- */
--(void)switchCameraPosition:(C4CameraPosition)position;
-
+#pragma mark - Capture Session
+///@name Capture Session
 /**An AVCaptureSession object used to coordinate the flow of data from AV input devices to outputs.
  
  This property is used by `C4Camera` to access and coordinate with its underlying controller.

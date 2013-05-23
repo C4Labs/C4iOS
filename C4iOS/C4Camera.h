@@ -20,7 +20,8 @@
  
  */
 @interface C4Camera : C4Control <AVCaptureVideoDataOutputSampleBufferDelegate>
-
+#pragma mark - Creating Cameras
+///@name Creating Cameras
 /** Creates and returns a camera object in the specified frame.
   
  @param frame The frame into which the camera image will be scaled, or cropped depending on the dimensions of the frame.
@@ -29,10 +30,14 @@
  */
 +(C4Camera *)cameraWithFrame:(CGRect)frame;
 
+#pragma mark - Initializing Capture
+///@name Initializing Capture
 /** Initializes a C4Camera object, making it ready to capture images.
  */
 -(void)initCapture;
 
+#pragma mark - Capturing Images
+///@name Capturing Images
 /** Captures an image.
  
  This method also posts a notification when an image has been captured.
@@ -45,19 +50,13 @@
  */
 @property (readonly, strong, nonatomic) C4Image *capturedImage;
 
+#pragma mark - Camera Position & Quality
+///@name Camera Position & Quality
 /** Specifies the current position of the receiver's camera.
  
  A camera's position can be either `CAMERAFRONT` or `CAMERABACK`, setting this property will change to the specified camera position.
  */
 @property (readwrite, nonatomic) C4CameraPosition cameraPosition;
-
-/**Returns the appearance proxy for the object, cast as a C4Camera rather than the standard (id) cast provided by UIAppearance.
- 
- You use this method to grab the appearance object that allows you to change the default style for C4Camera objects.
- 
- @return The appearance proxy for the receiver, cast as a C4Camera.
- */
-+(C4Camera *)defaultStyle;
 
 /**Specifies the current capture quality of the camera. The following list of qualities is available:
  
@@ -75,4 +74,13 @@
  */
 @property (readwrite, nonatomic) NSString *captureQuality;
 
+#pragma mark - Default Style
+///@name Default Style
+/**Returns the appearance proxy for the object, cast as a C4Camera rather than the standard (id) cast provided by UIAppearance.
+ 
+ You use this method to grab the appearance object that allows you to change the default style for C4Camera objects.
+ 
+ @return The appearance proxy for the receiver, cast as a C4Camera.
+ */
++(C4Camera *)defaultStyle;
 @end

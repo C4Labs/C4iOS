@@ -194,8 +194,8 @@ typedef enum C4ScrollViewIndicatorStyle : NSUInteger {
     INDICATORWHITE
 } C4ScrollViewIndicatorStyle;
 
-C4_EXTERN const float DECELERATENORMAL;
-C4_EXTERN const float DECELERATEFAST;
+C4_EXTERN const CGFloat DECELERATENORMAL;
+C4_EXTERN const CGFloat DECELERATEFAST;
 C4_EXTERN const CGFloat DECELERATEMEDIUM;
 
 /* `fillRule' values. */

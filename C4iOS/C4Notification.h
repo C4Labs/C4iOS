@@ -66,7 +66,7 @@
  
  This method calls the removeObserver:name:object: method of the default notification center, passing nil for the object.
  
- @param methodName the name of a notification for which the object should stop listening
+ @param notification the name of a notification for which the object should stop listening
  */
 -(void)stopListeningFor:(NSString *)notification;
 
@@ -76,7 +76,7 @@
  
  This method calls the removeObserver:name:object: method of the default notification center passing a specific object.
  
- @param methodName the name of a notification for which the object should stop listening
+ @param notification the name of a notification for which the object should stop listening
  @param object the object for which to stop listening
  */
 -(void)stopListeningFor:(NSString *)notification object:(id)object;
@@ -87,7 +87,7 @@
  
  This method calls the removeObserver:name:object: method of the default notification center passing all of the specific objects in the given array.
  
- @param methodName the name of a notification for which the object should stop listening
+ @param notification the name of a notification for which the object should stop listening
  @param objectArray the set of objects for which to stop listening
  */
 -(void)stopListeningFor:(NSString *)notification objects:(NSArray *)objectArray;

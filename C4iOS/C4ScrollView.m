@@ -382,4 +382,14 @@
     [_UIScrollview addSubview:movie];
 }
 
++(C4ScrollView *)defaultStyle {
+    return (C4ScrollView *)[C4ScrollView appearance];
+}
+
+//FIXME: NEED TO ADD STYLE COPYING METHODS TO C4SCROLLVIEW.M
+-(id)copyWithZone:(NSZone *)zone {
+    C4ScrollView *newScrollView = [[C4ScrollView allocWithZone:zone] initWithFrame:self.frame];
+    newScrollView.style = self.style;
+    return newScrollView;
+}
 @end

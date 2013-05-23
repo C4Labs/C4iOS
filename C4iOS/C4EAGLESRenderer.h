@@ -29,6 +29,4 @@
  @param layer The underlying CAEAGLLayer from which to resize.
  */
 - (BOOL)resizeFromLayer:(CAEAGLLayer*)layer;
-
--(id)copyWithZone:(NSZone *)zone;
 @end

@@ -12,7 +12,8 @@
  Instead of manipulating this object's initialization methods, you can instantiate variables using the setup method. The setup method gets called at the end of the init method executed by the superclass [C4EAGLES1Renderer](C4EAGLES1Renderer).
  */
 @interface C4GL1Renderer : C4EAGLES1Renderer
-
+#pragma mark - Setup & Render
+///@name Setup & Render
 /**The method to override for adding additional variable setup.
  
  This method gets called automatically at the end of the object's initialization.
@@ -25,6 +26,12 @@
   */
 -(void)render;
 
+#pragma mark - Copying
+///@name Copying
+/**Creates a copy of the receiver.
+ @param zone The zone for copying. Leave this as nil for normal results.
+ @return a copy of the receiver.
+ */
 -(C4GL1Renderer *)copyWithZone:(NSZone *)zone;
 
 @end

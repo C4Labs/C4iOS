@@ -15,8 +15,8 @@
     NSComparator floatSortComparator;
 }
 
-/// @name Foundation Methods
 #pragma mark Foundation Methods
+/// @name Foundation Methods
 
 +(C4Foundation *)sharedManager;
 

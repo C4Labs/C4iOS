@@ -195,6 +195,14 @@
  */
 -(id)initWithURL:(NSURL *)movieURL frame:(CGRect)movieFrame;
 
+/**Specifies whether or not the movie will maintain its visual proportions when either of its `width` or `height` properties are changed.
+ 
+ The default is `YES`.
+ */
+@property (readwrite, atomic) BOOL constrainsProportions;
+
+#pragma mark - Default style
+///@name Default Style
 /**Returns the appearance proxy for the object, cast as a C4Movie rather than the standard (id) cast provided by UIAppearance.
  
  You use this method to grab the appearance object that allows you to change the default style for C4Movie objects.
@@ -202,11 +210,4 @@
  @return The appearance proxy for the receiver, cast as a C4Movie.
  */
 +(C4Movie *)defaultStyle;
-
-/**Specifies whether or not the movie will maintain its visual proportions when either of its `width` or `height` properties are changed.
- 
- The default is `YES`.
- */
-@property (readwrite, atomic) BOOL constrainsProportions;
-
 @end

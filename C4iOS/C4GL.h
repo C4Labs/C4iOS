@@ -22,14 +22,26 @@
 
 @interface C4GL : C4Control {    
 }
+#pragma mark - Creating C4GL Objects
+///@name Creating C4GL Objects
+/**Creates and returns a new C4GL object with a specified frame.
+ 
+ This method creates a new C4GL object sized and positioned based on the specified frame, and initialized the default renderer
+ 
+ @param frame the frame for building the new C4GL object's view.
+ @return a new C4GL object.
+ */
 
 +(C4GL *)glWithFrame:(CGRect)frame;
 
 /**Initializes a C4GL object with a specific renderer.
+
  @param renderer A rendering object which conforms to the C4EAGLESRenderer protocol.
  */
 -(id)initWithRenderer:(id <C4EAGLESRenderer>)renderer;
 
+#pragma mark Animation Control
+///@name Animation Control
 /**Starts rendering
  */
 -(void)startAnimation;
@@ -70,6 +82,23 @@
  Set this property to YES if you want to draw something but aren't animating its contents. If you are not animating and this property is set to NO the rendering call will be made at the specified frame rate (default 60fps) and you'll be wasting a lot of resources.
  */
 @property (atomic) BOOL drawOnce;
-+(C4GL *)defaultStyle;
+
+#pragma mark - Copying
+///@name Copying
+/**Creates a copy of the receiver.
+ @param zone The zone for copying. Leave this as nil for normal results.
+ @return a copy of the receiver.
+ */
 -(C4GL *)copyWithZone:(NSZone *)zone;
+
+#pragma mark - Default Style
+///@name Default Style
+/**Returns the appearance proxy for the object, cast as a C4GL rather than the standard (id) cast provided by UIAppearance.
+ 
+ You use this method to grab the appearance object that allows you to change the default style for C4GL objects.
+ 
+ @return The appearance proxy for the receiver, cast as a C4GL.
+ */
++(C4GL *)defaultStyle;
+
 @end

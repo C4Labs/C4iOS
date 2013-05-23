@@ -20,6 +20,8 @@
 @interface C4EAGLES1Renderer : C4Object <C4EAGLESRenderer> {
 }
 
+#pragma mark - Setup & Render
+///@name Setup & Render
 /**The method used for adding additional variable setup, outside of the main initialization methods.
   */
 -(void)setup;
@@ -28,6 +30,8 @@
  */
 -(void)render;
 
+#pragma mark - Width & Height
+///@name Width & Height
 /**The width of the layer.
 
  This property is used in the resizeFromLayer: method 
@@ -40,6 +44,8 @@
  */
 @property (readonly, nonatomic) GLint height;
 
+#pragma mark - Buffers
+///@name Buffers
 /**The frame buffer.
  
  Framebuffer Objects are a mechanism for rendering to images other than the default OpenGL Default Framebuffer. They are OpenGL Objects that allow you to render directly to textures.
@@ -60,6 +66,12 @@
  */
 @property (readwrite, atomic, strong) EAGLContext *eaglContext;
 
+#pragma mark - Copying
+///@name Copying
+/**Creates a copy of the receiver.
+ @param zone The zone for copying. Leave this as nil for normal results.
+ @return a copy of the receiver.
+ */
 -(C4EAGLES1Renderer *)copyWithZone:(NSZone *)zone;
 
 @end

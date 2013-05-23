@@ -15,6 +15,7 @@ This class provides methods for setting the title, image, and other appearance p
  */
 @interface C4Button : C4Control <C4UIElement>
 
+#pragma mark Creating Buttons
 ///@name Creating Buttons
 /**Creates and returns a new button of the specified type.
  
@@ -38,23 +39,23 @@ This class provides methods for setting the title, image, and other appearance p
  */
 -(id)initWithType:(C4ButtonType)buttonType;
 
-///@name Default Style
-/**Returns the appearance proxy for the button, cast as a C4Button rather than the standard (id) cast provided by UIAppearance.
- 
- You use this method to grab the appearance object that allows you to change the default style for C4Button objects.
- 
- @return The appearance proxy for the receiver, cast as a C4Button.
- */
-+(C4Button *)defaultStyle;
-
+#pragma mark Configuring the Button Title
 ///@name Configuring the Button Title
-/**Returns the title associated with the specified state.
-
- @param state The state that uses the title. The possible values are described in C4ControlState.
+/**A view that displays the value of the currentTitle property for a button. (read-only)
  
- @return The title for the specified state. If no title has been set for the specific state, this method returns the title associated with the NORMAL state.
+ Although this property is read-only, its own properties are read/write. Use these properties primarily to configure the text of the button. For example:
+ 
+ Do not use the label object to set the text color or the shadow color. Instead, use the setTitleColor:forState: and setTitleShadowColor:forState: methods of this class to make those changes.
+ 
+ The titleLabel property returns a value even if the button has not been displayed yet. The value of the property is nil for system buttons.
  */
--(NSString *)titleForState:(C4ControlState)state;
+@property (readonly, nonatomic, weak) C4Label *titleLabel;
+
+/**A Boolean value that determines whether the title shadow changes when the button is highlighted.
+ 
+ If YES, the shadow changes from engrave to emboss appearance when highlighted. The default value is NO.
+ */
+@property (readwrite, nonatomic) BOOL reversesTitleShadowWhenHighlighted;
 
 /**Sets the title to use for the specified state.
  
@@ -63,18 +64,21 @@ This class provides methods for setting the title, image, and other appearance p
  At a minimum, you should set the value for the normal state. If a title is not specified for a state, the default behavior is to use the title associated with the NORMAL state. If the value for NORMAL is not set, then the property defaults to a system value.
  
  @param title The title to use for the specified state.
-
+ 
  @param state The state that uses the specified title. The possible values are described in UIControlState.
  */
 -(void)setTitle:(NSString *)title forState:(C4ControlState)state;
 
-/**Returns the title color used for a state.
+/**Sets the styled title to use for the specified state.
  
- @param state The state that uses the title color. The possible values are described in UIControlState.
-
- @return The color of the title for the specified state.
+ Use this method to set the title of the button, including any relevant formatting information. If you set both a title and an attributed title for the button, the button prefers the use of the attributed title.
+ 
+ At a minimum, you should set the value for the normal state. If a title is not specified for a state, the default behavior is to use the title associated with the NORMAL state. If the value for NORMAL is not set, then the property defaults to a system value.
+ 
+ @param title The styled text string so use for the title.
+ @param state The state that uses the specified title. The possible values are described in UIControlState.
  */
--(UIColor *)titleColorForState:(C4ControlState)state;
+-(void)setAttributedTitle:(NSAttributedString *)title forState:(C4ControlState)state NS_AVAILABLE_IOS(6_0);
 
 /**Sets the color of the title to use for the specified state.
  
@@ -85,55 +89,30 @@ This class provides methods for setting the title, image, and other appearance p
  */
 -(void)setTitleColor:(UIColor *)color forState:(C4ControlState)state;
 
-/**Returns the title color used for a state.
- 
- @param state The state that uses the title color. The possible values are described in C4ControlState.
- @return The color of the title for the specified state.
- */
--(UIColor *)titleShadowColorForState:(C4ControlState)state;
-
 /**Sets the color of the title to use for the specified state.
-
+ 
  In general, if a property is not specified for a state, the default is to use the NORMAL value. If the NORMAL value is not set, then the property defaults to a system value. Therefore, at a minimum, you should set the value for the normal state.
-
+ 
  @param color The color of the title to use for the specified state.
  @param state The state that uses the specified color. The possible values are described in C4ControlState.
  */
 -(void)setTitleShadowColor:(UIColor *)color forState:(C4ControlState)state;
 
-/**Returns the C4Image used for a button state.
+/**Returns the title color used for a state.
  
- @param state The state that uses the image. Possible values are described in C4ControlState.
+ @param state The state that uses the title color. The possible values are described in UIControlState.
  
- @return The image used for the specified state.
+ @return The color of the title for the specified state.
  */
--(C4Image *)imageForState:(C4ControlState)state;
+-(UIColor *)titleColorForState:(C4ControlState)state;
 
-/**Sets the C4Image to use for the specified state.
- 
- In general, if a property is not specified for a state, the default is to use the NORMAL value. If the NORMAL value is not set, then the property defaults to a system value. Therefore, at a minimum, you should set the value for the normal state.
- 
- @param image The image to use for the specified state.
- @param state The state that uses the specified title. The values are described in C4ControlState.
- */
--(void)setImage:(C4Image *)image forState:(C4ControlState)state;
+/**Returns the title associated with the specified state.
 
-/**Returns the C4Image used for the background of a button state.
+ @param state The state that uses the title. The possible values are described in C4ControlState.
  
- @param state The state that uses the image. Possible values are described in C4ControlState.
- 
- @return The image used for the background of the specified state.
+ @return The title for the specified state. If no title has been set for the specific state, this method returns the title associated with the NORMAL state.
  */
--(C4Image *)backgroundImageForState:(C4ControlState)state;
-
-/**Sets the background image to use for the specified button state.
- 
- In general, if a property is not specified for a state, the default is to use the NORMAL value. If the NORMAL value is not set, then the property defaults to a system value. Therefore, at a minimum, you should set the value for the normal state.
- 
- @param image The background image to use for the specified state.
- @param state The state that uses the specified image. The values are described in UIControlState.
- */
--(void)setBackgroundImage:(C4Image *)image forState:(C4ControlState)state;
+-(NSString *)titleForState:(C4ControlState)state;
 
 /**Returns the styled title associated with the specified state.
  
@@ -142,59 +121,15 @@ This class provides methods for setting the title, image, and other appearance p
  */
 -(NSAttributedString *)attributedTitleForState:(C4ControlState)state NS_AVAILABLE_IOS(6_0);
 
-/**Sets the styled title to use for the specified state.
+/**Returns the title color used for a state.
  
- Use this method to set the title of the button, including any relevant formatting information. If you set both a title and an attributed title for the button, the button prefers the use of the attributed title.
- 
- At a minimum, you should set the value for the normal state. If a title is not specified for a state, the default behavior is to use the title associated with the NORMAL state. If the value for NORMAL is not set, then the property defaults to a system value.
-
- @param title The styled text string so use for the title.
- @param state The state that uses the specified title. The possible values are described in UIControlState.
+ @param state The state that uses the title color. The possible values are described in C4ControlState.
+ @return The color of the title for the specified state.
  */
--(void)setAttributedTitle:(NSAttributedString *)title forState:(C4ControlState)state NS_AVAILABLE_IOS(6_0);
+-(UIColor *)titleShadowColorForState:(C4ControlState)state;
 
-@property (readonly, nonatomic, weak) C4Label *titleLabel;
-
-/**The font used to display text on the button.
-
- This method binds to the UIButton's font by accessing its titleLabel.font property.
- 
- If nil, a system font is used. The default value is 15.0pt Avenir-Medium.
- */
-@property (readwrite, nonatomic, weak) C4Font *font;
-
-/**The encapsulated UIButton object.
- 
- This method returns the UIButton object that is the subview of the C4Button's view.
- */
-@property (readonly, strong, nonatomic) UIButton *UIButton;
-
-/**The inset or outset margins for the rectangle surrounding all of the button’s content.
- 
- Use this property to resize and reposition the effective drawing rectangle for the button content. The content comprises the button image and button title. You can specify a different value for each of the four insets (top, left, bottom, right). A positive value shrinks, or insets, that edge—moving it closer to the center of the button. A negative value expands, or outsets, that edge. Use the UIEdgeInsetsMake function to construct a value for this property. The default value is UIEdgeInsetsZero.
- */
-@property (readwrite, nonatomic) UIEdgeInsets contentEdgeInsets;
-
-/**The inset or outset margins for the rectangle around the button’s image.
- 
- Use this property to resize and reposition the effective drawing rectangle for the button image. You can specify a different value for each of the four insets (top, left, bottom, right). A positive value shrinks, or insets, that edge—moving it closer to the center of the button. A negative value expands, or outsets, that edge. Use the UIEdgeInsetsMake function to construct a value for this property. The default value is UIEdgeInsetsZero.
- */
-@property (readwrite, nonatomic) UIEdgeInsets imageEdgeInsets;
-
-/**The inset or outset margins for the rectangle around the button’s title text.
- 
- Use this property to resize and reposition the effective drawing rectangle for the button title. You can specify a different value for each of the four insets (top, left, bottom, right). A positive value shrinks, or insets, that edge—moving it closer to the center of the button. A negative value expands, or outsets, that edge. Use the UIEdgeInsetsMake function to construct a value for this property. The default value is UIEdgeInsetsZero.
- 
- The insets you specify are applied to the title rectangle after that rectangle has been sized to fit the button’s text. Thus, positive inset values may actually clip the title text.
- */
-@property (readwrite, nonatomic) UIEdgeInsets titleEdgeInsets;
-
-/**A Boolean value that determines whether the title shadow changes when the button is highlighted.
- 
- If YES, the shadow changes from engrave to emboss appearance when highlighted. The default value is NO.
- */
-@property (readwrite, nonatomic) BOOL reversesTitleShadowWhenHighlighted;
-
+#pragma mark - Configuring Button Presentation
+///@name Configuring Button Presentation
 /**A Boolean value that determines whether the image changes when the button is highlighted.
  
  If YES, the image is drawn lighter when the button is highlighted. The default value is YES.
@@ -213,6 +148,40 @@ This class provides methods for setting the title, image, and other appearance p
  */
 @property (readwrite, nonatomic) BOOL showsTouchWhenHighlighted;
 
+/**Returns the C4Image used for the background of a button state.
+ 
+ @param state The state that uses the image. Possible values are described in C4ControlState.
+ 
+ @return The image used for the background of the specified state.
+ */
+-(C4Image *)backgroundImageForState:(C4ControlState)state;
+
+/**Returns the C4Image used for a button state.
+ 
+ @param state The state that uses the image. Possible values are described in C4ControlState.
+ 
+ @return The image used for the specified state.
+ */
+-(C4Image *)imageForState:(C4ControlState)state;
+
+/**Sets the background image to use for the specified button state.
+ 
+ In general, if a property is not specified for a state, the default is to use the NORMAL value. If the NORMAL value is not set, then the property defaults to a system value. Therefore, at a minimum, you should set the value for the normal state.
+ 
+ @param image The background image to use for the specified state.
+ @param state The state that uses the specified image. The values are described in UIControlState.
+ */
+-(void)setBackgroundImage:(C4Image *)image forState:(C4ControlState)state;
+
+/**Sets the C4Image to use for the specified state.
+ 
+ In general, if a property is not specified for a state, the default is to use the NORMAL value. If the NORMAL value is not set, then the property defaults to a system value. Therefore, at a minimum, you should set the value for the normal state.
+ 
+ @param image The image to use for the specified state.
+ @param state The state that uses the specified title. The values are described in C4ControlState.
+ */
+-(void)setImage:(C4Image *)image forState:(C4ControlState)state;
+
 /**The tint color for the button.
  
  The default value is a UIColor created with the darkBluePattern image.
@@ -221,6 +190,38 @@ This class provides methods for setting the title, image, and other appearance p
  */
 @property (readwrite, nonatomic, strong) UIColor *tintColor NS_AVAILABLE_IOS(5_0) UI_APPEARANCE_SELECTOR;
 
+/**The font used to display text on the button.
+ 
+ This method binds to the UIButton's font by accessing its titleLabel.font property.
+ 
+ If nil, a system font is used. The default value is 15.0pt Avenir-Medium.
+ */
+@property (readwrite, nonatomic, weak) C4Font *font;
+
+#pragma mark - Configuring Edge Insets
+///@name Configuring Edge Insets
+/**The inset or outset margins for the rectangle surrounding all of the button’s content.
+ 
+ Use this property to resize and reposition the effective drawing rectangle for the button content. The content comprises the button image and button title. You can specify a different value for each of the four insets (top, left, bottom, right). A positive value shrinks, or insets, that edge—moving it closer to the center of the button. A negative value expands, or outsets, that edge. Use the UIEdgeInsetsMake function to construct a value for this property. The default value is UIEdgeInsetsZero.
+ */
+@property (readwrite, nonatomic) UIEdgeInsets contentEdgeInsets;
+
+/**The inset or outset margins for the rectangle around the button’s title text.
+ 
+ Use this property to resize and reposition the effective drawing rectangle for the button title. You can specify a different value for each of the four insets (top, left, bottom, right). A positive value shrinks, or insets, that edge—moving it closer to the center of the button. A negative value expands, or outsets, that edge. Use the UIEdgeInsetsMake function to construct a value for this property. The default value is UIEdgeInsetsZero.
+ 
+ The insets you specify are applied to the title rectangle after that rectangle has been sized to fit the button’s text. Thus, positive inset values may actually clip the title text.
+ */
+@property (readwrite, nonatomic) UIEdgeInsets titleEdgeInsets;
+
+/**The inset or outset margins for the rectangle around the button’s image.
+ 
+ Use this property to resize and reposition the effective drawing rectangle for the button image. You can specify a different value for each of the four insets (top, left, bottom, right). A positive value shrinks, or insets, that edge—moving it closer to the center of the button. A negative value expands, or outsets, that edge. Use the UIEdgeInsetsMake function to construct a value for this property. The default value is UIEdgeInsetsZero.
+ */
+@property (readwrite, nonatomic) UIEdgeInsets imageEdgeInsets;
+
+#pragma mark - Getting the Current State
+///@name Getting the Current State
 /**The button type. (read-only)
  
  See C4ButtonType for the possible values.
@@ -234,7 +235,7 @@ This class provides methods for setting the title, image, and other appearance p
 @property (readonly, nonatomic, weak) NSString *currentTitle;
 
 /**The current styled title that is displayed on the button. (read-only)
-
+ 
  The value for this property reflects the title associated with the control’s current state. For states that do not have a custom title string associated with them, this method returns the attributed title that is currently displayed, which is typically the one associated with the NORMAL state.
  */
 @property (readonly, nonatomic, weak) NSAttributedString *currentAttributedTitle NS_AVAILABLE_IOS(6_0);
@@ -263,4 +264,22 @@ This class provides methods for setting the title, image, and other appearance p
  */
 @property (readonly, nonatomic, weak) C4Image *currentBackgroundImage;
 
+#pragma mark - Accessing the UIButton 
+///@name Accessing the UIButton 
+
+/**The encapsulated UIButton object.
+ 
+ This method returns the UIButton object that is the subview of the C4Button's view.
+ */
+@property (readonly, strong, nonatomic) UIButton *UIButton;
+
+#pragma mark Default Style
+///@name Default Style
+/**Returns the appearance proxy for the button, cast as a C4Button rather than the standard (id) cast provided by UIAppearance.
+ 
+ You use this method to grab the appearance object that allows you to change the default style for C4Button objects.
+ 
+ @return The appearance proxy for the receiver, cast as a C4Button.
+ */
++(C4Button *)defaultStyle;
 @end

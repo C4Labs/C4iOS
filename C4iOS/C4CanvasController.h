@@ -18,7 +18,8 @@
 @interface C4CanvasController : UIViewController <AVAudioSessionDelegate, C4Gesture, C4Notification, C4MethodDelay, C4AddSubview> {
 }
 
-///@name Instance Methods
+#pragma mark - Setup
+///@name Setup
 /** The setup method for the canvas.
  
  This method is called at the end of the application's launch cycle.
@@ -27,8 +28,23 @@
  */
 -(void)setup;
 
-#pragma mark C4Camera Callback
+#pragma mark - The Canvas
+///@name The Canvas
+/** The application's main canvas.
+ 
+ This property references the main canvas for the application, you can access the canvas to perform actions such as:
+ 
+ `[self.canvas addShape:s];`
+ 
+ or to set properties such as:
+ 
+ `self.canvas.backgroundColor = [UIColor ...];`
+ */
+@property (readonly, strong, nonatomic) C4Window *canvas;
 
+#pragma mark C4Camera Callback
+#pragma mark - Callbacks
+///@name Callbacks
 /** A callback method for the current C4Camera object.
  
  After a C4Camera captures an image it posts a notification. The canvas listens for when the camera's image is ready to use and then automatically triggers this method.
@@ -42,18 +58,5 @@
  `[self imageWasCaptured];`
  */
 -(void)imageWasCaptured;
-
-///@name Properties
-/** The application's main canvas.
- 
- This property references the main canvas for the application, you can access the canvas to perform actions such as:
- 
- `[self.canvas addShape:s];`
- 
- or to set properties such as:
- 
- `self.canvas.backgroundColor = [UIColor ...];`
- */
-@property (readonly, strong, nonatomic) C4Window *canvas;
 
 @end

@@ -271,8 +271,24 @@
  */
 @property (readwrite, nonatomic, weak) UIColor *borderColor;
 
--(void)addObjects:(NSArray *)array;
-+(C4View *)defaultStyle;
-
+#pragma mark - Rendering into a Context
+/**Renders the receiver and its sublayers into the specified context.
+ 
+ This method renders the contents of a C4View directly from the layer tree, ignoring any animations added to the render tree. It essentially binds to the `renderInContext` method of the underlying C4Layer.
+ 
+ This method is used for rendering objects into a graphics context before either creating an image or saving drawing to external files.
+ 
+ @param context The graphics context to use to render the layer.
+ */
 -(void)renderInContext:(CGContextRef)context;
+
+#pragma mark - Default Style
+///@name Default Style
+/**Returns the appearance proxy for the object, cast as a C4View rather than the standard (id) cast provided by UIAppearance.
+ 
+ You use this method to grab the appearance object that allows you to change the default style for C4View objects.
+ 
+ @return The appearance proxy for the receiver, cast as a C4View.
+ */
++(C4View *)defaultStyle;
 @end

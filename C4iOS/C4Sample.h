@@ -27,8 +27,10 @@
 */
 
 @interface C4Sample : C4Object <AVAudioPlayerDelegate>
+#pragma mark - Creating An Audio Sample
+///@name Creating An Audio Sample
 
-/**Creates and returns a new C4Sample with a given file name. 
+/**Creates and returns a new C4Sample with a given file name.
  
  @param sampleName The filename of a sample to be loaded.
  */
@@ -40,11 +42,23 @@
  */
 -(id)initWithSampleName:(NSString *)sampleName;
 
+#pragma mark - Configuring and Controlling Playback
+///@name Configuring and Controlling Playback
 /**Plays a sound asynchronously.
-  
+ 
  Calling this method implicitly calls the prepareToPlay method if the audio player is not already prepared to play.
  */
 -(void)play;
+
+/**Plays a sound asynchronously, starting at a specified point in the audio output device’s timeline.
+ 
+ Use this method to precisely synchronize the playback of two or more AVAudioPlayer objects. This code snippet shows the recommended way to do this:
+ 
+ Calling this method implicitly calls the prepareToPlay method if the audio player is not already prepared to play.
+ 
+ @param time The number of seconds to delay playback, relative to the audio output device’s current time.
+ */
+-(void)playAtTime:(CGFloat)time;
 
 /**Pauses playback; sound remains ready to resume playback from where it left off.
  
@@ -53,7 +67,7 @@
 -(void)pause;
 
 /**Stops playback and undoes the setup needed for playback.
-
+ 
  Calling this method, or allowing a sound to finish playing, undoes the setup performed upon calling the play or prepareToPlay methods.
  
  The stop method does not reset the value of the currentTime property to 0. In other words, if you call stop during playback and then call play, playback resumes at the point where it left off.
@@ -68,41 +82,19 @@
  */
 -(void)prepareToPlay;
 
-/**Method called when the audio sample reaches its end and stops.
- 
- Can be overridden to trigger actions at the end of the movie.
- 
- Similar to C4Movie's reachedEnd method, however when an audio sample is looping this method will not get called when the currentTime reaches the end of the file's playback length.
- */
--(void)endedNormally;
-
-/**Plays a sound asynchronously, starting at a specified point in the audio output device’s timeline.
- 
- Use this method to precisely synchronize the playback of two or more AVAudioPlayer objects. This code snippet shows the recommended way to do this:
-
- Calling this method implicitly calls the prepareToPlay method if the audio player is not already prepared to play.
- 
- @param time The number of seconds to delay playback, relative to the audio output device’s current time.
- */
--(void)playAtTime:(CGFloat)time;
-
 /**A Boolean value that indicates whether the audio player is playing (YES) or not (NO). (read-only)
  */
 @property (readonly, nonatomic, getter=isPlaying) BOOL playing;
 
-/**Returns the total duration, in seconds, of the sound associated with the audio player. (read-only)
+/**The playback gain for the audio player, ranging from 0.0 through 1.0.
  */
-@property (readonly, nonatomic) CGFloat duration;
+@property (readwrite, nonatomic) CGFloat volume;
 
 /**The audio player’s stereo pan position.
  
  By setting this property you can position a sound in the stereo field. A value of –1.0 is full left, 0.0 is center, and 1.0 is full right.
  */
 @property (readwrite, nonatomic) CGFloat pan;
-
-/**The playback gain for the audio player, ranging from 0.0 through 1.0.
- */
-@property (readwrite, nonatomic) CGFloat volume;
 
 /**The audio player’s playback rate.
  
@@ -116,7 +108,43 @@
  
  To enable adjustable playback rate for an audio player, set this property to YES after you initialize the player and before you call the prepareToPlay instance method for the player.
  */
-@property (readwrite, nonatomic) BOOL enableRate; 
+@property (readwrite, nonatomic) BOOL enableRate;
+
+/**A Boolean value that specifies whether or not the sound will loop when it reaches its end.
+ 
+ Setting this variable to YES implicitly sets numberOfLoops to -1.
+ */
+@property (readwrite, nonatomic) BOOL loops;
+
+/**The number of times a sound will return to the beginning, upon reaching the end, to repeat playback.
+ 
+ A value of 0, which is the default, means to play the sound once. Set a positive integer value to specify the number of times to return to the start and play again. For example, specifying a value of 1 results in a total of two plays of the sound. Set any negative integer value to loop the sound indefinitely until you call the stop method.
+ */
+@property (readwrite, nonatomic) NSInteger numberOfLoops;
+
+/**The audio player’s settings dictionary, containing information about the sound associated with the player. (read-only)
+ 
+ An audio player’s settings dictionary contains keys for the following information about the player’s associated sound:
+ 
+ - Channel layout (AVChannelLayoutKey)
+ - Encoder bit rate (AVEncoderBitRateKey)
+ - Audio data format (AVFormatIDKey)
+ - Channel count (AVNumberOfChannelsKey)
+ - Sample rate (AVSampleRateKey)
+ 
+ The settings keys are described in AV Foundation Audio Settings Constants.
+ */
+@property (readonly, nonatomic) NSDictionary *settings;
+
+#pragma mark - Managing Information About a Sound
+///@name Managing Information About a Sound
+/**The number of audio channels in the sound associated with the audio player. (read-only)
+ */
+-(NSUInteger)numberOfChannels;
+
+/**Returns the total duration, in seconds, of the sound associated with the audio player. (read-only)
+ */
+@property (readonly, nonatomic) CGFloat duration;
 
 /**The playback point, in seconds, within the timeline of the sound associated with the audio player.
  
@@ -138,18 +166,8 @@
  */
 @property (readonly, nonatomic) CGFloat deviceCurrentTime;
 
-/**A Boolean value that specifies whether or not the sound will loop when it reaches its end.
- 
- Setting this variable to YES implicitly sets numberOfLoops to -1.
- */
-@property (readwrite, nonatomic) BOOL loops;
-
-/**The number of times a sound will return to the beginning, upon reaching the end, to repeat playback.
- 
- A value of 0, which is the default, means to play the sound once. Set a positive integer value to specify the number of times to return to the start and play again. For example, specifying a value of 1 results in a total of two plays of the sound. Set any negative integer value to loop the sound indefinitely until you call the stop method.
- */
-@property (readwrite, nonatomic) NSInteger numberOfLoops;
-
+#pragma mark - Using Audio Level Metering
+///@name Using Audio Level Metering
 /**A Boolean value that specifies the audio-level metering on/off state for the audio player.
  
  The default value for the meteringEnabled property is off (Boolean NO). Before using metering for an audio player, you need to enable it by setting this property to YES. If player is an audio player instance variable of your controller class, you enable metering as shown here:
@@ -158,13 +176,43 @@
  */
 @property (readwrite, nonatomic, getter = isMeteringEnabled) BOOL meteringEnabled;
 
+/**Returns the peak power for a given channel, in decibels, for the sound being played.
+ 
+ To obtain a current peak power value, you must call the updateMeters method before calling this method.
+
+ @param channelNumber The audio channel whose peak power value you want to obtain. Channel numbers are zero-indexed. A monaural signal, or the left channel of a stereo signal, has channel number 0.
+ @return A floating-point representation, in decibels, of a given audio channel’s current peak power. A return value of 0 dB indicates full scale, or maximum power; a return value of -160 dB indicates minimum power (that is, near silence). If the signal provided to the audio player exceeds ±full scale, then the return value may exceed 0 (that is, it may enter the positive range).
+ */
+-(CGFloat)peakPowerForChannel:(NSUInteger)channelNumber;
+
+/**Returns the average power for a given channel, in decibels, for the sound being played.
+ 
+ To obtain a current average power value, you must call the updateMeters method before calling this method.
+ 
+ @param channelNumber The audio channel whose average power value you want to obtain. Channel numbers are zero-indexed. A monaural signal, or the left channel of a stereo signal, has channel number 0.
+ @return A floating-point representation, in decibels, of a given audio channel’s current average power. A return value of 0 dB indicates full scale, or maximum power; a return value of -160 dB indicates minimum power (that is, near silence). If the signal provided to the audio player exceeds ±full scale, then the return value may exceed 0 (that is, it may enter the positive range).
+ */
+-(CGFloat)averagePowerForChannel:(NSUInteger)channelNumber;
+
+/**Refreshes the average and peak power values for all channels of an audio player.
+ 
+ To obtain current audio power values, you must call this method before calling averagePowerForChannel: or peakPowerForChannel:.
+ */
+-(void)updateMeters;
+
+#pragma mark - Marking the End of Playback
+/**Method called when the audio sample reaches its end and stops.
+ 
+ Can be overridden to trigger actions at the end of the movie.
+ 
+ Similar to C4Movie's reachedEnd method, however when an audio sample is looping this method will not get called when the currentTime reaches the end of the file's playback length.
+ */
+-(void)endedNormally;
+
+#pragma mark - Accessing the AVAudioPlayer
+///@name Accessing the AVAudioPlayer
 /**Specifies the player object for the audio sample.
  */
 @property (readonly, nonatomic, strong) AVAudioPlayer *player;
 
--(NSUInteger)numberOfChannels;
--(CGFloat)peakPowerForChannel:(NSUInteger)channelNumber;
--(CGFloat)averagePowerForChannel:(NSUInteger)channelNumber;
--(void)updateMeters;
-@property (readonly, nonatomic) NSDictionary *settings;
 @end
