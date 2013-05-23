@@ -133,6 +133,10 @@
     }
 }
 
+-(C4Label *)titleLabel {
+    return nil;
+}
+
 -(C4Font *)font {
     return [C4Font fontWithName:self.UIButton.titleLabel.font.fontName size:self.UIButton.titleLabel.font.pointSize];
 }

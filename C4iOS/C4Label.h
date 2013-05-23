@@ -31,6 +31,8 @@
 
 /// @name Properties
 #pragma mark Properties
+/**The UILabel which is the subview off the receiver.
+ */
 @property (readonly, strong, nonatomic) UILabel *label;
 /**The text displayed by the label.
  

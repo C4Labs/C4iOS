@@ -347,14 +347,43 @@ The change will happen based on the shape's current animation options, duration 
  */
 @property (readonly, atomic, strong) C4ShapeLayer *shapeLayer;
 
+/**Specifies whether the given shape is closed or not. This is useful for determining if polygons are open or closed.
+ */
 @property (readonly, atomic, getter = isClosed) BOOL closed;
 
+/**Specifies whether the given shape is a wedge.
+
+ This property is specifically used in the `pointA` and `pointB` methods to determine if the current object is capable of setting them. In particular, only lines, beziers and quadratic curves should be able to acces the `pointA` and `pointB` properties of the `C4Shape` class.
+ */
 @property (readonly, atomic, getter = isWedge) BOOL wedge;
 
+/**Specifies whether the given shape is a bezier curve.
+
+ This property is specifically used in the `pointA` and `pointB` methods to determine if the current object is capable of setting them. In particular, only lines, beziers and quadratic curves should be able to acces the `pointA` and `pointB` properties of the `C4Shape` class.
+*/
 @property (readonly, atomic, getter = isBezierCurve) BOOL bezierCurve;
+
+/**Specifies whether the given shape is a quadratic curve.
+ 
+ This property is specifically used in the `pointA` and `pointB` methods to determine if the current object is capable of setting them. In particular, only lines, beziers and quadratic curves should be able to acces the `pointA` and `pointB` properties of the `C4Shape` class.
+ */
 @property (readonly, atomic, getter = isQuadCurve) BOOL quadCurve;
 
+/**The path defining the shape to be rendered. Animatable.
+ 
+ Paths will interpolate as a linear blend of the "on-line" points; "off-line" points may be interpolated non-linearly (e.g. to preserve continuity of the curve's derivative). If the two paths have a different number of control points or segments the results are undefined. If the path extends outside the layer bounds it will not automatically be clipped to the layer, only if the normal layer masking rules cause that.
+ 
+ If the value in this property is non-nil, the path is created using the specified path instead of the layer’s composited alpha channel. The path defines the outline of the shape layer. It is filled using the non-zero winding rule and the current color, opacity, and blur radius.
+
+ Specifying an explicit path usually improves rendering performance.
+ */
 @property (readwrite, nonatomic) CGPathRef path;
 
+/**Returns the appearance proxy for the object, cast as a C4Shape rather than the standard (id) cast provided by UIAppearance.
+ 
+ You use this method to grab the appearance object that allows you to change the default style for C4Shape objects.
+ 
+ @return The appearance proxy for the receiver, cast as a C4Shape.
+ */
 +(C4Shape *)defaultStyle;
 @end

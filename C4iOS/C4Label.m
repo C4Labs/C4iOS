@@ -55,6 +55,16 @@
     return self;
 }
 
+-(id)initWithUILabel:(UILabel *)aLabel {
+    self = [super initWithFrame:aLabel.frame];
+    if(self != nil) {
+        _label = [aLabel copy];
+        [self addSubview:_label];
+        [self setup];
+    }
+    return self;
+}
+
 -(id)initWithFrame:(CGRect)frame {
     if(CGRectEqualToRect(frame, CGRectZero)) frame = CGRectMake(0, 0, 1, 1);
     self = [super initWithFrame:frame];

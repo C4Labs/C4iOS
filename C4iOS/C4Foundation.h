@@ -45,7 +45,12 @@ void C4Log(NSString *logString,...);
  */
 NSInteger   basicSort(id obj1, id obj2, void *context);
 
-#pragma mark New Stuff
+/** Sorts two NSString objects.
+ 
+ Takes two string objects and sorts them using NSString's localizedStandardCompare method.
+ */
+NSInteger strSort(id obj1, id obj2, void *context);
+
 /**Returns a frame that encompasses the all the points in the specified pointArray
  
  @param pointArray a c-array of CGPoint structures
@@ -76,8 +81,9 @@ CGRect CGRectMakeFromArcComponents(CGPoint centerPoint, CGFloat radius, CGFloat 
  */
 CGRect CGRectMakeFromWedgeComponents(CGPoint centerPoint, CGFloat radius, CGFloat startAngle, CGFloat endAngle, BOOL clockwise);
 
+/**Returns a string that describes the current device model. For example, running this method from the simulator returns "x86_64" because the simulator is on a Macbook Pro whereas running this on an iPhone 5 returns "iPhone5,1".
+ 
+ @return an NSString describing the current device model
+ */
 +(NSString *)currentDeviceModel;
-
-NSInteger strSort(id obj1, id obj2, void *context);
-
 @end

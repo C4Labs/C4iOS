@@ -69,6 +69,14 @@
  */
 -(void)addMovie:(C4Movie *)movie;
 
+/** A method for adding multiple objects to the canvas at one time.
+ 
+ This will run the appropriate add method for all C4 objects, and will run the default addSubview for any other objects.
+ 
+ @param array The array of visual objects to remove from their parent view.
+ */
+-(void)addObjects:(NSArray *)array;
+
 /** Adds a C4Shape to the view.
  
  Takes a C4Shape object and adds it to the view hierarchy.
@@ -78,6 +86,16 @@
  @param shape A C4Shape object.
  */
 -(void)addShape:(C4Shape *)shape;
+
+/** Adds a C4UIElement to the view.
+ 
+ Takes a C4UIElement object and adds it to the view hierarchy.
+ 
+ Use this method instead of addSubview: when adding C4UIElements, because if there are special conditions for adding shapes this method will handle those.
+ 
+ @param object an object that conforms to the C4UIElement protocol.
+ */
+-(void)addUIElement:(id <C4UIElement> )object;
 
 /** A method to remove another object from its view.
  
@@ -91,11 +109,7 @@
  
  This will run the removeObject: method on each object in an array.
  
- @param array the array of visible objects to remove from their parent view
+ @param array The array of visual objects to remove from their parent view
  */
 -(void)removeObjects:(NSArray *)array;
-
--(void)addObjects:(NSArray *)array;
--(void)addUIElement:(id <C4UIElement> )object;
-
 @end

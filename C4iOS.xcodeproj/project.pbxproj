@@ -219,6 +219,7 @@
 		ED43517716DD78D000340298 /* C4Spin10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = C4Spin10.png; sourceTree = "<group>"; };
 		ED43517816DD78D000340298 /* C4Spin11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = C4Spin11.png; sourceTree = "<group>"; };
 		ED4702D615C052CA004B75D1 /* pyramid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pyramid.png; sourceTree = "<group>"; };
+		ED48906C174C98B5001040F4 /* C4WorkSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4WorkSpace.h; sourceTree = "<group>"; };
 		ED50C88114EAC2010040D844 /* C4iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = C4iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED50C88514EAC2010040D844 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		ED50C88714EAC2010040D844 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -293,7 +294,6 @@
 		EDECBF6A14EAE26600D9A446 /* C4Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Shape.h; sourceTree = "<group>"; };
 		EDECBF6B14EAE26600D9A446 /* C4Shape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Shape.m; sourceTree = "<group>"; };
 		EDEF69AF157ED95A00E280B9 /* C4MethodDelay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = C4MethodDelay.h; sourceTree = "<group>"; };
-		EDF65448150DEF3300194671 /* C4WorkSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4WorkSpace.h; sourceTree = "<group>"; };
 		EDF65449150DEF3300194671 /* C4WorkSpace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4WorkSpace.m; sourceTree = "<group>"; };
 		EDF65456150E104100194671 /* C4Sample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Sample.h; sourceTree = "<group>"; };
 		EDF65457150E104100194671 /* C4Sample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Sample.m; sourceTree = "<group>"; };
@@ -466,7 +466,7 @@
 		ED50C88B14EAC2010040D844 /* C4iOS */ = {
 			isa = PBXGroup;
 			children = (
-				EDF65448150DEF3300194671 /* C4WorkSpace.h */,
+				ED48906C174C98B5001040F4 /* C4WorkSpace.h */,
 				EDF65449150DEF3300194671 /* C4WorkSpace.m */,
 				EDECBF6A14EAE26600D9A446 /* C4Shape.h */,
 				EDECBF6B14EAE26600D9A446 /* C4Shape.m */,
@@ -923,6 +923,7 @@
 				PROVISIONING_PROFILE = "95754C52-1E01-4569-ABCD-B853407801DB";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "95754C52-1E01-4569-ABCD-B853407801DB";
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
+				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -969,6 +970,7 @@
 				PROVISIONING_PROFILE = "95754C52-1E01-4569-ABCD-B853407801DB";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "95754C52-1E01-4569-ABCD-B853407801DB";
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
+				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

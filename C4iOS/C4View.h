@@ -57,7 +57,7 @@
  
  For the object in question, use this method to remove any visible object that was previously added to it as a subview.
  
- @param visibleObject the visible object to remove from its parent view
+ @param visualObject the visible object to remove from its parent view
  */
 -(void)removeObject:(id)visualObject;
 
@@ -141,7 +141,7 @@
 @property (nonatomic) CGFloat repeatCount;
 
 #pragma mark Shadow Properties
-///@name ShadowProperties
+///@name Shadow Properties
 
 /**Specifies the blur radius used to render the receiver’s shadow.
  

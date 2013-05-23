@@ -38,7 +38,7 @@
     [super setCenter:center];
 }
 
--(BOOL)continuous {
+-(BOOL)isContinuous {
     return self.UIStepper.isContinuous;
 }
 

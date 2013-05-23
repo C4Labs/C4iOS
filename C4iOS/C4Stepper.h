@@ -14,7 +14,7 @@
 +(C4Stepper *)stepper;
 @property (readonly, nonatomic, strong) UIStepper *UIStepper;
 
-@property(nonatomic,getter=isContinuous) BOOL continuous;
+@property(nonatomic,getter = isContinuous) BOOL continuous;
 @property(nonatomic) BOOL autorepeat, wraps;
 @property(readwrite, nonatomic) CGFloat value, minimumValue, maximumValue, stepValue;
 @property(readwrite, nonatomic, strong) UIColor *tintColor NS_AVAILABLE_IOS(6_0) UI_APPEARANCE_SELECTOR;

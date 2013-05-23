@@ -131,7 +131,7 @@
             self.input = [AVCaptureDeviceInput deviceInputWithDevice:self.currentCamera error:nil];
             [self initializeCaptureSession];
             [self initializePreviewLayer];
-            [self.captureSession startRunning ];
+            [self.captureSession startRunning];
         }
     }
 }

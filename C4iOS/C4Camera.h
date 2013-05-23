@@ -44,8 +44,35 @@
  When a camera object captures an image it overwrites any other image that was previously captured.
  */
 @property (readonly, strong, nonatomic) C4Image *capturedImage;
+
+/** Specifies the current position of the receiver's camera.
+ 
+ A camera's position can be either `CAMERAFRONT` or `CAMERABACK`, setting this property will change to the specified camera position.
+ */
 @property (readwrite, nonatomic) C4CameraPosition cameraPosition;
+
+/**Returns the appearance proxy for the object, cast as a C4Camera rather than the standard (id) cast provided by UIAppearance.
+ 
+ You use this method to grab the appearance object that allows you to change the default style for C4Camera objects.
+ 
+ @return The appearance proxy for the receiver, cast as a C4Camera.
+ */
 +(C4Camera *)defaultStyle;
+
+/**Specifies the current capture quality of the camera. The following list of qualities is available:
+ 
+ - C4CameraQualityPhoto
+ - C4CameraQualityHigh
+ - C4CameraQualityLow
+ - C4CameraQuality352x288
+ - C4CameraQuality640x480
+ - C4CameraQuality1280x720
+ - C4CameraQuality1920x1080
+ - C4CameraQualityiFrame960x540
+ - C4CameraQualityiFrame1280x720
+
+ See C4Defines for more information.
+ */
 @property (readwrite, nonatomic) NSString *captureQuality;
 
 @end

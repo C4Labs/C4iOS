@@ -153,13 +153,60 @@
  */
 @property (readwrite, nonatomic) CGSize size;
 
-#pragma mark New Stuff
+/**Creates and returns a new C4Movie object with a given URL pointing to a movie file.
+ 
+ This method will set the frame of the returned object to that of the file's original size.
+ 
+ @param url The NSURL for a given movie file. The URL can access files directly from the device, or it can also access movies from the internet (i.e. http, etc.)
+
+ @return The initialized C4Movie object created or nil if initialization is not successful.
+ */
 +(C4Movie *)movieWithURL:(NSString *)url;
+
+/**Creates and returns a new C4Movie object with a given URL pointing to a movie file.
+ 
+ This method will stretch the movie to fill the given frame size.
+ 
+ @param url The NSURL for a given movie file. The URL can access files directly from the device, or it can also access movies from the internet (i.e. http, etc.)
+ @param movieFrame The frame for the new movie
+ 
+ @return The initialized C4Movie object created or nil if initialization is not successful.
+ */
 +(C4Movie *)movieWithURL:(NSString *)url frame:(CGRect)movieFrame;
 
+/** Initializes a C4Movie object with a given URL pointing to a movie file.
+ 
+ This method will set the frame of the returned object to that of the file's original size.
+ 
+ @param movieURL The NSURL for a given movie file. The URL can access files directly from the device, or it can also access movies from the internet (i.e. http, etc.)
+ 
+ @return The initialized C4Movie object created or nil if initialization is not successful.
+ */
 -(id)initWithURL:(NSURL *)movieURL;
+
+/**Initializes a C4Movie object with a given URL pointing to a movie file.
+ 
+ This method will stretch the movie to fill the given frame size.
+ 
+ @param movieURL The NSURL for a given movie file. The URL can access files directly from the device, or it can also access movies from the internet (i.e. http, etc.)
+ @param movieFrame The frame for the new movie
+ 
+ @return The initialized C4Movie object created or nil if initialization is not successful.
+ */
 -(id)initWithURL:(NSURL *)movieURL frame:(CGRect)movieFrame;
+
+/**Returns the appearance proxy for the object, cast as a C4Movie rather than the standard (id) cast provided by UIAppearance.
+ 
+ You use this method to grab the appearance object that allows you to change the default style for C4Movie objects.
+ 
+ @return The appearance proxy for the receiver, cast as a C4Movie.
+ */
 +(C4Movie *)defaultStyle;
+
+/**Specifies whether or not the movie will maintain its visual proportions when either of its `width` or `height` properties are changed.
+ 
+ The default is `YES`.
+ */
 @property (readwrite, atomic) BOOL constrainsProportions;
 
 @end

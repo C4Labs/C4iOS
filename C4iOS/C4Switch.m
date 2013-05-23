@@ -102,7 +102,7 @@
     _UISwitch.offImage = offImage.UIImage;
 }
 
--(BOOL)on {
+-(BOOL)isOn {
     return _UISwitch.isOn;
 }
 
