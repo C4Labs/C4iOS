@@ -49,7 +49,7 @@
 -(id)initWithText:(NSString *)text font:(C4Font *)font frame:(CGRect)frame {
     self = [self initWithFrame:frame];
     if(self != nil) {
-        self.text = text;
+        self.text = text; 
         self.font = font;
     }
     return self;

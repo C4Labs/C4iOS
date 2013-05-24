@@ -16,9 +16,10 @@
  When working with blends and composite methods, it is recommended that the images you use are of the same size.
  
  */
-@interface C4Image : C4Control {
-}
+@interface C4Image : C4Control
 
+#pragma mark - Creating Images
+///@name Creating Images
 /**Creates and returns a new image using a file with the given name.
  
  @param name A string representation of the file name (e.g. photo.jpg, image.png, etc.)
@@ -31,17 +32,32 @@
  */
 +(C4Image *)imageWithImage:(C4Image *)image;
 
-///**Creates and returns a new image using an array of image names.
-// 
-// @param imageNames A C4Image whose contents will be used to create a new C4Image object.
-// */
-//+(NewImage *)animatedImageWithNames:(NSArray *)imageNames;
-
 /**Creates and returns a new image using an NSData object.
  
  @param imageData An NSData object.
  */
 +(C4Image *)imageWithData:(NSData *)imageData;
+
+/**Creates and returns a new image using an UIImage object.
+ 
+ @param image a UIImage used to create the C4Image.
+ */
++(C4Image *)imageWithUIImage:(UIImage *)image;
+
+/**Creates and returns a new image using an URL.
+ 
+ The URL should point directly to an image resource  (PNG, JPEG, etc..), this URL can be online or somewhere else on the system. If the URL is online make sure that the device is connected to a wifi network.
+ 
+ @param imageURL the URL for the file used to create the image.
+ */
++(C4Image *)imageWithURL:(NSString *)imageURL;
+
+/**Creates and returns a new animated image from an array of image file names.
+ 
+ @param imageNames An NSArray of image names (e.g. C4Sky, C4Table@2x.png, etc.) used to construct the images for the animation.
+ @return a new animatable image.
+ */
++(C4Image *)animatedImageWithNames:(NSArray *)imageNames;
 
 /**Initializes an image using a file with the given name.
  
@@ -79,28 +95,74 @@
  */
 -(id)initWithCGImage:(CGImageRef)image;
 
-///**Initializes an animated image using a set of files with the specified names.
-// 
-// This method will look for a series of files with the given names in the application's local directory. If it cannot find the image it will cause an assertion error.
-// 
-// @param imageNames An array of image names to be used to construct the animated image
-// */
-//-(id)initAnimatedImageWithNames:(NSArray *)imageNames;
+/**Initializes a C4Image using a UIImage object
+ 
+ @param image A UIImage whose contents will be used to create a new C4Image object.
+ */
+-(id)initWithUIImage:(UIImage *)image;
 
+/**Initializes and returns a new image using an URL.
+ 
+ The URL should point directly to an image resource  (PNG, JPEG, etc..), this URL can be online or somewhere else on the system. If the URL is online make sure that the device is connected to a wifi network.
+ 
+ @param imageURL the URL for the file used to create the image.
+ */
+-(id)initWithURL:(NSURL *)imageURL;
+
+/**Initializes and returns a new animated image from an array of image file names.
+ 
+ @param imageNames An NSArray of image names (e.g. C4Sky, C4Table@2x.png, etc.) used to construct the images for the animation.
+ @return a new animatable image.
+ */
+-(id)initAnimatedImageWithNames:(NSArray *)imageNames;
+
+#pragma mark - Animated Images
+///@name Animated Images
+/**Specifies the array of images used for animating.
+ 
+ This array is filled when the animatedImage is created using the appropriate constructor.
+ */
+@property (readwrite, atomic) NSArray *animationImages;
+
+/**Specifies the duration for the entire animation.
+ 
+ Setting this value, the animatedImage will automatically calculate how long each image in its array will be visible.
+ 
+ The duration for each image is consistent, for example a 2-second animation consisting of 10 frames will display each image for 0.2 seconds.
+ */
+@property (readwrite, nonatomic) CGFloat animatedImageDuration;
+
+/**Specifies the number of times to repeat the animation.
+ The default value is 0, which specifies to repeat the animation indefinitely.
+ */
+@property (readwrite, nonatomic) NSInteger animationRepeatCount;
+
+/**Starts animating the images in the receiver.
+ 
+ This method always starts the animation from the first image in the list.
+ */
+-(void)play;
+
+/**Stops animating the images in the receiver.
+ */
+-(void)pause;
+
+/**Returns a Boolean value indicating whether the animation is running.
+ 
+ YES if the animation is running; otherwise, NO.
+ */
+@property (readonly, nonatomic, getter = isAnimating) BOOL animating;
+
+#pragma mark - Set Image
+///@name Set Image
 /**Sets the current visible representation of a C4Image to that of another image.
  
  @param image A C4Image whose contents will be used to set the visible representation of the receiver.
  */
 -(void)setImage:(C4Image *)image;
-//
-///**Causes an animatedImage to start playing.
-// */
-//-(void)play;
-//
-///**Causes an animatedImage to stop playing.
-// */
-//-(void)stop;
 
+#pragma mark - Pixels & Colors
+///@name Pixels & Colors
 /**Loads a raw character array with color data.
  
  This will load the array one time, and must be called before colorAt: or rgbVectorAt:
@@ -119,8 +181,361 @@
  */
 -(C4Vector *)rgbVectorAt:(CGPoint)point;
 
-#pragma mark Filters
-/// @name Filters
+#pragma mark - Properties
+/// @name Properties
+/**The image displayed in the image view.
+ 
+ The initial value of this property is the image passed into the initWithImage: method or nil if you initialized the receiver using a different method.
+ 
+ @warning The object returned from this property was made with a CIImage, so calling returnedUIImage.CGImage on the returned object will return NULL.
+ */
+@property (readonly, nonatomic, weak) UIImage *UIImage;
+
+/**Returns a Core Image representation of the current image.
+ 
+ If the image data has been purged because of memory constraints, invoking this method forces that data to be loaded back into memory. Reloading the image data may incur a performance penalty.
+ 
+ @warning: The CIImage is the object off of which we base all other image manipulations and returns.
+ */
+@property (readonly, nonatomic, weak) CIImage *CIImage;
+
+/**The underlying Core Image data. (read-only)
+ */
+@property (readonly, nonatomic) CGImageRef CGImage;
+
+/**Specifies the height of the image. Animatable.
+ 
+ Setting this property will actually change the frame of the object.
+ */
+@property (readwrite, nonatomic) CGFloat height;
+
+/**Specifies the width of the image. Animatable.
+ 
+ Setting this property will actually change the frame of the object.
+ */
+@property (readwrite, nonatomic) CGFloat width;
+
+/**Specifies the size of the image. Animatable.
+ 
+ Setting this property will actually change the frame of the object.
+ */
+@property (readwrite, nonatomic) CGSize size;
+
+/**Specifies the original size of the of the image.
+ */
+@property (readonly, nonatomic) CGSize originalSize;
+
+/**Specifies the original ratio (width / height) of the image.
+ */
+@property (readonly, nonatomic) CGFloat originalRatio;
+
+/**Specifies whether or not the image has loaded its pixel data.
+ */
+@property (readonly, nonatomic) BOOL pixelDataLoaded;
+
+/**Specifies whether or not the image will maintain its current proportions when scaling either its width or height values.
+ */
+@property (readwrite, atomic) BOOL constrainsProportions;
+
+/**The contets of the image's layer (i.e. the visible image as a CGImageRef).
+ */
+@property (readwrite, nonatomic) CGImageRef contents;
+
+#pragma mark - Working With Filters
+/// @name Working With Filters
+
+/**A list of all availble filters using the CI prefix.
+ 
+ This method creates an array of all filters available on iOS. It does this by calling filterNamesInCategory: on a list of all available filter categories. Each entry is returned as the actual Core Image reference name, for example the boxBlur filter is called CIBoxBlur. 
+ 
+ The array of filters is sorted alphabetically.
+ 
+ @return An array of available filters, by name.
+ */
++(NSArray *)availableFilters;
+
+/**Specifies whether or not an image will process one or many filters at a time.
+ 
+ If NO, then running a filter method on an image will render it immediately.
+ 
+ If YES, then you must wrap your filter calls in calls to startFiltering, and renderFilteredImage like so:
+ 
+    img.multipleFilterEnabled = YES;
+    [img startFiltering];
+    [img filter1];
+    [img filter2];
+    [img filter3];
+    [img renderFilteredImage];
+ */
+@property (readonly, nonatomic, getter = isMultipleFilterEnabled) BOOL multipleFilterEnabled;
+
+/**Sets the receiver to allow multiple filters before rendering.
+ 
+ Essentially, this method prevents automatic render after individual filters have completed.
+ */
+-(void)startFiltering;
+
+/**Renders the current image's filter stack. 
+ 
+ Calling this method will composite all previously called filters and then switch the reciever's contents to the new filtered image.
+ */
+-(void)renderFilteredImage;
+
+/**Specifies whether the activity indicator for this image should show.
+ 
+ Filtering can take some time and it happens on the background thread so it sometimes looks like nothing is happening after a call to render filters is executed. By default, the reciever will show a spinning activity indicator for the duration that the filter takes to render before switching its own contents.
+ */
+@property (readwrite, nonatomic) BOOL showsActivityIndicator;
+
+#pragma mark - Filters By Task
+/// @name Filters By Task
+/**Please note that as of June 2013, we have implemented the following filters but have not had the opportunity to fully test them all. Some behaviours may be unpredictable. 
+ 
+ Bugs can be submitted to the C4iOS project on GitHub:
+ https://github.com/C4framework/C4iOS/issues
+ */
+
+#pragma mark - Blurs
+/// @name Blurs
+/**Blurs an image using a box-shaped convolution kernel.
+
+ @param radius a CGFloat representing the length of the radius for the blur. Default value: 10.00
+ */
+-(void)boxBlur:(CGFloat)radius;
+
+/**Blurs an image using a disc-shaped convolution kernel.
+
+ @param radius a CGFloat representing the length of the radius for the blur. Default value: 8.00
+ */
+-(void)discBlur:(CGFloat)radius;
+
+/**Spreads source pixels by an amount specified by a Gaussian distribution.
+ 
+ @param radius a CGFloat representing the length of the radius for the blur. Default value: 10.00
+ */
+-(void)gaussianBlur:(CGFloat)radius;
+
+/**Computes the median value for a group of neighboring pixels and replaces each pixel value with the median.
+ 
+ The effect is to reduce noise.
+ */
+-(void)medianFilter;
+
+/**Blurs an image to simulate the effect of using a camera that moves a specified angle and distance while capturing the image.
+ 
+ @param radius a CGFloat representing the length of the radius for the blur. Default value: 20.00
+ @param angle a CGFloat representing the angle of the blur (in radians).
+ */
+-(void)motionBlur:(CGFloat)radius angle:(CGFloat)angle;
+
+/**Reduces noise using a threshold value to define what is considered noise.
+ 
+ Small changes in luminance below that value are considered noise and get a noise reduction treatment, which is a local blur. Changes above the threshold value are considered edges, so they are sharpened.
+ 
+ @param level A CGFloat representing the threshold to use for determining noise. Default value: 0.02
+ @param sharpness A CGFloat representing the sharpness to apply to the filter. Default value: 0.40
+ */
+-(void)noiseRedution:(CGFloat)level sharpness:(CGFloat)sharpness;
+
+/**Simulates the effect of zooming the camera while capturing the image.
+
+ @param center A CGPoint representing the center of the zoom. Default value {150,150}
+ @param amount The amount of zoom to apply. Default value 20.0
+ */
+-(void)zoomBlur:(CGPoint)center amount:(CGFloat)amount;
+
+#pragma mark - Color Adjustments
+/// @name Color Adjustments
+/**Color control filter.
+ Adjusts saturation, brightness, and contrast values.
+ 
+ To calculate saturation, this filter linearly interpolates between a grayscale image (saturation = 0.0) and the original image (saturation = 1.0). The filter supports extrapolation: For values large than 1.0, it increases saturation.
+ 
+ To calculate contrast, this filter uses the following formula:
+ 
+ (color.rgb - vec3(0.5)) * contrast + vec3(0.5)
+ 
+ This filter calculates brightness by adding a bias value:
+ 
+ color.rgb + vec3(brightness)
+ 
+ @param saturation Saturation value defaults to 1.0f, minimum 0.0f, maximum 2.0f
+ @param brightness Brightness value defaults to 0.0f, minimum -1.0f, maximum 1.0f
+ @param contrast Contrast value defaults to 1.0f, minimum 0.0f, maximum 4.0f
+ */
+-(void)colorControlSaturation:(CGFloat)saturation brightness:(CGFloat)brightness contrast:(CGFloat)contrast  NS_AVAILABLE_IOS(5_0);
+
+/**Color matrix filter
+ Multiplies source color values and adds a bias factor to each color component.
+ 
+ Given colors are translated to corresponding vectors.
+ 
+ This filter performs a matrix multiplication, as follows, to transform the color vector:
+ 
+ s.r = dot(s, redVector)
+ s.g = dot(s, greenVector)
+ s.b = dot(s, blueVector)
+ s.a = dot(s, alphaVector)
+ s = s + bias
+ 
+ @param color The color whose components will be used in the matrix multiplication
+ @param bias The bias value to be used in the matrix multiplication
+ */
+-(void)colorMatrix:(UIColor *)color bias:(CGFloat)bias;
+
+/**Exposure adjustment filter
+ Adjusts the exposure setting for an image similar to the way you control exposure for a camera when you change the F-stop.
+ 
+ This filter multiplies the color values, as follows, to simulate exposure change by the specified F-stops:
+ 
+ s.rgb * pow(2.0, ev)
+ 
+ @param adjustment The level of exposure adjustment, defaults to 0.5, minimum -10.0, maximum 10.0
+ */
+-(void)exposureAdjust:(CGFloat)adjustment;
+
+/**Gamma adjustment filter
+ Adjusts midtone brightness.
+ 
+ This filter is typically used to compensate for nonlinear effects of displays. Adjusting the gamma effectively changes the slope of the transition between black and white. It uses the following formula:
+ 
+ pow(s.rgb, vec3(power))
+ 
+ @param adjustment The level of gamma adjustment, defaults to 0.75, minimum 0.10, maximum 3.0
+ */
+-(void)gammaAdjustment:(CGFloat)adjustment;
+
+/**Hue adjustment filter
+ Changes the overall hue, or tint, of the source pixels.
+ 
+ This filter essentially rotates the color cube around the neutral axis.
+ 
+ @param angle The angular value to calculate the adjustment, defaults to 0.0, minimum -PI, maximum PI
+ */
+-(void)hueAdjust:(CGFloat)angle;
+
+/**Temperature and tint filter
+ Adapts the reference white point for an image.
+ 
+ @param neutral An offset value, defaults to {6500,0}
+ @param targetNeutral An target offset value, defaults to {6500,0}
+ */
+-(void)tempartureAndTint:(CGSize)neutral target:(CGSize)targetNeutral;
+
+/**Tone curve filter
+ Adjusts tone response of the R, G, and B channels of an image.
+ 
+ The input points are five x,y values that are interpolated using a spline curve. The curve is applied in a perceptual (gamma 2) version of the working space.
+ 
+ An example of how to construct the point array : CGPoint *pointArray = {CGPointMake(),CGPointMake(),CGPointMake(),CGPointMake(),CGPointMake()};
+ 
+ The five points default to the following:
+ 
+ - point1: { 0.0, 0.0}
+ - point2: {0.25, 0.25}
+ - point3: { 0.5, 0.5};
+ - point4: {0.75, 0.75};
+ - point5: { 1.0, 1.0};
+ 
+ @param pointArray A C-Array of CGPoints which will be used to construct the tone curve
+ */
+-(void)toneCurve:(CGPoint *)pointArray;
+
+/**Vibrance adjustment filter
+ Adjusts the saturation of an image while keeping pleasing skin tones.
+ 
+ @param amount The amount to adjust the image's vibrance, defaults to 0.0, minimum -1.0, maximum 1.0
+ */
+-(void)vibranceAdjust:(CGFloat)amount;
+
+/*White point adjustment filter
+ Adjusts the reference white point for an image and maps all colors in the source using the new reference.
+ 
+ @param color The reference color for the new mapping.
+ */
+-(void)whitePointAdjust:(UIColor *)color;
+
+#pragma mark - Color Effects
+///@name Color Effects
+/**Uses a three-dimensional color table to transform the source image pixels.
+ 
+ This filter applies a mapping from RGB space to new color values that are defined in inputCubeData. For each RGBA pixel in inputImage the filter uses the R,G and B values to index into a thee dimensional texture represented by inputCubeData. inputCubeData contains floating point RGBA cells that contain linear premultiplied values. The data is organized into inputCubeDimension number of xy planes, with each plane of size inputCubeDimension by inputCubeDimension. Input pixel components R and G are used to index the data in x and y respectively, and B is used to index in z. In inputCubeData the R component varies fastest, followed by G, then B.
+
+ @param dimension A CGFloat representing the number of XY planes used to create the resulting image. The size of the planes are dimension x dimension. Default value: 2.00
+ @param data An NSData object that represents a three-dimensional texture.
+ */
+-(void)colorCube:(CGFloat)dimension cubeData:(NSData *)data;
+
+/**Color invert filter.
+
+ Inverts the colors in an image.
+ */
+-(void)colorInvert;
+
+/**Performs a nonlinear transformation of source color values using mapping values provided in a table.
+ 
+ @param gradientImage The image that provides the basis for the color map transformation.
+ */
+-(void)colorMap:(C4Image *)gradientImage;
+
+/**Color monochrome filter.
+ Remaps colors so they fall within shades of a single color.
+ 
+ @param color The color to which the image will be mapped.
+ @param intensity The intensity of the mapping, defaults to 1.0f, minimum 0.0f, maximum 1.0f
+ */
+-(void)colorMonochrome:(UIColor *)color inputIntensity:(CGFloat)intensity;
+
+/**Remaps red, green, and blue color components to the number of brightness values you specify for each color component.
+ 
+ This filter flattens colors to achieve a look similar to that of a silk-screened poster.
+ 
+ @param levels A CGFloat representing the level of posterize effect to be applied to the image. Default value: 6.00
+ */
+-(void)colorPosterize:(CGFloat)levels;
+
+/**False color filter
+ Maps luminance to a color ramp of two colors.
+ 
+ False color is often used to process astronomical and other scientific data, such as ultraviolet and x-ray images.
+ 
+ @param color1 A UIColor.
+ @param color2 A UIColor.
+ */
+-(void)falseColor:(UIColor *)color1 color2:(UIColor *)color2;
+
+/**Converts a grayscale image to a white image that is masked by alpha.
+ 
+ The white values from the source image produce the inside of the mask; the black values become completely transparent.
+ 
+ To use this method you would take a black and white image, apply this filter to it, and then use the results as the mask for another object.
+ */
+-(void)maskToAlpha;
+
+/**Returns a grayscale image from max(r,g,b).
+ */
+-(void)maximumComponent;
+
+/**Returns a grayscale image from min(r,g,b).
+ */
+-(void)minimumComponent;
+
+/**Sepia tone filter
+ Maps the colors of an image to various shades of brown.
+ 
+ @param intensity The level of intensity for which to apply the sepia tone, defaults to 1.0, minimum 0.0, maximum 1.0
+ */
+-(void)sepiaTone:(CGFloat)intensity;
+
+/**Reduces the brightness of an image at the periphery.
+ 
+ @param radius A CGFloat representing the radius for the vignette.
+ @param intensity A CGFloat representing the intensity of the vignette.
+ */
+-(void)vignette:(CGFloat)radius intensity:(CGFloat)intensity;
+
+#pragma mark - Composite Operations
+/// @name Composite Operations
 /**Addition composite filter
  
  This filter is typically used to add highlights and lens flare effects. The formula used to create this filter is described in Thomas Porter and Tom Duff. 1984. Compositing Digital Images. Computer Graphics, 18 (3): 253-259.
@@ -144,25 +559,6 @@
  */
 -(void)colorBurn:(C4Image *)backgroundImage;
 
-/**Color control filter.
- Adjusts saturation, brightness, and contrast values.
- 
- To calculate saturation, this filter linearly interpolates between a grayscale image (saturation = 0.0) and the original image (saturation = 1.0). The filter supports extrapolation: For values large than 1.0, it increases saturation.
- 
- To calculate contrast, this filter uses the following formula:
- 
- (color.rgb - vec3(0.5)) * contrast + vec3(0.5)
- 
- This filter calculates brightness by adding a bias value:
- 
- color.rgb + vec3(brightness)
- 
- @param saturation Saturation value defaults to 1.0f, minimum 0.0f, maximum 2.0f
- @param brightness Brightness value defaults to 0.0f, minimum -1.0f, maximum 1.0f
- @param contrast Contrast value defaults to 1.0f, minimum 0.0f, maximum 4.0f
- */
--(void)colorControlSaturation:(CGFloat)saturation brightness:(CGFloat)brightness contrast:(CGFloat)contrast  NS_AVAILABLE_IOS(5_0);
-
 /**Color dodge filter.
  
  Brightens the background image samples to reflect the source image samples.
@@ -172,37 +568,6 @@
  @param backgroundImage The image that will provide the background for this filter.
  */
 -(void)colorDodge:(C4Image *)backgroundImage;
-
-/**Color invert filter.
- Inverts the colors in an image.
- */
--(void)colorInvert;
-
-/**Color matrix filter
- Multiplies source color values and adds a bias factor to each color component.
- 
- Given colors are translated to corresponding vectors.
- 
- This filter performs a matrix multiplication, as follows, to transform the color vector:
- 
- s.r = dot(s, redVector)
- s.g = dot(s, greenVector)
- s.b = dot(s, blueVector)
- s.a = dot(s, alphaVector)
- s = s + bias
- 
- @param color The color whose components will be used in the matrix multiplication
- @param bias The bias value to be used in the matrix multiplication
- */
--(void)colorMatrix:(UIColor *)color bias:(CGFloat)bias;
-
-/**Color monochrome filter.
- Remaps colors so they fall within shades of a single color.
- 
- @param color The color to which the image will be mapped.
- @param intensity The intensity of the mapping, defaults to 1.0f, minimum 0.0f, maximum 1.0f
- */
--(void)colorMonochrome:(UIColor *)color inputIntensity:(CGFloat)intensity;
 
 /**Darken blend filter
  Creates composite image samples by choosing the darker samples (from either the source image or the background).
@@ -231,61 +596,12 @@
  */
 -(void)exclusionBlend:(C4Image *)backgroundImage;
 
-/**Exposure adjustment filter
- Adjusts the exposure setting for an image similar to the way you control exposure for a camera when you change the F-stop.
- 
- This filter multiplies the color values, as follows, to simulate exposure change by the specified F-stops:
- 
- s.rgb * pow(2.0, ev)
- 
- @param adjustment The level of exposure adjustment, defaults to 0.5, minimum -10.0, maximum 10.0
- */
--(void)exposureAdjust:(CGFloat)adjustment;
-
-/**False color filter
- Maps luminance to a color ramp of two colors.
- 
- False color is often used to process astronomical and other scientific data, such as ultraviolet and x-ray images.
- 
- @param color1 A UIColor.
- @param color2 A UIColor.
- */
--(void)falseColor:(UIColor *)color1 color2:(UIColor *)color2;
-
-/**Gamma adjustment filter
- Adjusts midtone brightness.
- 
- This filter is typically used to compensate for nonlinear effects of displays. Adjusting the gamma effectively changes the slope of the transition between black and white. It uses the following formula:
- 
- pow(s.rgb, vec3(power))
- 
- @param adjustment The level of gamma adjustment, defaults to 0.75, minimum 0.10, maximum 3.0
- */
--(void)gammaAdjustment:(CGFloat)adjustment;
-
 /**Hard light blend filter
  Either multiplies or screens colors, depending on the source image sample color.
  
  @param backgroundImage The image that will provide the background for this filter.
  */
 -(void)hardLightBlend:(C4Image *)backgroundImage;
-
-/**Highlight and shadow adjustment filter
- Adjust the tonal mapping of an image while preserving spatial detail.
- 
- @param highlightAmount The adjustment value for image highlights, defaults to 1.0, minimum 0.0, maximum 1.0
- @param shadowAmount The adjustment value for image shadows, defaults to 0.0, minimum -1.0, maximum 1.0
- */
--(void)highlightShadowAdjust:(CGFloat)highlightAmount shadowAmount:(CGFloat)shadowAmount;
-
-/**Hue adjustment filter
- Changes the overall hue, or tint, of the source pixels.
- 
- This filter essentially rotates the color cube around the neutral axis.
- 
- @param angle The angular value to calculate the adjustment, defaults to 0.0, minimum -PI, maximum PI
- */
--(void)hueAdjust:(CGFloat)angle;
 
 /**Hue blend filter
  Uses the luminance and saturation values of the background with the hue of the source image.
@@ -377,13 +693,6 @@
  */
 -(void)screenBlend:(C4Image *)backgroundImage;
 
-/**Sepia tone filter
- Maps the colors of an image to various shades of brown.
- 
- @param intensity The level of intensity for which to apply the sepia tone, defaults to 1.0, minimum 0.0, maximum 1.0
- */
--(void)sepiaTone:(CGFloat)intensity;
-
 /**Soft light blend filter
  Either darkens or lightens colors, depending on the source image sample color.
  
@@ -429,6 +738,191 @@
  */
 -(void)sourceOverComposite:(C4Image *)backgroundImage;
 
+#pragma mark - Distortion Effects
+/// @name Distortion Effects
+/**Creates a bump that originates at a specified point in the image.
+ 
+ The bump can be concave or convex.
+ 
+ @param center A CGPoint marking the center of the bump.
+ @param radius A CGFloat specifying the radius of the bump.
+ @param scale A CGFloat marking the positive or negative scale of the bump.
+ */
+-(void)bumpDistortion:(CGPoint)center radius:(CGFloat)radius scale:(CGFloat)scale;
+
+/**Creates a concave or convex distortion that originates from a line in the image.
+  
+ @param center A CGPoint marking the center of the bump.
+ @param radius A CGFloat specifying the radius of the bump.
+ @param angle A GFloat specifying the angle of the line, in radians.
+ @param scale A CGFloat marking the positive or negative scale of the bump.
+ */
+-(void)bumpDistortionLinear:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle scale:(CGFloat)scale;
+
+/**Distorts the pixels starting at the circumference of a circle and emanating outward.
+ 
+ @param center A CGPoint marking the center of the circle.
+ @param radius A CGFloat specifying the radius of the circle.
+ */
+-(void)circleSplashDistortion:(CGPoint)center radius:(CGFloat)radius;
+
+/**Wraps an image around a transparent circle.
+ 
+ The distortion of the image increases with the distance from the center of the circle.
+ 
+
+ @param center A CGPoint marking the center of the circle.
+ @param radius A CGFloat specifying the radius of the circle.
+ @param angle A GFloat specifying the angle of the distortion.
+ */
+-(void)circularWrap:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle;
+
+/**Recursively draws a portion of an image in imitation of an M. C. Escher drawing.
+
+ @param inset1 The top-left corner of the portion of the image to repeat.
+ @param inset2 The bottom-right corner of the portion of the image to repeat.
+ @param radius The radius of the repetition.
+ @param periodicity The period of the repetition.
+ @param rotation The rotation angle of the portion of the image to be repeated.
+ @param zoom The zoom level for the repetition.
+ */
+-(void)droste:(CGPoint)inset1 inset2:(CGPoint)inset2 strandRadius:(CGFloat)radius periodicity:(CGFloat)periodicity rotation:(CGFloat)rotation zoom:(CGFloat)zoom;
+
+/**Applies the grayscale values of the second image to the first image.
+ 
+ The output image has a texture defined by the grayscale values.
+ 
+ @param displacementImage The second image to use as the basis for distortion the receiver.
+ @param scale The scale of the effect on the receiver's image.
+ */
+-(void)displacementDistortion:(C4Image *)displacementImage scale:(CGFloat)scale;
+
+/**Distorts an image by applying a glass-like texture.
+ 
+ The raised portions of the output image are the result of applying a texture map.
+ 
+ @param texture A C4Image that acts as a texture map for the filter.
+ @param center A CGPoint representing the center of the texture map.
+ @param scale A CGFloat representing the scale of the effect of the distortion.
+ */
+-(void)glassDistortion:(C4Image *)texture center:(CGPoint)center scale:(CGFloat)scale;
+
+/**Creates a lozenge-shaped lens and distorts the portion of the image over which the lens is placed.
+ 
+ @param point1 The first point of the lozenge.
+ @param point2 The second point of the lozenge.
+ @param radius The radius of the lozenge.
+ @param refraction The level of refraction for the simulated glass effect.
+ */
+-(void)glassLozenge:(CGPoint)point1 point2:(CGPoint)point2 radius:(CGFloat)radius refraction:(CGFloat)refraction;
+
+/**Creates a circular area that pushes the image pixels outward, distorting those pixels closest to the circle the most
+ 
+
+ */
+-(void)holeDistortion:(CGPoint)center radius:(CGFloat)radius;
+-(void)lightTunnel:(CGPoint)center rotation:(CGFloat)rotation radius:(CGFloat)radius;
+-(void)pinchDistortion:(CGPoint)center radius:(CGFloat)radius scale:(CGFloat)scale;
+-(void)stretchCrop:(CGSize)size cropAmount:(CGFloat)cropAmount stretchAmount:(CGFloat)stretchAmount;
+-(void)torusLensDistortion:(CGPoint)center radius:(CGFloat)radius width:(CGFloat)width refraction:(CGFloat)refraction;
+-(void)twirlDistortion:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle;
+-(void)vortexDistortion:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle;
+
+#pragma mark - Generators
+/// @name Generators
+/**Generates a checkerboard pattern.
+ 
+ You can specify the checkerboard size and colors, and the sharpness of the pattern.
+
+ @param size The size of the resulting image, this should be greater than CGPointZero.
+ @param center The center of the checkerboard pattern.
+ @param color1 The first color of the pattern.
+ @param color2 The second color of the pattern.
+ @param width The width (and height) of the pattern's squares.
+ @param sharpness The sharpness of the edges between the squares.
+ 
+ @return A new C4Image whose contents are a checkerboard pattern of two colors.
+ */
++(C4Image *)checkerboard:(CGSize)size center:(CGPoint)center color1:(UIColor *)color1 color2:(UIColor *)color2 squareWidth:(CGFloat)width sharpness:(CGFloat)sharpness;
+
+/**Generates a solid color.
+ 
+ @param size The size of the resulting image, this shold be greater than CGPointZero.
+ @param color The color used to generate the image.
+ @return A new C4Image whose contents are a solid color.
+ */
++(C4Image *)constantColor:(CGSize)size color:(UIColor *)color;
+
+/**Simulates a lens flare.
+ 
+ @param size The size of the resulting image, this should be greater than CGPointZero.
+ @param center The center of the halo pattern.
+ @param color Controls the proportion of red, green, and blue halos.
+ @param radius Controls the size of the lens flare.
+ @param width Controls the width of the lens flare, that is, the distance between the inner flare and the outer flare.
+ @param overlap Controls how much the red, green, and blue halos overlap. A value of 0 means no overlap (a lot of separation). A value of 1 means full overlap (white halos).
+ @param strength Controls the brightness of the rainbow-colored halo area.
+ @param contrast Controls the contrast of the rainbow-colored halo area.
+ @param time Adds a randomness to the lens flare; it causes the flare to "sparkle" as it changes through various time values.
+ */
++(C4Image *)lenticularHalo:(CGSize)size center:(CGPoint)center color:(UIColor *)color haloRadius:(CGFloat)radius haloWidth:(CGFloat)haloWidth haloOverlap:(CGFloat)overlap striationStrength:(CGFloat)strength striationContrast:(CGFloat)contrast time:(CGFloat)time;
+
+/**Generates an image of infinite extent whose pixel values are made up of four independent, uniformly-distributed random numbers in the 0 to 1 range.
+ 
+ @param size The size of the resulting image, this should be greater than CGPointZero.
+ */
++(C4Image *)random:(CGSize)size;
+
+//FIXME: I don't think these filters work right now... There's no code online to check
+//+(C4Image *)starShineGenerator:(CGSize)size center:(CGPoint)center color:(UIColor *)color radius:(CGFloat)radius crossScale:(CGFloat)scale crossAngle:(CGFloat)angle crossOpacity:(CGFloat)opacity crossWidth:(CGFloat)width epsilon:(CGFloat)epsilon;
+//+(C4Image *)stripes:(CGSize)size center:(CGPoint)center color1:(UIColor *)color1 color2:(UIColor *)color2 stripeWidth:(CGFloat)width sharpness:(CGFloat)sharpness;
+//+(C4Image *)sunbeams:(CGSize)size center:(CGPoint)center color:(UIColor *)color sunRadius:(CGFloat)sunRadius maxStriationRadius:(CGFloat)striationRadius striationStrength:(CGFloat)striationStrength striationContrast:(CGFloat)striationContrast time:(CGFloat)time;
+
+#pragma mark - Geometry Adjustments
+/// @name Geometry Adjustments
+/**Applies an affine transform to an image.
+ 
+ You can scale, translate, or rotate the input image. You can also apply a combination of these operations:
+ 
+ - CGAffineTransformMake
+ - CGAffineTransformMakeRotation
+ - CGAffineTransformMakeScale
+ - CGAffineTransformMakeTranslation
+
+ Have a look at the CGAffineTransform Reference in the Organizer for more information.
+
+ @param transform A CGAffineTransform.
+ */
+-(void)affineTransform:(CGAffineTransform)transform;
+
+/**Applies a crop to an image.
+ 
+ The size and shape of the cropped image depend on the rectangle you specify.
+
+ @param area A CGRect defined in the receiver's coordinates to which its image will be cropped.
+ */
+-(void)crop:(CGRect)area;
+
+/**Produces a high-quality, scaled version of a source image.
+ 
+ You typically use this filter to scale down an image.
+ 
+ @param scale A CGFloat specifying the scale you want to which the receiver should downsize.
+ @param ratio A CGFloat specifying the new width : height ratio.
+ */
+-(void)lanczosScaleTransform:(CGFloat)scale aspectRatio:(CGFloat)ratio;
+
+/**Alters the geometry of an image to simulate the observer changing viewing position.
+ 
+ You can use the perspective filter to skew an image.
+ 
+ @param points An array of 4 CGPoints to use for the transform.
+ */
+-(void)perspectiveTransform:(CGPoint *)points;
+
+//FIXME: Add the folliwng filter
+//-(void)perspectiveTransform:(CGPoint *)points withExtent:(CGRect)extent;
+
 /**Straighten filter
  Rotates the source image by the specified angle in radians.
  
@@ -438,139 +932,57 @@
  */
 -(void)straighten:(CGFloat)angle;
 
-/**Temperature and tint filter
- Adapts the reference white point for an image.
+
+#pragma mark - Gradients
+/// @name Gradients
+
+#pragma mark - Halftone Effects
+/// @name Halftone Effects
+
+#pragma mark - Reduction
+/// @name Reduction
+
+#pragma mark - Sharpen
+/// @name Sharpen
+
+#pragma mark - Stylize
+/// @name Stylize
+
+#pragma mark - Tile Effects
+/// @name Tile Effects
+
+#pragma mark - Transitions
+/// @name Transitions
+
+
+
+
+
+
+
+
+
+
+
+/**Highlight and shadow adjustment filter
+ Adjust the tonal mapping of an image while preserving spatial detail.
  
- @param neutral An offset value, defaults to {6500,0}
- @param targetNeutral An target offset value, defaults to {6500,0}
+ @param highlightAmount The adjustment value for image highlights, defaults to 1.0, minimum 0.0, maximum 1.0
+ @param shadowAmount The adjustment value for image shadows, defaults to 0.0, minimum -1.0, maximum 1.0
  */
--(void)tempartureAndTint:(CGSize)neutral target:(CGSize)targetNeutral;
+-(void)highlightShadowAdjust:(CGFloat)highlightAmount shadowAmount:(CGFloat)shadowAmount;
 
-/**Tone curve filter
- Adjusts tone response of the R, G, and B channels of an image.
- 
- The input points are five x,y values that are interpolated using a spline curve. The curve is applied in a perceptual (gamma 2) version of the working space.
- 
- An example of how to construct the point array : CGPoint *pointArray = {CGPointMake(),CGPointMake(),CGPointMake(),CGPointMake(),CGPointMake()};
- 
- The five points default to the following:
- 
- - point1: { 0.0, 0.0}
- - point2: {0.25, 0.25}
- - point3: { 0.5, 0.5};
- - point4: {0.75, 0.75};
- - point5: { 1.0, 1.0};
- 
- @param pointArray A C-Array of CGPoints which will be used to construct the tone curve
- */
--(void)toneCurve:(CGPoint *)pointArray;
 
-/**Vibrance adjustment filter
- Adjusts the saturation of an image while keeping pleasing skin tones.
- 
- @param amount The amount to adjust the image's vibrance, defaults to 0.0, minimum -1.0, maximum 1.0
- */
--(void)vibranceAdjust:(CGFloat)amount;
 
-/*White point adjustment filter
- Adjusts the reference white point for an image and maps all colors in the source using the new reference.
- 
- @param color The reference color for the new mapping.
- */
--(void)whitePointAdjust:(UIColor *)color;
 
-#pragma mark Properties
-/// @name Properties
-/**The image displayed in the image view.
- 
- The initial value of this property is the image passed into the initWithImage: method or nil if you initialized the receiver using a different method.
- 
- @warning The object returned from this property was made with a CIImage, so calling returnedUIImage.CGImage on the returned object will return NULL.
- */
-@property (readonly, nonatomic, weak) UIImage *UIImage;
 
-/**Returns a Core Image representation of the current image.
- 
- If the image data has been purged because of memory constraints, invoking this method forces that data to be loaded back into memory. Reloading the image data may incur a performance penalty.
- 
- @warning: The CIImage is the object off of which we base all other image manipulations and returns.
- */
-@property (readonly, nonatomic, weak) CIImage *CIImage;
 
-/**The underlying Core Image data. (read-only)
- */
-@property (readonly, nonatomic) CGImageRef CGImage;
-//
-///**Specifies whether or not an image is animated.
-// */
-//@property (readonly, nonatomic, getter = isAnimatedImage) BOOL animatedImage;
-//
-///**Specifies the array of CGImageRef images used for animating.
-// 
-// This array is filled when the animatedImage is created using the appropriate constructor.
-// */
-//@property (readwrite, atomic) CFMutableArrayRef animatedImages;
-//
-///**Specifies the duration for the entire animation.
-// 
-// Setting this value, the animatedImage will automatically calculate how long each image in its array will be visible.
-// 
-// The duration for each image is consistent, for example a 2-second animation consisting of 10 frames will display each image for 0.2 seconds.
-// */
-//@property (readwrite, nonatomic) CGFloat animatedImageDuration;
-//
 
-/**Specifies the height of the image. Animatable.
- 
- Setting this property will actually change the frame of the object.
- */
-@property (readwrite, nonatomic) CGFloat height;
 
-/**Specifies the width of the image. Animatable.
- 
- Setting this property will actually change the frame of the object.
- */
-@property (readwrite, nonatomic) CGFloat width;
-
-/**Specifies the size of the image. Animatable.
- 
- Setting this property will actually change the frame of the object.
- */
-@property (readwrite, nonatomic) CGSize size;
-
-/**Specifies the original size of the of the image.
- */
-@property (readonly, nonatomic) CGSize originalSize;
-
-/**Specifies the original ratio (width / height) of the image.
- */
-@property (readonly, nonatomic) CGFloat originalRatio;
-
-/**Specifies whether or not the image has loaded its pixel data.
- */
-@property (readonly, nonatomic) BOOL pixelDataLoaded;
-
-#pragma mark JANUARY 2013
-@property (readwrite, atomic) BOOL constrainsProportions;
-////@property (readwrite, nonatomic) CGFloat animatedImageDuration
-//
-//@property (readonly, atomic) CGImageRef filteredImage;
-+(C4Image *)defaultStyle;
-@property (readonly, nonatomic, getter = isMultipleFilterEnabled) BOOL multipleFilterEnabled;
-
--(C4Image *)copyWithZone:(NSZone *)zone;
--(id)initWithUIImage:(UIImage *)image;
-//-(void)showOriginalImage;
-//-(void)showFilteredImage;
-//
--(void)startFiltering;
--(void)renderFilteredImage;
-@property (readwrite, nonatomic) CGImageRef contents;
 
 //FIXME: There are some filters that return nil images... like perspectiveTile, check with iOS 6.1
 -(void)affineClamp:(CGAffineTransform)transform;
 -(void)affineTile:(CGAffineTransform)transform;
--(void)affineTransform:(CGAffineTransform)transform;
 -(void)areaAverage:(CGRect)area;
 -(void)areaHistogram:(CGRect)area count:(NSInteger)width scale:(CGFloat)scale;
 -(void)areaMaximum:(CGRect)area;
@@ -579,56 +991,30 @@
 -(void)areaMinimumAlpha:(CGRect)area;
 -(void)blendWithMask:(C4Image *)backgroundImage mask:(C4Image *)maskImage;
 -(void)bloom:(CGFloat)radius intensity:(CGFloat)intensity;
--(void)boxBlur:(CGFloat)radius;
--(void)bumpDistortion:(CGPoint)center radius:(CGFloat)radius scale:(CGFloat)scale;
--(void)bumpDistortionLinear:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle scale:(CGFloat)scale;
--(void)circleSplashDistortion:(CGPoint)center radius:(CGFloat)radius;
 -(void)circularScreen:(CGPoint)center width:(CGFloat)width sharpness:(CGFloat)sharpness;
--(void)circularWrap:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle;
 -(void)halftoneCMYK:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle sharpness:(CGFloat)sharpness gcr:(CGFloat)gcr ucr:(CGFloat)ucr;
--(void)colorCube:(CGFloat)dimension cubeData:(NSData *)data;
--(void)colorMap:(C4Image *)gradientImage;
--(void)colorPosterize:(CGFloat)levels;
 -(void)columnAverage:(CGRect)area;
 -(void)comicEffect;
--(void)crop:(CGRect)area;
 -(void)crystallize:(CGFloat)radius center:(CGPoint)center;
 -(void)depthOfField:(CGPoint)point1 point2:(CGPoint)point2 saturation:(CGFloat)saturation maskRadius:(CGFloat)maskRadius maskIntensity:(CGFloat)maskIntensity blurRadius:(CGFloat)radius;
--(void)discBlur:(CGFloat)radius;
--(void)displacementDistortion:(C4Image *)displacementImage scale:(CGFloat)scale;
 -(void)dotScreen:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width sharpness:(CGFloat)sharpness;
--(void)droste:(CGPoint)inset1 inset2:(CGPoint)inset2 strandRadius:(CGFloat)radius periodicity:(CGFloat)periodicity rotation:(CGFloat)rotation zoom:(CGFloat)zoom;
 -(void)edges:(CGFloat)intensity;
 -(void)edgeWork:(CGFloat)radius;
 -(void)eightFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
 -(void)fourFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle acuteAngle:(CGFloat)acuteAngle width:(CGFloat)width;
 -(void)fourFoldRotatedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
 -(void)fourFoldTranslatedTile:(CGPoint)center angle:(CGFloat)angle acuteAngle:(CGFloat)acuteAngle width:(CGFloat)width;
--(void)gaussianBlur:(CGFloat)radius;
--(void)glassDistortion:(C4Image *)texture center:(CGPoint)center scale:(CGFloat)scale;
--(void)glassLozenge:(CGPoint)point1 point2:(CGPoint)point2 radius:(CGFloat)radius refraction:(CGFloat)refraction;
 -(void)glideReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
 -(void)gloom:(CGFloat)radius intensity:(CGFloat)intensity;
 -(void)hatchedScreen:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width sharpness:(CGFloat)sharpness;
 -(void)heightShieldFromMask:(CGFloat)radius;
 -(void)hexagonalPixellate:(CGPoint)center scale:(CGFloat)scale;
--(void)holeDistortion:(CGPoint)center radius:(CGFloat)radius;
 -(void)kaleidescope:(CGFloat)count center:(CGPoint)center angle:(CGFloat)angle;
--(void)lanczosScaleTransform:(CGFloat)scale aspectRatio:(CGFloat)ratio;
--(void)lightTunnel:(CGPoint)center rotation:(CGFloat)rotation radius:(CGFloat)radius;
 -(void)lineOverlay:(CGFloat)noiseLevel sharpness:(CGFloat)sharpness edgeIntensity:(CGFloat)edgeIntensity threshold:(CGFloat)threshold contrast:(CGFloat)contrast;
 -(void)lineScreen:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width sharpness:(CGFloat)sharpness;
--(void)maskToAlpha;
--(void)maximumComponent;
--(void)medianFilter;
--(void)minimumComponent;
--(void)motionBlur:(CGFloat)radius angle:(CGFloat)angle;
--(void)noiseRedution:(CGFloat)level sharpness:(CGFloat)sharpness;
 -(void)opTile:(CGPoint)center scale:(CGFloat)scale angle:(CGFloat)angle width:(CGFloat)width;
 -(void)parallelogramTile:(CGPoint)center angle:(CGFloat)angle acuteAngle:(CGFloat)acuteAngle width:(CGFloat)width;
 -(void)perspectiveTile:(CGPoint *)points;
--(void)perspectiveTransform:(CGPoint *)points;
--(void)pinchDistortion:(CGPoint)center radius:(CGFloat)radius scale:(CGFloat)scale;
 -(void)pixellate:(CGPoint)center scale:(CGFloat)scale;
 -(void)pointillize:(CGFloat)radius center:(CGPoint)center;
 -(void)rowAverage:(CGRect)area;
@@ -638,51 +1024,24 @@
 -(void)sixFoldRotatedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
 -(void)spotColor:(NSArray *)colorsets closenessAndContrast:(CGFloat *)values;
 -(void)spotLight:(C4Vector *)position lightPointsAt:(C4Vector *)spot brightness:(CGFloat)brightness concentration:(CGFloat)concentration color:(UIColor *)color;
--(void)stretchCrop:(CGSize)size cropAmount:(CGFloat)cropAmount stretchAmount:(CGFloat)stretchAmount;
--(void)torusLensDistortion:(CGPoint)center radius:(CGFloat)radius width:(CGFloat)width refraction:(CGFloat)refraction;
 -(void)triangleKaleidescope:(CGPoint)point size:(CGSize)size rotation:(CGFloat)rotation decay:(CGFloat)decay;
 -(void)triangleTile:(CGPoint)center scale:(CGFloat)scale angle:(CGFloat)angle width:(CGFloat)width;
 -(void)twelveFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
--(void)twirlDistortion:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle;
 -(void)unsharpMask:(CGFloat)radius intensity:(CGFloat)intensity;
--(void)vignette:(CGFloat)radius intensity:(CGFloat)intensity;
--(void)vortexDistortion:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle;
--(void)zoomBlur:(CGPoint)center amount:(CGFloat)amount;
 
-+(C4Image *)checkerboard:(CGSize)size center:(CGPoint)center color1:(UIColor *)color1 color2:(UIColor *)color2 squareWidth:(CGFloat)width sharpness:(CGFloat)sharpness;
-+(C4Image *)constantColor:(CGSize)size color:(UIColor *)color;
-+(C4Image *)lenticularHalo:(CGSize)size center:(CGPoint)center color:(UIColor *)color haloRadius:(CGFloat)radius haloWidth:(CGFloat)haloWidth haloOverlap:(CGFloat)overlap striationStrength:(CGFloat)strength striationContrast:(CGFloat)contrast time:(CGFloat)time;
-+(C4Image *)random:(CGSize)size;
-//FIXME: I don't think these filters work right now... There's no code online to check
-//+(C4Image *)starShineGenerator:(CGSize)size center:(CGPoint)center color:(UIColor *)color radius:(CGFloat)radius crossScale:(CGFloat)scale crossAngle:(CGFloat)angle crossOpacity:(CGFloat)opacity crossWidth:(CGFloat)width epsilon:(CGFloat)epsilon;
-//+(C4Image *)stripes:(CGSize)size center:(CGPoint)center color1:(UIColor *)color1 color2:(UIColor *)color2 stripeWidth:(CGFloat)width sharpness:(CGFloat)sharpness;
-//+(C4Image *)sunbeams:(CGSize)size center:(CGPoint)center color:(UIColor *)color sunRadius:(CGFloat)sunRadius maxStriationRadius:(CGFloat)striationRadius striationStrength:(CGFloat)striationStrength striationContrast:(CGFloat)striationContrast time:(CGFloat)time;
+//FIXME: Add the following
+//CIGaussianGradient
+//CILinearGradient
+//CIRadialGradient
 
-+(NSArray *)availableFilters;
-
-/**Specifies the array of CGImageRef images used for animating.
+#pragma mark - Default Style
+///@name Default Style
+/**Returns the appearance proxy for the object, cast as a C4Image rather than the standard (id) cast provided by UIAppearance.
  
- This array is filled when the animatedImage is created using the appropriate constructor.
+ You use this method to grab the appearance object that allows you to change the default style for C4Image objects.
+ 
+ @return The appearance proxy for the receiver, cast as a C4Image.
  */
-@property (readwrite, atomic) NSArray *animationImages;
++(C4Image *)defaultStyle;
 
-/**Specifies the duration for the entire animation.
- 
- Setting this value, the animatedImage will automatically calculate how long each image in its array will be visible.
- 
- The duration for each image is consistent, for example a 2-second animation consisting of 10 frames will display each image for 0.2 seconds.
- */
-@property (readwrite, nonatomic) CGFloat animatedImageDuration;
-@property (readwrite, nonatomic) NSInteger animationRepeatCount;
-@property (readonly, nonatomic, getter = isAnimating) BOOL animating;
-@property (readwrite, nonatomic) BOOL showsActivityIndicator;
--(void)play;
--(void)pause;
-
-+(C4Image *)animatedImageWithNames:(NSArray *)imageNames;
--(id)initAnimatedImageWithNames:(NSArray *)imageNames;
-
-+(C4Image *)imageWithUIImage:(UIImage *)image;
-+(C4Image *)imageWithURL:(NSString *)imageURL;
--(id)initWithURL:(NSURL *)imageURL;
 @end

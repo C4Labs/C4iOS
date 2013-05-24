@@ -14,33 +14,80 @@
  
  Unlike [C4Shape](C4Shape), which has an underlying backing layer, C4Label adds its encapsulated UILabel as a subview.
  */
-@interface C4Label : C4Control {
-}
+@interface C4Label : C4Control
 
+#pragma mark - Creating Labels
+///@name Creating Labels
+
+/**Creates and returns a new label with the specified text, using the default font.
+ 
+ The default font is your base System Font 24pt.
+ 
+ @param text An NSString that will make up the text for the label.
+ @return A new C4Label.
+ */
 +(C4Label *)labelWithText:(NSString *)text;
+
+/**Creates and returns a new label with the specified text, using the specified font.
+ 
+ @param text An NSString that will make up the text for the label.
+ @param font A C4Font that will be used to render the label's text.
+ @return A new C4Label.
+ */
 +(C4Label *)labelWithText:(NSString *)text font:(C4Font *)font;
+
+/**Creates and returns a new label with the specified text, using the specified font.
+ 
+ @param text An NSString that will make up the text for the label.
+ @param font A C4Font that will be used to render the label's text.
+ @param frame A CGRect that will make up the size of the view for the label.
+ @return A new C4Label.
+ */
 +(C4Label *)labelWithText:(NSString *)text font:(C4Font *)font frame:(CGRect)frame;
 
+/**Initializes and returns a new label with the specified text, using the default font.
+ 
+ The default font is your base System Font 24pt.
+ 
+ @param text An NSString that will make up the text for the label.
+ @return A new C4Label.
+ */
 -(id)initWithText:(NSString *)text;
+
+/**Initializes and returns a new label with the specified text, using the specified font.
+ 
+ @param text An NSString that will make up the text for the label.
+ @param font A C4Font that will be used to render the label's text.
+ @return A new C4Label.
+ */
 -(id)initWithText:(NSString *)text font:(C4Font *)font;
+
+/**Initializes and returns a new label with the specified text, using the specified font.
+ 
+ @param text An NSString that will make up the text for the label.
+ @param font A C4Font that will be used to render the label's text.
+ @param frame A CGRect that will make up the size of the view for the label.
+ @return A new C4Label.
+ */
 -(id)initWithText:(NSString *)text font:(C4Font *)font frame:(CGRect)frame;
 
-/// @name Custom
-#pragma mark Custom
+/// @name Fitting the label's size to its text
+#pragma mark Fitting the label's size to its text
+
+/**Resizes the label's view so that it just fits its text.
+ 
+ Call this method when you want to tightly the label's view so that it uses the most appropriate amount of space for its text.
+ */
 -(void)sizeToFit;
 
 /// @name Properties
 #pragma mark Properties
-/**The UILabel which is the subview off the receiver.
- */
-@property (readonly, strong, nonatomic) UILabel *label;
+
 /**The text displayed by the label.
- 
- This string is nil by default.
- */
+  */
 @property (readwrite, strong, nonatomic) NSString *text;
 
-/**The font of the text.
+/**The font for the label.
  
  This property applies to the entire text string. The default value for this property is the system font at a size of 17 points (using the systemFontOfSize: class method of C4Font). The value for the property can only be set to a non-nil value; setting this property to nil raises an exception.
  */
@@ -135,24 +182,36 @@
  */
 @property (readonly, nonatomic, weak) C4Layer *backingLayer;
 
-/**Specifies the height of the image. Animatable.
- 
- Setting this property will actually change the frame of the object.
- */
-@property (readwrite, nonatomic) CGFloat height;
+///**Specifies the height of the image. Animatable.
+// 
+// Setting this property will actually change the frame of the object.
+// */
+//@property (readwrite, nonatomic) CGFloat height;
+//
+///**Specifies the width of the image. Animatable.
+// 
+// Setting this property will actually change the frame of the object.
+// */
+//@property (readwrite, nonatomic) CGFloat width;
+//
+///**Specifies the size of the image. Animatable.
+// 
+// Setting this property will actually change the frame of the object.
+// */
+//@property (readwrite, nonatomic) CGSize size;
 
-/**Specifies the width of the image. Animatable.
- 
- Setting this property will actually change the frame of the object.
+/**The UILabel which is the subview off the receiver.
  */
-@property (readwrite, nonatomic) CGFloat width;
+@property (readonly, strong, nonatomic) UILabel *label;
 
-/**Specifies the size of the image. Animatable.
+#pragma mark - Default Style
+///@name Default Style
+/**Returns the appearance proxy for the object, cast as a C4Label rather than the standard (id) cast provided by UIAppearance.
  
- Setting this property will actually change the frame of the object.
+ You use this method to grab the appearance object that allows you to change the default style for C4Label objects.
+ 
+ @return The appearance proxy for the receiver, cast as a C4Label.
  */
-@property (readwrite, nonatomic) CGSize size;
-
 +(C4Label *)defaultStyle;
 
 @end
