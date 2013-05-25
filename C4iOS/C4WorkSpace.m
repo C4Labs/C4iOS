@@ -17,11 +17,15 @@
     img.center = self.canvas.center;
     img.borderColor = C4RED;
     img.borderWidth = 1.0f;
+
     [self.canvas addImage:img];
 }
 
 
 -(void)touchesBegan {
-    [img droste:CGPointMake(100,100) inset2:CGPointMake(200,200) strandRadius:1 periodicity:1 rotation:0 zoom:1];
+    CGPoint pt = CGPointMake(img.width/4,img.height/2);
+    CGFloat rad = 120.0f;
+    CGFloat rot = 1 * PI / 4;
+    [img triangleKaleidescope:pt size:200.0f rotation:-.36f decay:.55f];
 }
 @end

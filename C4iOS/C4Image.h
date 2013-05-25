@@ -769,7 +769,6 @@
 /**Wraps an image around a transparent circle.
  
  The distortion of the image increases with the distance from the center of the circle.
- 
 
  @param center A CGPoint marking the center of the circle.
  @param radius A CGFloat specifying the radius of the circle.
@@ -818,14 +817,58 @@
 
 /**Creates a circular area that pushes the image pixels outward, distorting those pixels closest to the circle the most
  
-
+ @param center The center point of the hole.
+ @param radius The radius of the hole.
  */
 -(void)holeDistortion:(CGPoint)center radius:(CGFloat)radius;
+
+/**Rotates a portion of the input image specified by the center and radius parameters to give a tunneling effect.
+ 
+ @param center The center point of the light tunnel distortion.
+ @param rotation The rotation angle of the distortion.
+ @param radius The radius of the invisible circle around which the distortion will be stretched.
+ */
 -(void)lightTunnel:(CGPoint)center rotation:(CGFloat)rotation radius:(CGFloat)radius;
+
+/**Creates a rectangular-shaped area that pinches source pixels inward, distorting those pixels closest to the rectangle the most.
+ 
+ @param center The center point of the pinch distortion.
+ @param radius The radius of the pinch.
+ @param scale The scale of the pinch. This value must greater than 0.0 and less than 2.0
+ */
 -(void)pinchDistortion:(CGPoint)center radius:(CGFloat)radius scale:(CGFloat)scale;
+
+/**Distorts an image by stretching and or cropping it to fit a target size.
+ 
+ @param size This value specifies the size of the output image in pixels.
+ @param cropAmount This value determines if, and how much, cropping should be used to achieve the target size. If the value is 0, the image is stretched but not cropped. If the value is 1, the image is cropped but not stretched. Values in-between use stretching and cropping proportionally.
+ @param stretchAmount This value determines how much stretching to apply to the center of the image, if stretching is indicated by the inputCropAmount value. A value of 0 causes the center of the image to maintain its original aspect ratio. A value of 0 causes the image to be stretched uniformly.
+ */
 -(void)stretchCrop:(CGSize)size cropAmount:(CGFloat)cropAmount stretchAmount:(CGFloat)stretchAmount;
+
+/**Creates a torus-shaped lens and distorts the portion of the image over which the lens is placed.
+ 
+ @param center The center of the torus.
+ @param radius The radius of the torus.
+ @param width The width of the band of the torus.
+ @param refraction The level of refraction seen through the torus.
+ */
 -(void)torusLensDistortion:(CGPoint)center radius:(CGFloat)radius width:(CGFloat)width refraction:(CGFloat)refraction;
+
+/**Rotates pixels around a point to give a twirling effect.
+ 
+ @param center A CGPoint marking the center of the twirl.
+ @param radius A CGFloat specifying the radius of the twirl.
+ @param angle A GFloat specifying the number of rotations that the twirl will do.
+ */
 -(void)twirlDistortion:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle;
+
+/**Rotates pixels around a point to simulate a vortex.
+ 
+ @param center A CGPoint marking the center of the vortex.
+ @param radius A CGFloat specifying the radius of the vortex.
+ @param angle A GFloat specifying the number of rotations that the vortex will do.
+ */
 -(void)vortexDistortion:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle;
 
 #pragma mark - Generators
@@ -852,20 +895,20 @@
  @return A new C4Image whose contents are a solid color.
  */
 +(C4Image *)constantColor:(CGSize)size color:(UIColor *)color;
-
-/**Simulates a lens flare.
- 
- @param size The size of the resulting image, this should be greater than CGPointZero.
- @param center The center of the halo pattern.
- @param color Controls the proportion of red, green, and blue halos.
- @param radius Controls the size of the lens flare.
- @param width Controls the width of the lens flare, that is, the distance between the inner flare and the outer flare.
- @param overlap Controls how much the red, green, and blue halos overlap. A value of 0 means no overlap (a lot of separation). A value of 1 means full overlap (white halos).
- @param strength Controls the brightness of the rainbow-colored halo area.
- @param contrast Controls the contrast of the rainbow-colored halo area.
- @param time Adds a randomness to the lens flare; it causes the flare to "sparkle" as it changes through various time values.
- */
-+(C4Image *)lenticularHalo:(CGSize)size center:(CGPoint)center color:(UIColor *)color haloRadius:(CGFloat)radius haloWidth:(CGFloat)haloWidth haloOverlap:(CGFloat)overlap striationStrength:(CGFloat)strength striationContrast:(CGFloat)contrast time:(CGFloat)time;
+//
+///**Simulates a lens flare.
+// 
+// @param size The size of the resulting image, this should be greater than CGPointZero.
+// @param center The center of the halo pattern.
+// @param color Controls the proportion of red, green, and blue halos.
+// @param radius Controls the size of the lens flare.
+// @param width Controls the width of the lens flare, that is, the distance between the inner flare and the outer flare.
+// @param overlap Controls how much the red, green, and blue halos overlap. A value of 0 means no overlap (a lot of separation). A value of 1 means full overlap (white halos).
+// @param strength Controls the brightness of the rainbow-colored halo area.
+// @param contrast Controls the contrast of the rainbow-colored halo area.
+// @param time Adds a randomness to the lens flare; it causes the flare to "sparkle" as it changes through various time values.
+// */
+//+(C4Image *)lenticularHalo:(CGSize)size center:(CGPoint)center color:(UIColor *)color haloRadius:(CGFloat)radius haloWidth:(CGFloat)haloWidth haloOverlap:(CGFloat)overlap striationStrength:(CGFloat)strength striationContrast:(CGFloat)contrast time:(CGFloat)time;
 
 /**Generates an image of infinite extent whose pixel values are made up of four independent, uniformly-distributed random numbers in the 0 to 1 range.
  
@@ -935,34 +978,122 @@
 
 #pragma mark - Gradients
 /// @name Gradients
+/**Generates a gradient that varies from one color to another using a Gaussian distribution.
+ 
+ @param size The size of the output image.
+ @param center The center of the gradient.
+ @param innerColor The inner color of the gradient.
+ @param outerColor The outer color of the gradient.
+ @param radius The radius of the gradient.
+ */
++(C4Image *)gaussianGradient:(CGSize)size center:(CGPoint)center innerColor:(UIColor *)innerColor outerColor:(UIColor *)outerColor radius:(CGFloat)radius;
+
+/**Generates a gradient that varies along a linear axis between two defined endpoints.
+ 
+ @param size The size of the output image.
+ @param startPoint The start point of the gradient.
+ @param endPoint The end point of the gradient.
+ @param startColor The start color of the gradient.
+ @param endColor The end color of the gradient.
+ */
++(C4Image *)linearGradient:(CGSize)size startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint startColor:(UIColor *)startColor endColor:(UIColor *)endColor;
+
+/**Generates a gradient that varies radially between two circles having the same center.
+ 
+ @param size The size of the output image.
+ @param center The center of the gradient.
+ @param innerRadius The inner radius of the gradient.
+ @param outerRadius The outer radius of the gradient.
+ @param innerColor The inner color of the gradient.
+ @param outerColor The outer color of the gradient.
+ */
++(C4Image *)radialGradient:(CGSize)size center:(CGPoint)center innerRadius:(CGFloat)innerRadius outerRadius:(CGFloat)outerRadius innerColor:(UIColor *)innerColor outerColor:(UIColor *)outerColor;
 
 #pragma mark - Halftone Effects
 /// @name Halftone Effects
+/**Simulates a circular-shaped halftone screen.
+ 
+ @param center The center of the circular screen effect.
+ @param width The width of the bands in the effect.
+ @param sharpness The sharpness of the edges of the bands in the effect (values from 0.0 to 1.0)
+ */
+-(void)circularScreen:(CGPoint)center width:(CGFloat)width sharpness:(CGFloat)sharpness;
 
-#pragma mark - Reduction
-/// @name Reduction
+///**Creates a color, halftoned rendition of the source image, using cyan, magenta, yellow, and black inks over a white page.
+// */
+//-(void)halftoneCMYK:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle sharpness:(CGFloat)sharpness gcr:(CGFloat)gcr ucr:(CGFloat)ucr;
+
+/**Simulates the dot patterns of a halftone screen.
+ 
+ @param center The center of the dot pattern.
+ @param angle The angle of the bands of dots in the effect.
+ @param width The width of the dots in the effect.
+ @param sharpness The sharpness of the edges of the dots in the effect (values from 0.0 to 1.0)
+ */
+-(void)dotScreen:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width sharpness:(CGFloat)sharpness;
+
+/**Simulates the hatched pattern of a halftone screen.
+ 
+ @param center The center of the hatch pattern.
+ @param angle The angle of the bands of hatches in the effect.
+ @param width The width of the hatches in the effect.
+ @param sharpness The sharpness of the edges of the hatches in the effect (values from 0.0 to 1.0)
+ */
+-(void)hatchedScreen:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width sharpness:(CGFloat)sharpness;
+
+/**Simulates the line pattern of a halftone screen.
+ @param center The center of the line pattern.
+ @param angle The angle of the bands of line in the effect.
+ @param width The width of the lines in the effect.
+ @param sharpness The sharpness of the edges of the lines in the effect (values from 0.0 to 1.0)
+ */
+-(void)lineScreen:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width sharpness:(CGFloat)sharpness;
 
 #pragma mark - Sharpen
 /// @name Sharpen
+/**Increases image detail by sharpening.
+ 
+ It operates on the luminance of the image; the chrominance of the pixels remains unaffected.
+
+ @param sharpness The level of sharpness for the filter's effect.
+ */
+-(void)sharpenLuminance:(CGFloat)sharpness;
+
+/**Increases the contrast of the edges between pixels of different colors in an image.
+ 
+ @param radius The radius of the blending area.
+ @param intensity The intensity of the filter's effect.
+ */
+-(void)unsharpMask:(CGFloat)radius intensity:(CGFloat)intensity;
 
 #pragma mark - Stylize
 /// @name Stylize
+/**Uses values from a grayscale mask to interpolate between an image and the background.
+ 
+ When a mask value is 0.0, the result is the background. When the mask value is 1.0, the result is the image.
+ 
+ @param backgroundImage The background image that will be revealed by the mask.
+ @param maskImage The image to use as the mask (should be black and white).
+ */
+-(void)blendWithMask:(C4Image *)backgroundImage mask:(C4Image *)maskImage;
 
-#pragma mark - Tile Effects
-/// @name Tile Effects
+/**Softens edges and applies a pleasant glow to an image.
+ 
+ @param radius The radius of the area, per pixel, to which the bloom filter is applied.
+ @param intensity The intensity of the filter's effect.
+ */
+-(void)bloom:(CGFloat)radius intensity:(CGFloat)intensity;
 
-#pragma mark - Transitions
-/// @name Transitions
+/**Simulates a comic book drawing by outlining edges and applying a color halftone effect.
+ */
+-(void)comicEffect;
 
+/**Dulls the highlights of an image.
 
-
-
-
-
-
-
-
-
+ @param radius The radius of the area, per pixel, to which the bloom filter is applied.
+ @param intensity The intensity of the filter's effect.
+*/
+-(void)gloom:(CGFloat)radius intensity:(CGFloat)intensity;
 
 /**Highlight and shadow adjustment filter
  Adjust the tonal mapping of an image while preserving spatial detail.
@@ -972,67 +1103,109 @@
  */
 -(void)highlightShadowAdjust:(CGFloat)highlightAmount shadowAmount:(CGFloat)shadowAmount;
 
-
-
-
-
-
-
-
-
-//FIXME: There are some filters that return nil images... like perspectiveTile, check with iOS 6.1
--(void)affineClamp:(CGAffineTransform)transform;
--(void)affineTile:(CGAffineTransform)transform;
--(void)areaAverage:(CGRect)area;
--(void)areaHistogram:(CGRect)area count:(NSInteger)width scale:(CGFloat)scale;
--(void)areaMaximum:(CGRect)area;
--(void)areaMaximumAlpha:(CGRect)area;
--(void)areaMinimum:(CGRect)area;
--(void)areaMinimumAlpha:(CGRect)area;
--(void)blendWithMask:(C4Image *)backgroundImage mask:(C4Image *)maskImage;
--(void)bloom:(CGFloat)radius intensity:(CGFloat)intensity;
--(void)circularScreen:(CGPoint)center width:(CGFloat)width sharpness:(CGFloat)sharpness;
--(void)halftoneCMYK:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle sharpness:(CGFloat)sharpness gcr:(CGFloat)gcr ucr:(CGFloat)ucr;
--(void)columnAverage:(CGRect)area;
--(void)comicEffect;
--(void)crystallize:(CGFloat)radius center:(CGPoint)center;
--(void)depthOfField:(CGPoint)point1 point2:(CGPoint)point2 saturation:(CGFloat)saturation maskRadius:(CGFloat)maskRadius maskIntensity:(CGFloat)maskIntensity blurRadius:(CGFloat)radius;
--(void)dotScreen:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width sharpness:(CGFloat)sharpness;
--(void)edges:(CGFloat)intensity;
--(void)edgeWork:(CGFloat)radius;
--(void)eightFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
--(void)fourFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle acuteAngle:(CGFloat)acuteAngle width:(CGFloat)width;
--(void)fourFoldRotatedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
--(void)fourFoldTranslatedTile:(CGPoint)center angle:(CGFloat)angle acuteAngle:(CGFloat)acuteAngle width:(CGFloat)width;
--(void)glideReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
--(void)gloom:(CGFloat)radius intensity:(CGFloat)intensity;
--(void)hatchedScreen:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width sharpness:(CGFloat)sharpness;
--(void)heightShieldFromMask:(CGFloat)radius;
--(void)hexagonalPixellate:(CGPoint)center scale:(CGFloat)scale;
--(void)kaleidescope:(CGFloat)count center:(CGPoint)center angle:(CGFloat)angle;
--(void)lineOverlay:(CGFloat)noiseLevel sharpness:(CGFloat)sharpness edgeIntensity:(CGFloat)edgeIntensity threshold:(CGFloat)threshold contrast:(CGFloat)contrast;
--(void)lineScreen:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width sharpness:(CGFloat)sharpness;
--(void)opTile:(CGPoint)center scale:(CGFloat)scale angle:(CGFloat)angle width:(CGFloat)width;
--(void)parallelogramTile:(CGPoint)center angle:(CGFloat)angle acuteAngle:(CGFloat)acuteAngle width:(CGFloat)width;
--(void)perspectiveTile:(CGPoint *)points;
+/**Makes an image blocky by mapping the image to colored squares whose color is defined by the replaced pixels.
+ 
+ @param center The center of the effect.
+ @param scale The scale of the pixel sizes after the effect has been applied.
+ */
 -(void)pixellate:(CGPoint)center scale:(CGFloat)scale;
--(void)pointillize:(CGFloat)radius center:(CGPoint)center;
--(void)rowAverage:(CGRect)area;
--(void)shadedMaterial:(C4Image *)shadingImage scale:(CGFloat)scale;
--(void)sharpenLuminance:(CGFloat)sharpness;
--(void)sixFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
--(void)sixFoldRotatedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
--(void)spotColor:(NSArray *)colorsets closenessAndContrast:(CGFloat *)values;
--(void)spotLight:(C4Vector *)position lightPointsAt:(C4Vector *)spot brightness:(CGFloat)brightness concentration:(CGFloat)concentration color:(UIColor *)color;
--(void)triangleKaleidescope:(CGPoint)point size:(CGSize)size rotation:(CGFloat)rotation decay:(CGFloat)decay;
--(void)triangleTile:(CGPoint)center scale:(CGFloat)scale angle:(CGFloat)angle width:(CGFloat)width;
--(void)twelveFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
--(void)unsharpMask:(CGFloat)radius intensity:(CGFloat)intensity;
 
-//FIXME: Add the following
-//CIGaussianGradient
-//CILinearGradient
-//CIRadialGradient
+#pragma mark - Tile Effects
+/// @name Tile Effects
+/**Performs an affine transform on a source image and then clamps the pixels at the edge of the transformed image, extending them outwards.
+ 
+ This filter performs similarly to the CIAffineTransform filter except that it produces an image with infinite extent. You can use this filter when you need to blur an image but you want to avoid a soft, black fringe along the edges.
+ 
+ @param transform The affine transform you wish to apply prior to clamping the outer edge pixels.
+ */
+-(void)affineClamp:(CGAffineTransform)transform;
+
+/**Applies an affine transform to an image and then tiles the transformed image.
+ 
+ @param transform The affine transform you wish to apply prior to tiling the transformed image. 
+ */
+-(void)affineTile:(CGAffineTransform)transform;
+
+/**Produces a tiled image from a source image by applying an 8-way reflected symmetry.
+ 
+ @param center The center point of the effect within the image.
+ @param angle The angle of the effect.
+ @param width The width, along with the center parameter, defines the portion of the image to tile.
+ */
+-(void)eightFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
+
+/**Produces a tiled image from a source image by applying a 4-way reflected symmetry.
+ 
+ @param center The center point of the effect within the image.
+ @param angle The angle of the effect.
+ @param acuteAngle The acute angle of the effect.
+ @param width The width, along with the center parameter, defines the portion of the image to tile.
+ */
+-(void)fourFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle acuteAngle:(CGFloat)acuteAngle width:(CGFloat)width;
+
+/**Produces a tiled image from a source image by rotating the source image at increments of 90 degrees.
+
+ @param center The center point of the effect within the image.
+ @param angle The angle of the effect.
+ @param width The width, along with the center parameter, defines the portion of the image to tile.
+ */
+-(void)fourFoldRotatedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
+
+/**Produces a tiled image from a source image by applying 4 translation operations.
+ 
+ @param center The center point of the effect within the image.
+ @param angle The angle of the effect.
+ @param acuteAngle The acute angle of the effect.
+ @param width The width, along with the center parameter, defines the portion of the image to tile.
+ */
+-(void)fourFoldTranslatedTile:(CGPoint)center angle:(CGFloat)angle acuteAngle:(CGFloat)acuteAngle width:(CGFloat)width;
+
+/**Produces a tiled image from a source image by translating and smearing the image.
+ 
+ @param center The center point of the effect within the image.
+ @param angle The angle of the effect.
+ @param width The width, along with the center parameter, defines the portion of the image to tile.
+ */
+-(void)glideReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
+
+/**Applies a perspective transform to an image and then tiles the result.
+ 
+ @param points A CGPoint array of 4 points defining the space into which the image will be transformed prior to tiling.
+ */
+-(void)perspectiveTile:(CGPoint *)points;
+
+/**Produces a tiled image from a source image by applying a 6-way reflected symmetry.
+
+ @param center The center point of the effect within the image.
+ @param angle The angle of the effect.
+ @param width The width, along with the center parameter, defines the portion of the image to tile.
+ */
+-(void)sixFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
+
+/**Produces a tiled image from a source image by rotating the source image at increments of 60 degrees.
+ 
+ @param center The center point of the effect within the image.
+ @param angle The angle of the effect.
+ @param width The width, along with the center parameter, defines the portion of the image to tile.
+ */
+-(void)sixFoldRotatedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
+
+/**Maps a triangular portion of an input image to create a kaleidoscope effect.
+ 
+ @param point The point of interest around which the effect will be rendered.
+ @param size The size of the triangle that will be select.
+ @param rotation The rotation of the effect's space.
+ @param decay The decay of the effect.
+ */
+-(void)triangleKaleidescope:(CGPoint)point size:(CGFloat)size rotation:(CGFloat)rotation decay:(CGFloat)decay;
+
+/**Produces a tiled image from a source image by rotating the source image at increments of 30 degrees.
+ 
+ @param center The center point of the effect within the image.
+ @param angle The angle of the effect.
+ @param width The width, along with the center parameter, defines the portion of the image to tile.
+ */
+-(void)twelveFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
 
 #pragma mark - Default Style
 ///@name Default Style
