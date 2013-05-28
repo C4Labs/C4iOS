@@ -1,31 +1,46 @@
-//
-//  C4WorkSpace.m
-//  Page Flip
-//
-//  Created by Les's Computer on 13-05-15.
-//  Copyright (c) 2013 Les's Computer. All rights reserved.
-//
-
-#import "C4WorkSpace.h"
-
 @implementation C4WorkSpace {
-    C4Image *img;
+    C4Shape *s1, *s2, *s3;
 }
 
 -(void)setup {
-    img = [C4Image imageNamed:@"C4Sky"];
-    img.center = self.canvas.center;
-    img.borderColor = C4RED;
-    img.borderWidth = 1.0f;
-
-    [self.canvas addImage:img];
+    [self setupShapes];
+    
+    [self addLongPressToShape:s1];
+    [self addLongPressToShape:s2];
+    [self addLongPressToShape:s3];
 }
 
+-(void)addLongPressToShape:(C4Shape *)shape {
+    [shape addGesture:LONGPRESS name:@"longPress" action:@"pressedLong"];
+    [shape minimumPressDuration:2.0f forGesture:@"longPress"];
+    [self listenFor:@"pressedLong" fromObject:shape andRunMethod:@"randomColor:"];
+}
 
--(void)touchesBegan {
-    CGPoint pt = CGPointMake(img.width/4,img.height/2);
-    CGFloat rad = 120.0f;
-    CGFloat rot = 1 * PI / 4;
-    [img triangleKaleidescope:pt size:200.0f rotation:-.36f decay:.55f];
+-(void)randomColor: (NSNotification *)notification {
+    C4Shape *shape = (C4Shape *)notification.object;
+    shape.fillColor = [UIColor colorWithRed:[C4Math randomInt:100]/100.0f
+                                      green:[C4Math randomInt:100]/100.0f
+                                       blue:[C4Math randomInt:100]/100.0f
+                                      alpha:1.0f];
+    
+}
+
+-(void)setupShapes {
+    CGRect shapeFrame = CGRectMake(0, 0, 100, 100);
+    s1 = [C4Shape ellipse:shapeFrame];
+    s2 = [C4Shape ellipse:shapeFrame];
+    s3 = [C4Shape ellipse:shapeFrame];
+    
+    CGPoint centerPoint = self.canvas.center;
+    centerPoint.y -= 150;
+    s1.center = centerPoint;
+    centerPoint.y += 150;
+    s2.center = centerPoint;
+    centerPoint.y += 150;
+    s3.center = centerPoint;
+    
+    NSArray *shapes = @[s1,s2,s3];
+    [self.canvas addObjects:shapes];
 }
 @end
+

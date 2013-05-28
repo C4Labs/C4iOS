@@ -426,7 +426,7 @@
 -(void)minimumPressDuration:(CGFloat)duration forGesture:(NSString *)gestureName {
     UIGestureRecognizer *recognizer = _gestureDictionary[gestureName];
     
-    C4Assert([recognizer isKindOfClass:[UITapGestureRecognizer class]],
+    C4Assert([recognizer isKindOfClass:[UILongPressGestureRecognizer class]],
              @"The gesture type(%@) you tried to configure does not respond to the method %@",[recognizer class],NSStringFromSelector(_cmd));
     
     ((UILongPressGestureRecognizer *) recognizer).minimumPressDuration = duration;

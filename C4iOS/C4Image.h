@@ -1,5 +1,5 @@
 //
-//  NewImage.h
+//  C4Image.h
 //  C4iOS
 //
 //  Created by moi on 13-02-18.
