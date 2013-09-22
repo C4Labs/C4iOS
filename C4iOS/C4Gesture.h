@@ -18,7 +18,7 @@ typedef enum C4GestureType : NSUInteger {
     LONGPRESS
 } C4GestureType;
 
-typedef enum C4SwipeDirection : UISwipeGestureRecognizerDirection {
+typedef enum C4SwipeDirection {
     SWIPEDIRRIGHT = UISwipeGestureRecognizerDirectionRight,
     SWIPEDIRLEFT = UISwipeGestureRecognizerDirectionLeft,
     SWIPEDIRUP = UISwipeGestureRecognizerDirectionUp ,

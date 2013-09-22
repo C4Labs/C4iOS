@@ -8,12 +8,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "C4iOS/C4Image.m"
-         timestampString = "391128014.311534"
+         timestampString = "400034910.50162"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "980"
-         endingLineNumber = "980"
-         landmarkName = "-dotScreen:angle:width:sharpness:"
+         startingLineNumber = "221"
+         endingLineNumber = "221"
+         landmarkName = "-renderImageWithFilterName:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

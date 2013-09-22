@@ -53,7 +53,8 @@
 
 -(id)initWithImageName:(NSString *)name {
     name = [name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    return [self initWithUIImage:[UIImage imageNamed:name]];
+    UIImage *newImage = [UIImage imageNamed:name];
+    return [self initWithUIImage:newImage];
 }
 
 -(id)initWithImage:(C4Image *)image {
@@ -65,7 +66,6 @@
     self = [super init];
     if(self != nil) {
         _originalImage = image;
-        
         _constrainsProportions = YES;
         _multipleFilterEnabled = NO;
         

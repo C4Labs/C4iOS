@@ -36,7 +36,6 @@
     
     [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategorySoloAmbient error: nil];
     [[AVAudioSession sharedInstance] setActive:YES error:nil];
-    
     [self.workspace setup];
     return YES;
 }

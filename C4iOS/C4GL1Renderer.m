@@ -103,7 +103,8 @@ const GLubyte colors[] = {
     glEnableClientState(GL_COLOR_ARRAY);
     
     glLineWidth(20.0f);
-    glDrawArrays(GL_LINE_LOOP, 0, 24);
+    
+    
     
     glBindRenderbufferOES(GL_RENDERBUFFER_OES, self.renderBuffer);
     [self.eaglContext presentRenderbuffer:GL_RENDERBUFFER_OES];

@@ -29,10 +29,7 @@
 				<string>C4_AppIcon_iPhone@2x.png</string>
 				<string>C4_AppIcon_iPad.png</string>
 				<string>C4_AppIcon_iPad@2x.png</string>
-				<string>C4_LaunchImage_iPhone-Landscape~ipad.png</string>
-				<string>C4_LaunchImage_iPhone-Landscape@2x~ipad.png</string>
-				<string>C4_LaunchImage_iPhone-Portrait~ipad.png</string>
-				<string>C4_LaunchImage_iPhone-Portrait@2x~ipad.png</string>
+				<string></string>
 			</array>
 		</dict>
 		<key>UINewsstandIcon</key>
@@ -85,8 +82,6 @@
 	<array>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationPortrait</string>
 	</array>
 </dict>
 </plist>
