@@ -357,7 +357,8 @@
 -(void)pressedLong:(id)sender {
     if(((UIGestureRecognizer *)sender).state == UIGestureRecognizerStateBegan
        && [((UIGestureRecognizer *)sender) isKindOfClass:[UILongPressGestureRecognizer class]]) {
-        objc_msgSend(self, NSSelectorFromString(self.longPressMethodName)); // have to do this manually here... because the WorkSpace doesn't respond to performSelector: or sendAction:
+        if([self.longPressMethodName rangeOfString:@":"].location == NSNotFound) objc_msgSend(self, NSSelectorFromString(self.longPressMethodName));
+        else objc_msgSend(self, NSSelectorFromString(self.longPressMethodName),sender);
     }
 }
 

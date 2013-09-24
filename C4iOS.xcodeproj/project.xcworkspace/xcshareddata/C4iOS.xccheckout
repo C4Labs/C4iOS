@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>E273B35D-39BD-4AFF-89FC-7B47CF27BBA6</string>
+	<key>IDESourceControlProjectName</key>
+	<string>C4iOS</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>733F0217-A530-488E-9907-9D440AEF7FF4</key>
+		<string>https://github.com/C4Framework/C4iOS.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>C4iOS.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>733F0217-A530-488E-9907-9D440AEF7FF4</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/C4Framework/C4iOS.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>733F0217-A530-488E-9907-9D440AEF7FF4</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>733F0217-A530-488E-9907-9D440AEF7FF4</string>
+			<key>IDESourceControlWCCName</key>
+			<string>C4iOS</string>
+		</dict>
+	</array>
+</dict>
+</plist>
