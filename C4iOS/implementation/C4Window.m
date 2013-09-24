@@ -463,7 +463,6 @@
     //    if([[self nextResponder] isKindOfClass:[C4WorkSpace class]]) [super touchesMoved:touches withEvent:event];
     [super touchesMoved:touches withEvent:event];
     [self postNotification:@"touchesMoved"];
-    [super touchesMoved:touches withEvent:event];
     [self touchesMoved];
 }
 
