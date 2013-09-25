@@ -515,7 +515,7 @@
 
 -(void)tapped:(id)sender {
     sender = sender;
-    [self postNotification:NSStringFromSelector(_cmd)];
+    [self postNotification:@"tapped"];
     [self tapped];
 }
 
