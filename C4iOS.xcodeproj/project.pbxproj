@@ -82,6 +82,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		615871EC18D8C8740074E4B6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		615871ED18D8C8740074E4B6 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		BED79E1817F2435400F0F82E /* C4iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = C4iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BED79E1B17F2435400F0F82E /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		BED79E1D17F2435400F0F82E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -229,6 +231,8 @@
 		BED79E0F17F2435400F0F82E = {
 			isa = PBXGroup;
 			children = (
+				615871EC18D8C8740074E4B6 /* README.md */,
+				615871ED18D8C8740074E4B6 /* LICENSE */,
 				BED79E3117F2435400F0F82E /* C4iOS */,
 				BED79ECD17F2435500F0F82E /* C4iOSTests */,
 				BED79E1A17F2435400F0F82E /* Frameworks */,
