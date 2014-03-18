@@ -368,7 +368,7 @@
 }
 
 -(void)setContentHorizontalAlignment:(UIControlContentHorizontalAlignment)contentHorizontalAlignment {
-    self.UIButton.contentVerticalAlignment = contentHorizontalAlignment;
+    self.UIButton.contentHorizontalAlignment = contentHorizontalAlignment;
 }
 
 #pragma mark isEqual

@@ -279,7 +279,7 @@
 -(void)swipeDirection:(C4SwipeDirection)direction forGesture:(NSString *)gestureName {
     UIGestureRecognizer *recognizer = _gestureDictionary[gestureName];
     if([recognizer isKindOfClass:[UISwipeGestureRecognizer class]])
-        ((UISwipeGestureRecognizer *) recognizer).direction = direction;
+        ((UISwipeGestureRecognizer *) recognizer).direction = (UISwipeGestureRecognizerDirection)direction;
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

@@ -220,7 +220,7 @@
     else [self performSelector:@selector(_setTextAlignment:) withObject:@(textAlignment) afterDelay:self.animationDelay];
 }
 -(void)_setTextAlignment:(NSNumber *)textAlignment {
-    self.label.textAlignment = (UITextAlignment)[textAlignment intValue];
+    self.label.textAlignment = (NSTextAlignment)[textAlignment intValue];
 }
 
 -(C4TextAlignment)textAlignment {
@@ -232,7 +232,7 @@
     else [self performSelector:@selector(_setLineBreakMode:) withObject:@(lineBreakMode) afterDelay:self.animationDelay];
 }
 -(void)_setLineBreakMode:(NSNumber *)lineBreakMode {
-    self.label.lineBreakMode = (UILineBreakMode)[lineBreakMode integerValue];
+    self.label.lineBreakMode = (NSLineBreakMode)[lineBreakMode integerValue];
 }
 
 -(C4LineBreakMode)lineBreakMode {

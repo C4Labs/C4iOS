@@ -75,7 +75,7 @@
 }
 
 +(C4Shape *)polygon:(CGPoint *)pointArray pointCount:(NSInteger)pointCount {
-    CGRect polygonFrame = CGRectMakeFromPointArray(pointArray, pointCount);
+    CGRect polygonFrame = CGRectMakeFromPointArray(pointArray, (int)pointCount);
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:polygonFrame];
     NSMutableArray *points = [@[] mutableCopy];
     for(int i = 0; i < pointCount; i++) {
@@ -321,17 +321,13 @@
     _closed = YES;
     NSString *string = stringAndFontDictionary[@"string"];
     C4Font *font = stringAndFontDictionary[@"font"];
-    NSStringEncoding encoding = [NSString defaultCStringEncoding];
-    CFStringRef stringRef = CFStringCreateWithCString(kCFAllocatorDefault, [string cStringUsingEncoding:encoding], encoding);
-    CFIndex length = CFStringGetLength(stringRef);
-    CFRelease(stringRef);
     CGAffineTransform afft = CGAffineTransformMakeScale(1, -1);
     CGMutablePathRef glyphPaths = CGPathCreateMutable();
     CGPathMoveToPoint(glyphPaths, nil, 0, 0);
     CTFontRef ctFont = CTFontCreateWithName((__bridge CFStringRef)font.fontName, font.pointSize, nil);
 
     CGPoint currentOrigin = CGPointZero;
-    for(int i = 0; i < length; i++) {
+    for(int i = 0; i < string.length; i++) {
         CGGlyph currentGlyph;
         const unichar c = [string characterAtIndex:i];
         CTFontGetGlyphsForCharacters(ctFont, &c, &currentGlyph, 1);

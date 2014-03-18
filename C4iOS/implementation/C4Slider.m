@@ -314,7 +314,7 @@
 }
 
 -(void)setContentHorizontalAlignment:(UIControlContentHorizontalAlignment)contentHorizontalAlignment {
-    self.UISlider.contentVerticalAlignment = contentHorizontalAlignment;
+    self.UISlider.contentHorizontalAlignment = contentHorizontalAlignment;
 }
 
 #pragma mark isEqual

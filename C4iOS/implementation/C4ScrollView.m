@@ -208,7 +208,7 @@
     _UIScrollview.zoomScale = zoomScale;
 }
 
--(void)setZoomScale:(float)scale animated:(BOOL)animated {
+-(void)setZoomScale:(CGFloat)scale animated:(BOOL)animated {
     [_UIScrollview setZoomScale:scale animated:animated];
 }
 

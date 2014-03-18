@@ -456,7 +456,7 @@
     C4Assert([recognizer isKindOfClass:[UISwipeGestureRecognizer class]],
              @"The gesture type(%@) you tried to configure does not respond to the method: %@",[recognizer class],NSStringFromSelector(_cmd));
     
-    ((UISwipeGestureRecognizer *) recognizer).direction = direction;
+    ((UISwipeGestureRecognizer *) recognizer).direction = (UISwipeGestureRecognizerDirection)direction;
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

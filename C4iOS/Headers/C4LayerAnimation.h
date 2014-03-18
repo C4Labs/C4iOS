@@ -202,7 +202,7 @@
  
  @warning *Note:* This parameter is currently unused.
  */
-@property (nonatomic) CGFloat repeatCount;
+@property (nonatomic) float repeatCount;
 
 /** Type of easing that an animation will use.
  */
