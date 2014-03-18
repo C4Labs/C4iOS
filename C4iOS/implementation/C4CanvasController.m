@@ -197,7 +197,7 @@
        [methodName isEqualToString:@"tapped"]) {
         methodName = [methodName stringByAppendingString:@":"];
     }
-
+    
     if(containsGesture == NO) {
         UIGestureRecognizer *recognizer;
         switch (type) {

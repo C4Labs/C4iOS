@@ -702,7 +702,7 @@
         CIFilter *filter = [self prepareFilterWithName:@"CIAreaAverage"];
         [filter setValue:[NSValue valueWithCGRect:area] forKey:@"inputExtent"];
         _output = filter.outputImage;
-
+        
         CIImage *image = filter.outputImage;
         CIContext *context = [CIContext contextWithOptions:nil];
         CGImageRef filteredImage = [context createCGImage:image fromRect:CGRectMake(0, 0, 10, 10)];
@@ -1751,26 +1751,26 @@
 
 +(NSArray *)availableFilters {
     NSArray *filterCategories = @[
-    kCICategoryDistortionEffect,
-    kCICategoryGeometryAdjustment,
-    kCICategoryCompositeOperation,
-    kCICategoryHalftoneEffect,
-    kCICategoryColorAdjustment,
-    kCICategoryColorEffect,
-    kCICategoryTransition,
-    kCICategoryTileEffect,
-    kCICategoryGenerator,
-    kCICategoryReduction,
-    kCICategoryGradient,
-    kCICategoryStylize,
-    kCICategorySharpen,
-    kCICategoryBlur,
-    kCICategoryVideo,
-    kCICategoryStillImage,
-    kCICategoryInterlaced,
-    kCICategoryNonSquarePixels,
-    kCICategoryHighDynamicRange ,
-    kCICategoryBuiltIn
+      kCICategoryDistortionEffect,
+      kCICategoryGeometryAdjustment,
+      kCICategoryCompositeOperation,
+      kCICategoryHalftoneEffect,
+      kCICategoryColorAdjustment,
+      kCICategoryColorEffect,
+      kCICategoryTransition,
+      kCICategoryTileEffect,
+      kCICategoryGenerator,
+      kCICategoryReduction,
+      kCICategoryGradient,
+      kCICategoryStylize,
+      kCICategorySharpen,
+      kCICategoryBlur,
+      kCICategoryVideo,
+      kCICategoryStillImage,
+      kCICategoryInterlaced,
+      kCICategoryNonSquarePixels,
+      kCICategoryHighDynamicRange ,
+      kCICategoryBuiltIn
     ];
     
     NSMutableSet *allFilters = [[NSMutableSet alloc] initWithCapacity:0];
@@ -1800,7 +1800,7 @@
 //};
 //+(C4Image *)sunbeams:(CGSize)size center:(CGPoint)center color:(UIColor *)color sunRadius:(CGFloat)sunRadius maxStriationRadius:(CGFloat)striationRadius striationStrength:(CGFloat)striationStrength striationContrast:(CGFloat)striationContrast time:(CGFloat)time{return nil;};
 
-#pragma mark Animated Image 
+#pragma mark Animated Image
 +(C4Image *)animatedImageWithNames:(NSArray *)imageNames {
     C4Image *animImg = [[C4Image alloc] initAnimatedImageWithNames:imageNames];
     return animImg;

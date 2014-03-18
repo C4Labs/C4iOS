@@ -257,7 +257,7 @@
 
 /**A list of all availble filters using the CI prefix.
  
- This method creates an array of all filters available on iOS. It does this by calling filterNamesInCategory: on a list of all available filter categories. Each entry is returned as the actual Core Image reference name, for example the boxBlur filter is called CIBoxBlur. 
+ This method creates an array of all filters available on iOS. It does this by calling filterNamesInCategory: on a list of all available filter categories. Each entry is returned as the actual Core Image reference name, for example the boxBlur filter is called CIBoxBlur.
  
  The array of filters is sorted alphabetically.
  
@@ -271,12 +271,12 @@
  
  If YES, then you must wrap your filter calls in calls to startFiltering, and renderFilteredImage like so:
  
-    img.multipleFilterEnabled = YES;
-    [img startFiltering];
-    [img filter1];
-    [img filter2];
-    [img filter3];
-    [img renderFilteredImage];
+ img.multipleFilterEnabled = YES;
+ [img startFiltering];
+ [img filter1];
+ [img filter2];
+ [img filter3];
+ [img renderFilteredImage];
  */
 @property (readonly, nonatomic, getter = isMultipleFilterEnabled) BOOL multipleFilterEnabled;
 
@@ -286,7 +286,7 @@
  */
 -(void)startFiltering;
 
-/**Renders the current image's filter stack. 
+/**Renders the current image's filter stack.
  
  Calling this method will composite all previously called filters and then switch the reciever's contents to the new filtered image.
  */
@@ -300,7 +300,7 @@
 
 #pragma mark - Filters By Task
 /// @name Filters By Task
-/**Please note that as of June 2013, we have implemented the following filters but have not had the opportunity to fully test them all. Some behaviours may be unpredictable. 
+/**Please note that as of June 2013, we have implemented the following filters but have not had the opportunity to fully test them all. Some behaviours may be unpredictable.
  
  Bugs can be submitted to the C4iOS project on GitHub:
  https://github.com/C4framework/C4iOS/issues
@@ -309,13 +309,13 @@
 #pragma mark - Blurs
 /// @name Blurs
 /**Blurs an image using a box-shaped convolution kernel.
-
+ 
  @param radius a CGFloat representing the length of the radius for the blur. Default value: 10.00
  */
 -(void)boxBlur:(CGFloat)radius;
 
 /**Blurs an image using a disc-shaped convolution kernel.
-
+ 
  @param radius a CGFloat representing the length of the radius for the blur. Default value: 8.00
  */
 -(void)discBlur:(CGFloat)radius;
@@ -349,7 +349,7 @@
 -(void)noiseRedution:(CGFloat)level sharpness:(CGFloat)sharpness;
 
 /**Simulates the effect of zooming the camera while capturing the image.
-
+ 
  @param center A CGPoint representing the center of the zoom. Default value {150,150}
  @param amount The amount of zoom to apply. Default value 20.0
  */
@@ -471,14 +471,14 @@
 /**Uses a three-dimensional color table to transform the source image pixels.
  
  This filter applies a mapping from RGB space to new color values that are defined in inputCubeData. For each RGBA pixel in inputImage the filter uses the R,G and B values to index into a thee dimensional texture represented by inputCubeData. inputCubeData contains floating point RGBA cells that contain linear premultiplied values. The data is organized into inputCubeDimension number of xy planes, with each plane of size inputCubeDimension by inputCubeDimension. Input pixel components R and G are used to index the data in x and y respectively, and B is used to index in z. In inputCubeData the R component varies fastest, followed by G, then B.
-
+ 
  @param dimension A CGFloat representing the number of XY planes used to create the resulting image. The size of the planes are dimension x dimension. Default value: 2.00
  @param data An NSData object that represents a three-dimensional texture.
  */
 -(void)colorCube:(CGFloat)dimension cubeData:(NSData *)data;
 
 /**Color invert filter.
-
+ 
  Inverts the colors in an image.
  */
 -(void)colorInvert;
@@ -762,7 +762,7 @@
 -(void)bumpDistortion:(CGPoint)center radius:(CGFloat)radius scale:(CGFloat)scale;
 
 /**Creates a concave or convex distortion that originates from a line in the image.
-  
+ 
  @param center A CGPoint marking the center of the bump.
  @param radius A CGFloat specifying the radius of the bump.
  @param angle A GFloat specifying the angle of the line, in radians.
@@ -780,7 +780,7 @@
 /**Wraps an image around a transparent circle.
  
  The distortion of the image increases with the distance from the center of the circle.
-
+ 
  @param center A CGPoint marking the center of the circle.
  @param radius A CGFloat specifying the radius of the circle.
  @param angle A GFloat specifying the angle of the distortion.
@@ -788,7 +788,7 @@
 -(void)circularWrap:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle;
 
 /**Recursively draws a portion of an image in imitation of an M. C. Escher drawing.
-
+ 
  @param inset1 The top-left corner of the portion of the image to repeat.
  @param inset2 The bottom-right corner of the portion of the image to repeat.
  @param radius The radius of the repetition.
@@ -887,7 +887,7 @@
 /**Generates a checkerboard pattern.
  
  You can specify the checkerboard size and colors, and the sharpness of the pattern.
-
+ 
  @param size The size of the resulting image, this should be greater than CGPointZero.
  @param center The center of the checkerboard pattern.
  @param color1 The first color of the pattern.
@@ -908,7 +908,7 @@
 +(C4Image *)constantColor:(CGSize)size color:(UIColor *)color;
 //
 ///**Simulates a lens flare.
-// 
+//
 // @param size The size of the resulting image, this should be greater than CGPointZero.
 // @param center The center of the halo pattern.
 // @param color Controls the proportion of red, green, and blue halos.
@@ -942,9 +942,9 @@
  - CGAffineTransformMakeRotation
  - CGAffineTransformMakeScale
  - CGAffineTransformMakeTranslation
-
+ 
  Have a look at the CGAffineTransform Reference in the Organizer for more information.
-
+ 
  @param transform A CGAffineTransform.
  */
 -(void)affineTransform:(CGAffineTransform)transform;
@@ -952,7 +952,7 @@
 /**Applies a crop to an image.
  
  The size and shape of the cropped image depend on the rectangle you specify.
-
+ 
  @param area A CGRect defined in the receiver's coordinates to which its image will be cropped.
  */
 -(void)crop:(CGRect)area;
@@ -1065,7 +1065,7 @@
 /**Increases image detail by sharpening.
  
  It operates on the luminance of the image; the chrominance of the pixels remains unaffected.
-
+ 
  @param sharpness The level of sharpness for the filter's effect.
  */
 -(void)sharpenLuminance:(CGFloat)sharpness;
@@ -1100,10 +1100,10 @@
 -(void)comicEffect;
 
 /**Dulls the highlights of an image.
-
+ 
  @param radius The radius of the area, per pixel, to which the bloom filter is applied.
  @param intensity The intensity of the filter's effect.
-*/
+ */
 -(void)gloom:(CGFloat)radius intensity:(CGFloat)intensity;
 
 /**Highlight and shadow adjustment filter
@@ -1133,7 +1133,7 @@
 
 /**Applies an affine transform to an image and then tiles the transformed image.
  
- @param transform The affine transform you wish to apply prior to tiling the transformed image. 
+ @param transform The affine transform you wish to apply prior to tiling the transformed image.
  */
 -(void)affineTile:(CGAffineTransform)transform;
 
@@ -1155,7 +1155,7 @@
 -(void)fourFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle acuteAngle:(CGFloat)acuteAngle width:(CGFloat)width;
 
 /**Produces a tiled image from a source image by rotating the source image at increments of 90 degrees.
-
+ 
  @param center The center point of the effect within the image.
  @param angle The angle of the effect.
  @param width The width, along with the center parameter, defines the portion of the image to tile.
@@ -1186,7 +1186,7 @@
 -(void)perspectiveTile:(CGPoint *)points;
 
 /**Produces a tiled image from a source image by applying a 6-way reflected symmetry.
-
+ 
  @param center The center point of the effect within the image.
  @param angle The angle of the effect.
  @param width The width, along with the center parameter, defines the portion of the image to tile.

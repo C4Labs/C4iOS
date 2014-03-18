@@ -34,7 +34,7 @@
 +(C4Switch *)switch;
 
 /**Creates and returns a C4Switch object.
-
+ 
  C4Switch overrides the frame and enforces a size appropriate for the control.
  @param frame A rectangle defining the frame of the C4Switch object. The size components of this rectangle are ignored.
  @return a new C4Switch.
@@ -46,7 +46,7 @@
 /**Returns an initialized switch object.
  
  C4Switch overrides initWithFrame: and enforces a size appropriate for the control.
-
+ 
  @param frame A rectangle defining the frame of the C4Switch object. The size components of this rectangle are ignored.
  @return An initialized UISwitch object or nil if the object could not be initialized.
  */
@@ -57,13 +57,13 @@
 /**A Boolean value that determines the off/on state of the switch.
  
  This property allows you to retrieve and set (without animation) a value determining whether the C4Switch object is on or off.
-*/
+ */
 @property (readwrite, nonatomic, getter=isOn) BOOL on;
 
 /**Set the state of the switch to On or Off, optionally animating the transition.
  
  Setting the switch to either position does not result in an action message being sent.
-
+ 
  @param on YES if the switch should be turned to the On position; NO if it should be turned to the Off position. If the switch is already in the designated position, nothing happens.
  @param animated YES to animate the “flipping” of the switch; otherwise NO.
  */

@@ -19,9 +19,9 @@
 
 #import "C4Control.h"
 
-/** The C4Camera class provides easy access to a devices cameras. 
+/** The C4Camera class provides easy access to a devices cameras.
  
- Creating and adding a C4Camera object to the canvas will let you play around with the images your device is pulling from its camera. 
+ Creating and adding a C4Camera object to the canvas will let you play around with the images your device is pulling from its camera.
  
  The captureImage method is tied to another method called imageWasCaptured which is located on the canvas. When captureImage is called, the device takes some time to capture and format the image. When it is done it posts a notification. Then, when the canvas hears this notification it runs its imageWasCaptured method.
  
@@ -34,7 +34,7 @@
 #pragma mark - Creating Cameras
 ///@name Creating Cameras
 /** Creates and returns a camera object in the specified frame.
-  
+ 
  @param frame The frame into which the camera image will be scaled, or cropped depending on the dimensions of the frame.
  
  @return A C4Camera object of the specified size;
@@ -80,7 +80,7 @@
  - C4CameraQuality1920x1080
  - C4CameraQualityiFrame960x540
  - C4CameraQualityiFrame1280x720
-
+ 
  See C4Defines for more information.
  */
 @property (readwrite, nonatomic) NSString *captureQuality;

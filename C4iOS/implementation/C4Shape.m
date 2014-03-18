@@ -72,7 +72,7 @@
     CGRect lineFrame = CGRectMakeFromPointArray(pointArray, 2);
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:lineFrame];
     [newShape _line:@[[NSValue valueWithCGPoint:pointArray[0]],
-                     [NSValue valueWithCGPoint:pointArray[1]]]];
+                      [NSValue valueWithCGPoint:pointArray[1]]]];
     return newShape;
 }
 
@@ -80,8 +80,8 @@
     CGRect polygonFrame = CGRectMakeFromPointArray(pointArray, 3);
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:polygonFrame];
     [newShape _triangle:@[[NSValue valueWithCGPoint:pointArray[0]],
-                         [NSValue valueWithCGPoint:pointArray[1]],
-                         [NSValue valueWithCGPoint:pointArray[2]]]];
+                          [NSValue valueWithCGPoint:pointArray[1]],
+                          [NSValue valueWithCGPoint:pointArray[2]]]];
     return newShape;
 }
 
@@ -97,7 +97,7 @@
 }
 
 +(C4Shape *)arcWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise {
-    //I'm not sure what's going on here, but i have to invert clockwise to get the 
+    //I'm not sure what's going on here, but i have to invert clockwise to get the
     CGRect arcRect = CGRectMakeFromArcComponents(centerPoint,radius,startAngle,endAngle,!clockwise);
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:arcRect];
     
@@ -115,10 +115,10 @@
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:wedgeRect];
     
     NSDictionary *wedgeDict = @{@"centerPoint":[NSValue valueWithCGPoint:centerPoint],
-                              @"radius":@(radius),
-                              @"startAngle":@(startAngle),
-                              @"endAngle":@(endAngle),
-                              @"clockwise":@(clockwise)};
+                                @"radius":@(radius),
+                                @"startAngle":@(startAngle),
+                                @"endAngle":@(endAngle),
+                                @"clockwise":@(clockwise)};
     [newShape _wedge:wedgeDict];
     return newShape;
 }
@@ -200,9 +200,9 @@
     CGPoint centerPoint = [[arcDict valueForKey:@"centerPoint"] CGPointValue];
     //strage, i have to invert the Bool value for clockwise
     CGPathAddArc(newPath, nil, centerPoint.x, centerPoint.y, [arcDict[@"radius"] floatValue], [arcDict[@"startAngle"] floatValue], [arcDict[@"endAngle"] floatValue], ![arcDict[@"clockwise"] boolValue]);
-
+    
     CGPathAddLineToPoint(newPath, nil, centerPoint.x, centerPoint.y);
-
+    
     CGRect arcRect = CGPathGetBoundingBox(newPath);
     
     const CGAffineTransform translation = CGAffineTransformMakeTranslation(arcRect.origin.x *-1, arcRect.origin.y *-1);
@@ -275,8 +275,8 @@
     CGPathAddCurveToPoint(newPath, &translation, controlPoint1.x, controlPoint1.y, controlPoint2.x, controlPoint2.y, endPoint.x, endPoint.y);
     
     [self.shapeLayer animatePath:newPath];
-//    CGRect pathRect = CGPathGetBoundingBox(newPath);
-//    self.bounds = pathRect;
+    //    CGRect pathRect = CGPathGetBoundingBox(newPath);
+    //    self.bounds = pathRect;
     CGPathRelease(newPath);
     _initialized = YES;
 }
@@ -336,7 +336,7 @@
     CGMutablePathRef glyphPaths = CGPathCreateMutable();
     CGPathMoveToPoint(glyphPaths, nil, 0, 0);
     CTFontRef ctFont = CTFontCreateWithName((__bridge CFStringRef)font.fontName, font.pointSize, nil);
-
+    
     CGPoint currentOrigin = CGPointZero;
     for(int i = 0; i < string.length; i++) {
         CGGlyph currentGlyph;
@@ -350,17 +350,17 @@
         currentOrigin.x += advance.width;
         CFRelease(fontPath);
     }
-
+    
     CGRect pathRect = CGPathGetBoundingBox(glyphPaths);
     const CGAffineTransform translate = CGAffineTransformMakeTranslation(-pathRect.origin.x,-pathRect.origin.y);
     
     CGMutablePathRef transFormedGlyphPaths = CGPathCreateMutableCopyByTransformingPath(glyphPaths, &translate);
-
+    
     [self.shapeLayer animatePath:transFormedGlyphPaths];
     pathRect.origin = CGPointZero;
     self.frame = pathRect; //Need this step to sync the appearance of the paths to the frame of the shape
     _initialized = YES;
-
+    
     CFRelease(ctFont);
     CGPathRelease(glyphPaths);
     CGPathRelease(transFormedGlyphPaths);
@@ -377,10 +377,10 @@
     _closed = YES;
     
     CGPoint points[2];
-
+    
     points[0] = [pointArray[0] CGPointValue];
     points[1] = [pointArray[1] CGPointValue];
-  
+    
     _pointA = points[0];
     _pointB = points[1];
     
@@ -399,7 +399,7 @@
     CGMutablePathRef newPath = CGPathCreateMutable();
     CGPathMoveToPoint(newPath, nil, points[0].x,points[0].y);
     CGPathAddLineToPoint(newPath, nil, points[1].x, points[1].y);
-
+    
     [self.shapeLayer animatePath:newPath];
     CGRect newBounds = self.bounds;
     newBounds.origin = CGPointZero;
@@ -410,15 +410,15 @@
 
 -(void)triangle:(CGPoint *)pointArray {
     NSArray *trianglePointArray = @[[NSValue valueWithCGPoint:pointArray[0]],
-                                  [NSValue valueWithCGPoint:pointArray[1]],
-                                  [NSValue valueWithCGPoint:pointArray[2]]];
+                                    [NSValue valueWithCGPoint:pointArray[1]],
+                                    [NSValue valueWithCGPoint:pointArray[2]]];
     [self _triangle:trianglePointArray];
 }
 
 -(void)_triangle:(NSArray *)pointArray {
     [self willChangeShape];
     _isTriangle = YES;
-    //create a c-array of points 
+    //create a c-array of points
     NSInteger pointCount = [pointArray count];
     CGPoint points[pointCount];
     
@@ -457,7 +457,7 @@
  
  [triangle setFrame:triangleFrame]; */
 
-/* 
+/*
  for polygons, you're not given a rect right away
  so, i create a path, get the bounding box, then shift all the points to CGPointZero
  and recreate the path so that it sits at CGPointZero in its superview
@@ -477,11 +477,11 @@
     //create a c-array of points
     NSInteger pointCount = [pointArray count];
     CGPoint points[pointCount];
-     
+    
     for (int i = 0; i < pointCount; i++) {
         points[i] = [pointArray[i] CGPointValue];
     }
-
+    
     CGMutablePathRef newPath = CGPathCreateMutable();
     CGPathMoveToPoint(newPath, nil, points[0].x, points[0].y);
     for(int i = 1; i < pointCount; i++) {
@@ -503,8 +503,8 @@
 
 -(void)closeShape {
     _shouldClose = YES;
-        if(self.animationDelay == 0.0f) [self _closeShape];
-        else [self performSelector:@selector(_closeShape) withObject:nil afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f) [self _closeShape];
+    else [self performSelector:@selector(_closeShape) withObject:nil afterDelay:self.animationDelay];
 }
 -(void)_closeShape {
     if(_initialized == YES && _shouldClose == YES && _closed == NO) {
@@ -594,12 +594,12 @@
         
         CGFloat dx = center.x - self.center.x;
         CGFloat dy = center.y - self.center.y;
-
+        
         _pointA.x += dx;
         _pointA.y += dy;
         _pointB.x += dx;
         _pointB.y += dy;
-
+        
         if(self.isBezierCurve || self.isQuadCurve) {
             _controlPointA.x += dx;
             _controlPointA.y += dy;
@@ -786,10 +786,10 @@
 //-(void)setAnimationOptions:(NSUInteger)animationOptions {
 //    /*
 //     This method needs to be in all C4Control subclasses, not sure why it doesn't inherit properly
-//     
+//
 //     important: we have to intercept the setting of AUTOREVERSE for the case of reversing 1 time
 //     i.e. reversing without having set REPEAT
-//     
+//
 //     UIView animation will flicker if we don't do this...
 //     */
 //    ((id <C4LayerAnimation>)self.layer).animationOptions = _animationOptions;
@@ -798,28 +798,28 @@
 //        self.shouldAutoreverse = YES;
 //        animationOptions &= ~AUTOREVERSE;
 //    }
-//    
+//
 //    _animationOptions = animationOptions | BEGINCURRENT;
 //}
 
 -(NSDictionary *)style {
     NSMutableDictionary *localStyle = [NSMutableDictionary dictionaryWithDictionary:
                                        @{
-                                       @"shape":self
-                                       }];
-
+                                         @"shape":self
+                                         }];
+    
     
     NSMutableDictionary *localAndSuperStyle = [NSMutableDictionary dictionaryWithDictionary:localStyle];
     localStyle = nil;
     
     [localAndSuperStyle addEntriesFromDictionary:[super style]];
-
+    
     return (NSDictionary *)localAndSuperStyle;
 }
 
 -(void)setStyle:(NSDictionary *)style {
     [super setStyle:style];
-
+    
     @autoreleasepool {
         C4Shape *shape = [style objectForKey:@"shape"];
         if(shape != nil) {
@@ -842,7 +842,7 @@
     C4Shape *newShape = [[C4Shape allocWithZone:zone] initWithFrame:self.frame];
     newShape.path = self.path;
     newShape.style = self.style;
-
+    
     return newShape;
 }
 

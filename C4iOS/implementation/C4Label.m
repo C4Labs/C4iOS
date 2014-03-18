@@ -60,7 +60,7 @@
 -(id)initWithText:(NSString *)text font:(C4Font *)font frame:(CGRect)frame {
     self = [self initWithFrame:frame];
     if(self != nil) {
-        self.text = text; 
+        self.text = text;
         self.font = font;
     }
     return self;
@@ -85,7 +85,7 @@
         _label.highlightedTextColor = self.highlightedTextColor;
         _label.backgroundColor = [UIColor clearColor];
         _label.shadowColor = [UIColor clearColor];
-
+        
         [self addSubview:(UILabel *)_label];
         [self setup];
     }
@@ -180,7 +180,7 @@
 -(void)setTextColor:(UIColor *)textColor {
     if(self.animationDelay == 0.0f) [self _setTextColor:textColor];
     else [self performSelector:@selector(_setTextColor:) withObject:textColor afterDelay:self.animationDelay];
-
+    
 }
 -(void)_setTextColor:(UIColor *)textColor {
     self.label.textColor = textColor;
@@ -355,14 +355,14 @@
 -(NSDictionary *)style {
     NSMutableDictionary *localStyle = [NSMutableDictionary dictionaryWithDictionary:
                                        @{
-                                       @"adjustsFontSizeToFitWidth":@(self.adjustsFontSizeToFitWidth),
-                                       @"baselineAdjustment":@(self.baselineAdjustment),
-                                       @"highlighted":@(self.highlighted),
-                                       @"lineBreakMode":@(self.lineBreakMode),
-                                       @"numberOfLines":@(self.numberOfLines),
-                                       @"textAlignment":@(self.textAlignment),
-                                       @"textShadowOffset":[NSValue valueWithCGSize:self.textShadowOffset]
-                                       }];
+                                         @"adjustsFontSizeToFitWidth":@(self.adjustsFontSizeToFitWidth),
+                                         @"baselineAdjustment":@(self.baselineAdjustment),
+                                         @"highlighted":@(self.highlighted),
+                                         @"lineBreakMode":@(self.lineBreakMode),
+                                         @"numberOfLines":@(self.numberOfLines),
+                                         @"textAlignment":@(self.textAlignment),
+                                         @"textShadowOffset":[NSValue valueWithCGSize:self.textShadowOffset]
+                                         }];
     if (self.font != nil) [localStyle setObject:self.font forKey:@"font"];
     if (self.highlightedTextColor != nil) [localStyle setObject:self.highlightedTextColor forKey:@"highlightedTextColor"];
     if (self.textColor != nil) [localStyle setObject:self.textColor forKey:@"textColor"];
@@ -408,10 +408,10 @@
     
     key = @"textColor";
     if([styleKeys containsObject:key]) self.textColor = [style objectForKey:key];
-
+    
     key = @"textShadowColor";
     if([styleKeys containsObject:key]) self.textShadowColor = [style objectForKey:key];
-
+    
     key = @"textShadowOffset";
     if([styleKeys containsObject:key]) self.textShadowOffset = [[style objectForKey:key] CGSizeValue];
 }

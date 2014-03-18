@@ -46,10 +46,10 @@
         self.previewLayer = [C4CameraLayer layerWithSession:self.cameraController.captureSession];
         self.cameraController.previewLayer = self.previewLayer;
         self.previewLayer.frame = self.layer.bounds;
-
+        
         [self.layer addSublayer:self.previewLayer];
         self.cameraPosition = CAMERAFRONT;
-
+        
         [self listenFor:@"imageWasCaptured" fromObject:self.cameraController andRunMethod:@"imageWasCaptured"];
         [self setup];
     }

@@ -32,7 +32,7 @@
 
 /** Animates the layer's shadowColor from it's current color to a new one.
  
- Creates a CABasicAnimation contained within a CATransaction. This method also handles setting a completion block if the animation needs it. 
+ Creates a CABasicAnimation contained within a CATransaction. This method also handles setting a completion block if the animation needs it.
  
  @param shadowColor The color to which will be animated
  */
@@ -40,7 +40,7 @@
 
 /** Animates the layer's shadowOpacity from it's current opacity to a new one.
  
- Creates a CABasicAnimation contained within a CATransaction. This method also handles setting a completion block if the animation needs it. 
+ Creates a CABasicAnimation contained within a CATransaction. This method also handles setting a completion block if the animation needs it.
  
  @param shadowOpacity The opacity to which will be animated
  */
@@ -48,7 +48,7 @@
 
 /** Animates the layer's shadowRadius from it's current radius to a new one.
  
- Creates a CABasicAnimation contained within a CATransaction. This method also handles setting a completion block if the animation needs it. 
+ Creates a CABasicAnimation contained within a CATransaction. This method also handles setting a completion block if the animation needs it.
  
  @param shadowRadius The radius to which will be animated
  */
@@ -56,7 +56,7 @@
 
 /** Animates the layer's shadowOffset from it's current offset size to a new one.
  
- Creates a CABasicAnimation contained within a CATransaction. This method also handles setting a completion block if the animation needs it. 
+ Creates a CABasicAnimation contained within a CATransaction. This method also handles setting a completion block if the animation needs it.
  
  @param shadowOffset The offset size to which will be animated
  */
@@ -64,7 +64,7 @@
 
 /** Animates the layer's shadowPath from it's current path to a new one.
  
- Creates a CABasicAnimation contained within a CATransaction. This method also handles setting a completion block if the animation needs it. 
+ Creates a CABasicAnimation contained within a CATransaction. This method also handles setting a completion block if the animation needs it.
  
  @param shadowPath The path to which will be animated
  */
@@ -72,7 +72,7 @@
 
 /** Animates the layer's backgroundFilters from it's current set of background filters to a new one.
  
- Creates a CABasicAnimation contained within a CATransaction. This method also handles setting a completion block if the animation needs it. 
+ Creates a CABasicAnimation contained within a CATransaction. This method also handles setting a completion block if the animation needs it.
  
  @param backgroundFilters The set of filters to which will be animated
  */
@@ -80,7 +80,7 @@
 
 /** Animates the layer's contents.
  
- Creates a CABasicAnimation contained within a CATransaction. This method also handles setting a completion block if the animation needs it. 
+ Creates a CABasicAnimation contained within a CATransaction. This method also handles setting a completion block if the animation needs it.
  
  @param image The new image to set as the layer's contents
  */
@@ -88,7 +88,7 @@
 
 /** Animates the layer's compositingFilters from it's current set of compositing filters to a new one.
  
- Creates a CABasicAnimation contained within a CATransaction. This method also handles setting a completion block if the animation needs it. 
+ Creates a CABasicAnimation contained within a CATransaction. This method also handles setting a completion block if the animation needs it.
  
  @param compositingFilter The set of compositing filters to which will be animated
  */
@@ -219,7 +219,7 @@
 @property (readonly, atomic, strong) NSString *currentAnimationEasing;
 
 /** The interaction state.
-
+ 
  @return BOOL YES if the layer allows interaction, NO otherwise.
  */
 @property (readonly, nonatomic) BOOL allowsInteraction;

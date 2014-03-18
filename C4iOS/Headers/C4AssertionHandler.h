@@ -26,9 +26,9 @@
 
 @interface C4AssertionHandler : NSAssertionHandler
 /** Logs (using C4Log) an error message that includes the name of the function, the name of the file, and the line number.
-
+ 
  Raises NSInternalInconsistencyException.
-
+ 
  -(void)handleFailureInFunction:(NSString *)functionName file:(NSString *)fileName lineNumber:(NSInteger)line description:(NSString *)format, ...
  
  @param functionName The function that failed.

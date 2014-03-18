@@ -82,7 +82,7 @@ const GLubyte colors[] = {
 }
 
 -(void)render {
-
+    
     GLfloat currentVerts[48];
     for(int i = 0; i < 48; i++){
 //        currentVerts[i] = vertices[i];
@@ -95,9 +95,9 @@ const GLubyte colors[] = {
         currentColors[i] = colors[j];
         if(j == 96) j = 0;
     }
-
+    
     [EAGLContext setCurrentContext:self.eaglContext];
-
+    
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     //reigns in the drawing area because the layer will clip to its viewport

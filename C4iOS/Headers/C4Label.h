@@ -21,7 +21,7 @@
 
 /** The C4Label class implements a read-only text view. You can use this class to draw one or multiple lines of static text, such as those you might use to identify other parts of your user interface. The base C4Label class provides control over the appearance of your text, including whether it uses a shadow or draws with a highlight. If needed, you can customize the appearance of your text further by subclassing.
  
- C4Label is a subclass of C4Control, and so inherits all the functionality of animation and interaction provided by C4Control. It encapsulates a UILabel and provides all the necessary methods to access and manipulate its label. 
+ C4Label is a subclass of C4Control, and so inherits all the functionality of animation and interaction provided by C4Control. It encapsulates a UILabel and provides all the necessary methods to access and manipulate its label.
  
  Unlike [C4Shape](C4Shape), which has an underlying backing layer, C4Label adds its encapsulated UILabel as a subview.
  */
@@ -95,7 +95,7 @@
 #pragma mark Properties
 
 /**The text displayed by the label.
-  */
+ */
 @property (readwrite, strong, nonatomic) NSString *text;
 
 /**The font for the label.
@@ -109,11 +109,11 @@
  Normally, the label text is drawn with the font you specify in the font property. If this property is set to YES, however, and the text in the text property exceeds the label’s bounding rectangle, the receiver starts reducing the font size until the string fits or the minimum font size is reached. This property is effective only when the numberOfLines property is set to 1.
  
  The default value for this property is NO. If you change it to YES, you should also set an appropriate minimum font size by modifying the minimumFontSize property.
-*/
+ */
 @property (readwrite, nonatomic) BOOL adjustsFontSizeToFitWidth;
 
 /**Controls how text baselines are adjusted when text needs to shrink to fit in the label.
-
+ 
  If the adjustsFontSizeToFitWidth property is set to YES, this property controls the behavior of the text baselines in situations where adjustment of the font size is required. The default value of this property is ALIGNBASELINES. This property is effective only when the numberOfLines property is set to 1.
  */
 @property (readwrite, nonatomic) C4BaselineAdjustment baselineAdjustment;
@@ -194,19 +194,19 @@
 @property (readonly, nonatomic, weak) C4Layer *backingLayer;
 
 ///**Specifies the height of the image. Animatable.
-// 
+//
 // Setting this property will actually change the frame of the object.
 // */
 //@property (readwrite, nonatomic) CGFloat height;
 //
 ///**Specifies the width of the image. Animatable.
-// 
+//
 // Setting this property will actually change the frame of the object.
 // */
 //@property (readwrite, nonatomic) CGFloat width;
 //
 ///**Specifies the size of the image. Animatable.
-// 
+//
 // Setting this property will actually change the frame of the object.
 // */
 //@property (readwrite, nonatomic) CGSize size;

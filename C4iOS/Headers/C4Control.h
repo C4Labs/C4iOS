@@ -35,7 +35,7 @@
  - animationDelay
  - animationDuration
  - animationOptions
-
+ 
  C4Control conforms to the C4Notification protocol which means that all controls will have the ability to post and receive notifications. Furthermore, C4Control defines basic methods that deal with basic animations for the following properties:
  
  - center
@@ -47,8 +47,8 @@
  - contentStretch
  
  @warning For more information on the above properties, consult the [UIView](UIView) class documentation.
-
-*/
+ 
+ */
 
 @interface C4Control : UIControl <C4Notification, C4Gesture, C4MethodDelay, NSCopying, C4AddSubview> {
     
@@ -60,7 +60,7 @@
 /** A method to call instead of overriding any of the standard initializers.
  
  It is easier and safer to override this method than to override something like -(id)init, or -(id)initWithFrame, etc...
-  */
+ */
 -(void)setup;
 
 /** A method to call when you want to test simple things.
@@ -68,7 +68,7 @@
  Override this method to test small bits of fuctionality. For example, you could call this method to make sure another call is working by doing the following in the .m file of your subclass:
  
  -(void)test {
-    C4Log(@"test was run");
+ C4Log(@"test was run");
  }
  */
 -(void)test;
@@ -92,7 +92,7 @@
 /** A convenience method used for handling the rotation of a visual object's view after its z-rotation has changed.
  
  You shouldn't use this method, it will be deprecated in future versions.
-
+ 
  @param rotation the value (in radians) to rotate the receiver
  */
 -(void)rotationDidFinish:(CGFloat)rotation;
@@ -132,7 +132,7 @@
 #pragma mark Animation Properties
 ///@name Animation Properties
 /** The duration of the view's animations, measured in seconds.
-  
+ 
  All animations that occur will use this value as their duration.
  
  For immediate animations set this property to 0.0f;
@@ -164,7 +164,7 @@
  - EASEINOUT
  - EASEIN
  - EASEOUT
- - LINEAR 
+ - LINEAR
  
  This value can have a variety of options attached to it by using integer bitmasks. For example, to set an animation which will auto reverse and repeat:
  view.animationOptions = AUTOREVERSE | REPEAT;
@@ -184,7 +184,7 @@
 #pragma mark Shadow Properties
 ///@name Shadow Properties
 
-/**Specifies the blur radius used to render the receiver’s shadow. 
+/**Specifies the blur radius used to render the receiver’s shadow.
  
  This applies to the shadow of the contents of the layer, and not specifically the text.
  */
@@ -209,7 +209,7 @@
 
 /**Defines the shape of the shadow. Animatable.
  
- Unlike most animatable properties, shadowPath does not support implicit animation. 
+ Unlike most animatable properties, shadowPath does not support implicit animation.
  
  If the value in this property is non-nil, the shadow is created using the specified path instead of the layer’s composited alpha channel. The path defines the outline of the shadow. It is filled using the non-zero winding rule and the current shadow color, opacity, and blur radius.
  
@@ -222,7 +222,7 @@
 #pragma mark Other Properties
 ///@name Other Properties
 /**Determines if the sublayers are clipped to the receiver’s bounds. Animatable.
-
+ 
  If YES, an implicit mask matching the layer bounds is applied to the layer, including the effects of the cornerRadius property. If YES and a mask property is specified, the two masks are multiplied to get the actual mask values. Defaults to NO.
  */
 @property (readwrite, nonatomic) BOOL masksToBounds;
@@ -234,7 +234,7 @@
 @property (readwrite, nonatomic) CATransform3D layerTransform;
 
 /**An optional layer whose alpha channel is used as a mask to select between the layer's background and the result of compositing the layer's contents with its filtered background.
-
+ 
  Defaults to nil.
  */
 @property (readwrite, nonatomic, assign) C4Control *mask;
@@ -325,7 +325,7 @@
  */
 @property (readwrite, nonatomic, weak) UIColor *borderColor;
 
-/**The style for the receiver. 
+/**The style for the receiver.
  
  This property returns an NSDictionary of objects used to define the visual style for the receiver. The objects contained in this dictionary are those that pertain directly to C4Control:
  
@@ -343,7 +343,7 @@
  -backgroundColor
  -shadowColor
  -shadowPath
-
+ 
  All visual objects should return their own unique style combined with a call to this basic property set of style objects.
  */
 @property (readwrite, nonatomic) NSDictionary *style;

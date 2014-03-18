@@ -224,10 +224,10 @@
     NSLog(@"%4.2f",self.contentsScale);
     
     if(_animationDuration == 0.0f) {
-         self.contents = (__bridge id)(_image);
+        self.contents = (__bridge id)(_image);
         return;
     }
-
+    
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"contents"];
     animation.fromValue = self.contents;

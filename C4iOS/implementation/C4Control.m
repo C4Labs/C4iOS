@@ -36,10 +36,10 @@
 -(id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if(self != nil) {
-
+        
         self.longPressMethodName = @"pressedLong";
         self.shouldAutoreverse = NO;
-
+        
         self.style = [C4Control defaultStyle].style;
     }
     return self;
@@ -347,10 +347,10 @@
     self.animationOptions = DEFAULT;
     
     CGPoint translatedPoint = [p translationInView:self];
-
+    
     translatedPoint.x += self.center.x;
     translatedPoint.y += self.center.y;
-
+    
     self.center = translatedPoint;
     [p setTranslation:CGPointZero inView:self];
     [self postNotification:@"moved"];
@@ -816,15 +816,15 @@
     //(let's deal with it later rather than solve a "potential" problem)
     NSMutableDictionary *controlStyle = [NSMutableDictionary dictionaryWithDictionary:
                                          @{
-                                         @"alpha":@(self.alpha),
-                                         @"borderColor":self.borderColor,
-                                         @"borderWidth":@(self.borderWidth),
-                                         @"cornerRadius":@(self.cornerRadius),
-                                         @"masksToBounds":@(self.masksToBounds),
-                                         @"shadowOpacity":@(self.shadowOpacity),
-                                         @"shadowOffset":[NSValue valueWithCGSize:self.shadowOffset],
-                                         @"shadowRadius":@(self.shadowRadius)
-                                         }];
+                                           @"alpha":@(self.alpha),
+                                           @"borderColor":self.borderColor,
+                                           @"borderWidth":@(self.borderWidth),
+                                           @"cornerRadius":@(self.cornerRadius),
+                                           @"masksToBounds":@(self.masksToBounds),
+                                           @"shadowOpacity":@(self.shadowOpacity),
+                                           @"shadowOffset":[NSValue valueWithCGSize:self.shadowOffset],
+                                           @"shadowRadius":@(self.shadowRadius)
+                                           }];
     if (self.backgroundColor != nil) [controlStyle setObject:self.backgroundColor forKey:@"backgroundColor"];
     if (self.shadowColor != nil) [controlStyle setObject:self.shadowColor forKey:@"shadowColor"];
     [controlStyle setObject:self.shadowPath == nil ? [NSNull null] : (__bridge UIBezierPath *)self.shadowPath forKey:@"shadowPath"];
@@ -891,7 +891,7 @@
     //
     //    key = @"thumbTintColor";
     //    if([styleKeys containsObject:key]) self.thumbTintColor = [style objectForKey:key];
-
+    
 }
 
 +(C4Control *)defaultStyle {

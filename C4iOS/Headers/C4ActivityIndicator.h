@@ -38,7 +38,7 @@ typedef NS_ENUM(NSInteger, C4ActivityIndicatorStyle) {
 /**Creates, initializes and returns an activity-indicator object.
  
  C4ActivityIndicator sizes the returned instance according to the specified style. You can set and retrieve the style of a activity indicator through the activityIndicatorStyle property.
-
+ 
  @param style A constant that specifies the style of the object to be created. The options are: WHITELARGE, WHITE, GRAY.
  
  @return An initialized C4ActivityIndicator object or nil if the object couldn’t be created.

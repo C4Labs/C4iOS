@@ -19,7 +19,7 @@
 
 #import "C4GL.h"
 
-@interface C4GL () 
+@interface C4GL ()
 -(void)render;
 @property (readonly, nonatomic, getter = isDisplayLinkSupported) BOOL displayLinkSupported;
 @property (readonly, strong, nonatomic) C4EAGLLayer *eaglLayer;
@@ -49,10 +49,10 @@
 
 -(id)initWithRenderer:(id <C4EAGLESRenderer>)renderer {
     self = [super init];
-    if (self != nil) {        
+    if (self != nil) {
         _eaglLayer = (C4EAGLLayer *)self.layer;
         _eaglLayer.drawableProperties = @{kEAGLDrawablePropertyRetainedBacking: @NO, kEAGLDrawablePropertyColorFormat: kEAGLColorFormatRGBA8};
-
+        
 		if (nil == _renderer) {
 			_renderer = renderer;
 			if (nil == renderer) {
@@ -98,7 +98,7 @@
 
 - (void) setAnimationFrameInterval:(NSInteger)frameInterval {
 	if (frameInterval >= 1) {
-	_animationFrameInterval = frameInterval;
+        _animationFrameInterval = frameInterval;
 		if (self.isAnimating) {
 			[self stopAnimation];
 			[self startAnimation];
@@ -109,19 +109,19 @@
 -(void)startAnimation {
 	if (!self.isAnimating) {
 		if (self.isDisplayLinkSupported) {
-			self.displayLink = [NSClassFromString(@"CADisplayLink") displayLinkWithTarget:self 
-                                                                            selector:@selector(render)];
+			self.displayLink = [NSClassFromString(@"CADisplayLink") displayLinkWithTarget:self
+                                                                                 selector:@selector(render)];
 			[self.displayLink setFrameInterval:_animationFrameInterval];
-			[self.displayLink addToRunLoop:[NSRunLoop currentRunLoop] 
-                              forMode:NSDefaultRunLoopMode];
+			[self.displayLink addToRunLoop:[NSRunLoop currentRunLoop]
+                                   forMode:NSDefaultRunLoopMode];
 		} else {
             NSTimeInterval sixtyFramesPerSecond = (NSTimeInterval)(1.0 / 60.0);
             NSTimeInterval actualFramesPerSecond = sixtyFramesPerSecond * _animationFrameInterval;
-			self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:actualFramesPerSecond 
-                                                              target:self 
-                                                            selector:@selector(render) 
-                                                            userInfo:nil 
-                                                             repeats:TRUE];
+			self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:actualFramesPerSecond
+                                                                   target:self
+                                                                 selector:@selector(render)
+                                                                 userInfo:nil
+                                                                  repeats:TRUE];
         }
 		_animating = YES;
 	}

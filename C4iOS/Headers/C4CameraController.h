@@ -29,13 +29,13 @@
 #pragma mark - Initializing Capture
 ///@name Initializing Capture
 /** Initializes a C4Camera object, making it ready to capture images.
-
+ 
  The default is CAMERAFRONT.
  */
 -(void)initCapture;
 
 /** Initializes camera capture for a given camera position.
-
+ 
  @param position The position of the camera to use upon initialization.
  */
 -(void)initCapture:(C4CameraPosition)position;
@@ -70,7 +70,7 @@
 
 #pragma mark - Camera Position & Quality
 ///@name Camera Position & Quality
-/**Specifies and returns the current position of the receiver. 
+/**Specifies and returns the current position of the receiver.
  
  Use this property to set or determine the current position of a given C4Camera object.
  */
@@ -80,7 +80,7 @@
  
  This method will switch the camera on a given device from the front to the back (e.g. iPhone) depending on the value of the `position` being passed into it.
  
- The camera will switch only if the `position` is different than the camera's actual current position. For example, it will not switch to the front if te camera 
+ The camera will switch only if the `position` is different than the camera's actual current position. For example, it will not switch to the front if te camera
  
  @param position A position (CAMERAFRONT or CAMERABACK) to which the camera should switch.
  */
@@ -109,7 +109,7 @@
  This property is used by `C4Camera` to access and coordinate with its underlying controller.
  
  You should never have to access this property, but it is available for if you really want to work with the capture session. Other methods and properties in `C4Camera` should provide sufficient control over the capture session.
-
+ 
  See AVCaptureSession for more details.
  */
 @property (readwrite, strong, atomic) AVCaptureSession *captureSession;

@@ -41,7 +41,7 @@
     return self;
 }
 
-#pragma mark Style 
+#pragma mark Style
 +(C4Button *)defaultStyle {
     return (C4Button *)[C4Button appearance];
 }
@@ -107,7 +107,7 @@
     controlStyle = nil;
     
     return (NSDictionary *)localAndControlStyle;
-
+    
 }
 
 -(void)setStyle:(NSDictionary *)newStyle {
@@ -126,7 +126,7 @@
             [self.UIButton setImage:[b imageForState:state[i]] forState:state[i]];
             [self.UIButton setBackgroundImage:[b backgroundImageForState:state[i]] forState:state[i]];
         }
-                
+        
         self.UIButton.contentEdgeInsets = b.contentEdgeInsets;
         self.UIButton.imageEdgeInsets = b.imageEdgeInsets;
         self.UIButton.titleEdgeInsets = b.titleEdgeInsets;
@@ -139,7 +139,7 @@
         self.UIButton.titleLabel.font = b.titleLabel.font;
         
         self.UIButton.tintColor = b.tintColor;
-
+        
         b = nil;
     }
 }
@@ -307,7 +307,7 @@
     [self.UIButton removeTarget:object action:NSSelectorFromString(methodName) forControlEvents:(UIControlEvents)event];
 }
 
-#pragma mark Tracking 
+#pragma mark Tracking
 -(BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
     [self postNotification:@"trackingBegan"];
     [self beginTracking];

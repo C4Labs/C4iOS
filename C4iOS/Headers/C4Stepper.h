@@ -27,7 +27,7 @@
 @interface C4Stepper : C4Control <C4UIElement>
 
 /**Creates and returns a new C4Stepper object.
-
+ 
  The primary subview of C4Stepper is a UIStepper.
  
  @return a new C4Stepper.
@@ -112,7 +112,7 @@
 /**Sets the background image for the control when it is in the specified state.
  
  For good results, image must be a stretchable image.
-
+ 
  @param image The background image to use for the specified state.
  @param state The control state in which you want to display the image (one of: DISABLED, NORMAL, HIGHLIGHTED, SELECTED).
  */
@@ -160,7 +160,7 @@
 /**Sets the image to use for the increment glyph of the control
  
  The image you specify is composited on top of the control’s background to create the final control. If you do not specify a custom image, a plus (+) glyph is used.
-
+ 
  @param image The image to use for the increment glyph.
  @param state The control state (one of: DISABLED, NORMAL, HIGHLIGHTED, SELECTED).
  */

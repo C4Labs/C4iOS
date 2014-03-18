@@ -69,7 +69,7 @@ typedef enum C4AnimationOptions : NSUInteger {
 //    UIViewAnimationOptionOverrideInheritedCurve    = 1 <<  6,
 //    UIViewAnimationOptionAllowAnimatedContent      = 1 <<  7,
 //    UIViewAnimationOptionShowHideTransitionViews   = 1 <<  8,
-//    
+//
 //    UIViewAnimationOptionCurveEaseInOut            = 0 << 16,
 //    UIViewAnimationOptionCurveEaseIn               = 1 << 16,
 //    UIViewAnimationOptionCurveEaseOut              = 2 << 16,
@@ -78,7 +78,7 @@ typedef enum C4AnimationOptions : NSUInteger {
     EASEIN               = UIViewAnimationOptionCurveEaseIn,
     EASEOUT              = UIViewAnimationOptionCurveEaseOut,
     LINEAR               = UIViewAnimationOptionCurveLinear,
-//    
+//
 //    UIViewAnimationOptionTransitionNone            = 0 << 20,
 //    UIViewAnimationOptionTransitionFlipFromLeft    = 1 << 20,
 //    UIViewAnimationOptionTransitionFlipFromRight   = 2 << 20,
@@ -131,8 +131,8 @@ typedef enum C4TextAlignment : NSUInteger {
 } C4TextAlignment;
 
 typedef enum C4BaselineAdjustment : NSUInteger {
-    ALIGNBASELINES = UIBaselineAdjustmentAlignBaselines, 
-    ALIGNBASELINECENTERS = UIBaselineAdjustmentAlignCenters, 
+    ALIGNBASELINES = UIBaselineAdjustmentAlignBaselines,
+    ALIGNBASELINECENTERS = UIBaselineAdjustmentAlignCenters,
     ALIGNBASELINENONE = UIBaselineAdjustmentNone
 } C4BaselineAdjustment;
 

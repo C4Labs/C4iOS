@@ -24,20 +24,20 @@
  
  The most common way to customize the slider’s appearance is to provide custom minimum and maximum value images. These images sit at either end of the slider control and indicate which value that end of the slider represents. For example, a slider used to control volume might display a small speaker with no sound waves emanating from it for the minimum value and display a large speaker with many sound waves emanating from it for the maximum value.
  
- The bar on which the thumb rides is referred to as the slider’s track. Slider controls draw the track using two distinct images, which are customizable. 
+ The bar on which the thumb rides is referred to as the slider’s track. Slider controls draw the track using two distinct images, which are customizable.
  
- The region between the thumb and the end of the track associated with the slider’s minimum value is drawn using the minimum track image. 
+ The region between the thumb and the end of the track associated with the slider’s minimum value is drawn using the minimum track image.
  
  The region between the thumb and the end of the track associated with the slider’s maximum value is drawn using the maximum track image.
  
- Different track images are used in order to provide context as to which end contains the minimum value. For example, the minimum track image typically contains a blue highlight while the maximum track image contains a white highlight. 
+ Different track images are used in order to provide context as to which end contains the minimum value. For example, the minimum track image typically contains a blue highlight while the maximum track image contains a white highlight.
  
  You can assign different tint colors for all of the standard parts provided by the slider, or you customize the appearance further by assigning different pairs of track images to each of the control states of the slider. Assigning different images to each state lets you customize the appearance of the slider when it is enabled, disabled, highlighted, and so on.
  
  In addition to customizing the track images, you can also customize the appearance of the thumb itself. Like the track images, you can assign different thumb images to each control state of the slider.
  
  Note: The slider control provides a set of default images for both the track and thumb. If you do not specify any custom images, those images are used automatically.
-
+ 
  */
 @interface C4Slider : C4Control <C4UIElement>
 
@@ -73,7 +73,7 @@
 /**Sets the receiver’s current value, allowing you to animate the change visually.
  
  If you try to set a value that is below the minimum or above the maximum value, the minimum or maximum value is set instead. The default value of this property is 0.0.
-
+ 
  @param value The new value to assign to the value property
  @param animated Specify YES to animate the change in value when the receiver is redrawn; otherwise, specify NO to draw the receiver with the new value only. Animations are performed asynchronously and do not block the calling thread.
  */
@@ -147,13 +147,13 @@
 -(C4Image *)minimumTrackImageForState:(C4ControlState)state;
 
 /**Assigns a minimum track image to the specified control states.
-
+ 
  The orientation of the track image must match the orientation of the slider control. To facilitate the stretching of the image to fill the space between the thumb and end point, track images are usually defined in three regions. A stretchable region sits between two end cap regions. The end caps define the portions of the image that remain as is and are not stretched. The stretchable region is a 1-point wide area between the end caps that can be replicated to make the image appear longer.
  
  To define the end cap sizes for a slider, assign an appropriate value to the image’s leftCapWidth property. For more information about how this value defines the regions of the slider, see the C4Image class.
  
  Setting a new track image for any state clears any custom tint color you may have provided for minimum track images.
-
+ 
  @param image The minimum track image to associate with the specified states.
  @param state The control state with which to associate the image (one of: DISABLED, NORMAL, HIGHLIGHTED, SELECTED).
  */
@@ -187,7 +187,7 @@
  To define the end cap sizes for a slider, assign an appropriate value to the image’s leftCapWidth property. For more information about how this value defines the regions of the slider, see the UIImage class.
  
  Setting a new track image for any state clears any custom tint color you may have provided for maximum track images.
-
+ 
  @param image The maximum track image to associate with the specified states.
  @param state The control state with which to associate the image (one of: DISABLED, NORMAL, HIGHLIGHTED, SELECTED).
  */
@@ -217,7 +217,7 @@
 /**Assigns a thumb image to the specified control states.
  
  Setting a new thumb image for any state clears any custom tint color you may have provided for thumb images.
-
+ 
  @param image The thumb image to associate with the specified states.
  @param state The control state with which to associate the image (one of: DISABLED, NORMAL, HIGHLIGHTED, SELECTED).
  */

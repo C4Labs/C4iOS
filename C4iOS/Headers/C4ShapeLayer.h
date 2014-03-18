@@ -21,7 +21,7 @@
  
  It is rare that you will need to directly use C4ShapeLayers when working with C4. By conforming to the C4LayerAnimation protocol, this class makes it possible to animate basic properties of the layer such as color.
  
- In essence, each C4Shape is a view (sublcass of UIView) and the C4ShapeLayer is its Core Animation backing layer. 
+ In essence, each C4Shape is a view (sublcass of UIView) and the C4ShapeLayer is its Core Animation backing layer.
  
  In C4 all visible objects have properties that are animatable, and this layer provides some overrides that allow for the flexibility of getting around Core Animation's implicit actions. So, instead of having overridden properties there are methods that setup basic animations based on the object's properties and commit them by calling the layer's animatable properties from within a custom CATransaction block.
  

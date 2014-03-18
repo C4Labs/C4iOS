@@ -299,23 +299,23 @@
 //}
 //
 //- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
-//    
+//
 //}
 //
 //- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-//    
+//
 //}
 //
 //- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
-//    
+//
 //}
 //
 //- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-//    
+//
 //}
 //
 //- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
-//    
+//
 //}
 //
 //- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
@@ -323,27 +323,27 @@
 //}
 //
 //- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
-//    
+//
 //}
 //
 //- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-//    
+//
 //}
 //
 //- (void)scrollViewWillBeginZooming:(UIScrollView *)scrollView withView:(UIView *)view {
-//    
+//
 //}
 //
 //- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(float)scale {
-//    
+//
 //}
 //
 //- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView {
-//    
+//
 //}
 //
 //- (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView {
-//    
+//
 //}
 
 #pragma mark C4AddSubview

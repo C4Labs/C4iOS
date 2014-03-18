@@ -25,7 +25,7 @@ static C4Foundation *sharedC4Foundation = nil;
 @interface C4Foundation (private)
 NSInteger numSort(id num1, id num2, void *context);
 NSInteger strSort(id str1, id str2, void *context);
-NSInteger floatSort(id obj1, id obj2, void *context);	
+NSInteger floatSort(id obj1, id obj2, void *context);
 @end
 
 @implementation C4Foundation
@@ -54,7 +54,7 @@ NSInteger floatSort(id obj1, id obj2, void *context);
 +(C4Foundation *)sharedManager {
     if (sharedC4Foundation == nil) {
         static dispatch_once_t once;
-        dispatch_once(&once, ^ { sharedC4Foundation = [[super allocWithZone:NULL] init]; 
+        dispatch_once(&once, ^ { sharedC4Foundation = [[super allocWithZone:NULL] init];
         });
         return sharedC4Foundation;
     }

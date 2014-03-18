@@ -68,16 +68,16 @@
     
     //Need to have this because the style property doesn't synthesize when setting default appearance
     NSDictionary *basicStyle = @{
-    @"alpha":@([C4Control defaultStyle].alpha),
-    @"animationDuration":@([C4Control defaultStyle].animationDuration),
-    @"animationDelay":@([C4Control defaultStyle].animationDelay),
-    @"animationOptions":@([C4Control defaultStyle].animationOptions),
-    @"backgroundColor":[C4Control defaultStyle].backgroundColor,
-    @"cornerRadius":@([C4Control defaultStyle].cornerRadius),
-    @"shadowColor":[C4Control defaultStyle].shadowColor,
-    @"shadowOpacity":@([C4Control defaultStyle].shadowOpacity),
-    @"shadowOffset":[NSValue valueWithCGSize:[C4Control defaultStyle].shadowOffset],
-    @"repeatCount":@([C4Control defaultStyle].repeatCount)
+      @"alpha":@([C4Control defaultStyle].alpha),
+      @"animationDuration":@([C4Control defaultStyle].animationDuration),
+      @"animationDelay":@([C4Control defaultStyle].animationDelay),
+      @"animationOptions":@([C4Control defaultStyle].animationOptions),
+      @"backgroundColor":[C4Control defaultStyle].backgroundColor,
+      @"cornerRadius":@([C4Control defaultStyle].cornerRadius),
+      @"shadowColor":[C4Control defaultStyle].shadowColor,
+      @"shadowOpacity":@([C4Control defaultStyle].shadowOpacity),
+      @"shadowOffset":[NSValue valueWithCGSize:[C4Control defaultStyle].shadowOffset],
+      @"repeatCount":@([C4Control defaultStyle].repeatCount)
     };
     
     [C4Control defaultStyle].style = basicStyle;

@@ -120,7 +120,7 @@
 -(void)add:(C4Vector *)aVec {
     [self update];
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_sync(queue, ^(void) { 
+    dispatch_sync(queue, ^(void) {
         vDSP_vadd(vec3, 1, aVec.vec, 1, vec3, 1, 3);
     });
 }
@@ -129,7 +129,7 @@
     [self update];
     float *s = &scalar;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_sync(queue, ^(void) { 
+    dispatch_sync(queue, ^(void) {
         vDSP_vsadd(vec3, 1, s, vec3, 1, 3);
     });
 }
@@ -137,7 +137,7 @@
 -(void)divide:(C4Vector *)aVec {
     [self update];
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_sync(queue, ^(void) { 
+    dispatch_sync(queue, ^(void) {
         vDSP_vdiv(aVec.vec, 1, vec3, 1, vec3, 1, 3);
     });
 }
@@ -146,7 +146,7 @@
     [self update];
     float *s = &scalar;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_sync(queue, ^(void) { 
+    dispatch_sync(queue, ^(void) {
         vDSP_vsdiv(vec3, 1, s, vec3, 1, 3);
     });
 }
@@ -154,7 +154,7 @@
 -(void)multiply:(C4Vector *)aVec {
     [self update];
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_sync(queue, ^(void) { 
+    dispatch_sync(queue, ^(void) {
         vDSP_vmul(vec3, 1, aVec.vec, 1, vec3, 1, 3);
     });
 }
@@ -162,7 +162,7 @@
 -(void)multiplyScalar:(float)scalar {
     [self update];
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_sync(queue, ^(void) { 
+    dispatch_sync(queue, ^(void) {
         vDSP_vsmul(vec3, 1, &scalar, vec3, 1, 3);
     });
 }
@@ -170,7 +170,7 @@
 -(void)subtract:(C4Vector *)aVec {
     [self update];
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_sync(queue, ^(void) { 
+    dispatch_sync(queue, ^(void) {
         vDSP_vsub(vec3, 1, aVec.vec, 1, vec3, 1, 3);
     });
 }
@@ -183,7 +183,7 @@
 -(CGFloat)distance:(C4Vector *)aVec {
     __block CGFloat value;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_sync(queue, ^(void) { 
+    dispatch_sync(queue, ^(void) {
         value = (CGFloat)sqrt(pow(vec3[0]-(aVec.vec)[0], 2)+pow(vec3[1]-(aVec.vec)[1], 2)+pow(vec3[2]-(aVec.vec)[2], 2));
     });
     return value;
@@ -192,7 +192,7 @@
 -(CGFloat)dot:(C4Vector *)aVec {
     __block CGFloat value;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_sync(queue, ^(void) { 
+    dispatch_sync(queue, ^(void) {
         value = (CGFloat)cblas_sdot(3, vec3, 1, aVec.vec, 1);
     });
     return value;
@@ -201,7 +201,7 @@
 -(CGFloat)magnitude {
     __block CGFloat value;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_sync(queue, ^(void) { 
+    dispatch_sync(queue, ^(void) {
         value = (CGFloat)sqrt(pow(vec3[0], 2)+pow(vec3[1], 2)+pow(vec3[2], 2));
     });
     return value;
@@ -210,7 +210,7 @@
 -(CGFloat)angleBetween:(C4Vector *)aVec {
     __block CGFloat value;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_sync(queue, ^(void) { 
+    dispatch_sync(queue, ^(void) {
         float dotProduct = [self dot:aVec];
         float cosTheta = dotProduct/([self magnitude]*[aVec magnitude]);
         value = acosf(cosTheta);
@@ -220,7 +220,7 @@
 
 -(void)cross:(C4Vector *)aVec {
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_sync(queue, ^(void) { 
+    dispatch_sync(queue, ^(void) {
         float newVec[3];
         newVec[0] = vec3[1]*(aVec.vec)[2] - vec3[2]*(aVec.vec)[1];
         newVec[1] = vec3[2]*(aVec.vec)[0] - vec3[0]*(aVec.vec)[2];
@@ -237,7 +237,7 @@
 
 -(void)limit:(CGFloat)max {
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_sync(queue, ^(void) { 
+    dispatch_sync(queue, ^(void) {
         cblas_sscal(3, max/cblas_snrm2(3, vec3, 1), vec3, 1);
     });
 }

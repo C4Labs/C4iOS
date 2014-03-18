@@ -27,7 +27,7 @@
 @interface C4AppDelegate : UIResponder <UIApplicationDelegate, UIScrollViewDelegate>
 
 /** The main application window.
-
+ 
  @return C4Window a subclass of UIWindow customized specifically for the C4 Framework
  */
 @property (strong, nonatomic) IBOutlet C4Window *window;

@@ -21,16 +21,16 @@
 
 /**This document describes the C4Movie class. You use an C4Movie object to implement the playback of video files, it encapulates an [AVPlayer](AVPlayer) object which handles the loading and control of assets.
  
- Underlying the AVPlayer is an C4PlayerLayer which has many of the common functionalities of image, shape, text and gl layers. The C4PlayerLayer is what will display the visual content of items played by an instance of AVPlayer and uses CoreAnimation to do so; 
+ Underlying the AVPlayer is an C4PlayerLayer which has many of the common functionalities of image, shape, text and gl layers. The C4PlayerLayer is what will display the visual content of items played by an instance of AVPlayer and uses CoreAnimation to do so;
  
  The C4Movie class is meant to simplify the addition of videos to your application. It is also a subclass of C4Control, and so has all the common animation, interaction and notification capabilities.
  
  A C4Movie's resizing behaviour is to map itself to the edges of its visible frame. This functionality implicitly uses  AVLayerVideoGravityResize as its layer's default gravity. You can change the frame of the movie from an arbitrary shape back to its original proportion by using its originalMovieSize, originalMovieRatio, or by independently setting either its width or height properties.
  */
 
-@interface C4Movie : C4Control 
+@interface C4Movie : C4Control
 /**Creates and returns a new C4Movie object with a given file name.
-
+ 
  This method will set the frame of the returned object to that of the file's original size.
  
  @param movieName The filename of a video located in the application's main bundle.
@@ -40,7 +40,7 @@
 /**Creates and returns a new C4Movie object with a given file name and frame.
  
  This method will stretch the movie to fill the given frame size.
-
+ 
  @param movieName The filename of a video located in the application's main bundle.
  @param movieFrame The frame for the new movie
  */
@@ -169,7 +169,7 @@
  This method will set the frame of the returned object to that of the file's original size.
  
  @param url The NSURL for a given movie file. The URL can access files directly from the device, or it can also access movies from the internet (i.e. http, etc.)
-
+ 
  @return The initialized C4Movie object created or nil if initialization is not successful.
  */
 +(C4Movie *)movieWithURL:(NSString *)url;

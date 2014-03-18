@@ -81,7 +81,7 @@
         if([_movieURL scheme]) {
             AVURLAsset *asset = [AVURLAsset URLAssetWithURL:_movieURL options:nil];
             C4Assert(asset != nil, @"The asset (%@) you tried to create couldn't be initialized", _movieURL);
-
+            
             NSArray *requestedKeys = @[@"duration", @"playable"];
             for (NSString *key in requestedKeys) {
                 NSError *error = nil;
@@ -97,7 +97,7 @@
                 [self assetFailedToPrepareForPlayback:error];
                 return nil;
             }
-
+            
             [asset loadValuesAsynchronouslyForKeys:requestedKeys completionHandler: ^(void) {
                 dispatch_async( dispatch_get_main_queue(), ^(void) {
                     [self prepareToPlayAsset:asset];
@@ -113,7 +113,7 @@
     NSArray *assetTracks = [asset tracksWithMediaType:AVMediaTypeVideo];
     
     if(CGRectEqualToRect(movieFrame, CGRectZero)) {
-    AVAssetTrack *videoTrack = assetTracks[0];
+        AVAssetTrack *videoTrack = assetTracks[0];
         _originalMovieSize = videoTrack.naturalSize;
         _originalMovieRatio = _originalMovieSize.width / _originalMovieSize.height;
         movieFrame.size = _originalMovieSize;
@@ -124,7 +124,7 @@
     self.player.actionAtItemEnd = AVPlayerActionAtItemEndPause; // currently C4Movie doesn't handle queues
     
     _rate = 1.0f;
-
+    
     [self setup];
 }
 
@@ -219,7 +219,7 @@
         [[self player] replaceCurrentItemWithPlayerItem:self.playerItem];
     }
     //explicitly set the volume here, it needs to be set after the audio mix has been created
-    self.volume = self.volume;    
+    self.volume = self.volume;
 }
 
 - (void)observeValueForKeyPath:(NSString*) path

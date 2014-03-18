@@ -53,7 +53,7 @@
 
 -(void)setupFromDefaults {
     C4Slider *defaultSlider = [C4Slider defaultStyle];
-
+    
     self.thumbTintColor = defaultSlider.thumbTintColor;
     self.minimumTrackTintColor = defaultSlider.minimumTrackTintColor;
     self.maximumTrackTintColor = defaultSlider.maximumTrackTintColor;
@@ -69,7 +69,7 @@
     //mutable local styles
     NSMutableDictionary *localStyle = [[NSMutableDictionary alloc] initWithCapacity:0];
     [localStyle addEntriesFromDictionary:@{@"slider":self.UISlider}];
-
+    
     NSDictionary *controlStyle = [super style];
     
     NSMutableDictionary *localAndControlStyle = [NSMutableDictionary dictionaryWithDictionary:localStyle];
@@ -84,7 +84,7 @@
 -(void)setStyle:(NSDictionary *)newStyle {
     self.maximumTrackTintColor = self.minimumTrackTintColor = self.thumbTintColor = nil;
     [super setStyle:newStyle];
-
+    
     UISlider *s = [newStyle objectForKey:@"slider"];
     if(s != nil) {
         

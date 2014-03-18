@@ -34,7 +34,7 @@
         
         NSURL *soundFileURL = [[NSBundle mainBundle] URLForResource:filenameComponents[0]
                                                       withExtension:filenameComponents[1]];
-                                    
+        
         _player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
         self.enableRate = YES;
         self.player.delegate = self;
@@ -125,7 +125,7 @@
 }
 
 -(void)playAtTime:(CGFloat)time {
-   [self.player playAtTime:(NSTimeInterval)time];
+    [self.player playAtTime:(NSTimeInterval)time];
 }
 
 -(void)endedNormally {

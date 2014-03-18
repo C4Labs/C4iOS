@@ -18,11 +18,11 @@
 // IN THE SOFTWARE.
 
 #import "C4Control.h"
-/**This document describes the C4Button class. An instance of the C4Button class implements a button on the touch screen. A button intercepts touch events and sends an action message to a target object when tapped. 
+/**This document describes the C4Button class. An instance of the C4Button class implements a button on the touch screen. A button intercepts touch events and sends an action message to a target object when tapped.
  
  The C4Button class implements a UIButton embedded in a C4Control view with bindings directly to the native object. That is, many of the methods in this class are simpy wrappers for triggering the same methods on the contained UIButton.
  
-This class provides methods for setting the title, image, and other appearance properties of a button. By using these accessors, you can specify a different appearance for each button state.
+ This class provides methods for setting the title, image, and other appearance properties of a button. By using these accessors, you can specify a different appearance for each button state.
  */
 @interface C4Button : C4Control <C4UIElement>
 
@@ -118,7 +118,7 @@ This class provides methods for setting the title, image, and other appearance p
 -(UIColor *)titleColorForState:(C4ControlState)state;
 
 /**Returns the title associated with the specified state.
-
+ 
  @param state The state that uses the title. The possible values are described in C4ControlState.
  
  @return The title for the specified state. If no title has been set for the specific state, this method returns the title associated with the NORMAL state.
@@ -275,8 +275,8 @@ This class provides methods for setting the title, image, and other appearance p
  */
 @property (readonly, nonatomic, weak) C4Image *currentBackgroundImage;
 
-#pragma mark - Accessing the UIButton 
-///@name Accessing the UIButton 
+#pragma mark - Accessing the UIButton
+///@name Accessing the UIButton
 
 /**The encapsulated UIButton object.
  

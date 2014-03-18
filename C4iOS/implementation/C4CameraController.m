@@ -153,7 +153,7 @@
         typedef void (^AVBufferBlock)(CMSampleBufferRef, NSError *);
         AVBufferBlock bufferBlock = ^(CMSampleBufferRef buf, NSError *err) {
             NSData *d = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:buf];
-
+            
             if(self.cameraPosition == CAMERAFRONT) {
                 //Orient the image so its the same as the preview layer
                 UIImage *img = [UIImage imageWithData:d];

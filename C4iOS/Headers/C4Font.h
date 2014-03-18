@@ -20,7 +20,7 @@
 #import <UIKit/UIKit.h>
 
 /** This document describes the C4Font class which provides basic font construction and manipulation throughout the C4 framework.
-
+ 
  The C4Font provides access to an underlying UIFont object, which class provides the interface for getting and setting font information. The class provides you with access to the font’s characteristics and also provides the system with access to the font’s glyph information, which is used during layout. You use font objects by passing them to methods that accept them as a parameter.
  
  You do not create C4Font objects using the alloc and init methods. Instead, you use class methods of C4Font to look up and retrieve the desired font object.
@@ -40,13 +40,13 @@
  
  @param fontName The fully specified name of the font. This name incorporates both the font family name and the specific style information for the font.
  @param fontSize The size (in points) to which the font is scaled. This value must be greater than 0.0.
-
+ 
  @return A C4Font object of the specified name and size;
-*/
+ */
 + (C4Font *)fontWithName:(NSString *)fontName size:(CGFloat)fontSize;
 
 /** Returns a font object that is the same as the receiver but which has the specified size instead.
-
+ 
  @param fontSize The size (in points) to which the font is scaled. This value must be greater than 0.0.
  @return A C4Font object of the specified size;
  */
@@ -61,7 +61,7 @@
 -(id)initWithName:(NSString *)fontName size:(CGFloat)fontSize;
 
 /** Returns an array of font family names available on the system.
-
+ 
  Font family names correspond to the base name of a font, such as Times New Roman. You can pass the returned strings to the fontNamesForFamilyName: method to retrieve a list of font names available for that family. You can then use the corresponding font name to retrieve an actual font object.
  
  @return An array of NSString objects, each of which contains the name of a font family.
@@ -72,28 +72,28 @@
  
  You can pass the returned strings as parameters to the fontWithName:size: method to retrieve an actual font object.
  
- @param familyName The name of the font family. Use the familyNames method to get an array of the available font family names on the system. 
+ @param familyName The name of the font family. Use the familyNames method to get an array of the available font family names on the system.
  @return An array of NSString objects, each of which contains a font name associated with the specified family.
  */
 + (NSArray *)fontNamesForFamilyName:(NSString *)familyName;
 
 /** Returns the font object used for standard interface items in the specified size.
  
- @param fontSize The size (in points) to which the font is scaled. This value must be greater than 0.0. 
+ @param fontSize The size (in points) to which the font is scaled. This value must be greater than 0.0.
  @return A C4Font object of the specified size.
  */
 + (C4Font *)systemFontOfSize:(CGFloat)fontSize;
 
 /** Returns the font object used for standard interface items that are rendered in boldface type in the specified size.
  
- @param fontSize The size (in points) to which the font is scaled. This value must be greater than 0.0. 
+ @param fontSize The size (in points) to which the font is scaled. This value must be greater than 0.0.
  @return A C4Font object of the specified size.
  */
 + (C4Font *)boldSystemFontOfSize:(CGFloat)fontSize;
 
 /** Returns the font object used for standard interface items that are rendered in italic type in the specified size.
  
- @param fontSize The size (in points) to which the font is scaled. This value must be greater than 0.0. 
+ @param fontSize The size (in points) to which the font is scaled. This value must be greater than 0.0.
  @return A C4Font object of the specified size.
  */
 + (C4Font *)italicSystemFontOfSize:(CGFloat)fontSize;
@@ -104,7 +104,7 @@
  
  When a C4Font is initialized it creates and stores a UIFont. The C4Font class is essentially a wrapper for UIFont, with some additions that make it easier to access and create CGFontRef and CTFontRef objects depending on the need and the context.
  
- The C4Font class is designed to mimick the UIFont class and can be used in almost identical fashion. 
+ The C4Font class is designed to mimick the UIFont class and can be used in almost identical fashion.
  
  @return The receiver's UIFont object.
  */

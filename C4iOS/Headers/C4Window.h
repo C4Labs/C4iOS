@@ -20,11 +20,11 @@
 #import <UIKit/UIKit.h>
 
 /**The C4Window class is a subclass of UIWindow. The two principal functions of a window are to provide an area for displaying its views and to distribute events to the views. The window is the root view in the view hierarchy. Typically, there is only one window in an iOS application.
-
+ 
  The UIWindow class defines an object known as a window that manages and coordinates the views an app displays on a device screen. Unless an app can display content on an external device screen, an app has only one window.
  
  The two principal functions of a window are to provide an area for displaying its views and to distribute events to the views. To change the content your app displays, you can change the window’s root view; you don’t create a new window. A window belongs to a level—typically, UIWindowLevelNormal—that represents where it sits on the z-axis relative to other windows. For example, a system alert window appears above normal app windows.
-*/
+ */
 @interface C4Window : UIWindow <C4Notification, C4Gesture, C4MethodDelay, NSCopying, C4AddSubview>
 
 #pragma mark - Convenience Methods

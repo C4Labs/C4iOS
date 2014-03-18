@@ -34,7 +34,7 @@
 -(void)setup;
 
 /**The method to override for adding custom drawing calls.
-  */
+ */
 -(void)render;
 
 #pragma mark - Copying

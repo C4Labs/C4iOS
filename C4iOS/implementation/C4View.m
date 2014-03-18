@@ -18,7 +18,7 @@
 // IN THE SOFTWARE.
 
 #import "C4View.h"
-@interface C4View() 
+@interface C4View()
 @property (readwrite, atomic) BOOL shouldAutoreverse;
 @property (readwrite, atomic, strong) NSString *longPressMethodName;
 @property (readwrite, atomic, strong) NSMutableDictionary *gestureDictionary;

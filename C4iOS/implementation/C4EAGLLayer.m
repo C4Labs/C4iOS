@@ -28,7 +28,7 @@
 @synthesize perspectiveDistance = _perspectiveDistance;
 
 -(id)init {
-    self = [super init]; 
+    self = [super init];
     if(self != nil) {
         self.name = @"eaglLayer";
         self.repeatCount = 0;

@@ -24,7 +24,7 @@
 /**This document describes C4Sample a simple class for loading and playing individual audio files.
  
  C4Sample encapsulates an instance of the AVAudioPlayer class, called an audio player, provides playback of audio data from a file or memory.
-  
+ 
  Using an audio player you can:
  
  Play sounds of any duration
@@ -33,9 +33,9 @@
  Play multiple sounds simultaneously, one sound per audio player, with precise synchronization
  Control relative playback level, stereo positioning, and playback rate for each sound you are playing
  Seek to a particular point in a sound file, which supports such application features as fast forward and rewind
-
+ 
  The C4Sample class lets you play sound in any audio format available in iOS. You implement a delegate to handle interruptions (such as an incoming phone call) and to update the user interface when a sound has finished playing. The delegate methods to use are described in AVAudioPlayerDelegate Protocol Reference.
-*/
+ */
 
 @interface C4Sample : C4Object <AVAudioPlayerDelegate>
 #pragma mark - Creating An Audio Sample
@@ -47,7 +47,7 @@
  */
 +(C4Sample *)sampleNamed:(NSString *)sampleName;
 
-/**Initializes a C4Sample with a given file name. 
+/**Initializes a C4Sample with a given file name.
  
  @param sampleName The filename of a sample to be loaded.
  */
@@ -190,7 +190,7 @@
 /**Returns the peak power for a given channel, in decibels, for the sound being played.
  
  To obtain a current peak power value, you must call the updateMeters method before calling this method.
-
+ 
  @param channelNumber The audio channel whose peak power value you want to obtain. Channel numbers are zero-indexed. A monaural signal, or the left channel of a stereo signal, has channel number 0.
  @return A floating-point representation, in decibels, of a given audio channel’s current peak power. A return value of 0 dB indicates full scale, or maximum power; a return value of -160 dB indicates minimum power (that is, near silence). If the signal provided to the audio player exceeds ±full scale, then the return value may exceed 0 (that is, it may enter the positive range).
  */

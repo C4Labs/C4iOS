@@ -430,7 +430,7 @@
         self.compositingFilter = compositingFilter;
         return;
     }
-
+    
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"compositingFilter"];
     animation.fromValue = self.compositingFilter;
@@ -453,7 +453,7 @@
         self.cornerRadius = cornerRadius;
         return;
     }
-
+    
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"cornerRadius"];
     animation.fromValue = @(self.cornerRadius);

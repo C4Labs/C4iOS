@@ -35,7 +35,7 @@
 #pragma mark - Setup & Render
 ///@name Setup & Render
 /**The method used for adding additional variable setup, outside of the main initialization methods.
-  */
+ */
 -(void)setup;
 
 /**The method used for rendering OpenGL animations.
@@ -45,14 +45,14 @@
 #pragma mark - Width & Height
 ///@name Width & Height
 /**The width of the layer.
-
- This property is used in the resizeFromLayer: method 
+ 
+ This property is used in the resizeFromLayer: method
  */
 @property (readonly, nonatomic) GLint width;
 
 /**The height of the layer.
  
- This property is used in the resizeFromLayer: method 
+ This property is used in the resizeFromLayer: method
  */
 @property (readonly, nonatomic) GLint height;
 
@@ -67,7 +67,7 @@
 @property (readonly, nonatomic) GLuint frameBuffer;
 
 /**The render buffer.
-
+ 
  Renderbuffer Objects are OpenGL Objects that contain images. They are created and used specifically with Framebuffer Objects. They are optimized for being used as render targets, while Textures may not be.
  
  For more see: [Render Buffer Object](http://www.opengl.org/wiki/Renderbuffer_Object )

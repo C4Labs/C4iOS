@@ -34,7 +34,7 @@
         self.name = @"playerLayer";
         self.repeatCount = 0;
         self.autoreverses = NO;
-
+        
         _currentAnimationEasing = (NSString *)kCAMediaTimingFunctionEaseInEaseOut;
         _allowsInteraction = NO;
         _repeats = NO;

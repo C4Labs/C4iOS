@@ -23,7 +23,7 @@
  Because view objects are the main way your application interacts with the user, they have a number of responsibilities. Here are just a few:
  
  You should never have to construct a C4View yourself. Instead, choose the appropriate C4 object and work from there.
-
+ 
  C4Views conform to the C4Notification protocol which means that all views will have the ability to post and receive notifications. Furthermore, C4View defines basic methods that deal with basic animations for the following properties:
  
  @property center
@@ -41,8 +41,8 @@
  @property animationDelay
  @property animationDuration
  @property animationOptions
-
-*/
+ 
+ */
 @interface C4View : UIView <C4Notification, C4Gesture, C4MethodDelay, NSCopying, C4AddSubview> {
 }
 

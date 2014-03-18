@@ -23,7 +23,7 @@
  
  If an object conforms to this protocol, it has the ability to create and listen for messages which pass through the NSNotification center.
  
- The C4 Framework is built with the idea that all objects of any kind should be able to broadcast and respond to notifications, and to communicate with one another directly if necessary. All C4 objects conform to the methods defined below. 
+ The C4 Framework is built with the idea that all objects of any kind should be able to broadcast and respond to notifications, and to communicate with one another directly if necessary. All C4 objects conform to the methods defined below.
  
  @warning *Note:* It is assumed that the object which includes this protocol is a subclass of NSObject.
  */
@@ -40,8 +40,8 @@
  
  @param notification the name of a notification for which the object should listen
  @param methodName a string which represents the name of a method defined in the object's class or any of its superclasses, this parameter should be written as a string (e.g. @"test", @"changePosition:")
-
- @warning *Note:* To listen for messages coming from a specific object, use listenFor:fromObject:andRunMethod 
+ 
+ @warning *Note:* To listen for messages coming from a specific object, use listenFor:fromObject:andRunMethod
  */
 -(void)listenFor:(NSString *)notification andRunMethod:(NSString *)methodName;
 
@@ -55,7 +55,7 @@
  @param object a specific object to listen to
  @param methodName a string which represents the name of a method defined in the object's class or any of its superclasses, this parameter should be written as a string (e.g. @"test", @"changePosition:")
  
- @warning *Note:* To listen for messages coming from a specific object, use listenFor:fromObject:andRunMethod 
+ @warning *Note:* To listen for messages coming from a specific object, use listenFor:fromObject:andRunMethod
  */
 -(void)listenFor:(NSString *)notification fromObject:(id)object andRunMethod:(NSString *)methodName;
 
@@ -107,7 +107,7 @@
 /// @name Broadcast Methods
 
 /** Creates a notification with a given string and posts it to the default notification center.
-  
+ 
  This method calls the postNotification:object: method of the default notification center passing a itself as the object.
  
  @param notification the name of a notification to be broadcast

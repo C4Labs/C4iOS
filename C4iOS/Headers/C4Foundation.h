@@ -18,7 +18,7 @@
 // IN THE SOFTWARE.
 
 /** This document describes a set of basic functions that are available to use throughout the C4 framework.
- *  
+ *
  *  This methods listed in this document are used for sorting, comparing, and most importantly logging messages to the console.
  */
 
@@ -49,7 +49,7 @@ void C4Log(NSString *logString,...);
 
 /** Sorts two undefined objects.
  
- Takes two undefined objects (i.e. cast as id) and determines their class kinds. It then sorts the two based on the kinds of objects that they are. 
+ Takes two undefined objects (i.e. cast as id) and determines their class kinds. It then sorts the two based on the kinds of objects that they are.
  
  This method can deal with strings, floats and NSNumbers. This method defaults to sorting by float value.
  

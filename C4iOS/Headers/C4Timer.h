@@ -106,7 +106,7 @@
 -(void)start;
 
 /**Calling this method will stop a timer from firing continuously.
-
+ 
  This method effectively invalidates the timer.
  */
 -(void)stop;
@@ -123,7 +123,7 @@
 
 /**Returns a Boolean value that indicates whether the receiver is currently valid.
  
- @return YES if the receiver is still capable of firing or NO if the timer has been invalidated and is no longer capable of firing. 
+ @return YES if the receiver is still capable of firing or NO if the timer has been invalidated and is no longer capable of firing.
  */
 @property (readonly, nonatomic) BOOL isValid;
 

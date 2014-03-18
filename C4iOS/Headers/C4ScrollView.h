@@ -59,7 +59,7 @@
 ///@name Managing the Display of Content
 
 /**Sets the offset from the content view’s origin that corresponds to the receiver’s origin.
-
+ 
  @param contentOffset A point (expressed in points) that is offset from the content view’s origin.
  @param animated YES to animate the transition at a constant velocity to the new offset, NO to make the transition immediate.
  */
@@ -100,7 +100,7 @@
 @property (readwrite, nonatomic,getter=isDirectionalLockEnabled) BOOL directionalLockEnabled;
 
 /**A Boolean value that controls whether the scroll-to-top gesture is effective
-
+ 
  The scroll-to-top gesture is a tap on the status bar; when this property is YES, the scroll view jumps to the top of the content when this gesture occurs. The default value of this property is YES.
  
  This gesture works on a single visible scroll view; if there are multiple scroll views (for example, a date picker) with this property set, or if the delegate returns NO in scrollViewShouldScrollToTop:, UIScrollView ignores the request. After the scroll view scrolls to the top of the content view, it sends the delegate a scrollViewDidScrollToTop: message.
@@ -110,7 +110,7 @@
 /**Scrolls a specific area of the content so that it is visible in the receiver.
  
  This method scrolls the content view so that the area defined by rect is just visible inside the scroll view. If the area is already visible, the method does nothing.
-
+ 
  @param rect A rectangle defining an area of the content view.
  @param animated YES if the scrolling should be animated, NO if it should be immediate.
  */
@@ -123,7 +123,7 @@
 @property (readwrite, nonatomic,getter=isPagingEnabled) BOOL pagingEnabled;
 
 /**A Boolean value that controls whether the scroll view bounces past the edge of content and back again.
-
+ 
  If the value of this property is YES, the scroll view bounces when it encounters a boundary of the content. Bouncing visually indicates that scrolling has reached an edge of the content. If the value is NO, scrolling stops immediately at the content boundary without bouncing. The default value is YES.
  */
 @property (readwrite, nonatomic) BOOL bounces;
@@ -235,13 +235,13 @@
 /**A floating-point value that specifies the current scale factor applied to the scroll view's content.
  
  This value determines how much the content is currently scaled. The default value is 1.0.
-*/
+ */
 @property (readwrite, nonatomic) CGFloat zoomScale;
 
 /**A floating-point value that specifies the current zoom scale.
  
  The new scale value should be between the minimumZoomScale and the maximumZoomScale.
-
+ 
  @param scale The new value to scale the content to.
  @param animated YES to animate the transition to the new scale, NO to make the transition immediate.
  */
@@ -288,7 +288,7 @@
 /**Overridden by subclasses to customize the default behavior when a finger touches down in displayed content.
  
  The default behavior of UIScrollView is to invoke the UIResponder event-handling methods of the target subview that the touches occur in.
-
+ 
  @param touches A set of UITouch instances that represent the touches for the starting phase of the event represented by event.
  @param event An object representing the event to which the touch objects in touches belong.
  @param view The subview in the content where the touch-down gesture occurred.
@@ -299,7 +299,7 @@
 /**Returns whether to cancel touches related to the content subview and start dragging.
  
  The scroll view calls this method just after it starts sending tracking messages to the content view. If it receives NO from this method, it stops dragging and forwards the touch events to the content subview. The scroll view does not call this method if the value of the canCancelContentTouches property is NO.
-
+ 
  @param view The view object in the content that is being touched.
  @return value YES to cancel further touch messages to view, NO to have view continue to receive those messages. The default returned value is YES if view is not a UIControl object; otherwise, it returns NO.
  */
