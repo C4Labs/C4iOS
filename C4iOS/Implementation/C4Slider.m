@@ -52,12 +52,6 @@
 }
 
 -(void)setupFromDefaults {
-    C4Slider *defaultSlider = [C4Slider defaultStyle];
-    
-    self.thumbTintColor = defaultSlider.thumbTintColor;
-    self.minimumTrackTintColor = defaultSlider.minimumTrackTintColor;
-    self.maximumTrackTintColor = defaultSlider.maximumTrackTintColor;
-    //NOTE: UISlider only recognizes colors for its UIAppearance (check UISlider.h)
 }
 
 -(void)setFrame:(CGRect)frame {
@@ -252,7 +246,12 @@
 }
 
 +(C4Slider *)defaultStyle {
-    return (C4Slider *)[C4Slider appearance];
+    static C4Template* template;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        template = [C4Template templateForClass:self];
+    });
+    return (C4Movie *)template;
 }
 
 -(C4Slider *)copyWithZone:(NSZone *)zone {

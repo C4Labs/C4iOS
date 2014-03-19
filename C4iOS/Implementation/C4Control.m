@@ -40,7 +40,8 @@
         self.longPressMethodName = @"pressedLong";
         self.shouldAutoreverse = NO;
         
-        self.style = [C4Control defaultStyle].style;
+        C4Template* template = (C4Template*)[[self class] defaultStyle];
+        [template applyToTarget:self];
     }
     return self;
 }
@@ -895,7 +896,12 @@
 }
 
 +(C4Control *)defaultStyle {
-    return (C4Control *)[C4Control appearance];
+    static C4Template* template;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        template = [C4Template templateForClass:self];
+    });
+    return (C4Control *)template;
 }
 
 -(C4Control *)copyWithZone:(NSZone *)zone {

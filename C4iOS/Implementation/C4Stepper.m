@@ -163,7 +163,12 @@
 
 #pragma mark Style
 +(C4Stepper *)defaultStyle {
-    return (C4Stepper *)[C4Stepper appearance];
+    static C4Template* template;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        template = [C4Template templateForClass:self];
+    });
+    return (C4Stepper *)template;
 }
 
 -(C4Stepper *)copyWithZone:(NSZone *)zone {

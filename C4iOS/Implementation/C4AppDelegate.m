@@ -49,30 +49,30 @@
 
 +(void)initialize {
     //set these before everything else.
-    [C4Control defaultStyle].alpha = 1.0f;
-    [C4Control defaultStyle].animationDuration = 0.0f;
-    [C4Control defaultStyle].animationDelay = 0.0f;
-    [C4Control defaultStyle].animationOptions = BEGINCURRENT;
-    [C4Control defaultStyle].backgroundColor = [UIColor clearColor];
-    [C4Control defaultStyle].cornerRadius = 0.0f;
-    [C4Control defaultStyle].layer.delegate = self;
-    [C4Control defaultStyle].shadowColor = C4GREY;
-    [C4Control defaultStyle].shadowOpacity = 0.0f;
-    [C4Control defaultStyle].shadowOffset = CGSizeZero;
-    [C4Control defaultStyle].repeatCount = 0;
+    C4Control* controlStyle = [C4Control defaultStyle];
+    controlStyle.alpha = 1.0f;
+    controlStyle.animationDuration = 0.0f;
+    controlStyle.animationDelay = 0.0f;
+    controlStyle.animationOptions = BEGINCURRENT;
+    controlStyle.backgroundColor = [UIColor clearColor];
+    controlStyle.cornerRadius = 0.0f;
+    controlStyle.layer.delegate = self;
+    controlStyle.shadowColor = C4GREY;
+    controlStyle.shadowOpacity = 0.0f;
+    controlStyle.shadowOffset = CGSizeZero;
+    controlStyle.repeatCount = 0;
     
-    //Need to have this because the style property doesn't synthesize when setting default appearance
     NSDictionary *basicStyle = @{
-      @"alpha":@([C4Control defaultStyle].alpha),
-      @"animationDuration":@([C4Control defaultStyle].animationDuration),
-      @"animationDelay":@([C4Control defaultStyle].animationDelay),
-      @"animationOptions":@([C4Control defaultStyle].animationOptions),
-      @"backgroundColor":[C4Control defaultStyle].backgroundColor,
-      @"cornerRadius":@([C4Control defaultStyle].cornerRadius),
-      @"shadowColor":[C4Control defaultStyle].shadowColor,
-      @"shadowOpacity":@([C4Control defaultStyle].shadowOpacity),
-      @"shadowOffset":[NSValue valueWithCGSize:[C4Control defaultStyle].shadowOffset],
-      @"repeatCount":@([C4Control defaultStyle].repeatCount)
+      @"alpha":@1.f,
+      @"animationDuration":@0.f,
+      @"animationDelay":@0.f,
+      @"animationOptions":@(BEGINCURRENT),
+      @"backgroundColor":[UIColor clearColor],
+      @"cornerRadius":@0.f,
+      @"shadowColor":C4GREY,
+      @"shadowOpacity":@0.f,
+      @"shadowOffset":[NSValue valueWithCGSize:CGSizeZero],
+      @"repeatCount":@0
     };
     
     [C4Control defaultStyle].style = basicStyle;
@@ -86,18 +86,19 @@
     [C4Label defaultStyle].highlightedTextColor = C4RED;
     [C4Label defaultStyle].backgroundColor = [UIColor clearColor];
     
-    [C4Shape defaultStyle].style = basicStyle;
-    [C4Shape defaultStyle].fillColor = C4GREY;
-    [C4Shape defaultStyle].fillRule = FILLNORMAL;
-    [C4Shape defaultStyle].lineCap = CAPBUTT;
-    [C4Shape defaultStyle].lineDashPattern = nil;
-    [C4Shape defaultStyle].lineDashPhase = 0.0f;
-    [C4Shape defaultStyle].lineJoin = JOINMITER;
-    [C4Shape defaultStyle].lineWidth = 5.0f;
-    [C4Shape defaultStyle].miterLimit = 10.0f; //this doesn't like being set here...
-    [C4Shape defaultStyle].strokeColor = C4BLUE;
-    [C4Shape defaultStyle].strokeEnd = 1.0f;
-    [C4Shape defaultStyle].strokeStart = 0.0f;
+    C4Shape* shapeStyle = [C4Shape defaultStyle];
+    shapeStyle.style = basicStyle;
+    shapeStyle.fillColor = C4GREY;
+    shapeStyle.fillRule = FILLNORMAL;
+    shapeStyle.lineCap = CAPBUTT;
+    shapeStyle.lineDashPattern = nil;
+    shapeStyle.lineDashPhase = 0.0f;
+    shapeStyle.lineJoin = JOINMITER;
+    shapeStyle.lineWidth = 5.0f;
+    shapeStyle.miterLimit = 10.0f; //this doesn't like being set here...
+    shapeStyle.strokeColor = C4BLUE;
+    shapeStyle.strokeEnd = 1.0f;
+    shapeStyle.strokeStart = 0.0f;
     
     [C4Slider defaultStyle].style = basicStyle;
     [C4Slider defaultStyle].thumbTintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"darkBluePattern"]];

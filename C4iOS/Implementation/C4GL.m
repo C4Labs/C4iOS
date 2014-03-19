@@ -162,7 +162,12 @@
 }
 
 +(C4GL *)defaultStyle {
-    return (C4GL *)[C4GL appearance];
+    static C4Template* template;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        template = [C4Template templateForClass:self];
+    });
+    return (C4GL *)template;
 }
 
 -(C4GL *)copyWithZone:(NSZone *)zone {

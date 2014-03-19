@@ -46,6 +46,8 @@
 		6158726718D8D0D90074E4B6 /* C4ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6158724018D8D0D90074E4B6 /* C4ViewController.m */; };
 		6158726818D8D0D90074E4B6 /* C4Window.m in Sources */ = {isa = PBXBuildFile; fileRef = 6158724118D8D0D90074E4B6 /* C4Window.m */; };
 		6158726918D8D0D90074E4B6 /* UIColor+CIColorFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 6158724218D8D0D90074E4B6 /* UIColor+CIColorFix.m */; };
+		A9758EDC18DA400A00B28F08 /* C4Template.m in Sources */ = {isa = PBXBuildFile; fileRef = A9758EDB18DA400A00B28F08 /* C4Template.m */; };
+		A9758EDE18DA498100B28F08 /* C4TemplateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A9758EDD18DA498100B28F08 /* C4TemplateTests.m */; };
 		BED79E1C17F2435400F0F82E /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED79E1B17F2435400F0F82E /* Accelerate.framework */; };
 		BED79E1E17F2435400F0F82E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED79E1D17F2435400F0F82E /* AVFoundation.framework */; };
 		BED79E2017F2435400F0F82E /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED79E1F17F2435400F0F82E /* CoreFoundation.framework */; };
@@ -165,6 +167,9 @@
 		6158724018D8D0D90074E4B6 /* C4ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4ViewController.m; sourceTree = "<group>"; };
 		6158724118D8D0D90074E4B6 /* C4Window.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Window.m; sourceTree = "<group>"; };
 		6158724218D8D0D90074E4B6 /* UIColor+CIColorFix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CIColorFix.m"; sourceTree = "<group>"; };
+		A9758EDA18DA400A00B28F08 /* C4Template.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Template.h; sourceTree = "<group>"; };
+		A9758EDB18DA400A00B28F08 /* C4Template.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Template.m; sourceTree = "<group>"; };
+		A9758EDD18DA498100B28F08 /* C4TemplateTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4TemplateTests.m; sourceTree = "<group>"; };
 		BED79E1817F2435400F0F82E /* C4iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = C4iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BED79E1B17F2435400F0F82E /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		BED79E1D17F2435400F0F82E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -264,6 +269,7 @@
 				6158721118D8D0C80074E4B6 /* C4Slider.h */,
 				6158721218D8D0C80074E4B6 /* C4Stepper.h */,
 				6158721318D8D0C80074E4B6 /* C4Switch.h */,
+				A9758EDA18DA400A00B28F08 /* C4Template.h */,
 				6158721418D8D0C80074E4B6 /* C4Timer.h */,
 				6158721518D8D0C80074E4B6 /* C4UIElement.h */,
 				6158721618D8D0C80074E4B6 /* C4Vector.h */,
@@ -310,6 +316,7 @@
 				6158723918D8D0D90074E4B6 /* C4Slider.m */,
 				6158723A18D8D0D90074E4B6 /* C4Stepper.m */,
 				6158723B18D8D0D90074E4B6 /* C4Switch.m */,
+				A9758EDB18DA400A00B28F08 /* C4Template.m */,
 				6158723C18D8D0D90074E4B6 /* C4Timer.m */,
 				6158723D18D8D0D90074E4B6 /* C4UIElement.m */,
 				6158723E18D8D0D90074E4B6 /* C4Vector.m */,
@@ -390,6 +397,7 @@
 			isa = PBXGroup;
 			children = (
 				BED79ED317F2435500F0F82E /* C4iOSTests.m */,
+				A9758EDD18DA498100B28F08 /* C4TemplateTests.m */,
 				BED79ECE17F2435500F0F82E /* Supporting Files */,
 			);
 			path = C4iOSTests;
@@ -513,6 +521,7 @@
 				6158725918D8D0D90074E4B6 /* C4Movie.m in Sources */,
 				6158724E18D8D0D90074E4B6 /* C4EAGLESRenderer.m in Sources */,
 				6158726718D8D0D90074E4B6 /* C4ViewController.m in Sources */,
+				A9758EDC18DA400A00B28F08 /* C4Template.m in Sources */,
 				6158724C18D8D0D90074E4B6 /* C4Defines.m in Sources */,
 				6158724F18D8D0D90074E4B6 /* C4EAGLLayer.m in Sources */,
 				6158726318D8D0D90074E4B6 /* C4Timer.m in Sources */,
@@ -549,6 +558,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9758EDE18DA498100B28F08 /* C4TemplateTests.m in Sources */,
 				BED79ED417F2435500F0F82E /* C4iOSTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -55,6 +55,7 @@
 #import "C4Sample.h"
 #import "C4EAGLES1Renderer.h"
 #import "C4View.h"
+#import "C4Template.h"
 
 #import "C4ActivityIndicator.h"
 #import "C4Button.h"

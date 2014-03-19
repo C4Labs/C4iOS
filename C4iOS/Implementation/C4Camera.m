@@ -96,7 +96,12 @@
 }
 
 +(C4Camera *)defaultStyle {
-    return (C4Camera *)[C4Camera appearance];
+    static C4Template* template;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        template = [C4Template templateForClass:self];
+    });
+    return (C4Camera *)template;
 }
 
 -(void)setCameraPosition:(C4CameraPosition)position {

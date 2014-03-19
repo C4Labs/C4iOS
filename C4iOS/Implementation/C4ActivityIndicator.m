@@ -40,7 +40,6 @@
 
 -(void)setupFromDefaults {
     _UIActivityIndicatorView.hidesWhenStopped = YES;
-    _UIActivityIndicatorView.color = [C4ActivityIndicator defaultStyle].color;
 }
 
 -(void)startAnimating {
@@ -82,7 +81,12 @@
 
 #pragma mark Style
 +(C4ActivityIndicator *)defaultStyle {
-    return ((C4ActivityIndicator *)[C4ActivityIndicator appearance]);
+    static C4Template* template;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        template = [C4Template templateForClass:self];
+    });
+    return (C4ActivityIndicator *)template;
 }
 
 -(NSDictionary *)style {

@@ -394,7 +394,12 @@
 }
 
 +(C4ScrollView *)defaultStyle {
-    return (C4ScrollView *)[C4ScrollView appearance];
+    static C4Template* template;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        template = [C4Template templateForClass:self];
+    });
+    return (C4ScrollView *)template;
 }
 
 //FIXME: NEED TO ADD STYLE COPYING METHODS TO C4SCROLLVIEW.M

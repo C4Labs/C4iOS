@@ -787,7 +787,12 @@
 }
 
 +(C4View *)defaultStyle {
-    return (C4View *)[C4View appearance];
+    static C4Template* template;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        template = [C4Template templateForClass:self];
+    });
+    return (C4View *)template;
 }
 
 -(void)renderInContext:(CGContextRef)context {

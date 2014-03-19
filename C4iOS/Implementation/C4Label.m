@@ -417,7 +417,12 @@
 }
 
 +(C4Label *)defaultStyle {
-    return (C4Label *)[C4Label appearance];
+    static C4Template* template;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        template = [C4Template templateForClass:self];
+    });
+    return (C4Label *)template;
 }
 
 -(C4Label *)copyWithZone:(NSZone *)zone {

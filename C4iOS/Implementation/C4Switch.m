@@ -51,15 +51,15 @@
 }
 
 -(void)setupFromDefaults {
-    _UISwitch.onTintColor = [C4Switch defaultStyle].onTintColor;
-    _UISwitch.tintColor = [C4Switch defaultStyle].tintColor;
-    _UISwitch.thumbTintColor = [C4Switch defaultStyle].thumbTintColor;
-    _UISwitch.offImage = [C4Switch defaultStyle].offImage.UIImage;
-    _UISwitch.onImage = [C4Switch defaultStyle].onImage.UIImage;
 }
 
 +(C4Switch *)defaultStyle {
-    return (C4Switch *)[C4Switch appearance];
+    static C4Template* template;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        template = [C4Template templateForClass:self];
+    });
+    return (C4Switch *)template;
 }
 
 -(C4Switch *)copyWithZone:(NSZone *)zone {

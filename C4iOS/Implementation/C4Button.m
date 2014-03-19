@@ -43,12 +43,16 @@
 
 #pragma mark Style
 +(C4Button *)defaultStyle {
-    return (C4Button *)[C4Button appearance];
+    static C4Template* template;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        template = [C4Template templateForClass:self];
+    });
+    return (C4Button *)template;
 }
 
 -(void)setupFromDefaults {
     self.UIButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:15.0f];
-    self.tintColor = [C4Button defaultStyle].tintColor;
     
     if(self.buttonType == ROUNDEDRECT) {
         self.frame = CGRectMake(0,0,96,27);

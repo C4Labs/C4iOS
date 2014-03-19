@@ -384,7 +384,12 @@
 }
 
 +(C4Movie *)defaultStyle {
-    return (C4Movie *)[C4Movie appearance];
+    static C4Template* template;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        template = [C4Template templateForClass:self];
+    });
+    return (C4Movie *)template;
 }
 
 -(id)copyWithZone:(NSZone *)zone {

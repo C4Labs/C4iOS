@@ -38,9 +38,6 @@
     if(self != nil) {
         _initialized = NO;
         self.animationOptions = BEGINCURRENT | EASEINOUT;
-        //miterLimit doesn't like being set from defaultStyles, so we just make sure it's set here.
-        self.miterLimit = [C4Shape defaultStyle].miterLimit;
-        self.lineWidth = [C4Shape defaultStyle].lineWidth;
         [self setup];
     }
     return self;
@@ -780,7 +777,12 @@
 }
 
 +(C4Shape *)defaultStyle {
-    return (C4Shape *)[C4Shape appearance];
+    static C4Template* template;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        template = [C4Template templateForClass:self];
+    });
+    return (C4Movie *)template;
 }
 
 //-(void)setAnimationOptions:(NSUInteger)animationOptions {

@@ -1939,7 +1939,12 @@
 
 #pragma mark Default Style
 +(C4Image *)defaultStyle {
-    return (C4Image *)[C4Image appearance];
+    static C4Template* template;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        template = [C4Template templateForClass:self];
+    });
+    return (C4Image *)template;
 }
 
 #pragma mark Layer Access Overrides
