@@ -26,10 +26,6 @@
 
 @implementation C4View
 
--(id)init {
-    return [self initWithFrame:CGRectZero];
-}
-
 -(id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if(self != nil) {
@@ -45,15 +41,20 @@
     return self;
 }
 
-/* don't add this ever...
- creates a:
- CoreAnimation: failed to allocate 3145760 bytes
- wait_fences: failed to receive reply: 10004003
- 
- -(void)drawRect:(CGRect)rect {
- [self.layer display];
- }
- */
+-(id)initWithCoder:(NSCoder *)decoder {
+    self = [super initWithCoder:decoder];
+    if (self != nil) {
+        //these need to be self.anim... etc., rather than _anim = because the setters are overridden
+        self.animationDuration = 0.0f;
+        self.animationDelay = 0.0f;
+        self.animationOptions = BEGINCURRENT;
+        self.repeatCount = 0;
+        self.shouldAutoreverse = NO;
+        self.longPressMethodName = @"pressedLong";
+        self.layer.delegate = self;
+    }
+    return self;
+}
 
 -(void)dealloc {
     [[NSRunLoop mainRunLoop] cancelPerformSelectorsWithTarget:self];

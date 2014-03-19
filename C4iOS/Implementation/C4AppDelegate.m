@@ -34,12 +34,7 @@
     application.statusBarHidden = YES;
     self.window = [[C4Window alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.workspace = [[C4WorkSpace alloc] init];
-//    self.workspace = [[C4WorkSpace alloc] initWithNibName:@"C4Canvas" bundle:nil];
-    
     _window.rootViewController = self.workspace;
-    /* don't ever do the following !
-     self.canvasController.view = self.window;
-     */
     
     [self.window makeKeyAndVisible];
     

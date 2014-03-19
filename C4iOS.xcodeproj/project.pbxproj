@@ -59,8 +59,6 @@
 		BED79E3017F2435400F0F82E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED79E2F17F2435400F0F82E /* UIKit.framework */; };
 		BED79E3617F2435400F0F82E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BED79E3417F2435400F0F82E /* InfoPlist.strings */; };
 		BED79E3817F2435400F0F82E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BED79E3717F2435400F0F82E /* main.m */; };
-		BED79EB717F2435500F0F82E /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BED79EB517F2435500F0F82E /* Main_iPhone.storyboard */; };
-		BED79EBA17F2435500F0F82E /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BED79EB817F2435500F0F82E /* Main_iPad.storyboard */; };
 		BED79EBD17F2435500F0F82E /* C4WorkSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = BED79EBC17F2435500F0F82E /* C4WorkSpace.m */; };
 		BED79EBF17F2435500F0F82E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BED79EBE17F2435500F0F82E /* Images.xcassets */; };
 		BED79EC117F2435500F0F82E /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BED79EC017F2435500F0F82E /* Media.xcassets */; };
@@ -183,8 +181,6 @@
 		BED79E3517F2435400F0F82E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BED79E3717F2435400F0F82E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BED79E3917F2435400F0F82E /* C4iOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "C4iOS-Prefix.pch"; sourceTree = "<group>"; };
-		BED79EB617F2435500F0F82E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		BED79EB917F2435500F0F82E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		BED79EBB17F2435500F0F82E /* C4WorkSpace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = C4WorkSpace.h; sourceTree = "<group>"; };
 		BED79EBC17F2435500F0F82E /* C4WorkSpace.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = C4WorkSpace.m; sourceTree = "<group>"; };
 		BED79EBE17F2435500F0F82E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -374,8 +370,6 @@
 				6158721B18D8D0D90074E4B6 /* Implementation */,
 				BED79EBE17F2435500F0F82E /* Images.xcassets */,
 				BED79EC017F2435500F0F82E /* Media.xcassets */,
-				BED79EB517F2435500F0F82E /* Main_iPhone.storyboard */,
-				BED79EB817F2435500F0F82E /* Main_iPad.storyboard */,
 				BED79E3217F2435400F0F82E /* Supporting Files */,
 			);
 			path = C4iOS;
@@ -487,9 +481,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BED79EC117F2435500F0F82E /* Media.xcassets in Resources */,
-				BED79EBA17F2435500F0F82E /* Main_iPad.storyboard in Resources */,
 				BED79EBF17F2435500F0F82E /* Images.xcassets in Resources */,
-				BED79EB717F2435500F0F82E /* Main_iPhone.storyboard in Resources */,
 				BED79E3617F2435400F0F82E /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -580,22 +572,6 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		BED79EB517F2435500F0F82E /* Main_iPhone.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BED79EB617F2435500F0F82E /* Base */,
-			);
-			name = Main_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		BED79EB817F2435500F0F82E /* Main_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BED79EB917F2435500F0F82E /* Base */,
-			);
-			name = Main_iPad.storyboard;
-			sourceTree = "<group>";
-		};
 		BED79ED017F2435500F0F82E /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -684,10 +660,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "C4iOS/C4iOS-Prefix.pch";
 				INFOPLIST_FILE = "C4iOS/C4iOS-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -697,10 +676,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "C4iOS/C4iOS-Prefix.pch";
 				INFOPLIST_FILE = "C4iOS/C4iOS-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

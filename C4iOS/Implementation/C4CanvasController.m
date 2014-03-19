@@ -31,8 +31,6 @@
 -(id)init {
     self = [super init];
     if(self != nil) {
-        self.view = [[C4View alloc] initWithFrame:self.view.frame];
-        _canvas = (C4Window *)self.view;
         [self listenFor:@"movieIsReadyForPlayback" andRunMethod:@"movieIsReadyForPlayback:"];
     }
     return self;
@@ -50,6 +48,11 @@
     [self.gestureDictionary removeAllObjects];
     self.gestureDictionary = nil;
     _canvas = nil;
+}
+
+-(void)loadView {
+    self.view = [[C4View alloc] init];
+    _canvas = (C4Window *)self.view;
 }
 
 -(void)setup {
