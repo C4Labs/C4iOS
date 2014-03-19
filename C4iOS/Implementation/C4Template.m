@@ -47,8 +47,9 @@
 
 - (void)applyToTarget:(id)target {
     for (NSInvocation* invocation in self.invocations) {
-        [invocation setTarget:target];
+        invocation.target = target;
         [invocation invoke];
+        invocation.target = nil; // Don't keep a reference to target
     }
 }
 
