@@ -28,8 +28,8 @@
     [C4View class];
     
     C4AssertionHandler* customAssertionHandler = [[C4AssertionHandler alloc] init];
-	[[[NSThread currentThread] threadDictionary] setValue:customAssertionHandler forKey:NSAssertionHandlerKey];
-	// NB: your windowing code goes here - e.g. self.window.rootViewController = self.viewController;
+    [[[NSThread currentThread] threadDictionary] setValue:customAssertionHandler forKey:NSAssertionHandlerKey];
+    // NB: your windowing code goes here - e.g. self.window.rootViewController = self.viewController;
     
     application.statusBarHidden = YES;
     self.window = [[C4Window alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

@@ -41,7 +41,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    // Do any additional setup after loading the view.
 }
 
 //- (void)viewDidUnload
@@ -57,11 +57,11 @@
 
 #pragma mark Notification Methods
 -(void)listenFor:(NSString *)notification andRunMethod:(NSString *)methodName {
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(methodName) name:notification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(methodName) name:notification object:nil];
 }
 
 -(void)listenFor:(NSString *)notification fromObject:(id)object andRunMethod:(NSString *)methodName {
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(methodName) name:notification object:object];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(methodName) name:notification object:object];
 }
 
 -(void)listenFor:(NSString *)notification fromObjects:(NSArray *)objectArray andRunMethod:(NSString *)methodName {
@@ -75,7 +75,7 @@
 }
 
 -(void)stopListeningFor:(NSString *)methodName object:(id)object {
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:methodName object:object];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:methodName object:object];
 }
 
 -(void)stopListeningFor:(NSString *)methodName objects:(NSArray *)objectArray {
@@ -85,7 +85,7 @@
 }
 
 -(void)postNotification:(NSString *)notification {
-	[[NSNotificationCenter defaultCenter] postNotificationName:notification object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:notification object:self];
 }
 
 -(void)runMethod:(NSString *)methodName afterDelay:(CGFloat)seconds {

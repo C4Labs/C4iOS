@@ -24,12 +24,12 @@
 
 #if !defined(_C4AssertBody)
 #define C4Assert(condition, desc, ...) \
-do {			\
-if (!(condition)) {	\
+do {                    \
+if (!(condition)) {     \
 [[C4AssertionHandler currentHandler] handleFailureInMethod:_cmd \
 object:self file:[NSString stringWithUTF8String:__FILE__] \
 lineNumber:__LINE__ description:(desc), ##__VA_ARGS__]; \
-}			\
+}                       \
 } while(0)
 #endif
 

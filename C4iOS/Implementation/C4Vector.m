@@ -57,12 +57,12 @@
 
 +(C4Vector *)vectorWithX:(CGFloat)x Y:(CGFloat)y Z:(CGFloat)z {
     C4Vector *v = [[C4Vector alloc] initWithX:x Y:y Z:z];
-	return v;
+    return v;
 }
 
 -(id)initWithX:(CGFloat)_x Y:(CGFloat)_y Z:(CGFloat)_z {
     self = [super init];
-	if(self != nil) {
+    if(self != nil) {
         vec3[0] = _x;
         vec3[1] = _y;
         vec3[2] = _z;
@@ -73,8 +73,8 @@
         
         pDisplacedHeading = 0;
         [self setup];
-	}
-	return self;
+    }
+    return self;
 }
 
 -(void)update {
@@ -85,9 +85,9 @@
 
 -(void)setX:(CGFloat)_x Y:(CGFloat)_y Z:(CGFloat)_z {
     [self update];
-	vec3[0] = _x;
-	vec3[1] = _y;
-	vec3[2] = _z;
+    vec3[0] = _x;
+    vec3[1] = _y;
+    vec3[2] = _z;
 }
 
 -(void)setX:(CGFloat)newX {
@@ -106,15 +106,15 @@
 }
 
 -(CGFloat)x {
-	return vec3[0];
+    return vec3[0];
 }
 
 -(CGFloat)y {
-	return vec3[1];
+    return vec3[1];
 }
 
 -(CGFloat)z {
-	return vec3[2];
+    return vec3[2];
 }
 
 -(void)add:(C4Vector *)aVec {
@@ -177,7 +177,7 @@
 
 -(void)subtractScalar:(float)scalar {
     [self update];
-	[self addScalar:-1*scalar];
+    [self addScalar:-1*scalar];
 }
 
 -(CGFloat)distance:(C4Vector *)aVec {
@@ -232,7 +232,7 @@
 }
 
 -(void)normalize {
-	[self limit:1.0f];
+    [self limit:1.0f];
 }
 
 -(void)limit:(CGFloat)max {
@@ -243,7 +243,7 @@
 }
 
 -(CGPoint)CGPoint {
-	return CGPointMake(vec3[0], vec3[1]);
+    return CGPointMake(vec3[0], vec3[1]);
 }
 
 -(CGFloat)heading {
@@ -280,10 +280,10 @@
 }
 
 -(float*)vec {
-	return vec3;
+    return vec3;
 }
 
 -(NSString *)description {
-	return [NSString stringWithFormat:@"vec(%4.2f,%4.2f,%4.2f)",vec3[0],vec3[1],vec3[2]];
+    return [NSString stringWithFormat:@"vec(%4.2f,%4.2f,%4.2f)",vec3[0],vec3[1],vec3[2]];
 }
 @end

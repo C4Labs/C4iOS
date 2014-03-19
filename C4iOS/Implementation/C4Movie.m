@@ -129,15 +129,15 @@
 }
 
 - (CMTime)playerItemDuration {
-	AVPlayerItem *thePlayerItem = [_player currentItem];
-	if (thePlayerItem.status == AVPlayerItemStatusReadyToPlay) {
-		return(_playerItem.duration);
-	}
-	return(kCMTimeInvalid);
+    AVPlayerItem *thePlayerItem = [_player currentItem];
+    if (thePlayerItem.status == AVPlayerItemStatusReadyToPlay) {
+        return(_playerItem.duration);
+    }
+    return(kCMTimeInvalid);
 }
 
 - (BOOL)isPlaying {
-	return (self.player.rate != 0.0f);
+    return (self.player.rate != 0.0f);
 }
 
 -(CGFloat)rate {
@@ -156,11 +156,11 @@
 }
 
 + (Class)layerClass {
-	return [C4MovieLayer class];
+    return [C4MovieLayer class];
 }
 
 - (C4MovieLayer *)playerLayer {
-	return (C4MovieLayer *)self.layer;
+    return (C4MovieLayer *)self.layer;
 }
 
 -(void)assetFailedToPrepareForPlayback:(NSError *)error {
@@ -171,14 +171,14 @@
     rateContext = &rateContext;
     currentItemContext = &currentItemContext;
     playerItemStatusContext = &playerItemStatusContext;
-	
+    
     if (self.playerItem != nil) {
         [self.playerItem removeObserver:self forKeyPath:@"status"];
         [[NSNotificationCenter defaultCenter] removeObserver:self
                                                         name:AVPlayerItemDidPlayToEndTimeNotification
                                                       object:self.playerItem];
     }
-	
+    
     self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
     
     [self.playerItem addObserver:self
@@ -195,7 +195,7 @@
     
     if (self.player == nil) {
         [self setPlayer:[AVPlayer playerWithPlayerItem:self.playerItem]];
-		_player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
+        _player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
         [self.player addObserver:self
                       forKeyPath:@"currentItem"
                          options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
@@ -227,9 +227,9 @@
                         change:(NSDictionary*)change
                        context:(void*)context
 {
-	/* AVPlayerItem "status" property value observer. */
-	if (context == playerItemStatusContext)
-	{
+    /* AVPlayerItem "status" property value observer. */
+    if (context == playerItemStatusContext)
+    {
         
         AVPlayerStatus status = [change[NSKeyValueChangeNewKey] integerValue];
         switch (status)
@@ -264,12 +264,12 @@
                 C4Assert(NO,@"Strange... the player's status is none of: AVPlayerStatusUnknown, AVPlayerStatusReadyToPlay, AVPlayerStatusFailed");
                 break;
         }
-	}
-	/* AVPlayer "currentItem" property observer.
+    }
+    /* AVPlayer "currentItem" property observer.
      Called when the AVPlayer replaceCurrentItemWithPlayerItem:
      replacement will/did occur. */
-	else if (context == currentItemContext)
-	{
+    else if (context == currentItemContext)
+    {
         AVPlayerItem *newPlayerItem = change[NSKeyValueChangeNewKey];
         //C4Log(@"currentItemContext");
         
@@ -284,10 +284,10 @@
              fit the video within the layer’s bounds. */
             self.playerLayer.videoGravity = AVLayerVideoGravityResize;
         }
-	}
-	else {
-		[super observeValueForKeyPath:path ofObject:object change:change context:context];
-	}
+    }
+    else {
+        [super observeValueForKeyPath:path ofObject:object change:change context:context];
+    }
     
     return;
 }

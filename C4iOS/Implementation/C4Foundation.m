@@ -63,41 +63,41 @@ NSInteger floatSort(id obj1, id obj2, void *context);
 
 void C4Log(NSString *logString,...) {
     va_list args;
-	
+    
     va_start (args, logString);
     NSString *finalString = [[NSString alloc] initWithFormat:
                              [logString stringByAppendingString: @"\n"] arguments:args];
     va_end (args);
     
-	fprintf(stderr,"[C4Log] %s",[finalString UTF8String]);
+    fprintf(stderr,"[C4Log] %s",[finalString UTF8String]);
 }
 
 NSInteger basicSort(id obj1, id obj2, void *context) {
-	if([obj1 class] == [NSNumber class]){
-		return numSort(obj1, obj2, context);
-	}
-	
-	if([obj1 class] == [@"" class] || [obj1 class] == [NSString class]){
-		return strSort(obj1, obj2, context);
-	}
- 	return floatSort(obj1, obj2, context);
+    if([obj1 class] == [NSNumber class]){
+        return numSort(obj1, obj2, context);
+    }
+    
+    if([obj1 class] == [@"" class] || [obj1 class] == [NSString class]){
+        return strSort(obj1, obj2, context);
+    }
+    return floatSort(obj1, obj2, context);
 }
 
 NSInteger numSort(id num1, id num2, void *context) {
     context = context;
-	return [(NSNumber *)num1 compare:(NSNumber *)num2];
+    return [(NSNumber *)num1 compare:(NSNumber *)num2];
 }
 
 NSInteger strSort(id str1, id str2, void *context) {
     context = context;
-	return [str1 localizedStandardCompare:str2];
+    return [str1 localizedStandardCompare:str2];
 }
 
 NSInteger floatSort(id obj1, id obj2, void *context) {
     context = context;
-	float flt1 = [obj1 floatValue];
-	float flt2 = [obj2 floatValue];
-	if (flt1 < flt2)
+    float flt1 = [obj1 floatValue];
+    float flt2 = [obj2 floatValue];
+    if (flt1 < flt2)
         return NSOrderedAscending;
     else if (flt1 > flt2)
         return NSOrderedDescending;

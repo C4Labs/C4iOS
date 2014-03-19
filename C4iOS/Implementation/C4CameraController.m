@@ -31,18 +31,18 @@
 @implementation C4CameraController
 
 - (id)init {
-	self = [super init];
-	if (self) {
-		_previewLayer = nil;
+    self = [super init];
+    if (self) {
+        _previewLayer = nil;
         _captureQuality = C4CameraQualityPhoto;
         _cameraPosition = CAMERAFRONT;
-	}
-	return self;
+    }
+    return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	[self initCapture];
+    [self initCapture];
 }
 
 -(void)dealloc {

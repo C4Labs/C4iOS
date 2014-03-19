@@ -151,7 +151,7 @@
        [methodName isEqualToString:@"tapped"]) {
         methodName = [methodName stringByAppendingString:@":"];
     }
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(methodName) name:notification object:object];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(methodName) name:notification object:object];
 }
 
 -(void)listenFor:(NSString *)notification fromObjects:(NSArray *)objectArray andRunMethod:(NSString *)methodName {
@@ -165,7 +165,7 @@
 }
 
 -(void)stopListeningFor:(NSString *)notification object:(id)object {
-   	[[NSNotificationCenter defaultCenter] removeObserver:self name:notification object:object];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:notification object:object];
 }
 
 -(void)stopListeningFor:(NSString *)methodName objects:(NSArray *)objectArray {
@@ -175,7 +175,7 @@
 }
 
 -(void)postNotification:(NSString *)notification {
-	[[NSNotificationCenter defaultCenter] postNotificationName:notification object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:notification object:self];
 }
 
 #pragma mark New Stuff

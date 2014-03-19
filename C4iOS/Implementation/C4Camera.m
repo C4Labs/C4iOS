@@ -68,11 +68,11 @@
 }
 
 +(Class)layerClass {
-	return [C4Layer class];
+    return [C4Layer class];
 }
 
 //- (C4CameraLayer *)previewLayer {
-//	return (C4CameraLayer *)self.layer;
+//    return (C4CameraLayer *)self.layer;
 //}
 
 -(void)captureImage {

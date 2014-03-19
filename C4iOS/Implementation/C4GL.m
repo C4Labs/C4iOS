@@ -53,25 +53,25 @@
         _eaglLayer = (C4EAGLLayer *)self.layer;
         _eaglLayer.drawableProperties = @{kEAGLDrawablePropertyRetainedBacking: @NO, kEAGLDrawablePropertyColorFormat: kEAGLColorFormatRGBA8};
         
-		if (nil == _renderer) {
-			_renderer = renderer;
-			if (nil == renderer) {
-				return nil;
-			}
-		}
+        if (nil == _renderer) {
+            _renderer = renderer;
+            if (nil == renderer) {
+                return nil;
+            }
+        }
         
         self.backgroundColor = [UIColor clearColor];
         
-		_animating = NO;
-		_displayLinkSupported = NO;
-		_animationFrameInterval = 1;
-		_displayLink = nil;
-		_animationTimer = nil;
-		
-		CGFloat minimumSystemVersion = 3.1f;
+        _animating = NO;
+        _displayLinkSupported = NO;
+        _animationFrameInterval = 1;
+        _displayLink = nil;
+        _animationTimer = nil;
+        
+        CGFloat minimumSystemVersion = 3.1f;
         CGFloat currentSystemVersion = [[[UIDevice currentDevice] systemVersion] floatValue];
-		if (currentSystemVersion >= minimumSystemVersion) {
-			_displayLinkSupported = YES;
+        if (currentSystemVersion >= minimumSystemVersion) {
+            _displayLinkSupported = YES;
         }
         self.masksToBounds = NO;
         [self setup];
@@ -92,52 +92,52 @@
 }
 
 - (void) layoutSubviews {
-	[_renderer resizeFromLayer:(C4EAGLLayer*)self.layer];
+    [_renderer resizeFromLayer:(C4EAGLLayer*)self.layer];
     [self render];
 }
 
 - (void) setAnimationFrameInterval:(NSInteger)frameInterval {
-	if (frameInterval >= 1) {
+    if (frameInterval >= 1) {
         _animationFrameInterval = frameInterval;
-		if (self.isAnimating) {
-			[self stopAnimation];
-			[self startAnimation];
-		}
-	}
+        if (self.isAnimating) {
+            [self stopAnimation];
+            [self startAnimation];
+        }
+    }
 }
 
 -(void)startAnimation {
-	if (!self.isAnimating) {
-		if (self.isDisplayLinkSupported) {
-			self.displayLink = [NSClassFromString(@"CADisplayLink") displayLinkWithTarget:self
+    if (!self.isAnimating) {
+        if (self.isDisplayLinkSupported) {
+            self.displayLink = [NSClassFromString(@"CADisplayLink") displayLinkWithTarget:self
                                                                                  selector:@selector(render)];
-			[self.displayLink setFrameInterval:_animationFrameInterval];
-			[self.displayLink addToRunLoop:[NSRunLoop currentRunLoop]
+            [self.displayLink setFrameInterval:_animationFrameInterval];
+            [self.displayLink addToRunLoop:[NSRunLoop currentRunLoop]
                                    forMode:NSDefaultRunLoopMode];
-		} else {
+        } else {
             NSTimeInterval sixtyFramesPerSecond = (NSTimeInterval)(1.0 / 60.0);
             NSTimeInterval actualFramesPerSecond = sixtyFramesPerSecond * _animationFrameInterval;
-			self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:actualFramesPerSecond
+            self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:actualFramesPerSecond
                                                                    target:self
                                                                  selector:@selector(render)
                                                                  userInfo:nil
                                                                   repeats:TRUE];
         }
-		_animating = YES;
-	}
+        _animating = YES;
+    }
 }
 
 - (void)stopAnimation {
-	if (self.isAnimating) {
-		if (self.isDisplayLinkSupported) {
-			[self.displayLink invalidate];
-			self.displayLink = nil;
-		} else {
-			[self.animationTimer invalidate];
-			self.animationTimer = nil;
-		}
-		_animating = NO;
-	}
+    if (self.isAnimating) {
+        if (self.isDisplayLinkSupported) {
+            [self.displayLink invalidate];
+            self.displayLink = nil;
+        } else {
+            [self.animationTimer invalidate];
+            self.animationTimer = nil;
+        }
+        _animating = NO;
+    }
 }
 
 -(void)setRenderer:(id<C4EAGLESRenderer>)renderer {
