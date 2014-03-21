@@ -43,7 +43,7 @@
  @property animationOptions
  
  */
-@interface C4View : UIView <C4Notification, C4Gesture, C4MethodDelay, NSCopying, C4AddSubview> {
+@interface C4View : UIView <C4Notification, C4Gesture, C4MethodDelay, C4AddSubview> {
 }
 
 /// @name Convenience Methods

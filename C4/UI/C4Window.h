@@ -25,7 +25,7 @@
  
  The two principal functions of a window are to provide an area for displaying its views and to distribute events to the views. To change the content your app displays, you can change the window’s root view; you don’t create a new window. A window belongs to a level—typically, UIWindowLevelNormal—that represents where it sits on the z-axis relative to other windows. For example, a system alert window appears above normal app windows.
  */
-@interface C4Window : UIWindow <C4Notification, C4Gesture, C4MethodDelay, NSCopying, C4AddSubview>
+@interface C4Window : UIWindow <C4Notification, C4Gesture, C4MethodDelay, C4AddSubview>
 
 #pragma mark - Convenience Methods
 ///@name Convenience Methods
