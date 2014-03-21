@@ -49,7 +49,7 @@
 
 +(void)initialize {
     //set these before everything else.
-    C4Control* controlStyle = [C4Control defaultStyle];
+    C4Control* controlStyle = [C4Control defaultTemplateProxy];
     controlStyle.alpha = 1.0f;
     controlStyle.animationDuration = 0.0f;
     controlStyle.animationDelay = 0.0f;
@@ -62,32 +62,15 @@
     controlStyle.shadowOffset = CGSizeZero;
     controlStyle.repeatCount = 0;
     
-    NSDictionary *basicStyle = @{
-      @"alpha":@1.f,
-      @"animationDuration":@0.f,
-      @"animationDelay":@0.f,
-      @"animationOptions":@(BEGINCURRENT),
-      @"backgroundColor":[UIColor clearColor],
-      @"cornerRadius":@0.f,
-      @"shadowColor":C4GREY,
-      @"shadowOpacity":@0.f,
-      @"shadowOffset":[NSValue valueWithCGSize:CGSizeZero],
-      @"repeatCount":@0
-    };
+    [C4ActivityIndicator defaultTemplateProxy].color = C4BLUE;
     
-    [C4Control defaultStyle].style = basicStyle;
-    [C4ActivityIndicator defaultStyle].color = C4BLUE;
+    [C4Button defaultTemplateProxy].tintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"darkBluePattern@2x"]];
     
-    [C4Button defaultStyle].style = basicStyle;
-    [C4Button defaultStyle].tintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"darkBluePattern@2x"]];
+    [C4Label defaultTemplateProxy].textColor = C4GREY;
+    [C4Label defaultTemplateProxy].highlightedTextColor = C4RED;
+    [C4Label defaultTemplateProxy].backgroundColor = [UIColor clearColor];
     
-    [C4Label defaultStyle].style = basicStyle;
-    [C4Label defaultStyle].textColor = C4GREY;
-    [C4Label defaultStyle].highlightedTextColor = C4RED;
-    [C4Label defaultStyle].backgroundColor = [UIColor clearColor];
-    
-    C4Shape* shapeStyle = [C4Shape defaultStyle];
-    shapeStyle.style = basicStyle;
+    C4Shape* shapeStyle = [C4Shape defaultTemplateProxy];
     shapeStyle.fillColor = C4GREY;
     shapeStyle.fillRule = FILLNORMAL;
     shapeStyle.lineCap = CAPBUTT;
@@ -100,24 +83,21 @@
     shapeStyle.strokeEnd = 1.0f;
     shapeStyle.strokeStart = 0.0f;
     
-    [C4Slider defaultStyle].style = basicStyle;
-    [C4Slider defaultStyle].thumbTintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"darkBluePattern"]];
-    [C4Slider defaultStyle].minimumTrackTintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"lightGrayPattern"]];
-    [C4Slider defaultStyle].maximumTrackTintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"lightGrayPattern"]];
+    [C4Slider defaultTemplateProxy].thumbTintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"darkBluePattern"]];
+    [C4Slider defaultTemplateProxy].minimumTrackTintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"lightGrayPattern"]];
+    [C4Slider defaultTemplateProxy].maximumTrackTintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"lightGrayPattern"]];
     
-    [C4Stepper defaultStyle].style = basicStyle;
-    [C4Stepper defaultStyle].tintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"lightGrayPattern"]];
-    [[C4Stepper defaultStyle] setDecrementImage:[C4Image imageNamed:@"decrementDisabled"] forState:DISABLED];
-    [[C4Stepper defaultStyle] setDecrementImage:[C4Image imageNamed:@"decrementNormal"] forState:NORMAL];
-    [[C4Stepper defaultStyle] setIncrementImage:[C4Image imageNamed:@"incrementDisabled"] forState:DISABLED];
-    [[C4Stepper defaultStyle] setIncrementImage:[C4Image imageNamed:@"incrementNormal"] forState:NORMAL];
+    [C4Stepper defaultTemplateProxy].tintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"lightGrayPattern"]];
+    [[C4Stepper defaultTemplateProxy] setDecrementImage:[C4Image imageNamed:@"decrementDisabled"] forState:DISABLED];
+    [[C4Stepper defaultTemplateProxy] setDecrementImage:[C4Image imageNamed:@"decrementNormal"] forState:NORMAL];
+    [[C4Stepper defaultTemplateProxy] setIncrementImage:[C4Image imageNamed:@"incrementDisabled"] forState:DISABLED];
+    [[C4Stepper defaultTemplateProxy] setIncrementImage:[C4Image imageNamed:@"incrementNormal"] forState:NORMAL];
     
-    [C4Switch defaultStyle].style = basicStyle;
-    [C4Switch defaultStyle].onTintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"lightBluePattern"]];
-    [C4Switch defaultStyle].tintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"lightRedPattern"]];
-    [C4Switch defaultStyle].thumbTintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"lightGrayPattern"]];
-    [[C4Switch defaultStyle] setOffImage:[C4Image imageNamed:@"switchOff"]];
-    [[C4Switch defaultStyle] setOnImage:[C4Image imageNamed:@"switchOn"]];
+    [C4Switch defaultTemplateProxy].onTintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"lightBluePattern"]];
+    [C4Switch defaultTemplateProxy].tintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"lightRedPattern"]];
+    [C4Switch defaultTemplateProxy].thumbTintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"lightGrayPattern"]];
+    [[C4Switch defaultTemplateProxy] setOffImage:[C4Image imageNamed:@"switchOff"]];
+    [[C4Switch defaultTemplateProxy] setOnImage:[C4Image imageNamed:@"switchOn"]];
 }
 
 @end

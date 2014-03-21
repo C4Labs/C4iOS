@@ -24,6 +24,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class C4Template;
+
 /** The C4Control is a subclass of UIControl, which is the base class for control objects such as buttons and sliders that convey user intent to the application. You cannot use the UIControl class directly to instantiate controls. It instead defines the common interface and behavioral structure for all its subclasses.
  
  In C4, the main role of C4Control is to provide all objects that have a visible representation the ability to receive and handle user interaction. Because we cannot chain subclasses, C4Control mimicks some functionality with is available for C4Views.
@@ -50,7 +52,7 @@
  
  */
 
-@interface C4Control : UIControl <C4Notification, C4Gesture, C4MethodDelay, NSCopying, C4AddSubview> {
+@interface C4Control : UIControl <C4Notification, C4Gesture, C4MethodDelay, C4AddSubview> {
     
 }
 
@@ -325,36 +327,31 @@
  */
 @property (readwrite, nonatomic, weak) UIColor *borderColor;
 
-/**The style for the receiver.
- 
- This property returns an NSDictionary of objects used to define the visual style for the receiver. The objects contained in this dictionary are those that pertain directly to C4Control:
- 
- -alpha
- -borderColor
- -borderWidth
- -cornerRadius
- -masksToBounds
- -shadowOpacity
- -shadowOffset
- -shadowRadius
- 
- When appropriate, this property will also contain the following:
- 
- -backgroundColor
- -shadowColor
- -shadowPath
- 
- All visual objects should return their own unique style combined with a call to this basic property set of style objects.
- */
-@property (readwrite, nonatomic) NSDictionary *style;
 
-#pragma mark - Default Style
-///@name Default Style
-/**Returns the appearance proxy for the object, cast as a C4Control rather than the standard (id) cast provided by UIAppearance.
+#pragma mark - Templates
+///@name Templates
+
+/**Returns the default template for the object.
  
- You use this method to grab the appearance object that allows you to change the default style for C4Control objects.
- 
- @return The appearance proxy for the receiver, cast as a C4Control.
+ @return The default template for the receiver.
  */
-+(C4Control *)defaultStyle;
++ (C4Template *)defaultTemplate;
+
+/**Returns the template proxy for the object, cast as a C4Control.
+ 
+ You use this method to grab the default template proxy object that allows you to change the default template for C4Control objects.
+ 
+ @return The template proxy for the receiver, cast as a C4Control.
+ */
++ (C4Control *)defaultTemplateProxy;
+
+
+/** Return a new blank template for the object.
+ */
++ (C4Template *)template;
+
+/** Apply a template to the object.
+ */
+- (void)applyTemplate:(C4Template*)template;
+
 @end

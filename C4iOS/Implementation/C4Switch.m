@@ -53,21 +53,6 @@
 -(void)setupFromDefaults {
 }
 
-+(C4Switch *)defaultStyle {
-    static C4Template* template;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        template = [C4Template templateForClass:self];
-    });
-    return (C4Switch *)template;
-}
-
--(C4Switch *)copyWithZone:(NSZone *)zone {
-    C4Switch *s = [[C4Switch allocWithZone:zone] initWithFrame:self.frame];
-    s.style = self.style;
-    return s;
-}
-
 -(UIColor *)onTintColor {
     return _UISwitch.onTintColor;
 }
@@ -125,39 +110,6 @@
     [_UISwitch setOn:on animated:animated];
 }
 
--(NSDictionary *)style {
-    //mutable local styles
-    NSMutableDictionary *localStyle = [[NSMutableDictionary alloc] initWithCapacity:0];
-    [localStyle addEntriesFromDictionary:@{@"switch":self.UISwitch}];
-    
-    NSDictionary *controlStyle = [super style];
-    
-    NSMutableDictionary *localAndControlStyle = [NSMutableDictionary dictionaryWithDictionary:localStyle];
-    [localAndControlStyle addEntriesFromDictionary:controlStyle];
-    
-    localStyle = nil;
-    controlStyle = nil;
-    
-    return (NSDictionary *)localAndControlStyle;
-}
-
--(void)setStyle:(NSDictionary *)newStyle {
-    self.tintColor = self.thumbTintColor = self.onTintColor = nil;
-    self.offImage = self.onImage = nil;
-    
-    [super setStyle:newStyle];
-    
-    UISwitch *s = [newStyle objectForKey:@"switch"];
-    if(s != nil) {
-        _UISwitch.tintColor = s.tintColor;
-        _UISwitch.onTintColor = s.onTintColor;
-        _UISwitch.thumbTintColor = s.thumbTintColor;
-        _UISwitch.onImage = s.onImage;
-        _UISwitch.offImage = s.offImage;
-        s = nil;
-    }
-}
-
 -(void)setFrame:(CGRect)frame {
     CGPoint origin = frame.origin;
     origin.x = floorf(origin.x);
@@ -174,6 +126,23 @@
 -(void)stopRunningMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
     [self.UISwitch removeTarget:object action:NSSelectorFromString(methodName) forControlEvents:(UIControlEvents)event];
 }
+
+
+#pragma mark Templates
+
++ (C4Template *)defaultTemplate {
+    static C4Template* template;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        template = [C4Template templateForClass:self];
+    });
+    return template;
+}
+
++ (C4Switch *)defaultTemplateProxy {
+    return [[self defaultTemplate] proxy];
+}
+
 
 #pragma mark isEqual
 

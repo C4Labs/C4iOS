@@ -1932,19 +1932,20 @@
     return [C4Vector vectorWithX:-1 Y:-1 Z:-1];
 }
 
-#pragma mark Copying
--(C4Image *)copyWithZone:(NSZone *)zone {
-    return [[C4Image allocWithZone:zone] initWithImage:self];
-}
 
-#pragma mark Default Style
-+(C4Image *)defaultStyle {
+#pragma mark Templates
+
++ (C4Template *)defaultTemplate {
     static C4Template* template;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         template = [C4Template templateForClass:self];
     });
-    return (C4Image *)template;
+    return template;
+}
+
++ (C4Image *)defaultTemplateProxy {
+    return [[self defaultTemplate] proxy];
 }
 
 #pragma mark Layer Access Overrides

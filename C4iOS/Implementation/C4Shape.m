@@ -126,6 +126,12 @@
     return newShape;
 }
 
++(C4Shape *)shapeFromTemplate:(C4Template*)template {
+    C4Shape *shape = [[C4Shape alloc] init];
+    [shape applyTemplate:template];
+    return shape;
+}
+
 /* the technique in both the following methods allows me to change the shape of a shape and change the shape of their view's frame automatically */
 -(void)ellipse:(CGRect)rect {
     if(self.animationDelay == 0.0f) [self _ellipse:[NSValue valueWithCGRect:rect]];
@@ -776,15 +782,6 @@
     return [C4ShapeLayer class];
 }
 
-+(C4Shape *)defaultStyle {
-    static C4Template* template;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        template = [C4Template templateForClass:self];
-    });
-    return (C4Movie *)template;
-}
-
 //-(void)setAnimationOptions:(NSUInteger)animationOptions {
 //    /*
 //     This method needs to be in all C4Control subclasses, not sure why it doesn't inherit properly
@@ -804,48 +801,20 @@
 //    _animationOptions = animationOptions | BEGINCURRENT;
 //}
 
--(NSDictionary *)style {
-    NSMutableDictionary *localStyle = [NSMutableDictionary dictionaryWithDictionary:
-                                       @{
-                                         @"shape":self
-                                         }];
-    
-    
-    NSMutableDictionary *localAndSuperStyle = [NSMutableDictionary dictionaryWithDictionary:localStyle];
-    localStyle = nil;
-    
-    [localAndSuperStyle addEntriesFromDictionary:[super style]];
-    
-    return (NSDictionary *)localAndSuperStyle;
+
+#pragma mark Templates
+
++ (C4Template *)defaultTemplate {
+    static C4Template* template;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        template = [C4Template templateForClass:self];
+    });
+    return template;
 }
 
--(void)setStyle:(NSDictionary *)style {
-    [super setStyle:style];
-    
-    @autoreleasepool {
-        C4Shape *shape = [style objectForKey:@"shape"];
-        if(shape != nil) {
-            self.fillColor = shape.fillColor;
-            self.fillRule = shape.fillRule;
-            self.lineCap = shape.lineCap;
-            self.lineDashPattern = shape.lineDashPattern;
-            self.lineDashPhase = shape.lineDashPhase;
-            self.lineJoin = shape.lineJoin;
-            self.miterLimit = shape.miterLimit;
-            self.lineWidth = shape.lineWidth;
-            self.strokeColor = shape.strokeColor;
-            self.strokeEnd = shape.strokeEnd;
-            self.strokeStart = shape.strokeStart;
-        }
-    }
-}
-
--(id)copyWithZone:(NSZone *)zone {
-    C4Shape *newShape = [[C4Shape allocWithZone:zone] initWithFrame:self.frame];
-    newShape.path = self.path;
-    newShape.style = self.style;
-    
-    return newShape;
++ (C4Shape *)defaultTemplateProxy {
+    return [[self defaultTemplate] proxy];
 }
 
 @end

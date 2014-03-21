@@ -161,20 +161,20 @@
     return NO;
 }
 
-#pragma mark Style
-+(C4Stepper *)defaultStyle {
+
+#pragma mark Templates
+
++ (C4Template *)defaultTemplate {
     static C4Template* template;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         template = [C4Template templateForClass:self];
     });
-    return (C4Stepper *)template;
+    return template;
 }
 
--(C4Stepper *)copyWithZone:(NSZone *)zone {
-    C4Stepper *s = [[C4Stepper allocWithZone:zone] initWithFrame:self.frame];
-    s.style = self.style;
-    return s;
++ (C4Stepper *)defaultTemplateProxy {
+    return [[self defaultTemplate] proxy];
 }
 
 @end

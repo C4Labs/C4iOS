@@ -95,15 +95,6 @@
     [self performSelector:NSSelectorFromString(methodName) withObject:object afterDelay:seconds];
 }
 
-+(C4Camera *)defaultStyle {
-    static C4Template* template;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        template = [C4Template templateForClass:self];
-    });
-    return (C4Camera *)template;
-}
-
 -(void)setCameraPosition:(C4CameraPosition)position {
     [self.cameraController switchCameraPosition:position];
 }
@@ -118,6 +109,22 @@
 
 -(NSString *)captureQuality {
     return self.cameraController.captureQuality;
+}
+
+
+#pragma mark Templates
+
++ (C4Template *)defaultTemplate {
+    static C4Template* template;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        template = [C4Template templateForClass:self];
+    });
+    return template;
+}
+
++ (C4Camera *)defaultTemplateProxy {
+    return [[self defaultTemplate] proxy];
 }
 
 @end

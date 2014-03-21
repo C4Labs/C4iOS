@@ -99,13 +99,13 @@ typedef NS_ENUM(NSInteger, C4ActivityIndicatorStyle) {
  */
 @property (readwrite, nonatomic, strong) UIColor *color NS_AVAILABLE_IOS(5_0) UI_APPEARANCE_SELECTOR;
 
-#pragma mark Default Style
-///@name Default Style
-/**Returns the appearance proxy for the button, cast as a C4ActivityIndicator rather than the standard (id) cast provided by UIAppearance.
+
+/**Returns the template proxy for the object, cast as a C4ActivityIndicator.
  
- You use this method to grab the appearance object that allows you to change the default style for C4ActivityIndicator objects.
+ You use this method to grab the default template proxy object that allows you to change the default template for C4ActivityIndicator objects.
  
- @return The appearance proxy for the receiver, cast as a C4ActivityIndicator.
+ @return The template proxy for the receiver, cast as a C4ActivityIndicator.
  */
-+(C4ActivityIndicator *)defaultStyle;
++ (C4ActivityIndicator *)defaultTemplateProxy;
+
 @end

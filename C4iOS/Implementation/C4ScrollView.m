@@ -393,19 +393,20 @@
     [_UIScrollview addSubview:movie];
 }
 
-+(C4ScrollView *)defaultStyle {
+
+#pragma mark Templates
+
++ (C4Template *)defaultTemplate {
     static C4Template* template;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         template = [C4Template templateForClass:self];
     });
-    return (C4ScrollView *)template;
+    return template;
 }
 
-//FIXME: NEED TO ADD STYLE COPYING METHODS TO C4SCROLLVIEW.M
--(id)copyWithZone:(NSZone *)zone {
-    C4ScrollView *newScrollView = [[C4ScrollView allocWithZone:zone] initWithFrame:self.frame];
-    newScrollView.style = self.style;
-    return newScrollView;
++ (C4ScrollView *)defaultTemplateProxy {
+    return [[self defaultTemplate] proxy];
 }
+
 @end

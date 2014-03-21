@@ -78,12 +78,4 @@
  */
 @property (readwrite, atomic, strong) EAGLContext *eaglContext;
 
-#pragma mark - Copying
-///@name Copying
-/**Creates a copy of the receiver.
- @param zone The zone for copying. Leave this as nil for normal results.
- @return a copy of the receiver.
- */
--(C4EAGLES1Renderer *)copyWithZone:(NSZone *)zone;
-
 @end

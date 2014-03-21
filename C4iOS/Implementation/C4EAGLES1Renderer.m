@@ -80,8 +80,4 @@
     _eaglContext = nil;
 }
 
--(C4EAGLES1Renderer *)copyWithZone:(NSZone *)zone {
-    return [[C4EAGLES1Renderer allocWithZone:zone] init];
-}
-
 @end

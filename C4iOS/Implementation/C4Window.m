@@ -785,15 +785,6 @@
     [self performSelector:NSSelectorFromString(methodName) withObject:object afterDelay:seconds];
 }
 
-+(C4Window *)defaultStyle {
-    static C4Template* template;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        template = [C4Template templateForClass:self];
-    });
-    return (C4Window *)template;
-}
-
 -(void)renderInContext:(CGContextRef)context {
     if(self.backgroundColor != nil || self.backgroundColor != [UIColor clearColor]) {
         CGFloat components[4];
@@ -803,4 +794,21 @@
     }
     [self.layer renderInContext:context];
 }
+
+
+#pragma mark Templates
+
++ (C4Template *)defaultTemplate {
+    static C4Template* template;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        template = [C4Template templateForClass:self];
+    });
+    return template;
+}
+
++ (C4Window *)defaultTemplateProxy {
+    return [[self defaultTemplate] proxy];
+}
+
 @end

@@ -212,13 +212,12 @@
  */
 @property (readwrite, atomic) BOOL constrainsProportions;
 
-#pragma mark - Default style
-///@name Default Style
-/**Returns the appearance proxy for the object, cast as a C4Movie rather than the standard (id) cast provided by UIAppearance.
+/**Returns the template proxy for the object, cast as a C4Movie.
  
- You use this method to grab the appearance object that allows you to change the default style for C4Movie objects.
+ You use this method to grab the default template proxy object that allows you to change the default template for C4Movie objects.
  
- @return The appearance proxy for the receiver, cast as a C4Movie.
+ @return The template proxy for the receiver, cast as a C4Movie.
  */
-+(C4Movie *)defaultStyle;
++(C4Movie *)defaultTemplateProxy;
+
 @end

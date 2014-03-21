@@ -313,5 +313,5 @@
  
  @return The appearance proxy for the receiver, cast as a C4ScrollView.
  */
-+(C4ScrollView *)defaultStyle;
++(C4ScrollView *)defaultTemplateProxy;
 @end

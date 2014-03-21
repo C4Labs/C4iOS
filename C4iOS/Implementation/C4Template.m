@@ -45,6 +45,10 @@
     return self;
 }
 
+- (id)proxy {
+    return self;
+}
+
 - (void)applyToTarget:(id)target {
     for (NSInvocation* invocation in self.invocations) {
         invocation.target = target;

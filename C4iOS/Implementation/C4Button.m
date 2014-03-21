@@ -41,16 +41,6 @@
     return self;
 }
 
-#pragma mark Style
-+(C4Button *)defaultStyle {
-    static C4Template* template;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        template = [C4Template templateForClass:self];
-    });
-    return (C4Button *)template;
-}
-
 -(void)setupFromDefaults {
     self.UIButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:15.0f];
     
@@ -87,65 +77,9 @@
     [super setCenter:center];
 }
 
--(C4Button *)copyWithZone:(NSZone *)zone {
-    C4Button *button = [[C4Button allocWithZone:zone] initWithType:self.buttonType];
-    button.style = self.style;
-    return button;
-}
-
 -(void)setCornerRadius:(CGFloat)cornerRadius {
     [super setCornerRadius:cornerRadius];
     [self.UIButton.layer setCornerRadius:cornerRadius];
-}
-
--(NSDictionary *)style {
-    //mutable local styles
-    NSMutableDictionary *localStyle = [[NSMutableDictionary alloc] initWithCapacity:0];
-    [localStyle addEntriesFromDictionary:@{@"button":self.UIButton}];
-    
-    NSDictionary *controlStyle = [super style];
-    NSMutableDictionary *localAndControlStyle = [NSMutableDictionary dictionaryWithDictionary:localStyle];
-    [localAndControlStyle addEntriesFromDictionary:controlStyle];
-    
-    localStyle = nil;
-    controlStyle = nil;
-    
-    return (NSDictionary *)localAndControlStyle;
-    
-}
-
--(void)setStyle:(NSDictionary *)newStyle {
-    self.tintColor = nil;
-    [super setStyle:newStyle];
-    
-    UIButton *b = [newStyle objectForKey:@"button"];
-    if(b != nil) {
-        
-        UIControlState state[4] = {UIControlStateDisabled, UIControlStateHighlighted, UIControlStateNormal, UIControlStateSelected};
-        for(int i = 0; i < 4; i++) {
-            [self.UIButton setTitle:[b titleForState:state[i]] forState:state[i]];
-            [self.UIButton setAttributedTitle:[b attributedTitleForState:state[i]] forState:state[i]];
-            [self.UIButton setTitleColor:[b titleColorForState:state[i]] forState:state[i]];
-            [self.UIButton setTitleShadowColor:[b titleShadowColorForState:state[i]] forState:state[i]];
-            [self.UIButton setImage:[b imageForState:state[i]] forState:state[i]];
-            [self.UIButton setBackgroundImage:[b backgroundImageForState:state[i]] forState:state[i]];
-        }
-        
-        self.UIButton.contentEdgeInsets = b.contentEdgeInsets;
-        self.UIButton.imageEdgeInsets = b.imageEdgeInsets;
-        self.UIButton.titleEdgeInsets = b.titleEdgeInsets;
-        
-        self.UIButton.reversesTitleShadowWhenHighlighted = b.reversesTitleShadowWhenHighlighted;
-        self.UIButton.adjustsImageWhenDisabled = b.adjustsImageWhenDisabled;
-        self.UIButton.adjustsImageWhenHighlighted = b.adjustsImageWhenHighlighted;
-        self.UIButton.showsTouchWhenHighlighted = b.showsTouchWhenHighlighted;
-        
-        self.UIButton.titleLabel.font = b.titleLabel.font;
-        
-        self.UIButton.tintColor = b.tintColor;
-        
-        b = nil;
-    }
 }
 
 -(C4Label *)titleLabel {
@@ -386,6 +320,23 @@
     self.UIButton.contentHorizontalAlignment = contentHorizontalAlignment;
 }
 
+
+#pragma mark Templates
+
++ (C4Template *)defaultTemplate {
+    static C4Template* template;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        template = [C4Template templateForClass:self];
+    });
+    return template;
+}
+
++ (C4Button *)defaultTemplateProxy {
+    return [[self defaultTemplate] proxy];
+}
+
+
 #pragma mark isEqual
 
 -(BOOL)isEqual:(id)object {
@@ -393,6 +344,5 @@
     else if([object isKindOfClass:[self class]]) return [self.UIButton isEqual:((C4Button *)object).UIButton];
     return NO;
 }
-
 
 @end

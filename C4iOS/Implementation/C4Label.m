@@ -352,82 +352,20 @@
     self.frame = newFrame;
 }
 
--(NSDictionary *)style {
-    NSMutableDictionary *localStyle = [NSMutableDictionary dictionaryWithDictionary:
-                                       @{
-                                         @"adjustsFontSizeToFitWidth":@(self.adjustsFontSizeToFitWidth),
-                                         @"baselineAdjustment":@(self.baselineAdjustment),
-                                         @"highlighted":@(self.highlighted),
-                                         @"lineBreakMode":@(self.lineBreakMode),
-                                         @"numberOfLines":@(self.numberOfLines),
-                                         @"textAlignment":@(self.textAlignment),
-                                         @"textShadowOffset":[NSValue valueWithCGSize:self.textShadowOffset]
-                                         }];
-    if (self.font != nil) [localStyle setObject:self.font forKey:@"font"];
-    if (self.highlightedTextColor != nil) [localStyle setObject:self.highlightedTextColor forKey:@"highlightedTextColor"];
-    if (self.textColor != nil) [localStyle setObject:self.textColor forKey:@"textColor"];
-    if (self.textShadowColor != nil) [localStyle setObject:self.textShadowColor forKey:@"textShadowColor"];
-    
-    NSMutableDictionary *localAndSuperStyle = [NSMutableDictionary dictionaryWithDictionary:localStyle];
-    localStyle = nil;
-    
-    [localAndSuperStyle addEntriesFromDictionary:[super style]];
-    return (NSDictionary *)localAndSuperStyle;
-}
 
--(void)setStyle:(NSDictionary *)style {
-    [super setStyle:style];
-    
-    NSArray *styleKeys = [style allKeys];
-    NSString *key;
-    
-    //Local Style Values
-    key = @"adjustsFontSizeToFitWidth";
-    if([styleKeys containsObject:key]) self.adjustsFontSizeToFitWidth = [[style objectForKey:key] boolValue];
-    
-    key = @"baselineAdjustment";
-    if([styleKeys containsObject:key]) self.baselineAdjustment = (C4BaselineAdjustment)[[style objectForKey:key] integerValue];
-    
-    key = @"font";
-    if([styleKeys containsObject:key]) self.font = [style objectForKey:key];
-    
-    key = @"highlighted";
-    if([styleKeys containsObject:key]) self.highlighted = [[style objectForKey:key] boolValue];
-    
-    key = @"highlightedTextColor";
-    if([styleKeys containsObject:key]) self.highlightedTextColor = [style objectForKey:key];
-    
-    key = @"lineBreakMode";
-    if([styleKeys containsObject:key]) self.lineBreakMode = (C4LineBreakMode)[[style objectForKey:key] integerValue];
-    
-    key = @"numberOfLines";
-    if([styleKeys containsObject:key]) self.numberOfLines = [[style objectForKey:key] integerValue];
-    
-    key = @"textAlignment";
-    if([styleKeys containsObject:key]) self.textAlignment = (C4TextAlignment)[[style objectForKey:key] integerValue];
-    
-    key = @"textColor";
-    if([styleKeys containsObject:key]) self.textColor = [style objectForKey:key];
-    
-    key = @"textShadowColor";
-    if([styleKeys containsObject:key]) self.textShadowColor = [style objectForKey:key];
-    
-    key = @"textShadowOffset";
-    if([styleKeys containsObject:key]) self.textShadowOffset = [[style objectForKey:key] CGSizeValue];
-}
+#pragma mark Templates
 
-+(C4Label *)defaultStyle {
++ (C4Template *)defaultTemplate {
     static C4Template* template;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         template = [C4Template templateForClass:self];
     });
-    return (C4Label *)template;
+    return template;
 }
 
--(C4Label *)copyWithZone:(NSZone *)zone {
-    C4Label *label = [[C4Label allocWithZone:zone] initWithText:self.text font:self.font frame:self.frame];
-    label.style = self.style;
-    return label;
++ (C4Label *)defaultTemplateProxy {
+    return [[self defaultTemplate] proxy];
 }
+
 @end

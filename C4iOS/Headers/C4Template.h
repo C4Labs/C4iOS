@@ -42,6 +42,10 @@
  */
 - (id)initWithTargetClass:(Class)targetClass;
 
+/** Return the proxy object.
+ */
+- (id)proxy;
+
 /** Apply the template to the target object. The target object's class need to match the class used to initialize the template.
  
  @param target The object to which the template is being applied.

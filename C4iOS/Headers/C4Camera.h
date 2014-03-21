@@ -85,13 +85,12 @@
  */
 @property (readwrite, nonatomic) NSString *captureQuality;
 
-#pragma mark - Default Style
-///@name Default Style
-/**Returns the appearance proxy for the object, cast as a C4Camera rather than the standard (id) cast provided by UIAppearance.
+/**Returns the template proxy for the object, cast as a C4Camera.
  
- You use this method to grab the appearance object that allows you to change the default style for C4Camera objects.
+ You use this method to grab the default template proxy object that allows you to change the default template for C4Camera objects.
  
- @return The appearance proxy for the receiver, cast as a C4Camera.
+ @return The template proxy for the receiver, cast as a C4Camera.
  */
-+(C4Camera *)defaultStyle;
++ (C4Camera *)defaultTemplateProxy;
+
 @end

@@ -383,18 +383,20 @@
     self.player.currentItem.audioMix = self.audioMix;
 }
 
-+(C4Movie *)defaultStyle {
+
+#pragma mark Templates
+
++ (C4Template *)defaultTemplate {
     static C4Template* template;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         template = [C4Template templateForClass:self];
     });
-    return (C4Movie *)template;
+    return template;
 }
 
--(id)copyWithZone:(NSZone *)zone {
-    C4Movie *newMovie = [[C4Movie allocWithZone:zone] initWithURL:self.movieURL];
-    newMovie.style = self.style;
-    return newMovie;
++ (C4Movie *)defaultTemplateProxy {
+    return [[self defaultTemplate] proxy];
 }
+
 @end

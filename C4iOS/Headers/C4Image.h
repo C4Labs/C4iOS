@@ -1218,14 +1218,12 @@
  */
 -(void)twelveFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
 
-#pragma mark - Default Style
-///@name Default Style
-/**Returns the appearance proxy for the object, cast as a C4Image rather than the standard (id) cast provided by UIAppearance.
+/**Returns the template proxy for the object, cast as a C4Image.
  
- You use this method to grab the appearance object that allows you to change the default style for C4Image objects.
+ You use this method to grab the default template proxy object that allows you to change the default template for C4Image objects.
  
- @return The appearance proxy for the receiver, cast as a C4Image.
+ @return The template proxy for the receiver, cast as a C4Image.
  */
-+(C4Image *)defaultStyle;
++ (C4Image *)defaultTemplateProxy;
 
 @end

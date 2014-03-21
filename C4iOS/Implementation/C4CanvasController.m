@@ -26,6 +26,7 @@
 @end
 
 @implementation C4CanvasController
+
 @synthesize canvas = _canvas;
 
 -(id)init {
@@ -52,14 +53,14 @@
 
 -(void)loadView {
     self.view = [[C4View alloc] init];
-    _canvas = (C4Window *)self.view;
+    _canvas = (C4View*)self.view;
 }
 
 -(void)setup {
 }
 
--(C4Window *)canvas {
-    return (C4Window *)self.view;
+-(C4View *)canvas {
+    return (C4View *)self.view;
 }
 
 -(void)addCamera:(C4Camera *)camera {

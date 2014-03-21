@@ -59,61 +59,6 @@
     self.UISlider.frame = frame;
 }
 
--(NSDictionary *)style {
-    //mutable local styles
-    NSMutableDictionary *localStyle = [[NSMutableDictionary alloc] initWithCapacity:0];
-    [localStyle addEntriesFromDictionary:@{@"slider":self.UISlider}];
-    
-    NSDictionary *controlStyle = [super style];
-    
-    NSMutableDictionary *localAndControlStyle = [NSMutableDictionary dictionaryWithDictionary:localStyle];
-    [localAndControlStyle addEntriesFromDictionary:controlStyle];
-    
-    localStyle = nil;
-    controlStyle = nil;
-    
-    return (NSDictionary *)localAndControlStyle;
-}
-
--(void)setStyle:(NSDictionary *)newStyle {
-    self.maximumTrackTintColor = self.minimumTrackTintColor = self.thumbTintColor = nil;
-    [super setStyle:newStyle];
-    
-    UISlider *s = [newStyle objectForKey:@"slider"];
-    if(s != nil) {
-        
-        UIControlState state[4] = {UIControlStateDisabled, UIControlStateHighlighted, UIControlStateNormal, UIControlStateSelected};
-        for(int i = 0; i < 4; i++) {
-            [self.UISlider setMaximumTrackImage:[s maximumTrackImageForState:state[i]] forState:state[i]];
-            [self.UISlider setMinimumTrackImage:[s minimumTrackImageForState:state[i]] forState:state[i]];
-            [self.UISlider setThumbImage:[s thumbImageForState:state[i]] forState:state[i]];
-        }
-
-//        [self.UISlider setMaximumTrackImage:[s maximumTrackImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
-//        [self.UISlider setMaximumTrackImage:[s maximumTrackImageForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
-//        [self.UISlider setMaximumTrackImage:[s maximumTrackImageForState:UIControlStateNormal] forState:UIControlStateNormal];
-//        [self.UISlider setMaximumTrackImage:[s maximumTrackImageForState:UIControlStateSelected] forState:UIControlStateSelected];
-
-//        [self.UISlider setMinimumTrackImage:[s minimumTrackImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
-//        [self.UISlider setMinimumTrackImage:[s minimumTrackImageForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
-//        [self.UISlider setMinimumTrackImage:[s minimumTrackImageForState:UIControlStateNormal] forState:UIControlStateNormal];
-//        [self.UISlider setMinimumTrackImage:[s minimumTrackImageForState:UIControlStateSelected] forState:UIControlStateSelected];
-
-//        [self.UISlider setThumbImage:[s thumbImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
-//        [self.UISlider setThumbImage:[s thumbImageForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
-//        [self.UISlider setThumbImage:[s thumbImageForState:UIControlStateNormal] forState:UIControlStateNormal];
-//        [self.UISlider setThumbImage:[s thumbImageForState:UIControlStateSelected] forState:UIControlStateSelected];
-
-        [self.UISlider setMaximumValueImage:[s maximumValueImage]];
-        [self.UISlider setMinimumValueImage:[s minimumValueImage]];
-        
-        [self.UISlider setThumbTintColor:[s thumbTintColor]];
-        [self.UISlider setMaximumTrackTintColor:[s maximumTrackTintColor]];
-        [self.UISlider setMinimumTrackTintColor:[s minimumTrackTintColor]];
-        s = nil;
-    }
-}
-
 -(UIColor *)thumbTintColor {
     return self.UISlider.thumbTintColor;
 }
@@ -245,21 +190,6 @@
     return [[C4Slider alloc] initWithFrame:rect];
 }
 
-+(C4Slider *)defaultStyle {
-    static C4Template* template;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        template = [C4Template templateForClass:self];
-    });
-    return (C4Movie *)template;
-}
-
--(C4Slider *)copyWithZone:(NSZone *)zone {
-    C4Slider *slider = [[C4Slider allocWithZone:zone] initWithFrame:self.frame defaults:NO];
-    slider.style = self.style;
-    return slider;
-}
-
 #pragma mark Slider
 -(CGFloat)value {
     return self.UISlider.value;
@@ -326,6 +256,23 @@
 -(void)setContentHorizontalAlignment:(UIControlContentHorizontalAlignment)contentHorizontalAlignment {
     self.UISlider.contentHorizontalAlignment = contentHorizontalAlignment;
 }
+
+
+#pragma mark Templates
+
++ (C4Template *)defaultTemplate {
+    static C4Template* template;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        template = [C4Template templateForClass:self];
+    });
+    return template;
+}
+
++ (C4Slider *)defaultTemplateProxy {
+    return [[self defaultTemplate] proxy];
+}
+
 
 #pragma mark isEqual
 

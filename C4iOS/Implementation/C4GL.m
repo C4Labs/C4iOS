@@ -161,20 +161,20 @@
     [super setBackgroundColor:backgroundColor];
 }
 
-+(C4GL *)defaultStyle {
+
+#pragma mark Templates
+
++ (C4Template *)defaultTemplate {
     static C4Template* template;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         template = [C4Template templateForClass:self];
     });
-    return (C4GL *)template;
+    return template;
 }
 
--(C4GL *)copyWithZone:(NSZone *)zone {
-    C4GL *newGL = [[C4GL allocWithZone:zone]
-                   initWithRenderer:[(C4GL1Renderer *)self.renderer copy]];
-    newGL.frame = self.frame;
-    return newGL;
++ (C4GL *)defaultTemplateProxy {
+    return [[self defaultTemplate] proxy];
 }
 
 @end

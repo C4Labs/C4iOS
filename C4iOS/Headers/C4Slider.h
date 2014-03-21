@@ -229,14 +229,12 @@
  */
 @property (readonly, nonatomic) UISlider *UISlider;
 
-#pragma mark - Default Style
-///@name Default Style
-/**Returns the appearance proxy for the object, cast as a C4Slider rather than the standard (id) cast provided by UIAppearance.
+/**Returns the template proxy for the object, cast as a C4Slider.
  
- You use this method to grab the appearance object that allows you to change the default style for C4Slider objects.
+ You use this method to grab the default template proxy object that allows you to change the default template for C4Slider objects.
  
- @return The appearance proxy for the receiver, cast as a C4Slider.
+ @return The template proxy for the receiver, cast as a C4Slider.
  */
-+(C4Slider *)defaultStyle;
++ (C4Slider *)defaultTemplateProxy;
 
 @end

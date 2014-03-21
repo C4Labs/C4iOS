@@ -23,7 +23,6 @@
 @property (readwrite, atomic) BOOL shouldAutoreverse;
 @property (readwrite, atomic, strong) NSString *longPressMethodName;
 @property (readwrite, atomic, strong) NSMutableDictionary *gestureDictionary;
-@property (readonly, atomic) NSArray *stylePropertyNames;
 @property (readwrite, atomic) CGPoint firstPositionForMove;
 @end
 
@@ -40,7 +39,7 @@
         self.longPressMethodName = @"pressedLong";
         self.shouldAutoreverse = NO;
         
-        C4Template* template = (C4Template*)[[self class] defaultStyle];
+        C4Template* template = (C4Template*)[[self class] defaultTemplate];
         [template applyToTarget:self];
     }
     return self;
@@ -812,103 +811,32 @@
     [self performSelector:NSSelectorFromString(methodName) withObject:object afterDelay:seconds];
 }
 
--(NSDictionary *)style {
-    //FIXME: Will never transfer nil for some properties
-    //(let's deal with it later rather than solve a "potential" problem)
-    NSMutableDictionary *controlStyle = [NSMutableDictionary dictionaryWithDictionary:
-                                         @{
-                                           @"alpha":@(self.alpha),
-                                           @"borderColor":self.borderColor,
-                                           @"borderWidth":@(self.borderWidth),
-                                           @"cornerRadius":@(self.cornerRadius),
-                                           @"masksToBounds":@(self.masksToBounds),
-                                           @"shadowOpacity":@(self.shadowOpacity),
-                                           @"shadowOffset":[NSValue valueWithCGSize:self.shadowOffset],
-                                           @"shadowRadius":@(self.shadowRadius)
-                                           }];
-    if (self.backgroundColor != nil) [controlStyle setObject:self.backgroundColor forKey:@"backgroundColor"];
-    if (self.shadowColor != nil) [controlStyle setObject:self.shadowColor forKey:@"shadowColor"];
-    [controlStyle setObject:self.shadowPath == nil ? [NSNull null] : (__bridge UIBezierPath *)self.shadowPath forKey:@"shadowPath"];
-    
-    return (NSDictionary *)controlStyle;
-}
 
--(void)setStyle:(NSDictionary *)style {
-    NSArray *styleKeys = [style allKeys];
-    NSString *key;
-    
-    //Control Style Values
-    key = @"alpha";
-    if([styleKeys containsObject:key]) self.alpha = [[style objectForKey:key] floatValue];
-    
-    key = @"backgroundColor";
-    if([styleKeys containsObject:key]) self.backgroundColor = [style objectForKey:key];
-    
-    key = @"borderColor";
-    if([styleKeys containsObject:key]) self.borderColor = [style objectForKey:key];
-    
-    key = @"borderWidth";
-    if([styleKeys containsObject:key]) self.borderWidth = [[style objectForKey:key] floatValue];
-    
-    key = @"cornerRadius";
-    if([styleKeys containsObject:key]) self.cornerRadius = [[style objectForKey:key] floatValue];
-    
-    key = @"masksToBounds";
-    if([styleKeys containsObject:key]) self.masksToBounds = [[style objectForKey:key] boolValue];
-    
-    key = @"shadowColor";
-    if([styleKeys containsObject:key]) self.shadowColor = [style objectForKey:key];
-    
-    key = @"shadowOpacity";
-    if([styleKeys containsObject:key]) self.shadowOpacity = [[style objectForKey:key] floatValue];
-    
-    key = @"shadowOffset";
-    if([styleKeys containsObject:key]) self.shadowOffset = [[style objectForKey:key] CGSizeValue];
-    
-    key = @"shadowPath";
-    if([styleKeys containsObject:key]) self.shadowPath = [style objectForKey:key] == [NSNull null] ? nil : (__bridge CGPathRef)[style objectForKey:key];
-    
-    key = @"shadowRadius";
-    if([styleKeys containsObject:key]) self.shadowRadius = [[style objectForKey:key] floatValue];
-    
-    //  FIXME: should the following be part of C4Control?
-    //    key = @"maxTrackImage";
-    //    if([styleKeys containsObject:key]) self.maxTrackImage = [style objectForKey:key];
-    //
-    //    key = @"maxTrackImageHighlighted";
-    //    if([styleKeys containsObject:key]) self.maxTrackImageHighlighted = [style objectForKey:key];
-    //
-    //    key = @"maxTrackImageDisabled";
-    //    if([styleKeys containsObject:key]) self.maxTrackImageDisabled = [style objectForKey:key];
-    //
-    //    key = @"maxTrackImageSelected";
-    //    if([styleKeys containsObject:key]) self.maxTrackImageSelected = [style objectForKey:key];
-    //
-    //    key = @"minimumTrackTintColor";
-    //    if([styleKeys containsObject:key]) self.minimumTrackTintColor = [style objectForKey:key];
-    //
-    //    key = @"maximumTrackTintColor";
-    //    if([styleKeys containsObject:key]) self.maximumTrackTintColor = [style objectForKey:key];
-    //
-    //    key = @"thumbTintColor";
-    //    if([styleKeys containsObject:key]) self.thumbTintColor = [style objectForKey:key];
-    
-}
+#pragma mark Templates
 
-+(C4Control *)defaultStyle {
++ (C4Template *)defaultTemplate {
     static C4Template* template;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         template = [C4Template templateForClass:self];
     });
-    return (C4Control *)template;
+    return template;
 }
 
--(C4Control *)copyWithZone:(NSZone *)zone {
-    C4Control *control = [[C4Control allocWithZone:zone] initWithFrame:self.frame];
-    control.style = self.style;
-    return control;
++ (C4Control *)defaultTemplateProxy {
+    return [[self defaultTemplate] proxy];
 }
+
++ (C4Template *)template {
+    return [C4Template templateForClass:self];
+}
+
+- (void)applyTemplate:(C4Template*)template {
+    [template applyToTarget:self];
+}
+
+
+#pragma mark -
 
 -(id)nullForNilObject:(id)object {
     if(object == nil) return [NSNull null];

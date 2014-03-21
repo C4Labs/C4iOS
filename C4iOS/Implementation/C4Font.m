@@ -128,8 +128,4 @@
     return CTFontCreateWithName((__bridge CFStringRef)self.fontName, self.pointSize, nil);
 }
 
--(C4Font *)copyWithZone:(NSZone *)zone {
-    return [[C4Font allocWithZone:zone] initWithName:self.fontName size:self.pointSize];
-}
-
 @end

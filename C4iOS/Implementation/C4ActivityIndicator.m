@@ -79,52 +79,6 @@
     return _UIActivityIndicatorView.color;
 }
 
-#pragma mark Style
-+(C4ActivityIndicator *)defaultStyle {
-    static C4Template* template;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        template = [C4Template templateForClass:self];
-    });
-    return (C4ActivityIndicator *)template;
-}
-
--(NSDictionary *)style {
-    //mutable local styles
-    NSMutableDictionary *localStyle = [[NSMutableDictionary alloc] initWithCapacity:0];
-    [localStyle addEntriesFromDictionary:@{@"indicator":self.UIActivityIndicatorView}];
-    
-    NSDictionary *controlStyle = [super style];
-    
-    NSMutableDictionary *localAndControlStyle = [NSMutableDictionary dictionaryWithDictionary:localStyle];
-    [localAndControlStyle addEntriesFromDictionary:controlStyle];
-    
-    localStyle = nil;
-    controlStyle = nil;
-    
-    return (NSDictionary *)localAndControlStyle;
-}
-
--(void)setStyle:(NSDictionary *)newStyle {
-    self.color = nil;
-    
-    [super setStyle:newStyle];
-    
-    UIActivityIndicatorView *indicator = [newStyle objectForKey:@"indicator"];
-    if(indicator != nil) {
-        _UIActivityIndicatorView.color = indicator.color;
-        indicator = nil;
-    }
-}
-
-#pragma mark isEqual
-
--(BOOL)isEqual:(id)object {
-    if([object isKindOfClass:[UIActivityIndicatorView class]]) return [self.UIActivityIndicatorView isEqual:object];
-    else if([object isKindOfClass:[self class]]) return [self.UIActivityIndicatorView isEqual:((C4ActivityIndicator *)object).UIActivityIndicatorView];
-    return NO;
-}
-
 -(void)runMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event{
     methodName = methodName;
     object = object;
@@ -136,4 +90,30 @@
     object = object;
     event = event;
 }
+
+
+#pragma mark Templates
+
++ (C4Template *)defaultTemplate {
+    static C4Template* template;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        template = [C4Template templateForClass:self];
+    });
+    return template;
+}
+
++ (C4ActivityIndicator *)defaultTemplateProxy {
+    return [[self defaultTemplate] proxy];
+}
+
+
+#pragma mark isEqual
+
+-(BOOL)isEqual:(id)object {
+    if([object isKindOfClass:[UIActivityIndicatorView class]]) return [self.UIActivityIndicatorView isEqual:object];
+    else if([object isKindOfClass:[self class]]) return [self.UIActivityIndicatorView isEqual:((C4ActivityIndicator *)object).UIActivityIndicatorView];
+    return NO;
+}
+
 @end

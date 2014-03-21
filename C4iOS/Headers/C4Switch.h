@@ -107,13 +107,12 @@
 /**The UISwitch object which is the primary subview of the receiver.
  */@property (readonly, nonatomic) UISwitch *UISwitch;
 
-#pragma mark - Default Style
-///@name Default Style
-/**Returns the appearance proxy for the object, cast as a C4Switch rather than the standard (id) cast provided by UIAppearance.
+/**Returns the template proxy for the object, cast as a C4Switch.
  
- You use this method to grab the appearance object that allows you to change the default style for C4Switch objects.
+ You use this method to grab the default template proxy object that allows you to change the default template for C4Switch objects.
  
- @return The appearance proxy for the receiver, cast as a C4Switch.
+ @return The template proxy for the receiver, cast as a C4Switch.
  */
-+(C4Switch *)defaultStyle;
++ (C4Switch *)defaultTemplateProxy;
+
 @end

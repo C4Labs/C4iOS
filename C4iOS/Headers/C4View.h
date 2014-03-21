@@ -293,13 +293,12 @@
  */
 -(void)renderInContext:(CGContextRef)context;
 
-#pragma mark - Default Style
-///@name Default Style
-/**Returns the appearance proxy for the object, cast as a C4View rather than the standard (id) cast provided by UIAppearance.
+/**Returns the template proxy for the object, cast as a C4View.
  
- You use this method to grab the appearance object that allows you to change the default style for C4View objects.
+ You use this method to grab the default template proxy object that allows you to change the default template for C4View objects.
  
- @return The appearance proxy for the receiver, cast as a C4View.
+ @return The template proxy for the receiver, cast as a C4View.
  */
-+(C4View *)defaultStyle;
++ (C4View *)defaultTemplateProxy;
+
 @end

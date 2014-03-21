@@ -172,13 +172,12 @@
  */
 @property (readonly, nonatomic, strong) UIStepper *UIStepper;
 
-#pragma mark - Default Style
-///@name Default Style
-/**Returns the appearance proxy for the object, cast as a C4Stepper rather than the standard (id) cast provided by UIAppearance.
+/**Returns the template proxy for the object, cast as a C4Stepper.
  
- You use this method to grab the appearance object that allows you to change the default style for C4Stepper objects.
+ You use this method to grab the default template proxy object that allows you to change the default template for C4Stepper objects.
  
- @return The appearance proxy for the receiver, cast as a C4Stepper.
+ @return The template proxy for the receiver, cast as a C4Stepper.
  */
-+(C4Stepper *)defaultStyle;
++ (C4Stepper *)defaultTemplateProxy;
+
 @end

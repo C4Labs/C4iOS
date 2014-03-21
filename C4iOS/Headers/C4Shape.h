@@ -121,6 +121,12 @@
  */
 +(C4Shape *)shapeFromString:(NSString *)string withFont:(C4Font *)font;
 
+/**Creates and returns an instance of C4Shape, whose configuration is specified by a template.
+ 
+ @param template The template to use.
+ */
++(C4Shape *)shapeFromTemplate:(C4Template*)template;
+
 #pragma mark Changing a Shape's Path
 /// @name Changing a Shape's Path
 
@@ -390,11 +396,13 @@
  */
 @property (readwrite, nonatomic) CGPathRef path;
 
-/**Returns the appearance proxy for the object, cast as a C4Shape rather than the standard (id) cast provided by UIAppearance.
+
+/**Returns the template proxy for the object, cast as a C4Shape.
  
- You use this method to grab the appearance object that allows you to change the default style for C4Shape objects.
+ You use this method to grab the default template proxy object that allows you to change the default template for C4Shape objects.
  
- @return The appearance proxy for the receiver, cast as a C4Shape.
+ @return The template proxy for the receiver, cast as a C4Shape.
  */
-+(C4Shape *)defaultStyle;
++ (C4Shape *)defaultTemplateProxy;
+
 @end

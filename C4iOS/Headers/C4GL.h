@@ -94,22 +94,12 @@
  */
 @property (atomic) BOOL drawOnce;
 
-#pragma mark - Copying
-///@name Copying
-/**Creates a copy of the receiver.
- @param zone The zone for copying. Leave this as nil for normal results.
- @return a copy of the receiver.
- */
--(C4GL *)copyWithZone:(NSZone *)zone;
-
-#pragma mark - Default Style
-///@name Default Style
-/**Returns the appearance proxy for the object, cast as a C4GL rather than the standard (id) cast provided by UIAppearance.
+/**Returns the template proxy for the object, cast as a C4GL.
  
- You use this method to grab the appearance object that allows you to change the default style for C4GL objects.
+ You use this method to grab the default template proxy object that allows you to change the default template for C4GL objects.
  
- @return The appearance proxy for the receiver, cast as a C4GL.
+ @return The template proxy for the receiver, cast as a C4GL.
  */
-+(C4GL *)defaultStyle;
++ (C4GL *)defaultTemplateProxy;
 
 @end
