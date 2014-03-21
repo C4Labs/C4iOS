@@ -17,10 +17,12 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
+#import "C4ActivityIndicator.h"
 #import "C4Image.h"
+#import "C4UIImageView.h"
 
 @interface C4Image ()
-@property (readwrite, strong, nonatomic) C4ImageView *imageView;
+@property (readwrite, strong, nonatomic) C4UIImageView *imageView;
 @property (readwrite, strong, nonatomic) UIImage *originalImage;
 @property (readwrite, strong, nonatomic) CIImage *output;
 @property (readwrite, strong, nonatomic) CIContext *filterContext;
@@ -79,8 +81,11 @@
 }
 
 -(id)initWithUIImage:(UIImage *)image {
-    if(image == nil || image == (UIImage *)[NSNull null]) return nil;
-    self = [super init];
+    if(image == nil || image == (UIImage *)[NSNull null])
+        return nil;
+    
+    C4UIImageView* imageView = [[C4UIImageView alloc] initWithImage:image];
+    self = [super initWithView:imageView];
     if(self != nil) {
         _originalImage = image;
         _constrainsProportions = YES;
@@ -89,10 +94,8 @@
         [self setProperties];
         _filterQueue = nil;
         _output = nil;
-        _imageView = [[C4ImageView alloc] initWithImage:_originalImage];
+        _imageView = [[C4UIImageView alloc] initWithImage:_originalImage];
         _imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-        [self addSubview:_imageView];
-        self.autoresizesSubviews = YES;
         self.showsActivityIndicator = YES;
         _filterIndicator = [C4ActivityIndicator indicatorWithStyle:WHITE];
         _filterIndicator.center = CGPointMake(self.width/2,self.height/2);
@@ -202,13 +205,30 @@
 
 -(void)setContents:(CGImageRef)image {
     if(self.animationDuration == 0.0f) self.imageLayer.contents = (__bridge id)image;
-    else [self.imageLayer animateContents:image];
+    else [self animateContents:image];
 }
 
 -(void)setImage:(C4Image *)image {
     _originalImage = image.UIImage;
     [self setProperties];
     [self setContents:_originalImage.CGImage];
+}
+
+-(void)animateContents:(CGImageRef)image {
+    C4Layer* layer = (C4Layer*)self.layer;
+    
+    [CATransaction begin];
+    CABasicAnimation *animation = [layer setupBasicAnimationWithKeyPath:@"contents"];
+    animation.fromValue = layer.contents;
+    animation.toValue = (__bridge id)image;
+    if (animation.repeatCount != FOREVER && !layer.autoreverses) {
+        [CATransaction setCompletionBlock:^ {
+            layer.contents = (__bridge id)image;
+            [layer removeAnimationForKey:@"animateContents"];
+        }];
+    }
+    [layer addAnimation:animation forKey:@"animateContents"];
+    [CATransaction commit];
 }
 
 #pragma mark Filter Basics
@@ -1899,7 +1919,7 @@
 -(UIColor *)colorAt:(CGPoint)point {
     if(_pixelDataLoaded == NO) {
         C4Log(@"You must first load pixel data");
-    } else  if ([self pointInside:point withEvent:nil]) {
+    } else  if ([self.view pointInside:point withEvent:nil]) {
         if(_rawData == nil) {
             [self loadPixelData];
         }
@@ -1918,7 +1938,7 @@
 -(C4Vector *)rgbVectorAt:(CGPoint)point {
     if(_pixelDataLoaded == NO) {
         C4Log(@"You must first load pixel data");
-    } else if([self pointInside:point withEvent:nil]) {
+    } else if([self.view pointInside:point withEvent:nil]) {
         if(self.pixelDataLoaded == NO) {
             [self loadPixelData];
         }
@@ -1950,7 +1970,7 @@
 
 #pragma mark Layer Access Overrides
 -(C4Layer *)imageLayer {
-    return self.imageView.imageLayer;
+    return (C4Layer*)self.imageView.layer;
 }
 
 -(C4Layer *)layer {

@@ -28,17 +28,12 @@
 }
 
 -(id)initWithFrame:(CGRect)frame {
-    CGPoint origin = frame.origin;
-    origin.x = floorf(origin.x);
-    origin.y = floorf(origin.y);
-    frame.origin = origin;
-    self = [super initWithFrame:frame];
+    UIStepper* stepper = [[UIStepper alloc] initWithFrame:frame];
+    stepper.maximumValue = 5;
+    self = [super initWithView:stepper];
     if(self != nil) {
-        _UIStepper.layer.masksToBounds = YES;
-        _UIStepper = [[UIStepper alloc] init];
+        _UIStepper = stepper;
         self.maximumValue = 5;
-        self.frame = (CGRect){self.origin,_UIStepper.frame.size};
-        [self addSubview:_UIStepper];
     }
     return self;
 }

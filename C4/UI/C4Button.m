@@ -29,13 +29,11 @@
 
 -(id)initWithType:(C4ButtonType)type {
     UIButton *button = [UIButton buttonWithType:(UIButtonType)type];
-    self = [super initWithFrame:button.frame];
+    self = [super initWithView:button];
     if(self != nil) {
         _UIButton = button;
-        _UIButton.frame = self.bounds;
         _UIButton.layer.masksToBounds = YES;
         [self setupFromDefaults];
-        [self addSubview:_UIButton];
         [self setup];
     }
     return self;

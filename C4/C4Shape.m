@@ -18,10 +18,10 @@
 // IN THE SOFTWARE.
 
 #import "C4Shape.h"
+#import "C4UIShapeControl.h"
 
 @interface C4Shape()
 @property (readonly, nonatomic) BOOL initialized, shouldClose;
-@property (atomic) BOOL isTriangle;
 @property (readonly, atomic) NSArray *localStylePropertyNames;
 @end
 
@@ -34,7 +34,7 @@
 }
 
 -(id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
+    self = [super initWithView:[[C4UIShapeControl alloc] initWithFrame:frame]];
     if(self != nil) {
         _initialized = NO;
         self.animationOptions = BEGINCURRENT | EASEINOUT;
@@ -46,7 +46,6 @@
 -(void)willChangeShape {
     _arc = NO;
     _line = NO;
-    _isTriangle = NO;
     _bezierCurve = NO;
     _quadCurve = NO;
     _closed = NO;
@@ -420,7 +419,6 @@
 
 -(void)_triangle:(NSArray *)pointArray {
     [self willChangeShape];
-    _isTriangle = YES;
     //create a c-array of points
     NSInteger pointCount = [pointArray count];
     CGPoint points[pointCount];
@@ -776,10 +774,6 @@
 #pragma mark Layer class methods
 -(C4ShapeLayer *)shapeLayer {
     return (C4ShapeLayer *)self.layer;
-}
-
-+(Class)layerClass {
-    return [C4ShapeLayer class];
 }
 
 //-(void)setAnimationOptions:(NSUInteger)animationOptions {

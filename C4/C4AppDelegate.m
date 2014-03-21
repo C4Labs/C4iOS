@@ -19,20 +19,17 @@
 
 #import "C4AppDelegate.h"
 #import "C4AssertionHandler.h"
+#import "C4UIWindow.h"
 
 @implementation C4AppDelegate
 
--(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    launchOptions = launchOptions;
-    
-    [C4View class];
-    
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     C4AssertionHandler* customAssertionHandler = [[C4AssertionHandler alloc] init];
     [[[NSThread currentThread] threadDictionary] setValue:customAssertionHandler forKey:NSAssertionHandlerKey];
     // NB: your windowing code goes here - e.g. self.window.rootViewController = self.viewController;
     
     application.statusBarHidden = YES;
-    self.window = [[C4Window alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window = [[C4UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.workspace = [[C4WorkSpace alloc] init];
     _window.rootViewController = self.workspace;
     
@@ -47,7 +44,7 @@
     return YES;
 }
 
-+(void)initialize {
++ (void)initialize {
     //set these before everything else.
     C4Control* controlStyle = [C4Control defaultTemplateProxy];
     controlStyle.alpha = 1.0f;

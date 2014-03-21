@@ -18,7 +18,8 @@
 // IN THE SOFTWARE.
 
 #import <UIKit/UIKit.h>
-@class C4Window;
+
+@class C4Control;
 
 /** The C4CanvasController class provides control over the main canvas in C4.
  
@@ -51,7 +52,7 @@
  
  `self.canvas.backgroundColor = [UIColor ...];`
  */
-@property (readonly, strong, nonatomic) C4View *canvas;
+@property (readonly, strong, nonatomic) C4Control *canvas;
 
 #pragma mark C4Camera Callback
 #pragma mark - Callbacks

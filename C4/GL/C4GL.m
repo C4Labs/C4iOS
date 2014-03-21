@@ -18,6 +18,7 @@
 // IN THE SOFTWARE.
 
 #import "C4GL.h"
+#import "C4UIGLControl.h"
 
 @interface C4GL ()
 -(void)render;
@@ -48,7 +49,7 @@
 }
 
 -(id)initWithRenderer:(id <C4EAGLESRenderer>)renderer {
-    self = [super init];
+    self = [super initWithView:[[C4UIGLControl alloc] init]];
     if (self != nil) {
         _eaglLayer = (C4EAGLLayer *)self.layer;
         _eaglLayer.drawableProperties = @{kEAGLDrawablePropertyRetainedBacking: @NO, kEAGLDrawablePropertyColorFormat: kEAGLColorFormatRGBA8};
@@ -150,10 +151,6 @@
     _renderer = renderer;
     
     if(wasAnimating) [self startAnimation];
-}
-
-+ (Class) layerClass {
-    return [C4EAGLLayer class];
 }
 
 -(void)setBackgroundColor:(UIColor *)backgroundColor {

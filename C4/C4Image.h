@@ -18,7 +18,6 @@
 // IN THE SOFTWARE.
 
 #import "C4Control.h"
-#import "C4ImageView.h"
 
 /**This document describes the C4Image class. A C4Image object provides access for creating, showing, interacting and manipulating images. C4Image is a subclass of C4Control and so inherits its animation, gesture and notification abilities.
  

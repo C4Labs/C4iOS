@@ -50,10 +50,6 @@
 #endif
 }
 
-#pragma mark Safe Initialization Methods
--(void)setup {}
--(void)test {}
-
 #pragma mark C4Layer Animation Methods //code from this line forward should be common amongst all C4Layer variations
 -(CABasicAnimation *)setupBasicAnimationWithKeyPath:(NSString *)keyPath {
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:keyPath];

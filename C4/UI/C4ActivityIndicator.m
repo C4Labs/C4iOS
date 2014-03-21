@@ -28,12 +28,11 @@
 }
 
 -(id)initWithActivityIndicatorStyle:(C4ActivityIndicatorStyle)style {
-    self = [super init];
-    if(self != nil) {
-        _UIActivityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:(UIActivityIndicatorViewStyle)style];
-        self.frame = _UIActivityIndicatorView.frame;
+    UIActivityIndicatorView* aiv = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:(UIActivityIndicatorViewStyle)style];
+    self = [super initWithView:aiv];
+    if (self != nil) {
+        _UIActivityIndicatorView = aiv;
         [self setupFromDefaults];
-        [self addSubview:_UIActivityIndicatorView];
     }
     return self;
 }

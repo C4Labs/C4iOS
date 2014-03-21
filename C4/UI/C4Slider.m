@@ -17,6 +17,7 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
+#import "C4Defines.h"
 #import "C4Slider.h"
 
 @implementation C4Slider
@@ -33,15 +34,13 @@
 }
 
 -(id)initWithFrame:(CGRect)frame defaults:(BOOL)useDefaults {
-    self = [super initWithFrame:frame];
-    if(self != nil) {
+    UISlider *slider = [[UISlider alloc] initWithFrame:frame];
+    self = [super initWithView:slider];
+    if (self != nil) {
+        _UISlider = slider;
         
-        _UISlider = [[UISlider alloc] initWithFrame:frame];
-        
-        if(useDefaults) [self setupFromDefaults];
-        
-        [self addSubview:_UISlider];
-        self.userInteractionEnabled = YES;
+        if (useDefaults)
+            [self setupFromDefaults];
         [self setup];
     }
     return self;
@@ -65,7 +64,7 @@
 
 -(void)setThumbTintColor:(UIColor *)color {
     _thumbTintColor = color;
-    self.UISlider.thumbTintColor = [self nilForNullObject:color];
+    self.UISlider.thumbTintColor = nilForNullObject(color);
 }
 
 -(UIColor *)maximumTrackTintColor {
@@ -74,7 +73,7 @@
 
 -(void)setMaximumTrackTintColor:(UIColor *)color {
     _maximumTrackTintColor = color;
-    self.UISlider.maximumTrackTintColor = [self nilForNullObject:color];
+    self.UISlider.maximumTrackTintColor = nilForNullObject(color);
 }
 
 -(UIColor *)minimumTrackTintColor {
@@ -83,7 +82,7 @@
 
 -(void)setMinimumTrackTintColor:(UIColor *)color {
     _minimumTrackTintColor = color;
-    self.UISlider.minimumTrackTintColor = [self nilForNullObject:color];
+    self.UISlider.minimumTrackTintColor = nilForNullObject(color);
 }
 
 -(C4Image *)maximumValueImage {

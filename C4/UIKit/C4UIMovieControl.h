@@ -1,4 +1,4 @@
-// Copyright © 2012 Travis Kirton
+// Copyright © 2012 Travis Kirton, Alejandro Isaza
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to
@@ -17,10 +17,8 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-#import <UIKit/UIKit.h>
+#import "C4UIControl.h"
 
-@interface C4ImageView : UIImageView
+@interface C4UIMovieControl : C4UIControl
 
--(C4Layer *)imageLayer;
--(void)rotationDidFinish:(CGFloat)newRotationAngle;
 @end

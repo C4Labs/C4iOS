@@ -62,7 +62,7 @@
 ///@name View & Layer
 /** The receiver’s view.
  */
-@property (readwrite, strong, nonatomic) C4View *view;
+@property (readwrite, strong, nonatomic) C4Control *view;
 
 /** The receiver’s view's backing layer.
  */

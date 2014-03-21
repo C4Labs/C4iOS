@@ -66,30 +66,21 @@
     return self;
 }
 
--(id)initWithUILabel:(UILabel *)aLabel {
-    self = [super initWithFrame:aLabel.frame];
+-(id)initWithUILabel:(UILabel *)label {
+    self = [super initWithView:label];
     if(self != nil) {
-        _label = [aLabel copy];
-        [self addSubview:_label];
         [self setup];
     }
     return self;
 }
 
 -(id)initWithFrame:(CGRect)frame {
-    if(CGRectEqualToRect(frame, CGRectZero)) frame = CGRectMake(0, 0, 1, 1);
-    self = [super initWithFrame:frame];
-    if(self != nil) {
-        _label = [[UILabel alloc] initWithFrame:self.bounds];
-        _label.textColor = self.textColor;
-        _label.highlightedTextColor = self.highlightedTextColor;
-        _label.backgroundColor = [UIColor clearColor];
-        _label.shadowColor = [UIColor clearColor];
-        
-        [self addSubview:(UILabel *)_label];
-        [self setup];
-    }
-    return self;
+    UILabel* label = [[UILabel alloc] initWithFrame:frame];
+    label.textColor = self.textColor;
+    label.highlightedTextColor = self.highlightedTextColor;
+    label.backgroundColor = [UIColor clearColor];
+    label.shadowColor = [UIColor clearColor];
+    return [self initWithUILabel:label];
 }
 
 -(void)dealloc {
@@ -145,16 +136,6 @@
 -(void)_setTextShadowOffset:(NSValue *)shadowOffset {
     _textShadowOffset = [shadowOffset CGSizeValue];
     self.label.shadowOffset = [shadowOffset CGSizeValue];
-}
-
--(void)setEnabled:(BOOL)enabled {
-    if(self.animationDelay == 0.0f) [self _setEnabled:@(enabled)];
-    else [self performSelector:@selector(_setEnabled:) withObject:@(enabled) afterDelay:self.animationDelay];
-}
-
--(void)_setEnabled:(NSNumber *)enabled {
-    [super setEnabled:[enabled boolValue]];//weeeeeeird bug if this isn't included
-    self.label.enabled = [enabled boolValue];
 }
 
 -(C4Font *)font {

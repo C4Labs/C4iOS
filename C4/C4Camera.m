@@ -42,12 +42,12 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.cameraController = [[C4CameraController alloc] init];
-        self.cameraController.view = (C4View *)self;
+        self.cameraController.view = (C4Control *)self;
         self.previewLayer = [C4CameraLayer layerWithSession:self.cameraController.captureSession];
         self.cameraController.previewLayer = self.previewLayer;
-        self.previewLayer.frame = self.layer.bounds;
+        self.previewLayer.frame = self.view.layer.bounds;
         
-        [self.layer addSublayer:self.previewLayer];
+        [self.view.layer addSublayer:self.previewLayer];
         self.cameraPosition = CAMERAFRONT;
         
         [self listenFor:@"imageWasCaptured" fromObject:self.cameraController andRunMethod:@"imageWasCaptured"];
@@ -66,14 +66,6 @@
 -(void)initCapture {
     [self.cameraController initCapture];
 }
-
-+(Class)layerClass {
-    return [C4Layer class];
-}
-
-//- (C4CameraLayer *)previewLayer {
-//    return (C4CameraLayer *)self.layer;
-//}
 
 -(void)captureImage {
     [self.cameraController captureImage];

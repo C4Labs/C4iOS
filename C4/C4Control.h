@@ -17,13 +17,10 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-/*
- should add https://developer.apple.com/library/ios/#qa/qa1673/_index.html
- and animating along a path
- */
-
 #import <UIKit/UIKit.h>
+#import "C4Object.h"
 
+@class C4Layer;
 @class C4Template;
 
 /** The C4Control is a subclass of UIControl, which is the base class for control objects such as buttons and sliders that convey user intent to the application. You cannot use the UIControl class directly to instantiate controls. It instead defines the common interface and behavioral structure for all its subclasses.
@@ -52,28 +49,28 @@
  
  */
 
-@interface C4Control : UIControl <C4Notification, C4Gesture, C4MethodDelay, C4AddSubview> {
-    
-}
+@interface C4Control : C4Object <C4AddSubview>
+
+- (id)initWithFrame:(CGRect)frame;
+- (id)initWithView:(UIView*)view;
+
+
+#pragma mark - Properties
+
+@property(nonatomic, strong, readonly) UIView* view;
+@property(nonatomic, strong, readonly) C4Layer *layer;
+
+@property(nonatomic) CGRect frame;
+@property(nonatomic) CGRect bounds;
+@property(nonatomic) CGPoint center;
+@property(nonatomic) CGAffineTransform transform;
+
+@property(nonatomic, copy) UIColor *backgroundColor;
+@property(nonatomic) CGFloat alpha;
+@property(nonatomic, getter=isHidden) BOOL hidden;
+
 
 #pragma mark - Convenience Methods
-///@name Convenience Methods
-
-/** A method to call instead of overriding any of the standard initializers.
- 
- It is easier and safer to override this method than to override something like -(id)init, or -(id)initWithFrame, etc...
- */
--(void)setup;
-
-/** A method to call when you want to test simple things.
- 
- Override this method to test small bits of fuctionality. For example, you could call this method to make sure another call is working by doing the following in the .m file of your subclass:
- 
- -(void)test {
- C4Log(@"test was run");
- }
- */
--(void)test;
 
 /** A method to remove another object from its view.
  
@@ -98,28 +95,6 @@
  @param rotation the value (in radians) to rotate the receiver
  */
 -(void)rotationDidFinish:(CGFloat)rotation;
-
-/**This method returns an NSNull object if the current object is nil, otherwise it returns the given object as-is.
- 
- Use this method to check a given object is equal to nil. If so, this method returns an NSNull object.
- 
- This method is used for reading out NSNull values from the style dictionaries that are passed as properties.
- 
- @param object An object to test if its value is nil
- @return NSNull or the object being passed.
- */
--(id)nullForNilObject:(id)object;
-
-/**This method returns nil if the current object is NSNull, otherwise it returns the given object as-is.
- 
- Use this method to check a given object is equal to NSNull. If so, this method returns nil.
- 
- This method is used when creating style dictionaries that cannot take nil as object values.
- 
- @param object An object to test if its value is NSNull
- @return nil or the object being passed.
- */
--(id)nilForNullObject:(id)object;
 
 /**Renders the receiver and its sublayers into the specified context.
  

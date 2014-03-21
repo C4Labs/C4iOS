@@ -21,7 +21,6 @@
 
 @interface C4ShapeLayer()
 -(CABasicAnimation *)setupBasicAnimationWithKeyPath:(NSString *)keyPath;
-@property (readwrite, nonatomic) CGFloat rotationAngle;
 @end
 
 @implementation C4ShapeLayer
@@ -493,15 +492,17 @@
 
 
 -(void)animateRotation:(CGFloat)rotationAngle {
+    static NSString* const KEY_PATH = @"transform.rotation.z";
+    CGFloat from = [[self valueForKeyPath:KEY_PATH] floatValue];
+    
     [CATransaction begin];
-    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"transform.rotation.z"];
-    animation.fromValue = @(self.rotationAngle);
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:KEY_PATH];
+    animation.fromValue = @(from);
     animation.toValue = @(rotationAngle);
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
         [CATransaction setCompletionBlock:^ {
-            self.rotationAngle = rotationAngle;
-            [self.delegate rotationDidFinish:rotationAngle];
             [self removeAnimationForKey:@"animateRotationZ"];
+            [self setValue:@(rotationAngle) forKeyPath:KEY_PATH];
         }];
     }
     [self addAnimation:animation forKey:@"animateRotationZ"];

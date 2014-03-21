@@ -26,14 +26,14 @@
     return [[C4ScrollView alloc] initWithFrame:rect];
 }
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
+- (id)initWithFrame:(CGRect)frame {
+    UIScrollView* scrollView = [[UIScrollView alloc] initWithFrame:frame];
+    scrollView.delegate = self;
+    scrollView.backgroundColor = [UIColor clearColor];
+    
+    self = [super initWithView:scrollView];
     if (self) {
-        _UIScrollview = [[UIScrollView alloc] initWithFrame:self.bounds];
-        _UIScrollview.delegate = self;
-        _UIScrollview.backgroundColor = [UIColor clearColor];
-        [super addSubview:_UIScrollview];
+        _UIScrollview = scrollView;
         [_UIScrollview addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
     }
     return self;
@@ -350,13 +350,13 @@
 -(void)addCamera:(C4Camera *)camera {
     C4Assert([camera isKindOfClass:[C4Camera class]],
              @"You tried to add a %@ using [canvas addShape:]", [camera class]);
-    [_UIScrollview addSubview:camera];
+    [_UIScrollview addSubview:camera.view];
 }
 
 -(void)addShape:(C4Shape *)shape {
     C4Assert([shape isKindOfClass:[C4Shape class]],
              @"You tried to add a %@ using [canvas addShape:]", [shape class]);
-    [_UIScrollview addSubview:shape];
+    [_UIScrollview addSubview:shape.view];
 }
 
 -(void)addSubview:(UIView *)subview {
@@ -372,25 +372,25 @@
 -(void)addLabel:(C4Label *)label {
     C4Assert([label isKindOfClass:[C4Label class]],
              @"You tried to add a %@ using [canvas addLabel:]", [label class]);
-    [_UIScrollview addSubview:label];
+    [_UIScrollview addSubview:label.view];
 }
 
 -(void)addGL:(C4GL *)gl {
     C4Assert([gl isKindOfClass:[C4GL class]],
              @"You tried to add a %@ using [canvas addGL:]", [gl class]);
-    [_UIScrollview addSubview:gl];
+    [_UIScrollview addSubview:gl.view];
 }
 
 -(void)addImage:(C4Image *)image {
     C4Assert([image isKindOfClass:[C4Image class]],
              @"You tried to add a %@ using [canvas addImage:]", [image class]);
-    [_UIScrollview addSubview:image];
+    [_UIScrollview addSubview:image.view];
 }
 
 -(void)addMovie:(C4Movie *)movie {
     C4Assert([movie isKindOfClass:[C4Movie class]],
              @"You tried to add a %@ using [canvas addMovie:]", [movie class]);
-    [_UIScrollview addSubview:movie];
+    [_UIScrollview addSubview:movie.view];
 }
 
 

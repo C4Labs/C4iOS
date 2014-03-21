@@ -18,6 +18,7 @@
 // IN THE SOFTWARE.
 
 #import "C4Movie.h"
+#import "C4UIMovieControl.h"
 
 @interface C4Movie() {
     void *rateContext, *currentItemContext, *playerItemStatusContext;
@@ -72,8 +73,8 @@
     return self;
 }
 
--(id)initWithURL:(NSURL *)url frame:(CGRect)movieFrame {
-    self = [super initWithFrame:movieFrame];
+-(id)initWithURL:(NSURL *)url frame:(CGRect)frame {
+    self = [super initWithView:[[C4UIMovieControl alloc] initWithFrame:frame]];
     if(self != nil) {
         _volume = 1.0f;
         self.shouldAutoplay = NO;
@@ -103,7 +104,7 @@
                     [self prepareToPlayAsset:asset];
                 });
             }];
-            [self completeSetupWithAsset:asset frame:movieFrame];
+            [self completeSetupWithAsset:asset frame:frame];
         }
     }
     return self;
@@ -153,10 +154,6 @@
     if(wasPlaying == YES) {
         [self play];
     }
-}
-
-+ (Class)layerClass {
-    return [C4MovieLayer class];
 }
 
 - (C4MovieLayer *)playerLayer {

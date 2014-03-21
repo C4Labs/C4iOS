@@ -33,12 +33,11 @@
 }
 
 -(id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
+    UISwitch* sw = [[UISwitch alloc] init];
+    self = [super initWithView:sw];
     if(self != nil) {
-        _UISwitch = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 63, 23)];//not sure if i really need this
-        self.frame = _UISwitch.frame;
+        _UISwitch = sw;
         [self setupFromDefaults];
-        [self addSubview:_UISwitch];
         [self setup];
     }
     return self;

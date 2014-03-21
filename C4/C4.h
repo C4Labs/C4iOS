@@ -38,7 +38,6 @@
 // Main classes
 #import "C4Object.h"
 #import "C4Control.h"
-#import "C4View.h"
 
 #import "C4Camera.h"
 #import "C4Font.h"
@@ -60,7 +59,6 @@
 #import "C4Slider.h"
 #import "C4Stepper.h"
 #import "C4Switch.h"
-#import "C4Window.h"
 
 // OpenGl
 #import "C4EAGLESRenderer.h"

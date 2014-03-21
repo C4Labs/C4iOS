@@ -18,18 +18,18 @@
 // IN THE SOFTWARE.
 
 #import "C4CanvasController.h"
+#import "C4UIControl.h"
 #import <objc/message.h>
 
 @interface C4CanvasController ()
-@property (readwrite, atomic, strong) NSString *longPressMethodName;
-@property (readwrite, atomic, strong) NSMutableDictionary *gestureDictionary;
+@property (nonatomic, strong) C4Control *canvas;
+@property (nonatomic, strong) NSString *longPressMethodName;
+@property (nonatomic, strong) NSMutableDictionary *gestureDictionary;
 @end
 
 @implementation C4CanvasController
 
-@synthesize canvas = _canvas;
-
--(id)init {
+- (id)init {
     self = [super init];
     if(self != nil) {
         [self listenFor:@"movieIsReadyForPlayback" andRunMethod:@"movieIsReadyForPlayback:"];
@@ -37,66 +37,56 @@
     return self;
 }
 
--(void)dealloc {
-    self.longPressMethodName = nil;
-    NSEnumerator *enumerator = [self.gestureDictionary keyEnumerator];
-    id key;
-    while ((key = [enumerator nextObject])) {
-        UIGestureRecognizer *g = (self.gestureDictionary)[key];
+- (void)dealloc {
+    for (UIGestureRecognizer *g in [self.gestureDictionary allValues]) {
         [g removeTarget:self action:nil];
-        [self.canvas removeGestureRecognizer:g];
+        [self.view removeGestureRecognizer:g];
     }
-    [self.gestureDictionary removeAllObjects];
-    self.gestureDictionary = nil;
-    _canvas = nil;
 }
 
--(void)loadView {
-    self.view = [[C4View alloc] init];
-    _canvas = (C4View*)self.view;
+- (void)loadView {
+    C4UIControl* control = [[C4UIControl alloc] init];;
+    self.view = control;
+    _canvas = [[C4Control alloc] initWithView:control];
 }
 
 -(void)setup {
 }
 
--(C4View *)canvas {
-    return (C4View *)self.view;
-}
-
 -(void)addCamera:(C4Camera *)camera {
     C4Assert([camera isKindOfClass:[C4Camera class]],
              @"You tried to add a %@ using [canvas addCamera:]", [camera class]);
-    [self.canvas addSubview:camera];
+    [self.view addSubview:camera.view];
     [camera initCapture];
     [self listenFor:@"imageWasCaptured" fromObject:camera andRunMethod:@"imageWasCaptured"];
 }
 
 -(void)addShape:(C4Shape *)shape {
-    [(C4View *)self.view addShape:shape];
+    [(C4Control *)self.view addShape:shape];
 }
 
 -(void)addSubview:(UIView *)subview {
-    [(C4View *)self.view addSubview:subview];
+    [self.view addSubview:subview];
 }
 
 -(void)addLabel:(C4Label *)label {
-    [(C4View *)self.view addLabel:label];
+    [(C4Control *)self.view addLabel:label];
 }
 
 -(void)addGL:(C4GL *)gl {
-    [(C4View *)self.view addGL:gl];
+    [(C4Control *)self.view addGL:gl];
 }
 
 -(void)addImage:(C4Image *)image {
-    [(C4View *)self.view addImage:image];
+    [(C4Control *)self.view addImage:image];
 }
 
 -(void)addMovie:(C4Movie *)movie {
-    [(C4View *)self.view addMovie:movie];
+    [(C4Control *)self.view addMovie:movie];
 }
 
 -(void)addUIElement:(id<C4UIElement>)object {
-    [(C4View *)self.view addSubview:(C4Control *)object];
+    [self.view addSubview:((C4Control *)object).view];
 }
 
 -(void)addObjects:(NSArray *)array {
@@ -237,7 +227,7 @@
         }
         recognizer.delaysTouchesBegan = YES;
         recognizer.delaysTouchesEnded = YES;
-        [self.canvas addGestureRecognizer:recognizer];
+        [self.view addGestureRecognizer:recognizer];
         (self.gestureDictionary)[gestureName] = recognizer;
     }
 }
