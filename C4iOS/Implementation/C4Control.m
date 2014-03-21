@@ -241,14 +241,21 @@
     [(id <C4LayerAnimation>)self.layer animateRotation:_rotation];
 }
 
+- (CGFloat)rotationX {
+    return [[self.layer valueForKeyPath:@"transform.rotation.x"] floatValue];
+}
+
 -(void)setRotationX:(CGFloat)rotation {
     if(self.animationDelay == 0.0f) [self _setRotationX:@(rotation)];
     else [self performSelector:@selector(_setRotationX:) withObject:@(rotation) afterDelay:self.animationDelay];
 }
 
 -(void)_setRotationX:(NSNumber *)rotation {
-    _rotationX = [rotation floatValue];
-    [(id <C4LayerAnimation>)self.layer animateRotationX:_rotationX];
+    [(id <C4LayerAnimation>)self.layer animateRotationX:[rotation floatValue]];
+}
+
+- (CGFloat)rotationY {
+    return [[self.layer valueForKeyPath:@"transform.rotation.y"] floatValue];
 }
 
 -(void)setRotationY:(CGFloat)rotation {
@@ -257,8 +264,7 @@
 }
 
 -(void)_setRotationY:(NSNumber *)rotation {
-    _rotationY = [rotation floatValue];
-    [(id <C4LayerAnimation>)self.layer animateRotationY:_rotationY];
+    [(id <C4LayerAnimation>)self.layer animateRotationY:[rotation floatValue]];
 }
 
 -(void)rotationDidFinish:(CGFloat)rotation {

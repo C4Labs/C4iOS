@@ -21,7 +21,7 @@
 
 @interface C4ShapeLayer()
 -(CABasicAnimation *)setupBasicAnimationWithKeyPath:(NSString *)keyPath;
-@property (readwrite, nonatomic) CGFloat rotationAngle, rotationAngleX, rotationAngleY;
+@property (readwrite, nonatomic) CGFloat rotationAngle;
 @end
 
 @implementation C4ShapeLayer
@@ -509,15 +509,17 @@
 }
 
 -(void)animateRotationX:(CGFloat)newRotationAngle {
+    static NSString* const KEY_PATH = @"transform.rotation.x";
+    CGFloat from = [[self valueForKeyPath:KEY_PATH] floatValue];
+    
     [CATransaction begin];
-    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"transform.rotation.x"];
-    animation.fromValue = @(self.rotationAngleX);
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:KEY_PATH];
+    animation.fromValue = @(from);
     animation.toValue = @(newRotationAngle);
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
         [CATransaction setCompletionBlock:^ {
-            self.transform = CATransform3DRotate(self.transform, newRotationAngle - self.rotationAngleX, 1, 0, 0);
-            self.rotationAngleX = newRotationAngle;
             [self removeAnimationForKey:@"animateRotationX"];
+            [self setValue:@(newRotationAngle) forKeyPath:KEY_PATH];
         }];
     }
     [self addAnimation:animation forKey:@"animateRotationX"];
@@ -525,15 +527,17 @@
 }
 
 -(void)animateRotationY:(CGFloat)newRotationAngle {
+    static NSString* const KEY_PATH = @"transform.rotation.y";
+    CGFloat from = [[self valueForKeyPath:KEY_PATH] floatValue];
+    
     [CATransaction begin];
-    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"transform.rotation.y"];
-    animation.fromValue = @(self.rotationAngleY);
+    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:KEY_PATH];
+    animation.fromValue = @(from);
     animation.toValue = @(newRotationAngle);
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
         [CATransaction setCompletionBlock:^ {
-            self.transform =    CATransform3DRotate(self.transform, newRotationAngle - self.rotationAngleY, 0, 1, 0);
-            self.rotationAngleY = newRotationAngle;
             [self removeAnimationForKey:@"animateRotationY"];
+            [self setValue:@(newRotationAngle) forKeyPath:KEY_PATH];
         }];
     }
     [self addAnimation:animation forKey:@"animateRotationY"];
