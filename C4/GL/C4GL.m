@@ -23,7 +23,7 @@
 @interface C4GL ()
 -(void)render;
 @property (readonly, nonatomic, getter = isDisplayLinkSupported) BOOL displayLinkSupported;
-@property (readonly, strong, nonatomic) C4EAGLLayer *eaglLayer;
+@property (readonly, strong, nonatomic) CAEAGLLayer *eaglLayer;
 @property (readwrite, strong, nonatomic) id displayLink;
 @property (readwrite, strong, nonatomic) NSTimer *animationTimer;
 @end
@@ -51,7 +51,7 @@
 -(id)initWithRenderer:(id <C4EAGLESRenderer>)renderer {
     self = [super initWithView:[[C4UIGLControl alloc] init]];
     if (self != nil) {
-        _eaglLayer = (C4EAGLLayer *)self.layer;
+        _eaglLayer = (CAEAGLLayer *)self.view.layer;
         _eaglLayer.drawableProperties = @{kEAGLDrawablePropertyRetainedBacking: @NO, kEAGLDrawablePropertyColorFormat: kEAGLColorFormatRGBA8};
         
         if (nil == _renderer) {
@@ -93,7 +93,7 @@
 }
 
 - (void) layoutSubviews {
-    [_renderer resizeFromLayer:(C4EAGLLayer*)self.layer];
+    [_renderer resizeFromLayer:(CAEAGLLayer*)self.view.layer];
     [self render];
 }
 

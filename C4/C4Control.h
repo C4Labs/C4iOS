@@ -20,6 +20,7 @@
 #import <UIKit/UIKit.h>
 #import "C4Object.h"
 
+@class C4AnimationHelper;
 @class C4Layer;
 @class C4Template;
 
@@ -58,7 +59,7 @@
 #pragma mark - Properties
 
 @property(nonatomic, strong, readonly) UIView* view;
-@property(nonatomic, strong, readonly) C4Layer *layer;
+@property(nonatomic, strong, readonly) C4AnimationHelper *animationHelper;
 
 @property(nonatomic) CGRect frame;
 @property(nonatomic) CGRect bounds;
@@ -87,14 +88,6 @@
  @param array the array of visible objects to remove from their parent view
  */
 -(void)removeObjects:(NSArray *)array;
-
-/** A convenience method used for handling the rotation of a visual object's view after its z-rotation has changed.
- 
- You shouldn't use this method, it will be deprecated in future versions.
- 
- @param rotation the value (in radians) to rotate the receiver
- */
--(void)rotationDidFinish:(CGFloat)rotation;
 
 /**Renders the receiver and its sublayers into the specified context.
  
@@ -152,11 +145,6 @@
  */
 @property (nonatomic) NSUInteger animationOptions;
 
-/** The number of times an animation autorepeats.
- 
- @warning *Note:* This parameter is currently unused.
- */
-@property (nonatomic) CGFloat repeatCount;
 
 #pragma mark Shadow Properties
 ///@name Shadow Properties

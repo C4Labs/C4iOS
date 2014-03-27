@@ -24,7 +24,7 @@
     void *rateContext, *currentItemContext, *playerItemStatusContext;
 }
 @property (readwrite, nonatomic) NSURL *movieURL;
-@property (readwrite, nonatomic, strong) C4MovieLayer *playerLayer;
+@property (readwrite, nonatomic, strong) AVPlayerLayer *playerLayer;
 @property (readwrite, nonatomic, strong) AVPlayer *player;
 @property (readwrite, nonatomic, strong) AVPlayerItem *playerItem;
 @end
@@ -156,8 +156,8 @@
     }
 }
 
-- (C4MovieLayer *)playerLayer {
-    return (C4MovieLayer *)self.layer;
+- (AVPlayerLayer *)playerLayer {
+    return (AVPlayerLayer *)self.view.layer;
 }
 
 -(void)assetFailedToPrepareForPlayback:(NSError *)error {

@@ -21,7 +21,6 @@
 
 // Protocols
 #import "C4Gesture.h"
-#import "C4LayerAnimation.h"
 #import "C4MethodDelay.h"
 #import "C4Notification.h"
 #import "C4UIElement.h"
@@ -41,11 +40,8 @@
 
 #import "C4Camera.h"
 #import "C4Font.h"
-#import "C4Layer.h"
 #import "C4Image.h"
-#import "C4ShapeLayer.h"
 #import "C4Shape.h"
-#import "C4MovieLayer.h"
 #import "C4Movie.h"
 #import "C4Sample.h"
 #import "C4ViewController.h"
@@ -65,7 +61,6 @@
 #import "C4EAGLES1Renderer.h"
 #import "C4GL1Renderer.h"
 #import "C4GL.h"
-#import "C4EAGLLayer.h"
 
 // Workspace
 #import "C4WorkSpace.h"

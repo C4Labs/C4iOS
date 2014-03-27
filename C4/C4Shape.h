@@ -17,7 +17,7 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-#import "C4ShapeLayer.h"
+#import "C4Control.h"
 
 /**The C4Shape class implements a modifiable view that handles shapes. You can use this class to create almost any kind of basic shape, as well as more complicated polygons.
  
@@ -355,14 +355,6 @@
 /**Specifies the second control point (bezier curves only). Animatable.
  */
 @property (readwrite, nonatomic) CGPoint controlPointB;
-
-/**The shape's view backing layer.
- 
- C4Shapes are actually views, and have a backing layer. This layer is a C4ShapeLayer which is a subclass of CAShapelayer, allowing for the creation and drawing of bezier paths.
- 
- Accessing the shape layer is allowed, but modifying it is not. Changing properties of the shape will automatically inform and apply them to shapeLayer.
- */
-@property (readonly, atomic, strong) C4ShapeLayer *shapeLayer;
 
 /**Specifies whether the given shape is closed or not. This is useful for determining if polygons are open or closed.
  */

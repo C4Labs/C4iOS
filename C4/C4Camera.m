@@ -22,7 +22,7 @@
 
 @interface C4Camera ()
 @property (readwrite, strong, nonatomic) C4CameraController *cameraController;
-@property (readwrite, strong, nonatomic) C4CameraLayer *previewLayer;
+@property (readwrite, strong, nonatomic) AVCaptureVideoPreviewLayer *previewLayer;
 @property (readonly, nonatomic) BOOL initialized;
 //@property (readwrite, atomic) BOOL shouldAutoreverse;
 @end
@@ -43,7 +43,7 @@
     if (self) {
         self.cameraController = [[C4CameraController alloc] init];
         self.cameraController.view = (C4Control *)self;
-        self.previewLayer = [C4CameraLayer layerWithSession:self.cameraController.captureSession];
+        self.previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:self.cameraController.captureSession];
         self.cameraController.previewLayer = self.previewLayer;
         self.previewLayer.frame = self.view.layer.bounds;
         

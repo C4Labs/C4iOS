@@ -17,13 +17,12 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-#import "C4MovieLayer.h"
 #import "C4UIMovieControl.h"
 
 @implementation C4UIMovieControl
 
 + (Class)layerClass {
-    return [C4MovieLayer class];
+    return [AVPlayerLayer class];
 }
 
 @end

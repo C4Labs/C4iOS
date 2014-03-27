@@ -17,13 +17,12 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-#import "C4ShapeLayer.h"
 #import "C4UIShapeControl.h"
 
 @implementation C4UIShapeControl
 
 + (Class)layerClass {
-    return [C4ShapeLayer class];
+    return [CAShapeLayer class];
 }
 
 @end

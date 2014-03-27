@@ -18,7 +18,6 @@
 // IN THE SOFTWARE.
 
 #import "C4CanvasController.h"
-#import "C4UIControl.h"
 #import <objc/message.h>
 
 @interface C4CanvasController ()
@@ -45,7 +44,7 @@
 }
 
 - (void)loadView {
-    C4UIControl* control = [[C4UIControl alloc] init];;
+    UIControl* control = [[UIControl alloc] init];;
     self.view = control;
     _canvas = [[C4Control alloc] initWithView:control];
 }

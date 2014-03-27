@@ -17,8 +17,6 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-#import "C4UIControl.h"
-
-@interface C4UIMovieControl : C4UIControl
+@interface C4UIMovieControl : UIControl
 
 @end

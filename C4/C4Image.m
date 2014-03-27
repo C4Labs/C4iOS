@@ -17,12 +17,12 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
+#import "C4AnimationHelper.h"
 #import "C4ActivityIndicator.h"
 #import "C4Image.h"
-#import "C4UIImageView.h"
 
 @interface C4Image ()
-@property (readwrite, strong, nonatomic) C4UIImageView *imageView;
+@property (readwrite, strong, nonatomic) UIImageView *imageView;
 @property (readwrite, strong, nonatomic) UIImage *originalImage;
 @property (readwrite, strong, nonatomic) CIImage *output;
 @property (readwrite, strong, nonatomic) CIContext *filterContext;
@@ -84,7 +84,7 @@
     if(image == nil || image == (UIImage *)[NSNull null])
         return nil;
     
-    C4UIImageView* imageView = [[C4UIImageView alloc] initWithImage:image];
+    UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
     self = [super initWithView:imageView];
     if(self != nil) {
         _originalImage = image;
@@ -94,7 +94,7 @@
         [self setProperties];
         _filterQueue = nil;
         _output = nil;
-        _imageView = [[C4UIImageView alloc] initWithImage:_originalImage];
+        _imageView = [[UIImageView alloc] initWithImage:_originalImage];
         _imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         self.showsActivityIndicator = YES;
         _filterIndicator = [C4ActivityIndicator indicatorWithStyle:WHITE];
@@ -163,11 +163,9 @@
  
  */
 -(void)setRotation:(CGFloat)rotation {
-    [self _setRotation:@(rotation)];
-}
-
--(void)_setRotation:(NSNumber *)rotation {
-    [(id <C4LayerAnimation>)self.layer animateRotation:[rotation floatValue]-_rotation];
+    [self.animationHelper animateKeyPath:@"transform.rotation.z" toValue:@(rotation - _rotation) completion:^() {
+        [self rotationDidFinish:rotation];
+    }];
 }
 
 -(void)rotationDidFinish:(CGFloat)rotation {
@@ -200,11 +198,11 @@
 }
 
 -(CGImageRef)contents {
-    return (__bridge CGImageRef)(self.imageLayer.contents);
+    return (__bridge CGImageRef)(self.imageView.layer.contents);
 }
 
 -(void)setContents:(CGImageRef)image {
-    if(self.animationDuration == 0.0f) self.imageLayer.contents = (__bridge id)image;
+    if(self.animationDuration == 0.0f) self.imageView.layer.contents = (__bridge id)image;
     else [self animateContents:image];
 }
 
@@ -215,20 +213,7 @@
 }
 
 -(void)animateContents:(CGImageRef)image {
-    C4Layer* layer = (C4Layer*)self.layer;
-    
-    [CATransaction begin];
-    CABasicAnimation *animation = [layer setupBasicAnimationWithKeyPath:@"contents"];
-    animation.fromValue = layer.contents;
-    animation.toValue = (__bridge id)image;
-    if (animation.repeatCount != FOREVER && !layer.autoreverses) {
-        [CATransaction setCompletionBlock:^ {
-            layer.contents = (__bridge id)image;
-            [layer removeAnimationForKey:@"animateContents"];
-        }];
-    }
-    [layer addAnimation:animation forKey:@"animateContents"];
-    [CATransaction commit];
+    [self.animationHelper animateKeyPath:@"contents" toValue:(__bridge id)image];
 }
 
 #pragma mark Filter Basics
@@ -1966,15 +1951,6 @@
 
 + (C4Image *)defaultTemplateProxy {
     return [[self defaultTemplate] proxy];
-}
-
-#pragma mark Layer Access Overrides
--(C4Layer *)imageLayer {
-    return (C4Layer*)self.imageView.layer;
-}
-
--(C4Layer *)layer {
-    return self.imageLayer;
 }
 
 @end

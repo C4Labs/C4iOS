@@ -17,13 +17,12 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-#import "C4EAGLLayer.h"
 #import "C4UIGLControl.h"
 
 @implementation C4UIGLControl
 
 + (Class)layerClass {
-    return [C4EAGLLayer class];
+    return [CAEAGLLayer class];
 }
 
 @end

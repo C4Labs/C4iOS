@@ -18,7 +18,6 @@
 // IN THE SOFTWARE.
 
 #import "C4GL1Renderer.h"
-#import "C4EAGLLayer.h"
 
 @implementation C4EAGLES1Renderer
 
@@ -49,7 +48,7 @@
 - (void) render {
 }
 
-- (BOOL) resizeFromLayer:(C4EAGLLayer *)layer{
+- (BOOL) resizeFromLayer:(CAEAGLLayer *)layer{
     glBindRenderbufferOES(GL_RENDERBUFFER_OES, _renderBuffer);
     [_eaglContext renderbufferStorage:GL_RENDERBUFFER_OES fromDrawable:layer];
     glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_WIDTH_OES, &_width);

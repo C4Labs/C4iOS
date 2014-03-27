@@ -17,6 +17,7 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
+#import "C4AnimationHelper.h"
 #import "C4Label.h"
 
 @interface C4Label()
@@ -280,24 +281,15 @@
     else [self performSelector:@selector(_setBackgroundFilters:) withObject:backgroundFilters afterDelay:self.animationDelay];
 }
 -(void)_setBackgroundFilters:(NSArray *)backgroundFilters {
-    [self.backingLayer animateBackgroundFilters:backgroundFilters];
+    [self.animationHelper animateKeyPath:@"backgroundFilters" toValue:backgroundFilters];
 }
 
 -(void)setCompositingFilter:(id)compositingFilter {
-    [self.backingLayer performSelector:@selector(_setCompositingFilter:) withObject:compositingFilter afterDelay:self.animationDelay];
+    [self.animationHelper animateKeyPath:@"compositingFilter" toValue:compositingFilter];
 }
--(void)_setCompositingFilter:(id)compositingFilter {
-    [self.backingLayer animateCompositingFilter:compositingFilter];
-}
+
 
 #pragma mark C4Layer-backed object methods
--(C4Layer *)backingLayer {
-    return (C4Layer *)self.layer;
-}
-
-+(Class)layerClass {
-    return [C4Layer class];
-}
 
 -(CGFloat)width {
     return self.bounds.size.width;

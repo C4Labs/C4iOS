@@ -19,7 +19,6 @@
 
 #import "C4AppDelegate.h"
 #import "C4AssertionHandler.h"
-#import "C4UIWindow.h"
 
 @implementation C4AppDelegate
 
@@ -29,7 +28,7 @@
     // NB: your windowing code goes here - e.g. self.window.rootViewController = self.viewController;
     
     application.statusBarHidden = YES;
-    self.window = [[C4UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.workspace = [[C4WorkSpace alloc] init];
     _window.rootViewController = self.workspace;
     
@@ -53,11 +52,9 @@
     controlStyle.animationOptions = BEGINCURRENT;
     controlStyle.backgroundColor = [UIColor clearColor];
     controlStyle.cornerRadius = 0.0f;
-    controlStyle.layer.delegate = self;
     controlStyle.shadowColor = C4GREY;
     controlStyle.shadowOpacity = 0.0f;
     controlStyle.shadowOffset = CGSizeZero;
-    controlStyle.repeatCount = 0;
     
     [C4ActivityIndicator defaultTemplateProxy].color = C4BLUE;
     
