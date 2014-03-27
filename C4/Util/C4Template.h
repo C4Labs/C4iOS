@@ -25,7 +25,7 @@
  When setting the template properties, the template object acts as a proxy of the target object. You need to cast the template to the target object's class and call methods on it as if it was the actual object. For instance use this code to create a template for a C4Control:
  
      C4Template* template = [C4Template templateForClass:[C4Control class]];
-     C4Control* proxy = (C4Control*)template;
+     C4Control* proxy = [template proxy];
      proxy.shadowRadius = 1.5;
  */
 @interface C4Template : NSObject
