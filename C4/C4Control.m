@@ -272,19 +272,21 @@
 }
 
 - (void)animateWithBlock:(void (^)())animationBlock reverseBlock:(void (^)())reverseBlock {
-    C4AnimationOptions autoReverseOptions = self.animationOptions;
     void (^completionBlock)(BOOL) = NULL;
     
-    BOOL animationShouldNotRepeat = (self.animationOptions & REPEAT) != REPEAT;
-    if (self.shouldAutoreverse && animationShouldNotRepeat) {
+    //we insert the autoreverse options here, only if it should repeat and autoreverse
+    C4AnimationOptions autoReverseOptions = self.animationOptions;
+    BOOL shouldRepeat = (self.animationOptions & REPEAT) == REPEAT;
+    if (self.shouldAutoreverse && shouldRepeat)
         autoReverseOptions |= AUTOREVERSE;
-        if (reverseBlock) {
-            completionBlock = ^(BOOL animationIsComplete) {
-                [self autoreverseAnimation:^() {
-                    reverseBlock();
-                }];
-            };
-        }
+    
+    
+    if (self.shouldAutoreverse && !shouldRepeat && reverseBlock) {
+        completionBlock = ^(BOOL animationIsComplete) {
+            [self autoreverseAnimation:^() {
+                reverseBlock();
+            }];
+        };
     }
     
     [UIView animateWithDuration:self.animationDuration
