@@ -86,22 +86,24 @@
     
     UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
     self = [super initWithView:imageView];
-    if(self != nil) {
-        _originalImage = image;
-        _constrainsProportions = YES;
-        _multipleFilterEnabled = NO;
-        
-        [self setProperties];
-        _filterQueue = nil;
-        _output = nil;
-        _imageView = [[UIImageView alloc] initWithImage:_originalImage];
-        _imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-        self.showsActivityIndicator = YES;
-        _filterIndicator = [C4ActivityIndicator indicatorWithStyle:WHITE];
-        _filterIndicator.center = CGPointMake(self.width/2,self.height/2);
-        [_filterIndicator stopAnimating];
-        [self addUIElement:_filterIndicator];
-    }
+    if (self == nil)
+        return nil;
+    
+    _originalImage = image;
+    _constrainsProportions = YES;
+    _multipleFilterEnabled = NO;
+    
+    [self setProperties];
+    _filterQueue = nil;
+    _output = nil;
+    _imageView = imageView;
+    _imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    self.showsActivityIndicator = YES;
+    _filterIndicator = [C4ActivityIndicator indicatorWithStyle:WHITE];
+    _filterIndicator.center = CGPointMake(self.width/2,self.height/2);
+    [_filterIndicator stopAnimating];
+    [self addUIElement:_filterIndicator];
+    
     return self;
 }
 
@@ -184,17 +186,15 @@
 
 #pragma mark Contents
 -(UIImage *)UIImage {
-    CGImageRef cg = self.contents;
-    UIImage *image = [UIImage imageWithCGImage:cg scale:CGImageGetWidth(cg)/self.width orientation:self.originalImage.imageOrientation ];
-    return image;
+    return _imageView.image;
 }
 
 -(CIImage *)CIImage {
-    return [CIImage imageWithCGImage:self.contents];
+    return [CIImage imageWithCGImage:self.CGImage];
 }
 
 -(CGImageRef)CGImage {
-    return self.contents;
+    return _imageView.image.CGImage;
 }
 
 -(CGImageRef)contents {
@@ -202,18 +202,13 @@
 }
 
 -(void)setContents:(CGImageRef)image {
-    if(self.animationDuration == 0.0f) self.imageView.layer.contents = (__bridge id)image;
-    else [self animateContents:image];
+    [self.animationHelper animateKeyPath:@"contents" toValue:(__bridge id)image];
 }
 
 -(void)setImage:(C4Image *)image {
     _originalImage = image.UIImage;
     [self setProperties];
     [self setContents:_originalImage.CGImage];
-}
-
--(void)animateContents:(CGImageRef)image {
-    [self.animationHelper animateKeyPath:@"contents" toValue:(__bridge id)image];
 }
 
 #pragma mark Filter Basics
@@ -240,8 +235,7 @@
 -(void)renderImageWithFilterName:(NSString *)filterName {
     if(self.showsActivityIndicator) [_filterIndicator startAnimating];
     dispatch_async(self.filterQueue, ^{
-        //applies create the image based on its original size, contents will automatically scale
-        CGImageRef filteredImage = [self.filterContext createCGImage:_output fromRect:(CGRect){CGPointZero,self.originalSize}];
+        CGImageRef filteredImage = [self.filterContext createCGImage:_output fromRect:_output.extent];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [self setContents:filteredImage];

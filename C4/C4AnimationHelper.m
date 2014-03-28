@@ -30,7 +30,7 @@
     self.animationDuration = 0;
     self.animationDelay = 0;
     self.currentAnimationEasing = kCAMediaTimingFunctionEaseInEaseOut;
-    self.autoreverses = YES;
+    self.autoreverses = NO;
     self.repeats = NO;
     
     return self;
