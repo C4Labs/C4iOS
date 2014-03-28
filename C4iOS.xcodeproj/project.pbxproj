@@ -10,7 +10,6 @@
 		A9758EDE18DA498100B28F08 /* C4TemplateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A9758EDD18DA498100B28F08 /* C4TemplateTests.m */; };
 		A97591C518DC08E800B28F08 /* C4AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A975916E18DC08E800B28F08 /* C4AppDelegate.m */; };
 		A97591C718DC08E800B28F08 /* C4Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = A975917218DC08E800B28F08 /* C4Camera.m */; };
-		A97591C818DC08E800B28F08 /* C4CameraController.m in Sources */ = {isa = PBXBuildFile; fileRef = A975917418DC08E800B28F08 /* C4CameraController.m */; };
 		A97591CA18DC08E800B28F08 /* C4CanvasController.m in Sources */ = {isa = PBXBuildFile; fileRef = A975917818DC08E800B28F08 /* C4CanvasController.m */; };
 		A97591CB18DC08E800B28F08 /* C4Control.m in Sources */ = {isa = PBXBuildFile; fileRef = A975917A18DC08E800B28F08 /* C4Control.m */; };
 		A97591CC18DC08E800B28F08 /* C4Font.m in Sources */ = {isa = PBXBuildFile; fileRef = A975917C18DC08E800B28F08 /* C4Font.m */; };
@@ -84,8 +83,6 @@
 		A975916E18DC08E800B28F08 /* C4AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4AppDelegate.m; sourceTree = "<group>"; };
 		A975917118DC08E800B28F08 /* C4Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Camera.h; sourceTree = "<group>"; };
 		A975917218DC08E800B28F08 /* C4Camera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Camera.m; sourceTree = "<group>"; };
-		A975917318DC08E800B28F08 /* C4CameraController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4CameraController.h; sourceTree = "<group>"; };
-		A975917418DC08E800B28F08 /* C4CameraController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4CameraController.m; sourceTree = "<group>"; };
 		A975917718DC08E800B28F08 /* C4CanvasController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4CanvasController.h; sourceTree = "<group>"; };
 		A975917818DC08E800B28F08 /* C4CanvasController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4CanvasController.m; sourceTree = "<group>"; };
 		A975917918DC08E800B28F08 /* C4Control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Control.h; sourceTree = "<group>"; };
@@ -227,8 +224,6 @@
 				A975916E18DC08E800B28F08 /* C4AppDelegate.m */,
 				A975917118DC08E800B28F08 /* C4Camera.h */,
 				A975917218DC08E800B28F08 /* C4Camera.m */,
-				A975917318DC08E800B28F08 /* C4CameraController.h */,
-				A975917418DC08E800B28F08 /* C4CameraController.m */,
 				A975917718DC08E800B28F08 /* C4CanvasController.h */,
 				A975917818DC08E800B28F08 /* C4CanvasController.m */,
 				A975917B18DC08E800B28F08 /* C4Font.h */,
@@ -533,7 +528,6 @@
 				A97591DF18DC08E800B28F08 /* UIColor+CIColorFix.m in Sources */,
 				A97591DD18DC08E800B28F08 /* C4ViewController.m in Sources */,
 				A975922E18DD194400B28F08 /* C4Button.m in Sources */,
-				A97591C818DC08E800B28F08 /* C4CameraController.m in Sources */,
 				A975921B18DD163F00B28F08 /* C4UIGLControl.m in Sources */,
 				A975923118DD194400B28F08 /* C4ScrollView.m in Sources */,
 				A97591E918DC08E800B28F08 /* C4Template.m in Sources */,

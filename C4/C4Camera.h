@@ -39,13 +39,23 @@
  
  @return A C4Camera object of the specified size;
  */
-+(C4Camera *)cameraWithFrame:(CGRect)frame;
++ (C4Camera *)cameraWithFrame:(CGRect)frame;
 
 #pragma mark - Initializing Capture
 ///@name Initializing Capture
 /** Initializes a C4Camera object, making it ready to capture images.
  */
--(void)initCapture;
+- (void)initCapture;
+
+/** Initializes camera capture for a given camera position.
+ 
+ @param position The position of the camera to use upon initialization.
+ */
+- (void)initCapture:(C4CameraPosition)position;
+
+/**Specifies whether or not the receiver has already been initialized.
+ */
+@property (readonly, nonatomic, getter = isInitialized) BOOL initialized;
 
 #pragma mark - Capturing Images
 ///@name Capturing Images
@@ -53,7 +63,7 @@
  
  This method also posts a notification when an image has been captured.
  */
--(void)captureImage;
+- (void)captureImage;
 
 /** The receiver’s most recently captured image. (read-only)
  
@@ -61,13 +71,19 @@
  */
 @property (readonly, strong, nonatomic) C4Image *capturedImage;
 
+#pragma mark - Layer
+
+/** The receiver’s view's backing layer.
+ */
+@property (strong, nonatomic, readonly) AVCaptureVideoPreviewLayer *previewLayer;
+
 #pragma mark - Camera Position & Quality
 ///@name Camera Position & Quality
 /** Specifies the current position of the receiver's camera.
  
  A camera's position can be either `CAMERAFRONT` or `CAMERABACK`, setting this property will change to the specified camera position.
  */
-@property (readwrite, nonatomic) C4CameraPosition cameraPosition;
+@property (nonatomic) C4CameraPosition cameraPosition;
 
 /**Specifies the current capture quality of the camera. The following list of qualities is available:
  
@@ -84,6 +100,18 @@
  See C4Defines for more information.
  */
 @property (readwrite, nonatomic) NSString *captureQuality;
+
+#pragma mark - Capture Session
+///@name Capture Session
+/**An AVCaptureSession object used to coordinate the flow of data from AV input devices to outputs.
+ 
+ This property is used by `C4Camera` to access and coordinate with its underlying controller.
+ 
+ You should never have to access this property, but it is available for if you really want to work with the capture session. Other methods and properties in `C4Camera` should provide sufficient control over the capture session.
+ 
+ See AVCaptureSession for more details.
+ */
+@property (readwrite, strong, atomic) AVCaptureSession *captureSession;
 
 /**Returns the template proxy for the object, cast as a C4Camera.
  
