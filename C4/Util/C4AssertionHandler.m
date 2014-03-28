@@ -21,7 +21,7 @@
 
 @implementation C4AssertionHandler
 
--(void)handleFailureInFunction:(NSString *)functionName file:(NSString *)fileName lineNumber:(NSInteger)line description:(NSString *)format, ...{
++ (void)handleFailureInFunction:(NSString *)functionName file:(NSString *)fileName lineNumber:(NSInteger)line description:(NSString *)format, ...{
     C4Log(@"ASSERTION ERROR");
     C4Log(@"IN:     %@",[fileName lastPathComponent]);
     C4Log(@"LINE:   %d",line);
@@ -34,7 +34,7 @@
     abort();
 }
 
--(void)handleFailureInMethod:(SEL)selector object:(id)object file:(NSString *)fileName lineNumber:(NSInteger)line description:(NSString *)format, ... {
++ (void)handleFailureInMethod:(SEL)selector object:(id)object file:(NSString *)fileName lineNumber:(NSInteger)line description:(NSString *)format, ... {
     C4Log(@"ASSERTION ERROR");
     C4Log(@"IN:     %@",[fileName lastPathComponent]);
     C4Log(@"LINE:   %d",line);
@@ -47,4 +47,5 @@
     C4Log(@"REASON: %@",reason);
     abort();
 }
+
 @end
