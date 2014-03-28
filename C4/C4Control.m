@@ -610,10 +610,12 @@
 
 -(void)removeObject:(id)visualObject {
     C4Assert(self != visualObject, @"You tried to remove %@ from itself, don't be silly", visualObject);
-    if([visualObject isKindOfClass:[UIView class]] ||
-       [visualObject isKindOfClass:[C4Control class]])
+    if ([visualObject isKindOfClass:[UIView class]])
         [visualObject removeFromSuperview];
-    else C4Log(@"object (%@) you wish to remove is not a visual object", visualObject);
+    else if ([visualObject isKindOfClass:[C4Control class]])
+        [((C4Control*)visualObject).view removeFromSuperview];
+    else
+        C4Log(@"object (%@) you wish to remove is not a visual object", visualObject);
 }
 
 -(void)removeObjects:(NSArray *)array {
