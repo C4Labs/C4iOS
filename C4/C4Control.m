@@ -23,11 +23,41 @@
 @interface C4Control()
 @property(nonatomic, strong) UIView* view;
 
-@property (nonatomic) BOOL shouldAutoreverse;
-@property (nonatomic, strong) NSString *longPressMethodName;
-@property (nonatomic, strong) NSMutableDictionary *gestureDictionary;
-@property (nonatomic) CGPoint firstPositionForMove;
+@property(nonatomic) BOOL shouldAutoreverse;
+@property(nonatomic, strong) NSString *longPressMethodName;
+@property(nonatomic, strong) NSMutableDictionary *gestureDictionary;
+@property(nonatomic) CGPoint firstPositionForMove;
+
+@property(nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
+@property(nonatomic, copy) C4TapGestureBlock tapBlock;
+
+@property(nonatomic, strong) UIPanGestureRecognizer *panGestureRecognizer;
+@property(nonatomic, copy) C4PanGestureBlock panBlock;
+
+@property(nonatomic, strong) UIPinchGestureRecognizer *pinchGestureRecognizer;
+@property(nonatomic, copy) C4PinchGestureBlock pinchBlock;
+
+@property(nonatomic, strong) UIRotationGestureRecognizer *rotationGestureRecognizer;
+@property(nonatomic, copy) C4RotationGestureBlock rotationBlock;
+
+@property(nonatomic, strong) UILongPressGestureRecognizer *longPressGestureRecognizer;
+@property(nonatomic, copy) C4LongPressGestureBlock longPressStartBlock;
+@property(nonatomic, copy) C4LongPressGestureBlock longPressEndBlock;
+
+@property(nonatomic, strong) UISwipeGestureRecognizer *swipeRightGestureRecognizer;
+@property(nonatomic, copy) C4SwipeGestureBlock swipeRightBlock;
+
+@property(nonatomic, strong) UISwipeGestureRecognizer *swipeLeftGestureRecognizer;
+@property(nonatomic, copy) C4SwipeGestureBlock swipeLeftBlock;
+
+@property(nonatomic, strong) UISwipeGestureRecognizer *swipeUpGestureRecognizer;
+@property(nonatomic, copy) C4SwipeGestureBlock swipeUpBlock;
+
+@property(nonatomic, strong) UISwipeGestureRecognizer *swipeDownGestureRecognizer;
+@property(nonatomic, copy) C4SwipeGestureBlock swipeDownBlock;
+
 @end
+
 
 @implementation C4Control
 
@@ -360,173 +390,6 @@
     self.animationOptions = _ani;
 }
 
-#pragma mark Gesture Methods
-
--(void)addGesture:(C4GestureType)type name:(NSString *)gestureName action:(NSString *)methodName {
-    if(self.gestureDictionary == nil) self.gestureDictionary = [[NSMutableDictionary alloc] initWithCapacity:0];
-    BOOL containsGesture = ((self.gestureDictionary)[gestureName] != nil);
-    if(containsGesture == NO) {
-        UIGestureRecognizer *recognizer;
-        switch (type) {
-            case TAP:
-                recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:NSSelectorFromString(methodName)];
-                break;
-            case PAN:
-                recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:NSSelectorFromString(methodName)];
-                break;
-            case SWIPERIGHT:
-                recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:NSSelectorFromString(methodName)];
-                ((UISwipeGestureRecognizer *)recognizer).direction = SWIPEDIRRIGHT;
-                break;
-            case SWIPELEFT:
-                recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:NSSelectorFromString(methodName)];
-                ((UISwipeGestureRecognizer *)recognizer).direction = SWIPEDIRLEFT;
-                break;
-            case SWIPEUP:
-                recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:NSSelectorFromString(methodName)];
-                ((UISwipeGestureRecognizer *)recognizer).direction = SWIPEDIRUP;
-                break;
-            case SWIPEDOWN:
-                recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:NSSelectorFromString(methodName)];
-                ((UISwipeGestureRecognizer *)recognizer).direction = SWIPEDIRDOWN;
-                break;
-            case LONGPRESS:
-                self.longPressMethodName = methodName;
-                recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(pressedLong:)];
-                break;
-            default:
-                C4Assert(NO,@"The gesture you tried to use is not one of: TAP, PINCH, SWIPERIGHT, SWIPELEFT, SWIPEUP, SWIPEDOWN, ROTATION, PAN, or LONGPRESS");
-                break;
-        }
-        recognizer.delaysTouchesBegan = YES;
-        recognizer.delaysTouchesEnded = YES;
-        [self.view addGestureRecognizer:recognizer];
-        (self.gestureDictionary)[gestureName] = recognizer;
-    }
-}
-
--(UIGestureRecognizer *)gestureForName:(NSString *)gestureName {
-    return (self.gestureDictionary)[gestureName];
-}
-
--(NSDictionary *)allGestures {
-    return self.gestureDictionary;
-}
-
--(void)numberOfTapsRequired:(NSInteger)tapCount forGesture:(NSString *)gestureName {
-    UIGestureRecognizer *recognizer = _gestureDictionary[gestureName];
-    
-    C4Assert([recognizer isKindOfClass:[UITapGestureRecognizer class]] ||
-             [recognizer isKindOfClass:[UILongPressGestureRecognizer class]],
-             @"The gesture type(%@) you tried to configure does not respond to the method: %@",[recognizer class],NSStringFromSelector(_cmd));
-    
-    ((UILongPressGestureRecognizer *) recognizer).numberOfTapsRequired = tapCount;
-}
-
--(void)numberOfTouchesRequired:(NSInteger)touchCount forGesture:(NSString *)gestureName {
-    UIGestureRecognizer *recognizer = _gestureDictionary[gestureName];
-    
-    C4Assert([recognizer isKindOfClass:[UITapGestureRecognizer class]] ||
-             [recognizer isKindOfClass:[UISwipeGestureRecognizer class]] ||
-             [recognizer isKindOfClass:[UILongPressGestureRecognizer class]],
-             @"The gesture type(%@) you tried to configure does not respond to the method: %@",[recognizer class],NSStringFromSelector(_cmd));
-    
-    ((UITapGestureRecognizer *) recognizer).numberOfTouchesRequired = touchCount;
-}
-
--(void)minimumPressDuration:(CGFloat)duration forGesture:(NSString *)gestureName {
-    UIGestureRecognizer *recognizer = _gestureDictionary[gestureName];
-    
-    C4Assert([recognizer isKindOfClass:[UILongPressGestureRecognizer class]],
-             @"The gesture type(%@) you tried to configure does not respond to the method %@",[recognizer class],NSStringFromSelector(_cmd));
-    
-    ((UILongPressGestureRecognizer *) recognizer).minimumPressDuration = duration;
-}
-
--(void)minimumNumberOfTouches:(NSInteger)touchCount forGesture:(NSString *)gestureName {
-    UIGestureRecognizer *recognizer = _gestureDictionary[gestureName];
-    
-    C4Assert([recognizer isKindOfClass:[UIPanGestureRecognizer class]],
-             @"The gesture type(%@) you tried to configure does not respond to the method: %@",[recognizer class],NSStringFromSelector(_cmd));
-    
-    ((UIPanGestureRecognizer *) recognizer).minimumNumberOfTouches = touchCount;
-}
-
--(void)maximumNumberOfTouches:(NSInteger)touchCount forGesture:(NSString *)gestureName {
-    UIGestureRecognizer *recognizer = _gestureDictionary[gestureName];
-    
-    C4Assert([recognizer isKindOfClass:[UIPanGestureRecognizer class]],
-             @"The gesture type(%@) you tried to configure does not respond to the method: %@",[recognizer class],NSStringFromSelector(_cmd));
-    
-    ((UIPanGestureRecognizer *) recognizer).maximumNumberOfTouches = touchCount;
-}
-
--(void)swipeDirection:(C4SwipeDirection)direction forGesture:(NSString *)gestureName {
-    UIGestureRecognizer *recognizer = _gestureDictionary[gestureName];
-    
-    C4Assert([recognizer isKindOfClass:[UISwipeGestureRecognizer class]],
-             @"The gesture type(%@) you tried to configure does not respond to the method: %@",[recognizer class],NSStringFromSelector(_cmd));
-    
-    ((UISwipeGestureRecognizer *) recognizer).direction = (UISwipeGestureRecognizerDirection)direction;
-}
-
--(void)swipedRight:(id)sender {
-    sender = sender;
-    [self postNotification:@"swipedRight"];
-    [self swipedRight];
-}
-
--(void)swipedLeft:(id)sender {
-    sender = sender;
-    [self postNotification:@"swipedLeft"];
-    [self swipedLeft];
-}
-
--(void)swipedUp:(id)sender {
-    sender = sender;
-    [self postNotification:@"swipedUp"];
-    [self swipedUp];
-}
-
--(void)swipedDown:(id)sender {
-    sender = sender;
-    [self postNotification:@"swipedDown"];
-    [self swipedDown];
-}
-
--(void)tapped:(id)sender {
-    sender = sender;
-    [self postNotification:NSStringFromSelector(_cmd)];
-    [self tapped];
-}
-
--(void)tapped {
-}
-
-
--(void)swipedUp {
-}
-
--(void)swipedDown {
-}
-
--(void)swipedLeft {
-}
-
--(void)swipedRight {
-}
-
--(void)pressedLong {
-}
-
--(void)pressedLong:(id)sender {
-    if(((UIGestureRecognizer *)sender).state == UIGestureRecognizerStateBegan
-       && [((UIGestureRecognizer *)sender) isKindOfClass:[UILongPressGestureRecognizer class]]) {
-        [self runMethod:self.longPressMethodName withObject:sender afterDelay:0.0f];
-        [self postNotification:@"pressedLong"];
-    }
-}
-
 #pragma mark C4AddSubview
 
 -(void)addCamera:(C4Camera *)camera {
@@ -705,6 +568,142 @@
 
 - (void)setCornerRadius:(CGFloat)cornerRadius {
     [self.animationHelper animateKeyPath:@"cornerRadius" toValue:@(cornerRadius)];
+}
+
+
+#pragma mark Gestures
+
+- (void)onTap:(C4TapGestureBlock)block {
+    self.tapBlock = block;
+    
+    if (self.tapBlock && !_tapGestureRecognizer) {
+        _tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
+        [self.view addGestureRecognizer:_tapGestureRecognizer];
+    }
+}
+
+- (void)tapGesture:(UITapGestureRecognizer *)gr {
+    if (self.tapBlock && gr.state == UIGestureRecognizerStateRecognized)
+        self.tapBlock([gr locationInView:self.view]);
+}
+
+- (void)onPan:(C4PanGestureBlock)block {
+    self.panBlock = block;
+    
+    if (self.panBlock && !_panGestureRecognizer) {
+        _panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
+        [self.view addGestureRecognizer:_panGestureRecognizer];
+    }
+}
+
+- (void)panGesture:(UIPanGestureRecognizer *)gr {
+    if (self.panBlock && gr.state == UIGestureRecognizerStateChanged)
+        self.panBlock([gr locationInView:self.view], [gr translationInView:self.view], [gr velocityInView:self.view]);
+}
+
+- (void)onPinch:(C4PinchGestureBlock)block {
+    self.pinchBlock = block;
+    
+    if (self.pinchBlock && !_pinchGestureRecognizer) {
+        _pinchGestureRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
+        [self.view addGestureRecognizer:_pinchGestureRecognizer];
+    }
+}
+
+- (void)pinchGesture:(UIPinchGestureRecognizer*)gr {
+    if (self.pinchBlock && gr.state == UIGestureRecognizerStateChanged)
+        self.pinchBlock([gr locationInView:self.view], gr.scale, gr.velocity);
+}
+
+- (void)onRotation:(C4RotationGestureBlock)block {
+    self.rotationBlock = block;
+    
+    if (self.rotationBlock && !_rotationGestureRecognizer) {
+        _rotationGestureRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
+        [self.view addGestureRecognizer:_rotationGestureRecognizer];
+    }
+}
+
+- (void)rotationGesture:(UIRotationGestureRecognizer*)gr {
+    if (self.rotationBlock && gr.state == UIGestureRecognizerStateChanged)
+        self.rotationBlock([gr locationInView:self.view], gr.rotation, gr.velocity);
+}
+
+- (void)onLongPressStart:(C4LongPressGestureBlock)block {
+    self.longPressStartBlock = block;
+    
+    if (self.longPressStartBlock && !_longPressGestureRecognizer) {
+        _longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGesutre:)];
+        _longPressGestureRecognizer.minimumPressDuration = 0.25;
+        [self.view addGestureRecognizer:_longPressGestureRecognizer];
+    }
+}
+
+- (void)onLongPressEnd:(C4LongPressGestureBlock)block {
+    self.longPressEndBlock = block;
+    
+    if (self.longPressEndBlock && !_longPressGestureRecognizer) {
+        _longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGesutre:)];
+        [self.view addGestureRecognizer:_longPressGestureRecognizer];
+    }
+}
+
+- (void)longPressGesutre:(UILongPressGestureRecognizer *)gr {
+    if (self.longPressStartBlock && gr.state == UIGestureRecognizerStateBegan)
+        self.longPressStartBlock([gr locationInView:self.view]);
+    else if (self.longPressEndBlock && gr.state == UIGestureRecognizerStateEnded)
+        self.longPressEndBlock([gr locationInView:self.view]);
+}
+
+- (void)onSwipeRight:(C4SwipeGestureBlock)block {
+    self.swipeRightBlock = block;
+    
+    if (self.swipeRightBlock && !_swipeRightGestureRecognizer) {
+        _swipeRightGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGesutre:)];
+        _swipeRightGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+        [self.view addGestureRecognizer:_swipeRightGestureRecognizer];
+    }
+}
+
+- (void)onSwipeLeft:(C4SwipeGestureBlock)block {
+    self.swipeLeftBlock = block;
+    
+    if (self.swipeLeftBlock && !_swipeLeftGestureRecognizer) {
+        _swipeLeftGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGesutre:)];
+        _swipeLeftGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+        [self.view addGestureRecognizer:_swipeLeftGestureRecognizer];
+    }
+}
+
+- (void)onSwipeUp:(C4SwipeGestureBlock)block {
+    self.swipeUpBlock = block;
+    
+    if (self.swipeUpBlock && !_swipeUpGestureRecognizer) {
+        _swipeUpGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGesutre:)];
+        _swipeUpGestureRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
+        [self.view addGestureRecognizer:_swipeUpGestureRecognizer];
+    }
+}
+
+- (void)onSwipeDown:(C4SwipeGestureBlock)block {
+    self.swipeDownBlock = block;
+    
+    if (self.swipeDownBlock && !_swipeDownGestureRecognizer) {
+        _swipeDownGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGesutre:)];
+        _swipeDownGestureRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
+        [self.view addGestureRecognizer:_swipeDownGestureRecognizer];
+    }
+}
+
+- (void)swipeGesture:(UISwipeGestureRecognizer *)gr {
+    if (self.swipeRightBlock && gr == _swipeRightGestureRecognizer && gr.state == UIGestureRecognizerStateRecognized)
+        self.swipeRightBlock();
+    else if (self.swipeLeftBlock && gr == _swipeLeftGestureRecognizer && gr.state == UIGestureRecognizerStateRecognized)
+        self.swipeLeftBlock();
+    else if (self.swipeUpBlock && gr == _swipeUpGestureRecognizer && gr.state == UIGestureRecognizerStateRecognized)
+        self.swipeUpBlock();
+    else if (self.swipeDownBlock && gr == _swipeDownGestureRecognizer && gr.state == UIGestureRecognizerStateRecognized)
+        self.swipeDownBlock();
 }
 
 

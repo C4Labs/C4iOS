@@ -291,6 +291,57 @@
 @property (readwrite, nonatomic, weak) UIColor *borderColor;
 
 
+#pragma mark - Gestures
+///@name Gestures
+
+typedef void (^C4TapGestureBlock)(CGPoint location);
+typedef void (^C4PanGestureBlock)(CGPoint location, CGPoint translation, CGPoint velocity);
+typedef void (^C4PinchGestureBlock)(CGPoint location, CGFloat scale, CGFloat velocity);
+typedef void (^C4RotationGestureBlock)(CGPoint location, CGFloat rotation, CGFloat velocity);
+typedef void (^C4LongPressGestureBlock)(CGPoint location);
+typedef void (^C4SwipeGestureBlock)();
+
+/** Registers a block of code to execute when the control is tapped.
+ */
+- (void)onTap:(C4TapGestureBlock)block;
+
+/** Registers a block of code to execute when the control is panned (dragged).
+ */
+- (void)onPan:(C4PanGestureBlock)block;
+
+/** Registers a block of code to execute when the control is pinched.
+ */
+- (void)onPinch:(C4PinchGestureBlock)block;
+
+/** Register a block of code to exectue when the control is rotated.
+ */
+- (void)onRotation:(C4RotationGestureBlock)block;
+
+/** Restier a block of code to execute when the control is long-pressed.
+ */
+- (void)onLongPressStart:(C4LongPressGestureBlock)block;
+
+/** Register a block of code to exectue when the control stops being long-pressed.
+ */
+- (void)onLongPressEnd:(C4LongPressGestureBlock)block;
+
+/** Register a block of code to execute when the control is swiped right.
+ */
+- (void)onSwipeRight:(C4SwipeGestureBlock)block;
+
+/** Register a block of code to exectue when the control is swiped left.
+ */
+- (void)onSwipeLeft:(C4SwipeGestureBlock)block;
+
+/** Register a block of code to exectue when the control is swiped up.
+ */
+- (void)onSwipeUp:(C4SwipeGestureBlock)block;
+
+/** Register a block of code to exectue when the control is swiped down.
+ */
+- (void)onSwipeDown:(C4SwipeGestureBlock)block;
+
+
 #pragma mark - Templates
 ///@name Templates
 

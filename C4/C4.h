@@ -20,7 +20,6 @@
 #import "C4Defines.h"
 
 // Protocols
-#import "C4Gesture.h"
 #import "C4MethodDelay.h"
 #import "C4Notification.h"
 #import "C4UIElement.h"
