@@ -50,7 +50,7 @@
  
  */
 
-@interface C4Control : C4Object <C4AddSubview>
+@interface C4Control : C4Object
 
 - (id)initWithFrame:(CGRect)frame;
 - (id)initWithView:(UIView*)view;
@@ -72,22 +72,6 @@
 
 
 #pragma mark - Convenience Methods
-
-/** A method to remove another object from its view.
- 
- For the object in question, use this method to remove any visible object that was previously added to it as a subview.
- 
- @param visualObject the visible object to remove from its parent view
- */
--(void)removeObject:(id)visualObject;
-
-/** A method to remove an array of objects from their view.
- 
- This will run the removeObject: method on each object in an array.
- 
- @param array the array of visible objects to remove from their parent view
- */
--(void)removeObjects:(NSArray *)array;
 
 /**Renders the receiver and its sublayers into the specified context.
  
@@ -289,6 +273,49 @@
  The value of this property is retained using the Core Foundation retain/release semantics. This behavior occurs despite the fact that the property declaration appears to use the default assign semantics for object retention.
  */
 @property (readwrite, nonatomic, weak) UIColor *borderColor;
+
+
+#pragma mark - Adding sub-elements
+
+/** Adds a UIView to the control.
+ 
+ Takes a UIView object and adds it to the view hierarchy.
+ 
+ @param view A view.
+ */
+-(void)addSubview:(UIView *)view;
+
+/** Adds a C4Control to the view.
+ 
+ Takes a C4Control object and adds it to the view hierarchy.
+ 
+ @param control A control.
+ */
+-(void)addControl:(C4Control *)control;
+
+/** A method for adding multiple objects to the canvas at one time.
+ 
+ This will run the appropriate add method for all C4 objects, and will run the default addSubview for any other objects.
+ 
+ @param array The array of visual objects to remove from their parent view.
+ */
+-(void)addObjects:(NSArray *)array;
+
+/** A method to remove another object from its view.
+ 
+ For the object in question, use this method to remove any visible object that was previously added to it as a subview.
+ 
+ @param visualObject the visible object to remove from its parent view
+ */
+-(void)removeObject:(id)visualObject;
+
+/** A method to remove an array of objects from their view.
+ 
+ This will run the removeObject: method on each object in an array.
+ 
+ @param array The array of visual objects to remove from their parent view
+ */
+-(void)removeObjects:(NSArray *)array;
 
 
 #pragma mark - Gestures

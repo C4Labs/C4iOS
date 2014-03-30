@@ -23,7 +23,6 @@
 #import "C4MethodDelay.h"
 #import "C4Notification.h"
 #import "C4UIElement.h"
-#import "C4AddSubview.h"
 
 // Utilities
 #import "C4AssertionHandler.h"

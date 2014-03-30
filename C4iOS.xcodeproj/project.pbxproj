@@ -110,7 +110,6 @@
 		A97591AC18DC08E800B28F08 /* C4GL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4GL.m; sourceTree = "<group>"; };
 		A97591AD18DC08E800B28F08 /* C4GL1Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4GL1Renderer.h; sourceTree = "<group>"; };
 		A97591AE18DC08E800B28F08 /* C4GL1Renderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4GL1Renderer.m; sourceTree = "<group>"; };
-		A97591B018DC08E800B28F08 /* C4AddSubview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4AddSubview.h; sourceTree = "<group>"; };
 		A97591B318DC08E800B28F08 /* C4MethodDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4MethodDelay.h; sourceTree = "<group>"; };
 		A97591B418DC08E800B28F08 /* C4Notification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Notification.h; sourceTree = "<group>"; };
 		A97591B618DC08E800B28F08 /* C4AssertionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4AssertionHandler.h; sourceTree = "<group>"; };
@@ -273,7 +272,6 @@
 		A97591AF18DC08E800B28F08 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				A97591B018DC08E800B28F08 /* C4AddSubview.h */,
 				A97591B318DC08E800B28F08 /* C4MethodDelay.h */,
 				A97591B418DC08E800B28F08 /* C4Notification.h */,
 				A97591EC18DC0AB400B28F08 /* C4UIElement.h */,

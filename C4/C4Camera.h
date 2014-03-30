@@ -19,6 +19,9 @@
 
 #import "C4Control.h"
 
+@class C4Image;
+
+
 /** The C4Camera class provides easy access to a devices cameras.
  
  Creating and adding a C4Camera object to the canvas will let you play around with the images your device is pulling from its camera.

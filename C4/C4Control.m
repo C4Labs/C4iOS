@@ -392,77 +392,21 @@
 
 #pragma mark C4AddSubview
 
--(void)addCamera:(C4Camera *)camera {
-    C4Assert([camera isKindOfClass:[C4Camera class]],
-             @"You tried to add a %@ using [canvas addShape:]", [camera class]);
-    [self.view addSubview:camera.view];
-}
-
--(void)addShape:(C4Shape *)shape {
-    C4Assert([shape isKindOfClass:[C4Shape class]],
-             @"You tried to add a %@ using [canvas addShape:]", [shape class]);
-    [self.view addSubview:shape.view];
-}
-
 -(void)addSubview:(UIView *)subview {
-    C4Assert(![[subview class] isKindOfClass:[C4Camera class]], @"You just tried to add a C4Camera using the addSubview: method, please use addCamera:");
-    C4Assert(![[subview class] isKindOfClass:[C4Shape class]], @"You just tried to add a C4Shape using the addSubview: method, please use addShape:");
-    C4Assert(![[subview class] isKindOfClass:[C4Movie class]], @"You just tried to add a C4Movie using the addSubview: method, please use addMovie:");
-    C4Assert(![[subview class] isKindOfClass:[C4Image class]], @"You just tried to add a C4Image using the addSubview: method, please use addImage:");
-    C4Assert(![[subview class] isKindOfClass:[C4GL class]], @"You just tried to add a C4GL using the addSubview: method, please use addGL:");
-//    C4Assert(![subview conformsToProtocol:NSProtocolFromString(@"C4UIElement")], @"You just tried to add a C4UIElement using the addSubview: method, please use addUIElement:");
+    C4Assert(![[subview class] isKindOfClass:[C4Control class]], @"You just tried to add a C4Control using the addSubview: method, please use addControl:");
     [self.view addSubview:subview];
 }
 
--(void)addUIElement:(id<C4UIElement>)object {
-    [self.view addSubview:((C4Control *)object).view];
-}
-
--(void)addGL:(C4GL *)gl {
-    C4Assert([gl isKindOfClass:[C4GL class]],
-             @"You tried to add a %@ using [canvas addGL:]", [gl class]);
-    [self.view addSubview:gl.view];
-}
-
--(void)addImage:(C4Image *)image {
-    C4Assert([image isKindOfClass:[C4Image class]],
-             @"You tried to add a %@ using [canvas addImage:]", [image class]);
-    [self.view addSubview:image.view];
-}
-
--(void)addLabel:(C4Label *)label {
-    C4Assert([label isKindOfClass:[C4Label class]],
-             @"You tried to add a %@ using [canvas addLabel:]", [label class]);
-    [self.view addSubview:label.view];
-}
-
--(void)addMovie:(C4Movie *)movie {
-    C4Assert([movie isKindOfClass:[C4Movie class]],
-             @"You tried to add a %@ using [canvas addMovie:]", [movie class]);
-    [self.view addSubview:movie.view];
+-(void)addControl:(C4Control *)control {
+    [self.view addSubview:control.view];
 }
 
 -(void)addObjects:(NSArray *)array {
     for(id obj in array) {
-        if([obj isKindOfClass:[C4Shape class]]) {
-            [self addShape:obj];
-        }
-        else if([obj isKindOfClass:[C4GL class]]) {
-            [self addGL:obj];
-        }
-        else if([obj isKindOfClass:[C4Image class]]) {
-            [self addImage:obj];
-        }
-        else if([obj isKindOfClass:[C4Movie class]]) {
-            [self addMovie:obj];
-        }
-        else if([obj isKindOfClass:[C4Camera class]]) {
-            [self addCamera:obj];
+        if([obj isKindOfClass:[C4Control class]]) {
+            [self addControl:obj];
         }
         else if([obj isKindOfClass:[UIView class]]) {
-            [self addSubview:obj];
-        }
-        else if([obj conformsToProtocol:NSProtocolFromString(@"C4UIElement")]) {
             [self addSubview:obj];
         }
         else {
