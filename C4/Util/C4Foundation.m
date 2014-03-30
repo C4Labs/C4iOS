@@ -20,8 +20,6 @@
 #import "C4Foundation.h"
 #import <sys/utsname.h>
 
-static C4Foundation *sharedC4Foundation = nil;
-
 @interface C4Foundation (private)
 NSInteger numSort(id num1, id num2, void *context);
 NSInteger strSort(id str1, id str2, void *context);
@@ -29,37 +27,6 @@ NSInteger floatSort(id obj1, id obj2, void *context);
 @end
 
 @implementation C4Foundation
-
-- (id)init {
-    self = [super init];
-    if (self) {
-#ifdef VERBOSE
-        C4Log(@"%@ init",[self class]);
-#endif
-        floatSortComparator = ^(id obj1, id obj2) {
-            float flt1 = [obj1 floatValue];
-            float flt2 = [obj2 floatValue];
-            if (flt1 < flt2)
-                return NSOrderedAscending;
-            else if (flt1 > flt2)
-                return NSOrderedDescending;
-            else
-                return NSOrderedSame;
-        };
-    }
-    
-    return self;
-}
-
-+(C4Foundation *)sharedManager {
-    if (sharedC4Foundation == nil) {
-        static dispatch_once_t once;
-        dispatch_once(&once, ^ { sharedC4Foundation = [[super allocWithZone:NULL] init];
-        });
-        return sharedC4Foundation;
-    }
-    return sharedC4Foundation;
-}
 
 void C4Log(NSString *logString,...) {
     va_list args;
@@ -105,22 +72,20 @@ NSInteger floatSort(id obj1, id obj2, void *context) {
         return NSOrderedSame;
 }
 
--(NSComparator) floatComparator {
++ (NSComparator)floatComparator {
+    static NSComparator floatSortComparator = ^(id obj1, id obj2) {
+        float flt1 = [obj1 floatValue];
+        float flt2 = [obj2 floatValue];
+        if (flt1 < flt2)
+            return NSOrderedAscending;
+        else if (flt1 > flt2)
+            return NSOrderedDescending;
+        else
+            return NSOrderedSame;
+    };
     return floatSortComparator;
 }
-+(NSComparator) floatComparator {
-    return [[self sharedManager] floatComparator];
-}
 
-+(id)allocWithZone:(NSZone *)zone {
-    zone = zone;
-    return [self sharedManager];
-}
-
--(id)copyWithZone:(NSZone *)zone {
-    zone = zone;
-    return self;
-}
 
 #pragma mark New Stuff
 CGRect CGRectMakeFromPointArray(CGPoint *pointArray, int pointCount) {

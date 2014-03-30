@@ -22,14 +22,10 @@
  *  This methods listed in this document are used for sorting, comparing, and most importantly logging messages to the console.
  */
 
-@interface C4Foundation : NSObject {
-    NSComparator floatSortComparator;
-}
+@interface C4Foundation : NSObject
 
 #pragma mark Foundation Methods
 /// @name Foundation Methods
-
-+(C4Foundation *)sharedManager;
 
 /** Logs an error message to the console.
  
@@ -42,10 +38,6 @@ void C4Log(NSString *logString,...);
 /** Returns a pre-defined comparator for sorting float values.
  */
 +(NSComparator)floatComparator;
-
-/** Returns a pre-defined comparator for sorting float values.
- */
--(NSComparator)floatComparator;
 
 /** Sorts two undefined objects.
  

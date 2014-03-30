@@ -22,29 +22,6 @@
 static C4Math *sharedC4Math = nil;
 
 @implementation C4Math
-#pragma mark Singleton
-
-+ (C4Math *)sharedManager
-{
-    if (sharedC4Math == nil) {
-        static dispatch_once_t once;
-        dispatch_once(&once, ^ {
-            sharedC4Math = [[super allocWithZone:NULL] init];
-        });
-        return sharedC4Math;
-    }
-    return sharedC4Math;
-}
-
-+ (id)allocWithZone:(NSZone *)zone {
-    zone = zone;
-    return [self sharedManager];
-}
-
-- (id)copyWithZone:(NSZone *)zone {
-    zone = zone;
-    return self;
-}
 
 #pragma mark Initialization
 

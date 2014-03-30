@@ -30,9 +30,6 @@
 
 @interface C4Math : C4Object
 
-#pragma mark Singleton
-+(C4Math *)sharedManager;
-
 #pragma mark Arithmetic
 /// @Arithmetic
 /** Computes the absolute value of an integer number
