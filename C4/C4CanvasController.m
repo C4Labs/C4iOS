@@ -43,72 +43,73 @@
     }
 }
 
-- (void)loadView {
-    UIControl* control = [[UIControl alloc] init];;
-    self.view = control;
-    _canvas = [[C4Control alloc] initWithView:control];
+- (void)viewDidLoad {
+    _canvas = [[C4Control alloc] initWithView:self.view];
 }
 
--(void)setup {
+- (void)setup {
 }
 
-#pragma mark Notification Methods
--(void)listenFor:(NSString *)notification andRunMethod:(NSString *)methodName {
+
+#pragma mark C4Notification Methods
+
+- (void)listenFor:(NSString *)notification andRunMethod:(NSString *)methodName {
     [self listenFor:notification fromObject:nil andRunMethod:methodName];
 }
 
--(void)listenFor:(NSString *)notification fromObject:(id)object andRunMethod:(NSString *)methodName {
+- (void)listenFor:(NSString *)notification fromObject:(id)object andRunMethod:(NSString *)methodName {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(methodName) name:notification object:object];
 }
 
--(void)listenFor:(NSString *)notification fromObjects:(NSArray *)objectArray andRunMethod:(NSString *)methodName {
+- (void)listenFor:(NSString *)notification fromObjects:(NSArray *)objectArray andRunMethod:(NSString *)methodName {
     for (id object in objectArray) {
         [self listenFor:notification fromObject:object andRunMethod:methodName];
     }
 }
 
--(void)stopListeningFor:(NSString *)notification {
+- (void)stopListeningFor:(NSString *)notification {
     [self stopListeningFor:notification object:nil];
 }
 
--(void)stopListeningFor:(NSString *)notification object:(id)object {
+- (void)stopListeningFor:(NSString *)notification object:(id)object {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:notification object:object];
 }
 
--(void)stopListeningFor:(NSString *)methodName objects:(NSArray *)objectArray {
+- (void)stopListeningFor:(NSString *)methodName objects:(NSArray *)objectArray {
     for(id object in objectArray) {
         [self stopListeningFor:methodName object:object];
     }
 }
 
--(void)postNotification:(NSString *)notification {
+- (void)postNotification:(NSString *)notification {
     [[NSNotificationCenter defaultCenter] postNotificationName:notification object:self];
 }
 
-#pragma mark New Stuff
 
--(void)imageWasCaptured {
-    
-}
+#pragma mark C4MethodDelay methods
 
--(void)move:(id)sender {
-}
-
--(void)runMethod:(NSString *)methodName afterDelay:(CGFloat)seconds {
+- (void)runMethod:(NSString *)methodName afterDelay:(CGFloat)seconds {
     [self performSelector:NSSelectorFromString(methodName) withObject:self afterDelay:seconds];
 }
 
--(void)runMethod:(NSString *)methodName withObject:(id)object afterDelay:(CGFloat)seconds {
+- (void)runMethod:(NSString *)methodName withObject:(id)object afterDelay:(CGFloat)seconds {
     [self performSelector:NSSelectorFromString(methodName) withObject:object afterDelay:seconds];
 }
 
--(void)movieIsReadyForPlayback:(NSNotification *)notification {
+
+#pragma mark Other methods
+
+- (void)imageWasCaptured {
+    
+}
+
+- (void)movieIsReadyForPlayback:(NSNotification *)notification {
     C4Movie *currentMovie = (C4Movie *)[notification object];
     [self movieIsReady:currentMovie];
     [self stopListeningFor:@"movieIsReadyForPlayback" object:currentMovie];
 }
 
--(void)movieIsReady:(C4Movie *)movie {
+- (void)movieIsReady:(C4Movie *)movie {
 }
 
 @end
