@@ -19,8 +19,12 @@
 
 #import "C4Sample.h"
 
+@interface C4Sample ()
+@property(nonatomic, strong) AVAudioPlayer *player;
+@end
+
+
 @implementation C4Sample
-@synthesize player = _player;
 
 +(C4Sample *)sampleNamed:(NSString *)sampleName {
     return [[C4Sample alloc] initWithSampleName:sampleName];

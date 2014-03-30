@@ -20,7 +20,6 @@
 #import "C4ActivityIndicator.h"
 
 @implementation C4ActivityIndicator
-@synthesize color = _color;
 
 +(C4ActivityIndicator *)indicatorWithStyle:(C4ActivityIndicatorStyle)style {
     C4ActivityIndicator *indicator = [[C4ActivityIndicator alloc] initWithActivityIndicatorStyle:style];
@@ -69,25 +68,18 @@
     return _UIActivityIndicatorView.hidesWhenStopped;
 }
 
--(void)setColor:(UIColor *)color {
-    _color = color;
-    self.UIActivityIndicatorView.color = color;
-}
-
 -(UIColor *)color {
     return _UIActivityIndicatorView.color;
 }
 
+-(void)setColor:(UIColor *)color {
+    self.UIActivityIndicatorView.color = color;
+}
+
 -(void)runMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event{
-    methodName = methodName;
-    object = object;
-    event = event;
 }
 
 -(void)stopRunningMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
-    methodName = methodName;
-    object = object;
-    event = event;
 }
 
 

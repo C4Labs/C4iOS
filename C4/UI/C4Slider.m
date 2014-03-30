@@ -22,9 +22,6 @@
 
 @implementation C4Slider
 
-#pragma mark style methods
-@synthesize maximumTrackTintColor = _maximumTrackTintColor, minimumTrackTintColor = _minimumTrackTintColor, thumbTintColor = _thumbTintColor;
-
 -(id)init {
     return [self initWithFrame:CGRectZero];
 }
@@ -63,7 +60,6 @@
 }
 
 -(void)setThumbTintColor:(UIColor *)color {
-    _thumbTintColor = color;
     self.UISlider.thumbTintColor = nilForNullObject(color);
 }
 
@@ -72,7 +68,6 @@
 }
 
 -(void)setMaximumTrackTintColor:(UIColor *)color {
-    _maximumTrackTintColor = color;
     self.UISlider.maximumTrackTintColor = nilForNullObject(color);
 }
 
@@ -81,7 +76,6 @@
 }
 
 -(void)setMinimumTrackTintColor:(UIColor *)color {
-    _minimumTrackTintColor = color;
     self.UISlider.minimumTrackTintColor = nilForNullObject(color);
 }
 

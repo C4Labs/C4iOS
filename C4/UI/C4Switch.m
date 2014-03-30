@@ -20,7 +20,6 @@
 #import "C4Switch.h"
 
 @implementation C4Switch
-@synthesize on = _on, onImage = _onImage, onTintColor = _onTintColor, offImage = _offImage, tintColor = _tintColor, thumbTintColor = _thumbTintColor;
 
 +(C4Switch *)switch:(CGRect)frame {
     C4Switch *s = [[C4Switch alloc] initWithFrame:frame];
@@ -57,7 +56,6 @@
 }
 
 -(void)setOnTintColor:(UIColor *)onTintColor {
-    _onTintColor = onTintColor;
     _UISwitch.onTintColor = onTintColor;
 }
 
@@ -66,7 +64,6 @@
 }
 
 -(void)setTintColor:(UIColor *)tintColor {
-    _tintColor = tintColor;
     _UISwitch.tintColor = tintColor;
 }
 
@@ -75,7 +72,6 @@
 }
 
 -(void)setThumbTintColor:(UIColor *)thumbTintColor {
-    _thumbTintColor = thumbTintColor;
     _UISwitch.thumbTintColor = thumbTintColor;
 }
 
@@ -84,7 +80,6 @@
 }
 
 -(void)setOnImage:(C4Image *)onImage {
-    _onImage = onImage;
     _UISwitch.onImage = onImage.UIImage;
 }
 
@@ -93,7 +88,6 @@
 }
 
 -(void)setOffImage:(C4Image *)offImage {
-    _offImage = offImage;
     _UISwitch.offImage = offImage.UIImage;
 }
 

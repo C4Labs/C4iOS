@@ -20,7 +20,6 @@
 #import "C4Button.h"
 
 @implementation C4Button
-@synthesize tintColor = _tintColor;
 
 +(C4Button *)buttonWithType:(C4ButtonType)type {
     C4Button *button = [[C4Button alloc] initWithType:type];
@@ -202,7 +201,6 @@
 }
 
 -(void)setTintColor:(UIColor *)tintColor {
-    _tintColor = tintColor;
     self.UIButton.tintColor = tintColor;
 }
 

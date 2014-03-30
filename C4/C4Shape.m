@@ -26,9 +26,10 @@
 @property (readonly, atomic) NSArray *localStylePropertyNames;
 @end
 
-@implementation C4Shape
-@synthesize pointA = _pointA, pointB = _pointB;
-@synthesize lineWidth = _lineWidth;
+@implementation C4Shape {
+    CGPoint _pointA;
+    CGPoint _pointB;
+}
 
 -(id)init {
     return [self initWithFrame:CGRectZero];

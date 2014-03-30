@@ -26,14 +26,15 @@
 @property (readwrite, strong, nonatomic) UIImage *originalImage;
 @property (readwrite, strong, nonatomic) CIImage *output;
 @property (readwrite, strong, nonatomic) CIContext *filterContext;
-@property (readonly, nonatomic) dispatch_queue_t filterQueue;
-@property (readonly, nonatomic) NSUInteger bytesPerPixel, bytesPerRow;
-@property (readonly, nonatomic) unsigned char *rawData;
-@property (readonly, nonatomic) C4ActivityIndicator *filterIndicator;
+@property (nonatomic) dispatch_queue_t filterQueue;
+@property (nonatomic) NSUInteger bytesPerPixel, bytesPerRow;
+@property (nonatomic) unsigned char *rawData;
+@property (nonatomic) C4ActivityIndicator *filterIndicator;
 @end
 
-@implementation C4Image
-@synthesize filterQueue = _filterQueue, rawData = _rawData, rotation = _rotation;
+@implementation C4Image {
+    CGFloat _rotation;
+}
 
 #pragma mark Initialization
 +(C4Image *)imageNamed:(NSString *)name {

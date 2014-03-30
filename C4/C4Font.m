@@ -20,7 +20,6 @@
 #import "C4Font.h"
 
 @implementation C4Font
-@synthesize UIFont = _UIFont, CTFont = _CTFont, CGFont = _CGFont, familyName = _familyName, fontName = _fontName, pointSize = _pointSize, ascender = _ascender, descender = _descender, capHeight = _capHeight, xHeight = _xHeight, lineHeight = _lineHeight;
 
 -(id)init {
     self = [super init];
@@ -42,14 +41,6 @@
 
 + (C4Font *)fontWithName:(NSString *)fontName size:(CGFloat)fontSize {
     return [[C4Font alloc] initWithName:fontName size:fontSize];
-}
-
--(void)dealloc {
-    _UIFont = nil;
-    _CTFont = nil;
-    _CGFont = nil;
-    _familyName = nil;
-    _fontName = nil;
 }
 
 // Returns an array of font family names for all installed fonts

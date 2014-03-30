@@ -20,7 +20,6 @@
 #import "C4Stepper.h"
 
 @implementation C4Stepper
-@synthesize tintColor = _tintColor;
 
 +(C4Stepper *)stepper {
     C4Stepper *stepper = [[C4Stepper alloc] initWithFrame:CGRectZero];

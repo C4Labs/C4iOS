@@ -20,7 +20,6 @@
 #import "C4ScrollView.h"
 
 @implementation C4ScrollView
-@synthesize contentOffset = _contentOffset;
 
 +(C4ScrollView *)scrollView:(CGRect)rect {
     return [[C4ScrollView alloc] initWithFrame:rect];
@@ -100,7 +99,6 @@
 }
 
 -(void)setContentOffset:(CGPoint)contentOffset {
-    _contentOffset = contentOffset;
     _UIScrollview.contentOffset = contentOffset;
 }
 
@@ -280,14 +278,9 @@
                       ofObject:(id)object
                         change:(NSDictionary *)change
                        context:(void *)context {
-    change = change;
-    context = context;
-    if([keyPath isEqualToString:@"contentOffset"]) {
-        if((UIScrollView *)object == _UIScrollview) {
-            [self willChangeValueForKey:@"contentOffset"];
-            _contentOffset = _UIScrollview.contentOffset;
-            [self didChangeValueForKey:@"contentOffset"];
-        }
+    if([keyPath isEqualToString:@"contentOffset"] && (UIScrollView *)object == _UIScrollview) {
+        [self willChangeValueForKey:@"contentOffset"];
+        [self didChangeValueForKey:@"contentOffset"];
     }
 }
 

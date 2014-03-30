@@ -26,9 +26,6 @@
 @end
 
 @implementation C4Label
-@synthesize textShadowColor = _textShadowColor;
-@synthesize width = _width, height = _height;
-@synthesize size = _size;
 
 -(id)init {
     return [self initWithFrame:CGRectZero];
@@ -122,21 +119,11 @@
 }
 
 -(void)setTextShadowColor:(UIColor *)shadowColor {
-    if(self.animationDelay == 0.0f) self.label.shadowColor = shadowColor;
-    else [self performSelector:@selector(_setTextShadowColor:) withObject:shadowColor afterDelay:self.animationDelay];
-}
--(void)_setTextShadowColor:(UIColor *)shadowColor {
-    _textShadowColor = shadowColor;
-    self.label.shadowColor = shadowColor;
+    [self.animationHelper animateKeyPath:@"shadowColor" toValue:shadowColor];
 }
 
 -(void)setTextShadowOffset:(CGSize)shadowOffset {
-    if (self.animationDelay == 0.0f) [self _setTextShadowOffset:[NSValue valueWithCGSize:shadowOffset]];
-    else [self performSelector:@selector(_setTextShadowOffset:) withObject:[NSValue valueWithCGSize:shadowOffset] afterDelay:self.animationDelay];
-}
--(void)_setTextShadowOffset:(NSValue *)shadowOffset {
-    _textShadowOffset = [shadowOffset CGSizeValue];
-    self.label.shadowOffset = [shadowOffset CGSizeValue];
+    [self.animationHelper animateKeyPath:@"shadowOffset" toValue:[NSValue valueWithCGSize:shadowOffset]];
 }
 
 -(C4Font *)font {
@@ -296,7 +283,6 @@
 }
 
 -(void)setWidth:(CGFloat)width {
-    _width = width;
     CGRect newFrame = self.frame;
     newFrame.size.width = width;
     self.frame = newFrame;
@@ -307,7 +293,6 @@
 }
 
 -(void)setHeight:(CGFloat)height {
-    _height = height;
     CGRect newFrame = self.frame;
     newFrame.size.height = height;
     self.frame = newFrame;
@@ -318,7 +303,6 @@
 }
 
 -(void)setSize:(CGSize)size {
-    _size = size;
     CGRect newFrame = CGRectZero;
     newFrame.origin = self.origin;
     newFrame.size = size;

@@ -23,17 +23,13 @@
 @interface C4Movie() {
     void *rateContext, *currentItemContext, *playerItemStatusContext;
 }
-@property (readwrite, nonatomic) NSURL *movieURL;
-@property (readwrite, nonatomic, strong) AVPlayerLayer *playerLayer;
-@property (readwrite, nonatomic, strong) AVPlayer *player;
-@property (readwrite, nonatomic, strong) AVPlayerItem *playerItem;
+@property(nonatomic) NSURL *movieURL;
+@property(nonatomic, strong) AVPlayerLayer *playerLayer;
+@property(nonatomic, strong) AVPlayer *player;
+@property(nonatomic, strong) AVPlayerItem *playerItem;
 @end
 
 @implementation C4Movie
-@synthesize player = _player;
-@synthesize rate = _rate;
-@synthesize width = _width;
-@synthesize height = _height;
 
 +(C4Movie *)movieNamed:(NSString *)movieName {
     C4Movie *newMovie = [[C4Movie alloc] initWithMovieName:movieName frame:CGRectZero];
@@ -123,8 +119,7 @@
     self.backgroundColor = [UIColor clearColor];
     _constrainsProportions = YES;
     self.player.actionAtItemEnd = AVPlayerActionAtItemEndPause; // currently C4Movie doesn't handle queues
-    
-    _rate = 1.0f;
+    self.rate = 1.0f;
     
     [self setup];
 }
@@ -150,7 +145,7 @@
     if(wasPlaying == YES) {
         [self pause];
     }
-    _rate = rate;
+    self.player.rate = rate;
     if(wasPlaying == YES) {
         [self play];
     }
@@ -303,7 +298,7 @@
 }
 
 -(void)play {
-    self.player.rate = _rate;
+    [self.player play];
 }
 
 -(void)pause {
@@ -315,7 +310,6 @@
 }
 
 -(void)setWidth:(CGFloat)width {
-    _width = width;
     CGRect newFrame = self.frame;
     newFrame.size.width = width;
     if(_constrainsProportions) newFrame.size.height = width/self.originalMovieRatio;
@@ -327,7 +321,6 @@
 }
 
 -(void)setHeight:(CGFloat)height {
-    _height = height;
     CGRect newFrame = self.frame;
     newFrame.size.height = height;
     if(_constrainsProportions) newFrame.size.width = height * self.originalMovieRatio;

@@ -29,14 +29,6 @@
 @end
 
 @implementation C4GL
-//@synthesize animationOptions = _animationOptions;
-//@synthesize animating, animationFrameInterval;
-//@synthesize renderer, displayLinkSupported;
-//@synthesize eaglLayer;
-//@synthesize displayLink;
-//@synthesize animationTimer;
-//@synthesize drawOnce;
-//@synthesize shouldAutoreverse = _shouldAutoreverse;
 
 +(C4GL *)glWithFrame:(CGRect)frame {
     C4GL *gl = [[C4GL alloc] init];
