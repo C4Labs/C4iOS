@@ -385,8 +385,4 @@
     return template;
 }
 
-+ (C4Movie *)defaultTemplateProxy {
-    return [[self defaultTemplate] proxy];
-}
-
 @end

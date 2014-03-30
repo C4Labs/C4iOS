@@ -192,8 +192,4 @@
     return template;
 }
 
-+ (C4Camera *)defaultTemplateProxy {
-    return [[self defaultTemplate] proxy];
-}
-
 @end

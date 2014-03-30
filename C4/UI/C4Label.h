@@ -215,12 +215,4 @@
  */
 @property(nonatomic, readonly, strong) UILabel *label;
 
-/**Returns the template proxy for the object, cast as a C4Label.
- 
- You use this method to grab the default template proxy object that allows you to change the default template for C4Label objects.
- 
- @return The template proxy for the receiver, cast as a C4Label.
- */
-+(C4Label *)defaultTemplateProxy;
-
 @end

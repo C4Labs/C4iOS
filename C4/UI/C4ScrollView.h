@@ -305,13 +305,4 @@
  */
 - (BOOL)touchesShouldCancelInContentView:(UIView *)view;
 
-#pragma mark - Default Style
-///@name Default Style
-/**Returns the appearance proxy for the object, cast as a C4ScrollView rather than the standard (id) cast provided by UIAppearance.
- 
- You use this method to grab the appearance object that allows you to change the default style for C4ScrollView objects.
- 
- @return The appearance proxy for the receiver, cast as a C4ScrollView.
- */
-+(C4ScrollView *)defaultTemplateProxy;
 @end

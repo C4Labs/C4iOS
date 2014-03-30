@@ -162,8 +162,4 @@
     return template;
 }
 
-+ (C4GL *)defaultTemplateProxy {
-    return [[self defaultTemplate] proxy];
-}
-
 @end

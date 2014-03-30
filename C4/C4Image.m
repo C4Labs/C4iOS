@@ -1944,8 +1944,4 @@
     return template;
 }
 
-+ (C4Image *)defaultTemplateProxy {
-    return [[self defaultTemplate] proxy];
-}
-
 @end

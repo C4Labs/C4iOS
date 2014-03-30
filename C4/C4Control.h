@@ -372,7 +372,7 @@ typedef void (^C4SwipeGestureBlock)();
  
  @return The template proxy for the receiver, cast as a C4Control.
  */
-+ (C4Control *)defaultTemplateProxy;
++ (instancetype)defaultTemplateProxy;
 
 
 /** Return a new blank template for the object.

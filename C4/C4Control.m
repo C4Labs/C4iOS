@@ -662,7 +662,7 @@
     return template;
 }
 
-+ (C4Control *)defaultTemplateProxy {
++ (instancetype)defaultTemplateProxy {
     return [[self defaultTemplate] proxy];
 }
 

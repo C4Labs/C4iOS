@@ -388,13 +388,4 @@
  */
 @property(nonatomic) CGPathRef path;
 
-
-/**Returns the template proxy for the object, cast as a C4Shape.
- 
- You use this method to grab the default template proxy object that allows you to change the default template for C4Shape objects.
- 
- @return The template proxy for the receiver, cast as a C4Shape.
- */
-+ (C4Shape *)defaultTemplateProxy;
-
 @end

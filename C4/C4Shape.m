@@ -732,8 +732,4 @@
     return template;
 }
 
-+ (C4Shape *)defaultTemplateProxy {
-    return [[self defaultTemplate] proxy];
-}
-
 @end

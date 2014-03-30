@@ -94,10 +94,6 @@
     return template;
 }
 
-+ (C4ActivityIndicator *)defaultTemplateProxy {
-    return [[self defaultTemplate] proxy];
-}
-
 
 #pragma mark isEqual
 

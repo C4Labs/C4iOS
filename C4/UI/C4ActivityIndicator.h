@@ -99,13 +99,4 @@ typedef NS_ENUM(NSInteger, C4ActivityIndicatorStyle) {
  */
 @property(nonatomic, strong) UIColor *color;
 
-
-/**Returns the template proxy for the object, cast as a C4ActivityIndicator.
- 
- You use this method to grab the default template proxy object that allows you to change the default template for C4ActivityIndicator objects.
- 
- @return The template proxy for the receiver, cast as a C4ActivityIndicator.
- */
-+ (C4ActivityIndicator *)defaultTemplateProxy;
-
 @end

@@ -262,10 +262,6 @@
     return template;
 }
 
-+ (C4Slider *)defaultTemplateProxy {
-    return [[self defaultTemplate] proxy];
-}
-
 
 #pragma mark isEqual
 

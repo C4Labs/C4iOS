@@ -166,8 +166,4 @@
     return template;
 }
 
-+ (C4Stepper *)defaultTemplateProxy {
-    return [[self defaultTemplate] proxy];
-}
-
 @end

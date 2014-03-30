@@ -324,10 +324,6 @@
     return template;
 }
 
-+ (C4Button *)defaultTemplateProxy {
-    return [[self defaultTemplate] proxy];
-}
-
 
 #pragma mark isEqual
 

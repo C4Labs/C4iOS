@@ -1217,12 +1217,4 @@
  */
 -(void)twelveFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
 
-/**Returns the template proxy for the object, cast as a C4Image.
- 
- You use this method to grab the default template proxy object that allows you to change the default template for C4Image objects.
- 
- @return The template proxy for the receiver, cast as a C4Image.
- */
-+ (C4Image *)defaultTemplateProxy;
-
 @end

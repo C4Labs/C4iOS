@@ -320,8 +320,4 @@
     return template;
 }
 
-+ (C4Label *)defaultTemplateProxy {
-    return [[self defaultTemplate] proxy];
-}
-
 @end

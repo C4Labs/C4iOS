@@ -295,8 +295,4 @@
     return template;
 }
 
-+ (C4ScrollView *)defaultTemplateProxy {
-    return [[self defaultTemplate] proxy];
-}
-
 @end
