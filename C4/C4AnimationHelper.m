@@ -81,21 +81,15 @@
     }
     
     [CATransaction begin];
+    if (completion)
+        [CATransaction setCompletionBlock:completion];
+    
     CABasicAnimation *animation = [self animation];
     animation.keyPath = keyPath;
-    animation.fromValue = [self.layer valueForKeyPath:keyPath];
+    animation.fromValue = [self.layer.presentationLayer valueForKeyPath:keyPath];
     animation.toValue = toValue;
-    if (animation.repeatCount != FOREVER && !_layer.autoreverses) {
-        [CATransaction setCompletionBlock:^ {
-            [_layer setValue:toValue forKeyPath:keyPath];
-            [_layer removeAnimationForKey:keyPath];
-            if (completion)
-                completion();
-        }];
-    } else if (completion) {
-        [CATransaction setCompletionBlock:completion];
-    }
     [_layer addAnimation:animation forKey:keyPath];
+    
     [CATransaction commit];
 }
 
