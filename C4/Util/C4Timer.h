@@ -125,7 +125,7 @@
  
  @return YES if the receiver is still capable of firing or NO if the timer has been invalidated and is no longer capable of firing.
  */
-@property (readonly, nonatomic) BOOL isValid;
+@property(nonatomic, readonly) BOOL isValid;
 
 /**Returns the date at which the receiver will fire.
  
@@ -135,18 +135,18 @@
  
  @return The date at which the receiver will fire. If the timer is no longer valid, this method returns the last date at which the timer fired.
  */
-@property (readwrite, nonatomic, weak) NSDate *fireDate;
+@property(nonatomic, strong) NSDate *fireDate;
 
 /**Returns the receiver’s time interval.
  
  The receiver’s time interval. If the receiver is a non-repeating timer, returns 0 (even if a time interval was set).
  */
-@property (readonly, nonatomic) CGFloat timeInterval;
+@property(nonatomic, readonly) CGFloat timeInterval;
 
 /**Returns the receiver's userInfo object. The userInfo is the object that will be passed to the method the timer is targeting.
  
  Do not invoke this method after the timer is invalidated. Use isValid to test whether the timer is valid.
  */
-@property (readonly, nonatomic, weak) id userInfo;
+@property(nonatomic, readonly) id userInfo;
 
 @end

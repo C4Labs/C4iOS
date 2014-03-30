@@ -69,11 +69,11 @@
  
  @warning In the current version of C4 the only kind of renderer is [C4GL1Renderer](C4GL1Renderer) which only allows you to draw with OpenGL ES 1.x function calls.
  */
-@property (readwrite, strong, nonatomic) id <C4EAGLESRenderer> renderer;
+@property(nonatomic, strong) id <C4EAGLESRenderer> renderer;
 
 /**Specifies a readonly variable used to determine if the renderer is currently animating.
  */
-@property (readonly, nonatomic, getter=isAnimating) BOOL animating;
+@property(nonatomic, readonly, getter=isAnimating) BOOL animating;
 
 /**Specifies an interval which determines how often frames are rendered.
  
@@ -84,7 +84,7 @@
  at 60 times a second. A frame interval setting of less than one results in undefined
  behavior, and is prevented from being set.
  */
-@property (nonatomic) NSInteger animationFrameInterval;
+@property(nonatomic) NSInteger animationFrameInterval;
 
 /**Specifies that drawing should happen only one time.
  
@@ -92,7 +92,7 @@
  
  Set this property to YES if you want to draw something but aren't animating its contents. If you are not animating and this property is set to NO the rendering call will be made at the specified frame rate (default 60fps) and you'll be wasting a lot of resources.
  */
-@property (atomic) BOOL drawOnce;
+@property(nonatomic) BOOL drawOnce;
 
 /**Returns the template proxy for the object, cast as a C4GL.
  

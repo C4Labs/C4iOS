@@ -55,22 +55,12 @@
 -(id)initWithType:(C4ButtonType)buttonType;
 
 #pragma mark Configuring the Button Title
-///@name Configuring the Button Title
-/**A view that displays the value of the currentTitle property for a button. (read-only)
- 
- Although this property is read-only, its own properties are read/write. Use these properties primarily to configure the text of the button. For example:
- 
- Do not use the label object to set the text color or the shadow color. Instead, use the setTitleColor:forState: and setTitleShadowColor:forState: methods of this class to make those changes.
- 
- The titleLabel property returns a value even if the button has not been displayed yet. The value of the property is nil for system buttons.
- */
-@property (readonly, nonatomic, weak) C4Label *titleLabel;
 
 /**A Boolean value that determines whether the title shadow changes when the button is highlighted.
  
  If YES, the shadow changes from engrave to emboss appearance when highlighted. The default value is NO.
  */
-@property (readwrite, nonatomic) BOOL reversesTitleShadowWhenHighlighted;
+@property(nonatomic) BOOL reversesTitleShadowWhenHighlighted;
 
 /**Sets the title to use for the specified state.
  
@@ -149,19 +139,19 @@
  
  If YES, the image is drawn lighter when the button is highlighted. The default value is YES.
  */
-@property (readwrite, nonatomic) BOOL adjustsImageWhenHighlighted;
+@property(nonatomic) BOOL adjustsImageWhenHighlighted;
 
 /**A Boolean value that determines whether the image changes when the button is disabled.
  
  If YES, the image is drawn darker when the button is disabled. The default value is YES.
  */
-@property (readwrite, nonatomic) BOOL adjustsImageWhenDisabled;
+@property(nonatomic) BOOL adjustsImageWhenDisabled;
 
 /**A Boolean value that determines whether tapping the button causes it to glow.
  
  If YES, the button glows when tapped; otherwise, it does not. The image and button behavior is not changed by the glow. The default value is NO.
  */
-@property (readwrite, nonatomic) BOOL showsTouchWhenHighlighted;
+@property(nonatomic) BOOL showsTouchWhenHighlighted;
 
 /**Returns the C4Image used for the background of a button state.
  
@@ -203,7 +193,7 @@
  
  This property is not valid for all button types.
  */
-@property (readwrite, nonatomic, strong) UIColor *tintColor NS_AVAILABLE_IOS(5_0) UI_APPEARANCE_SELECTOR;
+@property(nonatomic, strong) UIColor *tintColor;
 
 /**The font used to display text on the button.
  
@@ -211,7 +201,7 @@
  
  If nil, a system font is used. The default value is 15.0pt Avenir-Medium.
  */
-@property (readwrite, nonatomic, weak) C4Font *font;
+@property(nonatomic, strong) C4Font *font;
 
 #pragma mark - Configuring Edge Insets
 ///@name Configuring Edge Insets
@@ -219,7 +209,7 @@
  
  Use this property to resize and reposition the effective drawing rectangle for the button content. The content comprises the button image and button title. You can specify a different value for each of the four insets (top, left, bottom, right). A positive value shrinks, or insets, that edge—moving it closer to the center of the button. A negative value expands, or outsets, that edge. Use the UIEdgeInsetsMake function to construct a value for this property. The default value is UIEdgeInsetsZero.
  */
-@property (readwrite, nonatomic) UIEdgeInsets contentEdgeInsets;
+@property(nonatomic) UIEdgeInsets contentEdgeInsets;
 
 /**The inset or outset margins for the rectangle around the button’s title text.
  
@@ -227,13 +217,13 @@
  
  The insets you specify are applied to the title rectangle after that rectangle has been sized to fit the button’s text. Thus, positive inset values may actually clip the title text.
  */
-@property (readwrite, nonatomic) UIEdgeInsets titleEdgeInsets;
+@property(nonatomic) UIEdgeInsets titleEdgeInsets;
 
 /**The inset or outset margins for the rectangle around the button’s image.
  
  Use this property to resize and reposition the effective drawing rectangle for the button image. You can specify a different value for each of the four insets (top, left, bottom, right). A positive value shrinks, or insets, that edge—moving it closer to the center of the button. A negative value expands, or outsets, that edge. Use the UIEdgeInsetsMake function to construct a value for this property. The default value is UIEdgeInsetsZero.
  */
-@property (readwrite, nonatomic) UIEdgeInsets imageEdgeInsets;
+@property(nonatomic) UIEdgeInsets imageEdgeInsets;
 
 #pragma mark - Getting the Current State
 ///@name Getting the Current State
@@ -241,43 +231,43 @@
  
  See C4ButtonType for the possible values.
  */
-@property (readonly, nonatomic) C4ButtonType buttonType;
+@property(nonatomic, readonly) C4ButtonType buttonType;
 
 /**The current title that is displayed on the button. (read-only)
  
  The value for this property is set automatically whenever the button state changes. For states that do not have a custom title string associated with them, this method returns the title that is currently displayed, which is typically the one associated with the NORMAL state. The value may be nil.
  */
-@property (readonly, nonatomic, weak) NSString *currentTitle;
+@property(nonatomic, readonly, strong) NSString *currentTitle;
 
 /**The current styled title that is displayed on the button. (read-only)
  
  The value for this property reflects the title associated with the control’s current state. For states that do not have a custom title string associated with them, this method returns the attributed title that is currently displayed, which is typically the one associated with the NORMAL state.
  */
-@property (readonly, nonatomic, weak) NSAttributedString *currentAttributedTitle NS_AVAILABLE_IOS(6_0);
+@property(nonatomic, readonly, strong) NSAttributedString *currentAttributedTitle NS_AVAILABLE_IOS(6_0);
 
 /**The color used to display the title. (read-only)
  
  This value is guaranteed not to be nil. The default value is C4GREY.
  */
-@property (readonly, nonatomic, weak) UIColor *currentTitleColor;
+@property(nonatomic, readonly, strong) UIColor *currentTitleColor;
 
 /**The color of the title’s shadow. (read-only)
  
  The default value is white.
  */
-@property (readonly, nonatomic, weak) UIColor *currentTitleShadowColor;
+@property(nonatomic, readonly, strong) UIColor *currentTitleShadowColor;
 
 /**The current image displayed on the button. (read-only)
  
  This value can be nil.
  */
-@property (readonly, nonatomic, weak) C4Image *currentImage;
+@property(nonatomic, readonly, weak) C4Image *currentImage;
 
 /**The current background image displayed on the button. (read-only)
  
  This value can be nil.
  */
-@property (readonly, nonatomic, weak) C4Image *currentBackgroundImage;
+@property(nonatomic, readonly, strong) C4Image *currentBackgroundImage;
 
 #pragma mark - Accessing the UIButton
 ///@name Accessing the UIButton
@@ -286,7 +276,7 @@
  
  This method returns the UIButton object that is the subview of the C4Button's view.
  */
-@property (readonly, strong, nonatomic) UIButton *UIButton;
+@property(nonatomic, readonly, strong) UIButton *UIButton;
 
 /**Returns the template proxy for the object, cast as a C4Button.
  

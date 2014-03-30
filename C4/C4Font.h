@@ -108,7 +108,7 @@
  
  @return The receiver's UIFont object.
  */
-@property(readonly, strong, nonatomic) UIFont *UIFont;
+@property(nonatomic, readonly, strong) UIFont *UIFont;
 
 /** A CTFont object that corresponds to the receiver's UIFont.
  
@@ -116,7 +116,7 @@
  
  @return A CTFontRef object whose characteristics match the receiver's.
  */
-@property(readonly, nonatomic) CTFontRef CTFont;
+@property(nonatomic, readonly) CTFontRef CTFont;
 
 /** A CGFont object that corresponds to the receiver's UIFont.
  
@@ -124,13 +124,13 @@
  
  @return A CGFontRef object whose characteristics match the receiver's.
  */
-@property(readonly, nonatomic) CGFontRef CGFont;
+@property(nonatomic, readonly) CGFontRef CGFont;
 
 /** The font family name. (read-only)
  
  A family name is a name such as Times New Roman that identifies one or more specific fonts. The value in this property is intended for an application’s internal usage only and should not be displayed.
  */
-@property(nonatomic,readonly,strong) NSString *familyName;
+@property(nonatomic, readonly, strong) NSString *familyName;
 
 /** The font face name.
  
@@ -138,37 +138,38 @@
  
  You can find out all the font names available for your device at: www.iosfonts.com
  */
-@property(nonatomic,readwrite,strong) NSString *fontName;
+@property(nonatomic, strong) NSString *fontName;
 
 /** The receiver’s point size, or the effective vertical point size for a font with a nonstandard matrix. (read-only)
  */
-@property(nonatomic,readwrite) CGFloat pointSize;
+@property(nonatomic) CGFloat pointSize;
 
 /** The top y-coordinate, offset from the baseline, of the receiver’s longest ascender. (read-only)
  
  The ascender value is measured in points.
  */
-@property(nonatomic,readonly) CGFloat ascender;
+@property(nonatomic, readonly) CGFloat ascender;
 
 /** The bottom y-coordinate, offset from the baseline, of the receiver’s longest descender. (read-only)
  
  The descender value is measured in points. This value may be positive or negative. For example, if the longest descender extends 2 points below the baseline, this method returns -2.0.
  */
-@property(nonatomic,readonly) CGFloat descender;
+@property(nonatomic, readonly) CGFloat descender;
 
 /** The receiver’s cap height information. (read-only)
  
  This value measures (in points) the height of a capital character.
  */
-@property(nonatomic,readonly) CGFloat capHeight;
+@property(nonatomic, readonly) CGFloat capHeight;
 
 /** The x-height of the receiver. (read-only)
  
  This value measures (in points) the height of the lowercase character "x".
  */
-@property(nonatomic,readonly) CGFloat xHeight;
+@property(nonatomic, readonly) CGFloat xHeight;
 
 /** The height of text lines (measured in points). (read-only)
  */
-@property(nonatomic,readonly) CGFloat lineHeight;
+@property(nonatomic, readonly) CGFloat lineHeight;
+
 @end

@@ -95,17 +95,17 @@
 
 /**A Boolean value that indicates whether the audio player is playing (YES) or not (NO). (read-only)
  */
-@property (readonly, nonatomic, getter=isPlaying) BOOL playing;
+@property(nonatomic, readonly, getter=isPlaying) BOOL playing;
 
 /**The playback gain for the audio player, ranging from 0.0 through 1.0.
  */
-@property (readwrite, nonatomic) CGFloat volume;
+@property(nonatomic) CGFloat volume;
 
 /**The audio player’s stereo pan position.
  
  By setting this property you can position a sound in the stereo field. A value of –1.0 is full left, 0.0 is center, and 1.0 is full right.
  */
-@property (readwrite, nonatomic) CGFloat pan;
+@property(nonatomic) CGFloat pan;
 
 /**The audio player’s playback rate.
  
@@ -113,25 +113,25 @@
  
  To set an audio player’s playback rate, you must first enable rate adjustment as described in the enableRate property description.
  */
-@property (readwrite, nonatomic) CGFloat rate;
+@property(nonatomic) CGFloat rate;
 
 /**A Boolean value that specifies whether playback rate adjustment is enabled for an audio player.
  
  To enable adjustable playback rate for an audio player, set this property to YES after you initialize the player and before you call the prepareToPlay instance method for the player.
  */
-@property (readwrite, nonatomic) BOOL enableRate;
+@property(nonatomic) BOOL enableRate;
 
 /**A Boolean value that specifies whether or not the sound will loop when it reaches its end.
  
  Setting this variable to YES implicitly sets numberOfLoops to -1.
  */
-@property (readwrite, nonatomic) BOOL loops;
+@property(nonatomic) BOOL loops;
 
 /**The number of times a sound will return to the beginning, upon reaching the end, to repeat playback.
  
  A value of 0, which is the default, means to play the sound once. Set a positive integer value to specify the number of times to return to the start and play again. For example, specifying a value of 1 results in a total of two plays of the sound. Set any negative integer value to loop the sound indefinitely until you call the stop method.
  */
-@property (readwrite, nonatomic) NSInteger numberOfLoops;
+@property(nonatomic) NSInteger numberOfLoops;
 
 /**The audio player’s settings dictionary, containing information about the sound associated with the player. (read-only)
  
@@ -145,7 +145,7 @@
  
  The settings keys are described in AV Foundation Audio Settings Constants.
  */
-@property (readonly, nonatomic) NSDictionary *settings;
+@property(nonatomic, readonly) NSDictionary *settings;
 
 #pragma mark - Managing Information About a Sound
 ///@name Managing Information About a Sound
@@ -155,7 +155,7 @@
 
 /**Returns the total duration, in seconds, of the sound associated with the audio player. (read-only)
  */
-@property (readonly, nonatomic) CGFloat duration;
+@property(nonatomic, readonly) CGFloat duration;
 
 /**The playback point, in seconds, within the timeline of the sound associated with the audio player.
  
@@ -163,7 +163,7 @@
  
  By setting this property you can seek to a specific point in a sound file or implement audio fast-forward and rewind functions.
  */
-@property (readwrite, nonatomic) CGFloat currentTime;
+@property(nonatomic) CGFloat currentTime;
 
 /**The time value, in seconds, of the audio output device. (read-only)
  
@@ -175,7 +175,7 @@
  
  Use this property to indicate “now” when calling the playAtTime: instance method. By configuring multiple audio players to play at a specified offset from deviceCurrentTime, you can perform precise synchronization—as described in the discussion for that method.
  */
-@property (readonly, nonatomic) CGFloat deviceCurrentTime;
+@property(nonatomic, readonly) CGFloat deviceCurrentTime;
 
 #pragma mark - Using Audio Level Metering
 ///@name Using Audio Level Metering
@@ -185,7 +185,7 @@
  
  `[self.player setMeteringEnabled: YES];`
  */
-@property (readwrite, nonatomic, getter = isMeteringEnabled) BOOL meteringEnabled;
+@property(nonatomic, getter = isMeteringEnabled) BOOL meteringEnabled;
 
 /**Returns the peak power for a given channel, in decibels, for the sound being played.
  
@@ -224,6 +224,6 @@
 ///@name Accessing the AVAudioPlayer
 /**Specifies the player object for the audio sample.
  */
-@property (readonly, nonatomic, strong) AVAudioPlayer *player;
+@property(nonatomic, readonly, strong) AVAudioPlayer *player;
 
 @end

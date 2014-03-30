@@ -106,13 +106,13 @@
 
 /**The original size of the movie file.
  */
-@property (readonly, nonatomic) CGSize originalMovieSize;
+@property(nonatomic, readonly) CGSize originalMovieSize;
 
 /**The original ratio of the movie file.
  
  Calculated from the originalMovieSize.
  */
-@property (readonly, nonatomic) CGFloat originalMovieRatio;
+@property(nonatomic, readonly) CGFloat originalMovieRatio;
 
 /**The rate at which the movie will play.
  
@@ -120,7 +120,7 @@
  
  Setting to 0.0f is like calling pause.
  */
-@property (readwrite, nonatomic) CGFloat rate;
+@property(nonatomic) CGFloat rate;
 
 /**The width of the movie.
  
@@ -128,7 +128,7 @@
  
  To stretch the movie without changing its height, you can call movie.frame(movie.origin.x, movie.origin.y, newWidth, movie.height);
  */
-@property (nonatomic) CGFloat width;
+@property(nonatomic) CGFloat width;
 
 /**The height of the movie.
  
@@ -136,33 +136,33 @@
  
  To stretch the movie without changing its width, you can call movie.frame(movie.origin.x, movie.origin.y, movie.width, newHeight);
  */
-@property (nonatomic) CGFloat height;
+@property(nonatomic) CGFloat height;
 
 /**Specifies whether the movie is playing or not.
  */
-@property (readonly, nonatomic) BOOL isPlaying;
+@property(nonatomic, readonly) BOOL isPlaying;
 
 /**Specifies whether the movie will loop or not.
  */
-@property (atomic) BOOL loops;
+@property(nonatomic) BOOL loops;
 
 /**Specifies whether the movies should play automatically after being loaded into the view.
  */
-@property (atomic) BOOL shouldAutoplay;
+@property(nonatomic) BOOL shouldAutoplay;
 
 /**Specifies the audio mix for the movie.
  */
-@property (readonly, nonatomic, strong) AVMutableAudioMix *audioMix;
+@property(nonatomic, readonly, strong) AVMutableAudioMix *audioMix;
 
 /**Specifies the volume of the movie.
  
  This value ranges from 0 to 1.
  */
-@property (readwrite, nonatomic) CGFloat volume;
+@property(nonatomic) CGFloat volume;
 
 /**Specifies the size of the movie. Animatable.
  */
-@property (readwrite, nonatomic) CGSize size;
+@property(nonatomic) CGSize size;
 
 /**Creates and returns a new C4Movie object with a given URL pointing to a movie file.
  
@@ -210,7 +210,7 @@
  
  The default is `YES`.
  */
-@property (readwrite, atomic) BOOL constrainsProportions;
+@property(nonatomic) BOOL constrainsProportions;
 
 /**Returns the template proxy for the object, cast as a C4Movie.
  

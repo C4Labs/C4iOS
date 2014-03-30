@@ -28,7 +28,7 @@
 
 /** The layer on which to apply the animations.
  */
-@property (nonatomic, strong, readonly) CALayer *layer;
+@property(nonatomic, readonly, strong) CALayer *layer;
 
 /** The duration of the animations.
  
@@ -36,7 +36,7 @@
  
  Defaults to 0.
  */
-@property (nonatomic) CGFloat animationDuration;
+@property(nonatomic) CGFloat animationDuration;
 
 /** The time to wait before the view's animations begin, measured in seconds.
  
@@ -46,7 +46,7 @@
  
  Defaults to 0.0f
  */
-@property (nonatomic) CGFloat animationDelay;
+@property(nonatomic) CGFloat animationDelay;
 
 /** The options for which the layer should use in its animations.
  
@@ -67,19 +67,19 @@
  layer.animationOptions = AUTOREVERSE;
  layer.animationOptions = REPEAT;
  */
-@property (nonatomic) NSUInteger animationOptions;
+@property(nonatomic) NSUInteger animationOptions;
 
 /** Type of easing that an animation will use.
  */
-@property (nonatomic, strong) NSString *currentAnimationEasing;
+@property(nonatomic, strong) NSString *currentAnimationEasing;
 
 /** The autoreverse state. YES if the animation autoreverses, NO otherwise.
  */
-@property (nonatomic) BOOL autoreverses;
+@property(nonatomic) BOOL autoreverses;
 
 /** The repeat state. YES if the layer's animations will repeat, NO otherwise.
  */
-@property (nonatomic) BOOL repeats;
+@property(nonatomic) BOOL repeats;
 
 /** Create a new animation object based on the current properties.
  */

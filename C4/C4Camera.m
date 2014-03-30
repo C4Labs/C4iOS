@@ -20,11 +20,11 @@
 #import "C4Camera.h"
 
 @interface C4Camera ()
-@property (strong, nonatomic) AVCaptureStillImageOutput *stillImageOutput;
-@property (strong, nonatomic) AVCaptureDevice *currentCamera;
-@property (strong, nonatomic) AVCaptureDeviceInput *input;
-@property (strong, nonatomic) AVCaptureVideoDataOutput *output;
-@property (strong, nonatomic) AVCaptureVideoPreviewLayer *previewLayer;
+@property(nonatomic, strong) AVCaptureStillImageOutput *stillImageOutput;
+@property(nonatomic, strong) AVCaptureDevice *currentCamera;
+@property(nonatomic, strong) AVCaptureDeviceInput *input;
+@property(nonatomic, strong) AVCaptureVideoDataOutput *output;
+@property(nonatomic, strong) AVCaptureVideoPreviewLayer *previewLayer;
 @end
 
 

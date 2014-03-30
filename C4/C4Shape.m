@@ -22,8 +22,8 @@
 #import "C4UIShapeControl.h"
 
 @interface C4Shape()
-@property (readonly, nonatomic) BOOL initialized, shouldClose;
-@property (readonly, atomic) NSArray *localStylePropertyNames;
+@property(nonatomic, readonly) BOOL initialized, shouldClose;
+@property(nonatomic, readonly, copy) NSArray *localStylePropertyNames;
 @end
 
 @implementation C4Shape {

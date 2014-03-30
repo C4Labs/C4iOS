@@ -249,7 +249,7 @@
  
  Default is C4BLUE.
  */
-@property (readwrite, strong, atomic) UIColor *fillColor UI_APPEARANCE_SELECTOR;
+@property(nonatomic, strong) UIColor *fillColor;
 
 /**The color used to stroke the shape’s path. Animatable.
  
@@ -257,7 +257,7 @@
  
  Default is nil.
  */
-@property (readwrite, strong, atomic) UIColor *strokeColor UI_APPEARANCE_SELECTOR;
+@property(nonatomic, strong) UIColor *strokeColor;
 
 /**The dash phase applied to the shape’s path when stroked. Animatable.
  
@@ -265,11 +265,11 @@
  
  Default is 0.
  */
-@property (readwrite, nonatomic) CGFloat lineDashPhase UI_APPEARANCE_SELECTOR;
+@property(nonatomic) CGFloat lineDashPhase;
 
 /**Specifies the line width of the shape’s path. Animatable.
  */
-@property (readwrite, nonatomic) CGFloat lineWidth UI_APPEARANCE_SELECTOR;
+@property(nonatomic) CGFloat lineWidth;
 
 /**The miter limit used when stroking the shape’s path. Animatable.
  
@@ -277,7 +277,7 @@
  
  Default is 10.0.
  */
-@property (readwrite, nonatomic) CGFloat miterLimit UI_APPEARANCE_SELECTOR;
+@property(nonatomic) CGFloat miterLimit;
 
 /**The relative location at which to stop stroking the path. Animatable.
  
@@ -288,7 +288,7 @@
  Combined with the strokeStart property, this property defines the subregion of the path to stroke. The value in this property indicates the relative point along the path at which to finish stroking while the strokeStart property defines the starting point. A value of 0.0 represents the beginning of the path while a value of 1.0 represents the end of the path. Values in between are interpreted linearly along the path length.
  
  */
-@property (readwrite, nonatomic) CGFloat strokeEnd UI_APPEARANCE_SELECTOR;
+@property(nonatomic) CGFloat strokeEnd;
 
 /**The relative location at which to begin stroking the path. Animatable.
  
@@ -296,7 +296,7 @@
  
  Combined with the strokeEnd property, this property defines the subregion of the path to stroke. The value in this property indicates the relative point along the path at which to begin stroking while the strokeEnd property defines the end point. A value of 0.0 represents the beginning of the path while a value of 1.0 represents the end of the path. Values in between are interpreted linearly along the path length.
  */
-@property (readwrite, nonatomic) CGFloat strokeStart UI_APPEARANCE_SELECTOR;
+@property(nonatomic) CGFloat strokeStart;
 
 /**The dash pattern applied to the shape’s path when stroked.
  
@@ -306,13 +306,13 @@
  
  Default is nil, a solid line.
  */
-@property (readwrite, strong, atomic) NSArray *lineDashPattern UI_APPEARANCE_SELECTOR;
+@property(nonatomic, copy) NSArray *lineDashPattern;
 
 /**The fill rule used when filling the shape’s path.
  
  The possible values are FILLNORMAL and FILLNONZERO which are equivalent to Cocoa's default winding mode values. See “Winding Rules” in Cocoa Drawing Guide for examples of the two fill rules.
  */
-@property (readwrite, strong, atomic) NSString *fillRule UI_APPEARANCE_SELECTOR;
+@property(nonatomic, copy) NSString *fillRule;
 
 /**Specifies the line cap style for the shape’s path.
  
@@ -322,7 +322,7 @@
  
  The default is CAPBUTT.
  */
-@property (readwrite, strong, atomic) NSString *lineCap UI_APPEARANCE_SELECTOR;
+@property(nonatomic, copy) NSString *lineCap;
 
 /**Specifies the line join style for the shape’s path.
  
@@ -330,53 +330,53 @@
  
  The default is JOINMITRE.
  */
-@property (readwrite, strong, atomic) NSString *lineJoin UI_APPEARANCE_SELECTOR;
+@property(nonatomic, copy) NSString *lineJoin;
 
 /**Specifies whether or not the shape is a line.
  */
-@property (readonly, nonatomic, getter = isLine) BOOL line;
+@property(nonatomic, readonly, getter = isLine) BOOL line;
 
 /**Specifies whether or not the shape is an arc.
  */
-@property (readonly, nonatomic, getter = isArc) BOOL arc;
+@property(nonatomic, readonly, getter = isArc) BOOL arc;
 
 /**Specifies the origin point of a line. Animatable.
  */
-@property (readwrite, nonatomic) CGPoint pointA;
+@property(nonatomic) CGPoint pointA;
 
 /**Specifies the end point of a line. Animatable.
  */
-@property (readwrite, nonatomic) CGPoint pointB;
+@property(nonatomic) CGPoint pointB;
 
 /**Specifies the first control point of a curve, both bezier and quad curves. Animatable.
  */
-@property (readwrite, nonatomic) CGPoint controlPointA;
+@property(nonatomic) CGPoint controlPointA;
 
 /**Specifies the second control point (bezier curves only). Animatable.
  */
-@property (readwrite, nonatomic) CGPoint controlPointB;
+@property(nonatomic) CGPoint controlPointB;
 
 /**Specifies whether the given shape is closed or not. This is useful for determining if polygons are open or closed.
  */
-@property (readonly, atomic, getter = isClosed) BOOL closed;
+@property(nonatomic, readonly, getter = isClosed) BOOL closed;
 
 /**Specifies whether the given shape is a wedge.
  
  This property is specifically used in the `pointA` and `pointB` methods to determine if the current object is capable of setting them. In particular, only lines, beziers and quadratic curves should be able to acces the `pointA` and `pointB` properties of the `C4Shape` class.
  */
-@property (readonly, atomic, getter = isWedge) BOOL wedge;
+@property(nonatomic, readonly, getter = isWedge) BOOL wedge;
 
 /**Specifies whether the given shape is a bezier curve.
  
  This property is specifically used in the `pointA` and `pointB` methods to determine if the current object is capable of setting them. In particular, only lines, beziers and quadratic curves should be able to acces the `pointA` and `pointB` properties of the `C4Shape` class.
  */
-@property (readonly, atomic, getter = isBezierCurve) BOOL bezierCurve;
+@property(nonatomic, readonly, getter = isBezierCurve) BOOL bezierCurve;
 
 /**Specifies whether the given shape is a quadratic curve.
  
  This property is specifically used in the `pointA` and `pointB` methods to determine if the current object is capable of setting them. In particular, only lines, beziers and quadratic curves should be able to acces the `pointA` and `pointB` properties of the `C4Shape` class.
  */
-@property (readonly, atomic, getter = isQuadCurve) BOOL quadCurve;
+@property(nonatomic, readonly, getter = isQuadCurve) BOOL quadCurve;
 
 /**The path defining the shape to be rendered. Animatable.
  
@@ -386,7 +386,7 @@
  
  Specifying an explicit path usually improves rendering performance.
  */
-@property (readwrite, nonatomic) CGPathRef path;
+@property(nonatomic) CGPathRef path;
 
 
 /**Returns the template proxy for the object, cast as a C4Shape.

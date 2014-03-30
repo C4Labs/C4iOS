@@ -32,7 +32,7 @@
 
 /** The target class of this template.
  */
-@property (strong, nonatomic, readonly) Class targetClass;
+@property(nonatomic, readonly, strong) Class targetClass;
 
 /** Helper method to create a new template for a target class.
  */

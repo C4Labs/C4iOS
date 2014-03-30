@@ -132,7 +132,7 @@
  
  This array is filled when the animatedImage is created using the appropriate constructor.
  */
-@property (readwrite, atomic) NSArray *animationImages;
+@property(nonatomic, copy) NSArray *animationImages;
 
 /**Specifies the duration for the entire animation.
  
@@ -140,12 +140,12 @@
  
  The duration for each image is consistent, for example a 2-second animation consisting of 10 frames will display each image for 0.2 seconds.
  */
-@property (readwrite, nonatomic) CGFloat animatedImageDuration;
+@property(nonatomic) CGFloat animatedImageDuration;
 
 /**Specifies the number of times to repeat the animation.
  The default value is 0, which specifies to repeat the animation indefinitely.
  */
-@property (readwrite, nonatomic) NSInteger animationRepeatCount;
+@property(nonatomic) NSInteger animationRepeatCount;
 
 /**Starts animating the images in the receiver.
  
@@ -161,7 +161,7 @@
  
  YES if the animation is running; otherwise, NO.
  */
-@property (readonly, nonatomic, getter = isAnimating) BOOL animating;
+@property(nonatomic, readonly, getter = isAnimating) BOOL animating;
 
 #pragma mark - Set Image
 ///@name Set Image
@@ -199,7 +199,7 @@
  
  @warning The object returned from this property was made with a CIImage, so calling returnedUIImage.CGImage on the returned object will return NULL.
  */
-@property (readonly, nonatomic, weak) UIImage *UIImage;
+@property(nonatomic, readonly, strong) UIImage *UIImage;
 
 /**Returns a Core Image representation of the current image.
  
@@ -207,49 +207,49 @@
  
  @warning: The CIImage is the object off of which we base all other image manipulations and returns.
  */
-@property (readonly, nonatomic, weak) CIImage *CIImage;
+@property(nonatomic, readonly, strong) CIImage *CIImage;
 
 /**The underlying Core Image data. (read-only)
  */
-@property (readonly, nonatomic) CGImageRef CGImage;
+@property(nonatomic, readonly) CGImageRef CGImage;
 
 /**Specifies the height of the image. Animatable.
  
  Setting this property will actually change the frame of the object.
  */
-@property (readwrite, nonatomic) CGFloat height;
+@property(nonatomic) CGFloat height;
 
 /**Specifies the width of the image. Animatable.
  
  Setting this property will actually change the frame of the object.
  */
-@property (readwrite, nonatomic) CGFloat width;
+@property(nonatomic) CGFloat width;
 
 /**Specifies the size of the image. Animatable.
  
  Setting this property will actually change the frame of the object.
  */
-@property (readwrite, nonatomic) CGSize size;
+@property(nonatomic) CGSize size;
 
 /**Specifies the original size of the of the image.
  */
-@property (readonly, nonatomic) CGSize originalSize;
+@property(nonatomic, readonly) CGSize originalSize;
 
 /**Specifies the original ratio (width / height) of the image.
  */
-@property (readonly, nonatomic) CGFloat originalRatio;
+@property(nonatomic, readonly) CGFloat originalRatio;
 
 /**Specifies whether or not the image has loaded its pixel data.
  */
-@property (readonly, nonatomic) BOOL pixelDataLoaded;
+@property(nonatomic, readonly) BOOL pixelDataLoaded;
 
 /**Specifies whether or not the image will maintain its current proportions when scaling either its width or height values.
  */
-@property (readwrite, atomic) BOOL constrainsProportions;
+@property(nonatomic) BOOL constrainsProportions;
 
 /**The contets of the image's layer (i.e. the visible image as a CGImageRef).
  */
-@property (readwrite, nonatomic) CGImageRef contents;
+@property(nonatomic) CGImageRef contents;
 
 #pragma mark - Working With Filters
 /// @name Working With Filters
@@ -277,7 +277,7 @@
  [img filter3];
  [img renderFilteredImage];
  */
-@property (readonly, nonatomic, getter = isMultipleFilterEnabled) BOOL multipleFilterEnabled;
+@property(nonatomic, readonly, getter = isMultipleFilterEnabled) BOOL multipleFilterEnabled;
 
 /**Sets the receiver to allow multiple filters before rendering.
  
@@ -295,7 +295,7 @@
  
  Filtering can take some time and it happens on the background thread so it sometimes looks like nothing is happening after a call to render filters is executed. By default, the reciever will show a spinning activity indicator for the duration that the filter takes to render before switching its own contents.
  */
-@property (readwrite, nonatomic) BOOL showsActivityIndicator;
+@property(nonatomic) BOOL showsActivityIndicator;
 
 #pragma mark - Filters By Task
 /// @name Filters By Task

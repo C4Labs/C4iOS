@@ -21,9 +21,9 @@
 #import <objc/message.h>
 
 @interface C4CanvasController ()
-@property (nonatomic, strong) C4Control *canvas;
-@property (nonatomic, strong) NSString *longPressMethodName;
-@property (nonatomic, strong) NSMutableDictionary *gestureDictionary;
+@property(nonatomic, strong) C4Control *canvas;
+@property(nonatomic, strong) NSString *longPressMethodName;
+@property(nonatomic, strong) NSMutableDictionary *gestureDictionary;
 @end
 
 @implementation C4CanvasController

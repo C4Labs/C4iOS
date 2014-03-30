@@ -24,9 +24,9 @@
 -(id)initWithInterval:(CGFloat)seconds target:(id)object method:(NSString *)methodName userInfo:(id)infoObject repeats:(BOOL)repeats;
 -(id)initWithFireDate:(NSDate *)date interval:(CGFloat)seconds target:(id)target method:(NSString *)methodName userInfo:(id)userInfo repeats:(BOOL)repeats;
 
-@property (readwrite, atomic, strong) NSTimer *timer;
-@property (readwrite, nonatomic) BOOL timerCanStart;
-@property (readwrite, atomic, strong) NSMutableDictionary *propertiesDictionary;
+@property(nonatomic, strong) NSTimer *timer;
+@property(nonatomic) BOOL timerCanStart;
+@property(nonatomic, strong) NSMutableDictionary *propertiesDictionary;
 @end
 
 @implementation C4Timer

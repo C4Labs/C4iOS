@@ -162,27 +162,27 @@
 
 /**The x-coordinate of the vector.
  */
-@property (readwrite, nonatomic) CGFloat x;
+@property(nonatomic) CGFloat x;
 
 /**The y-coordinate of the vector.
  */
-@property (readwrite, nonatomic) CGFloat y;
+@property(nonatomic) CGFloat y;
 
 /**The z-coordinate of the vector.
  */
-@property (readwrite, nonatomic) CGFloat z;
+@property(nonatomic) CGFloat z;
 
 /**The magnitude of the vector.
  
  sqrt(x*x+y*y+z*z)
  */
-@property (readonly, nonatomic) CGFloat magnitude;
+@property(nonatomic, readonly) CGFloat magnitude;
 
 /**Returns the heading of a vector based on {0,0}.
  */
-@property (readonly, nonatomic) CGFloat heading;
+@property(nonatomic, readonly) CGFloat heading;
 
 /**Returns the 2-dimensional coordinate of a vector.
  */
-@property (readonly, nonatomic) CGPoint CGPoint;
+@property(nonatomic, readonly) CGPoint CGPoint;
 @end

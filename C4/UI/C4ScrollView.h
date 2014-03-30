@@ -47,13 +47,13 @@
 ///@name ScrollView & Delegate
 /**The UIScrollview object that is the primary subview of the receiver.
  */
-@property (readonly, nonatomic) UIScrollView *UIScrollview;
+@property(nonatomic, readonly) UIScrollView *UIScrollview;
 
 /**The delegate object for the receiver.
  
  This object is passed directly to the receiver's UIScrollView which allows it to act like a normal scrollview delegate.
  */
-@property (assign, nonatomic) id<UIScrollViewDelegate> delegate;
+@property(nonatomic, weak) id<UIScrollViewDelegate> delegate;
 
 #pragma mark - Managing the Display of Content
 ///@name Managing the Display of Content
@@ -69,19 +69,19 @@
  
  The default value is CGPointZero.
  */
-@property (readwrite, nonatomic) CGPoint contentOffset;
+@property(nonatomic) CGPoint contentOffset;
 
 /**The size of the content view.
  
  The unit of size is points. The default size is CGSizeZero.
  */
-@property (readwrite, nonatomic) CGSize contentSize;
+@property(nonatomic) CGSize contentSize;
 
 /**The distance that the content view is inset from the enclosing scroll view.
  
  Use this property to add to the scrolling area around the content. The unit of size is points. The default value is UIEdgeInsetsZero.
  */
-@property (readwrite, nonatomic) UIEdgeInsets contentInset;
+@property(nonatomic) UIEdgeInsets contentInset;
 
 #pragma mark - Managing Scrolling
 ///@name Managing Scrolling
@@ -91,13 +91,13 @@
  
  When scrolling is disabled, the scroll view does not accept touch events; it forwards them up the responder chain.
  */
-@property (readwrite, nonatomic,getter=isScrollEnabled) BOOL scrollEnabled;
+@property(nonatomic,getter=isScrollEnabled) BOOL scrollEnabled;
 
 /**A Boolean value that determines whether scrolling is disabled in a particular direction
  
  If this property is NO, scrolling is permitted in both horizontal and vertical directions. If this property is YES and the user begins dragging in one general direction (horizontally or vertically), the scroll view disables scrolling in the other direction. If the drag direction is diagonal, then scrolling will not be locked and the user can drag in any direction until the drag completes. The default value is NO
  */
-@property (readwrite, nonatomic,getter=isDirectionalLockEnabled) BOOL directionalLockEnabled;
+@property(nonatomic,getter=isDirectionalLockEnabled) BOOL directionalLockEnabled;
 
 /**A Boolean value that controls whether the scroll-to-top gesture is effective
  
@@ -105,7 +105,7 @@
  
  This gesture works on a single visible scroll view; if there are multiple scroll views (for example, a date picker) with this property set, or if the delegate returns NO in scrollViewShouldScrollToTop:, UIScrollView ignores the request. After the scroll view scrolls to the top of the content view, it sends the delegate a scrollViewDidScrollToTop: message.
  */
-@property (readwrite, nonatomic) BOOL scrollsToTop;
+@property(nonatomic) BOOL scrollsToTop;
 
 /**Scrolls a specific area of the content so that it is visible in the receiver.
  
@@ -120,61 +120,61 @@
  
  If the value of this property is YES, the scroll view stops on multiples of the scroll view’s bounds when the user scrolls. The default value is NO.
  */
-@property (readwrite, nonatomic,getter=isPagingEnabled) BOOL pagingEnabled;
+@property(nonatomic,getter=isPagingEnabled) BOOL pagingEnabled;
 
 /**A Boolean value that controls whether the scroll view bounces past the edge of content and back again.
  
  If the value of this property is YES, the scroll view bounces when it encounters a boundary of the content. Bouncing visually indicates that scrolling has reached an edge of the content. If the value is NO, scrolling stops immediately at the content boundary without bouncing. The default value is YES.
  */
-@property (readwrite, nonatomic) BOOL bounces;
+@property(nonatomic) BOOL bounces;
 
 /**A Boolean value that determines whether bouncing always occurs when vertical scrolling reaches the end of the content.
  
  If this property is set to YES and bounces is YES, vertical dragging is allowed even if the content is smaller than the bounds of the scroll view. The default value is NO.
  */
-@property (readwrite, nonatomic) BOOL alwaysBounceVertical;
+@property(nonatomic) BOOL alwaysBounceVertical;
 
 /**A Boolean value that determines whether bouncing always occurs when horizontal scrolling reaches the end of the content view.
  
  If this property is set to YES and bounces is YES, horizontal dragging is allowed even if the content is smaller than the bounds of the scroll view. The default value is NO.
  */
-@property (readwrite, nonatomic) BOOL alwaysBounceHorizontal;
+@property(nonatomic) BOOL alwaysBounceHorizontal;
 
 /**A Boolean value that controls whether touches in the content view always lead to tracking.
  
  If the value of this property is YES and a view in the content has begun tracking a finger touching it, and if the user drags the finger enough to initiate a scroll, the view receives a touchesCancelled:withEvent: message and the scroll view handles the touch as a scroll. If the value of this property is NO, the scroll view does not scroll regardless of finger movement once the content view starts tracking.
  */
-@property (readwrite, nonatomic) BOOL canCancelContentTouches;
+@property(nonatomic) BOOL canCancelContentTouches;
 
 /**A Boolean value that determines whether the scroll view delays the handling of touch-down gestures.
  
  If the value of this property is YES, the scroll view delays handling the touch-down gesture until it can determine if scrolling is the intent. If the value is NO , the scroll view immediately calls touchesShouldBegin:withEvent:inContentView:. The default value is YES.
  */
-@property (readwrite, nonatomic) BOOL delaysContentTouches;
+@property(nonatomic) BOOL delaysContentTouches;
 
 /**A floating-point value that determines the rate of deceleration after the user lifts their finger.
  
  Your application can use the DECELERATENORMAL and DECELERATEMEDIUM and DECELERATEFAST constants as reference points for reasonable deceleration rates.
  */
-@property (readwrite, nonatomic) CGFloat decelerationRate;
+@property(nonatomic) CGFloat decelerationRate;
 
 /**A Boolean value that indicates whether the user has begun scrolling the content. (read-only)
  
  The value held by this property might require some time or distance of scrolling before it is set to YES.
  */
-@property (readonly, nonatomic, getter=isDragging) BOOL dragging;
+@property(nonatomic, readonly, getter=isDragging) BOOL dragging;
 
 /**Returns whether the user has touched the content to initiate scrolling. (read-only)
  
  The value of this property is YES if the user has touched the content view but might not have yet have started dragging it.
  */
-@property (readonly, nonatomic, getter=isTracking) BOOL tracking;
+@property(nonatomic, readonly, getter=isTracking) BOOL tracking;
 
 /**Returns whether the content is moving in the scroll view after the user lifted their finger. (read-only)
  
  The returned value is YES if user isn't dragging the content but scrolling is still occurring.
  */
-@property (readonly, nonatomic, getter=isDecelerating) BOOL decelerating;
+@property(nonatomic, readonly, getter=isDecelerating) BOOL decelerating;
 
 #pragma mark - Managing the Scroll Indicator
 ///@name Managing the Scroll Indicator
@@ -182,25 +182,25 @@
  
  Possible values for this are WHITELARGE, WHITE and GRAY.
  */
-@property (readwrite, nonatomic) C4ScrollViewIndicatorStyle indicatorStyle;
+@property(nonatomic) C4ScrollViewIndicatorStyle indicatorStyle;
 
 /**The distance the scroll indicators are inset from the edge of the scroll view.
  
  The default value is UIEdgeInsetsZero.
  */
-@property (readwrite, nonatomic) UIEdgeInsets scrollIndicatorInsets;
+@property(nonatomic) UIEdgeInsets scrollIndicatorInsets;
 
 /**A Boolean value that controls whether the horizontal scroll indicator is visible.
  
  The default value is YES. The indicator is visible while tracking is underway and fades out after tracking.
  */
-@property (readwrite, nonatomic) BOOL showsHorizontalScrollIndicator;
+@property(nonatomic) BOOL showsHorizontalScrollIndicator;
 
 /**A Boolean value that controls whether the vertical scroll indicator is visible.
  
  The default value is YES. The indicator is visible while tracking is underway and fades out after tracking.
  */
-@property (readwrite, nonatomic) BOOL showsVerticalScrollIndicator;
+@property(nonatomic) BOOL showsVerticalScrollIndicator;
 /**Displays the scroll indicators momentarily.
  
  You should call this method whenever you bring the scroll view to front.
@@ -214,13 +214,13 @@
  
  Your application accesses this property when it wants to more precisely control which pan gestures are recognized by the scroll view.
  */
-@property (readonly, nonatomic) UIPanGestureRecognizer *panGestureRecognizer;
+@property(nonatomic, readonly, strong) UIPanGestureRecognizer *panGestureRecognizer;
 
 /**The underlying gesture recognizer for pinch gestures. (read-only)
  
  Your application accesses this property when it wants to more precisely control which pinch gestures are recognized by the scroll view.
  */
-@property (readonly, nonatomic) UIPinchGestureRecognizer *pinchGestureRecognizer;
+@property(nonatomic, readonly, strong) UIPinchGestureRecognizer *pinchGestureRecognizer;
 
 /**
  Zooms to a specific area of the content so that it is visible in the receiver.
@@ -236,7 +236,7 @@
  
  This value determines how much the content is currently scaled. The default value is 1.0.
  */
-@property (readwrite, nonatomic) CGFloat zoomScale;
+@property(nonatomic) CGFloat zoomScale;
 
 /**A floating-point value that specifies the current zoom scale.
  
@@ -251,31 +251,31 @@
  
  This value determines how large the content can be scaled. It must be greater than the minimum zoom scale for zooming to be enabled. The default value is 1.0.
  */
-@property (readwrite, nonatomic) CGFloat maximumZoomScale;
+@property(nonatomic) CGFloat maximumZoomScale;
 
 /**A floating-point value that specifies the minimum scale factor that can be applied to the scroll view's content.
  
  This value determines how small the content can be scaled. The default value is 1.0
  */
-@property (readwrite, nonatomic) CGFloat minimumZoomScale;
+@property(nonatomic) CGFloat minimumZoomScale;
 
 /**A Boolean value that indicates that zooming has exceeded the scaling limits specified for the receiver. (read-only)
  
  The value of this property is YES if the scroll view is zooming back to a minimum or maximum zoom scaling value; otherwise the value is NO .
  */
-@property (readonly, nonatomic, getter=isZoomBouncing) BOOL zoomBouncing;
+@property(nonatomic, readonly, getter=isZoomBouncing) BOOL zoomBouncing;
 
 /**A Boolean value that indicates whether the content view is currently zooming in or out. (read-only)
  
  The value of this property is YES if user is making a zoom gesture, otherwise it is NO.
  */
-@property (readonly, nonatomic, getter=isZooming) BOOL zooming;
+@property(nonatomic, readonly, getter=isZooming) BOOL zooming;
 
 /**A Boolean value that determines whether the scroll view animates the content scaling when the scaling exceeds the maximum or minimum limits.
  
  If the value of this property is YES and zooming exceeds either the maximum or minimum limits for scaling, the scroll view temporarily animates the content scaling just past these limits before returning to them. If this property is NO, zooming stops immediately at one a scaling limits. The default is YES.
  */
-@property (readwrite, nonatomic) BOOL bouncesZoom;
+@property(nonatomic) BOOL bouncesZoom;
 
 #pragma mark - Other Methods
 ///@name Other Methods

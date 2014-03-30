@@ -107,7 +107,6 @@
     [self.UIStepper setTintColor:tintColor];
 }
 
-//FIXME: these UI_APPEARANCE_SELECTORS might be confusing because they refer to an object, but I don't want to have objects for all of them...
 -(void)setBackgroundImage:(C4Image*)image forState:(C4ControlState)state {
     [self.UIStepper setBackgroundImage:image.UIImage forState:(UIControlState)state];
 }

@@ -28,10 +28,10 @@
 
 /** The main application window.
  */
-@property (strong, nonatomic) UIWindow *window;
+@property(nonatomic, strong) UIWindow *window;
 
 /** The root view controller of the main application window. A UIViewController customized specifically for the C4 Framework.
  */
-@property (strong, nonatomic) C4WorkSpace *workspace;
+@property(nonatomic, strong) C4WorkSpace *workspace;
 
 @end

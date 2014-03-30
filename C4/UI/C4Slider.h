@@ -68,7 +68,7 @@
  
  If you try to set a value that is below the minimum or above the maximum value, the minimum or maximum value is set instead. The default value of this property is 0.0.
  */
-@property (readwrite, nonatomic) CGFloat value;
+@property(nonatomic) CGFloat value;
 
 /**Sets the receiver’s current value, allowing you to animate the change visually.
  
@@ -87,7 +87,7 @@
  
  The default value of this property is 0.0.
  */
-@property (readwrite, nonatomic) CGFloat minimumValue;
+@property(nonatomic) CGFloat minimumValue;
 
 /**Contains the maximum value of the receiver.
  
@@ -95,7 +95,7 @@
  
  The default value of this property is 1.0.
  */
-@property (readwrite, nonatomic) CGFloat maximumValue;
+@property(nonatomic) CGFloat maximumValue;
 
 #pragma mark - Modifying the Slider’s Behavior
 ///@name Modifying the Slider’s Behavior
@@ -115,7 +115,7 @@
  
  This default value of this property is nil.
  */
-@property(nonatomic, weak) C4Image *minimumValueImage;
+@property(nonatomic, strong) C4Image *minimumValueImage;
 
 /**Contains the image that is drawn on the side of the slider representing the maximum value.
  
@@ -123,13 +123,13 @@
  
  This default value of this property is nil.
  */
-@property(nonatomic, weak) C4Image *maximumValueImage;
+@property(nonatomic, strong) C4Image *maximumValueImage;
 
 /*The color used to tint the standard minimum track images.
  
  Setting this property removes any custom minimum track images associated with the slider.
  */
-@property(readwrite, nonatomic,weak) UIColor *minimumTrackTintColor NS_AVAILABLE_IOS(5_0) UI_APPEARANCE_SELECTOR;
+@property(nonatomic, strong) UIColor *minimumTrackTintColor;
 
 /**Contains the minimum track image currently being used to render the receiver. (read-only)
  
@@ -137,7 +137,7 @@
  
  If no custom track images have been set using the setMinimumTrackImage:forState: method, this property contains the value nil. In that situation, the receiver uses the default minimum track image for drawing.
  */
-@property(readonly, nonatomic, weak) C4Image* currentMinimumTrackImage;
+@property(nonatomic, readonly, strong) C4Image* currentMinimumTrackImage;
 
 /**Returns the minimum track image associated with the specified control state.
  
@@ -163,7 +163,7 @@
  
  Setting this property removes any custom maximum track images associated with the slider.
  */
-@property(readwrite, nonatomic,weak) UIColor *maximumTrackTintColor NS_AVAILABLE_IOS(5_0) UI_APPEARANCE_SELECTOR;
+@property(nonatomic, strong) UIColor *maximumTrackTintColor;
 
 /**Contains the maximum track image currently being used to render the receiver. (read-only)
  
@@ -171,7 +171,7 @@
  
  If no custom track images have been set using the setMaximumTrackImage:forState: method, this property contains the value nil. In that situation, the receiver uses the default maximum track image for drawing.
  */
-@property(readonly, nonatomic, weak) C4Image* currentMaximumTrackImage;
+@property(nonatomic, readonly, strong) C4Image* currentMaximumTrackImage;
 
 /**Returns the maximum track image associated with the specified control state.
  
@@ -197,7 +197,7 @@
  
  Setting this property removes any custom thumb images associated with the slider.
  */
-@property(readwrite, nonatomic,weak) UIColor *thumbTintColor NS_AVAILABLE_IOS(5_0) UI_APPEARANCE_SELECTOR;
+@property(nonatomic, strong) UIColor *thumbTintColor;
 
 /**Contains the thumb image currently being used to render the receiver. (read-only)
  
@@ -205,7 +205,7 @@
  
  If no custom thumb images have been set using the setThumbImage:forState: method, this property contains the value nil. In that situation, the receiver uses the default thumb image for drawing.
  */
-@property(readonly, nonatomic, weak) C4Image* currentThumbImage;
+@property(nonatomic, readonly, strong) C4Image* currentThumbImage;
 
 /**Returns the thumb image associated with the specified control state.
  
@@ -227,7 +227,7 @@
 ///@name Accessing The UISlider
 /**The UISlider object which is the primary subview of the receiver.
  */
-@property (readonly, nonatomic) UISlider *UISlider;
+@property(nonatomic, readonly) UISlider *UISlider;
 
 /**Returns the template proxy for the object, cast as a C4Slider.
  

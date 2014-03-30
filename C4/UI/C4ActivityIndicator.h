@@ -79,25 +79,25 @@ typedef NS_ENUM(NSInteger, C4ActivityIndicatorStyle) {
  
  This is the primary subview of C4ActivityIndicator.
  */
-@property (readonly, nonatomic, strong) UIActivityIndicatorView *UIActivityIndicatorView;
+@property(nonatomic, readonly, strong) UIActivityIndicatorView *UIActivityIndicatorView;
 
 /**The basic appearance of the activity indicator.
  
  There are 3 basic styles: WHITELARGE, WHITE, GRAY.
  */
-@property (readwrite, nonatomic) C4ActivityIndicatorStyle activityIndicatorStyle;
+@property(nonatomic) C4ActivityIndicatorStyle activityIndicatorStyle;
 
 /**A Boolean value that controls whether the receiver is hidden when the animation is stopped.
  
  If the value of this property is YES (the default), the receiver sets its hidden property (UIView) to YES when receiver is not animating. If the hidesWhenStopped property is NO, the receiver is not hidden when animation stops. You stop an animating progress indicator with the stopAnimating method.
  */
-@property (readwrite, nonatomic) BOOL hidesWhenStopped;
+@property(nonatomic) BOOL hidesWhenStopped;
 
 /**The color of the activity indicator.
  
  If you set a color for an activity indicator, it overrides the color provided by the activityIndicatorViewStyle property.
  */
-@property (readwrite, nonatomic, strong) UIColor *color NS_AVAILABLE_IOS(5_0) UI_APPEARANCE_SELECTOR;
+@property(nonatomic, strong) UIColor *color;
 
 
 /**Returns the template proxy for the object, cast as a C4ActivityIndicator.

@@ -22,10 +22,10 @@
 
 @interface C4GL ()
 -(void)render;
-@property (readonly, nonatomic, getter = isDisplayLinkSupported) BOOL displayLinkSupported;
-@property (readonly, strong, nonatomic) CAEAGLLayer *eaglLayer;
-@property (readwrite, strong, nonatomic) id displayLink;
-@property (readwrite, strong, nonatomic) NSTimer *animationTimer;
+@property(nonatomic, readonly, getter = isDisplayLinkSupported) BOOL displayLinkSupported;
+@property(nonatomic, readonly, strong) CAEAGLLayer *eaglLayer;
+@property(nonatomic, strong) id displayLink;
+@property(nonatomic, strong) NSTimer *animationTimer;
 @end
 
 @implementation C4GL

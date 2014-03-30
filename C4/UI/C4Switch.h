@@ -58,7 +58,7 @@
  
  This property allows you to retrieve and set (without animation) a value determining whether the C4Switch object is on or off.
  */
-@property (readwrite, nonatomic, getter=isOn) BOOL on;
+@property(nonatomic, getter=isOn) BOOL on;
 
 /**Set the state of the switch to On or Off, optionally animating the transition.
  
@@ -73,18 +73,18 @@
 ///@name Customizing the Appearance of the Switch
 /**The color used to tint the appearance of the switch when it is turned on.
  */
-@property (readwrite, nonatomic, strong) UIColor *onTintColor NS_AVAILABLE_IOS(5_0) UI_APPEARANCE_SELECTOR;
+@property(nonatomic, strong) UIColor *onTintColor;
 /**The color used to tint the appearance when the switch is disabled.
  
  If you do not specify a color for the thumbTintColor property, this property is also used to tint the thumb of the switch.
  */
-@property (readwrite, nonatomic, strong) UIColor *tintColor NS_AVAILABLE_IOS(6_0) UI_APPEARANCE_SELECTOR;
+@property(nonatomic, strong) UIColor *tintColor;
 
 /**The color used to tint the appearance of the thumb.
  
  If the value of this property is nil, the tint color is derived from the value in the tintColor property.
  */
-@property (readwrite, nonatomic, strong) UIColor *thumbTintColor NS_AVAILABLE_IOS(6_0) UI_APPEARANCE_SELECTOR;
+@property(nonatomic, strong) UIColor *thumbTintColor;
 
 /**The image displayed when the switch is in the on position.
  
@@ -92,7 +92,7 @@
  
  The size of this image must be less than or equal to 77 points wide and 27 points tall. If you specify larger images, the edges may be clipped.
  */
-@property (readwrite, nonatomic, strong) C4Image *onImage NS_AVAILABLE_IOS(6_0) UI_APPEARANCE_SELECTOR;
+@property(nonatomic, strong) C4Image *onImage;
 
 /**The image displayed while the switch is in the off position.
  
@@ -100,12 +100,13 @@
  
  The size of this image must be less than or equal to 77 points wide and 27 points tall. If you specify larger images, the edges may be clipped.
  */
-@property (readwrite, nonatomic, strong) C4Image *offImage NS_AVAILABLE_IOS(6_0) UI_APPEARANCE_SELECTOR;
+@property(nonatomic, strong) C4Image *offImage;
 
 #pragma mark - Accessing The UISwitch
 ///@name Accessing The UISwitch
 /**The UISwitch object which is the primary subview of the receiver.
- */@property (readonly, nonatomic) UISwitch *UISwitch;
+ */
+@property(nonatomic, readonly) UISwitch *UISwitch;
 
 /**Returns the template proxy for the object, cast as a C4Switch.
  

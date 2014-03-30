@@ -47,13 +47,13 @@
  
  This property is used in the resizeFromLayer: method
  */
-@property (readonly, nonatomic) GLint width;
+@property(nonatomic, readonly) GLint width;
 
 /**The height of the layer.
  
  This property is used in the resizeFromLayer: method
  */
-@property (readonly, nonatomic) GLint height;
+@property(nonatomic, readonly) GLint height;
 
 #pragma mark - Buffers
 ///@name Buffers
@@ -63,7 +63,7 @@
  
  For more see: [Frame Buffer Object](http://www.opengl.org/wiki/Framebuffer_Object )
  */
-@property (readonly, nonatomic) GLuint frameBuffer;
+@property(nonatomic, readonly) GLuint frameBuffer;
 
 /**The render buffer.
  
@@ -71,10 +71,10 @@
  
  For more see: [Render Buffer Object](http://www.opengl.org/wiki/Renderbuffer_Object )
  */
-@property (readonly, nonatomic) GLuint renderBuffer;
+@property(nonatomic, readonly) GLuint renderBuffer;
 
 /** The EAGLContext into which the renderer should draw.
  */
-@property (readwrite, atomic, strong) EAGLContext *eaglContext;
+@property(nonatomic, strong) EAGLContext *eaglContext;
 
 @end

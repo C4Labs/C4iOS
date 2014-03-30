@@ -21,8 +21,7 @@
 #import "C4Label.h"
 
 @interface C4Label()
-//@property (readwrite, atomic) BOOL shouldAutoreverse;
-@property (readonly, atomic) NSArray *localStylePropertyNames;
+@property(nonatomic, readonly) NSArray *localStylePropertyNames;
 @end
 
 @implementation C4Label

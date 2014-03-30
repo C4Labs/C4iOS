@@ -96,13 +96,13 @@
 
 /**The text displayed by the label.
  */
-@property (readwrite, strong, nonatomic) NSString *text;
+@property(nonatomic, strong) NSString *text;
 
 /**The font for the label.
  
  This property applies to the entire text string. The default value for this property is the system font at a size of 17 points (using the systemFontOfSize: class method of C4Font). The value for the property can only be set to a non-nil value; setting this property to nil raises an exception.
  */
-@property (readwrite, strong, nonatomic) C4Font *font;
+@property(nonatomic, strong) C4Font *font;
 
 /**A Boolean value indicating whether the font size should be reduced in order to fit the title string into the label’s bounding rectangle.
  
@@ -110,13 +110,13 @@
  
  The default value for this property is NO. If you change it to YES, you should also set an appropriate minimum font size by modifying the minimumFontSize property.
  */
-@property (readwrite, nonatomic) BOOL adjustsFontSizeToFitWidth;
+@property(nonatomic) BOOL adjustsFontSizeToFitWidth;
 
 /**Controls how text baselines are adjusted when text needs to shrink to fit in the label.
  
  If the adjustsFontSizeToFitWidth property is set to YES, this property controls the behavior of the text baselines in situations where adjustment of the font size is required. The default value of this property is ALIGNBASELINES. This property is effective only when the numberOfLines property is set to 1.
  */
-@property (readwrite, nonatomic) C4BaselineAdjustment baselineAdjustment;
+@property(nonatomic) C4BaselineAdjustment baselineAdjustment;
 
 /**A Boolean value indicating whether the receiver should be drawn with a highlight.
  
@@ -124,25 +124,25 @@
  
  The default value of this property is NO.
  */
-@property (nonatomic, getter=isHighlighted) BOOL highlighted;
+@property(nonatomic, getter=isHighlighted) BOOL highlighted;
 
 /**The color of the text.
  
  This property applies to the entire text string. The default value for this property is a black color (set through the blackColor class method of UIColor). The value for the property can only be set to a non-nil value; setting this property to nil raises an exception.
  */
-@property (readwrite, strong, nonatomic) UIColor *textColor;
+@property(nonatomic, strong) UIColor *textColor;
 
 /**The technique to use for aligning the text.
  
  This property applies to the entire text string. The default value of this property is ALIGNTEXTLEFT.
  */
-@property (readwrite, nonatomic) C4TextAlignment textAlignment;
+@property(nonatomic) C4TextAlignment textAlignment;
 
 /**The technique to use for wrapping and truncating the label’s text.
  
  This property is in effect both during normal drawing and in cases where the font size must be reduced to fit the label’s text in its bounding box. For label objects, this property is set to TRUNCATEEND by default.
  */
-@property (readwrite, nonatomic) C4LineBreakMode lineBreakMode;
+@property(nonatomic) C4LineBreakMode lineBreakMode;
 
 /**The size of the smallest permissible font with which to draw the label’s text.
  
@@ -150,7 +150,7 @@
  
  The default value for this property is 0.0. If you enable font adjustment for the label, you should always increase this value. This property is effective only when the numberOfLines property is set to 1.
  */
-@property (readwrite, nonatomic) CGFloat minimumFontSize;
+@property(nonatomic) CGFloat minimumFontSize;
 
 /**The maximum number of lines to use for rendering text.
  
@@ -160,7 +160,7 @@
  
  When the receiver is resized using the sizeToFit method, resizing takes into account the value stored in this property. For example, if this property is set to 3, the sizeToFit method resizes the receiver so that it is big enough to display three lines of text.
  */
-@property (readwrite, nonatomic) NSUInteger numberOfLines;
+@property(nonatomic) NSUInteger numberOfLines;
 
 /**The highlight color applied to the label’s text.
  
@@ -168,20 +168,20 @@
  
  The default value of this property is nil .
  */
-@property (readwrite, strong, nonatomic) UIColor *highlightedTextColor;
+@property(nonatomic, strong) UIColor *highlightedTextColor;
 
 /**The shadow color of the text.
  
  The default value for this property is nil, which indicates that no shadow is drawn. In addition to this property, you may also want to change the default shadow offset by modifying the shadowOffset property. Text shadows are drawn with the specified offset and color and no blurring.
  
  */
-@property (readwrite, strong, nonatomic) UIColor *textShadowColor;
+@property(nonatomic, strong) UIColor *textShadowColor;
 
 /**The shadow offset (measured in points) for the text.
  
  The shadow color must be non-nil for this property to have any effect. The default offset size is (0, -1), which indicates a shadow one point above the text. Text shadows are drawn with the specified offset and color and no blurring.
  */
-@property (readwrite, nonatomic) CGSize textShadowOffset;
+@property(nonatomic) CGSize textShadowOffset;
 
 #pragma mark C4Layer-backed object properties
 
@@ -191,29 +191,29 @@
  
  @warning *Note:* Instead of calling label.layer, call label.backingLayer
  */
-@property (readonly, nonatomic, weak) C4Layer *backingLayer;
+@property(nonatomic, readonly, strong) C4Layer *backingLayer;
 
 ///**Specifies the height of the image. Animatable.
 //
 // Setting this property will actually change the frame of the object.
 // */
-//@property (readwrite, nonatomic) CGFloat height;
+//@property(nonatomic) CGFloat height;
 //
 ///**Specifies the width of the image. Animatable.
 //
 // Setting this property will actually change the frame of the object.
 // */
-//@property (readwrite, nonatomic) CGFloat width;
+//@property(nonatomic) CGFloat width;
 //
 ///**Specifies the size of the image. Animatable.
 //
 // Setting this property will actually change the frame of the object.
 // */
-//@property (readwrite, nonatomic) CGSize size;
+//@property(nonatomic) CGSize size;
 
 /**The UILabel which is the subview off the receiver.
  */
-@property (readonly, strong, nonatomic) UILabel *label;
+@property(nonatomic, readonly, strong) UILabel *label;
 
 /**Returns the template proxy for the object, cast as a C4Label.
  

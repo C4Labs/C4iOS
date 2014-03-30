@@ -58,8 +58,8 @@
 
 #pragma mark - Properties
 
-@property(nonatomic, strong, readonly) UIView* view;
-@property(nonatomic, strong, readonly) C4AnimationHelper *animationHelper;
+@property(nonatomic, readonly, strong) UIView* view;
+@property(nonatomic, readonly, strong) C4AnimationHelper *animationHelper;
 
 /** The receiver's frame. */
 @property(nonatomic) CGRect frame;
@@ -71,16 +71,16 @@
 @property(nonatomic) CGPoint center;
 
 /** The position of the receiver's top-left corner, in parent coordinates. */
-@property (nonatomic) CGPoint origin;
+@property(nonatomic) CGPoint origin;
 
 /** The width of the receiver's frame. */
-@property (readonly, nonatomic) CGFloat width;
+@property(nonatomic, readonly) CGFloat width;
 
 /** The height of the receiver's frame. */
-@property (readonly, nonatomic) CGFloat height;
+@property(nonatomic, readonly) CGFloat height;
 
 /** The size of the receiver's frame. */
-@property (readonly, nonatomic) CGSize size;
+@property(nonatomic, readonly) CGSize size;
 
 @property(nonatomic) CGAffineTransform transform;
 
@@ -95,7 +95,7 @@
  Defaults to 0.0f
  
  */
-@property (nonatomic) CGFloat animationDuration;
+@property(nonatomic) CGFloat animationDuration;
 
 /** The time to wait before the view's animations begin, measured in seconds.
  
@@ -105,7 +105,7 @@
  
  Defaults to 0.0f
  */
-@property (atomic) CGFloat animationDelay;
+@property(nonatomic) CGFloat animationDelay;
 
 /** The options for which the view should use in its animations.
  
@@ -128,7 +128,7 @@
  view.animationOptions = AUTOREVERSE;
  view.animationOptions = REPEAT;
  */
-@property (nonatomic) NSUInteger animationOptions;
+@property(nonatomic) NSUInteger animationOptions;
 
 
 #pragma mark Shadow Properties
@@ -138,24 +138,24 @@
  
  This applies to the shadow of the contents of the layer, and not specifically the text.
  */
-@property (readwrite, nonatomic) CGFloat shadowRadius;
+@property(nonatomic) CGFloat shadowRadius;
 
 /**Specifies the opacity of the receiver’s shadow. Animatable.
  
  This applies to the shadow of the contents of the layer, and not specifically the text.
  */
-@property (readwrite, nonatomic) CGFloat shadowOpacity;
+@property(nonatomic) CGFloat shadowOpacity;
 /**The shadow color of the text.
  
  The default value for this property is nil, which indicates that no shadow is drawn. In addition to this property, you may also want to change the default shadow offset by modifying the shadowOffset property. Text shadows are drawn with the specified offset and color and no blurring.
  */
-@property (readwrite, strong, nonatomic) UIColor *shadowColor;
+@property(nonatomic, strong) UIColor *shadowColor;
 
 /**The shadow offset (measured in points) for the text.
  
  The shadow color must be non-nil for this property to have any effect. The default offset size is (0, -1), which indicates a shadow one point above the text. Text shadows are drawn with the specified offset and color and no blurring.
  */
-@property (readwrite, nonatomic) CGSize shadowOffset;
+@property(nonatomic) CGSize shadowOffset;
 
 /**Defines the shape of the shadow. Animatable.
  
@@ -167,7 +167,7 @@
  
  The default value of this property is NULL.
  */
-@property (readwrite, nonatomic) CGPathRef shadowPath;
+@property(nonatomic) CGPathRef shadowPath;
 
 
 #pragma mark Style Properties
@@ -180,13 +180,13 @@
  
  The border is drawn inset from the receiver’s bounds by borderWidth. It is composited above the receiver’s contents and sublayers and includes the effects of the cornerRadius property. The default is 0.0.
  */
-@property (readwrite, nonatomic) CGFloat borderWidth;
+@property(nonatomic) CGFloat borderWidth;
 
 /**Specifies a radius used to draw the rounded corners of the receiver’s background. Animatable.
  
  If the radius is greater than 0 the background is drawn with rounded corners. The default value is 0.0.
  */
-@property (readwrite, nonatomic) CGFloat cornerRadius;
+@property(nonatomic) CGFloat cornerRadius;
 
 /**The color of the receiver’s border. Animatable.
  
@@ -194,7 +194,7 @@
  
  The value of this property is retained using the Core Foundation retain/release semantics. This behavior occurs despite the fact that the property declaration appears to use the default assign semantics for object retention.
  */
-@property (readwrite, nonatomic, weak) UIColor *borderColor;
+@property(nonatomic, strong) UIColor *borderColor;
 
 
 #pragma mark Other Properties
@@ -203,43 +203,43 @@
  
  If YES, an implicit mask matching the layer bounds is applied to the layer, including the effects of the cornerRadius property. If YES and a mask property is specified, the two masks are multiplied to get the actual mask values. Defaults to NO.
  */
-@property (readwrite, nonatomic) BOOL masksToBounds;
+@property(nonatomic) BOOL masksToBounds;
 
 /**Specifies a transform applied to each sublayer when rendering. Animatable.
  
  This property is typically used as the projection matrix to add perspective and other viewing effects to the receiver. Defaults to the identity transform.
  */
-@property (readwrite, nonatomic) CATransform3D layerTransform;
+@property(nonatomic) CATransform3D layerTransform;
 
 /**An optional layer whose alpha channel is used as a mask to select between the layer's background and the result of compositing the layer's contents with its filtered background.
  
  Defaults to nil.
  */
-@property (readwrite, nonatomic, assign) C4Control *mask;
+@property(nonatomic, strong) C4Control *mask;
 
 /**Specifies the receiver’s position on the z axis. Animatable.
  
  Defaults to 0.
  */
-@property (readwrite, nonatomic) CGFloat zPosition;
+@property(nonatomic) CGFloat zPosition;
 
 /**Specifies the receiver's z-axis rotation value. Animatable.
  
  Setting this value will rotate the receiver around its anchorPoint.
  */
-@property (readwrite, nonatomic) CGFloat rotation;
+@property(nonatomic) CGFloat rotation;
 
 /**Specifies the receiver's x-axis rotation value. Animatable.
  
  Setting this value will rotate the receiver around its anchorPoint.
  */
-@property (readwrite, nonatomic) CGFloat rotationX;
+@property(nonatomic) CGFloat rotationX;
 
 /**Specifies the receiver's y-axis rotation value. Animatable.
  
  Setting this value will rotate the receiver around its anchorPoint.
  */
-@property (readwrite, nonatomic) CGFloat rotationY;
+@property(nonatomic) CGFloat rotationY;
 
 /**Specifies the perspective distance for x and y axis rotations.
  
@@ -252,7 +252,7 @@
  
  Defaults to 0.
  */
-@property (readwrite, nonatomic) CGFloat perspectiveDistance;
+@property(nonatomic) CGFloat perspectiveDistance;
 
 /**Defines the anchor point of the layer's bounds rectangle. Animatable.
  
@@ -260,7 +260,7 @@
  
  See “Layer Geometry and Transforms” in Core Animation Programming Guide for more information on the relationship between the bounds, anchorPoint and position properties.
  */
-@property (readwrite, nonatomic) CGPoint anchorPoint;
+@property(nonatomic) CGPoint anchorPoint;
 
 
 #pragma mark - Adding sub-elements

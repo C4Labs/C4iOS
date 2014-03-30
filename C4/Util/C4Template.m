@@ -22,8 +22,8 @@
 
 
 @interface C4Template ()
-@property (strong, nonatomic) Class targetClass;
-@property (strong, nonatomic) NSMutableArray* invocations;
+@property(nonatomic, strong) Class targetClass;
+@property(nonatomic, strong) NSMutableArray* invocations;
 @end
 
 
