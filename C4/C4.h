@@ -42,7 +42,6 @@
 #import "C4Shape.h"
 #import "C4Movie.h"
 #import "C4Sample.h"
-#import "C4ViewController.h"
 #import "C4CanvasController.h"
 
 // UI

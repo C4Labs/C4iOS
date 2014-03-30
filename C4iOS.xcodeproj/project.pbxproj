@@ -18,7 +18,6 @@
 		A97591D318DC08E800B28F08 /* C4Object.m in Sources */ = {isa = PBXBuildFile; fileRef = A975918A18DC08E800B28F08 /* C4Object.m */; };
 		A97591D418DC08E800B28F08 /* C4Sample.m in Sources */ = {isa = PBXBuildFile; fileRef = A975918C18DC08E800B28F08 /* C4Sample.m */; };
 		A97591D618DC08E800B28F08 /* C4Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = A975919018DC08E800B28F08 /* C4Shape.m */; };
-		A97591DD18DC08E800B28F08 /* C4ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A975919E18DC08E800B28F08 /* C4ViewController.m */; };
 		A97591DF18DC08E800B28F08 /* UIColor+CIColorFix.m in Sources */ = {isa = PBXBuildFile; fileRef = A97591A318DC08E800B28F08 /* UIColor+CIColorFix.m */; };
 		A97591E018DC08E800B28F08 /* C4EAGLES1Renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = A97591A618DC08E800B28F08 /* C4EAGLES1Renderer.m */; };
 		A97591E318DC08E800B28F08 /* C4GL.m in Sources */ = {isa = PBXBuildFile; fileRef = A97591AC18DC08E800B28F08 /* C4GL.m */; };
@@ -99,8 +98,6 @@
 		A975918C18DC08E800B28F08 /* C4Sample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Sample.m; sourceTree = "<group>"; };
 		A975918F18DC08E800B28F08 /* C4Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Shape.h; sourceTree = "<group>"; };
 		A975919018DC08E800B28F08 /* C4Shape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Shape.m; sourceTree = "<group>"; };
-		A975919D18DC08E800B28F08 /* C4ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4ViewController.h; sourceTree = "<group>"; };
-		A975919E18DC08E800B28F08 /* C4ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4ViewController.m; sourceTree = "<group>"; };
 		A97591A218DC08E800B28F08 /* UIColor+CIColorFix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+CIColorFix.h"; sourceTree = "<group>"; };
 		A97591A318DC08E800B28F08 /* UIColor+CIColorFix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CIColorFix.m"; sourceTree = "<group>"; };
 		A97591A518DC08E800B28F08 /* C4EAGLES1Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4EAGLES1Renderer.h; sourceTree = "<group>"; };
@@ -234,8 +231,6 @@
 				A975918C18DC08E800B28F08 /* C4Sample.m */,
 				A975918F18DC08E800B28F08 /* C4Shape.h */,
 				A975919018DC08E800B28F08 /* C4Shape.m */,
-				A975919D18DC08E800B28F08 /* C4ViewController.h */,
-				A975919E18DC08E800B28F08 /* C4ViewController.m */,
 				A97591A118DC08E800B28F08 /* Categories */,
 				A97591A418DC08E800B28F08 /* GL */,
 				A97591AF18DC08E800B28F08 /* Protocols */,
@@ -522,7 +517,6 @@
 				A97591EB18DC08E800B28F08 /* C4Vector.m in Sources */,
 				A97591E718DC08E800B28F08 /* C4Foundation.m in Sources */,
 				A97591DF18DC08E800B28F08 /* UIColor+CIColorFix.m in Sources */,
-				A97591DD18DC08E800B28F08 /* C4ViewController.m in Sources */,
 				A975922E18DD194400B28F08 /* C4Button.m in Sources */,
 				A975921B18DD163F00B28F08 /* C4UIGLControl.m in Sources */,
 				A975923118DD194400B28F08 /* C4ScrollView.m in Sources */,
