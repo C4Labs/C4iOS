@@ -61,27 +61,28 @@
 @property(nonatomic, strong, readonly) UIView* view;
 @property(nonatomic, strong, readonly) C4AnimationHelper *animationHelper;
 
+/** The receiver's frame. */
 @property(nonatomic) CGRect frame;
+
+/** The receiver's bounds. */
 @property(nonatomic) CGRect bounds;
+
+/** The position of the receiver's center, in parent coordinates. */
 @property(nonatomic) CGPoint center;
+
+/** The position of the receiver's top-left corner, in parent coordinates. */
+@property (nonatomic) CGPoint origin;
+
+/** The width of the receiver's frame. */
+@property (readonly, nonatomic) CGFloat width;
+
+/** The height of the receiver's frame. */
+@property (readonly, nonatomic) CGFloat height;
+
+/** The size of the receiver's frame. */
+@property (readonly, nonatomic) CGSize size;
+
 @property(nonatomic) CGAffineTransform transform;
-
-@property(nonatomic, copy) UIColor *backgroundColor;
-@property(nonatomic) CGFloat alpha;
-@property(nonatomic, getter=isHidden) BOOL hidden;
-
-
-#pragma mark - Convenience Methods
-
-/**Renders the receiver and its sublayers into the specified context.
- 
- This method renders the contents of a C4Control directly from the layer tree, ignoring any animations added to the render tree. It essentially binds to the `renderInContext` method of the underlying C4Layer.
- 
- This method is used for rendering objects into a graphics context before either creating an image or saving drawing to external files.
- 
- @param context The graphics context to use to render the layer.
- */
--(void)renderInContext:(CGContextRef)context;
 
 #pragma mark Animation Properties
 ///@name Animation Properties
@@ -168,6 +169,34 @@
  */
 @property (readwrite, nonatomic) CGPathRef shadowPath;
 
+
+#pragma mark Style Properties
+
+@property(nonatomic, copy) UIColor *backgroundColor;
+@property(nonatomic) CGFloat alpha;
+@property(nonatomic, getter=isHidden) BOOL hidden;
+
+/**Specifies the width of the receiver’s border. Animatable.
+ 
+ The border is drawn inset from the receiver’s bounds by borderWidth. It is composited above the receiver’s contents and sublayers and includes the effects of the cornerRadius property. The default is 0.0.
+ */
+@property (readwrite, nonatomic) CGFloat borderWidth;
+
+/**Specifies a radius used to draw the rounded corners of the receiver’s background. Animatable.
+ 
+ If the radius is greater than 0 the background is drawn with rounded corners. The default value is 0.0.
+ */
+@property (readwrite, nonatomic) CGFloat cornerRadius;
+
+/**The color of the receiver’s border. Animatable.
+ 
+ Defaults to opaque black.
+ 
+ The value of this property is retained using the Core Foundation retain/release semantics. This behavior occurs despite the fact that the property declaration appears to use the default assign semantics for object retention.
+ */
+@property (readwrite, nonatomic, weak) UIColor *borderColor;
+
+
 #pragma mark Other Properties
 ///@name Other Properties
 /**Determines if the sublayers are clipped to the receiver’s bounds. Animatable.
@@ -187,39 +216,6 @@
  Defaults to nil.
  */
 @property (readwrite, nonatomic, assign) C4Control *mask;
-
-/** The origin point of the view.
- 
- Takes a CGPoint and animates the view's origin position from its current point to the new point.
- 
- This method positions the origin point of the current view by calculating the difference between this point and what the view's new center point will be. It then initiates the animation by setting the displaced new center point.
- */
-@property (nonatomic) CGPoint origin;
-
-/** The width of the receiver's frame.
- */
-@property (readonly, nonatomic) CGFloat width;
-
-/** The height of the receiver's frame.
- */
-@property (readonly, nonatomic) CGFloat height;
-
-/** The size of the receiver's frame.
- */
-@property (readonly, nonatomic) CGSize size;
-
-#pragma mark Style Properties
-/**Specifies the width of the receiver’s border. Animatable.
- 
- The border is drawn inset from the receiver’s bounds by borderWidth. It is composited above the receiver’s contents and sublayers and includes the effects of the cornerRadius property. The default is 0.0.
- */
-@property (readwrite, nonatomic) CGFloat borderWidth;
-
-/**Specifies a radius used to draw the rounded corners of the receiver’s background. Animatable.
- 
- If the radius is greater than 0 the background is drawn with rounded corners. The default value is 0.0.
- */
-@property (readwrite, nonatomic) CGFloat cornerRadius;
 
 /**Specifies the receiver’s position on the z axis. Animatable.
  
@@ -265,14 +261,6 @@
  See “Layer Geometry and Transforms” in Core Animation Programming Guide for more information on the relationship between the bounds, anchorPoint and position properties.
  */
 @property (readwrite, nonatomic) CGPoint anchorPoint;
-
-/**The color of the receiver’s border. Animatable.
- 
- Defaults to opaque black.
- 
- The value of this property is retained using the Core Foundation retain/release semantics. This behavior occurs despite the fact that the property declaration appears to use the default assign semantics for object retention.
- */
-@property (readwrite, nonatomic, weak) UIColor *borderColor;
 
 
 #pragma mark - Adding sub-elements
@@ -394,5 +382,18 @@ typedef void (^C4SwipeGestureBlock)();
 /** Apply a template to the object.
  */
 - (void)applyTemplate:(C4Template*)template;
+
+
+#pragma mark - Convenience Methods
+
+/**Renders the receiver and its sublayers into the specified context.
+ 
+ This method renders the contents of a C4Control directly from the layer tree, ignoring any animations added to the render tree. It essentially binds to the `renderInContext` method of the underlying C4Layer.
+ 
+ This method is used for rendering objects into a graphics context before either creating an image or saving drawing to external files.
+ 
+ @param context The graphics context to use to render the layer.
+ */
+-(void)renderInContext:(CGContextRef)context;
 
 @end

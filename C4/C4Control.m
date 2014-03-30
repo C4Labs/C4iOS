@@ -98,33 +98,6 @@
 
 #pragma mark UIView animatable properties
 
-- (CGPoint)center {
-    return self.view.center;
-}
-
-- (void)setCenter:(CGPoint)center {
-    if (self.animationDuration == 0.0f) {
-        self.view.center = center;
-        return;
-    }
-    
-    CGPoint oldCenter = CGPointMake(self.view.center.x, self.view.center.y);
-    void (^animationBlock)() = ^() { self.view.center = center; };
-    void (^reverseBlock)() = ^() { self.view.center = oldCenter; };
-    [self animateWithBlock:animationBlock reverseBlock:reverseBlock];
-}
-
-- (CGPoint)origin {
-    return self.view.frame.origin;
-}
-
-- (void)setOrigin:(CGPoint)origin {
-    CGPoint difference = origin;
-    difference.x += self.view.frame.size.width/2.0f;
-    difference.y += self.view.frame.size.height/2.0f;
-    self.center = difference;
-}
-
 - (CGRect)frame {
     return self.view.frame;
 }
@@ -151,6 +124,33 @@
     void (^animationBlock)() = ^() { self.view.bounds = bounds; };
     void (^reverseBlock)() = ^() { self.view.bounds = oldBounds; };
     [self animateWithBlock:animationBlock reverseBlock:reverseBlock];
+}
+
+- (CGPoint)center {
+    return self.view.center;
+}
+
+- (void)setCenter:(CGPoint)center {
+    if (self.animationDuration == 0.0f) {
+        self.view.center = center;
+        return;
+    }
+    
+    CGPoint oldCenter = CGPointMake(self.view.center.x, self.view.center.y);
+    void (^animationBlock)() = ^() { self.view.center = center; };
+    void (^reverseBlock)() = ^() { self.view.center = oldCenter; };
+    [self animateWithBlock:animationBlock reverseBlock:reverseBlock];
+}
+
+- (CGPoint)origin {
+    return self.view.frame.origin;
+}
+
+- (void)setOrigin:(CGPoint)origin {
+    CGPoint difference = origin;
+    difference.x += self.view.frame.size.width/2.0f;
+    difference.y += self.view.frame.size.height/2.0f;
+    self.center = difference;
 }
 
 - (CGAffineTransform)transform {
