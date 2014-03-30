@@ -20,7 +20,7 @@
 #import <Foundation/Foundation.h>
 
 
-/** C4AnimationHelper stores animation properties and has helper methods to create CAAnimations.
+/** C4AnimationHelper stores animation properties and has helper methods to create CAAnimations. You shouldn't need to use this class directly, instead use the animation features of C4Control.
  */
 @interface C4AnimationHelper : NSObject
 

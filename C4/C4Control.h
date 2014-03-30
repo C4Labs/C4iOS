@@ -24,9 +24,9 @@
 @class C4Layer;
 @class C4Template;
 
-/** The C4Control is a subclass of UIControl, which is the base class for control objects such as buttons and sliders that convey user intent to the application. You cannot use the UIControl class directly to instantiate controls. It instead defines the common interface and behavioral structure for all its subclasses.
+/** The C4Control is a subclass of C4Object, which is the base class for control objects such as buttons and sliders that convey user intent to the application. It instead defines the common interface and behavioral structure for all its subclasses.
  
- In C4, the main role of C4Control is to provide all objects that have a visible representation the ability to receive and handle user interaction. Because we cannot chain subclasses, C4Control mimicks some functionality with is available for C4Views.
+ In C4, the main role of C4Control is to provide all objects that have a visible representation the ability to receive and handle user interaction.
  
  Anything visible in a C4 application is a subclass of C4Control. So, in this sense, you should never have to construct a C4Control yourself. Instead, choose the appropriate C4 object, which if visible will be a descendant of a C4Control, and work from there.
  
