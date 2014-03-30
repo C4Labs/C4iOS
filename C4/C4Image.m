@@ -37,19 +37,19 @@
 }
 
 #pragma mark Initialization
-+(C4Image *)imageNamed:(NSString *)name {
++ (instancetype)imageNamed:(NSString *)name {
     return [[C4Image alloc] initWithImageName:name];
 }
 
-+(C4Image *)imageWithImage:(C4Image *)image {
++ (instancetype)imageWithImage:(C4Image *)image {
     return [[C4Image alloc] initWithImage:image];
 }
 
-+(C4Image *)imageWithUIImage:(UIImage *)image {
++ (instancetype)imageWithUIImage:(UIImage *)image {
     return [[C4Image alloc] initWithUIImage:image];
 }
 
-+(C4Image *)imageWithURL:(NSString *)imageURL {
++ (instancetype)imageWithURL:(NSString *)imageURL {
     return [[C4Image alloc] initWithURL:[NSURL URLWithString:imageURL]];
 }
 
@@ -108,7 +108,7 @@
     return self;
 }
 
-+(C4Image *)imageWithData:(NSData *)imageData {
++ (instancetype)imageWithData:(NSData *)imageData {
     return [[C4Image alloc] initWithData:imageData];
 }
 
@@ -1618,7 +1618,7 @@
 }
 
 #pragma mark Generators
-+(C4Image *)checkerboard:(CGSize)size center:(CGPoint)center color1:(UIColor *)color1 color2:(UIColor *)color2 squareWidth:(CGFloat)width sharpness:(CGFloat)sharpness {
++ (instancetype)checkerboard:(CGSize)size center:(CGPoint)center color1:(UIColor *)color1 color2:(UIColor *)color2 squareWidth:(CGFloat)width sharpness:(CGFloat)sharpness {
     @autoreleasepool {
         CIContext *context = [CIContext contextWithOptions:nil];
         CIFilter *filter = [CIFilter filterWithName:@"CICheckerboardGenerator"];
@@ -1638,7 +1638,7 @@
     }
 }
 
-+(C4Image *)constantColor:(CGSize)size color:(UIColor *)color{
++ (instancetype)constantColor:(CGSize)size color:(UIColor *)color{
     @autoreleasepool {
         CIContext *context = [CIContext contextWithOptions:nil];
         CIFilter *filter = [CIFilter filterWithName:@"CIConstantColorGenerator"];
@@ -1652,7 +1652,7 @@
     }
 };
 
-+(C4Image *)lenticularHalo:(CGSize)size center:(CGPoint)center color:(UIColor *)color haloRadius:(CGFloat)radius haloWidth:(CGFloat)haloWidth haloOverlap:(CGFloat)overlap striationStrength:(CGFloat)strength striationContrast:(CGFloat)contrast time:(CGFloat)time{
++ (instancetype)lenticularHalo:(CGSize)size center:(CGPoint)center color:(UIColor *)color haloRadius:(CGFloat)radius haloWidth:(CGFloat)haloWidth haloOverlap:(CGFloat)overlap striationStrength:(CGFloat)strength striationContrast:(CGFloat)contrast time:(CGFloat)time{
     @autoreleasepool {
         CIContext *context = [CIContext contextWithOptions:nil];
         CIFilter *filter = [CIFilter filterWithName:@"CILenticularHaloGenerator"];
@@ -1675,7 +1675,7 @@
     }
 };
 
-+(C4Image *)random:(CGSize)size{
++ (instancetype)random:(CGSize)size{
     @autoreleasepool {
         CIContext *context = [CIContext contextWithOptions:nil];
         CIFilter *filter = [CIFilter filterWithName:@"CIRandomGenerator"];
@@ -1688,7 +1688,7 @@
     }
 }
 
-+(C4Image *)gaussianGradient:(CGSize)size center:(CGPoint)center innerColor:(UIColor *)innerColor outerColor:(UIColor *)outerColor radius:(CGFloat)radius {
++ (instancetype)gaussianGradient:(CGSize)size center:(CGPoint)center innerColor:(UIColor *)innerColor outerColor:(UIColor *)outerColor radius:(CGFloat)radius {
     @autoreleasepool {
         CIContext *context = [CIContext contextWithOptions:nil];
         CIFilter *filter = [CIFilter filterWithName:@"CIGaussianGradient"];
@@ -1708,7 +1708,7 @@
     return nil;
 }
 
-+(C4Image *)linearGradient:(CGSize)size startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint startColor:(UIColor *)startColor endColor:(UIColor *)endColor {
++ (instancetype)linearGradient:(CGSize)size startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint startColor:(UIColor *)startColor endColor:(UIColor *)endColor {
     @autoreleasepool {
         CIContext *context = [CIContext contextWithOptions:nil];
         CIFilter *filter = [CIFilter filterWithName:@"CILinearGradient"];
@@ -1729,7 +1729,7 @@
     return nil;
 }
 
-+(C4Image *)radialGradient:(CGSize)size center:(CGPoint)center innerRadius:(CGFloat)innerRadius outerRadius:(CGFloat)outerRadius innerColor:(UIColor *)innerColor outerColor:(UIColor *)outerColor {
++ (instancetype)radialGradient:(CGSize)size center:(CGPoint)center innerRadius:(CGFloat)innerRadius outerRadius:(CGFloat)outerRadius innerColor:(UIColor *)innerColor outerColor:(UIColor *)outerColor {
     @autoreleasepool {
         CIContext *context = [CIContext contextWithOptions:nil];
         CIFilter *filter = [CIFilter filterWithName:@"CIRadialGradient"];
@@ -1749,7 +1749,7 @@
     }
 }
 
-+(NSArray *)availableFilters {
++ (NSArray *)availableFilters {
     NSArray *filterCategories = @[
       kCICategoryDistortionEffect,
       kCICategoryGeometryAdjustment,
@@ -1780,9 +1780,9 @@
     return sortedFilterList;
 }
 
-//+(C4Image *)starShineGenerator:(CGSize)size center:(CGPoint)center color:(UIColor *)color radius:(CGFloat)radius crossScale:(CGFloat)scale crossAngle:(CGFloat)angle crossOpacity:(CGFloat)opacity crossWidth:(CGFloat)width epsilon:(CGFloat)epsilon{return nil;};
+//+ (instancetype)starShineGenerator:(CGSize)size center:(CGPoint)center color:(UIColor *)color radius:(CGFloat)radius crossScale:(CGFloat)scale crossAngle:(CGFloat)angle crossOpacity:(CGFloat)opacity crossWidth:(CGFloat)width epsilon:(CGFloat)epsilon{return nil;};
 //
-//+(C4Image *)stripes:(CGSize)size center:(CGPoint)center color1:(UIColor *)color1 color2:(UIColor *)color2 stripeWidth:(CGFloat)width sharpness:(CGFloat)sharpness{
+//+ (instancetype)stripes:(CGSize)size center:(CGPoint)center color1:(UIColor *)color1 color2:(UIColor *)color2 stripeWidth:(CGFloat)width sharpness:(CGFloat)sharpness{
 //    @autoreleasepool {
 //        CIContext *context = [CIContext contextWithOptions:nil];
 //        CIFilter *filter = [CIFilter filterWithName:@"CIStripesGenerator"];
@@ -1798,10 +1798,10 @@
 //        return [[C4Image alloc] initWithCGImage:filteredImage];
 //    }
 //};
-//+(C4Image *)sunbeams:(CGSize)size center:(CGPoint)center color:(UIColor *)color sunRadius:(CGFloat)sunRadius maxStriationRadius:(CGFloat)striationRadius striationStrength:(CGFloat)striationStrength striationContrast:(CGFloat)striationContrast time:(CGFloat)time{return nil;};
+//+ (instancetype)sunbeams:(CGSize)size center:(CGPoint)center color:(UIColor *)color sunRadius:(CGFloat)sunRadius maxStriationRadius:(CGFloat)striationRadius striationStrength:(CGFloat)striationStrength striationContrast:(CGFloat)striationContrast time:(CGFloat)time{return nil;};
 
 #pragma mark Animated Image
-+(C4Image *)animatedImageWithNames:(NSArray *)imageNames {
++ (instancetype)animatedImageWithNames:(NSArray *)imageNames {
     C4Image *animImg = [[C4Image alloc] initAnimatedImageWithNames:imageNames];
     return animImg;
 }

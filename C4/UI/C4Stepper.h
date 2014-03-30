@@ -32,7 +32,7 @@
  
  @return a new C4Stepper.
  */
-+(C4Stepper *)stepper;
++ (instancetype)stepper;
 
 #pragma mark - Configuring the Stepper
 ///@name Configuring the Stepper

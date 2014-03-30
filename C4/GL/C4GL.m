@@ -30,7 +30,7 @@
 
 @implementation C4GL
 
-+(C4GL *)glWithFrame:(CGRect)frame {
++ (instancetype)glWithFrame:(CGRect)frame {
     C4GL *gl = [[C4GL alloc] init];
     gl.frame = frame;
     return gl;

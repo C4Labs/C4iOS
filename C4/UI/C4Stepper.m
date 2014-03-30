@@ -21,7 +21,7 @@
 
 @implementation C4Stepper
 
-+(C4Stepper *)stepper {
++ (instancetype)stepper {
     C4Stepper *stepper = [[C4Stepper alloc] initWithFrame:CGRectZero];
     return stepper;
 }

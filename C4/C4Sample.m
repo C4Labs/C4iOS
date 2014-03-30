@@ -26,7 +26,7 @@
 
 @implementation C4Sample
 
-+(C4Sample *)sampleNamed:(NSString *)sampleName {
++ (instancetype)sampleNamed:(NSString *)sampleName {
     return [[C4Sample alloc] initWithSampleName:sampleName];
 }
 

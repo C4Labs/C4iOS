@@ -21,7 +21,7 @@
 
 @implementation C4Button
 
-+(C4Button *)buttonWithType:(C4ButtonType)type {
++ (instancetype)buttonWithType:(C4ButtonType)type {
     C4Button *button = [[C4Button alloc] initWithType:type];
     return button;
 }

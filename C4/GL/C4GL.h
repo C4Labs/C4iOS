@@ -43,7 +43,7 @@
  @return a new C4GL object.
  */
 
-+(C4GL *)glWithFrame:(CGRect)frame;
++ (instancetype)glWithFrame:(CGRect)frame;
 
 /**Initializes a C4GL object with a specific renderer.
  

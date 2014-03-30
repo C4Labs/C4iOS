@@ -39,14 +39,14 @@
  @param rect A rectangle that defines the shape of an ellipse.
  @return The initialized C4Shape object created with an ellipse path or nil if initialization is not successful.
  */
-+(C4Shape *)ellipse:(CGRect)rect;
++ (instancetype)ellipse:(CGRect)rect;
 
 /**Creates and returns an instance of C4Shape, whose path is a rectangle.
  
  @param rect A rectangle that defines the shape.
  @return The initialized C4Shape object created with an rectangular path or nil if initialization is not successful.
  */
-+(C4Shape *)rect:(CGRect)rect;
++ (instancetype)rect:(CGRect)rect;
 
 /**Creates and returns an instance of C4Shape, whose path is a line.
  
@@ -55,14 +55,14 @@
  @param pointArray A C-Array containing 2 CGPoints like: {CGpoint,CGPoint}.
  @return The initialized C4Shape object created with a line path or nil if initialization is not successful.
  */
-+(C4Shape *)line:(CGPoint *)pointArray;
++ (instancetype)line:(CGPoint *)pointArray;
 
 /**Creates and returns an instance of C4Shape, whose path is a triangle.
  
  @param pointArray A C-Array containing 3 CGPoints like: {CGpoint,CGPoint,CGPoint}.
  @return The initialized C4Shape object created with a triangle path or nil if initialization is not successful.
  */
-+(C4Shape *)triangle:(CGPoint *)pointArray;
++ (instancetype)triangle:(CGPoint *)pointArray;
 
 /**Creates and returns an instance of C4Shape, whose path is a polygon.
  
@@ -72,7 +72,7 @@
  @param pointCount The number of points in the array.
  @return The initialized C4Shape object created with a polygon path or nil if initialization is not successful.
  */
-+(C4Shape *)polygon:(CGPoint *)pointArray pointCount:(NSInteger)pointCount;
++ (instancetype)polygon:(CGPoint *)pointArray pointCount:(NSInteger)pointCount;
 
 /**Creates and returns an instance of C4Shape, whose path is an arc.
  
@@ -83,7 +83,7 @@
  @param clockwise A Boolean value specifying whether or not the arc will draw in a clockwise direction from the start to end angle
  @return The initialized C4Shape object created with an arc path or nil if initialization is not successful.
  */
-+(C4Shape *)arcWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise;
++ (instancetype)arcWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise;
 
 /**Creates and returns an instance of C4Shape, whose path is a wedge.
  
@@ -94,7 +94,7 @@
  @param clockwise A Boolean value specifying whether or not the wedge will draw in a clockwise direction from the start to end angle
  @return The initialized C4Shape object created with a wedge path or nil if initialization is not successful.
  */
-+(C4Shape *)wedgeWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise;
++ (instancetype)wedgeWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise;
 
 /**Creates and returns an instance of C4Shape, whose path is a bezier curve.
  
@@ -102,7 +102,7 @@
  @param controlPointArray A C-Array consisting of two points, like: {CGPoint,CGPoint}, which mark the control points that distort the curve.
  @return The initialized C4Shape object created with a curve path or nil if initialization is not successful.
  */
-+(C4Shape *)curve:(CGPoint *)beginEndPointArray controlPoints:(CGPoint *)controlPointArray;
++ (instancetype)curve:(CGPoint *)beginEndPointArray controlPoints:(CGPoint *)controlPointArray;
 
 
 /**Creates and returns an instance of C4Shape, whose path is a quadratic curve
@@ -111,7 +111,7 @@
  @param controlPoint A CGPoint used to defined the quadratic curve.
  @return The initialized C4Shape object created with a curve path or nil if initialization is not successful.
  */
-+(C4Shape *)quadCurve:(CGPoint *)beginEndPointArray controlPoint:(CGPoint)controlPoint;
++ (instancetype)quadCurve:(CGPoint *)beginEndPointArray controlPoint:(CGPoint)controlPoint;
 
 /**Creates and returns an instance of C4Shape, whose path is a combination of curves made up from a string of text.
  
@@ -119,13 +119,13 @@
  @param font The font used to generate the paths that will be drawn.
  @return The initialized C4Shape object created with a combination of paths that look like characters or nil if initialization is not successful.
  */
-+(C4Shape *)shapeFromString:(NSString *)string withFont:(C4Font *)font;
++ (instancetype)shapeFromString:(NSString *)string withFont:(C4Font *)font;
 
 /**Creates and returns an instance of C4Shape, whose configuration is specified by a template.
  
  @param template The template to use.
  */
-+(C4Shape *)shapeFromTemplate:(C4Template*)template;
++ (instancetype)shapeFromTemplate:(C4Template*)template;
 
 #pragma mark Changing a Shape's Path
 /// @name Changing a Shape's Path

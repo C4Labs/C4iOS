@@ -179,7 +179,7 @@
 //-(void)cancelTracking {
 //}
 
-+(C4Slider *)slider:(CGRect)rect {
++ (instancetype)slider:(CGRect)rect {
     return [[C4Slider alloc] initWithFrame:rect];
 }
 

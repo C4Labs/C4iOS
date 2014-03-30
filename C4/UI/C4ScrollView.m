@@ -21,7 +21,7 @@
 
 @implementation C4ScrollView
 
-+(C4ScrollView *)scrollView:(CGRect)rect {
++ (instancetype)scrollView:(CGRect)rect {
     return [[C4ScrollView alloc] initWithFrame:rect];
 }
 

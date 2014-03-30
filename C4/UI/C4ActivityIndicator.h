@@ -43,7 +43,7 @@ typedef NS_ENUM(NSInteger, C4ActivityIndicatorStyle) {
  
  @return An initialized C4ActivityIndicator object or nil if the object couldn’t be created.
  */
-+(C4ActivityIndicator *)indicatorWithStyle:(C4ActivityIndicatorStyle)style;
++ (instancetype)indicatorWithStyle:(C4ActivityIndicatorStyle)style;
 
 /**Initializes and returns an activity-indicator object.
  

@@ -48,7 +48,7 @@
  @param rect a CGRect structure used to construct the slider's view.
  @return a new C4Slider object.
  */
-+(C4Slider *)slider:(CGRect)rect;
++ (instancetype)slider:(CGRect)rect;
 
 /**Initializes and returns a new slider object fit inside the given frame.
  

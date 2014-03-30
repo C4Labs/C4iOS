@@ -30,7 +30,7 @@
 
 @implementation C4Camera
 
-+ (C4Camera *)cameraWithFrame:(CGRect)frame {
++ (instancetype)cameraWithFrame:(CGRect)frame {
     return [[C4Camera alloc] initWithFrame:frame];
 }
 

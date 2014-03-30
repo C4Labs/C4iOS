@@ -38,7 +38,7 @@
     return [a angleBetween:b];
 }
 
-+ (C4Vector *)vectorWithX:(CGFloat)x Y:(CGFloat)y Z:(CGFloat)z {
++ (instancetype)vectorWithX:(CGFloat)x Y:(CGFloat)y Z:(CGFloat)z {
     return [[C4Vector alloc] initWithX:x Y:y Z:z];
 }
 

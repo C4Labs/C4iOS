@@ -37,7 +37,7 @@
  @param text An NSString that will make up the text for the label.
  @return A new C4Label.
  */
-+(C4Label *)labelWithText:(NSString *)text;
++ (instancetype)labelWithText:(NSString *)text;
 
 /**Creates and returns a new label with the specified text, using the specified font.
  
@@ -45,7 +45,7 @@
  @param font A C4Font that will be used to render the label's text.
  @return A new C4Label.
  */
-+(C4Label *)labelWithText:(NSString *)text font:(C4Font *)font;
++ (instancetype)labelWithText:(NSString *)text font:(C4Font *)font;
 
 /**Creates and returns a new label with the specified text, using the specified font.
  
@@ -54,7 +54,7 @@
  @param frame A CGRect that will make up the size of the view for the label.
  @return A new C4Label.
  */
-+(C4Label *)labelWithText:(NSString *)text font:(C4Font *)font frame:(CGRect)frame;
++ (instancetype)labelWithText:(NSString *)text font:(C4Font *)font frame:(CGRect)frame;
 
 /**Initializes and returns a new label with the specified text, using the default font.
  

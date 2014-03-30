@@ -42,7 +42,7 @@
  
  @return A C4Camera object of the specified size;
  */
-+ (C4Camera *)cameraWithFrame:(CGRect)frame;
++ (instancetype)cameraWithFrame:(CGRect)frame;
 
 #pragma mark - Initializing Capture
 ///@name Initializing Capture

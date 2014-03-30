@@ -41,7 +41,7 @@
  @param rect the frame used to create the size and position of the scrollview.
  @return a new C4ScrollView object.
  */
-+(C4ScrollView *)scrollView:(CGRect)rect;
++ (instancetype)scrollView:(CGRect)rect;
 
 #pragma mark - ScrollView & Delegate
 ///@name ScrollView & Delegate

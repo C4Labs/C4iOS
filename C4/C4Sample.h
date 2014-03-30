@@ -45,7 +45,7 @@
  
  @param sampleName The filename of a sample to be loaded.
  */
-+(C4Sample *)sampleNamed:(NSString *)sampleName;
++ (instancetype)sampleNamed:(NSString *)sampleName;
 
 /**Initializes a C4Sample with a given file name.
  

@@ -31,7 +31,7 @@
 /**Creates and returns a C4Switch object.
  @return A new C4Switch.
  */
-+(C4Switch *)switch;
++ (instancetype)switch;
 
 /**Creates and returns a C4Switch object.
  
@@ -39,7 +39,7 @@
  @param frame A rectangle defining the frame of the C4Switch object. The size components of this rectangle are ignored.
  @return a new C4Switch.
  */
-+(C4Switch *)switch:(CGRect)frame;
++ (instancetype)switch:(CGRect)frame;
 
 #pragma mark - Initializing the Switch Object
 ///@name Initializing the Switch Object

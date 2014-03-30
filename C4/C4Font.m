@@ -39,7 +39,7 @@
     return self;
 }
 
-+ (C4Font *)fontWithName:(NSString *)fontName size:(CGFloat)fontSize {
++ (instancetype)fontWithName:(NSString *)fontName size:(CGFloat)fontSize {
     return [[C4Font alloc] initWithName:fontName size:fontSize];
 }
 
@@ -53,14 +53,14 @@
 }
 
 // Some convenience methods to create system fonts
-+ (C4Font *)systemFontOfSize:(CGFloat)fontSize {
++ (instancetype)systemFontOfSize:(CGFloat)fontSize {
     return [[C4Font alloc] initWithName:SYSTEMFONTNAME size:fontSize];
 }
 
-+ (C4Font *)boldSystemFontOfSize:(CGFloat)fontSize {
++ (instancetype)boldSystemFontOfSize:(CGFloat)fontSize {
     return [[C4Font alloc] initWithName:BOLDSYSTEMFONTNAME size:fontSize];
 }
-+ (C4Font *)italicSystemFontOfSize:(CGFloat)fontSize {
++ (instancetype)italicSystemFontOfSize:(CGFloat)fontSize {
     return [[C4Font alloc] initWithName:ITALICSYSTEMFONTNAME size:fontSize];
 }
 

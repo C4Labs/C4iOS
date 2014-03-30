@@ -52,7 +52,7 @@
  @param z The z coordinate of the vector
  @return A new C4Vector object
  */
-+ (C4Vector *)vectorWithX:(CGFloat)x Y:(CGFloat)y Z:(CGFloat)z;
++ (instancetype)vectorWithX:(CGFloat)x Y:(CGFloat)y Z:(CGFloat)z;
 
 /**Initializes a new C4Vector object.
  

@@ -31,22 +31,22 @@
 
 @implementation C4Movie
 
-+(C4Movie *)movieNamed:(NSString *)movieName {
++ (instancetype)movieNamed:(NSString *)movieName {
     C4Movie *newMovie = [[C4Movie alloc] initWithMovieName:movieName frame:CGRectZero];
     return newMovie;
 }
 
-+(C4Movie *)movieNamed:(NSString *)movieName inFrame:(CGRect)movieFrame {
++ (instancetype)movieNamed:(NSString *)movieName inFrame:(CGRect)movieFrame {
     C4Movie *newMovie = [[C4Movie alloc] initWithMovieName:movieName frame:movieFrame];
     return newMovie;
 }
 
-+(C4Movie *)movieWithURL:(NSString *)url {
++ (instancetype)movieWithURL:(NSString *)url {
     C4Movie *newMovie = [[C4Movie alloc] initWithURL:[NSURL URLWithString:url] frame:CGRectZero];
     return newMovie;
 }
 
-+(C4Movie *)movieWithURL:(NSString *)url frame:(CGRect)movieFrame {
++ (instancetype)movieWithURL:(NSString *)url frame:(CGRect)movieFrame {
     C4Movie *newMovie = [[C4Movie alloc] initWithURL:[NSURL URLWithString:url] frame:movieFrame];
     return newMovie;
 }

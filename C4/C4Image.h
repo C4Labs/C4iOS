@@ -34,25 +34,25 @@
  
  @param name A string representation of the file name (e.g. photo.jpg, image.png, etc.)
  */
-+(C4Image *)imageNamed:(NSString *)name;
++ (instancetype)imageNamed:(NSString *)name;
 
 /**Creates and returns a new image using a pre-existing C4Image object.
  
  @param image A C4Image whose contents will be used to create a new C4Image object.
  */
-+(C4Image *)imageWithImage:(C4Image *)image;
++ (instancetype)imageWithImage:(C4Image *)image;
 
 /**Creates and returns a new image using an NSData object.
  
  @param imageData An NSData object.
  */
-+(C4Image *)imageWithData:(NSData *)imageData;
++ (instancetype)imageWithData:(NSData *)imageData;
 
 /**Creates and returns a new image using an UIImage object.
  
  @param image a UIImage used to create the C4Image.
  */
-+(C4Image *)imageWithUIImage:(UIImage *)image;
++ (instancetype)imageWithUIImage:(UIImage *)image;
 
 /**Creates and returns a new image using an URL.
  
@@ -60,14 +60,14 @@
  
  @param imageURL the URL for the file used to create the image.
  */
-+(C4Image *)imageWithURL:(NSString *)imageURL;
++ (instancetype)imageWithURL:(NSString *)imageURL;
 
 /**Creates and returns a new animated image from an array of image file names.
  
  @param imageNames An NSArray of image names (e.g. C4Sky, C4Table@2x.png, etc.) used to construct the images for the animation.
  @return a new animatable image.
  */
-+(C4Image *)animatedImageWithNames:(NSArray *)imageNames;
++ (instancetype)animatedImageWithNames:(NSArray *)imageNames;
 
 /**Initializes an image using a file with the given name.
  
@@ -896,7 +896,7 @@
  
  @return A new C4Image whose contents are a checkerboard pattern of two colors.
  */
-+(C4Image *)checkerboard:(CGSize)size center:(CGPoint)center color1:(UIColor *)color1 color2:(UIColor *)color2 squareWidth:(CGFloat)width sharpness:(CGFloat)sharpness;
++ (instancetype)checkerboard:(CGSize)size center:(CGPoint)center color1:(UIColor *)color1 color2:(UIColor *)color2 squareWidth:(CGFloat)width sharpness:(CGFloat)sharpness;
 
 /**Generates a solid color.
  
@@ -904,7 +904,7 @@
  @param color The color used to generate the image.
  @return A new C4Image whose contents are a solid color.
  */
-+(C4Image *)constantColor:(CGSize)size color:(UIColor *)color;
++ (instancetype)constantColor:(CGSize)size color:(UIColor *)color;
 //
 ///**Simulates a lens flare.
 //
@@ -918,18 +918,18 @@
 // @param contrast Controls the contrast of the rainbow-colored halo area.
 // @param time Adds a randomness to the lens flare; it causes the flare to "sparkle" as it changes through various time values.
 // */
-//+(C4Image *)lenticularHalo:(CGSize)size center:(CGPoint)center color:(UIColor *)color haloRadius:(CGFloat)radius haloWidth:(CGFloat)haloWidth haloOverlap:(CGFloat)overlap striationStrength:(CGFloat)strength striationContrast:(CGFloat)contrast time:(CGFloat)time;
+//+ (instancetype)lenticularHalo:(CGSize)size center:(CGPoint)center color:(UIColor *)color haloRadius:(CGFloat)radius haloWidth:(CGFloat)haloWidth haloOverlap:(CGFloat)overlap striationStrength:(CGFloat)strength striationContrast:(CGFloat)contrast time:(CGFloat)time;
 
 /**Generates an image of infinite extent whose pixel values are made up of four independent, uniformly-distributed random numbers in the 0 to 1 range.
  
  @param size The size of the resulting image, this should be greater than CGPointZero.
  */
-+(C4Image *)random:(CGSize)size;
++ (instancetype)random:(CGSize)size;
 
 //FIXME: I don't think these filters work right now... There's no code online to check
-//+(C4Image *)starShineGenerator:(CGSize)size center:(CGPoint)center color:(UIColor *)color radius:(CGFloat)radius crossScale:(CGFloat)scale crossAngle:(CGFloat)angle crossOpacity:(CGFloat)opacity crossWidth:(CGFloat)width epsilon:(CGFloat)epsilon;
-//+(C4Image *)stripes:(CGSize)size center:(CGPoint)center color1:(UIColor *)color1 color2:(UIColor *)color2 stripeWidth:(CGFloat)width sharpness:(CGFloat)sharpness;
-//+(C4Image *)sunbeams:(CGSize)size center:(CGPoint)center color:(UIColor *)color sunRadius:(CGFloat)sunRadius maxStriationRadius:(CGFloat)striationRadius striationStrength:(CGFloat)striationStrength striationContrast:(CGFloat)striationContrast time:(CGFloat)time;
+//+ (instancetype)starShineGenerator:(CGSize)size center:(CGPoint)center color:(UIColor *)color radius:(CGFloat)radius crossScale:(CGFloat)scale crossAngle:(CGFloat)angle crossOpacity:(CGFloat)opacity crossWidth:(CGFloat)width epsilon:(CGFloat)epsilon;
+//+ (instancetype)stripes:(CGSize)size center:(CGPoint)center color1:(UIColor *)color1 color2:(UIColor *)color2 stripeWidth:(CGFloat)width sharpness:(CGFloat)sharpness;
+//+ (instancetype)sunbeams:(CGSize)size center:(CGPoint)center color:(UIColor *)color sunRadius:(CGFloat)sunRadius maxStriationRadius:(CGFloat)striationRadius striationStrength:(CGFloat)striationStrength striationContrast:(CGFloat)striationContrast time:(CGFloat)time;
 
 #pragma mark - Geometry Adjustments
 /// @name Geometry Adjustments
@@ -996,7 +996,7 @@
  @param outerColor The outer color of the gradient.
  @param radius The radius of the gradient.
  */
-+(C4Image *)gaussianGradient:(CGSize)size center:(CGPoint)center innerColor:(UIColor *)innerColor outerColor:(UIColor *)outerColor radius:(CGFloat)radius;
++ (instancetype)gaussianGradient:(CGSize)size center:(CGPoint)center innerColor:(UIColor *)innerColor outerColor:(UIColor *)outerColor radius:(CGFloat)radius;
 
 /**Generates a gradient that varies along a linear axis between two defined endpoints.
  
@@ -1006,7 +1006,7 @@
  @param startColor The start color of the gradient.
  @param endColor The end color of the gradient.
  */
-+(C4Image *)linearGradient:(CGSize)size startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint startColor:(UIColor *)startColor endColor:(UIColor *)endColor;
++ (instancetype)linearGradient:(CGSize)size startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint startColor:(UIColor *)startColor endColor:(UIColor *)endColor;
 
 /**Generates a gradient that varies radially between two circles having the same center.
  
@@ -1017,7 +1017,7 @@
  @param innerColor The inner color of the gradient.
  @param outerColor The outer color of the gradient.
  */
-+(C4Image *)radialGradient:(CGSize)size center:(CGPoint)center innerRadius:(CGFloat)innerRadius outerRadius:(CGFloat)outerRadius innerColor:(UIColor *)innerColor outerColor:(UIColor *)outerColor;
++ (instancetype)radialGradient:(CGSize)size center:(CGPoint)center innerRadius:(CGFloat)innerRadius outerRadius:(CGFloat)outerRadius innerColor:(UIColor *)innerColor outerColor:(UIColor *)outerColor;
 
 #pragma mark - Halftone Effects
 /// @name Halftone Effects

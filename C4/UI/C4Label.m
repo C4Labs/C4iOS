@@ -30,15 +30,15 @@
     return [self initWithFrame:CGRectZero];
 }
 
-+(C4Label *)labelWithText:(NSString *)text {
++ (instancetype)labelWithText:(NSString *)text {
     return [[C4Label alloc] initWithText:text];
 }
 
-+(C4Label *)labelWithText:(NSString *)text font:(C4Font *)font {
++ (instancetype)labelWithText:(NSString *)text font:(C4Font *)font {
     return [[C4Label alloc] initWithText:text font:font];
 }
 
-+(C4Label *)labelWithText:(NSString *)text font:(C4Font *)font frame:(CGRect)frame {
++ (instancetype)labelWithText:(NSString *)text font:(C4Font *)font frame:(CGRect)frame {
     return [[C4Label alloc] initWithText:text font:font frame:frame];
 }
 

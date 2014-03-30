@@ -42,7 +42,7 @@
  
  @return A newly created button.
  */
-+(C4Button *)buttonWithType:(C4ButtonType)buttonType;
++ (instancetype)buttonWithType:(C4ButtonType)buttonType;
 
 /**The default initialization method for the C4Button class.
  

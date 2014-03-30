@@ -21,7 +21,7 @@
 
 @implementation C4ActivityIndicator
 
-+(C4ActivityIndicator *)indicatorWithStyle:(C4ActivityIndicatorStyle)style {
++ (instancetype)indicatorWithStyle:(C4ActivityIndicatorStyle)style {
     C4ActivityIndicator *indicator = [[C4ActivityIndicator alloc] initWithActivityIndicatorStyle:style];
     return indicator;
 }

@@ -21,12 +21,12 @@
 
 @implementation C4Switch
 
-+(C4Switch *)switch:(CGRect)frame {
++ (instancetype)switch:(CGRect)frame {
     C4Switch *s = [[C4Switch alloc] initWithFrame:frame];
     return s;
 }
 
-+(C4Switch *)switch {
++ (instancetype)switch {
     C4Switch *s = [[C4Switch alloc] initWithFrame:CGRectZero];
     return s;
 }

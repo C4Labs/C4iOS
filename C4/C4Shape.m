@@ -54,19 +54,19 @@
     _shouldClose = NO;
 }
 
-+(C4Shape *)ellipse:(CGRect)rect {
++ (instancetype)ellipse:(CGRect)rect {
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:rect];
     [newShape _ellipse:[NSValue valueWithCGRect:rect]];
     return newShape;
 }
 
-+(C4Shape *)rect:(CGRect)rect {
++ (instancetype)rect:(CGRect)rect {
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:rect];
     [newShape _rect:[NSValue valueWithCGRect:rect]];
     return newShape;
 }
 
-+(C4Shape *)line:(CGPoint *)pointArray {
++ (instancetype)line:(CGPoint *)pointArray {
     CGRect lineFrame = CGRectMakeFromPointArray(pointArray, 2);
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:lineFrame];
     [newShape _line:@[[NSValue valueWithCGPoint:pointArray[0]],
@@ -74,7 +74,7 @@
     return newShape;
 }
 
-+(C4Shape *)triangle:(CGPoint *)pointArray {
++ (instancetype)triangle:(CGPoint *)pointArray {
     CGRect polygonFrame = CGRectMakeFromPointArray(pointArray, 3);
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:polygonFrame];
     [newShape _triangle:@[[NSValue valueWithCGPoint:pointArray[0]],
@@ -83,7 +83,7 @@
     return newShape;
 }
 
-+(C4Shape *)polygon:(CGPoint *)pointArray pointCount:(NSInteger)pointCount {
++ (instancetype)polygon:(CGPoint *)pointArray pointCount:(NSInteger)pointCount {
     CGRect polygonFrame = CGRectMakeFromPointArray(pointArray, (int)pointCount);
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:polygonFrame];
     NSMutableArray *points = [@[] mutableCopy];
@@ -94,7 +94,7 @@
     return newShape;
 }
 
-+(C4Shape *)arcWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise {
++ (instancetype)arcWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise {
     //I'm not sure what's going on here, but i have to invert clockwise to get the
     CGRect arcRect = CGRectMakeFromArcComponents(centerPoint,radius,startAngle,endAngle,!clockwise);
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:arcRect];
@@ -108,7 +108,7 @@
     return newShape;
 }
 
-+(C4Shape *)wedgeWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise {
++ (instancetype)wedgeWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise {
     CGRect wedgeRect = CGRectMakeFromWedgeComponents(centerPoint,radius,startAngle,endAngle,clockwise);
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:wedgeRect];
     
@@ -120,14 +120,14 @@
     [newShape _wedge:wedgeDict];
     return newShape;
 }
-+(C4Shape *)shapeFromString:(NSString *)string withFont:(C4Font *)font {
++ (instancetype)shapeFromString:(NSString *)string withFont:(C4Font *)font {
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
     NSDictionary *stringAndFontDictionary = @{@"string": string,@"font": font};
     [newShape _shapeFromString:stringAndFontDictionary];
     return newShape;
 }
 
-+(C4Shape *)shapeFromTemplate:(C4Template*)template {
++ (instancetype)shapeFromTemplate:(C4Template*)template {
     C4Shape *shape = [[C4Shape alloc] init];
     [shape applyTemplate:template];
     return shape;
@@ -222,7 +222,7 @@
     _initialized = YES;
 }
 
-+(C4Shape *)curve:(CGPoint *)beginEndPointArray controlPoints:(CGPoint *)controlPointArray{
++ (instancetype)curve:(CGPoint *)beginEndPointArray controlPoints:(CGPoint *)controlPointArray{
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:CGRectMakeFromPointArray(beginEndPointArray, 2)];
     NSMutableDictionary *curveDict = [[NSMutableDictionary alloc] initWithCapacity:0];
     [curveDict setValue:[NSValue valueWithCGPoint:beginEndPointArray[0]] forKey:@"beginPoint"];
@@ -233,7 +233,7 @@
     return newShape;
 }
 
-+(C4Shape *)quadCurve:(CGPoint *)beginEndPointArray controlPoint:(CGPoint)controlPoint{
++ (instancetype)quadCurve:(CGPoint *)beginEndPointArray controlPoint:(CGPoint)controlPoint{
     C4Shape *newShape = [[C4Shape alloc] initWithFrame:CGRectMakeFromPointArray(beginEndPointArray, 2)];
     NSMutableDictionary *curveDict = [[NSMutableDictionary alloc] initWithCapacity:0];
     [curveDict setValue:[NSValue valueWithCGPoint:beginEndPointArray[0]] forKey:@"beginPoint"];

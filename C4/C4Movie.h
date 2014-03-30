@@ -35,7 +35,7 @@
  
  @param movieName The filename of a video located in the application's main bundle.
  */
-+(C4Movie *)movieNamed:(NSString *)movieName;
++ (instancetype)movieNamed:(NSString *)movieName;
 
 /**Creates and returns a new C4Movie object with a given file name and frame.
  
@@ -44,7 +44,7 @@
  @param movieName The filename of a video located in the application's main bundle.
  @param movieFrame The frame for the new movie
  */
-+(C4Movie *)movieNamed:(NSString *)movieName inFrame:(CGRect)movieFrame;
++ (instancetype)movieNamed:(NSString *)movieName inFrame:(CGRect)movieFrame;
 
 /**Initializes a C4Movie object with a given file name.
  
@@ -172,7 +172,7 @@
  
  @return The initialized C4Movie object created or nil if initialization is not successful.
  */
-+(C4Movie *)movieWithURL:(NSString *)url;
++ (instancetype)movieWithURL:(NSString *)url;
 
 /**Creates and returns a new C4Movie object with a given URL pointing to a movie file.
  
@@ -183,7 +183,7 @@
  
  @return The initialized C4Movie object created or nil if initialization is not successful.
  */
-+(C4Movie *)movieWithURL:(NSString *)url frame:(CGRect)movieFrame;
++ (instancetype)movieWithURL:(NSString *)url frame:(CGRect)movieFrame;
 
 /** Initializes a C4Movie object with a given URL pointing to a movie file.
  

@@ -34,7 +34,7 @@
  @param methodName The name of the method that will be sent to the object
  @param repeats A boolean value that specifies whether or not the timer will continuously fire
  */
-+(C4Timer *)automaticTimerWithInterval:(CGFloat)seconds target:(id)object method:(NSString *)methodName repeats:(BOOL)repeats;
++ (instancetype)automaticTimerWithInterval:(CGFloat)seconds target:(id)object method:(NSString *)methodName repeats:(BOOL)repeats;
 
 /**Creates and returns a new C4Timer object that will begin firing automatically, it will also pass an object to the method it triggers.
  
@@ -44,7 +44,7 @@
  @param infoObject The object to pass to the method being called
  @param repeats A boolean value that specifies whether or not the timer will continuously fire
  */
-+(C4Timer *)automaticTimerWithInterval:(CGFloat)seconds target:(id)object method:(NSString *)methodName userInfo:(id)infoObject repeats:(BOOL)repeats;
++ (instancetype)automaticTimerWithInterval:(CGFloat)seconds target:(id)object method:(NSString *)methodName userInfo:(id)infoObject repeats:(BOOL)repeats;
 
 /**Creates and returns a new C4Timer object that will begin firing automatically.
  
@@ -55,7 +55,7 @@
  @param methodName The name of the method that will be sent to the object
  @param repeats A boolean value that specifies whether or not the timer will continuously fire
  */
-+(C4Timer *)timerWithInterval:(CGFloat)seconds target:(id)object method:(NSString *)methodName repeats:(BOOL)repeats;
++ (instancetype)timerWithInterval:(CGFloat)seconds target:(id)object method:(NSString *)methodName repeats:(BOOL)repeats;
 
 /**Creates and returns a new C4Timer object that will begin firing automatically, it will also pass an object to the method it triggers.
  
@@ -67,7 +67,7 @@
  @param infoObject The object to pass to the method being called
  @param repeats A boolean value that specifies whether or not the timer will continuously fire
  */
-+(C4Timer *)timerWithInterval:(CGFloat)seconds target:(id)object method:(NSString *)methodName userInfo:(id)infoObject repeats:(BOOL)repeats;
++ (instancetype)timerWithInterval:(CGFloat)seconds target:(id)object method:(NSString *)methodName userInfo:(id)infoObject repeats:(BOOL)repeats;
 
 /**Creates and returns a new C4Timer object that will begin firing at a specified date.
  
@@ -77,7 +77,7 @@
  @param methodName The name of the method that will be sent to the object
  @param repeats A boolean value that specifies whether or not the timer will continuously fire
  */
-+(C4Timer *)timerWithFireDate:(NSDate *)date interval:(CGFloat)seconds target:(id)object method:(NSString *)methodName repeats:(BOOL)repeats;
++ (instancetype)timerWithFireDate:(NSDate *)date interval:(CGFloat)seconds target:(id)object method:(NSString *)methodName repeats:(BOOL)repeats;
 
 /**Creates and returns a new C4Timer object that will begin firing at a specified date, it will also pass an object to the method it triggers.
  
@@ -88,7 +88,7 @@
  @param infoObject The object to pass to the method being called
  @param repeats A boolean value that specifies whether or not the timer will continuously fire
  */
-+(C4Timer *)timerWithFireDate:(NSDate *)date interval:(CGFloat)seconds target:(id)object method:(NSString *)methodName userInfo:(id)infoObject repeats:(BOOL)repeats;
++ (instancetype)timerWithFireDate:(NSDate *)date interval:(CGFloat)seconds target:(id)object method:(NSString *)methodName userInfo:(id)infoObject repeats:(BOOL)repeats;
 
 #pragma mark - Firing a Timer
 ///@name Firing a Timer
