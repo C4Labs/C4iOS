@@ -265,18 +265,6 @@
     return [_UIScrollview touchesShouldCancelInContentView:view];
 }
 
-//FIXME: the following is troublesome... looking ahead, i guess if anyone wants to use this method they'll be sufficiently able to code it with a regular UIScrollview
-
-// override points for subclasses to control delivery of touch events to subviews of the scroll view
-// called before touches are delivered to a subview of the scroll view. if it returns NO the touches will not be delivered to the subview
-// default returns YES
-- (BOOL)touchesShouldBegin:(NSSet *)touches withEvent:(UIEvent *)event inContentView:(UIView *)view {
-    touches = touches;
-    event = event;
-    view = view;
-    return NO;
-}
-
 #pragma mark ObserverMethods
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object

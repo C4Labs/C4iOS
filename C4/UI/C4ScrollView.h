@@ -279,12 +279,6 @@
 
 #pragma mark - Other Methods
 ///@name Other Methods
-//FIXME: the following is troublesome... looking ahead, i guess if anyone wants to use this method they'll be sufficiently able to code it with a regular UIScrollview
-
-// override points for subclasses to control delivery of touch events to subviews of the scroll view
-// called before touches are delivered to a subview of the scroll view. if it returns NO the touches will not be delivered to the subview
-// default returns YES
-
 /**Overridden by subclasses to customize the default behavior when a finger touches down in displayed content.
  
  The default behavior of UIScrollView is to invoke the UIResponder event-handling methods of the target subview that the touches occur in.

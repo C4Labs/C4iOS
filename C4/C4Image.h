@@ -899,11 +899,6 @@
  */
 + (instancetype)random:(CGSize)size;
 
-//FIXME: I don't think these filters work right now... There's no code online to check
-//+ (instancetype)starShineGenerator:(CGSize)size center:(CGPoint)center color:(UIColor *)color radius:(CGFloat)radius crossScale:(CGFloat)scale crossAngle:(CGFloat)angle crossOpacity:(CGFloat)opacity crossWidth:(CGFloat)width epsilon:(CGFloat)epsilon;
-//+ (instancetype)stripes:(CGSize)size center:(CGPoint)center color1:(UIColor *)color1 color2:(UIColor *)color2 stripeWidth:(CGFloat)width sharpness:(CGFloat)sharpness;
-//+ (instancetype)sunbeams:(CGSize)size center:(CGPoint)center color:(UIColor *)color sunRadius:(CGFloat)sunRadius maxStriationRadius:(CGFloat)striationRadius striationStrength:(CGFloat)striationStrength striationContrast:(CGFloat)striationContrast time:(CGFloat)time;
-
 #pragma mark - Geometry Adjustments
 /// @name Geometry Adjustments
 /**Applies an affine transform to an image.
@@ -945,9 +940,6 @@
  @param points An array of 4 CGPoints to use for the transform.
  */
 -(void)perspectiveTransform:(CGPoint *)points;
-
-//FIXME: Add the folliwng filter
-//-(void)perspectiveTransform:(CGPoint *)points withExtent:(CGRect)extent;
 
 /**Straighten filter
  Rotates the source image by the specified angle in radians.
