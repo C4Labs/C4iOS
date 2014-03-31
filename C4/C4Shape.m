@@ -389,8 +389,7 @@
     _pointB = points[1];
     
     CGRect lineRect = CGRectMakeFromPointArray(points, 2);
-    if(_initialized == YES) self.frame = lineRect;
-    self.origin = self.frame.origin;
+    self.frame = lineRect;
     CGPoint translation = lineRect.origin;
     translation.x *= -1;
     translation.y *= -1;
@@ -405,7 +404,7 @@
     CGPathAddLineToPoint(newPath, nil, points[1].x, points[1].y);
     
     [self.animationHelper animateKeyPath:@"path" toValue:(__bridge id)newPath];
-    CGRect newBounds = self.bounds;
+    CGRect newBounds = self.frame;
     newBounds.origin = CGPointZero;
     self.bounds = newBounds;
     CGPathRelease(newPath);
