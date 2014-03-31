@@ -38,6 +38,10 @@
     return self;
 }
 
+-(void)dealloc {
+    [self.UIScrollview removeObserver:self forKeyPath:@"contentOffset"];
+}
+
 -(id <UIScrollViewDelegate>)delegate {
     return _UIScrollview.delegate;
 }
