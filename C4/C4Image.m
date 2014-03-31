@@ -236,7 +236,9 @@
 -(void)renderImageWithFilterName:(NSString *)filterName {
     if(self.showsActivityIndicator) [_filterIndicator startAnimating];
     dispatch_async(self.filterQueue, ^{
-        CGImageRef filteredImage = [self.filterContext createCGImage:_output fromRect:_output.extent];
+        CGRect extent = _output.extent;
+        if(CGRectIsInfinite(extent)) extent = self.CIImage.extent;
+        CGImageRef filteredImage = [self.filterContext createCGImage:_output fromRect:extent];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [self setContents:filteredImage];
@@ -610,14 +612,14 @@
 -(void)straighten:(CGFloat)angle {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIStraightenFilter"];
-        [filter setValue:@(angle) forKey:@"inputAngle"];
+        [filter setValue:@(-angle) forKey:@"inputAngle"];
         _output = filter.outputImage;
         if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
         filter = nil;
     }
 }
 
--(void)tempartureAndTint:(CGSize)neutral target:(CGSize)targetNeutral {
+-(void)temperatureAndTint:(CGSize)neutral target:(CGSize)targetNeutral {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CITemperatureAndTint"];
         [filter setValue:[CIVector vectorWithX:neutral.width Y:neutral.height] forKey:@"inputNeutral"];
@@ -774,6 +776,17 @@
     }
 }
 
+-(void)blendWithAlphaMask:(C4Image *)backgroundImage mask:(C4Image *)maskImage {
+    @autoreleasepool {
+        CIFilter *filter = [self prepareFilterWithName:@"CIBlendWithAlphaMask"];
+        [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
+        [filter setValue:maskImage.CIImage forKey:@"inputMaskImage"];
+        _output = filter.outputImage;
+        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
+        filter = nil;
+    }
+}
+
 -(void)bloom:(CGFloat)radius intensity:(CGFloat)intensity {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIBloom"];
@@ -909,16 +922,8 @@
 -(void)columnAverage:(CGRect)area {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIColumnAverage"];
+        area.origin.y = self.height - area.origin.y;
         [filter setValue:[NSValue valueWithCGRect:area] forKey:@"inputExtent"];
-        _output = filter.outputImage;
-        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
-        filter = nil;
-    }
-}
-
--(void)comicEffect {
-    @autoreleasepool {
-        CIFilter *filter = [self prepareFilterWithName:@"CIComicEffect"];
         _output = filter.outputImage;
         if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
         filter = nil;
@@ -1037,7 +1042,7 @@
 
 -(void)eightFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width {
     @autoreleasepool {
-        CIFilter *filter = [self prepareFilterWithName:@"CIEightFoldReflectedTile"];
+        CIFilter *filter = [self prepareFilterWithName:@"CIEightfoldReflectedTile"];
         center.y = self.height - center.y;
         [filter setValue:[CIVector vectorWithCGPoint:center] forKey:@"inputCenter"];
         [filter setValue:@(angle) forKey:@"inputAngle"];
@@ -1050,7 +1055,7 @@
 
 -(void)fourFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle acuteAngle:(CGFloat)acuteAngle width:(CGFloat)width {
     @autoreleasepool {
-        CIFilter *filter = [self prepareFilterWithName:@"CIFourFoldReflectedTile"];
+        CIFilter *filter = [self prepareFilterWithName:@"CIFourfoldReflectedTile"];
         center.y = self.height - center.y;
         [filter setValue:[CIVector vectorWithCGPoint:center] forKey:@"inputCenter"];
         [filter setValue:@(angle) forKey:@"inputAngle"];
@@ -1064,7 +1069,7 @@
 
 -(void)fourFoldRotatedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width {
     @autoreleasepool {
-        CIFilter *filter = [self prepareFilterWithName:@"CIFourFoldRotatedTile"];
+        CIFilter *filter = [self prepareFilterWithName:@"CIFourfoldRotatedTile"];
         center.y = self.height - center.y;
         [filter setValue:[CIVector vectorWithCGPoint:center] forKey:@"inputCenter"];
         [filter setValue:@(angle) forKey:@"inputAngle"];
@@ -1077,7 +1082,7 @@
 
 -(void)fourFoldTranslatedTile:(CGPoint)center angle:(CGFloat)angle acuteAngle:(CGFloat)acuteAngle width:(CGFloat)width {
     @autoreleasepool {
-        CIFilter *filter = [self prepareFilterWithName:@"CIFourFoldTranslatedTile"];
+        CIFilter *filter = [self prepareFilterWithName:@"CIFourfoldTranslatedTile"];
         center.y = self.height - center.y;
         [filter setValue:[CIVector vectorWithCGPoint:center] forKey:@"inputCenter"];
         [filter setValue:@(angle) forKey:@"inputAngle"];
@@ -1093,34 +1098,6 @@
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIGaussianBlur"];
         [filter setValue:@(radius) forKey:@"inputRadius"];
-        _output = filter.outputImage;
-        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
-        filter = nil;
-    }
-}
-
--(void)glassDistortion:(C4Image *)texture center:(CGPoint)center scale:(CGFloat)scale {
-    @autoreleasepool {
-        CIFilter *filter = [self prepareFilterWithName:@"CIGlassDistortion"];
-        [filter setValue:texture.CIImage forKey:@"inputTexture"];
-        center.y = self.height - center.y;
-        [filter setValue:[CIVector vectorWithCGPoint:center] forKey:@"inputCenter"];
-        [filter setValue:@(scale) forKey:@"inputScale"];
-        _output = filter.outputImage;
-        if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
-        filter = nil;
-    }
-}
-
--(void)glassLozenge:(CGPoint)point1 point2:(CGPoint)point2 radius:(CGFloat)radius refraction:(CGFloat)refraction {
-    @autoreleasepool {
-        CIFilter *filter = [self prepareFilterWithName:@"CIGlassLozenge"];
-        point1.y = self.height - point1.y;
-        [filter setValue:[CIVector vectorWithCGPoint:point1] forKey:@"inputPoint0"];
-        point2.y = self.height - point2.y;
-        [filter setValue:[CIVector vectorWithCGPoint:point2] forKey:@"inputPoint1"];
-        [filter setValue:@(radius) forKey:@"inputRadius"];
-        [filter setValue:@(refraction) forKey:@"inputRefraction"];
         _output = filter.outputImage;
         if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
         filter = nil;
@@ -1352,7 +1329,7 @@
 
 -(void)perspectiveTile:(CGPoint *)points {
     @autoreleasepool {
-        CIFilter *filter = [self prepareFilterWithName:@"CIParallelogramTile"];
+        CIFilter *filter = [self prepareFilterWithName:@"CIPerspectiveTile"];
         for(int i = 0 ; i < 4; i++) points[i].y = self.height - points[i].y;
         [filter setValue:[CIVector vectorWithCGPoint:points[0]] forKey:@"inputTopLeft"];
         [filter setValue:[CIVector vectorWithCGPoint:points[1]] forKey:@"inputTopRight"];
@@ -1448,7 +1425,7 @@
 
 -(void)sixFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width {
     @autoreleasepool {
-        CIFilter *filter = [self prepareFilterWithName:@"CISixFoldReflectedTile"];
+        CIFilter *filter = [self prepareFilterWithName:@"CISixfoldReflectedTile"];
         center.y = self.height - center.y;
         [filter setValue:[CIVector vectorWithCGPoint:center] forKey:@"inputCenter"];
         [filter setValue:@(angle) forKey:@"inputAngle"];
@@ -1461,7 +1438,7 @@
 
 -(void)sixFoldRotatedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width {
     @autoreleasepool {
-        CIFilter *filter = [self prepareFilterWithName:@"CISixFoldRotatedTile"];
+        CIFilter *filter = [self prepareFilterWithName:@"CISixfoldRotatedTile"];
         center.y = self.height - center.y;
         [filter setValue:[CIVector vectorWithCGPoint:center] forKey:@"inputCenter"];
         [filter setValue:@(angle) forKey:@"inputAngle"];
@@ -1499,16 +1476,6 @@
     [filter setValue:@(brightness) forKey:@"inputBrightness"];
     [filter setValue:@(concentration) forKey:@"inputConcentration"];
     [filter setValue:color.CIColor forKey:@"inputColor"];
-    _output = filter.outputImage;
-    if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
-    filter = nil;
-}
-
--(void)stretchCrop:(CGSize)size cropAmount:(CGFloat)cropAmount stretchAmount:(CGFloat)stretchAmount {
-    CIFilter *filter = [self prepareFilterWithName:@"CIStretchCrop"];
-    [filter setValue:[NSValue valueWithCGSize:size] forKey:@"inputSize"];
-    [filter setValue:@(cropAmount) forKey:@"inputCropAmount"];
-    [filter setValue:@(stretchAmount) forKey:@"inputCenterStretchAmount"];
     _output = filter.outputImage;
     if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
     filter = nil;
@@ -1555,7 +1522,7 @@
 
 -(void)twelveFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width {
     @autoreleasepool {
-        CIFilter *filter = [self prepareFilterWithName:@"CITwelveFoldReflectedTile"];
+        CIFilter *filter = [self prepareFilterWithName:@"CITwelvefoldReflectedTile"];
         center.y = self.height - center.y;
         [filter setValue:[CIVector vectorWithCGPoint:center] forKey:@"inputCenter"];
         [filter setValue:@(angle) forKey:@"inputAngle"];

@@ -430,7 +430,7 @@
  @param neutral An offset value, defaults to {6500,0}
  @param targetNeutral An target offset value, defaults to {6500,0}
  */
--(void)tempartureAndTint:(CGSize)neutral target:(CGSize)targetNeutral;
+-(void)temperatureAndTint:(CGSize)neutral target:(CGSize)targetNeutral;
 
 /**Tone curve filter
  Adjusts tone response of the R, G, and B channels of an image.
@@ -806,25 +806,6 @@
  */
 -(void)displacementDistortion:(C4Image *)displacementImage scale:(CGFloat)scale;
 
-/**Distorts an image by applying a glass-like texture.
- 
- The raised portions of the output image are the result of applying a texture map.
- 
- @param texture A C4Image that acts as a texture map for the filter.
- @param center A CGPoint representing the center of the texture map.
- @param scale A CGFloat representing the scale of the effect of the distortion.
- */
--(void)glassDistortion:(C4Image *)texture center:(CGPoint)center scale:(CGFloat)scale;
-
-/**Creates a lozenge-shaped lens and distorts the portion of the image over which the lens is placed.
- 
- @param point1 The first point of the lozenge.
- @param point2 The second point of the lozenge.
- @param radius The radius of the lozenge.
- @param refraction The level of refraction for the simulated glass effect.
- */
--(void)glassLozenge:(CGPoint)point1 point2:(CGPoint)point2 radius:(CGFloat)radius refraction:(CGFloat)refraction;
-
 /**Creates a circular area that pushes the image pixels outward, distorting those pixels closest to the circle the most
  
  @param center The center point of the hole.
@@ -847,14 +828,6 @@
  @param scale The scale of the pinch. This value must greater than 0.0 and less than 2.0
  */
 -(void)pinchDistortion:(CGPoint)center radius:(CGFloat)radius scale:(CGFloat)scale;
-
-/**Distorts an image by stretching and or cropping it to fit a target size.
- 
- @param size This value specifies the size of the output image in pixels.
- @param cropAmount This value determines if, and how much, cropping should be used to achieve the target size. If the value is 0, the image is stretched but not cropped. If the value is 1, the image is cropped but not stretched. Values in-between use stretching and cropping proportionally.
- @param stretchAmount This value determines how much stretching to apply to the center of the image, if stretching is indicated by the inputCropAmount value. A value of 0 causes the center of the image to maintain its original aspect ratio. A value of 0 causes the image to be stretched uniformly.
- */
--(void)stretchCrop:(CGSize)size cropAmount:(CGFloat)cropAmount stretchAmount:(CGFloat)stretchAmount;
 
 /**Creates a torus-shaped lens and distorts the portion of the image over which the lens is placed.
  
@@ -1094,10 +1067,6 @@
  */
 -(void)bloom:(CGFloat)radius intensity:(CGFloat)intensity;
 
-/**Simulates a comic book drawing by outlining edges and applying a color halftone effect.
- */
--(void)comicEffect;
-
 /**Dulls the highlights of an image.
  
  @param radius The radius of the area, per pixel, to which the bloom filter is applied.
@@ -1217,4 +1186,6 @@
  */
 -(void)twelveFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
 
+#pragma mark new filters
+-(void)blendWithAlphaMask:(C4Image *)backgroundImage mask:(C4Image *)maskImage;
 @end
