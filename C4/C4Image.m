@@ -243,7 +243,6 @@
             NSString *notificationName = [filterName stringByAppendingString:@"Complete"];
             [self postNotification:notificationName];
             _multipleFilterEnabled = NO;
-            _output = nil;
             if(self.showsActivityIndicator) [_filterIndicator stopAnimating];
         });
     });
