@@ -126,6 +126,10 @@
     [self animateWithBlock:animationBlock reverseBlock:reverseBlock];
 }
 
+-(CGRect)bounds {
+    return self.view.bounds;
+}
+
 - (CGPoint)center {
     return self.view.center;
 }
