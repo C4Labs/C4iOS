@@ -279,17 +279,6 @@
 
 #pragma mark - Other Methods
 ///@name Other Methods
-/**Overridden by subclasses to customize the default behavior when a finger touches down in displayed content.
- 
- The default behavior of UIScrollView is to invoke the UIResponder event-handling methods of the target subview that the touches occur in.
- 
- @param touches A set of UITouch instances that represent the touches for the starting phase of the event represented by event.
- @param event An object representing the event to which the touch objects in touches belong.
- @param view The subview in the content where the touch-down gesture occurred.
- @return value NO if you don’t want the scroll view to send event messages to view. If you want view to receive those messages, return YES (the default).
- */
-- (BOOL)touchesShouldBegin:(NSSet *)touches withEvent:(UIEvent *)event inContentView:(UIView *)view;
-
 /**Returns whether to cancel touches related to the content subview and start dragging.
  
  The scroll view calls this method just after it starts sending tracking messages to the content view. If it receives NO from this method, it stops dragging and forwards the touch events to the content subview. The scroll view does not call this method if the value of the canCancelContentTouches property is NO.
