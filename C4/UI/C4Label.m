@@ -66,6 +66,7 @@
 -(id)initWithUILabel:(UILabel *)label {
     self = [super initWithView:label];
     if(self != nil) {
+        _label = label;
         [self setup];
     }
     return self;
