@@ -100,4 +100,12 @@
  */
 - (void)animateKeyPath:(NSString *)keyPath toValue:(id)toValue completion:(void (^)())completion;
 
+/** Pause all animations happening on the layer.
+ */
+- (void)pause;
+
+/** Resume all animations happening on the layer.
+ */
+- (void)resume;
+
 @end

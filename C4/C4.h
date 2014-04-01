@@ -31,6 +31,7 @@
 #import "C4Template.h"
 #import "C4Timer.h"
 #import "C4Vector.h"
+#import "C4AnimationHelper.h"
 
 // Main classes
 #import "C4Object.h"
