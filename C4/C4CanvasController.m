@@ -44,7 +44,10 @@
 }
 
 - (void)viewDidLoad {
-    _canvas = [[C4Control alloc] initWithView:self.view];
+    CGSize size = self.view.bounds.size;
+    _canvas = [[C4Control alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+    _canvas.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self.view addSubview:_canvas.view];
 }
 
 - (void)setup {

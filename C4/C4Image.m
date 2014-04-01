@@ -86,6 +86,8 @@
         return nil;
     
     UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
+    imageView.autoresizingMask = UIViewAutoresizingNone;
+    
     self = [super initWithView:imageView];
     if (self == nil)
         return nil;
@@ -98,7 +100,6 @@
     _filterQueue = nil;
     _output = nil;
     _imageView = imageView;
-    _imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.showsActivityIndicator = YES;
     _filterIndicator = [C4ActivityIndicator indicatorWithStyle:WHITE];
     _filterIndicator.center = CGPointMake(self.width/2,self.height/2);
