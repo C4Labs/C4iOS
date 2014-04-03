@@ -372,8 +372,7 @@
 
 -(void)line:(CGPoint *)pointArray {
     NSArray *linePointArray = @[[NSValue valueWithCGPoint:pointArray[0]],[NSValue valueWithCGPoint:pointArray[1]]];
-    if(self.animationDelay == 0.0f) [self _line:linePointArray];
-    else [self performSelector:@selector(_line:) withObject:linePointArray afterDelay:self.animationDelay];
+    [self _line:linePointArray];
 }
 -(void)_line:(NSArray *)pointArray {
     [self willChangeShape];
@@ -404,9 +403,6 @@
     CGPathAddLineToPoint(newPath, nil, points[1].x, points[1].y);
     
     [self.animationHelper animateKeyPath:@"path" toValue:(__bridge id)newPath];
-    CGRect newBounds = self.frame;
-    newBounds.origin = CGPointZero;
-    self.bounds = newBounds;
     CGPathRelease(newPath);
     _initialized = YES;
 }

@@ -48,7 +48,7 @@
     } else if(animationOptions & EASEINOUT) {
         self.currentAnimationEasing = kCAMediaTimingFunctionEaseInEaseOut;
     } else {
-        self.currentAnimationEasing = kCAMediaTimingFunctionDefault;
+        self.currentAnimationEasing = kCAMediaTimingFunctionEaseInEaseOut;
     }
     
     self.autoreverses = (animationOptions & AUTOREVERSE) != 0;
