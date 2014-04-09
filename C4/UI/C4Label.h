@@ -193,17 +193,17 @@
  */
 @property(nonatomic, readonly, strong) C4Layer *backingLayer;
 
-///**Specifies the height of the image. Animatable.
-//
-// Setting this property will actually change the frame of the object.
-// */
-//@property(nonatomic) CGFloat height;
-//
-///**Specifies the width of the image. Animatable.
-//
-// Setting this property will actually change the frame of the object.
-// */
-//@property(nonatomic) CGFloat width;
+/**Specifies the height of the label. Animatable.
+
+ Setting this property will actually change the frame of the object.
+ */
+@property(nonatomic) CGFloat height;
+
+/**Specifies the width of the label. Animatable.
+
+ Setting this property will actually change the frame of the object.
+ */
+@property(nonatomic) CGFloat width;
 //
 ///**Specifies the size of the image. Animatable.
 //

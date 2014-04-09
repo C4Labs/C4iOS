@@ -119,11 +119,11 @@
 }
 
 -(void)setTextShadowColor:(UIColor *)shadowColor {
-    [self.animationHelper animateKeyPath:@"shadowColor" toValue:shadowColor];
+    self.label.shadowColor = shadowColor;
 }
 
 -(void)setTextShadowOffset:(CGSize)shadowOffset {
-    [self.animationHelper animateKeyPath:@"shadowOffset" toValue:[NSValue valueWithCGSize:shadowOffset]];
+    self.label.shadowOffset = shadowOffset;
 }
 
 -(C4Font *)font {
