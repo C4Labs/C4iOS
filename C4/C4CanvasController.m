@@ -30,9 +30,28 @@
 
 - (id)init {
     self = [super init];
-    if(self != nil) {
-        [self listenFor:@"movieIsReadyForPlayback" andRunMethod:@"movieIsReadyForPlayback:"];
-    }
+    if (!self)
+        return nil;
+    [self createCanvas];
+    [self listenFor:@"movieIsReadyForPlayback" andRunMethod:@"movieIsReadyForPlayback:"];
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    self = [super initWithCoder:decoder];
+    if (!self)
+        return nil;
+    [self createCanvas];
+    [self listenFor:@"movieIsReadyForPlayback" andRunMethod:@"movieIsReadyForPlayback:"];
+    return self;
+}
+
+- (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)nibBundle {
+    self = [super initWithNibName:nibName bundle:nibBundle];
+    if (!self)
+        return nil;
+    [self createCanvas];
+    [self listenFor:@"movieIsReadyForPlayback" andRunMethod:@"movieIsReadyForPlayback:"];
     return self;
 }
 
@@ -43,14 +62,18 @@
     }
 }
 
-- (void)viewDidLoad {
-    CGSize size = self.view.bounds.size;
-    _canvas = [[C4Control alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+- (void)createCanvas {
+    _canvas = [[C4Control alloc] init];
     _canvas.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [self.view addSubview:_canvas.view];
 }
 
 - (void)setup {
+}
+
+- (void)viewDidLoad {
+    CGSize size = self.view.bounds.size;
+    self.canvas.frame = CGRectMake(0, 0, size.width, size.height);
+    [self.view addSubview:self.canvas.view];
 }
 
 
