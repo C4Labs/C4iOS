@@ -65,6 +65,22 @@
 - (void)createCanvas {
     _canvas = [[C4Control alloc] init];
     _canvas.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    
+    [self.canvas onTap:^(CGPoint location) {
+        [self tapped:location];
+    }];
+    
+    [self.canvas onLongPressEnd:^(CGPoint location) {
+        [self longPressEnded:location];
+    }];
+    
+    [self.canvas onLongPressStart:^(CGPoint location) {
+        [self longPressStarted:location];
+    }];
+
+    [self.canvas onPan:^(CGPoint location, CGPoint translation, CGPoint velocity) {
+        [self panned:location translation:translation velocity:velocity];
+    }];
 }
 
 - (void)setup {
