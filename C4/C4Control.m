@@ -607,7 +607,7 @@
     self.swipeRightBlock = block;
     
     if (self.swipeRightBlock && !_swipeRightGestureRecognizer) {
-        _swipeRightGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGesutre:)];
+        _swipeRightGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeGesture:)];
         _swipeRightGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
         [self.view addGestureRecognizer:_swipeRightGestureRecognizer];
     }
@@ -617,7 +617,7 @@
     self.swipeLeftBlock = block;
     
     if (self.swipeLeftBlock && !_swipeLeftGestureRecognizer) {
-        _swipeLeftGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGesutre:)];
+        _swipeLeftGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeGesture:)];
         _swipeLeftGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
         [self.view addGestureRecognizer:_swipeLeftGestureRecognizer];
     }
@@ -627,7 +627,7 @@
     self.swipeUpBlock = block;
     
     if (self.swipeUpBlock && !_swipeUpGestureRecognizer) {
-        _swipeUpGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGesutre:)];
+        _swipeUpGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeGesture:)];
         _swipeUpGestureRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
         [self.view addGestureRecognizer:_swipeUpGestureRecognizer];
     }
@@ -637,7 +637,7 @@
     self.swipeDownBlock = block;
     
     if (self.swipeDownBlock && !_swipeDownGestureRecognizer) {
-        _swipeDownGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGesutre:)];
+        _swipeDownGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeGesture:)];
         _swipeDownGestureRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
         [self.view addGestureRecognizer:_swipeDownGestureRecognizer];
     }
