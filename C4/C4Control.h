@@ -314,7 +314,7 @@ typedef void (^C4PanGestureBlock)(CGPoint location, CGPoint translation, CGPoint
 typedef void (^C4PinchGestureBlock)(CGPoint location, CGFloat scale, CGFloat velocity);
 typedef void (^C4RotationGestureBlock)(CGPoint location, CGFloat rotation, CGFloat velocity);
 typedef void (^C4LongPressGestureBlock)(CGPoint location);
-typedef void (^C4SwipeGestureBlock)();
+typedef void (^C4SwipeGestureBlock)(CGPoint location);
 
 /** Registers a block of code to execute when the control is tapped.
  */

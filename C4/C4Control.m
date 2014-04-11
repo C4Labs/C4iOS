@@ -645,13 +645,14 @@
 
 - (void)swipeGesture:(UISwipeGestureRecognizer *)gr {
     if (self.swipeRightBlock && gr == _swipeRightGestureRecognizer && gr.state == UIGestureRecognizerStateRecognized)
-        self.swipeRightBlock();
+        self.swipeRightBlock([gr locationInView:self.view]);
     else if (self.swipeLeftBlock && gr == _swipeLeftGestureRecognizer && gr.state == UIGestureRecognizerStateRecognized)
-        self.swipeLeftBlock();
+        self.swipeLeftBlock([gr locationInView:self.view]);
     else if (self.swipeUpBlock && gr == _swipeUpGestureRecognizer && gr.state == UIGestureRecognizerStateRecognized)
-        self.swipeUpBlock();
+        self.swipeUpBlock([gr locationInView:self.view]);
     else if (self.swipeDownBlock && gr == _swipeDownGestureRecognizer && gr.state == UIGestureRecognizerStateRecognized)
-        self.swipeDownBlock();
+        self.swipeDownBlock([gr locationInView:self.view]);
+}
 }
 
 
