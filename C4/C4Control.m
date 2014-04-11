@@ -760,11 +760,56 @@
     [template applyToTarget:self];
 }
 
-
-#pragma mark -
+#pragma mark - Rendering
 
 - (void)renderInContext:(CGContextRef)context {
     [self.view.layer renderInContext:context];
+}
+
+#pragma mark - Notifications
+- (void)listenFor:(NSString *)notification andRun:(NotificationBlock)block {
+    [self listenFor:notification fromObject:nil andRun:block];
+}
+
+- (void)listenFor:(NSString *)notification fromObject:(id)object andRun:(NotificationBlock)block {
+    [[NSNotificationCenter defaultCenter] addObserverForName:notification object:self queue:nil usingBlock:block];
+}
+
+- (void)listenFor:(NSString *)notification fromObjects:(NSArray *)objectArray andRun:(NotificationBlock)block {
+    for (id object in objectArray) {
+        [[NSNotificationCenter defaultCenter] addObserverForName:notification object:object queue:nil usingBlock:block];
+    }
+}
+
+- (void)stopListeningFor:(NSString *)methodName {
+    [self stopListeningFor:methodName object:nil];
+}
+
+- (void)stopListeningFor:(NSString *)methodName object:(id)object {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:methodName object:object];
+}
+
+- (void)stopListeningFor:(NSString *)methodName objects:(NSArray *)objectArray {
+    for(id object in objectArray) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:methodName object:object];
+    }
+}
+
+- (void)postNotification:(NSString *)notification {
+    [[NSNotificationCenter defaultCenter] postNotificationName:notification object:self];
+}
+
+#pragma mark - MethodDelay
+
+-(void)run:(void (^)())block afterDelay:(CGFloat)seconds {
+    NSDictionary *d = @{@"block": block};
+    [self performSelector:@selector(executeBlockUsingDictionary:) withObject:d afterDelay:seconds];
+}
+
+-(void)executeBlockUsingDictionary:(NSDictionary *)d {
+    void (^block)(void) = d[@"block"];
+    block();
+    d = nil;
 }
 
 @end

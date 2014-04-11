@@ -33,7 +33,11 @@
     if (!self)
         return nil;
     [self createCanvas];
-    [self listenFor:@"movieIsReadyForPlayback" andRunMethod:@"movieIsReadyForPlayback:"];
+    
+    [self listenFor:@"movieIsReadyForPlayback" andRun:^(NSNotification *n) {
+        [self movieIsReadyForPlayback:n];
+    }];
+
     return self;
 }
 
@@ -42,7 +46,9 @@
     if (!self)
         return nil;
     [self createCanvas];
-    [self listenFor:@"movieIsReadyForPlayback" andRunMethod:@"movieIsReadyForPlayback:"];
+    [self listenFor:@"movieIsReadyForPlayback" andRun:^(NSNotification *n) {
+        [self movieIsReadyForPlayback:n];
+    }];
     return self;
 }
 
@@ -51,7 +57,9 @@
     if (!self)
         return nil;
     [self createCanvas];
-    [self listenFor:@"movieIsReadyForPlayback" andRunMethod:@"movieIsReadyForPlayback:"];
+    [self listenFor:@"movieIsReadyForPlayback" andRun:^(NSNotification *n) {
+        [self movieIsReadyForPlayback:n];
+    }];
     return self;
 }
 
@@ -93,33 +101,32 @@
 }
 
 
-#pragma mark C4Notification Methods
-
-- (void)listenFor:(NSString *)notification andRunMethod:(NSString *)methodName {
-    [self listenFor:notification fromObject:nil andRunMethod:methodName];
+#pragma mark - Notifications
+- (void)listenFor:(NSString *)notification andRun:(NotificationBlock)block {
+    [self listenFor:notification fromObject:nil andRun:block];
 }
 
-- (void)listenFor:(NSString *)notification fromObject:(id)object andRunMethod:(NSString *)methodName {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(methodName) name:notification object:object];
+- (void)listenFor:(NSString *)notification fromObject:(id)object andRun:(NotificationBlock)block {
+    [[NSNotificationCenter defaultCenter] addObserverForName:notification object:self queue:nil usingBlock:block];
 }
 
-- (void)listenFor:(NSString *)notification fromObjects:(NSArray *)objectArray andRunMethod:(NSString *)methodName {
+- (void)listenFor:(NSString *)notification fromObjects:(NSArray *)objectArray andRun:(NotificationBlock)block {
     for (id object in objectArray) {
-        [self listenFor:notification fromObject:object andRunMethod:methodName];
+        [[NSNotificationCenter defaultCenter] addObserverForName:notification object:object queue:nil usingBlock:block];
     }
 }
 
-- (void)stopListeningFor:(NSString *)notification {
-    [self stopListeningFor:notification object:nil];
+- (void)stopListeningFor:(NSString *)methodName {
+    [self stopListeningFor:methodName object:nil];
 }
 
-- (void)stopListeningFor:(NSString *)notification object:(id)object {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:notification object:object];
+- (void)stopListeningFor:(NSString *)methodName object:(id)object {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:methodName object:object];
 }
 
 - (void)stopListeningFor:(NSString *)methodName objects:(NSArray *)objectArray {
     for(id object in objectArray) {
-        [self stopListeningFor:methodName object:object];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:methodName object:object];
     }
 }
 
@@ -127,17 +134,18 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:notification object:self];
 }
 
+#pragma mark - MethodDelay
 
-#pragma mark C4MethodDelay methods
-
-- (void)runMethod:(NSString *)methodName afterDelay:(CGFloat)seconds {
-    [self performSelector:NSSelectorFromString(methodName) withObject:self afterDelay:seconds];
+-(void)run:(void (^)())block afterDelay:(CGFloat)seconds {
+    NSDictionary *d = @{@"block": block};
+    [self performSelector:@selector(executeBlockUsingDictionary:) withObject:d afterDelay:seconds];
 }
 
-- (void)runMethod:(NSString *)methodName withObject:(id)object afterDelay:(CGFloat)seconds {
-    [self performSelector:NSSelectorFromString(methodName) withObject:object afterDelay:seconds];
+-(void)executeBlockUsingDictionary:(NSDictionary *)d {
+    void (^block)(void) = d[@"block"];
+    block();
+    d = nil;
 }
-
 
 #pragma mark Other methods
 
