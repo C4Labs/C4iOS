@@ -413,5 +413,6 @@ typedef void (^C4SwipeGestureBlock)(CGPoint location);
 -(void)longPressStarted:(CGPoint)location;
 -(void)longPressEnded;
 -(void)longPressEnded:(CGPoint)location;
+-(void)move:(CGPoint)location;
 
 @end

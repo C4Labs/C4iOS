@@ -369,31 +369,6 @@
     _animationOptions = animationOptions | BEGINCURRENT;
 }
 
-#pragma mark Move
--(void)move:(id)sender {
-    UIPanGestureRecognizer *p = (UIPanGestureRecognizer *)sender;
-    
-    NSUInteger _ani = self.animationOptions;
-    CGFloat _dur = self.animationDuration;
-    CGFloat _del = self.animationDelay;
-    self.animationDuration = 0;
-    self.animationDelay = 0;
-    self.animationOptions = DEFAULT;
-    
-    CGPoint translatedPoint = [p translationInView:self.view];
-    
-    translatedPoint.x += self.center.x;
-    translatedPoint.y += self.center.y;
-    
-    self.center = translatedPoint;
-    [p setTranslation:CGPointZero inView:self.view];
-    [self postNotification:@"moved"];
-    
-    self.animationDelay = _del;
-    self.animationDuration = _dur;
-    self.animationOptions = _ani;
-}
-
 #pragma mark C4AddSubview
 
 -(void)addSubview:(UIView *)subview {
@@ -742,6 +717,24 @@
 -(void)longPressStarted:(CGPoint)location {
     [self postNotification:@"longPressStarted"];
     [self longPressStarted];
+}
+
+-(void)move:(CGPoint)location {
+    NSUInteger _ani = self.animationOptions;
+    CGFloat _dur = self.animationDuration;
+    CGFloat _del = self.animationDelay;
+    self.animationDuration = 0;
+    self.animationDelay = 0;
+    self.animationOptions = DEFAULT;
+    
+    CGPoint displacementFromCenter = CGPointMake(location.x - self.width/2 , location.y - self.height / 2);
+    self.center = CGPointMake(self.center.x + displacementFromCenter.x, self.center.y + displacementFromCenter.y);
+
+    [self postNotification:@"moved"];
+    
+    self.animationDelay = _del;
+    self.animationDuration = _dur;
+    self.animationOptions = _ani;
 }
 
 #pragma mark Templates
