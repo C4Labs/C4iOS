@@ -567,7 +567,7 @@
     self.rotationBlock = block;
     
     if (self.rotationBlock && !_rotationGestureRecognizer) {
-        _rotationGestureRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
+        _rotationGestureRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotationGesture:)];
         [self.view addGestureRecognizer:_rotationGestureRecognizer];
     }
 }
