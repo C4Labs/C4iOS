@@ -581,7 +581,7 @@
     self.longPressStartBlock = block;
     
     if (self.longPressStartBlock && !_longPressGestureRecognizer) {
-        _longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGesutre:)];
+        _longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGesture:)];
         _longPressGestureRecognizer.minimumPressDuration = 0.25;
         [self.view addGestureRecognizer:_longPressGestureRecognizer];
     }
@@ -591,13 +591,13 @@
     self.longPressEndBlock = block;
     
     if (self.longPressEndBlock && !_longPressGestureRecognizer) {
-        _longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGesutre:)];
+        _longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGesture:)];
         [self.view addGestureRecognizer:_longPressGestureRecognizer];
     }
 }
 
-- (void)longPressGesutre:(UILongPressGestureRecognizer *)gr {
     if (self.longPressStartBlock && gr.state == UIGestureRecognizerStateBegan)
+- (void)longPressGesture:(UILongPressGestureRecognizer *)gr {
         self.longPressStartBlock([gr locationInView:self.view]);
     else if (self.longPressEndBlock && gr.state == UIGestureRecognizerStateEnded)
         self.longPressEndBlock([gr locationInView:self.view]);
