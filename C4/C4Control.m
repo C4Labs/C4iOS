@@ -653,8 +653,96 @@
     else if (self.swipeDownBlock && gr == _swipeDownGestureRecognizer && gr.state == UIGestureRecognizerStateRecognized)
         self.swipeDownBlock([gr locationInView:self.view]);
 }
+
+#pragma mark Gesture Additions
+- (void)tapped {
+    
 }
 
+- (void)tapped:(CGPoint)location {
+    [self postNotification:@"tapped"];
+    [self tapped];
+}
+
+- (void)pinched {
+    
+}
+
+- (void)pinched:(CGPoint)location scale:(CGFloat)scale velocity:(CGFloat)velocity {
+    [self postNotification:@"pinched"];
+    [self pinched];
+}
+
+- (void)panned {
+    
+}
+
+- (void)panned:(CGPoint)location translation:(CGPoint)translation velocity:(CGPoint)velocity {
+    [self panned];
+}
+
+- (void)rotated {
+    
+}
+
+-(void)rotated:(CGPoint)location rotation:(CGFloat)rotation velocity:(CGFloat)velocity {
+    [self postNotification:@"rotated"];
+    [self rotated];
+}
+
+- (void)swipedLeft {
+    
+}
+
+- (void)swipedLeft:(CGPoint)location {
+    [self postNotification:@"swipedLeft"];
+    [self swipedLeft];
+}
+
+- (void)swipedRight {
+    
+}
+
+- (void)swipedRight:(CGPoint)location {
+    [self postNotification:@"swipedRight"];
+    [self swipedRight];
+}
+
+- (void)swipedUp {
+    
+}
+
+- (void)swipedUp:(CGPoint)location {
+    [self postNotification:@"swipedUp"];
+    [self swipedUp];
+}
+
+- (void)swipedDown {
+    
+}
+
+- (void)swipedDown:(CGPoint)location {
+    [self postNotification:@"swipedDown"];
+    [self swipedDown];
+}
+
+- (void)longPressEnded {
+    
+}
+
+-(void)longPressEnded:(CGPoint)location {
+    [self postNotification:@"longPressEnded"];
+    [self longPressEnded];
+}
+
+- (void)longPressStarted {
+    
+}
+
+-(void)longPressStarted:(CGPoint)location {
+    [self postNotification:@"longPressStarted"];
+    [self longPressStarted];
+}
 
 #pragma mark Templates
 

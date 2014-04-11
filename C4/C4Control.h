@@ -396,4 +396,22 @@ typedef void (^C4SwipeGestureBlock)(CGPoint location);
  */
 -(void)renderInContext:(CGContextRef)context;
 
+#pragma - mark Gesture Additions
+-(void)tapped;
+-(void)tapped:(CGPoint)location;
+-(void)panned;
+-(void)panned:(CGPoint)location translation:(CGPoint)translation velocity:(CGPoint)velocity;
+-(void)pinched;
+-(void)pinched:(CGPoint)location scale:(CGFloat)scale velocity:(CGFloat)velocity;
+-(void)rotated;
+-(void)rotated:(CGPoint)location rotation:(CGFloat)rotation velocity:(CGFloat)velocity;
+-(void)swipedLeft;
+-(void)swipedRight;
+-(void)swipedUp;
+-(void)swipedDown;
+-(void)longPressStarted;
+-(void)longPressStarted:(CGPoint)location;
+-(void)longPressEnded;
+-(void)longPressEnded:(CGPoint)location;
+
 @end
