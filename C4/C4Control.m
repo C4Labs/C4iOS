@@ -596,8 +596,8 @@
     }
 }
 
-    if (self.longPressStartBlock && gr.state == UIGestureRecognizerStateBegan)
 - (void)longPressGesture:(UILongPressGestureRecognizer *)gr {
+    if (self.longPressStartBlock && gr.state == UIGestureRecognizerStateBegan)
         self.longPressStartBlock([gr locationInView:self.view]);
     else if (self.longPressEndBlock && gr.state == UIGestureRecognizerStateEnded)
         self.longPressEndBlock([gr locationInView:self.view]);
