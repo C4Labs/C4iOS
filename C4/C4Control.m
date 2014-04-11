@@ -369,31 +369,6 @@
     _animationOptions = animationOptions | BEGINCURRENT;
 }
 
-#pragma mark Move
--(void)move:(id)sender {
-    UIPanGestureRecognizer *p = (UIPanGestureRecognizer *)sender;
-    
-    NSUInteger _ani = self.animationOptions;
-    CGFloat _dur = self.animationDuration;
-    CGFloat _del = self.animationDelay;
-    self.animationDuration = 0;
-    self.animationDelay = 0;
-    self.animationOptions = DEFAULT;
-    
-    CGPoint translatedPoint = [p translationInView:self.view];
-    
-    translatedPoint.x += self.center.x;
-    translatedPoint.y += self.center.y;
-    
-    self.center = translatedPoint;
-    [p setTranslation:CGPointZero inView:self.view];
-    [self postNotification:@"moved"];
-    
-    self.animationDelay = _del;
-    self.animationDuration = _dur;
-    self.animationOptions = _ani;
-}
-
 #pragma mark C4AddSubview
 
 -(void)addSubview:(UIView *)subview {
@@ -553,7 +528,7 @@
     self.pinchBlock = block;
     
     if (self.pinchBlock && !_pinchGestureRecognizer) {
-        _pinchGestureRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
+        _pinchGestureRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchGesture:)];
         [self.view addGestureRecognizer:_pinchGestureRecognizer];
     }
 }
@@ -567,7 +542,7 @@
     self.rotationBlock = block;
     
     if (self.rotationBlock && !_rotationGestureRecognizer) {
-        _rotationGestureRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
+        _rotationGestureRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotationGesture:)];
         [self.view addGestureRecognizer:_rotationGestureRecognizer];
     }
 }
@@ -581,7 +556,7 @@
     self.longPressStartBlock = block;
     
     if (self.longPressStartBlock && !_longPressGestureRecognizer) {
-        _longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGesutre:)];
+        _longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGesture:)];
         _longPressGestureRecognizer.minimumPressDuration = 0.25;
         [self.view addGestureRecognizer:_longPressGestureRecognizer];
     }
@@ -591,12 +566,12 @@
     self.longPressEndBlock = block;
     
     if (self.longPressEndBlock && !_longPressGestureRecognizer) {
-        _longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGesutre:)];
+        _longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGesture:)];
         [self.view addGestureRecognizer:_longPressGestureRecognizer];
     }
 }
 
-- (void)longPressGesutre:(UILongPressGestureRecognizer *)gr {
+- (void)longPressGesture:(UILongPressGestureRecognizer *)gr {
     if (self.longPressStartBlock && gr.state == UIGestureRecognizerStateBegan)
         self.longPressStartBlock([gr locationInView:self.view]);
     else if (self.longPressEndBlock && gr.state == UIGestureRecognizerStateEnded)
@@ -607,7 +582,7 @@
     self.swipeRightBlock = block;
     
     if (self.swipeRightBlock && !_swipeRightGestureRecognizer) {
-        _swipeRightGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGesutre:)];
+        _swipeRightGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeGesture:)];
         _swipeRightGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
         [self.view addGestureRecognizer:_swipeRightGestureRecognizer];
     }
@@ -617,7 +592,7 @@
     self.swipeLeftBlock = block;
     
     if (self.swipeLeftBlock && !_swipeLeftGestureRecognizer) {
-        _swipeLeftGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGesutre:)];
+        _swipeLeftGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeGesture:)];
         _swipeLeftGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
         [self.view addGestureRecognizer:_swipeLeftGestureRecognizer];
     }
@@ -627,7 +602,7 @@
     self.swipeUpBlock = block;
     
     if (self.swipeUpBlock && !_swipeUpGestureRecognizer) {
-        _swipeUpGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGesutre:)];
+        _swipeUpGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeGesture:)];
         _swipeUpGestureRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
         [self.view addGestureRecognizer:_swipeUpGestureRecognizer];
     }
@@ -637,7 +612,7 @@
     self.swipeDownBlock = block;
     
     if (self.swipeDownBlock && !_swipeDownGestureRecognizer) {
-        _swipeDownGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGesutre:)];
+        _swipeDownGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeGesture:)];
         _swipeDownGestureRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
         [self.view addGestureRecognizer:_swipeDownGestureRecognizer];
     }
@@ -645,15 +620,122 @@
 
 - (void)swipeGesture:(UISwipeGestureRecognizer *)gr {
     if (self.swipeRightBlock && gr == _swipeRightGestureRecognizer && gr.state == UIGestureRecognizerStateRecognized)
-        self.swipeRightBlock();
+        self.swipeRightBlock([gr locationInView:self.view]);
     else if (self.swipeLeftBlock && gr == _swipeLeftGestureRecognizer && gr.state == UIGestureRecognizerStateRecognized)
-        self.swipeLeftBlock();
+        self.swipeLeftBlock([gr locationInView:self.view]);
     else if (self.swipeUpBlock && gr == _swipeUpGestureRecognizer && gr.state == UIGestureRecognizerStateRecognized)
-        self.swipeUpBlock();
+        self.swipeUpBlock([gr locationInView:self.view]);
     else if (self.swipeDownBlock && gr == _swipeDownGestureRecognizer && gr.state == UIGestureRecognizerStateRecognized)
-        self.swipeDownBlock();
+        self.swipeDownBlock([gr locationInView:self.view]);
 }
 
+#pragma mark Gesture Additions
+- (void)tapped {
+    
+}
+
+- (void)tapped:(CGPoint)location {
+    [self postNotification:@"tapped"];
+    [self tapped];
+}
+
+- (void)pinched {
+    
+}
+
+- (void)pinched:(CGPoint)location scale:(CGFloat)scale velocity:(CGFloat)velocity {
+    [self postNotification:@"pinched"];
+    [self pinched];
+}
+
+- (void)panned {
+    
+}
+
+- (void)panned:(CGPoint)location translation:(CGPoint)translation velocity:(CGPoint)velocity {
+    [self panned];
+}
+
+- (void)rotated {
+    
+}
+
+-(void)rotated:(CGPoint)location rotation:(CGFloat)rotation velocity:(CGFloat)velocity {
+    [self postNotification:@"rotated"];
+    [self rotated];
+}
+
+- (void)swipedLeft {
+    
+}
+
+- (void)swipedLeft:(CGPoint)location {
+    [self postNotification:@"swipedLeft"];
+    [self swipedLeft];
+}
+
+- (void)swipedRight {
+    
+}
+
+- (void)swipedRight:(CGPoint)location {
+    [self postNotification:@"swipedRight"];
+    [self swipedRight];
+}
+
+- (void)swipedUp {
+    
+}
+
+- (void)swipedUp:(CGPoint)location {
+    [self postNotification:@"swipedUp"];
+    [self swipedUp];
+}
+
+- (void)swipedDown {
+    
+}
+
+- (void)swipedDown:(CGPoint)location {
+    [self postNotification:@"swipedDown"];
+    [self swipedDown];
+}
+
+- (void)longPressEnded {
+    
+}
+
+-(void)longPressEnded:(CGPoint)location {
+    [self postNotification:@"longPressEnded"];
+    [self longPressEnded];
+}
+
+- (void)longPressStarted {
+    
+}
+
+-(void)longPressStarted:(CGPoint)location {
+    [self postNotification:@"longPressStarted"];
+    [self longPressStarted];
+}
+
+-(void)move:(CGPoint)location {
+    NSUInteger _ani = self.animationOptions;
+    CGFloat _dur = self.animationDuration;
+    CGFloat _del = self.animationDelay;
+    self.animationDuration = 0;
+    self.animationDelay = 0;
+    self.animationOptions = DEFAULT;
+    
+    CGPoint displacementFromCenter = CGPointMake(location.x - self.width/2 , location.y - self.height / 2);
+    self.center = CGPointMake(self.center.x + displacementFromCenter.x, self.center.y + displacementFromCenter.y);
+
+    [self postNotification:@"moved"];
+    
+    self.animationDelay = _del;
+    self.animationDuration = _dur;
+    self.animationOptions = _ani;
+}
 
 #pragma mark Templates
 
@@ -678,11 +760,56 @@
     [template applyToTarget:self];
 }
 
-
-#pragma mark -
+#pragma mark - Rendering
 
 - (void)renderInContext:(CGContextRef)context {
     [self.view.layer renderInContext:context];
+}
+
+#pragma mark - Notifications
+- (void)listenFor:(NSString *)notification andRun:(NotificationBlock)block {
+    [self listenFor:notification fromObject:nil andRun:block];
+}
+
+- (void)listenFor:(NSString *)notification fromObject:(id)object andRun:(NotificationBlock)block {
+    [[NSNotificationCenter defaultCenter] addObserverForName:notification object:self queue:nil usingBlock:block];
+}
+
+- (void)listenFor:(NSString *)notification fromObjects:(NSArray *)objectArray andRun:(NotificationBlock)block {
+    for (id object in objectArray) {
+        [[NSNotificationCenter defaultCenter] addObserverForName:notification object:object queue:nil usingBlock:block];
+    }
+}
+
+- (void)stopListeningFor:(NSString *)methodName {
+    [self stopListeningFor:methodName object:nil];
+}
+
+- (void)stopListeningFor:(NSString *)methodName object:(id)object {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:methodName object:object];
+}
+
+- (void)stopListeningFor:(NSString *)methodName objects:(NSArray *)objectArray {
+    for(id object in objectArray) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:methodName object:object];
+    }
+}
+
+- (void)postNotification:(NSString *)notification {
+    [[NSNotificationCenter defaultCenter] postNotificationName:notification object:self];
+}
+
+#pragma mark - MethodDelay
+
+-(void)run:(void (^)())block afterDelay:(CGFloat)seconds {
+    NSDictionary *d = @{@"block": block};
+    [self performSelector:@selector(executeBlockUsingDictionary:) withObject:d afterDelay:seconds];
+}
+
+-(void)executeBlockUsingDictionary:(NSDictionary *)d {
+    void (^block)(void) = d[@"block"];
+    block();
+    d = nil;
 }
 
 @end

@@ -29,48 +29,11 @@
  */
 @protocol C4Notification <NSObject>
 
-#pragma mark Listen Methods
+typedef void (^NotificationBlock)(NSNotification *n);
+
 ///@name Notification Methods
 
-/** Sets up a given object to listen for a given notification, and run a specific method.
- 
- This method is a basic wrapper for setting up an observer which listens for a specific notification.
- 
- This method calls the addObserver:selector:name:object method of the default NotificationCenter, passing _nil_ for the object.
- 
- @param notification the name of a notification for which the object should listen
- @param methodName a string which represents the name of a method defined in the object's class or any of its superclasses, this parameter should be written as a string (e.g. @"test", @"changePosition:")
- 
- @warning *Note:* To listen for messages coming from a specific object, use listenFor:fromObject:andRunMethod
- */
--(void)listenFor:(NSString *)notification andRunMethod:(NSString *)methodName;
-
-/** Sets up a given object to listen for a given notification _from a specific object_, and runs a specific method.
- 
- This method is a basic wrapper for setting up an observer which listens for a specific notification from a specified object.
- 
- This method calls the addObserver:selector:name:object method of the default NotificationCenter.
- 
- @param notification the name of a notification for which the object should listen
- @param object a specific object to listen to
- @param methodName a string which represents the name of a method defined in the object's class or any of its superclasses, this parameter should be written as a string (e.g. @"test", @"changePosition:")
- 
- @warning *Note:* To listen for messages coming from a specific object, use listenFor:fromObject:andRunMethod
- */
--(void)listenFor:(NSString *)notification fromObject:(id)object andRunMethod:(NSString *)methodName;
-
-/** Sets up a given object to listen for a given notification _from an array of objects_, and runs a specific method.
- 
- This method is a basic wrapper for setting up an observer which listens for a specific notification from a specified set of objects.
- 
- This method calls the addObserver:selector:name:object method of the default NotificationCenter for all the objects in the array.
- 
- @param notification the name of a notification for which the object should listen
- @param objectArray a set of object to listen to
- @param methodName a string which represents the name of a method defined in the object's class or any of its superclasses, this parameter should be written as a string (e.g. @"test", @"changePosition:")
- */
--(void)listenFor:(NSString *)notification fromObjects:(NSArray *)objectArray andRunMethod:(NSString *)methodName;
-
+#pragma mark Listen Methods
 /** Stops an object from listening for a given notification.
  
  This method is a basic wrapper for removing an observer from the notification center.
@@ -113,5 +76,45 @@
  @param notification the name of a notification to be broadcast
  */
 -(void)postNotification:(NSString *)notification;
+
+#pragma mark new
+/** Sets up a given object to listen for a given notification, and run a specific block of code.
+ 
+ This method is a basic wrapper for setting up an observer which listens for a specific notification.
+ 
+ This method calls the addObserverForName:object:queue:usingBlock: method of the default NotificationCenter, passing _nil_ for the object.
+
+ @param notification the name of a notification for which the object should listen
+ @param block a block of code to execute
+ 
+ @warning *Note:* To listen for messages coming from a specific object, use listenFor:fromObject:andRun:
+ */
+- (void)listenFor:(NSString *)notification andRun:(NotificationBlock)block;
+
+/** Sets up a given object to listen for a given notification _from a specific object_, and runs a specific method.
+ 
+ This method is a basic wrapper for setting up an observer which listens for a specific notification from a specified object.
+ 
+ This method calls the addObserverForName:object:queue:usingBlock: method of the default NotificationCenter.
+ 
+ @param notification the name of a notification for which the object should listen
+ @param object a specific object to listen to
+ @param block a block of code to execute
+ 
+ @warning *Note:* To listen for messages coming from a specific object, use listenFor:fromObject:andRunMethod
+ */
+- (void)listenFor:(NSString *)notification fromObject:(id)object andRun:(NotificationBlock)block;
+
+/** Sets up a given object to listen for a given notification _from an array of objects_, and runs a specific method.
+ 
+ This method is a basic wrapper for setting up an observer which listens for a specific notification from a specified set of objects.
+ 
+ This method calls the addObserver:selector:name:object method of the default NotificationCenter for all the objects in the array.
+ 
+ @param notification the name of a notification for which the object should listen
+ @param objectArray a set of objects to listen to
+ @param block a block of code to execute
+ */
+- (void)listenFor:(NSString *)notification fromObjects:(NSArray *)objectArray andRun:(NotificationBlock)block;
 
 @end

@@ -314,7 +314,7 @@ typedef void (^C4PanGestureBlock)(CGPoint location, CGPoint translation, CGPoint
 typedef void (^C4PinchGestureBlock)(CGPoint location, CGFloat scale, CGFloat velocity);
 typedef void (^C4RotationGestureBlock)(CGPoint location, CGFloat rotation, CGFloat velocity);
 typedef void (^C4LongPressGestureBlock)(CGPoint location);
-typedef void (^C4SwipeGestureBlock)();
+typedef void (^C4SwipeGestureBlock)(CGPoint location);
 
 /** Registers a block of code to execute when the control is tapped.
  */
@@ -395,5 +395,24 @@ typedef void (^C4SwipeGestureBlock)();
  @param context The graphics context to use to render the layer.
  */
 -(void)renderInContext:(CGContextRef)context;
+
+#pragma - mark Gesture Additions
+-(void)tapped;
+-(void)tapped:(CGPoint)location;
+-(void)panned;
+-(void)panned:(CGPoint)location translation:(CGPoint)translation velocity:(CGPoint)velocity;
+-(void)pinched;
+-(void)pinched:(CGPoint)location scale:(CGFloat)scale velocity:(CGFloat)velocity;
+-(void)rotated;
+-(void)rotated:(CGPoint)location rotation:(CGFloat)rotation velocity:(CGFloat)velocity;
+-(void)swipedLeft;
+-(void)swipedRight;
+-(void)swipedUp;
+-(void)swipedDown;
+-(void)longPressStarted;
+-(void)longPressStarted:(CGPoint)location;
+-(void)longPressEnded;
+-(void)longPressEnded:(CGPoint)location;
+-(void)move:(CGPoint)location;
 
 @end
