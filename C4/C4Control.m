@@ -553,7 +553,7 @@
     self.pinchBlock = block;
     
     if (self.pinchBlock && !_pinchGestureRecognizer) {
-        _pinchGestureRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
+        _pinchGestureRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchGesture:)];
         [self.view addGestureRecognizer:_pinchGestureRecognizer];
     }
 }
