@@ -178,7 +178,9 @@
                          options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
                          context:playerItemStatusContext];
     
-    [self listenFor:AVPlayerItemTimeJumpedNotification andRunMethod:@"currentTimeChanged"];
+    [self listenFor:AVPlayerItemTimeJumpedNotification andRun:^(NSNotification *n) {
+        [self currentTimeChanged];
+    }];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(playerItemDidReachEnd:)
