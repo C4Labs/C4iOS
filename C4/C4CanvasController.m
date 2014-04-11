@@ -138,4 +138,86 @@
 - (void)movieIsReady:(C4Movie *)movie {
 }
 
+#pragma mark Gesture Additions
+
+- (void)tapped {
+    
+}
+
+- (void)tapped:(CGPoint)location {
+    [self tapped];
+}
+
+- (void)pinched {
+    
+}
+
+- (void)pinched:(CGPoint)location scale:(CGFloat)scale velocity:(CGFloat)velocity {
+    [self pinched];
+}
+
+- (void)panned {
+    
+}
+
+- (void)panned:(CGPoint)location translation:(CGPoint)translation velocity:(CGPoint)velocity {
+    [self panned];
+}
+
+- (void)rotated {
+    
+}
+
+-(void)rotated:(CGPoint)location rotation:(CGFloat)rotation velocity:(CGFloat)velocity {
+    [self rotated];
+}
+
+- (void)swipedLeft {
+    
+}
+
+- (void)swipedLeft:(CGPoint)location {
+    [self swipedLeft];
+}
+
+- (void)swipedRight {
+    
+}
+
+- (void)swipedRight:(CGPoint)location {
+    [self swipedRight];
+}
+
+- (void)swipedUp {
+    
+}
+
+- (void)swipedUp:(CGPoint)location {
+    [self swipedUp];
+}
+
+- (void)swipedDown {
+    
+}
+
+- (void)swipedDown:(CGPoint)location {
+    [self swipedDown];
+}
+
+- (void)longPressEnded {
+    
+}
+
+-(void)longPressEnded:(CGPoint)location {
+    [self longPressEnded];
+}
+
+- (void)longPressStarted {
+    
+}
+
+-(void)longPressStarted:(CGPoint)location {
+    [self longPressStarted];
+}
+
 @end
