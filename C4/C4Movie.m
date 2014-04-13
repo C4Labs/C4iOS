@@ -141,14 +141,7 @@
 }
 
 -(void)setRate:(CGFloat)rate {
-    BOOL wasPlaying = self.isPlaying;
-    if(wasPlaying == YES) {
-        [self pause];
-    }
     self.player.rate = rate;
-    if(wasPlaying == YES) {
-        [self play];
-    }
 }
 
 - (AVPlayerLayer *)playerLayer {
