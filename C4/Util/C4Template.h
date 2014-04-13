@@ -28,7 +28,7 @@
      C4Control* proxy = [template proxy];
      proxy.shadowRadius = 1.5;
  */
-@interface C4Template : NSObject
+@interface C4Template : NSObject <NSCopying>
 
 /** The target class of this template.
  */
@@ -37,6 +37,13 @@
 /** Helper method to create a new template for a target class.
  */
 + (instancetype)templateForClass:(Class)targetClass;
+
+/** Helper method to create a new template by copying a base template targeting a superclass of targetClass.
+ 
+ @param template The template to copy.
+ @param targetClass The target class for the new template, should be a subclass of the base template's target class.
+ */
++ (instancetype)templateFromBaseTemplate:(C4Template*)template forClass:(Class)targetClass;
 
 /** Initializes a new template with a target class. This is the designated initializer.
  */

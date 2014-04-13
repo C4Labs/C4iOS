@@ -1906,7 +1906,7 @@
     static C4Template* template;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        template = [C4Template templateForClass:self];
+        template = [C4Template templateFromBaseTemplate:[super defaultTemplate] forClass:self];
     });
     return template;
 }

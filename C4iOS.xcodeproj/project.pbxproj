@@ -40,6 +40,8 @@
 		A975923318DD194400B28F08 /* C4Stepper.m in Sources */ = {isa = PBXBuildFile; fileRef = A975922A18DD194400B28F08 /* C4Stepper.m */; };
 		A975923418DD194400B28F08 /* C4Switch.m in Sources */ = {isa = PBXBuildFile; fileRef = A975922C18DD194400B28F08 /* C4Switch.m */; };
 		A975925318E3FAB700B28F08 /* C4AnimationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A975925218E3FAB700B28F08 /* C4AnimationHelper.m */; };
+		A9BC498C18FB0D170075DBEF /* UIView+C4AddControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A9BC498A18FB0D170075DBEF /* UIView+C4AddControl.m */; };
+		A9BC498E18FB0D590075DBEF /* inception.mov in Resources */ = {isa = PBXBuildFile; fileRef = A9BC498D18FB0D590075DBEF /* inception.mov */; };
 		BED79E1C17F2435400F0F82E /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED79E1B17F2435400F0F82E /* Accelerate.framework */; };
 		BED79E1E17F2435400F0F82E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED79E1D17F2435400F0F82E /* AVFoundation.framework */; };
 		BED79E2017F2435400F0F82E /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED79E1F17F2435400F0F82E /* CoreFoundation.framework */; };
@@ -146,6 +148,9 @@
 		A975922C18DD194400B28F08 /* C4Switch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Switch.m; sourceTree = "<group>"; };
 		A975925118E3FAB700B28F08 /* C4AnimationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4AnimationHelper.h; sourceTree = "<group>"; };
 		A975925218E3FAB700B28F08 /* C4AnimationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4AnimationHelper.m; sourceTree = "<group>"; };
+		A9BC498A18FB0D170075DBEF /* UIView+C4AddControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+C4AddControl.m"; sourceTree = "<group>"; };
+		A9BC498B18FB0D170075DBEF /* UIView+C4AddControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+C4AddControl.h"; sourceTree = "<group>"; };
+		A9BC498D18FB0D590075DBEF /* inception.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = inception.mov; sourceTree = "<group>"; };
 		BED79E1817F2435400F0F82E /* C4iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = C4iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BED79E1B17F2435400F0F82E /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		BED79E1D17F2435400F0F82E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -244,6 +249,8 @@
 		A97591A118DC08E800B28F08 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				A9BC498A18FB0D170075DBEF /* UIView+C4AddControl.m */,
+				A9BC498B18FB0D170075DBEF /* UIView+C4AddControl.h */,
 				A97591A218DC08E800B28F08 /* UIColor+CIColorFix.h */,
 				A97591A318DC08E800B28F08 /* UIColor+CIColorFix.m */,
 			);
@@ -374,6 +381,7 @@
 		BED79E3117F2435400F0F82E /* C4iOS */ = {
 			isa = PBXGroup;
 			children = (
+				A9BC498D18FB0D590075DBEF /* inception.mov */,
 				BED79EBB17F2435500F0F82E /* C4WorkSpace.h */,
 				BED79EBC17F2435500F0F82E /* C4WorkSpace.m */,
 				BED79EBE17F2435500F0F82E /* Images.xcassets */,
@@ -491,6 +499,7 @@
 			files = (
 				BED79EC117F2435500F0F82E /* Media.xcassets in Resources */,
 				BED79EBF17F2435500F0F82E /* Images.xcassets in Resources */,
+				A9BC498E18FB0D590075DBEF /* inception.mov in Resources */,
 				BED79E3617F2435400F0F82E /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -528,6 +537,7 @@
 				A975923018DD194400B28F08 /* C4Label.m in Sources */,
 				A975923418DD194400B28F08 /* C4Switch.m in Sources */,
 				A97591C718DC08E800B28F08 /* C4Camera.m in Sources */,
+				A9BC498C18FB0D170075DBEF /* UIView+C4AddControl.m in Sources */,
 				A97591CD18DC08E800B28F08 /* C4Image.m in Sources */,
 				A97591EA18DC08E800B28F08 /* C4Timer.m in Sources */,
 				A97591E518DC08E800B28F08 /* C4AssertionHandler.m in Sources */,

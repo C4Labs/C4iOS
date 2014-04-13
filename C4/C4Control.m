@@ -80,9 +80,6 @@
     
     _animationHelper = [[C4AnimationHelper alloc] initWithLayer:self.view.layer];
     
-    C4Template *controlTemplate = [C4Control defaultTemplate];
-    [controlTemplate applyToTarget:self];
-    
     C4Template* template = (C4Template*)[[self class] defaultTemplate];
     [template applyToTarget:self];
     

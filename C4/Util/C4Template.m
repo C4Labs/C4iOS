@@ -31,8 +31,13 @@
 
 + (instancetype)templateForClass:(Class)targetClass {
     C4Template* template = [[C4Template alloc] initWithTargetClass:targetClass];
-    template.targetClass = targetClass;
     return template;
+}
+
++ (instancetype)templateFromBaseTemplate:(C4Template*)template forClass:(Class)targetClass {
+    C4Template* newTemplate = [[C4Template alloc] initWithTargetClass:targetClass];
+    newTemplate.invocations = [template.invocations mutableCopy];
+    return newTemplate;
 }
 
 - (id)initWithTargetClass:(Class)targetClass {
@@ -43,6 +48,12 @@
     self.targetClass = targetClass;
     self.invocations = [[NSMutableArray alloc] init];
     return self;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    C4Template* copy = [[[self class] allocWithZone:zone] initWithTargetClass:self.targetClass];
+    copy.invocations = [self.invocations mutableCopy];
+    return copy;
 }
 
 - (id)proxy {
