@@ -11,4 +11,5 @@
 @class C4Control;
 @interface UIView (C4AddControl)
 -(void)addSubview:(id)view;
+-(void)addControl:(C4Control *)control;
 @end

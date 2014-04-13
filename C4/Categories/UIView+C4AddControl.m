@@ -20,4 +20,8 @@
     [self insertSubview:_view atIndex:self.subviews.count];
 }
 
+-(void)addControl:(C4Control *)control {
+    [self addSubview:control.view];
+}
+
 @end
