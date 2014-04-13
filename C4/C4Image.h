@@ -776,16 +776,6 @@
  */
 -(void)circleSplashDistortion:(CGPoint)center radius:(CGFloat)radius;
 
-/**Wraps an image around a transparent circle.
- 
- The distortion of the image increases with the distance from the center of the circle.
- 
- @param center A CGPoint marking the center of the circle.
- @param radius A CGFloat specifying the radius of the circle.
- @param angle A GFloat specifying the angle of the distortion.
- */
--(void)circularWrap:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle;
-
 /**Recursively draws a portion of an image in imitation of an M. C. Escher drawing.
  
  @param inset1 The top-left corner of the portion of the image to repeat.
