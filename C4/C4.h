@@ -19,6 +19,10 @@
 
 #import "C4Defines.h"
 
+// Categories
+#import "UIColor+CIColorFix.h"
+#import "UIView+C4AddControl.h"
+
 // Protocols
 #import "C4MethodDelay.h"
 #import "C4Notification.h"
