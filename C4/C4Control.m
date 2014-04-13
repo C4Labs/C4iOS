@@ -815,4 +815,20 @@
     d = nil;
 }
 
+#pragma mark Other Additions
+#pragma mark - Remove from superview
+
+-(void)removeFromSuperview {
+    [self.view removeFromSuperview];
+}
+
+#pragma mark - new
+-(BOOL)userInteractionEnabled {
+    return self.view.userInteractionEnabled;
+}
+
+-(void)setUserInteractionEnabled:(BOOL)userInteractionEnabled {
+    self.view.userInteractionEnabled = userInteractionEnabled;
+}
+    
 @end

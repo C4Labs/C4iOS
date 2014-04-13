@@ -415,4 +415,8 @@ typedef void (^C4SwipeGestureBlock)(CGPoint location);
 -(void)longPressEnded:(CGPoint)location;
 -(void)move:(CGPoint)location;
 
+#pragma - mark Other Additions
+-(void)removeFromSuperview;
+@property (nonatomic) BOOL userInteractionEnabled;
+
 @end
