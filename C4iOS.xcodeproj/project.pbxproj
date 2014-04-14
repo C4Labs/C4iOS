@@ -63,6 +63,7 @@
 		BED79ECA17F2435500F0F82E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED79E2F17F2435400F0F82E /* UIKit.framework */; };
 		BED79ED217F2435500F0F82E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BED79ED017F2435500F0F82E /* InfoPlist.strings */; };
 		BED79ED417F2435500F0F82E /* C4iOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BED79ED317F2435500F0F82E /* C4iOSTests.m */; };
+		C48214A818FCA46100C4758F /* C4Loop.aif in Resources */ = {isa = PBXBuildFile; fileRef = C48214A718FCA46100C4758F /* C4Loop.aif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -176,6 +177,7 @@
 		BED79ECF17F2435500F0F82E /* C4iOSTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "C4iOSTests-Info.plist"; sourceTree = "<group>"; };
 		BED79ED117F2435500F0F82E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BED79ED317F2435500F0F82E /* C4iOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = C4iOSTests.m; sourceTree = "<group>"; };
+		C48214A718FCA46100C4758F /* C4Loop.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = C4Loop.aif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -340,10 +342,10 @@
 		BED79E0F17F2435400F0F82E = {
 			isa = PBXGroup;
 			children = (
+				BED79E3117F2435400F0F82E /* C4iOS */,
 				615871EC18D8C8740074E4B6 /* README.md */,
 				615871ED18D8C8740074E4B6 /* LICENSE */,
 				A9758FE118DC05CA00B28F08 /* C4 */,
-				BED79E3117F2435400F0F82E /* C4iOS */,
 				BED79ECD17F2435500F0F82E /* C4iOSTests */,
 				BED79E1A17F2435400F0F82E /* Frameworks */,
 				BED79E1917F2435400F0F82E /* Products */,
@@ -381,11 +383,12 @@
 		BED79E3117F2435400F0F82E /* C4iOS */ = {
 			isa = PBXGroup;
 			children = (
-				A9BC498D18FB0D590075DBEF /* inception.mov */,
 				BED79EBB17F2435500F0F82E /* C4WorkSpace.h */,
 				BED79EBC17F2435500F0F82E /* C4WorkSpace.m */,
 				BED79EBE17F2435500F0F82E /* Images.xcassets */,
 				BED79EC017F2435500F0F82E /* Media.xcassets */,
+				A9BC498D18FB0D590075DBEF /* inception.mov */,
+				C48214A718FCA46100C4758F /* C4Loop.aif */,
 				BED79E3217F2435400F0F82E /* Supporting Files */,
 			);
 			path = C4iOS;
@@ -497,6 +500,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C48214A818FCA46100C4758F /* C4Loop.aif in Resources */,
 				BED79EC117F2435500F0F82E /* Media.xcassets in Resources */,
 				BED79EBF17F2435500F0F82E /* Images.xcassets in Resources */,
 				A9BC498E18FB0D590075DBEF /* inception.mov in Resources */,
