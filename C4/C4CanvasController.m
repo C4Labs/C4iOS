@@ -169,6 +169,7 @@
 }
 
 - (void)tapped:(CGPoint)location {
+    [self postNotification:@"tapped"];
     [self tapped];
 }
 
@@ -177,6 +178,7 @@
 }
 
 - (void)pinched:(CGPoint)location scale:(CGFloat)scale velocity:(CGFloat)velocity {
+    [self postNotification:@"pinched"];
     [self pinched];
 }
 
@@ -193,6 +195,7 @@
 }
 
 -(void)rotated:(CGPoint)location rotation:(CGFloat)rotation velocity:(CGFloat)velocity {
+    [self postNotification:@"rotated"];
     [self rotated];
 }
 
@@ -201,6 +204,7 @@
 }
 
 - (void)swipedLeft:(CGPoint)location {
+    [self postNotification:@"swipedLeft"];
     [self swipedLeft];
 }
 
@@ -209,6 +213,7 @@
 }
 
 - (void)swipedRight:(CGPoint)location {
+    [self postNotification:@"swipedRight"];
     [self swipedRight];
 }
 
@@ -217,6 +222,7 @@
 }
 
 - (void)swipedUp:(CGPoint)location {
+    [self postNotification:@"swipedUp"];
     [self swipedUp];
 }
 
@@ -225,6 +231,7 @@
 }
 
 - (void)swipedDown:(CGPoint)location {
+    [self postNotification:@"swipedDown"];
     [self swipedDown];
 }
 
@@ -233,6 +240,7 @@
 }
 
 -(void)longPressEnded:(CGPoint)location {
+    [self postNotification:@"longPressEnded"];
     [self longPressEnded];
 }
 
@@ -241,6 +249,7 @@
 }
 
 -(void)longPressStarted:(CGPoint)location {
+    [self postNotification:@"longPressStarted"];
     [self longPressStarted];
 }
 
