@@ -265,7 +265,7 @@
 }
 
 - (void)setLayerTransform:(CATransform3D)transform {
-    [self.animationHelper animateKeyPath:@"sublayerTransform" toValue:[NSValue valueWithCATransform3D:transform]];
+    [self.animationHelper animateKeyPath:@"transform" toValue:[NSValue valueWithCATransform3D:transform]];
 }
 
 - (CGPoint)anchorPoint {
