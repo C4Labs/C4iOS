@@ -183,6 +183,8 @@
         _closed = YES;
     }
     [self.animationHelper animateKeyPath:@"path" toValue:(__bridge id)translatedPath];
+    CGRect pathRect = CGPathGetPathBoundingBox(translatedPath);
+    self.bounds = pathRect;
     CGPathRelease(translatedPath);
     _initialized = YES;
 }
@@ -218,6 +220,8 @@
     _closed = YES;
     
     [self.animationHelper animateKeyPath:@"path" toValue:(__bridge id)translatedPath];
+    CGRect pathRect = CGPathGetPathBoundingBox(translatedPath);
+    self.bounds = pathRect;
     CGPathRelease(translatedPath);
     _initialized = YES;
 }
@@ -413,9 +417,9 @@
     CGMutablePathRef transFormedGlyphPaths = CGPathCreateMutableCopyByTransformingPath(glyphPaths, &translate);
     
     [self.animationHelper animateKeyPath:@"path" toValue:(__bridge id)transFormedGlyphPaths];
-    pathRect.origin = CGPointZero;
-    self.frame = pathRect; //Need this step to sync the appearance of the paths to the frame of the shape
-    _initialized = YES;
+
+    pathRect = CGPathGetPathBoundingBox(transFormedGlyphPaths);
+    self.bounds = pathRect;
     
     CFRelease(ctFont);
     CGPathRelease(glyphPaths);
