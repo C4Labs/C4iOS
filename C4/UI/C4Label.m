@@ -88,10 +88,6 @@
 }
 
 -(void)sizeToFit {
-    [self _sizeToFit];
-}
-
--(void)_sizeToFit {
     [self.label sizeToFit];
     self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.label.frame.size.width, self.label.frame.size.height);
 }
@@ -142,8 +138,8 @@
 }
 
 -(void)setFrame:(CGRect)frame {
-    super.frame = frame;
     self.label.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
+    super.frame = frame;
 }
 
 -(void)setTextColor:(UIColor *)textColor {
