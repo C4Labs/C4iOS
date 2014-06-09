@@ -82,14 +82,6 @@
  */
 -(id)initWithText:(NSString *)text font:(C4Font *)font frame:(CGRect)frame;
 
-/// @name Fitting the label's size to its text
-#pragma mark Fitting the label's size to its text
-
-/**Resizes the label's view so that it just fits its text.
- 
- Call this method when you want to tightly the label's view so that it uses the most appropriate amount of space for its text.
- */
--(void)sizeToFit;
 
 /// @name Properties
 #pragma mark Properties

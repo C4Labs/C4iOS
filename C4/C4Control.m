@@ -291,6 +291,10 @@
     [self setLayerTransform:t];
 }
 
+- (void)sizeToFit {
+    [self.view sizeToFit];
+}
+
 
 #pragma mark Animation methods
 

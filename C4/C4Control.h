@@ -306,6 +306,18 @@
 -(void)removeObjects:(NSArray *)array;
 
 
+#pragma mark - Helper methods
+
+/** Resize the control so that its contents fit inside. */
+- (void)sizeToFit;
+
+
+#pragma mark - Animations
+
+- (void)animateWithBlock:(void (^)())animationBlock;
+- (void)animateWithBlock:(void (^)())animationBlock reverseBlock:(void (^)())reverseBlock;
+
+
 #pragma mark - Gestures
 ///@name Gestures
 
