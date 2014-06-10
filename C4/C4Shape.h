@@ -34,92 +34,12 @@
 #pragma mark Changing a Shape's Path
 /// @name Creating Shapes
 
-/**Creates and returns an instance of C4Shape, whose path is an ellipse.
- 
- @param rect A rectangle that defines the shape of an ellipse.
- @return The initialized C4Shape object created with an ellipse path or nil if initialization is not successful.
- */
-+ (instancetype)ellipse:(CGRect)rect;
-
 /**Creates and returns an instance of C4Shape, whose path is a rectangle.
  
  @param rect A rectangle that defines the shape.
  @return The initialized C4Shape object created with an rectangular path or nil if initialization is not successful.
  */
 + (instancetype)rect:(CGRect)rect;
-
-/**Creates and returns an instance of C4Shape, whose path is a line.
- 
- @warning *Note:* Lines are the only shape objects which are not touchable, draggable, etc.
- 
- @param pointArray A C-Array containing 2 CGPoints like: {CGpoint,CGPoint}.
- @return The initialized C4Shape object created with a line path or nil if initialization is not successful.
- */
-+ (instancetype)line:(CGPoint *)pointArray;
-
-/**Creates and returns an instance of C4Shape, whose path is a triangle.
- 
- @param pointArray A C-Array containing 3 CGPoints like: {CGpoint,CGPoint,CGPoint}.
- @return The initialized C4Shape object created with a triangle path or nil if initialization is not successful.
- */
-+ (instancetype)triangle:(CGPoint *)pointArray;
-
-/**Creates and returns an instance of C4Shape, whose path is a polygon.
- 
- This method requires a secondary variable, called pointCount, because the length of the C-Array is unknown once it is passed to the method.
- 
- @param pointArray A C-Array containing any number of CGPoints like: {CGpoint, .. , CGPoint}.
- @param pointCount The number of points in the array.
- @return The initialized C4Shape object created with a polygon path or nil if initialization is not successful.
- */
-+ (instancetype)polygon:(CGPoint *)pointArray pointCount:(NSInteger)pointCount;
-
-/**Creates and returns an instance of C4Shape, whose path is an arc.
- 
- @param centerPoint The center point of the arc.
- @param radius The radius of the arc.
- @param startAngle The starting angle of the arc, in radians in the range of (0 .. 2*PI)
- @param endAngle The ending angle of the arc, in radians in the range of (0 .. 2*PI)
- @param clockwise A Boolean value specifying whether or not the arc will draw in a clockwise direction from the start to end angle
- @return The initialized C4Shape object created with an arc path or nil if initialization is not successful.
- */
-+ (instancetype)arcWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise;
-
-/**Creates and returns an instance of C4Shape, whose path is a wedge.
- 
- @param centerPoint The center point of the wedge.
- @param radius The radius of the wedge.
- @param startAngle The starting angle of the wedge, in radians in the range of (0 .. 2*PI)
- @param endAngle The ending angle of the wedge, in radians in the range of (0 .. 2*PI)
- @param clockwise A Boolean value specifying whether or not the wedge will draw in a clockwise direction from the start to end angle
- @return The initialized C4Shape object created with a wedge path or nil if initialization is not successful.
- */
-+ (instancetype)wedgeWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise;
-
-/**Creates and returns an instance of C4Shape, whose path is a bezier curve.
- 
- @param beginEndPointArray A C-Array consisting of two points, like: {CGPoint,CGPoint}, which mark the beginning and end of the curve.
- @param controlPointArray A C-Array consisting of two points, like: {CGPoint,CGPoint}, which mark the control points that distort the curve.
- @return The initialized C4Shape object created with a curve path or nil if initialization is not successful.
- */
-+ (instancetype)curve:(CGPoint *)beginEndPointArray controlPoints:(CGPoint *)controlPointArray;
-
-
-/**Creates and returns an instance of C4Shape, whose path is a quadratic curve
- 
- @param beginEndPointArray A C-Array consisting of two points, like: {CGPoint,CGPoint}, which mark the beginning and end of the curve.
- @param controlPoint A CGPoint used to defined the quadratic curve.
- @return The initialized C4Shape object created with a curve path or nil if initialization is not successful.
- */
-+ (instancetype)quadCurve:(CGPoint *)beginEndPointArray controlPoint:(CGPoint)controlPoint;
-
-/**Creates and returns an instance of C4Shape, whose path is a combination of curves made up from a string of text.
- 
- @param string The string to turn into a shape.
- @param font The font used to generate the paths that will be drawn.
- @return The initialized C4Shape object created with a combination of paths that look like characters or nil if initialization is not successful.
- */
-+ (instancetype)shapeFromString:(NSString *)string withFont:(C4Font *)font;
 
 /**Creates and returns an instance of C4Shape, whose configuration is specified by a template.
  
@@ -130,13 +50,6 @@
 #pragma mark Changing a Shape's Path
 /// @name Changing a Shape's Path
 
-/**Changes the object's current shape to an ellipse
- 
- The change will happen based on the shape's current animation options, duration and delay.
- @param rect A rectangle that defines the shape of an ellipse.
- */
--(void)ellipse:(CGRect)rect;
-
 /**Changes the object's current shape to a rectangle
  
  The change will happen based on the shape's current animation options, duration and delay.
@@ -144,90 +57,6 @@
  @param rect A rectangle that defines the shape.
  */
 -(void)rect:(CGRect)rect;
-
-/**Changes the object's current shape to a line
- 
- The change will happen based on the shape's current animation options, duration and delay.
- 
- @param pointArray A C-Array containing 2 CGPoints like: {CGpoint,CGPoint}.
- */
--(void)line:(CGPoint *)pointArray;
-
-/**Changes the object's current shape to a triangle
- 
- The change will happen based on the shape's current animation options, duration and delay.
- 
- @param pointArray A C-Array containing 3 CGPoints like: {CGpoint,CGPoint,CGPoint}.
- */
--(void)triangle:(CGPoint *)pointArray;
-
-/**Changes the object's current shape to a polygon
- 
- The change will happen based on the shape's current animation options, duration and delay.
- 
- @param pointArray A C-Array containing any number of CGPoints like: {CGpoint, .. , CGPoint}.
- @param pointCount The number of points in the array.
- */
--(void)polygon:(CGPoint *)pointArray pointCount:(NSInteger)pointCount;
-
-/**Changes the object's current shape to an arc
- 
- The change will happen based on the shape's current animation options, duration and delay.
- 
- @param centerPoint The center point of the arc.
- @param radius The radius of the arc.
- @param startAngle The starting angle of the arc, in radians in the range of (0 .. 2*PI)
- @param clockwise A Boolean value specifying whether or not the arc will draw in a clockwise direction from the start to end angle
- @param endAngle The ending angle of the arc, in radians in the range of (0 .. 2*PI)
- */
--(void)arcWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise;
-
-/**Changes the object's current shape to a wedge
- 
- The change will happen based on the shape's current animation options, duration and delay.
- 
- @param centerPoint The center point of the wedge.
- @param radius The radius of the wedge.
- @param startAngle The starting angle of the wedge, in radians in the range of (0 .. 2*PI)
- @param clockwise A Boolean value specifying whether or not the wedge will draw in a clockwise direction from the start to end angle
- @param endAngle The ending angle of the wedge, in radians in the range of (0 .. 2*PI)
- */
--(void)wedgeWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise;
-
-/**Changes the object's current shape to a curve
- 
- The change will happen based on the shape's current animation options, duration and delay.
- 
- @param beginEndPointArray A C-Array consisting of two points, like: {CGPoint,CGPoint}, which mark the beginning and end of the curve.
- @param controlPointArray A C-Array consisting of two points, like: {CGPoint,CGPoint}, which mark the control points that distort the curve.
- */
--(void)curve:(CGPoint *)beginEndPointArray controlPoints:(CGPoint *)controlPointArray;
-
-/**Changes the object's current shape to a quadratic curve
- 
- The change will happen based on the shape's current animation options, duration and delay.
- 
- @param beginEndPointArray A C-Array consisting of two points, like: {CGPoint,CGPoint}, which mark the beginning and end of the curve.
- @param controlPoint A CGPoint used to defined the quadratic curve.
- */
--(void)quadCurve:(CGPoint *)beginEndPointArray controlPoint:(CGPoint)controlPoint;
-
-/**Changes the object's current shape to one made from the paths of a given string
- 
- The change will happen based on the shape's current animation options, duration and delay.
- 
- @param string The string to turn into a shape.
- @param font The font used to generate the paths that will be drawn.
- */
--(void)shapeFromString:(NSString *)string withFont:(C4Font *)font;
-
-/**Closes the path of a shape that currently does not have a line from its last point to its beginning point.
- 
- When a polygon is created, the last point and first point are not connected. This method connects them.
- 
- You cannot undo this action (i.e. there is no openShape method)
- */
--(void)closeShape;
 
 /**Sets the dash pattern for the shape's line.
  
@@ -331,52 +160,6 @@
  The default is JOINMITRE.
  */
 @property(nonatomic, copy) NSString *lineJoin;
-
-/**Specifies whether or not the shape is a line.
- */
-@property(nonatomic, readonly, getter = isLine) BOOL line;
-
-/**Specifies whether or not the shape is an arc.
- */
-@property(nonatomic, readonly, getter = isArc) BOOL arc;
-
-/**Specifies the origin point of a line. Animatable.
- */
-@property(nonatomic) CGPoint pointA;
-
-/**Specifies the end point of a line. Animatable.
- */
-@property(nonatomic) CGPoint pointB;
-
-/**Specifies the first control point of a curve, both bezier and quad curves. Animatable.
- */
-@property(nonatomic) CGPoint controlPointA;
-
-/**Specifies the second control point (bezier curves only). Animatable.
- */
-@property(nonatomic) CGPoint controlPointB;
-
-/**Specifies whether the given shape is closed or not. This is useful for determining if polygons are open or closed.
- */
-@property(nonatomic, readonly, getter = isClosed) BOOL closed;
-
-/**Specifies whether the given shape is a wedge.
- 
- This property is specifically used in the `pointA` and `pointB` methods to determine if the current object is capable of setting them. In particular, only lines, beziers and quadratic curves should be able to acces the `pointA` and `pointB` properties of the `C4Shape` class.
- */
-@property(nonatomic, readonly, getter = isWedge) BOOL wedge;
-
-/**Specifies whether the given shape is a bezier curve.
- 
- This property is specifically used in the `pointA` and `pointB` methods to determine if the current object is capable of setting them. In particular, only lines, beziers and quadratic curves should be able to acces the `pointA` and `pointB` properties of the `C4Shape` class.
- */
-@property(nonatomic, readonly, getter = isBezierCurve) BOOL bezierCurve;
-
-/**Specifies whether the given shape is a quadratic curve.
- 
- This property is specifically used in the `pointA` and `pointB` methods to determine if the current object is capable of setting them. In particular, only lines, beziers and quadratic curves should be able to acces the `pointA` and `pointB` properties of the `C4Shape` class.
- */
-@property(nonatomic, readonly, getter = isQuadCurve) BOOL quadCurve;
 
 /**The path defining the shape to be rendered. Animatable.
  

@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A972A0E71946D88100AF52B2 /* C4Shape+Ellipse.m in Sources */ = {isa = PBXBuildFile; fileRef = A972A0E61946D88100AF52B2 /* C4Shape+Ellipse.m */; };
+		A972A0EB1946DA8000AF52B2 /* C4Shape+Curve.m in Sources */ = {isa = PBXBuildFile; fileRef = A972A0EA1946DA8000AF52B2 /* C4Shape+Curve.m */; };
+		A972A0EE1946DA9300AF52B2 /* C4Shape+QuadCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = A972A0ED1946DA9300AF52B2 /* C4Shape+QuadCurve.m */; };
+		A972A0F11946DAA200AF52B2 /* C4Shape+Polygon.m in Sources */ = {isa = PBXBuildFile; fileRef = A972A0F01946DAA200AF52B2 /* C4Shape+Polygon.m */; };
+		A972A0F41946DABA00AF52B2 /* C4Shape+String.m in Sources */ = {isa = PBXBuildFile; fileRef = A972A0F31946DABA00AF52B2 /* C4Shape+String.m */; };
+		A972A0F71946DACC00AF52B2 /* C4Shape+Arc.m in Sources */ = {isa = PBXBuildFile; fileRef = A972A0F61946DACC00AF52B2 /* C4Shape+Arc.m */; };
+		A972A0FA1946DAD900AF52B2 /* C4Shape+Wedge.m in Sources */ = {isa = PBXBuildFile; fileRef = A972A0F91946DAD900AF52B2 /* C4Shape+Wedge.m */; };
+		A972A0FD1946DAEA00AF52B2 /* C4Shape+Triangle.m in Sources */ = {isa = PBXBuildFile; fileRef = A972A0FC1946DAEA00AF52B2 /* C4Shape+Triangle.m */; };
+		A972A1001946DAFC00AF52B2 /* C4Shape+Line.m in Sources */ = {isa = PBXBuildFile; fileRef = A972A0FF1946DAFC00AF52B2 /* C4Shape+Line.m */; };
 		A9758EDE18DA498100B28F08 /* C4TemplateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A9758EDD18DA498100B28F08 /* C4TemplateTests.m */; };
 		A97591C518DC08E800B28F08 /* C4AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A975916E18DC08E800B28F08 /* C4AppDelegate.m */; };
 		A97591C718DC08E800B28F08 /* C4Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = A975917218DC08E800B28F08 /* C4Camera.m */; };
@@ -79,6 +88,25 @@
 /* Begin PBXFileReference section */
 		615871EC18D8C8740074E4B6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		615871ED18D8C8740074E4B6 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		A972A0E51946D88100AF52B2 /* C4Shape+Ellipse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "C4Shape+Ellipse.h"; sourceTree = "<group>"; };
+		A972A0E61946D88100AF52B2 /* C4Shape+Ellipse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "C4Shape+Ellipse.m"; sourceTree = "<group>"; };
+		A972A0E81946D9AE00AF52B2 /* C4Shape_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = C4Shape_Private.h; sourceTree = "<group>"; };
+		A972A0E91946DA8000AF52B2 /* C4Shape+Curve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "C4Shape+Curve.h"; sourceTree = "<group>"; };
+		A972A0EA1946DA8000AF52B2 /* C4Shape+Curve.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "C4Shape+Curve.m"; sourceTree = "<group>"; };
+		A972A0EC1946DA9300AF52B2 /* C4Shape+QuadCurve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "C4Shape+QuadCurve.h"; sourceTree = "<group>"; };
+		A972A0ED1946DA9300AF52B2 /* C4Shape+QuadCurve.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "C4Shape+QuadCurve.m"; sourceTree = "<group>"; };
+		A972A0EF1946DAA200AF52B2 /* C4Shape+Polygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "C4Shape+Polygon.h"; sourceTree = "<group>"; };
+		A972A0F01946DAA200AF52B2 /* C4Shape+Polygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "C4Shape+Polygon.m"; sourceTree = "<group>"; };
+		A972A0F21946DABA00AF52B2 /* C4Shape+String.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "C4Shape+String.h"; sourceTree = "<group>"; };
+		A972A0F31946DABA00AF52B2 /* C4Shape+String.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "C4Shape+String.m"; sourceTree = "<group>"; };
+		A972A0F51946DACC00AF52B2 /* C4Shape+Arc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "C4Shape+Arc.h"; sourceTree = "<group>"; };
+		A972A0F61946DACC00AF52B2 /* C4Shape+Arc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "C4Shape+Arc.m"; sourceTree = "<group>"; };
+		A972A0F81946DAD900AF52B2 /* C4Shape+Wedge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "C4Shape+Wedge.h"; sourceTree = "<group>"; };
+		A972A0F91946DAD900AF52B2 /* C4Shape+Wedge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "C4Shape+Wedge.m"; sourceTree = "<group>"; };
+		A972A0FB1946DAEA00AF52B2 /* C4Shape+Triangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "C4Shape+Triangle.h"; sourceTree = "<group>"; };
+		A972A0FC1946DAEA00AF52B2 /* C4Shape+Triangle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "C4Shape+Triangle.m"; sourceTree = "<group>"; };
+		A972A0FE1946DAFC00AF52B2 /* C4Shape+Line.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "C4Shape+Line.h"; sourceTree = "<group>"; };
+		A972A0FF1946DAFC00AF52B2 /* C4Shape+Line.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "C4Shape+Line.m"; sourceTree = "<group>"; };
 		A9758EDD18DA498100B28F08 /* C4TemplateTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4TemplateTests.m; sourceTree = "<group>"; };
 		A975916A18DC08E800B28F08 /* C4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4.h; sourceTree = "<group>"; };
 		A975916D18DC08E800B28F08 /* C4AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4AppDelegate.h; sourceTree = "<group>"; };
@@ -216,10 +244,6 @@
 			isa = PBXGroup;
 			children = (
 				A975916A18DC08E800B28F08 /* C4.h */,
-				A975918918DC08E800B28F08 /* C4Object.h */,
-				A975918A18DC08E800B28F08 /* C4Object.m */,
-				A975917918DC08E800B28F08 /* C4Control.h */,
-				A975917A18DC08E800B28F08 /* C4Control.m */,
 				A975925118E3FAB700B28F08 /* C4AnimationHelper.h */,
 				A975925218E3FAB700B28F08 /* C4AnimationHelper.m */,
 				A975916D18DC08E800B28F08 /* C4AppDelegate.h */,
@@ -228,16 +252,39 @@
 				A975917218DC08E800B28F08 /* C4Camera.m */,
 				A975917718DC08E800B28F08 /* C4CanvasController.h */,
 				A975917818DC08E800B28F08 /* C4CanvasController.m */,
+				A975917918DC08E800B28F08 /* C4Control.h */,
+				A975917A18DC08E800B28F08 /* C4Control.m */,
 				A975917B18DC08E800B28F08 /* C4Font.h */,
 				A975917C18DC08E800B28F08 /* C4Font.m */,
 				A975917D18DC08E800B28F08 /* C4Image.h */,
 				A975917E18DC08E800B28F08 /* C4Image.m */,
 				A975918518DC08E800B28F08 /* C4Movie.h */,
 				A975918618DC08E800B28F08 /* C4Movie.m */,
+				A975918918DC08E800B28F08 /* C4Object.h */,
+				A975918A18DC08E800B28F08 /* C4Object.m */,
 				A975918B18DC08E800B28F08 /* C4Sample.h */,
 				A975918C18DC08E800B28F08 /* C4Sample.m */,
 				A975918F18DC08E800B28F08 /* C4Shape.h */,
 				A975919018DC08E800B28F08 /* C4Shape.m */,
+				A972A0E81946D9AE00AF52B2 /* C4Shape_Private.h */,
+				A972A0F51946DACC00AF52B2 /* C4Shape+Arc.h */,
+				A972A0F61946DACC00AF52B2 /* C4Shape+Arc.m */,
+				A972A0E91946DA8000AF52B2 /* C4Shape+Curve.h */,
+				A972A0EA1946DA8000AF52B2 /* C4Shape+Curve.m */,
+				A972A0EC1946DA9300AF52B2 /* C4Shape+QuadCurve.h */,
+				A972A0ED1946DA9300AF52B2 /* C4Shape+QuadCurve.m */,
+				A972A0E51946D88100AF52B2 /* C4Shape+Ellipse.h */,
+				A972A0E61946D88100AF52B2 /* C4Shape+Ellipse.m */,
+				A972A0EF1946DAA200AF52B2 /* C4Shape+Polygon.h */,
+				A972A0F01946DAA200AF52B2 /* C4Shape+Polygon.m */,
+				A972A0FE1946DAFC00AF52B2 /* C4Shape+Line.h */,
+				A972A0FF1946DAFC00AF52B2 /* C4Shape+Line.m */,
+				A972A0FB1946DAEA00AF52B2 /* C4Shape+Triangle.h */,
+				A972A0FC1946DAEA00AF52B2 /* C4Shape+Triangle.m */,
+				A972A0F21946DABA00AF52B2 /* C4Shape+String.h */,
+				A972A0F31946DABA00AF52B2 /* C4Shape+String.m */,
+				A972A0F81946DAD900AF52B2 /* C4Shape+Wedge.h */,
+				A972A0F91946DAD900AF52B2 /* C4Shape+Wedge.m */,
 				A97591A118DC08E800B28F08 /* Categories */,
 				A97591A418DC08E800B28F08 /* GL */,
 				A97591AF18DC08E800B28F08 /* Protocols */,
@@ -528,24 +575,30 @@
 				A975921818DD152D00B28F08 /* C4UIMovieControl.m in Sources */,
 				A97591D318DC08E800B28F08 /* C4Object.m in Sources */,
 				A97591EB18DC08E800B28F08 /* C4Vector.m in Sources */,
+				A972A0F41946DABA00AF52B2 /* C4Shape+String.m in Sources */,
 				A97591E718DC08E800B28F08 /* C4Foundation.m in Sources */,
 				A97591DF18DC08E800B28F08 /* UIColor+CIColorFix.m in Sources */,
 				A975922E18DD194400B28F08 /* C4Button.m in Sources */,
 				A975921B18DD163F00B28F08 /* C4UIGLControl.m in Sources */,
 				A975923118DD194400B28F08 /* C4ScrollView.m in Sources */,
 				A97591E918DC08E800B28F08 /* C4Template.m in Sources */,
+				A972A0F11946DAA200AF52B2 /* C4Shape+Polygon.m in Sources */,
 				A975923218DD194400B28F08 /* C4Slider.m in Sources */,
 				A97591CB18DC08E800B28F08 /* C4Control.m in Sources */,
+				A972A0FA1946DAD900AF52B2 /* C4Shape+Wedge.m in Sources */,
+				A972A0EB1946DA8000AF52B2 /* C4Shape+Curve.m in Sources */,
 				A97591D418DC08E800B28F08 /* C4Sample.m in Sources */,
 				A97591C518DC08E800B28F08 /* C4AppDelegate.m in Sources */,
 				A975923018DD194400B28F08 /* C4Label.m in Sources */,
 				A975923418DD194400B28F08 /* C4Switch.m in Sources */,
 				A97591C718DC08E800B28F08 /* C4Camera.m in Sources */,
+				A972A0FD1946DAEA00AF52B2 /* C4Shape+Triangle.m in Sources */,
 				A9BC498C18FB0D170075DBEF /* UIView+C4AddControl.m in Sources */,
 				A97591CD18DC08E800B28F08 /* C4Image.m in Sources */,
 				A97591EA18DC08E800B28F08 /* C4Timer.m in Sources */,
 				A97591E518DC08E800B28F08 /* C4AssertionHandler.m in Sources */,
 				A975923318DD194400B28F08 /* C4Stepper.m in Sources */,
+				A972A1001946DAFC00AF52B2 /* C4Shape+Line.m in Sources */,
 				BED79E3817F2435400F0F82E /* main.m in Sources */,
 				A975921518DD10E400B28F08 /* C4UIShapeControl.m in Sources */,
 				A97591CA18DC08E800B28F08 /* C4CanvasController.m in Sources */,
@@ -556,6 +609,9 @@
 				A97591E818DC08E800B28F08 /* C4Math.m in Sources */,
 				A97591CC18DC08E800B28F08 /* C4Font.m in Sources */,
 				A975922D18DD194400B28F08 /* C4ActivityIndicator.m in Sources */,
+				A972A0E71946D88100AF52B2 /* C4Shape+Ellipse.m in Sources */,
+				A972A0EE1946DA9300AF52B2 /* C4Shape+QuadCurve.m in Sources */,
+				A972A0F71946DACC00AF52B2 /* C4Shape+Arc.m in Sources */,
 				A97591E018DC08E800B28F08 /* C4EAGLES1Renderer.m in Sources */,
 				A97591E318DC08E800B28F08 /* C4GL.m in Sources */,
 			);

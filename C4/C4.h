@@ -44,10 +44,20 @@
 #import "C4Camera.h"
 #import "C4Font.h"
 #import "C4Image.h"
-#import "C4Shape.h"
 #import "C4Movie.h"
 #import "C4Sample.h"
 #import "C4CanvasController.h"
+
+#import "C4Shape.h"
+#import "C4Shape+Arc.h"
+#import "C4Shape+Curve.h"
+#import "C4Shape+QuadCurve.h"
+#import "C4Shape+Ellipse.h"
+#import "C4Shape+Polygon.h"
+#import "C4Shape+Line.h"
+#import "C4Shape+Triangle.h"
+#import "C4Shape+String.h"
+#import "C4Shape+Wedge.h"
 
 // UI
 #import "C4ActivityIndicator.h"
