@@ -137,15 +137,6 @@
     return [C4Image imageWithUIImage:[self.UIStepper decrementImageForState:(UIControlState)state]];
 }
 
-#pragma mark C4UIElement (target:action)
--(void)runMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
-    [self.UIStepper addTarget:object action:NSSelectorFromString(methodName) forControlEvents:(UIControlEvents)event];
-}
-
--(void)stopRunningMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
-    [self.UIStepper removeTarget:object action:NSSelectorFromString(methodName) forControlEvents:(UIControlEvents)event];
-}
-
 #pragma mark isEqual
 
 -(BOOL)isEqual:(id)object {

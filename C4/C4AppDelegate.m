@@ -57,7 +57,7 @@
     
     [C4ActivityIndicator defaultTemplateProxy].color = C4BLUE;
     
-    [C4Button defaultTemplateProxy].tintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"darkBluePattern@2x"]];
+    [C4Button defaultTemplateProxy].tintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"darkBluePattern"]];
     
     [C4Label defaultTemplateProxy].textColor = C4GREY;
     [C4Label defaultTemplateProxy].highlightedTextColor = C4RED;

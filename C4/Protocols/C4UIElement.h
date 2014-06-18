@@ -22,6 +22,11 @@
  
  If an object conforms to this protocol that object can trigger methods associated with various control events.
  */
+
+#pragma mark – Target-Action Blocks
+
+typedef void (^TargetActionBlock)();
+
 @protocol C4UIElement <NSObject>
 ///@name User Interface Methods
 /**Attaches a method to a specific control event for the receiver.
@@ -34,13 +39,11 @@
  @param object The target object—that is, the object from which the method is run. If this is nil, the responder chain is searched for an object willing to respond to the action message.
  @param event A bitmask specifying the control events for which the action message is sent. See “Control Events” for bitmask constants.
  */
--(void)runMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event;
+-(void)run:(TargetActionBlock)block forEvent:(C4ControlEvents)event;
 
-/**Removes a target and action for a particular event (or events) from an internal dispatch table.
+/**Removes the running of a block for a particular event.
  
- @param methodName A string-version of a selector (i.e. the name of a method) identifying an action message. It cannot be NULL.
- @param object The target object—that is, the object from which the method is run. Pass nil to remove all targets paired with action and the specified control events.
- @param event A bitmask specifying the control events for which the action message is sent. See “Control Events” for bitmask constants.
+ @param event A bitmask specifying the control events for which to stop running a previously specified block.
  */
--(void)stopRunningMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event;
+-(void)stopRunningBlockForEvent:(C4ControlEvents)event;
 @end

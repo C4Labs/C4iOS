@@ -132,15 +132,6 @@
     [self.UISlider setThumbImage:image.UIImage forState:(UIControlState)state];
 }
 
-#pragma mark C4UIElement (target:action)
--(void)runMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
-    [self.UISlider addTarget:object action:NSSelectorFromString(methodName) forControlEvents:(UIControlEvents)event];
-}
-
--(void)stopRunningMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
-    [self.UISlider removeTarget:object action:NSSelectorFromString(methodName) forControlEvents:(UIControlEvents)event];
-}
-
 #pragma mark Tracking
 
 //-(BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {

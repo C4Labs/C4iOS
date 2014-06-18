@@ -368,7 +368,6 @@ typedef void (^C4SwipeGestureBlock)(CGPoint location);
  */
 - (void)onSwipeDown:(C4SwipeGestureBlock)block;
 
-
 #pragma mark - Templates
 ///@name Templates
 
@@ -431,4 +430,7 @@ typedef void (^C4SwipeGestureBlock)(CGPoint location);
 -(void)removeFromSuperview;
 @property (nonatomic) BOOL userInteractionEnabled;
 
+#pragma mark - Run For Event
+-(void)run:(TargetActionBlock)block forEvent:(C4ControlEvents)event;
+-(void)stopRunningBlockForEvent:(C4ControlEvents)event;
 @end

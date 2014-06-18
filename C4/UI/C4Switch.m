@@ -111,16 +111,6 @@
     [super setFrame:frame];
 }
 
-#pragma mark other C4UIElement (target:action)
--(void)runMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
-    [self.UISwitch addTarget:object action:NSSelectorFromString(methodName) forControlEvents:(UIControlEvents)event];
-}
-
--(void)stopRunningMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
-    [self.UISwitch removeTarget:object action:NSSelectorFromString(methodName) forControlEvents:(UIControlEvents)event];
-}
-
-
 #pragma mark Templates
 
 + (C4Template *)defaultTemplate {

@@ -141,15 +141,6 @@
     super.frame = frame;
 }
 
--(void)setTextColor:(UIColor *)textColor {
-    if(self.animationDelay == 0.0f) [self _setTextColor:textColor];
-    else [self performSelector:@selector(_setTextColor:) withObject:textColor afterDelay:self.animationDelay];
-    
-}
--(void)_setTextColor:(UIColor *)textColor {
-    self.label.textColor = textColor;
-}
-
 -(UIColor *)textColor {
     return self.label.textColor;
 }
@@ -160,10 +151,6 @@
 
 -(BOOL)isHighlighted {
     return self.label.isHighlighted;
-}
-
-- (void)setHighlighted:(BOOL)highlighted {
-    self.label.highlighted = highlighted;
 }
 
 - (BOOL)adjustsFontSizeToFitWidth {

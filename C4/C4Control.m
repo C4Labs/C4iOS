@@ -20,7 +20,7 @@
 #import "C4AnimationHelper.h"
 #import "C4Control.h"
 
-@interface C4Control()
+@interface C4Control() <UIGestureRecognizerDelegate>
 @property(nonatomic, strong) UIView* view;
 
 @property(nonatomic) BOOL shouldAutoreverse;
@@ -55,6 +55,18 @@
 
 @property(nonatomic, strong) UISwipeGestureRecognizer *swipeDownGestureRecognizer;
 @property(nonatomic, copy) C4SwipeGestureBlock swipeDownBlock;
+
+@property(nonatomic, copy) TargetActionBlock touchDownBlock;
+@property(nonatomic, copy) TargetActionBlock touchDownRepeatBlock;
+@property(nonatomic, copy) TargetActionBlock touchDownDragInsideBlock;
+@property(nonatomic, copy) TargetActionBlock touchDownDragOutsideBlock;
+@property(nonatomic, copy) TargetActionBlock touchDownDragEnterBlock;
+@property(nonatomic, copy) TargetActionBlock touchDownDragExitBlock;
+@property(nonatomic, copy) TargetActionBlock touchUpInsideBlock;
+@property(nonatomic, copy) TargetActionBlock touchUpOutsideBlock;
+@property(nonatomic, copy) TargetActionBlock touchCancelBlock;
+@property(nonatomic, copy) TargetActionBlock valueChangedBlock;
+@property(nonatomic, copy) TargetActionBlock allTouchEventsBlock;
 
 @end
 
@@ -94,7 +106,6 @@
         [self.view removeGestureRecognizer:g];
     }
 }
-
 
 #pragma mark UIView animatable properties
 
@@ -294,7 +305,6 @@
 - (void)sizeToFit {
     [self.view sizeToFit];
 }
-
 
 #pragma mark Animation methods
 
@@ -505,6 +515,7 @@
     
     if (self.tapBlock && !_tapGestureRecognizer) {
         _tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
+        _tapGestureRecognizer.delegate = self;
         [self.view addGestureRecognizer:_tapGestureRecognizer];
     }
 }
@@ -515,10 +526,12 @@
 }
 
 - (void)onPan:(C4PanGestureBlock)block {
+    [self removeSwipeGestures];
     self.panBlock = block;
     
     if (self.panBlock && !_panGestureRecognizer) {
         _panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
+        _panGestureRecognizer.delegate = self;
         [self.view addGestureRecognizer:_panGestureRecognizer];
     }
 }
@@ -533,6 +546,7 @@
     
     if (self.pinchBlock && !_pinchGestureRecognizer) {
         _pinchGestureRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchGesture:)];
+        _pinchGestureRecognizer.delegate = self;
         [self.view addGestureRecognizer:_pinchGestureRecognizer];
     }
 }
@@ -547,6 +561,7 @@
     
     if (self.rotationBlock && !_rotationGestureRecognizer) {
         _rotationGestureRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotationGesture:)];
+        _rotationGestureRecognizer.delegate = self;
         [self.view addGestureRecognizer:_rotationGestureRecognizer];
     }
 }
@@ -562,6 +577,7 @@
     if (self.longPressStartBlock && !_longPressGestureRecognizer) {
         _longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGesture:)];
         _longPressGestureRecognizer.minimumPressDuration = 0.25;
+        _longPressGestureRecognizer.delegate = self;
         [self.view addGestureRecognizer:_longPressGestureRecognizer];
     }
 }
@@ -571,6 +587,7 @@
     
     if (self.longPressEndBlock && !_longPressGestureRecognizer) {
         _longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGesture:)];
+        _longPressGestureRecognizer.delegate = self;
         [self.view addGestureRecognizer:_longPressGestureRecognizer];
     }
 }
@@ -583,42 +600,84 @@
 }
 
 - (void)onSwipeRight:(C4SwipeGestureBlock)block {
+    [self removePanGesture];
     self.swipeRightBlock = block;
     
     if (self.swipeRightBlock && !_swipeRightGestureRecognizer) {
         _swipeRightGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeGesture:)];
         _swipeRightGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+        _swipeRightGestureRecognizer.delegate = self;
         [self.view addGestureRecognizer:_swipeRightGestureRecognizer];
     }
 }
 
 - (void)onSwipeLeft:(C4SwipeGestureBlock)block {
+    [self removePanGesture];
     self.swipeLeftBlock = block;
     
     if (self.swipeLeftBlock && !_swipeLeftGestureRecognizer) {
         _swipeLeftGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeGesture:)];
         _swipeLeftGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+        _swipeLeftGestureRecognizer.delegate = self;
         [self.view addGestureRecognizer:_swipeLeftGestureRecognizer];
     }
 }
 
 - (void)onSwipeUp:(C4SwipeGestureBlock)block {
+    [self removePanGesture]; //swipes and pans should never be combined
     self.swipeUpBlock = block;
     
     if (self.swipeUpBlock && !_swipeUpGestureRecognizer) {
         _swipeUpGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeGesture:)];
         _swipeUpGestureRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
+        _swipeUpGestureRecognizer.delegate = self;
         [self.view addGestureRecognizer:_swipeUpGestureRecognizer];
     }
 }
 
 - (void)onSwipeDown:(C4SwipeGestureBlock)block {
+    [self removePanGesture]; //swipes and pans should never be combined
     self.swipeDownBlock = block;
     
     if (self.swipeDownBlock && !_swipeDownGestureRecognizer) {
         _swipeDownGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeGesture:)];
         _swipeDownGestureRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
+        _swipeDownGestureRecognizer.delegate = self;
         [self.view addGestureRecognizer:_swipeDownGestureRecognizer];
+    }
+}
+
+- (void)removePanGesture {
+    if(_panGestureRecognizer != nil) {
+        [_panGestureRecognizer removeTarget:self action:nil];
+        [self.view removeGestureRecognizer:_panGestureRecognizer];
+        _panGestureRecognizer = nil;
+    }
+}
+
+-(void)removeSwipeGestures {
+    if(_swipeUpGestureRecognizer != nil) {
+        [_swipeUpGestureRecognizer removeTarget:self action:nil];
+        [self.view removeGestureRecognizer:_swipeUpGestureRecognizer];
+        _swipeUpGestureRecognizer = nil;
+    }
+    
+    if(_swipeDownGestureRecognizer != nil) {
+        [_swipeDownGestureRecognizer removeTarget:self action:nil];
+        [self.view removeGestureRecognizer:_swipeDownGestureRecognizer];
+        _swipeDownGestureRecognizer = nil;
+    }
+    
+    if(_swipeLeftGestureRecognizer != nil) {
+        [_swipeLeftGestureRecognizer removeTarget:self action:nil];
+        [self.view removeGestureRecognizer:_swipeLeftGestureRecognizer];
+        _swipeLeftGestureRecognizer = nil;
+    }
+    
+    if(_swipeRightGestureRecognizer != nil) {
+        [_swipeRightGestureRecognizer removeTarget:self action:nil];
+        [self.view removeGestureRecognizer:_swipeRightGestureRecognizer];
+        _swipeRightGestureRecognizer = nil;
     }
 }
 
@@ -632,6 +691,10 @@
     else if (self.swipeDownBlock && gr == _swipeDownGestureRecognizer && gr.state == UIGestureRecognizerStateRecognized)
         self.swipeDownBlock([gr locationInView:self.view]);
 }
+
+//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+//    return  (touch.view == self.view);
+//}
 
 #pragma mark Gesture Additions
 - (void)tapped {
@@ -814,6 +877,139 @@
     void (^block)(void) = d[@"block"];
     block();
     d = nil;
+}
+
+-(void)run:(TargetActionBlock)block forEvent:(C4ControlEvents)event {
+    if(![self conformsToProtocol:@protocol(C4UIElement)]) {
+        C4Log(@"You should only use run:forEvent: on C4UIElement objects.");
+        return;
+    }
+    switch (event) {
+        case TOUCHDOWN:
+            self.touchDownBlock = block;
+            [(UIControl *)self.view addTarget:self action:@selector(touchDownAction) forControlEvents:UIControlEventTouchDown];
+            break;
+        case TOUCHDOWNDRAGINSIDE:
+            self.touchDownDragInsideBlock = block;
+            [(UIControl *)self.view addTarget:self action:@selector(touchDownDragInsideAction) forControlEvents:UIControlEventTouchDragInside];
+            break;
+        case TOUCHDOWNDRAGOUTSIDE:
+            self.touchDownDragOutsideBlock = block;
+            [(UIControl *)self.view addTarget:self action:@selector(touchDownDragOutsideAction) forControlEvents:UIControlEventTouchDragOutside];
+            break;
+        case TOUCHDOWNDRAGENTER:
+            self.touchDownDragEnterBlock = block;
+            [(UIControl *)self.view addTarget:self action:@selector(touchDownDragEnterAction) forControlEvents:UIControlEventTouchDragEnter];
+            break;
+        case TOUCHDOWNDRAGEXIT:
+            self.touchDownDragExitBlock = block;
+            [(UIControl *)self.view addTarget:self action:@selector(touchDownDragExitAction) forControlEvents:UIControlEventTouchDragExit];
+            break;
+        case TOUCHUPINSIDE:
+            self.touchUpInsideBlock = block;
+            [(UIControl *)self.view addTarget:self action:@selector(touchUpInsideAction) forControlEvents:UIControlEventTouchUpInside];
+            break;
+        case TOUCHUPOUTSIDE:
+            self.touchUpOutsideBlock = block;
+            [(UIControl *)self.view addTarget:self action:@selector(touchUpOutsideAction) forControlEvents:UIControlEventTouchUpOutside];
+            break;
+        case TOUCHCANCEL:
+            self.touchCancelBlock = block;
+            [(UIControl *)self.view addTarget:self action:@selector(touchCancelAction) forControlEvents:UIControlEventTouchCancel];
+            break;
+        case VALUECHANGED:
+            self.valueChangedBlock = block;
+            [(UIControl *)self.view addTarget:self action:@selector(valueChangedAction) forControlEvents:UIControlEventValueChanged];
+            break;
+        case ALLTOUCHEVENTS:
+            self.allTouchEventsBlock = block;
+            [(UIControl *)self.view addTarget:self action:@selector(allTouchEventsAction) forControlEvents:UIControlEventAllTouchEvents];
+            break;
+        default:
+            break;
+    }
+}
+
+-(void)stopRunningBlockForEvent:(C4ControlEvents)event {
+    if(![self conformsToProtocol:@protocol(C4UIElement)]) {
+        C4Log(@"You should only use run:forEvent: on C4UIElement objects.");
+        return;
+    }
+    switch (event) {
+        case TOUCHDOWN:
+            self.touchDownBlock = nil;
+            [(UIControl *)self.view removeTarget:self action:@selector(touchDownAction) forControlEvents:UIControlEventTouchDown];
+            break;
+        case TOUCHDOWNDRAGINSIDE:
+            self.touchDownDragInsideBlock = nil;
+            [(UIControl *)self.view removeTarget:self action:@selector(touchDownDragInsideAction) forControlEvents:UIControlEventTouchDragInside];
+            break;
+        case TOUCHDOWNDRAGOUTSIDE:
+            self.touchDownDragOutsideBlock = nil;
+            [(UIControl *)self.view removeTarget:self action:@selector(touchDownDragOutsideAction) forControlEvents:UIControlEventTouchDragOutside];
+            break;
+        case TOUCHDOWNDRAGENTER:
+            self.touchDownDragEnterBlock = nil;
+            [(UIControl *)self.view removeTarget:self action:@selector(touchDownDragEnterAction) forControlEvents:UIControlEventTouchDragEnter];
+            break;
+        case TOUCHDOWNDRAGEXIT:
+            self.touchDownDragExitBlock = nil;
+            [(UIControl *)self.view removeTarget:self action:@selector(touchDownDragExitAction) forControlEvents:UIControlEventTouchDragExit];
+            break;
+        case TOUCHUPINSIDE:
+            self.touchUpInsideBlock = nil;
+            [(UIControl *)self.view removeTarget:self action:@selector(touchUpInsideAction) forControlEvents:UIControlEventTouchUpInside];
+            break;
+        case TOUCHUPOUTSIDE:
+            self.touchUpOutsideBlock = nil;
+            [(UIControl *)self.view removeTarget:self action:@selector(touchUpOutsideAction) forControlEvents:UIControlEventTouchUpOutside];
+            break;
+        case TOUCHCANCEL:
+            self.touchCancelBlock = nil;
+            [(UIControl *)self.view removeTarget:self action:@selector(touchCancelAction) forControlEvents:UIControlEventTouchCancel];
+            break;
+        case VALUECHANGED:
+            self.valueChangedBlock = nil;
+            [(UIControl *)self.view removeTarget:self action:@selector(valueChangedAction) forControlEvents:UIControlEventValueChanged];
+            break;
+        case ALLTOUCHEVENTS:
+            self.allTouchEventsBlock = nil;
+            [(UIControl *)self.view removeTarget:self action:@selector(allTouchEventsAction) forControlEvents:UIControlEventAllTouchEvents];
+            break;
+        default:
+            break;
+    }
+}
+
+-(void)touchDownAction {
+    self.touchDownBlock();
+}
+-(void)touchDownDragInsideAction {
+    self.touchDownDragInsideBlock();
+}
+-(void)touchDownDragOutsideAction {
+    self.touchDownDragOutsideBlock();
+}
+-(void)touchDownDragEnterAction {
+    self.touchDownDragEnterBlock();
+}
+-(void)touchDownDragExitAction {
+    self.touchDownDragExitBlock();
+}
+-(void)touchUpInsideAction {
+    self.touchUpInsideBlock();
+}
+-(void)touchUpOutsideAction {
+    self.touchUpOutsideBlock();
+}
+-(void)touchCancelAction {
+    self.touchCancelBlock();
+}
+-(void)valueChangedAction {
+    self.valueChangedBlock();
+}
+-(void)allTouchEventsAction {
+    self.allTouchEventsBlock();
 }
 
 #pragma mark Other Additions

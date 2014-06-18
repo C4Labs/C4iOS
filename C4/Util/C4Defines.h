@@ -137,22 +137,22 @@ typedef enum C4BaselineAdjustment : NSUInteger {
 } C4BaselineAdjustment;
 
 typedef enum C4ControlEvents : NSUInteger {
-    TOUCHDOWN           = 1 <<  0,      // on all touch downs
-    TOUCHDOWNREPEAT     = 1 <<  1,      // on multiple touchdowns (tap count > 1)
+    TOUCHDOWN               = 1 <<  0,      // on all touch downs
+    TOUCHDOWNREPEAT         = 1 <<  1,      // on multiple touchdowns (tap count > 1)
     TOUCHDOWNDRAGINSIDE     = 1 <<  2,
     TOUCHDOWNDRAGOUTSIDE    = 1 <<  3,
     TOUCHDOWNDRAGENTER      = 1 <<  4,
     TOUCHDOWNDRAGEXIT       = 1 <<  5,
-    TOUCHUPINSIDE       = 1 <<  6,
-    TOUCHUPOUTSIDE      = 1 <<  7,
-    TOUCHCANCEL         = 1 <<  8,
+    TOUCHUPINSIDE           = 1 <<  6,
+    TOUCHUPOUTSIDE          = 1 <<  7,
+    TOUCHCANCEL             = 1 <<  8,
     
-    VALUECHANGED        = 1 << 12,     // sliders, etc.
+    VALUECHANGED            = 1 << 12,     // sliders, etc.
     
-    EDITINGDIDBEGIN     = 1 << 16,     // UITextField
-    EDITINGCHANGED      = 1 << 17,
-    EDITINGDIDEND       = 1 << 18,
-    EDITINGDIDENDONEXIT = 1 << 19,     // 'return key' ending editing
+    EDITINGDIDBEGIN         = 1 << 16,     // UITextField
+    EDITINGCHANGED          = 1 << 17,
+    EDITINGDIDEND           = 1 << 18,
+    EDITINGDIDENDONEXIT     = 1 << 19,     // 'return key' ending editing
     
     ALLTOUCHEVENTS      = 0x00000FFF,  // for touch events
     ALLEDITINGEVENTS    = 0x000F0000,  // for UITextField

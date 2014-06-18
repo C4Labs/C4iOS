@@ -253,4 +253,8 @@
     [self longPressStarted];
 }
 
+-(BOOL)prefersStatusBarHidden {
+    return YES;
+}
+
 @end

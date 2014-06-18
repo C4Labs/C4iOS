@@ -76,13 +76,6 @@
     self.UIActivityIndicatorView.color = color;
 }
 
--(void)runMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event{
-}
-
--(void)stopRunningMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
-}
-
-
 #pragma mark Templates
 
 + (C4Template *)defaultTemplate {
