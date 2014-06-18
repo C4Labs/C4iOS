@@ -71,8 +71,8 @@ NSString* const C4ShapeTypeKey = @"type";
 }
 
 - (void)setPath:(CGPathRef)newPath {
+    ((CAShapeLayer*)self.view.layer).path = newPath;
     [self.animationHelper animateKeyPath:@"path" toValue:(__bridge id)newPath];
-    
     CGRect bounds = CGPathGetBoundingBox(newPath);
     self.frame = bounds;
 }
@@ -184,6 +184,16 @@ NSString* const C4ShapeTypeKey = @"type";
 - (CAShapeLayer*)shapeLayer {
     return (CAShapeLayer*)self.view.layer;
 }
+
+-(void)closeShape {
+    if(_initialized == YES) {
+        CGMutablePathRef newPath = CGPathCreateMutableCopy(self.path);
+        CGPathCloseSubpath(newPath);
+        self.path = newPath;
+        CGPathRelease(newPath);
+    }
+}
+
 
 #pragma mark Templates
 
