@@ -692,9 +692,9 @@
         self.swipeDownBlock([gr locationInView:self.view]);
 }
 
-//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-//    return  (touch.view == self.view);
-//}
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    return  (touch.view == self.view);
+}
 
 #pragma mark Gesture Additions
 - (void)tapped {
