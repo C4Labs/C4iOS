@@ -34,7 +34,7 @@ NSString* const C4ShapeTriangleType = @"curve";
 - (void)triangle:(CGPoint *)points {
     // This is a special case of a polygon
     [self polygon:points pointCount:3];
-    
+    [self closeShape];
     NSMutableDictionary* data = [self.shapeData mutableCopy];
     [data setObject:C4ShapeTriangleType forKey:C4ShapeTypeKey];
     self.shapeData = data;
