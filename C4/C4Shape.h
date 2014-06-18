@@ -69,6 +69,14 @@
  */
 -(void)setDashPattern:(CGFloat *)dashPattern pointCount:(NSUInteger)pointCount;
 
+/**Closes the path of a shape that currently does not have a line from its last point to its beginning point.
+ 
+ When a polygon is created, the last point and first point are not connected. This method connects them.
+ 
+ You cannot undo this action (i.e. there is no openShape method)
+ */
+-(void)closeShape;
+
 #pragma mark Properties
 /// @name Properties
 
@@ -170,5 +178,6 @@
  Specifying an explicit path usually improves rendering performance.
  */
 @property(nonatomic) CGPathRef path;
+
 
 @end
