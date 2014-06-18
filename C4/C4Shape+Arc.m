@@ -47,7 +47,8 @@ NSString* const C4ShapeArcType = @"arc";
     CGMutablePathRef translatedPath = CGPathCreateMutableCopyByTransformingPath(newPath, &translation);
     CGPathRelease(newPath);
     
-    [self.animationHelper animateKeyPath:@"path" toValue:(__bridge id)translatedPath];
+    self.path = translatedPath;
+//    [self.animationHelper animateKeyPath:@"path" toValue:(__bridge id)translatedPath];
     CGRect pathRect = CGPathGetPathBoundingBox(translatedPath);
     self.bounds = pathRect;
     CGPathRelease(translatedPath);

@@ -49,7 +49,8 @@ NSString* const C4ShapeWedgeType = @"wedge";
     
     CGPathCloseSubpath(translatedPath);
     
-    [self.animationHelper animateKeyPath:@"path" toValue:(__bridge id)translatedPath];
+    self.path = translatedPath;
+//    [self.animationHelper animateKeyPath:@"path" toValue:(__bridge id)translatedPath];
     CGRect pathRect = CGPathGetPathBoundingBox(translatedPath);
     self.bounds = pathRect;
     CGPathRelease(translatedPath);

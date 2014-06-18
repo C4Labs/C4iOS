@@ -42,7 +42,8 @@ NSString* const C4ShapeEllipseType = @"ellipse";
     
     CGMutablePathRef newPath = CGPathCreateMutable();
     CGPathAddEllipseInRect(newPath, nil, ellipseRect);
-    [self.animationHelper animateKeyPath:@"path" toValue:(__bridge id)newPath];
+    self.path = newPath;
+//    [self.animationHelper animateKeyPath:@"path" toValue:(__bridge id)newPath];
     CGPathRelease(newPath);
     
     self.initialized = YES;

@@ -59,7 +59,8 @@ NSString* const C4ShapeStringType = @"string";
     
     CGMutablePathRef transFormedGlyphPaths = CGPathCreateMutableCopyByTransformingPath(glyphPaths, &translate);
     
-    [self.animationHelper animateKeyPath:@"path" toValue:(__bridge id)transFormedGlyphPaths];
+    self.path = transFormedGlyphPaths;
+//    [self.animationHelper animateKeyPath:@"path" toValue:(__bridge id)transFormedGlyphPaths];
     
     pathRect = CGPathGetPathBoundingBox(transFormedGlyphPaths);
     self.bounds = pathRect;
