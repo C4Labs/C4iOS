@@ -62,6 +62,9 @@
     if (self != nil) {
         self.text = text;
         self.font = font;
+        if (CGRectEqualToRect(self.frame, CGRectZero)) {
+            [self sizeToFit];
+        }
     }
     return self;
 }
@@ -75,6 +78,10 @@
 
 - (NSString *)text {
     return self.label.text;
+}
+
+-(void)setText:(NSString *)text {
+    self.label.text = text;
 }
 
 -(void)sizeToFit {
