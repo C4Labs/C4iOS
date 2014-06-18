@@ -107,7 +107,7 @@
 }
 
 - (void)listenFor:(NSString *)notification fromObject:(id)object andRun:(NotificationBlock)block {
-    [[NSNotificationCenter defaultCenter] addObserverForName:notification object:self queue:nil usingBlock:block];
+    [[NSNotificationCenter defaultCenter] addObserverForName:notification object:object queue:nil usingBlock:block];
 }
 
 - (void)listenFor:(NSString *)notification fromObjects:(NSArray *)objectArray andRun:(NotificationBlock)block {
