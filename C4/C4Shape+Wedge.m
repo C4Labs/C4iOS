@@ -42,17 +42,18 @@ NSString* const C4ShapeWedgeType = @"wedge";
     CGPathAddLineToPoint(newPath, nil, centerPoint.x, centerPoint.y);
     
     CGRect arcRect = CGPathGetBoundingBox(newPath);
-    
+    CGPoint origin = arcRect.origin; //preserves the origin
     const CGAffineTransform translation = CGAffineTransformMakeTranslation(arcRect.origin.x *-1, arcRect.origin.y *-1);
     CGMutablePathRef translatedPath = CGPathCreateMutableCopyByTransformingPath(newPath, &translation);
     CGPathRelease(newPath);
+    
     CGPathCloseSubpath(translatedPath);
     
     [self.animationHelper animateKeyPath:@"path" toValue:(__bridge id)translatedPath];
     CGRect pathRect = CGPathGetPathBoundingBox(translatedPath);
     self.bounds = pathRect;
     CGPathRelease(translatedPath);
-    
+    self.origin = origin;
     self.initialized = YES;
 }
 
