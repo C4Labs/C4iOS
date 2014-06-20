@@ -18,6 +18,7 @@
 // IN THE SOFTWARE.
 
 #import <UIKit/UIKit.h>
+#import "C4AppDelegate.h"
 
 int main(int argc, char * argv[]) {
     @autoreleasepool {

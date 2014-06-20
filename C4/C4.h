@@ -76,4 +76,3 @@
 
 // Workspace
 #import "C4WorkSpace.h"
-#import "C4AppDelegate.h"
