@@ -28,19 +28,6 @@
 
 @implementation C4CanvasController
 
-- (id)init {
-    self = [super init];
-    if (!self)
-        return nil;
-    [self createCanvas];
-    
-    [self listenFor:@"movieIsReadyForPlayback" andRun:^(NSNotification *n) {
-        [self movieIsReadyForPlayback:n];
-    }];
-
-    return self;
-}
-
 - (id)initWithCoder:(NSCoder *)decoder {
     self = [super initWithCoder:decoder];
     if (!self)
