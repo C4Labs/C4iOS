@@ -45,21 +45,7 @@ NSString* const C4ShapePolygonPointsKey = @"polygonPoints";
         C4ShapePolygonPointsKey: points
     };
     
-    // Determine path bounding box
-    CGPathRef tmpPath = [self createPathWithPoints:points transform:NULL];
-    CGRect newFrame = CGPathGetPathBoundingBox(tmpPath);
-    CGPathRelease(tmpPath);
-    
-    // Transform points to the new frame
-    CGPoint origin = newFrame.origin;
-    CGAffineTransform t = CGAffineTransformMakeTranslation(-origin.x, -origin.y);
-    
-    // Set new path and frame
-    CGPathRef newPath = [self createPathWithPoints:points transform:&t];
-    self.path = newPath;
-    self.frame = newFrame;
-    CGPathRelease(newPath);
-    
+    [self updatePathWithPoints:points];
     self.initialized = YES;
 }
 
@@ -79,6 +65,55 @@ NSString* const C4ShapePolygonPointsKey = @"polygonPoints";
 
 - (BOOL)isPolygon {
     return [[self.shapeData objectForKey:C4ShapeTypeKey] isEqualToString:C4ShapePolygonType];
+}
+
+- (NSArray*)points {
+    NSArray* points = self.shapeData[C4ShapePolygonPointsKey];
+    C4Assert(points, @"You tried to access the points from a shape that isn't a polygon");
+    return points;
+}
+
+- (CGPoint)firstPoint {
+    NSValue* value = [self.points firstObject];
+    return [value CGPointValue];
+}
+
+- (CGPoint)lastPoint {
+    NSValue* value = [self.points lastObject];
+    return [value CGPointValue];
+}
+
+- (CGPoint)pointAtIndex:(NSUInteger)index {
+    NSValue* value = [self.points objectAtIndex:index];
+    return [value CGPointValue];
+}
+
+- (void)setPoint:(CGPoint)point atIndex:(NSUInteger)index {
+    NSMutableArray* points = [self.points mutableCopy];
+    [points replaceObjectAtIndex:index withObject:[NSValue valueWithCGPoint:point]];
+    
+    NSMutableDictionary* data = [self.shapeData mutableCopy];
+    [data setObject:points forKey:C4ShapePolygonPointsKey];
+    self.shapeData = data;
+    
+    [self updatePathWithPoints:points];
+}
+
+- (void)updatePathWithPoints:(NSArray*)points {
+    // Determine path bounding box
+    CGPathRef tmpPath = [self createPathWithPoints:points transform:NULL];
+    CGRect newFrame = CGPathGetPathBoundingBox(tmpPath);
+    CGPathRelease(tmpPath);
+    
+    // Transform points to the new frame
+    CGPoint origin = newFrame.origin;
+    CGAffineTransform t = CGAffineTransformMakeTranslation(-origin.x, -origin.y);
+    
+    // Set new path and frame
+    CGPathRef newPath = [self createPathWithPoints:points transform:&t];
+    self.path = newPath;
+    self.frame = newFrame;
+    CGPathRelease(newPath);
 }
 
 @end

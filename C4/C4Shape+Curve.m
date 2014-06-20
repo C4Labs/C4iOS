@@ -80,13 +80,13 @@ NSString* const C4ShapeCurvePointsKey = @"curvePoints";
 
 - (CGPoint)pointA {
     NSArray* points = self.shapeData[C4ShapeCurvePointsKey];
-    C4Assert(points, @"You tried to access pointA from a shape that isn't a line or a curve");
+    C4Assert(points, @"You tried to access pointA from a shape that isn't a curve");
     return [points[0] CGPointValue];
 }
 
 - (void)setPointA:(CGPoint)pointA {
     NSMutableArray* points = [self.shapeData[C4ShapeCurvePointsKey] mutableCopy];
-    C4Assert(points, @"You tried to access pointA from a shape that isn't a line or a curve");
+    C4Assert(points, @"You tried to access pointA from a shape that isn't a curve");
     
     [points replaceObjectAtIndex:0 withObject:[NSValue valueWithCGPoint:pointA]];
     [self curve:points];
@@ -94,13 +94,13 @@ NSString* const C4ShapeCurvePointsKey = @"curvePoints";
 
 - (CGPoint)pointB {
     NSArray* points = self.shapeData[C4ShapeCurvePointsKey];
-    C4Assert(points, @"You tried to access pointA from a shape that isn't a line or a curve");
+    C4Assert(points, @"You tried to access pointA from a shape that isn't a curve");
     return [points[3] CGPointValue];
 }
 
 - (void)setPointB:(CGPoint)pointB {
     NSMutableArray* points = [self.shapeData[C4ShapeCurvePointsKey] mutableCopy];
-    C4Assert(points, @"You tried to access pointA from a shape that isn't a line or a curve");
+    C4Assert(points, @"You tried to access pointA from a shape that isn't a curve");
     
     [points replaceObjectAtIndex:3 withObject:[NSValue valueWithCGPoint:pointB]];
     [self curve:points];
@@ -108,13 +108,13 @@ NSString* const C4ShapeCurvePointsKey = @"curvePoints";
 
 - (CGPoint)controlPointA {
     NSArray* points = self.shapeData[C4ShapeCurvePointsKey];
-    C4Assert(points, @"You tried to access pointA from a shape that isn't a line or a curve");
+    C4Assert(points, @"You tried to access pointA from a shape that isn't a curve");
     return [points[1] CGPointValue];
 }
 
 - (void)setControlPointA:(CGPoint)controlPointA {
     NSMutableArray* points = [self.shapeData[C4ShapeCurvePointsKey] mutableCopy];
-    C4Assert(points, @"You tried to access pointA from a shape that isn't a line or a curve");
+    C4Assert(points, @"You tried to access pointA from a shape that isn't a curve");
     
     [points replaceObjectAtIndex:1 withObject:[NSValue valueWithCGPoint:controlPointA]];
     [self curve:points];
@@ -122,13 +122,13 @@ NSString* const C4ShapeCurvePointsKey = @"curvePoints";
 
 - (CGPoint)controlPointB {
     NSArray* points = self.shapeData[C4ShapeCurvePointsKey];
-    C4Assert(points, @"You tried to access pointA from a shape that isn't a line or a curve");
+    C4Assert(points, @"You tried to access pointA from a shape that isn't a curve");
     return [points[2] CGPointValue];
 }
 
 - (void)setControlPointB:(CGPoint)controlPointB {
     NSMutableArray* points = [self.shapeData[C4ShapeCurvePointsKey] mutableCopy];
-    C4Assert(points, @"You tried to access pointA from a shape that isn't a line or a curve");
+    C4Assert(points, @"You tried to access pointA from a shape that isn't a curve");
     
     [points replaceObjectAtIndex:2 withObject:[NSValue valueWithCGPoint:controlPointB]];
     [self curve:points];

@@ -46,4 +46,13 @@
  */
 @property(nonatomic, readonly, getter = isPolygon) BOOL polygon;
 
+/**The points in the polygon
+ */
+@property(nonatomic, copy, readonly) NSArray* points;
+@property(nonatomic, readonly) CGPoint firstPoint;
+@property(nonatomic, readonly) CGPoint lastPoint;
+
+- (CGPoint)pointAtIndex:(NSUInteger)index;
+- (void)setPoint:(CGPoint)point atIndex:(NSUInteger)index;
+
 @end
