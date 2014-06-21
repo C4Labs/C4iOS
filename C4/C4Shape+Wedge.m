@@ -34,28 +34,31 @@ NSString* const C4ShapeWedgeType = @"wedge";
     self.shapeData = @{
         C4ShapeTypeKey: C4ShapeWedgeType
     };
-
-    CGMutablePathRef newPath = CGPathCreateMutable();
-    //strage, i have to invert the Bool value for clockwise
-    CGPathAddArc(newPath, nil, centerPoint.x, centerPoint.y, radius, startAngle, endAngle, !clockwise);
     
-    CGPathAddLineToPoint(newPath, nil, centerPoint.x, centerPoint.y);
+    // Determine path bounding box
+    CGPathRef tmpPath = [self createPathWithCenter:centerPoint radius:radius startAngle:startAngle endAngle:endAngle clockwise:clockwise transform:NULL];
+    CGRect newFrame = CGPathGetPathBoundingBox(tmpPath);
+    CGPathRelease(tmpPath);
     
-    CGRect arcRect = CGPathGetBoundingBox(newPath);
-    CGPoint origin = arcRect.origin; //preserves the origin
-    const CGAffineTransform translation = CGAffineTransformMakeTranslation(arcRect.origin.x *-1, arcRect.origin.y *-1);
-    CGMutablePathRef translatedPath = CGPathCreateMutableCopyByTransformingPath(newPath, &translation);
+    // Transform points to the new frame
+    CGPoint origin = newFrame.origin;
+    CGAffineTransform t = CGAffineTransformMakeTranslation(-origin.x, -origin.y);
+    
+    // Set new path and frame
+    CGPathRef newPath = [self createPathWithCenter:centerPoint radius:radius startAngle:startAngle endAngle:endAngle clockwise:clockwise transform:&t];
+    self.path = newPath;
+    self.frame = newFrame;
     CGPathRelease(newPath);
     
-    CGPathCloseSubpath(translatedPath);
-    
-    self.path = translatedPath;
-//    [self.animationHelper animateKeyPath:@"path" toValue:(__bridge id)translatedPath];
-    CGRect pathRect = CGPathGetPathBoundingBox(translatedPath);
-    self.bounds = pathRect;
-    CGPathRelease(translatedPath);
-    self.origin = origin;
     self.initialized = YES;
+}
+
+- (CGMutablePathRef)createPathWithCenter:(CGPoint)centerPoint radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise transform:(CGAffineTransform*)t {
+    CGMutablePathRef newPath = CGPathCreateMutable();
+    CGPathAddArc(newPath, t, centerPoint.x, centerPoint.y, radius, startAngle, endAngle, !clockwise);
+    CGPathAddLineToPoint(newPath, t, centerPoint.x, centerPoint.y);
+    CGPathCloseSubpath(newPath);
+    return newPath;
 }
 
 - (BOOL)isWedge {
