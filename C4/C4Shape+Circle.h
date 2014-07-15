@@ -17,16 +17,22 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-#import "C4WorkSpace.h"
+#import "C4Shape.h"
 
-@implementation C4WorkSpace 
+@interface C4Shape (Circle)
 
--(void)setup
-{
-    
-    C4Shape *circle = [C4Shape circleWithCenter:CGPointMake(0,0) radius:150];
-    [self.canvas addControl:circle];
-    
-}
+/**Creates and returns an instance of C4Shape, whose path is a circle.
+ 
+ @param rect A rectangle that defines the shape of a circle.
+ @return The initialized C4Shape object created with a circle or nil if initialization is not successful.
+ */
++ (instancetype)circleWithCenter:(CGPoint)c radius:(float)d;
+
+/**Changes the object's current shape to an circle
+
+ The change will happen based on the shape's current animation options, duration and delay.
+ @param value set that defines the shape of an circle.
+ */
+- (void)circle:(CGRect)rect;
 
 @end

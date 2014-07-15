@@ -17,16 +17,32 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-#import "C4WorkSpace.h"
+#import "C4Shape_Private.h"
+#import "C4Shape+Circle.h"
 
-@implementation C4WorkSpace 
+NSString* const C4ShapeCircleType = @"circle";
 
--(void)setup
+@implementation C4Shape (Circle)
+
++ (instancetype)circleWithCenter:(CGPoint)c radius:(float)r
 {
-    
-    C4Shape *circle = [C4Shape circleWithCenter:CGPointMake(0,0) radius:150];
-    [self.canvas addControl:circle];
-    
+    C4Shape *newShape = [[C4Shape alloc] init];
+    CGRect rect;
+    rect = CGRectMake(c.x,c.y,r*2,r*2);
+    [newShape circle:rect];
+    return newShape;
+}
+
+- (void)circle:(CGRect)rect
+{
+    self.frame = rect;
+    CGRect circleRect = rect;
+    circleRect.origin = CGPointZero;
+    CGMutablePathRef newPath = CGPathCreateMutable();
+    CGPathAddEllipseInRect(newPath, nil, circleRect);
+    self.path = newPath;
+    CGPathRelease(newPath);
+    self.initialized = YES;
 }
 
 @end
