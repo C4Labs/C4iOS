@@ -21,8 +21,12 @@
 
 @implementation C4WorkSpace 
 
--(void)setup {
-    //work your magic here
+-(void)setup
+{
+    
+    C4Shape *circle = [C4Shape circleWithCenter:CGPointMake(0,0) radius:150];
+    [self.canvas addControl:circle];
+    
 }
 
 @end
