@@ -24,7 +24,8 @@ NSString* const C4ShapeCircleType = @"circle";
 
 @implementation C4Shape (Circle)
 
-+ (instancetype)circleWithCenter:(CGPoint)c radius:(float)r {
++ (instancetype)circleWithCenter:(CGPoint)c radius:(float)r
+{
     C4Shape *newShape = [[C4Shape alloc] init];
     CGRect rect;
     rect = CGRectMake(c.x,c.y,r*2,r*2);
@@ -32,23 +33,16 @@ NSString* const C4ShapeCircleType = @"circle";
     return newShape;
 }
 
-- (void)circle:(CGRect)rect {
-    
-    
+- (void)circle:(CGRect)rect
+{
     self.frame = rect;
-    
     CGRect circleRect = rect;
     circleRect.origin = CGPointZero;
-    
     CGMutablePathRef newPath = CGPathCreateMutable();
     CGPathAddEllipseInRect(newPath, nil, circleRect);
     self.path = newPath;
     CGPathRelease(newPath);
-    
     self.initialized = YES;
-
 }
-
-
 
 @end

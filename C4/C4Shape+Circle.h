@@ -29,7 +29,7 @@
 + (instancetype)circleWithCenter:(CGPoint)c radius:(float)d;
 
 /**Changes the object's current shape to an circle
- 
+
  The change will happen based on the shape's current animation options, duration and delay.
  @param value set that defines the shape of an circle.
  */
