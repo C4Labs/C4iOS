@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A3A1F73D1975B406002648EC /* C4Shape+Circle.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A1F73C1975B406002648EC /* C4Shape+Circle.m */; };
 		A972A0E71946D88100AF52B2 /* C4Shape+Ellipse.m in Sources */ = {isa = PBXBuildFile; fileRef = A972A0E61946D88100AF52B2 /* C4Shape+Ellipse.m */; };
 		A972A0EB1946DA8000AF52B2 /* C4Shape+Curve.m in Sources */ = {isa = PBXBuildFile; fileRef = A972A0EA1946DA8000AF52B2 /* C4Shape+Curve.m */; };
 		A972A0EE1946DA9300AF52B2 /* C4Shape+QuadCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = A972A0ED1946DA9300AF52B2 /* C4Shape+QuadCurve.m */; };
@@ -88,6 +89,8 @@
 /* Begin PBXFileReference section */
 		615871EC18D8C8740074E4B6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		615871ED18D8C8740074E4B6 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		A3A1F73B1975B406002648EC /* C4Shape+Circle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "C4Shape+Circle.h"; sourceTree = "<group>"; };
+		A3A1F73C1975B406002648EC /* C4Shape+Circle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "C4Shape+Circle.m"; sourceTree = "<group>"; };
 		A972A0E51946D88100AF52B2 /* C4Shape+Ellipse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "C4Shape+Ellipse.h"; sourceTree = "<group>"; };
 		A972A0E61946D88100AF52B2 /* C4Shape+Ellipse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "C4Shape+Ellipse.m"; sourceTree = "<group>"; };
 		A972A0E81946D9AE00AF52B2 /* C4Shape_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = C4Shape_Private.h; sourceTree = "<group>"; };
@@ -267,6 +270,8 @@
 				A975918F18DC08E800B28F08 /* C4Shape.h */,
 				A975919018DC08E800B28F08 /* C4Shape.m */,
 				A972A0E81946D9AE00AF52B2 /* C4Shape_Private.h */,
+				A3A1F73B1975B406002648EC /* C4Shape+Circle.h */,
+				A3A1F73C1975B406002648EC /* C4Shape+Circle.m */,
 				A972A0F51946DACC00AF52B2 /* C4Shape+Arc.h */,
 				A972A0F61946DACC00AF52B2 /* C4Shape+Arc.m */,
 				A972A0E91946DA8000AF52B2 /* C4Shape+Curve.h */,
@@ -603,6 +608,7 @@
 				A975921518DD10E400B28F08 /* C4UIShapeControl.m in Sources */,
 				A97591CA18DC08E800B28F08 /* C4CanvasController.m in Sources */,
 				A97591D118DC08E800B28F08 /* C4Movie.m in Sources */,
+				A3A1F73D1975B406002648EC /* C4Shape+Circle.m in Sources */,
 				A975925318E3FAB700B28F08 /* C4AnimationHelper.m in Sources */,
 				BED79EBD17F2435500F0F82E /* C4WorkSpace.m in Sources */,
 				A97591D618DC08E800B28F08 /* C4Shape.m in Sources */,
