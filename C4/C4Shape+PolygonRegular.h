@@ -19,14 +19,16 @@
 
 #import "C4Shape.h"
 
-extern NSString* const C4ShapeTypeKey;
+@interface C4Shape (PolygonRegular)
 
+/** Creates and returns an instance of C4Shape, whose path is a regular polygon. 
+ */
 
-@interface C4Shape ()
++ (instancetype)polygonRegularWithCenter:(CGPoint)c sideLength:(float)l numberOfSides:(int)n eulerAnglePolyIsRotated:(float)e;
 
-@property(nonatomic) BOOL initialized;
+/** Changes the object's current shape to a regular polygon. 
+ */
 
-/** Used to store data specific to the current shape. */
-@property(nonatomic, strong) NSDictionary* shapeData;
+- (void)polygonRegular:(CGPoint *)points pointCount:(int)n;
 
 @end

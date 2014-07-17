@@ -21,7 +21,6 @@
 #import "C4Shape+Circle.h"
 
 NSString* const C4ShapeCircleType = @"circle";
-
 @implementation C4Shape (Circle)
 
 + (instancetype)circleWithCenter:(CGPoint)c radius:(float)r
