@@ -25,45 +25,42 @@ NSString* const C4ShapePolygonRegularType = @"polygon";
 
 @implementation C4Shape (PolygonRegular)
 
-+ (instancetype)polygonRegularWithCenter:(CGPoint)c sideLength:(float)l numberOfSides:(int)n eulerAnglePolyIsRotated:(float)e
-{
-    // This is a special case of a polygon.
-    float r = l/(2 * sin(DegreesToRadians(180.0f)/n));
-    if (n < 3)
-        n = 3;
-    if (n > 2048)
-        n = 2048;
-    CGPoint pointArray[n];
++ (instancetype)polygonRegularWithCenter:(CGPoint)center sideLength:(float)length numberOfSides:(int)numberOfSides eulerAnglePolyIsRotated:(float)euler{
+    float radius = length/(2 * sin(DegreesToRadians(180.0f)/numberOfSides));
+    if (numberOfSides < 3)
+        numberOfSides = 3;
+    if (numberOfSides > 2048)
+        numberOfSides = 2048;
+    CGPoint pointArray[numberOfSides];
     CGPoint start;
     CGPoint next;
-    e = e + ((360.0f/n)/2);
-    start.x = c.x - r * cos(DegreesToRadians(e));
-    start.y = c.y + r * sin(DegreesToRadians(e));
+    euler = euler + ((360.0f/numberOfSides)/2);
+    start.x = center.x - radius * cos(DegreesToRadians(euler));
+    start.y = center.y + radius * sin(DegreesToRadians(euler));
     pointArray[0] = start;
-    for (NSInteger i = 1; i < n; i += 1)
+    for (NSInteger i = 1; i < numberOfSides; i += 1)
     {
         if (i == 1 )
         {
-            e = e + 180.0f - ((360.0f/n)/2);
-            next.x = start.x - l * cos(DegreesToRadians(e));
-            next.y = start.y + l * sin(DegreesToRadians(e));
+            euler = euler + 180.0f - ((360.0f/numberOfSides)/2);
+            next.x = start.x - length * cos(DegreesToRadians(euler));
+            next.y = start.y + length * sin(DegreesToRadians(euler));
         }
-        if (i != 1 )
+        else
         {
-            e = e + (360.0f/n);
-            next.x = next.x - l * cos(DegreesToRadians(e));
-            next.y = next.y + l * sin(DegreesToRadians(e));
+            euler = euler + (360.0f/numberOfSides);
+            next.x = next.x - length * cos(DegreesToRadians(euler));
+            next.y = next.y + length * sin(DegreesToRadians(euler));
         }
         pointArray[i] = next;
     }
     C4Shape *newShape = [[C4Shape alloc] init];
-    [newShape polygonRegular:(CGPoint*)pointArray pointCount:n];
+    [newShape polygonRegular:(CGPoint*)pointArray pointCount:numberOfSides];
     return newShape;
 }
 
-- (void)polygonRegular:(CGPoint *)points pointCount:(int)n
-{
-    [self polygon:points pointCount:n];
+- (void)polygonRegular:(CGPoint *)points pointCount:(int)numberOfSides{
+    [self polygon:points pointCount:numberOfSides];
     [self closeShape];
     NSMutableDictionary* data = [self.shapeData mutableCopy];
     [data setObject:C4ShapePolygonRegularType forKey:C4ShapeTypeKey];
