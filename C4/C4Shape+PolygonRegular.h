@@ -24,11 +24,11 @@
 /** Creates and returns an instance of C4Shape, whose path is a regular polygon
  */
 
-+ (instancetype)polygonRegularWithCenter:(CGPoint)c sideLength:(float)l numberOfSides:(int)n eulerAnglePolyIsRotated:(float)e;
++ (instancetype)polygonRegularWithCenter:(CGPoint)center sideLength:(float)length numberOfSides:(int)numberOfSides eulerAnglePolyIsRotated:(float)euler;
 
 /** Changes the object's current shape to a regular polygon. 
  */
 
-- (void)polygonRegular:(CGPoint *)points pointCount:(int)n;
+- (void)polygonRegular:(CGPoint *)points pointCount:(int)numberOfSides;
 
 @end
