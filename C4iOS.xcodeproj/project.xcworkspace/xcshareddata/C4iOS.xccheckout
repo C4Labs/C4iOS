@@ -5,36 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>E273B35D-39BD-4AFF-89FC-7B47CF27BBA6</string>
+	<string>7FD64DFF-2C13-42FA-AFE5-989CC5F356E7</string>
 	<key>IDESourceControlProjectName</key>
 	<string>C4iOS</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>733F0217-A530-488E-9907-9D440AEF7FF4</key>
-		<string>https://github.com/C4Framework/C4iOS.git</string>
+		<key>CFEDBCB0-5E59-46F2-BD62-2DCE1297BD46</key>
+		<string>https://github.com/LukeTurvey/C4iOS</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>C4iOS.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>733F0217-A530-488E-9907-9D440AEF7FF4</key>
+		<key>CFEDBCB0-5E59-46F2-BD62-2DCE1297BD46</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/C4Framework/C4iOS.git</string>
+	<string>https://github.com/LukeTurvey/C4iOS</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>733F0217-A530-488E-9907-9D440AEF7FF4</string>
+	<string>CFEDBCB0-5E59-46F2-BD62-2DCE1297BD46</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>733F0217-A530-488E-9907-9D440AEF7FF4</string>
+			<string>CFEDBCB0-5E59-46F2-BD62-2DCE1297BD46</string>
 			<key>IDESourceControlWCCName</key>
-			<string>C4iOS</string>
+			<string>polygonRegular</string>
 		</dict>
 	</array>
 </dict>
