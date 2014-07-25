@@ -29,6 +29,6 @@
 /** Changes the object's current shape to a polygon defined by side length.
  */
 
-- (void)polygonBySideLength:(CGPoint *)points pointCount:(int)numberOfSides;
+- (void)polygonBySideLength:(CGPoint *)points pointCount:(int)pointCount;
 
 @end

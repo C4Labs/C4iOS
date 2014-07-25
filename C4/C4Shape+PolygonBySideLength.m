@@ -21,38 +21,35 @@
 #import "C4Shape_Private.h"
 #import "C4Shape+Polygon.h"
 
-NSString* const C4ShapePolygonBySideLengthType = @"equilateralPolygon";
-
 @implementation C4Shape (PolygonBySideLength)
 
 + (instancetype)polygonBySideLength:(float)length center:(CGPoint)center numberOfSides:(int)numberOfSides{
-    //enforce minimum sides to avoid exception cases
-    if (numberOfSides < 2)
-        numberOfSides = 2;
-    //begin math to draw the equilateral polygon
-    CGPoint pointArray[numberOfSides];
-    float angle;
+    //math to set polygon to draw around the center point
+    float angle = 180/numberOfSides;
+    float radius = length/(2 * sin(DegreesToRadians(angle)));
+    center.y = center.y - radius;
+    //math to draw the equilateral polygon
+    int pointCount = numberOfSides + 1;
+    CGPoint pointArray[pointCount];
     CGPoint next = center;
-    for (NSInteger i = 0; i < numberOfSides; i += 1){
+    pointArray[0] = center;
+    for (NSInteger i = 1; i <= numberOfSides; i += 1){
         if (i == 1)
             angle = (360.0f/numberOfSides)/2;
         else
             angle = angle + (360.0f/numberOfSides);
-        next.x = next.x + length * cos(DegreesToRadians(angle));
-        next.y = next.y + length * sin(DegreesToRadians(angle));
+        next.x = next.x  + length * cos(DegreesToRadians(angle));
+        next.y = next.y  + length * sin(DegreesToRadians(angle));
         pointArray[i] = next;
     }
     C4Shape *newShape = [[C4Shape alloc] init];
-    [newShape polygonBySideLength:(CGPoint*)pointArray pointCount:numberOfSides];
+    [newShape polygon:(CGPoint*)pointArray pointCount:pointCount];
     return newShape;
 }
 
-- (void)polygonBySideLength:(CGPoint *)points pointCount:(int)numberOfSides{
-    [self polygon:points pointCount:numberOfSides];
-    [self closeShape];
-    NSMutableDictionary* data = [self.shapeData mutableCopy];
-    [data setObject:C4ShapePolygonBySideLengthType forKey:C4ShapeTypeKey];
-    self.shapeData = data;
+- (void)polygonBySideLength:(CGPoint *)points pointCount:(int)pointCount{
+    // This is a special case of a polygon
+    [self polygon:points pointCount:pointCount];
 }
 
 @end
