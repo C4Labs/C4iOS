@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A31159D81980B8A200BAD691 /* C4Shape+PolygonBySideLength.m in Sources */ = {isa = PBXBuildFile; fileRef = A31159D71980B8A200BAD691 /* C4Shape+PolygonBySideLength.m */; };
 		A3A1F73D1975B406002648EC /* C4Shape+Circle.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A1F73C1975B406002648EC /* C4Shape+Circle.m */; };
 		A972A0E71946D88100AF52B2 /* C4Shape+Ellipse.m in Sources */ = {isa = PBXBuildFile; fileRef = A972A0E61946D88100AF52B2 /* C4Shape+Ellipse.m */; };
 		A972A0EB1946DA8000AF52B2 /* C4Shape+Curve.m in Sources */ = {isa = PBXBuildFile; fileRef = A972A0EA1946DA8000AF52B2 /* C4Shape+Curve.m */; };
@@ -89,6 +90,8 @@
 /* Begin PBXFileReference section */
 		615871EC18D8C8740074E4B6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		615871ED18D8C8740074E4B6 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		A31159D61980B8A200BAD691 /* C4Shape+PolygonBySideLength.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "C4Shape+PolygonBySideLength.h"; sourceTree = "<group>"; };
+		A31159D71980B8A200BAD691 /* C4Shape+PolygonBySideLength.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "C4Shape+PolygonBySideLength.m"; sourceTree = "<group>"; };
 		A3A1F73B1975B406002648EC /* C4Shape+Circle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "C4Shape+Circle.h"; sourceTree = "<group>"; };
 		A3A1F73C1975B406002648EC /* C4Shape+Circle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "C4Shape+Circle.m"; sourceTree = "<group>"; };
 		A972A0E51946D88100AF52B2 /* C4Shape+Ellipse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "C4Shape+Ellipse.h"; sourceTree = "<group>"; };
@@ -267,29 +270,31 @@
 				A975918A18DC08E800B28F08 /* C4Object.m */,
 				A975918B18DC08E800B28F08 /* C4Sample.h */,
 				A975918C18DC08E800B28F08 /* C4Sample.m */,
+				A972A0F51946DACC00AF52B2 /* C4Shape+Arc.h */,
+				A972A0F61946DACC00AF52B2 /* C4Shape+Arc.m */,
+				A3A1F73B1975B406002648EC /* C4Shape+Circle.h */,
+				A3A1F73C1975B406002648EC /* C4Shape+Circle.m */,
+				A972A0E91946DA8000AF52B2 /* C4Shape+Curve.h */,
+				A972A0EA1946DA8000AF52B2 /* C4Shape+Curve.m */,
+				A972A0E51946D88100AF52B2 /* C4Shape+Ellipse.h */,
+				A972A0E61946D88100AF52B2 /* C4Shape+Ellipse.m */,
+				A972A0FE1946DAFC00AF52B2 /* C4Shape+Line.h */,
+				A972A0FF1946DAFC00AF52B2 /* C4Shape+Line.m */,
+				A972A0EF1946DAA200AF52B2 /* C4Shape+Polygon.h */,
+				A972A0F01946DAA200AF52B2 /* C4Shape+Polygon.m */,
+				A31159D61980B8A200BAD691 /* C4Shape+PolygonBySideLength.h */,
+				A31159D71980B8A200BAD691 /* C4Shape+PolygonBySideLength.m */,
+				A972A0EC1946DA9300AF52B2 /* C4Shape+QuadCurve.h */,
+				A972A0ED1946DA9300AF52B2 /* C4Shape+QuadCurve.m */,
+				A972A0F21946DABA00AF52B2 /* C4Shape+String.h */,
+				A972A0F31946DABA00AF52B2 /* C4Shape+String.m */,
+				A972A0FB1946DAEA00AF52B2 /* C4Shape+Triangle.h */,
+				A972A0FC1946DAEA00AF52B2 /* C4Shape+Triangle.m */,
+				A972A0F81946DAD900AF52B2 /* C4Shape+Wedge.h */,
+				A972A0F91946DAD900AF52B2 /* C4Shape+Wedge.m */,
 				A975918F18DC08E800B28F08 /* C4Shape.h */,
 				A975919018DC08E800B28F08 /* C4Shape.m */,
 				A972A0E81946D9AE00AF52B2 /* C4Shape_Private.h */,
-				A3A1F73B1975B406002648EC /* C4Shape+Circle.h */,
-				A3A1F73C1975B406002648EC /* C4Shape+Circle.m */,
-				A972A0F51946DACC00AF52B2 /* C4Shape+Arc.h */,
-				A972A0F61946DACC00AF52B2 /* C4Shape+Arc.m */,
-				A972A0E91946DA8000AF52B2 /* C4Shape+Curve.h */,
-				A972A0EA1946DA8000AF52B2 /* C4Shape+Curve.m */,
-				A972A0EC1946DA9300AF52B2 /* C4Shape+QuadCurve.h */,
-				A972A0ED1946DA9300AF52B2 /* C4Shape+QuadCurve.m */,
-				A972A0E51946D88100AF52B2 /* C4Shape+Ellipse.h */,
-				A972A0E61946D88100AF52B2 /* C4Shape+Ellipse.m */,
-				A972A0EF1946DAA200AF52B2 /* C4Shape+Polygon.h */,
-				A972A0F01946DAA200AF52B2 /* C4Shape+Polygon.m */,
-				A972A0FE1946DAFC00AF52B2 /* C4Shape+Line.h */,
-				A972A0FF1946DAFC00AF52B2 /* C4Shape+Line.m */,
-				A972A0FB1946DAEA00AF52B2 /* C4Shape+Triangle.h */,
-				A972A0FC1946DAEA00AF52B2 /* C4Shape+Triangle.m */,
-				A972A0F21946DABA00AF52B2 /* C4Shape+String.h */,
-				A972A0F31946DABA00AF52B2 /* C4Shape+String.m */,
-				A972A0F81946DAD900AF52B2 /* C4Shape+Wedge.h */,
-				A972A0F91946DAD900AF52B2 /* C4Shape+Wedge.m */,
 				A97591A118DC08E800B28F08 /* Categories */,
 				A97591A418DC08E800B28F08 /* GL */,
 				A97591AF18DC08E800B28F08 /* Protocols */,
@@ -604,6 +609,7 @@
 				A97591E518DC08E800B28F08 /* C4AssertionHandler.m in Sources */,
 				A975923318DD194400B28F08 /* C4Stepper.m in Sources */,
 				A972A1001946DAFC00AF52B2 /* C4Shape+Line.m in Sources */,
+				A31159D81980B8A200BAD691 /* C4Shape+PolygonBySideLength.m in Sources */,
 				BED79E3817F2435400F0F82E /* main.m in Sources */,
 				A975921518DD10E400B28F08 /* C4UIShapeControl.m in Sources */,
 				A97591CA18DC08E800B28F08 /* C4CanvasController.m in Sources */,
