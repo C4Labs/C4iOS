@@ -23,28 +23,57 @@
 
 @implementation C4Shape (PolygonBySideLength)
 
-+ (instancetype)polygonBySideLength:(float)length center:(CGPoint)center numberOfSides:(int)numberOfSides{
++ (instancetype)polygonBySideLength:(float)length center:(CGPoint)center numberOfSides:(int)numberOfSides optionalStarArm:(float)optionalStarArm{
     //math to set polygon to draw around the center point
-    float angle = 180/numberOfSides;
-    float radius = length/(2 * sin(DegreesToRadians(angle)));
+    double angle = 180.0f/numberOfSides;
+    double radius = length/(2 * sin(DegreesToRadians(angle)));
     center.y = center.y - radius;
     
-    //add two points to properly join our end of path
-    int pointCount = numberOfSides + 2;
+    //add two points to properly join our end of path and set up star geometry if needed
+    int pointCount;
+    double starSide;
+    double starBaseAngle;
+    double starPointAngle;
+    if (optionalStarArm > 0) {
+        pointCount = (2 * numberOfSides) + 2;
+        starSide = sqrt(pow(length*0.5f, 2.0) + pow(optionalStarArm, 2.0));
+        starBaseAngle = (asin(optionalStarArm/starSide) * 180) / PI;
+        starPointAngle = (180.0f - (starBaseAngle + 90.0f)) * 2;
+    }
+    else
+        pointCount = numberOfSides + 2;
     
     //math for mapping our equilateral polygon
     CGPoint pointArray[pointCount];
     CGPoint next = center;
     pointArray[0] = center;
-    for (NSInteger i = 1; i <= numberOfSides + 1; i += 1){
+    for (NSInteger i = 1; i <= pointCount - 1; i += 1){
         if (i == 1)
             angle = (360.0f/numberOfSides)/2;
-        else
-            angle = angle + (360.0f/numberOfSides);
-        next.x = next.x  + length * cos(DegreesToRadians(angle));
-        next.y = next.y  + length * sin(DegreesToRadians(angle));
-        pointArray[i] = next;
+        
+        //do simple loop for non-star polygons
+        if (optionalStarArm == 0) {
+            angle = angle + (360.0/numberOfSides);
+            next.x = next.x  + length * cos(DegreesToRadians(angle));
+            next.y = next.y  + length * sin(DegreesToRadians(angle));
         }
+        
+        //alternate inward points and outward points for star polygons
+        else {
+            if (i % 2 == 0) {
+                next.x = (double)(next.x  + starSide * cos(((180.0 + angle - starPointAngle- starBaseAngle)*PI)/180));
+                next.y = (double)(next.y  + starSide * sin(((180.0 + angle - starPointAngle- starBaseAngle)*PI)/180));
+            }
+            
+            else {
+                angle = angle + (360.0/numberOfSides);
+                next.x = (double)(next.x  + starSide * cos(((angle - starBaseAngle)*PI)/180));
+                next.y = (double)(next.y  + starSide * sin(((angle - starBaseAngle)*PI)/180));
+            }
+        }
+        pointArray[i] = next;
+    }
+
     C4Shape *newShape = [[C4Shape alloc] init];
     [newShape polygon:(CGPoint*)pointArray pointCount:pointCount];
     return newShape;

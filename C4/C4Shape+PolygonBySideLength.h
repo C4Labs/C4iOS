@@ -24,7 +24,7 @@
 /** Creates and returns an instance of C4Shape, whose path is a polygon defined by side length.
  */
 
-+ (instancetype)polygonBySideLength:(float)length center:(CGPoint)center numberOfSides:(int)numberOfSides;
++ (instancetype)polygonBySideLength:(float)length center:(CGPoint)center numberOfSides:(int)numberOfSides optionalStarArm:(float)optionalStarArm;
 
 /** Changes the object's current shape to a polygon defined by side length.
  */
