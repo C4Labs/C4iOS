@@ -37,13 +37,13 @@
     const CGFloat radius = length / (2.0 * sin(wedgeAngle/2.0));
     
     CGFloat angle = 0;
-    CGPoint pointArray[numberOfSides + 1];
-    for (NSUInteger side = 0; side <= numberOfSides; side += 1) {
+    CGPoint pointArray[numberOfSides];
+    for (NSUInteger side = 0; side < numberOfSides; side += 1) {
         pointArray[side] = CGPointMake(center.x + radius * cos(angle), center.y + radius * sin(angle));
         angle += wedgeAngle;
     }
     
-    [self polygon:pointArray pointCount:numberOfSides + 1 closed:YES];
+    [self polygon:pointArray pointCount:numberOfSides closed:YES];
 }
 
 @end
