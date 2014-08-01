@@ -17,33 +17,40 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-#import "C4Shape+RegularPolygon.h"
+#import "C4Shape+Star.h"
 #import "C4Shape_Private.h"
 #import "C4Shape+Polygon.h"
 
-@implementation C4Shape (RegularPolygon)
+@implementation C4Shape (Star)
 
-+ (instancetype)regularPolygonWithNumberOfSides:(NSUInteger)numberOfSides sideLength:(CGFloat)length center:(CGPoint)center {
++ (instancetype)starWithNumberOfPoints:(int)numberOfPoints innerRadius:(float)innerRadius outerRadius:(float)outerRadius center:(CGPoint)center {
     C4Shape* shape = [[C4Shape alloc] init];
-    [shape regularPolygonWithNumberOfSides:numberOfSides sideLength:length center:center];
+    [shape starWithNumberOfPoints:numberOfPoints innerRadius:innerRadius outerRadius:outerRadius center:center];
     return shape;
 }
 
-- (void)regularPolygonWithNumberOfSides:(NSUInteger)numberOfSides sideLength:(CGFloat)length center:(CGPoint)center {
-    NSParameterAssert(numberOfSides > 2);
+- (void)starWithNumberOfPoints:(NSUInteger)numberOfPoints innerRadius:(float)innerRadius outerRadius:(float)outerRadius center:(CGPoint)center {
+    NSParameterAssert(numberOfPoints > 2);
+    
+    double length = 2*innerRadius * sin(DegreesToRadians(180/numberOfPoints));
+    
     NSParameterAssert(length > 0.0);
     
-    const CGFloat wedgeAngle = 2.0*M_PI / numberOfSides;
-    const CGFloat radius = length / (2.0 * sin(wedgeAngle/2.0));
+    const CGFloat wedgeAngle = 2.0*M_PI / numberOfPoints;
     
-    CGFloat angle = -0.5*M_PI;
-    CGPoint pointArray[numberOfSides];
-    for (NSUInteger side = 0; side < numberOfSides; side += 1) {
-        pointArray[side] = CGPointMake(center.x + radius * cos(angle), center.y + radius * sin(angle));
-        angle += wedgeAngle;
+    CGFloat angle = 0.5*M_PI;
+    CGPoint pointArray[numberOfPoints*2];
+    for (NSUInteger side = 0; side < numberOfPoints*2; side += 1) {
+        angle += wedgeAngle*0.5;
+        if (side % 2 != 0) {
+            pointArray[side] = CGPointMake(center.x + innerRadius * cos(angle), center.y + innerRadius * sin(angle));
+        }
+        else {
+            pointArray[side] = CGPointMake(center.x + outerRadius * cos(angle), center.y + outerRadius * sin(angle));
+        }
     }
     
-    [self polygon:pointArray pointCount:numberOfSides closed:YES];
+    [self polygon:pointArray pointCount:numberOfPoints*2 closed:YES];
 }
 
 @end

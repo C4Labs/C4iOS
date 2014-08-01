@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A39AF3ED19847B5900E2419A /* C4Shape+RegularPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = A39AF3EC19847B5900E2419A /* C4Shape+RegularPolygon.m */; };
 		A3A1F73D1975B406002648EC /* C4Shape+Circle.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A1F73C1975B406002648EC /* C4Shape+Circle.m */; };
+		A3EC3F32198BA46400E3D95D /* C4Shape+Star.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EC3F31198BA46400E3D95D /* C4Shape+Star.m */; };
 		A972A0E71946D88100AF52B2 /* C4Shape+Ellipse.m in Sources */ = {isa = PBXBuildFile; fileRef = A972A0E61946D88100AF52B2 /* C4Shape+Ellipse.m */; };
 		A972A0EB1946DA8000AF52B2 /* C4Shape+Curve.m in Sources */ = {isa = PBXBuildFile; fileRef = A972A0EA1946DA8000AF52B2 /* C4Shape+Curve.m */; };
 		A972A0EE1946DA9300AF52B2 /* C4Shape+QuadCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = A972A0ED1946DA9300AF52B2 /* C4Shape+QuadCurve.m */; };
@@ -94,6 +95,8 @@
 		A39AF3EC19847B5900E2419A /* C4Shape+RegularPolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "C4Shape+RegularPolygon.m"; sourceTree = "<group>"; };
 		A3A1F73B1975B406002648EC /* C4Shape+Circle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "C4Shape+Circle.h"; sourceTree = "<group>"; };
 		A3A1F73C1975B406002648EC /* C4Shape+Circle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "C4Shape+Circle.m"; sourceTree = "<group>"; };
+		A3EC3F30198BA46400E3D95D /* C4Shape+Star.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "C4Shape+Star.h"; sourceTree = "<group>"; };
+		A3EC3F31198BA46400E3D95D /* C4Shape+Star.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "C4Shape+Star.m"; sourceTree = "<group>"; };
 		A972A0E51946D88100AF52B2 /* C4Shape+Ellipse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "C4Shape+Ellipse.h"; sourceTree = "<group>"; };
 		A972A0E61946D88100AF52B2 /* C4Shape+Ellipse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "C4Shape+Ellipse.m"; sourceTree = "<group>"; };
 		A972A0E81946D9AE00AF52B2 /* C4Shape_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = C4Shape_Private.h; sourceTree = "<group>"; };
@@ -301,6 +304,8 @@
 				A975921C18DD194400B28F08 /* UI */,
 				A975920918DC997800B28F08 /* UIKit */,
 				A97591B518DC08E800B28F08 /* Util */,
+				A3EC3F30198BA46400E3D95D /* C4Shape+Star.h */,
+				A3EC3F31198BA46400E3D95D /* C4Shape+Star.m */,
 			);
 			path = C4;
 			sourceTree = "<group>";
@@ -613,6 +618,7 @@
 				BED79E3817F2435400F0F82E /* main.m in Sources */,
 				A975921518DD10E400B28F08 /* C4UIShapeControl.m in Sources */,
 				A97591CA18DC08E800B28F08 /* C4CanvasController.m in Sources */,
+				A3EC3F32198BA46400E3D95D /* C4Shape+Star.m in Sources */,
 				A97591D118DC08E800B28F08 /* C4Movie.m in Sources */,
 				A3A1F73D1975B406002648EC /* C4Shape+Circle.m in Sources */,
 				A975925318E3FAB700B28F08 /* C4AnimationHelper.m in Sources */,
