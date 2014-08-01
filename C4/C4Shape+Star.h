@@ -17,33 +17,16 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-#import "C4Shape+RegularPolygon.h"
-#import "C4Shape_Private.h"
-#import "C4Shape+Polygon.h"
+#import "C4Shape.h"
 
-@implementation C4Shape (RegularPolygon)
+@interface C4Shape (Star)
 
-+ (instancetype)regularPolygonWithNumberOfSides:(NSUInteger)numberOfSides sideLength:(CGFloat)length center:(CGPoint)center {
-    C4Shape* shape = [[C4Shape alloc] init];
-    [shape regularPolygonWithNumberOfSides:numberOfSides sideLength:length center:center];
-    return shape;
-}
+/** Creates and returns an instance of C4Shape, whose path is a star.
+ */
++ (instancetype)starWithNumberOfPoints:(int)numberOfPoints innerRadius:(float)innerRadius outerRadius:(float)outerRadius center:(CGPoint)center;
 
-- (void)regularPolygonWithNumberOfSides:(NSUInteger)numberOfSides sideLength:(CGFloat)length center:(CGPoint)center {
-    NSParameterAssert(numberOfSides > 2);
-    NSParameterAssert(length > 0.0);
-    
-    const CGFloat wedgeAngle = 2.0*M_PI / numberOfSides;
-    const CGFloat radius = length / (2.0 * sin(wedgeAngle/2.0));
-    
-    CGFloat angle = -0.5*M_PI;
-    CGPoint pointArray[numberOfSides];
-    for (NSUInteger side = 0; side < numberOfSides; side += 1) {
-        pointArray[side] = CGPointMake(center.x + radius * cos(angle), center.y + radius * sin(angle));
-        angle += wedgeAngle;
-    }
-    
-    [self polygon:pointArray pointCount:numberOfSides closed:YES];
-}
+/** Changes the object's current shape to a star.
+ */
+- (void)starWithNumberOfPoints:(NSUInteger)numberOfPoints innerRadius:(float)innerRadius outerRadius:(float)outerRadius center:(CGPoint)center;
 
 @end

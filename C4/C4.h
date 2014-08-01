@@ -58,6 +58,7 @@
 #import "C4Shape+RegularPolygon.h"
 #import "C4Shape+Line.h"
 #import "C4Shape+Triangle.h"
+#import "C4Shape+Star.h"
 #import "C4Shape+String.h"
 #import "C4Shape+Wedge.h"
 
