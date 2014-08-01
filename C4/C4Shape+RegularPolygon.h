@@ -17,31 +17,16 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-#import "C4Shape_Private.h"
-#import "C4Shape+Triangle.h"
-#import "C4Shape+Polygon.h"
+#import "C4Shape.h"
 
-NSString* const C4ShapeTriangleType = @"curve";
+@interface C4Shape (RegularPolygon)
 
-@implementation C4Shape (Triangle)
+/** Creates and returns an instance of C4Shape, whose path is a regular polygon.
+ */
++ (instancetype)regularPolygonWithNumberOfSides:(NSUInteger)numberOfSides sideLength:(CGFloat)length center:(CGPoint)center;
 
-+ (instancetype)triangle:(CGPoint *)pointArray {
-    C4Shape *newShape = [[C4Shape alloc] init];
-    [newShape triangle:pointArray];
-    return newShape;
-}
-
-- (void)triangle:(CGPoint *)points {
-    // This is a special case of a polygon
-    [self polygon:points pointCount:3 closed:YES];
-    [self closeShape];
-    NSMutableDictionary* data = [self.shapeData mutableCopy];
-    [data setObject:C4ShapeTriangleType forKey:C4ShapeTypeKey];
-    self.shapeData = data;
-}
-
-- (BOOL)isTriangle {
-    return [[self.shapeData objectForKey:C4ShapeTypeKey] isEqualToString:C4ShapeTriangleType];
-}
+/** Changes the object's current shape to a regular polygon.
+ */
+- (void)regularPolygonWithNumberOfSides:(NSUInteger)numberOfSides sideLength:(CGFloat)length center:(CGPoint)center;
 
 @end

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A39AF3ED19847B5900E2419A /* C4Shape+PolygonBySideLength.m in Sources */ = {isa = PBXBuildFile; fileRef = A39AF3EC19847B5900E2419A /* C4Shape+PolygonBySideLength.m */; };
+		A39AF3ED19847B5900E2419A /* C4Shape+RegularPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = A39AF3EC19847B5900E2419A /* C4Shape+RegularPolygon.m */; };
 		A3A1F73D1975B406002648EC /* C4Shape+Circle.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A1F73C1975B406002648EC /* C4Shape+Circle.m */; };
 		A972A0E71946D88100AF52B2 /* C4Shape+Ellipse.m in Sources */ = {isa = PBXBuildFile; fileRef = A972A0E61946D88100AF52B2 /* C4Shape+Ellipse.m */; };
 		A972A0EB1946DA8000AF52B2 /* C4Shape+Curve.m in Sources */ = {isa = PBXBuildFile; fileRef = A972A0EA1946DA8000AF52B2 /* C4Shape+Curve.m */; };
@@ -90,8 +90,8 @@
 /* Begin PBXFileReference section */
 		615871EC18D8C8740074E4B6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		615871ED18D8C8740074E4B6 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		A39AF3EB19847B5900E2419A /* C4Shape+PolygonBySideLength.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "C4Shape+PolygonBySideLength.h"; sourceTree = "<group>"; };
-		A39AF3EC19847B5900E2419A /* C4Shape+PolygonBySideLength.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "C4Shape+PolygonBySideLength.m"; sourceTree = "<group>"; };
+		A39AF3EB19847B5900E2419A /* C4Shape+RegularPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "C4Shape+RegularPolygon.h"; sourceTree = "<group>"; };
+		A39AF3EC19847B5900E2419A /* C4Shape+RegularPolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "C4Shape+RegularPolygon.m"; sourceTree = "<group>"; };
 		A3A1F73B1975B406002648EC /* C4Shape+Circle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "C4Shape+Circle.h"; sourceTree = "<group>"; };
 		A3A1F73C1975B406002648EC /* C4Shape+Circle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "C4Shape+Circle.m"; sourceTree = "<group>"; };
 		A972A0E51946D88100AF52B2 /* C4Shape+Ellipse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "C4Shape+Ellipse.h"; sourceTree = "<group>"; };
@@ -285,6 +285,8 @@
 				A972A0E61946D88100AF52B2 /* C4Shape+Ellipse.m */,
 				A972A0EF1946DAA200AF52B2 /* C4Shape+Polygon.h */,
 				A972A0F01946DAA200AF52B2 /* C4Shape+Polygon.m */,
+				A39AF3EB19847B5900E2419A /* C4Shape+RegularPolygon.h */,
+				A39AF3EC19847B5900E2419A /* C4Shape+RegularPolygon.m */,
 				A972A0FE1946DAFC00AF52B2 /* C4Shape+Line.h */,
 				A972A0FF1946DAFC00AF52B2 /* C4Shape+Line.m */,
 				A972A0FB1946DAEA00AF52B2 /* C4Shape+Triangle.h */,
@@ -299,8 +301,6 @@
 				A975921C18DD194400B28F08 /* UI */,
 				A975920918DC997800B28F08 /* UIKit */,
 				A97591B518DC08E800B28F08 /* Util */,
-				A39AF3EB19847B5900E2419A /* C4Shape+PolygonBySideLength.h */,
-				A39AF3EC19847B5900E2419A /* C4Shape+PolygonBySideLength.m */,
 			);
 			path = C4;
 			sourceTree = "<group>";
@@ -609,7 +609,7 @@
 				A97591E518DC08E800B28F08 /* C4AssertionHandler.m in Sources */,
 				A975923318DD194400B28F08 /* C4Stepper.m in Sources */,
 				A972A1001946DAFC00AF52B2 /* C4Shape+Line.m in Sources */,
-				A39AF3ED19847B5900E2419A /* C4Shape+PolygonBySideLength.m in Sources */,
+				A39AF3ED19847B5900E2419A /* C4Shape+RegularPolygon.m in Sources */,
 				BED79E3817F2435400F0F82E /* main.m in Sources */,
 				A975921518DD10E400B28F08 /* C4UIShapeControl.m in Sources */,
 				A97591CA18DC08E800B28F08 /* C4CanvasController.m in Sources */,

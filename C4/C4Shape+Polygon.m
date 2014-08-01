@@ -22,34 +22,36 @@
 
 NSString* const C4ShapePolygonType = @"polygon";
 NSString* const C4ShapePolygonPointsKey = @"polygonPoints";
+NSString* const C4ShapePolygonClosedKey = @"polygonClosed";
 
 @implementation C4Shape (Polygon)
 
-+ (instancetype)polygon:(CGPoint *)pointArray pointCount:(NSInteger)pointCount {
++ (instancetype)polygon:(CGPoint *)pointArray pointCount:(NSInteger)pointCount closed:(BOOL)closed {
     C4Shape *newShape = [[C4Shape alloc] init];
-    [newShape polygon:pointArray pointCount:pointCount];
+    [newShape polygon:pointArray pointCount:pointCount closed:closed];
     return newShape;
 }
 
-- (void)polygon:(CGPoint *)pointArray pointCount:(NSInteger)pointCount {
+- (void)polygon:(CGPoint *)pointArray pointCount:(NSInteger)pointCount closed:(BOOL)closed {
     NSMutableArray* array = [NSMutableArray arrayWithCapacity:pointCount];
     for (NSInteger i = 0; i < pointCount; i += 1) {
         [array addObject:[NSValue valueWithCGPoint:pointArray[i]]];
     }
-    [self polygon:array];
+    [self polygon:array closed:closed];
 }
 
-- (void)polygon:(NSArray*)points {
+- (void)polygon:(NSArray*)points closed:(BOOL)closed {
     self.shapeData = @{
         C4ShapeTypeKey: C4ShapePolygonType,
-        C4ShapePolygonPointsKey: points
+        C4ShapePolygonPointsKey: points,
+        C4ShapePolygonClosedKey: @(closed)
     };
     
     [self updatePathWithPoints:points];
     self.initialized = YES;
 }
 
-- (CGPathRef)createPathWithPoints:(NSArray*)points transform:(CGAffineTransform*)t {
+- (CGPathRef)createPathWithPoints:(NSArray*)points closed:(BOOL)closed transform:(CGAffineTransform*)t {
     CGMutablePathRef newPath = CGPathCreateMutable();
     if (points.count > 0) {
         CGPoint point = [points[0] CGPointValue];
@@ -60,11 +62,19 @@ NSString* const C4ShapePolygonPointsKey = @"polygonPoints";
         CGPoint point = [points[i] CGPointValue];
         CGPathAddLineToPoint(newPath, t, point.x, point.y);
     }
+    
+    if (closed)
+        CGPathCloseSubpath(newPath);
+    
     return newPath;
 }
 
 - (BOOL)isPolygon {
     return [[self.shapeData objectForKey:C4ShapeTypeKey] isEqualToString:C4ShapePolygonType];
+}
+
+- (BOOL)isClosed {
+    return [[self.shapeData objectForKey:C4ShapePolygonClosedKey] boolValue];
 }
 
 - (NSArray*)points {
@@ -100,8 +110,10 @@ NSString* const C4ShapePolygonPointsKey = @"polygonPoints";
 }
 
 - (void)updatePathWithPoints:(NSArray*)points {
+    BOOL closed = self.isClosed;
+    
     // Determine path bounding box
-    CGPathRef tmpPath = [self createPathWithPoints:points transform:NULL];
+    CGPathRef tmpPath = [self createPathWithPoints:points closed:closed transform:NULL];
     CGRect newFrame = CGPathGetPathBoundingBox(tmpPath);
     CGPathRelease(tmpPath);
     
@@ -110,7 +122,7 @@ NSString* const C4ShapePolygonPointsKey = @"polygonPoints";
     CGAffineTransform t = CGAffineTransformMakeTranslation(-origin.x, -origin.y);
     
     // Set new path and frame
-    CGPathRef newPath = [self createPathWithPoints:points transform:&t];
+    CGPathRef newPath = [self createPathWithPoints:points closed:closed transform:&t];
     self.path = newPath;
     self.frame = newFrame;
     CGPathRelease(newPath);

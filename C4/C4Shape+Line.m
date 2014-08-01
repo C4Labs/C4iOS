@@ -33,7 +33,7 @@ NSString* const C4ShapeLineType = @"line";
 
 - (void)line:(CGPoint *)points {
     // This is a special case of a polygon
-    [self polygon:points pointCount:2];
+    [self polygon:points pointCount:2 closed:NO];
     
     NSMutableDictionary* data = [self.shapeData mutableCopy];
     [data setObject:C4ShapeLineType forKey:C4ShapeTypeKey];

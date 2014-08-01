@@ -29,7 +29,7 @@
  @param pointCount The number of points in the array.
  @return The initialized C4Shape object created with a polygon path or nil if initialization is not successful.
  */
-+ (instancetype)polygon:(CGPoint *)pointArray pointCount:(NSInteger)pointCount;
++ (instancetype)polygon:(CGPoint *)pointArray pointCount:(NSInteger)pointCount closed:(BOOL)closed;
 
 /**Changes the object's current shape to a polygon
  
@@ -38,9 +38,9 @@
  @param pointArray A C-Array containing any number of CGPoints like: {CGpoint, .. , CGPoint}.
  @param pointCount The number of points in the array.
  */
-- (void)polygon:(CGPoint *)pointArray pointCount:(NSInteger)pointCount;
+- (void)polygon:(CGPoint *)pointArray pointCount:(NSInteger)pointCount closed:(BOOL)closed;
 
-- (void)polygon:(NSArray*)points;
+- (void)polygon:(NSArray*)points closed:(BOOL)closed;
 
 /**Specifies whether the given shape is a polygon.
  */
@@ -51,6 +51,10 @@
 @property(nonatomic, copy, readonly) NSArray* points;
 @property(nonatomic, readonly) CGPoint firstPoint;
 @property(nonatomic, readonly) CGPoint lastPoint;
+
+/**Specified whether the polygon is closed.
+ */
+@property(nonatomic, readonly, getter = isClosed) BOOL closed;
 
 - (CGPoint)pointAtIndex:(NSUInteger)index;
 - (void)setPoint:(CGPoint)point atIndex:(NSUInteger)index;

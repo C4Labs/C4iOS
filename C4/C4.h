@@ -55,7 +55,7 @@
 #import "C4Shape+Ellipse.h"
 #import "C4Shape+Circle.h"
 #import "C4Shape+Polygon.h"
-#import "C4Shape+PolygonBySideLength.h"
+#import "C4Shape+RegularPolygon.h"
 #import "C4Shape+Line.h"
 #import "C4Shape+Triangle.h"
 #import "C4Shape+String.h"

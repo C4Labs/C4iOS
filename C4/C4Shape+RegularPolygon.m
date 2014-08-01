@@ -17,18 +17,33 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-#import "C4Shape.h"
+#import "C4Shape+RegularPolygon.h"
+#import "C4Shape_Private.h"
+#import "C4Shape+Polygon.h"
 
-@interface C4Shape (PolygonBySideLength)
+@implementation C4Shape (PolygonBySideLength)
 
-/** Creates and returns an instance of C4Shape, whose path is a polygon defined by side length.
- */
++ (instancetype)regularPolygonWithNumberOfSides:(NSUInteger)numberOfSides sideLength:(CGFloat)length center:(CGPoint)center {
+    C4Shape* shape = [[C4Shape alloc] init];
+    [shape regularPolygonWithNumberOfSides:numberOfSides sideLength:length center:center];
+    return shape;
+}
 
-+ (instancetype)polygonBySideLength:(float)length center:(CGPoint)center numberOfSides:(int)numberOfSides;
-
-/** Changes the object's current shape to a polygon defined by side length.
- */
-
-- (void)polygonBySideLength:(CGPoint *)points pointCount:(int)pointCount;
+- (void)regularPolygonWithNumberOfSides:(NSUInteger)numberOfSides sideLength:(CGFloat)length center:(CGPoint)center {
+    NSParameterAssert(numberOfSides > 2);
+    NSParameterAssert(length > 0.0);
+    
+    const CGFloat wedgeAngle = 2.0*M_PI / numberOfSides;
+    const CGFloat radius = length / (2.0 * sin(wedgeAngle/2.0));
+    
+    CGFloat angle = 0;
+    CGPoint pointArray[numberOfSides + 1];
+    for (NSUInteger side = 0; side <= numberOfSides; side += 1) {
+        pointArray[side] = CGPointMake(center.x + radius * cos(angle), center.y + radius * sin(angle));
+        angle += wedgeAngle;
+    }
+    
+    [self polygon:pointArray pointCount:numberOfSides + 1 closed:YES];
+}
 
 @end
