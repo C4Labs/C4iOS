@@ -31,9 +31,6 @@
 		A97591D418DC08E800B28F08 /* C4Sample.m in Sources */ = {isa = PBXBuildFile; fileRef = A975918C18DC08E800B28F08 /* C4Sample.m */; };
 		A97591D618DC08E800B28F08 /* C4Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = A975919018DC08E800B28F08 /* C4Shape.m */; };
 		A97591DF18DC08E800B28F08 /* UIColor+CIColorFix.m in Sources */ = {isa = PBXBuildFile; fileRef = A97591A318DC08E800B28F08 /* UIColor+CIColorFix.m */; };
-		A97591E018DC08E800B28F08 /* C4EAGLES1Renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = A97591A618DC08E800B28F08 /* C4EAGLES1Renderer.m */; };
-		A97591E318DC08E800B28F08 /* C4GL.m in Sources */ = {isa = PBXBuildFile; fileRef = A97591AC18DC08E800B28F08 /* C4GL.m */; };
-		A97591E418DC08E800B28F08 /* C4GL1Renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = A97591AE18DC08E800B28F08 /* C4GL1Renderer.m */; };
 		A97591E518DC08E800B28F08 /* C4AssertionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A97591B718DC08E800B28F08 /* C4AssertionHandler.m */; };
 		A97591E618DC08E800B28F08 /* C4Defines.m in Sources */ = {isa = PBXBuildFile; fileRef = A97591B918DC08E800B28F08 /* C4Defines.m */; };
 		A97591E718DC08E800B28F08 /* C4Foundation.m in Sources */ = {isa = PBXBuildFile; fileRef = A97591BB18DC08E800B28F08 /* C4Foundation.m */; };
@@ -140,13 +137,6 @@
 		A975919018DC08E800B28F08 /* C4Shape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4Shape.m; sourceTree = "<group>"; };
 		A97591A218DC08E800B28F08 /* UIColor+CIColorFix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+CIColorFix.h"; sourceTree = "<group>"; };
 		A97591A318DC08E800B28F08 /* UIColor+CIColorFix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CIColorFix.m"; sourceTree = "<group>"; };
-		A97591A518DC08E800B28F08 /* C4EAGLES1Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4EAGLES1Renderer.h; sourceTree = "<group>"; };
-		A97591A618DC08E800B28F08 /* C4EAGLES1Renderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4EAGLES1Renderer.m; sourceTree = "<group>"; };
-		A97591A718DC08E800B28F08 /* C4EAGLESRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4EAGLESRenderer.h; sourceTree = "<group>"; };
-		A97591AB18DC08E800B28F08 /* C4GL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4GL.h; sourceTree = "<group>"; };
-		A97591AC18DC08E800B28F08 /* C4GL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4GL.m; sourceTree = "<group>"; };
-		A97591AD18DC08E800B28F08 /* C4GL1Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4GL1Renderer.h; sourceTree = "<group>"; };
-		A97591AE18DC08E800B28F08 /* C4GL1Renderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4GL1Renderer.m; sourceTree = "<group>"; };
 		A97591B318DC08E800B28F08 /* C4MethodDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4MethodDelay.h; sourceTree = "<group>"; };
 		A97591B418DC08E800B28F08 /* C4Notification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Notification.h; sourceTree = "<group>"; };
 		A97591B618DC08E800B28F08 /* C4AssertionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4AssertionHandler.h; sourceTree = "<group>"; };
@@ -294,18 +284,17 @@
 				A972A0FF1946DAFC00AF52B2 /* C4Shape+Line.m */,
 				A972A0FB1946DAEA00AF52B2 /* C4Shape+Triangle.h */,
 				A972A0FC1946DAEA00AF52B2 /* C4Shape+Triangle.m */,
+				A3EC3F30198BA46400E3D95D /* C4Shape+Star.h */,
+				A3EC3F31198BA46400E3D95D /* C4Shape+Star.m */,
 				A972A0F21946DABA00AF52B2 /* C4Shape+String.h */,
 				A972A0F31946DABA00AF52B2 /* C4Shape+String.m */,
 				A972A0F81946DAD900AF52B2 /* C4Shape+Wedge.h */,
 				A972A0F91946DAD900AF52B2 /* C4Shape+Wedge.m */,
 				A97591A118DC08E800B28F08 /* Categories */,
-				A97591A418DC08E800B28F08 /* GL */,
 				A97591AF18DC08E800B28F08 /* Protocols */,
 				A975921C18DD194400B28F08 /* UI */,
 				A975920918DC997800B28F08 /* UIKit */,
 				A97591B518DC08E800B28F08 /* Util */,
-				A3EC3F30198BA46400E3D95D /* C4Shape+Star.h */,
-				A3EC3F31198BA46400E3D95D /* C4Shape+Star.m */,
 			);
 			path = C4;
 			sourceTree = "<group>";
@@ -319,20 +308,6 @@
 				A97591A318DC08E800B28F08 /* UIColor+CIColorFix.m */,
 			);
 			path = Categories;
-			sourceTree = "<group>";
-		};
-		A97591A418DC08E800B28F08 /* GL */ = {
-			isa = PBXGroup;
-			children = (
-				A97591A718DC08E800B28F08 /* C4EAGLESRenderer.h */,
-				A97591A518DC08E800B28F08 /* C4EAGLES1Renderer.h */,
-				A97591A618DC08E800B28F08 /* C4EAGLES1Renderer.m */,
-				A97591AB18DC08E800B28F08 /* C4GL.h */,
-				A97591AC18DC08E800B28F08 /* C4GL.m */,
-				A97591AD18DC08E800B28F08 /* C4GL1Renderer.h */,
-				A97591AE18DC08E800B28F08 /* C4GL1Renderer.m */,
-			);
-			path = GL;
 			sourceTree = "<group>";
 		};
 		A97591AF18DC08E800B28F08 /* Protocols */ = {
@@ -586,7 +561,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A97591E618DC08E800B28F08 /* C4Defines.m in Sources */,
-				A97591E418DC08E800B28F08 /* C4GL1Renderer.m in Sources */,
 				A975921818DD152D00B28F08 /* C4UIMovieControl.m in Sources */,
 				A97591D318DC08E800B28F08 /* C4Object.m in Sources */,
 				A97591EB18DC08E800B28F08 /* C4Vector.m in Sources */,
@@ -630,8 +604,6 @@
 				A972A0E71946D88100AF52B2 /* C4Shape+Ellipse.m in Sources */,
 				A972A0EE1946DA9300AF52B2 /* C4Shape+QuadCurve.m in Sources */,
 				A972A0F71946DACC00AF52B2 /* C4Shape+Arc.m in Sources */,
-				A97591E018DC08E800B28F08 /* C4EAGLES1Renderer.m in Sources */,
-				A97591E318DC08E800B28F08 /* C4GL.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

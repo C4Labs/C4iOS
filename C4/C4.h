@@ -71,11 +71,5 @@
 #import "C4Stepper.h"
 #import "C4Switch.h"
 
-// OpenGl
-#import "C4EAGLESRenderer.h"
-#import "C4EAGLES1Renderer.h"
-#import "C4GL1Renderer.h"
-#import "C4GL.h"
-
 // Workspace
 #import "C4WorkSpace.h"
