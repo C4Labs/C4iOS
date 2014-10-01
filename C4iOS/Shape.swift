@@ -5,7 +5,7 @@ import QuartzCore
 import UIKit
 
 @IBDesignable
-class ShapeView: UIView {
+class Shape: UIView {
 
     var shapeLayer: CAShapeLayer { get { return layer as CAShapeLayer } }
 

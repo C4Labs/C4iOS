@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		614F824919DB5ED3001DF1D4 /* C4iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 614F824819DB5ED3001DF1D4 /* C4iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		614F825319DB5ED4001DF1D4 /* C4iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614F825219DB5ED4001DF1D4 /* C4iOSTests.swift */; };
-		614F825D19DB5FFD001DF1D4 /* ShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614F825C19DB5FFD001DF1D4 /* ShapeView.swift */; };
+		614F825D19DB5FFD001DF1D4 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614F825C19DB5FFD001DF1D4 /* Shape.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,7 +19,7 @@
 		614F824E19DB5ED4001DF1D4 /* C4iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = C4iOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		614F825119DB5ED4001DF1D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		614F825219DB5ED4001DF1D4 /* C4iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = C4iOSTests.swift; sourceTree = "<group>"; };
-		614F825C19DB5FFD001DF1D4 /* ShapeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeView.swift; sourceTree = "<group>"; };
+		614F825C19DB5FFD001DF1D4 /* Shape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,7 +62,7 @@
 			isa = PBXGroup;
 			children = (
 				614F824819DB5ED3001DF1D4 /* C4iOS.h */,
-				614F825C19DB5FFD001DF1D4 /* ShapeView.swift */,
+				614F825C19DB5FFD001DF1D4 /* Shape.swift */,
 				614F824619DB5ED3001DF1D4 /* Supporting Files */,
 			);
 			path = C4iOS;
@@ -199,7 +199,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				614F825D19DB5FFD001DF1D4 /* ShapeView.swift in Sources */,
+				614F825D19DB5FFD001DF1D4 /* Shape.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
