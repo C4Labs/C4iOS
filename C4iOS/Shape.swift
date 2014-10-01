@@ -175,7 +175,39 @@ class Shape: UIView {
         return CAShapeLayer.self;
     }
 
+    override init(frame: CGRect) {
+        super.init(frame: frame)
 
+        // Set up a default path
+        addCircle(CGPointMake(100, 100), radius: 100)
+    }
+
+    required init(coder: NSCoder) {
+        super.init(coder: coder)
+
+        // Set up a default path
+        addCircle(CGPointMake(100, 100), radius: 100)
+    }
+
+    override func intrinsicContentSize() -> CGSize {
+        let boundingBox = CGPathGetPathBoundingBox(path)
+        return CGSize(width: CGRectGetMaxX(boundingBox) + lineWidth/2, height: CGRectGetMaxY(boundingBox) + lineWidth/2)
+    }
+
+    func isEmpty() -> Bool {
+        return path == nil || CGPathIsEmpty(path)
+    }
+
+    /**
+      Changes the bounds so that they match the path's bounding box.
+    */
+    func adjustToFitPath() {
+        var newFrame = CGPathGetPathBoundingBox(path)
+        newFrame = CGRectInset(newFrame, lineWidth, lineWidth)
+        bounds = newFrame
+    }
+
+    
     enum FillRule {
         /**
         Specifies the non-zero winding rule. Count each left-to-right path as +1 and each right-to-left path as -1.

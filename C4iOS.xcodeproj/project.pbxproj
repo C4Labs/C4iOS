@@ -10,6 +10,7 @@
 		614F824919DB5ED3001DF1D4 /* C4iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 614F824819DB5ED3001DF1D4 /* C4iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		614F825319DB5ED4001DF1D4 /* C4iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614F825219DB5ED4001DF1D4 /* C4iOSTests.swift */; };
 		614F825D19DB5FFD001DF1D4 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614F825C19DB5FFD001DF1D4 /* Shape.swift */; };
+		6162BFB719DB971C00D7F3D0 /* Shape+Creation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6162BFB619DB971C00D7F3D0 /* Shape+Creation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		614F825119DB5ED4001DF1D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		614F825219DB5ED4001DF1D4 /* C4iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = C4iOSTests.swift; sourceTree = "<group>"; };
 		614F825C19DB5FFD001DF1D4 /* Shape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
+		6162BFB619DB971C00D7F3D0 /* Shape+Creation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Shape+Creation.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 			children = (
 				614F824819DB5ED3001DF1D4 /* C4iOS.h */,
 				614F825C19DB5FFD001DF1D4 /* Shape.swift */,
+				6162BFB619DB971C00D7F3D0 /* Shape+Creation.swift */,
 				614F824619DB5ED3001DF1D4 /* Supporting Files */,
 			);
 			path = C4iOS;
@@ -200,6 +203,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				614F825D19DB5FFD001DF1D4 /* Shape.swift in Sources */,
+				6162BFB719DB971C00D7F3D0 /* Shape+Creation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
