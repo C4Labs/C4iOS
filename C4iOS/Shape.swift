@@ -5,18 +5,18 @@ import QuartzCore
 import UIKit
 
 @IBDesignable
-class Shape: UIView {
-
-    var shapeLayer: CAShapeLayer { get { return layer as CAShapeLayer } }
-
+public class Shape: UIView {
     /**
-      The path defining the shape to be rendered. If the path extends outside the layer bounds it will not
-      automatically be clipped to the layer. Defaults to nil. Animatable.
+    The path defining the shape to be rendered. If the path extends outside the layer bounds it will not automatically
+    be clipped to the layer. Defaults to nil. Animatable.
     */
-    var path: CGPath? {
-        get { return shapeLayer.path }
-        set(path) { shapeLayer.path = path }
+    internal var path: Path? {
+        didSet {
+            shapeLayer.path = path?.internalPath
+        }
     }
+    
+    internal var shapeLayer: CAShapeLayer { get { return layer as CAShapeLayer } }
 
     /**
       The color to fill the path, or nil for no fill. Defaults to opaque black. Animatable.
@@ -171,7 +171,7 @@ class Shape: UIView {
         set(pattern) { shapeLayer.lineDashPattern = pattern }
     }
 
-    override class func layerClass() -> AnyClass {
+    override public class func layerClass() -> AnyClass {
         return CAShapeLayer.self;
     }
 
@@ -182,46 +182,36 @@ class Shape: UIView {
         addCircle(CGPointMake(100, 100), radius: 100)
     }
 
-    required init(coder: NSCoder) {
+    required public init(coder: NSCoder) {
         super.init(coder: coder)
 
         // Set up a default path
         addCircle(CGPointMake(100, 100), radius: 100)
     }
 
-    override func intrinsicContentSize() -> CGSize {
-        let boundingBox = CGPathGetPathBoundingBox(path)
-        return CGSize(width: CGRectGetMaxX(boundingBox) + lineWidth/2, height: CGRectGetMaxY(boundingBox) + lineWidth/2)
+    override public func intrinsicContentSize() -> CGSize {
+        if let path = path {
+            let boundingBox = path.boundingBox()
+            return CGSize(width: CGRectGetMaxX(boundingBox) + lineWidth/2, height: CGRectGetMaxY(boundingBox) + lineWidth/2)
+        } else {
+            return CGSizeZero
+        }
     }
 
+    /// Determine whether the shape's path is empty
     func isEmpty() -> Bool {
-        return path == nil || CGPathIsEmpty(path)
+        return path == nil || path!.isEmpty()
     }
 
     /**
       Changes the bounds so that they match the path's bounding box.
     */
     func adjustToFitPath() {
-        var newFrame = CGPathGetPathBoundingBox(path)
-        newFrame = CGRectInset(newFrame, lineWidth, lineWidth)
-        bounds = newFrame
-    }
-
-    
-    enum FillRule {
-        /**
-        Specifies the non-zero winding rule. Count each left-to-right path as +1 and each right-to-left path as -1.
-        If the sum of all crossings is 0, the point is outside the path. If the sum is nonzero, the point is inside
-        the path and the region containing it is filled.
-        */
-        case NonZero
-
-        /**
-        Specifies the even-odd winding rule. Count the total number of path crossings. If the number of crossings is
-        even, the point is outside the path. If the number of crossings is odd, the point is inside the path and the
-        region containing it should be filled.
-        */
-        case EvenOdd
+        if let path = path {
+            var newFrame = path.boundingBox()
+            newFrame = CGRectInset(newFrame, lineWidth, lineWidth)
+            bounds = newFrame
+        }
     }
 
     enum LineJoin {
