@@ -43,5 +43,4 @@ public class Rectangle: Shape {
         path.addRoundedRect(rect, cornerWidth: cornerWidth, cornerHeight: cornerHeight)
         shapeLayer.path = path.internalPath
     }
-    
 }
