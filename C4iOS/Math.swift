@@ -190,20 +190,26 @@ func radToDeg<T: NumericType>(val: T) -> T {
     var norm = val / T(M_PI)
     return norm * T(180.0)
 public func radToDeg<T: NumericType>(val: T) -> T {
+    return T(val.doubleValue() / M_PI * 180.0)
 }
 
 func degToRad<T: NumericType>(val: T) -> T {
     var norm = val / T(180.0)
     return norm * T(M_PI)
 public func degToRad<T: NumericType>(val: T) -> T {
+    return T(val.doubleValue() / 180.0 * M_PI)
 }
 
 func rgbToFloat<T: NumericType>(val: T) -> T {
     return val / T(255.0)
 public func rgbToDouble<T: NumericType>(val: T) -> Double {
+    var clamped = clamp(val, T(0), T(255))
+    return clamped.doubleValue() / 255.0
 }
 
 func rgbFromFloat<T: NumericType>(val: T) -> T {
     return val * T(255.0)
 public func rgbFromDouble<T: NumericType>(val: T) -> Double {
+    var clamped = clamp(val, T(0.0), T(1.0))
+    return clamped.doubleValue() * 255.0
 }
