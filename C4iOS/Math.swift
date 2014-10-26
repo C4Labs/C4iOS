@@ -42,22 +42,41 @@ extension CGFloat: NumericType {}
 
 import UIKit
 
-func constrain<T : SignedNumberType>(val: T, min: T, max: T) -> T {
+func clamp<T : SignedNumberType>(val: T, min: T, max: T) -> T {
     assert(min < max, "min cannot be less than max")
     if(val < min) { return min }
     if val > max { return max }
     return val
 }
 
-//tried a lot of variations, but it generall doesn't like this...
-func lerp<T : NumericType>(a: T, b: T, amount: T) -> T {
-    return a + (b-a) / amount
+func lerp<T : NumericType>(a: T, b: T, amount: Double) -> T {
+    return a + (b-a) * T(amount)
 }
 
 func map<T : NumericType>(val: T, min: T, max: T, toMin: T, toMax: T) -> T {
+    //hey al, is this proper?
+    //writing a generic function in this way so that it handles
+    //(float, float, float, float)
+    //(double, double, double, double)
+    //AND
+    //(int, int, int, int)?
+    if let intVal = val as? Int {
+        let intMin = min as? Int
+        let intMax = max as? Int
+        let intToMin = toMin as? Int
+        let intToMax = toMax as? Int
+        
+        let dvm = Double(intVal-intMin!)
+        let dmm = Double(intMax!-intMin!)
+        let dtt = Double(intToMax!-intToMin!)
+        let dtm = Double(intToMin!)
+        let returnValue = dvm / dmm * dtt + dtm
+        
+        return T(returnValue)
+    }
+    
     return ((val-min)/(max-min) * (toMax-toMin) + toMin) //this doesn't work without the <T: NumericType>
 }
-
 //using SignedNumberType when we need > or <
 func max<T : SignedNumberType>(a: T, b: T) -> T {
     return a > b ? a : b

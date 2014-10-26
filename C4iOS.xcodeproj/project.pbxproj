@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1F5B470719FCA2D300FC0477 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B470619FCA2D300FC0477 /* Math.swift */; };
+		1F5B470919FCADCF00FC0477 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B470619FCA2D300FC0477 /* Math.swift */; };
 		614F824919DB5ED3001DF1D4 /* C4iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 614F824819DB5ED3001DF1D4 /* C4iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		614F825319DB5ED4001DF1D4 /* C4iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614F825219DB5ED4001DF1D4 /* C4iOSTests.swift */; };
 		614F825D19DB5FFD001DF1D4 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614F825C19DB5FFD001DF1D4 /* Shape.swift */; };
@@ -245,6 +246,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				614F825319DB5ED4001DF1D4 /* C4iOSTests.swift in Sources */,
+				1F5B470919FCADCF00FC0477 /* Math.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

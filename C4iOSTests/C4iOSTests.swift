@@ -22,4 +22,43 @@ import XCTest
 
 class C4iOSTests: XCTestCase {
     
+    func testMath() {
+            XCTAssert(lerp(0.0, 10.0, 0.2) == 2.0, "LERP")
+
+        func testClampMIN() {
+            var testValue = clamp(-1, 10, 20)
+            var correctValue = 10
+            XCTAssert(testValue == correctValue, "CLAMP clamp(-1, 10, 20) = \(testValue) != \(correctValue)")
+        }
+        testClampMIN()
+
+        func testClampINRANGE() {
+            var testValue = clamp(11, 10, 20)
+            var correctValue = 11
+            XCTAssert(testValue == correctValue, "CLAMP clamp(11, 10, 20) = \(testValue) != \(correctValue)")
+        }
+        testClampINRANGE()
+
+        func testClampMAX() {
+            var testValue = clamp(21, 10, 20)
+            var correctValue = 20
+            XCTAssert(testValue == correctValue, "CLAMP clamp(21, 10, 20) = \(testValue) != \(correctValue)")
+        }
+        testClampMAX()
+
+        
+        func testLerpINT() {
+            let testValue = map(5,0,10,0,20)
+            let correctValue = 10
+            XCTAssert(testValue == correctValue, "MAP map(5,0,10,0,20) = \(testValue) != \(correctValue)")
+        }
+        testLerpINT()
+
+        func testLerpFLOAT() {
+            let testValue = map(5.0,0.0,10.0,0.0,20.0)
+            let correctValue = 10.0
+            XCTAssert(testValue == correctValue, "MAP map(5.0,0.0,10.0,0.0,20.0) = \(testValue) != \(correctValue)")
+        }
+        testLerpFLOAT()
+    }
 }
