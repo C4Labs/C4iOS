@@ -55,7 +55,7 @@ class MathTests: XCTestCase {
         let correctValue = 10.0
         XCTAssert(testValue == correctValue, "Double value should be mapped to the target range")
     }
-    
+
     func testLerpInt() {
         let testValue = map(6, 0, 10, 0, 20)
         let correctValue = 12
@@ -66,7 +66,52 @@ class MathTests: XCTestCase {
         let testValue = random(below:100)
         XCTAssert(testValue < 100, "Returned value for random is not below provided value")
     }
-    
+
+    func testRandomBelow() {
+        let upperBound = 10
+        let samples = 1000
+        var min = Int.max
+        var max = Int.min
+        for i in 0..<samples {
+            var value = random(below: upperBound)
+            if value < min { min = value }
+            if value > max { max = value }
+        }
+
+        XCTAssertGreaterThanOrEqual(min, 0, "Random values should be >= 0")
+        XCTAssertLessThan(max, upperBound, "Random values should be < \(upperBound)")
+    }
+
+    func testRandomBetween() {
+        let lowerBound = 10
+        let upperBound = 20
+        let samples = 1000
+        var min = Int.max
+        var max = Int.min
+        for i in 0..<samples {
+            var value = random(lowerBound, upperBound)
+            if value < min { min = value }
+            if value > max { max = value }
+        }
+
+        XCTAssertGreaterThanOrEqual(min, 0, "Random values should be >= \(lowerBound)")
+        XCTAssertLessThan(max, upperBound, "Random values should be < \(upperBound)")
+    }
+
+    func testRandom01() {
+        let samples = 1000
+        var min = 1.0
+        var max = 0.0
+        for i in 0..<samples {
+            var value = random01()
+            if value < min { min = value }
+            if value > max { max = value }
+        }
+
+        XCTAssertGreaterThanOrEqual(min, 0.0, "Random values should be >= 0")
+        XCTAssertLessThan(max, 1.0, "Random values should be < 1")
+    }
+
     func testRadToDeg() {
         let testValue = radToDeg(M_PI_2)
         XCTAssert(testValue == 90.0, "Retured value for radToDeg is invalid, should be 90.0")
@@ -76,5 +121,4 @@ class MathTests: XCTestCase {
         let testValue = degToRad(90.0)
         XCTAssert(testValue == M_PI_2, "Retured value for degToRag is invalid, should be M_PI_2")
     }
-
 }

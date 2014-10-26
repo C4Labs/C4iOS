@@ -156,6 +156,15 @@ public func random(min: Int, max: Int) -> Int {
     return min + random(below: max - min)
 }
 
+/**
+Return a random Double in the interval [0, 1)
+
+:returns: A random Double uniformly distributed between 0 and 1
+*/
+func random01() -> Double {
+    return Double(arc4random()) / Double(UInt32.max)
+}
+
 func radToDeg<T: FloatType>(val: T) -> T {
     return T(180) * val / T(M_PI)
 }
