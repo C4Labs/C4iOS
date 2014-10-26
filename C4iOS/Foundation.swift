@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 C4. All rights reserved.
 //
 
-import Foundation
+import CoreGraphics
 
 /**
 Prints a string to the console. Replacement for the noisy NSlog.

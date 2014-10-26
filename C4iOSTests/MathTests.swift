@@ -17,7 +17,6 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-import UIKit
 import XCTest
 
 class MathTests: XCTestCase {
@@ -62,31 +61,7 @@ class MathTests: XCTestCase {
         let correctValue = 12
         XCTAssert(testValue == correctValue, "Double value should be mapped to the target range")
     }
-    
-    func testMinDouble() {
-        let testValue = min(1.0,2.0,3.0)
-        let correctValue = 1.0
-        XCTAssert(testValue == correctValue, "testMinDouble() error")
-    }
-    
-    func testMinInt() {
-        let testValue = min(1,2,3)
-        let correctValue = 1
-        XCTAssert(testValue == correctValue, "testMinInt() error")
-    }
-
-    func testMaxDouble() {
-        let testValue = max(1.0,2.0,3.0)
-        let correctValue = 3.0
-        XCTAssert(testValue == correctValue, "testMinDouble() error")
-    }
-    
-    func testMaxInt() {
-        let testValue = max(1,2,3)
-        let correctValue = 3
-        XCTAssert(testValue == correctValue, "testMinInt() error")
-    }
-    
+        
     func testRandom() {
         let testValue = random(below:100)
         XCTAssert(testValue < 100, "Returned value for random is not below provided value")
@@ -99,28 +74,7 @@ class MathTests: XCTestCase {
 
     func testDegToRad() {
         let testValue = degToRad(90.0)
-        
         XCTAssert(testValue == M_PI_2, "Retured value for degToRag is invalid, should be M_PI_2")
     }
 
-    func testDegToRadInt() {
-        let testValue = degToRad(90)
-        
-        XCTAssert(testValue == Int(M_PI_2), "Retured value for radToDeg is invalid, should be 1")
-    }
-    
-    func testRGBToDouble() {
-        let testValue = rgbToDouble(255)
-        XCTAssert(testValue == 1.0, "Returned value for rgbToDouble should be 1.0")
-    }
-
-    func testRGBToDoubleLess() {
-        let testValue = rgbToDouble(-1)
-        XCTAssert(testValue == 0.0, "Returned value for rgbToDouble should be 0.0")
-    }
-
-    func testRGBToDoubleGreater() {
-        let testValue = rgbToDouble(256)
-        XCTAssert(testValue == 1.0, "Returned value for rgbToDouble should be 1.0")
-    }
 }

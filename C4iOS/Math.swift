@@ -41,12 +41,6 @@ public protocol NumericType : Comparable, Equatable {
     func doubleValue() -> Double;
 }
 
-extension Double : NumericType {
-    public func doubleValue() -> Double { return self }
-}
-extension Float  : NumericType {
-    public func doubleValue() -> Double { return Double(self) }
-}
 extension Int    : NumericType {
     public func doubleValue() -> Double { return Double(self) }
 }
@@ -77,9 +71,19 @@ extension UInt32 : NumericType {
 extension UInt64 : NumericType {
     public func doubleValue() -> Double { return Double(self) }
 }
-extension CGFloat: NumericType {
+
+protocol FloatType : NumericType {}
+
+extension Double : FloatType {
+    public func doubleValue() -> Double { return self }
+}
+extension Float  : FloatType {
     public func doubleValue() -> Double { return Double(self) }
 }
+extension CGFloat: FloatType {
+    public func doubleValue() -> Double { return Double(self) }
+}
+
 
 /**
 Clamp a value to the range [min, max].
@@ -102,7 +106,7 @@ Linear interpolation. For any two values a and b return a linear interpolation w
 
 :param: a     first value
 :param: b     second value
-:param: param parameter between 0 and 1
+:param: param parameter between 0 and 1 for interpolation
 
 :returns: The interpolated value
 */
@@ -126,14 +130,6 @@ public func map<T: NumericType>(val: T, min: T, max: T, toMin: T, toMax: T) -> T
     assert(min < max, "min has to be less than max")
     var param = val.doubleValue() / (max - min).doubleValue() - min.doubleValue()
     return lerp(toMin, toMax, param)
-}
-
-public func max<T : Comparable>(a: T, b: T) -> T {
-    return a > b ? a : b
-}
-
-public func min<T : Comparable>(a: T, b: T) -> T {
-    return a > b ? a : b
 }
 
 /**
@@ -160,20 +156,10 @@ public func random(min: Int, max: Int) -> Int {
     return min + random(below: max - min)
 }
 
-public func radToDeg<T: NumericType>(val: T) -> T {
-    return T(val.doubleValue() / M_PI * 180.0)
+func radToDeg<T: FloatType>(val: T) -> T {
+    return T(180) * val / T(M_PI)
 }
 
-public func degToRad<T: NumericType>(val: T) -> T {
-    return T(val.doubleValue() / 180.0 * M_PI)
-}
-
-public func rgbToDouble<T: NumericType>(val: T) -> Double {
-    var clamped = clamp(val, T(0), T(255))
-    return clamped.doubleValue() / 255.0
-}
-
-public func rgbFromDouble<T: NumericType>(val: T) -> Double {
-    var clamped = clamp(val, T(0.0), T(1.0))
-    return clamped.doubleValue() * 255.0
+func degToRad<T: FloatType>(val: T) -> T {
+    return T(M_PI) * val / T(180)
 }
