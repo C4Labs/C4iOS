@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1F5B470719FCA2D300FC0477 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B470619FCA2D300FC0477 /* Math.swift */; };
 		1F5B470919FCADCF00FC0477 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B470619FCA2D300FC0477 /* Math.swift */; };
+		61464D7D19FCD04400B90395 /* MathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61464D7C19FCD04400B90395 /* MathTests.swift */; };
 		614F824919DB5ED3001DF1D4 /* C4iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 614F824819DB5ED3001DF1D4 /* C4iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		614F825319DB5ED4001DF1D4 /* C4iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614F825219DB5ED4001DF1D4 /* C4iOSTests.swift */; };
 		614F825D19DB5FFD001DF1D4 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614F825C19DB5FFD001DF1D4 /* Shape.swift */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		1F5B470619FCA2D300FC0477 /* Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
+		61464D7C19FCD04400B90395 /* MathTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathTests.swift; sourceTree = "<group>"; };
 		614F824319DB5ED3001DF1D4 /* C4iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = C4iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		614F824719DB5ED3001DF1D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		614F824819DB5ED3001DF1D4 /* C4iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = C4iOS.h; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				614F825219DB5ED4001DF1D4 /* C4iOSTests.swift */,
+				61464D7C19FCD04400B90395 /* MathTests.swift */,
 				614F825019DB5ED4001DF1D4 /* Supporting Files */,
 			);
 			path = C4iOSTests;
@@ -245,6 +248,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61464D7D19FCD04400B90395 /* MathTests.swift in Sources */,
 				614F825319DB5ED4001DF1D4 /* C4iOSTests.swift in Sources */,
 				1F5B470919FCADCF00FC0477 /* Math.swift in Sources */,
 			);

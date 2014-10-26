@@ -1,12 +1,25 @@
+// Copyright © 2014 C4
 //
-//  Math.swift
-//  C4Swift
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions: The above copyright
+// notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
 //
-//  Created by travis on 2014-10-25.
-//  Copyright (c) 2014 C4. All rights reserved.
-//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+// IN THE SOFTWARE.
 
-protocol NumericType {
+import CoreGraphics
+
+protocol NumericType : Comparable, Equatable {
     func +(lhs: Self, rhs: Self) -> Self
     func -(lhs: Self, rhs: Self) -> Self
     func *(lhs: Self, rhs: Self) -> Self
@@ -24,76 +37,125 @@ protocol NumericType {
     init(_ v: UInt16)
     init(_ v: UInt32)
     init(_ v: UInt64)
+
+    func doubleValue() -> Double;
 }
 
-extension Double : NumericType {}
-extension Float  : NumericType {}
-extension Int    : NumericType {}
-extension Int8   : NumericType {}
-extension Int16  : NumericType {}
-extension Int32  : NumericType {}
-extension Int64  : NumericType {}
-extension UInt   : NumericType {}
-extension UInt8  : NumericType {}
-extension UInt16 : NumericType {}
-extension UInt32 : NumericType {}
-extension UInt64 : NumericType {}
-extension CGFloat: NumericType {}
+extension Double : NumericType {
+    func doubleValue() -> Double { return self }
+}
+extension Float  : NumericType {
+    func doubleValue() -> Double { return Double(self) }
+}
+extension Int    : NumericType {
+    func doubleValue() -> Double { return Double(self) }
+}
+extension Int8   : NumericType {
+    func doubleValue() -> Double { return Double(self) }
+}
+extension Int16  : NumericType {
+    func doubleValue() -> Double { return Double(self) }
+}
+extension Int32  : NumericType {
+    func doubleValue() -> Double { return Double(self) }
+}
+extension Int64  : NumericType {
+    func doubleValue() -> Double { return Double(self) }
+}
+extension UInt   : NumericType {
+    func doubleValue() -> Double { return Double(self) }
+}
+extension UInt8  : NumericType {
+    func doubleValue() -> Double { return Double(self) }
+}
+extension UInt16 : NumericType {
+    func doubleValue() -> Double { return Double(self) }
+}
+extension UInt32 : NumericType {
+    func doubleValue() -> Double { return Double(self) }
+}
+extension UInt64 : NumericType {
+    func doubleValue() -> Double { return Double(self) }
+}
+extension CGFloat: NumericType {
+    func doubleValue() -> Double { return Double(self) }
+}
 
-import UIKit
+/**
+Clamp a value to the range [min, max].
 
-func clamp<T : SignedNumberType>(val: T, min: T, max: T) -> T {
-    assert(min < max, "min cannot be less than max")
-    if(val < min) { return min }
+:param: val The value
+:param: min The lower bound
+:param: max The upper bound
+
+:returns: The clamped value
+*/
+func clamp<T : Comparable>(val: T, min: T, max: T) -> T {
+    assert(min < max, "min has to be less than or equal to max")
+    if val < min { return min }
     if val > max { return max }
     return val
 }
 
-func lerp<T : NumericType>(a: T, b: T, amount: Double) -> T {
-    return a + (b-a) * T(amount)
+/**
+Linear interpolation. For any two values a and b return a linear interpolation with parameter `param`.
+
+:param: a     first value
+:param: b     second value
+:param: param parameter between 0 and 1
+
+:returns: The interpolated value
+*/
+func lerp<T : NumericType>(a: T, b: T, param: Double) -> T {
+    return a + T((b - a).doubleValue() * param)
 }
 
-func map<T : NumericType>(val: T, min: T, max: T, toMin: T, toMax: T) -> T {
-    //hey al, is this proper?
-    //writing a generic function in this way so that it handles
-    //(float, float, float, float)
-    //(double, double, double, double)
-    //AND
-    //(int, int, int, int)?
-    if let intVal = val as? Int {
-        let intMin = min as? Int
-        let intMax = max as? Int
-        let intToMin = toMin as? Int
-        let intToMax = toMax as? Int
-        
-        let dvm = Double(intVal-intMin!)
-        let dmm = Double(intMax!-intMin!)
-        let dtt = Double(intToMax!-intToMin!)
-        let dtm = Double(intToMin!)
-        let returnValue = dvm / dmm * dtt + dtm
-        
-        return T(returnValue)
-    }
-    
-    return ((val-min)/(max-min) * (toMax-toMin) + toMin) //this doesn't work without the <T: NumericType>
+/**
+Linear mapping. Maps a value in the source range [min, max] to a value in the target range [toMin, toMax] using linear interpolation.
+
+:param: val   Source value
+:param: min   Source range lower bound
+:param: max   Source range upper bound
+:param: toMin Target range lower bound
+:param: toMax Target range upper bound
+
+:returns: The mapped value.
+*/
+func map<T: NumericType>(val: T, min: T, max: T, toMin: T, toMax: T) -> T {
+    assert(min < max, "min has to be less than max")
+    var param = val.doubleValue() / (max - min).doubleValue() - min.doubleValue()
+    return lerp(toMin, toMax, param)
 }
-//using SignedNumberType when we need > or <
-func max<T : SignedNumberType>(a: T, b: T) -> T {
+
+func max<T : Comparable>(a: T, b: T) -> T {
     return a > b ? a : b
 }
 
-func min<T : SignedNumberType>(a: T, b: T) -> T {
+func min<T : Comparable>(a: T, b: T) -> T {
     return a > b ? a : b
 }
 
-func random<T : NumericType>(val: T) -> T {
-    srandomdev()
-    return T(random())%val
+/**
+Return a random integer below `below`
+
+:param: below The upper bound
+
+:returns: A random value smaller than `below`
+*/
+func random(#below: Int) -> Int {
+    return Int(arc4random_uniform(UInt32(below)))
 }
 
-func random<T: NumericType>(min: T, max: T) -> T {
-    var val = random(max-min)
-    return val + min
+/**
+Return a random integer greater than or equal to min and less than max.
+
+:param: min The lower bound
+:param: max The upper bound
+
+:returns: A random value greater than or equal to min and less than max.
+*/
+func random(min: Int, max: Int) -> Int {
+    return min + random(below: max - min)
 }
 
 func radToDeg<T: NumericType>(val: T) -> T {
