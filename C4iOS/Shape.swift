@@ -38,7 +38,7 @@ public class Shape: UIView {
       The color to fill the path, or nil for no fill. Defaults to opaque black. Animatable.
     */
     @IBInspectable
-    var fillColor: UIColor? {
+    public var fillColor: UIColor? {
         get { return UIColor(CGColor: shapeLayer.fillColor) }
         set(color) { shapeLayer.fillColor = color?.CGColor }
     }
@@ -46,7 +46,7 @@ public class Shape: UIView {
     /**
       The fill rule used when filling the path. Defaults to `NonZero`.
     */
-    var fillRule: FillRule {
+    public var fillRule: FillRule {
         get {
             switch (shapeLayer.fillRule) {
             case kCAFillRuleNonZero:
@@ -71,7 +71,7 @@ public class Shape: UIView {
       The color to fill the path's stroked outline, or nil for no stroking. Defaults to nil. Animatable.
     */
     @IBInspectable
-    var strokeColor: UIColor? {
+    public var strokeColor: UIColor? {
         get { return UIColor(CGColor: shapeLayer.strokeColor) }
         set(color) { shapeLayer.strokeColor = color?.CGColor }
     }
@@ -82,7 +82,7 @@ public class Shape: UIView {
       linearly along the path length. Defaults to zero. Animatable.
     */
     @IBInspectable
-    var strokeStart: CGFloat {
+    public var strokeStart: CGFloat {
         get { return shapeLayer.strokeStart }
         set(start) { shapeLayer.strokeStart = start; }
     }
@@ -93,7 +93,7 @@ public class Shape: UIView {
       linearly along the path length. Defaults to one. Animatable.
     */
     @IBInspectable
-    var strokeEnd: CGFloat {
+    public var strokeEnd: CGFloat {
         get { return shapeLayer.strokeEnd }
         set(end) { shapeLayer.strokeEnd = end; }
     }
@@ -102,7 +102,7 @@ public class Shape: UIView {
       The line width used when stroking the path. Defaults to one. Animatable.
     */
     @IBInspectable
-    var lineWidth: CGFloat {
+    public var lineWidth: CGFloat {
         get { return shapeLayer.lineWidth }
         set(width) { shapeLayer.lineWidth = width }
     }
@@ -110,7 +110,7 @@ public class Shape: UIView {
     /**
       The miter limit used when stroking the path. Defaults to ten. Animatable. */
     @IBInspectable
-    var miterLimit: CGFloat {
+    public var miterLimit: CGFloat {
         get { return shapeLayer.miterLimit }
         set(miterLimit) { shapeLayer.miterLimit = miterLimit }
     }
@@ -118,7 +118,7 @@ public class Shape: UIView {
     /**
       The cap style used when stroking the path. Defaults to `Butt`.
     */
-    var lineCap: LineCap  {
+    public var lineCap: LineCap  {
         get {
             switch shapeLayer.lineCap {
             case kCALineCapButt:
@@ -146,7 +146,7 @@ public class Shape: UIView {
     /**
       The join style used when stroking the path. Defaults to `Miter`.
     */
-    var lineJoin: LineJoin {
+    public var lineJoin: LineJoin {
         get {
             switch shapeLayer.lineJoin {
             case kCALineJoinMiter:
@@ -174,7 +174,7 @@ public class Shape: UIView {
     /**
       The phase of the dashing pattern applied when creating the stroke. Defaults to zero. Animatable.
     */
-    var lineDashPhase: CGFloat {
+    public var lineDashPhase: CGFloat {
         get { return shapeLayer.lineDashPhase }
         set(phase) { shapeLayer.lineDashPhase = phase }
     }
@@ -182,7 +182,7 @@ public class Shape: UIView {
     /**
       The dash pattern applied when creating the stroked version of the path. Defaults to nil.
     */
-    var lineDashPattern: [NSNumber]? {
+    public var lineDashPattern: [NSNumber]? {
         get { return shapeLayer.lineDashPattern as [NSNumber]? }
         set(pattern) { shapeLayer.lineDashPattern = pattern }
     }
@@ -191,18 +191,12 @@ public class Shape: UIView {
         return CAShapeLayer.self;
     }
 
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
-
-        // Set up a default path
-        addCircle(CGPointMake(100, 100), radius: 100)
     }
 
     required public init(coder: NSCoder) {
         super.init(coder: coder)
-
-        // Set up a default path
-        addCircle(CGPointMake(100, 100), radius: 100)
     }
 
     override public func intrinsicContentSize() -> CGSize {
@@ -215,14 +209,14 @@ public class Shape: UIView {
     }
 
     /// Determine whether the shape's path is empty
-    func isEmpty() -> Bool {
+    public func isEmpty() -> Bool {
         return path == nil || path!.isEmpty()
     }
 
     /**
       Changes the bounds so that they match the path's bounding box.
     */
-    func adjustToFitPath() {
+    public func adjustToFitPath() {
         if let path = path {
             var newFrame = path.boundingBox()
             newFrame = CGRectInset(newFrame, lineWidth, lineWidth)
@@ -230,7 +224,7 @@ public class Shape: UIView {
         }
     }
 
-    enum LineJoin {
+    public enum LineJoin {
         /// Specifies a miter line shape of the joints between connected segments of a stroked path.
         case Miter
 
@@ -241,7 +235,7 @@ public class Shape: UIView {
         case Bevel
     }
 
-    enum LineCap {
+    public enum LineCap {
         /// Specifies a butt line cap style for endpoints for an open path when stroked.
         case Butt
 

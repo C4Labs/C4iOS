@@ -20,6 +20,16 @@
 import Foundation
 
 public class RegularPolygon: Shape {
+    override public init(frame: CGRect) {
+        super.init(frame: frame)
+        updatePath()
+    }
+
+    required public init(coder: NSCoder) {
+        super.init(coder: coder)
+        updatePath()
+    }
+    
     override public var bounds: CGRect {
         didSet {
             updatePath();
@@ -33,21 +43,21 @@ public class RegularPolygon: Shape {
     }
     
     @IBInspectable
-    override var lineWidth: CGFloat {
+    override public var lineWidth: CGFloat {
         didSet {
             updatePath()
         }
     }
     
     @IBInspectable
-    var sides: Int = 3 {
+    public var sides: Int = 3 {
         didSet {
             updatePath()
         }
     }
     
     @IBInspectable
-    var phase: CGFloat = 0 {
+    public var phase: CGFloat = 0 {
         didSet {
             updatePath()
         }

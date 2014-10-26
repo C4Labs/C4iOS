@@ -20,6 +20,16 @@
 import Foundation
 
 public class Rectangle: Shape {
+    override public init(frame: CGRect) {
+        super.init(frame: frame)
+        updatePath()
+    }
+
+    required public init(coder: NSCoder) {
+        super.init(coder: coder)
+        updatePath()
+    }
+    
     override public var bounds: CGRect {
         didSet {
             updatePath();
@@ -33,26 +43,26 @@ public class Rectangle: Shape {
     }
     
     @IBInspectable
-    override var lineWidth: CGFloat {
+    override public var lineWidth: CGFloat {
         didSet {
             updatePath()
         }
     }
     
     @IBInspectable
-    var cornerWidth: CGFloat = 0 {
+    public var cornerWidth: CGFloat = 0 {
         didSet {
             updatePath()
         }
     }
     
     @IBInspectable
-    var cornerHeight: CGFloat = 0 {
+    public var cornerHeight: CGFloat = 0 {
         didSet {
             updatePath()
         }
     }
-    
+
     internal func updatePath() {
         let path = Path()
         let rect = CGRectInset(bounds, lineWidth, lineWidth)

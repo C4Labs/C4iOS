@@ -20,6 +20,16 @@
 import Foundation
 
 public class Ellipse: Shape {
+    override public init(frame: CGRect) {
+        super.init(frame: frame)
+        updatePath()
+    }
+
+    required public init(coder: NSCoder) {
+        super.init(coder: coder)
+        updatePath()
+    }
+
     override public var bounds: CGRect {
         didSet {
             updatePath();
@@ -33,7 +43,7 @@ public class Ellipse: Shape {
     }
     
     @IBInspectable
-    override var lineWidth: CGFloat {
+    override public var lineWidth: CGFloat {
         didSet {
             updatePath()
         }
