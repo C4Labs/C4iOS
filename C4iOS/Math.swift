@@ -20,6 +20,7 @@
 import CoreGraphics
 
 protocol NumericType : Comparable, Equatable {
+public protocol NumericType : Comparable, Equatable {
     func +(lhs: Self, rhs: Self) -> Self
     func -(lhs: Self, rhs: Self) -> Self
     func *(lhs: Self, rhs: Self) -> Self
@@ -43,42 +44,55 @@ protocol NumericType : Comparable, Equatable {
 
 extension Double : NumericType {
     func doubleValue() -> Double { return self }
+    public func doubleValue() -> Double { return self }
 }
 extension Float  : NumericType {
     func doubleValue() -> Double { return Double(self) }
+    public func doubleValue() -> Double { return Double(self) }
 }
 extension Int    : NumericType {
     func doubleValue() -> Double { return Double(self) }
+    public func doubleValue() -> Double { return Double(self) }
 }
 extension Int8   : NumericType {
     func doubleValue() -> Double { return Double(self) }
+    public func doubleValue() -> Double { return Double(self) }
 }
 extension Int16  : NumericType {
     func doubleValue() -> Double { return Double(self) }
+    public func doubleValue() -> Double { return Double(self) }
 }
 extension Int32  : NumericType {
     func doubleValue() -> Double { return Double(self) }
+    public func doubleValue() -> Double { return Double(self) }
 }
 extension Int64  : NumericType {
     func doubleValue() -> Double { return Double(self) }
+    public func doubleValue() -> Double { return Double(self) }
 }
 extension UInt   : NumericType {
     func doubleValue() -> Double { return Double(self) }
+    public func doubleValue() -> Double { return Double(self) }
 }
 extension UInt8  : NumericType {
     func doubleValue() -> Double { return Double(self) }
+    public func doubleValue() -> Double { return Double(self) }
 }
 extension UInt16 : NumericType {
     func doubleValue() -> Double { return Double(self) }
+    public func doubleValue() -> Double { return Double(self) }
 }
 extension UInt32 : NumericType {
     func doubleValue() -> Double { return Double(self) }
+    public func doubleValue() -> Double { return Double(self) }
 }
 extension UInt64 : NumericType {
     func doubleValue() -> Double { return Double(self) }
+    public func doubleValue() -> Double { return Double(self) }
 }
 extension CGFloat: NumericType {
     func doubleValue() -> Double { return Double(self) }
+    public func doubleValue() -> Double { return Double(self) }
 }
 
 /**
@@ -92,6 +106,7 @@ Clamp a value to the range [min, max].
 */
 func clamp<T : Comparable>(val: T, min: T, max: T) -> T {
     assert(min < max, "min has to be less than or equal to max")
+public func clamp<T : Comparable>(val: T, min: T, max: T) -> T {
     if val < min { return min }
     if val > max { return max }
     return val
@@ -107,6 +122,7 @@ Linear interpolation. For any two values a and b return a linear interpolation w
 :returns: The interpolated value
 */
 func lerp<T : NumericType>(a: T, b: T, param: Double) -> T {
+public func lerp<T : NumericType>(a: T, b: T, param: Double) -> T {
     return a + T((b - a).doubleValue() * param)
 }
 
@@ -122,16 +138,19 @@ Linear mapping. Maps a value in the source range [min, max] to a value in the ta
 :returns: The mapped value.
 */
 func map<T: NumericType>(val: T, min: T, max: T, toMin: T, toMax: T) -> T {
+public func map<T: NumericType>(val: T, min: T, max: T, toMin: T, toMax: T) -> T {
     assert(min < max, "min has to be less than max")
     var param = val.doubleValue() / (max - min).doubleValue() - min.doubleValue()
     return lerp(toMin, toMax, param)
 }
 
 func max<T : Comparable>(a: T, b: T) -> T {
+public func max<T : Comparable>(a: T, b: T) -> T {
     return a > b ? a : b
 }
 
 func min<T : Comparable>(a: T, b: T) -> T {
+public func min<T : Comparable>(a: T, b: T) -> T {
     return a > b ? a : b
 }
 
@@ -143,6 +162,7 @@ Return a random integer below `below`
 :returns: A random value smaller than `below`
 */
 func random(#below: Int) -> Int {
+public func random(#below: Int) -> Int {
     return Int(arc4random_uniform(UInt32(below)))
 }
 
@@ -155,6 +175,7 @@ Return a random integer greater than or equal to min and less than max.
 :returns: A random value greater than or equal to min and less than max.
 */
 func random(min: Int, max: Int) -> Int {
+public func random(min: Int, max: Int) -> Int {
     return min + random(below: max - min)
 }
 
@@ -165,17 +186,21 @@ func radToDeg<T: NumericType>(val: T) -> T {
     }
     var norm = val / T(M_PI)
     return norm * T(180.0)
+public func radToDeg<T: NumericType>(val: T) -> T {
 }
 
 func degToRad<T: NumericType>(val: T) -> T {
     var norm = val / T(180.0)
     return norm * T(M_PI)
+public func degToRad<T: NumericType>(val: T) -> T {
 }
 
 func rgbToFloat<T: NumericType>(val: T) -> T {
     return val / T(255.0)
+public func rgbToDouble<T: NumericType>(val: T) -> Double {
 }
 
 func rgbFromFloat<T: NumericType>(val: T) -> T {
     return val * T(255.0)
+public func rgbFromDouble<T: NumericType>(val: T) -> Double {
 }
