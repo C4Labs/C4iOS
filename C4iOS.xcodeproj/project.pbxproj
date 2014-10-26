@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1F5726E419FCECE4006FF395 /* Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5726E319FCECE4006FF395 /* Foundation.swift */; };
 		1F5726E519FCECE4006FF395 /* Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5726E319FCECE4006FF395 /* Foundation.swift */; };
+		1F5726EA19FDA784006FF395 /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5726E819FD8B17006FF395 /* Vector.swift */; };
 		1F5B470719FCA2D300FC0477 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B470619FCA2D300FC0477 /* Math.swift */; };
 		1F5B470919FCADCF00FC0477 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B470619FCA2D300FC0477 /* Math.swift */; };
 		61464D7D19FCD04400B90395 /* MathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61464D7C19FCD04400B90395 /* MathTests.swift */; };
@@ -35,6 +36,7 @@
 
 /* Begin PBXFileReference section */
 		1F5726E319FCECE4006FF395 /* Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Foundation.swift; sourceTree = "<group>"; };
+		1F5726E819FD8B17006FF395 /* Vector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
 		1F5B470619FCA2D300FC0477 /* Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
 		61464D7C19FCD04400B90395 /* MathTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathTests.swift; sourceTree = "<group>"; };
 		614F824319DB5ED3001DF1D4 /* C4iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = C4iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				614F824819DB5ED3001DF1D4 /* C4iOS.h */,
+				1F5726E819FD8B17006FF395 /* Vector.swift */,
 				1F5726E319FCECE4006FF395 /* Foundation.swift */,
 				1F5B470619FCA2D300FC0477 /* Math.swift */,
 				A9491CD419DE2F2E00D413E6 /* Path.swift */,
@@ -245,6 +248,7 @@
 				1F5B470719FCA2D300FC0477 /* Math.swift in Sources */,
 				6162BFB719DB971C00D7F3D0 /* Shape+Creation.swift in Sources */,
 				A9491CD519DE2F2E00D413E6 /* Path.swift in Sources */,
+				1F5726EA19FDA784006FF395 /* Vector.swift in Sources */,
 				A94E3BE919ECF7E60039A9C4 /* RegularPolygon.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
