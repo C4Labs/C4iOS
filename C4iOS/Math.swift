@@ -107,6 +107,7 @@ Clamp a value to the range [min, max].
 func clamp<T : Comparable>(val: T, min: T, max: T) -> T {
     assert(min < max, "min has to be less than or equal to max")
 public func clamp<T : Comparable>(val: T, min: T, max: T) -> T {
+    assert(min < max, "min has to be less than max")
     if val < min { return min }
     if val > max { return max }
     return val
@@ -123,6 +124,7 @@ Linear interpolation. For any two values a and b return a linear interpolation w
 */
 func lerp<T : NumericType>(a: T, b: T, param: Double) -> T {
 public func lerp<T : NumericType>(a: T, b: T, param: Double) -> T {
+    assert(a < b, "a must be less than b")
     return a + T((b - a).doubleValue() * param)
 }
 
@@ -176,6 +178,7 @@ Return a random integer greater than or equal to min and less than max.
 */
 func random(min: Int, max: Int) -> Int {
 public func random(min: Int, max: Int) -> Int {
+    assert(min < max, "min must be less than max")
     return min + random(below: max - min)
 }
 
