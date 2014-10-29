@@ -22,7 +22,7 @@ Returns a rectangle that contains all of the specified coordinates in an array.
 
 :param: points An array of CGPoint coordinates
 */
-public func CGRectMake(points: [CGPoint]) -> CGRect {
+public func CGRectMakeFromPoints(points: [CGPoint]) -> CGRect {
     var path = CGPathCreateMutable()
     CGPathMoveToPoint(path, nil, points[0].x, points[0].y)
     for i in 1..<points.count {

@@ -72,7 +72,7 @@ extension UInt64 : NumericType {
     public func doubleValue() -> Double { return Double(self) }
 }
 
-protocol FloatType : NumericType {}
+public protocol FloatType : NumericType {}
 
 extension Double : FloatType {
     public func doubleValue() -> Double { return self }
@@ -165,10 +165,18 @@ func random01() -> Double {
     return Double(arc4random()) / Double(UInt32.max)
 }
 
-func radToDeg<T: FloatType>(val: T) -> T {
+public func radToDeg<T: FloatType>(val: T) -> T {
     return T(180) * val / T(M_PI)
 }
 
-func degToRad<T: FloatType>(val: T) -> T {
+public func degToRad<T: FloatType>(val: T) -> T {
     return T(M_PI) * val / T(180)
+}
+
+public func rgbToFloat<T: FloatType>(val: T) -> Double {
+    return val.doubleValue()/255.0
+}
+
+public func floatToRGB<T: FloatType>(val: T) -> Double {
+    return val.doubleValue() * 255.0
 }
