@@ -17,73 +17,7 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-import CoreGraphics
-
-public protocol NumericType : Comparable, Equatable {
-    func +(lhs: Self, rhs: Self) -> Self
-    func -(lhs: Self, rhs: Self) -> Self
-    func *(lhs: Self, rhs: Self) -> Self
-    func /(lhs: Self, rhs: Self) -> Self
-    func %(lhs: Self, rhs: Self) -> Self
-    init(_ v: Double)
-    init(_ v: Float)
-    init(_ v: Int)
-    init(_ v: Int8)
-    init(_ v: Int16)
-    init(_ v: Int32)
-    init(_ v: Int64)
-    init(_ v: UInt)
-    init(_ v: UInt8)
-    init(_ v: UInt16)
-    init(_ v: UInt32)
-    init(_ v: UInt64)
-
-    func doubleValue() -> Double;
-}
-
-extension Int    : NumericType {
-    public func doubleValue() -> Double { return Double(self) }
-}
-extension Int8   : NumericType {
-    public func doubleValue() -> Double { return Double(self) }
-}
-extension Int16  : NumericType {
-    public func doubleValue() -> Double { return Double(self) }
-}
-extension Int32  : NumericType {
-    public func doubleValue() -> Double { return Double(self) }
-}
-extension Int64  : NumericType {
-    public func doubleValue() -> Double { return Double(self) }
-}
-extension UInt   : NumericType {
-    public func doubleValue() -> Double { return Double(self) }
-}
-extension UInt8  : NumericType {
-    public func doubleValue() -> Double { return Double(self) }
-}
-extension UInt16 : NumericType {
-    public func doubleValue() -> Double { return Double(self) }
-}
-extension UInt32 : NumericType {
-    public func doubleValue() -> Double { return Double(self) }
-}
-extension UInt64 : NumericType {
-    public func doubleValue() -> Double { return Double(self) }
-}
-
-public protocol FloatType : NumericType {}
-
-extension Double : FloatType {
-    public func doubleValue() -> Double { return self }
-}
-extension Float  : FloatType {
-    public func doubleValue() -> Double { return Double(self) }
-}
-extension CGFloat: FloatType {
-    public func doubleValue() -> Double { return Double(self) }
-}
-
+import Foundation
 
 /**
 Clamp a value to the range [min, max].
@@ -110,9 +44,8 @@ Linear interpolation. For any two values a and b return a linear interpolation w
 
 :returns: The interpolated value
 */
-public func lerp<T : NumericType>(a: T, b: T, param: Double) -> T {
-    assert(a < b, "a must be less than b")
-    return a + T((b - a).doubleValue() * param)
+public func lerp(a: Double, b: Double, param: Double) -> Double {
+    return a + (b - a) * param
 }
 
 /**
@@ -126,9 +59,8 @@ Linear mapping. Maps a value in the source range [min, max] to a value in the ta
 
 :returns: The mapped value.
 */
-public func map<T: NumericType>(val: T, min: T, max: T, toMin: T, toMax: T) -> T {
-    assert(min < max, "min has to be less than max")
-    var param = val.doubleValue() / (max - min).doubleValue() - min.doubleValue()
+public func map(val: Double, min: Double, max: Double, toMin: Double, toMax: Double) -> Double {
+    let param = val / (max - min) - min
     return lerp(toMin, toMax, param)
 }
 
@@ -165,18 +97,18 @@ func random01() -> Double {
     return Double(arc4random()) / Double(UInt32.max)
 }
 
-public func radToDeg<T: FloatType>(val: T) -> T {
-    return T(180) * val / T(M_PI)
+public func radToDeg(val: Double) -> Double {
+    return 180.0 * val / M_PI
 }
 
-public func degToRad<T: FloatType>(val: T) -> T {
-    return T(M_PI) * val / T(180)
+public func degToRad(val: Double) -> Double {
+    return M_PI * val / 180.0
 }
 
-public func rgbToFloat<T: FloatType>(val: T) -> Double {
-    return val.doubleValue()/255.0
+public func rgbToFloat(val: Int) -> Double {
+    return Double(val) / 255.0
 }
 
-public func floatToRGB<T: FloatType>(val: T) -> Double {
-    return val.doubleValue() * 255.0
+public func floatToRGB(val: Double) -> Int {
+    return Int(val * 255)
 }

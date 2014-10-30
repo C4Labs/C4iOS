@@ -35,7 +35,7 @@ public struct Vector : Equatable {
     }
     
     /**
-    Create a vector with a polar representation: a magnitude and an angle.
+    Create a vector with a polar representation: a magnitude and an angle in radians.
     http://en.wikipedia.org/wiki/Polar_coordinate_system
     */
     public init(magnitude: Double, heading: Double) {
@@ -43,6 +43,9 @@ public struct Vector : Equatable {
         y = magnitude * sin(heading)
     }
     
+    /**
+    The polar representation magnitude of the vector.
+    */
     public var magnitude: Double {
         get {
             return sqrt(x * x + y * y)
@@ -53,6 +56,9 @@ public struct Vector : Equatable {
         }
     }
     
+    /**
+    The polar representation heading angle of the vector, in radians.
+    */
     public var heading : Double {
         get {
             return atan2(y, x);

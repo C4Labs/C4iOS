@@ -28,38 +28,38 @@ class MathTests: XCTestCase {
     func testClampLess() {
         var testValue = clamp(-1, 10, 20)
         var correctValue = 10
-        XCTAssert(testValue == correctValue, "Value should be clamped to lower bound")
+        XCTAssertEqual(testValue, correctValue, "Value should be clamped to lower bound")
     }
 
     func testClampNoOp() {
         var testValue = clamp(11, 10, 20)
         var correctValue = 11
-        XCTAssert(testValue == correctValue, "Value should not be clamped")
+        XCTAssertEqual(testValue, correctValue, "Value should not be clamped")
     }
 
     func testClampGreater() {
         var testValue = clamp(21, 10, 20)
         var correctValue = 20
-        XCTAssert(testValue == correctValue, "Value should be clamped to upper bound")
+        XCTAssertEqual(testValue, correctValue, "Value should be clamped to upper bound")
     }
 
 
     func testMap() {
         let testValue = map(5, 0, 10, 0, 20)
-        let correctValue = 10
-        XCTAssert(testValue == correctValue, "Value should be mapped to the target range")
+        let correctValue = 10.0
+        XCTAssertEqual(testValue, correctValue, "Value should be mapped to the target range")
     }
 
     func testLerpDouble() {
         let testValue = map(5.0, 0.0, 10.0, 0.0, 20.0)
         let correctValue = 10.0
-        XCTAssert(testValue == correctValue, "Double value should be mapped to the target range")
+        XCTAssertEqual(testValue, correctValue, "Double value should be mapped to the target range")
     }
 
     func testLerpInt() {
         let testValue = map(6, 0, 10, 0, 20)
-        let correctValue = 12
-        XCTAssert(testValue == correctValue, "Double value should be mapped to the target range")
+        let correctValue = 12.0
+        XCTAssertEqual(testValue, correctValue, "Double value should be mapped to the target range")
     }
         
     func testRandom() {

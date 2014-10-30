@@ -57,6 +57,21 @@ public func == (lhs: Point, rhs: Point) -> Bool {
     return lhs.x == rhs.x && lhs.y == rhs.y
 }
 
+/**
+Linear interpolation. For any two points `a` and `b` return a point that is the linear interpolation between a and b
+for interpolation parameter `param`. For instance, a parameter of 0 will return `a`, a parameter of 1 will return `b`
+and a parameter of 0.5 will return the midpoint between `a` and `b`.
+
+:param: a     first point
+:param: b     second point
+:param: param parameter between 0 and 1 for interpolation
+
+:returns: The interpolated point
+*/
+public func lerp(a: Point, b: Point, param: Double) -> Point {
+    return a + (b - a) * param
+}
+
 
 // MARK: - Casting to and from CGPoint
 
