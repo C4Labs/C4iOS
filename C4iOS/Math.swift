@@ -104,11 +104,3 @@ public func radToDeg(val: Double) -> Double {
 public func degToRad(val: Double) -> Double {
     return M_PI * val / 180.0
 }
-
-public func rgbToFloat(val: Int) -> Double {
-    return Double(val) / 255.0
-}
-
-public func floatToRGB(val: Double) -> Int {
-    return Int(val * 255)
-}
