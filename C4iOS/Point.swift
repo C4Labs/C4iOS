@@ -17,50 +17,59 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-import Foundation
+import CoreGraphics
 
-public struct Rectangle : Equatable {
-    public var origin: Point
-    public var width: Double
-    public var height: Double
+public struct Point : Equatable {
+    public var x: Double = 0
+    public var y: Double = 0
     
-    public var center: Point {
-        get {
-            return Point(x: origin.x + width/2, y: origin.y + height/2)
-        }
-        set {
-            origin.x = newValue.x - width/2
-            origin.y = newValue.y - height/2
-        }
+    public init() {
+    }
+    
+    public init(x: Double, y: Double) {
+        self.x = x
+        self.y = y
     }
     
     public func isZero() -> Bool {
-        return origin.isZero() && width == 0 && height == 0
-    }
-    
-    public func contains(point: Point) -> Bool {
-        return CGRectContainsPoint(CGRect(self), CGPoint(point))
+        return x == 0 && y == 0
     }
 }
 
-public func == (lhs: Rectangle, rhs: Rectangle) -> Bool {
-    return lhs.origin == rhs.origin && lhs.width == rhs.width && lhs.height == rhs.height
+/// Calculate the vector between two points
+public func - (lhs: Point, rhs: Point) -> Vector {
+    return Vector(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
+}
+
+/// Translate a point by the given vector
+public func + (lhs: Point, rhs: Vector) -> Point {
+    return Point(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
+}
+
+/// Calculate the distance between two points
+public func distance(lhs: Point, rhs: Point) -> Double {
+    let dx = rhs.x - lhs.x
+    let dy = rhs.y - lhs.y
+    return sqrt(dx*dx + dy*dy)
+}
+
+public func == (lhs: Point, rhs: Point) -> Bool {
+    return lhs.x == rhs.x && lhs.y == rhs.y
 }
 
 
-// MARK: - Casting to and from CGRect
+// MARK: - Casting to and from CGPoint
 
-public extension Rectangle {
-    public init(_ rect: CGRect) {
-        origin = Point(rect.origin)
-        width = Double(rect.size.width)
-        height = Double(rect.size.height)
+public extension Point {
+    public init(_ point: CGPoint) {
+        x = Double(point.x)
+        y = Double(point.y)
     }
 }
 
-public extension CGRect {
-    public init(_ rect: Rectangle) {
-        origin = CGPoint(rect.origin)
-        size = CGSizeMake(CGFloat(rect.width), CGFloat(rect.height))
+public extension CGPoint {
+    public init(_ point: Point) {
+        x = CGFloat(point.x)
+        y = CGFloat(point.y)
     }
 }

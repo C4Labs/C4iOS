@@ -19,7 +19,7 @@
 
 import Foundation
 
-public class Ellipse: Shape {
+public class EllipseShape: Shape {
     override public init(frame: CGRect) {
         super.init(frame: frame)
         updatePath()

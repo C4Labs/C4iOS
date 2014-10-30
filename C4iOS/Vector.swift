@@ -1,192 +1,143 @@
+// Copyright © 2014 C4
 //
-//  Vector.swift
-//  C4iOS
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions: The above copyright
+// notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
 //
-//  Created by travis on 2014-10-26.
-//  Copyright (c) 2014 C4. All rights reserved.
-//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+// IN THE SOFTWARE.
 
-import Foundation
+import CoreGraphics
 
-public func CGPointDistanceBetween(a: CGPoint, b: CGPoint) -> Double {
-    let va = Vector(a)
-    let vb = Vector(b)
-    return va.distanceTo(vb)
-}
-
-public func CGPointAngleBetween(a: CGPoint, b: CGPoint) -> Double {
-    let va = Vector(a)
-    let vb = Vector(b)
-    return va.angleTo(vb)
-}
-
-public func == (lhs: Vector, rhs: Vector) -> Bool {
-    return lhs.x == rhs.x && lhs.y == rhs.y && lhs.z == rhs.z
-}
-
-public func += (inout lhs: Vector, rhs: Vector) {
-    &lhs.x += rhs.x
-    &lhs.y += rhs.y
-    &lhs.z += rhs.z
-}
-
-public func -= (inout lhs: Vector, rhs: Vector) {
-    &lhs.x -= rhs.x
-    &lhs.y -= rhs.y
-    &lhs.z -= rhs.z
-}
-
-public func *= (inout lhs: Vector, rhs: Vector) {
-    &lhs.x *= rhs.x
-    &lhs.y *= rhs.y
-    &lhs.z *= rhs.z
-}
-
-public func /= (inout lhs: Vector, rhs: Vector) {
-    &lhs.x /= rhs.x
-    &lhs.y /= rhs.y
-    &lhs.z /= rhs.z
-}
-
-public func %= (inout lhs: Vector, rhs: Vector) {
-    &lhs.x %= rhs.x
-    &lhs.y %= rhs.y
-    &lhs.z %= rhs.z
-}
-
-public func += (inout lhs: Vector, rhs: Double) {
-    &lhs.x += rhs
-    &lhs.y += rhs
-    &lhs.z += rhs
-}
-
-public func -= (inout lhs: Vector, rhs: Double) {
-    &lhs.x -= rhs
-    &lhs.y -= rhs
-    &lhs.z -= rhs
-}
-
-public func *= (inout lhs: Vector, rhs: Double) {
-    &lhs.x *= rhs
-    &lhs.y *= rhs
-    &lhs.z *= rhs
-}
-
-public func /= (inout lhs: Vector, rhs: Double) {
-    &lhs.x /= rhs
-    &lhs.y /= rhs
-    &lhs.z /= rhs
-}
-
-public func %= (inout lhs: Vector, rhs: Double) {
-    &lhs.x %= rhs
-    &lhs.y %= rhs
-    &lhs.z %= rhs
-}
-
-public func + (lhs: Vector, rhs: Vector) -> Vector {
-    return Vector(lhs.x+rhs.x,lhs.y+rhs.y,lhs.z+rhs.z)
-}
-
-public func + (lhs: Vector, rhs: Double) -> Vector {
-    return Vector(lhs.x+rhs,lhs.y+rhs,lhs.z+rhs)
-}
-
-public func - (lhs: Vector, rhs: Vector) -> Vector {
-    return Vector(lhs.x-rhs.x,lhs.y-rhs.y,lhs.z-rhs.z)
-}
-
-public func - (lhs: Vector, rhs: Double) -> Vector {
-    return Vector(lhs.x-rhs,lhs.y-rhs,lhs.z-rhs)
-}
-
-public func / (lhs: Vector, rhs: Vector) -> Vector {
-    return Vector(lhs.x/rhs.x,lhs.y/rhs.y,lhs.z/rhs.z)
-}
-
-public func / (lhs: Vector, rhs: Double) -> Vector {
-    return Vector(lhs.x/rhs,lhs.y/rhs,lhs.z/rhs)
-}
-
-public func * (lhs: Vector, rhs: Vector) -> Vector {
-    return Vector(lhs.x*rhs.x,lhs.y*rhs.y,lhs.z*rhs.z)
-}
-
-public func * (lhs: Vector, rhs: Double) -> Vector {
-    return Vector(lhs.x*rhs,lhs.y*rhs,lhs.z*rhs)
-}
-
-public func % (lhs: Vector, rhs: Vector) -> Vector {
-    return Vector(lhs.x%rhs.x,lhs.y%rhs.y,lhs.z%rhs.z)
-}
-
-public func % (lhs: Vector, rhs: Double) -> Vector {
-    return Vector(lhs.x%rhs,lhs.y%rhs,lhs.z%rhs)
-}
-
-public class Vector : NSObject, Equatable {
-    public var x: Double = 0.0, y: Double = 0.0, z: Double = 0.0
+public struct Vector : Equatable {
+    public var x: Double = 0
+    public var y: Double = 0
     
-    public init(_ x: Double, _ y: Double, _ z: Double) {
-        super.init()
-        self.x = x
-        self.y = y
-        self.z = z
+    public init() {
     }
     
-    public convenience init(_ point: CGPoint) {
-        self.init(Double(point.x), Double(point.y), 0.0)
+    /**
+    Create a vector with a cartesian representation: an x and a y coordinates.
+    */
+    public init(x: Double, y: Double) {
+        self.x = x
+        self.y = y
+    }
+    
+    /**
+    Create a vector with a polar representation: a magnitude and an angle.
+    http://en.wikipedia.org/wiki/Polar_coordinate_system
+    */
+    public init(magnitude: Double, heading: Double) {
+        x = magnitude * cos(heading)
+        y = magnitude * sin(heading)
     }
     
     public var magnitude: Double {
-        return sqrt(x * x + y * y + z * z)
+        get {
+            return sqrt(x * x + y * y)
+        }
+        set {
+            x = newValue * cos(heading)
+            y = newValue * sin(heading)
+        }
     }
     
     public var heading : Double {
-        return atan2(y, x);
-    }
-    
-    public func heading(basedOnPoint point: CGPoint) -> Double {
-        return atan2(y-Double(point.y), x-Double(point.x))
-    }
-    
-    public func headingv( vec: Vector) -> Double {
-        return atan2(y-vec.y, x-vec.x)
-    }
-    
-    public var GGPoint : CGPoint {
-        return CGPointMake(CGFloat(x), CGFloat(y))
-    }
-    
-    public func distanceTo(vec: Vector) -> Double {
-        let dx = vec.x - x
-        let dy = vec.y - y
-        let dz = vec.z - z
-        return sqrt(dx*dx + dy*dy + dz*dz)
+        get {
+            return atan2(y, x);
+        }
+        set {
+            x = magnitude * cos(newValue)
+            y = magnitude * sin(newValue)
+        }
     }
     
     public func angleTo(vec: Vector) -> Double {
-        return acos(dot(vec)/(self.magnitude * vec.magnitude))
+        return acos(self ⋅ vec / (self.magnitude * vec.magnitude))
     }
     
+    /**
+    Return the dot product. You should use the ⋅ operator instead.
+    */
     public func dot(vec: Vector) -> Double {
-        return x * vec.x + y * vec.y + z * vec.z
+        return x * vec.x + y * vec.y
     }
     
-    public func cross(vec: Vector) {
-        var temp = Vector(0,0,0)
-        temp.x = y * vec.z - z * vec.y
-        temp.y = z * vec.x - x * vec.z
-        temp.z = x * vec.y - y * vec.x
-        x = temp.x
-        y = temp.y
-        z = temp.z
-    }
-    
-    public func normalize() {
+    /**
+    Return a vector with the same heading but a magnitude of 1.
+    */
+    public func unitVector() -> Vector {
         let mag = self.magnitude
-        x /= mag
-        y /= mag
-        z /= mag
+        if mag == 0 {
+            return Vector()
+        }
+        return Vector(x: x / mag, y: y / mag)
     }
+
+    /**
+    Return `true` if the vector is zero.
+    */
+    public func isZero() -> Bool {
+        return x == 0 && y == 0
+    }
+}
+
+public func == (lhs: Vector, rhs: Vector) -> Bool {
+    return lhs.x == rhs.x && lhs.y == rhs.y
+}
+
+public func += (inout lhs: Vector, rhs: Vector) {
+    lhs.x += rhs.x
+    lhs.y += rhs.y
+}
+
+public func -= (inout lhs: Vector, rhs: Vector) {
+    lhs.x -= rhs.x
+    lhs.y -= rhs.y
+}
+
+public func *= (inout lhs: Vector, rhs: Double) {
+    lhs.x *= rhs
+    lhs.y *= rhs
+}
+
+public func /= (inout lhs: Vector, rhs: Double) {
+    lhs.x /= rhs
+    lhs.y /= rhs
+}
+
+public func + (lhs: Vector, rhs: Vector) -> Vector {
+    return Vector(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
+}
+
+public func - (lhs: Vector, rhs: Vector) -> Vector {
+    return Vector(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
+}
+
+infix operator ⋅ { associativity left precedence 150 }
+public func ⋅ (lhs: Vector, rhs: Vector) -> Double {
+    return lhs.x * rhs.x + lhs.y * rhs.y
+}
+
+public func / (lhs: Vector, rhs: Double) -> Vector {
+    return Vector(x: lhs.x / rhs, y: lhs.y / rhs)
+}
+
+public func * (lhs: Vector, rhs: Double) -> Vector {
+    return Vector(x: lhs.x * rhs, y: lhs.y * rhs)
+}
+
+public prefix func - (vector: Vector) -> Vector {
+    return Vector(x: -vector.x, y: -vector.y)
 }
