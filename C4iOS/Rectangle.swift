@@ -20,7 +20,7 @@
 import Foundation
 import CoreGraphics
 
-public class RectangleShape: Shape {
+public class Rectangle: Shape {
     convenience public init(_ frame: Rect) {
         self.init(frame: CGRect(frame))
         updatePath()
