@@ -26,7 +26,7 @@ public struct Point : Equatable {
     public init() {
     }
     
-    public init(x: Double, y: Double) {
+    public init(_ x: Double, _ y: Double) {
         self.x = x
         self.y = y
     }
@@ -43,7 +43,7 @@ public func - (lhs: Point, rhs: Point) -> Vector {
 
 /// Translate a point by the given vector
 public func + (lhs: Point, rhs: Vector) -> Point {
-    return Point(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
+    return Point(lhs.x + rhs.x,lhs.y + rhs.y)
 }
 
 /// Calculate the distance between two points

@@ -14,13 +14,13 @@ public struct Rect : Equatable {
     public var size: Size
     
     public init(_ x: Double, _ y: Double, _ w: Double, _ h: Double) {
-        origin = Point(x: x, y: y)
+        origin = Point(x, y)
         size = Size(w,h)
     }
 
     public var center: Point {
         get {
-            return Point(x: origin.x + size.width/2, y: origin.y + size.height/2)
+            return Point(origin.x + size.width/2, origin.y + size.height/2)
         }
         set {
             origin.x = newValue.x - size.width/2
