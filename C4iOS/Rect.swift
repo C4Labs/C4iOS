@@ -18,6 +18,7 @@ public struct Rect : Equatable {
         size = Size(w,h)
     }
 
+    //MARK: - Mid & Max
     public var center: Point {
         get {
             return Point(origin.x + size.width/2, origin.y + size.height/2)
@@ -28,22 +29,33 @@ public struct Rect : Equatable {
         }
     }
 
+    public var max: Point {
+        get {
+            return Point(origin.x + size.width, origin.y + size.height)
+        }
+    }
+
     public func isZero() -> Bool {
         return origin.isZero() && size.isZero()
     }
 
+    //MARK: - Membership
     public func contains(point: Point) -> Bool {
         return CGRectContainsPoint(CGRect(self), CGPoint(point))
     }
+    
+    public func contains(rect: Rect) -> Bool {
+        return CGRectContainsRect(CGRect(self), CGRect(rect))
+    }
 }
 
+//MARK: - Equatable
 public func == (lhs: Rect, rhs: Rect) -> Bool {
     return lhs.origin == rhs.origin && lhs.size == rhs.size
 }
 
 
 // MARK: - Casting to and from CGRect
-
 
 public extension Rect {
     public init(_ rect: CGRect) {
