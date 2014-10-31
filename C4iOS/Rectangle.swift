@@ -18,9 +18,11 @@
 // IN THE SOFTWARE.
 
 import Foundation
+import CoreGraphics
 
 public struct Rectangle : Equatable {
     public var origin: Point
+    public var size: Size
     public var width: Double
     public var height: Double
     
@@ -35,7 +37,7 @@ public struct Rectangle : Equatable {
     }
     
     public func isZero() -> Bool {
-        return origin.isZero() && width == 0 && height == 0
+        return origin.isZero() && size.isZero()
     }
     
     public func contains(point: Point) -> Bool {
@@ -55,12 +57,13 @@ public extension Rectangle {
         origin = Point(rect.origin)
         width = Double(rect.size.width)
         height = Double(rect.size.height)
+        size = Size(rect.size)
     }
 }
 
 public extension CGRect {
     public init(_ rect: Rectangle) {
         origin = CGPoint(rect.origin)
-        size = CGSizeMake(CGFloat(rect.width), CGFloat(rect.height))
+        size = CGSize(rect.size)
     }
 }

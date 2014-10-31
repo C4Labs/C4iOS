@@ -18,8 +18,14 @@
 // IN THE SOFTWARE.
 
 import Foundation
+import CoreGraphics
 
 public class RectangleShape: Shape {
+    convenience public init(_ frame: Rect) {
+        self.init(frame: CGRect(frame))
+        updatePath()
+    }
+    
     override public init(frame: CGRect) {
         super.init(frame: frame)
         updatePath()
