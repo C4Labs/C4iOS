@@ -22,9 +22,6 @@
 		6162BFB719DB971C00D7F3D0 /* Shape+Creation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6162BFB619DB971C00D7F3D0 /* Shape+Creation.swift */; };
 		A9491CD519DE2F2E00D413E6 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9491CD419DE2F2E00D413E6 /* Path.swift */; };
 		A94E3BD419E0E9390039A9C4 /* C4iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 614F824319DB5ED3001DF1D4 /* C4iOS.framework */; };
-		A94E3BE519ECF0160039A9C4 /* EllipseShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94E3BE419ECF0160039A9C4 /* EllipseShape.swift */; };
-		A94E3BE719ECF6250039A9C4 /* RectangleShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94E3BE619ECF6250039A9C4 /* RectangleShape.swift */; };
-		A94E3BE919ECF7E60039A9C4 /* RegularPolygonShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94E3BE819ECF7E60039A9C4 /* RegularPolygonShape.swift */; };
 		A9596D071A0211420023323D /* Rectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D061A0211420023323D /* Rectangle.swift */; };
 		A9596D091A0215A80023323D /* PointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D081A0215A80023323D /* PointTests.swift */; };
 		A9596D0B1A0218000023323D /* VectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D0A1A0218000023323D /* VectorTests.swift */; };
@@ -60,9 +57,6 @@
 		614F825C19DB5FFD001DF1D4 /* Shape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
 		6162BFB619DB971C00D7F3D0 /* Shape+Creation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Shape+Creation.swift"; sourceTree = "<group>"; };
 		A9491CD419DE2F2E00D413E6 /* Path.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
-		A94E3BE419ECF0160039A9C4 /* EllipseShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EllipseShape.swift; sourceTree = "<group>"; };
-		A94E3BE619ECF6250039A9C4 /* RectangleShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RectangleShape.swift; sourceTree = "<group>"; };
-		A94E3BE819ECF7E60039A9C4 /* RegularPolygonShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegularPolygonShape.swift; sourceTree = "<group>"; };
 		A9596D061A0211420023323D /* Rectangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rectangle.swift; sourceTree = "<group>"; };
 		A9596D081A0215A80023323D /* PointTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointTests.swift; sourceTree = "<group>"; };
 		A9596D0A1A0218000023323D /* VectorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VectorTests.swift; sourceTree = "<group>"; };
@@ -127,9 +121,6 @@
 				A9491CD419DE2F2E00D413E6 /* Path.swift */,
 				614F825C19DB5FFD001DF1D4 /* Shape.swift */,
 				6162BFB619DB971C00D7F3D0 /* Shape+Creation.swift */,
-				A94E3BE419ECF0160039A9C4 /* EllipseShape.swift */,
-				A94E3BE619ECF6250039A9C4 /* RectangleShape.swift */,
-				A94E3BE819ECF7E60039A9C4 /* RegularPolygonShape.swift */,
 				614F824619DB5ED3001DF1D4 /* Supporting Files */,
 			);
 			path = C4iOS;
@@ -270,8 +261,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A94E3BE719ECF6250039A9C4 /* RectangleShape.swift in Sources */,
-				A94E3BE519ECF0160039A9C4 /* EllipseShape.swift in Sources */,
 				1F5726E419FCECE4006FF395 /* Foundation.swift in Sources */,
 				A9596D071A0211420023323D /* Rectangle.swift in Sources */,
 				614F825D19DB5FFD001DF1D4 /* Shape.swift in Sources */,
@@ -283,7 +272,6 @@
 				A9491CD519DE2F2E00D413E6 /* Path.swift in Sources */,
 				1F5726EA19FDA784006FF395 /* Vector.swift in Sources */,
 				1F06D5881A0392F600BA501B /* Rect.swift in Sources */,
-				A94E3BE919ECF7E60039A9C4 /* RegularPolygonShape.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
