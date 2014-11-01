@@ -218,4 +218,10 @@ extension Path {
     public func addPath(path: Path) {
         CGPathAddPath(internalPath, nil, path.internalPath)
     }
+    
+    public var CGPath: CGPathRef {
+        get {
+            return internalPath
+        }
+    }
 }
