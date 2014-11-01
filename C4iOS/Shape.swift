@@ -19,6 +19,7 @@
 
 import QuartzCore
 import UIKit
+import C4Core
 
 @IBDesignable
 public class Shape: UIView {

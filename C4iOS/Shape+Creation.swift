@@ -18,6 +18,8 @@
 // IN THE SOFTWARE.
 
 import Foundation
+import CoreGraphics
+import C4Core
 
 extension Shape {
     func addCircle(center: CGPoint, radius: CGFloat) {

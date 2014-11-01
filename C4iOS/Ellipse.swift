@@ -18,6 +18,7 @@
 // IN THE SOFTWARE.
 
 import Foundation
+import C4Core
 
 public class Ellipse: Shape {
     override public init(frame: CGRect) {

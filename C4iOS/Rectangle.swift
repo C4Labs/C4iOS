@@ -19,6 +19,7 @@
 
 import Foundation
 import CoreGraphics
+import C4Core
 
 public class Rectangle: Shape {
     convenience public init(_ frame: Rect) {

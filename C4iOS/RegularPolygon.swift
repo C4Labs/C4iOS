@@ -18,6 +18,8 @@
 // IN THE SOFTWARE.
 
 import Foundation
+import CoreGraphics
+import C4Core
 
 public class RegularPolygonShape: Shape {
     override public init(frame: CGRect) {
