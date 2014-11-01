@@ -33,4 +33,55 @@ class VectorTests: XCTestCase {
         let vectorB = Vector(x: 0, y: 1)
         XCTAssertEqualWithAccuracy(vectorA ⋅ vectorB, 0, 1e-15, "Dot product of perpendicular vectors should be 0")
     }
+    
+    func testAngleTo() {
+        let vectorA = Vector(x: 2, y: 0)
+        let vectorB = Vector(x: 1, y: 1)
+        let angle = vectorA.angleTo(vectorB)
+        XCTAssertEqualWithAccuracy(angle, Double(M_PI)/4.0, 1e-15, "Product should be PI/4")
+    }
+
+    func testAngleToBaseOn() {
+        let vectorA = Vector(x: 2, y: 0)
+        let vectorB = Vector(x: 1, y: 1)
+        let vectorC = Vector(x: 1, y: 0)
+        let angle = vectorA.angleTo(vectorB, basedOn:vectorC)
+        XCTAssertEqualWithAccuracy(angle, Double(M_PI)/2.0, 1e-15, "Product should be PI/2")
+    }
+    
+    func testDivideScalar() {
+        for i in 10...1000 {
+            var v = Double(random(below:i))+1.0
+            var vector = Vector(x:v,y:v)
+            vector /= v
+            XCTAssertEqual(vector.x, 1.0, "Vector should equal 1")
+        }
+    }
+    
+    func testMultiplyScalar() {
+        for i in 10...1000 {
+            let val = Double(i)
+            var vector = Vector(x:val, y:val)
+            vector *= 10
+            XCTAssertEqual(vector.x, val*10, "Vector should equal 1")
+        }
+    }
+
+    func testAddition() {
+        for i in 10...1000 {
+            var val = Double(i)
+            var vector = Vector(x: val, y: val)
+            vector += Vector(x: 1, y: 1)
+            XCTAssertEqual(vector.x, val+1, "Vectore should be original value + 1")
+        }
+    }
+    
+    func testSubtraction() {
+        for i in 10...1000 {
+            var val = Double(i)
+            var vector = Vector(x: val, y: val)
+            vector -= Vector(x: 1, y: 1)
+            XCTAssertEqual(vector.x, val-1, "Vectore should be original value - 1")
+        }
+    }
 }
