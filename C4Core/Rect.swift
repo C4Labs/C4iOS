@@ -9,13 +9,6 @@
 import Foundation
 import CoreGraphics
 
-public enum RectEdge {
-    case Top
-    case Left
-    case Right
-    case Bottom
-}
-
 public struct Rect : Equatable {
     public var origin: Point
     public var size: Size
