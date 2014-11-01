@@ -69,10 +69,26 @@ public struct Vector : Equatable {
         }
     }
     
+    /**
+    The angle between two vectors, based on {0,0}
+    */
     public func angleTo(vec: Vector) -> Double {
         return acos(self ⋅ vec / (self.magnitude * vec.magnitude))
     }
-    
+
+    /**
+    The angle between two vectors, based on a provided point
+    */
+    public func angleTo(vec: Vector, basedOn: Vector) -> Double {
+        var vecA = Vector(x: x, y: y)
+        var vecB = Vector(x: vec.x, y: vec.y)
+        
+        vecA -= basedOn
+        vecB -= basedOn
+        
+        return acos(vecA ⋅ vecB / (self.magnitude * vecB.magnitude))
+    }
+
     /**
     Return the dot product. You should use the ⋅ operator instead.
     */
