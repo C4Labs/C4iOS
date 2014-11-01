@@ -22,10 +22,10 @@ import CoreGraphics
 import C4Core
 
 public class Rectangle: Shape {
-    convenience public init(_ frame: Rect) {
-        self.init(frame: CGRect(frame))
-        updatePath()
-    }
+//    convenience public init(_ frame: Rect) {
+//        self.init(frame: CGRect(frame))
+//        updatePath()
+//    }
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
