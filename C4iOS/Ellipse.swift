@@ -54,6 +54,6 @@ public class Ellipse: Shape {
         let path = Path()
         let rect = CGRectInset(bounds, lineWidth, lineWidth)
         path.addEllipse(rect)
-        shapeLayer.path = path.internalPath
+        shapeLayer.path = path.CGPath
     }
 }

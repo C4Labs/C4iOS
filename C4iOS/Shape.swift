@@ -29,7 +29,7 @@ public class Shape: UIView {
     */
     internal var path: Path? {
         didSet {
-            shapeLayer.path = path?.internalPath
+            shapeLayer.path = path?.CGPath
         }
     }
     

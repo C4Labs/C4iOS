@@ -74,6 +74,6 @@ public class Rectangle: Shape {
         let path = Path()
         let rect = CGRectInset(bounds, lineWidth, lineWidth)
         path.addRoundedRect(rect, cornerWidth: cornerWidth, cornerHeight: cornerHeight)
-        shapeLayer.path = path.internalPath
+        shapeLayer.path = path.CGPath
     }
 }

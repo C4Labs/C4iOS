@@ -88,6 +88,6 @@ public class RegularPolygonShape: Shape {
             }
         }
         path.closeSubpath()
-        shapeLayer.path = path.internalPath
+        shapeLayer.path = path.CGPath
     }
 }
