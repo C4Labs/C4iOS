@@ -18,18 +18,18 @@
 // IN THE SOFTWARE.
 
 import XCTest
-import C4iOS
+import C4Core
 
 class PointTests: XCTestCase {
     func testDistance() {
         let pointA = Point()
-        let pointB = Point(x: 1, y: 1)
+        let pointB = Point(1, 1)
         XCTAssertEqualWithAccuracy(distance(pointA, pointB), sqrt(2), DBL_MIN, "Distance between origin and (1,1) should be √2")
     }
     
     func testTranslate() {
-        let original = Point(x: 2, y: 3)
+        let original = Point(2, 3)
         let translated = original + Vector(x: 3, y: 2)
-        XCTAssertEqual(translated, Point(x: 5, y: 5), "Point should be translated to (5, 5)")
+        XCTAssertEqual(translated, Point(5, 5), "Point should be translated to (5, 5)")
     }
 }

@@ -93,7 +93,7 @@ Return a random Double in the interval [0, 1)
 
 :returns: A random Double uniformly distributed between 0 and 1
 */
-func random01() -> Double {
+public func random01() -> Double {
     return Double(arc4random()) / Double(UInt32.max)
 }
 

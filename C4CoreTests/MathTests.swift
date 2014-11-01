@@ -18,6 +18,7 @@
 // IN THE SOFTWARE.
 
 import XCTest
+import C4Core
 
 class MathTests: XCTestCase {
 
