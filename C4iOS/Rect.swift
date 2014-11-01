@@ -9,6 +9,13 @@
 import Foundation
 import CoreGraphics
 
+public enum RectEdge {
+    case Top
+    case Left
+    case Right
+    case Bottom
+}
+
 public struct Rect : Equatable {
     public var origin: Point
     public var size: Size
@@ -17,8 +24,13 @@ public struct Rect : Equatable {
         origin = Point(x, y)
         size = Size(w,h)
     }
-
-    //MARK: - Mid & Max
+    
+    //MARK: - Comparing
+    public func intersects(r: Rect) -> Bool {
+        return CGRectIntersectsRect(CGRect(self), CGRect(r))
+    }
+    
+    //MARK: - Center & Max
     public var center: Point {
         get {
             return Point(origin.x + size.width/2, origin.y + size.height/2)
@@ -49,11 +61,31 @@ public struct Rect : Equatable {
     }
 }
 
-//MARK: - Equatable
+//MARK: - Comparing
 public func == (lhs: Rect, rhs: Rect) -> Bool {
     return lhs.origin == rhs.origin && lhs.size == rhs.size
 }
 
+//MARK: - Manipulating
+public func intersection(rect1: Rect, rect2: Rect) -> Rect {
+    return Rect(CGRectIntersection(CGRect(rect1), CGRect(rect2)))
+}
+
+public func union(rect1: Rect, rect2: Rect) -> Rect {
+    return Rect(CGRectUnion(CGRect(rect1), CGRect(rect2)))
+}
+
+public func integral(r: Rect) -> Rect {
+    return Rect(CGRectIntegral(CGRect(r)))
+}
+
+public func standardize(r: Rect) -> Rect {
+    return Rect(CGRectStandardize(CGRect(r)))
+}
+
+public func inset(r: Rect, dx: Double, dy: Double) -> Rect {
+    return Rect(CGRectInset(CGRect(r), CGFloat(dx), CGFloat(dy)))
+}
 
 // MARK: - Casting to and from CGRect
 

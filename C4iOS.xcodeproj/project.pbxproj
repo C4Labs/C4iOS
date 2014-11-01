@@ -110,11 +110,11 @@
 			isa = PBXGroup;
 			children = (
 				614F824819DB5ED3001DF1D4 /* C4iOS.h */,
-				A96BFA051A01F85100DFB1B4 /* Point.swift */,
 				1F5726E819FD8B17006FF395 /* Vector.swift */,
 				A9596D061A0211420023323D /* Rectangle.swift */,
 				1F06D5871A0392F600BA501B /* Rect.swift */,
 				1F06D5891A0394C200BA501B /* Size.swift */,
+				A96BFA051A01F85100DFB1B4 /* Point.swift */,
 				1F5726E319FCECE4006FF395 /* Foundation.swift */,
 				1F5B470619FCA2D300FC0477 /* Math.swift */,
 				A9596D0C1A02215B0023323D /* Color.swift */,
