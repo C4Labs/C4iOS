@@ -133,7 +133,7 @@ public class Shape: UIView {
     @IBInspectable
     public var lineWidth: Double {
         get { return Double(shapeLayer.lineWidth) }
-        set(width) { shapeLayer.lineWidth = CGFloat(width) }
+        set(width) { shapeLayer.lineWidth = CGFloat(width); updatePath(); }
     }
 
     /**
