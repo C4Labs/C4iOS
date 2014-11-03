@@ -45,7 +45,7 @@ public class RegularPolygonShape: Shape {
     }
     
     @IBInspectable
-    override public var lineWidth: CGFloat {
+    override public var lineWidth: Double {
         didSet {
             updatePath()
         }
@@ -59,14 +59,14 @@ public class RegularPolygonShape: Shape {
     }
     
     @IBInspectable
-    public var phase: CGFloat = 0 {
+    public var phase: Double = 0 {
         didSet {
             updatePath()
         }
     }
     
     internal func updatePath() {
-        let rect = CGRectInset(bounds, lineWidth, lineWidth)
+        let rect = inset(Rect(bounds), lineWidth, lineWidth)
         let rx = rect.size.width / 2.0
         let ry = rect.size.height / 2.0
         if sides == 0 || rx <= 0 || ry <= 0 {
@@ -74,13 +74,13 @@ public class RegularPolygonShape: Shape {
             return
         }
         
-        let center = CGPoint(x: CGRectGetMidX(rect), y: CGRectGetMidY(rect))
-        let delta = CGFloat(2.0*M_PI) / CGFloat(sides)
+        let center = rect.center
+        let delta = 2.0*M_PI / Double(sides)
         let path = Path()
         
         for i in 0..<sides {
-            let angle = phase + delta*CGFloat(i)
-            let point = CGPoint(x: center.x + rx*CGFloat(cos(angle)), y: center.y + ry*CGFloat(sin(angle)))
+            let angle = phase + delta*Double(i)
+            let point = Point(center.x + rx*cos(angle), center.y + ry*sin(angle))
             if i == 0 {
                 path.moveToPoint(point)
             } else {

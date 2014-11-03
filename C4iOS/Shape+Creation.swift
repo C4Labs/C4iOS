@@ -27,11 +27,11 @@ extension Shape {
             path = Path()
         }
 
-        let rect = CGRectMake(center.x - radius, center.y - radius, radius*2, radius*2)
-        path!.addEllipse(rect)
+        let r = CGRectMake(center.x - radius, center.y - radius, radius*2, radius*2)
+        path!.addEllipse(Rect(r))
     }
 
-    func addPolygon(points: [CGPoint], closed: Bool = true) {
+    func addPolygon(points: [C4Core.Point], closed: Bool = true) {
         if path == nil {
             path = Path()
         }
@@ -47,7 +47,7 @@ extension Shape {
         }
     }
 
-    func addLine(start: CGPoint, stop: CGPoint) {
+    func addLine(start: C4Core.Point, stop: C4Core.Point) {
         if path == nil {
             path = Path()
         }

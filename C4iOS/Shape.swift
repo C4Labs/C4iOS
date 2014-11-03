@@ -83,9 +83,9 @@ public class Shape: UIView {
       linearly along the path length. Defaults to zero. Animatable.
     */
     @IBInspectable
-    public var strokeStart: CGFloat {
-        get { return shapeLayer.strokeStart }
-        set(start) { shapeLayer.strokeStart = start; }
+    public var strokeStart: Double {
+        get { return Double(shapeLayer.strokeStart) }
+        set(start) { shapeLayer.strokeStart = CGFloat(start); }
     }
 
     /**
@@ -94,26 +94,26 @@ public class Shape: UIView {
       linearly along the path length. Defaults to one. Animatable.
     */
     @IBInspectable
-    public var strokeEnd: CGFloat {
-        get { return shapeLayer.strokeEnd }
-        set(end) { shapeLayer.strokeEnd = end; }
+    public var strokeEnd: Double {
+        get { return Double(shapeLayer.strokeEnd) }
+        set(end) { shapeLayer.strokeEnd = CGFloat(end); }
     }
 
     /**
       The line width used when stroking the path. Defaults to one. Animatable.
     */
     @IBInspectable
-    public var lineWidth: CGFloat {
-        get { return shapeLayer.lineWidth }
-        set(width) { shapeLayer.lineWidth = width }
+    public var lineWidth: Double {
+        get { return Double(shapeLayer.lineWidth) }
+        set(width) { shapeLayer.lineWidth = CGFloat(width) }
     }
 
     /**
       The miter limit used when stroking the path. Defaults to ten. Animatable. */
     @IBInspectable
-    public var miterLimit: CGFloat {
-        get { return shapeLayer.miterLimit }
-        set(miterLimit) { shapeLayer.miterLimit = miterLimit }
+    public var miterLimit: Double {
+        get { return Double(shapeLayer.miterLimit) }
+        set(miterLimit) { shapeLayer.miterLimit = CGFloat(miterLimit) }
     }
 
     /**
@@ -175,9 +175,9 @@ public class Shape: UIView {
     /**
       The phase of the dashing pattern applied when creating the stroke. Defaults to zero. Animatable.
     */
-    public var lineDashPhase: CGFloat {
-        get { return shapeLayer.lineDashPhase }
-        set(phase) { shapeLayer.lineDashPhase = phase }
+    public var lineDashPhase: Double {
+        get { return Double(shapeLayer.lineDashPhase) }
+        set(phase) { shapeLayer.lineDashPhase = CGFloat(phase) }
     }
 
     /**
@@ -203,7 +203,7 @@ public class Shape: UIView {
     override public func intrinsicContentSize() -> CGSize {
         if let path = path {
             let boundingBox = path.boundingBox()
-            return CGSize(width: CGRectGetMaxX(boundingBox) + lineWidth/2, height: CGRectGetMaxY(boundingBox) + lineWidth/2)
+            return CGSize(width: boundingBox.max.x + lineWidth/2, height: boundingBox.max.y + lineWidth/2)
         } else {
             return CGSizeZero
         }
@@ -220,8 +220,8 @@ public class Shape: UIView {
     public func adjustToFitPath() {
         if let path = path {
             var newFrame = path.boundingBox()
-            newFrame = CGRectInset(newFrame, lineWidth, lineWidth)
-            bounds = newFrame
+            newFrame = inset(newFrame, lineWidth, lineWidth)
+            bounds = CGRect(newFrame)
         }
     }
 

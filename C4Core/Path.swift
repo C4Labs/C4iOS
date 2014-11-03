@@ -62,8 +62,8 @@ public class Path: Equatable {
     in the path, *not* including control points for Bézier cubic and quadratic curves. If the path is empty, then
     return `CGRectNull`.
     */
-    public func boundingBox() -> CGRect {
-        return CGPathGetPathBoundingBox(internalPath)
+    public func boundingBox() -> Rect {
+        return Rect(CGPathGetPathBoundingBox(internalPath))
     }
     
     /**
@@ -71,8 +71,8 @@ public class Path: Equatable {
     painted region when the path is filled; if `fillRule` is `EvenOdd`, then the even-odd fill rule is used to evaluate
     the painted region of the path, otherwise, the winding-number fill rule is used.
     */
-    public func containsPoint(point: CGPoint, fillRule: FillRule = .NonZero) -> Bool {
-        return CGPathContainsPoint(internalPath, nil, point, fillRule == .EvenOdd)
+    public func containsPoint(point: Point, fillRule: FillRule = .NonZero) -> Bool {
+        return CGPathContainsPoint(internalPath, nil, CGPoint(point), fillRule == .EvenOdd)
     }
     
     /// Create a copy of the path
@@ -90,9 +90,9 @@ extension Path {
     /**
     Return the current point of the current subpath.
     */
-    public var currentPoint: CGPoint {
+    public var currentPoint: Point {
         get {
-            return CGPathGetCurrentPoint(internalPath)
+            return Point(CGPathGetCurrentPoint(internalPath))
         }
         set(point) {
             moveToPoint(point)
@@ -102,31 +102,31 @@ extension Path {
     /**
     Move the current point of the current subpath.
     */
-    public func moveToPoint(point: CGPoint) {
-        CGPathMoveToPoint(internalPath, nil, point.x, point.y)
+    public func moveToPoint(point: Point) {
+        CGPathMoveToPoint(internalPath, nil, CGFloat(point.x), CGFloat(point.y))
     }
     
     /**
     Append a straight-line segment fron the current point to `point` and move the current point to `point`.
     */
-    public func addLineToPoint(point: CGPoint) {
-        CGPathAddLineToPoint(internalPath, nil, point.x, point.y)
+    public func addLineToPoint(point: Point) {
+        CGPathAddLineToPoint(internalPath, nil, CGFloat(point.x), CGFloat(point.y))
     }
     
     /**
     Append a quadratic curve from the current point to `point` with control point `control` and move the current
     point to `point`.
     */
-    public func addQuadCurveToPoint(#control: CGPoint, point: CGPoint) {
-        CGPathAddQuadCurveToPoint(internalPath, nil, control.x, control.y, point.x, point.y)
+    public func addQuadCurveToPoint(#control: Point, point: Point) {
+        CGPathAddQuadCurveToPoint(internalPath, nil, CGFloat(control.x), CGFloat(control.y), CGFloat(point.x), CGFloat(point.y))
     }
     
     /**
     Append a cubic Bézier curve from the current point to `point` with control points `control1` and `control2`
     and move the current point to `point`.
     */
-    public func addCurveToPoint(control1: CGPoint, control2: CGPoint, point: CGPoint) {
-        CGPathAddCurveToPoint(internalPath, nil, control1.x, control1.y, control2.x, control2.y, point.x, point.y)
+    public func addCurveToPoint(control1: Point, control2: Point, point: Point) {
+        CGPathAddCurveToPoint(internalPath, nil, CGFloat(control1.x), CGFloat(control1.y), CGFloat(control2.x), CGFloat(control2.y), CGFloat(point.x), CGFloat(point.y))
     }
     
     /**
@@ -139,8 +139,8 @@ extension Path {
     /**
     Add a rectangle to the path.
     */
-    public func addRect(rect: CGRect) {
-        CGPathAddRect(internalPath, nil, rect)
+    public func addRect(rect: Rect) {
+        CGPathAddRect(internalPath, nil, CGRect(rect))
     }
     
     /**
@@ -149,8 +149,8 @@ extension Path {
     complete subpath of the path --- that is, it begins with a "move to" and ends with a "close subpath" --- oriented
     in the clockwise direction.
     */
-    public func addRoundedRect(rect: CGRect, cornerWidth: CGFloat, cornerHeight: CGFloat) {
-        CGPathAddRoundedRect(internalPath, nil, rect, cornerWidth, cornerHeight)
+    public func addRoundedRect(rect: Rect, cornerWidth: Double, cornerHeight: Double) {
+        CGPathAddRoundedRect(internalPath, nil, CGRect(rect), CGFloat(cornerWidth), CGFloat(cornerHeight))
     }
     
     /**
@@ -160,8 +160,8 @@ extension Path {
     minor-axes will be the width and height of `rect`. The ellipse forms a complete subpath --- that is, it begins with
     a "move to" and ends with a "close subpath" --- oriented in the clockwise direction. 
     */
-    public func addEllipse(rect: CGRect) {
-        CGPathAddEllipseInRect(internalPath, nil, rect)
+    public func addEllipse(rect: Rect) {
+        CGPathAddEllipseInRect(internalPath, nil, CGRect(rect))
     }
     
     /**
@@ -175,8 +175,8 @@ extension Path {
     :delta:      The angle between `startAngle` and the second endpoint of the arc, in radians. If `delta' is positive,
                  then the arc is drawn counter-clockwise; if negative, clockwise.
     */
-    public func addRelativeArc(center: CGPoint, radius: CGFloat, startAngle: CGFloat, delta: CGFloat) {
-        CGPathAddRelativeArc(internalPath, nil, center.x, center.y, radius, startAngle, delta)
+    public func addRelativeArc(center: Point, radius: Double, startAngle: Double, delta: Double) {
+        CGPathAddRelativeArc(internalPath, nil, CGFloat(center.x), CGFloat(center.y), CGFloat(radius), CGFloat(startAngle), CGFloat(delta))
     }
     
     /**
@@ -199,8 +199,8 @@ extension Path {
     :clockwise:  If true the arc is drawn clockwise.
 
     */
-    public func addArc(center: CGPoint, radius: CGFloat, startAngle: CGFloat, endAngle: CGFloat, clockwise: Bool) {
-        CGPathAddArc(internalPath, nil, center.x, center.y, radius, startAngle, endAngle, clockwise)
+    public func addArc(center: Point, radius: Double, startAngle: Double, endAngle: Double, clockwise: Bool) {
+        CGPathAddArc(internalPath, nil, CGFloat(center.x), CGFloat(center.y), CGFloat(radius), CGFloat(startAngle), CGFloat(endAngle), clockwise)
     }
     
     /**
@@ -208,8 +208,8 @@ extension Path {
     Bézier curves. The resulting arc is tangent to the line from the current point to `point1`, and the line from
     `point1` to `point2`.
     */
-    public func addArcToPoint(point1: CGPoint, point2: CGPoint, radius: CGFloat) {
-        CGPathAddArcToPoint(internalPath, nil, point1.x, point1.y, point2.x, point2.y, radius)
+    public func addArcToPoint(point1: Point, point2: Point, radius: Double) {
+        CGPathAddArcToPoint(internalPath, nil, CGFloat(point1.x), CGFloat(point1.y), CGFloat(point2.x), CGFloat(point2.y), CGFloat(radius))
     }
     
     /**

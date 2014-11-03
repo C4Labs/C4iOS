@@ -49,7 +49,7 @@ public class Ellipse: Shape {
     }
     
     @IBInspectable
-    override public var lineWidth: CGFloat {
+    override public var lineWidth: Double {
         didSet {
             updatePath()
         }
@@ -57,7 +57,7 @@ public class Ellipse: Shape {
     
     internal func updatePath() {
         let path = Path()
-        let rect = CGRectInset(bounds, lineWidth, lineWidth)
+        let rect = inset(Rect(bounds), Double(lineWidth), Double(lineWidth))
         path.addEllipse(rect)
         shapeLayer.path = path.CGPath
     }

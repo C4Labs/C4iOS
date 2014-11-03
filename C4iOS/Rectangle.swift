@@ -22,10 +22,10 @@ import CoreGraphics
 import C4Core
 
 public class Rectangle: Shape {
-//    convenience public init(_ frame: Rect) {
-//        self.init(frame: CGRect(frame))
-//        updatePath()
-//    }
+    convenience public init(_ frame: C4Core.Rect) {
+        self.init(frame: CGRect(frame))
+        updatePath()
+    }
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -50,21 +50,21 @@ public class Rectangle: Shape {
     }
     
     @IBInspectable
-    override public var lineWidth: CGFloat {
+    override public var lineWidth: Double {
         didSet {
             updatePath()
         }
     }
     
     @IBInspectable
-    public var cornerWidth: CGFloat = 0 {
+    public var cornerWidth: Double = 0 {
         didSet {
             updatePath()
         }
     }
     
     @IBInspectable
-    public var cornerHeight: CGFloat = 0 {
+    public var cornerHeight: Double = 0 {
         didSet {
             updatePath()
         }
@@ -72,7 +72,7 @@ public class Rectangle: Shape {
 
     internal func updatePath() {
         let path = Path()
-        let rect = CGRectInset(bounds, lineWidth, lineWidth)
+        let rect = inset(Rect(bounds), lineWidth, Double(lineWidth))
         path.addRoundedRect(rect, cornerWidth: cornerWidth, cornerHeight: cornerHeight)
         shapeLayer.path = path.CGPath
     }
