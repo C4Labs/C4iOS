@@ -13,6 +13,11 @@ public struct Size : Equatable, Comparable {
     public var width: Double
     public var height: Double
     
+    public init() {
+        width = 0
+        height = 0
+    }
+    
     public init(_ width: Double, _ height: Double) {
         self.width = width
         self.height = height
