@@ -48,7 +48,7 @@ public class C4Path: Equatable {
         internalPath = CGPathCreateMutable()
     }
     
-    internal init(path: CGMutablePathRef) {
+    public init(path: CGMutablePathRef) {
         internalPath = path
     }
     

@@ -22,6 +22,14 @@ import CoreGraphics
 import C4Core
 
 extension Shape {
+    public func addEllipse(center: C4Point, radius: Double) {
+        var cgp = CGPathCreateMutableCopy(self.shapeLayer.path!)
+        var p = C4Path(path:cgp)
+        p.addEllipse(C4Rect(center.x-radius,center.y-radius,radius*2,radius*2))
+        self.shapeLayer.path = p.CGPath
+        adjustToFitPath()
+    }
+    
     func addCircle(center: CGPoint, radius: CGFloat) {
         if path == nil {
             path = C4Path()
