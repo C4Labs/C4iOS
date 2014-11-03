@@ -20,42 +20,6 @@
 import Foundation
 import C4Core
 
-public class Ellipse: Shape {
-    convenience public init(_ frame: C4Core.Rect) {
-        self.init(frame: CGRect(frame))
-        updatePath()
-    }
-    
-    override public init(frame: CGRect) {
-        super.init(frame: frame)
-        updatePath()
-    }
-
-    required public init(coder: NSCoder) {
-        super.init(coder: coder)
-        updatePath()
-    }
-
-    override public var bounds: CGRect {
-        didSet {
-            updatePath();
-        }
-    }
-    
-    override public var frame: CGRect {
-        didSet {
-            updatePath();
-        }
-    }
-    
-    @IBInspectable
-    override public var lineWidth: Double {
-        didSet {
-            updatePath()
-        }
-    }
-    
-    internal func updatePath() {
         let path = Path()
         let rect = inset(Rect(bounds), Double(lineWidth), Double(lineWidth))
         path.addEllipse(rect)

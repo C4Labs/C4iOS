@@ -21,36 +21,6 @@ import Foundation
 import CoreGraphics
 import C4Core
 
-public class RegularPolygonShape: Shape {
-    override public init(frame: CGRect) {
-        super.init(frame: frame)
-        updatePath()
-    }
-
-    required public init(coder: NSCoder) {
-        super.init(coder: coder)
-        updatePath()
-    }
-    
-    override public var bounds: CGRect {
-        didSet {
-            updatePath();
-        }
-    }
-    
-    override public var frame: CGRect {
-        didSet {
-            updatePath();
-        }
-    }
-    
-    @IBInspectable
-    override public var lineWidth: Double {
-        didSet {
-            updatePath()
-        }
-    }
-    
     @IBInspectable
     public var sides: Int = 3 {
         didSet {

@@ -21,41 +21,6 @@ import Foundation
 import CoreGraphics
 import C4Core
 
-public class Rectangle: Shape {
-    convenience public init(_ frame: C4Core.Rect) {
-        self.init(frame: CGRect(frame))
-        updatePath()
-    }
-    
-    override public init(frame: CGRect) {
-        super.init(frame: frame)
-        updatePath()
-    }
-
-    required public init(coder: NSCoder) {
-        super.init(coder: coder)
-        updatePath()
-    }
-    
-    override public var bounds: CGRect {
-        didSet {
-            updatePath();
-        }
-    }
-    
-    override public var frame: CGRect {
-        didSet {
-            updatePath();
-        }
-    }
-    
-    @IBInspectable
-    override public var lineWidth: Double {
-        didSet {
-            updatePath()
-        }
-    }
-    
     @IBInspectable
     public var cornerWidth: Double = 0 {
         didSet {
