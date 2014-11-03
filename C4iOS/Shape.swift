@@ -23,6 +23,34 @@ import C4Core
 
 @IBDesignable
 public class Shape: UIView {
+    convenience public init(_ frame: C4Core.Rect) {
+        self.init(frame: CGRect(frame))
+        updatePath()
+    }
+    
+    override public init(frame: CGRect) {
+        super.init(frame: frame)
+        updatePath()
+    }
+    
+    required public init(coder: NSCoder) {
+        super.init(coder: coder)
+        updatePath()
+    }
+    
+    override public var bounds: CGRect {
+        didSet {
+            updatePath();
+        }
+    }
+    
+    override public var frame: CGRect {
+        didSet {
+            updatePath();
+        }
+    }
+
+    
     /**
     The path defining the shape to be rendered. If the path extends outside the layer bounds it will not automatically
     be clipped to the layer. Defaults to nil. Animatable.
@@ -192,14 +220,6 @@ public class Shape: UIView {
         return CAShapeLayer.self;
     }
 
-    override public init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-
-    required public init(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-
     override public func intrinsicContentSize() -> CGSize {
         if let path = path {
             let boundingBox = path.boundingBox()
@@ -245,5 +265,9 @@ public class Shape: UIView {
 
         /// Specifies a square line cap style for endpoints for an open path when stroked.
         case Square
+    }
+    
+    internal func updatePath() {
+        
     }
 }
