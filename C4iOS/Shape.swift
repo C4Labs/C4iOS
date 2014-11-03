@@ -28,6 +28,11 @@ public class Shape: UIView {
         updatePath()
     }
     
+    convenience public init(_ path: C4Path) {
+        self.init(frame: CGPathGetBoundingBox(path.CGPath))
+        handleNewPath(path)
+    }
+    
     override public init(frame: CGRect) {
         super.init(frame: frame)
         updatePath()
@@ -56,9 +61,22 @@ public class Shape: UIView {
     be clipped to the layer. Defaults to nil. Animatable.
     */
     internal var path: Path? {
+    internal var path: C4Path? {
         didSet {
             shapeLayer.path = path?.CGPath
+            if let p = path {
+                handleNewPath(p)
+            }
         }
+    }
+    
+    internal func handleNewPath(path: C4Path) {
+        frame = CGPathGetBoundingBox(path.CGPath)
+        var transform = CGAffineTransformMakeTranslation(-frame.origin.x, -frame.origin.y)
+        var newPath = withUnsafePointer(&transform) { (pointer: UnsafePointer<CGAffineTransform>) -> CGPath in
+            return CGPathCreateCopyByTransformingPath(path.CGPath, pointer)
+        }
+        shapeLayer.path = newPath
     }
     
     internal var shapeLayer: CAShapeLayer { get { return layer as CAShapeLayer } }
