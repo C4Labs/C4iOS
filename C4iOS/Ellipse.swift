@@ -21,6 +21,11 @@ import Foundation
 import C4Core
 
 public class Ellipse: Shape {
+    convenience public init(_ frame: C4Core.Rect) {
+        self.init(frame: CGRect(frame))
+        updatePath()
+    }
+    
     override public init(frame: CGRect) {
         super.init(frame: frame)
         updatePath()
