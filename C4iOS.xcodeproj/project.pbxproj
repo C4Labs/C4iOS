@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F06D5991A055EBB00BA501B /* C4Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9596D191A054A960023323D /* C4Core.framework */; };
+		1F06D59A1A055F3900BA501B /* Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5726E319FCECE4006FF395 /* Foundation.swift */; };
 		1F5726E419FCECE4006FF395 /* Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5726E319FCECE4006FF395 /* Foundation.swift */; };
-		1F5726E519FCECE4006FF395 /* Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5726E319FCECE4006FF395 /* Foundation.swift */; };
+		1F8CB1DA1A05781700A20783 /* RectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8CB1D91A05781700A20783 /* RectTests.swift */; };
 		614F824919DB5ED3001DF1D4 /* C4iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 614F824819DB5ED3001DF1D4 /* C4iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		614F825D19DB5FFD001DF1D4 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614F825C19DB5FFD001DF1D4 /* Shape.swift */; };
 		6162BFB719DB971C00D7F3D0 /* Shape+Creation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6162BFB619DB971C00D7F3D0 /* Shape+Creation.swift */; };
@@ -17,7 +19,6 @@
 		A9596D121A054A3F0023323D /* Ellipse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D101A054A3F0023323D /* Ellipse.swift */; };
 		A9596D131A054A3F0023323D /* RegularPolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D111A054A3F0023323D /* RegularPolygon.swift */; };
 		A9596D1E1A054A960023323D /* C4Core.h in Headers */ = {isa = PBXBuildFile; fileRef = A9596D1D1A054A960023323D /* C4Core.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A9596D241A054A960023323D /* C4Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9596D191A054A960023323D /* C4Core.framework */; };
 		A9596D391A054AF50023323D /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D321A054AF50023323D /* Color.swift */; };
 		A9596D3A1A054AF50023323D /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D331A054AF50023323D /* Math.swift */; };
 		A9596D3B1A054AF50023323D /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D341A054AF50023323D /* Path.swift */; };
@@ -32,6 +33,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		1F06D59B1A055FEC00BA501B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 614F823A19DB5ED3001DF1D4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9596D181A054A960023323D;
+			remoteInfo = C4Core;
+		};
 		A94E3BD219E0E9340039A9C4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 614F823A19DB5ED3001DF1D4 /* Project object */;
@@ -50,6 +58,7 @@
 
 /* Begin PBXFileReference section */
 		1F5726E319FCECE4006FF395 /* Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Foundation.swift; sourceTree = "<group>"; };
+		1F8CB1D91A05781700A20783 /* RectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RectTests.swift; sourceTree = "<group>"; };
 		614F824319DB5ED3001DF1D4 /* C4iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = C4iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		614F824719DB5ED3001DF1D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		614F824819DB5ED3001DF1D4 /* C4iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = C4iOS.h; sourceTree = "<group>"; };
@@ -105,7 +114,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9596D241A054A960023323D /* C4Core.framework in Frameworks */,
+				1F06D5991A055EBB00BA501B /* C4Core.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,6 +212,7 @@
 				A9596D401A054B4F0023323D /* ColorTests.swift */,
 				A9596D411A054B4F0023323D /* MathTests.swift */,
 				A9596D421A054B4F0023323D /* PointTests.swift */,
+				1F8CB1D91A05781700A20783 /* RectTests.swift */,
 				A9596D431A054B4F0023323D /* VectorTests.swift */,
 				A9596D281A054A960023323D /* Supporting Files */,
 			);
@@ -251,6 +261,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				1F06D59C1A055FEC00BA501B /* PBXTargetDependency */,
 			);
 			name = C4iOS;
 			productName = C4iOS;
@@ -403,7 +414,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F5726E519FCECE4006FF395 /* Foundation.swift in Sources */,
+				1F06D59A1A055F3900BA501B /* Foundation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,6 +438,7 @@
 			files = (
 				A9596D461A054B4F0023323D /* PointTests.swift in Sources */,
 				A9596D451A054B4F0023323D /* MathTests.swift in Sources */,
+				1F8CB1DA1A05781700A20783 /* RectTests.swift in Sources */,
 				A9596D441A054B4F0023323D /* ColorTests.swift in Sources */,
 				A9596D471A054B4F0023323D /* VectorTests.swift in Sources */,
 			);
@@ -435,6 +447,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1F06D59C1A055FEC00BA501B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9596D181A054A960023323D /* C4Core */;
+			targetProxy = 1F06D59B1A055FEC00BA501B /* PBXContainerItemProxy */;
+		};
 		A94E3BD319E0E9340039A9C4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 614F824219DB5ED3001DF1D4 /* C4iOS */;
@@ -701,6 +718,7 @@
 				A9596D2E1A054A960023323D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A9596D2F1A054A960023323D /* Build configuration list for PBXNativeTarget "C4CoreTests" */ = {
 			isa = XCConfigurationList;
@@ -709,6 +727,7 @@
 				A9596D311A054A960023323D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
