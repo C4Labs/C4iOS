@@ -19,7 +19,7 @@
 
 import CoreGraphics
 
-public struct Point : Equatable {
+public struct C4Point : Equatable {
     public var x: Double = 0
     public var y: Double = 0
     
@@ -37,23 +37,23 @@ public struct Point : Equatable {
 }
 
 /// Calculate the vector between two points
-public func - (lhs: Point, rhs: Point) -> Vector {
-    return Vector(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
+public func - (lhs: C4Point, rhs: C4Point) -> C4Vector {
+    return C4Vector(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
 }
 
 /// Translate a point by the given vector
-public func + (lhs: Point, rhs: Vector) -> Point {
-    return Point(lhs.x + rhs.x,lhs.y + rhs.y)
+public func + (lhs: C4Point, rhs: C4Vector) -> C4Point {
+    return C4Point(lhs.x + rhs.x,lhs.y + rhs.y)
 }
 
 /// Calculate the distance between two points
-public func distance(lhs: Point, rhs: Point) -> Double {
+public func distance(lhs: C4Point, rhs: C4Point) -> Double {
     let dx = rhs.x - lhs.x
     let dy = rhs.y - lhs.y
     return sqrt(dx*dx + dy*dy)
 }
 
-public func == (lhs: Point, rhs: Point) -> Bool {
+public func == (lhs: C4Point, rhs: C4Point) -> Bool {
     return lhs.x == rhs.x && lhs.y == rhs.y
 }
 
@@ -68,14 +68,14 @@ and a parameter of 0.5 will return the midpoint between `a` and `b`.
 
 :returns: The interpolated point
 */
-public func lerp(a: Point, b: Point, param: Double) -> Point {
+public func lerp(a: C4Point, b: C4Point, param: Double) -> C4Point {
     return a + (b - a) * param
 }
 
 
 // MARK: - Casting to and from CGPoint
 
-public extension Point {
+public extension C4Point {
     public init(_ point: CGPoint) {
         x = Double(point.x)
         y = Double(point.y)
@@ -83,7 +83,7 @@ public extension Point {
 }
 
 public extension CGPoint {
-    public init(_ point: Point) {
+    public init(_ point: C4Point) {
         x = CGFloat(point.x)
         y = CGFloat(point.y)
     }

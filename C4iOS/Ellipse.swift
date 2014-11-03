@@ -22,8 +22,8 @@ import C4Core
 
 public class Ellipse: Shape {   
     internal override func updatePath() {
-        let path = Path()
-        let rect = inset(Rect(bounds), Double(lineWidth), Double(lineWidth))
+        let path = C4Path()
+        let rect = inset(C4Rect(bounds), Double(lineWidth), Double(lineWidth))
         path.addEllipse(rect)
         shapeLayer.path = path.CGPath
     }

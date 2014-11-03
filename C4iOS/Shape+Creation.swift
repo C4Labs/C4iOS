@@ -24,16 +24,16 @@ import C4Core
 extension Shape {
     func addCircle(center: CGPoint, radius: CGFloat) {
         if path == nil {
-            path = Path()
+            path = C4Path()
         }
 
         let r = CGRectMake(center.x - radius, center.y - radius, radius*2, radius*2)
-        path!.addEllipse(Rect(r))
+        path!.addEllipse(C4Rect(r))
     }
 
-    func addPolygon(points: [C4Core.Point], closed: Bool = true) {
+    func addPolygon(points: [C4Point], closed: Bool = true) {
         if path == nil {
-            path = Path()
+            path = C4Path()
         }
 
         if !points.isEmpty {
@@ -45,11 +45,12 @@ extension Shape {
         if closed {
             path!.closeSubpath()
         }
+        handleNewPath(path!)
     }
 
-    func addLine(start: C4Core.Point, stop: C4Core.Point) {
+    func addLine(start: C4Point, stop: C4Point) {
         if path == nil {
-            path = Path()
+            path = C4Path()
         }
         
         path!.moveToPoint(start)

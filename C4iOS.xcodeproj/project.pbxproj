@@ -10,7 +10,7 @@
 		1F06D5991A055EBB00BA501B /* C4Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9596D191A054A960023323D /* C4Core.framework */; };
 		1F06D59A1A055F3900BA501B /* Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5726E319FCECE4006FF395 /* Foundation.swift */; };
 		1F5726E419FCECE4006FF395 /* Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5726E319FCECE4006FF395 /* Foundation.swift */; };
-		1F8CB1DA1A05781700A20783 /* RectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8CB1D91A05781700A20783 /* RectTests.swift */; };
+		1F8CB1DA1A05781700A20783 /* C4RectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8CB1D91A05781700A20783 /* C4RectTests.swift */; };
 		614F824919DB5ED3001DF1D4 /* C4iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 614F824819DB5ED3001DF1D4 /* C4iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		614F825D19DB5FFD001DF1D4 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614F825C19DB5FFD001DF1D4 /* Shape.swift */; };
 		6162BFB719DB971C00D7F3D0 /* Shape+Creation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6162BFB619DB971C00D7F3D0 /* Shape+Creation.swift */; };
@@ -19,17 +19,18 @@
 		A9596D121A054A3F0023323D /* Ellipse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D101A054A3F0023323D /* Ellipse.swift */; };
 		A9596D131A054A3F0023323D /* RegularPolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D111A054A3F0023323D /* RegularPolygon.swift */; };
 		A9596D1E1A054A960023323D /* C4Core.h in Headers */ = {isa = PBXBuildFile; fileRef = A9596D1D1A054A960023323D /* C4Core.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A9596D391A054AF50023323D /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D321A054AF50023323D /* Color.swift */; };
-		A9596D3A1A054AF50023323D /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D331A054AF50023323D /* Math.swift */; };
-		A9596D3B1A054AF50023323D /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D341A054AF50023323D /* Path.swift */; };
-		A9596D3C1A054AF50023323D /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D351A054AF50023323D /* Point.swift */; };
-		A9596D3D1A054AF50023323D /* Rect.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D361A054AF50023323D /* Rect.swift */; };
-		A9596D3E1A054AF50023323D /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D371A054AF50023323D /* Size.swift */; };
-		A9596D3F1A054AF50023323D /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D381A054AF50023323D /* Vector.swift */; };
-		A9596D441A054B4F0023323D /* ColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D401A054B4F0023323D /* ColorTests.swift */; };
-		A9596D451A054B4F0023323D /* MathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D411A054B4F0023323D /* MathTests.swift */; };
-		A9596D461A054B4F0023323D /* PointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D421A054B4F0023323D /* PointTests.swift */; };
-		A9596D471A054B4F0023323D /* VectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D431A054B4F0023323D /* VectorTests.swift */; };
+		A9596D391A054AF50023323D /* C4Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D321A054AF50023323D /* C4Color.swift */; };
+		A9596D3A1A054AF50023323D /* C4Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D331A054AF50023323D /* C4Math.swift */; };
+		A9596D3B1A054AF50023323D /* C4Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D341A054AF50023323D /* C4Path.swift */; };
+		A9596D3C1A054AF50023323D /* C4Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D351A054AF50023323D /* C4Point.swift */; };
+		A9596D3D1A054AF50023323D /* C4Rect.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D361A054AF50023323D /* C4Rect.swift */; };
+		A9596D3E1A054AF50023323D /* C4Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D371A054AF50023323D /* C4Size.swift */; };
+		A9596D3F1A054AF50023323D /* C4Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D381A054AF50023323D /* C4Vector.swift */; };
+		A9596D441A054B4F0023323D /* C4ColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D401A054B4F0023323D /* C4ColorTests.swift */; };
+		A9596D451A054B4F0023323D /* C4MathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D411A054B4F0023323D /* C4MathTests.swift */; };
+		A9596D461A054B4F0023323D /* C4PointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D421A054B4F0023323D /* C4PointTests.swift */; };
+		A9596D471A054B4F0023323D /* C4VectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D431A054B4F0023323D /* C4VectorTests.swift */; };
+		D9D3827C1A0817160083CF4D /* Polygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D3827B1A0817160083CF4D /* Polygon.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,7 +59,7 @@
 
 /* Begin PBXFileReference section */
 		1F5726E319FCECE4006FF395 /* Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Foundation.swift; sourceTree = "<group>"; };
-		1F8CB1D91A05781700A20783 /* RectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RectTests.swift; sourceTree = "<group>"; };
+		1F8CB1D91A05781700A20783 /* C4RectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4RectTests.swift; sourceTree = "<group>"; };
 		614F824319DB5ED3001DF1D4 /* C4iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = C4iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		614F824719DB5ED3001DF1D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		614F824819DB5ED3001DF1D4 /* C4iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = C4iOS.h; sourceTree = "<group>"; };
@@ -74,17 +75,18 @@
 		A9596D1D1A054A960023323D /* C4Core.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = C4Core.h; sourceTree = "<group>"; };
 		A9596D231A054A960023323D /* C4CoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = C4CoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9596D291A054A960023323D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A9596D321A054AF50023323D /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		A9596D331A054AF50023323D /* Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
-		A9596D341A054AF50023323D /* Path.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
-		A9596D351A054AF50023323D /* Point.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
-		A9596D361A054AF50023323D /* Rect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rect.swift; sourceTree = "<group>"; };
-		A9596D371A054AF50023323D /* Size.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
-		A9596D381A054AF50023323D /* Vector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
-		A9596D401A054B4F0023323D /* ColorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorTests.swift; sourceTree = "<group>"; };
-		A9596D411A054B4F0023323D /* MathTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathTests.swift; sourceTree = "<group>"; };
-		A9596D421A054B4F0023323D /* PointTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointTests.swift; sourceTree = "<group>"; };
-		A9596D431A054B4F0023323D /* VectorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VectorTests.swift; sourceTree = "<group>"; };
+		A9596D321A054AF50023323D /* C4Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Color.swift; sourceTree = "<group>"; };
+		A9596D331A054AF50023323D /* C4Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Math.swift; sourceTree = "<group>"; };
+		A9596D341A054AF50023323D /* C4Path.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Path.swift; sourceTree = "<group>"; };
+		A9596D351A054AF50023323D /* C4Point.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Point.swift; sourceTree = "<group>"; };
+		A9596D361A054AF50023323D /* C4Rect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Rect.swift; sourceTree = "<group>"; };
+		A9596D371A054AF50023323D /* C4Size.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Size.swift; sourceTree = "<group>"; };
+		A9596D381A054AF50023323D /* C4Vector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Vector.swift; sourceTree = "<group>"; };
+		A9596D401A054B4F0023323D /* C4ColorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4ColorTests.swift; sourceTree = "<group>"; };
+		A9596D411A054B4F0023323D /* C4MathTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4MathTests.swift; sourceTree = "<group>"; };
+		A9596D421A054B4F0023323D /* C4PointTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4PointTests.swift; sourceTree = "<group>"; };
+		A9596D431A054B4F0023323D /* C4VectorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4VectorTests.swift; sourceTree = "<group>"; };
+		D9D3827B1A0817160083CF4D /* Polygon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Polygon.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 			children = (
 				A9596D101A054A3F0023323D /* Ellipse.swift */,
 				A9596D111A054A3F0023323D /* RegularPolygon.swift */,
+				D9D3827B1A0817160083CF4D /* Polygon.swift */,
 				614F824819DB5ED3001DF1D4 /* C4iOS.h */,
 				A9596D061A0211420023323D /* Rectangle.swift */,
 				1F5726E319FCECE4006FF395 /* Foundation.swift */,
@@ -185,13 +188,13 @@
 		A9596D1A1A054A960023323D /* C4Core */ = {
 			isa = PBXGroup;
 			children = (
-				A9596D321A054AF50023323D /* Color.swift */,
-				A9596D331A054AF50023323D /* Math.swift */,
-				A9596D341A054AF50023323D /* Path.swift */,
-				A9596D351A054AF50023323D /* Point.swift */,
-				A9596D361A054AF50023323D /* Rect.swift */,
-				A9596D371A054AF50023323D /* Size.swift */,
-				A9596D381A054AF50023323D /* Vector.swift */,
+				A9596D321A054AF50023323D /* C4Color.swift */,
+				A9596D331A054AF50023323D /* C4Math.swift */,
+				A9596D341A054AF50023323D /* C4Path.swift */,
+				A9596D351A054AF50023323D /* C4Point.swift */,
+				A9596D361A054AF50023323D /* C4Rect.swift */,
+				A9596D371A054AF50023323D /* C4Size.swift */,
+				A9596D381A054AF50023323D /* C4Vector.swift */,
 				A9596D1D1A054A960023323D /* C4Core.h */,
 				A9596D1B1A054A960023323D /* Supporting Files */,
 			);
@@ -209,11 +212,11 @@
 		A9596D271A054A960023323D /* C4CoreTests */ = {
 			isa = PBXGroup;
 			children = (
-				A9596D401A054B4F0023323D /* ColorTests.swift */,
-				A9596D411A054B4F0023323D /* MathTests.swift */,
-				A9596D421A054B4F0023323D /* PointTests.swift */,
-				1F8CB1D91A05781700A20783 /* RectTests.swift */,
-				A9596D431A054B4F0023323D /* VectorTests.swift */,
+				A9596D401A054B4F0023323D /* C4ColorTests.swift */,
+				A9596D411A054B4F0023323D /* C4MathTests.swift */,
+				A9596D421A054B4F0023323D /* C4PointTests.swift */,
+				1F8CB1D91A05781700A20783 /* C4RectTests.swift */,
+				A9596D431A054B4F0023323D /* C4VectorTests.swift */,
 				A9596D281A054A960023323D /* Supporting Files */,
 			);
 			path = C4CoreTests;
@@ -407,6 +410,7 @@
 				A9596D131A054A3F0023323D /* RegularPolygon.swift in Sources */,
 				6162BFB719DB971C00D7F3D0 /* Shape+Creation.swift in Sources */,
 				A9596D121A054A3F0023323D /* Ellipse.swift in Sources */,
+				D9D3827C1A0817160083CF4D /* Polygon.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,13 +426,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9596D3C1A054AF50023323D /* Point.swift in Sources */,
-				A9596D391A054AF50023323D /* Color.swift in Sources */,
-				A9596D3B1A054AF50023323D /* Path.swift in Sources */,
-				A9596D3F1A054AF50023323D /* Vector.swift in Sources */,
-				A9596D3D1A054AF50023323D /* Rect.swift in Sources */,
-				A9596D3E1A054AF50023323D /* Size.swift in Sources */,
-				A9596D3A1A054AF50023323D /* Math.swift in Sources */,
+				A9596D3C1A054AF50023323D /* C4Point.swift in Sources */,
+				A9596D391A054AF50023323D /* C4Color.swift in Sources */,
+				A9596D3B1A054AF50023323D /* C4Path.swift in Sources */,
+				A9596D3F1A054AF50023323D /* C4Vector.swift in Sources */,
+				A9596D3D1A054AF50023323D /* C4Rect.swift in Sources */,
+				A9596D3E1A054AF50023323D /* C4Size.swift in Sources */,
+				A9596D3A1A054AF50023323D /* C4Math.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,11 +440,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9596D461A054B4F0023323D /* PointTests.swift in Sources */,
-				A9596D451A054B4F0023323D /* MathTests.swift in Sources */,
-				1F8CB1DA1A05781700A20783 /* RectTests.swift in Sources */,
-				A9596D441A054B4F0023323D /* ColorTests.swift in Sources */,
-				A9596D471A054B4F0023323D /* VectorTests.swift in Sources */,
+				A9596D461A054B4F0023323D /* C4PointTests.swift in Sources */,
+				A9596D451A054B4F0023323D /* C4MathTests.swift in Sources */,
+				1F8CB1DA1A05781700A20783 /* C4RectTests.swift in Sources */,
+				A9596D441A054B4F0023323D /* C4ColorTests.swift in Sources */,
+				A9596D471A054B4F0023323D /* C4VectorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

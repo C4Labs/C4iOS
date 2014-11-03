@@ -23,7 +23,7 @@ import C4Core
 
 @IBDesignable
 public class Shape: UIView {
-    convenience public init(_ frame: C4Core.Rect) {
+    convenience public init(_ frame: C4Rect) {
         self.init(frame: CGRect(frame))
         updatePath()
     }
@@ -55,15 +55,12 @@ public class Shape: UIView {
         }
     }
 
-    
     /**
     The path defining the shape to be rendered. If the path extends outside the layer bounds it will not automatically
     be clipped to the layer. Defaults to nil. Animatable.
     */
-    internal var path: Path? {
     internal var path: C4Path? {
         didSet {
-            shapeLayer.path = path?.CGPath
             if let p = path {
                 handleNewPath(p)
             }
@@ -286,6 +283,5 @@ public class Shape: UIView {
     }
     
     internal func updatePath() {
-        
     }
 }

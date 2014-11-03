@@ -1,5 +1,5 @@
 //
-//  Size.swift
+//  C4Size.swift
 //  C4iOS
 //
 //  Created by travis on 2014-10-31.
@@ -9,7 +9,7 @@
 import Foundation
 import CoreGraphics
 
-public struct Size : Equatable, Comparable {
+public struct C4Size : Equatable, Comparable {
     public var width: Double
     public var height: Double
     
@@ -28,29 +28,29 @@ public struct Size : Equatable, Comparable {
     }
 }
 
-public func == (lhs: Size, rhs: Size) -> Bool {
+public func == (lhs: C4Size, rhs: C4Size) -> Bool {
     return lhs.width == rhs.width && lhs.height == rhs.height
 }
 
-public func > (lhs: Size, rhs: Size) -> Bool {
+public func > (lhs: C4Size, rhs: C4Size) -> Bool {
     return lhs.width * lhs.height > rhs.width * rhs.height
 }
 
-public func < (lhs: Size, rhs: Size) -> Bool {
+public func < (lhs: C4Size, rhs: C4Size) -> Bool {
     return lhs.width * lhs.height < rhs.width * rhs.height
 }
 
-public func >= (lhs: Size, rhs: Size) -> Bool {
+public func >= (lhs: C4Size, rhs: C4Size) -> Bool {
     return lhs.width * lhs.height >= rhs.width * rhs.height
 }
 
-public func <= (lhs: Size, rhs: Size) -> Bool {
+public func <= (lhs: C4Size, rhs: C4Size) -> Bool {
     return lhs.width * lhs.height <= rhs.width * rhs.height
 }
 
 
 // MARK: - Casting to and from CGSize
-public extension Size {
+public extension C4Size {
     public init(_ size: CGSize) {
         width = Double(size.width)
         height = Double(size.height)
@@ -58,7 +58,7 @@ public extension Size {
 }
 
 public extension CGSize {
-    public init(_ size: Size) {
+    public init(_ size: C4Size) {
         width = CGFloat(size.width)
         height = CGFloat(size.height)
     }

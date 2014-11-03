@@ -20,11 +20,11 @@
 import XCTest
 import C4Core
 
-class RectTests: XCTestCase {
+class C4RectTests: XCTestCase {
     func testIntersects() {
-        let a = Rect(0,0,100,100)
-        let b = Rect(50,50,100,100)
-        let c = Rect(100,100,100,100)
+        let a = C4Rect(0,0,100,100)
+        let b = C4Rect(50,50,100,100)
+        let c = C4Rect(100,100,100,100)
         XCTAssertTrue(a.intersects(b),"a and b intersect")
         XCTAssertFalse(a.intersects(c),"a and c do not intersect")
     }
@@ -32,8 +32,8 @@ class RectTests: XCTestCase {
     func testCenter() {
         for i in 1...10 {
             var val = Double(random(below:100))
-            let rect = Rect(0,0,val,val)
-            XCTAssertEqual(rect.center,Point(val/2.0,val/2.0),"Center point should be half the width and height of the Rect")
+            let rect = C4Rect(0,0,val,val)
+            XCTAssertEqual(rect.center, C4Point(val/2.0,val/2.0),"Center point should be half the width and height of the C4Rect")
         }
     }
     
@@ -41,37 +41,37 @@ class RectTests: XCTestCase {
         for i in 1...10 {
             var x = Double(random(below:100))
             var y = Double(random(below:100))
-            let rect = Rect(x,y,100,100)
-            XCTAssertEqual(rect.max,Point(x+100,y+100),"Max point should equal the origin plus the size of the Rect")
+            let rect = C4Rect(x,y,100,100)
+            XCTAssertEqual(rect.max, C4Point(x+100,y+100),"Max point should equal the origin plus the size of the C4Rect")
         }
     }
     
     func testIsZero() {
-        XCTAssertTrue(Point().isZero(), "A point created with no arguments should be {0,0}")
+        XCTAssertTrue(C4Point().isZero(), "A point created with no arguments should be {0,0}")
     }
     
     func testContainsRect() {
-        let a = Rect(0,0,100,100)
-        let b = Rect(50,50,50,50)
-        let c = Rect(50,50,100,100)
+        let a = C4Rect(0,0,100,100)
+        let b = C4Rect(50,50,50,50)
+        let c = C4Rect(50,50,100,100)
         XCTAssertTrue(a.contains(b),"A should contain B")
         XCTAssertTrue(c.contains(b),"C should contain B")
         XCTAssertFalse(a.contains(c),"A should not contain C")
     }
     
     func testContainsPoint() {
-        let a = Rect(0,0,100,100)
-        let b = Rect(25,25,50,50)
-        let c = Rect(50,50,100,100)
+        let a = C4Rect(0,0,100,100)
+        let b = C4Rect(25,25,50,50)
+        let c = C4Rect(50,50,100,100)
         XCTAssertTrue(a.contains(b.center),"A should contain the center of B")
         XCTAssertTrue(b.contains(c.origin),"B should contain the origin of C")
         XCTAssertFalse(c.contains(b.origin),"C should not contain the center of A")
     }
     
     func testEquals() {
-        let a = Rect(10,10,10,10)
-        var b = Rect(0,0,10,10)
-        b.center = Point(15,15)
+        let a = C4Rect(10,10,10,10)
+        var b = C4Rect(0,0,10,10)
+        b.center = C4Point(15,15)
         XCTAssertEqual(a,b,"A should be equal to B")
     }
     
@@ -80,12 +80,12 @@ class RectTests: XCTestCase {
             return Double(random(below: 90) + 10)
         }
         
-        let a = Rect(0,0,r(),r())
-        let b = Rect(10,10,r(),r())
+        let a = C4Rect(0,0,r(),r())
+        let b = C4Rect(10,10,r(),r())
         let c = intersection(a,b)
         let x = (b.max.x - a.max.x < 0) ? b.max.x : a.max.x
         let y = (b.max.y - a.max.y < 0) ? b.max.y : a.max.y
-        let d = Rect(b.origin.x,b.origin.y,x-b.origin.x,y-b.origin.y)
+        let d = C4Rect(b.origin.x,b.origin.y,x-b.origin.x,y-b.origin.y)
         XCTAssertEqual(c,d,"C should be equal to D")
     }
     
@@ -94,12 +94,12 @@ class RectTests: XCTestCase {
             return Double(random(below: 100))
         }
         
-        let a = Rect(r(),r(),r()+1,r()+1)
-        let b = Rect(r(),r(),r()+1,r()+1)
+        let a = C4Rect(r(),r(),r()+1,r()+1)
+        let b = C4Rect(r(),r(),r()+1,r()+1)
         let c = union(a,b)
-        let o = Point(min(a.origin.x,b.origin.x),min(a.origin.y,b.origin.y))
-        let s = Size(max(a.max.x,b.max.x)-o.x,max(a.max.y,b.max.y)-o.y)
-        let d = Rect(o,s)
+        let o = C4Point(min(a.origin.x,b.origin.x),min(a.origin.y,b.origin.y))
+        let s = C4Size(max(a.max.x,b.max.x)-o.x,max(a.max.y,b.max.y)-o.y)
+        let d = C4Rect(o,s)
         XCTAssertEqual(c,d,"C should be equal to D")
     }
 
@@ -111,10 +111,10 @@ class RectTests: XCTestCase {
         func r() -> Double {
             return Double(random(below: 100))
         }
-        let a = Point(r(),r())
-        let b = Size(-r(),-r())
-        let c = Rect(a.x+b.width,a.y+b.height,-b.width,-b.height)
-        let d = standardize(Rect(a,b))
+        let a = C4Point(r(),r())
+        let b = C4Size(-r(),-r())
+        let c = C4Rect(a.x+b.width,a.y+b.height,-b.width,-b.height)
+        let d = standardize(C4Rect(a,b))
         XCTAssertEqual(c,d,"C should equal D")
     }
     
@@ -122,10 +122,10 @@ class RectTests: XCTestCase {
         func r() -> Double {
             return Double(random(below: 100))
         }
-        let a = Rect(r(),r(),r()+1,r()+1)
+        let a = C4Rect(r(),r(),r()+1,r()+1)
         let x = r()
         let y = r()
         let b = inset(a,x,y)
-        let c = Rect(a.origin,Size(a.size.width-x,a.size.height-y))
+        let c = C4Rect(a.origin,C4Size(a.size.width-x,a.size.height-y))
     }
 }

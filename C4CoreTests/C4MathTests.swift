@@ -20,7 +20,7 @@
 import XCTest
 import C4Core
 
-class MathTests: XCTestCase {
+class C4MathTests: XCTestCase {
 
     func testLerp() {
         XCTAssert(lerp(0.0, 10.0, 0.2) == 2.0, "Value should be interpolated")

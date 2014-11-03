@@ -37,7 +37,7 @@ public class RegularPolygon: Shape {
     }
     
     internal override func updatePath() {
-        let rect = inset(Rect(bounds), lineWidth, lineWidth)
+        let rect = inset(C4Rect(bounds), lineWidth, lineWidth)
         let rx = rect.size.width / 2.0
         let ry = rect.size.height / 2.0
         if sides == 0 || rx <= 0 || ry <= 0 {
@@ -47,11 +47,11 @@ public class RegularPolygon: Shape {
         
         let center = rect.center
         let delta = 2.0*M_PI / Double(sides)
-        let path = Path()
+        let path = C4Path()
         
         for i in 0..<sides {
             let angle = phase + delta*Double(i)
-            let point = Point(center.x + rx*cos(angle), center.y + ry*sin(angle))
+            let point = C4Point(center.x + rx*cos(angle), center.y + ry*sin(angle))
             if i == 0 {
                 path.moveToPoint(point)
             } else {

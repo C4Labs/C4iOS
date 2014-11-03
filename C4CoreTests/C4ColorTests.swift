@@ -20,9 +20,9 @@
 import C4Core
 import XCTest
 
-class ColorTests: XCTestCase {
+class C4ColorTests: XCTestCase {
     func testInitWithRedHexValue() {
-        let redColor   = Color(hexValue: 0xFF0000FF)
+        let redColor   = C4Color(hexValue: 0xFF0000FF)
         XCTAssertEqual(redColor.red,   1.0, "Red value should be 1.0")
         XCTAssertEqual(redColor.green, 0.0, "Green value should be 0.0")
         XCTAssertEqual(redColor.blue,  0.0, "Blue value should be 0.0")
@@ -30,7 +30,7 @@ class ColorTests: XCTestCase {
     }
     
     func testInitWithGreenHexValue() {
-        let greenColor = Color(hexValue: 0x00FF00FF)
+        let greenColor = C4Color(hexValue: 0x00FF00FF)
         XCTAssertEqual(greenColor.red,   0.0, "Red value should be 0.0")
         XCTAssertEqual(greenColor.green, 1.0, "Green value should be 1.0")
         XCTAssertEqual(greenColor.blue,  0.0, "Blue value should be 0.0")
@@ -38,7 +38,7 @@ class ColorTests: XCTestCase {
     }
     
     func testInitWithBlueHexValue() {
-        let blueColor  = Color(hexValue: 0x0000FFFF)
+        let blueColor  = C4Color(hexValue: 0x0000FFFF)
         XCTAssertEqual(blueColor.red,   0.0, "Red value should be 0.0")
         XCTAssertEqual(blueColor.green, 0.0, "Green value should be 0.0")
         XCTAssertEqual(blueColor.blue,  1.0, "Blue value should be 1.0")
@@ -46,7 +46,7 @@ class ColorTests: XCTestCase {
     }
     
     func testInitWithClearHexValue() {
-        let clearColor = Color(hexValue: 0xFFFFFF00)
+        let clearColor = C4Color(hexValue: 0xFFFFFF00)
         XCTAssertEqual(clearColor.red,   1.0, "Red value should be 1.0")
         XCTAssertEqual(clearColor.green, 1.0, "Green value should be 1.0")
         XCTAssertEqual(clearColor.blue,  1.0, "Blue value should be 1.0")

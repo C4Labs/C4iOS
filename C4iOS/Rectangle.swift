@@ -37,8 +37,8 @@ public class Rectangle: Shape {
     }
 
     internal override func updatePath() {
-        let path = Path()
-        let rect = inset(Rect(bounds), lineWidth, Double(lineWidth))
+        let path = C4Path()
+        let rect = inset(C4Rect(bounds), lineWidth, Double(lineWidth))
         path.addRoundedRect(rect, cornerWidth: cornerWidth, cornerHeight: cornerHeight)
         shapeLayer.path = path.CGPath
     }

@@ -19,7 +19,7 @@
 
 import CoreGraphics
 
-public struct Vector : Equatable {
+public struct C4Vector : Equatable {
     public var x: Double = 0
     public var y: Double = 0
     
@@ -72,16 +72,16 @@ public struct Vector : Equatable {
     /**
     The angle between two vectors, based on {0,0}
     */
-    public func angleTo(vec: Vector) -> Double {
+    public func angleTo(vec: C4Vector) -> Double {
         return acos(self ⋅ vec / (self.magnitude * vec.magnitude))
     }
 
     /**
     The angle between two vectors, based on a provided point
     */
-    public func angleTo(vec: Vector, basedOn: Vector) -> Double {
-        var vecA = Vector(x: x, y: y)
-        var vecB = Vector(x: vec.x, y: vec.y)
+    public func angleTo(vec: C4Vector, basedOn: C4Vector) -> Double {
+        var vecA = C4Vector(x: x, y: y)
+        var vecB = C4Vector(x: vec.x, y: vec.y)
         
         vecA -= basedOn
         vecB -= basedOn
@@ -92,19 +92,19 @@ public struct Vector : Equatable {
     /**
     Return the dot product. You should use the ⋅ operator instead.
     */
-    public func dot(vec: Vector) -> Double {
+    public func dot(vec: C4Vector) -> Double {
         return x * vec.x + y * vec.y
     }
     
     /**
     Return a vector with the same heading but a magnitude of 1.
     */
-    public func unitVector() -> Vector {
+    public func unitVector() -> C4Vector {
         let mag = self.magnitude
         if mag == 0 {
-            return Vector()
+            return C4Vector()
         }
-        return Vector(x: x / mag, y: y / mag)
+        return C4Vector(x: x / mag, y: y / mag)
     }
 
     /**
@@ -115,51 +115,51 @@ public struct Vector : Equatable {
     }
 }
 
-public func == (lhs: Vector, rhs: Vector) -> Bool {
+public func == (lhs: C4Vector, rhs: C4Vector) -> Bool {
     return lhs.x == rhs.x && lhs.y == rhs.y
 }
 
-public func += (inout lhs: Vector, rhs: Vector) {
+public func += (inout lhs: C4Vector, rhs: C4Vector) {
     lhs.x += rhs.x
     lhs.y += rhs.y
 }
 
-public func -= (inout lhs: Vector, rhs: Vector) {
+public func -= (inout lhs: C4Vector, rhs: C4Vector) {
     lhs.x -= rhs.x
     lhs.y -= rhs.y
 }
 
-public func *= (inout lhs: Vector, rhs: Double) {
+public func *= (inout lhs: C4Vector, rhs: Double) {
     lhs.x *= rhs
     lhs.y *= rhs
 }
 
-public func /= (inout lhs: Vector, rhs: Double) {
+public func /= (inout lhs: C4Vector, rhs: Double) {
     lhs.x /= rhs
     lhs.y /= rhs
 }
 
-public func + (lhs: Vector, rhs: Vector) -> Vector {
-    return Vector(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
+public func + (lhs: C4Vector, rhs: C4Vector) -> C4Vector {
+    return C4Vector(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
 }
 
-public func - (lhs: Vector, rhs: Vector) -> Vector {
-    return Vector(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
+public func - (lhs: C4Vector, rhs: C4Vector) -> C4Vector {
+    return C4Vector(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
 }
 
 infix operator ⋅ { associativity left precedence 150 }
-public func ⋅ (lhs: Vector, rhs: Vector) -> Double {
+public func ⋅ (lhs: C4Vector, rhs: C4Vector) -> Double {
     return lhs.x * rhs.x + lhs.y * rhs.y
 }
 
-public func / (lhs: Vector, rhs: Double) -> Vector {
-    return Vector(x: lhs.x / rhs, y: lhs.y / rhs)
+public func / (lhs: C4Vector, rhs: Double) -> C4Vector {
+    return C4Vector(x: lhs.x / rhs, y: lhs.y / rhs)
 }
 
-public func * (lhs: Vector, rhs: Double) -> Vector {
-    return Vector(x: lhs.x * rhs, y: lhs.y * rhs)
+public func * (lhs: C4Vector, rhs: Double) -> C4Vector {
+    return C4Vector(x: lhs.x * rhs, y: lhs.y * rhs)
 }
 
-public prefix func - (vector: Vector) -> Vector {
-    return Vector(x: -vector.x, y: -vector.y)
+public prefix func - (vector: C4Vector) -> C4Vector {
+    return C4Vector(x: -vector.x, y: -vector.y)
 }

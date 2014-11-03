@@ -19,7 +19,7 @@
 
 import CoreGraphics
 
-public class Color {
+public class C4Color {
     internal var colorSpace: CGColorSpaceRef
     internal var internalColor: CGColorRef
     
@@ -107,7 +107,7 @@ public class Color {
 // MARK: - Casting to UIColor
 
 public extension UIColor {
-    public convenience init(_ color: Color) {
+    public convenience init(_ color: C4Color) {
         self.init(CGColor: color.internalColor)
     }
 }
