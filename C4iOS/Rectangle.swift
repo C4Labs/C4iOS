@@ -21,6 +21,7 @@ import Foundation
 import CoreGraphics
 import C4Core
 
+public class Rectangle: Shape {    
     @IBInspectable
     public var cornerWidth: Double = 0 {
         didSet {
@@ -35,7 +36,7 @@ import C4Core
         }
     }
 
-    internal func updatePath() {
+    internal override func updatePath() {
         let path = Path()
         let rect = inset(Rect(bounds), lineWidth, Double(lineWidth))
         path.addRoundedRect(rect, cornerWidth: cornerWidth, cornerHeight: cornerHeight)

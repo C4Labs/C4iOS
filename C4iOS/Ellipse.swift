@@ -20,6 +20,8 @@
 import Foundation
 import C4Core
 
+public class Ellipse: Shape {   
+    internal override func updatePath() {
         let path = Path()
         let rect = inset(Rect(bounds), Double(lineWidth), Double(lineWidth))
         path.addEllipse(rect)

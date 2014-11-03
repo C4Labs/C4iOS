@@ -21,6 +21,7 @@ import Foundation
 import CoreGraphics
 import C4Core
 
+public class RegularPolygon: Shape {
     @IBInspectable
     public var sides: Int = 3 {
         didSet {
@@ -35,7 +36,7 @@ import C4Core
         }
     }
     
-    internal func updatePath() {
+    internal override func updatePath() {
         let rect = inset(Rect(bounds), lineWidth, lineWidth)
         let rx = rect.size.width / 2.0
         let ry = rect.size.height / 2.0
