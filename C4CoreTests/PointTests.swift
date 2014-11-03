@@ -32,4 +32,11 @@ class PointTests: XCTestCase {
         let translated = original + Vector(x: 3, y: 2)
         XCTAssertEqual(translated, Point(5, 5), "Point should be translated to (5, 5)")
     }
+    
+    func testLerp() {
+        let target = Point(10,10)
+        let lerped = lerp(Point(), target, 0.2)
+        XCTAssertEqual(lerped, Point(2,2), "Point should be {2,2}")
+    }
+    
 }
