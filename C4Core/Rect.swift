@@ -18,6 +18,11 @@ public struct Rect : Equatable {
         size = Size(w,h)
     }
     
+    public init(_ o: Point, _ s: Size) {
+        origin = o
+        size = s
+    }
+    
     //MARK: - Comparing
     public func intersects(r: Rect) -> Bool {
         return CGRectIntersectsRect(CGRect(self), CGRect(r))
