@@ -22,24 +22,16 @@ import CoreGraphics
 import C4Core
 
 extension Shape {
-    public func addEllipse(center: C4Point, radius: Double) {
-        var cgp = CGPathCreateMutableCopy(self.shapeLayer.path!)
-        var p = C4Path(path:cgp)
-        p.addEllipse(C4Rect(center.x-radius,center.y-radius,radius*2,radius*2))
-        self.shapeLayer.path = p.CGPath
-        adjustToFitPath()
-    }
-    
-    func addCircle(center: CGPoint, radius: CGFloat) {
+    public func addCircle(#center: C4Point, radius: Double) {
         if path == nil {
             path = C4Path()
         }
 
-        let r = CGRectMake(center.x - radius, center.y - radius, radius*2, radius*2)
-        path!.addEllipse(C4Rect(r))
+        let r = C4Rect(center.x - radius, center.y - radius, radius*2, radius*2)
+        path!.addEllipse(r)
     }
 
-    func addPolygon(points: [C4Point], closed: Bool = true) {
+    public func addPolygon(#points: [C4Point], closed: Bool = true) {
         if path == nil {
             path = C4Path()
         }
@@ -56,7 +48,7 @@ extension Shape {
         handleNewPath(path!)
     }
 
-    func addLine(start: C4Point, stop: C4Point) {
+    public func addLine(#start: C4Point, stop: C4Point) {
         if path == nil {
             path = C4Path()
         }
