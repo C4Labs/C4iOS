@@ -31,6 +31,11 @@ public struct C4Point : Equatable {
         self.y = y
     }
     
+    public init(_ x: Int, _ y: Int) {
+        self.x = Double(x)
+        self.y = Double(y)
+    }
+    
     public func isZero() -> Bool {
         return x == 0 && y == 0
     }

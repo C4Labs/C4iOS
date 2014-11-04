@@ -23,6 +23,11 @@ public struct C4Size : Equatable, Comparable {
         self.height = height
     }
     
+    public init(_ width: Int, _ height: Int) {
+        self.width = Double(width)
+        self.height = Double(height)
+    }
+    
     public func isZero() -> Bool {
         return width == 0 && height == 0
     }

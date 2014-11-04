@@ -34,6 +34,11 @@ public struct C4Vector : Equatable {
         self.y = y
     }
     
+    public init(_ x: Int, _ y: Int) {
+        self.x = Double(x)
+        self.y = Double(y)
+    }
+    
     /**
     Create a vector with a polar representation: a magnitude and an angle in radians.
     http://en.wikipedia.org/wiki/Polar_coordinate_system

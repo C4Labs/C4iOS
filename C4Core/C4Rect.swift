@@ -15,7 +15,12 @@ public struct C4Rect : Equatable {
     
     public init(_ x: Double, _ y: Double, _ w: Double, _ h: Double) {
         origin = C4Point(x, y)
-        size = C4Size(w,h)
+        size = C4Size(w, h)
+    }
+    
+    public init(_ x: Int, _ y: Int, _ w: Int, _ h: Int) {
+        origin = C4Point(x, y)
+        size = C4Size(w, h)
     }
     
     public init(_ o: C4Point, _ s: C4Size) {
