@@ -30,7 +30,6 @@ public class Shape: UIView {
     
     convenience public init(_ path: C4Path) {
         self.init(frame: CGPathGetBoundingBox(path.CGPath))
-        handleNewPath(path)
     }
     
     override public init(frame: CGRect) {
@@ -61,19 +60,8 @@ public class Shape: UIView {
     */
     internal var path: C4Path? {
         didSet {
-            if let p = path {
-                handleNewPath(p)
-            }
+            shapeLayer.path = path?.CGPath
         }
-    }
-    
-    internal func handleNewPath(path: C4Path) {
-        frame = CGPathGetBoundingBox(path.CGPath)
-        var transform = CGAffineTransformMakeTranslation(-frame.origin.x, -frame.origin.y)
-        var newPath = withUnsafePointer(&transform) { (pointer: UnsafePointer<CGAffineTransform>) -> CGPath in
-            return CGPathCreateCopyByTransformingPath(path.CGPath, pointer)
-        }
-        shapeLayer.path = newPath
     }
     
     internal var shapeLayer: CAShapeLayer { get { return layer as CAShapeLayer } }
@@ -253,11 +241,12 @@ public class Shape: UIView {
       Changes the bounds so that they match the path's bounding box.
     */
     public func adjustToFitPath() {
-        if let path = path {
-            var newFrame = path.boundingBox()
-            newFrame = inset(newFrame, lineWidth, lineWidth)
-            bounds = CGRect(newFrame)
+        if path == nil {
+            return
         }
+        var newFrame = path!.boundingBox()
+        newFrame = inset(newFrame, lineWidth, lineWidth)
+        bounds = CGRect(newFrame)
     }
 
     public enum LineJoin {

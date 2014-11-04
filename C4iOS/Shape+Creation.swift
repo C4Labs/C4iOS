@@ -45,7 +45,6 @@ extension Shape {
         if closed {
             path!.closeSubpath()
         }
-        handleNewPath(path!)
     }
 
     public func addLine(#start: C4Point, stop: C4Point) {
