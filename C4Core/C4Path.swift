@@ -48,8 +48,8 @@ public class C4Path: Equatable {
         internalPath = CGPathCreateMutable()
     }
     
-    public init(path: CGMutablePathRef) {
-        internalPath = path
+    public init(path: CGPathRef) {
+        internalPath = CGPathCreateMutableCopy(path)
     }
     
     /// Determine if the path is empty
@@ -78,6 +78,12 @@ public class C4Path: Equatable {
     /// Create a copy of the path
     public func copy() -> C4Path {
         return C4Path(path: CGPathCreateMutableCopy(internalPath))
+    }
+    
+    public var CGPath: CGPathRef {
+        get {
+            return internalPath
+        }
     }
 }
 
@@ -217,11 +223,5 @@ extension C4Path {
     */
     public func addPath(path: C4Path) {
         CGPathAddPath(internalPath, nil, path.internalPath)
-    }
-    
-    public var CGPath: CGPathRef {
-        get {
-            return internalPath
-        }
     }
 }
