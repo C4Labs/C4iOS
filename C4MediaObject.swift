@@ -11,15 +11,29 @@ import C4Core
 import C4iOS
 import AVFoundation
 
-protocol MediaObject {
+protocol MediaObject: Run, Notification {
     func setup()
 }
 
-protocol Run {
+protocol VisibleMediaObject: MediaObject, Visible, Interactive, Animatable {
     
+}
+
+protocol Run {
     func run()
     func run(delay: Double)
+}
+
+protocol Notification {
+    typealias NotificationClosure = (notification: NSNotification) -> ()
     
+    func post(notification: String)
+    func listen(notification: String, run: NotificationClosure)
+    func listen(notification: String, object: AnyObject, run: NotificationClosure)
+    func listen(notification: String, objects: [AnyObject], run: NotificationClosure)
+    func stopListening(notification: String)
+    func stopListening(notification: String, object: AnyObject)
+    func stopListening(notification: String, objects: [AnyObject])
 }
 
 protocol Visible {
@@ -156,7 +170,8 @@ struct Original {
     var ratio: Double { get{ return 0.0} }
 }
 
-protocol Movie {
+//class
+protocol Movie: VisibleMediaObject {
     var original: Original { get }
     var audioMix: AVMutableAudioMix { get }
     var player: AVPlayer { get }
@@ -167,7 +182,8 @@ protocol Movie {
     func initialize(url: NSURL, frame: C4Rect)
 }
 
-protocol Sound {
+//class
+protocol Sound: MediaObject {
     var pan: Double { get set }
     var player: AVAudioPlayer { get }
     var numberOfChannels: Int { get }
@@ -180,8 +196,6 @@ protocol Sound {
     func averagePower(channel: Int) -> Double
     func updateMeters()
 }
-
-protocol C4Image {}
 
 struct CameraPosition {
     // front, back
@@ -200,9 +214,10 @@ protocol CameraDelegate {
     func cameraDidCaptureImage()
 }
 
-protocol Camera {
+//class
+protocol Camera: VisibleMediaObject {
     var initialized: Bool { get }
-    var capturedImage: C4Image { get }
+    var capturedImage: Image { get }
     var position: CameraPosition { get set }
     var quality: CaptureQuality { get set }
     var session: AVCaptureSession { get }
@@ -214,7 +229,8 @@ protocol Camera {
     func stopCapturing()
 }
 
-protocol Font {
+//class
+protocol Font: MediaObject {
     var UIFont: UIFont { get }
     var CTFont: CTFont { get }
     var CGFont: CGFont { get }
@@ -228,7 +244,8 @@ protocol Font {
     var lineHeight: Double { get }
 }
 
-protocol Image {
+//class
+protocol Image: VisibleMediaObject {
     var pixelsLoaded: Bool { get set }
     var original: original { get }
     var contents: CGImage { get }
@@ -249,6 +266,7 @@ protocol Image {
     func apply(filters: [Filter])
 }
 
+//extension
 protocol AnimatedImage {
     var images: [Image] { get }
     var rate: Double { get set } //set explicity .25s, etc.
@@ -269,7 +287,8 @@ protocol AnimatedImage {
     func ended() -> Bool //returns true for normally, false otherwise
 }
 
-protocol Filter {
+//class
+protocol Filter: MediaObject {
     var availableFilters: [String]
     class func filter(var1: AnyObject, var2: AnyObject) -> Filter //and then all the rest
     func applyTo(inout image: Image)
@@ -278,7 +297,8 @@ protocol Filter {
     
 }
 
-protocol Timer {
+//class
+protocol Timer: VisibleMediaObject {
     var valid: Bool { get }
     var fireDate: NSDate { get set }
     var interval: Double { get }
@@ -303,14 +323,15 @@ protocol UI {
 
 struct ButtonType {}
 struct ControlState {}
-protocol Button {
+//class
+protocol Button: VisibleMediaObject {
     var buttonType: ButtonType { get set }
     var title: String { get } //the current title
     var attributedTitle: String { get } //the current attributed title
     var titleColor: Color { get } //the current title color
     var titleShadowColor: Color { get } //the current title shadow color
     var image: Image { get } //the current image
-    var backgroundImage { get } //the current backgroundImage
+    var backgroundImage: Image { get } //the current backgroundImage
     var tintColor: Color { get set }
     var font: Font { get set }
     var showsTouchWhenHighlighted: Bool { get set }
@@ -350,7 +371,8 @@ struct BaselineAdjustment {}
 struct TextAlignment {}
 struct LineBreakMode {}
 		
-protocol Label {
+//class
+protocol Label: VisibleMediaObject {
 	var text: String { get set }
 	var font: Font { get set }
 	var adjustsToWidth: Bool { get set }
@@ -373,7 +395,8 @@ protocol Label {
 
 struct IndicatorStyle {}
 
-protocol ScrollView {
+//class
+protocol ScrollView: VisibleMediaObject {
 	var delegate: UIScrollViewDelegate { get set }
 	var contentOffset: C4Point { get set }
 	var contentSize: C4Size { get set }
@@ -417,7 +440,8 @@ protocol ScrollView {
 	func touchesShouldCancelInContentView(view: UIView) -> Bool
 }
 
-protocol Slider {
+//class
+protocol Slider: VisibleMediaObject {
 	var value: Double { get set }
 	var minValue: Double { get set }
 	var maxValue: Double { get set }
@@ -445,7 +469,8 @@ protocol Slider {
 	func thumbImage(state: ControlState) -> Image
 }
 
-protocol Stepper {
+//class
+protocol Stepper: VisibleMediaObject {
 	var continuous: Bool { get set }
 	var autorepeats: Bool { get set }
 	var wraps: Bool { get set }
@@ -467,7 +492,8 @@ protocol Stepper {
 	func incrementImage(state: ControlState)
 }
 
-protocol Switch {
+//class
+protocol Switch: VisibleMediaObject {
 	var on: Bool { get set }
 	var onTintColor: Color { get set }
 	var tintColor: Color { get set }
@@ -482,6 +508,7 @@ protocol Switch {
 
 struct ActivityIndicatorStyle {}
 	
+//class
 protocol ActivityIndicator {
 	func initialize(style: ActivityIndicatorStyle)
 
@@ -495,17 +522,6 @@ protocol ActivityIndicator {
 	func stop()
 }
 
-protocol Notification {
-    typealias NotificationClosure = (notification: NSNotification) -> ()
-
-	func post(notification: String)
-	func listen(notification: String, run: NotificationClosure)
-	func listen(notification: String, object: AnyObject, run: NotificationClosure)
-	func listen(notification: String, objects: [AnyObject], run: NotificationClosure)
-	func stopListening(notification: String)
-	func stopListening(notification: String, object: AnyObject)
-	func stopListening(notification: String, objects: [AnyObject])	
-}
 
 extension UIColor {
 	var CIColor: CIColor {
