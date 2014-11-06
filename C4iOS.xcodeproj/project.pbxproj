@@ -30,7 +30,6 @@
 		A9596D451A054B4F0023323D /* C4MathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D411A054B4F0023323D /* C4MathTests.swift */; };
 		A9596D461A054B4F0023323D /* C4PointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D421A054B4F0023323D /* C4PointTests.swift */; };
 		A9596D471A054B4F0023323D /* C4VectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D431A054B4F0023323D /* C4VectorTests.swift */; };
-		A9596D841A08967C0023323D /* C4View.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D831A08967C0023323D /* C4View.swift */; };
 		A9596D8F1A089EA00023323D /* C4Animation.h in Headers */ = {isa = PBXBuildFile; fileRef = A9596D8E1A089EA00023323D /* C4Animation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A9596D951A089EA00023323D /* C4Animation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9596D8A1A089E9F0023323D /* C4Animation.framework */; };
 		A9596DA41A089EB60023323D /* C4Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596DA31A089EB60023323D /* C4Animator.swift */; };
@@ -72,6 +71,7 @@
 /* Begin PBXFileReference section */
 		1F5726E319FCECE4006FF395 /* Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Foundation.swift; sourceTree = "<group>"; };
 		1F8CB1D91A05781700A20783 /* C4RectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4RectTests.swift; sourceTree = "<group>"; };
+		1FB628D31A0B17DD00699D1E /* C4MediaObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = C4MediaObject.swift; sourceTree = "<group>"; };
 		614F824319DB5ED3001DF1D4 /* C4iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = C4iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		614F824719DB5ED3001DF1D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		614F824819DB5ED3001DF1D4 /* C4iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = C4iOS.h; sourceTree = "<group>"; };
@@ -161,6 +161,7 @@
 		614F823919DB5ED3001DF1D4 = {
 			isa = PBXGroup;
 			children = (
+				1FB628D31A0B17DD00699D1E /* C4MediaObject.swift */,
 				A9596D1A1A054A960023323D /* C4Core */,
 				A9596D271A054A960023323D /* C4CoreTests */,
 				614F824519DB5ED3001DF1D4 /* C4iOS */,
@@ -546,7 +547,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F5726E419FCECE4006FF395 /* Foundation.swift in Sources */,
-				A9596D841A08967C0023323D /* C4View.swift in Sources */,
 				A9596D071A0211420023323D /* Rectangle.swift in Sources */,
 				614F825D19DB5FFD001DF1D4 /* Shape.swift in Sources */,
 				A9596D131A054A3F0023323D /* RegularPolygon.swift in Sources */,
@@ -974,6 +974,7 @@
 				A9596D9F1A089EA00023323D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A9596DA01A089EA00023323D /* Build configuration list for PBXNativeTarget "C4AnimationTests" */ = {
 			isa = XCConfigurationList;
@@ -982,6 +983,7 @@
 				A9596DA21A089EA00023323D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
