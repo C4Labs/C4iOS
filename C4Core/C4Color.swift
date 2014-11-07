@@ -101,6 +101,17 @@ public class C4Color {
             components[3] = newValue
         }
     }
+    
+    public var CGColor: CGColorRef {
+        get {
+            let floatComponents: UnsafeMutablePointer<CGFloat> =  UnsafeMutablePointer<CGFloat>(calloc(4, UInt(sizeof(CGFloat))))
+            floatComponents[0] = CGFloat(components[0])
+            floatComponents[1] = CGFloat(components[1])
+            floatComponents[2] = CGFloat(components[2])
+            floatComponents[3] = CGFloat(components[3])
+            return CGColorCreate(CGColorSpaceCreateDeviceRGB(), floatComponents)
+        }
+    }
 }
 
 
