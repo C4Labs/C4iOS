@@ -39,6 +39,7 @@
 		D949478B1A0BFC6700F9CDC8 /* C4MediaObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D949478A1A0BFC6700F9CDC8 /* C4MediaObjectTests.swift */; };
 		D94947931A0BFC9500F9CDC8 /* MediaObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94947921A0BFC9500F9CDC8 /* MediaObject.swift */; };
 		D94947951A0BFD5700F9CDC8 /* C4View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94947941A0BFD5700F9CDC8 /* C4View.swift */; };
+		D94947971A0D8E7A00F9CDC8 /* EventSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94947961A0D8E7A00F9CDC8 /* EventSource.swift */; };
 		D9D3827C1A0817160083CF4D /* Polygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D3827B1A0817160083CF4D /* Polygon.swift */; };
 /* End PBXBuildFile section */
 
@@ -125,6 +126,7 @@
 		D949478A1A0BFC6700F9CDC8 /* C4MediaObjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = C4MediaObjectTests.swift; sourceTree = "<group>"; };
 		D94947921A0BFC9500F9CDC8 /* MediaObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaObject.swift; sourceTree = "<group>"; };
 		D94947941A0BFD5700F9CDC8 /* C4View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4View.swift; sourceTree = "<group>"; };
+		D94947961A0D8E7A00F9CDC8 /* EventSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventSource.swift; sourceTree = "<group>"; };
 		D9D3827B1A0817160083CF4D /* Polygon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Polygon.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -348,6 +350,7 @@
 				D949477D1A0BFC6700F9CDC8 /* C4MediaObject.h */,
 				D94947921A0BFC9500F9CDC8 /* MediaObject.swift */,
 				D94947941A0BFD5700F9CDC8 /* C4View.swift */,
+				D94947961A0D8E7A00F9CDC8 /* EventSource.swift */,
 				1FB628D31A0B17DD00699D1E /* C4MediaObjectTrial.swift */,
 				D949477B1A0BFC6700F9CDC8 /* Supporting Files */,
 			);
@@ -751,6 +754,7 @@
 			files = (
 				D94947931A0BFC9500F9CDC8 /* MediaObject.swift in Sources */,
 				D94947951A0BFD5700F9CDC8 /* C4View.swift in Sources */,
+				D94947971A0D8E7A00F9CDC8 /* EventSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

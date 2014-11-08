@@ -17,14 +17,6 @@ protocol MediaObject: Animatable, EventSource, NSObjectProtocol {
 
 protocol Animatable {}
 
-typealias EventToken = AnyObject
-protocol EventSource {
-    
-    func post(event: String)
-    func on(event: String, run: Void -> Void) -> EventToken
-    func cancel(token: EventToken)
-}
-
 typealias TapAction = (location: C4Point) -> ()
 typealias PanAction = (location: C4Point, translation: C4Point, velocity: C4Point) -> ()
 typealias PinchAction = (location: C4Point, scale: Double, velocity: Double) -> ()
