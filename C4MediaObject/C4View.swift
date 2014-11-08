@@ -144,7 +144,7 @@ public struct Rotation {
     }
 }
 
-public class C4View : UIViewController, Visible {
+public class C4View : UIViewController, Visible, EventSource {
     convenience public init(frame: C4Rect) {
         self.init()
         self.view.frame = CGRect(frame)
@@ -260,4 +260,40 @@ public class C4View : UIViewController, Visible {
             //set perspective distance on layer
         }
     }
+    
+    //MARK: - Events
+    func post(event: String) {
+        NSNotificationCenter.defaultCenter().postNotificationName(event, object: self)
+    }
+    
+    func on(event notificationName: String, run executionBlock: Void -> Void) -> AnyObject {
+        return self.on(event: notificationName, from: nil, run: executionBlock)
+    }
+
+    func on(event notificationName: String, from objectToObserve: AnyObject?, run executionBlock: Void -> Void) -> AnyObject {
+        let nc = NSNotificationCenter.defaultCenter()
+        return nc.addObserverForName(notificationName, object: objectToObserve, queue: NSOperationQueue.currentQueue(), usingBlock: { (n: NSNotification!) in
+            executionBlock()
+        });
+    }
+
+    func cancel(observer: AnyObject) {
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.removeObserver(observer, name: nil, object: nil)
+    }
+    
+    func cancel(event: String, observer: AnyObject) {
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.removeObserver(observer, name: event, object: nil)
+    }
+    
+    func cancel(event: String, observer: AnyObject, object: AnyObject) {
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.removeObserver(observer, name: event, object: object)
+    }
+
+    func watch(property: String, of object: NSObject) {
+        //would be great to simplify Key Value Observing
+    }
+
 }
