@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol VisibleMediaObject: MediaObject, Visible, Touchable, Maskable {
+public protocol VisibleMediaObject: MediaObject, Visible, Touchable, Maskable, AddRemoveSubview {
     
 }
 public typealias TapAction = (location: C4Point) -> ()
@@ -75,3 +75,8 @@ public protocol Maskable {
     var mask: Mask { get set }
 }
 
+public protocol AddRemoveSubview {
+    func add<T: AddRemoveSubview>(subview: T)
+    func remove<T: AddRemoveSubview>(subview: T)
+    func removeFromSuperview()
+}
