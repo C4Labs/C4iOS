@@ -196,4 +196,13 @@ public class C4View : NSObject, VisibleMediaObject {
         get { return self.view.layer.mask }
         set(val) { }
     }
+    
+    //MARK: - AddRemoveSubview
+    public func add<T: AddRemoveSubview>(subview: T) {
+        
+    }
+    public func remove<T: AddRemoveSubview>(subview: T) {}
+    public func removeFromSuperview() {}
+}
+
 }
