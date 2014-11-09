@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol EventSource {
+public protocol EventSource {
     func post(event: String)
     func on(event notificationName: String, run executionBlock: Void -> Void) -> AnyObject
     func on(event notificationName: String, from objectToObserve: AnyObject?, run executionBlock: Void -> Void) -> AnyObject
