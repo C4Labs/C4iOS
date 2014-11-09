@@ -14,6 +14,8 @@
 		1F3FC01E1A0F2BF8005984BB /* EventSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94947961A0D8E7A00F9CDC8 /* EventSource.swift */; };
 		1F5726E419FCECE4006FF395 /* Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5726E319FCECE4006FF395 /* Foundation.swift */; };
 		1F8CB1DA1A05781700A20783 /* C4RectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8CB1D91A05781700A20783 /* C4RectTests.swift */; };
+		1FD74B741A0F31B400A65163 /* Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD74B731A0F31B400A65163 /* Rotation.swift */; };
+		1FD74B781A0F31F800A65163 /* VisibleMediaObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD74B771A0F31F800A65163 /* VisibleMediaObject.swift */; };
 		614F824919DB5ED3001DF1D4 /* C4iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 614F824819DB5ED3001DF1D4 /* C4iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		614F825D19DB5FFD001DF1D4 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614F825C19DB5FFD001DF1D4 /* Shape.swift */; };
 		6162BFB719DB971C00D7F3D0 /* Shape+Creation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6162BFB619DB971C00D7F3D0 /* Shape+Creation.swift */; };
@@ -41,7 +43,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		1F06D59B1A055FEC00BA501B /* PBXContainerItemProxy */ = {
+		1F3FC01F1A0F2EDC005984BB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 614F823A19DB5ED3001DF1D4 /* Project object */;
 			proxyType = 1;
@@ -74,6 +76,8 @@
 /* Begin PBXFileReference section */
 		1F5726E319FCECE4006FF395 /* Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Foundation.swift; sourceTree = "<group>"; };
 		1F8CB1D91A05781700A20783 /* C4RectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4RectTests.swift; sourceTree = "<group>"; };
+		1FD74B731A0F31B400A65163 /* Rotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rotation.swift; sourceTree = "<group>"; };
+		1FD74B771A0F31F800A65163 /* VisibleMediaObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisibleMediaObject.swift; sourceTree = "<group>"; };
 		614F824319DB5ED3001DF1D4 /* C4iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = C4iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		614F824719DB5ED3001DF1D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		614F824819DB5ED3001DF1D4 /* C4iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = C4iOS.h; sourceTree = "<group>"; };
@@ -240,6 +244,8 @@
 				A9596D371A054AF50023323D /* C4Size.swift */,
 				A9596D381A054AF50023323D /* C4Vector.swift */,
 				D94947921A0BFC9500F9CDC8 /* MediaObject.swift */,
+				1FD74B771A0F31F800A65163 /* VisibleMediaObject.swift */,
+				1FD74B731A0F31B400A65163 /* Rotation.swift */,
 				D94947961A0D8E7A00F9CDC8 /* EventSource.swift */,
 				A9596D1D1A054A960023323D /* C4Core.h */,
 				A9596D1B1A054A960023323D /* Supporting Files */,
@@ -353,7 +359,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				1F06D59C1A055FEC00BA501B /* PBXTargetDependency */,
+				1F3FC0201A0F2EDC005984BB /* PBXTargetDependency */,
 			);
 			name = C4iOS;
 			productName = C4iOS;
@@ -578,7 +584,9 @@
 				A9596D391A054AF50023323D /* C4Color.swift in Sources */,
 				A9596D3B1A054AF50023323D /* C4Path.swift in Sources */,
 				1F3FC01E1A0F2BF8005984BB /* EventSource.swift in Sources */,
+				1FD74B741A0F31B400A65163 /* Rotation.swift in Sources */,
 				1F3FC01B1A0F2A9A005984BB /* MediaObject.swift in Sources */,
+				1FD74B781A0F31F800A65163 /* VisibleMediaObject.swift in Sources */,
 				A9596D3F1A054AF50023323D /* C4Vector.swift in Sources */,
 				A9596D3D1A054AF50023323D /* C4Rect.swift in Sources */,
 				A9596D3E1A054AF50023323D /* C4Size.swift in Sources */,
@@ -617,10 +625,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		1F06D59C1A055FEC00BA501B /* PBXTargetDependency */ = {
+		1F3FC0201A0F2EDC005984BB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A9596D181A054A960023323D /* C4Core */;
-			targetProxy = 1F06D59B1A055FEC00BA501B /* PBXContainerItemProxy */;
+			targetProxy = 1F3FC01F1A0F2EDC005984BB /* PBXContainerItemProxy */;
 		};
 		A94E3BD319E0E9340039A9C4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

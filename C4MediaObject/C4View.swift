@@ -7,12 +7,10 @@
 //
 
 import Foundation
-import C4Core
 import C4iOS
-//import C4Animatable
-//import C4MediaObject
+import C4Core
 
-public class C4View : NSObject, MediaObject, Visible, EventSource {
+public class C4View : NSObject, VisibleMediaObject {
     internal var view : UIView
     
     convenience public init(frame: C4Rect) {
@@ -20,7 +18,7 @@ public class C4View : NSObject, MediaObject, Visible, EventSource {
         self.view.frame = CGRect(frame)
     }
     
-    public init() {
+    public override init() {
         self.view = UIView(frame:CGRectZero)
     }
     
@@ -29,45 +27,42 @@ public class C4View : NSObject, MediaObject, Visible, EventSource {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: -
     //MARK: - Media:Object
-    //MARK: -
     //MARK: - Animatable
     //nothing yet
     
     //MARK: - EventSource
-    //MARK: - Events
-    func post(event: String) {
+    public func post(event: String) {
         NSNotificationCenter.defaultCenter().postNotificationName(event, object: self)
     }
     
-    func on(event notificationName: String, run executionBlock: Void -> Void) -> AnyObject {
+    public func on(event notificationName: String, run executionBlock: Void -> Void) -> AnyObject {
         return self.on(event: notificationName, from: nil, run: executionBlock)
     }
     
-    func on(event notificationName: String, from objectToObserve: AnyObject?, run executionBlock: Void -> Void) -> AnyObject {
+    public func on(event notificationName: String, from objectToObserve: AnyObject?, run executionBlock: Void -> Void) -> AnyObject {
         let nc = NSNotificationCenter.defaultCenter()
         return nc.addObserverForName(notificationName, object: objectToObserve, queue: NSOperationQueue.currentQueue(), usingBlock: { (n: NSNotification!) in
             executionBlock()
         });
     }
     
-    func cancel(observer: AnyObject) {
+    public func cancel(observer: AnyObject) {
         let nc = NSNotificationCenter.defaultCenter()
         nc.removeObserver(observer, name: nil, object: nil)
     }
     
-    func cancel(event: String, observer: AnyObject) {
+    public func cancel(event: String, observer: AnyObject) {
         let nc = NSNotificationCenter.defaultCenter()
         nc.removeObserver(observer, name: event, object: nil)
     }
     
-    func cancel(event: String, observer: AnyObject, object: AnyObject) {
+    public func cancel(event: String, observer: AnyObject, object: AnyObject) {
         let nc = NSNotificationCenter.defaultCenter()
         nc.removeObserver(observer, name: event, object: object)
     }
     
-    func watch(property: String, of object: NSObject) {
+    public func watch(property: String, of object: NSObject) {
         //would be great to simplify Key Value Observing
     }
     
@@ -172,5 +167,33 @@ public class C4View : NSObject, MediaObject, Visible, EventSource {
         didSet {
             //set perspective distance on layer
         }
+    }
+    
+    //MARK: - Touchable
+    public var interactionEnabled: Bool = true
+    
+    public func onTap(run: TapAction) {
+        
+    }
+    public func onPan(run: PanAction) {
+        
+    }
+    public func onPinch(run: PinchAction) {
+        
+    }
+    public func onRotate(run: RotationAction) {
+        
+    }
+    public func onLongPress(run: LongPressAction) {
+        
+    }
+    public func onSwipe(run: SwipeAction) {
+        
+    }
+    
+    //MARK: - Maskable
+    public var mask: Mask {
+        get { return self.view.layer.mask }
+        set(val) { }
     }
 }
