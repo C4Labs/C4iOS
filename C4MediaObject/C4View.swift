@@ -12,146 +12,16 @@ import C4iOS
 //import C4Animatable
 //import C4MediaObject
 
-public struct Border {
-    public init() {
-        self.layer = CALayer()
-    }
+public class C4View : NSObject, MediaObject, Visible, EventSource {
+    internal var view : UIView
     
-    public init(_ layer: CALayer) {
-        self.init()
-        self.layer = layer
-    }
-    
-    public var layer: CALayer {
-        didSet {
-            update()
-        }
-    }
-    
-    public var color: C4Color = C4Color(red: 0, green: 0, blue: 0, alpha: 0) {
-        didSet {
-            layer.borderColor = color.CGColor
-        }
-    }
-    
-    public var radius: Double = 0 {
-        didSet {
-            layer.cornerRadius = CGFloat(radius)
-        }
-    }
-    
-    public var width: Double = 0 {
-        didSet {
-            layer.borderWidth = CGFloat(width)
-        }
-    }
-
-    internal func update() {
-        layer.borderColor = color.CGColor
-        layer.cornerRadius = CGFloat(radius)
-        layer.borderWidth = CGFloat(width)
-    }
-}
-
-public struct Shadow {
-    public init() {
-        self.layer = CALayer()
-    }
-    
-    public init(_ layer: CALayer) {
-        self.init()
-        self.layer = layer
-    }
-
-    public var layer: CALayer {
-        didSet {
-            update()
-        }
-    }
- 
-    public var radius: Double = 0 {
-        didSet {
-           layer.shadowRadius = CGFloat(radius)
-        }
-    }
-    public var color: C4Color = C4Color(red: 0, green: 0, blue: 0, alpha: 0) {
-        didSet {
-            layer.shadowColor = color.CGColor
-        }
-    }
-    public var offset: C4Size = C4Size() {
-        didSet {
-            layer.shadowOffset = CGSize(offset)
-        }
-    }
-    public var opacity: Double = 0 {
-        didSet {
-            layer.shadowOpacity = Float(opacity)
-        }
-    }
-    public var shadowPath: C4Path = C4Path() {
-        didSet {
-            layer.shadowPath = shadowPath.CGPath
-        }
-    }
-
-    internal func update() {
-        layer.shadowRadius = CGFloat(radius)
-        layer.shadowColor = color.CGColor
-        layer.shadowOffset = CGSize(offset)
-        layer.shadowOpacity = Float(opacity)
-    }
-}
-
-public struct Rotation {
-    public init() {
-        self.layer = CALayer()
-    }
-    
-    public init(_ layer: CALayer) {
-        self.init()
-        self.layer = layer
-    }
-
-    public var layer: CALayer {
-        didSet {
-            update()
-        }
-    }
-    
-    public var x: Double = 0 {
-        didSet {
-            //trigger x rotation for layer
-        }
-    }
-
-    public var y: Double = 0 {
-        didSet {
-            //trigger y rotation for layer
-        }
-    }
-    
-    public var z: Double = 0 {
-        didSet {
-            //trigger z rotation for layer
-        }
-    }
-
-    internal func update() {
-        //trigger x rotation for layer
-        //trigger y rotation for layer
-        //trigger z rotation for layer
-    }
-}
-
-public class C4View : UIViewController, Visible, EventSource {
     convenience public init(frame: C4Rect) {
         self.init()
         self.view.frame = CGRect(frame)
     }
     
-    public override init() {
-        super.init()
+    public init() {
+        self.view = UIView(frame:CGRectZero)
     }
     
 
@@ -159,6 +29,49 @@ public class C4View : UIViewController, Visible, EventSource {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: -
+    //MARK: - Media:Object
+    //MARK: -
+    //MARK: - Animatable
+    //nothing yet
+    
+    //MARK: - EventSource
+    //MARK: - Events
+    func post(event: String) {
+        NSNotificationCenter.defaultCenter().postNotificationName(event, object: self)
+    }
+    
+    func on(event notificationName: String, run executionBlock: Void -> Void) -> AnyObject {
+        return self.on(event: notificationName, from: nil, run: executionBlock)
+    }
+    
+    func on(event notificationName: String, from objectToObserve: AnyObject?, run executionBlock: Void -> Void) -> AnyObject {
+        let nc = NSNotificationCenter.defaultCenter()
+        return nc.addObserverForName(notificationName, object: objectToObserve, queue: NSOperationQueue.currentQueue(), usingBlock: { (n: NSNotification!) in
+            executionBlock()
+        });
+    }
+    
+    func cancel(observer: AnyObject) {
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.removeObserver(observer, name: nil, object: nil)
+    }
+    
+    func cancel(event: String, observer: AnyObject) {
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.removeObserver(observer, name: event, object: nil)
+    }
+    
+    func cancel(event: String, observer: AnyObject, object: AnyObject) {
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.removeObserver(observer, name: event, object: object)
+    }
+    
+    func watch(property: String, of object: NSObject) {
+        //would be great to simplify Key Value Observing
+    }
+    
+    //MARK: - Visible
     public var frame: C4Rect {
         get {
             return C4Rect(self.view.frame)
@@ -260,40 +173,4 @@ public class C4View : UIViewController, Visible, EventSource {
             //set perspective distance on layer
         }
     }
-    
-    //MARK: - Events
-    func post(event: String) {
-        NSNotificationCenter.defaultCenter().postNotificationName(event, object: self)
-    }
-    
-    func on(event notificationName: String, run executionBlock: Void -> Void) -> AnyObject {
-        return self.on(event: notificationName, from: nil, run: executionBlock)
-    }
-
-    func on(event notificationName: String, from objectToObserve: AnyObject?, run executionBlock: Void -> Void) -> AnyObject {
-        let nc = NSNotificationCenter.defaultCenter()
-        return nc.addObserverForName(notificationName, object: objectToObserve, queue: NSOperationQueue.currentQueue(), usingBlock: { (n: NSNotification!) in
-            executionBlock()
-        });
-    }
-
-    func cancel(observer: AnyObject) {
-        let nc = NSNotificationCenter.defaultCenter()
-        nc.removeObserver(observer, name: nil, object: nil)
-    }
-    
-    func cancel(event: String, observer: AnyObject) {
-        let nc = NSNotificationCenter.defaultCenter()
-        nc.removeObserver(observer, name: event, object: nil)
-    }
-    
-    func cancel(event: String, observer: AnyObject, object: AnyObject) {
-        let nc = NSNotificationCenter.defaultCenter()
-        nc.removeObserver(observer, name: event, object: object)
-    }
-
-    func watch(property: String, of object: NSObject) {
-        //would be great to simplify Key Value Observing
-    }
-
 }
