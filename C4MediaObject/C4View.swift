@@ -21,51 +21,12 @@ public class C4View : NSObject, VisibleMediaObject {
     public override init() {
         self.view = UIView(frame:CGRectZero)
     }
-    
 
     required public init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     //MARK: - Media:Object
-    //MARK: - Animatable
-    //nothing yet
-    
-    //MARK: - EventSource
-    public func post(event: String) {
-        NSNotificationCenter.defaultCenter().postNotificationName(event, object: self)
-    }
-    
-    public func on(event notificationName: String, run executionBlock: Void -> Void) -> AnyObject {
-        return self.on(event: notificationName, from: nil, run: executionBlock)
-    }
-    
-    public func on(event notificationName: String, from objectToObserve: AnyObject?, run executionBlock: Void -> Void) -> AnyObject {
-        let nc = NSNotificationCenter.defaultCenter()
-        return nc.addObserverForName(notificationName, object: objectToObserve, queue: NSOperationQueue.currentQueue(), usingBlock: { (n: NSNotification!) in
-            executionBlock()
-        });
-    }
-    
-    public func cancel(observer: AnyObject) {
-        let nc = NSNotificationCenter.defaultCenter()
-        nc.removeObserver(observer, name: nil, object: nil)
-    }
-    
-    public func cancel(event: String, observer: AnyObject) {
-        let nc = NSNotificationCenter.defaultCenter()
-        nc.removeObserver(observer, name: event, object: nil)
-    }
-    
-    public func cancel(event: String, observer: AnyObject, object: AnyObject) {
-        let nc = NSNotificationCenter.defaultCenter()
-        nc.removeObserver(observer, name: event, object: object)
-    }
-    
-    public func watch(property: String, of object: NSObject) {
-        //would be great to simplify Key Value Observing
-    }
-    
     //MARK: - Visible
     public var frame: C4Rect {
         get {
@@ -168,7 +129,44 @@ public class C4View : NSObject, VisibleMediaObject {
             //set perspective distance on layer
         }
     }
+    //MARK: - Animatable
+    //nothing yet
     
+    //MARK: - EventSource
+    public func post(event: String) {
+        NSNotificationCenter.defaultCenter().postNotificationName(event, object: self)
+    }
+    
+    public func on(event notificationName: String, run executionBlock: Void -> Void) -> AnyObject {
+        return self.on(event: notificationName, from: nil, run: executionBlock)
+    }
+    
+    public func on(event notificationName: String, from objectToObserve: AnyObject?, run executionBlock: Void -> Void) -> AnyObject {
+        let nc = NSNotificationCenter.defaultCenter()
+        return nc.addObserverForName(notificationName, object: objectToObserve, queue: NSOperationQueue.currentQueue(), usingBlock: { (n: NSNotification!) in
+            executionBlock()
+        });
+    }
+    
+    public func cancel(observer: AnyObject) {
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.removeObserver(observer, name: nil, object: nil)
+    }
+    
+    public func cancel(event: String, observer: AnyObject) {
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.removeObserver(observer, name: event, object: nil)
+    }
+    
+    public func cancel(event: String, observer: AnyObject, object: AnyObject) {
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.removeObserver(observer, name: event, object: object)
+    }
+    
+    public func watch(property: String, of object: NSObject) {
+        //would be great to simplify Key Value Observing
+    }
+
     //MARK: - Touchable
     public var interactionEnabled: Bool = true
     
