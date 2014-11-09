@@ -7,75 +7,16 @@
 //
 
 import Foundation
-//import C4Animation
-import C4iOS
+import QuartzCore
 
-protocol MediaObject: Animatable, EventSource, NSObjectProtocol {
+public protocol MediaObject: Animatable, EventSource, NSObjectProtocol {
     
 }
 
-protocol Animatable {}
 
-typealias TapAction = (location: C4Point) -> ()
-typealias PanAction = (location: C4Point, translation: C4Point, velocity: C4Point) -> ()
-typealias PinchAction = (location: C4Point, scale: Double, velocity: Double) -> ()
-typealias RotationAction = (location: C4Point, rotation: Double, velocity: Double) -> ()
-typealias LongPressAction = (location: C4Point) -> ()
-typealias SwipeAction = (location: C4Point) -> ()
+public protocol Animatable {}
 
-protocol Touchable {
-    var interactionEnabled: Bool { get set }
-    
-    func onTap(run: TapAction)
-    func onPan(run: PanAction)
-    func onPinch(run: PinchAction)
-    func onRotate(run: RotationAction)
-    func onLongPress(run: LongPressAction)
-    func onSwipe(run: SwipeAction)
-}
-
-public protocol Visible {
-    var frame: C4Rect { get set }
-    var bounds: C4Rect { get }
-    var center: C4Point { get set }
-    var size: C4Size { get }
-    var constrainsProportions: Bool { get set }
-    
-    var backgroundColor: C4Color { get set }
-    var opacity: Double { get set }
-    var hidden: Bool { get set }
-    
-    var border: Border { get set }
-    var shadow: Shadow { get set }
-    var rotation: Rotation { get set }
-//    
-//    var borderWidth: Double { get set }
-//    var borderHeight: Double { get set }
-//    var borderColor: C4Color { get set }
-//    var cornerRadius: Double { get set }
-//    //potential idea: struct border > .width, .height, .color, .radius
-//    
-//    var shadowRadius: Double { get set }
-//    var shadowColor: C4Color { get set }
-//    var shadowOffset: C4Point { get set }
-//    var shadowOpacity: Double { get set }
-//    var shadowPath: C4Path { get set }
-//    //potential idea: struct shadow > ... (see above)
-//    
-//    var rotation: Double { get set }
-//    var rotationX: Double { get set }
-//    var rotationZ: Double { get set }
-//    //idea: struct rotation > .z, .x, .y
-    var perspectiveDistance: Double { get set }
-}
-
-protocol Mask {}
-
-protocol Maskable {
-    var mask: Mask { get set }
-}
-
-protocol Styleable {
+public protocol Styleable {
     class var defaultStyle: Style { get set }
     var style: Style { get set }
 }
@@ -168,46 +109,5 @@ public struct Shadow {
         layer.shadowColor = color.CGColor
         layer.shadowOffset = CGSize(offset)
         layer.shadowOpacity = Float(opacity)
-    }
-}
-
-public struct Rotation {
-    public init() {
-        self.layer = CALayer()
-    }
-    
-    public init(_ layer: CALayer) {
-        self.init()
-        self.layer = layer
-    }
-    
-    public var layer: CALayer {
-        didSet {
-            update()
-        }
-    }
-    
-    public var x: Double = 0 {
-        didSet {
-            //trigger x rotation for layer
-        }
-    }
-    
-    public var y: Double = 0 {
-        didSet {
-            //trigger y rotation for layer
-        }
-    }
-    
-    public var z: Double = 0 {
-        didSet {
-            //trigger z rotation for layer
-        }
-    }
-    
-    internal func update() {
-        //trigger x rotation for layer
-        //trigger y rotation for layer
-        //trigger z rotation for layer
     }
 }
