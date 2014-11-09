@@ -8,7 +8,6 @@
 
 import Foundation
 //import C4Animation
-import C4Core
 import C4iOS
 
 protocol MediaObject: Animatable, EventSource, NSObjectProtocol {
@@ -79,4 +78,136 @@ protocol Maskable {
 protocol Styleable {
     class var defaultStyle: Style { get set }
     var style: Style { get set }
+}
+
+public struct Border {
+    public init() {
+        self.layer = CALayer()
+    }
+    
+    public init(_ layer: CALayer) {
+        self.init()
+        self.layer = layer
+    }
+    
+    public var layer: CALayer {
+        didSet {
+            update()
+        }
+    }
+    
+    public var color: C4Color = C4Color(red: 0, green: 0, blue: 0, alpha: 0) {
+        didSet {
+            layer.borderColor = color.CGColor
+        }
+    }
+    
+    public var radius: Double = 0 {
+        didSet {
+            layer.cornerRadius = CGFloat(radius)
+        }
+    }
+    
+    public var width: Double = 0 {
+        didSet {
+            layer.borderWidth = CGFloat(width)
+        }
+    }
+    
+    internal func update() {
+        layer.borderColor = color.CGColor
+        layer.cornerRadius = CGFloat(radius)
+        layer.borderWidth = CGFloat(width)
+    }
+}
+
+public struct Shadow {
+    public init() {
+        self.layer = CALayer()
+    }
+    
+    public init(_ layer: CALayer) {
+        self.init()
+        self.layer = layer
+    }
+    
+    public var layer: CALayer {
+        didSet {
+            update()
+        }
+    }
+    
+    public var radius: Double = 0 {
+        didSet {
+            layer.shadowRadius = CGFloat(radius)
+        }
+    }
+    public var color: C4Color = C4Color(red: 0, green: 0, blue: 0, alpha: 0) {
+        didSet {
+            layer.shadowColor = color.CGColor
+        }
+    }
+    public var offset: C4Size = C4Size() {
+        didSet {
+            layer.shadowOffset = CGSize(offset)
+        }
+    }
+    public var opacity: Double = 0 {
+        didSet {
+            layer.shadowOpacity = Float(opacity)
+        }
+    }
+    public var shadowPath: C4Path = C4Path() {
+        didSet {
+            layer.shadowPath = shadowPath.CGPath
+        }
+    }
+    
+    internal func update() {
+        layer.shadowRadius = CGFloat(radius)
+        layer.shadowColor = color.CGColor
+        layer.shadowOffset = CGSize(offset)
+        layer.shadowOpacity = Float(opacity)
+    }
+}
+
+public struct Rotation {
+    public init() {
+        self.layer = CALayer()
+    }
+    
+    public init(_ layer: CALayer) {
+        self.init()
+        self.layer = layer
+    }
+    
+    public var layer: CALayer {
+        didSet {
+            update()
+        }
+    }
+    
+    public var x: Double = 0 {
+        didSet {
+            //trigger x rotation for layer
+        }
+    }
+    
+    public var y: Double = 0 {
+        didSet {
+            //trigger y rotation for layer
+        }
+    }
+    
+    public var z: Double = 0 {
+        didSet {
+            //trigger z rotation for layer
+        }
+    }
+    
+    internal func update() {
+        //trigger x rotation for layer
+        //trigger y rotation for layer
+        //trigger z rotation for layer
+    }
 }
