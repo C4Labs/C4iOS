@@ -11,7 +11,7 @@ import C4Core
 import UIKit
 
 public class C4View : NSObject, VisibleMediaObject {
-    internal var view : UIView
+    internal var view : UIView = UIView()
     
     convenience public init(frame: C4Rect) {
         self.init()
@@ -19,7 +19,8 @@ public class C4View : NSObject, VisibleMediaObject {
     }
     
     public override init() {
-        self.view = UIView(frame:CGRectZero)
+        super.init()
+        self.setupObserver()
     }
 
     required public init(coder aDecoder: NSCoder) {
