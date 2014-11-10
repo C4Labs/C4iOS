@@ -190,6 +190,18 @@ public class C4View : NSObject, VisibleMediaObject {
         
     }
     
+    //MARK: - Setup Observer
+    internal var observer: NSObjectProtocol = NSObject()
+    internal func setupObserver() {
+        let nc = NSNotificationCenter.defaultCenter()
+        let mq = NSOperationQueue.mainQueue()
+        self.observer = nc.addObserverForName("", object: nil, queue: mq) { _ in self.observe() }
+    }
+    
+    internal func observe(){}
+    
+    deinit { NSNotificationCenter.defaultCenter().removeObserver(self.observer) }
+    
     //MARK: - Maskable
     public var mask: Mask {
         get { return self.view.layer.mask }
