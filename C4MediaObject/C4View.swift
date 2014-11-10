@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import C4iOS
 import C4Core
+import UIKit
 
 public class C4View : NSObject, VisibleMediaObject {
     internal var view : UIView
