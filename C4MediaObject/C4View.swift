@@ -171,9 +171,20 @@ public class C4View : NSObject, VisibleMediaObject {
     //MARK: - Touchable
     public var interactionEnabled: Bool = true
     
+    internal var tapAction : TapAction?
+    internal var tapRecognizer: UITapGestureRecognizer?
+    
     public func onTap(run: TapAction) {
-        
+        tapAction = run
+        tapRecognizer = UITapGestureRecognizer(target: self, action: "handleTap:")
+        view.addGestureRecognizer(tapRecognizer!)
     }
+    internal func handleTap(sender: UITapGestureRecognizer) {
+        if let action = tapAction? {
+            action(location: C4Point(sender.locationInView(self.view)))
+        }
+    }
+    
     public func onPan(run: PanAction) {
         
     }
