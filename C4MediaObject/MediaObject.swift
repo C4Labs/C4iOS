@@ -37,7 +37,7 @@ public struct Border {
         }
     }
     
-    public var color: C4Color = C4Color(red: 0, green: 0, blue: 0, alpha: 0) {
+    public var color: C4Color = C4Color(red: 0, green: 0, blue: 0, alpha: 1) {
         didSet {
             layer.borderColor = color.CGColor
         }
@@ -78,17 +78,17 @@ public struct Shadow {
         }
     }
     
-    public var radius: Double = 0 {
+    public var radius: Double = 5 {
         didSet {
             layer.shadowRadius = CGFloat(radius)
         }
     }
-    public var color: C4Color = C4Color(red: 0, green: 0, blue: 0, alpha: 0) {
+    public var color: C4Color = C4Color(red: 0, green: 0, blue: 0, alpha: 1) {
         didSet {
             layer.shadowColor = color.CGColor
         }
     }
-    public var offset: C4Size = C4Size() {
+    public var offset: C4Size = C4Size(5,5) {
         didSet {
             layer.shadowOffset = CGSize(offset)
         }
