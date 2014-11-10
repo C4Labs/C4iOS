@@ -18,7 +18,7 @@ public typealias RotationAction = (location: C4Point, rotation: Double, velocity
 public typealias LongPressAction = (location: C4Point) -> ()
 public typealias SwipeAction = (location: C4Point) -> ()
 
-public protocol Touchable {
+public protocol Touchable: UIGestureRecognizerDelegate {
     var interactionEnabled: Bool { get set }
     
     func onTap(run: TapAction)
@@ -43,24 +43,7 @@ public protocol Visible {
     var border: Border { get set }
     var shadow: Shadow { get set }
     var rotation: Rotation { get set }
-    //
-    //    var borderWidth: Double { get set }
-    //    var borderHeight: Double { get set }
-    //    var borderColor: C4Color { get set }
-    //    var cornerRadius: Double { get set }
-    //    //potential idea: struct border > .width, .height, .color, .radius
-    //
-    //    var shadowRadius: Double { get set }
-    //    var shadowColor: C4Color { get set }
-    //    var shadowOffset: C4Point { get set }
-    //    var shadowOpacity: Double { get set }
-    //    var shadowPath: C4Path { get set }
-    //    //potential idea: struct shadow > ... (see above)
-    //
-    //    var rotation: Double { get set }
-    //    var rotationX: Double { get set }
-    //    var rotationZ: Double { get set }
-    //    //idea: struct rotation > .z, .x, .y
+
     var perspectiveDistance: Double { get set }
 }
 
