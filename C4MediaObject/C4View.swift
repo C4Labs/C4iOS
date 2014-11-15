@@ -175,26 +175,46 @@ public class C4View : NSObject, VisibleMediaObject {
         }
     }
     
+    //MARK: Tap
+    lazy public var tap : Tap = Tap(UITapGestureRecognizer())
     internal var tapAction : TapAction?
     internal var tapRecognizer: UITapGestureRecognizer?
-    
     public func onTap(run: TapAction) {
         tapAction = run
 
         if tapRecognizer == nil {
             tapRecognizer = UITapGestureRecognizer(target: self, action: "handleTap:")
             view.addGestureRecognizer(tapRecognizer!)
+            tap = Tap(tapRecognizer!)
         }
     }
-
     internal func handleTap(sender: UITapGestureRecognizer) {
         if let action = tapAction? {
-            action(location: C4Point(sender.locationInView(self.view)))
+            let l = C4Point(sender.locationInView(self.view))
+            action(location: l)
         }
     }
     
+    //MARK: Pan
+    lazy public var pan : Pan = Pan(UIPanGestureRecognizer())
+    
+    internal var panAction : PanAction?
+    internal var panRecognizer : UIPanGestureRecognizer?
     public func onPan(run: PanAction) {
-        
+        panAction = run
+        if panRecognizer == nil {
+            panRecognizer = UIPanGestureRecognizer(target:self, action:"handlePan:")
+            view.addGestureRecognizer(panRecognizer!)
+            pan = Pan(panRecognizer!)
+        }
+    }
+    internal func handlePan(sender: UIPanGestureRecognizer) {
+        if let action = panAction? {
+            let l = C4Point(sender.locationInView(self.view))
+            let t = C4Point(sender.translationInView(self.view))
+            let v = C4Point(sender.velocityInView(self.view))
+            action(location: l, translation: t, velocity: v)
+        }
     }
     
     public func onPinch(run: PinchAction) {

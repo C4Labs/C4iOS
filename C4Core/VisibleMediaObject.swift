@@ -27,6 +27,31 @@ public protocol Touchable: UIGestureRecognizerDelegate {
     func onRotate(run: RotationAction)
     func onLongPress(run: LongPressAction)
     func onSwipe(run: SwipeAction)
+    var tap: Tap { get }
+}
+
+public struct Tap {
+    weak public var gesture: UITapGestureRecognizer?
+    
+    public init(_ recognizer: UITapGestureRecognizer) {
+        gesture = recognizer
+        numberOfTouchesRequired = 1
+        numberOfTapsRequired = 1
+    }
+    
+    public var numberOfTapsRequired : Int {
+        didSet {
+            self.gesture?.numberOfTapsRequired = numberOfTapsRequired
+        }
+    }
+    
+    public var numberOfTouchesRequired : Int {
+        didSet {
+            self.gesture?.numberOfTouchesRequired = numberOfTouchesRequired
+        }
+    }
+}
+
 }
 
 public protocol Visible {
