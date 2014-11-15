@@ -11,6 +11,8 @@ import Foundation
 public protocol VisibleMediaObject: MediaObject, Visible, Touchable, Mask, AddRemoveSubview {
     
 }
+
+//MARK: - Gesture Actions (typealiases)
 public typealias TapAction = (location: C4Point) -> ()
 public typealias PanAction = (location: C4Point, translation: C4Point, velocity: C4Point) -> ()
 public typealias PinchAction = (location: C4Point, scale: Double, velocity: Double) -> ()
@@ -19,8 +21,14 @@ public typealias LongPressAction = (location: C4Point) -> ()
 public typealias SwipeAction = (location: C4Point, direction: SwipeDirection) -> ()
 public typealias EdgePanAction = (location: C4Point) -> ()
 
+//MARK: - Touchable
 public protocol Touchable: UIGestureRecognizerDelegate {
     var interactionEnabled: Bool { get set }
+    var pan: Pan { get }
+    var tap: Tap { get }
+    var swipe: Swipe { get }
+    var longPress: LongPress { get }
+    var edgePan: EdgePan { get }
     
     func onTap(run: TapAction)
     func onPan(run: PanAction)
@@ -29,23 +37,43 @@ public protocol Touchable: UIGestureRecognizerDelegate {
     func onLongPress(run: LongPressAction)
     func onSwipe(run: SwipeAction)
     func onEdgePan(run: EdgePanAction)
-    
-    var pan: Pan { get }
-    var tap: Tap { get }
-    var swipe: Swipe { get }
-    var longPress: LongPress { get }
-    var edgePan: EdgePan { get }
 }
 
+//MARK: - Visible
+public protocol Visible {
+    var frame: C4Rect { get set }
+    var bounds: C4Rect { get }
+    var center: C4Point { get set }
+    var size: C4Size { get }
+    var constrainsProportions: Bool { get set }
+    
+    var backgroundColor: C4Color { get set }
+    var opacity: Double { get set }
+    var hidden: Bool { get set }
+    
+    var border: Border { get set }
+    var shadow: Shadow { get set }
+    var rotation: Rotation { get set }
+
+    var perspectiveDistance: Double { get set }
+}
+
+//MARK: - Mask
+public protocol Mask {
+    var mask: Mask? { get set }
+    var layer: CALayer? { get }
+}
+
+//MARK: - AddRemoveSubview
+public protocol AddRemoveSubview {
+    func add<T: AddRemoveSubview>(subview: T)
+    func remove<T: AddRemoveSubview>(subview: T)
+    func removeFromSuperview()
+}
+
+//MARK: - Structs & Enums
 public struct Tap {
     weak public var gesture: UITapGestureRecognizer?
-    
-    public init(_ recognizer: UITapGestureRecognizer) {
-        gesture = recognizer
-        numberOfTouchesRequired = 1
-        numberOfTapsRequired = 1
-    }
-    
     public var numberOfTapsRequired : Int {
         didSet {
             self.gesture?.numberOfTapsRequired = numberOfTapsRequired
@@ -57,17 +85,16 @@ public struct Tap {
             self.gesture?.numberOfTouchesRequired = numberOfTouchesRequired
         }
     }
+    
+    public init(_ recognizer: UITapGestureRecognizer) {
+        gesture = recognizer
+        numberOfTouchesRequired = 1
+        numberOfTapsRequired = 1
+    }
 }
 
 public struct Pan {
     weak public var gesture: UIPanGestureRecognizer?
-    
-    public init(_ recognizer: UIPanGestureRecognizer) {
-        gesture = recognizer
-        minimumNumberOfTouches = 1
-        maximumNumberOfTouches = 1
-    }
-    
     public var minimumNumberOfTouches : Int {
         didSet {
             self.gesture?.minimumNumberOfTouches = minimumNumberOfTouches
@@ -79,8 +106,13 @@ public struct Pan {
             self.gesture?.maximumNumberOfTouches = maximumNumberOfTouches
         }
     }
+    
+    public init(_ recognizer: UIPanGestureRecognizer) {
+        gesture = recognizer
+        minimumNumberOfTouches = 1
+        maximumNumberOfTouches = 1
+    }
 }
-
 
 public enum RectEdges  {
     case None
@@ -124,15 +156,6 @@ public struct EdgePan {
 
 public struct LongPress {
     weak public var gesture: UILongPressGestureRecognizer?
-    
-    public init(_ recognizer: UILongPressGestureRecognizer) {
-        gesture = recognizer
-        minimumPressDuration = 0.25
-        numberOfTouchesRequired = 1
-        numberOfTapsRequired = 0
-        allowableMovement = 10.0
-    }
-    
     public var minimumPressDuration: Double {
         didSet {
             gesture?.minimumPressDuration = minimumPressDuration
@@ -150,11 +173,19 @@ public struct LongPress {
             self.gesture?.numberOfTouchesRequired = numberOfTouchesRequired
         }
     }
-
+    
     public var allowableMovement : Double {
         didSet {
             self.gesture?.allowableMovement = CGFloat(allowableMovement)
         }
+    }
+    
+    public init(_ recognizer: UILongPressGestureRecognizer) {
+        gesture = recognizer
+        minimumPressDuration = 0.25
+        numberOfTouchesRequired = 1
+        numberOfTapsRequired = 0
+        allowableMovement = 10.0
     }
 }
 
@@ -170,27 +201,20 @@ public enum SwipeDirection {
     
     public init(_ direction: UISwipeGestureRecognizerDirection) {
         switch direction {
-            case UISwipeGestureRecognizerDirection.Left:
-                self = Left
-            case UISwipeGestureRecognizerDirection.Right:
-                self = Right
-            case UISwipeGestureRecognizerDirection.Up:
-                self = Up
-            default:
-                self = Down
+        case UISwipeGestureRecognizerDirection.Left:
+            self = Left
+        case UISwipeGestureRecognizerDirection.Right:
+            self = Right
+        case UISwipeGestureRecognizerDirection.Up:
+            self = Up
+        default:
+            self = Down
         }
     }
 }
 
 public struct Swipe {
     weak public var gesture: UISwipeGestureRecognizer?
-    
-    public init(_ recognizer: UISwipeGestureRecognizer) {
-        gesture = recognizer
-        direction = .Left
-        numberOfTouchesRequired = 1
-    }
-
     public var direction : SwipeDirection {
         didSet {
             switch direction {
@@ -211,33 +235,10 @@ public struct Swipe {
             gesture?.numberOfTouchesRequired = numberOfTouchesRequired
         }
     }
-}
-
-public protocol Visible {
-    var frame: C4Rect { get set }
-    var bounds: C4Rect { get }
-    var center: C4Point { get set }
-    var size: C4Size { get }
-    var constrainsProportions: Bool { get set }
     
-    var backgroundColor: C4Color { get set }
-    var opacity: Double { get set }
-    var hidden: Bool { get set }
-    
-    var border: Border { get set }
-    var shadow: Shadow { get set }
-    var rotation: Rotation { get set }
-
-    var perspectiveDistance: Double { get set }
-}
-
-public protocol Mask {
-    var mask: Mask? { get set }
-    var layer: CALayer? { get }
-}
-
-public protocol AddRemoveSubview {
-    func add<T: AddRemoveSubview>(subview: T)
-    func remove<T: AddRemoveSubview>(subview: T)
-    func removeFromSuperview()
+    public init(_ recognizer: UISwipeGestureRecognizer) {
+        gesture = recognizer
+        direction = .Left
+        numberOfTouchesRequired = 1
+    }
 }
