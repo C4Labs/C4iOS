@@ -332,10 +332,30 @@ public class C4View : NSObject, VisibleMediaObject {
     
     //MARK: - AddRemoveSubview
     public func add<T: AddRemoveSubview>(subview: T) {
-        
+        if subview is UIView {
+            if let v = subview as? UIView {
+                view.addSubview(v)
+            }
+        } else {
+            if let v = subview as? C4View {
+                view.addSubview(v.view)
+            }
+        }
     }
-    public func remove<T: AddRemoveSubview>(subview: T) {}
-    public func removeFromSuperview() {}
+    public func remove<T: AddRemoveSubview>(subview: T) {
+        if subview is UIView {
+            if let v = subview as? UIView {
+                v.removeFromSuperview()
+            }
+        } else {
+            if let v = subview as? C4View {
+                v.view.removeFromSuperview()
+            }
+        }
+    }
+    public func removeFromSuperview() {
+        self.view.removeFromSuperview()
+    }
 }
 
 extension UIView : AddRemoveSubview {
