@@ -76,6 +76,47 @@ public struct Pan {
     }
 }
 
+
+public enum RectEdges  {
+    case None
+    case Top
+    case Left
+    case Bottom
+    case Right
+    case All
+    
+    public init() {
+        self = Left
+    }
+    
+    public init(_ edges: UIRectEdge) {
+        switch edges {
+        case UIRectEdge.Top:
+            self = Top
+        case UIRectEdge.Left:
+            self = Left
+        case UIRectEdge.Right:
+            self = Right
+        case UIRectEdge.Bottom:
+            self = Bottom
+        case UIRectEdge.All:
+            self = All
+        default:
+            self = None
+        }
+    }
+}
+
+public struct EdgePan {
+    weak public var gesture: UIScreenEdgePanGestureRecognizer?
+    
+    public init(_ recognizer: UIScreenEdgePanGestureRecognizer) {
+        gesture = recognizer
+        
+    }
+    
+}
+
 public enum SwipeDirection {
     case Left
     case Right
