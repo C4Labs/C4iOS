@@ -76,6 +76,61 @@ public struct Pan {
     }
 }
 
+public enum SwipeDirection {
+    case Left
+    case Right
+    case Up
+    case Down
+    
+    public init() {
+        self = Left
+    }
+    
+    public init(_ direction: UISwipeGestureRecognizerDirection) {
+        switch direction {
+            case UISwipeGestureRecognizerDirection.Left:
+                self = Left
+            case UISwipeGestureRecognizerDirection.Right:
+                self = Right
+            case UISwipeGestureRecognizerDirection.Up:
+                self = Up
+            default:
+                self = Down
+        }
+    }
+}
+
+public struct Swipe {
+    weak public var gesture: UISwipeGestureRecognizer?
+    
+    public init(_ recognizer: UISwipeGestureRecognizer) {
+        gesture = recognizer
+        direction = .Left
+        numberOfTouchesRequired = 1
+    }
+
+    public var direction : SwipeDirection {
+        didSet {
+            switch direction {
+            case .Left:
+                gesture?.direction = .Left
+            case .Right:
+                gesture?.direction = .Right
+            case .Up:
+                gesture?.direction = .Up
+            case .Down:
+                gesture?.direction = .Down
+            }
+        }
+    }
+    
+    public var numberOfTouchesRequired: Int {
+        didSet {
+            gesture?.numberOfTouchesRequired = numberOfTouchesRequired
+        }
+    }
+}
+
 public protocol Visible {
     var frame: C4Rect { get set }
     var bounds: C4Rect { get }
