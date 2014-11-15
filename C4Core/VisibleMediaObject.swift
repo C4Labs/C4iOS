@@ -16,7 +16,8 @@ public typealias PanAction = (location: C4Point, translation: C4Point, velocity:
 public typealias PinchAction = (location: C4Point, scale: Double, velocity: Double) -> ()
 public typealias RotationAction = (location: C4Point, rotation: Double, velocity: Double) -> ()
 public typealias LongPressAction = (location: C4Point) -> ()
-public typealias SwipeAction = (location: C4Point) -> ()
+public typealias SwipeAction = (location: C4Point, direction: SwipeDirection) -> ()
+public typealias EdgePanAction = (location: C4Point) -> ()
 
 public protocol Touchable: UIGestureRecognizerDelegate {
     var interactionEnabled: Bool { get set }
