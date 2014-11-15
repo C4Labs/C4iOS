@@ -217,20 +217,99 @@ public class C4View : NSObject, VisibleMediaObject {
         }
     }
     
+    internal var pinchAction: PinchAction?
+    internal var pinchRecognizer: UIPinchGestureRecognizer?
     public func onPinch(run: PinchAction) {
-        
+        pinchAction = run
+        if pinchRecognizer == nil {
+            pinchRecognizer = UIPinchGestureRecognizer(target:self, action:"handlePinch:")
+            view.addGestureRecognizer(pinchRecognizer!)
+        }
+    }
+    internal func handlePinch(sender: UIPinchGestureRecognizer) {
+        if let action = pinchAction? {
+            let l = C4Point(sender.locationInView(self.view))
+            let s = Double(sender.scale)
+            let v = Double(sender.velocity)
+            action(location: l, scale: s, velocity: v)
+        }
     }
     
+    internal var rotationAction: RotationAction?
+    internal var rotationGesture: UIRotationGestureRecognizer?
     public func onRotate(run: RotationAction) {
-        
+        rotationAction = run
+        if rotationGesture == nil {
+            rotationGesture = UIRotationGestureRecognizer(target:self, action:"handleRotation:")
+            view.addGestureRecognizer(rotationGesture!)
+        }
     }
     
+    internal func handleRotation(sender: UIRotationGestureRecognizer) {
+        if let action = rotationAction {
+            let l = C4Point(sender.locationInView(self.view))
+            let r = Double(sender.rotation)
+            let v = Double(sender.velocity)
+            action(location: l, rotation: r, velocity: v)
+        }
+    }
+    
+    lazy public var longPress = LongPress(UILongPressGestureRecognizer())
+    internal var longPressAction: LongPressAction?
+    internal var longPressGesture: UILongPressGestureRecognizer?
     public func onLongPress(run: LongPressAction) {
-        
+        longPressAction = run
+        if longPressGesture == nil {
+            longPressGesture = UILongPressGestureRecognizer(target:self, action:"handleLongPress:")
+            view.addGestureRecognizer(longPressGesture!)
+            longPress = LongPress(longPressGesture!)
+        }
     }
     
+    internal func handleLongPress(sender: UILongPressGestureRecognizer) {
+        if let action = longPressAction {
+            let l = C4Point(sender.locationInView(self.view))
+            action(location: l)
+        }
+    }
+    
+    lazy public var swipe = Swipe(UISwipeGestureRecognizer())
+    internal var swipeAction: SwipeAction?
+    internal var swipeGesture: UISwipeGestureRecognizer?
     public func onSwipe(run: SwipeAction) {
-        
+        swipeAction = run
+        if swipeGesture == nil {
+            swipeGesture = UISwipeGestureRecognizer(target: self, action: "handleSwipe:")
+            view.addGestureRecognizer(swipeGesture!)
+            swipe = Swipe(swipeGesture!)
+        }
+    }
+    
+    internal func handleSwipe(sender: UISwipeGestureRecognizer) {
+        if let action = swipeAction {
+            let l = C4Point(sender.locationInView(self.view))
+            let d = SwipeDirection(sender.direction)
+            action(location: l, direction: d)
+        }
+    }
+    
+    lazy public var edgePan = EdgePan(UIScreenEdgePanGestureRecognizer())
+    internal var edgePanAction: EdgePanAction?
+    internal var edgePanGesture: UIScreenEdgePanGestureRecognizer?
+    public func onEdgePan(run: EdgePanAction) {
+        edgePanAction = run
+        if edgePanGesture == nil {
+            edgePanGesture = UIScreenEdgePanGestureRecognizer(target: self, action:"handleEdgePan:")
+            view.addGestureRecognizer(edgePanGesture!)
+            edgePan = EdgePan(edgePanGesture!)
+        }
+    }
+
+    internal func handleEdgePan(sender: UIScreenEdgePanGestureRecognizer) {
+        if let action = edgePanAction {
+            let l = C4Point(sender.locationInView(self.view))
+            action(location: l)
+        }
     }
     
     //MARK: - Setup Observer
