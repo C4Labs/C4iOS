@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol VisibleMediaObject: MediaObject, Visible, Touchable, Maskable, AddRemoveSubview {
+public protocol VisibleMediaObject: MediaObject, Visible, Touchable, Mask, AddRemoveSubview {
     
 }
 public typealias TapAction = (location: C4Point) -> ()
@@ -231,15 +231,9 @@ public protocol Visible {
     var perspectiveDistance: Double { get set }
 }
 
-extension CALayer: Mask {
-    
-}
-
 public protocol Mask {
-}
-
-public protocol Maskable {
-    var mask: Mask { get set }
+    var mask: Mask? { get set }
+    var layer: CALayer? { get }
 }
 
 public protocol AddRemoveSubview {

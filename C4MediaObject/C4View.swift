@@ -325,9 +325,16 @@ public class C4View : NSObject, VisibleMediaObject {
     deinit { NSNotificationCenter.defaultCenter().removeObserver(self.observer) }
     
     //MARK: - Maskable
-    public var mask: Mask {
-        get { return self.view.layer.mask }
-        set(val) { }
+    public var mask: Mask? {
+        didSet {
+            self.view.layer.mask = mask?.layer
+        }
+    }
+    
+    public var layer: CALayer? {
+        get {
+            return self.view.layer
+        }
     }
     
     //MARK: - AddRemoveSubview
