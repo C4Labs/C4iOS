@@ -28,9 +28,13 @@ public protocol Touchable: UIGestureRecognizerDelegate {
     func onRotate(run: RotationAction)
     func onLongPress(run: LongPressAction)
     func onSwipe(run: SwipeAction)
+    func onEdgePan(run: EdgePanAction)
     
     var pan: Pan { get }
     var tap: Tap { get }
+    var swipe: Swipe { get }
+    var longPress: LongPress { get }
+    var edgePan: EdgePan { get }
 }
 
 public struct Tap {
