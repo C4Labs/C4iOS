@@ -27,6 +27,8 @@ public protocol Touchable: UIGestureRecognizerDelegate {
     func onRotate(run: RotationAction)
     func onLongPress(run: LongPressAction)
     func onSwipe(run: SwipeAction)
+    
+    var pan: Pan { get }
     var tap: Tap { get }
 }
 
@@ -52,6 +54,26 @@ public struct Tap {
     }
 }
 
+public struct Pan {
+    weak public var gesture: UIPanGestureRecognizer?
+    
+    public init(_ recognizer: UIPanGestureRecognizer) {
+        gesture = recognizer
+        minimumNumberOfTouches = 1
+        maximumNumberOfTouches = 1
+    }
+    
+    public var minimumNumberOfTouches : Int {
+        didSet {
+            self.gesture?.minimumNumberOfTouches = minimumNumberOfTouches
+        }
+    }
+    
+    public var maximumNumberOfTouches : Int {
+        didSet {
+            self.gesture?.maximumNumberOfTouches = maximumNumberOfTouches
+        }
+    }
 }
 
 public protocol Visible {
