@@ -176,8 +176,11 @@ public class C4View : NSObject, VisibleMediaObject {
     
     public func onTap(run: TapAction) {
         tapAction = run
-        tapRecognizer = UITapGestureRecognizer(target: self, action: "handleTap:")
-        view.addGestureRecognizer(tapRecognizer!)
+
+        if tapRecognizer == nil {
+            tapRecognizer = UITapGestureRecognizer(target: self, action: "handleTap:")
+            view.addGestureRecognizer(tapRecognizer!)
+        }
     }
     internal func handleTap(sender: UITapGestureRecognizer) {
         if let action = tapAction? {
