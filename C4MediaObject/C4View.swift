@@ -169,7 +169,11 @@ public class C4View : NSObject, VisibleMediaObject {
     }
 
     //MARK: - Touchable
-    public var interactionEnabled: Bool = true
+    public var interactionEnabled: Bool = true {
+        didSet {
+            self.view.userInteractionEnabled = interactionEnabled
+        }
+    }
     
     internal var tapAction : TapAction?
     internal var tapRecognizer: UITapGestureRecognizer?
@@ -182,6 +186,7 @@ public class C4View : NSObject, VisibleMediaObject {
             view.addGestureRecognizer(tapRecognizer!)
         }
     }
+
     internal func handleTap(sender: UITapGestureRecognizer) {
         if let action = tapAction? {
             action(location: C4Point(sender.locationInView(self.view)))
@@ -191,15 +196,19 @@ public class C4View : NSObject, VisibleMediaObject {
     public func onPan(run: PanAction) {
         
     }
+    
     public func onPinch(run: PinchAction) {
         
     }
+    
     public func onRotate(run: RotationAction) {
         
     }
+    
     public func onLongPress(run: LongPressAction) {
         
     }
+    
     public func onSwipe(run: SwipeAction) {
         
     }
