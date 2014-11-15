@@ -117,6 +117,42 @@ public struct EdgePan {
     
 }
 
+public struct LongPress {
+    weak public var gesture: UILongPressGestureRecognizer?
+    
+    public init(_ recognizer: UILongPressGestureRecognizer) {
+        gesture = recognizer
+        minimumPressDuration = 0.25
+        numberOfTouchesRequired = 1
+        numberOfTapsRequired = 0
+        allowableMovement = 10.0
+    }
+    
+    public var minimumPressDuration: Double {
+        didSet {
+            gesture?.minimumPressDuration = minimumPressDuration
+        }
+    }
+    
+    public var numberOfTapsRequired : Int {
+        didSet {
+            self.gesture?.numberOfTapsRequired = numberOfTapsRequired
+        }
+    }
+    
+    public var numberOfTouchesRequired : Int {
+        didSet {
+            self.gesture?.numberOfTouchesRequired = numberOfTouchesRequired
+        }
+    }
+
+    public var allowableMovement : Double {
+        didSet {
+            self.gesture?.allowableMovement = CGFloat(allowableMovement)
+        }
+    }
+}
+
 public enum SwipeDirection {
     case Left
     case Right
