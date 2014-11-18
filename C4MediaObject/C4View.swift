@@ -52,9 +52,7 @@ public class C4View : NSObject, VisibleMediaObject {
             return C4Point(self.view.center)
         }
         set(val) {
-            let dx = self.width / 2.0
-            let dy = self.height / 2.0
-            self.center = C4Point(val.x + dx, val.y + dy)
+            self.view.center = CGPoint(val)
         }
     }
     
