@@ -22,43 +22,14 @@ public protocol Styleable {
 }
 
 public struct Border {
+    public var color: C4Color
+    public var radius: Double
+    public var width: Double
     public init() {
-        self.layer = CALayer()
-    }
-    
-    public init(_ layer: CALayer) {
-        self.init()
-        self.layer = layer
-    }
-    
-    public var layer: CALayer {
-        didSet {
-            update()
-        }
-    }
-    
-    public var color: C4Color = C4Color(red: 0, green: 0, blue: 0, alpha: 1) {
-        didSet {
-            layer.borderColor = color.CGColor
-        }
-    }
-    
-    public var radius: Double = 0 {
-        didSet {
-            layer.cornerRadius = CGFloat(radius)
-        }
-    }
-    
-    public var width: Double = 0 {
-        didSet {
-            layer.borderWidth = CGFloat(width)
-        }
-    }
-    
-    internal func update() {
-        layer.borderColor = color.CGColor
-        layer.cornerRadius = CGFloat(radius)
-        layer.borderWidth = CGFloat(width)
+        self.color = C4Color(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
+
+        self.radius = 0
+        self.width = 0
     }
 }
 

@@ -105,10 +105,12 @@ public class C4View : NSObject, VisibleMediaObject {
         }
     }
 
-    public var border: Border = Border() {
-        didSet {
-            self.border.layer = self.view.layer
-        }
+    lazy public var border: Border = Border()
+    
+    internal func updateBorder() {
+        layer?.borderWidth = CGFloat(border.width)
+        layer?.borderColor = border.color.CGColor
+        layer?.cornerRadius = CGFloat(border.radius)
     }
     
     public var shadow: Shadow = Shadow() {
