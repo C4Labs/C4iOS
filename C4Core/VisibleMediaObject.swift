@@ -86,14 +86,13 @@ public struct Shadow {
     public var color: C4Color
     public var offset: C4Size
     public var opacity: Double
-    public var path: C4Path
+    public var path: C4Path?
     
     public init() {
         radius = 5.0
         color = C4Color(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
         offset = C4Size(5,5)
         opacity = 0.0
-        path = C4Path()
     }
 }
 

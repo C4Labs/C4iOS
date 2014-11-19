@@ -116,7 +116,11 @@ public class C4View : NSObject, VisibleMediaObject {
         }
     }
 
-    lazy public var border: Border = Border()
+    public var border: Border = Border() {
+        didSet {
+            updateBorder()
+        }
+    }
     
     internal func updateBorder() {
         layer?.borderWidth = CGFloat(border.width)
@@ -134,8 +138,10 @@ public class C4View : NSObject, VisibleMediaObject {
         layer?.shadowColor = shadow.color.CGColor
         layer?.shadowRadius = CGFloat(shadow.radius)
         layer?.shadowOffset = CGSize(shadow.offset)
-        layer?.shadowPath = shadow.path.CGPath
         layer?.shadowOpacity = Float(shadow.opacity)
+        if shadow.path != nil {
+            layer?.shadowPath = shadow.path?.CGPath
+        }
     }
 
     public var rotation: Rotation = Rotation() {
