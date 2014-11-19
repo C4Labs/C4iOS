@@ -115,8 +115,16 @@ public class C4View : NSObject, VisibleMediaObject {
     
     public var shadow: Shadow = Shadow() {
         didSet {
-            self.shadow.layer = self.view.layer
+            updateShadow()
         }
+    }
+    
+    internal func updateShadow() {
+        layer?.shadowColor = shadow.color.CGColor
+        layer?.shadowRadius = CGFloat(shadow.radius)
+        layer?.shadowOffset = CGSize(shadow.offset)
+        layer?.shadowPath = shadow.path.CGPath
+        layer?.shadowOpacity = Float(shadow.opacity)
     }
 
     public var rotation: Rotation = Rotation() {
