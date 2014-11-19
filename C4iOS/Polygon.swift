@@ -25,6 +25,7 @@ public class Polygon: Shape {
     lazy internal var linePoints = [C4Point]()
     convenience public init(points: [C4Point]) {
         let count = points.count
+        assert(count >= 2, "To create a Polygon you need to specify an array of at least 2 points")
         var cgPoints = [CGPoint]()
         for i in 0..<count {
             cgPoints.append(CGPoint(points[i]))
@@ -53,7 +54,8 @@ public class Polygon: Shape {
                 path.addLineToPoint(linePoints[i])
             }
             
-            shapeLayer.path = path.CGPath
+            var transform = CGAffineTransformMakeTranslation(-frame.origin.x,-frame.origin.y)
+            shapeLayer.path = CGPathCreateCopyByTransformingPath(path.CGPath, &transform)
         }
     }
 }
