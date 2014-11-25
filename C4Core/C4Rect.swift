@@ -39,6 +39,18 @@ public struct C4Rect : Equatable {
         size = s
     }
     
+    public init(_ points:[C4Point]) {
+        let count = points.count
+        assert(count >= 2, "To create a Polygon you need to specify an array of at least 2 points")
+        var cgPoints = [CGPoint]()
+        for i in 0..<count {
+            cgPoints.append(CGPoint(points[i]))
+        }
+        let r = CGRectMakeFromPoints(cgPoints)
+        let f = C4Rect(r)
+        self.init(f.origin,f.size)
+    }
+    
     //MARK: - Comparing
     public func intersects(r: C4Rect) -> Bool {
         return CGRectIntersectsRect(CGRect(self), CGRect(r))
