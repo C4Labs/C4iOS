@@ -190,7 +190,7 @@ public class C4View : NSObject, VisibleMediaObject {
     }
     
     public func watch(property: String, of object: NSObject) {
-        //would be great to simplify Key Value Observing
+        //TODO: would be great to simplify Key Value Observing
     }
 
     //MARK: - Touchable

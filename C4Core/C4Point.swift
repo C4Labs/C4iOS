@@ -39,6 +39,10 @@ public struct C4Point : Equatable {
     public func isZero() -> Bool {
         return x == 0 && y == 0
     }
+    
+    public func description() -> String {
+        return "{\(x),\(y)}"
+    }
 }
 
 /// Calculate the vector between two points
