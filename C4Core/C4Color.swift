@@ -34,6 +34,11 @@ public class C4Color {
         internalColor = CGColorCreate(colorSpace, [CGFloat(red), CGFloat(green), CGFloat(blue), CGFloat(alpha)])
     }
     
+    public init(CGColor: CGColorRef) {
+        colorSpace = CGColorSpaceCreateDeviceRGB()
+        internalColor = CGColor
+    }
+    
     public convenience init(red: Int, green: Int, blue: Int, alpha: Double) {
         self.init(red: Double(red) / 255.0, green: Double(green) / 255.0, blue: Double(blue) / 255.0, alpha: alpha)
     }
