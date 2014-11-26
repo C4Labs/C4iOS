@@ -21,7 +21,7 @@ import Foundation
 import C4Core
 import UIKit
 
-public class C4View : NSObject, VisibleMediaObject {
+public class C4View : NSObject, AddRemoveSubview {
     internal var view : UIView = UIView()
     
     convenience public init(frame: C4Rect) {
