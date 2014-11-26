@@ -26,36 +26,55 @@ public class Polygon: Shape {
     convenience public init(points: [C4Point]) {
         let count = points.count
         assert(count >= 2, "To create a Polygon you need to specify an array of at least 2 points")
-        var cgPoints = [CGPoint]()
-        for i in 0..<count {
-            cgPoints.append(CGPoint(points[i]))
+        var cgpoints = [CGPoint]()
+        for p in points {
+            cgpoints.append(CGPoint(p))
         }
-        self.init(frame: CGRectMakeFromPoints(cgPoints))
+        self.init(frame: CGRectMakeFromPoints(cgpoints))
         for i in 0..<points.count {
             linePoints.append(points[i])
         }
         
         updatePath()
     }
-
-    override public init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    required public init(coder: NSCoder) {
-        super.init(coder: coder)
-    }
     
     internal override func updatePath() {
         if linePoints.count > 1 {
-        let path = C4Path()
-            path.moveToPoint(linePoints[0])
+        let p = C4Path()
+            p.moveToPoint(linePoints[0])
             
             for i in 1..<linePoints.count {
-                path.addLineToPoint(linePoints[i])
+                p.addLineToPoint(linePoints[i])
             }
             
-            var transform = CGAffineTransformMakeTranslation(-frame.origin.x,-frame.origin.y)
-            shapeLayer.path = CGPathCreateCopyByTransformingPath(path.CGPath, &transform)
+//            var transform = CGAffineTransformMakeTranslation(-frame.origin.x,-frame.origin.y)
+//            shapeLayer.path = CGPathCreateCopyByTransformingPath(path.CGPath, &transform)
+            animateKeyPath("path", toValue: p.CGPath)
         }
+    }
+    
+    func animation() -> CABasicAnimation {
+        var anim = CABasicAnimation()
+        anim.duration = 0.25
+        anim.beginTime = CACurrentMediaTime()
+        anim.autoreverses = false
+        anim.repeatCount = 0
+        anim.removedOnCompletion = false
+        anim.fillMode = kCAFillModeBoth
+        return anim
+    }
+    
+    func animateKeyPath(keyPath: String, toValue: AnyObject) {
+        CATransaction.begin()
+        CATransaction.setCompletionBlock({
+            self.shapeLayer.path = toValue as CGPath
+            self.adjustToFitPath()
+        })
+        var anim = animation()
+        anim.keyPath = "path"
+        anim.fromValue = layer.presentationLayer()?.valueForKeyPath("path")
+        anim.toValue = toValue
+        layer.addAnimation(anim, forKey:"animatePath")
+        CATransaction.commit()
     }
 }

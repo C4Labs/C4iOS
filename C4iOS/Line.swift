@@ -22,25 +22,28 @@ import CoreGraphics
 import C4Core
 
 public class Line: Polygon {
-    lazy public var a: C4Point = C4Point()
-    lazy public var b: C4Point = C4Point()
+    public var a: C4Point = C4Point() {
+        didSet {
+            linePoints[0] = a
+            updatePath()
+        }
+    }
+    public var b: C4Point = C4Point() {
+        didSet {
+            linePoints[1] = b
+            updatePath()
+        }
+    }
+    
     convenience public init(_ points: [C4Point]) {
-        assert(points.count >= 2, "To create a line you need to specify an array of at least 2 points")
-        var cgPoints = [CGPoint(points[0]),CGPoint(points[1])]
-        self.init(frame: CGRectMakeFromPoints(cgPoints))
+        let count = points.count
+        assert(count >= 2, "To create a Polygon you need to specify an array of at least 2 points")
+        self.init(C4Rect(points))
         a = points[0]
         b = points[1]
         linePoints.append(a)
         linePoints.append(b)
-        
         updatePath()
     }
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-
-    required public init(coder: NSCoder) {
-        super.init(coder: coder)
-    }
 }

@@ -8,12 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		1F06D5991A055EBB00BA501B /* C4Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9596D191A054A960023323D /* C4Core.framework */; };
-		1F06D59A1A055F3900BA501B /* Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5726E319FCECE4006FF395 /* Foundation.swift */; };
-		1F275A6F1A1C6FE000D1EF55 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F275A6E1A1C6FE000D1EF55 /* Line.swift */; };
 		1F3FC01B1A0F2A9A005984BB /* MediaObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94947921A0BFC9500F9CDC8 /* MediaObject.swift */; };
 		1F3FC01C1A0F2AAD005984BB /* C4View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94947941A0BFD5700F9CDC8 /* C4View.swift */; };
 		1F3FC01E1A0F2BF8005984BB /* EventSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94947961A0D8E7A00F9CDC8 /* EventSource.swift */; };
-		1F5726E419FCECE4006FF395 /* Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5726E319FCECE4006FF395 /* Foundation.swift */; };
 		1F8CB1DA1A05781700A20783 /* C4RectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8CB1D91A05781700A20783 /* C4RectTests.swift */; };
 		1FD74B741A0F31B400A65163 /* Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD74B731A0F31B400A65163 /* Rotation.swift */; };
 		1FD74B781A0F31F800A65163 /* VisibleMediaObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD74B771A0F31F800A65163 /* VisibleMediaObject.swift */; };
@@ -40,7 +37,9 @@
 		A9596D951A089EA00023323D /* C4Animation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9596D8A1A089E9F0023323D /* C4Animation.framework */; };
 		A9596DA41A089EB60023323D /* C4Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596DA31A089EB60023323D /* C4Animator.swift */; };
 		A9596DA81A08B0C20023323D /* C4Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596DA71A08B0C20023323D /* C4Animation.swift */; };
-		D9D3827C1A0817160083CF4D /* Polygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D3827B1A0817160083CF4D /* Polygon.swift */; };
+		D96954FE1A2526A100622AB0 /* C4Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96954FD1A2526A100622AB0 /* C4Shape.swift */; };
+		D9C0EF441A25190300C7A904 /* C4Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5726E319FCECE4006FF395 /* C4Foundation.swift */; };
+		D9C0EF451A25190400C7A904 /* C4Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5726E319FCECE4006FF395 /* C4Foundation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,7 +75,7 @@
 
 /* Begin PBXFileReference section */
 		1F275A6E1A1C6FE000D1EF55 /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
-		1F5726E319FCECE4006FF395 /* Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Foundation.swift; sourceTree = "<group>"; };
+		1F5726E319FCECE4006FF395 /* C4Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = C4Foundation.swift; path = ../C4iOS/C4Foundation.swift; sourceTree = "<group>"; };
 		1F8CB1D91A05781700A20783 /* C4RectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4RectTests.swift; sourceTree = "<group>"; };
 		1FD74B731A0F31B400A65163 /* Rotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rotation.swift; sourceTree = "<group>"; };
 		1FD74B771A0F31F800A65163 /* VisibleMediaObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisibleMediaObject.swift; sourceTree = "<group>"; };
@@ -116,6 +115,7 @@
 		D94947921A0BFC9500F9CDC8 /* MediaObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MediaObject.swift; path = ../C4MediaObject/MediaObject.swift; sourceTree = "<group>"; };
 		D94947941A0BFD5700F9CDC8 /* C4View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = C4View.swift; path = ../C4MediaObject/C4View.swift; sourceTree = "<group>"; };
 		D94947961A0D8E7A00F9CDC8 /* EventSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventSource.swift; path = ../C4MediaObject/EventSource.swift; sourceTree = "<group>"; };
+		D96954FD1A2526A100622AB0 /* C4Shape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Shape.swift; sourceTree = "<group>"; };
 		D9D3827B1A0817160083CF4D /* Polygon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Polygon.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -204,8 +204,8 @@
 				614F824819DB5ED3001DF1D4 /* C4iOS.h */,
 				D94947941A0BFD5700F9CDC8 /* C4View.swift */,
 				A9596D061A0211420023323D /* Rectangle.swift */,
-				1F5726E319FCECE4006FF395 /* Foundation.swift */,
 				614F825C19DB5FFD001DF1D4 /* Shape.swift */,
+				D96954FD1A2526A100622AB0 /* C4Shape.swift */,
 				6162BFB619DB971C00D7F3D0 /* Shape+Creation.swift */,
 				614F824619DB5ED3001DF1D4 /* Supporting Files */,
 			);
@@ -239,6 +239,7 @@
 		A9596D1A1A054A960023323D /* C4Core */ = {
 			isa = PBXGroup;
 			children = (
+				1F5726E319FCECE4006FF395 /* C4Foundation.swift */,
 				A9596D321A054AF50023323D /* C4Color.swift */,
 				A9596D331A054AF50023323D /* C4Math.swift */,
 				A9596D341A054AF50023323D /* C4Path.swift */,
@@ -560,15 +561,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F5726E419FCECE4006FF395 /* Foundation.swift in Sources */,
 				1F3FC01C1A0F2AAD005984BB /* C4View.swift in Sources */,
 				A9596D071A0211420023323D /* Rectangle.swift in Sources */,
 				614F825D19DB5FFD001DF1D4 /* Shape.swift in Sources */,
 				A9596D131A054A3F0023323D /* RegularPolygon.swift in Sources */,
+				D96954FE1A2526A100622AB0 /* C4Shape.swift in Sources */,
 				6162BFB719DB971C00D7F3D0 /* Shape+Creation.swift in Sources */,
-				1F275A6F1A1C6FE000D1EF55 /* Line.swift in Sources */,
 				A9596D121A054A3F0023323D /* Ellipse.swift in Sources */,
-				D9D3827C1A0817160083CF4D /* Polygon.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -576,7 +575,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F06D59A1A055F3900BA501B /* Foundation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -587,6 +585,7 @@
 				A9596D3C1A054AF50023323D /* C4Point.swift in Sources */,
 				A9596D391A054AF50023323D /* C4Color.swift in Sources */,
 				A9596D3B1A054AF50023323D /* C4Path.swift in Sources */,
+				D9C0EF441A25190300C7A904 /* C4Foundation.swift in Sources */,
 				1F3FC01E1A0F2BF8005984BB /* EventSource.swift in Sources */,
 				1FD74B741A0F31B400A65163 /* Rotation.swift in Sources */,
 				1F3FC01B1A0F2A9A005984BB /* MediaObject.swift in Sources */,
@@ -605,6 +604,7 @@
 				A9596D461A054B4F0023323D /* C4PointTests.swift in Sources */,
 				A9596D451A054B4F0023323D /* C4MathTests.swift in Sources */,
 				1F8CB1DA1A05781700A20783 /* C4RectTests.swift in Sources */,
+				D9C0EF451A25190400C7A904 /* C4Foundation.swift in Sources */,
 				A9596D441A054B4F0023323D /* C4ColorTests.swift in Sources */,
 				A9596D471A054B4F0023323D /* C4VectorTests.swift in Sources */,
 			);
