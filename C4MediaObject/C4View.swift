@@ -21,7 +21,7 @@ import Foundation
 import C4Core
 import UIKit
 
-public class C4View : NSObject, AddRemoveSubview {
+public class C4View : NSObject, VisibleMediaObject {
     internal var view : UIView = UIView()
     
     convenience public init(frame: C4Rect) {
@@ -201,7 +201,7 @@ public class C4View : NSObject, AddRemoveSubview {
     }
     
     //MARK: Tap
-    lazy public var tap : Tap = Tap(UITapGestureRecognizer())
+    public var tap : Tap = Tap(UITapGestureRecognizer())
     internal var tapAction : TapAction?
     internal var tapRecognizer: UITapGestureRecognizer?
     public func onTap(run: TapAction) {
@@ -221,7 +221,7 @@ public class C4View : NSObject, AddRemoveSubview {
     }
     
     //MARK: Pan
-    lazy public var pan : Pan = Pan(UIPanGestureRecognizer())
+    public var pan : Pan = Pan(UIPanGestureRecognizer())
     
     internal var panAction : PanAction?
     internal var panRecognizer : UIPanGestureRecognizer?
@@ -279,7 +279,7 @@ public class C4View : NSObject, AddRemoveSubview {
         }
     }
     
-    lazy public var longPress = LongPress(UILongPressGestureRecognizer())
+    public var longPress = LongPress(UILongPressGestureRecognizer())
     internal var longPressAction: LongPressAction?
     internal var longPressGesture: UILongPressGestureRecognizer?
     public func onLongPress(run: LongPressAction) {
@@ -298,7 +298,7 @@ public class C4View : NSObject, AddRemoveSubview {
         }
     }
     
-    lazy public var swipe = Swipe(UISwipeGestureRecognizer())
+    public var swipe = Swipe(UISwipeGestureRecognizer())
     internal var swipeAction: SwipeAction?
     internal var swipeGesture: UISwipeGestureRecognizer?
     public func onSwipe(run: SwipeAction) {
@@ -318,7 +318,7 @@ public class C4View : NSObject, AddRemoveSubview {
         }
     }
     
-    lazy public var edgePan = EdgePan(UIScreenEdgePanGestureRecognizer())
+    public var edgePan = EdgePan(UIScreenEdgePanGestureRecognizer())
     internal var edgePanAction: EdgePanAction?
     internal var edgePanGesture: UIScreenEdgePanGestureRecognizer?
     public func onEdgePan(run: EdgePanAction) {
