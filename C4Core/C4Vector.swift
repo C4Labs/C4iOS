@@ -168,3 +168,11 @@ public func * (lhs: C4Vector, rhs: Double) -> C4Vector {
 public prefix func - (vector: C4Vector) -> C4Vector {
     return C4Vector(x: -vector.x, y: -vector.y)
 }
+
+public extension C4Vector {
+    public init(_ point: CGPoint) {
+        x = Double(point.x)
+        y = Double(point.y)
+    }
+}
+

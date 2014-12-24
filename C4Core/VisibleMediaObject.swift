@@ -19,35 +19,8 @@
 
 import Foundation
 
-public protocol VisibleMediaObject: MediaObject, Visible, Touchable, Mask, AddRemoveSubview {
+public protocol VisibleMediaObject: MediaObject, Visible, Mask {
     
-}
-
-//MARK: - Gesture Actions (typealiases)
-public typealias TapAction = (location: C4Point) -> ()
-public typealias PanAction = (location: C4Point, translation: C4Point, velocity: C4Point) -> ()
-public typealias PinchAction = (location: C4Point, scale: Double, velocity: Double) -> ()
-public typealias RotationAction = (location: C4Point, rotation: Double, velocity: Double) -> ()
-public typealias LongPressAction = (location: C4Point) -> ()
-public typealias SwipeAction = (location: C4Point, direction: SwipeDirection) -> ()
-public typealias EdgePanAction = (location: C4Point) -> ()
-
-//MARK: - Touchable
-public protocol Touchable: UIGestureRecognizerDelegate {
-    var interactionEnabled: Bool { get set }
-    var pan: Pan { get }
-    var tap: Tap { get }
-    var swipe: Swipe { get }
-    var longPress: LongPress { get }
-    var edgePan: EdgePan { get }
-    
-    func onTap(run: TapAction)
-    func onPan(run: PanAction)
-    func onPinch(run: PinchAction)
-    func onRotate(run: RotationAction)
-    func onLongPress(run: LongPressAction)
-    func onSwipe(run: SwipeAction)
-    func onEdgePan(run: EdgePanAction)
 }
 
 //MARK: - Visible
@@ -100,35 +73,6 @@ public struct Shadow {
 public protocol Mask {
     var mask: Mask? { get set }
     var layer: CALayer? { get }
-}
-
-//MARK: - AddRemoveSubview
-public protocol AddRemoveSubview {
-    func add<T: AddRemoveSubview>(subview: T)
-    func remove<T: AddRemoveSubview>(subview: T)
-    func removeFromSuperview()
-}
-
-//MARK: - Structs & Enums
-public struct Tap {
-    weak public var gesture: UITapGestureRecognizer?
-    public var numberOfTapsRequired : Int {
-        didSet {
-            self.gesture?.numberOfTapsRequired = numberOfTapsRequired
-        }
-    }
-    
-    public var numberOfTouchesRequired : Int {
-        didSet {
-            self.gesture?.numberOfTouchesRequired = numberOfTouchesRequired
-        }
-    }
-    
-    public init(_ recognizer: UITapGestureRecognizer) {
-        gesture = recognizer
-        numberOfTouchesRequired = 1
-        numberOfTapsRequired = 1
-    }
 }
 
 public struct Pan {

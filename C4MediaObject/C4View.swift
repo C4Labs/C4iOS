@@ -200,141 +200,46 @@ public class C4View : NSObject, VisibleMediaObject {
         }
     }
     
-    //MARK: Tap
-    public var tap : Tap = Tap(UITapGestureRecognizer())
-    internal var tapAction : TapAction?
-    internal var tapRecognizer: UITapGestureRecognizer?
-    public func onTap(run: TapAction) {
-        tapAction = run
-
-        if tapRecognizer == nil {
-            tapRecognizer = UITapGestureRecognizer(target: self, action: "handleTap:")
-            view.addGestureRecognizer(tapRecognizer!)
-            tap = Tap(tapRecognizer!)
-        }
-    }
-    internal func handleTap(sender: UITapGestureRecognizer) {
-        if let action = tapAction? {
-            let l = C4Point(sender.locationInView(self.view))
-            action(location: l)
-        }
+    public func addTapGestureRecognizer(action: TapAction) -> UITapGestureRecognizer {
+        let gestureRecognizer = UITapGestureRecognizer(view: self.view, action: action)
+        self.view.addGestureRecognizer(gestureRecognizer)
+        return gestureRecognizer
     }
     
-    //MARK: Pan
-    public var pan : Pan = Pan(UIPanGestureRecognizer())
-    
-    internal var panAction : PanAction?
-    internal var panRecognizer : UIPanGestureRecognizer?
-    public func onPan(run: PanAction) {
-        panAction = run
-        if panRecognizer == nil {
-            panRecognizer = UIPanGestureRecognizer(target:self, action:"handlePan:")
-            view.addGestureRecognizer(panRecognizer!)
-            pan = Pan(panRecognizer!)
-        }
-    }
-    internal func handlePan(sender: UIPanGestureRecognizer) {
-        if let action = panAction? {
-            let l = C4Point(sender.locationInView(self.view))
-            let t = C4Point(sender.translationInView(self.view))
-            let v = C4Point(sender.velocityInView(self.view))
-            action(location: l, translation: t, velocity: v)
-        }
+    public func addPanGestureRecognizer(action: PanAction) -> UIPanGestureRecognizer {
+        let gestureRecognizer = UIPanGestureRecognizer(view: self.view, action: action)
+        self.view.addGestureRecognizer(gestureRecognizer)
+        return gestureRecognizer
     }
     
-    internal var pinchAction: PinchAction?
-    internal var pinchRecognizer: UIPinchGestureRecognizer?
-    public func onPinch(run: PinchAction) {
-        pinchAction = run
-        if pinchRecognizer == nil {
-            pinchRecognizer = UIPinchGestureRecognizer(target:self, action:"handlePinch:")
-            view.addGestureRecognizer(pinchRecognizer!)
-        }
-    }
-    internal func handlePinch(sender: UIPinchGestureRecognizer) {
-        if let action = pinchAction? {
-            let l = C4Point(sender.locationInView(self.view))
-            let s = Double(sender.scale)
-            let v = Double(sender.velocity)
-            action(location: l, scale: s, velocity: v)
-        }
+    public func addPinchGestureRecognizer(action: PinchAction) -> UIPinchGestureRecognizer {
+        let gestureRecognizer = UIPinchGestureRecognizer(view: view, action: action)
+        self.view.addGestureRecognizer(gestureRecognizer)
+        return gestureRecognizer
     }
     
-    internal var rotationAction: RotationAction?
-    internal var rotationGesture: UIRotationGestureRecognizer?
-    public func onRotate(run: RotationAction) {
-        rotationAction = run
-        if rotationGesture == nil {
-            rotationGesture = UIRotationGestureRecognizer(target:self, action:"handleRotation:")
-            view.addGestureRecognizer(rotationGesture!)
-        }
+    public func addRotationGestureRecognizer(action: RotationAction) -> UIRotationGestureRecognizer {
+        let gestureRecognizer = UIRotationGestureRecognizer(view: view, action: action)
+        self.view.addGestureRecognizer(gestureRecognizer)
+        return gestureRecognizer
     }
     
-    internal func handleRotation(sender: UIRotationGestureRecognizer) {
-        if let action = rotationAction {
-            let l = C4Point(sender.locationInView(self.view))
-            let r = Double(sender.rotation)
-            let v = Double(sender.velocity)
-            action(location: l, rotation: r, velocity: v)
-        }
+    public func addLongPressGestureRecognizer(action: LongPressAction) -> UILongPressGestureRecognizer {
+        let gestureRecognizer = UILongPressGestureRecognizer(view: view, action: action)
+        self.view.addGestureRecognizer(gestureRecognizer)
+        return gestureRecognizer
     }
     
-    public var longPress = LongPress(UILongPressGestureRecognizer())
-    internal var longPressAction: LongPressAction?
-    internal var longPressGesture: UILongPressGestureRecognizer?
-    public func onLongPress(run: LongPressAction) {
-        longPressAction = run
-        if longPressGesture == nil {
-            longPressGesture = UILongPressGestureRecognizer(target:self, action:"handleLongPress:")
-            view.addGestureRecognizer(longPressGesture!)
-            longPress = LongPress(longPressGesture!)
-        }
+    public func addSwipeGestureRecognizer(action: SwipeAction) -> UISwipeGestureRecognizer {
+        let gestureRecognizer = UISwipeGestureRecognizer(view: view, action: action)
+        self.view.addGestureRecognizer(gestureRecognizer)
+        return gestureRecognizer
     }
     
-    internal func handleLongPress(sender: UILongPressGestureRecognizer) {
-        if let action = longPressAction {
-            let l = C4Point(sender.locationInView(self.view))
-            action(location: l)
-        }
-    }
-    
-    public var swipe = Swipe(UISwipeGestureRecognizer())
-    internal var swipeAction: SwipeAction?
-    internal var swipeGesture: UISwipeGestureRecognizer?
-    public func onSwipe(run: SwipeAction) {
-        swipeAction = run
-        if swipeGesture == nil {
-            swipeGesture = UISwipeGestureRecognizer(target: self, action: "handleSwipe:")
-            view.addGestureRecognizer(swipeGesture!)
-            swipe = Swipe(swipeGesture!)
-        }
-    }
-    
-    internal func handleSwipe(sender: UISwipeGestureRecognizer) {
-        if let action = swipeAction {
-            let l = C4Point(sender.locationInView(self.view))
-            let d = SwipeDirection(sender.direction)
-            action(location: l, direction: d)
-        }
-    }
-    
-    public var edgePan = EdgePan(UIScreenEdgePanGestureRecognizer())
-    internal var edgePanAction: EdgePanAction?
-    internal var edgePanGesture: UIScreenEdgePanGestureRecognizer?
-    public func onEdgePan(run: EdgePanAction) {
-        edgePanAction = run
-        if edgePanGesture == nil {
-            edgePanGesture = UIScreenEdgePanGestureRecognizer(target: self, action:"handleEdgePan:")
-            view.addGestureRecognizer(edgePanGesture!)
-            edgePan = EdgePan(edgePanGesture!)
-        }
-    }
-
-    internal func handleEdgePan(sender: UIScreenEdgePanGestureRecognizer) {
-        if let action = edgePanAction {
-            let l = C4Point(sender.locationInView(self.view))
-            action(location: l)
-        }
+    public func addScreenEdgePanGestureRecognizer(action: ScreenEdgePanAction) -> UIScreenEdgePanGestureRecognizer {
+        let gestureRecognizer = UIScreenEdgePanGestureRecognizer(view: view, action: action)
+        self.view.addGestureRecognizer(gestureRecognizer)
+        return gestureRecognizer
     }
     
     //MARK: - Setup Observer
@@ -363,26 +268,20 @@ public class C4View : NSObject, VisibleMediaObject {
     }
     
     //MARK: - AddRemoveSubview
-    public func add<T: AddRemoveSubview>(subview: T) {
-        if subview is UIView {
-            if let v = subview as? UIView {
-                view.addSubview(v)
-            }
-        } else {
-            if let v = subview as? C4View {
-                view.addSubview(v.view)
-            }
+    public func add<T>(subview: T) {
+        if let v = subview as? UIView {
+            view.addSubview(v)
+        }
+        else if let v = subview as? C4View {
+            view.addSubview(v.view)
         }
     }
-    public func remove<T: AddRemoveSubview>(subview: T) {
-        if subview is UIView {
-            if let v = subview as? UIView {
-                v.removeFromSuperview()
-            }
-        } else {
-            if let v = subview as? C4View {
-                v.view.removeFromSuperview()
-            }
+    public func remove<T>(subview: T) {
+        if let v = subview as? UIView {
+            v.removeFromSuperview()
+        }
+        else if let v = subview as? C4View {
+            v.view.removeFromSuperview()
         }
     }
     public func removeFromSuperview() {
@@ -390,8 +289,8 @@ public class C4View : NSObject, VisibleMediaObject {
     }
 }
 
-extension UIView : AddRemoveSubview {
-    public func add<T: AddRemoveSubview>(subview: T) {
+extension UIView {
+    public func add<T>(subview: T) {
         if subview is UIView {
             if let v = subview as? UIView {
                 self.addSubview(v)
@@ -402,7 +301,7 @@ extension UIView : AddRemoveSubview {
             }
         }
     }
-    public func remove<T: AddRemoveSubview>(subview: T) {
+    public func remove<T>(subview: T) {
         if subview is UIView {
             if let v = subview as? UIView {
                 v.removeFromSuperview()
