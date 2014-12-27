@@ -28,7 +28,7 @@ public class C4Polygon: C4Shape {
         }
     }
     convenience public init(_ points: [C4Point]) {
-        assert(points.count >= 2, "You need to specify at least 2 points for a polygon")
+        assert(points.count >= 2, "To create a Polygon you need to specify an array of at least 2 points")
         self.init(frame: C4Rect(points))
         var path = C4Path()
         self.points = points

@@ -100,20 +100,14 @@ public class C4Shape: C4View {
         view.bounds = CGPathGetPathBoundingBox(shapeLayer.path)
         view.frame = f
     }
-
-    public func intrinsicContentSize() -> CGSize {
-        return view.intrinsicContentSize()
-    }
     
     /**
-    The width of the stroke. Defaults to 1.0. Animatable.
+    The line width used when stroking the path. Defaults to 1.0. Animatable.
     */
+    @IBInspectable
     public var lineWidth: Double {
-        get {
-            return Double(shapeLayer.lineWidth)
-        } set(val) {
-            shapeLayer.lineWidth = CGFloat(val)
-        }
+        get { return Double(shapeLayer.lineWidth) }
+        set(width) { shapeLayer.lineWidth = CGFloat(width); updatePath(); }
     }
     
     /**
@@ -165,16 +159,6 @@ public class C4Shape: C4View {
         get { return Double(shapeLayer.strokeStart) }
         set(start) { shapeLayer.strokeStart = CGFloat(start); }
     }
-    
-    /**
-    This value defines the start of the path used to draw the stroked outline. The value must be in the range [0,1]
-    with zero representing the start of the path and one the end. Values in between zero and one are interpolated
-    linearly along the path length. Defaults to zero. Animatable.
-    */
-    public var strokeStart: Double {
-        get { return Double(shapeLayer.strokeStart) }
-        set(start) { shapeLayer.strokeStart = CGFloat(start); }
-    }
 
     /**
     This value defines the end of the path used to draw the stroked outline. The value must be in the range [0,1]
@@ -186,15 +170,6 @@ public class C4Shape: C4View {
         set(end) { shapeLayer.strokeEnd = CGFloat(end); }
     }
 
-    /**
-    The line width used when stroking the path. Defaults to one. Animatable.
-    */
-    @IBInspectable
-    public var lineWidth: Double {
-        get { return Double(shapeLayer.lineWidth) }
-        set(width) { shapeLayer.lineWidth = CGFloat(width); updatePath(); }
-    }
-    
     /**
     The miter limit used when stroking the path. Defaults to ten. Animatable. */
     @IBInspectable
@@ -275,7 +250,7 @@ public class C4Shape: C4View {
         set(pattern) { shapeLayer.lineDashPattern = pattern }
     }
 
-    override public func intrinsicContentSize() -> CGSize {
+    public func intrinsicContentSize() -> CGSize {
         if let path = path {
             let boundingBox = path.boundingBox()
             return CGSize(width: boundingBox.max.x + lineWidth/2, height: boundingBox.max.y + lineWidth/2)
@@ -309,8 +284,5 @@ public class C4Shape: C4View {
         
         /// Specifies a square line cap style for endpoints for an open path when stroked.
         case Square
-    }
-    
-    internal func updatePath() {
     }
 }

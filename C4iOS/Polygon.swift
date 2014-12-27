@@ -47,34 +47,7 @@ public class Polygon: Shape {
                 p.addLineToPoint(linePoints[i])
             }
             
-//            var transform = CGAffineTransformMakeTranslation(-frame.origin.x,-frame.origin.y)
-//            shapeLayer.path = CGPathCreateCopyByTransformingPath(path.CGPath, &transform)
             animateKeyPath("path", toValue: p.CGPath)
         }
-    }
-    
-    func animation() -> CABasicAnimation {
-        var anim = CABasicAnimation()
-        anim.duration = 0.25
-        anim.beginTime = CACurrentMediaTime()
-        anim.autoreverses = false
-        anim.repeatCount = 0
-        anim.removedOnCompletion = false
-        anim.fillMode = kCAFillModeBoth
-        return anim
-    }
-    
-    func animateKeyPath(keyPath: String, toValue: AnyObject) {
-        CATransaction.begin()
-        CATransaction.setCompletionBlock({
-            self.shapeLayer.path = toValue as CGPath
-            self.adjustToFitPath()
-        })
-        var anim = animation()
-        anim.keyPath = "path"
-        anim.fromValue = layer.presentationLayer()?.valueForKeyPath("path")
-        anim.toValue = toValue
-        layer.addAnimation(anim, forKey:"animatePath")
-        CATransaction.commit()
     }
 }
