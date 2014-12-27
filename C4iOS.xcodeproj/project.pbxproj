@@ -12,6 +12,8 @@
 		1F3FC01C1A0F2AAD005984BB /* C4View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94947941A0BFD5700F9CDC8 /* C4View.swift */; };
 		1F3FC01E1A0F2BF8005984BB /* EventSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94947961A0D8E7A00F9CDC8 /* EventSource.swift */; };
 		1F8CB1DA1A05781700A20783 /* C4RectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8CB1D91A05781700A20783 /* C4RectTests.swift */; };
+		1F8FE9811A4F7BF700B38276 /* C4Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8FE9801A4F7BF700B38276 /* C4Line.swift */; };
+		1F8FE9831A4F7C2200B38276 /* C4Polygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8FE9821A4F7C2200B38276 /* C4Polygon.swift */; };
 		1FD74B741A0F31B400A65163 /* Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD74B731A0F31B400A65163 /* Rotation.swift */; };
 		1FD74B781A0F31F800A65163 /* VisibleMediaObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD74B771A0F31F800A65163 /* VisibleMediaObject.swift */; };
 		614F824919DB5ED3001DF1D4 /* C4iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 614F824819DB5ED3001DF1D4 /* C4iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -78,6 +80,8 @@
 		1F275A6E1A1C6FE000D1EF55 /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		1F5726E319FCECE4006FF395 /* C4Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = C4Foundation.swift; path = ../C4iOS/C4Foundation.swift; sourceTree = "<group>"; };
 		1F8CB1D91A05781700A20783 /* C4RectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4RectTests.swift; sourceTree = "<group>"; };
+		1F8FE9801A4F7BF700B38276 /* C4Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Line.swift; sourceTree = "<group>"; };
+		1F8FE9821A4F7C2200B38276 /* C4Polygon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Polygon.swift; sourceTree = "<group>"; };
 		1FD74B731A0F31B400A65163 /* Rotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rotation.swift; sourceTree = "<group>"; };
 		1FD74B771A0F31F800A65163 /* VisibleMediaObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisibleMediaObject.swift; sourceTree = "<group>"; };
 		614F824319DB5ED3001DF1D4 /* C4iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = C4iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -208,6 +212,8 @@
 				A9596D061A0211420023323D /* Rectangle.swift */,
 				614F825C19DB5FFD001DF1D4 /* Shape.swift */,
 				D96954FD1A2526A100622AB0 /* C4Shape.swift */,
+				1F8FE9801A4F7BF700B38276 /* C4Line.swift */,
+				1F8FE9821A4F7C2200B38276 /* C4Polygon.swift */,
 				6162BFB619DB971C00D7F3D0 /* Shape+Creation.swift */,
 				A988A9121A4A837A0044007C /* UIGestureRecognizer+Closure.swift */,
 				614F824619DB5ED3001DF1D4 /* Supporting Files */,
@@ -564,6 +570,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F8FE9811A4F7BF700B38276 /* C4Line.swift in Sources */,
 				1F3FC01C1A0F2AAD005984BB /* C4View.swift in Sources */,
 				A988A9131A4A837A0044007C /* UIGestureRecognizer+Closure.swift in Sources */,
 				A9596D071A0211420023323D /* Rectangle.swift in Sources */,
@@ -572,6 +579,7 @@
 				D96954FE1A2526A100622AB0 /* C4Shape.swift in Sources */,
 				6162BFB719DB971C00D7F3D0 /* Shape+Creation.swift in Sources */,
 				A9596D121A054A3F0023323D /* Ellipse.swift in Sources */,
+				1F8FE9831A4F7C2200B38276 /* C4Polygon.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

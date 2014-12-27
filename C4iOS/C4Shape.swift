@@ -47,6 +47,10 @@ public class C4Shape: C4View {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /**
+    The path defining the shape to be rendered. If the path extends outside the layer bounds it will not automatically
+    be clipped to the layer. Defaults to nil. Animatable.
+    */
     internal var path: C4Path? {
         get {
             return C4Path(path: shapeLayer.path)
@@ -151,6 +155,16 @@ public class C4Shape: C4View {
             }
         }
     }
+
+    /**
+    This value defines the start of the path used to draw the stroked outline. The value must be in the range [0,1]
+    with zero representing the start of the path and one the end. Values in between zero and one are interpolated
+    linearly along the path length. Defaults to zero. Animatable.
+    */
+    public var strokeStart: Double {
+        get { return Double(shapeLayer.strokeStart) }
+        set(start) { shapeLayer.strokeStart = CGFloat(start); }
+    }
     
     /**
     This value defines the start of the path used to draw the stroked outline. The value must be in the range [0,1]
@@ -172,75 +186,131 @@ public class C4Shape: C4View {
         set(end) { shapeLayer.strokeEnd = CGFloat(end); }
     }
 
-}
-
-public class C4Polygon: C4Shape {
-    public var points: [C4Point] {
-        didSet {
-            updatePath()
-        }
-    }
-    convenience public init(_ points: [C4Point]) {
-        assert(points.count >= 2, "You need to specify at least 2 points for a polygon")
-        self.init(frame: C4Rect(points))
-        var path = C4Path()
-        self.points = points
-        path.moveToPoint(points[0])
-        for i in 1..<points.count {
-            path.addLineToPoint(points[i])
-        }
-        self.path = path
-        adjustToFitPath()
+    /**
+    The line width used when stroking the path. Defaults to one. Animatable.
+    */
+    @IBInspectable
+    public var lineWidth: Double {
+        get { return Double(shapeLayer.lineWidth) }
+        set(width) { shapeLayer.lineWidth = CGFloat(width); updatePath(); }
     }
     
-    public override init() {
-        self.points = [C4Point]()
-        super.init()
+    /**
+    The miter limit used when stroking the path. Defaults to ten. Animatable. */
+    @IBInspectable
+    public var miterLimit: Double {
+        get { return Double(shapeLayer.miterLimit) }
+        set(miterLimit) { shapeLayer.miterLimit = CGFloat(miterLimit) }
     }
     
-    required public init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    internal override func updatePath() {
-        if points.count > 1 {
-            let p = C4Path()
-            p.moveToPoint(points[0])
-            
-            for i in 1..<points.count {
-                p.addLineToPoint(points[i])
+    /**
+    The cap style used when stroking the path. Defaults to `Butt`.
+    */
+    public var lineCap: LineCap  {
+        get {
+            switch shapeLayer.lineCap {
+            case kCALineCapButt:
+                return .Butt
+            case kCALineCapRound:
+                return .Round;
+            case kCALineCapSquare:
+                return .Square;
+            default:
+                return .Butt
             }
-
-            animateKeyPath("path", toValue: p.CGPath)
+        }
+        set(lineCap) {
+            switch lineCap {
+            case .Butt:
+                shapeLayer.lineCap = kCALineCapButt;
+            case .Round:
+                shapeLayer.lineCap = kCALineCapRound;
+            case .Square:
+                shapeLayer.lineCap = kCALineCapSquare;
+            }
         }
     }
-}
 
-public class C4Line: C4Polygon {
-    public var a: C4Point {
+    /**
+    The join style used when stroking the path. Defaults to `Miter`.
+    */
+    public var lineJoin: LineJoin {
         get {
-            return points[0]
-        } set(val) {
-            points[0] = val
-            updatePath()
+            switch shapeLayer.lineJoin {
+            case kCALineJoinMiter:
+                return .Miter
+            case kCALineJoinRound:
+                return .Round;
+            case kCALineJoinBevel:
+                return .Bevel;
+            default:
+                return .Miter;
+            }
         }
-    }
-    public var b: C4Point {
-        get {
-            return points[1]
-        } set(val) {
-            points[1] = val
-            updatePath()
+        set(lineJoin) {
+            switch lineJoin {
+            case .Miter:
+                shapeLayer.lineJoin = kCALineJoinMiter
+            case .Round:
+                shapeLayer.lineJoin = kCALineJoinRound
+            case .Bevel:
+                shapeLayer.lineJoin = kCALineJoinBevel
+            }
         }
     }
     
-    override func updatePath() {
-        if points.count > 1 {
-            let p = C4Path()
-            p.moveToPoint(points[0])
-            p.addLineToPoint(points[1])
-            
-            animateKeyPath("path", toValue: p.CGPath)
+    /**
+    The phase of the dashing pattern applied when creating the stroke. Defaults to zero. Animatable.
+    */
+    public var lineDashPhase: Double {
+        get { return Double(shapeLayer.lineDashPhase) }
+        set(phase) { shapeLayer.lineDashPhase = CGFloat(phase) }
+    }
+    
+    /**
+    The dash pattern applied when creating the stroked version of the path. Defaults to nil.
+    */
+    public var lineDashPattern: [NSNumber]? {
+        get { return shapeLayer.lineDashPattern as [NSNumber]? }
+        set(pattern) { shapeLayer.lineDashPattern = pattern }
+    }
+
+    override public func intrinsicContentSize() -> CGSize {
+        if let path = path {
+            let boundingBox = path.boundingBox()
+            return CGSize(width: boundingBox.max.x + lineWidth/2, height: boundingBox.max.y + lineWidth/2)
+        } else {
+            return CGSizeZero
         }
+    }
+
+    /// Determine whether the shape's path is empty
+    public func isEmpty() -> Bool {
+        return path == nil || path!.isEmpty()
+    }
+
+    public enum LineJoin {
+        /// Specifies a miter line shape of the joints between connected segments of a stroked path.
+        case Miter
+        
+        /// Specifies a round line shape of the joints between connected segments of a stroked path.
+        case Round
+        
+        /// Specifies a bevel line shape of the joints between connected segments of a stroked path.
+        case Bevel
+    }
+    
+    public enum LineCap {
+        /// Specifies a butt line cap style for endpoints for an open path when stroked.
+        case Butt
+        
+        /// Specifies a round line cap style for endpoints for an open path when stroked.
+        case Round
+        
+        /// Specifies a square line cap style for endpoints for an open path when stroked.
+        case Square
+    }
+    
+    internal func updatePath() {
     }
 }
