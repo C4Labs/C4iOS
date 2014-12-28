@@ -40,8 +40,13 @@ public struct C4Point : Equatable {
         return x == 0 && y == 0
     }
     
+    public mutating func transform(t: C4Transform) {
+        x = x * t.a + y * t.b + t.tx
+        y = x * t.c + y * t.d + t.ty
+    }
+    
     public func description() -> String {
-        return "{\(x),\(y)}"
+        return "{\(x), \(y)}"
     }
 }
 

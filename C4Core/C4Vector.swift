@@ -27,8 +27,8 @@ public struct C4Vector : Equatable {
     }
     
     /**
-    Create a vector with a cartesian representation: an x and a y coordinates.
-    */
+      Create a vector with a cartesian representation: an x and a y coordinates.
+     */
     public init(x: Double, y: Double) {
         self.x = x
         self.y = y
@@ -40,17 +40,17 @@ public struct C4Vector : Equatable {
     }
     
     /**
-    Create a vector with a polar representation: a magnitude and an angle in radians.
-    http://en.wikipedia.org/wiki/Polar_coordinate_system
-    */
+      Create a vector with a polar representation: a magnitude and an angle in radians.
+      http://en.wikipedia.org/wiki/Polar_coordinate_system
+     */
     public init(magnitude: Double, heading: Double) {
         x = magnitude * cos(heading)
         y = magnitude * sin(heading)
     }
     
     /**
-    The polar representation magnitude of the vector.
-    */
+      The polar representation magnitude of the vector.
+     */
     public var magnitude: Double {
         get {
             return sqrt(x * x + y * y)
@@ -62,8 +62,8 @@ public struct C4Vector : Equatable {
     }
     
     /**
-    The polar representation heading angle of the vector, in radians.
-    */
+      The polar representation heading angle of the vector, in radians.
+     */
     public var heading : Double {
         get {
             return atan2(y, x);
@@ -75,15 +75,15 @@ public struct C4Vector : Equatable {
     }
     
     /**
-    The angle between two vectors, based on {0,0}
-    */
+      The angle between two vectors, based on {0,0}
+     */
     public func angleTo(vec: C4Vector) -> Double {
         return acos(self ⋅ vec / (self.magnitude * vec.magnitude))
     }
 
     /**
-    The angle between two vectors, based on a provided point
-    */
+      The angle between two vectors, based on a provided point
+     */
     public func angleTo(vec: C4Vector, basedOn: C4Vector) -> Double {
         var vecA = C4Vector(x: x, y: y)
         var vecB = C4Vector(x: vec.x, y: vec.y)
@@ -95,15 +95,15 @@ public struct C4Vector : Equatable {
     }
 
     /**
-    Return the dot product. You should use the ⋅ operator instead.
-    */
+      Return the dot product. You should use the ⋅ operator instead.
+     */
     public func dot(vec: C4Vector) -> Double {
         return x * vec.x + y * vec.y
     }
     
     /**
-    Return a vector with the same heading but a magnitude of 1.
-    */
+      Return a vector with the same heading but a magnitude of 1.
+     */
     public func unitVector() -> C4Vector {
         let mag = self.magnitude
         if mag == 0 {
@@ -113,10 +113,22 @@ public struct C4Vector : Equatable {
     }
 
     /**
-    Return `true` if the vector is zero.
-    */
+      Return `true` if the vector is zero.
+     */
     public func isZero() -> Bool {
         return x == 0 && y == 0
+    }
+    
+    /**
+      Transform the vector.
+     */
+    public mutating func transform(t: C4Transform) {
+        x = x * t.a + y * t.b
+        y = x * t.c + y * t.d
+    }
+    
+    public func description() -> String {
+        return "{\(x), \(y)}"
     }
 }
 

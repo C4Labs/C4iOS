@@ -40,6 +40,8 @@
 		A9596DA41A089EB60023323D /* C4Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596DA31A089EB60023323D /* C4Animator.swift */; };
 		A9596DA81A08B0C20023323D /* C4Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596DA71A08B0C20023323D /* C4Animation.swift */; };
 		A988A9131A4A837A0044007C /* UIGestureRecognizer+Closure.swift in Sources */ = {isa = PBXBuildFile; fileRef = A988A9121A4A837A0044007C /* UIGestureRecognizer+Closure.swift */; };
+		A988A9151A4F4A3A0044007C /* C4Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = A988A9141A4F4A3A0044007C /* C4Transform.swift */; };
+		A988A9171A4F57330044007C /* C4TransformTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A988A9161A4F57330044007C /* C4TransformTests.swift */; };
 		D96954FE1A2526A100622AB0 /* C4Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96954FD1A2526A100622AB0 /* C4Shape.swift */; };
 		D9C0EF441A25190300C7A904 /* C4Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5726E319FCECE4006FF395 /* C4Foundation.swift */; };
 		D9C0EF451A25190400C7A904 /* C4Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5726E319FCECE4006FF395 /* C4Foundation.swift */; };
@@ -117,6 +119,8 @@
 		A9596DA31A089EB60023323D /* C4Animator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Animator.swift; sourceTree = "<group>"; };
 		A9596DA71A08B0C20023323D /* C4Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Animation.swift; sourceTree = "<group>"; };
 		A988A9121A4A837A0044007C /* UIGestureRecognizer+Closure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIGestureRecognizer+Closure.swift"; sourceTree = "<group>"; };
+		A988A9141A4F4A3A0044007C /* C4Transform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Transform.swift; sourceTree = "<group>"; };
+		A988A9161A4F57330044007C /* C4TransformTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4TransformTests.swift; sourceTree = "<group>"; };
 		D94947921A0BFC9500F9CDC8 /* MediaObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MediaObject.swift; path = ../C4MediaObject/MediaObject.swift; sourceTree = "<group>"; };
 		D94947941A0BFD5700F9CDC8 /* C4View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = C4View.swift; path = ../C4MediaObject/C4View.swift; sourceTree = "<group>"; };
 		D94947961A0D8E7A00F9CDC8 /* EventSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventSource.swift; path = ../C4MediaObject/EventSource.swift; sourceTree = "<group>"; };
@@ -252,6 +256,7 @@
 				A9596D361A054AF50023323D /* C4Rect.swift */,
 				A9596D371A054AF50023323D /* C4Size.swift */,
 				A9596D381A054AF50023323D /* C4Vector.swift */,
+				A988A9141A4F4A3A0044007C /* C4Transform.swift */,
 				D94947921A0BFC9500F9CDC8 /* MediaObject.swift */,
 				1FD74B771A0F31F800A65163 /* VisibleMediaObject.swift */,
 				1FD74B731A0F31B400A65163 /* Rotation.swift */,
@@ -278,6 +283,7 @@
 				A9596D421A054B4F0023323D /* C4PointTests.swift */,
 				1F8CB1D91A05781700A20783 /* C4RectTests.swift */,
 				A9596D431A054B4F0023323D /* C4VectorTests.swift */,
+				A988A9161A4F57330044007C /* C4TransformTests.swift */,
 				A9596D281A054A960023323D /* Supporting Files */,
 			);
 			path = C4CoreTests;
@@ -591,6 +597,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9596D3C1A054AF50023323D /* C4Point.swift in Sources */,
+				A988A9151A4F4A3A0044007C /* C4Transform.swift in Sources */,
 				A9596D391A054AF50023323D /* C4Color.swift in Sources */,
 				A9596D3B1A054AF50023323D /* C4Path.swift in Sources */,
 				D9C0EF441A25190300C7A904 /* C4Foundation.swift in Sources */,
@@ -610,6 +617,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9596D461A054B4F0023323D /* C4PointTests.swift in Sources */,
+				A988A9171A4F57330044007C /* C4TransformTests.swift in Sources */,
 				A9596D451A054B4F0023323D /* C4MathTests.swift in Sources */,
 				1F8CB1DA1A05781700A20783 /* C4RectTests.swift in Sources */,
 				D9C0EF451A25190400C7A904 /* C4Foundation.swift in Sources */,
