@@ -80,7 +80,7 @@ public class C4Shape: C4View {
             self.adjustToFitPath()
         })
         var anim = animation()
-        anim.duration = 0.2
+        anim.duration = 0.0
         anim.keyPath = keyPath
         anim.fromValue = view.layer.presentationLayer()?.valueForKeyPath(keyPath)
         anim.toValue = toValue
@@ -113,16 +113,16 @@ public class C4Shape: C4View {
     /**
     The color to stroke the path, or nil for no fill. Defaults to opaque black. Animatable.
     */
-    public var strokeColor: UIColor? {
-        get { return UIColor(CGColor: shapeLayer.strokeColor) }
+    public var strokeColor: C4Color? {
+        get { return C4Color(CGColor: shapeLayer.strokeColor) }
         set(color) { shapeLayer.strokeColor = color?.CGColor }
     }
     
     /**
     The color to fill the path, or nil for no fill. Defaults to opaque black. Animatable.
     */
-    public var fillColor: UIColor? {
-        get { return UIColor(CGColor: shapeLayer.fillColor) }
+    public var fillColor: C4Color? {
+        get { return C4Color(CGColor: shapeLayer.fillColor) }
         set(color) { shapeLayer.fillColor = color?.CGColor }
     }
     
