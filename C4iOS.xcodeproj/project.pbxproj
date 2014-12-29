@@ -21,7 +21,6 @@
 		614F825D19DB5FFD001DF1D4 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614F825C19DB5FFD001DF1D4 /* Shape.swift */; };
 		6162BFB719DB971C00D7F3D0 /* Shape+Creation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6162BFB619DB971C00D7F3D0 /* Shape+Creation.swift */; };
 		A94E3BD419E0E9390039A9C4 /* C4iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 614F824319DB5ED3001DF1D4 /* C4iOS.framework */; };
-		A9596D071A0211420023323D /* Rectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D061A0211420023323D /* Rectangle.swift */; };
 		A9596D121A054A3F0023323D /* Ellipse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D101A054A3F0023323D /* Ellipse.swift */; };
 		A9596D131A054A3F0023323D /* RegularPolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D111A054A3F0023323D /* RegularPolygon.swift */; };
 		A9596D1E1A054A960023323D /* C4Core.h in Headers */ = {isa = PBXBuildFile; fileRef = A9596D1D1A054A960023323D /* C4Core.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -94,7 +93,6 @@
 		614F825119DB5ED4001DF1D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		614F825C19DB5FFD001DF1D4 /* Shape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
 		6162BFB619DB971C00D7F3D0 /* Shape+Creation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Shape+Creation.swift"; sourceTree = "<group>"; };
-		A9596D061A0211420023323D /* Rectangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rectangle.swift; sourceTree = "<group>"; };
 		A9596D101A054A3F0023323D /* Ellipse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ellipse.swift; sourceTree = "<group>"; };
 		A9596D111A054A3F0023323D /* RegularPolygon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegularPolygon.swift; sourceTree = "<group>"; };
 		A9596D191A054A960023323D /* C4Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = C4Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -211,7 +209,6 @@
 				A9596D111A054A3F0023323D /* RegularPolygon.swift */,
 				614F824819DB5ED3001DF1D4 /* C4iOS.h */,
 				D94947941A0BFD5700F9CDC8 /* C4View.swift */,
-				A9596D061A0211420023323D /* Rectangle.swift */,
 				614F825C19DB5FFD001DF1D4 /* Shape.swift */,
 				D96954FD1A2526A100622AB0 /* C4Shape.swift */,
 				1F8FE9801A4F7BF700B38276 /* C4Line.swift */,
@@ -579,7 +576,6 @@
 				1F8FE9811A4F7BF700B38276 /* C4Line.swift in Sources */,
 				1F3FC01C1A0F2AAD005984BB /* C4View.swift in Sources */,
 				A988A9131A4A837A0044007C /* UIGestureRecognizer+Closure.swift in Sources */,
-				A9596D071A0211420023323D /* Rectangle.swift in Sources */,
 				614F825D19DB5FFD001DF1D4 /* Shape.swift in Sources */,
 				A9596D131A054A3F0023323D /* RegularPolygon.swift in Sources */,
 				D96954FE1A2526A100622AB0 /* C4Shape.swift in Sources */,
