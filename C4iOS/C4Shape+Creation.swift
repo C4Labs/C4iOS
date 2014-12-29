@@ -21,7 +21,7 @@ import Foundation
 import CoreGraphics
 import C4Core
 
-extension Shape {
+extension C4Shape {
     public func addCircle(#center: C4Point, radius: Double) {
         if path == nil {
             path = C4Path()
@@ -29,6 +29,7 @@ extension Shape {
 
         let r = C4Rect(center.x - radius, center.y - radius, radius*2, radius*2)
         path!.addEllipse(r)
+        animateKeyPath("path", toValue: path!.CGPath)
     }
 
     public func addPolygon(#points: [C4Point], closed: Bool = true) {
