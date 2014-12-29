@@ -73,8 +73,10 @@ public class C4Shape: C4View {
     func animateKeyPath(keyPath: String, toValue: AnyObject) {
         CATransaction.begin()
         CATransaction.setCompletionBlock({
-            self.shapeLayer.path = toValue as CGPath
-            self.adjustToFitPath()
+            if(keyPath == "path") {
+                self.shapeLayer.path = toValue as CGPath
+                self.adjustToFitPath()
+            }
         })
         var anim = animation()
         anim.duration = 0.0
