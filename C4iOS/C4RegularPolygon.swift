@@ -21,9 +21,9 @@ import Foundation
 import CoreGraphics
 import C4Core
 
-public class RegularPolygon: Shape {
+public class C4RegularPolygon: C4Shape {
     @IBInspectable
-    public var sides: Int = 3 {
+    public var sides: Int = 6 {
         didSet {
             updatePath()
         }
@@ -36,29 +36,45 @@ public class RegularPolygon: Shape {
         }
     }
     
+    convenience public init(frame: C4Rect) {
+        self.init()
+        self.view.frame = CGRect(frame)
+        view.layer.addSublayer(shapeLayer)
+        updatePath()
+    }
+    
+    public override init() {
+        super.init()
+    }
+    
+    required public init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     internal override func updatePath() {
-        let rect = inset(C4Rect(bounds), lineWidth, lineWidth)
+        let rect = inset(C4Rect(view.frame), lineWidth, lineWidth)
         let rx = rect.size.width / 2.0
         let ry = rect.size.height / 2.0
         if sides == 0 || rx <= 0 || ry <= 0 {
             // Don't try to generate invalid polygons, we'll get undefined behaviour
             return
         }
-        
+    
         let center = rect.center
         let delta = 2.0*M_PI / Double(sides)
-        let path = C4Path()
+        var newPath = C4Path()
         
         for i in 0..<sides {
             let angle = phase + delta*Double(i)
             let point = C4Point(center.x + rx*cos(angle), center.y + ry*sin(angle))
             if i == 0 {
-                path.moveToPoint(point)
+                newPath.moveToPoint(point)
             } else {
-                path.addLineToPoint(point)
+                newPath.addLineToPoint(point)
             }
         }
-        path.closeSubpath()
-        shapeLayer.path = path.CGPath
+        newPath.closeSubpath()
+        path = newPath
+        animateKeyPath("path", toValue: path!.CGPath)
     }
 }
