@@ -18,13 +18,21 @@
 // IN THE SOFTWARE.
 
 import Foundation
+import CoreGraphics
 import C4Core
 
-public class Ellipse: Shape {   
-    internal override func updatePath() {
-        let path = C4Path()
-        let rect = inset(C4Rect(bounds), Double(lineWidth), Double(lineWidth))
-        path.addEllipse(rect)
-        shapeLayer.path = path.CGPath
+public class C4Ellipse: C4Shape {
+    convenience public init(frame: C4Rect) {
+        self.init()
+        view.frame = CGRect(frame)
+        view.layer.addSublayer(shapeLayer)
+        updatePath()
+    }
+    
+    override public func updatePath() {
+        let newPath = C4Path()
+        newPath.addEllipse(frame)
+        path = newPath
+        animateKeyPath("path", toValue: path!.CGPath)
     }
 }
