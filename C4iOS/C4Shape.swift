@@ -22,7 +22,7 @@ import UIKit
 import C4Core
 
 public class C4Shape: C4View {
-    public var shapeLayer: CAShapeLayer
+    internal var shapeLayer: CAShapeLayer
     
     convenience public init(_ path: C4Path) {
         self.init(frame: path.boundingBox())
@@ -52,11 +52,8 @@ public class C4Shape: C4View {
     be clipped to the layer. Defaults to nil. Animatable.
     */
     internal var path: C4Path? {
-        get {
-            return C4Path(path: shapeLayer.path)
-        }
-        set(val) {
-            shapeLayer.path = val?.CGPath
+        didSet {
+            shapeLayer.path = path?.CGPath
         }
     }
     
