@@ -95,7 +95,7 @@ extension UITapGestureRecognizer {
     /**
     This class is used as the target of the gesture recognizer action. It forwards the method call to the closure.
     */
-    private class TapGestureHandler : NSObject {
+    internal class TapGestureHandler : NSObject {
         let action: TapAction
         
         init(action: TapAction) {
@@ -158,7 +158,7 @@ extension UIPanGestureRecognizer {
     /**
       This class is used as the target of the gesture recognizer action. It forwards the method call to the closure.
     */
-    private class PanGestureHandler : NSObject {
+    internal class PanGestureHandler : NSObject {
         let action: PanAction
         
         init(action: PanAction) {
@@ -205,7 +205,7 @@ extension UIPinchGestureRecognizer {
     /**
     This class is used as the target of the gesture recognizer action. It forwards the method call to the closure.
     */
-    private class PinchGestureHandler : NSObject {
+    internal class PinchGestureHandler : NSObject {
         let action: PinchAction
         
         init(action: PinchAction) {
@@ -253,7 +253,7 @@ extension UIRotationGestureRecognizer {
     /**
     This class is used as the target of the gesture recognizer action. It forwards the method call to the closure.
     */
-    private class RotationGestureHandler : NSObject {
+    internal class RotationGestureHandler : NSObject {
         let action: RotationAction
         
         init(action: RotationAction) {
@@ -300,7 +300,7 @@ extension UILongPressGestureRecognizer {
     /**
     This class is used as the target of the gesture recognizer action. It forwards the method call to the closure.
     */
-    private class LongPressGestureHandler : NSObject {
+    internal class LongPressGestureHandler : NSObject {
         let action: LongPressAction
         
         init(action: LongPressAction) {
@@ -347,7 +347,7 @@ extension UISwipeGestureRecognizer {
     /**
     This class is used as the target of the gesture recognizer action. It forwards the method call to the closure.
     */
-    private class SwipeGestureHandler : NSObject {
+    internal class SwipeGestureHandler : NSObject {
         let action: SwipeAction
         
         init(action: SwipeAction) {
@@ -370,7 +370,7 @@ extension UIScreenEdgePanGestureRecognizer {
     */
     public var screenEdgePanAction: ScreenEdgePanAction? {
         get {
-            return (actionHandler as? TapGestureHandler)?.action
+            return (actionHandler as? ScreenEdgePanGestureHandler)?.action
         }
         set {
             if let handler: AnyObject = actionHandler {
@@ -378,7 +378,7 @@ extension UIScreenEdgePanGestureRecognizer {
             }
             
             if let action = newValue {
-                actionHandler = TapGestureHandler(action)
+                actionHandler = ScreenEdgePanGestureHandler(action)
                 addTarget(actionHandler!, action: "handleGesture:")
             } else {
                 actionHandler = nil
@@ -395,7 +395,7 @@ extension UIScreenEdgePanGestureRecognizer {
     /**
     This class is used as the target of the gesture recognizer action. It forwards the method call to the closure.
     */
-    internal class TapGestureHandler : NSObject {
+    internal class ScreenEdgePanGestureHandler : NSObject {
         let action: ScreenEdgePanAction
         
         init(action: ScreenEdgePanAction) {
