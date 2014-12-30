@@ -38,6 +38,10 @@ public class C4View : NSObject, VisibleMediaObject {
         fatalError("init(coder:) has not been implemented")
     }
     
+    public class func layerClass() -> AnyClass {
+        return CALayer.self
+    }
+    
     //MARK: - Media:Object
     //MARK: - Visible
     public var frame: C4Rect {

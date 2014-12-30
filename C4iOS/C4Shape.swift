@@ -22,8 +22,29 @@ import UIKit
 import C4Core
 
 public class C4Shape: C4View {
-    internal var shapeLayer: CAShapeLayer
     
+    internal class ShapeView : UIView {
+        var shapeLayer: CAShapeLayer {
+            get {
+                return self.layer as CAShapeLayer
+            }
+        }
+        
+        override class func layerClass() -> AnyClass {
+            return CAShapeLayer.self
+        }
+    }
+    
+    internal var shapeLayer: CAShapeLayer {
+        get {
+            return self.shapeView.shapeLayer
+        }
+    }
+
+    internal var shapeView: ShapeView {
+        return self.view as ShapeView
+    }
+
     convenience public init(_ path: C4Path) {
         self.init(frame: path.boundingBox())
         self.path = path
@@ -33,14 +54,17 @@ public class C4Shape: C4View {
     
     convenience public init(frame: C4Rect) {
         self.init()
-        self.view.frame = CGRect(frame)
-        view.layer.addSublayer(shapeLayer)
+        self.view = ShapeView(frame: CGRect(frame))
+    }
+    
+    public override class func layerClass() -> AnyClass {
+        return CAShapeLayer.self
     }
     
     public override init() {
-        shapeLayer = CAShapeLayer()
-        shapeLayer.strokeColor = UIColor.greenColor().CGColor
         super.init()
+        self.view = ShapeView()
+        shapeLayer.strokeColor = UIColor.greenColor().CGColor
     }
     
     required public init(coder aDecoder: NSCoder) {
