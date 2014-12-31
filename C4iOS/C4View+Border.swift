@@ -17,45 +17,38 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-import Foundation
+import C4Core
 
-public struct Rotation {
+
+public struct Border {
+    public var color: C4Color
+    public var radius: Double
+    public var width: Double
+    
     public init() {
-        self.layer = CALayer()
+        color = C4Color(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
+        radius = 0.0
+        width = 0.0
     }
-    
-    public init(_ layer: CALayer) {
-        self.init()
-        self.layer = layer
-    }
-    
-    public var layer: CALayer {
-        didSet {
-            update()
+}
+
+public extension C4View {
+    public var border: Border {
+        get {
+            var border = Border()
+            if let layer = layer {
+                border.color = C4Color(CGColor: layer.borderColor)
+                border.radius = Double(layer.cornerRadius)
+                border.width = Double(layer.borderWidth)
+            }
+            return border
         }
-    }
-    
-    public var x: Double = 0 {
-        didSet {
-            //trigger x rotation for layer
+        set {
+            if let layer = layer {
+                layer.borderWidth = CGFloat(newValue.width)
+                layer.borderColor = newValue.color.CGColor
+                layer.cornerRadius = CGFloat(newValue.radius)
+            }
         }
-    }
-    
-    public var y: Double = 0 {
-        didSet {
-            //trigger y rotation for layer
-        }
-    }
-    
-    public var z: Double = 0 {
-        didSet {
-            //trigger z rotation for layer
-        }
-    }
-    
-    internal func update() {
-        //trigger x rotation for layer
-        //trigger y rotation for layer
-        //trigger z rotation for layer
     }
 }

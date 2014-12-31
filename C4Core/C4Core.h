@@ -17,14 +17,12 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <CoreGraphics/CoreGraphics.h>
 
 //! Project version number for C4Core.
 FOUNDATION_EXPORT double C4CoreVersionNumber;
 
 //! Project version string for C4Core.
 FOUNDATION_EXPORT const unsigned char C4CoreVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like #import <C4Core/PublicHeader.h>
-
 

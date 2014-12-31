@@ -20,7 +20,7 @@
 import Foundation
 import QuartzCore
 
-public protocol MediaObject: C4Animatable, C4EventSource, NSObjectProtocol {
+public protocol C4MediaObject: C4Animatable, C4EventSource, NSObjectProtocol {
     
 }
 

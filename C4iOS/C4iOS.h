@@ -25,6 +25,3 @@ FOUNDATION_EXPORT double C4iOSVersionNumber;
 //! Project version string for C4iOS.
 FOUNDATION_EXPORT const unsigned char C4iOSVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <C4iOS/PublicHeader.h>
-
-

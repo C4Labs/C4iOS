@@ -21,7 +21,7 @@ import Foundation
 import C4Core
 import UIKit
 
-public class C4View : NSObject, VisibleMediaObject {
+public class C4View : NSObject {
     internal var view : UIView = UIView()
     
     convenience public init(frame: C4Rect) {
@@ -119,48 +119,6 @@ public class C4View : NSObject, VisibleMediaObject {
             self.view.hidden = val
         }
     }
-
-    public var border: Border = Border() {
-        didSet {
-            updateBorder()
-        }
-    }
-    
-    internal func updateBorder() {
-        layer?.borderWidth = CGFloat(border.width)
-        layer?.borderColor = border.color.CGColor
-        layer?.cornerRadius = CGFloat(border.radius)
-    }
-    
-    public var shadow: Shadow = Shadow() {
-        didSet {
-            updateShadow()
-        }
-    }
-    
-    internal func updateShadow() {
-        layer?.shadowColor = shadow.color.CGColor
-        layer?.shadowRadius = CGFloat(shadow.radius)
-        layer?.shadowOffset = CGSize(shadow.offset)
-        layer?.shadowOpacity = Float(shadow.opacity)
-        if shadow.path != nil {
-            layer?.shadowPath = shadow.path?.CGPath
-        }
-    }
-
-    public var rotation: Rotation = Rotation() {
-        didSet {
-            self.rotation.layer = self.view.layer
-        }
-    }
-    
-    public var perspectiveDistance: Double = 0 {
-        didSet {
-            //set perspective distance on layer
-        }
-    }
-    //MARK: - Animatable
-    //nothing yet
     
     //MARK: - EventSource
     public func post(event: String) {
@@ -191,10 +149,6 @@ public class C4View : NSObject, VisibleMediaObject {
     public func cancel(event: String, observer: AnyObject, object: AnyObject) {
         let nc = NSNotificationCenter.defaultCenter()
         nc.removeObserver(observer, name: event, object: object)
-    }
-    
-    public func watch(property: String, of object: NSObject) {
-        //TODO: would be great to simplify Key Value Observing
     }
 
     //MARK: - Touchable
@@ -257,13 +211,6 @@ public class C4View : NSObject, VisibleMediaObject {
     internal func observe(){}
     
     deinit { NSNotificationCenter.defaultCenter().removeObserver(self.observer) }
-    
-    //MARK: - Maskable
-    public var mask: Mask? {
-        didSet {
-            self.view.layer.mask = mask?.layer
-        }
-    }
     
     public var layer: CALayer? {
         get {
