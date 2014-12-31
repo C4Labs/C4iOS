@@ -20,14 +20,9 @@
 import Foundation
 import QuartzCore
 
-public protocol MediaObject: Animatable, EventSource, NSObjectProtocol {
+public protocol MediaObject: C4Animatable, C4EventSource, NSObjectProtocol {
     
 }
 
 
-public protocol Animatable {}
-
-public protocol Styleable {
-    class var defaultStyle: Style { get set }
-    var style: Style { get set }
-}
+public protocol C4Animatable {}

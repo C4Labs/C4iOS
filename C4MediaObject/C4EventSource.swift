@@ -19,12 +19,14 @@
 
 import Foundation
 
-public protocol EventSource {
-    func post(event: String)
-    func on(event notificationName: String, run executionBlock: Void -> Void) -> AnyObject
-    func on(event notificationName: String, from objectToObserve: AnyObject?, run executionBlock: Void -> Void) -> AnyObject
+public protocol C4EventSource {
+    /**
+      Register an action to run when an event is triggered. Returns an observer handle you can use to cancel the action.
+     */
+    func on(event notificationName: String, run: Void -> Void) -> AnyObject
+    
+    /**
+      Cancel a previously registered action from an observer handle.
+     */
     func cancel(observer: AnyObject)
-    func cancel(event: String, observer: AnyObject)
-    func cancel(event: String, observer: AnyObject, object: AnyObject)
-    func watch(property: String, of object: NSObject)
 }
