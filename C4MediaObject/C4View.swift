@@ -120,36 +120,24 @@ public class C4View : NSObject {
         }
     }
     
+    
     //MARK: - EventSource
-    public func post(event: String) {
+    internal func post(event: String) {
         NSNotificationCenter.defaultCenter().postNotificationName(event, object: self)
     }
     
     public func on(event notificationName: String, run executionBlock: Void -> Void) -> AnyObject {
-        return self.on(event: notificationName, from: nil, run: executionBlock)
-    }
-    
-    public func on(event notificationName: String, from objectToObserve: AnyObject?, run executionBlock: Void -> Void) -> AnyObject {
         let nc = NSNotificationCenter.defaultCenter()
-        return nc.addObserverForName(notificationName, object: objectToObserve, queue: NSOperationQueue.currentQueue(), usingBlock: { (n: NSNotification!) in
+        return nc.addObserverForName(notificationName, object: self, queue: NSOperationQueue.currentQueue(), usingBlock: { notification in
             executionBlock()
         });
     }
     
     public func cancel(observer: AnyObject) {
         let nc = NSNotificationCenter.defaultCenter()
-        nc.removeObserver(observer, name: nil, object: nil)
+        nc.removeObserver(observer)
     }
     
-    public func cancel(event: String, observer: AnyObject) {
-        let nc = NSNotificationCenter.defaultCenter()
-        nc.removeObserver(observer, name: event, object: nil)
-    }
-    
-    public func cancel(event: String, observer: AnyObject, object: AnyObject) {
-        let nc = NSNotificationCenter.defaultCenter()
-        nc.removeObserver(observer, name: event, object: object)
-    }
 
     //MARK: - Touchable
     public var interactionEnabled: Bool = true {
