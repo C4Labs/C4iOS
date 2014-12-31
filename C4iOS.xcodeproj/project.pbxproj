@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1F06D5991A055EBB00BA501B /* C4Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9596D191A054A960023323D /* C4Core.framework */; };
-		1F3FC01B1A0F2A9A005984BB /* C4MediaObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94947921A0BFC9500F9CDC8 /* C4MediaObject.swift */; };
 		1F3FC01C1A0F2AAD005984BB /* C4View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94947941A0BFD5700F9CDC8 /* C4View.swift */; };
 		1F3FC01E1A0F2BF8005984BB /* C4EventSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94947961A0D8E7A00F9CDC8 /* C4EventSource.swift */; };
 		1F8CB1DA1A05781700A20783 /* C4RectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8CB1D91A05781700A20783 /* C4RectTests.swift */; };
@@ -41,6 +40,7 @@
 		A988A9171A4F57330044007C /* C4TransformTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A988A9161A4F57330044007C /* C4TransformTests.swift */; };
 		A988A9371A53818C0044007C /* C4View+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = A988A9361A53818C0044007C /* C4View+Border.swift */; };
 		A988A9391A5383070044007C /* C4View+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A988A9381A5383070044007C /* C4View+Shadow.swift */; };
+		A988A93F1A53901A0044007C /* C4MediaObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A988A93E1A53901A0044007C /* C4MediaObject.swift */; };
 		D96954FE1A2526A100622AB0 /* C4Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96954FD1A2526A100622AB0 /* C4Shape.swift */; };
 		D9C0EF441A25190300C7A904 /* C4Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5726E319FCECE4006FF395 /* C4Foundation.swift */; };
 		D9C0EF451A25190400C7A904 /* C4Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5726E319FCECE4006FF395 /* C4Foundation.swift */; };
@@ -119,7 +119,7 @@
 		A988A9161A4F57330044007C /* C4TransformTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4TransformTests.swift; sourceTree = "<group>"; };
 		A988A9361A53818C0044007C /* C4View+Border.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "C4View+Border.swift"; sourceTree = "<group>"; };
 		A988A9381A5383070044007C /* C4View+Shadow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "C4View+Shadow.swift"; sourceTree = "<group>"; };
-		D94947921A0BFC9500F9CDC8 /* C4MediaObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4MediaObject.swift; sourceTree = "<group>"; };
+		A988A93E1A53901A0044007C /* C4MediaObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4MediaObject.swift; sourceTree = "<group>"; };
 		D94947941A0BFD5700F9CDC8 /* C4View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4View.swift; sourceTree = "<group>"; };
 		D94947961A0D8E7A00F9CDC8 /* C4EventSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4EventSource.swift; sourceTree = "<group>"; };
 		D96954FD1A2526A100622AB0 /* C4Shape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Shape.swift; sourceTree = "<group>"; };
@@ -256,8 +256,8 @@
 				A9596D371A054AF50023323D /* C4Size.swift */,
 				A9596D381A054AF50023323D /* C4Vector.swift */,
 				A988A9141A4F4A3A0044007C /* C4Transform.swift */,
-				D94947921A0BFC9500F9CDC8 /* C4MediaObject.swift */,
 				D94947961A0D8E7A00F9CDC8 /* C4EventSource.swift */,
+				A988A93E1A53901A0044007C /* C4MediaObject.swift */,
 				A9596D1D1A054A960023323D /* C4Core.h */,
 				A9596D1B1A054A960023323D /* Supporting Files */,
 			);
@@ -600,8 +600,8 @@
 				A9596D3B1A054AF50023323D /* C4Path.swift in Sources */,
 				D9C0EF441A25190300C7A904 /* C4Foundation.swift in Sources */,
 				1F3FC01E1A0F2BF8005984BB /* C4EventSource.swift in Sources */,
-				1F3FC01B1A0F2A9A005984BB /* C4MediaObject.swift in Sources */,
 				A9596D3F1A054AF50023323D /* C4Vector.swift in Sources */,
+				A988A93F1A53901A0044007C /* C4MediaObject.swift in Sources */,
 				A9596D3D1A054AF50023323D /* C4Rect.swift in Sources */,
 				A9596D3E1A054AF50023323D /* C4Size.swift in Sources */,
 				A9596D3A1A054AF50023323D /* C4Math.swift in Sources */,
