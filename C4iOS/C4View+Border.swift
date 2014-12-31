@@ -37,7 +37,7 @@ public extension C4View {
         get {
             var border = Border()
             if let layer = layer {
-                border.color = C4Color(CGColor: layer.borderColor)
+                border.color = C4Color(layer.borderColor)
                 border.radius = Double(layer.cornerRadius)
                 border.width = Double(layer.borderWidth)
             }

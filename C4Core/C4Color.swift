@@ -34,9 +34,18 @@ public class C4Color {
         internalColor = CGColorCreate(colorSpace, [CGFloat(red), CGFloat(green), CGFloat(blue), CGFloat(alpha)])
     }
     
-    public init(CGColor: CGColorRef) {
+    public init(_ color: CGColorRef) {
         colorSpace = CGColorSpaceCreateDeviceRGB()
-        internalColor = CGColor
+        internalColor = color
+    }
+    
+    public convenience init(_ color: UIColor) {
+        var red: CGFloat = 0;
+        var green: CGFloat = 0;
+        var blue: CGFloat = 0;
+        var alpha: CGFloat = 0;
+        color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        self.init(red: Double(red), green: Double(green), blue: Double(blue), alpha: Double(alpha))
     }
     
     public convenience init(red: Int, green: Int, blue: Int, alpha: Double) {

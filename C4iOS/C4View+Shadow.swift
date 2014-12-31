@@ -42,7 +42,7 @@ public extension C4View {
             var shadow = Shadow()
             if let layer = layer {
                 shadow.radius = Double(layer.shadowRadius)
-                shadow.color = C4Color(CGColor: layer.shadowColor)
+                shadow.color = C4Color(layer.shadowColor)
                 shadow.offset = C4Size(layer.shadowOffset)
                 shadow.opacity = Double(layer.shadowOpacity)
                 shadow.path = C4Path(path: layer.shadowPath)

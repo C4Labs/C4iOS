@@ -57,18 +57,10 @@ public class C4Shape: C4View {
         self.view = ShapeView(frame: CGRect(frame))
     }
     
-    public override class func layerClass() -> AnyClass {
-        return CAShapeLayer.self
-    }
-    
     public override init() {
         super.init()
         self.view = ShapeView()
         shapeLayer.strokeColor = UIColor.greenColor().CGColor
-    }
-    
-    required public init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     /**
@@ -137,7 +129,7 @@ public class C4Shape: C4View {
     The color to stroke the path, or nil for no fill. Defaults to opaque black. Animatable.
     */
     public var strokeColor: C4Color? {
-        get { return C4Color(CGColor: shapeLayer.strokeColor) }
+        get { return C4Color(shapeLayer.strokeColor) }
         set(color) { shapeLayer.strokeColor = color?.CGColor }
     }
     
@@ -145,7 +137,7 @@ public class C4Shape: C4View {
     The color to fill the path, or nil for no fill. Defaults to opaque black. Animatable.
     */
     public var fillColor: C4Color? {
-        get { return C4Color(CGColor: shapeLayer.fillColor) }
+        get { return C4Color(shapeLayer.fillColor) }
         set(color) { shapeLayer.fillColor = color?.CGColor }
     }
     

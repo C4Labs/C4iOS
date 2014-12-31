@@ -29,99 +29,107 @@ public class C4View : NSObject {
         self.view.frame = CGRect(frame)
     }
     
-    public override init() {
-        super.init()
-        self.setupObserver()
-    }
-
-    required public init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    public var layer: CALayer? {
+        get {
+            return view.layer
+        }
     }
     
-    public class func layerClass() -> AnyClass {
-        return CALayer.self
-    }
-    
-    //MARK: - Media:Object
-    //MARK: - Visible
     public var frame: C4Rect {
         get {
-            return C4Rect(self.view.frame)
+            return C4Rect(view.frame)
         }
-        set(val) {
-            self.view.frame = CGRect(val)
+        set {
+            view.frame = CGRect(newValue)
         }
     }
     
     public var bounds: C4Rect {
         get {
-            return C4Rect(self.view.bounds)
+            return C4Rect(view.bounds)
         }
-        set(val) {
-            self.view.bounds = CGRect(val)
+        set {
+            view.bounds = CGRect(newValue)
         }
     }
     
     public var center: C4Point {
         get {
-            return C4Point(self.view.center)
+            return C4Point(view.center)
         }
-        set(val) {
-            self.view.center = CGPoint(val)
+        set {
+            view.center = CGPoint(newValue)
+        }
+    }
+
+    public var origin: C4Point {
+        get {
+            return frame.origin
+        }
+        set {
+            frame = C4Rect(newValue, self.size)
+        }
+    }
+    
+    public var size: C4Size {
+        get {
+            return bounds.size
+        }
+        set {
+            bounds = C4Rect(origin, newValue)
         }
     }
     
     public var width: Double {
         get {
-            return Double(self.view.frame.size.width)
+            return Double(bounds.size.width)
         }
     }
     
     public var height: Double {
         get {
-            return Double(self.view.frame.size.height)
-        }
-    }
-
-    public var origin: C4Point {
-        get { return C4Point(self.view.frame.origin)}
-        set(val) { self.view.frame = CGRect(C4Rect(val,self.size)) }
-    }
-    
-    public var size: C4Size {
-        get { return C4Size(self.view.frame.size) }
-        set(val) { self.view.frame = CGRect(C4Rect(origin,val)) }
-    }
-    
-    internal var proportion: Double = 1.0
-    public var constrainsProportions: Bool = false {
-        didSet {
-            proportion = width / height
+            return Double(bounds.size.height)
         }
     }
  
-    public var backgroundColor: C4Color = C4Color(red: 0, green: 0, blue: 0, alpha: 1) {
-        didSet {
-            self.view.backgroundColor = UIColor(backgroundColor)
+    public var backgroundColor: C4Color? {
+        get {
+            if let color = view.backgroundColor {
+                return C4Color(color)
+            } else {
+                return nil
+            }
+        }
+        set {
+            if let color = newValue {
+                view.backgroundColor = UIColor(color)
+            } else {
+                view.backgroundColor = nil
+            }
         }
     }
     
     public var opacity: Double {
-        get { return Double(self.view.alpha) }
-        set(val) { self.view.alpha = CGFloat(val) }
+        get {
+            return Double(view.alpha)
+        }
+        set {
+            view.alpha = CGFloat(newValue)
+        }
     }
     
     public var hidden: Bool {
         get {
-            return self.view.hidden
+            return view.hidden
         }
-        set(val) {
-            self.view.hidden = val
+        set {
+            view.hidden = newValue
         }
     }
     
     
     //MARK: - EventSource
+    
     internal func post(event: String) {
         NSNotificationCenter.defaultCenter().postNotificationName(event, object: self)
     }
@@ -140,6 +148,7 @@ public class C4View : NSObject {
     
 
     //MARK: - Touchable
+    
     public var interactionEnabled: Bool = true {
         didSet {
             self.view.userInteractionEnabled = interactionEnabled
@@ -188,25 +197,9 @@ public class C4View : NSObject {
         return gestureRecognizer
     }
     
-    //MARK: - Setup Observer
-    internal var observer: NSObjectProtocol = NSObject()
-    internal func setupObserver() {
-        let nc = NSNotificationCenter.defaultCenter()
-        let mq = NSOperationQueue.mainQueue()
-        self.observer = nc.addObserverForName("", object: nil, queue: mq) { _ in self.observe() }
-    }
-    
-    internal func observe(){}
-    
-    deinit { NSNotificationCenter.defaultCenter().removeObserver(self.observer) }
-    
-    public var layer: CALayer? {
-        get {
-            return self.view.layer
-        }
-    }
     
     //MARK: - AddRemoveSubview
+    
     public func add<T>(subview: T) {
         if let v = subview as? UIView {
             view.addSubview(v)
