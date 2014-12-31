@@ -17,12 +17,11 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-import Foundation
-import QuartzCore
+#import <UIKit/UIKit.h>
 
-public protocol C4MediaObject: C4Animatable, C4EventSource, NSObjectProtocol {
-    
-}
+//! Project version number for C4UI.
+FOUNDATION_EXPORT double C4UIVersionNumber;
 
+//! Project version string for C4UI.
+FOUNDATION_EXPORT const unsigned char C4UIVersionString[];
 
-public protocol C4Animatable {}
