@@ -127,6 +127,14 @@ public class C4View : NSObject {
         }
     }
     
+    public var transform: C4Transform {
+        get {
+            return C4Transform(view.layer.transform)
+        }
+        set {
+            view.layer.transform = newValue.transform3D
+        }
+    }
     
     //MARK: - EventSource
     

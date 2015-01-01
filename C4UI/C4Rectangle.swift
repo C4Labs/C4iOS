@@ -40,10 +40,4 @@ public class C4Rectangle: C4Shape {
         path = newPath
         animateKeyPath("path", toValue: path!.CGPath)
     }
-    
-    public var transform: CATransform3D = CATransform3DMakeTranslation(0,0,0) {
-        didSet {
-            animateKeyPath("transform.rotation.y", toValue:NSValue(CATransform3D:transform))
-        }
-    }
 }

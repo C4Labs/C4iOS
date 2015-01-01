@@ -17,8 +17,9 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-import CoreGraphics
 import Accelerate
+import CoreGraphics
+import QuartzCore
 
 public struct C4Transform : Equatable {
     private var matrix = [Double](count: 16, repeatedValue: 0)
@@ -41,6 +42,35 @@ public struct C4Transform : Equatable {
         self[1, 1] = 1
         self[2, 2] = 1
         self[3, 3] = 1
+    }
+    
+    public init(_ t: CGAffineTransform) {
+        self.init()
+        self[0, 0] = Double(t.a)
+        self[0, 1] = Double(t.b)
+        self[1, 0] = Double(t.c)
+        self[1, 1] = Double(t.d)
+        self[0, 3] = Double(t.tx)
+        self[1, 3] = Double(t.ty)
+    }
+    
+    public init(_ t: CATransform3D) {
+        self[0, 0] = Double(t.m11)
+        self[0, 1] = Double(t.m12)
+        self[0, 2] = Double(t.m13)
+        self[0, 3] = Double(t.m14)
+        self[1, 0] = Double(t.m21)
+        self[1, 1] = Double(t.m22)
+        self[1, 2] = Double(t.m23)
+        self[1, 3] = Double(t.m24)
+        self[2, 0] = Double(t.m31)
+        self[2, 1] = Double(t.m32)
+        self[2, 2] = Double(t.m33)
+        self[2, 3] = Double(t.m34)
+        self[3, 0] = Double(t.m41)
+        self[3, 1] = Double(t.m42)
+        self[3, 2] = Double(t.m43)
+        self[3, 3] = Double(t.m44)
     }
     
     public func isAffine() -> Bool {
@@ -72,16 +102,7 @@ public struct C4Transform : Equatable {
         return t
     }
     
-    public static func makeRotation(angle: Double) -> C4Transform {
-        var t = C4Transform()
-        t[0, 0] =  cos(angle)
-        t[0, 1] =  sin(angle)
-        t[1, 0] = -sin(angle)
-        t[1, 1] =  cos(angle)
-        return t
-    }
-    
-    public static func makeRotation(angle: Double, axis: C4Vector) -> C4Transform {
+    public static func makeRotation(angle: Double, axis: C4Vector = C4Vector(x: 0, y: 0, z : 1)) -> C4Transform {
         if axis.isZero() {
             return C4Transform()
         }
@@ -117,8 +138,8 @@ public struct C4Transform : Equatable {
         self = concat(self, s)
     }
     
-    public mutating func rotate(angle: Double) {
-        let r = C4Transform.makeRotation(angle)
+    public mutating func rotate(angle: Double, axis: C4Vector = C4Vector(x: 0, y: 0, z: 1)) {
+        let r = C4Transform.makeRotation(angle, axis: axis)
         self = concat(self, r)
     }
     
@@ -130,6 +151,28 @@ public struct C4Transform : Equatable {
             d:  CGFloat(self[1, 1]),
             tx: CGFloat(self[0, 3]),
             ty: CGFloat(self[1, 3]))
+    }
+    
+    public var transform3D: CATransform3D {
+        var t = CATransform3D(
+            m11: CGFloat(self[0, 0]),
+            m12: CGFloat(self[0, 1]),
+            m13: CGFloat(self[0, 2]),
+            m14: CGFloat(self[0, 3]),
+            m21: CGFloat(self[1, 0]),
+            m22: CGFloat(self[1, 1]),
+            m23: CGFloat(self[1, 2]),
+            m24: CGFloat(self[1, 3]),
+            m31: CGFloat(self[2, 0]),
+            m32: CGFloat(self[2, 1]),
+            m33: CGFloat(self[2, 2]),
+            m34: CGFloat(self[2, 3]),
+            m41: CGFloat(self[3, 0]),
+            m42: CGFloat(self[3, 1]),
+            m43: CGFloat(self[3, 2]),
+            m44: CGFloat(self[3, 3])
+        )
+        return t
     }
 }
 
