@@ -22,6 +22,7 @@ import CoreGraphics
 public struct C4Vector : Equatable {
     public var x: Double = 0
     public var y: Double = 0
+    public var z: Double = 0
     
     public init() {
     }
@@ -29,23 +30,20 @@ public struct C4Vector : Equatable {
     /**
       Create a vector with a cartesian representation: an x and a y coordinates.
      */
-    public init(x: Double, y: Double) {
+    public init(x: Double, y: Double, z: Double = 0) {
         self.x = x
         self.y = y
-    }
-    
-    public init(_ x: Int, _ y: Int) {
-        self.x = Double(x)
-        self.y = Double(y)
+        self.z = z
     }
     
     /**
       Create a vector with a polar representation: a magnitude and an angle in radians.
       http://en.wikipedia.org/wiki/Polar_coordinate_system
      */
-    public init(magnitude: Double, heading: Double) {
+    public init(magnitude: Double, heading: Double, z: Double = 0) {
         x = magnitude * cos(heading)
         y = magnitude * sin(heading)
+        self.z = z
     }
     
     /**
@@ -53,7 +51,7 @@ public struct C4Vector : Equatable {
      */
     public var magnitude: Double {
         get {
-            return sqrt(x * x + y * y)
+            return sqrt(x * x + y * y + z * z)
         }
         set {
             x = newValue * cos(heading)
@@ -85,8 +83,8 @@ public struct C4Vector : Equatable {
       The angle between two vectors, based on a provided point
      */
     public func angleTo(vec: C4Vector, basedOn: C4Vector) -> Double {
-        var vecA = C4Vector(x: x, y: y)
-        var vecB = C4Vector(x: vec.x, y: vec.y)
+        var vecA = self
+        var vecB = vec
         
         vecA -= basedOn
         vecB -= basedOn
@@ -98,93 +96,98 @@ public struct C4Vector : Equatable {
       Return the dot product. You should use the ⋅ operator instead.
      */
     public func dot(vec: C4Vector) -> Double {
-        return x * vec.x + y * vec.y
+        return x * vec.x + y * vec.y + z * vec.z
     }
     
     /**
       Return a vector with the same heading but a magnitude of 1.
      */
-    public func unitVector() -> C4Vector {
+    public func unitVector() -> C4Vector? {
         let mag = self.magnitude
         if mag == 0 {
-            return C4Vector()
+            return nil
         }
-        return C4Vector(x: x / mag, y: y / mag)
+        return C4Vector(x: x / mag, y: y / mag, z: z / mag)
     }
 
     /**
       Return `true` if the vector is zero.
      */
     public func isZero() -> Bool {
-        return x == 0 && y == 0
+        return x == 0 && y == 0 && z == 0
     }
     
     /**
       Transform the vector.
      */
     public mutating func transform(t: C4Transform) {
-        x = x * t.a + y * t.b
-        y = x * t.c + y * t.d
+        x = x * t[0, 0] + y * t[0, 1] + z * t[0, 2]
+        y = x * t[1, 0] + y * t[1, 1] + z * t[1, 2]
+        z = x * t[2, 0] + y * t[2, 1] + z * t[2, 2]
     }
     
     public func description() -> String {
-        return "{\(x), \(y)}"
+        return "{\(x), \(y), \(z)}"
     }
 }
 
 public func == (lhs: C4Vector, rhs: C4Vector) -> Bool {
-    return lhs.x == rhs.x && lhs.y == rhs.y
+    return lhs.x == rhs.x && lhs.y == rhs.y && lhs.z == rhs.z
 }
 
 public func += (inout lhs: C4Vector, rhs: C4Vector) {
     lhs.x += rhs.x
     lhs.y += rhs.y
+    lhs.z += rhs.z
 }
 
 public func -= (inout lhs: C4Vector, rhs: C4Vector) {
     lhs.x -= rhs.x
     lhs.y -= rhs.y
+    lhs.z -= rhs.z
 }
 
 public func *= (inout lhs: C4Vector, rhs: Double) {
     lhs.x *= rhs
     lhs.y *= rhs
+    lhs.z *= rhs
 }
 
 public func /= (inout lhs: C4Vector, rhs: Double) {
     lhs.x /= rhs
     lhs.y /= rhs
+    lhs.z /= rhs
 }
 
 public func + (lhs: C4Vector, rhs: C4Vector) -> C4Vector {
-    return C4Vector(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
+    return C4Vector(x: lhs.x + rhs.x, y: lhs.y + rhs.y, z: lhs.z + rhs.z)
 }
 
 public func - (lhs: C4Vector, rhs: C4Vector) -> C4Vector {
-    return C4Vector(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
+    return C4Vector(x: lhs.x - rhs.x, y: lhs.y - rhs.y, z: lhs.z - rhs.z)
 }
 
 infix operator ⋅ { associativity left precedence 150 }
 public func ⋅ (lhs: C4Vector, rhs: C4Vector) -> Double {
-    return lhs.x * rhs.x + lhs.y * rhs.y
+    return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z
 }
 
 public func / (lhs: C4Vector, rhs: Double) -> C4Vector {
-    return C4Vector(x: lhs.x / rhs, y: lhs.y / rhs)
+    return C4Vector(x: lhs.x / rhs, y: lhs.y / rhs, z: lhs.z / rhs)
 }
 
 public func * (lhs: C4Vector, rhs: Double) -> C4Vector {
-    return C4Vector(x: lhs.x * rhs, y: lhs.y * rhs)
+    return C4Vector(x: lhs.x * rhs, y: lhs.y * rhs, z: lhs.z * rhs)
 }
 
 public prefix func - (vector: C4Vector) -> C4Vector {
-    return C4Vector(x: -vector.x, y: -vector.y)
+    return C4Vector(x: -vector.x, y: -vector.y, z: -vector.z)
 }
 
 public extension C4Vector {
     public init(_ point: CGPoint) {
         x = Double(point.x)
         y = Double(point.y)
+        z = 0
     }
 }
-

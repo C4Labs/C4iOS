@@ -22,10 +22,16 @@ import XCTest
 
 class C4VectorTests: XCTestCase {
     func testUnitVector() {
-        let vector = C4Vector(x: 8, y: 8)
-        let unitVector = vector.unitVector()
+        let vector = C4Vector(x: 8, y: 8, z: 8)
+        let unitVector = vector.unitVector()!
         XCTAssertEqualWithAccuracy(unitVector.magnitude, 1, 1e-15, "Magnitude of unit vector should be 1")
         XCTAssertEqual(unitVector.heading, vector.heading, "Heading of unit vector should be the same as the original")
+    }
+    
+    func testNilUnitVector() {
+        let vector = C4Vector(x: 0, y: 0, z: 0)
+        let unitVector = vector.unitVector()
+        XCTAssert(unitVector == nil, "Callin unitVector on a zero vector should return nil")
     }
     
     func testDotProduct() {

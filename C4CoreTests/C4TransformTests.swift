@@ -22,21 +22,33 @@ import XCTest
 
 class C4TransformTests: XCTestCase {
     func testMultiplyByIndentity() {
-        let identity = C4Transform(a: 1, b: 0, c: 0, d: 1, tx: 0, ty: 0)
-        let transform = C4Transform(a: random01(), b: random01(), c: random01(), d: random01(), tx: random01(), ty: random01())
+        let identity = C4Transform()
+        var transform = C4Transform()
+        for col in 0...3 {
+            for row in 0...3 {
+                transform[row, col] = random01()
+            }
+        }
         XCTAssertEqual(identity * transform, transform, "Multiplying by the identity transform should not change the other transform")
         XCTAssertEqual(transform * identity, transform, "Multiplying by the identity transform should not change the other transform")
     }
     
     func testMultiplyByInverse() {
-        let identity = C4Transform(a: 1, b: 0, c: 0, d: 1, tx: 0, ty: 0)
-        let transform = C4Transform(a: 1, b: 2, c: 2, d: 5, tx: 5, ty: 6)
-        XCTAssertEqual(transform * inverse(transform), identity,
+        let identity = C4Transform()
+        var transform = C4Transform()
+        transform[0, 0] = 1
+        transform[0, 1] = 2
+        transform[1, 0] = 2
+        transform[1, 1] = 5
+        transform[0, 3] = 5
+        transform[1, 3] = 6
+        
+        XCTAssertEqual(transform * inverse(transform)!, identity,
             "A transform multiplied by its inverse should result in the identity transform")
     }
     
     func testTranslationProperty() {
-        let translation = C4Vector(10, 20)
+        let translation = C4Vector(x: 10, y: 20)
         let transform = C4Transform.makeTranslation(translation)
         XCTAssertEqual(transform.translation, translation,
             "The transform's translation should match the translation used to create it")

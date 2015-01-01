@@ -18,47 +18,93 @@
 // IN THE SOFTWARE.
 
 import CoreGraphics
+import Accelerate
 
 public struct C4Transform : Equatable {
-    public var a: Double = 1
-    public var b: Double = 0
-    public var c: Double = 0
-    public var d: Double = 1
-    public var tx: Double = 0
-    public var ty: Double = 1
+    private var matrix = [Double](count: 16, repeatedValue: 0)
     
-    public init() {
+    public subscript(row: Int, col: Int) -> Double {
+        get {
+            assert(row >= 0 && row < 4, "Row index out of bounds")
+            assert(col >= 0 && col < 4, "Column index out of bounds")
+            return matrix[row + col * 4]
+        }
+        set {
+            assert(row >= 0 && row < 4, "Row index out of bounds")
+            assert(col >= 0 && col < 4, "Column index out of bounds")
+            matrix[row + col * 4] = newValue
+        }
     }
     
-    public init(a: Double, b: Double, c: Double, d: Double, tx: Double, ty: Double) {
-        self.a = a
-        self.b = b
-        self.c = c
-        self.d = d
-        self.tx = tx;
-        self.ty = ty;
+    public init() {
+        self[0, 0] = 1
+        self[1, 1] = 1
+        self[2, 2] = 1
+        self[3, 3] = 1
+    }
+    
+    public func isAffine() -> Bool {
+        return self[3, 0] == 0.0 && self[3, 1] == 0.0 && self[3, 2] == 0.0 && self[3, 3] == 1.0
     }
     
     public var translation: C4Vector {
         get {
-            return C4Vector(x: tx, y: ty)
+            return C4Vector(x: self[0, 3], y: self[1, 3])
         }
         set {
-            tx = newValue.x
-            ty = newValue.y
+            self[0, 3] = newValue.x
+            self[1, 3] = newValue.y
         }
     }
     
     public static func makeTranslation(translation: C4Vector) -> C4Transform {
-        return C4Transform(a: 1, b: 0, c: 0, d:1, tx: translation.x, ty: translation.y)
+        var t = C4Transform()
+        t[0, 3] = translation.x
+        t[1, 3] = translation.y
+        return t
     }
     
-    public static func makeScale(sx: Double, _ sy: Double) -> C4Transform {
-        return C4Transform(a: sx, b: 0, c: 0, d:sy, tx: 0, ty: 0)
+    public static func makeScale(sx: Double, _ sy: Double, _ sz: Double = 1) -> C4Transform {
+        var t = C4Transform()
+        t[0, 0] = sx
+        t[1, 1] = sy
+        t[2, 2] = sz
+        return t
     }
     
     public static func makeRotation(angle: Double) -> C4Transform {
-        return C4Transform(a: cos(angle), b: sin(angle), c: -sin(angle), d:cos(angle), tx:0, ty:0)
+        var t = C4Transform()
+        t[0, 0] =  cos(angle)
+        t[0, 1] =  sin(angle)
+        t[1, 0] = -sin(angle)
+        t[1, 1] =  cos(angle)
+        return t
+    }
+    
+    public static func makeRotation(angle: Double, axis: C4Vector) -> C4Transform {
+        if axis.isZero() {
+            return C4Transform()
+        }
+        
+        let unitAxis = axis.unitVector()!
+        let ux = unitAxis.x
+        let uy = unitAxis.y
+        let uz = unitAxis.z
+        
+        let ca = cos(angle)
+        let sa = sin(angle)
+        
+        var t = C4Transform()
+        t[0, 0] = ux * ux * (1 - ca) + ca
+        t[0, 1] = ux * uy * (1 - ca) - uz * sa
+        t[0, 2] = ux * uz * (1 - ca) + uy * sa
+        t[1, 0] = uy * ux * (1 - ca) + uz * sa
+        t[1, 1] = uy * uy * (1 - ca) + ca
+        t[1, 2] = uy * uz * (1 - ca) - ux * sa
+        t[2, 0] = uz * ux * (1 - ca) - uy * sa
+        t[2, 1] = uz * uy * (1 - ca) + ux * sa
+        t[2, 2] = uz * uz * (1 - ca) + ca
+        return t
     }
     
     public mutating func translate(translation: C4Vector) {
@@ -66,8 +112,8 @@ public struct C4Transform : Equatable {
         self = concat(self, t)
     }
     
-    public mutating func scale(sx: Double, sy: Double) {
-        let s = C4Transform.makeScale(sx, sy)
+    public mutating func scale(sx: Double, _ sy: Double, _ sz: Double = 1) {
+        let s = C4Transform.makeScale(sx, sy, sz)
         self = concat(self, s)
     }
     
@@ -75,36 +121,52 @@ public struct C4Transform : Equatable {
         let r = C4Transform.makeRotation(angle)
         self = concat(self, r)
     }
+    
+    public var affineTransform: CGAffineTransform {
+        return CGAffineTransform(
+            a:  CGFloat(self[0, 0]),
+            b:  CGFloat(self[0, 1]),
+            c:  CGFloat(self[1, 0]),
+            d:  CGFloat(self[1, 1]),
+            tx: CGFloat(self[0, 3]),
+            ty: CGFloat(self[1, 3]))
+    }
 }
 
 public func == (lhs: C4Transform, rhs: C4Transform) -> Bool {
-    return lhs.a == rhs.a && lhs.b == rhs.b && lhs.c == rhs.c && lhs.d == rhs.d && lhs.tx == rhs.tx && lhs.ty == rhs.ty
+    var equal = true
+    for col in 0...3 {
+        for row in 0...3 {
+            equal &= lhs[row, col] == rhs[row, col]
+        }
+    }
+    return equal
 }
 
 /**
   Transform matrix multiplication
  */
 public func * (lhs: C4Transform, rhs: C4Transform) -> C4Transform {
-    return C4Transform(
-        a: lhs.a * rhs.a + lhs.b * rhs.c,
-        b: lhs.a * rhs.b + lhs.b * rhs.d,
-        c: lhs.c * rhs.a + lhs.d * rhs.c,
-        d: lhs.c * rhs.b + lhs.d * rhs.d,
-        tx: lhs.a * rhs.tx + lhs.b * rhs.ty + lhs.tx,
-        ty: lhs.c * rhs.tx + lhs.d * rhs.ty + lhs.ty)
+    var t = C4Transform()
+    for col in 0...3 {
+        for row in 0...3 {
+            t[row, col] = lhs[row, 0] * rhs[0, col] + lhs[row, 1] * rhs[1, col] + lhs[row, 2] * rhs[2, col] + lhs[row, 3] * rhs[3, col]
+        }
+    }
+    return t
 }
 
 /**
   Transform matrix scalar multiplication
 */
 public func * (t: C4Transform, s: Double) -> C4Transform {
-    return C4Transform(
-        a: t.a * s,
-        b: t.b * s,
-        c: t.c * s,
-        d: t.d * s,
-        tx: t.tx * s,
-        ty: t.ty * s)
+    var r = C4Transform()
+    for col in 0...3 {
+        for row in 0...3 {
+            r[row, col] = t[row, col] * s
+        }
+    }
+    return r
 }
 
 /**
@@ -124,12 +186,26 @@ public func concat(t1: C4Transform, t2: C4Transform) -> C4Transform {
 /**
   Calculates the inverse of a transfomation.
  */
-public func inverse(t: C4Transform) -> C4Transform {
-    let det = t.a * t.d - t.b * t.c;
-    if det == 0.0 {
-        return t;
+public func inverse(t: C4Transform) -> C4Transform? {
+    var N: __CLPK_integer = 4
+    var error: __CLPK_integer = 0
+    var pivot = [__CLPK_integer](count: 4, repeatedValue: 0)
+    var matrix: [__CLPK_doublereal] = t.matrix
+    
+    // LU factorisation
+    dgetrf_(&N, &N, &matrix, &N, &pivot, &error);
+    if error != 0 {
+        return nil;
     }
     
-    let invdet = 1.0 / det
-    return C4Transform(a: t.d, b: -t.b, c: -t.c, d: t.a, tx: (t.b * t.ty - t.tx * t.d), ty: (t.c * t.tx - t.a * t.ty)) * invdet
+    // matrix inversion
+    var workspace = [__CLPK_doublereal](count: 4, repeatedValue: 0)
+    dgetri_(&N, &matrix, &N, &pivot, &workspace, &N, &error);
+    if error != 0 {
+        return nil;
+    }
+    
+    var r = C4Transform()
+    r.matrix = matrix
+    return r;
 }

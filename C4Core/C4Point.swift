@@ -41,8 +41,8 @@ public struct C4Point : Equatable {
     }
     
     public mutating func transform(t: C4Transform) {
-        x = x * t.a + y * t.b + t.tx
-        y = x * t.c + y * t.d + t.ty
+        x = x * t[0, 0] + y * t[0, 1] + t[0, 3]
+        y = x * t[1, 0] + y * t[1, 1] + t[1, 3]
     }
     
     public func description() -> String {

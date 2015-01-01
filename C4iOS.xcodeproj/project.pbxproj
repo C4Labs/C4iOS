@@ -115,7 +115,7 @@
 		A9596DA31A089EB60023323D /* C4Animator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Animator.swift; sourceTree = "<group>"; };
 		A9596DA71A08B0C20023323D /* C4Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Animation.swift; sourceTree = "<group>"; };
 		A988A9121A4A837A0044007C /* UIGestureRecognizer+Closure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIGestureRecognizer+Closure.swift"; sourceTree = "<group>"; };
-		A988A9141A4F4A3A0044007C /* C4Transform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Transform.swift; sourceTree = "<group>"; };
+		A988A9141A4F4A3A0044007C /* C4Transform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = C4Transform.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A988A9161A4F57330044007C /* C4TransformTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4TransformTests.swift; sourceTree = "<group>"; };
 		A988A9361A53818C0044007C /* C4View+Border.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "C4View+Border.swift"; sourceTree = "<group>"; };
 		A988A9381A5383070044007C /* C4View+Shadow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "C4View+Shadow.swift"; sourceTree = "<group>"; };
