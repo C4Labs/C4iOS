@@ -15,7 +15,6 @@
 		1F8373081A574991009E0DCB /* C4Curve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8373001A574991009E0DCB /* C4Curve.swift */; };
 		1F8373091A574991009E0DCB /* C4QuadCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8373011A574991009E0DCB /* C4QuadCurve.swift */; };
 		1F83730A1A574991009E0DCB /* C4Star.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8373021A574991009E0DCB /* C4Star.swift */; };
-		1F83730B1A574991009E0DCB /* C4TextShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8373031A574991009E0DCB /* C4TextShape.swift */; };
 		1F83730C1A574991009E0DCB /* C4Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8373041A574991009E0DCB /* C4Triangle.swift */; };
 		1F83730D1A574991009E0DCB /* C4Wedge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8373051A574991009E0DCB /* C4Wedge.swift */; };
 		1F8CB1DA1A05781700A20783 /* C4RectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8CB1D91A05781700A20783 /* C4RectTests.swift */; };
@@ -92,7 +91,6 @@
 		1F8373001A574991009E0DCB /* C4Curve.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Curve.swift; sourceTree = "<group>"; };
 		1F8373011A574991009E0DCB /* C4QuadCurve.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4QuadCurve.swift; sourceTree = "<group>"; };
 		1F8373021A574991009E0DCB /* C4Star.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Star.swift; sourceTree = "<group>"; };
-		1F8373031A574991009E0DCB /* C4TextShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4TextShape.swift; sourceTree = "<group>"; };
 		1F8373041A574991009E0DCB /* C4Triangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Triangle.swift; sourceTree = "<group>"; };
 		1F8373051A574991009E0DCB /* C4Wedge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Wedge.swift; sourceTree = "<group>"; };
 		1F8CB1D91A05781700A20783 /* C4RectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4RectTests.swift; sourceTree = "<group>"; };
@@ -224,7 +222,6 @@
 				1F8373001A574991009E0DCB /* C4Curve.swift */,
 				1F8373011A574991009E0DCB /* C4QuadCurve.swift */,
 				1F8373021A574991009E0DCB /* C4Star.swift */,
-				1F8373031A574991009E0DCB /* C4TextShape.swift */,
 				1F8373041A574991009E0DCB /* C4Triangle.swift */,
 				1F8373051A574991009E0DCB /* C4Wedge.swift */,
 				614F824819DB5ED3001DF1D4 /* C4UI.h */,
@@ -601,7 +598,6 @@
 				1F8373061A574991009E0DCB /* C4Arc.swift in Sources */,
 				A988A9131A4A837A0044007C /* UIGestureRecognizer+Closure.swift in Sources */,
 				1FFE45BF1A51FA0B00E0B334 /* C4RegularPolygon.swift in Sources */,
-				1F83730B1A574991009E0DCB /* C4TextShape.swift in Sources */,
 				A988A9371A53818C0044007C /* C4View+Border.swift in Sources */,
 				1F83730A1A574991009E0DCB /* C4Star.swift in Sources */,
 				1F83730D1A574991009E0DCB /* C4Wedge.swift in Sources */,

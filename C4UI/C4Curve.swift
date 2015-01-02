@@ -38,36 +38,3 @@ public class C4Curve : C4Shape {
         adjustToFitPath()
     }
 }
-
-/*- (void)curve:(NSArray *)points {
-    self.shapeData = @{
-        C4ShapeTypeKey: C4ShapeCurveType,
-        C4ShapeCurvePointsKey: points
-    };
-    
-    CGPoint po = [points[0] CGPointValue];
-    CGPoint c1 = [points[1] CGPointValue];
-    CGPoint c2 = [points[2] CGPointValue];
-    CGPoint pe = [points[3] CGPointValue];
-    
-    // Determine path bounding box
-    CGMutablePathRef tmpPath = CGPathCreateMutable();
-    CGPathMoveToPoint(tmpPath, NULL, po.x, po.y);
-    CGPathAddCurveToPoint(tmpPath, NULL, c1.x, c1.y, c2.x, c2.y, pe.x, pe.y);
-    CGRect newFrame = CGPathGetPathBoundingBox(tmpPath);
-    CGPathRelease(tmpPath);
-    
-    // Transform points to the new frame
-    CGPoint origin = newFrame.origin;
-    CGAffineTransform t = CGAffineTransformMakeTranslation(-origin.x, -origin.y);
-    
-    // Set new path and frame
-    CGMutablePathRef newPath = CGPathCreateMutable();
-    CGPathMoveToPoint(newPath, &t, po.x, po.y);
-    CGPathAddCurveToPoint(tmpPath, &t, c1.x, c1.y, c2.x, c2.y, pe.x, pe.y);
-    self.path = newPath;
-    self.frame = newFrame;
-    CGPathRelease(newPath);
-    
-    self.initialized = YES;
-}*/
