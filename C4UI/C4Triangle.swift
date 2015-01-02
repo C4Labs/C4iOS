@@ -21,17 +21,17 @@ import Foundation
 import CoreGraphics
 import C4Core
 
-public class C4Ellipse: C4Shape {
-    convenience public init(frame: C4Rect) {
-        self.init()
-        view.frame = CGRect(frame)
-        updatePath()
-    }
-    
-    override public func updatePath() {
-        let newPath = C4Path()
-        newPath.addEllipse(frame)
-        path = newPath
-        animateKeyPath("path", toValue: path!.CGPath)
+public class C4Triangle: C4Polygon {
+    convenience public init(_ points: [C4Point]) {
+        assert(points.count >= 3, "To create a Triangle you need to specify an array of at least 3 points")
+        self.init(frame: C4Rect(points))
+        var path = C4Path()
+        self.points = points
+        path.moveToPoint(points[0])
+        path.addLineToPoint(points[1])
+        path.addLineToPoint(points[2])
+        path.addLineToPoint(points[0])
+        self.path = path
+        adjustToFitPath()
     }
 }

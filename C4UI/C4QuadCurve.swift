@@ -17,21 +17,12 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-import Foundation
-import CoreGraphics
+import QuartzCore
+import UIKit
 import C4Core
 
-public class C4Ellipse: C4Shape {
-    convenience public init(frame: C4Rect) {
-        self.init()
-        view.frame = CGRect(frame)
-        updatePath()
-    }
-    
-    override public func updatePath() {
-        let newPath = C4Path()
-        newPath.addEllipse(frame)
-        path = newPath
-        animateKeyPath("path", toValue: path!.CGPath)
+public class C4QuadCurve : C4Curve {
+    convenience public init(points: [C4Point], control: C4Point) {
+        self.init(points: points, controls: [control, control])
     }
 }
