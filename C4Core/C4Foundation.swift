@@ -53,7 +53,7 @@ Returns a bounding rectangle with the specified values for building an arc.
 */
 public func CGRectMakeFromArc(center: CGPoint, radius: CGFloat, startAngle: CGFloat, endAngle: CGFloat, clockwise: Bool) -> CGRect {
     var path = CGPathCreateMutable()
-    CGPathAddArc(path, nil, center.x, center.y, radius, startAngle, endAngle, !clockwise)
+    CGPathAddArc(path, nil, center.x, center.y, radius, startAngle, endAngle, clockwise)
     return CGPathGetBoundingBox(path)
 }
 
@@ -68,7 +68,7 @@ Returns a bounding rectangle with the specified values for building an wedge (in
 */
 public func CGRectMakeFromWedge(center: CGPoint, radius: CGFloat, startAngle: CGFloat, endAngle: CGFloat, clockwise: Bool) -> CGRect {
     var path = CGPathCreateMutable()
-    CGPathAddArc(path, nil, center.x, center.y, radius, startAngle, endAngle, !clockwise)
+    CGPathAddArc(path, nil, center.x, center.y, radius, startAngle, endAngle, clockwise)
     CGPathAddLineToPoint(path, nil, center.x, center.y)
     return CGPathGetBoundingBox(path)
 }
