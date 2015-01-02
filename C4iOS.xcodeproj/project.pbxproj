@@ -20,6 +20,8 @@
 		1F4881D51A56199600E0EBA4 /* C4Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4881D41A56199600E0EBA4 /* C4Font.swift */; };
 		1F4881D71A561BDF00E0EBA4 /* C4Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4881D61A561BDF00E0EBA4 /* C4Object.swift */; };
 		1F4881DB1A565F9700E0EBA4 /* C4Star.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4881DA1A565F9700E0EBA4 /* C4Star.swift */; };
+		1F4881E41A5670FE00E0EBA4 /* C4Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4881DC1A5665C400E0EBA4 /* C4Image.swift */; };
+		1F4881E61A5671F500E0EBA4 /* C4ImageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4881E51A5671F500E0EBA4 /* C4ImageProtocol.swift */; };
 		1F8CB1DA1A05781700A20783 /* C4RectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8CB1D91A05781700A20783 /* C4RectTests.swift */; };
 		1F8FE9811A4F7BF700B38276 /* C4Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8FE9801A4F7BF700B38276 /* C4Line.swift */; };
 		1F8FE9831A4F7C2200B38276 /* C4Polygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8FE9821A4F7C2200B38276 /* C4Polygon.swift */; };
@@ -98,6 +100,8 @@
 		1F4881D41A56199600E0EBA4 /* C4Font.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Font.swift; sourceTree = "<group>"; };
 		1F4881D61A561BDF00E0EBA4 /* C4Object.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Object.swift; sourceTree = "<group>"; };
 		1F4881DA1A565F9700E0EBA4 /* C4Star.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Star.swift; sourceTree = "<group>"; };
+		1F4881DC1A5665C400E0EBA4 /* C4Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Image.swift; sourceTree = "<group>"; };
+		1F4881E51A5671F500E0EBA4 /* C4ImageProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4ImageProtocol.swift; sourceTree = "<group>"; };
 		1F5726E319FCECE4006FF395 /* C4Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Foundation.swift; sourceTree = "<group>"; };
 		1F8CB1D91A05781700A20783 /* C4RectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4RectTests.swift; sourceTree = "<group>"; };
 		1F8FE9801A4F7BF700B38276 /* C4Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Line.swift; sourceTree = "<group>"; };
@@ -230,6 +234,8 @@
 				1F0D0DC61A56097400481D65 /* C4Circle.swift */,
 				1F4881CC1A5612AC00E0EBA4 /* C4Curve.swift */,
 				1FFE45BC1A51F8A200E0B334 /* C4Ellipse.swift */,
+				1F4881DC1A5665C400E0EBA4 /* C4Image.swift */,
+				1F4881E51A5671F500E0EBA4 /* C4ImageProtocol.swift */,
 				1F8FE9801A4F7BF700B38276 /* C4Line.swift */,
 				1F8FE9821A4F7C2200B38276 /* C4Polygon.swift */,
 				1F4881CE1A5615D600E0EBA4 /* C4QuadCurve.swift */,
@@ -605,6 +611,7 @@
 				1F8FE9811A4F7BF700B38276 /* C4Line.swift in Sources */,
 				1F0D0DC91A560A2800481D65 /* C4Triangle.swift in Sources */,
 				1F4881CD1A5612AC00E0EBA4 /* C4Curve.swift in Sources */,
+				1F4881E61A5671F500E0EBA4 /* C4ImageProtocol.swift in Sources */,
 				1F3FC01C1A0F2AAD005984BB /* C4View.swift in Sources */,
 				A988A9131A4A837A0044007C /* UIGestureRecognizer+Closure.swift in Sources */,
 				1F4881DB1A565F9700E0EBA4 /* C4Star.swift in Sources */,
@@ -617,6 +624,7 @@
 				A988A9391A5383070044007C /* C4View+Shadow.swift in Sources */,
 				6162BFB719DB971C00D7F3D0 /* C4Shape+Creation.swift in Sources */,
 				1F0D0DC71A56097400481D65 /* C4Circle.swift in Sources */,
+				1F4881E41A5670FE00E0EBA4 /* C4Image.swift in Sources */,
 				1F8FE9831A4F7C2200B38276 /* C4Polygon.swift in Sources */,
 				1F0D0DCB1A560D1800481D65 /* C4Arc.swift in Sources */,
 				1F4881D71A561BDF00E0EBA4 /* C4Object.swift in Sources */,
