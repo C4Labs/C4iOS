@@ -18,20 +18,12 @@
 // IN THE SOFTWARE.
 
 import Foundation
+import CoreGraphics
+import C4Core
 
-public protocol C4EventSource {
-    /**
-      Register an action to run when an event is triggered. Returns an observer handle you can use to cancel the action.
-     */
-    func on(event notificationName: String, run: Void -> Void) -> AnyObject
-    
-    /**
-    Register an action to run when an event is triggered by a specfied object. Returns an observer handle you can use to cancel the action.
-    */
-    func on(event notificationName: String, from object: AnyObject, run executionBlock: Void -> Void) -> AnyObject
-
-    /**
-      Cancel a previously registered action from an observer handle.
-     */
-    func cancel(observer: AnyObject)
+public class C4Circle: C4Ellipse {
+    convenience public init(center: C4Point, radius: Double) {
+        let frame = C4Rect(center.x-radius/2, center.y-radius/2, radius * 2, radius * 2)
+        self.init(frame: frame)
+    }
 }

@@ -25,7 +25,6 @@ public class C4Ellipse: C4Shape {
     convenience public init(frame: C4Rect) {
         self.init()
         view.frame = CGRect(frame)
-        view.layer.addSublayer(shapeLayer)
         updatePath()
     }
     

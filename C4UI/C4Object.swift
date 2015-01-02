@@ -18,20 +18,26 @@
 // IN THE SOFTWARE.
 
 import Foundation
+import C4Core
+import UIKit
 
-public protocol C4EventSource {
-    /**
-      Register an action to run when an event is triggered. Returns an observer handle you can use to cancel the action.
-     */
-    func on(event notificationName: String, run: Void -> Void) -> AnyObject
+public class C4Object : NSObject {
     
-    /**
-    Register an action to run when an event is triggered by a specfied object. Returns an observer handle you can use to cancel the action.
-    */
-    func on(event notificationName: String, from object: AnyObject, run executionBlock: Void -> Void) -> AnyObject
-
-    /**
-      Cancel a previously registered action from an observer handle.
-     */
-    func cancel(observer: AnyObject)
+    //MARK: - EventSource
+    
+    internal func post(event: String) {
+        NSNotificationCenter.defaultCenter().postNotificationName(event, object: self)
+    }
+    
+    public func on(event notificationName: String, run executionBlock: Void -> Void) -> AnyObject {
+        let nc = NSNotificationCenter.defaultCenter()
+        return nc.addObserverForName(notificationName, object: self, queue: NSOperationQueue.currentQueue(), usingBlock: { notification in
+            executionBlock()
+        });
+    }
+    
+    public func cancel(observer: AnyObject) {
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.removeObserver(observer)
+    }
 }

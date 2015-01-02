@@ -17,21 +17,15 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-import Foundation
+import QuartzCore
+import UIKit
+import C4Core
 
-public protocol C4EventSource {
-    /**
-      Register an action to run when an event is triggered. Returns an observer handle you can use to cancel the action.
-     */
-    func on(event notificationName: String, run: Void -> Void) -> AnyObject
-    
-    /**
-    Register an action to run when an event is triggered by a specfied object. Returns an observer handle you can use to cancel the action.
-    */
-    func on(event notificationName: String, from object: AnyObject, run executionBlock: Void -> Void) -> AnyObject
-
-    /**
-      Cancel a previously registered action from an observer handle.
-     */
-    func cancel(observer: AnyObject)
+public class C4Image: C4View {
+//MARK: Initializers
+    convenience public init(_ imageName: String) {
+        self.init()
+        let image = UIImage(named: imageName, inBundle: NSBundle.mainBundle(), compatibleWithTraitCollection: nil)
+        self.view = UIImageView(image: image)
+    }
 }

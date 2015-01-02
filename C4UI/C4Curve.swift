@@ -17,21 +17,24 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-import Foundation
+import QuartzCore
+import UIKit
+import C4Core
 
-public protocol C4EventSource {
-    /**
-      Register an action to run when an event is triggered. Returns an observer handle you can use to cancel the action.
-     */
-    func on(event notificationName: String, run: Void -> Void) -> AnyObject
-    
-    /**
-    Register an action to run when an event is triggered by a specfied object. Returns an observer handle you can use to cancel the action.
-    */
-    func on(event notificationName: String, from object: AnyObject, run executionBlock: Void -> Void) -> AnyObject
-
-    /**
-      Cancel a previously registered action from an observer handle.
-     */
-    func cancel(observer: AnyObject)
+public class C4Curve : C4Shape {
+    convenience public init(points: [C4Point], controls: [C4Point]) {
+        let p0 = CGPoint(points[0])
+        let p1 = CGPoint(points[1])
+        let c0 = CGPoint(controls[0])
+        let c1 = CGPoint(controls[1])
+        
+        let curve = CGPathCreateMutable()
+        CGPathMoveToPoint(curve, nil, p0.x, p0.y)
+        CGPathAddCurveToPoint(curve, nil, c0.x,c0.y,c1.x,c1.y,p1.x,p1.y)
+        let curveRect = CGPathGetBoundingBox(curve)
+        
+        self.init(frame: C4Rect(curveRect))
+        self.path = C4Path(path:curve)
+        adjustToFitPath()
+    }
 }

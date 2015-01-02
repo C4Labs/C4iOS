@@ -18,20 +18,20 @@
 // IN THE SOFTWARE.
 
 import Foundation
+import CoreGraphics
+import C4Core
 
-public protocol C4EventSource {
-    /**
-      Register an action to run when an event is triggered. Returns an observer handle you can use to cancel the action.
-     */
-    func on(event notificationName: String, run: Void -> Void) -> AnyObject
-    
-    /**
-    Register an action to run when an event is triggered by a specfied object. Returns an observer handle you can use to cancel the action.
-    */
-    func on(event notificationName: String, from object: AnyObject, run executionBlock: Void -> Void) -> AnyObject
-
-    /**
-      Cancel a previously registered action from an observer handle.
-     */
-    func cancel(observer: AnyObject)
+public class C4Triangle: C4Polygon {
+    convenience public init(_ points: [C4Point]) {
+        assert(points.count >= 3, "To create a Triangle you need to specify an array of at least 3 points")
+        self.init(frame: C4Rect(points))
+        var path = C4Path()
+        self.points = points
+        path.moveToPoint(points[0])
+        path.addLineToPoint(points[1])
+        path.addLineToPoint(points[2])
+        path.addLineToPoint(points[0])
+        self.path = path
+        adjustToFitPath()
+    }
 }

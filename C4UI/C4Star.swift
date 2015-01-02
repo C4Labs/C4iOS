@@ -18,20 +18,26 @@
 // IN THE SOFTWARE.
 
 import Foundation
+import CoreGraphics
+import C4Core
 
-public protocol C4EventSource {
-    /**
-      Register an action to run when an event is triggered. Returns an observer handle you can use to cancel the action.
-     */
-    func on(event notificationName: String, run: Void -> Void) -> AnyObject
-    
-    /**
-    Register an action to run when an event is triggered by a specfied object. Returns an observer handle you can use to cancel the action.
-    */
-    func on(event notificationName: String, from object: AnyObject, run executionBlock: Void -> Void) -> AnyObject
-
-    /**
-      Cancel a previously registered action from an observer handle.
-     */
-    func cancel(observer: AnyObject)
+public class C4Star: C4Polygon {
+    convenience public init(center: C4Point, pointCount: Int, innerRadius: Double, outerRadius: Double) {
+        let wedgeAngle = 2.0 * M_PI / Double(pointCount)
+        let length = 2.0 * innerRadius * sin(wedgeAngle)
+        var angle = M_PI_2
+        
+        var pointArray = [C4Point]()
+        
+        for i in 0..<pointCount * 2 {
+            angle += wedgeAngle / 2.0
+            if i % 2 != 0 {
+                pointArray.append(C4Point(center.x + innerRadius * cos(angle), center.y + innerRadius * sin(angle)))
+            } else {
+                pointArray.append(C4Point(center.x + outerRadius * cos(angle), center.y + outerRadius * sin(angle)))
+            }
+        }
+        
+        self.init(pointArray)
+    }
 }
