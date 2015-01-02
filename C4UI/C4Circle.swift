@@ -21,17 +21,9 @@ import Foundation
 import CoreGraphics
 import C4Core
 
-public class C4Ellipse: C4Shape {
-    convenience public init(frame: C4Rect) {
-        self.init()
-        view.frame = CGRect(frame)
-        updatePath()
-    }
-    
-    override public func updatePath() {
-        let newPath = C4Path()
-        newPath.addEllipse(frame)
-        path = newPath
-        animateKeyPath("path", toValue: path!.CGPath)
+public class C4Circle: C4Ellipse {
+    convenience public init(center: C4Point, radius: Double) {
+        let frame = C4Rect(center.x-radius/2, center.y-radius/2, radius * 2, radius * 2)
+        self.init(frame: frame)
     }
 }
