@@ -38,6 +38,5 @@ public class C4Rectangle: C4Shape {
         let newPath = C4Path()
         newPath.addRoundedRect(frame, cornerWidth: corner.width, cornerHeight: corner.height)
         path = newPath
-        animateKeyPath("path", toValue: path!.CGPath)
     }
 }

@@ -29,7 +29,6 @@ extension C4Shape {
 
         let r = C4Rect(center.x - radius, center.y - radius, radius*2, radius*2)
         path!.addEllipse(r)
-        animateKeyPath("path", toValue: path!.CGPath)
     }
 
     public func addPolygon(#points: [C4Point], closed: Bool = true) {

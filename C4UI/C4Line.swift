@@ -44,8 +44,7 @@ public class C4Line: C4Polygon {
             let p = C4Path()
             p.moveToPoint(points[0])
             p.addLineToPoint(points[1])
-            
-            animateKeyPath("path", toValue: p.CGPath)
+            path = p
         }
     }
 }

@@ -32,6 +32,5 @@ public class C4Ellipse: C4Shape {
         let newPath = C4Path()
         newPath.addEllipse(frame)
         path = newPath
-        animateKeyPath("path", toValue: path!.CGPath)
     }
 }

@@ -75,6 +75,5 @@ public class C4RegularPolygon: C4Shape {
         }
         newPath.closeSubpath()
         path = newPath
-        animateKeyPath("path", toValue: path!.CGPath)
     }
 }

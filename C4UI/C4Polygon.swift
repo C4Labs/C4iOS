@@ -58,7 +58,7 @@ public class C4Polygon: C4Shape {
                 p.addLineToPoint(points[i])
             }
             
-            animateKeyPath("path", toValue: p.CGPath)
+            path = p
         }
     }
 }
