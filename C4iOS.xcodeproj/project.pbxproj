@@ -19,6 +19,7 @@
 		1F4881D31A56195800E0EBA4 /* C4TextShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4881D21A56195800E0EBA4 /* C4TextShape.swift */; };
 		1F4881D51A56199600E0EBA4 /* C4Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4881D41A56199600E0EBA4 /* C4Font.swift */; };
 		1F4881D71A561BDF00E0EBA4 /* C4Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4881D61A561BDF00E0EBA4 /* C4Object.swift */; };
+		1F4881DB1A565F9700E0EBA4 /* C4Star.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4881DA1A565F9700E0EBA4 /* C4Star.swift */; };
 		1F8CB1DA1A05781700A20783 /* C4RectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8CB1D91A05781700A20783 /* C4RectTests.swift */; };
 		1F8FE9811A4F7BF700B38276 /* C4Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8FE9801A4F7BF700B38276 /* C4Line.swift */; };
 		1F8FE9831A4F7C2200B38276 /* C4Polygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8FE9821A4F7C2200B38276 /* C4Polygon.swift */; };
@@ -96,6 +97,7 @@
 		1F4881D21A56195800E0EBA4 /* C4TextShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4TextShape.swift; sourceTree = "<group>"; };
 		1F4881D41A56199600E0EBA4 /* C4Font.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Font.swift; sourceTree = "<group>"; };
 		1F4881D61A561BDF00E0EBA4 /* C4Object.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Object.swift; sourceTree = "<group>"; };
+		1F4881DA1A565F9700E0EBA4 /* C4Star.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Star.swift; sourceTree = "<group>"; };
 		1F5726E319FCECE4006FF395 /* C4Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Foundation.swift; sourceTree = "<group>"; };
 		1F8CB1D91A05781700A20783 /* C4RectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4RectTests.swift; sourceTree = "<group>"; };
 		1F8FE9801A4F7BF700B38276 /* C4Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Line.swift; sourceTree = "<group>"; };
@@ -225,17 +227,18 @@
 				1FFE45BE1A51FA0B00E0B334 /* C4RegularPolygon.swift */,
 				D96954FD1A2526A100622AB0 /* C4Shape.swift */,
 				1F0D0DCA1A560D1800481D65 /* C4Arc.swift */,
-				1F0D0DCC1A56110700481D65 /* C4Wedge.swift */,
-				1F4881CC1A5612AC00E0EBA4 /* C4Curve.swift */,
-				1F4881CE1A5615D600E0EBA4 /* C4QuadCurve.swift */,
-				1F8FE9801A4F7BF700B38276 /* C4Line.swift */,
-				1FFE45B81A51F1A000E0B334 /* C4Rectangle.swift */,
-				1FFE45BC1A51F8A200E0B334 /* C4Ellipse.swift */,
 				1F0D0DC61A56097400481D65 /* C4Circle.swift */,
+				1F4881CC1A5612AC00E0EBA4 /* C4Curve.swift */,
+				1FFE45BC1A51F8A200E0B334 /* C4Ellipse.swift */,
+				1F8FE9801A4F7BF700B38276 /* C4Line.swift */,
 				1F8FE9821A4F7C2200B38276 /* C4Polygon.swift */,
+				1F4881CE1A5615D600E0EBA4 /* C4QuadCurve.swift */,
+				1FFE45B81A51F1A000E0B334 /* C4Rectangle.swift */,
+				1F4881DA1A565F9700E0EBA4 /* C4Star.swift */,
 				1F4881D21A56195800E0EBA4 /* C4TextShape.swift */,
-				1F4881D41A56199600E0EBA4 /* C4Font.swift */,
 				1F0D0DC81A560A2800481D65 /* C4Triangle.swift */,
+				1F0D0DCC1A56110700481D65 /* C4Wedge.swift */,
+				1F4881D41A56199600E0EBA4 /* C4Font.swift */,
 				6162BFB619DB971C00D7F3D0 /* C4Shape+Creation.swift */,
 				A988A9121A4A837A0044007C /* UIGestureRecognizer+Closure.swift */,
 				1F4881D61A561BDF00E0EBA4 /* C4Object.swift */,
@@ -604,6 +607,7 @@
 				1F4881CD1A5612AC00E0EBA4 /* C4Curve.swift in Sources */,
 				1F3FC01C1A0F2AAD005984BB /* C4View.swift in Sources */,
 				A988A9131A4A837A0044007C /* UIGestureRecognizer+Closure.swift in Sources */,
+				1F4881DB1A565F9700E0EBA4 /* C4Star.swift in Sources */,
 				1FFE45BF1A51FA0B00E0B334 /* C4RegularPolygon.swift in Sources */,
 				A988A9371A53818C0044007C /* C4View+Border.swift in Sources */,
 				1F4881D31A56195800E0EBA4 /* C4TextShape.swift in Sources */,
