@@ -75,18 +75,7 @@ public class C4Shape: C4View {
     
     internal func updatePath() {}
     
-    func animation() -> CABasicAnimation {
-        var anim = CABasicAnimation()
-        anim.duration = 0.25
-        anim.beginTime = CACurrentMediaTime()
-        anim.autoreverses = false
-        anim.repeatCount = 0
-        anim.removedOnCompletion = false
-        anim.fillMode = kCAFillModeBoth
-        return anim
-    }
-    
-    func animateKeyPath(keyPath: String, toValue: AnyObject) {
+    public override func animateKeyPath(keyPath: String, toValue: AnyObject) {
         CATransaction.begin()
         CATransaction.setCompletionBlock({
             if(keyPath == "path") {
@@ -94,12 +83,7 @@ public class C4Shape: C4View {
                 self.adjustToFitPath()
             }
         })
-        var anim = animation()
-        anim.duration = 0.0
-        anim.keyPath = keyPath
-        anim.fromValue = view.layer.presentationLayer()?.valueForKeyPath(keyPath)
-        anim.toValue = toValue
-        shapeLayer.addAnimation(anim, forKey:"animate"+keyPath)
+        super.animateKeyPath(keyPath, toValue: toValue)
         CATransaction.commit()
     }
     

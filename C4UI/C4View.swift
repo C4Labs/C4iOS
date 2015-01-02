@@ -206,6 +206,32 @@ public class C4View : NSObject {
     }
     
     
+    //MARK: - Animation
+    
+    internal func animateKeyPath(keyPath: String, toValue: AnyObject) {
+        let anim = CABasicAnimation()
+        anim.duration = 0.25
+        anim.beginTime = CACurrentMediaTime()
+        anim.keyPath = keyPath
+        anim.fromValue = view.layer.presentationLayer()?.valueForKeyPath(keyPath)
+        anim.toValue = toValue
+        view.layer.addAnimation(anim, forKey:"C4AnimateKeyPath: \(keyPath)")
+        view.layer.setValue(toValue, forKeyPath: keyPath)
+    }
+    
+    public class func animate(#duration: Double, animations: Void -> Void) {
+        UIView.animateWithDuration(duration, animations: animations)
+    }
+    
+    public class func animate(#duration: Double, delay: Double, animations: () -> Void, completion: (Bool -> Void)?) {
+        UIView.animateWithDuration(duration, animations: animations, completion: completion)
+    }
+    
+    public class func animate(#duration: Double, delay: Double, options: UIViewAnimationOptions, animations: () -> Void, completion: (Bool -> Void)?) {
+        UIView.animateWithDuration(duration, delay: delay, options: options, animations: animations, completion: completion)
+    }
+    
+    
     //MARK: - AddRemoveSubview
     
     public func add<T>(subview: T) {
