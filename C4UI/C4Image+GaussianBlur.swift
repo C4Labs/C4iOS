@@ -18,15 +18,11 @@
 // IN THE SOFTWARE.
 
 extension C4Image {
-    public func gaussianBlur(radius: Double) {
-        autoreleasepool {
-            let filter = self.prepareFilter("CIGaussianBlur")
-            filter.setValue(radius, forKey:"inputRadius")
-            self.output = filter.outputImage
-            if self.renderImmediately {
-                self.renderImage(filter.name())
-            }
-        }
+    class public func gaussianBlur(radius: Double) -> CIFilter {
+        let filter = CIFilter(name:"CIGaussianBlur")
+        filter.setDefaults()
+        filter.setValue(radius, forKey:"inputRadius")
+        return filter
     }
 }
 

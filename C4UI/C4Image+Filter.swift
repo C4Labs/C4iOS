@@ -22,80 +22,29 @@ import UIKit
 import C4Core
 
 extension C4Image {
-    public class func availableFilters() -> [AnyObject] {
-        let categories = [
-            kCICategoryDistortionEffect,
-            kCICategoryGeometryAdjustment,
-            kCICategoryCompositeOperation,
-            kCICategoryHalftoneEffect,
-            kCICategoryColorAdjustment,
-            kCICategoryColorEffect,
-            kCICategoryTransition,
-            kCICategoryTileEffect,
-            kCICategoryGenerator,
-            kCICategoryReduction,
-            kCICategoryGradient,
-            kCICategoryStylize,
-            kCICategorySharpen,
-            kCICategoryBlur,
-            //kCICategoryVideo,
-            kCICategoryStillImage,
-            //kCICategoryInterlaced,
-            kCICategoryNonSquarePixels,
-            kCICategoryHighDynamicRange,
-            kCICategoryBuiltIn
-        ]
-        
-        var set = NSMutableSet()
-        
-        for category in categories {
-            let filterNames = CIFilter.filterNamesInCategory(category)
-            set.addObjectsFromArray(filterNames)
-        }
-        
-        var arr = set.allObjects
-        
-        let sorted = arr.sorted { (p1, p2) -> Bool in
-            (p1 as? String) < (p2 as? String)
-        }
-        
-        return sorted
+    public func apply(filter: CIFilter) {
+        self.apply(filters:[filter])
     }
     
-    internal func prepareFilter(name: String) -> CIFilter {
-        var filter = CIFilter(name: name)
-        filter.setDefaults()
-        
-        if self.outputReady {
+    public func apply(#filters: [CIFilter]) {
+        for filter in filters {
             filter.setValue(self.output, forKey: "inputImage")
-        } else {
-            filter.setValue(self.ciimage, forKey: "inputImage")
-            self.outputReady = true
+            self.output = filter.outputImage
         }
-        return filter
+        self.renderFilteredImage()
     }
     
-    internal func renderImage(filterName: String) {
-        dispatch_async(filterQueue) {
-            var extent = self.output.extent()
-            if CGRectIsInfinite(extent) {
-                extent = self.ciimage.extent()
-            }
-            let filterContext = CIContext(options:nil)
-            let filteredImage = filterContext.createCGImage(self.output, fromRect:extent)
-            dispatch_async(dispatch_get_main_queue()) {
-                self.contents = filteredImage
-                self.post(filterName+"Complete")
-            }
+    public func renderFilteredImage() {
+        var extent = self.output.extent()
+        if CGRectIsInfinite(extent) {
+            extent = self.ciimage.extent()
+        }
+        let filterContext = CIContext(options:nil)
+        let filteredImage = filterContext.createCGImage(self.output, fromRect:extent)
+        
+        dispatch_async(dispatch_get_main_queue()) {
+            self.imageView.layer.contents = filteredImage
         }
     }
     
-    public func startFiltering() {
-        renderImmediately = false
-    }
-    
-    public func endFiltering() {
-        renderImmediately = true
-        renderImage("MultipleFilters")
-    }
 }

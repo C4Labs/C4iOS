@@ -18,16 +18,10 @@
 // IN THE SOFTWARE.
 
 extension C4Image {
-    public func sepia(intensity: Double) {
-        autoreleasepool {
-            let filter = self.prepareFilter("CISepiaTone")
-            filter.setValue(intensity, forKey:"inputIntensity")
-            self.output = filter.outputImage
-            if self.renderImmediately {
-                self.renderImage(filter.name())
-            }
-        }
+    class public func sepia(intensity: Double) -> CIFilter {
+        let filter = CIFilter(name: "CISepiaTone")
+        filter.setDefaults()
+        filter.setValue(intensity, forKey:"inputIntensity")
+        return filter
     }
 }
-
-//test
