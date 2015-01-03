@@ -117,7 +117,7 @@ public class C4Image: C4View {
             let layer = imageView.layer as CALayer
             return layer.contents as CGImageRef
         } set(val) {
-            animateKeyPath("contents", toValue:val)
+            imageView.layer.contents = val
         }
     }
     
@@ -167,33 +167,10 @@ public class C4Image: C4View {
     }
     
     //MARK: Filters
-    lazy internal var output: CIImage = CIImage()
-    lazy internal var outputReady : Bool = false
+    lazy internal var output: CIImage = self.ciimage
     lazy internal var filterQueue: dispatch_queue_t = {
         return dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)
     }()
     lazy internal var renderImmediately = true
-    
-    func animation() -> CABasicAnimation {
-        var anim = CABasicAnimation()
-        anim.duration = 0.25
-        anim.beginTime = CACurrentMediaTime()
-        anim.autoreverses = false
-        anim.repeatCount = 0
-        anim.removedOnCompletion = false
-        anim.fillMode = kCAFillModeBoth
-        return anim
-    }
-    
-    func animateKeyPath(keyPath: String, toValue: AnyObject) {
-        CATransaction.begin()
-        var anim = animation()
-        anim.duration = 0.0
-        anim.keyPath = keyPath
-        anim.fromValue = view.layer.presentationLayer()?.valueForKeyPath(keyPath)
-        anim.toValue = toValue
-        imageView.layer.addAnimation(anim, forKey:"animate"+keyPath)
-        CATransaction.commit()
-    }
 
 }

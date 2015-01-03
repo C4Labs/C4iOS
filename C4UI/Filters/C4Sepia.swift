@@ -17,16 +17,15 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-extension C4Image {
-    public func gaussianBlur(radius: Double) {
-        autoreleasepool {
-            let filter = self.prepareFilter("CIGaussianBlur")
-            filter.setValue(radius, forKey:"inputRadius")
-            self.output = filter.outputImage
-            if self.renderImmediately {
-                self.renderImage(filter.name())
-            }
-        }
+public struct C4Sepia : C4Filter {
+    public let filterName = "CISepiaTone"
+    public var intensity: Double = 1
+    
+    public func createCoreImageFilter(inputImage: CIImage) -> CIFilter {
+        let filter = CIFilter(name: filterName)
+        filter.setDefaults()
+        filter.setValue(intensity, forKey:"inputIntensity")
+        filter.setValue(inputImage, forKey: "inputImage")
+        return filter
     }
 }
-

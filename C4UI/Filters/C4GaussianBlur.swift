@@ -17,34 +17,15 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-import QuartzCore
-import UIKit
-import C4Core
-
-extension C4Image {
-    public func apply(filter: C4Filter) {
-        self.apply(filters:[filter])
-    }
+public struct C4GaussianBlur : C4Filter {
+    public let filterName = "CIGaussianBlur"
+    public var radius: Double = 10
     
-    public func apply(#filters: [C4Filter]) {
-        for filter in filters {
-            let cifilter = filter.createCoreImageFilter(output)
-            self.output = cifilter.outputImage
-        }
-        self.renderFilteredImage()
+    public func createCoreImageFilter(inputImage: CIImage) -> CIFilter {
+        let filter = CIFilter(name: filterName)
+        filter.setDefaults()
+        filter.setValue(radius, forKey:"inputRadius")
+        filter.setValue(inputImage, forKey: "inputImage")
+        return filter
     }
-    
-    public func renderFilteredImage() {
-        var extent = self.output.extent()
-        if CGRectIsInfinite(extent) {
-            extent = self.ciimage.extent()
-        }
-        let filterContext = CIContext(options:nil)
-        let filteredImage = filterContext.createCGImage(self.output, fromRect:extent)
-        
-        dispatch_async(dispatch_get_main_queue()) {
-            self.imageView.layer.contents = filteredImage
-        }
-    }
-    
 }

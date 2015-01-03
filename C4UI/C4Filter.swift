@@ -17,17 +17,7 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-extension C4Image {
-    public func sepia(intensity: Double) {
-        autoreleasepool {
-            let filter = self.prepareFilter("CISepiaTone")
-            filter.setValue(intensity, forKey:"inputIntensity")
-            self.output = filter.outputImage
-            if self.renderImmediately {
-                self.renderImage(filter.name())
-            }
-        }
-    }
+public protocol C4Filter {
+    var filterName : String { get }
+    func createCoreImageFilter(inputImage: CIImage) -> CIFilter
 }
-
-//test
