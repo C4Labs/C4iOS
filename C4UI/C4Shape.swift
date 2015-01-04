@@ -75,18 +75,6 @@ public class C4Shape: C4View {
     
     internal func updatePath() {}
     
-    public override func animateKeyPath(keyPath: String, toValue: AnyObject) {
-        CATransaction.begin()
-        CATransaction.setCompletionBlock({
-            if(keyPath == "path") {
-                self.shapeLayer.path = toValue as CGPath
-                self.adjustToFitPath()
-            }
-        })
-        super.animateKeyPath(keyPath, toValue: toValue)
-        CATransaction.commit()
-    }
-    
     func adjustToFitPath() {
         if shapeLayer.path == nil {
             return

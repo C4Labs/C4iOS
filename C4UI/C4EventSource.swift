@@ -21,7 +21,7 @@ import Foundation
 import C4Core
 import UIKit
 
-public class C4Object : NSObject {
+public class C4EventSource : NSObject {
     
     //MARK: - EventSource
     

@@ -8,17 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		1F06D5991A055EBB00BA501B /* C4Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9596D191A054A960023323D /* C4Core.framework */; };
-		1F0D0DC71A56097400481D65 /* C4Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0D0DC61A56097400481D65 /* C4Circle.swift */; };
 		1F0D0DC91A560A2800481D65 /* C4Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0D0DC81A560A2800481D65 /* C4Triangle.swift */; };
 		1F0D0DCB1A560D1800481D65 /* C4Arc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0D0DCA1A560D1800481D65 /* C4Arc.swift */; };
 		1F0D0DCD1A56110700481D65 /* C4Wedge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0D0DCC1A56110700481D65 /* C4Wedge.swift */; };
 		1F3FC01C1A0F2AAD005984BB /* C4View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94947941A0BFD5700F9CDC8 /* C4View.swift */; };
 		1F3FC01E1A0F2BF8005984BB /* C4EventSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94947961A0D8E7A00F9CDC8 /* C4EventSource.swift */; };
-		1F4881CD1A5612AC00E0EBA4 /* C4Curve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4881CC1A5612AC00E0EBA4 /* C4Curve.swift */; };
-		1F4881CF1A5615D600E0EBA4 /* C4QuadCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4881CE1A5615D600E0EBA4 /* C4QuadCurve.swift */; };
 		1F4881D31A56195800E0EBA4 /* C4TextShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4881D21A56195800E0EBA4 /* C4TextShape.swift */; };
 		1F4881D51A56199600E0EBA4 /* C4Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4881D41A56199600E0EBA4 /* C4Font.swift */; };
-		1F4881D71A561BDF00E0EBA4 /* C4Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4881D61A561BDF00E0EBA4 /* C4Object.swift */; };
+		1F4881D71A561BDF00E0EBA4 /* C4EventSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4881D61A561BDF00E0EBA4 /* C4EventSource.swift */; };
 		1F8CB1DA1A05781700A20783 /* C4RectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8CB1D91A05781700A20783 /* C4RectTests.swift */; };
 		1F8FE9811A4F7BF700B38276 /* C4Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8FE9801A4F7BF700B38276 /* C4Line.swift */; };
 		1F8FE9831A4F7C2200B38276 /* C4Polygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8FE9821A4F7C2200B38276 /* C4Polygon.swift */; };
@@ -29,10 +26,6 @@
 		1FFE45BF1A51FA0B00E0B334 /* C4RegularPolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFE45BE1A51FA0B00E0B334 /* C4RegularPolygon.swift */; };
 		614F824919DB5ED3001DF1D4 /* C4UI.h in Headers */ = {isa = PBXBuildFile; fileRef = 614F824819DB5ED3001DF1D4 /* C4UI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6162BFB719DB971C00D7F3D0 /* C4Shape+Creation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6162BFB619DB971C00D7F3D0 /* C4Shape+Creation.swift */; };
-		A930661C1A57701400E704FF /* C4View+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A930661B1A57701400E704FF /* C4View+Animation.swift */; };
-		A930661E1A57736600E704FF /* C4ViewAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A930661D1A57736600E704FF /* C4ViewAnimation.swift */; };
-		A93066221A5A1C1100E704FF /* C4GaussianBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93066201A5A1C1100E704FF /* C4GaussianBlur.swift */; };
-		A93066231A5A1C1100E704FF /* C4Sepia.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93066211A5A1C1100E704FF /* C4Sepia.swift */; };
 		A94E3BD419E0E9390039A9C4 /* C4UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 614F824319DB5ED3001DF1D4 /* C4UI.framework */; };
 		A9596D1E1A054A960023323D /* C4Core.h in Headers */ = {isa = PBXBuildFile; fileRef = A9596D1D1A054A960023323D /* C4Core.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A9596D391A054AF50023323D /* C4Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D321A054AF50023323D /* C4Color.swift */; };
@@ -110,17 +103,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1F0D0DC61A56097400481D65 /* C4Circle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Circle.swift; sourceTree = "<group>"; };
 		1F0D0DC81A560A2800481D65 /* C4Triangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Triangle.swift; sourceTree = "<group>"; };
 		1F0D0DCA1A560D1800481D65 /* C4Arc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Arc.swift; sourceTree = "<group>"; };
 		1F0D0DCC1A56110700481D65 /* C4Wedge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Wedge.swift; sourceTree = "<group>"; };
-		1F4881CC1A5612AC00E0EBA4 /* C4Curve.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Curve.swift; sourceTree = "<group>"; };
-		1F4881CE1A5615D600E0EBA4 /* C4QuadCurve.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4QuadCurve.swift; sourceTree = "<group>"; };
 		1F4881D21A56195800E0EBA4 /* C4TextShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4TextShape.swift; sourceTree = "<group>"; };
 		1F4881D41A56199600E0EBA4 /* C4Font.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Font.swift; sourceTree = "<group>"; };
-		1F4881D61A561BDF00E0EBA4 /* C4Object.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Object.swift; sourceTree = "<group>"; };
+		1F4881D61A561BDF00E0EBA4 /* C4EventSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4EventSource.swift; sourceTree = "<group>"; };
 		1F5726E319FCECE4006FF395 /* C4Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Foundation.swift; sourceTree = "<group>"; };
-		1F8372FE1A574991009E0DCB /* C4Arc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Arc.swift; sourceTree = "<group>"; };
 		1F8372FF1A574991009E0DCB /* C4Circle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Circle.swift; sourceTree = "<group>"; };
 		1F8373001A574991009E0DCB /* C4Curve.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Curve.swift; sourceTree = "<group>"; };
 		1F8373011A574991009E0DCB /* C4QuadCurve.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4QuadCurve.swift; sourceTree = "<group>"; };
@@ -278,36 +267,32 @@
 		614F824519DB5ED3001DF1D4 /* C4UI */ = {
 			isa = PBXGroup;
 			children = (
-				D94947941A0BFD5700F9CDC8 /* C4View.swift */,
-				A988A9361A53818C0044007C /* C4View+Border.swift */,
-				A988A9381A5383070044007C /* C4View+Shadow.swift */,
-				A930661D1A57736600E704FF /* C4ViewAnimation.swift */,
-				A930661B1A57701400E704FF /* C4View+Animation.swift */,
-				1F8373111A574F06009E0DCB /* C4Image.swift */,
-				1FA1B6D41A599E78001B5011 /* C4Filter.swift */,
-				D9722B301A5B5E8200346C24 /* C4Generator.swift */,
-				1FFBC8DF1A5BBCC500A57685 /* C4Image+Crop.swift */,
-				1F8373151A5763EB009E0DCB /* C4Image+Filter.swift */,
-				D9722B321A5B5EAD00346C24 /* C4Image+Generator.swift */,
-				D96954FD1A2526A100622AB0 /* C4Shape.swift */,
+				614F824819DB5ED3001DF1D4 /* C4UI.h */,
 				1F0D0DCA1A560D1800481D65 /* C4Arc.swift */,
-				1F0D0DCC1A56110700481D65 /* C4Wedge.swift */,
-				1F4881CC1A5612AC00E0EBA4 /* C4Curve.swift */,
-				1F4881CE1A5615D600E0EBA4 /* C4QuadCurve.swift */,
-				1F8FE9801A4F7BF700B38276 /* C4Line.swift */,
-				1FFE45B81A51F1A000E0B334 /* C4Rectangle.swift */,
-				1FFE45BC1A51F8A200E0B334 /* C4Ellipse.swift */,
-				1F0D0DC61A56097400481D65 /* C4Circle.swift */,
-				1F8FE9821A4F7C2200B38276 /* C4Polygon.swift */,
-				1F4881D21A56195800E0EBA4 /* C4TextShape.swift */,
+				1F8372FF1A574991009E0DCB /* C4Circle.swift */,
+				1F8373001A574991009E0DCB /* C4Curve.swift */,
+				1F4881D61A561BDF00E0EBA4 /* C4EventSource.swift */,
 				1F4881D41A56199600E0EBA4 /* C4Font.swift */,
-				1F0D0DC81A560A2800481D65 /* C4Triangle.swift */,
+				1F8FE9801A4F7BF700B38276 /* C4Line.swift */,
+				1F8FE9821A4F7C2200B38276 /* C4Polygon.swift */,
+				1F8373011A574991009E0DCB /* C4QuadCurve.swift */,
+				1FFE45B81A51F1A000E0B334 /* C4Rectangle.swift */,
+				1FFE45BE1A51FA0B00E0B334 /* C4RegularPolygon.swift */,
+				D96954FD1A2526A100622AB0 /* C4Shape.swift */,
 				6162BFB619DB971C00D7F3D0 /* C4Shape+Creation.swift */,
-				A988A9121A4A837A0044007C /* UIGestureRecognizer+Closure.swift */,
-				1F4881D61A561BDF00E0EBA4 /* C4Object.swift */,
+				1F8373021A574991009E0DCB /* C4Star.swift */,
+				1F4881D21A56195800E0EBA4 /* C4TextShape.swift */,
+				1F8373041A574991009E0DCB /* C4Triangle.swift */,
 				D94947941A0BFD5700F9CDC8 /* C4View.swift */,
 				A988A9361A53818C0044007C /* C4View+Border.swift */,
 				A988A9381A5383070044007C /* C4View+Shadow.swift */,
+				A930661B1A57701400E704FF /* C4View+Animation.swift */,
+				A930661D1A57736600E704FF /* C4ViewAnimation.swift */,
+				1F8373051A574991009E0DCB /* C4Wedge.swift */,
+				1F0D0DCC1A56110700481D65 /* C4Wedge.swift */,
+				1FFE45BC1A51F8A200E0B334 /* C4Ellipse.swift */,
+				1F0D0DC81A560A2800481D65 /* C4Triangle.swift */,
+				A988A9121A4A837A0044007C /* UIGestureRecognizer+Closure.swift */,
 				614F824619DB5ED3001DF1D4 /* Supporting Files */,
 			);
 			path = C4UI;
@@ -685,7 +670,6 @@
 				1F8373121A574F06009E0DCB /* C4Image.swift in Sources */,
 				A93066221A5A1C1100E704FF /* C4GaussianBlur.swift in Sources */,
 				1F0D0DC91A560A2800481D65 /* C4Triangle.swift in Sources */,
-				1F4881CD1A5612AC00E0EBA4 /* C4Curve.swift in Sources */,
 				1F3FC01C1A0F2AAD005984BB /* C4View.swift in Sources */,
 				A988A9131A4A837A0044007C /* UIGestureRecognizer+Closure.swift in Sources */,
 				1FFE45BF1A51FA0B00E0B334 /* C4RegularPolygon.swift in Sources */,
@@ -696,7 +680,6 @@
 				D9722B271A5B50FB00346C24 /* C4ColorBurn.swift in Sources */,
 				1F4881D31A56195800E0EBA4 /* C4TextShape.swift in Sources */,
 				1FFE45BD1A51F8A200E0B334 /* C4Ellipse.swift in Sources */,
-				1F8373081A574991009E0DCB /* C4Curve.swift in Sources */,
 				D96954FE1A2526A100622AB0 /* C4Shape.swift in Sources */,
 				D9722B2B1A5B53A600346C24 /* C4Twirl.swift in Sources */,
 				D9722B2D1A5B57BC00346C24 /* C4Checkerboard.swift in Sources */,
@@ -720,10 +703,9 @@
 				1F4881CF1A5615D600E0EBA4 /* C4QuadCurve.swift in Sources */,
 				A988A9391A5383070044007C /* C4View+Shadow.swift in Sources */,
 				6162BFB719DB971C00D7F3D0 /* C4Shape+Creation.swift in Sources */,
-				1F0D0DC71A56097400481D65 /* C4Circle.swift in Sources */,
 				1F8FE9831A4F7C2200B38276 /* C4Polygon.swift in Sources */,
 				1F0D0DCB1A560D1800481D65 /* C4Arc.swift in Sources */,
-				1F4881D71A561BDF00E0EBA4 /* C4Object.swift in Sources */,
+				1F4881D71A561BDF00E0EBA4 /* C4EventSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

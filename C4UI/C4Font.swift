@@ -21,8 +21,14 @@ import QuartzCore
 import UIKit
 import C4Core
 
-public class C4Font : C4Object {
+public class C4Font : C4EventSource {
     internal var internalFont: UIFont?
+    
+    public var uiifont : UIFont {
+        get {
+            return internalFont!;
+        }
+    }
     
     convenience public init(name: String, size: Double) {
         self.init()
