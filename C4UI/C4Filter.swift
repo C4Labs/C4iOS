@@ -17,35 +17,7 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-import QuartzCore
-import UIKit
-import C4Core
-
-extension C4Image {
-    public func apply(filter: C4Filter) {
-        self.apply(filters:[filter])
-    }
-    
-    public func apply(#filters: [C4Filter]) {
-        for filter in filters {
-            let cifilter = filter.createCoreImageFilter()
-            cifilter.setValue(self.output, forKey: "inputImage")
-            self.output = cifilter.outputImage
-        }
-        self.renderFilteredImage()
-    }
-    
-    public func renderFilteredImage() {
-        var extent = self.output.extent()
-        if CGRectIsInfinite(extent) {
-            extent = self.ciimage.extent()
-        }
-        let filterContext = CIContext(options:nil)
-        let filteredImage = filterContext.createCGImage(self.output, fromRect:extent)
-        
-        dispatch_async(dispatch_get_main_queue()) {
-            self.imageView.layer.contents = filteredImage
-        }
-    }
-    
+public protocol C4Filter {
+    var filterName : String { get }
+    func createCoreImageFilter() -> CIFilter
 }

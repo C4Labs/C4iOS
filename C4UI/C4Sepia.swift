@@ -17,12 +17,25 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-extension C4Image {
-    class public func gaussianBlur(radius: Double) -> CIFilter {
-        let filter = CIFilter(name:"CIGaussianBlur")
+public class C4Sepia : C4Filter {
+    public var filterName : String {
+        get {
+            return "CISepiaTone"
+        }
+    }
+    public var intensity: Double = 1
+    
+    public init() {
+    }
+    
+    public init(intensity: Double) {
+        self.intensity = intensity
+    }
+    
+    public func createCoreImageFilter() -> CIFilter {
+        let filter = CIFilter(name: filterName)
         filter.setDefaults()
-        filter.setValue(radius, forKey:"inputRadius")
+        filter.setValue(intensity, forKey:"inputIntensity")
         return filter
     }
 }
-
