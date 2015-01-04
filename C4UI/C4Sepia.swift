@@ -17,25 +17,15 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-public class C4Sepia : C4Filter {
-    public var filterName : String {
-        get {
-            return "CISepiaTone"
-        }
-    }
+public struct C4Sepia : C4Filter {
+    public let filterName = "CISepiaTone"
     public var intensity: Double = 1
     
-    public init() {
-    }
-    
-    public init(intensity: Double) {
-        self.intensity = intensity
-    }
-    
-    public func createCoreImageFilter() -> CIFilter {
+    public func createCoreImageFilter(inputImage: CIImage) -> CIFilter {
         let filter = CIFilter(name: filterName)
         filter.setDefaults()
         filter.setValue(intensity, forKey:"inputIntensity")
+        filter.setValue(inputImage, forKey: "inputImage")
         return filter
     }
 }

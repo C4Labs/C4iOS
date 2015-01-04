@@ -19,5 +19,5 @@
 
 public protocol C4Filter {
     var filterName : String { get }
-    func createCoreImageFilter() -> CIFilter
+    func createCoreImageFilter(inputImage: CIImage) -> CIFilter
 }

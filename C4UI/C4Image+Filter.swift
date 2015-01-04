@@ -28,8 +28,7 @@ extension C4Image {
     
     public func apply(#filters: [C4Filter]) {
         for filter in filters {
-            let cifilter = filter.createCoreImageFilter()
-            cifilter.setValue(self.output, forKey: "inputImage")
+            let cifilter = filter.createCoreImageFilter(output)
             self.output = cifilter.outputImage
         }
         self.renderFilteredImage()
