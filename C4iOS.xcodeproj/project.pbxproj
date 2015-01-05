@@ -19,6 +19,7 @@
 		1FFE45BD1A51F8A200E0B334 /* C4Ellipse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFE45BC1A51F8A200E0B334 /* C4Ellipse.swift */; };
 		1FFE45BF1A51FA0B00E0B334 /* C4RegularPolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFE45BE1A51FA0B00E0B334 /* C4RegularPolygon.swift */; };
 		614F824919DB5ED3001DF1D4 /* C4UI.h in Headers */ = {isa = PBXBuildFile; fileRef = 614F824819DB5ED3001DF1D4 /* C4UI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A930662B1A68E78400E704FF /* C4AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A930662A1A68E78400E704FF /* C4AudioPlayer.swift */; };
 		A94E3BD419E0E9390039A9C4 /* C4UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 614F824319DB5ED3001DF1D4 /* C4UI.framework */; };
 		A9596D1E1A054A960023323D /* C4Core.h in Headers */ = {isa = PBXBuildFile; fileRef = A9596D1D1A054A960023323D /* C4Core.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A9596D391A054AF50023323D /* C4Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D321A054AF50023323D /* C4Color.swift */; };
@@ -126,6 +127,7 @@
 		6162BFB619DB971C00D7F3D0 /* C4Shape+Creation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "C4Shape+Creation.swift"; sourceTree = "<group>"; };
 		A930661B1A57701400E704FF /* C4View+Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "C4View+Animation.swift"; sourceTree = "<group>"; };
 		A930661D1A57736600E704FF /* C4ViewAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4ViewAnimation.swift; sourceTree = "<group>"; };
+		A930662A1A68E78400E704FF /* C4AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4AudioPlayer.swift; sourceTree = "<group>"; };
 		A9596D191A054A960023323D /* C4Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = C4Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9596D1C1A054A960023323D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A9596D1D1A054A960023323D /* C4Core.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = C4Core.h; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 			children = (
 				614F824819DB5ED3001DF1D4 /* C4UI.h */,
 				1F0D0DCA1A560D1800481D65 /* C4Arc.swift */,
+				A930662A1A68E78400E704FF /* C4AudioPlayer.swift */,
 				1F8372FF1A574991009E0DCB /* C4Circle.swift */,
 				1F8373001A574991009E0DCB /* C4Curve.swift */,
 				1FFE45BC1A51F8A200E0B334 /* C4Ellipse.swift */,
@@ -645,6 +648,7 @@
 				D90CB38A1A6700C1006233D5 /* C4Filter.swift in Sources */,
 				1F4881D51A56199600E0EBA4 /* C4Font.swift in Sources */,
 				D90CB38C1A6700C1006233D5 /* C4Image.swift in Sources */,
+				A930662B1A68E78400E704FF /* C4AudioPlayer.swift in Sources */,
 				D90CB38D1A6700C1006233D5 /* C4Image+Crop.swift in Sources */,
 				D90CB3941A6701B8006233D5 /* C4Curve.swift in Sources */,
 				D90CB38E1A6700C1006233D5 /* C4Image+Filter.swift in Sources */,

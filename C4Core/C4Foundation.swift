@@ -72,3 +72,12 @@ public func CGRectMakeFromWedge(center: CGPoint, radius: CGFloat, startAngle: CG
     CGPathAddLineToPoint(path, nil, center.x, center.y)
     return CGPathGetBoundingBox(path)
 }
+
+public func delay(delay:Double, closure:()->()) {
+    dispatch_after(
+        dispatch_time(
+            DISPATCH_TIME_NOW,
+            Int64(delay * Double(NSEC_PER_SEC))
+        ),
+        dispatch_get_main_queue(), closure)
+}
