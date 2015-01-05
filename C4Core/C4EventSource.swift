@@ -26,6 +26,11 @@ public protocol C4EventSource {
     func on(event notificationName: String, run: Void -> Void) -> AnyObject
     
     /**
+    Register an action to run when an event is triggered by a specfied object. Returns an observer handle you can use to cancel the action.
+    */
+    func on(event notificationName: String, from object: AnyObject, run executionBlock: Void -> Void) -> AnyObject
+
+    /**
       Cancel a previously registered action from an observer handle.
      */
     func cancel(observer: AnyObject)

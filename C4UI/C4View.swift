@@ -143,7 +143,14 @@ public class C4View : NSObject {
     
     public func on(event notificationName: String, run executionBlock: Void -> Void) -> AnyObject {
         let nc = NSNotificationCenter.defaultCenter()
-        return nc.addObserverForName(notificationName, object: self, queue: NSOperationQueue.currentQueue(), usingBlock: { notification in
+        return nc.addObserverForName(notificationName, object: nil, queue: NSOperationQueue.currentQueue(), usingBlock: { notification in
+            executionBlock()
+        });
+    }
+    
+    public func on(event notificationName: String, from object: AnyObject, run executionBlock: Void -> Void) -> AnyObject {
+        let nc = NSNotificationCenter.defaultCenter()
+        return nc.addObserverForName(notificationName, object: object, queue: NSOperationQueue.currentQueue(), usingBlock: { notification in
             executionBlock()
         });
     }
