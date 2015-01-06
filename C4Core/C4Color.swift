@@ -132,3 +132,9 @@ public extension UIColor {
         self.init(CGColor: color.CGColor)
     }
 }
+
+public extension CIColor {
+    public convenience init(_ color: C4Color) {
+        self.init(CGColor: color.CGColor)
+    }
+}

@@ -24,6 +24,10 @@ import C4Core
 public class C4Image: C4View {
 //MARK: Initializers
     convenience public init(_ filename: String) {
+        if filename.hasPrefix("http") {
+            self.init(url: NSURL(string: filename)!)
+            return
+        }
         let image = UIImage(named: filename, inBundle: NSBundle.mainBundle(), compatibleWithTraitCollection: nil)
         self.init(uiimage: image!)
     }

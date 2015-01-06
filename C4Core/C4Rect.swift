@@ -24,6 +24,10 @@ public struct C4Rect : Equatable {
     public var origin: C4Point
     public var size: C4Size
     
+    public init() {
+        self.init(0,0,0,0)
+    }
+    
     public init(_ x: Double, _ y: Double, _ w: Double, _ h: Double) {
         origin = C4Point(x, y)
         size = C4Size(w, h)
