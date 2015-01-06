@@ -20,6 +20,23 @@
 import UIKit
 import CoreGraphics
 
+public let black     = C4Color(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
+public let darkGray  = C4Color(red: 1/3.0, green: 1/3.0, blue: 1/3.0, alpha: 1.0)
+public let lightGray = C4Color(red: 2/3.0, green: 2/3.0, blue: 2/3.0, alpha: 1.0)
+public let white     = C4Color(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+public let gray      = C4Color(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0)
+public let red       = C4Color(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0)
+public let green     = C4Color(red: 0.0, green: 1.0, blue: 0.0, alpha: 1.0)
+public let blue      = C4Color(red: 0.0, green: 0.0, blue: 1.0, alpha: 1.0)
+public let cyan      = C4Color(red: 0.0, green: 1.0, blue: 1.0, alpha: 1.0)
+public let yellow    = C4Color(red: 1.0, green: 1.0, blue: 0.0, alpha: 1.0)
+public let magenta   = C4Color(red: 1.0, green: 0.0, blue: 1.0, alpha: 1.0)
+public let orange    = C4Color(red: 1.0, green: 0.5, blue: 0.0, alpha: 1.0)
+public let purple    = C4Color(red: 0.5, green: 0.0, blue: 0.5, alpha: 1.0)
+public let brown     = C4Color(red: 0.6, green: 0.4, blue: 0.2, alpha: 1.0)
+public let clear     = C4Color(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
+
+
 public class C4Color {
     internal var colorSpace: CGColorSpaceRef
     internal var internalColor: CGColorRef
@@ -123,7 +140,6 @@ public class C4Color {
         }
     }
 }
-
 
 // MARK: - Casting to UIColor
 
