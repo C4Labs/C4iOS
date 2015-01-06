@@ -19,7 +19,10 @@
 
 public struct C4Sepia : C4Filter {
     public let filterName = "CISepiaTone"
-    public var intensity: Double = 1
+    public var intensity: Double = 1.0
+    
+    public init() {}
+    public init(intensity: Double) { self.intensity = intensity }
     
     public func createCoreImageFilter(inputImage: CIImage) -> CIFilter {
         let filter = CIFilter(name: filterName)
