@@ -58,6 +58,7 @@
 		D90CB3981A6701D2006233D5 /* C4Star.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8373021A574991009E0DCB /* C4Star.swift */; };
 		D90CB3991A670203006233D5 /* C4View+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A930661B1A57701400E704FF /* C4View+Animation.swift */; };
 		D90CB39A1A67020B006233D5 /* C4ViewAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A930661D1A57736600E704FF /* C4ViewAnimation.swift */; };
+		D91D8C331A69A7C000A17464 /* C4Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91D8C321A69A7C000A17464 /* C4Movie.swift */; };
 		D96954FE1A2526A100622AB0 /* C4Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96954FD1A2526A100622AB0 /* C4Shape.swift */; };
 		D9C0EF441A25190300C7A904 /* C4Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5726E319FCECE4006FF395 /* C4Foundation.swift */; };
 		D9C0EF451A25190400C7A904 /* C4Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5726E319FCECE4006FF395 /* C4Foundation.swift */; };
@@ -163,6 +164,7 @@
 		D90CB3871A6700C1006233D5 /* C4Image+Crop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "C4Image+Crop.swift"; sourceTree = "<group>"; };
 		D90CB3881A6700C1006233D5 /* C4Image+Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "C4Image+Filter.swift"; sourceTree = "<group>"; };
 		D90CB3891A6700C1006233D5 /* C4Image+Generator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "C4Image+Generator.swift"; sourceTree = "<group>"; };
+		D91D8C321A69A7C000A17464 /* C4Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Movie.swift; sourceTree = "<group>"; };
 		D94947941A0BFD5700F9CDC8 /* C4View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4View.swift; sourceTree = "<group>"; };
 		D94947961A0D8E7A00F9CDC8 /* C4EventSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4EventSource.swift; sourceTree = "<group>"; };
 		D96954FD1A2526A100622AB0 /* C4Shape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Shape.swift; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 				1F4881D41A56199600E0EBA4 /* C4Font.swift */,
 				D90CB3861A6700C1006233D5 /* C4Image.swift */,
 				1F8FE9801A4F7BF700B38276 /* C4Line.swift */,
+				D91D8C321A69A7C000A17464 /* C4Movie.swift */,
 				1F8FE9821A4F7C2200B38276 /* C4Polygon.swift */,
 				1F8373011A574991009E0DCB /* C4QuadCurve.swift */,
 				1FFE45B81A51F1A000E0B334 /* C4Rectangle.swift */,
@@ -655,6 +658,7 @@
 				D90CB3981A6701D2006233D5 /* C4Star.swift in Sources */,
 				D90CB3951A6701BB006233D5 /* C4Circle.swift in Sources */,
 				D90CB38F1A6700C1006233D5 /* C4Image+Generator.swift in Sources */,
+				D91D8C331A69A7C000A17464 /* C4Movie.swift in Sources */,
 				D90CB38B1A6700C1006233D5 /* C4Generator.swift in Sources */,
 				1F8FE9811A4F7BF700B38276 /* C4Line.swift in Sources */,
 				1FFE45B91A51F1A000E0B334 /* C4Rectangle.swift in Sources */,
