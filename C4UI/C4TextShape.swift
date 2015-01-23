@@ -20,6 +20,7 @@
 import QuartzCore
 import UIKit
 import C4Core
+import Foundation
 
 public class C4TextShape : C4Shape {
     convenience public init(text: String, font: C4Font) {
@@ -30,7 +31,10 @@ public class C4TextShape : C4Shape {
         var currentOrigin = CGPointZero
         
         for character in text {
-            var glyph = CTFontGetGlyphWithName(ctfont, "\(character)")
+            
+            let str = String(character)
+            let cfstr = str as CFString
+            var glyph = CTFontGetGlyphWithName(ctfont, cfstr)
             var path = withUnsafePointer(&t) { (pointer: UnsafePointer<CGAffineTransform>) -> (CGPath) in
                 return CTFontCreatePathForGlyph(ctfont, glyph, pointer)
             }

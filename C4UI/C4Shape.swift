@@ -49,7 +49,11 @@ public class C4Shape: C4View {
         self.init(frame: path.boundingBox())
         self.path = path
         updatePath()
-        adjustToFitPath()
+
+        //init methods in swift don't run instance methods, so we have to add the adjustToFitPath functionality manually
+        var t = CGAffineTransformMakeTranslation(CGFloat(-origin.x),CGFloat(-origin.y))
+        let p = CGPathCreateCopyByTransformingPath(path.CGPath, &t)
+        self.shapeLayer.path = p
     }
     
     convenience public init(frame: C4Rect) {
@@ -80,7 +84,7 @@ public class C4Shape: C4View {
             return
         }
         var f = CGPathGetPathBoundingBox(shapeLayer.path)
-        var t = CGAffineTransformMakeTranslation(0,0)
+        var t = CGAffineTransformMakeTranslation(-f.origin.x,-f.origin.y)
         let p = CGPathCreateCopyByTransformingPath(shapeLayer.path, &t)
         
         self.shapeLayer.path = p

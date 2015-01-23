@@ -23,7 +23,7 @@ import C4Core
 
 public class C4Circle: C4Ellipse {
     convenience public init(center: C4Point, radius: Double) {
-        let frame = C4Rect(center.x-radius/2, center.y-radius/2, radius * 2, radius * 2)
+        let frame = C4Rect(center.x-radius, center.y-radius, radius * 2, radius * 2)
         self.init(frame: frame)
     }
 }

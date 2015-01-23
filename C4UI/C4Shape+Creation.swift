@@ -47,12 +47,25 @@ extension C4Shape {
         }
     }
 
-    public func addLine(#start: C4Point, stop: C4Point) {
+    public func addLine(points:[C4Point]) {
         if path == nil {
             path = C4Path()
         }
         
-        path!.moveToPoint(start)
-        path!.addLineToPoint(stop)
+        if path!.currentPoint != points[0] {
+            path!.moveToPoint(points[0])
+        }
+        path!.addLineToPoint(points[1])
+    }
+    
+    public func addCurve(#points:[C4Point], controls:[C4Point]) {
+        if path == nil {
+            path = C4Path()
+        }
+    
+        if path!.currentPoint != points[0] {
+            path!.moveToPoint(points[0])
+        }
+        path!.addCurveToPoint(controls[0], control2: controls[1], point: points[1]);
     }
 }

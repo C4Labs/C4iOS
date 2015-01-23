@@ -30,7 +30,7 @@ public class C4Ellipse: C4Shape {
     
     override public func updatePath() {
         let newPath = C4Path()
-        newPath.addEllipse(frame)
+        newPath.addEllipse(bounds)
         path = newPath
     }
 }

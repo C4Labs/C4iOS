@@ -233,6 +233,11 @@ public class C4View : NSObject {
     public func removeFromSuperview() {
         self.view.removeFromSuperview()
     }
+    
+    //MARK: - HitTest
+    public func hitTest(point: C4Point) -> Bool {
+        return CGRectContainsPoint(CGRect(bounds), CGPoint(point))
+    }
 }
 
 extension UIView {

@@ -224,4 +224,12 @@ extension C4Path {
     public func addPath(path: C4Path) {
         CGPathAddPath(internalPath, nil, path.internalPath)
     }
+    
+    /**
+    Tranform a path.
+    */
+    public func transform(transform: C4Transform) {
+        var t = transform.affineTransform
+        internalPath = CGPathCreateMutableCopyByTransformingPath(internalPath, &t)
+    }
 }

@@ -35,7 +35,9 @@ public let orange    = C4Color(red: 1.0, green: 0.5, blue: 0.0, alpha: 1.0)
 public let purple    = C4Color(red: 0.5, green: 0.0, blue: 0.5, alpha: 1.0)
 public let brown     = C4Color(red: 0.6, green: 0.4, blue: 0.2, alpha: 1.0)
 public let clear     = C4Color(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
-
+public let C4Pink    = C4Color(red: 1.0, green: 0.0, blue: 0.475, alpha: 1.0)
+public let C4Blue    = C4Color(red: 0.098, green: 0.271, blue: 1.0, alpha: 1.0)
+public let C4Purple  = C4Color(red: 0.0, green: 0.0, blue: 0.541, alpha: 1.0)
 
 public class C4Color {
     internal var colorSpace: CGColorSpaceRef
