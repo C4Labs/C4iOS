@@ -23,37 +23,61 @@ import C4Core
 import Foundation
 
 public class C4TextShape : C4Shape {
+    private var text: String = "" {
+        didSet {
+            updatePath()
+        }
+    }
+    private var font: C4Font {
+        didSet {
+            updatePath()
+        }
+    }
+    
+    public override init() {
+        font = C4Font(font: UIFont.systemFontOfSize(UIFont.systemFontSize()))
+    }
+    
     convenience public init(text: String, font: C4Font) {
-        var t = CGAffineTransformMakeScale(1,-1)
-        let glyphPaths = CGPathCreateMutable()
-        let ctfont = font.CTFont
-        
-        var currentOrigin = CGPointZero
-        
-        for character in text {
-            
-            let str = String(character)
-            let cfstr = str as CFString
-            var glyph = CTFontGetGlyphWithName(ctfont, cfstr)
-            var path = withUnsafePointer(&t) { (pointer: UnsafePointer<CGAffineTransform>) -> (CGPath) in
-                return CTFontCreatePathForGlyph(ctfont, glyph, pointer)
-            }
-            
-            var translation = CGAffineTransformMakeTranslation(currentOrigin.x, currentOrigin.y);
-            CGPathAddPath(glyphPaths, &translation, path);
-            
-            
-            var advance = withUnsafePointer(&glyph) {(glyphePointer: UnsafePointer<CGGlyph>) -> (Double) in
-                return CTFontGetAdvancesForGlyphs(ctfont, .OrientationDefault, &glyph, nil, 1);
-            }
-            
-            currentOrigin.x += CGFloat(advance);
+        self.init()
+        self.text = text
+        self.font = font
+        updatePath()
+    }
+    
+    override func updatePath() {
+        path = C4TextShape.createTextPath(text: text, font: font)
+        adjustToFitPath()
+    }
+    
+    internal class func createTextPath(#text: String, font: C4Font) -> C4Path? {
+        let ctfont = font.CTFont as CTFont?
+        if ctfont == nil {
+            return nil
         }
         
-        var stringRect = CGPathGetBoundingBox(glyphPaths)
-        self.init(frame: C4Rect(stringRect))
-        self.path = C4Path(path: glyphPaths)
-        adjustToFitPath()
-        self.origin = C4Point(0,0)
+        var unichars = [UniChar](text.utf16)
+        var glyphs = [CGGlyph](count: unichars.count, repeatedValue: 0)
+        if !CTFontGetGlyphsForCharacters(ctfont, &unichars, &glyphs, unichars.count) {
+            // Failed to encode characters into glyphs
+            return nil
+        }
+
+        var advances = [CGSize](count: glyphs.count, repeatedValue: CGSizeZero)
+        CTFontGetAdvancesForGlyphs(ctfont, .OrientationDefault, &glyphs, &advances, glyphs.count)
+        
+        let textPath = CGPathCreateMutable()
+        var invert = CGAffineTransformMakeScale(1, -1)
+        var origin = CGPointZero
+        for i in 0..<glyphs.count {
+            let glyphPath = CTFontCreatePathForGlyph(ctfont, glyphs[i], &invert)
+            var translation = CGAffineTransformMakeTranslation(origin.x, origin.y)
+            CGPathAddPath(textPath, &translation, glyphPath)
+            
+            origin.x += CGFloat(advances[i].width)
+            origin.y += CGFloat(advances[i].height)
+        }
+        
+        return C4Path(path: textPath)
     }
 }
