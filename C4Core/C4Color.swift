@@ -21,8 +21,8 @@ import UIKit
 import CoreGraphics
 
 public let black     = C4Color(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
-public let darkGray  = C4Color(red: 1/3.0, green: 1/3.0, blue: 1/3.0, alpha: 1.0)
-public let lightGray = C4Color(red: 2/3.0, green: 2/3.0, blue: 2/3.0, alpha: 1.0)
+public let darkGray  = C4Color(red: 1.0/3.0, green: 1.0/3.0, blue: 1.0/3.0, alpha: 1.0)
+public let lightGray = C4Color(red: 2.0/3.0, green: 2.0/3.0, blue: 2.0/3.0, alpha: 1.0)
 public let white     = C4Color(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
 public let gray      = C4Color(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0)
 public let red       = C4Color(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0)

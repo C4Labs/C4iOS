@@ -23,49 +23,61 @@ import C4Core
 
 extension C4Shape {
     public func addCircle(#center: C4Point, radius: Double) {
-        if path == nil {
-            path = C4Path()
+        var newPath = path
+        if newPath == nil {
+            newPath = C4Path()
         }
 
         let r = C4Rect(center.x - radius, center.y - radius, radius*2, radius*2)
-        path!.addEllipse(r)
+        newPath!.addEllipse(r)
+        path = newPath
+        adjustToFitPath()
     }
 
     public func addPolygon(#points: [C4Point], closed: Bool = true) {
-        if path == nil {
-            path = C4Path()
+        var newPath = path
+        if newPath == nil {
+            newPath = C4Path()
         }
 
         if !points.isEmpty {
-            path!.moveToPoint(points[0])
+            newPath!.moveToPoint(points[0])
         }
         for point in points {
-            path!.addLineToPoint(point)
+            newPath!.addLineToPoint(point)
         }
         if closed {
-            path!.closeSubpath()
+            newPath!.closeSubpath()
         }
+        path = newPath
+        adjustToFitPath()
     }
 
     public func addLine(points:[C4Point]) {
+        var newPath = path
         if path == nil {
             path = C4Path()
         }
         
-        if path!.currentPoint != points[0] {
-            path!.moveToPoint(points[0])
+        if newPath!.currentPoint != points[0] {
+            newPath!.moveToPoint(points[0])
         }
-        path!.addLineToPoint(points[1])
+        newPath!.addLineToPoint(points[1])
+        path = newPath
+        adjustToFitPath()
     }
     
     public func addCurve(#points:[C4Point], controls:[C4Point]) {
+        var newPath = path
         if path == nil {
             path = C4Path()
         }
     
-        if path!.currentPoint != points[0] {
-            path!.moveToPoint(points[0])
+        if newPath!.currentPoint != points[0] {
+            newPath!.moveToPoint(points[0])
         }
-        path!.addCurveToPoint(controls[0], control2: controls[1], point: points[1]);
+        newPath!.addCurveToPoint(controls[0], control2: controls[1], point: points[1]);
+        path = newPath
+        adjustToFitPath()
     }
 }
