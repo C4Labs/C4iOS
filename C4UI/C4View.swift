@@ -27,6 +27,9 @@ public class C4View : NSObject {
         self.init()
         self.view.frame = CGRect(frame)
     }
+    public init(view: UIView) {
+        self.view = view;
+    }
     
     public var layer: CALayer? {
         get {
