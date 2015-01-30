@@ -23,6 +23,13 @@ import UIKit
 public class C4View : NSObject {
     internal var view : UIView = UIView()
     
+    public override init() {
+    }
+    
+    public init(view: UIView) {
+        self.view = view;
+    }
+    
     convenience public init(frame: C4Rect) {
         self.init()
         self.view.frame = CGRect(frame)
