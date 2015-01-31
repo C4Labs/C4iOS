@@ -36,7 +36,7 @@ public class C4Rectangle: C4Shape {
     
     override public func updatePath() {
         let newPath = C4Path()
-        newPath.addRoundedRect(frame, cornerWidth: corner.width, cornerHeight: corner.height)
+        newPath.addRoundedRect(bounds, cornerWidth: corner.width, cornerHeight: corner.height)
         path = newPath
     }
 }
