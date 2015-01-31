@@ -363,13 +363,19 @@ public class C4View : NSObject {
         self.view.removeFromSuperview()
     }
     
-    /**
-    */
-    public func sendSubviewToBack<T>(subview: T) {
+    public func sendToBack<T>(subview:T) {
         if let v = subview as? UIView {
             view.sendSubviewToBack(v)
         } else if let v = subview as? C4View {
             view.sendSubviewToBack(v.view)
+        }
+    }
+
+    public func bringToFront<T>(subview:T) {
+        if let v = subview as? UIView {
+            view.bringSubviewToFront(v)
+        } else if let v = subview as? C4View {
+            view.bringSubviewToFront(v.view)
         }
     }
     
@@ -417,6 +423,22 @@ extension UIView {
             v.removeFromSuperview()
         } else if let v = subview as? C4View {
             v.view.removeFromSuperview()
+        }
+    }
+    
+    public func sendToBack<T>(subview:T) {
+        if let v = subview as? UIView {
+            self.sendSubviewToBack(v)
+        } else if let v = subview as? C4View {
+            self.sendSubviewToBack(v.view)
+        }
+    }
+    
+    public func bringToFront<T>(subview:T) {
+        if let v = subview as? UIView {
+            self.bringSubviewToFront(v)
+        } else if let v = subview as? C4View {
+            self.bringSubviewToFront(v.view)
         }
     }
 }
