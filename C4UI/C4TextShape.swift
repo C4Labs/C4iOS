@@ -43,6 +43,7 @@ public class C4TextShape : C4Shape {
         self.text = text
         self.font = font
         updatePath()
+        self.origin = C4Point()
     }
     
     override func updatePath() {
