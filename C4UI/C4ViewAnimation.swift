@@ -34,19 +34,31 @@ public class C4ViewAnimation : C4Animation {
     }
     
     public func animate() {
+        var timing: CAMediaTimingFunction
         var options: UIViewAnimationOptions
+        
         switch curve {
         case .Linear:
             options = UIViewAnimationOptions.CurveLinear
+            timing = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
         case .EaseOut:
             options = UIViewAnimationOptions.CurveEaseOut
+            timing = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
         case .EaseIn:
             options = UIViewAnimationOptions.CurveEaseIn
+            timing = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
         case .EaseInOut:
             options = UIViewAnimationOptions.CurveEaseInOut
+            timing = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         }
         
-        UIView.animateWithDuration(duration, delay: delay, options: options, animations:animations, completion: { finished in
+        UIView.animateWithDuration(duration, delay: delay, options: options, animations: {
+            CATransaction.begin()
+            CATransaction.setAnimationDuration(self.duration)
+            CATransaction.setAnimationTimingFunction(timing)
+            self.animations()
+            CATransaction.commit()
+        }, completion: { finished in
             if finished {
                 self.postCompletedEvent()
             } else {

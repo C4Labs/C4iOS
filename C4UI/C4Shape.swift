@@ -24,18 +24,18 @@ import C4Core
 public class C4Shape: C4View {
     
     internal class ShapeView : UIView {
-        var shapeLayer: CAShapeLayer {
+        var shapeLayer: C4ShapeLayer {
             get {
-                return self.layer as CAShapeLayer
+                return self.layer as C4ShapeLayer
             }
         }
         
         override class func layerClass() -> AnyClass {
-            return CAShapeLayer.self
+            return C4ShapeLayer.self
         }
     }
     
-    internal var shapeLayer: CAShapeLayer {
+    public var shapeLayer: C4ShapeLayer {
         get {
             return self.shapeView.shapeLayer
         }
@@ -94,7 +94,7 @@ public class C4Shape: C4View {
     @IBInspectable
     public var lineWidth: Double {
         get { return Double(shapeLayer.lineWidth) }
-        set(width) { shapeLayer.lineWidth = CGFloat(width); updatePath(); }
+        set(width) { shapeLayer.lineWidth = CGFloat(width) }
     }
     
     /**
