@@ -73,6 +73,11 @@ public func CGRectMakeFromWedge(center: CGPoint, radius: CGFloat, startAngle: CG
     return CGPathGetBoundingBox(path)
 }
 
+/**
+Delays the execution of a block of code.
+
+:param: time The amount of time in seconds to wait before executing the block of code.
+*/
 public func delay(delay:Double, closure:()->()) {
     dispatch_after(
         dispatch_time(
