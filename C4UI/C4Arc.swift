@@ -22,6 +22,14 @@ import UIKit
 import C4Core
 
 public class C4Arc : C4Shape {
+    /**
+    Creates an arc.
+
+    :param: center The center-point of the arc
+    :param: radius The radius of the arc
+    :param: startAngle	The angle (in radians) that determines the starting point of the arc, measured from the x-axis in the current user space.
+    :param: endAngle	The angle (in radians) that determines the ending point of the arc, measured from the x-axis in the current user space.
+    */
     convenience public init(center: C4Point, radius: Double, start: Double, end: Double) {
         let arcRect = CGRectMakeFromArc(CGPoint(center),CGFloat(radius),CGFloat(start),CGFloat(end), end > start ? false : true);
         self.init(frame: C4Rect(arcRect))

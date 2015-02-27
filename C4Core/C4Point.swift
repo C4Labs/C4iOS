@@ -23,50 +23,87 @@ public struct C4Point : Equatable {
     public var x: Double = 0
     public var y: Double = 0
     
+    /**
+    Initializes a new point with the coordinates {0,0}
+    */
     public init() {
     }
     
+    /**
+    Initializes a new point with the specified coordinates {x,y}
+    */
     public init(_ x: Double, _ y: Double) {
         self.x = x
         self.y = y
     }
     
+    /**
+    Initializes a new point with the specified coordinates {x,y}, converting integer values to doubles
+    */
     public init(_ x: Int, _ y: Int) {
         self.x = Double(x)
         self.y = Double(y)
     }
     
+    /**
+    Returns true if the point's coordinates are {0,0}, otherwise returns false
+    */
     public func isZero() -> Bool {
         return x == 0 && y == 0
     }
     
+    /**
+    Transforms the point.
+    
+    :param: t   A C4Transform to apply to the point
+    */
     public mutating func transform(t: C4Transform) {
         x = x * t[0, 0] + y * t[0, 1] + t[0, 3]
         y = x * t[1, 0] + y * t[1, 1] + t[1, 3]
     }
     
+    /**
+    A string representation of the point.
+    
+    :returns: A string formatted to look like {x,y}
+    */
     public func description() -> String {
         return "{\(x), \(y)}"
     }
 }
 
-/// Calculate the vector between two points
+/**
+Calculate the vector between two points
+*/
 public func - (lhs: C4Point, rhs: C4Point) -> C4Vector {
     return C4Vector(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
 }
 
-/// Translate a point by the given vector
+/**
+Translate a point by the given vector
+
+:returns: A new point whose coordinates have been translated by the values from the vector (e.g. point.x = lhs.x + rhs.x)
+*/
 public func + (lhs: C4Point, rhs: C4Vector) -> C4Point {
     return C4Point(lhs.x + rhs.x,lhs.y + rhs.y)
 }
 
-/// Calculate the distance between two points
+/**
+Calculates the distance between two points
+
+:param: lhs left-hand point
+:param: rhs right-hand point
+:returns: The linear distance between two points
+*/
 public func distance(lhs: C4Point, rhs: C4Point) -> Double {
     let dx = rhs.x - lhs.x
     let dy = rhs.y - lhs.y
     return sqrt(dx*dx + dy*dy)
 }
 
+/**
+Returns true if the two structs have identical coordinates
+*/
 public func == (lhs: C4Point, rhs: C4Point) -> Bool {
     return lhs.x == rhs.x && lhs.y == rhs.y
 }
@@ -88,7 +125,9 @@ public func lerp(a: C4Point, b: C4Point, param: Double) -> C4Point {
 
 
 // MARK: - Casting to and from CGPoint
-
+/**
+Initializes a C4Point initialized with a CGPoint
+*/
 public extension C4Point {
     public init(_ point: CGPoint) {
         x = Double(point.x)
@@ -96,6 +135,9 @@ public extension C4Point {
     }
 }
 
+/**
+Initializes a CGPoint from a C4Point 
+*/
 public extension CGPoint {
     public init(_ point: C4Point) {
         x = CGFloat(point.x)

@@ -22,6 +22,11 @@ import CoreGraphics
 import C4Core
 
 public class C4Ellipse: C4Shape {
+    /**
+    Creates an ellipse.
+    
+    :param: frame The frame within which to draw an ellipse that touches each of the four sides of the frame.
+    */
     convenience public init(frame: C4Rect) {
         self.init()
         view.frame = CGRect(frame)

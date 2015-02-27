@@ -22,6 +22,13 @@ import CoreGraphics
 import C4Core
 
 public class C4Circle: C4Ellipse {
+    /**
+    Creates a circle.
+    
+    :param: center The center-point of the circle
+    :param: radius The radius of the circle
+    */
+
     convenience public init(center: C4Point, radius: Double) {
         let frame = C4Rect(center.x-radius, center.y-radius, radius * 2, radius * 2)
         self.init(frame: frame)
