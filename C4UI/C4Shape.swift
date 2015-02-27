@@ -45,6 +45,11 @@ public class C4Shape: C4View {
         return self.view as ShapeView
     }
 
+    /**
+    Initializest a new C4Shape from a specified C4Path.
+    
+    :param: path A C4Path around which the new shape is created with the frame of the new shape fitting the path on screen.
+    */
     convenience public init(_ path: C4Path) {
         self.init(frame: path.boundingBox())
         self.path = path
@@ -56,6 +61,13 @@ public class C4Shape: C4View {
         self.shapeLayer.path = p
     }
     
+    /**
+    Initializes a new C4Shape from a specified frame.
+    
+    Shapes initialized this way will not have a path.
+    
+    :param: frame The frame for the new shape.
+    */
     convenience public init(frame: C4Rect) {
         self.init()
         self.view = ShapeView(frame: CGRect(frame))
@@ -241,6 +253,9 @@ public class C4Shape: C4View {
         set(pattern) { shapeLayer.lineDashPattern = pattern }
     }
 
+    /**
+    The size of the receiver including the width of its stroke.
+    */
     public func intrinsicContentSize() -> CGSize {
         if let path = path {
             let boundingBox = path.boundingBox()
@@ -250,11 +265,16 @@ public class C4Shape: C4View {
         }
     }
 
-    /// Determine whether the shape's path is empty
+    /**
+    Returns true if there is no path.
+    */
     public func isEmpty() -> Bool {
         return path == nil || path!.isEmpty()
     }
 
+    /**
+    The join style for joints on the shape's path.
+    */
     public enum LineJoin {
         /// Specifies a miter line shape of the joints between connected segments of a stroked path.
         case Miter
@@ -266,6 +286,9 @@ public class C4Shape: C4View {
         case Bevel
     }
     
+    /**
+    The cap style for the ends of the shape's path.
+    */
     public enum LineCap {
         /// Specifies a butt line cap style for endpoints for an open path when stroked.
         case Butt

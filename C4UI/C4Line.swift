@@ -22,6 +22,10 @@ import CoreGraphics
 import C4Core
 
 public class C4Line: C4Polygon {
+    /**
+    The beginning point of the receiver. Animatable.
+    Assigning a new value to this variable will cause the head of the line to move to a new position.
+    */
     public var a: C4Point {
         get {
             return points[0]
@@ -30,6 +34,11 @@ public class C4Line: C4Polygon {
             updatePath()
         }
     }
+
+    /**
+    The end point of the receiver. Animatable.
+    Assigning a new value to this variable will cause the end of the line to move to a new position.
+    */
     public var b: C4Point {
         get {
             return points[1]

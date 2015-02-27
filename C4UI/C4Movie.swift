@@ -51,6 +51,11 @@ public class C4Movie: C4View {
         return self.view as MovieView
     }
     
+    /**
+    Initializes a new C4Movie using the specified filename from the bundle (i.e. your project).
+    
+    :param: name	The name of the movie file included in your project.
+    */
     convenience public init(_ filename: String) {
         //grab url for movie file
 
@@ -79,24 +84,51 @@ public class C4Movie: C4View {
         movieLayer.player = player
     }
     
+    /**
+    Initializes a new C4Movie using the specified frame.
+    
+    :param: frame	The frame of the new movie object.
+    */
     convenience public init(frame: C4Rect) {
         self.init()
         self.view = MovieView(frame: CGRect(frame))
     }
     
+    /**
+    Begins playback of the current item.
+    
+    This is the same as setting rate to 1.0.
+    */
     public func play() {
         player.play()
     }
     
+    /**
+    Pauses playback.
+    
+    This is the same as setting rate to 0.0.
+    */
     public func pause() {
         player.pause()
     }
     
+    /**
+    Stops playback.
+    
+    This is the same as setting rate to 0.0 and resetting the current time to 0.
+    */
     public func stop() {
         player.seekToTime(CMTimeMake(0,1))
         player.pause()
     }
     
+    /**
+    Called at the end of playback (i.e. when the movie reaches its end).
+    
+    You can override this function to add your own custom actions.
+    
+    Default behaviour: if the movie should loop then the method calls `stop()` and `play()`.
+    */
     public func reachedEnd() {
         if loops {
             stop()
@@ -104,5 +136,9 @@ public class C4Movie: C4View {
         }
     }
     
-    public var loops : Bool = true
+    /**
+    Assigning a value of true to this property will cause the receiver to loop at the end of playback.
+
+    The default value of this property is `true`.
+    */    public var loops : Bool = true
 }

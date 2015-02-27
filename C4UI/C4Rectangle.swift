@@ -22,12 +22,25 @@ import CoreGraphics
 import C4Core
 
 public class C4Rectangle: C4Shape {
+    
+    /**
+    Returns the corner size for the receiver.
+    
+    The shape of a C4Rectangle's corners are specified with width and height.
+    
+    Automatically updates the shape of the receiver's corners when set.
+    */
     public var corner: C4Size = C4Size() {
         didSet {
             updatePath()
         }
     }
     
+    /**
+    Initializes a new C4Rectangle using the specified frame.
+    
+    :param: frame A C4Rect whose dimensions are used to construct the C4Rectangle.
+    */
     convenience public init(frame: C4Rect) {
         self.init()
         view.frame = CGRect(frame)

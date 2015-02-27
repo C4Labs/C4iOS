@@ -22,6 +22,13 @@ import CoreGraphics
 import C4Core
 
 public class C4Triangle: C4Polygon {
+    /**
+    Initializes a new C4Triangle using the specified array of points.
+    
+    Protects against trying to create a triangle with less than three points.
+    
+    :param: points An array of C4Point structs.
+    */
     convenience public init(_ points: [C4Point]) {
         assert(points.count >= 3, "To create a Triangle you need to specify an array of at least 3 points")
         self.init(frame: C4Rect(points))

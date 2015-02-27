@@ -21,7 +21,16 @@ import Foundation
 import CoreGraphics
 import C4Core
 
+/**
+Extension for C4Shape that provides functionality for adding elements to a receiver's path.
+*/
 extension C4Shape {
+    /**
+    Appends a circle to the end of the receiver's path.
+    
+    :param: center The center of the new circle
+    :param: radius The radius of the new circle
+    */
     public func addCircle(#center: C4Point, radius: Double) {
         var newPath = path
         if newPath == nil {
@@ -34,6 +43,12 @@ extension C4Shape {
         adjustToFitPath()
     }
 
+    /**
+    Appends a polygon to the end of the receiver's path.
+    
+    :param: points An array of C4Point structs that defines the new polygon
+    :param: closed If true then the polygon will have an additional line between its first and last points
+    */
     public func addPolygon(#points: [C4Point], closed: Bool = true) {
         var newPath = path
         if newPath == nil {
@@ -53,6 +68,11 @@ extension C4Shape {
         adjustToFitPath()
     }
 
+    /**
+    Appends a line segment to the end of the receiver's path.
+    
+    :param: points An array of C4Point structs that defines the new line
+    */
     public func addLine(points:[C4Point]) {
         var newPath = path
         if path == nil {
@@ -67,6 +87,12 @@ extension C4Shape {
         adjustToFitPath()
     }
     
+    /**
+    Appends a bezier curve to the end of the receiver's path.
+    
+    :param: points An array of C4Point structs that defines the beginning and end points of the curve
+    :param: controls An array of C4Point structs used to define the shape of the curve
+    */
     public func addCurve(#points:[C4Point], controls:[C4Point]) {
         var newPath = path
         if path == nil {
