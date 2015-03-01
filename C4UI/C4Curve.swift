@@ -22,6 +22,12 @@ import UIKit
 import C4Core
 
 public class C4Curve : C4Shape {
+    /**
+    Creates a bezier curve.
+    
+    :param: points The beginning and end points	of the curve.
+    :param: controls The control points used to define the shape of the curve.
+    */
     convenience public init(points: [C4Point], controls: [C4Point]) {
         let p0 = CGPoint(points[0])
         let p1 = CGPoint(points[1])

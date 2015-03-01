@@ -46,6 +46,7 @@ public class C4Path: Equatable {
     
     public init() {
         internalPath = CGPathCreateMutable()
+        CGPathMoveToPoint(internalPath, nil, 0, 0)
     }
     
     public init(path: CGPathRef) {
@@ -220,13 +221,17 @@ extension C4Path {
     
     /**
     Append a path.
+    
+    :path:      A new C4Path that is added to the end of the receiver.
     */
     public func addPath(path: C4Path) {
         CGPathAddPath(internalPath, nil, path.internalPath)
     }
     
     /**
-    Tranform a path.
+    Transform a path.
+    
+    :transform: A C4Transform to be applied to the receiver.
     */
     public func transform(transform: C4Transform) {
         var t = transform.affineTransform

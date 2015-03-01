@@ -23,6 +23,11 @@ import C4Core
 
 public class C4Image: C4View {
 //MARK: Initializers
+    /**
+    Initializes a new C4Image using the specified filename from the bundle (i.e. your project), it will also grab images from the web if the filename starts with http.
+
+    :param: name	The name of the image included in your project, or a web address.
+    */
     convenience public init(_ filename: String) {
         if filename.hasPrefix("http") {
             self.init(url: NSURL(string: filename)!)
@@ -32,32 +37,62 @@ public class C4Image: C4View {
         self.init(uiimage: image!)
     }
     
+    /**
+    Initializes a new C4Image using an existing C4Image (basically like copying).
+    
+    :param: image A C4Image.
+    */
     convenience public init(image: C4Image) {
         self.init()
         self.view = image.view
     }
     
+    /**
+    Initializes a new C4Image using a UIImage.
+    
+    :param: uiimage A UIImage object.
+    */
     convenience public init(uiimage: UIImage) {
         self.init()
         self.view = UIImageView(image: uiimage)
         _originalSize = C4Size(view.frame.size)
     }
     
+    /**
+    Initializes a new C4Image using a CGImageRef.
+    
+    :param: uiimage A CGImageRef object.
+    */
     convenience public init(cgimage: CGImageRef) {
         let image = UIImage(CGImage: cgimage)
         self.init(uiimage: image!)
     }
     
+    /**
+    Initializes a new C4Image using a CIImage.
+    
+    :param: uiimage A CIImage object.
+    */
     convenience public init(ciimage: CIImage) {
         let image = UIImage(CIImage: ciimage)
         self.init(uiimage: image!)
     }
     
+    /**
+    Initializes a new C4Image using raw data (for example, if you download an image as data you can pass it here to create an image).
+    
+    :param: data An NSData object.
+    */
     convenience public init(data: NSData) {
         let image = UIImage(data: data)
         self.init(uiimage: image!)
     }
     
+    /**
+    Initializes a new C4Image from an URL.
+    
+    :param: url An NSURL object.
+    */
     convenience public init(url: NSURL) {
         var error: NSError?
         var data = NSData(contentsOfURL: url, options:.DataReadingMappedIfSafe, error: &error)
@@ -71,6 +106,12 @@ public class C4Image: C4View {
         self.init()
     }
     
+    /**
+    Initializes a new C4Image using raw data. This method differs from `C4Image(data:...)` in that you can pass an array of raw data to the initializer. This works if you're creating your own raw images by changing the values of individual pixels. Pixel data should be RGBA.
+    
+    :param: rawData An array of raw pixel data.
+    :param: size The size {w,h} of the image you're creating based on the pixel array.
+    */
     convenience public init(rawData: Void, size: C4Size) {
         let colorspace = CGColorSpaceCreateDeviceRGB()
         let bitsPerComponent = 8
@@ -89,33 +130,52 @@ public class C4Image: C4View {
     }
     
 //MARK: Properties
+    /**
+    Returns the UIImageView of the object.
+    :returns: A UIImageView object.
+    */
     internal var imageView : UIImageView {
         get {
             return self.view as UIImageView
         }
     }
     
+    /**
+    Returns a UIImage representation of the receiver.
+    :returns:	A UIImage object.
+    */
     public var uiimage: UIImage {
         get {
             return imageView.image!
         }
     }
     
-    //creates CGImage when accessed
+    /**
+    Returns a CGImageRef representation of the receiver.
+    :returns:	A CGImageRef object.
+    */
     var cgimage: CGImageRef {
         get {
             return uiimage.CGImage
         }
     }
     
-    //creates CIImage when accessed
+    /**
+    Returns a CIImage representation of the receiver. Generally, this would be used to work with filters.
+    :returns:	A CIImage object.
+    */
     var ciimage: CIImage {
         get {
             return CIImage(CGImage: cgimage)
         }
     }
     
-    //returns current image view layer's contents
+    /**
+    An object that provides the contents of the layer. Animatable.
+    The default value of this property is nil.
+    If you are using the layer to display a static image, you can set this property to the CGImageRef containing the image you want to display. Assigning a value to this property causes the layer to use your image rather than create a separate backing store.
+    If the layer object is tied to a view object, you should avoid setting the contents of this property directly. The interplay between views and layers usually results in the view replacing the contents of this property during a subsequent update.
+    */
     var contents : CGImageRef {
         get {
             let layer = imageView.layer as CALayer
@@ -125,6 +185,11 @@ public class C4Image: C4View {
         }
     }
     
+    /**
+    A variable that provides access to the width of the receiver. Animatable.
+    The default value of this property is defined by the image being created.
+    Assigning a value to this property causes the receiver to change the width of its frame. If the receiver's `contrainsProportions` variable is set to `true` the receiver's height will change to match the new width.
+    */
     public override var width : Double {
         get {
             return Double(view.frame.size.width)
@@ -140,6 +205,11 @@ public class C4Image: C4View {
         }
     }
 
+    /**
+    A variable that provides access to the height of the receiver. Animatable.
+    The default value of this property is defined by the image being created.
+    Assigning a value to this property causes the receiver to change the height of its frame. If the receiver's `contrainsProportions` variable is set to `true` the receiver's width will change to match the new width.
+    */
     public override var height : Double {
         get {
             return Double(view.frame.size.height)
@@ -155,8 +225,15 @@ public class C4Image: C4View {
         }
     }
 
+    /**
+    Assigning a value of true to this property will cause the receiver to scale its entire frame whenever its `width` or `height` variables are set.
+    The default value of this property is `false`.
+    */
     public var constrainsProportions : Bool = false
     
+    /**
+    The original size of the receiver when it was initialized.
+    */
     internal var _originalSize : C4Size = C4Size()
     public var originalSize : C4Size {
         get {
@@ -164,6 +241,9 @@ public class C4Image: C4View {
         }
     }
 
+    /**
+    The original width/height ratio of the receiver when it was initialized.
+    */
     public var originalRatio : Double {
         get {
             return _originalSize.width / _originalSize.height

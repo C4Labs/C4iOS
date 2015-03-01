@@ -22,6 +22,12 @@ import CoreGraphics
 import C4Core
 
 public class C4RegularPolygon: C4Shape {
+
+    /**
+    Returns the number of sides in the polygon.
+    
+    Assigning a value to this property will change the number of sides and cause the receiver to automatically update its path.
+    */
     @IBInspectable
     public var sides: Int = 6 {
         didSet {
@@ -29,6 +35,11 @@ public class C4RegularPolygon: C4Shape {
         }
     }
     
+    /**
+    Returns the phase (i.e. "rotated" beginning position) of the shape. This is not actual rotation, it simply changes where the beginning of the shape is.
+    
+    Assigning a value to this property will change the starting position of the beginning of the shape. The shape will still calculate its points based on the frame.
+    */
     @IBInspectable
     public var phase: Double = 0 {
         didSet {
@@ -36,10 +47,16 @@ public class C4RegularPolygon: C4Shape {
         }
     }
     
+    /**
+    Initializes a new C4RegularPolygon.
+    
+    Default values are are sides = 6 (i.e. a hexagon) and phase = 0.
+    
+    :param: frame A C4Rect into which the shape of the polygon will be generated (taking into consideration `sides` and `phase`).
+    */
     convenience public init(frame: C4Rect) {
         self.init()
         self.view.frame = CGRect(frame)
-        view.layer.addSublayer(shapeLayer)
         updatePath()
     }
     
@@ -52,7 +69,7 @@ public class C4RegularPolygon: C4Shape {
     }
     
     internal override func updatePath() {
-        let rect = inset(C4Rect(view.frame), lineWidth, lineWidth)
+        let rect = inset(C4Rect(view.bounds), lineWidth, lineWidth)
         let rx = rect.size.width / 2.0
         let ry = rect.size.height / 2.0
         if sides == 0 || rx <= 0 || ry <= 0 {

@@ -126,64 +126,105 @@ public struct C4Vector : Equatable {
         z = x * t[2, 0] + y * t[2, 1] + z * t[2, 2]
     }
     
+    /**
+    A string representation of the vector.
+    
+    :returns: A string formatted to look like {x,y,z}
+    */
     public func description() -> String {
         return "{\(x), \(y), \(z)}"
     }
 }
 
+/**
+Returns true if the coordinates of both vectors are identical
+*/
 public func == (lhs: C4Vector, rhs: C4Vector) -> Bool {
     return lhs.x == rhs.x && lhs.y == rhs.y && lhs.z == rhs.z
 }
 
+/**
+Transforms the left-hand vector by adding the values of the right-hand vector
+*/
 public func += (inout lhs: C4Vector, rhs: C4Vector) {
     lhs.x += rhs.x
     lhs.y += rhs.y
     lhs.z += rhs.z
 }
 
+/**
+Transforms the left-hand vector by subtracting the values of the right-hand vector
+*/
 public func -= (inout lhs: C4Vector, rhs: C4Vector) {
     lhs.x -= rhs.x
     lhs.y -= rhs.y
     lhs.z -= rhs.z
 }
 
+/**
+Transforms the left-hand vector by multiplying each by the values of the right-hand vector
+*/
 public func *= (inout lhs: C4Vector, rhs: Double) {
     lhs.x *= rhs
     lhs.y *= rhs
     lhs.z *= rhs
 }
 
+/**
+Transforms the left-hand vector by dividing each by the values of the right-hand vector
+*/
 public func /= (inout lhs: C4Vector, rhs: Double) {
     lhs.x /= rhs
     lhs.y /= rhs
     lhs.z /= rhs
 }
 
+/**
+Returns a new vector whose coordinates are the sum of both input vectors
+*/
 public func + (lhs: C4Vector, rhs: C4Vector) -> C4Vector {
     return C4Vector(x: lhs.x + rhs.x, y: lhs.y + rhs.y, z: lhs.z + rhs.z)
 }
 
+/**
+Returns a new vector whose coordinates are the subtraction of the right-hand vector from the left-hand vector
+*/
 public func - (lhs: C4Vector, rhs: C4Vector) -> C4Vector {
     return C4Vector(x: lhs.x - rhs.x, y: lhs.y - rhs.y, z: lhs.z - rhs.z)
 }
 
+/**
+Returns a new vector that is the dot product of the both input vectors
+*/
 infix operator ⋅ { associativity left precedence 150 }
 public func ⋅ (lhs: C4Vector, rhs: C4Vector) -> Double {
     return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z
 }
 
+/**
+Returns a new vector whose coordinates are the division of the left-hand vector coordinates by those of the right-hand vector
+*/
 public func / (lhs: C4Vector, rhs: Double) -> C4Vector {
     return C4Vector(x: lhs.x / rhs, y: lhs.y / rhs, z: lhs.z / rhs)
 }
 
+/**
+Returns a new vector whose coordinates are the multiplication of the left-hand vector coordinates by those of the right-hand vector
+*/
 public func * (lhs: C4Vector, rhs: Double) -> C4Vector {
     return C4Vector(x: lhs.x * rhs, y: lhs.y * rhs, z: lhs.z * rhs)
 }
 
+/**
+Returns a new vector whose coordinates are the negative values of the receiver
+*/
 public prefix func - (vector: C4Vector) -> C4Vector {
     return C4Vector(x: -vector.x, y: -vector.y, z: -vector.z)
 }
 
+/**
+Initializes a C4Vector from a CGPoint
+*/
 public extension C4Vector {
     public init(_ point: CGPoint) {
         x = Double(point.x)

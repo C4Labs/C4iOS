@@ -22,6 +22,15 @@ import CoreGraphics
 import C4Core
 
 public class C4Star: C4Polygon {
+    
+    /**
+    Initializes a new C4Star shape.
+    
+    :param: center The center of the star
+    :param: pointCount The number of points on the star
+    :param: innerRadius The radial distance from the center of the star to the inner points
+    :param: outerRadius The radial distance from the center of the start to the outer points
+    */
     convenience public init(center: C4Point, pointCount: Int, innerRadius: Double, outerRadius: Double) {
         let wedgeAngle = 2.0 * M_PI / Double(pointCount)
         let length = 2.0 * innerRadius * sin(wedgeAngle)

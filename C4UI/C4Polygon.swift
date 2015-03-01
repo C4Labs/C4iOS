@@ -22,11 +22,24 @@ import CoreGraphics
 import C4Core
 
 public class C4Polygon: C4Shape {
+    /**
+    Returns the array of points that make up the polygon.
+    
+    Assigning an array of C4Point values to this object will cause the receiver to update itself.
+    */
     public var points: [C4Point] {
         didSet {
             updatePath()
         }
     }
+    
+    /**
+    Initializes a new C4Polygon using the specified array of points.
+    
+    Protects against trying to create a polygon with only 1 point (i.e. requires 2 or more points).
+
+    :param: points An array of C4Point structs.
+    */
     convenience public init(_ points: [C4Point]) {
         assert(points.count >= 2, "To create a Polygon you need to specify an array of at least 2 points")
         self.init(frame: C4Rect(points))
@@ -40,6 +53,11 @@ public class C4Polygon: C4Shape {
         adjustToFitPath()
     }
     
+    /**
+    Initializes a polygon without any points.
+    
+    Properly constructs the self.points array.
+    */
     public override init() {
         self.points = [C4Point]()
         super.init()

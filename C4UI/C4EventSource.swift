@@ -24,11 +24,21 @@ import UIKit
 public class C4EventSource : NSObject {
     
     //MARK: - EventSource
+    /**
+    Posts a new notification originating from the receiver.
     
+    :param: event The notification name for the event
+    */
     internal func post(event: String) {
         NSNotificationCenter.defaultCenter().postNotificationName(event, object: self)
     }
     
+    /**
+    An action to run on receipt of a given event.
+    
+    :param: event The notification name to listen for
+    :param: run A block of code to run when the receiver "hears" the specified event name
+    */
     public func on(event notificationName: String, run executionBlock: Void -> Void) -> AnyObject {
         let nc = NSNotificationCenter.defaultCenter()
         return nc.addObserverForName(notificationName, object: self, queue: NSOperationQueue.currentQueue(), usingBlock: { notification in
@@ -36,6 +46,11 @@ public class C4EventSource : NSObject {
         });
     }
     
+    /**
+    Cancels any actions registered to run for a specified object.
+    
+    :param: observer An object whose actions are to be removed from the notification center.
+    */
     public func cancel(observer: AnyObject) {
         let nc = NSNotificationCenter.defaultCenter()
         nc.removeObserver(observer)

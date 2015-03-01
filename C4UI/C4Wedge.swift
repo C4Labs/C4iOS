@@ -22,6 +22,16 @@ import UIKit
 import C4Core
 
 public class C4Wedge : C4Shape {
+    /**
+    Initializes a new C4Wedge.
+    
+    This shape differs from C4Arc in that is adds a point at the "center" of the circle on which the wedge exists.
+    
+    :param: center The center of the wedge.
+    :param: radius The radius of the wedge.
+    :param: start The start angle of the wedge.
+    :param: end The end angle of the wedge.
+    */
     convenience public init(center: C4Point, radius: Double, start: Double, end: Double) {
         let wedgeRect = CGRectMakeFromWedge(CGPoint(center),CGFloat(radius),CGFloat(start),CGFloat(end), end > start ? false : true);
         self.init(frame: C4Rect(wedgeRect))

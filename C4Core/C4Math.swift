@@ -22,6 +22,8 @@ import Foundation
 /**
 Clamp a value to the range [min, max].
 
+If the value is less than min this function returns min, if the value is greater than max the function returns max, otherwise it returns the value.
+
 :param: val The value
 :param: min The lower bound
 :param: max The upper bound
@@ -38,6 +40,11 @@ public func clamp<T : Comparable>(val: T, min: T, max: T) -> T {
 /**
 Linear interpolation. For any two values a and b return a linear interpolation with parameter `param`.
 
+For example:
+    lerp(0,100,0.5) = 50
+    lerp(100,200,0.5) = 150
+    lerp(500,1000,0.33) = 665
+
 :param: a     first value
 :param: b     second value
 :param: param parameter between 0 and 1 for interpolation
@@ -50,6 +57,11 @@ public func lerp(a: Double, b: Double, param: Double) -> Double {
 
 /**
 Linear mapping. Maps a value in the source range [min, max] to a value in the target range [toMin, toMax] using linear interpolation.
+
+For example:
+    map(10, 0, 20, 0, 200) = 100
+    map(10, 0, 100, 200, 300) = 210
+    map(10, 0, 20, 200, 300) = 250
 
 :param: val   Source value
 :param: min   Source range lower bound
@@ -97,10 +109,24 @@ public func random01() -> Double {
     return Double(arc4random()) / Double(UInt32.max)
 }
 
+/**
+Converts radian values to degrees.
+
+Uses the following equation: value * 180.0 / PI
+
+:returns: A double value representation of the radian value in degrees.
+*/
 public func radToDeg(val: Double) -> Double {
     return 180.0 * val / M_PI
 }
 
+/**
+Converts degree values to radians.
+
+Uses the following equation: value * PI / 180.0
+
+:returns: A double value representation of the degree value in radians.
+*/
 public func degToRad(val: Double) -> Double {
     return M_PI * val / 180.0
 }

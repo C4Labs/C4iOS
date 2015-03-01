@@ -38,6 +38,12 @@ public class C4TextShape : C4Shape {
         font = C4Font(font: UIFont.systemFontOfSize(UIFont.systemFontSize()))
     }
     
+    /**
+    Initializes a new C4TextShape from a specifed string and a font
+    
+    :param: text The string to be rendered as a shape
+    :param: font The font used to define the shape of the text
+    */
     convenience public init(text: String, font: C4Font) {
         self.init()
         self.text = text

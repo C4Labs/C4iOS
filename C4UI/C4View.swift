@@ -26,21 +26,37 @@ public class C4View : NSObject {
     public override init() {
     }
     
+    /**
+    Initializes a new C4View from a UIView.
+    
+    :param: view A UIView.
+    */
     public init(view: UIView) {
         self.view = view;
     }
     
+    /**
+    Initializes a new C4View with the specifed frame.
+    
+    :param: frame A C4Rect, which describes the view’s location and size in its superview’s coordinate system.
+    */
     convenience public init(frame: C4Rect) {
         self.init()
         self.view.frame = CGRect(frame)
     }
     
+    /**
+    Returns the receiver's layer.
+    */
     public var layer: CALayer? {
         get {
             return view.layer
         }
     }
     
+    /**
+    Returns the receiver's frame. Animatable.
+    */
     public var frame: C4Rect {
         get {
             return C4Rect(view.frame)
@@ -50,6 +66,9 @@ public class C4View : NSObject {
         }
     }
     
+    /**
+    Returns the receiver's bounds. Animatable.
+    */
     public var bounds: C4Rect {
         get {
             return C4Rect(view.bounds)
@@ -59,6 +78,9 @@ public class C4View : NSObject {
         }
     }
     
+    /**
+    Returns the receiver's center point. Animatable.
+    */
     public var center: C4Point {
         get {
             return C4Point(view.center)
@@ -68,6 +90,9 @@ public class C4View : NSObject {
         }
     }
 
+    /**
+    Returns the receiver's origin. Animatable.
+    */
     public var origin: C4Point {
         get {
             return frame.origin
@@ -77,6 +102,9 @@ public class C4View : NSObject {
         }
     }
     
+    /**
+    Returns the receiver's frame size. Animatable.
+    */
     public var size: C4Size {
         get {
             return bounds.size
@@ -86,18 +114,27 @@ public class C4View : NSObject {
         }
     }
     
+    /**
+    Returns the receiver's frame width. Animatable.
+    */
     public var width: Double {
         get {
             return Double(bounds.size.width)
         }
     }
     
-    public var height: Double {
+    /**
+    Returns the receiver's frame height. Animatable.
+    */
+   public var height: Double {
         get {
             return Double(bounds.size.height)
         }
     }
  
+    /**
+    Returns the receiver's background color. Animatable.
+    */
     public var backgroundColor: C4Color? {
         get {
             if let color = view.backgroundColor {
@@ -115,6 +152,9 @@ public class C4View : NSObject {
         }
     }
     
+    /**
+    Returns the receiver's opacity. Animatable.
+    */
     public var opacity: Double {
         get {
             return Double(view.alpha)
@@ -124,6 +164,9 @@ public class C4View : NSObject {
         }
     }
     
+    /**
+    Returns true if the receiver is hidden, false if visible.
+    */
     public var hidden: Bool {
         get {
             return view.hidden
@@ -133,6 +176,9 @@ public class C4View : NSObject {
         }
     }
     
+    /**
+    Returns the receiver's current transform.
+    */
     public var transform: C4Transform {
         get {
             return C4Transform(view.layer.transform)
@@ -162,58 +208,106 @@ public class C4View : NSObject {
     
 
     //MARK: - Touchable
-    
+    /**
+    Returns true if the receiver accepts touch events.
+    */
     public var interactionEnabled: Bool = true {
         didSet {
             self.view.userInteractionEnabled = interactionEnabled
         }
     }
     
+    /**
+    Adds a tap gesture recognizer to the receiver's view.
+    
+    :param: action A block of code to be executed when the receiver recognizes a tap gesture.
+    :returns: A UITapGestureRecognizer that can be customized.
+    */
     public func addTapGestureRecognizer(action: TapAction) -> UITapGestureRecognizer {
         let gestureRecognizer = UITapGestureRecognizer(view: self.view, action: action)
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
     }
     
+    /**
+    Adds a pan gesture recognizer to the receiver's view.
+    
+    :param: action A block of code to be executed when the receiver recognizes a pan gesture.
+    :returns: A UIPanGestureRecognizer that can be customized.
+    */
     public func addPanGestureRecognizer(action: PanAction) -> UIPanGestureRecognizer {
         let gestureRecognizer = UIPanGestureRecognizer(view: self.view, action: action)
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
     }
     
+    /**
+    Adds a pinch gesture recognizer to the receiver's view.
+    
+    :param: action A block of code to be executed when the receiver recognizes a pinch gesture.
+    :returns: A UIPinchGestureRecognizer that can be customized.
+    */
     public func addPinchGestureRecognizer(action: PinchAction) -> UIPinchGestureRecognizer {
         let gestureRecognizer = UIPinchGestureRecognizer(view: view, action: action)
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
     }
     
+    /**
+    Adds a rotation gesture recognizer to the receiver's view.
+    
+    :param: action A block of code to be executed when the receiver recognizes a rotation gesture.
+    :returns: A UIRotationGestureRecognizer that can be customized.
+    */
     public func addRotationGestureRecognizer(action: RotationAction) -> UIRotationGestureRecognizer {
         let gestureRecognizer = UIRotationGestureRecognizer(view: view, action: action)
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
     }
     
+    /**
+    Adds a longpress gesture recognizer to the receiver's view.
+    
+    :param: action A block of code to be executed when the receiver recognizes a longpress gesture.
+    :returns: A UILongPressGestureRecognizer that can be customized.
+    */
     public func addLongPressGestureRecognizer(action: LongPressAction) -> UILongPressGestureRecognizer {
         let gestureRecognizer = UILongPressGestureRecognizer(view: view, action: action)
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
     }
     
+    /**
+    Adds a swipe gesture recognizer to the receiver's view.
+    
+    :param: action A block of code to be executed when the receiver recognizes a swipe gesture.
+    :returns: A UISwipeGestureRecognizer that can be customized.
+    */
     public func addSwipeGestureRecognizer(action: SwipeAction) -> UISwipeGestureRecognizer {
         let gestureRecognizer = UISwipeGestureRecognizer(view: view, action: action)
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
     }
     
+    /**
+    Adds a screen edge pan gesture recognizer to the receiver's view.
+    
+    :param: action A block of code to be executed when the receiver recognizes a screen edge pan gesture.
+    :returns: A UIScreenEdgePanGestureRecognizer that can be customized.
+    */
     public func addScreenEdgePanGestureRecognizer(action: ScreenEdgePanAction) -> UIScreenEdgePanGestureRecognizer {
         let gestureRecognizer = UIScreenEdgePanGestureRecognizer(view: view, action: action)
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
     }
     
-    
     //MARK: - AddRemoveSubview
-    
+    /**
+    Adds a view to the end of the receiver’s list of subviews.
+
+    When working with C4, use this method to add views because it handles the addition of both UIView and C4View.
+    :param: view	The view to be added.
+    */
     public func add<T>(subview: T) {
         if let v = subview as? UIView {
             view.addSubview(v)
@@ -222,6 +316,16 @@ public class C4View : NSObject {
             view.addSubview(v.view)
         }
     }
+
+    /**
+    Unlinks the view from the receiver and its window, and removes it from the responder chain.
+    
+    Calling this method removes any constraints that refer to the view you are removing, or that refer to any view in the subtree of the view you are removing.
+    
+    When working with C4, use this method to add views because it handles the removal of both UIView and C4View.
+    
+    :param: view	The view to be removed.
+    */
     public func remove<T>(subview: T) {
         if let v = subview as? UIView {
             v.removeFromSuperview()
@@ -230,17 +334,40 @@ public class C4View : NSObject {
             v.view.removeFromSuperview()
         }
     }
+    
+    /**
+    Unlinks the view from its superview and its window, and removes it from the responder chain.
+    
+    If the view’s superview is not nil, the superview releases the view.
+
+    Calling this method removes any constraints that refer to the view you are removing, or that refer to any view in the subtree of the view you are removing.
+    */
     public func removeFromSuperview() {
         self.view.removeFromSuperview()
     }
     
     //MARK: - HitTest
+    
+    /**
+    Returns whether a specified point is contained within the frame of the receiver.
+
+    :param: point	The point to examine.
+    */
     public func hitTest(point: C4Point) -> Bool {
         return CGRectContainsPoint(CGRect(bounds), CGPoint(point))
     }
 }
 
+/**
+Extension to UIView that adds handling addition and removal of C4View objects.
+*/
 extension UIView {
+    /**
+    Adds a view to the end of the receiver’s list of subviews.
+    
+    When working with C4, use this method to add views because it handles the addition of both UIView and C4View.
+    :param: view	The view to be added.
+    */
     public func add<T>(subview: T) {
         if let v = subview as? UIView {
             self.addSubview(v)
@@ -249,6 +376,15 @@ extension UIView {
         }
     }
     
+    /**
+    Unlinks the view from the receiver and its window, and removes it from the responder chain.
+    
+    Calling this method removes any constraints that refer to the view you are removing, or that refer to any view in the subtree of the view you are removing.
+    
+    When working with C4, use this method to add views because it handles the removal of both UIView and C4View.
+    
+    :param: view	The view to be removed.
+    */
     public func remove<T>(subview: T) {
         if let v = subview as? UIView {
             v.removeFromSuperview()
