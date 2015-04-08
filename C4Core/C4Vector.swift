@@ -89,7 +89,7 @@ public struct C4Vector : Equatable {
         vecA -= basedOn
         vecB -= basedOn
         
-        return acos(vecA ⋅ vecB / (self.magnitude * vecB.magnitude))
+        return acos(vecA ⋅ vecB / (vecA.magnitude * vecB.magnitude))
     }
 
     /**

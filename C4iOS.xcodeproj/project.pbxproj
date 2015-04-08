@@ -63,6 +63,7 @@
 		D90CB39A1A67020B006233D5 /* C4ViewAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A930661D1A57736600E704FF /* C4ViewAnimation.swift */; };
 		D91D8C331A69A7C000A17464 /* C4Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91D8C321A69A7C000A17464 /* C4Movie.swift */; };
 		D96954FE1A2526A100622AB0 /* C4Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96954FD1A2526A100622AB0 /* C4Shape.swift */; };
+		D990BB971AC1F174009BBCAD /* C4Wedge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8373051A574991009E0DCB /* C4Wedge.swift */; };
 		D9C0EF441A25190300C7A904 /* C4Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5726E319FCECE4006FF395 /* C4Foundation.swift */; };
 		D9C0EF451A25190400C7A904 /* C4Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5726E319FCECE4006FF395 /* C4Foundation.swift */; };
 /* End PBXBuildFile section */
@@ -670,6 +671,7 @@
 				D90CB38C1A6700C1006233D5 /* C4Image.swift in Sources */,
 				A930662B1A68E78400E704FF /* C4AudioPlayer.swift in Sources */,
 				D90CB38D1A6700C1006233D5 /* C4Image+Crop.swift in Sources */,
+				D990BB971AC1F174009BBCAD /* C4Wedge.swift in Sources */,
 				D90CB3941A6701B8006233D5 /* C4Curve.swift in Sources */,
 				D90CB38E1A6700C1006233D5 /* C4Image+Filter.swift in Sources */,
 				D90CB3981A6701D2006233D5 /* C4Star.swift in Sources */,
