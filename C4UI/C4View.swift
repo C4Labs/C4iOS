@@ -346,6 +346,16 @@ public class C4View : NSObject {
         self.view.removeFromSuperview()
     }
     
+    /**
+    */
+    public func sendSubviewToBack<T>(subview: T) {
+        if let v = subview as? UIView {
+            view.sendSubviewToBack(v)
+        } else if let v = subview as? C4View {
+            view.sendSubviewToBack(v.view)
+        }
+    }
+    
     //MARK: - HitTest
     
     /**

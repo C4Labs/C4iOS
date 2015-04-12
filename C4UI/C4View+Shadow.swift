@@ -94,7 +94,9 @@ public extension C4View {
                 shadow.color = C4Color(layer.shadowColor)
                 shadow.offset = C4Size(layer.shadowOffset)
                 shadow.opacity = Double(layer.shadowOpacity)
-                shadow.path = C4Path(path: layer.shadowPath)
+                if let path = shadow.path {
+                    shadow.path = C4Path(path: layer.shadowPath)
+                }
             }
             return shadow
         }
