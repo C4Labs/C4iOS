@@ -187,6 +187,23 @@ public class C4View : NSObject {
             view.layer.transform = newValue.transform3D
         }
     }
+
+    /** 
+    Defines the anchor point of the layer's bounds rect, as a point in
+    normalized layer coordinates - '(0, 0)' is the bottom left corner of
+    the bounds rect, '(1, 1)' is the top right corner. Defaults to
+    '(0.5, 0.5)', i.e. the center of the bounds rect. Animatable. 
+    */
+    public var anchorPoint: C4Point {
+        get {
+            return C4Point(view.layer.anchorPoint)
+        }
+        set(val) {
+            let oldFrame = view.frame
+            view.layer.anchorPoint = CGPoint(val)
+            view.frame = oldFrame
+        }
+    }
     
     //MARK: - EventSource
     
