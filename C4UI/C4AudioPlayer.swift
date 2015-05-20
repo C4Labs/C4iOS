@@ -62,7 +62,16 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
     public func pause() {
         currentPlayer.pause()
     }
-    
+
+    /**
+    Stops playback and undoes the setup needed for playback.
+    Calling this method, or allowing a sound to finish playing, undoes the setup performed upon calling the play or prepareToPlay methods.
+    The stop method does not reset the value of the currentTime property to 0. In other words, if you call stop during playback and then call play, playback resumes at the point where it left off.
+    */
+    public func stop() {
+        currentPlayer.stop()
+    }
+
     /**
     Returns the total duration, in seconds, of the sound associated with the audio player. (read-only)
     */
@@ -159,6 +168,19 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
             currentPlayer = audiofiles[index - 1]
             currentPlayer.currentTime = 0.0
             currentPlayer.play()
+        }
+    }
+    
+    public var loops : Bool {
+        get {
+            return currentPlayer.numberOfLoops > 0 ? true : false
+        }
+        set(val) {
+            if val {
+                currentPlayer.numberOfLoops = 1000000
+            } else {
+                currentPlayer.numberOfLoops = 0
+            }
         }
     }
 }
