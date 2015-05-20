@@ -180,7 +180,7 @@ public func == (lhs: C4Transform, rhs: C4Transform) -> Bool {
     var equal = true
     for col in 0...3 {
         for row in 0...3 {
-            equal &= lhs[row, col] == rhs[row, col]
+            equal = equal && lhs[row, col] == rhs[row, col]
         }
     }
     return equal

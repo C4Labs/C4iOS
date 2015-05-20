@@ -98,7 +98,7 @@ extension UITapGestureRecognizer {
     internal class TapGestureHandler : NSObject {
         let action: TapAction
         
-        init(action: TapAction) {
+        init(_ action: TapAction) {
             self.action = action
         }
         
@@ -161,7 +161,7 @@ extension UIPanGestureRecognizer {
     internal class PanGestureHandler : NSObject {
         let action: PanAction
         
-        init(action: PanAction) {
+        init(_ action: PanAction) {
             self.action = action
         }
         
@@ -208,7 +208,7 @@ extension UIPinchGestureRecognizer {
     internal class PinchGestureHandler : NSObject {
         let action: PinchAction
         
-        init(action: PinchAction) {
+        init(_ action: PinchAction) {
             self.action = action
         }
         
@@ -256,7 +256,7 @@ extension UIRotationGestureRecognizer {
     internal class RotationGestureHandler : NSObject {
         let action: RotationAction
         
-        init(action: RotationAction) {
+        init(_ action: RotationAction) {
             self.action = action
         }
         
@@ -303,7 +303,7 @@ extension UILongPressGestureRecognizer {
     internal class LongPressGestureHandler : NSObject {
         let action: LongPressAction
         
-        init(action: LongPressAction) {
+        init(_ action: LongPressAction) {
             self.action = action
         }
         
@@ -350,7 +350,7 @@ extension UISwipeGestureRecognizer {
     internal class SwipeGestureHandler : NSObject {
         let action: SwipeAction
         
-        init(action: SwipeAction) {
+        init(_ action: SwipeAction) {
             self.action = action
         }
         
@@ -398,7 +398,7 @@ extension UIScreenEdgePanGestureRecognizer {
     internal class ScreenEdgePanGestureHandler : NSObject {
         let action: ScreenEdgePanAction
         
-        init(action: ScreenEdgePanAction) {
+        init(_ action: ScreenEdgePanAction) {
             self.action = action
         }
         

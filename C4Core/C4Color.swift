@@ -220,7 +220,7 @@ Initializes a UIColor object from a C4Color object.
 :returns: A UIColor whose characteristics match the specified C4Color
 */
 public extension UIColor {
-    public convenience init(_ color: C4Color) {
+    public convenience init?(_ color: C4Color) {
         self.init(CGColor: color.CGColor)
     }
 }

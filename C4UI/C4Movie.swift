@@ -32,7 +32,7 @@ public class C4Movie: C4View {
         
         var movieLayer: AVPlayerLayer {
             get {
-                return self.layer as AVPlayerLayer
+                return self.layer as! AVPlayerLayer
             }
         }
         
@@ -48,7 +48,7 @@ public class C4Movie: C4View {
     }
     
     internal var movieView: MovieView {
-        return self.view as MovieView
+        return self.view as! MovieView
     }
     
     /**
@@ -62,11 +62,11 @@ public class C4Movie: C4View {
         let url = NSBundle.mainBundle().URLForResource(filename, withExtension: nil)
         
         //create asset from url
-        let asset = AVAsset.assetWithURL(url) as AVAsset
+        let asset = AVAsset.assetWithURL(url)as! AVAsset
         let tracks = asset.tracksWithMediaType(AVMediaTypeVideo)
         
         //grab the movie track and size
-        let movieTrack = tracks[0] as AVAssetTrack
+        let movieTrack = tracks[0] as! AVAssetTrack
         let size = C4Size(movieTrack.naturalSize)
         
         self.init(frame: C4Rect(0,0,Double(size.width),Double(size.height)))

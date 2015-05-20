@@ -45,7 +45,7 @@ public extension UIViewController {
     */
     public var canvas : C4View {
         get {
-            let optionalCanvas = objc_getAssociatedObject(self, &canvasAssociationKey) as C4View?
+            let optionalCanvas = objc_getAssociatedObject(self, &canvasAssociationKey) as! C4View?
             if let canvas = optionalCanvas {
                 return canvas
             }

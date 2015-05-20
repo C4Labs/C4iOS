@@ -26,7 +26,7 @@ public class C4Shape: C4View {
     internal class ShapeView : UIView {
         var shapeLayer: C4ShapeLayer {
             get {
-                return self.layer as C4ShapeLayer
+                return self.layer as! C4ShapeLayer
             }
         }
         
@@ -42,7 +42,7 @@ public class C4Shape: C4View {
     }
 
     internal var shapeView: ShapeView {
-        return self.view as ShapeView
+        return self.view as! ShapeView
     }
 
     /**
@@ -249,7 +249,7 @@ public class C4Shape: C4View {
     The dash pattern applied when creating the stroked version of the path. Defaults to nil.
     */
     public var lineDashPattern: [NSNumber]? {
-        get { return shapeLayer.lineDashPattern as [NSNumber]? }
+        get { return shapeLayer.lineDashPattern as! [NSNumber]? }
         set(pattern) { shapeLayer.lineDashPattern = pattern }
     }
 

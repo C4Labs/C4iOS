@@ -24,7 +24,7 @@ public class C4ViewAnimation : C4Animation {
     
     public var animations: () -> Void
     
-    public init(animations: () -> Void) {
+    public init(_ animations: () -> Void) {
         self.animations = animations
     }
     
@@ -149,7 +149,7 @@ public class C4ViewAnimationGroup: C4Animation {
         
         var allCompleted = true
         for c in completed {
-            allCompleted &= c
+            allCompleted = allCompleted && c
         }
         if allCompleted {
             cleanUp()

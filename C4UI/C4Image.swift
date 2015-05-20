@@ -122,7 +122,7 @@ public class C4Image: C4View {
             let alphaInfo = CGBitmapInfo(CGImageAlphaInfo.PremultipliedLast.rawValue)
             let orderInfo = CGBitmapInfo.ByteOrder32Big
             let info = alphaInfo | orderInfo
-            return CGBitmapContextCreate(pointer, UInt(size.width), UInt(size.height), 8, UInt(4*size.width), colorspace, info)
+            return CGBitmapContextCreate(pointer, Int(size.width), Int(size.height), 8, Int(4*size.width), colorspace, info)
         }
         
         let image = CGBitmapContextCreateImage(context)
@@ -136,7 +136,7 @@ public class C4Image: C4View {
     */
     internal var imageView : UIImageView {
         get {
-            return self.view as UIImageView
+            return self.view as! UIImageView
         }
     }
     
@@ -179,7 +179,7 @@ public class C4Image: C4View {
     var contents : CGImageRef {
         get {
             let layer = imageView.layer as CALayer
-            return layer.contents as CGImageRef
+            return layer.contents as! CGImageRef
         } set(val) {
             imageView.layer.contents = val
         }

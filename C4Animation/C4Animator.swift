@@ -22,7 +22,7 @@ import QuartzCore
 private let _sharedAnimator = C4Animator()
 
 internal class C4Animator : NSObject {
-    private let displayLink: CADisplayLink!
+    private var displayLink: CADisplayLink!
     private var animations: [NSObject: [String: C4GenericAnimation]] = [:]
     
     class var sharedAnimator: C4Animator {
@@ -31,7 +31,7 @@ internal class C4Animator : NSObject {
     
     override init() {
         super.init()
-        displayLink = CADisplayLink(target: self, selector: Selector("render"))
+        displayLink = CADisplayLink(target: nil, selector: Selector("render"))
         displayLink.paused = true
         displayLink.addToRunLoop(NSRunLoop.currentRunLoop(), forMode: NSRunLoopCommonModes)
     }

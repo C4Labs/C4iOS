@@ -19,6 +19,7 @@
 		1FFE45B91A51F1A000E0B334 /* C4Rectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFE45B81A51F1A000E0B334 /* C4Rectangle.swift */; };
 		1FFE45BD1A51F8A200E0B334 /* C4Ellipse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFE45BC1A51F8A200E0B334 /* C4Ellipse.swift */; };
 		1FFE45BF1A51FA0B00E0B334 /* C4RegularPolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFE45BE1A51FA0B00E0B334 /* C4RegularPolygon.swift */; };
+		611A13841B0D49C000A9A4B1 /* C4Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9596D191A054A960023323D /* C4Core.framework */; };
 		614F824919DB5ED3001DF1D4 /* C4UI.h in Headers */ = {isa = PBXBuildFile; fileRef = 614F824819DB5ED3001DF1D4 /* C4UI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A930662B1A68E78400E704FF /* C4AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A930662A1A68E78400E704FF /* C4AudioPlayer.swift */; };
 		A94E3BD419E0E9390039A9C4 /* C4UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 614F824319DB5ED3001DF1D4 /* C4UI.framework */; };
@@ -68,6 +69,13 @@
 
 /* Begin PBXContainerItemProxy section */
 		1F3FC01F1A0F2EDC005984BB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 614F823A19DB5ED3001DF1D4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9596D181A054A960023323D;
+			remoteInfo = C4Core;
+		};
+		611A13821B0D49B900A9A4B1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 614F823A19DB5ED3001DF1D4 /* Project object */;
 			proxyType = 1;
@@ -209,6 +217,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				611A13841B0D49C000A9A4B1 /* C4Core.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,6 +533,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				611A13831B0D49B900A9A4B1 /* PBXTargetDependency */,
 			);
 			name = C4Animation;
 			productName = C4Animation;
@@ -746,6 +756,11 @@
 			target = A9596D181A054A960023323D /* C4Core */;
 			targetProxy = 1F3FC01F1A0F2EDC005984BB /* PBXContainerItemProxy */;
 		};
+		611A13831B0D49B900A9A4B1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9596D181A054A960023323D /* C4Core */;
+			targetProxy = 611A13821B0D49B900A9A4B1 /* PBXContainerItemProxy */;
+		};
 		A93066181A576E5800E704FF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A9596D891A089E9F0023323D /* C4Animation */;
@@ -804,7 +819,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -844,7 +859,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -930,7 +945,6 @@
 				);
 				INFOPLIST_FILE = C4Core/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -946,7 +960,6 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = C4Core/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -999,7 +1012,6 @@
 				);
 				INFOPLIST_FILE = C4Animation/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1017,7 +1029,6 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = C4Animation/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
