@@ -3,6 +3,7 @@
 
 import Foundation
 import C4Core
+import UIKit
 
 private var handlerAssociationKey: UInt8 = 0
 private var viewAssociationKey: UInt8 = 0

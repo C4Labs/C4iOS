@@ -18,6 +18,7 @@
 // IN THE SOFTWARE.
 
 import C4Core
+import CoreGraphics
 
 /**
 Defines a structure representing the border of a C4View.

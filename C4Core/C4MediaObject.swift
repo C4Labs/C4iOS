@@ -17,6 +17,8 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
+import Foundation
+
 public protocol C4MediaObject: C4Animatable, C4EventSource, NSObjectProtocol {
     
 }

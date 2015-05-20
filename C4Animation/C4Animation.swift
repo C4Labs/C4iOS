@@ -17,7 +17,9 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
+
 import C4Core
+import Foundation
 
 private let C4AnimationCompletedEvent = "C4AnimationCompleted"
 private let C4AnimationCancelledEvent = "C4AnimationCancelled"

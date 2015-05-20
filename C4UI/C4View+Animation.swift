@@ -18,6 +18,8 @@
 // IN THE SOFTWARE.
 
 import C4Animation
+import QuartzCore
+import UIKit
 
 /**
 Extension to C4View that handles animating of basic properties.

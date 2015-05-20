@@ -17,6 +17,8 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
+import CoreImage
+
 public protocol C4Filter {
     var filterName : String { get }
     func createCoreImageFilter(inputImage: CIImage) -> CIFilter

@@ -19,8 +19,8 @@
 
 import Foundation
 import C4Core
-import C4UI
 import ObjectiveC
+import UIKit
 
 private var canvasAssociationKey: UInt8 = 0
 
