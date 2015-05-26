@@ -389,6 +389,17 @@ public class C4View : NSObject {
     public func hitTest(point: C4Point) -> Bool {
         return CGRectContainsPoint(CGRect(bounds), CGPoint(point))
     }
+
+    public func hitTest(point: C4Point, from: C4View) -> Bool {
+        let p = convert(point, from:from)
+        return hitTest(p)
+    }
+
+    //MARK: – Convert
+    public func convert(point: C4Point, from: C4View) -> C4Point {
+        return C4Point(view.convertPoint(CGPoint(point), fromCoordinateSpace: from.view))
+    }
+
 }
 
 /**
