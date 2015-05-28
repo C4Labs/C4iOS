@@ -58,15 +58,12 @@ public class C4ViewAnimation : C4Animation {
             CATransaction.begin()
             CATransaction.setAnimationDuration(self.duration)
             CATransaction.setAnimationTimingFunction(timing)
+            CATransaction.setCompletionBlock() {
+                self.postCompletedEvent()
+            }
             self.animations()
             CATransaction.commit()
-        }, completion: { finished in
-            if finished {
-                self.postCompletedEvent()
-            } else {
-                self.postCancelledEvent()
-            }
-        })
+        }, completion:nil)
     }
 }
 
