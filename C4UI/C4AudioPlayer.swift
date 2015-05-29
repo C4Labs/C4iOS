@@ -42,10 +42,13 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
             let url = NSBundle.mainBundle().URLForResource(filename, withExtension:nil)
             let player = AVAudioPlayer(contentsOfURL: url, error: nil)
             player.delegate = self
+            player.prepareToPlay()
             audiofiles.append(player)
         }
         
         currentPlayer = audiofiles[0]
+        currentPlayer.meteringEnabled = true
+        currentPlayer.enableRate = true
     }
     
     /**
@@ -86,10 +89,9 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
     */
     public var playing : Bool {
         get {
-            return currentPlayer.rate > 0 ? true : false
+            return self.currentPlayer.playing
         }
     }
-    
     /**
     The audio player’s stereo pan position.
     By setting this property you can position a sound in the stereo field. A value of –1.0 is full left, 0.0 is center, and 1.0 is full right.
@@ -181,6 +183,43 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
             } else {
                 currentPlayer.numberOfLoops = 0
             }
+        }
+    }
+    
+    public var meteringEnabled : Bool {
+        get {
+            return currentPlayer.meteringEnabled
+        } set(v) {
+            currentPlayer.meteringEnabled = v
+        }
+    }
+    
+    public var numberOfChannels : Int {
+        get {
+            return currentPlayer.numberOfChannels
+        }
+    }
+    
+    public func averagePower(channel: Int) -> Double {
+        return Double(currentPlayer.averagePowerForChannel(channel))
+    }
+    
+    public func peakPower(channel: Int) -> Double {
+        return Double(currentPlayer.peakPowerForChannel(channel))
+    }
+    
+    public var enableRate : Bool {
+        get {
+            return currentPlayer.enableRate
+        } set(v) {
+            currentPlayer.enableRate = v
+        }
+    }
+    
+    public func updateMeters() {
+        currentPlayer.meteringEnabled = true
+        if currentPlayer.playing {
+            currentPlayer.updateMeters()
         }
     }
 }

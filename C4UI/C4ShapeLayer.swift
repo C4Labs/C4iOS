@@ -7,6 +7,9 @@ Extension for CAShapeLayer that allows overriding the actions for specific prope
 */
 public class C4ShapeLayer: CAShapeLayer {
     public override func actionForKey(key: String!) -> CAAction! {
+        if disableActions == true {
+            return nil
+        }
         if key == "lineWidth" {
             let animation = CABasicAnimation(keyPath: key)
             animation.fromValue = self.lineWidth
