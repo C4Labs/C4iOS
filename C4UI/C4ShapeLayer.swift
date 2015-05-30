@@ -6,8 +6,10 @@ import QuartzCore
 Extension for CAShapeLayer that allows overriding the actions for specific properties.
 */
 public class C4ShapeLayer: CAShapeLayer {
+    public static var disableActions = false
+    
     public override func actionForKey(key: String!) -> CAAction! {
-        if disableActions == true {
+        if C4ShapeLayer.disableActions == true {
             return nil
         }
         if key == "lineWidth" {

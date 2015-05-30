@@ -10,12 +10,11 @@ import Foundation
 import UIKit
 import C4Core
 
-var disableActions = true
-
 public class C4CanvasController: UIViewController {
     public override func viewDidLoad() {
+        C4ShapeLayer.disableActions == true
         self.setup()
-        disableActions = false
+        C4ShapeLayer.disableActions == false
     }
     
     public func setup() {
