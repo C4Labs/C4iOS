@@ -382,13 +382,48 @@ public class C4View : NSObject {
     //MARK: - HitTest
     
     /**
-    Returns whether a specified point is contained within the frame of the receiver.
+    Checks if a specified point falls within the frame of the current object.
 
-    :param: point	The point to examine.
+    :param: point A `C4Point` to examine
+
+    :returns: `true` if the point is within the object's frame, otherwise `false`.
     */
     public func hitTest(point: C4Point) -> Bool {
         return CGRectContainsPoint(CGRect(bounds), CGPoint(point))
     }
+
+    /**
+    Checks if a specified point, from another view, falls within the frame of the receiver.
+
+        let v = C4View(frame: C4Rect(0,0,100,100))
+        canvas.add(v)
+
+        canvas.addTapGestureRecognizer() { location, state in
+            if v.hitTest(location, from: self.canvas) {
+                println("C4")
+            }
+        }
+
+    :returns: `true` if the point is within the object's frame, otherwise `false`.
+    */
+    public func hitTest(point: C4Point, from: C4View) -> Bool {
+        let p = convert(point, from:from)
+        return hitTest(p)
+    }
+
+    /**
+    Converts a specified point from a given view's coordinate system to that of the receiver.
+    
+        let p = C4Point()
+        let cp = aView.convert(p, from:canvas)
+
+    :returns: A `C4Point` whose values have been translated into the receiver's coordinate system.
+    */
+    //MARK: – Convert
+    public func convert(point: C4Point, from: C4View) -> C4Point {
+        return C4Point(view.convertPoint(CGPoint(point), fromCoordinateSpace: from.view))
+    }
+
 }
 
 /**
