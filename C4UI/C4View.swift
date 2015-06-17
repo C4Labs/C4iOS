@@ -21,7 +21,7 @@ import C4Core
 import UIKit
 
 public class C4View : NSObject {
-    internal var view : UIView = UIView()
+    public var view : UIView = UIView()
     
     public override init() {
     }
