@@ -86,7 +86,7 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
     */
     public var playing : Bool {
         get {
-            return currentPlayer.rate > 0 ? true : false
+            return currentPlayer.playing
         }
     }
     
