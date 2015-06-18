@@ -24,8 +24,8 @@ Prints a string to the console. Replacement for the noisy NSlog.
 
 :param: string A formatted string that will print to the console
 */
-public func C4Log(string: String) {
-    println("[C4Log] \(string)")
+public func C4Log<T>(value: T) {
+    println("[C4Log] \(value)")
 }
 
 /**
