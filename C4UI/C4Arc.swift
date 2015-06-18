@@ -23,7 +23,7 @@ import C4Core
 
 public class C4Arc : C4Shape {
     /**
-    Creates an arc.
+    Creates an arc, whose edge is always drawn on the shorter circumference.
 
     :param: center The center-point of the arc
     :param: radius The radius of the arc
@@ -31,7 +31,19 @@ public class C4Arc : C4Shape {
     :param: endAngle	The angle (in radians) that determines the ending point of the arc, measured from the x-axis in the current user space.
     */
     convenience public init(center: C4Point, radius: Double, start: Double, end: Double) {
-        let arcRect = CGRectMakeFromArc(CGPoint(center),CGFloat(radius),CGFloat(start),CGFloat(end), end > start ? false : true);
+        self.init(center: center,radius: radius,start: start,end: end,clockwise: end>start ? false : true)
+    }
+
+    /**
+    Creates an arc, whose edge is drawn based on the input for `clockwise`.
+
+    :param: center The center-point of the arc
+    :param: radius The radius of the arc
+    :param: startAngle	The angle (in radians) that determines the starting point of the arc, measured from the x-axis in the current user space.
+    :param: endAngle	The angle (in radians) that determines the ending point of the arc, measured from the x-axis in the current user space.
+    */
+    convenience public init(center: C4Point, radius: Double, start: Double, end: Double, clockwise: Bool) {
+        let arcRect = CGRectMakeFromArc(CGPoint(center),CGFloat(radius),CGFloat(start),CGFloat(end), clockwise);
         self.init(frame: C4Rect(arcRect))
         let arc = CGPathCreateMutable()
         CGPathAddArc(arc, nil, CGFloat(center.x), CGFloat(center.y), CGFloat(radius), CGFloat(start), CGFloat(end), end > start ? false : true)
