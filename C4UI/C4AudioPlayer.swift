@@ -206,4 +206,11 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
         currentPlayer.updateMeters()
     }
 
+    public func averagePower(channel: Int) -> Double {
+        return Double(currentPlayer.averagePowerForChannel(channel))
+    }
+
+    public func peakPower(channel: Int) -> Double {
+        return Double(currentPlayer.peakPowerForChannel(channel))
+    }
 }
