@@ -46,6 +46,7 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
         }
         
         currentPlayer = audiofiles[0]
+        currentPlayer.meteringEnabled = true
     }
     
     /**
@@ -181,6 +182,14 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
             } else {
                 currentPlayer.numberOfLoops = 0
             }
+        }
+    }
+
+    public var meteringEnabled : Bool {
+        get {
+            return currentPlayer.meteringEnabled
+        } set(v) {
+            currentPlayer.meteringEnabled = v
         }
     }
 }
