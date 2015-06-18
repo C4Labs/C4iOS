@@ -11,7 +11,9 @@ import C4Core
 
 public class C4CanvasController : UIViewController {
     public override func viewDidLoad() {
+        C4ShapeLayer.disableActions = true
         self.setup()
+        C4ShapeLayer.disableActions = false
     }
 
     public func setup() {
