@@ -201,4 +201,9 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
             currentPlayer.enableRate = v
         }
     }
+
+    public func updateMeters() {
+        currentPlayer.updateMeters()
+    }
+
 }
