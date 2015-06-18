@@ -47,6 +47,7 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
         
         currentPlayer = audiofiles[0]
         currentPlayer.meteringEnabled = true
+        currentPlayer.enableRate = true
     }
     
     /**
@@ -190,6 +191,14 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
             return currentPlayer.meteringEnabled
         } set(v) {
             currentPlayer.meteringEnabled = v
+        }
+    }
+
+    public var enableRate : Bool {
+        get {
+            return currentPlayer.enableRate
+        } set(v) {
+            currentPlayer.enableRate = v
         }
     }
 }
