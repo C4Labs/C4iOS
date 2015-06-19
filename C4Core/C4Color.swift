@@ -50,6 +50,8 @@ public class C4Color {
     
     /**
     Initializes and returns a new color object. Defaults to black with 0 opacity (i.e. clear).
+    
+        let c = C4Color()
     */
     public init() {
         colorSpace = CGColorSpaceCreateDeviceRGB()
@@ -58,6 +60,8 @@ public class C4Color {
     
     /**
     Initializes and returns a new C4Color object based on specified color values.
+
+        let c = C4Color(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0)
 
     :param: red The red value for the new color [0.0 ... 1.0]
     :param: green The green value for the new color [0.0 ... 1.0]
@@ -72,6 +76,8 @@ public class C4Color {
     /**
     Initializes and returns a new C4Color object based on a provided CGColor object.
     
+        let c = C4Color(UIColor.redColor().CGColor)
+
     :param: color A CGColor object that will be used to create a new C4Color.
     */
     public init(_ color: CGColorRef) {
@@ -82,6 +88,8 @@ public class C4Color {
     /**
     Initializes and returns a new C4Color object based on a provided UIColor object.
     
+        let c = C4Color(UIColor.redColor())
+
     :param: color A UIColor object whose components will be extrated to create a new C4Color.
     */
     public convenience init(_ color: UIColor) {
@@ -95,6 +103,8 @@ public class C4Color {
     
     /**
     Initializes and returns a new C4Color object based on specified color values.
+    
+        let c = C4Color(red: 255, green: 0, blue: 0, alpha: 255)
 
     :param: red The red value for the new color [0 ... 255]
     :param: green The green value for the new color [0 ... 255]
@@ -108,9 +118,13 @@ public class C4Color {
     /**
     Initializes and returns a new C4Color object based on a specified hex value.
 
+    Remember to precede with `0x` and include the alpha component at the end (i.e. 7th + 8th characters)
+
+        let c = C4Color(0xFF0000FF)
+
     :param: hexValue A color value expressed in hexadecimal.
     */
-    public convenience init(hexValue: UInt32) {
+    public convenience init(_ hexValue: UInt32) {
         let red   = Int((hexValue & 0xFF000000) >> 12)
         let green = Int((hexValue & 0x00FF0000) >> 8)
         let blue  = Int((hexValue & 0x0000FF00) >> 4)
@@ -120,7 +134,7 @@ public class C4Color {
     
     /**
     The set of 3 color values + alpha that define the current color.
-    
+
     :returns: An array of 4 Double values in the range [0.0 ... 1.0]
     */
     public var components: [Double] {
@@ -147,6 +161,9 @@ public class C4Color {
     /** 
     The value of the red component of the current color, [0.0 ... 1.0]
 
+        let c = C4Color()
+        let redVal = c.red
+
     :returns: Double value in the range [0.0 ... 1.0]
     */
     public var red: Double {
@@ -160,6 +177,9 @@ public class C4Color {
     
     /**
     The value of the green component of the current color
+
+        let c = C4Color()
+        let greenVal = c.green
 
     :returns: Double value in the range [0.0 ... 1.0]
     */
@@ -175,6 +195,9 @@ public class C4Color {
     /**
     The value of the blue component of the current color
     
+        let c = C4Color()
+        let blueVal = c.blue
+
     :returns: Double value in the range [0.0 ... 1.0]
     */
     public var blue: Double {
@@ -189,6 +212,9 @@ public class C4Color {
     /**
     The value of the alpha component of the current color.
     
+        let c = C4Color()
+        let alphaVal = c.alpha
+
     :returns: Double value in the range [0.0 ... 1.0]
     */
     public var alpha: Double {
@@ -202,6 +228,9 @@ public class C4Color {
     
     /**
     A CGColor representation of the current color.
+    
+        let c = C4Color()
+        let cg = c.CGColor
     
     :returns: CGColorRef object that matches the color's `internalColor` property
     */
