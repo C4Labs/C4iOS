@@ -25,12 +25,16 @@ public struct C4Point : Equatable {
     
     /**
     Initializes a new point with the coordinates {0,0}
+
+        let p = C4Point()
     */
     public init() {
     }
     
     /**
     Initializes a new point with the specified coordinates {x,y}
+
+        let p = C4Point(10.5,10.5)
     */
     public init(_ x: Double, _ y: Double) {
         self.x = x
@@ -39,6 +43,8 @@ public struct C4Point : Equatable {
     
     /**
     Initializes a new point with the specified coordinates {x,y}, converting integer values to doubles
+
+        let p = C4Point(10,10)
     */
     public init(_ x: Int, _ y: Int) {
         self.x = Double(x)
@@ -55,6 +61,11 @@ public struct C4Point : Equatable {
     /**
     Transforms the point.
     
+        var p = C4Point(10,10)
+        let v = C4Vector(x: 0, y: 0, z: 1)
+        let t = C4Transform.makeRotation(M_PI, axis: v)
+        p.transform(t) //{-10.0, -10.0}
+
     :param: t   A C4Transform to apply to the point
     */
     public mutating func transform(t: C4Transform) {
@@ -65,6 +76,9 @@ public struct C4Point : Equatable {
     /**
     A string representation of the point.
     
+        let p = C4Point()
+        println(p)
+
     :returns: A string formatted to look like {x,y}
     */
     public func description() -> String {
