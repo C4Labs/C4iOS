@@ -24,6 +24,10 @@ Clamp a value to the range [min, max].
 
 If the value is less than min this function returns min, if the value is greater than max the function returns max, otherwise it returns the value.
 
+    clamp(10, 0, 5) = 5
+    clamp(10, 0, 20) = 10
+    clamp(10,20,30) = 20
+
 :param: val The value
 :param: min The lower bound
 :param: max The upper bound
@@ -40,7 +44,6 @@ public func clamp<T : Comparable>(val: T, min: T, max: T) -> T {
 /**
 Linear interpolation. For any two values a and b return a linear interpolation with parameter `param`.
 
-For example:
     lerp(0,100,0.5) = 50
     lerp(100,200,0.5) = 150
     lerp(500,1000,0.33) = 665
@@ -58,7 +61,6 @@ public func lerp(a: Double, b: Double, param: Double) -> Double {
 /**
 Linear mapping. Maps a value in the source range [min, max] to a value in the target range [toMin, toMax] using linear interpolation.
 
-For example:
     map(10, 0, 20, 0, 200) = 100
     map(10, 0, 100, 200, 300) = 210
     map(10, 0, 20, 200, 300) = 250
@@ -79,6 +81,8 @@ public func map(val: Double, min: Double, max: Double, toMin: Double, toMax: Dou
 /**
 Return a random integer below `below`
 
+    let x = random(below: 20)
+
 :param: below The upper bound
 
 :returns: A random value smaller than `below`
@@ -89,6 +93,8 @@ public func random(#below: Int) -> Int {
 
 /**
 Return a random integer greater than or equal to min and less than max.
+
+    let x = random(10,20)
 
 :param: min The lower bound
 :param: max The upper bound
@@ -103,6 +109,8 @@ public func random(min: Int, max: Int) -> Int {
 /**
 Return a random Double in the interval [0, 1)
 
+    let x = random01()
+
 :returns: A random Double uniformly distributed between 0 and 1
 */
 public func random01() -> Double {
@@ -114,6 +122,9 @@ Converts radian values to degrees.
 
 Uses the following equation: value * 180.0 / PI
 
+    radToDeg(M_PI) = 180
+    radToDeg(M_PI_2) = 90
+
 :returns: A double value representation of the radian value in degrees.
 */
 public func radToDeg(val: Double) -> Double {
@@ -124,6 +135,9 @@ public func radToDeg(val: Double) -> Double {
 Converts degree values to radians.
 
 Uses the following equation: value * PI / 180.0
+
+    degToRad(270) = 3*M_PI_2 (4.712...)
+    degToRad(360) = 2*PI (6.283...)
 
 :returns: A double value representation of the degree value in radians.
 */
