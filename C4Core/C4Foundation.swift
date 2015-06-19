@@ -22,6 +22,9 @@ import CoreGraphics
 /**
 Prints a string to the console. Replacement for the noisy NSlog.
 
+    C4Log("A message")
+    C4Log(0)
+
 :param: string A formatted string that will print to the console
 */
 public func C4Log<T>(value: T) {
@@ -30,6 +33,9 @@ public func C4Log<T>(value: T) {
 
 /**
 Returns a rectangle that contains all of the specified coordinates in an array.
+
+    let points = [CGPointZero,CGPointMake(10,10)]
+    let cgrect = CGRectMakeFromPoints(points)
 
 :param: points An array of CGPoint coordinates
 */
@@ -75,6 +81,10 @@ public func CGRectMakeFromWedge(center: CGPoint, radius: CGFloat, startAngle: CG
 
 /**
 Delays the execution of a block of code.
+
+    delay(0.25) {
+        //code to execute
+    }
 
 :param: time The amount of time in seconds to wait before executing the block of code.
 */
