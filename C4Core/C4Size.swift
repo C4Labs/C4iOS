@@ -20,7 +20,7 @@
 import Foundation
 import CoreGraphics
 
-public struct C4Size : Equatable, Comparable {
+public struct C4Size : Equatable, Comparable, Printable {
     public var width: Double
     public var height: Double
     
@@ -53,6 +53,17 @@ public struct C4Size : Equatable, Comparable {
     */
     public func isZero() -> Bool {
         return width == 0 && height == 0
+    }
+
+    /**
+    A string representation of the size.
+
+    :returns: A string formatted to look like {w,h}
+    */
+    public var description : String {
+        get {
+            return "{\(width),\(height)}"
+        }
     }
 }
 
