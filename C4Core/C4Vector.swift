@@ -19,7 +19,7 @@
 
 import CoreGraphics
 
-public struct C4Vector : Equatable {
+public struct C4Vector : Equatable, Printable {
     public var x: Double = 0
     public var y: Double = 0
     public var z: Double = 0
@@ -131,8 +131,10 @@ public struct C4Vector : Equatable {
     
     :returns: A string formatted to look like {x,y,z}
     */
-    public func description() -> String {
-        return "{\(x), \(y), \(z)}"
+    public var description : String {
+        get {
+            return "{\(x), \(y), \(z)}"
+        }
     }
 }
 
