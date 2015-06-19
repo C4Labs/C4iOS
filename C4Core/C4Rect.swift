@@ -20,7 +20,7 @@
 import Foundation
 import CoreGraphics
 
-public struct C4Rect : Equatable {
+public struct C4Rect : Equatable, Printable {
     public var origin: C4Point
     public var size: C4Size
     
@@ -138,6 +138,17 @@ public struct C4Rect : Equatable {
     */
     public func contains(rect: C4Rect) -> Bool {
         return CGRectContainsRect(CGRect(self), CGRect(rect))
+    }
+
+    /**
+    A string representation of the rect.
+
+    :returns: A string formatted to look like {{x,y},{w,h}}
+    */
+    public var description : String {
+        get {
+            return "{\(origin),\(size)}"
+        }
     }
 }
 
