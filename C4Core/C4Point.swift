@@ -19,7 +19,7 @@
 
 import CoreGraphics
 
-public struct C4Point : Equatable {
+public struct C4Point : Equatable, Printable {
     public var x: Double = 0
     public var y: Double = 0
     
@@ -67,8 +67,10 @@ public struct C4Point : Equatable {
     
     :returns: A string formatted to look like {x,y}
     */
-    public func description() -> String {
-        return "{\(x), \(y)}"
+    public var description : String {
+        get {
+            return "{\(x), \(y)}"
+        }
     }
 }
 
