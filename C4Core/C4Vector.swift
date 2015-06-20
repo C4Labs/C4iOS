@@ -35,7 +35,16 @@ public struct C4Vector : Equatable, Printable {
         self.y = y
         self.z = z
     }
-    
+
+    /**
+    Create a vector with a cartesian representation: an x and a y coordinates.
+    */
+    public init(x: Int, y: Int, z: Int = 0) {
+        self.x = Double(x)
+        self.y = Double(y)
+        self.z = Double(z)
+    }
+
     /**
       Create a vector with a polar representation: a magnitude and an angle in radians.
       http://en.wikipedia.org/wiki/Polar_coordinate_system
