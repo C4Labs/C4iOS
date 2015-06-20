@@ -26,6 +26,8 @@ public struct C4Rect : Equatable, Printable {
     
     /**
     Initializes a new C4Rect with the origin {0,0} and the size {0,0}
+    
+        let r = C4Rect()
     */
     public init() {
         self.init(0,0,0,0)
@@ -33,6 +35,8 @@ public struct C4Rect : Equatable, Printable {
     
     /**
     Initializes a new C4Rect with the origin {x,y} and the size {w,h}
+    
+        let r = C4Rect(0.0,0.0,10.0,10.0)
     */
     public init(_ x: Double, _ y: Double, _ w: Double, _ h: Double) {
         origin = C4Point(x, y)
@@ -41,6 +45,8 @@ public struct C4Rect : Equatable, Printable {
     
     /**
     Initializes a new C4Rect with the origin {x,y} and the size {w,h}, converting values from Int to Double
+
+        let r = C4Rect(0,0,10,10)
     */
     public init(_ x: Int, _ y: Int, _ w: Int, _ h: Int) {
         origin = C4Point(x, y)
@@ -49,6 +55,10 @@ public struct C4Rect : Equatable, Printable {
     
     /**
     Initializes a new C4Rect with the origin {o.x,o.y} and the size {s.w,s.h}
+
+        let p = C4Point()
+        let s = C4Size()
+        let r = C4Rect(p,s)
     */
     public init(_ o: C4Point, _ s: C4Size) {
         origin = o
@@ -57,6 +67,9 @@ public struct C4Rect : Equatable, Printable {
     
     /**
     Returns a rectangle that contains all of the specified coordinates in an array.
+
+        let pts = [C4Point(), C4Point(0,5), C4Point(10,10), C4Point(9,8)]
+        let r = C4Rect(pts) //-> {{0.0, 0.0}, {10.0, 10.0}}
 
     :param: points An array of C4Point coordinates
     */
@@ -76,6 +89,12 @@ public struct C4Rect : Equatable, Printable {
     /**
     Returns whether two rectangles intersect.
 
+        let r1 = C4Rect(0,0,10,10)
+        let r2 = C4Rect(5,5,10,10)
+        let r3 = C4Rect(10,10,10,10)
+        r1.intersects(r2) //-> true
+        r1.intersects(r3) //-> false
+
     :param: rect1	The first rectangle to examine.
     :param: rect2	The second rectangle to examine.
     :returns:	true if the two specified rectangles intersect; otherwise, false.
@@ -88,6 +107,9 @@ public struct C4Rect : Equatable, Printable {
     
     /**
     The center point of the receiver.
+    
+        let r = C4Rect(0,0,10,10)
+        r.center //-> {5,5}
     */
     public var center: C4Point {
         get {
@@ -101,6 +123,9 @@ public struct C4Rect : Equatable, Printable {
 
     /**
     The bottom-right point of the receiver.
+    
+        let r = C4Rect(5,5,10,10)
+        r.max //-> {15,15}
     */
     public var max: C4Point {
         get {
@@ -111,6 +136,9 @@ public struct C4Rect : Equatable, Printable {
     /**
     Checks to see if the receiver has zero size and position
     
+        let r = C4Point()
+        r.isZero() //-> true
+
     :returns: true if origin = {0,0} and size = {0,0}
     */
     public func isZero() -> Bool {
@@ -121,6 +149,12 @@ public struct C4Rect : Equatable, Printable {
     /**
     Returns whether a rectangle contains a specified point.
     
+        let r1 = C4Rect(0,0,10,10)
+        let r2 = C4Rect(5,5,10,10)
+        let p = C4Rect(2,2,2,2)
+        r1.contains(p) //-> true
+        r2.contains(p) //-> false
+
     :param: rect	The rectangle to examine.
     :param: point	The point to examine.
     :returns: true if the rectangle is not null or empty and the point is located within the rectangle; otherwise, false.
@@ -132,6 +166,12 @@ public struct C4Rect : Equatable, Printable {
     /**
     Returns whether the first rectangle contains the second rectangle.
     
+        let r1 = C4Rect(0,0,10,10)
+        let r2 = C4Rect(5,5,10,10)
+        let r3 = C4Rect(2,2,2,2)
+        r1.contains(r2) //-> false
+        r1.contains(r3) //-> true
+
     :param: rect1	The rectangle to examine for containment of the rectangle passed in rect2.
     :param: rect2	The rectangle to examine for being contained in the rectangle passed in rect1.
     :param:	true if the rectangle specified by rect2 is contained in the rectangle passed in rect1; otherwise, false.
@@ -155,6 +195,12 @@ public struct C4Rect : Equatable, Printable {
 //MARK: - Comparing
 /**
 Checks to see if two C4Rects share identical origin and size
+
+    let r1 = C4Rect(0,0,10,10)
+    let r2 = C4Rect(0,0,10,10.5)
+    println(r1 == r2) //-> false
+
+:returns: A bool, `true` if the rects are identical, otherwise `false`.
 */
 public func == (lhs: C4Rect, rhs: C4Rect) -> Bool {
     return lhs.origin == rhs.origin && lhs.size == rhs.size
@@ -163,6 +209,10 @@ public func == (lhs: C4Rect, rhs: C4Rect) -> Bool {
 //MARK: - Manipulating
 /**
 Returns the intersection of two rectangles.
+
+    let r1 = C4Rect(0,0,10,10)
+    let r2 = C4Rect(5,5,10,10)
+    intersection(r1,r2) //-> {5,5,5,5}
 
 :param: rect1	The first source rectangle.
 :param: rect2	The second source rectangle.
@@ -175,6 +225,10 @@ public func intersection(rect1: C4Rect, rect2: C4Rect) -> C4Rect {
 /**
 Returns the smallest rectangle that contains the two source rectangles.
 
+    let r1 = C4Rect(0,0,10,10)
+    let r2 = C4Rect(5,5,10,10)
+    intersection(r1,r2) //-> {0,0,15,15}
+
 :param: r1	The first source rectangle.
 :param: r2	The second source rectangle.
 :returns:	The smallest rectangle that completely contains both of the source rectangles.
@@ -184,6 +238,10 @@ Returns the smallest rectangle that contains the two source rectangles.
 
 /**
 Returns the smallest rectangle that results from converting the source rectangle values to integers.
+
+    let r1 = C4Rect(0.1,0.1,10.6,10.6)
+    let r2 = C4Rect(5,5,10,10)
+    intersection(r1,r2) //-> {5,5,5,5}
 
 :param: rect	The source rectangle.
 :returns: A rectangle with the smallest integer values for its origin and size that contains the source rectangle.
@@ -195,6 +253,9 @@ public func integral(r: C4Rect) -> C4Rect {
 /**
 Returns a rectangle with a positive width and height.
 
+    let r = C4Rect(0.1,0.1,10.6,10.6)
+    integral(r) //-> {0,0,11,11}
+
 :param: rect	The source rectangle.
 :returns:	A rectangle that represents the source rectangle, but with positive width and height values.
 */
@@ -204,6 +265,9 @@ public func standardize(r: C4Rect) -> C4Rect {
 
 /**
 Returns a rectangle that is smaller or larger than the source rectangle, with the same center point.
+
+    let r = C4Rect(0,0,10,10)
+    inset(r, 1, 1) //-> {1,1,8,8}
 
 :param: rect	The source C4Rect structure.
 :param: dx	The x-coordinate value to use for adjusting the source rectangle.
