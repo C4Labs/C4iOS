@@ -38,6 +38,8 @@ public struct C4Vector : Equatable, Printable {
 
     /**
     Create a vector with a cartesian representation: an x and a y coordinates.
+
+        let v = C4Vector(x: 1, y: 1, z: 1)
     */
     public init(x: Int, y: Int, z: Int = 0) {
         self.x = Double(x)
