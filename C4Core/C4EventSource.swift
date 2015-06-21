@@ -39,8 +39,12 @@ extension NSObject : C4EventSource {
     }
 
     public func on(event notificationName: String, run executionBlock: Void -> Void) -> AnyObject {
+       return on(event: notificationName, from: nil, run: executionBlock)
+    }
+
+    public func on(event notificationName: String, from sender: AnyObject?, run executionBlock: Void -> Void) -> AnyObject {
         let nc = NSNotificationCenter.defaultCenter()
-        return nc.addObserverForName(notificationName, object: nil, queue: NSOperationQueue.currentQueue(), usingBlock: { notification in
+        return nc.addObserverForName(notificationName, object: sender, queue: NSOperationQueue.currentQueue(), usingBlock: { notification in
             executionBlock()
         });
     }
