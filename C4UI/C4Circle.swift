@@ -25,6 +25,9 @@ public class C4Circle: C4Ellipse {
     /**
     Creates a circle.
     
+        let c = C4Circle(center: canvas.center, radius: 50)
+        canvas.add(c)
+    
     :param: center The center-point of the circle
     :param: radius The radius of the circle
     */
