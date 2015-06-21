@@ -21,7 +21,7 @@ import QuartzCore
 import UIKit
 import C4Core
 
-public class C4Font : C4EventSource {
+public class C4Font : NSObject {
     internal var internalFont: UIFont?
     
     /**
