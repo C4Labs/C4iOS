@@ -43,7 +43,11 @@ public struct C4Transform : Equatable {
         self[2, 2] = 1
         self[3, 3] = 1
     }
-    
+
+    /** Creates a new transform from a `CGAffineTransform` structure.
+
+    :param: t A `CGAffineTransform` structure.
+    */
     public init(_ t: CGAffineTransform) {
         self.init()
         self[0, 0] = Double(t.a)
@@ -53,7 +57,11 @@ public struct C4Transform : Equatable {
         self[0, 3] = Double(t.tx)
         self[1, 3] = Double(t.ty)
     }
+
+    /** Creates a new transform from a `CATransform3D` structure.
     
+    :param: t A `CATransform3D` structure.
+    */
     public init(_ t: CATransform3D) {
         self[0, 0] = Double(t.m11)
         self[0, 1] = Double(t.m12)
@@ -72,11 +80,19 @@ public struct C4Transform : Equatable {
         self[3, 2] = Double(t.m43)
         self[3, 3] = Double(t.m44)
     }
-    
+
+    /** Returns `true` if transform is affine, otherwise `false`.
+    */
+
     public func isAffine() -> Bool {
         return self[3, 0] == 0.0 && self[3, 1] == 0.0 && self[3, 2] == 0.0 && self[3, 3] == 1.0
     }
-    
+
+    /**
+    The translation component of the tranform.
+
+    :returns: A `C4Vector` that represents the translation of the transform, where x = [0,3], y = [1,3]
+    */
     public var translation: C4Vector {
         get {
             return C4Vector(x: self[0, 3], y: self[1, 3])
@@ -86,14 +102,33 @@ public struct C4Transform : Equatable {
             self[1, 3] = newValue.y
         }
     }
+
+    /** Creates a transform that represents a translation in 2d (x,y)
     
+        let v = C4Vector(x: 1, y: 1)
+        let t = C4Transform.makeTranslation(v)
+    
+    :param: translation A `C4Vector` that represents the translation to apply.
+
+    :returns: A `C4Transform` that can be used to apply a translation to a receiver.
+    */
     public static func makeTranslation(translation: C4Vector) -> C4Transform {
         var t = C4Transform()
         t[0, 3] = translation.x
         t[1, 3] = translation.y
         return t
     }
+
+    /** Creates a transform that represents a scale in 3d (x, y, z). The `z` component is optional.
     
+        let t = C4Transform.makeScale(2.0, 2.0)
+
+    :param: sx The amount to scale in the `x` axis
+    :param: sy The amount to scale in the `y` axis
+    :param: sz The amount to scale in the `z` axis
+
+    :returns: A `C4Transform` that can be used to scale a receiver.
+    */
     public static func makeScale(sx: Double, _ sy: Double, _ sz: Double = 1) -> C4Transform {
         var t = C4Transform()
         t[0, 0] = sx
@@ -101,7 +136,16 @@ public struct C4Transform : Equatable {
         t[2, 2] = sz
         return t
     }
-    
+
+    /** Creates a transform that represents a rotation. The `axis` component is optional.
+
+        let t = C4Transform.makeRotation(M_PI)
+
+    :param: angle The angle, in radians, to rotate
+    :param: axis The axis around which to rotate, defaults to the z axis {0,0,1}
+
+    :returns: A `C4Transform` that can be used to rotate a receiver.
+    */
     public static func makeRotation(angle: Double, axis: C4Vector = C4Vector(x: 0, y: 0, z : 1)) -> C4Transform {
         if axis.isZero() {
             return C4Transform()
@@ -127,22 +171,53 @@ public struct C4Transform : Equatable {
         t[2, 2] = uz * uz * (1 - ca) + ca
         return t
     }
-    
+
+    /** Applies a translation to the receiver.
+
+        let v = C4Vector(x: 1, y: 1)
+        let t = C4Transform()
+        t.translate(v)
+
+    :param: translation A `C4Vector` that represents the translation to apply.
+    */
     public mutating func translate(translation: C4Vector) {
         let t = C4Transform.makeTranslation(translation)
         self = concat(self, t)
     }
     
+    /** Applies a scale to the receiver. The `z` variable is optional.
+    
+        let t = C4Transform()
+        t.scale(2.0, 2.0)
+
+    :param: sx The amount to scale in the `x` axis
+    :param: sy The amount to scale in the `y` axis
+    :param: sz The amount to scale in the `z` axis
+
+    :returns: A `C4Transform` that can be used to rotate a receiver.
+    */
     public mutating func scale(sx: Double, _ sy: Double, _ sz: Double = 1) {
         let s = C4Transform.makeScale(sx, sy, sz)
         self = concat(self, s)
     }
     
+    /** Applies a rotation. The `axis` component is optional.
+
+        let t = C4Transform()
+        t.rotate(M_PI)
+    
+    :param: angle The angle, in radians, to rotate
+    :param: axis The axis around which to rotate, defaults to the z axis {0,0,1}
+    */
     public mutating func rotate(angle: Double, axis: C4Vector = C4Vector(x: 0, y: 0, z: 1)) {
         let r = C4Transform.makeRotation(angle, axis: axis)
         self = concat(self, r)
     }
+
+    /** The CGAffineTransform version of the receiver.
     
+    :returns: A `CGAffineTransform` that is equivalent to the receiver.
+    */
     public var affineTransform: CGAffineTransform {
         return CGAffineTransform(
             a:  CGFloat(self[0, 0]),
@@ -153,6 +228,10 @@ public struct C4Transform : Equatable {
             ty: CGFloat(self[1, 3]))
     }
     
+    /** The CATransform3D version of the receiver.
+
+    :returns: A `CATransform3D` that is equivalent to the receiver.
+    */
     public var transform3D: CATransform3D {
         var t = CATransform3D(
             m11: CGFloat(self[0, 0]),
@@ -176,6 +255,9 @@ public struct C4Transform : Equatable {
     }
 }
 
+/**
+Returns true if the two source C4Transform structs share identical dimensions
+*/
 public func == (lhs: C4Transform, rhs: C4Transform) -> Bool {
     var equal = true
     for col in 0...3 {
