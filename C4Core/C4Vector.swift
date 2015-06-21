@@ -33,10 +33,11 @@ public struct C4Vector : Equatable, Printable {
     }
     
     /**
-    Create a vector with a cartesian representation: an x and a y coordinates.
+    Create a vector with a cartesian representation: an x and a y coordinates. The `z` variable is optional.
     
-        let v = C4Vector(1.0,1.0,1.0)
-    */
+        let v = C4Vector(x: 1.0, y: 1.0, z: 1.0)
+        let v = C4Vector(x: 1.0, y: 1.0)
+     */
     public init(x: Double, y: Double, z: Double = 0) {
         self.x = x
         self.y = y
@@ -44,12 +45,12 @@ public struct C4Vector : Equatable, Printable {
     }
     
     /**
-      Create a vector with a polar representation: a magnitude and an angle in radians.
+      Create a vector with a polar representation: a magnitude and an angle in radians. The `z` variable is optional.
       http://en.wikipedia.org/wiki/Polar_coordinate_system
     
         let m = sqrt(2.0)
         let h = M_PI_4
-        let v = C4Vector(magnitude: m, heading: h, z: 0)
+        let v = C4Vector(magnitude: m, heading: h)
         v //-> {1,1,0}
      */
     public init(magnitude: Double, heading: Double, z: Double = 0) {
@@ -61,7 +62,7 @@ public struct C4Vector : Equatable, Printable {
     /**
       The polar representation magnitude of the vector.
     
-        let v = C4Vector(2,1,0)
+        let v = C4Vector(x: 2.0, y: 1.0, z: 0.0)
         v.magnitude //-> √2
      */
     public var magnitude: Double {
@@ -183,8 +184,8 @@ public struct C4Vector : Equatable, Printable {
 /**
 Returns true if the coordinates of both vectors are identical
 
-    let v1 = C4Vector(1,1,0)
-    let v2 = C4Vector(1,0,0)
+    let v1 = C4Vector(x: 1, y: 1)
+    let v2 = C4Vector(x: 1, y: 0)
     v1 == v2 //-> false
 */
 public func == (lhs: C4Vector, rhs: C4Vector) -> Bool {
@@ -194,8 +195,8 @@ public func == (lhs: C4Vector, rhs: C4Vector) -> Bool {
 /**
 Transforms the left-hand vector by adding the values of the right-hand vector
 
-    let v1 = C4Vector(1,1,0)
-    let v2 = C4Vector(1,0,0)
+    let v1 = C4Vector(x: 1, y: 1)
+    let v2 = C4Vector(x: 1, y: 0)
     v1 += v2 //-> v1 = {2,1,0}
 */
 public func += (inout lhs: C4Vector, rhs: C4Vector) {
@@ -207,8 +208,8 @@ public func += (inout lhs: C4Vector, rhs: C4Vector) {
 /**
 Transforms the left-hand vector by subtracting the values of the right-hand vector
 
-    let v1 = C4Vector(1,1,0)
-    let v2 = C4Vector(1,0,0)
+    let v1 = C4Vector(x: 1, y: 1)
+    let v2 = C4Vector(x: 1, y: 0)
     v1 += v2 //-> v1 = {0,1,0}
 */
 public func -= (inout lhs: C4Vector, rhs: C4Vector) {
@@ -220,7 +221,7 @@ public func -= (inout lhs: C4Vector, rhs: C4Vector) {
 /**
 Transforms the left-hand vector by multiplying each by the values of the right-hand vector
 
-    let v = C4Vector(1,1,0)
+    let v1 = C4Vector(x: 1, y: 1)
     v *= 2.0 //-> v1 = {2,2,0}
 */
 public func *= (inout lhs: C4Vector, rhs: Double) {
@@ -232,8 +233,8 @@ public func *= (inout lhs: C4Vector, rhs: Double) {
 /**
 Transforms the left-hand vector by dividing each by the values of the right-hand vector
 
-    let v = C4Vector(x: 1, y: 1, z:1)
-    v /= 2.0 //-> v = {0.5,0.5,0.5}
+    let v1 = C4Vector(x: 1, y: 1)
+    v /= 2.0 //-> v = {0.5,0.5,0.0}
 
 */
 public func /= (inout lhs: C4Vector, rhs: Double) {
@@ -245,9 +246,9 @@ public func /= (inout lhs: C4Vector, rhs: Double) {
 /**
 Returns a new vector whose coordinates are the sum of both input vectors
 
-    var v1 = C4Vector(x: 1, y: 1, z:0)
-    var v2 = C4Vector(x: 1, y: 1, z:0)
-    v1+v2 //-> {2,2,0}
+    let v1 = C4Vector(x: 1, y: 1)
+    let v2 = C4Vector(x: 1, y: 0)
+    v1+v2 //-> {2,1,0}
 */
 public func + (lhs: C4Vector, rhs: C4Vector) -> C4Vector {
     return C4Vector(x: lhs.x + rhs.x, y: lhs.y + rhs.y, z: lhs.z + rhs.z)
@@ -256,8 +257,8 @@ public func + (lhs: C4Vector, rhs: C4Vector) -> C4Vector {
 /**
 Returns a new vector whose coordinates are the subtraction of the right-hand vector from the left-hand vector
 
-    var v1 = C4Vector(x: 1, y: 1, z:0)
-    var v2 = C4Vector(x: 1, y: 1, z:0)
+    var v1 = C4Vector(x: 1, y: 1)
+    var v2 = C4Vector(x: 1, y: 1)
     v1-v2 //-> {0,0,0}
 */
 public func - (lhs: C4Vector, rhs: C4Vector) -> C4Vector {
@@ -267,8 +268,8 @@ public func - (lhs: C4Vector, rhs: C4Vector) -> C4Vector {
 /**
 Returns a new vector that is the dot product of the both input vectors. **Use this instead of v.dot(v)**
 
-    let v1 = C4Vector(x: 1, y: 1, z: 0)
-    let v2 = C4Vector(x: -1, y: 1, z: 0)
+    let v1 = C4Vector(x: 1, y: 1)
+    let v2 = C4Vector(x: -1, y: 1)
     v1 ⋅ v2 //-> 0.0
 
 */
@@ -280,7 +281,7 @@ public func ⋅ (lhs: C4Vector, rhs: C4Vector) -> Double {
 /**
 Returns a new vector whose coordinates are the division of the left-hand vector coordinates by those of the right-hand vector
 
-    var v1 = C4Vector(x: 1, y: 1, z:0)
+    var v1 = C4Vector(x: 1, y: 1)
     var v2 = v1 / 2.0
     v2 //-> {0.5,0.5,0}
 */
@@ -291,7 +292,7 @@ public func / (lhs: C4Vector, rhs: Double) -> C4Vector {
 /**
 Returns a new vector whose coordinates are the multiplication of the left-hand vector coordinates by those of the right-hand vector
 
-    var v1 = C4Vector(x: 1, y: 1, z:0)
+    var v1 = C4Vector(x: 1, y: 1)
     var v2 = v2 * 2.0
     v2 //-> {2,2,0}
 */
@@ -302,9 +303,9 @@ public func * (lhs: C4Vector, rhs: Double) -> C4Vector {
 /**
 Returns a new vector whose coordinates are the negative values of the receiver
 
-    var v1 = C4Vector(x: 1, y: 1, z:0)
+    var v1 = C4Vector(x: 1, y: 1)
     var v2 = -v1
-    v2 //-> {-1,-1,0}
+    v2 //-> {-1,-1}
 */
 public prefix func - (vector: C4Vector) -> C4Vector {
     return C4Vector(x: -vector.x, y: -vector.y, z: -vector.z)
