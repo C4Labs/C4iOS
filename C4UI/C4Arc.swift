@@ -25,6 +25,8 @@ public class C4Arc : C4Shape {
     /**
     Creates an arc, whose edge is always drawn on the shorter circumference.
 
+        let a = C4Arc(center: canvas.center,radius: 50, start: M_PI, end: 2*M_PI)
+
     :param: center The center-point of the arc
     :param: radius The radius of the arc
     :param: startAngle	The angle (in radians) that determines the starting point of the arc, measured from the x-axis in the current user space.
@@ -36,6 +38,8 @@ public class C4Arc : C4Shape {
 
     /**
     Creates an arc, whose edge is drawn based on the input for `clockwise`.
+
+        let a = C4Arc(center: canvas.center,radius: 50, start: M_PI, end: 2*M_PI, clockwise: clockwise: false)
 
     :param: center The center-point of the arc
     :param: radius The radius of the arc
