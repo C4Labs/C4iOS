@@ -12,7 +12,6 @@
 		1F3FC01E1A0F2BF8005984BB /* C4EventSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94947961A0D8E7A00F9CDC8 /* C4EventSource.swift */; };
 		1F4881D31A56195800E0EBA4 /* C4TextShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4881D21A56195800E0EBA4 /* C4TextShape.swift */; };
 		1F4881D51A56199600E0EBA4 /* C4Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4881D41A56199600E0EBA4 /* C4Font.swift */; };
-		1F4881D71A561BDF00E0EBA4 /* C4EventSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4881D61A561BDF00E0EBA4 /* C4EventSource.swift */; };
 		1F6D60BC1B3278FE00B12838 /* C4CanvasController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6D60BB1B3278FE00B12838 /* C4CanvasController.swift */; };
 		1F8CB1DA1A05781700A20783 /* C4RectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8CB1D91A05781700A20783 /* C4RectTests.swift */; };
 		1F8FE9811A4F7BF700B38276 /* C4Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8FE9801A4F7BF700B38276 /* C4Line.swift */; };
@@ -118,7 +117,6 @@
 		1F0D0DCA1A560D1800481D65 /* C4Arc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Arc.swift; sourceTree = "<group>"; };
 		1F4881D21A56195800E0EBA4 /* C4TextShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4TextShape.swift; sourceTree = "<group>"; };
 		1F4881D41A56199600E0EBA4 /* C4Font.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Font.swift; sourceTree = "<group>"; };
-		1F4881D61A561BDF00E0EBA4 /* C4EventSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4EventSource.swift; sourceTree = "<group>"; };
 		1F5726E319FCECE4006FF395 /* C4Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Foundation.swift; sourceTree = "<group>"; };
 		1F6D60BB1B3278FE00B12838 /* C4CanvasController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4CanvasController.swift; sourceTree = "<group>"; };
 		1F8372FF1A574991009E0DCB /* C4Circle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Circle.swift; sourceTree = "<group>"; };
@@ -271,7 +269,6 @@
 				1F8372FF1A574991009E0DCB /* C4Circle.swift */,
 				1F8373001A574991009E0DCB /* C4Curve.swift */,
 				1FFE45BC1A51F8A200E0B334 /* C4Ellipse.swift */,
-				1F4881D61A561BDF00E0EBA4 /* C4EventSource.swift */,
 				1F4881D41A56199600E0EBA4 /* C4Font.swift */,
 				D90CB3861A6700C1006233D5 /* C4Image.swift */,
 				1F8FE9801A4F7BF700B38276 /* C4Line.swift */,
@@ -668,7 +665,6 @@
 				A9B277F51A7DAA320018E456 /* C4ShapeLayer.swift in Sources */,
 				D90CB3931A6701AC006233D5 /* C4Polygon.swift in Sources */,
 				1FFE45BD1A51F8A200E0B334 /* C4Ellipse.swift in Sources */,
-				1F4881D71A561BDF00E0EBA4 /* C4EventSource.swift in Sources */,
 				D90CB38A1A6700C1006233D5 /* C4Filter.swift in Sources */,
 				1F4881D51A56199600E0EBA4 /* C4Font.swift in Sources */,
 				D90CB38C1A6700C1006233D5 /* C4Image.swift in Sources */,
