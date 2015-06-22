@@ -76,7 +76,8 @@ public class C4Shape: C4View {
     public override init() {
         super.init()
         self.view = ShapeView()
-        shapeLayer.strokeColor = UIColor.greenColor().CGColor
+        shapeLayer.strokeColor = C4Pink.CGColor
+        shapeLayer.fillColor = C4Blue.CGColor
     }
     
     /**
