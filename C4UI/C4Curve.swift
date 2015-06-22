@@ -25,6 +25,12 @@ public class C4Curve : C4Shape {
     /**
     Creates a bezier curve.
     
+        let p1 = C4Point()
+        let p2 = C4Point(100,0)
+        let c1 = C4Point(0,50)
+        let c2 = C4Point(100,50)
+        let crv = C4Curve(points: [p1,p2], controls: [c1,c2])
+
     :param: points The beginning and end points	of the curve.
     :param: controls The control points used to define the shape of the curve.
     */
