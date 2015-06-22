@@ -27,6 +27,10 @@ public class C4EventSource : NSObject {
     /**
     Posts a new notification originating from the receiver.
     
+        canvas.addTapGestureRecognizer { location, state in
+            self.canvas.post("tapped")
+        }
+
     :param: event The notification name for the event
     */
     internal func post(event: String) {
@@ -36,6 +40,10 @@ public class C4EventSource : NSObject {
     /**
     An action to run on receipt of a given event.
     
+        canvas.on(event: "tapped") {
+            println("received tap")
+        }
+
     :param: event The notification name to listen for
     :param: run A block of code to run when the receiver "hears" the specified event name
     */
@@ -49,6 +57,8 @@ public class C4EventSource : NSObject {
     /**
     Cancels any actions registered to run for a specified object.
     
+        canvas.cancel(self)
+
     :param: observer An object whose actions are to be removed from the notification center.
     */
     public func cancel(observer: AnyObject) {
