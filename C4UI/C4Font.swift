@@ -26,6 +26,8 @@ public class C4Font : C4EventSource {
     
     /**
     The UIFont representation of the receiver.
+    
+        let uif = font.UIFont
     */
     public var uiifont : UIFont {
         get {
@@ -35,6 +37,8 @@ public class C4Font : C4EventSource {
     
     /**
     Initializes a new C4Font using the specified font name and size.
+    
+        let f = C4Font("Helvetica", 20)
     */
     convenience public init(name: String, size: Double) {
         self.init()
@@ -43,6 +47,8 @@ public class C4Font : C4EventSource {
     
     /**
     Initializes a new C4Font using the specified font name and default size of 12.0 pt.
+
+        let f = C4Font("Helvetica")
     */
     convenience public init(name: String) {
         self.init(name: name, size: 12.0)
@@ -50,6 +56,10 @@ public class C4Font : C4EventSource {
 
     /**
     Initializes a new C4Font using a specified UIFont.
+
+        if let uif = UIFont(name: "Helvetica", size: 24) {
+            let f = C4Font(font: uif)
+        }
     */
     convenience public init(font: UIFont) {
         self.init()
@@ -58,6 +68,7 @@ public class C4Font : C4EventSource {
     
     /**
     Returns an array of font family names available on the system.
+
     :returns:	An array of String objects, each of which contains the name of a font family.
     */
     class func familyNames() -> [AnyObject] {
@@ -66,6 +77,10 @@ public class C4Font : C4EventSource {
     
     /**
     Returns an array of font names available in a particular font family.
+
+        for n in C4Font.fontNames("Avenir Next") {
+            println(n)
+        }
 
     :param: familyName	The name of the font family.
     :returns:	An array of String objects, each of which contains a font name associated with the specified family.
@@ -76,6 +91,8 @@ public class C4Font : C4EventSource {
     
     /**
     Returns the font object used for standard interface items in the specified size.
+    
+        let f = C4Font.systemFont(20)
 
     :param: fontSize	The size (in points) to which the font is scaled.
     :returns:	A font object of the specified size.
@@ -85,7 +102,9 @@ public class C4Font : C4EventSource {
     }
     /**
     Returns the font object used for standard interface items that are rendered in boldface type in the specified size.
-    
+
+        let f = C4Font.boldSystemFont(20)
+
     :param: fontSize	The size (in points) to which the font is scaled.
     :returns:	A font object of the specified size.
     */
@@ -96,6 +115,8 @@ public class C4Font : C4EventSource {
     /**
     Returns the font object used for standard interface items that are rendered in italic type in the specified size.
     
+        let f = C4Font.italicSystemFont(20)
+
     :param: fontSize	The size (in points) to which the font is scaled.
     :returns: A font object of the specified size.
     */
@@ -106,6 +127,9 @@ public class C4Font : C4EventSource {
     /**
     Returns a font object that is the same as the receiver but which has the specified size instead.
     
+        let f = C4Font(name: "Avenir Next")
+        let f2 = f.font(20)
+
     :param: fontSize	The desired size (in points) of the new font object.
     :returns:	A font object of the specified size.
     */
@@ -126,6 +150,9 @@ public class C4Font : C4EventSource {
     /**
     The font face name. (read-only)
     The font name is a name such as HelveticaBold that incorporates the family name and any specific style information for the font. The value in this property is intended for an application’s internal usage only and should not be displayed.
+
+        let f = C4Font(name: "Avenir Next")
+        let n = f.fontName
     */
     public var fontName : String {
         get {
