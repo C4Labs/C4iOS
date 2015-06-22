@@ -70,7 +70,7 @@ public class C4Shape: C4View {
     */
     convenience public init(frame: C4Rect) {
         self.init()
-        self.view = ShapeView(frame: CGRect(frame))
+        self.view.frame = CGRect(frame)
     }
     
     public override init() {
