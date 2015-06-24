@@ -29,14 +29,23 @@ public class C4Image: C4View {
     :param: name	The name of the image included in your project, or a web address.
     */
     convenience public init(_ filename: String) {
+        self.init(filename, scale: 1.0)
+    }
+
+    /**
+    Initializes a new C4Image using the specified filename from the bundle (i.e. your project), it will also grab images from the web if the filename starts with http.
+
+    :param: name	The name of the image included in your project, or a web address.
+    */
+    convenience public init(_ filename: String, scale: Double) {
         if filename.hasPrefix("http") {
-            self.init(url: NSURL(string: filename)!)
+            self.init(url: NSURL(string: filename)!, scale: scale)
             return
         }
-        let image = UIImage(named: filename, inBundle: NSBundle.mainBundle(), compatibleWithTraitCollection: nil)
-        self.init(uiimage: image!)
+        var image = UIImage(named: filename, inBundle: NSBundle.mainBundle(), compatibleWithTraitCollection: nil)
+        self.init(uiimage: image!, scale: scale)
     }
-    
+
     /**
     Initializes a new C4Image using an existing C4Image (basically like copying).
     
@@ -53,51 +62,98 @@ public class C4Image: C4View {
     :param: uiimage A UIImage object.
     */
     convenience public init(uiimage: UIImage) {
+        self.init(uiimage: uiimage, scale: 1.0)
+    }
+
+    convenience public init(uiimage: UIImage, var scale: Double) {
         self.init()
-        self.view = UIImageView(image: uiimage)
+
+        if scale != 1.0 {
+            let scaledImage = UIImage(CGImage: uiimage.CGImage, scale: CGFloat(scale), orientation: uiimage.imageOrientation)
+            self.view = UIImageView(image: scaledImage)
+        } else {
+            self.view = UIImageView(image: uiimage)
+        }
         _originalSize = C4Size(view.frame.size)
     }
-    
+
     /**
     Initializes a new C4Image using a CGImageRef.
-    
+
     :param: uiimage A CGImageRef object.
     */
     convenience public init(cgimage: CGImageRef) {
         let image = UIImage(CGImage: cgimage)
-        self.init(uiimage: image!)
+        self.init(uiimage: image!, scale: 1.0)
     }
-    
+
+    /**
+    Initializes a new C4Image using a CGImageRef.
+
+    :param: uiimage A CGImageRef object.
+    */
+    convenience public init(cgimage: CGImageRef, scale: Double) {
+        let image = UIImage(CGImage: cgimage)
+        self.init(uiimage: image!, scale: scale)
+    }
+
     /**
     Initializes a new C4Image using a CIImage.
-    
+
     :param: uiimage A CIImage object.
     */
     convenience public init(ciimage: CIImage) {
-        let image = UIImage(CIImage: ciimage)
-        self.init(uiimage: image!)
+        self.init(ciimage: ciimage, scale: 1.0)
     }
-    
+
+    /**
+    Initializes a new C4Image using a CIImage.
+
+    :param: uiimage A CIImage object.
+    */
+    convenience public init(ciimage: CIImage, scale: Double) {
+        let image = UIImage(CIImage: ciimage)
+        self.init(uiimage: image!, scale: scale)
+    }
+
     /**
     Initializes a new C4Image using raw data (for example, if you download an image as data you can pass it here to create an image).
     
     :param: data An NSData object.
     */
     convenience public init(data: NSData) {
-        let image = UIImage(data: data)
-        self.init(uiimage: image!)
+        self.init(data: data, scale: 1.0)
     }
-    
+
+    /**
+    Initializes a new C4Image using raw data (for example, if you download an image as data you can pass it here to create an image).
+
+    :param: data An NSData object.
+    */
+    convenience public init(data: NSData, scale: Double) {
+        let image = UIImage(data: data)
+        self.init(uiimage: image!, scale: scale)
+    }
+
     /**
     Initializes a new C4Image from an URL.
-    
+
     :param: url An NSURL object.
     */
     convenience public init(url: NSURL) {
+        self.init(url: url, scale: 1.0)
+    }
+
+    /**
+    Initializes a new C4Image from an URL.
+
+    :param: url An NSURL object.
+    */
+    convenience public init(url: NSURL, scale: Double) {
         var error: NSError?
         var data = NSData(contentsOfURL: url, options:.DataReadingMappedIfSafe, error: &error)
         if let d = data {
-            self.init(data: d)
+            self.init(data: d, scale: scale)
             return
         }
         if let e = error {
@@ -105,7 +161,7 @@ public class C4Image: C4View {
         }
         self.init()
     }
-    
+
     /**
     Initializes a new C4Image using raw data. This method differs from `C4Image(data:...)` in that you can pass an array of raw data to the initializer. This works if you're creating your own raw images by changing the values of individual pixels. Pixel data should be RGBA.
     
