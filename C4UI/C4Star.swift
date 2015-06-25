@@ -26,6 +26,14 @@ public class C4Star: C4Polygon {
     /**
     Initializes a new C4Star shape.
     
+        let star = C4Star(
+            center: canvas.center,
+            pointCount: 5,
+            innerRadius: 50,
+            outerRadius: 100)
+        canvas.add(star)
+
+
     :param: center The center of the star
     :param: pointCount The number of points on the star
     :param: innerRadius The radial distance from the center of the star to the inner points
