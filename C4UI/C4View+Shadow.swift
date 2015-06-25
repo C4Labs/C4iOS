@@ -65,7 +65,7 @@ public struct Shadow {
     radius = 5.0
     color = black
     offset = (5,5)
-    opacity = 0
+    opacity = 0.0
     */
     public init() {
         radius = 5.0
@@ -85,6 +85,13 @@ public extension C4View {
     Assigning a new value to this will change the `shadowRadius`, `shadowColor`, `shadowOpacity`, `shadowPath` and `shadowOffset` of the receiver's layer.
     
     The path is optional, and only set if it has a value.
+
+        let v = C4View(frame: C4Rect(25,25,100,100))
+        v.backgroundColor = white
+        var s = Shadow()
+        s.opacity = 0.5
+        v.shadow = s
+        canvas.add(v)
     */
     public var shadow: Shadow {
         get {
