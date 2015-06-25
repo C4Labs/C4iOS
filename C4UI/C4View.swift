@@ -38,6 +38,10 @@ public class C4View : NSObject {
     /**
     Initializes a new C4View with the specifed frame.
     
+        let f = C4Rect(0,0,100,100)
+        let v = C4View(frame: f)
+        canvas.add(v)
+    
     :param: frame A C4Rect, which describes the view’s location and size in its superview’s coordinate system.
     */
     convenience public init(frame: C4Rect) {
@@ -218,6 +222,12 @@ public class C4View : NSObject {
     /**
     Adds a tap gesture recognizer to the receiver's view.
     
+        let f = C4Rect(0,0,100,100)
+        let v = C4View(frame: f)
+        v.addTapGestureRecognizer { location, state in
+            println("tapped")
+        }
+
     :param: action A block of code to be executed when the receiver recognizes a tap gesture.
     :returns: A UITapGestureRecognizer that can be customized.
     */
@@ -230,6 +240,12 @@ public class C4View : NSObject {
     /**
     Adds a pan gesture recognizer to the receiver's view.
     
+        let f = C4Rect(0,0,100,100)
+        let v = C4View(frame: f)
+        v.addPanGestureRecognizer { location, translation, velocity, state in
+            println("panned")
+        }
+
     :param: action A block of code to be executed when the receiver recognizes a pan gesture.
     :returns: A UIPanGestureRecognizer that can be customized.
     */
@@ -242,6 +258,12 @@ public class C4View : NSObject {
     /**
     Adds a pinch gesture recognizer to the receiver's view.
     
+        let f = C4Rect(0,0,100,100)
+        let v = C4View(frame: f)
+        v.addPinchGestureRecognizer { scale, velocity, state in
+            println("pinched")
+        }
+
     :param: action A block of code to be executed when the receiver recognizes a pinch gesture.
     :returns: A UIPinchGestureRecognizer that can be customized.
     */
@@ -254,6 +276,12 @@ public class C4View : NSObject {
     /**
     Adds a rotation gesture recognizer to the receiver's view.
     
+        let f = C4Rect(0,0,100,100)
+        let v = C4View(frame: f)
+        v.addRotationGestureRecognizer { rotation, velocity, state in
+            println("rotated")
+        }
+
     :param: action A block of code to be executed when the receiver recognizes a rotation gesture.
     :returns: A UIRotationGestureRecognizer that can be customized.
     */
@@ -266,6 +294,12 @@ public class C4View : NSObject {
     /**
     Adds a longpress gesture recognizer to the receiver's view.
     
+        let f = C4Rect(0,0,100,100)
+        let v = C4View(frame: f)
+        v.addLongPressGestureRecognizer { location, state in
+            println("longpress")
+        }
+
     :param: action A block of code to be executed when the receiver recognizes a longpress gesture.
     :returns: A UILongPressGestureRecognizer that can be customized.
     */
@@ -278,6 +312,12 @@ public class C4View : NSObject {
     /**
     Adds a swipe gesture recognizer to the receiver's view.
     
+        let f = C4Rect(0,0,100,100)
+        let v = C4View(frame: f)
+        v.addSwipeGestureRecognizer { location, state in
+            println("swiped")
+        }
+
     :param: action A block of code to be executed when the receiver recognizes a swipe gesture.
     :returns: A UISwipeGestureRecognizer that can be customized.
     */
@@ -290,6 +330,11 @@ public class C4View : NSObject {
     /**
     Adds a screen edge pan gesture recognizer to the receiver's view.
     
+        let v = C4View(frame: canvas.bounds)
+        v.addSwipeGestureRecognizer { location, state in
+            println("edge pan")
+        }
+
     :param: action A block of code to be executed when the receiver recognizes a screen edge pan gesture.
     :returns: A UIScreenEdgePanGestureRecognizer that can be customized.
     */
@@ -302,8 +347,13 @@ public class C4View : NSObject {
     //MARK: - AddRemoveSubview
     /**
     Adds a view to the end of the receiver’s list of subviews.
-
+    
     When working with C4, use this method to add views because it handles the addition of both UIView and C4View.
+
+        let v = C4View(frame: C4Rect(0,0,100,100))
+        let subv = C4View(frame: C4Rect(25,25,50,50))
+        v.add(subv)
+
     :param: view	The view to be added.
     */
     public func add<T>(subview: T) {
@@ -319,9 +369,14 @@ public class C4View : NSObject {
     Unlinks the view from the receiver and its window, and removes it from the responder chain.
     
     Calling this method removes any constraints that refer to the view you are removing, or that refer to any view in the subtree of the view you are removing.
-    
+
     When working with C4, use this method to add views because it handles the removal of both UIView and C4View.
-    
+
+        let v = C4View(frame: C4Rect(0,0,100,100))
+        let subv = C4View(frame: C4Rect(25,25,50,50))
+        v.add(subv)
+        v.remove(subv)
+
     :param: view	The view to be removed.
     */
     public func remove<T>(subview: T) {
@@ -339,11 +394,22 @@ public class C4View : NSObject {
     If the view’s superview is not nil, the superview releases the view.
 
     Calling this method removes any constraints that refer to the view you are removing, or that refer to any view in the subtree of the view you are removing.
+    
+        let v = C4View(frame: C4Rect(0,0,100,100))
+        let subv = C4View(frame: C4Rect(25,25,50,50))
+        v.add(subv)
+        subv.removeFromSuperview()
+
     */
     public func removeFromSuperview() {
         self.view.removeFromSuperview()
     }
-    
+
+    /**
+    Moves the specified subview so that it appears behind its siblings.
+
+    :param: view The subview to move to the back.
+    */
     public func sendToBack<T>(subview:T) {
         if let v = subview as? UIView {
             view.sendSubviewToBack(v)
@@ -352,6 +418,11 @@ public class C4View : NSObject {
         }
     }
 
+    /**
+    Moves the specified subview so that it appears on top of its siblings.
+    
+    :param: view The subview to move to the front.
+    */
     public func bringToFront<T>(subview:T) {
         if let v = subview as? UIView {
             view.bringSubviewToFront(v)
@@ -363,7 +434,14 @@ public class C4View : NSObject {
     //MARK: - HitTest
     
     /**
-    Checks if a specified point falls within the frame of the current object.
+    Checks if a specified point falls within the bounds of the current object.
+    
+    :NOTE:
+    Because each view has its own coordinates, if you want to check if a point from anywhere on screen falls within a specific view you should use `hitTest(point, from: canvas)`.
+
+        let v = C4View(frame: C4Rect(0,0,100,100))
+        v.hitTest(C4Point(50,50)) //-> true
+        v.hitTest(C4Point(50, 101)) //-> false
 
     :param: point A `C4Point` to examine
 
@@ -430,7 +508,7 @@ extension UIView {
     
     Calling this method removes any constraints that refer to the view you are removing, or that refer to any view in the subtree of the view you are removing.
     
-    When working with C4, use this method to add views because it handles the removal of both UIView and C4View.
+    When working with C4, use this method to remove views because it handles the removal of both UIView and C4View.
     
     :param: view	The view to be removed.
     */
@@ -441,7 +519,14 @@ extension UIView {
             v.view.removeFromSuperview()
         }
     }
-    
+
+    /**
+    Moves the specified subview so that it appears behind its siblings.
+
+    When working with C4, use this method because it handles both UIView and C4View.
+
+    :param: view The subview to move to the back.
+    */
     public func sendToBack<T>(subview:T) {
         if let v = subview as? UIView {
             self.sendSubviewToBack(v)
@@ -449,7 +534,14 @@ extension UIView {
             self.sendSubviewToBack(v.view)
         }
     }
-    
+
+    /**
+    Moves the specified subview so that it appears on top of its siblings.
+
+    When working with C4, use this method because it handles both UIView and C4View.
+
+    :param: view The subview to move to the front.
+    */
     public func bringToFront<T>(subview:T) {
         if let v = subview as? UIView {
             self.bringSubviewToFront(v)
