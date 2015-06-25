@@ -53,6 +53,13 @@ public extension C4View {
     /**
     Returns a struct that represents the current visible state of the receiver's border. Animatable.
     
+        let v = C4View(frame: C4Rect(25,25,100,100))
+        var b = Border()
+        b.width = 10.0
+        b.color = C4Purple
+        v.border = b
+        canvas.add(v)
+
     Assigning a new value to this will change the `borderWidth`, `borderColor` and `cornderRadius` of the receiver's layer.
     */
     public var border: Border {
