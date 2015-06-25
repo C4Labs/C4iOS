@@ -67,7 +67,7 @@ public class C4Polygon: C4Shape {
         self.path = path
         adjustToFitPath()
     }
-    
+
     /**
     Initializes a polygon without any points.
     
@@ -92,6 +92,7 @@ public class C4Polygon: C4Shape {
             }
             
             path = p
+            adjustToFitPath()
         }
     }
 }
