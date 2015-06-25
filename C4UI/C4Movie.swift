@@ -82,6 +82,9 @@ public class C4Movie: C4View {
         
         //movie view's player
         movieLayer.player = player
+        movieLayer.videoGravity = AVLayerVideoGravityResize
+
+        _originalSize = self.size
     }
     
     /**
@@ -141,4 +144,70 @@ public class C4Movie: C4View {
 
     The default value of this property is `true`.
     */    public var loops : Bool = true
+
+    /**
+    A variable that provides access to the width of the receiver. Animatable.
+    The default value of this property is defined by the movie being created.
+    Assigning a value to this property causes the receiver to change the width of its frame. If the receiver's `contrainsProportions` variable is set to `true` the receiver's height will change to match the new width.
+    */
+    public override var width : Double {
+        get {
+            return Double(view.frame.size.width)
+        } set(val) {
+            var newSize = C4Size(val,height)
+            if constrainsProportions {
+                let ratio = Double(height / width)
+                newSize.height = val * ratio
+            }
+            var rect = self.frame
+            rect.size = newSize
+            self.frame = rect
+            self.movieLayer.frame = CGRect(bounds)
+        }
+    }
+
+    /**
+    A variable that provides access to the height of the receiver. Animatable.
+    The default value of this property is defined by the movie being created.
+    Assigning a value to this property causes the receiver to change the height of its frame. If the receiver's `contrainsProportions` variable is set to `true` the receiver's width will change to match the new height.
+    */
+    public override var height : Double {
+        get {
+            return Double(view.frame.size.height)
+        } set(val) {
+            var newSize = C4Size(Double(view.frame.size.width),val)
+            if constrainsProportions {
+                let ratio = Double(self.size.width / self.size.height)
+                newSize.width = val * ratio
+            }
+            var rect = self.frame
+            rect.size = newSize
+            self.frame = rect
+        }
+    }
+
+    /**
+    Assigning a value of true to this property will cause the receiver to scale its entire frame whenever its `width` or `height` variables are set.
+    The default value of this property is `false`.
+    */
+    public var constrainsProportions : Bool = false
+
+    /**
+    The original size of the receiver when it was initialized.
+    */
+    internal var _originalSize : C4Size = C4Size()
+    public var originalSize : C4Size {
+        get {
+            return _originalSize
+        }
+    }
+
+    /**
+    The original width/height ratio of the receiver when it was initialized.
+    */
+    public var originalRatio : Double {
+        get {
+            return _originalSize.width / _originalSize.height
+        }
+    }
 }
