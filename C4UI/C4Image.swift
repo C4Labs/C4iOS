@@ -65,7 +65,8 @@ public class C4Image: C4View {
     */
     convenience public init(image: C4Image) {
         self.init()
-        self.view = image.view
+        let uiimage = image.uiimage
+        self.view = UIImageView(image: uiimage)
     }
     
     /**
