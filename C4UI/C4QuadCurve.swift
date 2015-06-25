@@ -25,6 +25,12 @@ public class C4QuadCurve : C4Curve {
     /**
     Initializes a new C4QuadCurve.
     
+        let a = C4Point()
+        let b = C4Point(100,0)
+        let c = C4Point(50,50)
+        let curve = C4QuadCurve(points:[a,b], control: c)
+        canvas.add(curve)
+
     :param: points A two-point array specifying the beginning and end points of the curve.
     :param: control A single C4Point used to calculate the shape of the curve.
     */
