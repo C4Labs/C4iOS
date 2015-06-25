@@ -41,6 +41,11 @@ public class C4TextShape : C4Shape {
     /**
     Initializes a new C4TextShape from a specifed string and a font
     
+        let f = C4Font(name:"Avenir Next", size: 120)
+        let t = C4TextShape(text:"C4", font: f)
+        t.center = canvas.center
+        canvas.add(t)
+
     :param: text The string to be rendered as a shape
     :param: font The font used to define the shape of the text
     */
