@@ -23,22 +23,44 @@ import C4Core
 
 public class C4Wedge : C4Shape {
     /**
-    Initializes a new C4Wedge.
-    
+    Initializes a new C4Wedge, with the wedge always taking the shortest distance between start and end.
+
     This shape differs from C4Arc in that is adds a point at the "center" of the circle on which the wedge exists.
     
+        let w = C4Wedge(center: canvas.center, radius: 50, start: M_PI_4 * 3, end: M_PI_4)
+        canvas.add(w)
+
     :param: center The center of the wedge.
     :param: radius The radius of the wedge.
     :param: start The start angle of the wedge.
     :param: end The end angle of the wedge.
     */
     convenience public init(center: C4Point, radius: Double, start: Double, end: Double) {
-        let wedgeRect = CGRectMakeFromWedge(CGPoint(center),CGFloat(radius),CGFloat(start),CGFloat(end), end > start ? false : true);
+        self.init(center: center, radius: radius, start: start, end: end, clockwise: end > start ? false : true)
+    }
+
+    /**
+    Initializes a new C4Wedge, with the wedge always taking the shortest distance between start and end.
+
+    This shape differs from C4Arc in that is adds a point at the "center" of the circle on which the wedge exists.
+
+    let w = C4Wedge(center: canvas.center, radius: 50, start: M_PI_4 * 3, end: M_PI_4, clockwise: true)
+    canvas.add(w)
+
+    :param: center The center of the wedge.
+    :param: radius The radius of the wedge.
+    :param: start The start angle of the wedge.
+    :param: end The end angle of the wedge.
+    :param: clockwise Whether or not to close the shape in a clockwise fashion.
+    */
+    convenience public init(center: C4Point, radius: Double, start: Double, end: Double, clockwise: Bool) {
+        let wedgeRect = CGRectMakeFromWedge(CGPoint(center),CGFloat(radius),CGFloat(start),CGFloat(end), clockwise);
         self.init(frame: C4Rect(wedgeRect))
         let wedge = CGPathCreateMutable()
-        CGPathAddArc(wedge, nil, CGFloat(center.x), CGFloat(center.y), CGFloat(radius), CGFloat(start), CGFloat(end), end > start ? false : true)
+        CGPathAddArc(wedge, nil, CGFloat(center.x), CGFloat(center.y), CGFloat(radius), CGFloat(start), CGFloat(end), clockwise)
         CGPathAddLineToPoint(wedge, nil, CGFloat(center.x), CGFloat(center.y))
         self.path = C4Path(path: wedge)
+        path?.closeSubpath()
         adjustToFitPath()
     }
 }
