@@ -26,6 +26,9 @@ public class C4Image: C4View {
     /**
     Initializes a new C4Image using the specified filename from the bundle (i.e. your project), it will also grab images from the web if the filename starts with http.
 
+        let img = C4Image("logo")
+        canvas.add(img)
+
     :param: name	The name of the image included in your project, or a web address.
     */
     convenience public init(_ filename: String) {
@@ -34,6 +37,9 @@ public class C4Image: C4View {
 
     /**
     Initializes a new C4Image using the specified filename from the bundle (i.e. your project), it will also grab images from the web if the filename starts with http.
+    
+        let img = C4Image("http://www.c4ios.com/images/logo@2x.png", scale: 2.0)
+        canvas.add(img)
 
     :param: name	The name of the image included in your project, or a web address.
     */
@@ -48,7 +54,13 @@ public class C4Image: C4View {
 
     /**
     Initializes a new C4Image using an existing C4Image (basically like copying).
-    
+
+        let a = C4Image("logo")
+        canvas.add(a)
+        let b = C4Image(image: a)
+        b.center = canvas.center
+        canvas.add(b)
+
     :param: image A C4Image.
     */
     convenience public init(image: C4Image) {
@@ -58,6 +70,11 @@ public class C4Image: C4View {
     
     /**
     Initializes a new C4Image using a UIImage.
+
+        if let uii = UIImage(named:"logo") {
+            let img = C4Image(uiimage: uii)
+            canvas.add(img)
+        }
     
     :param: uiimage A UIImage object.
     */
@@ -65,6 +82,18 @@ public class C4Image: C4View {
         self.init(uiimage: uiimage, scale: 1.0)
     }
 
+    /**
+    Initializes a new C4Image using a UIImage, with option for specifying the scale of the image.
+
+        if let uii = UIImage(named:"logo") {
+            let img = C4Image(uiimage: uii, scale: 2.0)
+            canvas.add(img)
+        }
+
+    :param: uiimage A UIImage object.
+    :param: scale A `Double` should be larger than 0.0
+
+    */
     convenience public init(uiimage: UIImage, var scale: Double) {
         self.init()
 
@@ -80,7 +109,14 @@ public class C4Image: C4View {
     /**
     Initializes a new C4Image using a CGImageRef.
 
-    :param: uiimage A CGImageRef object.
+        let cgi = CGImageCreate()
+        let img = C4Image(cgimage: cgi)
+        canvas.add(img)
+    
+    :Example:
+    https://gist.github.com/C4Framework/06319d420426cb0f1cb3
+
+    :param: cgimage A CGImageRef object.
     */
     convenience public init(cgimage: CGImageRef) {
         let image = UIImage(CGImage: cgimage)
@@ -88,7 +124,11 @@ public class C4Image: C4View {
     }
 
     /**
-    Initializes a new C4Image using a CGImageRef.
+    Initializes a new C4Image using a CGImageRef, with option for specifying the scale of the image.
+
+        let cgi = CGImageCreate()
+        let img = C4Image(cgimage: cgi, scale: 2.0)
+        canvas.add(img)
 
     :param: uiimage A CGImageRef object.
     */
@@ -99,15 +139,19 @@ public class C4Image: C4View {
 
     /**
     Initializes a new C4Image using a CIImage.
+    
+    Use this method if you're working with the output of a CIFilter.
 
-    :param: uiimage A CIImage object.
+    :param: ciimage A CIImage object.
     */
     convenience public init(ciimage: CIImage) {
         self.init(ciimage: ciimage, scale: 1.0)
     }
 
     /**
-    Initializes a new C4Image using a CIImage.
+    Initializes a new C4Image using a CIImage, with option for specifying the scale of the image.
+
+    Use this method if you're working with the output of a CIFilter.
 
     :param: uiimage A CIImage object.
     */
@@ -117,8 +161,12 @@ public class C4Image: C4View {
     }
 
     /**
-    Initializes a new C4Image using raw data (for example, if you download an image as data you can pass it here to create an image).
+    Initializes a new C4Image using raw data.
     
+    Use this if you download an image as data you can pass it here to create an image. 
+    
+    See the body of init(url:) to see how to download an image as data.
+
     :param: data An NSData object.
     */
     convenience public init(data: NSData) {
@@ -126,8 +174,12 @@ public class C4Image: C4View {
     }
 
     /**
-    Initializes a new C4Image using raw data (for example, if you download an image as data you can pass it here to create an image).
+    Initializes a new C4Image using raw data, with option for specifying the scale of the image.
 
+    Use this if you download an image as data you can pass it here to create an image.
+
+    See the body of init(url:) to see how to download an image as data.
+    
     :param: data An NSData object.
     */
     convenience public init(data: NSData, scale: Double) {
@@ -138,6 +190,11 @@ public class C4Image: C4View {
     /**
     Initializes a new C4Image from an URL.
 
+        if let url = NSURL(string: "http://www.c4ios.com/images/logo@2x.png") {
+            let img = C4Image(url: url)
+            canvas.add(img)
+        }
+
     :param: url An NSURL object.
     */
     convenience public init(url: NSURL) {
@@ -145,7 +202,12 @@ public class C4Image: C4View {
     }
 
     /**
-    Initializes a new C4Image from an URL.
+    Initializes a new C4Image from an URL, with option for specifying the scale of the image.
+    
+        if let url = NSURL(string: "http://www.c4ios.com/images/logo@2x.png") {
+            let img = C4Image(url: url, scale: 2.0)
+            canvas.add(img)
+        }
 
     :param: url An NSURL object.
     */
@@ -188,6 +250,7 @@ public class C4Image: C4View {
 //MARK: Properties
     /**
     Returns the UIImageView of the object.
+
     :returns: A UIImageView object.
     */
     internal var imageView : UIImageView {
