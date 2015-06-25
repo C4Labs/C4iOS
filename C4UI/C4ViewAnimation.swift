@@ -29,12 +29,30 @@ public class C4ViewAnimation : C4Animation {
     public init(_ animations: () -> Void) {
         self.animations = animations
     }
+
+    /**
+    Initializes a new C4ViewAnimation. 
     
+        let v = C4View(frame: C4Rect(0,0,100,100))
+        canvas.add(v)
+        let bg = C4ViewAnimation(duration: 0.25) {
+            v.backgroundColor = C4Blue
+        }
+        delay(1.0) {
+            bg.animate()
+        }
+
+    :param: duration The length of the animations, measured in seconds.
+    :param: animations A block containing a variety of animations to execute
+    */
     public convenience init(duration: NSTimeInterval, animations: () -> Void) {
         self.init(animations)
         self.duration = duration
     }
-    
+
+    /**
+    Initiates the changes specified in the receivers `animations` block.
+    */
     public func animate() {
         var timing: CAMediaTimingFunction
         var options: UIViewAnimationOptions
@@ -74,7 +92,24 @@ public class C4ViewAnimationSequence: C4Animation {
     private var animations: [C4ViewAnimation]
     private var currentAnimationIndex: Int = -1
     private var currentObserver: AnyObject?
+
+    /**
+    Initializes a set of animations to execute in sequence.
     
+        let v = C4View(frame: C4Rect(0,0,100,100))
+        canvas.add(v)
+        let bg = C4ViewAnimation(duration: 0.25) {
+            v.backgroundColor = C4Blue
+        }
+        let ctr = C4ViewAnimation(duration: 0.25) {
+            v.center = self.canvas.center
+        }
+        let seq = C4ViewAnimationSequence(animations: [bg,ctr])
+        delay(1.0) {
+            seq.animate()
+        }
+
+    */
     public init(animations: [C4ViewAnimation]) {
         self.animations = animations
     }
@@ -119,7 +154,23 @@ public class C4ViewAnimationGroup: C4Animation {
     private var animations: [C4ViewAnimation]
     private var observers: [AnyObject] = []
     private var completed: [Bool]
+
+    /**
+    Initializes a set of animations to be executed at the same time.
     
+        let v = C4View(frame: C4Rect(0,0,100,100))
+        canvas.add(v)
+        let bg = C4ViewAnimation(duration: 0.25) {
+            v.backgroundColor = C4Blue
+        }
+        let ctr = C4ViewAnimation(duration: 0.25) {
+            v.center = self.canvas.center
+        }
+        let grp = C4ViewAnimationGroup(animations: [bg,ctr])
+        delay(1.0) {
+            grp.animate()
+        }
+    */
     public init(animations: [C4ViewAnimation]) {
         self.animations = animations
         completed = [Bool](count: animations.count, repeatedValue: false)
