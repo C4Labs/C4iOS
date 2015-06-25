@@ -28,6 +28,10 @@ extension C4Shape {
     /**
     Appends a circle to the end of the receiver's path.
     
+        var l = C4Line([C4Point(),C4Point(100,100)])
+        l.addCircle(center: l.path!.currentPoint, radius: 20)
+        canvas.add(l)
+
     :param: center The center of the new circle
     :param: radius The radius of the new circle
     */
@@ -46,6 +50,17 @@ extension C4Shape {
     /**
     Appends a polygon to the end of the receiver's path.
     
+        var l = C4Line([C4Point(),C4Point(100,100)])
+        var points = [C4Point]()
+        for i in 0...10 {
+            let x = random01()*100.0
+            let y = random01()*100.0
+            points.append(C4Point(x,y))
+        }
+        l.addPolygon(points: points, closed: true)
+        canvas.add(l)
+
+
     :param: points An array of C4Point structs that defines the new polygon
     :param: closed If true then the polygon will have an additional line between its first and last points
     */
@@ -71,6 +86,10 @@ extension C4Shape {
     /**
     Appends a line segment to the end of the receiver's path.
     
+        var l = C4Line([C4Point(),C4Point(100,100)])
+        l.addLine([C4Point(100,100),C4Point(100,0)])
+        canvas.add(l)
+
     :param: points An array of C4Point structs that defines the new line
     */
     public func addLine(points:[C4Point]) {
@@ -90,6 +109,12 @@ extension C4Shape {
     /**
     Appends a bezier curve to the end of the receiver's path.
     
+        var l = C4Line([C4Point(),C4Point(100,100)])
+        let pts = [C4Point(100,100),C4Point(100,0)]
+        let ctrls = [C4Point(150,100),C4Point(150,0)]
+        l.addCurve(points: pts, controls: ctrls)
+        canvas.add(l)
+
     :param: points An array of C4Point structs that defines the beginning and end points of the curve
     :param: controls An array of C4Point structs used to define the shape of the curve
     */
