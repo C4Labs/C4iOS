@@ -19,7 +19,6 @@
 
 import Foundation
 import UIKit
-import C4Animation
 
 public class C4ViewAnimation : C4Animation {
     public var delay: NSTimeInterval = 0

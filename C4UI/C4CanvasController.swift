@@ -17,7 +17,7 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-import Foundation
+import UIKit
 import C4Core
 
 public class C4CanvasController : UIViewController {

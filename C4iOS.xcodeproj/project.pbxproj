@@ -19,7 +19,6 @@
 		1FFE45B91A51F1A000E0B334 /* C4Rectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFE45B81A51F1A000E0B334 /* C4Rectangle.swift */; };
 		1FFE45BD1A51F8A200E0B334 /* C4Ellipse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFE45BC1A51F8A200E0B334 /* C4Ellipse.swift */; };
 		1FFE45BF1A51FA0B00E0B334 /* C4RegularPolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFE45BE1A51FA0B00E0B334 /* C4RegularPolygon.swift */; };
-		611A13841B0D49C000A9A4B1 /* C4Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9596D191A054A960023323D /* C4Core.framework */; };
 		614F824919DB5ED3001DF1D4 /* C4UI.h in Headers */ = {isa = PBXBuildFile; fileRef = 614F824819DB5ED3001DF1D4 /* C4UI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A930662B1A68E78400E704FF /* C4AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A930662A1A68E78400E704FF /* C4AudioPlayer.swift */; };
 		A94E3BD419E0E9390039A9C4 /* C4UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 614F824319DB5ED3001DF1D4 /* C4UI.framework */; };
@@ -35,10 +34,6 @@
 		A9596D451A054B4F0023323D /* C4MathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D411A054B4F0023323D /* C4MathTests.swift */; };
 		A9596D461A054B4F0023323D /* C4PointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D421A054B4F0023323D /* C4PointTests.swift */; };
 		A9596D471A054B4F0023323D /* C4VectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D431A054B4F0023323D /* C4VectorTests.swift */; };
-		A9596D8F1A089EA00023323D /* C4Animation.h in Headers */ = {isa = PBXBuildFile; fileRef = A9596D8E1A089EA00023323D /* C4Animation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A9596D951A089EA00023323D /* C4Animation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9596D8A1A089E9F0023323D /* C4Animation.framework */; };
-		A9596DA41A089EB60023323D /* C4Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596DA31A089EB60023323D /* C4Animator.swift */; };
-		A9596DA81A08B0C20023323D /* C4Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596DA71A08B0C20023323D /* C4Animation.swift */; };
 		A988A9131A4A837A0044007C /* UIGestureRecognizer+Closure.swift in Sources */ = {isa = PBXBuildFile; fileRef = A988A9121A4A837A0044007C /* UIGestureRecognizer+Closure.swift */; };
 		A988A9151A4F4A3A0044007C /* C4Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = A988A9141A4F4A3A0044007C /* C4Transform.swift */; };
 		A988A9171A4F57330044007C /* C4TransformTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A988A9161A4F57330044007C /* C4TransformTests.swift */; };
@@ -63,6 +58,8 @@
 		D90CB39A1A67020B006233D5 /* C4ViewAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A930661D1A57736600E704FF /* C4ViewAnimation.swift */; };
 		D91D8C331A69A7C000A17464 /* C4Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91D8C321A69A7C000A17464 /* C4Movie.swift */; };
 		D96954FE1A2526A100622AB0 /* C4Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96954FD1A2526A100622AB0 /* C4Shape.swift */; };
+		D9822D7E1B4CB0FE001B5628 /* C4Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9822D7C1B4CB0FE001B5628 /* C4Animation.swift */; };
+		D9822D7F1B4CB0FE001B5628 /* C4Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9822D7D1B4CB0FE001B5628 /* C4Animator.swift */; };
 		D990BB971AC1F174009BBCAD /* C4Wedge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8373051A574991009E0DCB /* C4Wedge.swift */; };
 		D9C0EF441A25190300C7A904 /* C4Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5726E319FCECE4006FF395 /* C4Foundation.swift */; };
 		D9C0EF451A25190400C7A904 /* C4Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5726E319FCECE4006FF395 /* C4Foundation.swift */; };
@@ -75,20 +72,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = A9596D181A054A960023323D;
 			remoteInfo = C4Core;
-		};
-		611A13821B0D49B900A9A4B1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 614F823A19DB5ED3001DF1D4 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A9596D181A054A960023323D;
-			remoteInfo = C4Core;
-		};
-		A93066171A576E5800E704FF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 614F823A19DB5ED3001DF1D4 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A9596D891A089E9F0023323D;
-			remoteInfo = C4Animation;
 		};
 		A94E3BD219E0E9340039A9C4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -103,13 +86,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = A9596D181A054A960023323D;
 			remoteInfo = C4Core;
-		};
-		A9596D961A089EA00023323D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 614F823A19DB5ED3001DF1D4 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A9596D891A089E9F0023323D;
-			remoteInfo = C4Animation;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -157,13 +133,7 @@
 		A9596D411A054B4F0023323D /* C4MathTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4MathTests.swift; sourceTree = "<group>"; };
 		A9596D421A054B4F0023323D /* C4PointTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4PointTests.swift; sourceTree = "<group>"; };
 		A9596D431A054B4F0023323D /* C4VectorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4VectorTests.swift; sourceTree = "<group>"; };
-		A9596D8A1A089E9F0023323D /* C4Animation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = C4Animation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A9596D8D1A089EA00023323D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A9596D8E1A089EA00023323D /* C4Animation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = C4Animation.h; sourceTree = "<group>"; };
-		A9596D941A089EA00023323D /* C4AnimationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = C4AnimationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9596D9A1A089EA00023323D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A9596DA31A089EB60023323D /* C4Animator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Animator.swift; sourceTree = "<group>"; };
-		A9596DA71A08B0C20023323D /* C4Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Animation.swift; sourceTree = "<group>"; };
 		A988A9121A4A837A0044007C /* UIGestureRecognizer+Closure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIGestureRecognizer+Closure.swift"; sourceTree = "<group>"; };
 		A988A9141A4F4A3A0044007C /* C4Transform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = C4Transform.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A988A9161A4F57330044007C /* C4TransformTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4TransformTests.swift; sourceTree = "<group>"; };
@@ -181,6 +151,8 @@
 		D94947941A0BFD5700F9CDC8 /* C4View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4View.swift; sourceTree = "<group>"; };
 		D94947961A0D8E7A00F9CDC8 /* C4EventSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4EventSource.swift; sourceTree = "<group>"; };
 		D96954FD1A2526A100622AB0 /* C4Shape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Shape.swift; sourceTree = "<group>"; };
+		D9822D7C1B4CB0FE001B5628 /* C4Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Animation.swift; sourceTree = "<group>"; };
+		D9822D7D1B4CB0FE001B5628 /* C4Animator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Animator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,22 +186,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A9596D861A089E9F0023323D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				611A13841B0D49C000A9A4B1 /* C4Core.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A9596D911A089EA00023323D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A9596D951A089EA00023323D /* C4Animation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -240,7 +196,6 @@
 				A9596D271A054A960023323D /* C4CoreTests */,
 				614F824519DB5ED3001DF1D4 /* C4UI */,
 				614F824F19DB5ED4001DF1D4 /* C4UITests */,
-				A9596D8B1A089EA00023323D /* C4Animation */,
 				A9596D981A089EA00023323D /* C4AnimationTests */,
 				614F824419DB5ED3001DF1D4 /* Products */,
 			);
@@ -253,8 +208,6 @@
 				614F824E19DB5ED4001DF1D4 /* C4UITests.xctest */,
 				A9596D191A054A960023323D /* C4Core.framework */,
 				A9596D231A054A960023323D /* C4CoreTests.xctest */,
-				A9596D8A1A089E9F0023323D /* C4Animation.framework */,
-				A9596D941A089EA00023323D /* C4AnimationTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -263,6 +216,8 @@
 			isa = PBXGroup;
 			children = (
 				614F824819DB5ED3001DF1D4 /* C4UI.h */,
+				D9822D7C1B4CB0FE001B5628 /* C4Animation.swift */,
+				D9822D7D1B4CB0FE001B5628 /* C4Animator.swift */,
 				1F0D0DCA1A560D1800481D65 /* C4Arc.swift */,
 				A930662A1A68E78400E704FF /* C4AudioPlayer.swift */,
 				1F6D60BB1B3278FE00B12838 /* C4CanvasController.swift */,
@@ -278,19 +233,19 @@
 				1FFE45B81A51F1A000E0B334 /* C4Rectangle.swift */,
 				1FFE45BE1A51FA0B00E0B334 /* C4RegularPolygon.swift */,
 				D96954FD1A2526A100622AB0 /* C4Shape.swift */,
-				A9B277F41A7DAA320018E456 /* C4ShapeLayer.swift */,
 				6162BFB619DB971C00D7F3D0 /* C4Shape+Creation.swift */,
+				A9B277F41A7DAA320018E456 /* C4ShapeLayer.swift */,
 				1F8373021A574991009E0DCB /* C4Star.swift */,
 				1F4881D21A56195800E0EBA4 /* C4TextShape.swift */,
 				1F8373041A574991009E0DCB /* C4Triangle.swift */,
 				D94947941A0BFD5700F9CDC8 /* C4View.swift */,
+				A930661B1A57701400E704FF /* C4View+Animation.swift */,
 				A988A9361A53818C0044007C /* C4View+Border.swift */,
 				A988A9381A5383070044007C /* C4View+Shadow.swift */,
-				A930661B1A57701400E704FF /* C4View+Animation.swift */,
 				A930661D1A57736600E704FF /* C4ViewAnimation.swift */,
 				1F8373051A574991009E0DCB /* C4Wedge.swift */,
-				1FA4A7BE1A7B6569002C94CB /* UIViewController+C4View.swift */,
 				A988A9121A4A837A0044007C /* UIGestureRecognizer+Closure.swift */,
+				1FA4A7BE1A7B6569002C94CB /* UIViewController+C4View.swift */,
 				D90CB39B1A670258006233D5 /* Filters */,
 				614F824619DB5ED3001DF1D4 /* Supporting Files */,
 			);
@@ -371,25 +326,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		A9596D8B1A089EA00023323D /* C4Animation */ = {
-			isa = PBXGroup;
-			children = (
-				A9596D8E1A089EA00023323D /* C4Animation.h */,
-				A9596DA31A089EB60023323D /* C4Animator.swift */,
-				A9596DA71A08B0C20023323D /* C4Animation.swift */,
-				A9596D8C1A089EA00023323D /* Supporting Files */,
-			);
-			path = C4Animation;
-			sourceTree = "<group>";
-		};
-		A9596D8C1A089EA00023323D /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				A9596D8D1A089EA00023323D /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		A9596D981A089EA00023323D /* C4AnimationTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -437,14 +373,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A9596D871A089E9F0023323D /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A9596D8F1A089EA00023323D /* C4Animation.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -460,7 +388,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				A93066181A576E5800E704FF /* PBXTargetDependency */,
 				1F3FC0201A0F2EDC005984BB /* PBXTargetDependency */,
 			);
 			name = C4UI;
@@ -522,43 +449,6 @@
 			productReference = A9596D231A054A960023323D /* C4CoreTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		A9596D891A089E9F0023323D /* C4Animation */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A9596D9D1A089EA00023323D /* Build configuration list for PBXNativeTarget "C4Animation" */;
-			buildPhases = (
-				A9596D851A089E9F0023323D /* Sources */,
-				A9596D861A089E9F0023323D /* Frameworks */,
-				A9596D871A089E9F0023323D /* Headers */,
-				A9596D881A089E9F0023323D /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				611A13831B0D49B900A9A4B1 /* PBXTargetDependency */,
-			);
-			name = C4Animation;
-			productName = C4Animation;
-			productReference = A9596D8A1A089E9F0023323D /* C4Animation.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		A9596D931A089EA00023323D /* C4AnimationTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A9596DA01A089EA00023323D /* Build configuration list for PBXNativeTarget "C4AnimationTests" */;
-			buildPhases = (
-				A9596D901A089EA00023323D /* Sources */,
-				A9596D911A089EA00023323D /* Frameworks */,
-				A9596D921A089EA00023323D /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				A9596D971A089EA00023323D /* PBXTargetDependency */,
-			);
-			name = C4AnimationTests;
-			productName = C4AnimationTests;
-			productReference = A9596D941A089EA00023323D /* C4AnimationTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -580,12 +470,6 @@
 					A9596D221A054A960023323D = {
 						CreatedOnToolsVersion = 6.1;
 					};
-					A9596D891A089E9F0023323D = {
-						CreatedOnToolsVersion = 6.1;
-					};
-					A9596D931A089EA00023323D = {
-						CreatedOnToolsVersion = 6.1;
-					};
 				};
 			};
 			buildConfigurationList = 614F823D19DB5ED3001DF1D4 /* Build configuration list for PBXProject "C4iOS" */;
@@ -604,8 +488,6 @@
 				614F824D19DB5ED4001DF1D4 /* C4UITests */,
 				A9596D181A054A960023323D /* C4Core */,
 				A9596D221A054A960023323D /* C4CoreTests */,
-				A9596D891A089E9F0023323D /* C4Animation */,
-				A9596D931A089EA00023323D /* C4AnimationTests */,
 			);
 		};
 /* End PBXProject section */
@@ -633,20 +515,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A9596D211A054A960023323D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A9596D881A089E9F0023323D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A9596D921A089EA00023323D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -684,10 +552,12 @@
 				1FFE45BF1A51FA0B00E0B334 /* C4RegularPolygon.swift in Sources */,
 				D96954FE1A2526A100622AB0 /* C4Shape.swift in Sources */,
 				1F4881D31A56195800E0EBA4 /* C4TextShape.swift in Sources */,
+				D9822D7E1B4CB0FE001B5628 /* C4Animation.swift in Sources */,
 				1F3FC01C1A0F2AAD005984BB /* C4View.swift in Sources */,
 				D90CB39A1A67020B006233D5 /* C4ViewAnimation.swift in Sources */,
 				D90CB3991A670203006233D5 /* C4View+Animation.swift in Sources */,
 				A988A9371A53818C0044007C /* C4View+Border.swift in Sources */,
+				D9822D7F1B4CB0FE001B5628 /* C4Animator.swift in Sources */,
 				1FA4A7BF1A7B6569002C94CB /* UIViewController+C4View.swift in Sources */,
 				D90CB3911A67016A006233D5 /* C4View+Shadow.swift in Sources */,
 				A988A9131A4A837A0044007C /* UIGestureRecognizer+Closure.swift in Sources */,
@@ -734,22 +604,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A9596D851A089E9F0023323D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A9596DA41A089EB60023323D /* C4Animator.swift in Sources */,
-				A9596DA81A08B0C20023323D /* C4Animation.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A9596D901A089EA00023323D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -757,16 +611,6 @@
 			isa = PBXTargetDependency;
 			target = A9596D181A054A960023323D /* C4Core */;
 			targetProxy = 1F3FC01F1A0F2EDC005984BB /* PBXContainerItemProxy */;
-		};
-		611A13831B0D49B900A9A4B1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A9596D181A054A960023323D /* C4Core */;
-			targetProxy = 611A13821B0D49B900A9A4B1 /* PBXContainerItemProxy */;
-		};
-		A93066181A576E5800E704FF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A9596D891A089E9F0023323D /* C4Animation */;
-			targetProxy = A93066171A576E5800E704FF /* PBXContainerItemProxy */;
 		};
 		A94E3BD319E0E9340039A9C4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -777,11 +621,6 @@
 			isa = PBXTargetDependency;
 			target = A9596D181A054A960023323D /* C4Core */;
 			targetProxy = A9596D251A054A960023323D /* PBXContainerItemProxy */;
-		};
-		A9596D971A089EA00023323D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A9596D891A089E9F0023323D /* C4Animation */;
-			targetProxy = A9596D961A089EA00023323D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1000,75 +839,6 @@
 			};
 			name = Release;
 		};
-		A9596D9E1A089EA00023323D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = C4Animation/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-			};
-			name = Debug;
-		};
-		A9596D9F1A089EA00023323D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = C4Animation/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		A9596DA11A089EA00023323D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = C4AnimationTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		A9596DA21A089EA00023323D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = C4AnimationTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1113,24 +883,6 @@
 			buildConfigurations = (
 				A9596D301A054A960023323D /* Debug */,
 				A9596D311A054A960023323D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A9596D9D1A089EA00023323D /* Build configuration list for PBXNativeTarget "C4Animation" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A9596D9E1A089EA00023323D /* Debug */,
-				A9596D9F1A089EA00023323D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A9596DA01A089EA00023323D /* Build configuration list for PBXNativeTarget "C4AnimationTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A9596DA11A089EA00023323D /* Debug */,
-				A9596DA21A089EA00023323D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
