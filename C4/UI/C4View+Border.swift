@@ -26,7 +26,7 @@ public struct Border {
     /**
     Returns the color of the border.
     */
-    public var color: C4Color
+    public var color: C4Color?
     
     /**
     Returns the corner radius of the border.
@@ -65,7 +65,9 @@ public extension C4View {
         get {
             var border = Border()
             if let layer = layer {
-                border.color = C4Color(layer.borderColor)
+                if let borderColor = layer.borderColor {
+                    border.color = C4Color(borderColor)
+                }
                 border.radius = Double(layer.cornerRadius)
                 border.width = Double(layer.borderWidth)
             }
@@ -74,7 +76,9 @@ public extension C4View {
         set {
             if let layer = layer {
                 layer.borderWidth = CGFloat(newValue.width)
-                layer.borderColor = newValue.color.CGColor
+                if let color = newValue.color {
+                    layer.borderColor = color.CGColor
+                }
                 layer.cornerRadius = CGFloat(newValue.radius)
             }
         }

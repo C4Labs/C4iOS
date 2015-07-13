@@ -30,8 +30,8 @@ public class C4Curve : C4Shape {
         let c2 = C4Point(100,50)
         let crv = C4Curve(points: [p1,p2], controls: [c1,c2])
 
-    :param: points The beginning and end points	of the curve.
-    :param: controls The control points used to define the shape of the curve.
+    - parameter points: The beginning and end points	of the curve.
+    - parameter controls: The control points used to define the shape of the curve.
     */
     convenience public init(points: [C4Point], controls: [C4Point]) {
         let p0 = CGPoint(points[0])

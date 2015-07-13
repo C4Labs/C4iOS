@@ -24,7 +24,7 @@ public struct C4Hue : C4Filter {
     public var angle: Double = 1.0
     public init() {}
     public func createCoreImageFilter(inputImage: CIImage) -> CIFilter {
-        let filter = CIFilter(name: filterName)
+        let filter = CIFilter(name: filterName)!
         filter.setDefaults()
         filter.setValue(angle, forKey:"inputAngle")
         filter.setValue(inputImage, forKey: "inputImage")

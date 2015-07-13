@@ -20,7 +20,7 @@
 import Foundation
 import CoreGraphics
 
-public struct C4Rect : Equatable, Printable {
+public struct C4Rect : Equatable, CustomStringConvertible {
     public var origin: C4Point
     public var size: C4Size
     
@@ -71,7 +71,7 @@ public struct C4Rect : Equatable, Printable {
         let pts = [C4Point(), C4Point(0,5), C4Point(10,10), C4Point(9,8)]
         let r = C4Rect(pts) //-> {{0.0, 0.0}, {10.0, 10.0}}
 
-    :param: points An array of C4Point coordinates
+    - parameter points: An array of C4Point coordinates
     */
     public init(_ points:[C4Point]) {
         let count = points.count
@@ -95,9 +95,9 @@ public struct C4Rect : Equatable, Printable {
         r1.intersects(r2) //-> true
         r1.intersects(r3) //-> false
 
-    :param: rect1	The first rectangle to examine.
-    :param: rect2	The second rectangle to examine.
-    :returns:	true if the two specified rectangles intersect; otherwise, false.
+    - parameter rect1:	The first rectangle to examine.
+    - parameter rect2:	The second rectangle to examine.
+    - returns:	true if the two specified rectangles intersect; otherwise, false.
     */
     public func intersects(r: C4Rect) -> Bool {
         return CGRectIntersectsRect(CGRect(self), CGRect(r))
@@ -139,7 +139,7 @@ public struct C4Rect : Equatable, Printable {
         let r = C4Point()
         r.isZero() //-> true
 
-    :returns: true if origin = {0,0} and size = {0,0}
+    - returns: true if origin = {0,0} and size = {0,0}
     */
     public func isZero() -> Bool {
         return origin.isZero() && size.isZero()
@@ -155,9 +155,9 @@ public struct C4Rect : Equatable, Printable {
         r1.contains(p) //-> true
         r2.contains(p) //-> false
 
-    :param: rect	The rectangle to examine.
-    :param: point	The point to examine.
-    :returns: true if the rectangle is not null or empty and the point is located within the rectangle; otherwise, false.
+    - parameter rect:	The rectangle to examine.
+    - parameter point:	The point to examine.
+    - returns: true if the rectangle is not null or empty and the point is located within the rectangle; otherwise, false.
     */
     public func contains(point: C4Point) -> Bool {
         return CGRectContainsPoint(CGRect(self), CGPoint(point))
@@ -172,9 +172,9 @@ public struct C4Rect : Equatable, Printable {
         r1.contains(r2) //-> false
         r1.contains(r3) //-> true
 
-    :param: rect1	The rectangle to examine for containment of the rectangle passed in rect2.
-    :param: rect2	The rectangle to examine for being contained in the rectangle passed in rect1.
-    :param:	true if the rectangle specified by rect2 is contained in the rectangle passed in rect1; otherwise, false.
+    - parameter rect1:	The rectangle to examine for containment of the rectangle passed in rect2.
+    - parameter rect2:	The rectangle to examine for being contained in the rectangle passed in rect1.
+    - parameter	true: if the rectangle specified by rect2 is contained in the rectangle passed in rect1; otherwise, false.
     */
     public func contains(rect: C4Rect) -> Bool {
         return CGRectContainsRect(CGRect(self), CGRect(rect))
@@ -183,7 +183,7 @@ public struct C4Rect : Equatable, Printable {
     /**
     A string representation of the rect.
 
-    :returns: A string formatted to look like {{x,y},{w,h}}
+    - returns: A string formatted to look like {{x,y},{w,h}}
     */
     public var description : String {
         get {
@@ -200,7 +200,7 @@ Checks to see if two C4Rects share identical origin and size
     let r2 = C4Rect(0,0,10,10.5)
     println(r1 == r2) //-> false
 
-:returns: A bool, `true` if the rects are identical, otherwise `false`.
+- returns: A bool, `true` if the rects are identical, otherwise `false`.
 */
 public func == (lhs: C4Rect, rhs: C4Rect) -> Bool {
     return lhs.origin == rhs.origin && lhs.size == rhs.size
@@ -214,9 +214,9 @@ Returns the intersection of two rectangles.
     let r2 = C4Rect(5,5,10,10)
     intersection(r1,r2) //-> {5,5,5,5}
 
-:param: rect1	The first source rectangle.
-:param: rect2	The second source rectangle.
-:returns: A rectangle that represents the intersection of the two specified rectangles.
+- parameter rect1:	The first source rectangle.
+- parameter rect2:	The second source rectangle.
+- returns: A rectangle that represents the intersection of the two specified rectangles.
 */
 public func intersection(rect1: C4Rect, rect2: C4Rect) -> C4Rect {
     return C4Rect(CGRectIntersection(CGRect(rect1), CGRect(rect2)))
@@ -229,9 +229,9 @@ Returns the smallest rectangle that contains the two source rectangles.
     let r2 = C4Rect(5,5,10,10)
     intersection(r1,r2) //-> {0,0,15,15}
 
-:param: r1	The first source rectangle.
-:param: r2	The second source rectangle.
-:returns:	The smallest rectangle that completely contains both of the source rectangles.
+- parameter r1:	The first source rectangle.
+- parameter r2:	The second source rectangle.
+- returns:	The smallest rectangle that completely contains both of the source rectangles.
 */public func union(rect1: C4Rect, rect2: C4Rect) -> C4Rect {
     return C4Rect(CGRectUnion(CGRect(rect1), CGRect(rect2)))
 }
@@ -243,8 +243,8 @@ Returns the smallest rectangle that results from converting the source rectangle
     let r2 = C4Rect(5,5,10,10)
     intersection(r1,r2) //-> {5,5,5,5}
 
-:param: rect	The source rectangle.
-:returns: A rectangle with the smallest integer values for its origin and size that contains the source rectangle.
+- parameter rect:	The source rectangle.
+- returns: A rectangle with the smallest integer values for its origin and size that contains the source rectangle.
 */
 public func integral(r: C4Rect) -> C4Rect {
     return C4Rect(CGRectIntegral(CGRect(r)))
@@ -256,8 +256,8 @@ Returns a rectangle with a positive width and height.
     let r = C4Rect(0.1,0.1,10.6,10.6)
     integral(r) //-> {0,0,11,11}
 
-:param: rect	The source rectangle.
-:returns:	A rectangle that represents the source rectangle, but with positive width and height values.
+- parameter rect:	The source rectangle.
+- returns:	A rectangle that represents the source rectangle, but with positive width and height values.
 */
 public func standardize(r: C4Rect) -> C4Rect {
     return C4Rect(CGRectStandardize(CGRect(r)))
@@ -269,10 +269,10 @@ Returns a rectangle that is smaller or larger than the source rectangle, with th
     let r = C4Rect(0,0,10,10)
     inset(r, 1, 1) //-> {1,1,8,8}
 
-:param: rect	The source C4Rect structure.
-:param: dx	The x-coordinate value to use for adjusting the source rectangle.
-:param: dy	The y-coordinate value to use for adjusting the source rectangle.
-:returns:	A rectangle.
+- parameter rect:	The source C4Rect structure.
+- parameter dx:	The x-coordinate value to use for adjusting the source rectangle.
+- parameter dy:	The y-coordinate value to use for adjusting the source rectangle.
+- returns:	A rectangle.
 */
 public func inset(r: C4Rect, dx: Double, dy: Double) -> C4Rect {
     return C4Rect(CGRectInset(CGRect(r), CGFloat(dx), CGFloat(dy)))

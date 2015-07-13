@@ -26,10 +26,10 @@ public class C4Arc : C4Shape {
 
         let a = C4Arc(center: canvas.center,radius: 50, start: M_PI, end: 2*M_PI)
 
-    :param: center The center-point of the arc
-    :param: radius The radius of the arc
-    :param: startAngle	The angle (in radians) that determines the starting point of the arc, measured from the x-axis in the current user space.
-    :param: endAngle	The angle (in radians) that determines the ending point of the arc, measured from the x-axis in the current user space.
+    - parameter center: The center-point of the arc
+    - parameter radius: The radius of the arc
+    - parameter startAngle:	The angle (in radians) that determines the starting point of the arc, measured from the x-axis in the current user space.
+    - parameter endAngle:	The angle (in radians) that determines the ending point of the arc, measured from the x-axis in the current user space.
     */
     convenience public init(center: C4Point, radius: Double, start: Double, end: Double) {
         self.init(center: center,radius: radius,start: start,end: end,clockwise: end>start ? false : true)
@@ -40,13 +40,13 @@ public class C4Arc : C4Shape {
 
         let a = C4Arc(center: canvas.center,radius: 50, start: M_PI, end: 2*M_PI, clockwise: clockwise: false)
 
-    :param: center The center-point of the arc
-    :param: radius The radius of the arc
-    :param: startAngle	The angle (in radians) that determines the starting point of the arc, measured from the x-axis in the current user space.
-    :param: endAngle	The angle (in radians) that determines the ending point of the arc, measured from the x-axis in the current user space.
+    - parameter center: The center-point of the arc
+    - parameter radius: The radius of the arc
+    - parameter startAngle:	The angle (in radians) that determines the starting point of the arc, measured from the x-axis in the current user space.
+    - parameter endAngle:	The angle (in radians) that determines the ending point of the arc, measured from the x-axis in the current user space.
     */
     convenience public init(center: C4Point, radius: Double, start: Double, end: Double, clockwise: Bool) {
-        let arcRect = CGRectMakeFromArc(CGPoint(center),CGFloat(radius),CGFloat(start),CGFloat(end), clockwise);
+        let arcRect = CGRectMakeFromArc(CGPoint(center),radius: CGFloat(radius),startAngle: CGFloat(start),endAngle: CGFloat(end), clockwise: clockwise);
         self.init(frame: C4Rect(arcRect))
         let arc = CGPathCreateMutable()
         CGPathAddArc(arc, nil, CGFloat(center.x), CGFloat(center.y), CGFloat(radius), CGFloat(start), CGFloat(end), end > start ? false : true)

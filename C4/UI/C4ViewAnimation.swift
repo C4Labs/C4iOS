@@ -41,8 +41,8 @@ public class C4ViewAnimation : C4Animation {
             bg.animate()
         }
 
-    :param: duration The length of the animations, measured in seconds.
-    :param: animations A block containing a variety of animations to execute
+    - parameter duration: The length of the animations, measured in seconds.
+    - parameter animations: A block containing a variety of animations to execute
     */
     public convenience init(duration: NSTimeInterval, animations: () -> Void) {
         self.init(animations)

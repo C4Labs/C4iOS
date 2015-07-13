@@ -31,7 +31,7 @@ internal class C4Animator : NSObject {
     
     override init() {
         super.init()
-        displayLink = CADisplayLink(target: nil, selector: Selector("render"))
+        displayLink = CADisplayLink(target: self, selector: Selector("render"))
         displayLink.paused = true
         displayLink.addToRunLoop(NSRunLoop.currentRunLoop(), forMode: NSRunLoopCommonModes)
     }
@@ -40,11 +40,11 @@ internal class C4Animator : NSObject {
         displayLink.invalidate()
     }
     
-    func animations(#object: NSObject) -> [String: C4GenericAnimation]? {
+    func animations(object object: NSObject) -> [String: C4GenericAnimation]? {
         return animations[object]
     }
     
-    func animation(#object: NSObject, key: String) -> C4GenericAnimation? {
+    func animation(object object: NSObject, key: String) -> C4GenericAnimation? {
         return animations[object]?[key]
     }
     
@@ -64,7 +64,7 @@ internal class C4Animator : NSObject {
         displayLink.paused = false
     }
     
-    func removeAnimation(#object: NSObject, key: String) {
+    func removeAnimation(object object: NSObject, key: String) {
         if var objectAnimations = animations[object] {
             objectAnimations.removeValueForKey(key)
             if objectAnimations.isEmpty {
@@ -77,7 +77,7 @@ internal class C4Animator : NSObject {
         }
     }
     
-    func removeAnimations(#object: NSObject) {
+    func removeAnimations(object object: NSObject) {
         animations.removeValueForKey(object)
         if animations.isEmpty {
             displayLink.paused = true

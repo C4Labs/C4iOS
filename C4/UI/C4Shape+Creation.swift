@@ -31,10 +31,10 @@ extension C4Shape {
         l.addCircle(center: l.path!.currentPoint, radius: 20)
         canvas.add(l)
     
-    :param: center The center of the new circle
-    :param: radius The radius of the new circle
+    - parameter center: The center of the new circle
+    - parameter radius: The radius of the new circle
     */
-    public func addCircle(#center: C4Point, radius: Double) {
+    public func addCircle(center center: C4Point, radius: Double) {
         var newPath = path
         if newPath == nil {
             newPath = C4Path()
@@ -59,10 +59,10 @@ extension C4Shape {
         l.addPolygon(points: points, closed: true)
         canvas.add(l)
     
-    :param: points An array of C4Point structs that defines the new polygon
-    :param: closed If true then the polygon will have an additional line between its first and last points
+    - parameter points: An array of C4Point structs that defines the new polygon
+    - parameter closed: If true then the polygon will have an additional line between its first and last points
     */
-    public func addPolygon(#points: [C4Point], closed: Bool = true) {
+    public func addPolygon(points points: [C4Point], closed: Bool = true) {
         var newPath = path
         if newPath == nil {
             newPath = C4Path()
@@ -88,10 +88,10 @@ extension C4Shape {
         l.addLine([C4Point(100,100),C4Point(100,0)])
         canvas.add(l)
 
-    :param: points An array of C4Point structs that defines the new line
+    - parameter points: An array of C4Point structs that defines the new line
     */
     public func addLine(points:[C4Point]) {
-        var newPath = path
+        let newPath = path
         if path == nil {
             path = C4Path()
         }
@@ -113,11 +113,11 @@ extension C4Shape {
         l.addCurve(points: pts, controls: ctrls)
         canvas.add(l)
 
-    :param: points An array of C4Point structs that defines the beginning and end points of the curve
-    :param: controls An array of C4Point structs used to define the shape of the curve
+    - parameter points: An array of C4Point structs that defines the beginning and end points of the curve
+    - parameter controls: An array of C4Point structs used to define the shape of the curve
     */
-    public func addCurve(#points:[C4Point], controls:[C4Point]) {
-        var newPath = path
+    public func addCurve(points points:[C4Point], controls:[C4Point]) {
+        let newPath = path
         if path == nil {
             path = C4Path()
         }

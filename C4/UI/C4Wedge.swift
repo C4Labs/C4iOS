@@ -29,10 +29,10 @@ public class C4Wedge : C4Shape {
         let w = C4Wedge(center: canvas.center, radius: 50, start: M_PI_4 * 3, end: M_PI_4)
         canvas.add(w)
 
-    :param: center The center of the wedge.
-    :param: radius The radius of the wedge.
-    :param: start The start angle of the wedge.
-    :param: end The end angle of the wedge.
+    - parameter center: The center of the wedge.
+    - parameter radius: The radius of the wedge.
+    - parameter start: The start angle of the wedge.
+    - parameter end: The end angle of the wedge.
     */
     convenience public init(center: C4Point, radius: Double, start: Double, end: Double) {
         self.init(center: center, radius: radius, start: start, end: end, clockwise: end > start ? false : true)
@@ -46,14 +46,14 @@ public class C4Wedge : C4Shape {
     let w = C4Wedge(center: canvas.center, radius: 50, start: M_PI_4 * 3, end: M_PI_4, clockwise: true)
     canvas.add(w)
 
-    :param: center The center of the wedge.
-    :param: radius The radius of the wedge.
-    :param: start The start angle of the wedge.
-    :param: end The end angle of the wedge.
-    :param: clockwise Whether or not to close the shape in a clockwise fashion.
+    - parameter center: The center of the wedge.
+    - parameter radius: The radius of the wedge.
+    - parameter start: The start angle of the wedge.
+    - parameter end: The end angle of the wedge.
+    - parameter clockwise: Whether or not to close the shape in a clockwise fashion.
     */
     convenience public init(center: C4Point, radius: Double, start: Double, end: Double, clockwise: Bool) {
-        let wedgeRect = CGRectMakeFromWedge(CGPoint(center),CGFloat(radius),CGFloat(start),CGFloat(end), clockwise);
+        let wedgeRect = CGRectMakeFromWedge(CGPoint(center),radius: CGFloat(radius),startAngle: CGFloat(start),endAngle: CGFloat(end), clockwise: clockwise);
         self.init(frame: C4Rect(wedgeRect))
         let wedge = CGPathCreateMutable()
         CGPathAddArc(wedge, nil, CGFloat(center.x), CGFloat(center.y), CGFloat(radius), CGFloat(start), CGFloat(end), clockwise)

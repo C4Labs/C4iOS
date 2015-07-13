@@ -25,7 +25,7 @@ public struct C4Bloom : C4Filter {
     public var intensity: Double = 1.0
     public init() {}
     public func createCoreImageFilter(inputImage: CIImage) -> CIFilter {
-        let filter = CIFilter(name: filterName)
+        let filter = CIFilter(name: filterName)!
         filter.setDefaults()
         filter.setValue(radius, forKey:"inputRadius")
         filter.setValue(intensity, forKey:"inputIntensity")

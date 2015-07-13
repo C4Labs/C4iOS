@@ -27,7 +27,7 @@ public class C4Ellipse: C4Shape {
         let r = C4Rect(0,0,100,200)
         let e = C4Ellipse(frame: r)
         
-    :param: frame The frame within which to draw an ellipse that touches each of the four sides of the frame.
+    - parameter frame: The frame within which to draw an ellipse that touches each of the four sides of the frame.
     */
     convenience public init(frame: C4Rect) {
         self.init()

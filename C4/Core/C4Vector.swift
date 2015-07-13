@@ -19,7 +19,7 @@
 
 import CoreGraphics
 
-public struct C4Vector : Equatable, Printable {
+public struct C4Vector : Equatable, CustomStringConvertible {
     public var x: Double = 0
     public var y: Double = 0
     public var z: Double = 0
@@ -183,7 +183,7 @@ public struct C4Vector : Equatable, Printable {
     /**
     A string representation of the vector.
 
-    :returns: A string formatted to look like {x,y,z}
+    - returns: A string formatted to look like {x,y,z}
     */
     public var description : String {
         get {

@@ -54,8 +54,8 @@ public class C4Color {
         let c = C4Color()
     */
     public init() {
-        colorSpace = CGColorSpaceCreateDeviceRGB()
-        internalColor = CGColorCreate(colorSpace, [0, 0, 0, 0])
+        colorSpace = CGColorSpaceCreateDeviceRGB()!
+        internalColor = CGColorCreate(colorSpace, [0, 0, 0, 0])!
     }
     
     /**
@@ -63,14 +63,14 @@ public class C4Color {
 
         let c = C4Color(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0)
 
-    :param: red The red value for the new color [0.0 ... 1.0]
-    :param: green The green value for the new color [0.0 ... 1.0]
-    :param: blue The blue value for the new color [0.0 ... 1.0]
-    :param: alpha The alpha value for the new color [0.0 ... 1.0]
+    - parameter red: The red value for the new color [0.0 ... 1.0]
+    - parameter green: The green value for the new color [0.0 ... 1.0]
+    - parameter blue: The blue value for the new color [0.0 ... 1.0]
+    - parameter alpha: The alpha value for the new color [0.0 ... 1.0]
     */
     public init(red: Double, green: Double, blue: Double, alpha: Double) {
-        colorSpace = CGColorSpaceCreateDeviceRGB()
-        internalColor = CGColorCreate(colorSpace, [CGFloat(red), CGFloat(green), CGFloat(blue), CGFloat(alpha)])
+        colorSpace = CGColorSpaceCreateDeviceRGB()!
+        internalColor = CGColorCreate(colorSpace, [CGFloat(red), CGFloat(green), CGFloat(blue), CGFloat(alpha)])!
     }
     
     /**
@@ -78,10 +78,10 @@ public class C4Color {
     
         let c = C4Color(UIColor.redColor().CGColor)
 
-    :param: color A CGColor object that will be used to create a new C4Color.
+    - parameter color: A CGColor object that will be used to create a new C4Color.
     */
     public init(_ color: CGColorRef) {
-        colorSpace = CGColorSpaceCreateDeviceRGB()
+        colorSpace = CGColorSpaceCreateDeviceRGB()!
         internalColor = color
     }
     
@@ -90,7 +90,7 @@ public class C4Color {
     
         let c = C4Color(UIColor.redColor())
 
-    :param: color A UIColor object whose components will be extrated to create a new C4Color.
+    - parameter color: A UIColor object whose components will be extrated to create a new C4Color.
     */
     public convenience init(_ color: UIColor) {
         var red: CGFloat = 0;
@@ -106,10 +106,10 @@ public class C4Color {
     
         let c = C4Color(red: 255, green: 0, blue: 0, alpha: 255)
 
-    :param: red The red value for the new color [0 ... 255]
-    :param: green The green value for the new color [0 ... 255]
-    :param: blue The blue value for the new color [0 ... 255]
-    :param: alpha The alpha value for the new color [0 ... 255]
+    - parameter red: The red value for the new color [0 ... 255]
+    - parameter green: The green value for the new color [0 ... 255]
+    - parameter blue: The blue value for the new color [0 ... 255]
+    - parameter alpha: The alpha value for the new color [0 ... 255]
     */
     public convenience init(red: Int, green: Int, blue: Int, alpha: Double) {
         self.init(red: Double(red) / 255.0, green: Double(green) / 255.0, blue: Double(blue) / 255.0, alpha: alpha)
@@ -122,7 +122,7 @@ public class C4Color {
 
         let c = C4Color(0xFF0000FF)
 
-    :param: hexValue A color value expressed in hexadecimal.
+    - parameter hexValue: A color value expressed in hexadecimal.
     */
     public convenience init(_ hexValue: UInt32) {
         let red   = Int((hexValue & 0xFF000000) >> 12)
@@ -135,7 +135,7 @@ public class C4Color {
     /**
     The set of 3 color values + alpha that define the current color.
 
-    :returns: An array of 4 Double values in the range [0.0 ... 1.0]
+    - returns: An array of 4 Double values in the range [0.0 ... 1.0]
     */
     public var components: [Double] {
         get {
@@ -154,7 +154,7 @@ public class C4Color {
                 CGFloat(newValue[2]),
                 CGFloat(newValue[3]),
             ]
-            internalColor = CGColorCreate(colorSpace, floatComponents)
+            internalColor = CGColorCreate(colorSpace, floatComponents)!
         }
     }
 
@@ -164,7 +164,7 @@ public class C4Color {
         let c = C4Color()
         let redVal = c.red
 
-    :returns: Double value in the range [0.0 ... 1.0]
+    - returns: Double value in the range [0.0 ... 1.0]
     */
     public var red: Double {
         get {
@@ -181,7 +181,7 @@ public class C4Color {
         let c = C4Color()
         let greenVal = c.green
 
-    :returns: Double value in the range [0.0 ... 1.0]
+    - returns: Double value in the range [0.0 ... 1.0]
     */
     public var green: Double {
         get {
@@ -198,7 +198,7 @@ public class C4Color {
         let c = C4Color()
         let blueVal = c.blue
 
-    :returns: Double value in the range [0.0 ... 1.0]
+    - returns: Double value in the range [0.0 ... 1.0]
     */
     public var blue: Double {
         get {
@@ -215,7 +215,7 @@ public class C4Color {
         let c = C4Color()
         let alphaVal = c.alpha
 
-    :returns: Double value in the range [0.0 ... 1.0]
+    - returns: Double value in the range [0.0 ... 1.0]
     */
     public var alpha: Double {
         get {
@@ -232,7 +232,7 @@ public class C4Color {
         let c = C4Color()
         let cg = c.CGColor
     
-    :returns: CGColorRef object that matches the color's `internalColor` property
+    - returns: CGColorRef object that matches the color's `internalColor` property
     */
     public var CGColor: CGColorRef {
         get {
@@ -246,7 +246,7 @@ public class C4Color {
 /**
 Initializes a UIColor object from a C4Color object.
 
-:returns: A UIColor whose characteristics match the specified C4Color
+- returns: A UIColor whose characteristics match the specified C4Color
 */
 public extension UIColor {
     public convenience init?(_ color: C4Color) {
@@ -257,7 +257,7 @@ public extension UIColor {
 /**
 Initializes a CIColor object from a C4Color object.
 
-:returns: A CIColor whose characteristics match the specified C4Color.
+- returns: A CIColor whose characteristics match the specified C4Color.
 */
 public extension CIColor {
     public convenience init(_ color: C4Color) {

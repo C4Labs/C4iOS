@@ -20,7 +20,7 @@
 import Foundation
 import CoreGraphics
 
-public struct C4Size : Equatable, Comparable, Printable {
+public struct C4Size : Equatable, Comparable, CustomStringConvertible {
     public var width: Double
     public var height: Double
     
@@ -67,7 +67,7 @@ public struct C4Size : Equatable, Comparable, Printable {
     /**
     A string representation of the size.
 
-    :returns: A string formatted to look like {w,h}
+    - returns: A string formatted to look like {w,h}
     */
     public var description : String {
         get {

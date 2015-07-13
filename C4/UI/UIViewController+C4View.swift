@@ -54,7 +54,7 @@ public extension UIViewController {
                 self,
                 &canvasAssociationKey,
                 canvas,
-                objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN))
+                objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
             return canvas
         }
     }

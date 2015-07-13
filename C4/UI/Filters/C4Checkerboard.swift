@@ -27,7 +27,7 @@ public struct C4Checkerboard : C4Generator {
     public var width: Double = 5.0
     public init() {}
     public func createCoreImageFilter() -> CIFilter {
-        let filter = CIFilter(name: filterName)
+        let filter = CIFilter(name: filterName)!
         filter.setDefaults()
         filter.setValue(CIColor(colors[0]), forKey:"inputColor0")
         filter.setValue(CIColor(colors[1]), forKey:"inputColor1")

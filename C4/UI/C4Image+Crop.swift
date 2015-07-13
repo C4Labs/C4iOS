@@ -32,7 +32,7 @@ extension C4Image {
             intersection.size.width,
             intersection.size.height)
 
-        let crop = CIFilter(name: "CICrop")
+        let crop = CIFilter(name: "CICrop")!
         crop.setDefaults()
         crop.setValue(CIVector(CGRect: inputRectangle), forKey: "inputRectangle")
         crop.setValue(ciimage, forKey: "inputImage")

@@ -8,7 +8,7 @@ Extension for CAShapeLayer that allows overriding the actions for specific prope
 public class C4ShapeLayer: CAShapeLayer {
     public static var disableActions = false
 
-    public override func actionForKey(key: String!) -> CAAction! {
+    public override func actionForKey(key: String) -> CAAction? {
         if C4ShapeLayer.disableActions == true {
             return nil
         }

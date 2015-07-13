@@ -27,7 +27,7 @@ public struct C4GaussianBlur : C4Filter {
     public init(radius: Double) { self.radius = radius }
     
     public func createCoreImageFilter(inputImage: CIImage) -> CIFilter {
-        let filter = CIFilter(name: filterName)
+        let filter = CIFilter(name: filterName)!
         filter.setDefaults()
         filter.setValue(radius, forKey:"inputRadius")
         filter.setValue(inputImage, forKey: "inputImage")

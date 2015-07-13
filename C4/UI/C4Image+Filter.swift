@@ -25,7 +25,7 @@ extension C4Image {
         self.apply(filters:[filter])
     }
     
-    public func apply(#filters: [C4Filter]) {
+    public func apply(filters filters: [C4Filter]) {
         for filter in filters {
             let cifilter = filter.createCoreImageFilter(output)
             self.output = cifilter.outputImage
@@ -34,9 +34,9 @@ extension C4Image {
     }
     
     public func renderFilteredImage() {
-        var extent = self.output.extent()
+        var extent = self.output.extent
         if CGRectIsInfinite(extent) {
-            extent = self.ciimage.extent()
+            extent = self.ciimage.extent
         }
         let filterContext = CIContext(options:nil)
         let filteredImage = filterContext.createCGImage(self.output, fromRect:extent)

@@ -52,12 +52,12 @@ public class C4Polygon: C4Shape {
         p.center = canvas.center
         canvas.add(p)
 
-    :param: points An array of C4Point structs.
+    - parameter points: An array of C4Point structs.
     */
     convenience public init(_ points: [C4Point]) {
         assert(points.count >= 2, "To create a Polygon you need to specify an array of at least 2 points")
         self.init(frame: C4Rect(points))
-        var path = C4Path()
+        let path = C4Path()
         self.points = points
         path.moveToPoint(points[0])
         for i in 1..<points.count {

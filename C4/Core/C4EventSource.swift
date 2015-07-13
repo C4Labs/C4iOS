@@ -40,7 +40,7 @@ extension NSObject : C4EventSource {
             self.canvas.post("tapped")
         }
 
-    :param: event The notification name for the event
+    - parameter event: The notification name for the event
     */
     public func post(event: String) {
         NSNotificationCenter.defaultCenter().postNotificationName(event, object: self)
@@ -53,8 +53,8 @@ extension NSObject : C4EventSource {
             println("received tap")
         }
 
-    :param: event The notification name to listen for
-    :param: run A block of code to run when the receiver "hears" the specified event name
+    - parameter event: The notification name to listen for
+    - parameter run: A block of code to run when the receiver "hears" the specified event name
     */
     public func on(event notificationName: String, run executionBlock: Void -> Void) -> AnyObject {
        return on(event: notificationName, from: nil, run: executionBlock)
@@ -72,7 +72,7 @@ extension NSObject : C4EventSource {
 
         canvas.cancel(self)
 
-    :param: observer An object whose actions are to be removed from the notification center.
+    - parameter observer: An object whose actions are to be removed from the notification center.
     */
     public func cancel(observer: AnyObject) {
         let nc = NSNotificationCenter.defaultCenter()

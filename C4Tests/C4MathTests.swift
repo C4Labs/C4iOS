@@ -23,42 +23,42 @@ import XCTest
 class C4MathTests: XCTestCase {
 
     func testLerp() {
-        XCTAssert(lerp(0.0, 10.0, 0.2) == 2.0, "Value should be interpolated")
+        XCTAssert(lerp(a: 0.0, b: 10.0, param: 0.2) == 2.0, "Value should be interpolated")
     }
 
     func testClampLess() {
-        var testValue = clamp(-1, 10, 20)
-        var correctValue = 10
+        let testValue = clamp(-1, min: 10, max: 20)
+        let correctValue = 10
         XCTAssertEqual(testValue, correctValue, "Value should be clamped to lower bound")
     }
 
     func testClampNoOp() {
-        var testValue = clamp(11, 10, 20)
-        var correctValue = 11
+        let testValue = clamp(11, min: 10, max: 20)
+        let correctValue = 11
         XCTAssertEqual(testValue, correctValue, "Value should not be clamped")
     }
 
     func testClampGreater() {
-        var testValue = clamp(21, 10, 20)
-        var correctValue = 20
+        let testValue = clamp(21, min: 10, max: 20)
+        let correctValue = 20
         XCTAssertEqual(testValue, correctValue, "Value should be clamped to upper bound")
     }
 
 
     func testMap() {
-        let testValue = map(5, 0, 10, 0, 20)
+        let testValue = map(5, min: 0, max: 10, toMin: 0, toMax: 20)
         let correctValue = 10.0
         XCTAssertEqual(testValue, correctValue, "Value should be mapped to the target range")
     }
 
     func testLerpDouble() {
-        let testValue = map(5.0, 0.0, 10.0, 0.0, 20.0)
+        let testValue = map(5.0, min: 0.0, max: 10.0, toMin: 0.0, toMax: 20.0)
         let correctValue = 10.0
         XCTAssertEqual(testValue, correctValue, "Double value should be mapped to the target range")
     }
 
     func testLerpInt() {
-        let testValue = map(6, 0, 10, 0, 20)
+        let testValue = map(6, min: 0, max: 10, toMin: 0, toMax: 20)
         let correctValue = 12.0
         XCTAssertEqual(testValue, correctValue, "Double value should be mapped to the target range")
     }
@@ -73,8 +73,8 @@ class C4MathTests: XCTestCase {
         let samples = 1000
         var min = Int.max
         var max = Int.min
-        for i in 0..<samples {
-            var value = random(below: upperBound)
+        for _ in 0..<samples {
+            let value = random(below: upperBound)
             if value < min { min = value }
             if value > max { max = value }
         }
@@ -89,8 +89,8 @@ class C4MathTests: XCTestCase {
         let samples = 1000
         var min = Int.max
         var max = Int.min
-        for i in 0..<samples {
-            var value = random(lowerBound, upperBound)
+        for _ in 0..<samples {
+            let value = random(min: lowerBound, max: upperBound)
             if value < min { min = value }
             if value > max { max = value }
         }
@@ -103,8 +103,8 @@ class C4MathTests: XCTestCase {
         let samples = 1000
         var min = 1.0
         var max = 0.0
-        for i in 0..<samples {
-            var value = random01()
+        for _ in 0..<samples {
+            let value = random01()
             if value < min { min = value }
             if value > max { max = value }
         }

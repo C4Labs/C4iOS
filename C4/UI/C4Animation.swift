@@ -133,7 +133,7 @@ public class C4GenericAnimation : C4Animation {
         
         let dt = time - startTime
         if duration > 0 {
-            progress = clamp(dt / duration, 0.0, 1.0)
+            progress = clamp(dt / duration, min: 0.0, max: 1.0)
         } else {
             progress = 1
         }
@@ -154,7 +154,7 @@ extension NSObject {
         C4Animator.sharedAnimator.addAnimation(animation, object: self, key: key)
     }
     
-    public func removeAnimation(#key: String) {
+    public func removeAnimation(key key: String) {
         C4Animator.sharedAnimator.removeAnimation(object: self, key: key)
     }
     

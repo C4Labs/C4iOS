@@ -28,7 +28,7 @@ public class C4View : NSObject {
     /**
     Initializes a new C4View from a UIView.
     
-    :param: view A UIView.
+    - parameter view: A UIView.
     */
     public init(view: UIView) {
         self.view = view;
@@ -41,7 +41,7 @@ public class C4View : NSObject {
         let v = C4View(frame: f)
         canvas.add(v)
     
-    :param: frame A C4Rect, which describes the view’s location and size in its superview’s coordinate system.
+    - parameter frame: A C4Rect, which describes the view’s location and size in its superview’s coordinate system.
     */
     convenience public init(frame: C4Rect) {
         self.init()
@@ -227,8 +227,8 @@ public class C4View : NSObject {
             println("tapped")
         }
 
-    :param: action A block of code to be executed when the receiver recognizes a tap gesture.
-    :returns: A UITapGestureRecognizer that can be customized.
+    - parameter action: A block of code to be executed when the receiver recognizes a tap gesture.
+    - returns: A UITapGestureRecognizer that can be customized.
     */
     public func addTapGestureRecognizer(action: TapAction) -> UITapGestureRecognizer {
         let gestureRecognizer = UITapGestureRecognizer(view: self.view, action: action)
@@ -245,8 +245,8 @@ public class C4View : NSObject {
             println("panned")
         }
 
-    :param: action A block of code to be executed when the receiver recognizes a pan gesture.
-    :returns: A UIPanGestureRecognizer that can be customized.
+    - parameter action: A block of code to be executed when the receiver recognizes a pan gesture.
+    - returns: A UIPanGestureRecognizer that can be customized.
     */
     public func addPanGestureRecognizer(action: PanAction) -> UIPanGestureRecognizer {
         let gestureRecognizer = UIPanGestureRecognizer(view: self.view, action: action)
@@ -263,8 +263,8 @@ public class C4View : NSObject {
             println("pinched")
         }
 
-    :param: action A block of code to be executed when the receiver recognizes a pinch gesture.
-    :returns: A UIPinchGestureRecognizer that can be customized.
+    - parameter action: A block of code to be executed when the receiver recognizes a pinch gesture.
+    - returns: A UIPinchGestureRecognizer that can be customized.
     */
     public func addPinchGestureRecognizer(action: PinchAction) -> UIPinchGestureRecognizer {
         let gestureRecognizer = UIPinchGestureRecognizer(view: view, action: action)
@@ -281,8 +281,8 @@ public class C4View : NSObject {
             println("rotated")
         }
 
-    :param: action A block of code to be executed when the receiver recognizes a rotation gesture.
-    :returns: A UIRotationGestureRecognizer that can be customized.
+    - parameter action: A block of code to be executed when the receiver recognizes a rotation gesture.
+    - returns: A UIRotationGestureRecognizer that can be customized.
     */
     public func addRotationGestureRecognizer(action: RotationAction) -> UIRotationGestureRecognizer {
         let gestureRecognizer = UIRotationGestureRecognizer(view: view, action: action)
@@ -299,8 +299,8 @@ public class C4View : NSObject {
             println("longpress")
         }
 
-    :param: action A block of code to be executed when the receiver recognizes a longpress gesture.
-    :returns: A UILongPressGestureRecognizer that can be customized.
+    - parameter action: A block of code to be executed when the receiver recognizes a longpress gesture.
+    - returns: A UILongPressGestureRecognizer that can be customized.
     */
     public func addLongPressGestureRecognizer(action: LongPressAction) -> UILongPressGestureRecognizer {
         let gestureRecognizer = UILongPressGestureRecognizer(view: view, action: action)
@@ -317,8 +317,8 @@ public class C4View : NSObject {
             println("swiped")
         }
 
-    :param: action A block of code to be executed when the receiver recognizes a swipe gesture.
-    :returns: A UISwipeGestureRecognizer that can be customized.
+    - parameter action: A block of code to be executed when the receiver recognizes a swipe gesture.
+    - returns: A UISwipeGestureRecognizer that can be customized.
     */
     public func addSwipeGestureRecognizer(action: SwipeAction) -> UISwipeGestureRecognizer {
         let gestureRecognizer = UISwipeGestureRecognizer(view: view, action: action)
@@ -334,8 +334,8 @@ public class C4View : NSObject {
             println("edge pan")
         }
 
-    :param: action A block of code to be executed when the receiver recognizes a screen edge pan gesture.
-    :returns: A UIScreenEdgePanGestureRecognizer that can be customized.
+    - parameter action: A block of code to be executed when the receiver recognizes a screen edge pan gesture.
+    - returns: A UIScreenEdgePanGestureRecognizer that can be customized.
     */
     public func addScreenEdgePanGestureRecognizer(action: ScreenEdgePanAction) -> UIScreenEdgePanGestureRecognizer {
         let gestureRecognizer = UIScreenEdgePanGestureRecognizer(view: view, action: action)
@@ -353,7 +353,7 @@ public class C4View : NSObject {
         let subv = C4View(frame: C4Rect(25,25,50,50))
         v.add(subv)
 
-    :param: view	The view to be added.
+    - parameter view:	The view to be added.
     */
     public func add<T>(subview: T) {
         if let v = subview as? UIView {
@@ -376,7 +376,7 @@ public class C4View : NSObject {
         v.add(subv)
         v.remove(subv)
 
-    :param: view	The view to be removed.
+    - parameter view:	The view to be removed.
     */
     public func remove<T>(subview: T) {
         if let v = subview as? UIView {
@@ -407,7 +407,7 @@ public class C4View : NSObject {
     /**
     Moves the specified subview so that it appears behind its siblings.
 
-    :param: view The subview to move to the back.
+    - parameter view: The subview to move to the back.
     */
     public func sendToBack<T>(subview:T) {
         if let v = subview as? UIView {
@@ -420,7 +420,7 @@ public class C4View : NSObject {
     /**
     Moves the specified subview so that it appears on top of its siblings.
     
-    :param: view The subview to move to the front.
+    - parameter view: The subview to move to the front.
     */
     public func bringToFront<T>(subview:T) {
         if let v = subview as? UIView {
@@ -442,9 +442,9 @@ public class C4View : NSObject {
         v.hitTest(C4Point(50,50)) //-> true
         v.hitTest(C4Point(50, 101)) //-> false
 
-    :param: point A `C4Point` to examine
+    - parameter point: A `C4Point` to examine
 
-    :returns: `true` if the point is within the object's frame, otherwise `false`.
+    - returns: `true` if the point is within the object's frame, otherwise `false`.
     */
     public func hitTest(point: C4Point) -> Bool {
         return CGRectContainsPoint(CGRect(bounds), CGPoint(point))
@@ -462,7 +462,7 @@ public class C4View : NSObject {
             }
         }
 
-    :returns: `true` if the point is within the object's frame, otherwise `false`.
+    - returns: `true` if the point is within the object's frame, otherwise `false`.
     */
     public func hitTest(point: C4Point, from: C4View) -> Bool {
         let p = convert(point, from:from)
@@ -475,7 +475,7 @@ public class C4View : NSObject {
         let p = C4Point()
         let cp = aView.convert(p, from:canvas)
 
-    :returns: A `C4Point` whose values have been translated into the receiver's coordinate system.
+    - returns: A `C4Point` whose values have been translated into the receiver's coordinate system.
     */
     //MARK: – Convert
     public func convert(point: C4Point, from: C4View) -> C4Point {
@@ -492,7 +492,7 @@ extension UIView {
     Adds a view to the end of the receiver’s list of subviews.
     
     When working with C4, use this method to add views because it handles the addition of both UIView and C4View.
-    :param: view	The view to be added.
+    - parameter view:	The view to be added.
     */
     public func add<T>(subview: T) {
         if let v = subview as? UIView {
@@ -509,7 +509,7 @@ extension UIView {
     
     When working with C4, use this method to remove views because it handles the removal of both UIView and C4View.
     
-    :param: view	The view to be removed.
+    - parameter view:	The view to be removed.
     */
     public func remove<T>(subview: T) {
         if let v = subview as? UIView {
@@ -524,7 +524,7 @@ extension UIView {
 
     When working with C4, use this method because it handles both UIView and C4View.
 
-    :param: view The subview to move to the back.
+    - parameter view: The subview to move to the back.
     */
     public func sendToBack<T>(subview:T) {
         if let v = subview as? UIView {
@@ -539,7 +539,7 @@ extension UIView {
 
     When working with C4, use this method because it handles both UIView and C4View.
 
-    :param: view The subview to move to the front.
+    - parameter view: The subview to move to the front.
     */
     public func bringToFront<T>(subview:T) {
         if let v = subview as? UIView {

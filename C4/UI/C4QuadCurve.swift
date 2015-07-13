@@ -30,8 +30,8 @@ public class C4QuadCurve : C4Curve {
         let curve = C4QuadCurve(points:[a,b], control: c)
         canvas.add(curve)
 
-    :param: points A two-point array specifying the beginning and end points of the curve.
-    :param: control A single C4Point used to calculate the shape of the curve.
+    - parameter points: A two-point array specifying the beginning and end points of the curve.
+    - parameter control: A single C4Point used to calculate the shape of the curve.
     */
     convenience public init(points: [C4Point], control: C4Point) {
         self.init(points: points, controls: [control, control])

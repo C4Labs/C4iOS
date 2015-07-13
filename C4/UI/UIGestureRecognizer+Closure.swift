@@ -19,14 +19,14 @@ extension UIGestureRecognizer {
     
     internal var referenceView: UIView? {
         get {
-            var weakViewWrapper: WeakViewWrapper? = objc_getAssociatedObject(self, &viewAssociationKey) as? WeakViewWrapper
+            let weakViewWrapper: WeakViewWrapper? = objc_getAssociatedObject(self, &viewAssociationKey) as? WeakViewWrapper
             return weakViewWrapper?.view
         }
         set {
             var weakViewWrapper: WeakViewWrapper? = objc_getAssociatedObject(self, &viewAssociationKey) as? WeakViewWrapper
             if weakViewWrapper == nil {
                 weakViewWrapper = WeakViewWrapper(newValue)
-                objc_setAssociatedObject(self, &viewAssociationKey, weakViewWrapper, UInt(OBJC_ASSOCIATION_RETAIN))
+                objc_setAssociatedObject(self, &viewAssociationKey, weakViewWrapper, .OBJC_ASSOCIATION_RETAIN)
             } else {
                 weakViewWrapper!.view = newValue
             }
@@ -38,7 +38,7 @@ extension UIGestureRecognizer {
             return objc_getAssociatedObject(self, &handlerAssociationKey)
         }
         set(newValue) {
-            objc_setAssociatedObject(self, &handlerAssociationKey, newValue, UInt(OBJC_ASSOCIATION_RETAIN))
+            objc_setAssociatedObject(self, &handlerAssociationKey, newValue, .OBJC_ASSOCIATION_RETAIN)
         }
     }
     

@@ -24,7 +24,7 @@ public struct C4Sharpen : C4Filter {
     public var sharpness: Double = 0.4
     public init() {}
     public func createCoreImageFilter(inputImage: CIImage) -> CIFilter {
-        let filter = CIFilter(name: filterName)
+        let filter = CIFilter(name: filterName)!
         filter.setDefaults()
         filter.setValue(sharpness, forKey:"inputSharpness")
         filter.setValue(inputImage, forKey:"inputImage")

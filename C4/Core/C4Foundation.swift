@@ -25,10 +25,10 @@ Prints a string to the console. Replacement for the noisy NSlog.
     C4Log("A message")
     C4Log(0)
 
-:param: string A formatted string that will print to the console
+- parameter string: A formatted string that will print to the console
 */
 public func C4Log<T>(value: T) {
-    println("[C4Log] \(value)")
+    print("[C4Log] \(value)")
 }
 
 /**
@@ -37,10 +37,10 @@ Returns a rectangle that contains all of the specified coordinates in an array.
     let points = [CGPointZero,CGPointMake(10,10)]
     let cgrect = CGRectMakeFromPoints(points)
 
-:param: points An array of CGPoint coordinates
+- parameter points: An array of CGPoint coordinates
 */
 public func CGRectMakeFromPoints(points: [CGPoint]) -> CGRect {
-    var path = CGPathCreateMutable()
+    let path = CGPathCreateMutable()
     CGPathMoveToPoint(path, nil, points[0].x, points[0].y)
     for i in 1..<points.count {
         CGPathAddLineToPoint(path, nil, points[i].x, points[i].y)
@@ -51,14 +51,14 @@ public func CGRectMakeFromPoints(points: [CGPoint]) -> CGRect {
 /**
 Returns a bounding rectangle with the specified values for building an arc.
 
-:param: center The center coordinate around which the arc will be drawn
-:param: radius The radius of the arc
-:param: startAngle The start angle of the arc
-:param: endAngle The end angle of the arc
-:param: clockwise The direction to draw the arc
+- parameter center: The center coordinate around which the arc will be drawn
+- parameter radius: The radius of the arc
+- parameter startAngle: The start angle of the arc
+- parameter endAngle: The end angle of the arc
+- parameter clockwise: The direction to draw the arc
 */
 public func CGRectMakeFromArc(center: CGPoint, radius: CGFloat, startAngle: CGFloat, endAngle: CGFloat, clockwise: Bool) -> CGRect {
-    var path = CGPathCreateMutable()
+    let path = CGPathCreateMutable()
     CGPathAddArc(path, nil, center.x, center.y, radius, startAngle, endAngle, clockwise)
     return CGPathGetBoundingBox(path)
 }
@@ -66,14 +66,14 @@ public func CGRectMakeFromArc(center: CGPoint, radius: CGFloat, startAngle: CGFl
 /**
 Returns a bounding rectangle with the specified values for building an wedge (includes the centerpoint when calculating the shape).
 
-:param: center The center coordinate around which the wedge will be drawn
-:param: radius The radius of the wedge
-:param: startAngle The start angle of the wedge
-:param: endAngle The end angle of the wedge
-:param: clockwise The direction to draw the wedge
+- parameter center: The center coordinate around which the wedge will be drawn
+- parameter radius: The radius of the wedge
+- parameter startAngle: The start angle of the wedge
+- parameter endAngle: The end angle of the wedge
+- parameter clockwise: The direction to draw the wedge
 */
 public func CGRectMakeFromWedge(center: CGPoint, radius: CGFloat, startAngle: CGFloat, endAngle: CGFloat, clockwise: Bool) -> CGRect {
-    var path = CGPathCreateMutable()
+    let path = CGPathCreateMutable()
     CGPathAddArc(path, nil, center.x, center.y, radius, startAngle, endAngle, clockwise)
     CGPathAddLineToPoint(path, nil, center.x, center.y)
     return CGPathGetBoundingBox(path)
@@ -86,7 +86,7 @@ Delays the execution of a block of code.
         //code to execute
     }
 
-:param: time The amount of time in seconds to wait before executing the block of code.
+- parameter time: The amount of time in seconds to wait before executing the block of code.
 */
 public func delay(delay:Double, closure:()->()) {
     dispatch_after(

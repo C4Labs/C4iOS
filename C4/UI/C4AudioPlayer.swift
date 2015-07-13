@@ -42,10 +42,16 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
         self.init()
         
         for filename in filenames {
-            let url = NSBundle.mainBundle().URLForResource(filename, withExtension:nil)
-            let player = AVAudioPlayer(contentsOfURL: url, error: nil)
-            player.delegate = self
-            audiofiles.append(player)
+            if let url = NSBundle.mainBundle().URLForResource(filename, withExtension:nil) {
+                let player: AVAudioPlayer!
+                do {
+                    player = try AVAudioPlayer(contentsOfURL: url)
+                } catch _ {
+                    player = nil
+                }
+                player.delegate = self
+                audiofiles.append(player)
+            }
         }
         
         currentPlayer = audiofiles[0]
@@ -103,7 +109,7 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
         get {
             return Double(currentPlayer.pan)
         } set(val) {
-            currentPlayer.pan = clamp(Float(val), -1.0, 1.0)
+            currentPlayer.pan = clamp(Float(val), min: -1.0, max: 1.0)
         }
     }
     
@@ -160,7 +166,7 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
     public func next() {
         currentPlayer.pause()
         
-        let index = find(audiofiles, currentPlayer)
+        let index = audiofiles.indexOf(currentPlayer)
         if let index = index {
             currentPlayer = audiofiles[index + 1]
             currentPlayer.currentTime = 0.0
@@ -174,7 +180,7 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
     */
     public func prev() {
         currentPlayer.pause()
-        let index = find(audiofiles, currentPlayer)
+        let index = audiofiles.indexOf(currentPlayer)
         if let index = index {
             currentPlayer = audiofiles[index - 1]
             currentPlayer.currentTime = 0.0
@@ -255,8 +261,8 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
         func update() {
             let av = player.averagePower(channel: 0)
         }
-    :param: channelNumber The audio channel whose average power value you want to obtain.
-    :returns: A floating-point representation, in decibels, of a given audio channel’s current average power.
+    - parameter channelNumber: The audio channel whose average power value you want to obtain.
+    - returns: A floating-point representation, in decibels, of a given audio channel’s current average power.
     */
     public func averagePower(channel: Int) -> Double {
         return Double(currentPlayer.averagePowerForChannel(channel))
@@ -269,8 +275,8 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
             let pk = player.peakPower(channel: 0)
         }
 
-    :param: channelNumber The audio channel whose peak power value you want to obtain.
-    :returns: A floating-point representation, in decibels, of a given audio channel’s current peak power.    
+    - parameter channelNumber: The audio channel whose peak power value you want to obtain.
+    - returns: A floating-point representation, in decibels, of a given audio channel’s current peak power.    
     */
     public func peakPower(channel: Int) -> Double {
         return Double(currentPlayer.peakPowerForChannel(channel))

@@ -24,7 +24,7 @@ class C4PointTests: XCTestCase {
     func testDistance() {
         let pointA = C4Point()
         let pointB = C4Point(1, 1)
-        XCTAssertEqualWithAccuracy(distance(pointA, pointB), sqrt(2), DBL_MIN, "Distance between origin and (1,1) should be √2")
+        XCTAssertEqualWithAccuracy(distance(pointA, rhs: pointB), sqrt(2), accuracy: DBL_MIN, "Distance between origin and (1,1) should be √2")
     }
     
     func testTranslate() {
@@ -35,7 +35,7 @@ class C4PointTests: XCTestCase {
     
     func testLerp() {
         let target = C4Point(10,10)
-        let lerped = lerp(C4Point(), target, 0.2)
+        let lerped = lerp(a: C4Point(), b: target, param: 0.2)
         XCTAssertEqual(lerped, C4Point(2,2), "Point should be {2,2}")
     }
     

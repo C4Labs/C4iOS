@@ -68,7 +68,7 @@ public class C4Font : NSObject {
     /**
     Returns an array of font family names available on the system.
 
-    :returns:	An array of String objects, each of which contains the name of a font family.
+    - returns:	An array of String objects, each of which contains the name of a font family.
     */
     class func familyNames() -> [AnyObject] {
         return UIFont.familyNames()
@@ -81,8 +81,8 @@ public class C4Font : NSObject {
             println(n)
         }
 
-    :param: familyName	The name of the font family.
-    :returns:	An array of String objects, each of which contains a font name associated with the specified family.
+    - parameter familyName:	The name of the font family.
+    - returns:	An array of String objects, each of which contains a font name associated with the specified family.
     */
     class func fontNames(familyName: String) -> [AnyObject] {
         return UIFont.fontNamesForFamilyName(familyName)
@@ -93,8 +93,8 @@ public class C4Font : NSObject {
     
         let f = C4Font.systemFont(20)
 
-    :param: fontSize	The size (in points) to which the font is scaled.
-    :returns:	A font object of the specified size.
+    - parameter fontSize:	The size (in points) to which the font is scaled.
+    - returns:	A font object of the specified size.
     */
     class func systemFont(size: Double) -> C4Font {
         return C4Font(font: UIFont.systemFontOfSize(CGFloat(size)))
@@ -104,8 +104,8 @@ public class C4Font : NSObject {
 
         let f = C4Font.boldSystemFont(20)
 
-    :param: fontSize	The size (in points) to which the font is scaled.
-    :returns:	A font object of the specified size.
+    - parameter fontSize:	The size (in points) to which the font is scaled.
+    - returns:	A font object of the specified size.
     */
     class func boldSystemFont(size: Double) -> C4Font {
         return C4Font(font: UIFont.boldSystemFontOfSize(CGFloat(size)))
@@ -116,8 +116,8 @@ public class C4Font : NSObject {
     
         let f = C4Font.italicSystemFont(20)
 
-    :param: fontSize	The size (in points) to which the font is scaled.
-    :returns: A font object of the specified size.
+    - parameter fontSize:	The size (in points) to which the font is scaled.
+    - returns: A font object of the specified size.
     */
     class func italicSystemFont(size: Double) -> C4Font {
         return C4Font(font: UIFont.italicSystemFontOfSize(CGFloat(size)))
@@ -129,8 +129,8 @@ public class C4Font : NSObject {
         let f = C4Font(name: "Avenir Next")
         let f2 = f.font(20)
 
-    :param: fontSize	The desired size (in points) of the new font object.
-    :returns:	A font object of the specified size.
+    - parameter fontSize:	The desired size (in points) of the new font object.
+    - returns:	A font object of the specified size.
     */
     public func font(size: Double) -> C4Font {
         return C4Font(font: internalFont!.fontWithSize(CGFloat(size)))
@@ -219,7 +219,7 @@ public class C4Font : NSObject {
     
     /**
     Returns the standard font size used for labels.
-    :returns:	The standard label font size in points.
+    - returns:	The standard label font size in points.
     */
     public var labelFontSize : Double {
         get {
@@ -229,7 +229,7 @@ public class C4Font : NSObject {
 
     /**
     Returns the standard font size used for buttons.
-    :returns:	The standard button font size in points.
+    - returns:	The standard button font size in points.
     */
     public var buttonFontSize : Double {
         get {
@@ -239,7 +239,7 @@ public class C4Font : NSObject {
 
     /**
     Returns the size of the standard system font.
-    :returns:	The standard system font size in points.
+    - returns:	The standard system font size in points.
     */
     public var systemFontSize : Double {
         get {
@@ -249,7 +249,7 @@ public class C4Font : NSObject {
 
     /**
     Returns the size of the standard small system font.
-    :returns:	The standard small system font size in points.
+    - returns:	The standard small system font size in points.
     */
     public var smallSystemFontSize : Double {
         get {
@@ -260,7 +260,7 @@ public class C4Font : NSObject {
     /**
     Returns a CGFontRef version of the receiver.
     */
-    public var CGFont : CGFontRef {
+    public var CGFont : CGFontRef? {
         get {
             return CGFontCreateWithFontName(fontName as NSString)
         }
@@ -271,7 +271,7 @@ public class C4Font : NSObject {
     */
     public var CTFont : CTFontRef {
         get {
-            return CTFontCreateWithNameAndOptions(fontName as CFString!, CGFloat(pointSize), nil, nil)
+            return CTFontCreateWithNameAndOptions(fontName as CFString!, CGFloat(pointSize), nil, [])
         }
     }
 }

@@ -26,12 +26,12 @@ public class C4Triangle: C4Polygon {
     
     Protects against trying to create a triangle with less than three points.
     
-    :param: points An array of C4Point structs.
+    - parameter points: An array of C4Point structs.
     */
     convenience public init(_ points: [C4Point]) {
         assert(points.count >= 3, "To create a Triangle you need to specify an array of at least 3 points")
         self.init(frame: C4Rect(points))
-        var path = C4Path()
+        let path = C4Path()
         self.points = points
         path.moveToPoint(points[0])
         path.addLineToPoint(points[1])

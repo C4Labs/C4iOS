@@ -30,17 +30,17 @@ class C4RectTests: XCTestCase {
     }
     
     func testCenter() {
-        for i in 1...10 {
-            var val = Double(random(below:100))
+        for _ in 1...10 {
+            let val = Double(random(below:100))
             let rect = C4Rect(0,0,val,val)
             XCTAssertEqual(rect.center, C4Point(val/2.0,val/2.0),"Center point should be half the width and height of the C4Rect")
         }
     }
     
     func testMax() {
-        for i in 1...10 {
-            var x = Double(random(below:100))
-            var y = Double(random(below:100))
+        for _ in 1...10 {
+            let x = Double(random(below:100))
+            let y = Double(random(below:100))
             let rect = C4Rect(x,y,100,100)
             XCTAssertEqual(rect.max, C4Point(x+100,y+100),"Max point should equal the origin plus the size of the C4Rect")
         }
@@ -82,7 +82,7 @@ class C4RectTests: XCTestCase {
         
         let a = C4Rect(0,0,r(),r())
         let b = C4Rect(10,10,r(),r())
-        let c = intersection(a,b)
+        let c = intersection(a,rect2: b)
         let x = (b.max.x - a.max.x < 0) ? b.max.x : a.max.x
         let y = (b.max.y - a.max.y < 0) ? b.max.y : a.max.y
         let d = C4Rect(b.origin.x,b.origin.y,x-b.origin.x,y-b.origin.y)
@@ -96,7 +96,7 @@ class C4RectTests: XCTestCase {
         
         let a = C4Rect(r(),r(),r()+1,r()+1)
         let b = C4Rect(r(),r(),r()+1,r()+1)
-        let c = union(a,b)
+        let c = union(a,rect2: b)
         let o = C4Point(min(a.origin.x,b.origin.x),min(a.origin.y,b.origin.y))
         let s = C4Size(max(a.max.x,b.max.x)-o.x,max(a.max.y,b.max.y)-o.y)
         let d = C4Rect(o,s)
@@ -125,7 +125,7 @@ class C4RectTests: XCTestCase {
         let a = C4Rect(r(),r(),r()+1,r()+1)
         let x = r()
         let y = r()
-        let b = inset(a,x,y)
+        let b = inset(a,dx: x,dy: y)
         let c = C4Rect(a.origin,C4Size(a.size.width-x,a.size.height-y))
     }
 }

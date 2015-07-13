@@ -19,7 +19,7 @@
 
 import CoreGraphics
 
-public struct C4Point : Equatable, Printable {
+public struct C4Point : Equatable, CustomStringConvertible {
     public var x: Double = 0
     public var y: Double = 0
     
@@ -66,7 +66,7 @@ public struct C4Point : Equatable, Printable {
         let t = C4Transform.makeRotation(M_PI, axis: v)
         p.transform(t) //{-10.0, -10.0}
 
-    :param: t   A C4Transform to apply to the point
+    - parameter t:   A C4Transform to apply to the point
     */
     public mutating func transform(t: C4Transform) {
         x = x * t[0, 0] + y * t[0, 1] + t[0, 3]
@@ -79,7 +79,7 @@ public struct C4Point : Equatable, Printable {
         let p = C4Point()
         println(p)
 
-    :returns: A string formatted to look like {x,y}
+    - returns: A string formatted to look like {x,y}
     */
     public var description : String {
         get {
@@ -98,7 +98,7 @@ public func - (lhs: C4Point, rhs: C4Point) -> C4Vector {
 /**
 Translate a point by the given vector
 
-:returns: A new point whose coordinates have been translated by the values from the vector (e.g. point.x = lhs.x + rhs.x)
+- returns: A new point whose coordinates have been translated by the values from the vector (e.g. point.x = lhs.x + rhs.x)
 */
 public func + (lhs: C4Point, rhs: C4Vector) -> C4Point {
     return C4Point(lhs.x + rhs.x,lhs.y + rhs.y)
@@ -107,9 +107,9 @@ public func + (lhs: C4Point, rhs: C4Vector) -> C4Point {
 /**
 Calculates the distance between two points
 
-:param: lhs left-hand point
-:param: rhs right-hand point
-:returns: The linear distance between two points
+- parameter lhs: left-hand point
+- parameter rhs: right-hand point
+- returns: The linear distance between two points
 */
 public func distance(lhs: C4Point, rhs: C4Point) -> Double {
     let dx = rhs.x - lhs.x
@@ -129,13 +129,13 @@ Linear interpolation. For any two points `a` and `b` return a point that is the 
 for interpolation parameter `param`. For instance, a parameter of 0 will return `a`, a parameter of 1 will return `b`
 and a parameter of 0.5 will return the midpoint between `a` and `b`.
 
-:param: a     first point
-:param: b     second point
-:param: param parameter between 0 and 1 for interpolation
+- parameter a:     first point
+- parameter b:     second point
+- parameter param: parameter between 0 and 1 for interpolation
 
-:returns: The interpolated point
+- returns: The interpolated point
 */
-public func lerp(a: C4Point, b: C4Point, param: Double) -> C4Point {
+public func lerp(a a: C4Point, b: C4Point, param: Double) -> C4Point {
     return a + (b - a) * param
 }
 

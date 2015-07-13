@@ -50,7 +50,7 @@ public class C4Path: Equatable {
     }
     
     public init(path: CGPathRef) {
-        internalPath = CGPathCreateMutableCopy(path)
+        internalPath = CGPathCreateMutableCopy(path)!
     }
     
     /// Determine if the path is empty
@@ -78,7 +78,7 @@ public class C4Path: Equatable {
     
     /// Create a copy of the path
     public func copy() -> C4Path {
-        return C4Path(path: CGPathCreateMutableCopy(internalPath))
+        return C4Path(path: CGPathCreateMutableCopy(internalPath)!)
     }
     
     public var CGPath: CGPathRef {
@@ -124,7 +124,7 @@ extension C4Path {
     Append a quadratic curve from the current point to `point` with control point `control` and move the current
     point to `point`.
     */
-    public func addQuadCurveToPoint(#control: C4Point, point: C4Point) {
+    public func addQuadCurveToPoint(control control: C4Point, point: C4Point) {
         CGPathAddQuadCurveToPoint(internalPath, nil, CGFloat(control.x), CGFloat(control.y), CGFloat(point.x), CGFloat(point.y))
     }
     
@@ -235,6 +235,6 @@ extension C4Path {
     */
     public func transform(transform: C4Transform) {
         var t = transform.affineTransform
-        internalPath = CGPathCreateMutableCopyByTransformingPath(internalPath, &t)
+        internalPath = CGPathCreateMutableCopyByTransformingPath(internalPath, &t)!
     }
 }

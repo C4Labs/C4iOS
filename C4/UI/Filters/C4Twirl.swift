@@ -26,7 +26,7 @@ public struct C4Twirl : C4Filter {
     public var angle: Double = M_PI_4
     public init() {}
     public func createCoreImageFilter(inputImage: CIImage) -> CIFilter {
-        let filter = CIFilter(name: filterName)
+        let filter = CIFilter(name: filterName)!
         filter.setDefaults()
         filter.setValue(radius, forKey:"inputRadius")
         filter.setValue(angle, forKey:"inputAngle")

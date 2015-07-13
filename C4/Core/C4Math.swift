@@ -28,11 +28,11 @@ If the value is less than min this function returns min, if the value is greater
     clamp(10, 0, 20) = 10
     clamp(10,20,30) = 20
 
-:param: val The value
-:param: min The lower bound
-:param: max The upper bound
+- parameter val: The value
+- parameter min: The lower bound
+- parameter max: The upper bound
 
-:returns: The clamped value
+- returns: The clamped value
 */
 public func clamp<T : Comparable>(val: T, min: T, max: T) -> T {
     assert(min < max, "min has to be less than max")
@@ -48,13 +48,13 @@ Linear interpolation. For any two values a and b return a linear interpolation w
     lerp(100,200,0.5) = 150
     lerp(500,1000,0.33) = 665
 
-:param: a     first value
-:param: b     second value
-:param: param parameter between 0 and 1 for interpolation
+- parameter a:     first value
+- parameter b:     second value
+- parameter param: parameter between 0 and 1 for interpolation
 
-:returns: The interpolated value
+- returns: The interpolated value
 */
-public func lerp(a: Double, b: Double, param: Double) -> Double {
+public func lerp(a a: Double, b: Double, param: Double) -> Double {
     return a + (b - a) * param
 }
 
@@ -65,17 +65,17 @@ Linear mapping. Maps a value in the source range [min, max] to a value in the ta
     map(10, 0, 100, 200, 300) = 210
     map(10, 0, 20, 200, 300) = 250
 
-:param: val   Source value
-:param: min   Source range lower bound
-:param: max   Source range upper bound
-:param: toMin Target range lower bound
-:param: toMax Target range upper bound
+- parameter val:   Source value
+- parameter min:   Source range lower bound
+- parameter max:   Source range upper bound
+- parameter toMin: Target range lower bound
+- parameter toMax: Target range upper bound
 
-:returns: The mapped value.
+- returns: The mapped value.
 */
 public func map(val: Double, min: Double, max: Double, toMin: Double, toMax: Double) -> Double {
     let param = val / (max - min) - min
-    return lerp(toMin, toMax, param)
+    return lerp(a: toMin, b: toMax, param: param)
 }
 
 /**
@@ -83,11 +83,11 @@ Return a random integer below `below`
 
     let x = random(below: 20)
 
-:param: below The upper bound
+- parameter below: The upper bound
 
-:returns: A random value smaller than `below`
+- returns: A random value smaller than `below`
 */
-public func random(#below: Int) -> Int {
+public func random(below below: Int) -> Int {
     return Int(arc4random_uniform(UInt32(below)))
 }
 
@@ -96,12 +96,12 @@ Return a random integer greater than or equal to min and less than max.
 
     let x = random(10,20)
 
-:param: min The lower bound
-:param: max The upper bound
+- parameter min: The lower bound
+- parameter max: The upper bound
 
-:returns: A random value greater than or equal to min and less than max.
+- returns: A random value greater than or equal to min and less than max.
 */
-public func random(min: Int, max: Int) -> Int {
+public func random(min min: Int, max: Int) -> Int {
     assert(min < max, "min must be less than max")
     return min + random(below: max - min)
 }
@@ -111,7 +111,7 @@ Return a random Double in the interval [0, 1)
 
     let x = random01()
 
-:returns: A random Double uniformly distributed between 0 and 1
+- returns: A random Double uniformly distributed between 0 and 1
 */
 public func random01() -> Double {
     return Double(arc4random()) / Double(UInt32.max)
@@ -125,7 +125,7 @@ Uses the following equation: value * 180.0 / PI
     radToDeg(M_PI) = 180
     radToDeg(M_PI_2) = 90
 
-:returns: A double value representation of the radian value in degrees.
+- returns: A double value representation of the radian value in degrees.
 */
 public func radToDeg(val: Double) -> Double {
     return 180.0 * val / M_PI
@@ -139,7 +139,7 @@ Uses the following equation: value * PI / 180.0
     degToRad(270) = 3*M_PI_2 (4.712...)
     degToRad(360) = 2*PI (6.283...)
 
-:returns: A double value representation of the degree value in radians.
+- returns: A double value representation of the degree value in radians.
 */
 public func degToRad(val: Double) -> Double {
     return M_PI * val / 180.0

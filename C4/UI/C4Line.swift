@@ -74,18 +74,18 @@ public class C4Line: C4Polygon {
 
     let l = C4Line([a,b])
 
-    :param: points An array of C4Point structs.
+    - parameter points: An array of C4Point structs.
     */
     convenience public init(var _ points: [C4Point]) {
 
         if points.count > 2 {
-            do {
+            repeat {
                 points.removeLast()
             } while points.count > 2
         }
 
         self.init(frame: C4Rect(points))
-        var path = C4Path()
+        let path = C4Path()
         self.points = points
         path.moveToPoint(points[0])
         for i in 1..<points.count {

@@ -65,7 +65,7 @@ public class C4RegularPolygon: C4Shape {
         var p = C4RegularPolygon(frame: f)
         canvas.add(p)
 
-    :param: frame A C4Rect into which the shape of the polygon will be generated (taking into consideration `sides` and `phase`).
+    - parameter frame: A C4Rect into which the shape of the polygon will be generated (taking into consideration `sides` and `phase`).
     */
     convenience public init(frame: C4Rect) {
         self.init()
@@ -82,7 +82,7 @@ public class C4RegularPolygon: C4Shape {
     }
     
     internal override func updatePath() {
-        let rect = inset(C4Rect(view.bounds), lineWidth, lineWidth)
+        let rect = inset(C4Rect(view.bounds), dx: lineWidth, dy: lineWidth)
         let rx = rect.size.width / 2.0
         let ry = rect.size.height / 2.0
         if sides == 0 || rx <= 0 || ry <= 0 {
@@ -92,7 +92,7 @@ public class C4RegularPolygon: C4Shape {
     
         let center = rect.center
         let delta = 2.0*M_PI / Double(sides)
-        var newPath = C4Path()
+        let newPath = C4Path()
         
         for i in 0..<sides {
             let angle = phase + delta*Double(i)

@@ -47,7 +47,7 @@ public class C4Shape: C4View {
     /**
     Initializest a new C4Shape from a specified C4Path.
     
-    :param: path A C4Path around which the new shape is created with the frame of the new shape fitting the path on screen.
+    - parameter path: A C4Path around which the new shape is created with the frame of the new shape fitting the path on screen.
     */
     convenience public init(_ path: C4Path) {
         self.init(frame: path.boundingBox())
@@ -65,7 +65,7 @@ public class C4Shape: C4View {
     
     Shapes initialized this way will not have a path.
     
-    :param: frame The frame for the new shape.
+    - parameter frame: The frame for the new shape.
     */
     convenience public init(frame: C4Rect) {
         self.init()
@@ -95,7 +95,7 @@ public class C4Shape: C4View {
         if shapeLayer.path == nil {
             return
         }
-        var f = CGPathGetPathBoundingBox(shapeLayer.path)
+        let f = CGPathGetPathBoundingBox(shapeLayer.path)
         var t = CGAffineTransformMakeTranslation(-f.origin.x,-f.origin.y)
         let p = CGPathCreateCopyByTransformingPath(shapeLayer.path, &t)
         
@@ -117,16 +117,32 @@ public class C4Shape: C4View {
     The color to stroke the path, or nil for no fill. Defaults to opaque black. Animatable.
     */
     public var strokeColor: C4Color? {
-        get { return C4Color(shapeLayer.strokeColor) }
-        set(color) { shapeLayer.strokeColor = color?.CGColor }
+        get {
+            if let color = shapeLayer.strokeColor {
+                return C4Color(color)
+            } else {
+                return nil
+            }
+        }
+        set(color) {
+            shapeLayer.strokeColor = color?.CGColor
+        }
     }
     
     /**
     The color to fill the path, or nil for no fill. Defaults to opaque black. Animatable.
     */
     public var fillColor: C4Color? {
-        get { return C4Color(shapeLayer.fillColor) }
-        set(color) { shapeLayer.fillColor = color?.CGColor }
+        get {
+            if let color = shapeLayer.fillColor {
+                return C4Color(color)
+            } else {
+                return nil
+            }
+        }
+        set(color) {
+            shapeLayer.fillColor = color?.CGColor
+        }
     }
     
     /**
@@ -249,7 +265,7 @@ public class C4Shape: C4View {
     The dash pattern applied when creating the stroked version of the path. Defaults to nil.
     */
     public var lineDashPattern: [NSNumber]? {
-        get { return shapeLayer.lineDashPattern as! [NSNumber]? }
+        get { return shapeLayer.lineDashPattern as [NSNumber]? }
         set(pattern) { shapeLayer.lineDashPattern = pattern }
     }
 

@@ -45,8 +45,8 @@ public class C4TextShape : C4Shape {
         t.center = canvas.center
         canvas.add(t)
 
-    :param: text The string to be rendered as a shape
-    :param: font The font used to define the shape of the text
+    - parameter text: The string to be rendered as a shape
+    - parameter font: The font used to define the shape of the text
     */
     convenience public init(text: String, font: C4Font) {
         self.init()
@@ -61,7 +61,7 @@ public class C4TextShape : C4Shape {
         adjustToFitPath()
     }
     
-    internal class func createTextPath(#text: String, font: C4Font) -> C4Path? {
+    internal class func createTextPath(text text: String, font: C4Font) -> C4Path? {
         let ctfont = font.CTFont as CTFont?
         if ctfont == nil {
             return nil
@@ -69,19 +69,19 @@ public class C4TextShape : C4Shape {
         
         var unichars = [UniChar](text.utf16)
         var glyphs = [CGGlyph](count: unichars.count, repeatedValue: 0)
-        if !CTFontGetGlyphsForCharacters(ctfont, &unichars, &glyphs, unichars.count) {
+        if !CTFontGetGlyphsForCharacters(ctfont!, &unichars, &glyphs, unichars.count) {
             // Failed to encode characters into glyphs
             return nil
         }
 
         var advances = [CGSize](count: glyphs.count, repeatedValue: CGSizeZero)
-        CTFontGetAdvancesForGlyphs(ctfont, .OrientationDefault, &glyphs, &advances, glyphs.count)
+        CTFontGetAdvancesForGlyphs(ctfont!, .Default, &glyphs, &advances, glyphs.count)
         
         let textPath = CGPathCreateMutable()
         var invert = CGAffineTransformMakeScale(1, -1)
         var origin = CGPointZero
         for i in 0..<glyphs.count {
-            let glyphPath = CTFontCreatePathForGlyph(ctfont, glyphs[i], &invert)
+            let glyphPath = CTFontCreatePathForGlyph(ctfont!, glyphs[i], &invert)
             var translation = CGAffineTransformMakeTranslation(origin.x, origin.y)
             CGPathAddPath(textPath, &translation, glyphPath)
             

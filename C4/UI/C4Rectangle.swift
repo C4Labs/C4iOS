@@ -47,7 +47,7 @@ public class C4Rectangle: C4Shape {
         let r = C4Rectangle(frame: f)
         canvas.add(r)
 
-    :param: frame A C4Rect whose dimensions are used to construct the C4Rectangle.
+    - parameter frame: A C4Rect whose dimensions are used to construct the C4Rectangle.
     */
     convenience public init(frame: C4Rect) {
         self.init()

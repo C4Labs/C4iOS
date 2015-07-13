@@ -35,7 +35,7 @@ public struct Shadow {
 
     Assigning an new value to this will change the color of the shadow.
     */
-    public var color: C4Color
+    public var color: C4Color?
     
     /**
     Returns the offset of the shadow. Animatable.
@@ -97,18 +97,20 @@ public extension C4View {
             var shadow = Shadow()
             if let layer = layer {
                 shadow.radius = Double(layer.shadowRadius)
-                shadow.color = C4Color(layer.shadowColor)
+                if let color = layer.shadowColor {
+                    shadow.color = C4Color(color)
+                }
                 shadow.offset = C4Size(layer.shadowOffset)
                 shadow.opacity = Double(layer.shadowOpacity)
-                if let path = shadow.path {
-                    shadow.path = C4Path(path: layer.shadowPath)
+                if let path = layer.shadowPath {
+                    shadow.path = C4Path(path: path)
                 }
             }
             return shadow
         }
         set {
             if let layer = layer {
-                layer.shadowColor = newValue.color.CGColor
+                layer.shadowColor = newValue.color?.CGColor
                 layer.shadowRadius = CGFloat(newValue.radius)
                 layer.shadowOffset = CGSize(newValue.offset)
                 layer.shadowOpacity = Float(newValue.opacity)

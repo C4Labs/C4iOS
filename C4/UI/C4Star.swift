@@ -32,14 +32,13 @@ public class C4Star: C4Polygon {
             outerRadius: 100)
         canvas.add(star)
 
-    :param: center The center of the star
-    :param: pointCount The number of points on the star
-    :param: innerRadius The radial distance from the center of the star to the inner points
-    :param: outerRadius The radial distance from the center of the start to the outer points
+    - parameter center: The center of the star
+    - parameter pointCount: The number of points on the star
+    - parameter innerRadius: The radial distance from the center of the star to the inner points
+    - parameter outerRadius: The radial distance from the center of the start to the outer points
     */
     convenience public init(center: C4Point, pointCount: Int, innerRadius: Double, outerRadius: Double) {
         let wedgeAngle = 2.0 * M_PI / Double(pointCount)
-        let length = 2.0 * innerRadius * sin(wedgeAngle)
         var angle = M_PI_2
         
         var pointArray = [C4Point]()
