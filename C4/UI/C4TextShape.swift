@@ -58,6 +58,15 @@ public class C4TextShape : C4Shape {
         self.origin = C4Point()
     }
 
+    /**
+    Initializes a new C4TextShape from a specifed string, using C4's default font.
+    
+    let t = C4TextShape(text:"C4")
+    t.center = canvas.center
+    canvas.add(t)
+    
+    :param: text The string to be rendered as a shape
+    */
     convenience public init(text: String) {
         self.init()
         self.text = text
