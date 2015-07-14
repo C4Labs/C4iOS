@@ -38,6 +38,7 @@ public let clear     = C4Color(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
 public let C4Pink    = C4Color(red: 1.0, green: 0.0, blue: 0.475, alpha: 1.0)
 public let C4Blue    = C4Color(red: 0.098, green: 0.271, blue: 1.0, alpha: 1.0)
 public let C4Purple  = C4Color(red: 0.0, green: 0.0, blue: 0.541, alpha: 1.0)
+public let C4Grey    = C4Color(red: 0.98, green: 0.98, blue: 0.98, alpha: 1.0)
 
 /**
 This document describes the C4Color object which represents color and sometimes opacity (alpha value). You can use C4Color objects to store color data, and pass them between various C4 objects such as C4Shape, C4Image, etc.
