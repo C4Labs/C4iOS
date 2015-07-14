@@ -75,8 +75,11 @@ public class C4Shape: C4View {
     public override init() {
         super.init()
         self.view = ShapeView()
-        shapeLayer.strokeColor = C4Pink.CGColor
-        shapeLayer.fillColor = C4Blue.CGColor
+        strokeColor = C4Purple
+        fillColor = C4Blue
+        lineWidth = 8.0
+        lineCap = .Round
+        lineJoin = .Round
     }
     
     /**
