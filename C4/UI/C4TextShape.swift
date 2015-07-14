@@ -51,17 +51,27 @@ public class C4TextShape : C4Shape {
     convenience public init(text: String, font: C4Font) {
         self.init()
         self.text = text
+        self.font = font
         lineWidth = 0.0
         fillColor = C4Pink
         updatePath()
         self.origin = C4Point()
     }
-    
+
+    convenience public init(text: String) {
+        self.init()
+        self.text = text
+        lineWidth = 0.0
+        fillColor = C4Pink
+        updatePath()
+        self.origin = C4Point()
+    }
+
     override func updatePath() {
         path = C4TextShape.createTextPath(text: text, font: font)
         adjustToFitPath()
     }
-    
+
     internal class func createTextPath(#text: String, font: C4Font) -> C4Path? {
         let ctfont = font.CTFont as CTFont?
         if ctfont == nil {
