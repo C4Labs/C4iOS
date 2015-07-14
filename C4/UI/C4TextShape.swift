@@ -34,7 +34,7 @@ public class C4TextShape : C4Shape {
     }
     
     public override init() {
-        font = C4Font(font: UIFont.systemFontOfSize(UIFont.systemFontSize()))
+        font = C4Font(name: "AvenirNext-DemiBold", size:80)
     }
     
     /**
@@ -51,7 +51,8 @@ public class C4TextShape : C4Shape {
     convenience public init(text: String, font: C4Font) {
         self.init()
         self.text = text
-        self.font = font
+        lineWidth = 0.0
+        fillColor = C4Pink
         updatePath()
         self.origin = C4Point()
     }
