@@ -71,7 +71,20 @@ public class C4ViewAnimation : C4Animation {
             timing = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         }
         
+        if autoreverses == true {
+            options |= UIViewAnimationOptions.Autoreverse
+        } else {
+            options |= ~UIViewAnimationOptions.Autoreverse
+        }
+
+        if repeatCount > 0  {
+            options |= UIViewAnimationOptions.Repeat
+        } else {
+            options |= ~UIViewAnimationOptions.Repeat
+        }
+        
         UIView.animateWithDuration(duration, delay: delay, options: options, animations: {
+            UIView.setAnimationRepeatCount(Float(self.repeatCount))
             CATransaction.begin()
             CATransaction.setAnimationDuration(self.duration)
             CATransaction.setAnimationTimingFunction(timing)
