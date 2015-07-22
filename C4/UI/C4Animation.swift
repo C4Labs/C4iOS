@@ -29,6 +29,10 @@ public class C4Animation {
         case EaseIn
         case EaseInOut
     }
+    
+    public var autoreverses = false
+    public var repeats = false
+    
     /**
     The duration of the animation, measured in seconds.
     */
