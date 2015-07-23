@@ -53,7 +53,6 @@ public class C4Shape: C4View {
         self.init(frame: path.boundingBox())
         self.path = path
         updatePath()
-
         //init methods in swift don't run instance methods, so we have to add the adjustToFitPath functionality manually
         var t = CGAffineTransformMakeTranslation(CGFloat(-origin.x),CGFloat(-origin.y))
         let p = CGPathCreateCopyByTransformingPath(path.CGPath, &t)
@@ -77,7 +76,7 @@ public class C4Shape: C4View {
         self.view = ShapeView()
         strokeColor = C4Purple
         fillColor = C4Blue
-        lineWidth = 8.0
+        lineWidth = 1
         lineCap = .Round
         lineJoin = .Round
     }
