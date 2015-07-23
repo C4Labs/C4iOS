@@ -39,6 +39,7 @@ public class C4Animation {
     */
     public var curve: Curve = .Linear
     
+    public var autoreverses = false
     private var completionObservers: [AnyObject] = []
     private var cancelObservers: [AnyObject] = []
     
