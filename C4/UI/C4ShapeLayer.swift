@@ -42,6 +42,10 @@ public class C4ShapeLayer: CAShapeLayer {
             let animation = CABasicAnimation(keyPath: key)
             animation.fromValue = self.fillColor
             return animation;
+        } else if key == "lineDashPhase" {
+            let animation = CABasicAnimation(keyPath: key)
+            animation.fromValue = self.lineDashPhase
+            return animation;
         }
         
         return super.actionForKey(key)
