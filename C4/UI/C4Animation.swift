@@ -31,7 +31,18 @@ public class C4Animation {
     }
     
     public var autoreverses = false
-    public var repeats = false
+    public var repeats: Bool {
+        get {
+            return repeatCount > 0
+        }
+        set {
+            if newValue {
+                repeatCount = DBL_MAX
+            } else {
+                repeatCount = 0
+            }
+        }
+    }
     
     /**
     The duration of the animation, measured in seconds.

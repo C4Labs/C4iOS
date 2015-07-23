@@ -77,17 +77,6 @@ public class C4ViewAnimation : C4Animation {
             options |= ~UIViewAnimationOptions.Autoreverse
         }
         
-        if repeatCount > 0.0 {
-            options |= ~UIViewAnimationOptions.Repeat
-            repeats = false
-        }
-
-        if repeats == true {
-            options |= UIViewAnimationOptions.Repeat
-        } else {
-            options |= ~UIViewAnimationOptions.Repeat
-        }
-        
         UIView.animateWithDuration(duration, delay: delay, options: options, animations: {
             if self.repeatCount > 0.0 {
                 UIView.setAnimationRepeatCount(Float(self.repeatCount))
