@@ -36,7 +36,7 @@ public class C4Triangle: C4Polygon {
         path.moveToPoint(points[0])
         path.addLineToPoint(points[1])
         path.addLineToPoint(points[2])
-        path.addLineToPoint(points[0])
+        path.closeSubpath()
         self.path = path
         adjustToFitPath()
     }
