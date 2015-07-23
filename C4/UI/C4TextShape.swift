@@ -64,8 +64,8 @@ public class C4TextShape : C4Shape {
     let t = C4TextShape(text:"C4")
     t.center = canvas.center
     canvas.add(t)
-    
-    :param: text The string to be rendered as a shape
+
+    - parameter text: text The string to be rendered as a shape
     */
     convenience public init(text: String) {
         self.init()
