@@ -56,6 +56,15 @@ public class C4TextShape : C4Shape {
         self.origin = C4Point()
     }
     
+    convenience public init(text: String) {
+        self.init()
+        self.text = text
+        lineWidth = 0.0
+        fillColor = C4Pink
+        updatePath()
+        self.origin = C4Point()
+    }
+    
     override func updatePath() {
         path = C4TextShape.createTextPath(text: text, font: font)
         adjustToFitPath()
