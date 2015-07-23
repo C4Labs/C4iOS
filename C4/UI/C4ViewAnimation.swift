@@ -54,20 +54,20 @@ public class C4ViewAnimation : C4Animation {
     */
     public func animate() {
         var timing: CAMediaTimingFunction
-        var options: UIViewAnimationOptions
+        var options : UIViewAnimationOptions = [UIViewAnimationOptions.BeginFromCurrentState]
         
         switch curve {
         case .Linear:
-            options = UIViewAnimationOptions.CurveLinear
+            options = [options, UIViewAnimationOptions.CurveLinear]
             timing = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
         case .EaseOut:
-            options = UIViewAnimationOptions.CurveEaseOut
+            options = [options, UIViewAnimationOptions.CurveEaseOut]
             timing = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
         case .EaseIn:
-            options = UIViewAnimationOptions.CurveEaseIn
+            options = [options, UIViewAnimationOptions.CurveEaseIn]
             timing = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
         case .EaseInOut:
-            options = UIViewAnimationOptions.CurveEaseInOut
+            options = [options, UIViewAnimationOptions.CurveEaseInOut]
             timing = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         }
         

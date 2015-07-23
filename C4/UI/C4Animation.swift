@@ -55,7 +55,6 @@ public class C4Animation {
     */
     public var curve: Curve = .Linear
 
-
     private var completionObservers: [AnyObject] = []
     private var cancelObservers: [AnyObject] = []
     
