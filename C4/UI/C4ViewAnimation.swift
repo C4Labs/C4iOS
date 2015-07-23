@@ -72,6 +72,7 @@ public class C4ViewAnimation : C4Animation {
         }
         
         UIView.animateWithDuration(duration, delay: delay, options: options, animations: {
+            UIView.setAnimationRepeatCount(Float(self.repeatCount))
             CATransaction.begin()
             CATransaction.setAnimationDuration(self.duration)
             CATransaction.setAnimationTimingFunction(timing)

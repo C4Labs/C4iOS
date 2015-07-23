@@ -39,6 +39,15 @@ public class C4Animation {
     */
     public var curve: Curve = .Linear
     
+    public var repeatCount = 0.0
+    public var repeats : Bool {
+        get {
+            return repeatCount > 0
+        } set(val) {
+            repeatCount = val == true ? DBL_MAX : 0
+        }
+    }
+    
     private var completionObservers: [AnyObject] = []
     private var cancelObservers: [AnyObject] = []
     
