@@ -125,7 +125,7 @@ class C4RectTests: XCTestCase {
         let a = C4Rect(r(),r(),r()+1,r()+1)
         let x = r()
         let y = r()
-        let b = inset(a,dx: x,dy: y)
-        let c = C4Rect(a.origin,C4Size(a.size.width-x,a.size.height-y))
+        _ = inset(a,dx: x,dy: y)
+        _ = C4Rect(a.origin,C4Size(a.size.width-x,a.size.height-y))
     }
 }
