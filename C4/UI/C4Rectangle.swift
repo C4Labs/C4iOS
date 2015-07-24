@@ -34,7 +34,7 @@ public class C4Rectangle: C4Shape {
         r.corner = C4Size(10,10)
         canvas.add(r)
     */
-    public var corner: C4Size = C4Size() {
+    public var corner: C4Size = C4Size(8,8) {
         didSet {
             updatePath()
         }
@@ -51,6 +51,9 @@ public class C4Rectangle: C4Shape {
     */
     convenience public init(frame: C4Rect) {
         self.init()
+        if frame.size.width <= corner.width * 2.0 {
+            corner = C4Size()
+        }
         view.frame = CGRect(frame)
         updatePath()
     }

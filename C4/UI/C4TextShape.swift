@@ -34,7 +34,7 @@ public class C4TextShape : C4Shape {
     }
     
     public override init() {
-        font = C4Font(font: UIFont.systemFontOfSize(UIFont.systemFontSize()))
+        font = C4Font(name: "AvenirNext-DemiBold", size:80)
     }
     
     /**
@@ -52,15 +52,35 @@ public class C4TextShape : C4Shape {
         self.init()
         self.text = text
         self.font = font
+        lineWidth = 0.0
+        fillColor = C4Pink
         updatePath()
         self.origin = C4Point()
     }
+
+    /**
+    Initializes a new C4TextShape from a specifed string, using C4's default font.
     
+    let t = C4TextShape(text:"C4")
+    t.center = canvas.center
+    canvas.add(t)
+    
+    :param: text The string to be rendered as a shape
+    */
+    convenience public init(text: String) {
+        self.init()
+        self.text = text
+        lineWidth = 0.0
+        fillColor = C4Pink
+        updatePath()
+        self.origin = C4Point()
+    }
+
     override func updatePath() {
         path = C4TextShape.createTextPath(text: text, font: font)
         adjustToFitPath()
     }
-    
+
     internal class func createTextPath(text text: String, font: C4Font) -> C4Path? {
         let ctfont = font.CTFont as CTFont?
         if ctfont == nil {

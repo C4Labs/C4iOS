@@ -29,6 +29,22 @@ public class C4Animation {
         case EaseIn
         case EaseInOut
     }
+    
+    public var autoreverses = false
+    public var repeatCount = 0.0
+    public var repeats: Bool {
+        get {
+            return repeatCount > 0
+        }
+        set {
+            if newValue {
+                repeatCount = DBL_MAX
+            } else {
+                repeatCount = 0
+            }
+        }
+    }
+    
     /**
     The duration of the animation, measured in seconds.
     */
@@ -38,7 +54,8 @@ public class C4Animation {
     The animation curve that the receiver will apply to the changes it is supposed to animate.
     */
     public var curve: Curve = .Linear
-    
+
+
     private var completionObservers: [AnyObject] = []
     private var cancelObservers: [AnyObject] = []
     
