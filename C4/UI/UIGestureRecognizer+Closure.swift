@@ -314,7 +314,7 @@ extension UILongPressGestureRecognizer {
 }
 
 
-public typealias SwipeAction = (location: C4Point, state: UIGestureRecognizerState) -> ()
+public typealias SwipeAction = (location: C4Point, state: UIGestureRecognizerState, direction: UISwipeGestureRecognizerDirection) -> ()
 
 extension UISwipeGestureRecognizer {
     /**
@@ -355,7 +355,7 @@ extension UISwipeGestureRecognizer {
         }
         
         func handleGesture(gestureRecognizer: UISwipeGestureRecognizer) {
-            action(location: gestureRecognizer.location, state: gestureRecognizer.state)
+            action(location: gestureRecognizer.location, state: gestureRecognizer.state, direction: gestureRecognizer.direction)
         }
     }
 }
