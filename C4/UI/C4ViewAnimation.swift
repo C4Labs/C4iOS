@@ -84,6 +84,7 @@ public class C4ViewAnimation : C4Animation {
         }
         
         UIView.animateWithDuration(duration, delay: delay, options: options, animations: {
+            C4ViewAnimation.stack.append(self)
             UIView.setAnimationRepeatCount(Float(self.repeatCount))
             CATransaction.begin()
             CATransaction.setAnimationDuration(self.duration)
@@ -93,7 +94,13 @@ public class C4ViewAnimation : C4Animation {
             }
             self.animations()
             CATransaction.commit()
+            C4ViewAnimation.stack.removeLast()
         }, completion:nil)
+    }
+
+    static var stack = [C4ViewAnimation]()
+    static var currentAnimation: C4ViewAnimation? {
+        return stack.last
     }
 }
 
