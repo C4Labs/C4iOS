@@ -1,7 +1,7 @@
 //  Copyright (c) 2015 C4. All rights reserved.
 
 import QuartzCore
-
+import UIKit
 /**
 Extension for CAShapeLayer that allows overriding the actions for specific properties.
 */
@@ -15,6 +15,7 @@ public class C4ShapeLayer: CAShapeLayer {
         
         if key == "lineWidth" {
             let animation = CABasicAnimation(keyPath: key)
+            animation.configureOptions()
             animation.fromValue = self.lineWidth
             return animation;
         }

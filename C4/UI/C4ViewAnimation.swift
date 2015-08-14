@@ -20,6 +20,9 @@
 import Foundation
 import UIKit
 
+public var currentOptions : UIViewAnimationOptions = UIViewAnimationOptions.BeginFromCurrentState
+public var currentRepeatCount : Float = 0.0
+
 public class C4ViewAnimation : C4Animation {
     public var delay: NSTimeInterval = 0
     
@@ -84,6 +87,8 @@ public class C4ViewAnimation : C4Animation {
         }
         
         UIView.animateWithDuration(duration, delay: delay, options: options, animations: {
+            currentOptions = options
+            currentRepeatCount = Float(self.repeatCount)
             UIView.setAnimationRepeatCount(Float(self.repeatCount))
             CATransaction.begin()
             CATransaction.setAnimationDuration(self.duration)
@@ -93,6 +98,7 @@ public class C4ViewAnimation : C4Animation {
             }
             self.animations()
             CATransaction.commit()
+            currentOptions = UIViewAnimationOptions.BeginFromCurrentState
         }, completion:nil)
     }
 }
