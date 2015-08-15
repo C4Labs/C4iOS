@@ -96,4 +96,11 @@ public class C4Polygon: C4Shape {
             adjustToFitPath()
         }
     }
+    
+    public func close() {
+        let p = path
+        p?.closeSubpath()
+        self.path = p
+        adjustToFitPath()
+    }
 }
