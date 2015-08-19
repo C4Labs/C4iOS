@@ -41,4 +41,8 @@ public class C4CanvasController : UIViewController {
     */
     public func setup() {
     }
+    
+    public override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
 }
