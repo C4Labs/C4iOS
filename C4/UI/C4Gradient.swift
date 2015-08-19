@@ -41,4 +41,18 @@ public class C4Gradient : C4View {
     internal var gradientView: GradientView {
         return self.view as! GradientView
     }
+    public var colors : [C4Color] {
+        get {
+            if let cgcolors = gradientLayer.colors as? [CGColorRef] {
+                return [C4Color(cgcolors[0]),C4Color(cgcolors[1])]
+            }
+            return [C4Blue,C4Pink]
+        } set {
+            assert(newValue.count == 2)
+            if let c1 : C4Color = newValue.first,
+                let c2 : C4Color = newValue.last {
+                    self.gradientLayer.colors = [c1.CGColor,c2.CGColor]
+            }
+        }
+    }
 }
