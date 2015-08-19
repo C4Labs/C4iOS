@@ -55,4 +55,16 @@ public class C4Gradient : C4View {
             }
         }
     }
+    
+    public var locations : [Double] {
+        get {
+            return gradientLayer.locations as! [Double]
+        } set {
+            var numbers = [NSNumber]()
+            for n in newValue {
+                numbers.append(n)
+            }
+            gradientLayer.locations = numbers
+        }
+    }
 }
