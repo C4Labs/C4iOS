@@ -280,7 +280,7 @@ public class C4Image: C4View {
     Returns a CGImageRef representation of the receiver.
     - returns:	A CGImageRef object.
     */
-    var cgimage: CGImageRef {
+    public var cgimage: CGImageRef {
         get {
             return uiimage.CGImage!
         }
@@ -290,7 +290,7 @@ public class C4Image: C4View {
     Returns a CIImage representation of the receiver. Generally, this would be used to work with filters.
     - returns:	A CIImage object.
     */
-    var ciimage: CIImage {
+    public var ciimage: CIImage {
         get {
             return CIImage(CGImage: cgimage)
         }
@@ -302,7 +302,7 @@ public class C4Image: C4View {
     If you are using the layer to display a static image, you can set this property to the CGImageRef containing the image you want to display. Assigning a value to this property causes the layer to use your image rather than create a separate backing store.
     If the layer object is tied to a view object, you should avoid setting the contents of this property directly. The interplay between views and layers usually results in the view replacing the contents of this property during a subsequent update.
     */
-    var contents : CGImageRef {
+    public var contents : CGImageRef {
         get {
             let layer = imageView.layer as CALayer
             return layer.contents as! CGImageRef
