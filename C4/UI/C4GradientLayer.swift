@@ -20,4 +20,20 @@
 import QuartzCore
 
 public class C4GradientLayer: CAGradientLayer {
+    public static var disableActions = false
+    
+    public override func actionForKey(key: String) -> CAAction? {
+        if C4ShapeLayer.disableActions == true {
+            return nil
+        }
+        
+        if key == "colors" {
+            let animation = CABasicAnimation(keyPath: key)
+            animation.configureOptions()
+            animation.fromValue = self.colors
+            return animation;
+        }
+        
+        return super.actionForKey(key)
+    }
 }
