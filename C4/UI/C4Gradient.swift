@@ -20,4 +20,20 @@
 import UIKit
 
 public class C4Gradient : C4View {
+    internal class GradientView : UIView {
+        var gradientLayer: C4GradientLayer {
+            get {
+                return self.layer as! C4GradientLayer
+            }
+        }
+        
+        override class func layerClass() -> AnyClass {
+            return C4GradientLayer.self
+        }
+    }
+    
+    
+    internal var gradientView: GradientView {
+        return self.view as! GradientView
+    }
 }
