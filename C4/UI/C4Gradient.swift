@@ -67,4 +67,20 @@ public class C4Gradient : C4View {
             gradientLayer.locations = numbers
         }
     }
+    
+    public var startPoint : C4Point {
+        get {
+            return C4Point(gradientLayer.startPoint)
+        } set {
+            gradientLayer.startPoint = CGPoint(newValue)
+        }
+    }
+
+    public var endPoint : C4Point {
+        get {
+            return C4Point(gradientLayer.endPoint)
+        } set {
+            gradientLayer.endPoint = CGPoint(newValue)
+        }
+    }
 }
