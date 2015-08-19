@@ -32,6 +32,11 @@ public class C4Gradient : C4View {
         }
     }
     
+    public var gradientLayer: C4GradientLayer {
+        get {
+            return self.gradientView.gradientLayer
+        }
+    }
     
     internal var gradientView: GradientView {
         return self.view as! GradientView
