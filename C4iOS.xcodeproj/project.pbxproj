@@ -78,6 +78,8 @@
 		A9D4F6E41B534F9F00F937AB /* UIGestureRecognizer+Closure.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6AA1B534F9F00F937AB /* UIGestureRecognizer+Closure.swift */; };
 		A9D4F6E51B534F9F00F937AB /* UIViewController+C4View.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6AB1B534F9F00F937AB /* UIViewController+C4View.swift */; };
 		A9D4F6E71B53517400F937AB /* C4.h in Headers */ = {isa = PBXBuildFile; fileRef = A9D4F6E61B53516400F937AB /* C4.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D917E1361B83E0920084BC82 /* C4Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D917E1351B83E0920084BC82 /* C4Gradient.swift */; };
+		D917E1381B83E1DB0084BC82 /* C4GradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D917E1371B83E1DB0084BC82 /* C4GradientLayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -193,6 +195,8 @@
 		A9D4F6AA1B534F9F00F937AB /* UIGestureRecognizer+Closure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIGestureRecognizer+Closure.swift"; sourceTree = "<group>"; };
 		A9D4F6AB1B534F9F00F937AB /* UIViewController+C4View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+C4View.swift"; sourceTree = "<group>"; };
 		A9D4F6E61B53516400F937AB /* C4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = C4.h; sourceTree = "<group>"; };
+		D917E1351B83E0920084BC82 /* C4Gradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Gradient.swift; sourceTree = "<group>"; };
+		D917E1371B83E1DB0084BC82 /* C4GradientLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4GradientLayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -329,6 +333,8 @@
 				A9D4F6861B534F9F00F937AB /* C4Filter.swift */,
 				A9D4F6871B534F9F00F937AB /* C4Font.swift */,
 				A9D4F6881B534F9F00F937AB /* C4Generator.swift */,
+				D917E1351B83E0920084BC82 /* C4Gradient.swift */,
+				D917E1371B83E1DB0084BC82 /* C4GradientLayer.swift */,
 				A9D4F6891B534F9F00F937AB /* C4Image+Crop.swift */,
 				A9D4F68A1B534F9F00F937AB /* C4Image+Filter.swift */,
 				A9D4F68B1B534F9F00F937AB /* C4Image+Generator.swift */,
@@ -524,6 +530,7 @@
 				A9D4F6CD1B534F9F00F937AB /* C4RegularPolygon.swift in Sources */,
 				A9D4F6B51B534F9F00F937AB /* C4Size.swift in Sources */,
 				A9D4F6C91B534F9F00F937AB /* C4Movie.swift in Sources */,
+				D917E1361B83E0920084BC82 /* C4Gradient.swift in Sources */,
 				A9D4F6C11B534F9F00F937AB /* C4Filter.swift in Sources */,
 				A9D4F6DA1B534F9F00F937AB /* C4Bloom.swift in Sources */,
 				A9D4F6BE1B534F9F00F937AB /* C4Circle.swift in Sources */,
@@ -544,6 +551,7 @@
 				A9D4F6CE1B534F9F00F937AB /* C4Shape+Creation.swift in Sources */,
 				A9D4F6B61B534F9F00F937AB /* C4Transform.swift in Sources */,
 				A9D4F6B11B534F9F00F937AB /* C4MediaObject.swift in Sources */,
+				D917E1381B83E1DB0084BC82 /* C4GradientLayer.swift in Sources */,
 				A9D4F6B71B534F9F00F937AB /* C4Vector.swift in Sources */,
 				A9D4F6C61B534F9F00F937AB /* C4Image+Generator.swift in Sources */,
 				A9D4F6E31B534F9F00F937AB /* C4Twirl.swift in Sources */,
