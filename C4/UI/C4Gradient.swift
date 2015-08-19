@@ -41,6 +41,25 @@ public class C4Gradient : C4View {
     internal var gradientView: GradientView {
         return self.view as! GradientView
     }
+    
+    public convenience init(frame: C4Rect) {
+        self.init()
+        self.view.frame = CGRect(frame)
+    }
+    
+    public override init() {
+        super.init()
+        self.view = GradientView()
+        self.colors = [C4Blue,C4Pink]
+        self.locations = [0]
+    }
+    
+    public convenience init(frame: C4Rect, colors: [C4Color], locations: [Double]) {
+        self.init(frame: frame)
+        self.colors = colors
+        self.locations = locations
+    }
+    
     public var colors : [C4Color] {
         get {
             if let cgcolors = gradientLayer.colors as? [CGColorRef] {
