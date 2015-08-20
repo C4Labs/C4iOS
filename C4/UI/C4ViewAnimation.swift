@@ -53,6 +53,7 @@ public class C4ViewAnimation : C4Animation {
     Initiates the changes specified in the receivers `animations` block.
     */
     public func animate() {
+        C4ShapeLayer.disableActions = false
         var timing: CAMediaTimingFunction
         var options : UIViewAnimationOptions = [UIViewAnimationOptions.BeginFromCurrentState]
         
@@ -96,6 +97,7 @@ public class C4ViewAnimation : C4Animation {
             CATransaction.commit()
             C4ViewAnimation.stack.removeLast()
         }, completion:nil)
+        C4ShapeLayer.disableActions = true
     }
 
     static var stack = [C4ViewAnimation]()
