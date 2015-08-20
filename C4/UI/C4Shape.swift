@@ -97,13 +97,8 @@ public class C4Shape: C4View {
         if shapeLayer.path == nil {
             return
         }
-        let f = CGPathGetPathBoundingBox(shapeLayer.path)
-        var t = CGAffineTransformMakeTranslation(-f.origin.x,-f.origin.y)
-        let p = CGPathCreateCopyByTransformingPath(shapeLayer.path, &t)
-        
-        self.shapeLayer.path = p
         view.bounds = CGPathGetPathBoundingBox(shapeLayer.path)
-        view.frame = f
+        view.frame = view.bounds
     }
     
     /**

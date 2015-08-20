@@ -59,6 +59,7 @@ public class C4Line: C4Polygon {
             p.moveToPoint(points[0])
             p.addLineToPoint(points[1])
             path = p
+            adjustToFitPath()
         }
     }
 
