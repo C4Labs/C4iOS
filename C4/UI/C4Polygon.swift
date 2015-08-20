@@ -57,7 +57,6 @@ public class C4Polygon: C4Shape {
     convenience public init(_ points: [C4Point]) {
         assert(points.count >= 2, "To create a Polygon you need to specify an array of at least 2 points")
         self.init(frame: C4Rect(points))
-        self.fillColor = clear
         let path = C4Path()
         self.points = points
         path.moveToPoint(points[0])
@@ -65,7 +64,9 @@ public class C4Polygon: C4Shape {
             path.addLineToPoint(points[i])
         }
         self.path = path
+        C4ShapeLayer.disableActions = true
         self.fillColor = clear
+        C4ShapeLayer.disableActions = false
         adjustToFitPath()
     }
 
