@@ -36,9 +36,13 @@ extension C4Image {
         crop.setDefaults()
         crop.setValue(CIVector(CGRect: inputRectangle), forKey: "inputRectangle")
         crop.setValue(ciimage, forKey: "inputImage")
-        
-        self.output = crop.outputImage
-        self.imageView.image = UIImage(CIImage: output)
-        self.frame = C4Rect(intersection)
+
+        if let outputImage = crop.outputImage {
+            self.output = outputImage
+            self.imageView.image = UIImage(CIImage: output)
+            self.frame = C4Rect(intersection)
+        } else {
+            print("Failed ot generate outputImage: \(__FUNCTION__)")
+        }
     }
 }
