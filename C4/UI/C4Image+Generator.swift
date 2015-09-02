@@ -27,17 +27,20 @@ extension C4Image {
         crop.setValue(CIVector(CGRect:CGRect(self.bounds)), forKey: "inputRectangle")
         let generatorFilter = generator.createCoreImageFilter()
         crop.setValue(generatorFilter.outputImage, forKey: "inputImage")
-        var outputImage = crop.outputImage
-        
-        let scale = CGAffineTransformMakeScale(1, -1)
-        let translate = CGAffineTransformTranslate(scale, 0, outputImage.extent.size.height)
-        outputImage = outputImage.imageByApplyingTransform(translate)
-        self.output = outputImage
-        
-        let img = UIImage(CIImage: output)
-        let orig = self.origin
-        self.view = UIImageView(image: img)
-        self.origin = orig
-        _originalSize = C4Size(view.frame.size)
+
+        if var outputImage = crop.outputImage {
+            let scale = CGAffineTransformMakeScale(1, -1)
+            let translate = CGAffineTransformTranslate(scale, 0, outputImage.extent.size.height)
+            outputImage = outputImage.imageByApplyingTransform(translate)
+            self.output = outputImage
+            
+            let img = UIImage(CIImage: output)
+            let orig = self.origin
+            self.view = UIImageView(image: img)
+            self.origin = orig
+            _originalSize = C4Size(view.frame.size)
+        } else {
+            print("Failed to generate outputImage: \(__FUNCTION__)")
+        }
     }
 }
