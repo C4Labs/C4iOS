@@ -28,7 +28,11 @@ extension C4Image {
     public func apply(filters filters: [C4Filter]) {
         for filter in filters {
             let cifilter = filter.createCoreImageFilter(output)
-            self.output = cifilter.outputImage
+            if let outputImage = cifilter.outputImage {
+                self.output = outputImage
+            } else {
+                print("Failed ot generate outputImage: \(__FUNCTION__)")
+            }
         }
         self.renderFilteredImage()
     }
