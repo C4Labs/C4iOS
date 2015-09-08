@@ -20,6 +20,24 @@
 import QuartzCore
 import UIKit
 
+public struct Pixel {
+    var r : UInt8 = 0
+    var g : UInt8 = 0
+    var b : UInt8 = 0
+    var a : UInt8 = 255
+    
+    public init(gray: Int) {
+        self.init(gray,gray,gray,255)
+    }
+    
+    public init(_ r : Int, _ g: Int, _ b: Int, _ a: UInt8) {
+        self.r = UInt8(r)
+        self.g = UInt8(g)
+        self.b = UInt8(b)
+        self.a = UInt8(a)
+    }
+}
+
 public class C4Image: C4View {
 //MARK: Initializers
     /**
