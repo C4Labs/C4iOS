@@ -55,14 +55,13 @@ public class C4Movie: C4View {
     
     - parameter name:	The name of the movie file included in your project.
     */
-    convenience public init?(_ filename: String) {
+    convenience public init(_ filename: String) {
         //grab url for movie file
 
         let url = NSBundle.mainBundle().URLForResource(filename, withExtension: nil)
-        if url == nil {
-            return nil
-        }
-
+        
+        assert(url != nil, "Could not locate movie with the given filename: \(filename)")
+        
         //create asset from url
         let asset = AVAsset(URL: url!)
         let tracks = asset.tracksWithMediaType(AVMediaTypeVideo)
