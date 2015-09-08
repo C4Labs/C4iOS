@@ -254,22 +254,36 @@ public class C4Image: C4View {
     - parameter rawData: An array of raw pixel data.
     - parameter size: The size {w,h} of the image you're creating based on the pixel array.
     */
-    convenience public init(rawData: Void, size: C4Size) {
-        let colorspace = CGColorSpaceCreateDeviceRGB()
-        let bitsPerComponent = 8
+    convenience public init(pixels: [Pixel], size: C4Size) {
+        let rgbColorSpace = CGColorSpaceCreateDeviceRGB()
+        let bitmapInfo:CGBitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.PremultipliedLast.rawValue)
+        let bitsPerComponent:Int = 8
+        let bitsPerPixel:Int = 32
+        let width : Int = Int(size.width)
+        let height : Int = Int(size.height)
         
-        var data: Void = rawData
-        let context = withUnsafeMutablePointer(&data) { (pointer: UnsafeMutablePointer<Void>) -> (CGContext?) in
-            
-            let alphaInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.PremultipliedLast.rawValue)
-            let orderInfo = CGBitmapInfo.ByteOrder32Big
-            let info = alphaInfo.union(orderInfo)
-            let context = CGBitmapContextCreate(pointer, Int(size.width), Int(size.height), bitsPerComponent, Int(4*size.width), colorspace, info.rawValue)
-            return context
-        }
+        assert(pixels.count == Int(width * height))
         
-        let image = CGBitmapContextCreateImage(context)!
-        self.init(cgimage: image)
+        var data = pixels // Copy to mutable []
+        let providerRef = CGDataProviderCreateWithCFData(
+            NSData(bytes: &data, length: data.count * sizeof(Pixel))
+        )
+        
+        let cgim = CGImageCreate(
+            width,
+            height,
+            bitsPerComponent,
+            bitsPerPixel,
+            width * Int(sizeof(Pixel)),
+            rgbColorSpace,
+            bitmapInfo,
+            providerRef,
+            nil,
+            true,
+            CGColorRenderingIntent.RenderingIntentDefault
+        )
+        
+        self.init(cgimage: cgim!)
     }
     
 //MARK: Properties
