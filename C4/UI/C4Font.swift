@@ -70,7 +70,7 @@ public class C4Font : NSObject {
 
     - returns:	An array of String objects, each of which contains the name of a font family.
     */
-    class func familyNames() -> [AnyObject] {
+    public class func familyNames() -> [AnyObject] {
         return UIFont.familyNames()
     }
     
@@ -84,7 +84,7 @@ public class C4Font : NSObject {
     - parameter familyName:	The name of the font family.
     - returns:	An array of String objects, each of which contains a font name associated with the specified family.
     */
-    class func fontNames(familyName: String) -> [AnyObject] {
+    public class func fontNames(familyName: String) -> [AnyObject] {
         return UIFont.fontNamesForFamilyName(familyName)
     }
     
@@ -96,7 +96,7 @@ public class C4Font : NSObject {
     - parameter fontSize:	The size (in points) to which the font is scaled.
     - returns:	A font object of the specified size.
     */
-    class func systemFont(size: Double) -> C4Font {
+    public class func systemFont(size: Double) -> C4Font {
         return C4Font(font: UIFont.systemFontOfSize(CGFloat(size)))
     }
     /**
@@ -107,7 +107,7 @@ public class C4Font : NSObject {
     - parameter fontSize:	The size (in points) to which the font is scaled.
     - returns:	A font object of the specified size.
     */
-    class func boldSystemFont(size: Double) -> C4Font {
+    public class func boldSystemFont(size: Double) -> C4Font {
         return C4Font(font: UIFont.boldSystemFontOfSize(CGFloat(size)))
     }
     
@@ -119,7 +119,7 @@ public class C4Font : NSObject {
     - parameter fontSize:	The size (in points) to which the font is scaled.
     - returns: A font object of the specified size.
     */
-    class func italicSystemFont(size: Double) -> C4Font {
+    public class func italicSystemFont(size: Double) -> C4Font {
         return C4Font(font: UIFont.italicSystemFontOfSize(CGFloat(size)))
     }
     
