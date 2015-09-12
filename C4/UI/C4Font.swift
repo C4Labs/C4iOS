@@ -18,19 +18,28 @@
 // IN THE SOFTWARE.
 
 import QuartzCore
+#if os(iOS)
 import UIKit
+#elseif os(OSX)
+import AppKit
+#endif
+
 
 public class C4Font : NSObject {
-    internal var internalFont: UIFont?
+#if os(iOS)
+    public typealias NativeFont = UIFont
+#elseif os(OSX)
+    public typealias NativeFont = NSFont
+#endif
+    
+    internal var internalFont: NativeFont = NativeFont()
     
     /**
-    The UIFont representation of the receiver.
-    
-        let uif = font.UIFont
+    The NativeFont representation of the receiver.
     */
-    public var uiifont : UIFont {
+    public var nativeFont : NativeFont {
         get {
-            return internalFont!;
+            return internalFont;
         }
     }
     
@@ -39,9 +48,12 @@ public class C4Font : NSObject {
     
         let f = C4Font("Helvetica", 20)
     */
-    convenience public init(name: String, size: Double) {
+    convenience public init?(name: String, size: Double) {
         self.init()
-        internalFont = UIFont(name: name, size: CGFloat(size))
+        guard let font = NativeFont(name: name, size: CGFloat(size)) else {
+            return nil
+        }
+        internalFont = font
     }
     
     /**
@@ -49,18 +61,18 @@ public class C4Font : NSObject {
 
         let f = C4Font("Helvetica")
     */
-    convenience public init(name: String) {
+    convenience public init?(name: String) {
         self.init(name: name, size: 12.0)
     }
 
     /**
-    Initializes a new C4Font using a specified UIFont.
+    Initializes a new C4Font using a specified system font.
 
         if let uif = UIFont(name: "Helvetica", size: 24) {
             let f = C4Font(font: uif)
         }
     */
-    convenience public init(font: UIFont) {
+    convenience public init(font: NativeFont) {
         self.init()
         internalFont = font
     }
@@ -71,7 +83,11 @@ public class C4Font : NSObject {
     - returns:	An array of String objects, each of which contains the name of a font family.
     */
     public class func familyNames() -> [AnyObject] {
-        return UIFont.familyNames()
+    #if os(iOS)
+        return NativeFont.familyNames()
+    #elseif os(OSX)
+        return NSFontManager.sharedFontManager().availableFontFamilies
+    #endif
     }
     
     /**
@@ -85,7 +101,11 @@ public class C4Font : NSObject {
     - returns:	An array of String objects, each of which contains a font name associated with the specified family.
     */
     public class func fontNames(familyName: String) -> [AnyObject] {
-        return UIFont.fontNamesForFamilyName(familyName)
+    #if os(iOS)
+        return NativeFont.fontNamesForFamilyName(familyName)
+    #elseif os(OSX)
+        return NSFontManager.sharedFontManager().availableMembersOfFontFamily(familyName)!
+    #endif
     }
     
     /**
@@ -97,7 +117,7 @@ public class C4Font : NSObject {
     - returns:	A font object of the specified size.
     */
     public class func systemFont(size: Double) -> C4Font {
-        return C4Font(font: UIFont.systemFontOfSize(CGFloat(size)))
+        return C4Font(font: NativeFont.systemFontOfSize(CGFloat(size)))
     }
     /**
     Returns the font object used for standard interface items that are rendered in boldface type in the specified size.
@@ -108,9 +128,10 @@ public class C4Font : NSObject {
     - returns:	A font object of the specified size.
     */
     public class func boldSystemFont(size: Double) -> C4Font {
-        return C4Font(font: UIFont.boldSystemFontOfSize(CGFloat(size)))
+        return C4Font(font: NativeFont.boldSystemFontOfSize(CGFloat(size)))
     }
     
+    #if os(iOS)
     /**
     Returns the font object used for standard interface items that are rendered in italic type in the specified size.
     
@@ -120,9 +141,10 @@ public class C4Font : NSObject {
     - returns: A font object of the specified size.
     */
     public class func italicSystemFont(size: Double) -> C4Font {
-        return C4Font(font: UIFont.italicSystemFontOfSize(CGFloat(size)))
+            return C4Font(font: NativeFont.italicSystemFontOfSize(CGFloat(size)))
     }
-    
+    #endif
+
     /**
     Returns a font object that is the same as the receiver but which has the specified size instead.
     
@@ -133,16 +155,24 @@ public class C4Font : NSObject {
     - returns:	A font object of the specified size.
     */
     public func font(size: Double) -> C4Font {
-        return C4Font(font: internalFont!.fontWithSize(CGFloat(size)))
+        #if os(iOS)
+            return C4Font(font: internalFont.fontWithSize(CGFloat(size)))
+        #elseif os(OSX)
+            return C4Font(font: NSFontManager.sharedFontManager().convertFont(internalFont, toSize: CGFloat(size)))
+        #endif
     }
-    
+
     /**
     The font family name. (read-only)
     A family name is a name such as Times New Roman that identifies one or more specific fonts. The value in this property is intended for an application’s internal usage only and should not be displayed.
     */
     public var familyName : String {
         get {
-            return internalFont!.familyName
+            #if os(iOS)
+                return internalFont.familyName
+            #elseif os(OSX)
+                return internalFont.familyName!
+            #endif
         }
     }
     
@@ -155,7 +185,7 @@ public class C4Font : NSObject {
     */
     public var fontName : String {
         get {
-            return internalFont!.fontName
+            return internalFont.fontName
         }
     }
     
@@ -164,7 +194,7 @@ public class C4Font : NSObject {
     */
     public var pointSize : Double {
         get {
-            return Double(internalFont!.pointSize)
+            return Double(internalFont.pointSize)
         }
     }
     
@@ -174,7 +204,7 @@ public class C4Font : NSObject {
     */
     public var ascender : Double {
         get {
-            return Double(internalFont!.ascender)
+            return Double(internalFont.ascender)
         }
     }
     
@@ -184,7 +214,7 @@ public class C4Font : NSObject {
     */
     public var descender : Double {
         get {
-            return Double(internalFont!.descender)
+            return Double(internalFont.descender)
         }
     }
     
@@ -194,7 +224,7 @@ public class C4Font : NSObject {
     */
     public var capHeight : Double {
         get {
-            return Double(internalFont!.capHeight)
+            return Double(internalFont.capHeight)
         }
     }
     
@@ -204,7 +234,7 @@ public class C4Font : NSObject {
     */
     public var xHeight : Double {
         get {
-            return Double(internalFont!.xHeight)
+            return Double(internalFont.xHeight)
         }
     }
     
@@ -213,7 +243,11 @@ public class C4Font : NSObject {
     */
     public var lineHeight : Double {
         get {
-            return Double(internalFont!.lineHeight)
+            #if os(iOS)
+                return Double(internalFont.lineHeight)
+            #elseif os(OSX)
+                return Double(internalFont.ascender - internalFont.descender + internalFont.leading)
+            #endif
         }
     }
     
@@ -223,7 +257,7 @@ public class C4Font : NSObject {
     */
     public var labelFontSize : Double {
         get {
-            return Double(UIFont.labelFontSize())
+            return Double(NativeFont.labelFontSize())
         }
     }
 
@@ -233,7 +267,11 @@ public class C4Font : NSObject {
     */
     public var buttonFontSize : Double {
         get {
-            return Double(UIFont.buttonFontSize())
+            #if os(iOS)
+                return Double(NativeFont.buttonFontSize())
+            #elseif os(OSX)
+                return Double(NativeFont.labelFontSize())
+            #endif
         }
     }
 
@@ -243,7 +281,7 @@ public class C4Font : NSObject {
     */
     public var systemFontSize : Double {
         get {
-            return Double(UIFont.systemFontSize())
+            return Double(NativeFont.systemFontSize())
         }
     }
 
@@ -253,7 +291,7 @@ public class C4Font : NSObject {
     */
     public var smallSystemFontSize : Double {
         get {
-            return Double(UIFont.smallSystemFontSize())
+            return Double(NativeFont.smallSystemFontSize())
         }
     }
     

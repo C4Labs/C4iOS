@@ -18,8 +18,6 @@
 // IN THE SOFTWARE.
 
 import QuartzCore
-import UIKit
-import Foundation
 
 public class C4TextShape : C4Shape {
     private var text: String = "" {
@@ -34,7 +32,7 @@ public class C4TextShape : C4Shape {
     }
     
     public override init() {
-        font = C4Font(name: "AvenirNext-DemiBold", size:80)
+        font = C4Font(name: "AvenirNext-DemiBold", size:80)!
     }
     
     /**
