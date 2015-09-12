@@ -18,7 +18,6 @@
 // IN THE SOFTWARE.
 
 import QuartzCore
-import UIKit
 
 public class C4Arc : C4Shape {
     /**
