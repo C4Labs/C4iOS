@@ -17,8 +17,12 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-import UIKit
 import CoreGraphics
+#if os(iOS)
+import UIKit
+#elseif os(OSX)
+import AppKit
+#endif
 
 public let black     = C4Color(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
 public let darkGray  = C4Color(red: 1.0/3.0, green: 1.0/3.0, blue: 1.0/3.0, alpha: 1.0)
@@ -46,6 +50,12 @@ This document describes the C4Color object which represents color and sometimes 
 C4Color internally wraps a CGColorSpaceRef called colorSpace, as well as a CGColorRef. From these two objects C4Color is able to properly maintain color data and convert it to / from other color objects such as UIColor, CIColor, C4Color, etc.
 */
 public class C4Color {
+    #if os(iOS)
+    typealias NativeColor = UIColor
+    #elseif os(OSX)
+    typealias NativeColor = NSColor
+    #endif
+
     internal var colorSpace: CGColorSpaceRef
     internal var internalColor: CGColorRef
     
@@ -87,13 +97,13 @@ public class C4Color {
     }
     
     /**
-    Initializes and returns a new C4Color object based on a provided UIColor object.
+    Initializes and returns a new C4Color object based on a provided NativeColor object.
     
         let c = C4Color(UIColor.redColor())
 
-    - parameter color: A UIColor object whose components will be extrated to create a new C4Color.
+    - parameter color: A NativeColor object whose components will be extrated to create a new C4Color.
     */
-    public convenience init(_ color: UIColor) {
+    public convenience init(_ color: NativeColor) {
         var red: CGFloat = 0;
         var green: CGFloat = 0;
         var blue: CGFloat = 0;
@@ -242,14 +252,14 @@ public class C4Color {
     }
 }
 
-// MARK: - Casting to UIColor
+// MARK: - Casting to NativeColor
 
 /**
-Initializes a UIColor object from a C4Color object.
+Initializes a NativeColor object from a C4Color object.
 
-- returns: A UIColor whose characteristics match the specified C4Color
+- returns: A NativeColor whose characteristics match the specified C4Color
 */
-public extension UIColor {
+public extension C4Color.NativeColor {
     public convenience init?(_ color: C4Color) {
         self.init(CGColor: color.CGColor)
     }
