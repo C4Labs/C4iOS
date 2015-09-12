@@ -18,7 +18,6 @@
 // IN THE SOFTWARE.
 
 import C4
-import UIKit
 
 class ViewController: C4CanvasController {
     override func setup() {
