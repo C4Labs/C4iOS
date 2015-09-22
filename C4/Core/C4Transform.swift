@@ -114,8 +114,8 @@ public struct C4Transform : Equatable {
     */
     public static func makeTranslation(translation: C4Vector) -> C4Transform {
         var t = C4Transform()
-        t[0, 3] = translation.x
-        t[1, 3] = translation.y
+        t[3, 0] = translation.x
+        t[3, 1] = translation.y
         return t
     }
 
