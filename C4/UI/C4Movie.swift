@@ -163,7 +163,6 @@ public class C4Movie: C4View {
             var rect = self.frame
             rect.size = newSize
             self.frame = rect
-            self.movieLayer.frame = CGRect(bounds)
         }
     }
 
