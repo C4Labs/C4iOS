@@ -207,6 +207,14 @@ public class C4View : NSObject {
             view.frame = oldFrame
         }
     }
+    
+    public var zPosition : Double {
+        get {
+            return Double(self.layer!.zPosition)
+        } set {
+            self.layer!.zPosition = CGFloat(newValue)
+        }
+    }
 
     //MARK: - Touchable
     /**
