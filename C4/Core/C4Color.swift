@@ -94,12 +94,11 @@ public class C4Color {
     - parameter color: A UIColor object whose components will be extrated to create a new C4Color.
     */
     public convenience init(_ color: UIColor) {
-        var red: CGFloat = 0;
-        var green: CGFloat = 0;
-        var blue: CGFloat = 0;
-        var alpha: CGFloat = 0;
-        color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-        self.init(red: Double(red), green: Double(green), blue: Double(blue), alpha: Double(alpha))
+        self.init(color.CGColor)
+    }
+
+    public convenience init(_ pattern: String) {
+        self.init(UIColor(patternImage: UIImage(named: pattern)!))
     }
     
     /**
