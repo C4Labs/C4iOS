@@ -95,4 +95,67 @@ public class C4Curve : C4Shape {
         }
     }
     
+    /**
+    The beginning point of the receiver. Animatable.
+    Assigning a new value to this variable will cause the head of the line to move to a new position.
+    
+    var l = C4Line([C4Point(), C4Point(100,100)])
+    l.a = C4Point(0,100)
+    */
+    public var a: C4Point {
+        get {
+            return points[0]
+        } set(val) {
+            points[0] = val
+            updatePath()
+        }
+    }
+    
+    /**
+    The end point of the receiver. Animatable.
+    Assigning a new value to this variable will cause the end of the line to move to a new position.
+    
+    var l = C4Line([C4Point(), C4Point(100,100)])
+    l.b = C4Point(100,200)
+    */
+    public var b: C4Point {
+        get {
+            return points[1]
+        } set(val) {
+            points[1] = val
+            updatePath()
+        }
+    }
+
+    /**
+    The beginning point of the receiver. Animatable.
+    Assigning a new value to this variable will cause the head of the line to move to a new position.
+    
+    var l = C4Line([C4Point(), C4Point(100,100)])
+    l.a = C4Point(0,100)
+    */
+    public var c: C4Point {
+        get {
+            return controls[0]
+        } set(val) {
+            controls[0] = val
+            updatePath()
+        }
+    }
+    
+    /**
+    The end point of the receiver. Animatable.
+    Assigning a new value to this variable will cause the end of the line to move to a new position.
+    
+    var l = C4Line([C4Point(), C4Point(100,100)])
+    l.b = C4Point(100,200)
+    */
+    public var d: C4Point {
+        get {
+            return controls[1]
+        } set(val) {
+            controls[1] = val
+            updatePath()
+        }
+    }
 }
