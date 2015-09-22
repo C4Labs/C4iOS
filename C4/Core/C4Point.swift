@@ -89,6 +89,22 @@ public struct C4Point : Equatable, CustomStringConvertible {
 }
 
 /**
+Translate a point by the given vector
+*/
+public func += (inout lhs: C4Point, rhs: C4Vector) {
+    lhs.x += rhs.x
+    lhs.y += rhs.y
+}
+
+/**
+Translate a point by the negative of the given vector
+*/
+public func -= (inout lhs: C4Point, rhs: C4Vector) {
+    lhs.x -= rhs.x
+    lhs.y -= rhs.y
+}
+
+/**
 Calculate the vector between two points
 */
 public func - (lhs: C4Point, rhs: C4Point) -> C4Vector {
