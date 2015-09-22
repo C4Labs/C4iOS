@@ -64,9 +64,7 @@ public class C4Polygon: C4Shape {
             path.addLineToPoint(points[i])
         }
         self.path = path
-        C4ShapeLayer.disableActions = true
         self.fillColor = clear
-        C4ShapeLayer.disableActions = false
         adjustToFitPath()
     }
 
