@@ -74,4 +74,25 @@ public class C4Curve : C4Shape {
             }
         }
     }
+    
+    var shouldUpdate = true
+
+    override func updatePath() {
+        if shouldUpdate {
+            let p0 = CGPoint(points[0])
+            let p1 = CGPoint(points[1])
+            let c0 = CGPoint(controls[0])
+            let c1 = CGPoint(controls[1])
+            
+            let curve = CGPathCreateMutable()
+            CGPathMoveToPoint(curve, nil, p0.x, p0.y)
+            CGPathAddCurveToPoint(curve, nil, c0.x,c0.y,c1.x,c1.y,p1.x,p1.y)
+            let curveRect = CGPathGetBoundingBox(curve)
+            
+            self.frame = C4Rect(curveRect)
+            self.path = C4Path(path:curve)
+            adjustToFitPath()
+        }
+    }
+    
 }
