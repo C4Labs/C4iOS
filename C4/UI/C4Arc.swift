@@ -49,7 +49,8 @@ public class C4Arc : C4Shape {
         let arcRect = CGRectMakeFromArc(CGPoint(center),radius: CGFloat(radius),startAngle: CGFloat(start),endAngle: CGFloat(end), clockwise: clockwise);
         self.init(frame: C4Rect(arcRect))
         let arc = CGPathCreateMutable()
-        CGPathAddArc(arc, nil, CGFloat(center.x), CGFloat(center.y), CGFloat(radius), CGFloat(start), CGFloat(end), end > start ? false : true)
+        CGPathAddArc(arc, nil, CGFloat(center.x), CGFloat(center.y), CGFloat(radius), CGFloat(start), CGFloat(end), !clockwise)
+        CGPathCloseSubpath(arc)
         self.path = C4Path(path: arc)
         adjustToFitPath()
     }

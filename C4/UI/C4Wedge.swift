@@ -56,10 +56,10 @@ public class C4Wedge : C4Shape {
         let wedgeRect = CGRectMakeFromWedge(CGPoint(center),radius: CGFloat(radius),startAngle: CGFloat(start),endAngle: CGFloat(end), clockwise: clockwise);
         self.init(frame: C4Rect(wedgeRect))
         let wedge = CGPathCreateMutable()
-        CGPathAddArc(wedge, nil, CGFloat(center.x), CGFloat(center.y), CGFloat(radius), CGFloat(start), CGFloat(end), clockwise)
+        CGPathAddArc(wedge, nil, CGFloat(center.x), CGFloat(center.y), CGFloat(radius), CGFloat(start), CGFloat(end), !clockwise)
         CGPathAddLineToPoint(wedge, nil, CGFloat(center.x), CGFloat(center.y))
+        CGPathCloseSubpath(wedge)
         self.path = C4Path(path: wedge)
-        path?.closeSubpath()
         adjustToFitPath()
     }
 }
