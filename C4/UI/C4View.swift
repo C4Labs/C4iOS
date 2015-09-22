@@ -355,12 +355,13 @@ public class C4View : NSObject {
 
     - parameter view:	The view to be added.
     */
-    public func add<T>(subview: T) {
+    public func add<T>(subview: T?) {
         if let v = subview as? UIView {
             view.addSubview(v)
-        }
-        else if let v = subview as? C4View {
+        } else if let v = subview as? C4View {
             view.addSubview(v.view)
+        } else {
+            fatalError("Can't add subview of class `\(subview.dynamicType)`")
         }
     }
 
@@ -378,12 +379,13 @@ public class C4View : NSObject {
 
     - parameter view:	The view to be removed.
     */
-    public func remove<T>(subview: T) {
+    public func remove<T>(subview: T?) {
         if let v = subview as? UIView {
             v.removeFromSuperview()
-        }
-        else if let v = subview as? C4View {
+        } else if let v = subview as? C4View {
             v.view.removeFromSuperview()
+        } else {
+            fatalError("Can't remove subview of class `\(subview.dynamicType)`")
         }
     }
     
@@ -409,11 +411,13 @@ public class C4View : NSObject {
 
     - parameter view: The subview to move to the back.
     */
-    public func sendToBack<T>(subview:T) {
+    public func sendToBack<T>(subview: T?) {
         if let v = subview as? UIView {
             view.sendSubviewToBack(v)
         } else if let v = subview as? C4View {
             view.sendSubviewToBack(v.view)
+        } else {
+            fatalError("Can't operate on subview of class `\(subview.dynamicType)`")
         }
     }
 
@@ -422,11 +426,13 @@ public class C4View : NSObject {
     
     - parameter view: The subview to move to the front.
     */
-    public func bringToFront<T>(subview:T) {
+    public func bringToFront<T>(subview: T?) {
         if let v = subview as? UIView {
             view.bringSubviewToFront(v)
         } else if let v = subview as? C4View {
             view.bringSubviewToFront(v.view)
+        } else {
+            fatalError("Can't operate on subview of class `\(subview.dynamicType)`")
         }
     }
     
@@ -494,11 +500,13 @@ extension UIView {
     When working with C4, use this method to add views because it handles the addition of both UIView and C4View.
     - parameter view:	The view to be added.
     */
-    public func add<T>(subview: T) {
+    public func add<T>(subview: T?) {
         if let v = subview as? UIView {
             self.addSubview(v)
         } else if let v = subview as? C4View {
             self.addSubview(v.view)
+        } else {
+            fatalError("Can't add subview of class `\(subview.dynamicType)`")
         }
     }
     
@@ -511,11 +519,13 @@ extension UIView {
     
     - parameter view:	The view to be removed.
     */
-    public func remove<T>(subview: T) {
+    public func remove<T>(subview: T?) {
         if let v = subview as? UIView {
             v.removeFromSuperview()
         } else if let v = subview as? C4View {
             v.view.removeFromSuperview()
+        } else {
+            fatalError("Can't remove subview of class `\(subview.dynamicType)`")
         }
     }
 
@@ -526,11 +536,13 @@ extension UIView {
 
     - parameter view: The subview to move to the back.
     */
-    public func sendToBack<T>(subview:T) {
+    public func sendToBack<T>(subview: T?) {
         if let v = subview as? UIView {
             self.sendSubviewToBack(v)
         } else if let v = subview as? C4View {
             self.sendSubviewToBack(v.view)
+        } else {
+            fatalError("Can't operate on subview of class `\(subview.dynamicType)`")
         }
     }
 
@@ -541,11 +553,13 @@ extension UIView {
 
     - parameter view: The subview to move to the front.
     */
-    public func bringToFront<T>(subview:T) {
+    public func bringToFront<T>(subview: T?) {
         if let v = subview as? UIView {
             self.bringSubviewToFront(v)
         } else if let v = subview as? C4View {
             self.bringSubviewToFront(v.view)
+        } else {
+            fatalError("Can't operate on subview of class `\(subview.dynamicType)`")
         }
     }
 }
