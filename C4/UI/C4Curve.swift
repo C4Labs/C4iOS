@@ -38,7 +38,12 @@ public class C4Curve : C4Shape {
     - parameter points: The beginning and end points	of the curve.
     - parameter controls: The control points used to define the shape of the curve.
     */
+    
     convenience public init(points: [C4Point], controls: [C4Point]) {
+        self.init()
+        self.points = points
+        self.controls = controls
+
         let p0 = CGPoint(points[0])
         let p1 = CGPoint(points[1])
         let c0 = CGPoint(controls[0])
@@ -49,7 +54,7 @@ public class C4Curve : C4Shape {
         CGPathAddCurveToPoint(curve, nil, c0.x,c0.y,c1.x,c1.y,p1.x,p1.y)
         let curveRect = CGPathGetBoundingBox(curve)
         
-        self.init(frame: C4Rect(curveRect))
+        self.frame = C4Rect(curveRect)
         self.path = C4Path(path:curve)
         adjustToFitPath()
     }
