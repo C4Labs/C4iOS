@@ -20,7 +20,7 @@
 import QuartzCore
 
 public class C4GradientLayer: CAGradientLayer {
-    public static var disableActions = false
+    public static var disableActions = true
     
     public override func actionForKey(key: String) -> CAAction? {
         if C4ShapeLayer.disableActions == true {
