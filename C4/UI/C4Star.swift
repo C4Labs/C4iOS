@@ -53,5 +53,7 @@ public class C4Star: C4Polygon {
         }
         
         self.init(pointArray)
+        self.close()
+        self.fillColor = C4Blue
     }
 }
