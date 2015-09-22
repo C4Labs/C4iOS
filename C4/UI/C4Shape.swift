@@ -74,13 +74,11 @@ public class C4Shape: C4View {
     public override init() {
         super.init()
         self.view = ShapeView()
-        C4ShapeLayer.disableActions = true
         strokeColor = C4Purple
         fillColor = C4Blue
         lineWidth = 1
         lineCap = .Round
         lineJoin = .Round
-        C4ShapeLayer.disableActions = false
     }
     
     /**
