@@ -63,6 +63,30 @@ public class C4Line: C4Polygon {
         }
     }
 
+    public override var center : C4Point {
+        get {
+            return C4Point(view.center)
+        }
+        set {
+            let diff = newValue - self.center
+            let newA = a + diff
+            let newB = b + diff
+            self.points = [newA, newB]
+        }
+    }
+
+
+    public override var origin : C4Point {
+        get {
+            return C4Point(view.frame.origin)
+        }
+        set {
+            let diff = newValue - self.origin
+            let newA = a + diff
+            let newB = b + diff
+            self.points = [newA, newB]
+        }
+    }
 
     /**
     Initializes a new C4Polygon using the specified array of points.
