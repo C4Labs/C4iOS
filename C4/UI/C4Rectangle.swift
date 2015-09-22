@@ -51,7 +51,7 @@ public class C4Rectangle: C4Shape {
     */
     convenience public init(frame: C4Rect) {
         self.init()
-        if frame.size.width <= corner.width * 2.0 {
+        if frame.size.width <= corner.width * 2.0 || frame.size.height <= corner.width / 2.0 {
             corner = C4Size()
         }
         view.frame = CGRect(frame)
