@@ -30,6 +30,7 @@ public class C4CanvasController : UIViewController {
     public override func viewDidLoad() {
         canvas.backgroundColor = C4Grey
         self.setup()
+        C4ShapeLayer.disableActions = false
     }
 
     /**
