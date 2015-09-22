@@ -158,4 +158,37 @@ public class C4Curve : C4Shape {
             updatePath()
         }
     }
+    
+    public override var center : C4Point {
+        get {
+            return C4Point(view.center)
+        }
+        set {
+            let diff = newValue - self.center
+            let newCurve = C4Curve(points: [a + diff, b + diff], controls:[c + diff, d + diff])
+            self.path = newCurve.path
+            adjustToFitPath()
+            shouldUpdate = false
+            points = newCurve.points
+            controls = newCurve.controls
+            shouldUpdate = true
+        }
+    }
+    
+    
+    public override var origin : C4Point {
+        get {
+            return C4Point(view.frame.origin)
+        }
+        set {
+            let diff = newValue - self.origin
+            let newCurve = C4Curve(points: [a + diff, b + diff], controls:[c + diff, d + diff])
+            self.path = newCurve.path
+            adjustToFitPath()
+            shouldUpdate = false
+            points = newCurve.points
+            controls = newCurve.controls
+            shouldUpdate = true
+        }
+    }
 }
