@@ -96,6 +96,10 @@ public class C4Color {
     public convenience init(_ color: UIColor) {
         self.init(color.CGColor)
     }
+
+    public convenience init(_ pattern: String) {
+        self.init(UIColor(patternImage: UIImage(named: pattern)!))
+    }
     
     /**
     Initializes and returns a new C4Color object based on specified color values.
