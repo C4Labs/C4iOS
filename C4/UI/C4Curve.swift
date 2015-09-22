@@ -21,6 +21,11 @@ import QuartzCore
 import UIKit
 
 public class C4Curve : C4Shape {
+    public override init() {
+        self.points = [C4Point]()
+        self.controls = [C4Point]()
+        super.init()
+    }
     /**
     Creates a bezier curve.
     
@@ -47,5 +52,21 @@ public class C4Curve : C4Shape {
         self.init(frame: C4Rect(curveRect))
         self.path = C4Path(path:curve)
         adjustToFitPath()
+    }
+    
+    public var points : [C4Point] {
+        didSet {
+            if points.count > 2 {
+                updatePath()
+            }
+        }
+    }
+    
+    public var controls : [C4Point] {
+        didSet {
+            if controls.count > 2 {
+                updatePath()
+            }
+        }
     }
 }
