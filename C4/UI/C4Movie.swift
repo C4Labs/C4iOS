@@ -66,7 +66,7 @@ public class C4Movie: C4View {
         //create asset from url
         let asset = AVAsset(URL: url!)
         let tracks = asset.tracksWithMediaType(AVMediaTypeVideo)
-        
+
         //grab the movie track and size
         let movieTrack = tracks[0]
         let size = C4Size(movieTrack.naturalSize)
@@ -83,7 +83,7 @@ public class C4Movie: C4View {
         on(event: AVPlayerItemDidPlayToEndTimeNotification) {
             self.reachedEnd()
         }
-        
+
         //movie view's player
         movieLayer.player = player
         movieLayer.videoGravity = AVLayerVideoGravityResize
@@ -142,7 +142,11 @@ public class C4Movie: C4View {
             play()
         }
     }
-    
+
+    public func seekTo(time: Double) {
+        player.seekToTime(CMTime(seconds: time, preferredTimescale: 600))
+    }
+
     /**
     Assigning a value of true to this property will cause the receiver to loop at the end of playback.
 
