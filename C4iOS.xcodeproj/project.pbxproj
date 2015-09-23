@@ -71,6 +71,7 @@
 		61511E8A1BB275870063B9AA /* C4RectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8CB1D91A05781700A20783 /* C4RectTests.swift */; };
 		61511E8B1BB275870063B9AA /* C4VectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D431A054B4F0023323D /* C4VectorTests.swift */; };
 		61511E8C1BB275870063B9AA /* C4TransformTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A988A9161A4F57330044007C /* C4TransformTests.swift */; };
+		61511EC21BB27AB50063B9AA /* UIViewController+C4View.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6AB1B534F9F00F937AB /* UIViewController+C4View.swift */; };
 		A94E3BD419E0E9390039A9C4 /* C4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 614F824319DB5ED3001DF1D4 /* C4.framework */; };
 		A96F4F451B538330002B3A46 /* C4ColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D401A054B4F0023323D /* C4ColorTests.swift */; };
 		A96F4F461B538330002B3A46 /* C4MathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D411A054B4F0023323D /* C4MathTests.swift */; };
@@ -694,6 +695,7 @@
 				6114EDEC1BA4B41900A29541 /* C4Polygon.swift in Sources */,
 				6114EDDD1BA4B41900A29541 /* C4CanvasController.swift in Sources */,
 				6114EDD01BA4B40D00A29541 /* C4Checkerboard.swift in Sources */,
+				61511EC21BB27AB50063B9AA /* UIViewController+C4View.swift in Sources */,
 				6114EDEF1BA4B41900A29541 /* C4RegularPolygon.swift in Sources */,
 				6114EDF71BA4B41900A29541 /* C4View+Border.swift in Sources */,
 				6114EDF31BA4B41900A29541 /* C4Star.swift in Sources */,
@@ -1199,6 +1201,7 @@
 				61511E861BB2755D0063B9AA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A96F50761B5385A5002B3A46 /* Build configuration list for PBXNativeTarget "C4App" */ = {
 			isa = XCConfigurationList;
