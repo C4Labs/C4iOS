@@ -72,10 +72,11 @@ public class C4Line: C4Polygon {
             return C4Point(view.center)
         }
         set {
-            let diff = newValue - self.center
-            let newA = a + diff
-            let newB = b + diff
-            self.points = [newA, newB]
+            let diff = newValue - center
+            batchUpdates() {
+                self.endPoints.0 += diff
+                self.endPoints.1 += diff
+            }
         }
     }
 
@@ -85,10 +86,11 @@ public class C4Line: C4Polygon {
             return C4Point(view.frame.origin)
         }
         set {
-            let diff = newValue - self.origin
-            let newA = a + diff
-            let newB = b + diff
-            self.points = [newA, newB]
+            let diff = newValue - origin
+            batchUpdates() {
+                self.endPoints.0 += diff
+                self.endPoints.1 += diff
+            }
         }
     }
 
