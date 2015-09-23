@@ -26,7 +26,8 @@ public class C4Movie: C4View {
     internal var statusContext = 0
     internal var player : AVQueuePlayer = AVQueuePlayer()
     internal var currentItem : AVPlayerItem?
-    
+    private(set) public var duration: Double = 0.0
+
     internal class MovieView : UIView {
         
         var movieLayer: AVPlayerLayer {
@@ -71,6 +72,8 @@ public class C4Movie: C4View {
         let size = C4Size(movieTrack.naturalSize)
         
         self.init(frame: C4Rect(0,0,Double(size.width),Double(size.height)))
+        duration = Double(CMTimeGetSeconds(asset.duration))
+
         //initialize player with item
         player = AVQueuePlayer(playerItem: AVPlayerItem(asset: asset))
         player.actionAtItemEnd = .Pause
