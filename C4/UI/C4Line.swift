@@ -41,6 +41,16 @@ public class C4Line: C4Polygon {
         var l = C4Line([C4Point(), C4Point(100,100)])
         l.b = C4Point(100,200)
     */
+    convenience public init(begin: C4Point, end: C4Point) {
+        let points = (begin,end)
+        self.init(frame: C4Rect(points))
+        self.endPoints = points
+
+        let p = C4Path()
+        p.moveToPoint(endPoints.0)
+        p.addLineToPoint(endPoints.1)
+        path = p
+        adjustToFitPath()
     }
     
     override func updatePath() {
