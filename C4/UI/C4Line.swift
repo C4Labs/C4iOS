@@ -88,6 +88,12 @@ public class C4Line: C4Polygon {
         }
     }
 
+    private var pauseUpdates = false
+    func batchUpdates(updates: Void -> Void) {
+        pauseUpdates = true
+        updates()
+        pauseUpdates = false
+        updatePath()
     }
 
 }
