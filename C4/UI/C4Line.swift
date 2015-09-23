@@ -28,11 +28,8 @@ public class C4Line: C4Polygon {
         var l = C4Line([C4Point(), C4Point(100,100)])
         l.a = C4Point(0,100)
     */
-    public var a: C4Point {
-        get {
-            return points[0]
-        } set(val) {
-            points[0] = val
+    public var endPoints = (C4Point(), C4Point()) {
+        didSet {
             updatePath()
         }
     }
@@ -44,13 +41,6 @@ public class C4Line: C4Polygon {
         var l = C4Line([C4Point(), C4Point(100,100)])
         l.b = C4Point(100,200)
     */
-    public var b: C4Point {
-        get {
-            return points[1]
-        } set(val) {
-            points[1] = val
-            updatePath()
-        }
     }
     
     override func updatePath() {
