@@ -160,21 +160,3 @@ public class C4GenericAnimation : C4Animation {
         }
     }
 }
-
-extension NSObject {
-    public func animationForKey(key: String) -> C4GenericAnimation? {
-        return C4Animator.sharedAnimator.animation(object: self, key: key)
-    }
-    
-    public func addAnimation(animation: C4GenericAnimation, key: String) {
-        C4Animator.sharedAnimator.addAnimation(animation, object: self, key: key)
-    }
-    
-    public func removeAnimation(key key: String) {
-        C4Animator.sharedAnimator.removeAnimation(object: self, key: key)
-    }
-    
-    public func removeAllAnimations() {
-        C4Animator.sharedAnimator.removeAnimations(object: self)
-    }
-}

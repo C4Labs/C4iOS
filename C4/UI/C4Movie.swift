@@ -18,25 +18,43 @@
 // IN THE SOFTWARE.
 
 import QuartzCore
-import UIKit
 import AVFoundation
 import CoreMedia
+#if os(iOS)
+import UIKit
+#elseif os(OSX)
+import AppKit
+#endif
 
 public class C4Movie: C4View {
     internal var statusContext = 0
     internal var player : AVQueuePlayer = AVQueuePlayer()
     internal var currentItem : AVPlayerItem?
     
-    internal class MovieView : UIView {
+    internal class MovieView : NativeView {
         
         var movieLayer: AVPlayerLayer {
             get {
                 return self.layer as! AVPlayerLayer
             }
         }
-        
+
+        #if os(iOS)
         override class func layerClass() -> AnyClass {
             return AVPlayerLayer.self
+        }
+        #endif
+
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+            #if os(OSX)
+                layer = AVPlayerLayer()
+                wantsLayer = true
+            #endif
+        }
+
+        required init?(coder: NSCoder) {
+            super.init(coder: coder)
         }
     }
     

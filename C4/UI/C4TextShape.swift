@@ -17,6 +17,7 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
+import CoreText
 import QuartzCore
 
 public class C4TextShape : C4Shape {

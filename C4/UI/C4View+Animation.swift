@@ -18,7 +18,11 @@
 // IN THE SOFTWARE.
 
 import QuartzCore
+#if os(iOS)
 import UIKit
+#elseif os(OSX)
+import AppKit
+#endif
 
 /**
 Extension to C4View that handles animating of basic properties.

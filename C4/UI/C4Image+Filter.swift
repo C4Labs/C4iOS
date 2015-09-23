@@ -18,7 +18,11 @@
 // IN THE SOFTWARE.
 
 import QuartzCore
+#if os(iOS)
 import UIKit
+#elseif os(OSX)
+import AppKit
+#endif
 
 extension C4Image {
     public func apply(filter: C4Filter) {
@@ -42,11 +46,17 @@ extension C4Image {
         if CGRectIsInfinite(extent) {
             extent = self.ciimage.extent
         }
-        let filterContext = CIContext(options:nil)
+        #if os(iOS)
+            let filterContext = CIContext(options:nil)
+        #elseif os(OSX)
+            let cgcontext = NSGraphicsContext().CGContext
+            let filterContext = CIContext(CGContext: cgcontext, options: nil)
+        #endif
+
         let filteredImage = filterContext.createCGImage(self.output, fromRect:extent)
         
         dispatch_async(dispatch_get_main_queue()) {
-            self.imageView.layer.contents = filteredImage
+            self.imageView.mainLayer?.contents = filteredImage
         }
     }
     

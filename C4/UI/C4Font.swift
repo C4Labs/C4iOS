@@ -26,12 +26,6 @@ import AppKit
 
 
 public class C4Font : NSObject {
-#if os(iOS)
-    public typealias NativeFont = UIFont
-#elseif os(OSX)
-    public typealias NativeFont = NSFont
-#endif
-    
     internal var internalFont: NativeFont = NativeFont()
     
     /**

@@ -18,19 +18,37 @@
 // IN THE SOFTWARE.
 
 import QuartzCore
+#if os(iOS)
 import UIKit
+#elseif os(OSX)
+import AppKit
+#endif
 
 public class C4Shape: C4View {
     
-    internal class ShapeView : UIView {
+    internal class ShapeView : NativeView {
         var shapeLayer: C4ShapeLayer {
             get {
                 return self.layer as! C4ShapeLayer
             }
         }
-        
+
+        #if os(iOS)
         override class func layerClass() -> AnyClass {
             return C4ShapeLayer.self
+        }
+        #endif
+
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+            #if os(OSX)
+            layer = C4ShapeLayer()
+            wantsLayer = true
+            #endif
+        }
+
+        required init?(coder: NSCoder) {
+            super.init(coder: coder)
         }
     }
     

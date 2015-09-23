@@ -18,7 +18,11 @@
 // IN THE SOFTWARE.
 
 import Foundation
+#if os(iOS)
 import UIKit
+#elseif os(OSX)
+import AppKit
+#endif
 
 public class C4ViewAnimation : C4Animation {
     public var delay: NSTimeInterval = 0
@@ -55,36 +59,20 @@ public class C4ViewAnimation : C4Animation {
     public func animate() {
         C4ShapeLayer.disableActions = false
         var timing: CAMediaTimingFunction
-        var options : UIViewAnimationOptions = [UIViewAnimationOptions.BeginFromCurrentState]
-        
+
         switch curve {
         case .Linear:
-            options = [options, UIViewAnimationOptions.CurveLinear]
             timing = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
         case .EaseOut:
-            options = [options, UIViewAnimationOptions.CurveEaseOut]
             timing = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
         case .EaseIn:
-            options = [options, UIViewAnimationOptions.CurveEaseIn]
             timing = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
         case .EaseInOut:
-            options = [options, UIViewAnimationOptions.CurveEaseInOut]
             timing = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         }
-        
-        if autoreverses == true {
-            options.unionInPlace(.Autoreverse)
-        } else {
-            options.subtractInPlace(.Autoreverse)
-        }
 
-        if repeatCount > 0  {
-            options.unionInPlace(.Repeat)
-        } else {
-            options.subtractInPlace(.Repeat)
-        }
-        
-        UIView.animateWithDuration(duration, delay: delay, options: options, animations: {
+        #if os(iOS)
+        UIView.animateWithDuration(duration, delay: delay, options: animationOptions(), animations: {
             C4ViewAnimation.stack.append(self)
             UIView.setAnimationRepeatCount(Float(self.repeatCount))
             CATransaction.begin()
@@ -97,8 +85,55 @@ public class C4ViewAnimation : C4Animation {
             CATransaction.commit()
             C4ViewAnimation.stack.removeLast()
         }, completion:nil)
+        #elseif os(OSX)
+        NSAnimationContext.runAnimationGroup({ context in
+            context.duration = self.duration
+            context.timingFunction = timing
+            C4ViewAnimation.stack.append(self)
+            CATransaction.begin()
+            CATransaction.setAnimationDuration(self.duration)
+            CATransaction.setAnimationTimingFunction(timing)
+            CATransaction.setCompletionBlock() {
+                self.postCompletedEvent()
+            }
+            self.animations()
+            CATransaction.commit()
+            C4ViewAnimation.stack.removeLast()
+        }, completionHandler: nil)
+        #endif
         C4ShapeLayer.disableActions = true
     }
+
+    #if os(iOS)
+    func animationOptions() -> UIViewAnimationOptions {
+        var options : UIViewAnimationOptions = [UIViewAnimationOptions.BeginFromCurrentState]
+
+        switch curve {
+        case .Linear:
+            options = [options, UIViewAnimationOptions.CurveLinear]
+        case .EaseOut:
+            options = [options, UIViewAnimationOptions.CurveEaseOut]
+        case .EaseIn:
+            options = [options, UIViewAnimationOptions.CurveEaseIn]
+        case .EaseInOut:
+            options = [options, UIViewAnimationOptions.CurveEaseInOut]
+        }
+
+        if autoreverses == true {
+            options.unionInPlace(.Autoreverse)
+        } else {
+            options.subtractInPlace(.Autoreverse)
+        }
+
+        if repeatCount > 0  {
+            options.unionInPlace(.Repeat)
+        } else {
+            options.subtractInPlace(.Repeat)
+        }
+
+        return options
+    }
+    #endif
 
     static var stack = [C4ViewAnimation]()
     static var currentAnimation: C4ViewAnimation? {

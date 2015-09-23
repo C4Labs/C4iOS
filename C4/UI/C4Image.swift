@@ -18,7 +18,11 @@
 // IN THE SOFTWARE.
 
 import QuartzCore
+#if os(iOS)
 import UIKit
+#elseif os(OSX)
+import AppKit
+#endif
 
 public struct Pixel {
     var r : UInt8 = 0
@@ -49,9 +53,15 @@ public class C4Image: C4View {
     - parameter name:	The name of the image included in your project, or a web address.
     */
     convenience public init(_ filename: String) {
-        self.init(filename, scale: 1.0)
+        if filename.hasPrefix("http") {
+            self.init(url: NSURL(string: filename)!)
+            return
+        }
+        let image = NativeImage(named: filename)
+        self.init(nativeImage: image!)
     }
 
+    #if os(iOS)
     /**
     Initializes a new C4Image using the specified filename from the bundle (i.e. your project), it will also grab images from the web if the filename starts with http.
     
@@ -65,9 +75,10 @@ public class C4Image: C4View {
             self.init(url: NSURL(string: filename)!, scale: scale)
             return
         }
-        let image = UIImage(named: filename, inBundle: NSBundle.mainBundle(), compatibleWithTraitCollection: nil)
-        self.init(uiimage: image!, scale: scale)
+        let image = NativeImage(named: filename)
+        self.init(nativeImage: image!, scale: scale)
     }
+    #endif
 
     /**
     Initializes a new C4Image using an existing C4Image (basically like copying).
@@ -82,47 +93,51 @@ public class C4Image: C4View {
     */
     convenience public init(image: C4Image) {
         self.init()
-        let uiimage = image.uiimage
-        self.view = UIImageView(image: uiimage)
+        let nativeImage = image.nativeImage
+        self.view = NativeImageView(image: nativeImage)
     }
-    
+
     /**
-    Initializes a new C4Image using a UIImage.
+    Initializes a new C4Image using a NativeImage.
 
         if let uii = UIImage(named:"logo") {
-            let img = C4Image(uiimage: uii)
+            let img = C4Image(nativeImage: uii)
             canvas.add(img)
         }
     
-    - parameter uiimage: A UIImage object.
+    - parameter nativeImage: A NativeImage object.
     */
-    convenience public init(uiimage: UIImage) {
-        self.init(uiimage: uiimage, scale: 1.0)
+    convenience public init(nativeImage: NativeImage) {
+        self.init()
+        self.view = NativeImageView(image: nativeImage)
     }
 
+    #if os(iOS)
     /**
-    Initializes a new C4Image using a UIImage, with option for specifying the scale of the image.
+    Initializes a new C4Image using a NativeImage, with option for specifying the scale of the image.
 
         if let uii = UIImage(named:"logo") {
-            let img = C4Image(uiimage: uii, scale: 2.0)
+            let img = C4Image(nativeImage: uii, scale: 2.0)
             canvas.add(img)
         }
 
-    - parameter uiimage: A UIImage object.
+    - parameter nativeImage: A NativeImage object.
     - parameter scale: A `Double` should be larger than 0.0
 
     */
-    convenience public init(uiimage: UIImage, let scale: Double) {
+    convenience public init(nativeImage: NativeImage, let scale: Double) {
         self.init()
 
         if scale != 1.0 {
-            let scaledImage = UIImage(CGImage: uiimage.CGImage!, scale: CGFloat(scale), orientation: uiimage.imageOrientation)
-            self.view = UIImageView(image: scaledImage)
+            let scaledImage = UIImage(CGImage: nativeImage.CGImage!, scale: CGFloat(scale), orientation: nativeImage.imageOrientation)
+
+            self.view = NativeImageView(image: scaledImage)
         } else {
-            self.view = UIImageView(image: uiimage)
+            self.view = NativeImageView(image: nativeImage)
         }
         _originalSize = C4Size(view.frame.size)
     }
+    #endif
 
     /**
     Initializes a new C4Image using a CGImageRef.
@@ -137,10 +152,11 @@ public class C4Image: C4View {
     - parameter cgimage: A CGImageRef object.
     */
     convenience public init(cgimage: CGImageRef) {
-        let image = UIImage(CGImage: cgimage)
-        self.init(uiimage: image, scale: 1.0)
+        let image = NativeImage(CGImage: cgimage)
+        self.init(nativeImage: image)
     }
 
+    #if os(iOS)
     /**
     Initializes a new C4Image using a CGImageRef, with option for specifying the scale of the image.
 
@@ -148,12 +164,13 @@ public class C4Image: C4View {
         let img = C4Image(cgimage: cgi, scale: 2.0)
         canvas.add(img)
 
-    - parameter uiimage: A CGImageRef object.
+    - parameter nativeImage: A CGImageRef object.
     */
     convenience public init(cgimage: CGImageRef, scale: Double) {
-        let image = UIImage(CGImage: cgimage)
-        self.init(uiimage: image, scale: scale)
+        let image = NativeImage(CGImage: cgimage)
+        self.init(nativeImage: image, scale: scale)
     }
+    #endif
 
     /**
     Initializes a new C4Image using a CIImage.
@@ -163,20 +180,23 @@ public class C4Image: C4View {
     - parameter ciimage: A CIImage object.
     */
     convenience public init(ciimage: CIImage) {
-        self.init(ciimage: ciimage, scale: 1.0)
+        let image = NativeImage(CIImage: ciimage)
+        self.init(nativeImage: image)
     }
 
+    #if os(iOS)
     /**
     Initializes a new C4Image using a CIImage, with option for specifying the scale of the image.
 
     Use this method if you're working with the output of a CIFilter.
 
-    - parameter uiimage: A CIImage object.
+    - parameter ciimage: A CIImage object.
     */
     convenience public init(ciimage: CIImage, scale: Double) {
-        let image = UIImage(CIImage: ciimage)
-        self.init(uiimage: image, scale: scale)
+        let image = NativeImage(CIImage: ciimage)
+        self.init(nativeImage: image, scale: scale)
     }
+    #endif
 
     /**
     Initializes a new C4Image using raw data.
@@ -188,9 +208,11 @@ public class C4Image: C4View {
     - parameter data: An NSData object.
     */
     convenience public init(data: NSData) {
-        self.init(data: data, scale: 1.0)
+        let image = NativeImage(data: data)
+        self.init(nativeImage: image!)
     }
 
+    #if os(iOS)
     /**
     Initializes a new C4Image using raw data, with option for specifying the scale of the image.
 
@@ -201,9 +223,10 @@ public class C4Image: C4View {
     - parameter data: An NSData object.
     */
     convenience public init(data: NSData, scale: Double) {
-        let image = UIImage(data: data)
-        self.init(uiimage: image!, scale: scale)
+        let image = NativeImage(data: data)
+        self.init(nativeImage: image!, scale: scale)
     }
+    #endif
 
     /**
     Initializes a new C4Image from an URL.
@@ -216,9 +239,25 @@ public class C4Image: C4View {
     - parameter url: An NSURL object.
     */
     convenience public init(url: NSURL) {
-        self.init(url: url, scale: 1.0)
+        var error: NSError?
+        var data: NSData?
+        do {
+            data = try NSData(contentsOfURL: url, options:.DataReadingMappedIfSafe)
+        } catch let error1 as NSError {
+            error = error1
+            data = nil
+        }
+        if let d = data {
+            self.init(data: d)
+            return
+        }
+        if let e = error {
+            C4Log("There was an error loading image data from url:\n ERROR: \(e.localizedDescription)\n URL:\(url)")
+        }
+        self.init()
     }
 
+    #if os(iOS)
     /**
     Initializes a new C4Image from an URL, with option for specifying the scale of the image.
     
@@ -247,6 +286,7 @@ public class C4Image: C4View {
         }
         self.init()
     }
+    #endif
 
     /**
     Initializes a new C4Image using raw data. This method differs from `C4Image(data:...)` in that you can pass an array of raw data to the initializer. This works if you're creating your own raw images by changing the values of individual pixels. Pixel data should be RGBA.
@@ -288,21 +328,21 @@ public class C4Image: C4View {
     
 //MARK: Properties
     /**
-    Returns the UIImageView of the object.
+    Returns the NativeImageView of the object.
 
-    - returns: A UIImageView object.
+    - returns: A NativeImageView object.
     */
-    internal var imageView : UIImageView {
+    internal var imageView : NativeImageView {
         get {
-            return self.view as! UIImageView
+            return self.view as! NativeImageView
         }
     }
     
     /**
-    Returns a UIImage representation of the receiver.
-    - returns:	A UIImage object.
+    Returns a NativeImage representation of the receiver.
+    - returns:	A NativeImage object.
     */
-    public var uiimage: UIImage {
+    public var nativeImage: NativeImage {
         get {
             return imageView.image!
         }
@@ -314,7 +354,7 @@ public class C4Image: C4View {
     */
     public var cgimage: CGImageRef {
         get {
-            return uiimage.CGImage!
+            return nativeImage.CGImage!
         }
     }
     
@@ -334,12 +374,13 @@ public class C4Image: C4View {
     If you are using the layer to display a static image, you can set this property to the CGImageRef containing the image you want to display. Assigning a value to this property causes the layer to use your image rather than create a separate backing store.
     If the layer object is tied to a view object, you should avoid setting the contents of this property directly. The interplay between views and layers usually results in the view replacing the contents of this property during a subsequent update.
     */
-    public var contents : CGImageRef {
+    public var contents : CGImageRef? {
         get {
-            let layer = imageView.layer as CALayer
-            return layer.contents as! CGImageRef
-        } set(val) {
-            imageView.layer.contents = val
+            let layer = imageView.mainLayer
+            return layer?.contents as! CGImageRef?
+        }
+        set {
+            imageView.mainLayer?.contents = newValue
         }
     }
     

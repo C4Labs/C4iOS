@@ -18,7 +18,11 @@
 // IN THE SOFTWARE.
 
 import QuartzCore
+#if os(iOS)
 import UIKit
+#elseif os(OSX)
+import AppKit
+#endif
 
 extension C4Image {
     public func generate(generator: C4Generator) {
@@ -33,11 +37,11 @@ extension C4Image {
             let translate = CGAffineTransformTranslate(scale, 0, outputImage.extent.size.height)
             outputImage = outputImage.imageByApplyingTransform(translate)
             self.output = outputImage
-            
-            let img = UIImage(CIImage: output)
-            let orig = self.origin
-            self.view = UIImageView(image: img)
-            self.origin = orig
+
+            let origin = self.origin
+            let img = NativeImage(CIImage: output)
+            self.view = NativeImageView(image: img)
+            self.origin = origin
             _originalSize = C4Size(view.frame.size)
         } else {
             print("Failed to generate outputImage: \(__FUNCTION__)")

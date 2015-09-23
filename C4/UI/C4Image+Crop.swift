@@ -18,7 +18,11 @@
 // IN THE SOFTWARE.
 
 import QuartzCore
+#if os(iOS)
 import UIKit
+#elseif os(OSX)
+import AppKit
+#endif
 
 extension C4Image {
     public func crop(rect: C4Rect) {
@@ -39,7 +43,7 @@ extension C4Image {
 
         if let outputImage = crop.outputImage {
             self.output = outputImage
-            self.imageView.image = UIImage(CIImage: output)
+            self.imageView.image = NativeImage(CIImage: output)
             self.frame = C4Rect(intersection)
         } else {
             print("Failed ot generate outputImage: \(__FUNCTION__)")

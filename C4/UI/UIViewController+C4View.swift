@@ -17,14 +17,10 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-import Foundation
-import ObjectiveC
-import UIKit
-
 private var canvasAssociationKey: UInt8 = 0
 
 /**
-Extension to UIViewController that adds a `canvas` object.
+Extension to NativeViewController that adds a `canvas` object.
 
 The canvas is a C4View representation of the view controller's UIView property. 
 
@@ -38,7 +34,7 @@ canvas.addTapGestureRecognizer(0.5){...}
 
 Where, `canvas` is essentially equal to `self.viewController.view`, keeping the interaction with a controller's main view consistent with using other C4View objects.
 */
-public extension UIViewController {
+public extension NativeViewController {
     /**
     Returns a C4View object representation of the controller's `view` property.
     */

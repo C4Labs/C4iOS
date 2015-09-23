@@ -17,18 +17,36 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
+#if os(iOS)
 import UIKit
+#elseif os(OSX)
+import AppKit
+#endif
 
 public class C4Gradient : C4View {
-    internal class GradientView : UIView {
+    internal class GradientView : NativeView {
         var gradientLayer: C4GradientLayer {
             get {
                 return self.layer as! C4GradientLayer
             }
         }
-        
+
+        #if os(iOS)
         override class func layerClass() -> AnyClass {
             return C4GradientLayer.self
+        }
+        #endif
+
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+            #if os(OSX)
+            layer = C4GradientLayer()
+            wantsLayer = true
+            #endif
+        }
+
+        required init?(coder: NSCoder) {
+            super.init(coder: coder)
         }
     }
     

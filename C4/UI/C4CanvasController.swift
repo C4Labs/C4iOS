@@ -17,9 +17,13 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
+#if os(iOS)
 import UIKit
+#elseif os(OSX)
+import AppKit
+#endif
 
-public class C4CanvasController : UIViewController {
+public class C4CanvasController : NativeViewController {
     /**
     Called after the controller's view is loaded into memory.
     
@@ -28,7 +32,9 @@ public class C4CanvasController : UIViewController {
     You should **not** override this method, instead use **setup()**.
     */
     public override func viewDidLoad() {
-        canvas.backgroundColor = C4Grey
+        #if os(iOS)
+            canvas.backgroundColor = C4Grey
+        #endif
         self.setup()
     }
 
@@ -39,8 +45,10 @@ public class C4CanvasController : UIViewController {
     */
     public func setup() {
     }
-    
+
+    #if os(iOS)
     public override func prefersStatusBarHidden() -> Bool {
         return true
     }
+    #endif
 }
