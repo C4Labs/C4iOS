@@ -54,6 +54,10 @@ public class C4Line: C4Polygon {
     }
     
     override func updatePath() {
+        if pauseUpdates {
+            return
+        }
+
         if points.count > 1 {
             let p = C4Path()
             p.moveToPoint(endPoints.0)
