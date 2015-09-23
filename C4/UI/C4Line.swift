@@ -22,11 +22,7 @@ import CoreGraphics
 
 public class C4Line: C4Polygon {
     /**
-    The beginning point of the receiver. Animatable.
-    Assigning a new value to this variable will cause the head of the line to move to a new position.
-    
-        var l = C4Line([C4Point(), C4Point(100,100)])
-        l.a = C4Point(0,100)
+    The beginning and end points of the receiver. Animatable.
     */
     public var endPoints = (C4Point(), C4Point()) {
         didSet {
@@ -35,11 +31,14 @@ public class C4Line: C4Polygon {
     }
 
     /**
-    The end point of the receiver. Animatable.
-    Assigning a new value to this variable will cause the end of the line to move to a new position.
+    Initializes a new C4Polygon using the specified tuple points.
 
-        var l = C4Line([C4Point(), C4Point(100,100)])
-        l.b = C4Point(100,200)
+    let a = C4Point(100,100)
+    let b = C4Point(200,200)
+
+    let l = C4Line((a,b))
+
+    - parameter points: An array of C4Point structs.
     */
     convenience public init(begin: C4Point, end: C4Point) {
         let points = (begin,end)
@@ -52,7 +51,7 @@ public class C4Line: C4Polygon {
         path = p
         adjustToFitPath()
     }
-    
+
     override func updatePath() {
         if pauseUpdates {
             return
@@ -101,5 +100,4 @@ public class C4Line: C4Polygon {
         pauseUpdates = false
         updatePath()
     }
-
 }
