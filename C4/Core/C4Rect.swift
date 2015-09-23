@@ -84,6 +84,13 @@ public struct C4Rect : Equatable, CustomStringConvertible {
         let f = C4Rect(r)
         self.init(f.origin,f.size)
     }
+
+    public init(_ points:(C4Point,C4Point)) {
+        let r = CGRectMakeFromPoints([CGPoint(points.0),CGPoint(points.1)])
+        let f = C4Rect(r)
+        self.init(f.origin,f.size)
+    }
+
     
     //MARK: - Comparing
     /**
