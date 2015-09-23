@@ -31,7 +31,7 @@ public class C4QuadCurve : C4Curve {
     - parameter b: A single C4Point used to calculate the shape of the curve.
     - parameter c: The end point of the curve.
     */
-    convenience public init(a: C4Point, b: C4Point, c: C4Point) {
-        self.init(a: a, b: b, c: b, d: c)
+    convenience public init(begin: C4Point, control: C4Point, end: C4Point) {
+        self.init(begin: begin, control0: control, control1: control, end: end)
     }
 }

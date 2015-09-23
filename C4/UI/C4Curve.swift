@@ -80,10 +80,10 @@ public class C4Curve : C4Shape {
     - parameter c: The second control point used to define the shape of the curve.
     - parameter d: The end point of the curve.
     */
-    convenience public init(a: C4Point, b: C4Point, c: C4Point, d: C4Point) {
+    convenience public init(begin: C4Point, control0: C4Point, control1: C4Point, end: C4Point) {
         self.init()
-        endPoints = (a, d)
-        controlPoints = (c, d)
+        endPoints = (begin, end)
+        controlPoints = (control0, control1)
         updatePath()
     }
 
