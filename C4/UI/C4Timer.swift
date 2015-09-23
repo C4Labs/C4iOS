@@ -20,64 +20,12 @@
 import Foundation
 
 public class C4Timer : NSObject {
-    var timer : NSTimer!
-    var timerCanStart = false
-    var properties = [String : AnyObject]()
-
-    func setup() {
-    }
-
-    public class func timerWithTimeInterval(ti: NSTimeInterval,
-        target aTarget: AnyObject,
-        selector aSelector: Selector,
-        userInfo: AnyObject?,
-        repeats yesOrNo: Bool) -> C4Timer {
-            let timer = C4Timer(timeInterval: ti, target: aTarget, selector: aSelector, userInfo: userInfo, repeats: yesOrNo)
-            return timer
-    }
-    public convenience init(timeInterval ti: NSTimeInterval,
-        target aTarget: AnyObject,
-        selector aSelector: Selector,
-        userInfo: AnyObject?,
-        repeats yesOrNo: Bool) {
-            self.init()
-            timer = NSTimer(timeInterval: ti, target: aTarget, selector: aSelector, userInfo: userInfo, repeats: yesOrNo)
-            properties.removeAll()
-            properties["ti"] = ti
-            properties["target"] = aTarget
-            properties["selector"] = String.init(CString: sel_getName(aSelector), encoding: NSUTF8StringEncoding)
-            if let ui = userInfo {
-                properties["userInfo"] = ui
-            }
-            properties["repeats"] = yesOrNo
-            timerCanStart = true
-    }
-
-    public func fire() {
-        timer?.fire()
-    }
-
-    public func start() {
-        if let t = timer {
-            if t.valid {
-                NSRunLoop.mainRunLoop().addTimer(t, forMode: NSDefaultRunLoopMode)
-            }
-            else {
-                let ti = properties["ti"] as! NSTimeInterval
-                let target = properties["target"]
-                let selector = Selector(properties["selector"] as! String)
-                let repeats = properties["repeats"] as! Bool
-                timer = NSTimer(timeInterval: ti, target: target!, selector: selector, userInfo: properties["userInfo"], repeats: repeats)
-                timerCanStart = false
-                NSRunLoop.mainRunLoop().addTimer(timer!, forMode: NSDefaultRunLoopMode)
-            }
-        }
-    }
-
-    public func stop() {
-        timer.invalidate()
-        timerCanStart = true
-    }
+    internal var timer : NSTimer!
+    internal var timerCanStart = false
+    internal var closure : ()->()
+    internal var repeats = true
+    private(set) public var userInfo : AnyObject? = nil
+    private(set) public var timeInterval : NSTimeInterval = 0.0
 
     public var valid : Bool {
         get {
@@ -85,24 +33,40 @@ public class C4Timer : NSObject {
         }
     }
 
-    public var fireDate : NSDate {
-        get {
-            return timer.fireDate
-        } set {
-            timer.fireDate = newValue
+    public init(interval:Double, userInfo: AnyObject? = nil, repeats: Bool = true, closure:()->()) {
+        self.closure = closure
+        self.timeInterval = interval
+        self.repeats = repeats
+        self.userInfo = userInfo
+        super.init()
+        timer = NSTimer(timeInterval: timeInterval, target: self, selector: "execute", userInfo: userInfo, repeats: repeats)
+        self.timerCanStart = true
+    }
+
+    public func execute() {
+        closure()
+    }
+
+    public func fire() {
+        timer?.fire()
+    }
+
+    public func start() {
+        if timerCanStart {
+            if let t = timer where timer!.valid {
+                NSRunLoop.mainRunLoop().addTimer(t, forMode: NSDefaultRunLoopMode)
+            }
+            else {
+                timer = NSTimer(timeInterval: timeInterval, target: self, selector: "execute", userInfo:userInfo, repeats: repeats)
+                NSRunLoop.mainRunLoop().addTimer(timer!, forMode: NSDefaultRunLoopMode)
+            }
+            timerCanStart = false
         }
     }
 
-    public var timeInterval : NSTimeInterval {
-        get {
-            return timer.timeInterval
-        }
-    }
-
-    public var userInfo : AnyObject? {
-        get {
-            return timer.userInfo
-        }
+    public func stop() {
+        timer.invalidate()
+        timerCanStart = true
     }
 
     public func invalidate() {
