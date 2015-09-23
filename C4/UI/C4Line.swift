@@ -88,36 +88,6 @@ public class C4Line: C4Polygon {
         }
     }
 
-    /**
-    Initializes a new C4Polygon using the specified array of points.
-
-    Protects against trying to create a polygon with only 1 point (i.e. requires 2 points).
-    Trims point array if count > 2.
-
-    let a = C4Point(100,100)
-    let b = C4Point(200,200)
-
-    let l = C4Line([a,b])
-
-    - parameter points: An array of C4Point structs.
-    */
-    convenience public init(var _ points: [C4Point]) {
-
-        if points.count > 2 {
-            repeat {
-                points.removeLast()
-            } while points.count > 2
-        }
-
-        self.init(frame: C4Rect(points))
-        let path = C4Path()
-        self.points = points
-        path.moveToPoint(points[0])
-        for i in 1..<points.count {
-            path.addLineToPoint(points[i])
-        }
-        self.path = path
-        adjustToFitPath()
     }
 
 }
