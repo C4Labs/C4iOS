@@ -21,6 +21,12 @@ import QuartzCore
 import UIKit
 
 public class C4QuadCurve : C4Curve {
+    public var controlPoint = C4Point() {
+        didSet {
+            self.controlPoints = (controlPoint,controlPoint)
+        }
+    }
+
     /**
     Initializes a new C4QuadCurve.
 
