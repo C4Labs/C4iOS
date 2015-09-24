@@ -32,38 +32,6 @@ public class C4Line: C4Polygon {
         }
     }
 
-    /**
-    The beginning point of the receiver. Animatable.
-    Assigning a new value to this variable will cause the head of the line to move to a new position.
-    
-        var l = C4Line([C4Point(), C4Point(100,100)])
-        l.a = C4Point(0,100)
-    */
-    public var a: C4Point {
-        get {
-            return points[0]
-        } set(val) {
-            points[0] = val
-            updatePath()
-        }
-    }
-
-    /**
-    The end point of the receiver. Animatable.
-    Assigning a new value to this variable will cause the end of the line to move to a new position.
-
-        var l = C4Line([C4Point(), C4Point(100,100)])
-        l.b = C4Point(100,200)
-    */
-    public var b: C4Point {
-        get {
-            return points[1]
-        } set(val) {
-            points[1] = val
-            updatePath()
-        }
-    }
-    
     override func updatePath() {
         if pauseUpdates {
             return
@@ -90,7 +58,6 @@ public class C4Line: C4Polygon {
             }
         }
     }
-
 
     public override var origin : C4Point {
         get {
