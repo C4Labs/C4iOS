@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F8252CC1BB3C65E0090E98A /* C4Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8252CB1BB3C65E0090E98A /* C4Timer.swift */; settings = {ASSET_TAGS = (); }; };
 		A94E3BD419E0E9390039A9C4 /* C4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 614F824319DB5ED3001DF1D4 /* C4.framework */; };
 		A96F4F451B538330002B3A46 /* C4ColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D401A054B4F0023323D /* C4ColorTests.swift */; };
 		A96F4F461B538330002B3A46 /* C4MathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D411A054B4F0023323D /* C4MathTests.swift */; };
@@ -121,6 +122,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1F8252CB1BB3C65E0090E98A /* C4Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Timer.swift; sourceTree = "<group>"; };
 		1F8CB1D91A05781700A20783 /* C4RectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4RectTests.swift; sourceTree = "<group>"; };
 		614F824319DB5ED3001DF1D4 /* C4.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = C4.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		614F824E19DB5ED4001DF1D4 /* C4Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = C4Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -350,6 +352,7 @@
 				A9D4F6951B534F9F00F937AB /* C4ShapeLayer.swift */,
 				A9D4F6961B534F9F00F937AB /* C4Star.swift */,
 				A9D4F6971B534F9F00F937AB /* C4TextShape.swift */,
+				1F8252CB1BB3C65E0090E98A /* C4Timer.swift */,
 				A9D4F6981B534F9F00F937AB /* C4Triangle.swift */,
 				A9D4F6991B534F9F00F937AB /* C4View+Animation.swift */,
 				A9D4F69A1B534F9F00F937AB /* C4View+Border.swift */,
@@ -563,6 +566,7 @@
 				A9D4F6C31B534F9F00F937AB /* C4Generator.swift in Sources */,
 				A9D4F6CF1B534F9F00F937AB /* C4Shape.swift in Sources */,
 				A9D4F6CC1B534F9F00F937AB /* C4Rectangle.swift in Sources */,
+				1F8252CC1BB3C65E0090E98A /* C4Timer.swift in Sources */,
 				A9D4F6B41B534F9F00F937AB /* C4Rect.swift in Sources */,
 				A9D4F6E11B534F9F00F937AB /* C4Sepia.swift in Sources */,
 				A9D4F6BD1B534F9F00F937AB /* C4CanvasController.swift in Sources */,
