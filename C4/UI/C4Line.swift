@@ -22,69 +22,59 @@ import CoreGraphics
 
 public class C4Line: C4Polygon {
     /**
-    The beginning point of the receiver. Animatable.
-    Assigning a new value to this variable will cause the head of the line to move to a new position.
-    
-        var l = C4Line([C4Point(), C4Point(100,100)])
-        l.a = C4Point(0,100)
+    Returns a tuple of points that make up the the begin and end points of the line.
+
+    Assigning a tuple of C4Point values to this object will cause the receiver to update itself.
     */
-    public var a: C4Point {
-        get {
-            return points[0]
-        } set(val) {
-            points[0] = val
+    public var endPoints: (C4Point,C4Point) = (C4Point(),C4Point(100,0)){
+        didSet {
             updatePath()
         }
     }
 
-    /**
-    The end point of the receiver. Animatable.
-    Assigning a new value to this variable will cause the end of the line to move to a new position.
-
-        var l = C4Line([C4Point(), C4Point(100,100)])
-        l.b = C4Point(100,200)
-    */
-    public var b: C4Point {
-        get {
-            return points[1]
-        } set(val) {
-            points[1] = val
-            updatePath()
-        }
-    }
-    
     override func updatePath() {
+        if pauseUpdates {
+            return
+        }
+
         if points.count > 1 {
             let p = C4Path()
-            p.moveToPoint(points[0])
-            p.addLineToPoint(points[1])
+            p.moveToPoint(endPoints.0)
+            p.addLineToPoint(endPoints.1)
             path = p
             adjustToFitPath()
         }
     }
 
+    /**
+    Returns the receiver's center. Animatable.
+    */
     public override var center : C4Point {
         get {
             return C4Point(view.center)
         }
         set {
-            let diff = newValue - self.center
-            let newA = a + diff
-            let newB = b + diff
-            self.points = [newA, newB]
+            let diff = newValue - center
+            batchUpdates() {
+                self.endPoints.0 += diff
+                self.endPoints.1 += diff
+            }
         }
     }
 
-
+    /**
+    Returns the receiver's origin. Animatable.
+    */
     public override var origin : C4Point {
         get {
             return C4Point(view.frame.origin)
         }
         set {
-            let diff = newValue - self.origin
-            let newA = a + diff
-            let newB = b + diff
-            self.points = [newA, newB]
+            let diff = newValue - origin
+            batchUpdates() {
+                self.endPoints.0 += diff
+                self.endPoints.1 += diff
+            }
         }
     }
 
@@ -120,4 +110,49 @@ public class C4Line: C4Polygon {
         adjustToFitPath()
     }
 
+    /**
+    Initializes a new C4Line using the specified tuple of points.
+
+
+    let a = C4Point(100,100)
+    let b = C4Point(200,200)
+
+    let l = C4Line((a,b))
+
+    - parameter points: An tuple of C4Point structs.
+    */
+    convenience public init(_ points: (C4Point, C4Point)) {
+        self.init(frame: C4Rect(points))
+        let path = C4Path()
+        self.endPoints = points
+        path.moveToPoint(endPoints.0)
+        path.addLineToPoint(endPoints.1)
+        self.path = path
+        adjustToFitPath()
+    }
+
+    /**
+    Initializes a new C4Line using two specified points.
+
+
+    let a = C4Point(100,100)
+    let b = C4Point(200,200)
+
+    let l = C4Line(begin: a, end: b)
+
+    - parameter begin: The start point of the line.
+    - parameter end: The end point of the line.
+    */
+    convenience public init(begin: C4Point, end: C4Point) {
+        let points = (begin,end)
+        self.init(points)
+    }
+
+    private var pauseUpdates = false
+    func batchUpdates(updates: Void -> Void) {
+        pauseUpdates = true
+        updates()
+        pauseUpdates = false
+        updatePath()
+    }
 }
