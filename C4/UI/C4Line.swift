@@ -22,42 +22,45 @@ import CoreGraphics
 
 public class C4Line: C4Polygon {
     /**
-    The beginning point of the receiver. Animatable.
-    Assigning a new value to this variable will cause the head of the line to move to a new position.
-    
-        var l = C4Line([C4Point(), C4Point(100,100)])
-        l.a = C4Point(0,100)
+    The beginning and end points of the receiver. Animatable.
     */
-    public var a: C4Point {
-        get {
-            return points[0]
-        } set(val) {
-            points[0] = val
+    public var endPoints = (C4Point(), C4Point()) {
+        didSet {
             updatePath()
         }
     }
 
     /**
-    The end point of the receiver. Animatable.
-    Assigning a new value to this variable will cause the end of the line to move to a new position.
+    Initializes a new C4Polygon using the specified tuple points.
 
-        var l = C4Line([C4Point(), C4Point(100,100)])
-        l.b = C4Point(100,200)
+    let a = C4Point(100,100)
+    let b = C4Point(200,200)
+
+    let l = C4Line((a,b))
+
+    - parameter points: An array of C4Point structs.
     */
-    public var b: C4Point {
-        get {
-            return points[1]
-        } set(val) {
-            points[1] = val
-            updatePath()
-        }
+    convenience public init(begin: C4Point, end: C4Point) {
+        let points = (begin,end)
+        self.init(frame: C4Rect(points))
+        self.endPoints = points
+
+        let p = C4Path()
+        p.moveToPoint(endPoints.0)
+        p.addLineToPoint(endPoints.1)
+        path = p
+        adjustToFitPath()
     }
-    
+
     override func updatePath() {
+        if pauseUpdates {
+            return
+        }
+
         if points.count > 1 {
             let p = C4Path()
-            p.moveToPoint(points[0])
-            p.addLineToPoint(points[1])
+            p.moveToPoint(endPoints.0)
+            p.addLineToPoint(endPoints.1)
             path = p
             adjustToFitPath()
         }
@@ -68,10 +71,11 @@ public class C4Line: C4Polygon {
             return C4Point(view.center)
         }
         set {
-            let diff = newValue - self.center
-            let newA = a + diff
-            let newB = b + diff
-            self.points = [newA, newB]
+            let diff = newValue - center
+            batchUpdates() {
+                self.endPoints.0 += diff
+                self.endPoints.1 += diff
+            }
         }
     }
 
@@ -81,43 +85,19 @@ public class C4Line: C4Polygon {
             return C4Point(view.frame.origin)
         }
         set {
-            let diff = newValue - self.origin
-            let newA = a + diff
-            let newB = b + diff
-            self.points = [newA, newB]
+            let diff = newValue - origin
+            batchUpdates() {
+                self.endPoints.0 += diff
+                self.endPoints.1 += diff
+            }
         }
     }
 
-    /**
-    Initializes a new C4Polygon using the specified array of points.
-
-    Protects against trying to create a polygon with only 1 point (i.e. requires 2 points).
-    Trims point array if count > 2.
-
-    let a = C4Point(100,100)
-    let b = C4Point(200,200)
-
-    let l = C4Line([a,b])
-
-    - parameter points: An array of C4Point structs.
-    */
-    convenience public init(var _ points: [C4Point]) {
-
-        if points.count > 2 {
-            repeat {
-                points.removeLast()
-            } while points.count > 2
-        }
-
-        self.init(frame: C4Rect(points))
-        let path = C4Path()
-        self.points = points
-        path.moveToPoint(points[0])
-        for i in 1..<points.count {
-            path.addLineToPoint(points[i])
-        }
-        self.path = path
-        adjustToFitPath()
+    private var pauseUpdates = false
+    func batchUpdates(updates: Void -> Void) {
+        pauseUpdates = true
+        updates()
+        pauseUpdates = false
+        updatePath()
     }
-
 }
