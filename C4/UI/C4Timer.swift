@@ -19,12 +19,12 @@
 
 import Foundation
 
-final public class C4Timer : NSObject {
-    public private(set) var step = 0
-    public private(set) var count = Int.max
-    public private(set) var interval: Double = 0.0
-    private var action: () -> ()
-    private weak var timer: NSTimer?
+public final class C4Timer : NSObject {
+    public internal(set) var step = 0
+    public internal(set) var count: Int
+    public internal(set) var interval: Double
+    var action: () -> ()
+    weak var timer: NSTimer?
 
     public init(interval: Double, count: Int = Int.max, action: () -> ()) {
         self.action = action
