@@ -65,10 +65,14 @@ public class C4Line: C4Polygon {
     }
     
     override func updatePath() {
+        if pauseUpdates {
+            return
+        }
+
         if points.count > 1 {
             let p = C4Path()
-            p.moveToPoint(points[0])
-            p.addLineToPoint(points[1])
+            p.moveToPoint(endPoints.0)
+            p.addLineToPoint(endPoints.1)
             path = p
             adjustToFitPath()
         }
