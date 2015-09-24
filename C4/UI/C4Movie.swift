@@ -26,7 +26,7 @@ public class C4Movie: C4View {
     internal var statusContext = 0
     internal var player : AVQueuePlayer = AVQueuePlayer()
     internal var currentItem : AVPlayerItem?
-    
+    internal var reachedEndClosure : ()->() = {}
     internal class MovieView : UIView {
         
         var movieLayer: AVPlayerLayer {
@@ -78,7 +78,7 @@ public class C4Movie: C4View {
         
         //runs an overrideable method for handling the end of the movie
         on(event: AVPlayerItemDidPlayToEndTimeNotification) {
-            self.reachedEnd()
+            self.reachedEndClosure()
         }
         
         //movie view's player
@@ -86,6 +86,13 @@ public class C4Movie: C4View {
         movieLayer.videoGravity = AVLayerVideoGravityResize
 
         _originalSize = self.size
+
+        reachedEndClosure = {
+            if self.loops {
+                self.stop()
+                self.play()
+            }
+        }
     }
     
     /**
@@ -133,10 +140,13 @@ public class C4Movie: C4View {
     
     Default behaviour: if the movie should loop then the method calls `stop()` and `play()`.
     */
-    public func reachedEnd() {
-        if loops {
-            stop()
-            play()
+    public func reachedEnd(closure: ()->()) {
+        reachedEndClosure = {
+            if self.loops {
+                self.stop()
+                self.play()
+            }
+            closure()
         }
     }
     
