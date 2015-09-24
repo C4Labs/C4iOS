@@ -29,7 +29,8 @@ public class C4Movie: C4View {
     Assigning a value of true to this property will cause the receiver to loop at the end of playback.
 
     The default value of this property is `true`.
-    */    public var loops : Bool = true
+    */
+    public var loops : Bool = true
 
     /**
     A variable that provides access to the width of the receiver. Animatable.
@@ -99,8 +100,6 @@ public class C4Movie: C4View {
     var movieView: MovieView {
         return self.view as! MovieView
     }
-
-
 
     class MovieView : UIView {
 
@@ -219,8 +218,6 @@ public class C4Movie: C4View {
             self.stop()
             self.play()
         }
-        if let action = reachedEndAction {
-            action()
-        }
+        reachedEndAction?()
     }
 }
