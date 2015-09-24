@@ -22,6 +22,17 @@ import CoreGraphics
 
 public class C4Line: C4Polygon {
     /**
+    Returns a tuple of points that make up the the begin and end points of the line.
+
+    Assigning a tuple of C4Point values to this object will cause the receiver to update itself.
+    */
+    public var endPoints: (C4Point,C4Point) = (C4Point(),C4Point(100,0)){
+        didSet {
+            updatePath()
+        }
+    }
+
+    /**
     The beginning point of the receiver. Animatable.
     Assigning a new value to this variable will cause the head of the line to move to a new position.
     
