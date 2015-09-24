@@ -199,7 +199,7 @@
 		614F824E19DB5ED4001DF1D4 /* C4Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = C4Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		61511E711BB2597B0063B9AA /* C4OS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4OS.swift; sourceTree = "<group>"; };
 		61511E741BB25BD50063B9AA /* C4View+Gestures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "C4View+Gestures.swift"; sourceTree = "<group>"; };
-		61511E7C1BB2755D0063B9AA /* C4Tests (OSX).xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "C4Tests (OSX).xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		61511E7C1BB2755D0063B9AA /* C4Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = C4Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9596D291A054A960023323D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A9596D401A054B4F0023323D /* C4ColorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4ColorTests.swift; sourceTree = "<group>"; };
 		A9596D411A054B4F0023323D /* C4MathTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4MathTests.swift; sourceTree = "<group>"; };
@@ -334,7 +334,7 @@
 				614F824E19DB5ED4001DF1D4 /* C4Tests.xctest */,
 				A96F505A1B5385A5002B3A46 /* C4App.app */,
 				6114EDBC1BA4B36700A29541 /* C4.framework */,
-				61511E7C1BB2755D0063B9AA /* C4Tests (OSX).xctest */,
+				61511E7C1BB2755D0063B9AA /* C4Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -566,7 +566,7 @@
 			);
 			name = "C4Tests (OSX)";
 			productName = "C4Tests (OSX)";
-			productReference = 61511E7C1BB2755D0063B9AA /* C4Tests (OSX).xctest */;
+			productReference = 61511E7C1BB2755D0063B9AA /* C4Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		A96F50591B5385A5002B3A46 /* C4App */ = {
@@ -1103,7 +1103,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.c4ios.C4Tests--OSX-";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = C4Tests;
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -1119,7 +1119,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.c4ios.C4Tests--OSX-";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = C4Tests;
 				SDKROOT = macosx;
 			};
 			name = Release;
