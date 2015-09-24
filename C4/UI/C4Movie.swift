@@ -17,135 +17,13 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-import QuartzCore
 import UIKit
 import AVFoundation
-import CoreMedia
 
 public class C4Movie: C4View {
-    internal var statusContext = 0
-    internal var player : AVQueuePlayer = AVQueuePlayer()
-    internal var currentItem : AVPlayerItem?
-    private(set) public var duration: Double = 0.0
-
-    internal class MovieView : UIView {
-        
-        var movieLayer: AVPlayerLayer {
-            get {
-                return self.layer as! AVPlayerLayer
-            }
-        }
-        
-        override class func layerClass() -> AnyClass {
-            return AVPlayerLayer.self
-        }
-    }
-    
-    internal var movieLayer: AVPlayerLayer {
-        get {
-            return self.movieView.movieLayer
-        }
-    }
-    
-    internal var movieView: MovieView {
-        return self.view as! MovieView
-    }
-    
-    /**
-    Initializes a new C4Movie using the specified filename from the bundle (i.e. your project).
-    
-    - parameter name:	The name of the movie file included in your project.
-    */
-    convenience public init(_ filename: String) {
-        //grab url for movie file
-
-        let url = NSBundle.mainBundle().URLForResource(filename, withExtension: nil)
-        
-        assert(url != nil, "Could not locate movie with the given filename: \(filename)")
-        
-        //create asset from url
-        let asset = AVAsset(URL: url!)
-        let tracks = asset.tracksWithMediaType(AVMediaTypeVideo)
-
-        //grab the movie track and size
-        let movieTrack = tracks[0]
-        let size = C4Size(movieTrack.naturalSize)
-        
-        self.init(frame: C4Rect(0,0,Double(size.width),Double(size.height)))
-        duration = Double(CMTimeGetSeconds(asset.duration))
-
-        //initialize player with item
-        player = AVQueuePlayer(playerItem: AVPlayerItem(asset: asset))
-        player.actionAtItemEnd = .Pause
-        currentItem = player.currentItem
-        
-        //runs an overrideable method for handling the end of the movie
-        on(event: AVPlayerItemDidPlayToEndTimeNotification) {
-            self.reachedEnd()
-        }
-
-        //movie view's player
-        movieLayer.player = player
-        movieLayer.videoGravity = AVLayerVideoGravityResize
-
-        _originalSize = self.size
-    }
-    
-    /**
-    Initializes a new C4Movie using the specified frame.
-    
-    - parameter frame:	The frame of the new movie object.
-    */
-    convenience public init(frame: C4Rect) {
-        self.init()
-        self.view = MovieView(frame: CGRect(frame))
-    }
-    
-    /**
-    Begins playback of the current item.
-    
-    This is the same as setting rate to 1.0.
-    */
-    public func play() {
-        player.play()
-    }
-    
-    /**
-    Pauses playback.
-    
-    This is the same as setting rate to 0.0.
-    */
-    public func pause() {
-        player.pause()
-    }
-    
-    /**
-    Stops playback.
-    
-    This is the same as setting rate to 0.0 and resetting the current time to 0.
-    */
-    public func stop() {
-        player.seekToTime(CMTimeMake(0,1))
-        player.pause()
-    }
-    
-    /**
-    Called at the end of playback (i.e. when the movie reaches its end).
-    
-    You can override this function to add your own custom actions.
-    
-    Default behaviour: if the movie should loop then the method calls `stop()` and `play()`.
-    */
-    public func reachedEnd() {
-        if loops {
-            stop()
-            play()
-        }
-    }
-
-    public func seekTo(time: Double) {
-        player.seekToTime(CMTime(seconds: time, preferredTimescale: 600))
-    }
+    var player : AVQueuePlayer?
+    var currentItem : AVPlayerItem?
+    var reachedEndAction : (()->())?
 
     /**
     Assigning a value of true to this property will cause the receiver to loop at the end of playback.
@@ -164,8 +42,7 @@ public class C4Movie: C4View {
         } set(val) {
             var newSize = C4Size(val,height)
             if constrainsProportions {
-                let ratio = Double(height / width)
-                newSize.height = val * ratio
+                newSize.height = val * height / width
             }
             var rect = self.frame
             rect.size = newSize
@@ -202,19 +79,148 @@ public class C4Movie: C4View {
     /**
     The original size of the receiver when it was initialized.
     */
-    internal var _originalSize : C4Size = C4Size()
-    public var originalSize : C4Size {
-        get {
-            return _originalSize
-        }
-    }
+    public internal(set) var originalSize : C4Size = C4Size(1,1)
 
     /**
     The original width/height ratio of the receiver when it was initialized.
     */
     public var originalRatio : Double {
         get {
-            return _originalSize.width / _originalSize.height
+            return originalSize.width / originalSize.height
+        }
+    }
+
+    var movieLayer: AVPlayerLayer {
+        get {
+            return self.movieView.movieLayer
+        }
+    }
+
+    var movieView: MovieView {
+        return self.view as! MovieView
+    }
+
+
+
+    class MovieView : UIView {
+
+        var movieLayer: AVPlayerLayer {
+            get {
+                return self.layer as! AVPlayerLayer
+            }
+        }
+
+        override class func layerClass() -> AnyClass {
+            return AVPlayerLayer.self
+        }
+    }
+
+    /**
+    Initializes a new C4Movie using the specified filename from the bundle (i.e. your project).
+
+    - parameter name:	The name of the movie file included in your project.
+    */
+    convenience public init(_ filename: String) {
+        //grab url for movie file
+
+        let url = NSBundle.mainBundle().URLForResource(filename, withExtension: nil)
+        assert(url != nil, "Could not locate movie with the given filename: \(filename)")
+        //create asset from url
+
+        let asset = AVAsset(URL: url!)
+        let tracks = asset.tracksWithMediaType(AVMediaTypeVideo)
+
+        //grab the movie track and size
+        let movieTrack = tracks[0]
+        let size = C4Size(movieTrack.naturalSize)
+
+        self.init(frame: C4Rect(0,0,Double(size.width),Double(size.height)))
+        //initialize player with item
+        let newPlayer = AVQueuePlayer(playerItem: AVPlayerItem(asset: asset))
+        newPlayer.actionAtItemEnd = .Pause
+        currentItem = newPlayer.currentItem
+        player = newPlayer
+
+        //runs an overrideable method for handling the end of the movie
+        on(event: AVPlayerItemDidPlayToEndTimeNotification) {
+            self.handleReachedEnd()
+        }
+
+        //movie view's player
+        movieLayer.player = player
+        movieLayer.videoGravity = AVLayerVideoGravityResize
+
+        originalSize = self.size
+    }
+
+    /**
+    Initializes a new C4Movie using the specified frame.
+
+    - parameter frame:	The frame of the new movie object.
+    */
+    convenience public init(frame: C4Rect) {
+        self.init()
+        self.view = MovieView(frame: CGRect(frame))
+    }
+
+    /**
+    Begins playback of the current item.
+
+    This is the same as setting rate to 1.0.
+    */
+    public func play() {
+        guard let p = player else {
+            print("The current movie's player is not properly initialized")
+            return
+        }
+        p.play()
+    }
+
+    /**
+    Pauses playback.
+
+    This is the same as setting rate to 0.0.
+    */
+    public func pause() {
+        guard let p = player else {
+            print("The current movie's player is not properly initialized")
+            return
+        }
+        p.pause()
+    }
+
+    /**
+    Stops playback.
+
+    This is the same as setting rate to 0.0 and resetting the current time to 0.
+    */
+    public func stop() {
+        guard let p = player else {
+            print("The current movie's player is not properly initialized")
+            return
+        }
+        p.seekToTime(CMTimeMake(0,1))
+        p.pause()
+    }
+
+    /**
+    Called at the end of playback (i.e. when the movie reaches its end).
+
+    You can override this function to add your own custom actions.
+
+    Default behaviour: if the movie should loop then the method calls `stop()` and `play()`.
+    */
+    public func reachedEnd(action: ()->()) {
+        reachedEndAction = action
+    }
+
+    public func handleReachedEnd() {
+        if self.loops {
+            self.stop()
+            self.play()
+        }
+        if let action = reachedEndAction {
+            action()
         }
     }
 }
