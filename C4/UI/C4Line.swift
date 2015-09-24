@@ -131,4 +131,25 @@ public class C4Line: C4Polygon {
         adjustToFitPath()
     }
 
+    /**
+    Initializes a new C4Line using the specified tuple of points.
+
+
+    let a = C4Point(100,100)
+    let b = C4Point(200,200)
+
+    let l = C4Line((a,b))
+
+    - parameter points: An tuple of C4Point structs.
+    */
+    convenience public init(_ points: (C4Point, C4Point)) {
+        self.init(frame: C4Rect(points))
+        let path = C4Path()
+        self.endPoints = points
+        path.moveToPoint(endPoints.0)
+        path.addLineToPoint(endPoints.1)
+        self.path = path
+        adjustToFitPath()
+    }
+
 }
