@@ -84,6 +84,20 @@ public struct C4Rect : Equatable, CustomStringConvertible {
         let f = C4Rect(r)
         self.init(f.origin,f.size)
     }
+
+    /**
+    Returns a rectangle that contains the specified coordinates in a tuple.
+
+    let pts = (C4Point(), C4Point(0,5))
+    let r = C4Rect(pts)
+
+    - parameter points: An tuple of C4Point coordinates
+    */
+    public init(_ points: (C4Point, C4Point)) {
+        let r = CGRectMakeFromPoints([CGPoint(points.0),CGPoint(points.1)])
+        let f = C4Rect(r)
+        self.init(f.origin,f.size)
+    }
     
     //MARK: - Comparing
     /**
