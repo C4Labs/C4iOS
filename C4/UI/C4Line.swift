@@ -152,4 +152,11 @@ public class C4Line: C4Polygon {
         adjustToFitPath()
     }
 
+    private var pauseUpdates = false
+    func batchUpdates(updates: Void -> Void) {
+        pauseUpdates = true
+        updates()
+        pauseUpdates = false
+        updatePath()
+    }
 }
