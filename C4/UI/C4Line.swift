@@ -156,6 +156,11 @@ public class C4Line: C4Polygon {
         adjustToFitPath()
     }
 
+    convenience public init(begin: C4Point, end: C4Point) {
+        let points = (begin,end)
+        self.init(points)
+    }
+
     private var pauseUpdates = false
     func batchUpdates(updates: Void -> Void) {
         pauseUpdates = true
