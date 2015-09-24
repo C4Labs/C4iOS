@@ -46,6 +46,9 @@ public class C4Line: C4Polygon {
         }
     }
 
+    /**
+    Returns the receiver's center. Animatable.
+    */
     public override var center : C4Point {
         get {
             return C4Point(view.center)
@@ -59,6 +62,9 @@ public class C4Line: C4Polygon {
         }
     }
 
+    /**
+    Returns the receiver's origin. Animatable.
+    */
     public override var origin : C4Point {
         get {
             return C4Point(view.frame.origin)
@@ -125,6 +131,18 @@ public class C4Line: C4Polygon {
         adjustToFitPath()
     }
 
+    /**
+    Initializes a new C4Line using two specified points.
+
+
+    let a = C4Point(100,100)
+    let b = C4Point(200,200)
+
+    let l = C4Line(begin: a, end: b)
+
+    - parameter begin: The start point of the line.
+    - parameter end: The end point of the line.
+    */
     convenience public init(begin: C4Point, end: C4Point) {
         let points = (begin,end)
         self.init(points)
