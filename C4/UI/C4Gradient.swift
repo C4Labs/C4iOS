@@ -20,7 +20,7 @@
 import UIKit
 
 public class C4Gradient : C4View {
-    internal class GradientView : UIView {
+    class GradientView : UIView {
         var gradientLayer: C4GradientLayer {
             get {
                 return self.layer as! C4GradientLayer
@@ -38,29 +38,10 @@ public class C4Gradient : C4View {
         }
     }
     
-    internal var gradientView: GradientView {
+    var gradientView: GradientView {
         return self.view as! GradientView
     }
-    
-    public convenience init(frame: C4Rect) {
-        self.init()
-        self.view.frame = CGRect(frame)
-    }
-    
-    public override init() {
-        super.init()
-        self.view = GradientView()
-        self.colors = [C4Blue,C4Pink]
-        self.locations = [0]
-    }
-    
-    public convenience init(frame: C4Rect, colors: [C4Color], locations: [Double]) {
-        assert(colors.count == locations.count, "colors and locations need to have the same number of elements")
-        self.init(frame: frame)
-        self.colors = colors
-        self.locations = locations
-    }
-    
+
     public var colors : [C4Color] {
         get {
             if let cgcolors = gradientLayer.colors as? [CGColorRef] {
@@ -107,5 +88,13 @@ public class C4Gradient : C4View {
         } set {
             gradientLayer.endPoint = CGPoint(newValue)
         }
+    }
+
+    public convenience init(frame: C4Rect, colors: [C4Color] = [C4Blue, C4Purple], locations: [Double] = [0,1]) {
+        assert(colors.count == locations.count, "colors and locations need to have the same number of elements")
+        self.init()
+        self.view = GradientView(frame: CGRect(frame))
+        self.colors = colors
+        self.locations = locations
     }
 }
