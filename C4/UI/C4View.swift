@@ -373,6 +373,25 @@ public class C4View : NSObject {
         }
     }
 
+    //MARK: - AddRemoveSubview
+    /**
+    Adds an array of views to the end of the receiver’s list of subviews.
+
+    When working with C4, use this method to add views because it handles the addition of both UIView and C4View.
+
+    let v = C4View(frame: C4Rect(0,0,100,100))
+    let subv1 = C4View(frame: C4Rect(25,25,50,50))
+    let subv2 = C4View(frame: C4Rect(100,25,50,50))
+    v.add([subv1,subv2])
+
+    - parameter view:	The view to be added.
+    */
+    public func add<T>(subviews: [T?]) {
+        for subv in subviews {
+            self.add(subv)
+        }
+    }
+
     /**
     Unlinks the view from the receiver and its window, and removes it from the responder chain.
     
@@ -515,6 +534,25 @@ extension UIView {
             self.addSubview(v.view)
         } else {
             fatalError("Can't add subview of class `\(subview.dynamicType)`")
+        }
+    }
+
+    //MARK: - AddRemoveSubview
+    /**
+    Adds an array of views to the end of the receiver’s list of subviews.
+
+    When working with C4, use this method to add views because it handles the addition of both UIView and C4View.
+
+    let v = C4View(frame: C4Rect(0,0,100,100))
+    let subv1 = C4View(frame: C4Rect(25,25,50,50))
+    let subv2 = C4View(frame: C4Rect(100,25,50,50))
+    v.add([subv1,subv2])
+
+    - parameter view:	The view to be added.
+    */
+    public func add<T>(subviews: [T?]) {
+        for subv in subviews {
+            self.add(subv)
         }
     }
     
