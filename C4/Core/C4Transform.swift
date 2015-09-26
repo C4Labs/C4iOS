@@ -95,11 +95,11 @@ public struct C4Transform : Equatable {
     */
     public var translation: C4Vector {
         get {
-            return C4Vector(x: self[0, 3], y: self[1, 3])
+            return C4Vector(x: self[3,0], y: self[3, 1])
         }
         set {
-            self[0, 3] = newValue.x
-            self[1, 3] = newValue.y
+            self[3, 0] = newValue.x
+            self[3, 1] = newValue.y
         }
     }
 
