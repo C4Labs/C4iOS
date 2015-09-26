@@ -69,8 +69,8 @@ public struct C4Point : Equatable, CustomStringConvertible {
     - parameter t:   A C4Transform to apply to the point
     */
     public mutating func transform(t: C4Transform) {
-        x = x * t[0, 0] + y * t[0, 1] + t[0, 3]
-        y = x * t[1, 0] + y * t[1, 1] + t[1, 3]
+        x = x * t[0, 0] + y * t[0, 1] + t[3, 0]
+        y = x * t[1, 0] + y * t[1, 1] + t[3, 1]
     }
     
     /**
