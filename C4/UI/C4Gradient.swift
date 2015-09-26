@@ -20,7 +20,7 @@
 import UIKit
 
 public class C4Gradient : C4View {
-    internal class GradientView : UIView {
+    class GradientView : UIView {
         var gradientLayer: C4GradientLayer {
             get {
                 return self.layer as! C4GradientLayer
@@ -38,40 +38,27 @@ public class C4Gradient : C4View {
         }
     }
     
-    internal var gradientView: GradientView {
+    var gradientView: GradientView {
         return self.view as! GradientView
     }
-    
-    public convenience init(frame: C4Rect) {
-        self.init()
-        self.view.frame = CGRect(frame)
-    }
-    
-    public override init() {
-        super.init()
-        self.view = GradientView()
-        self.colors = [C4Blue,C4Pink]
-        self.locations = [0]
-    }
-    
-    public convenience init(frame: C4Rect, colors: [C4Color], locations: [Double]) {
-        self.init(frame: frame)
-        self.colors = colors
-        self.locations = locations
-    }
-    
+
     public var colors : [C4Color] {
         get {
             if let cgcolors = gradientLayer.colors as? [CGColorRef] {
-                return [C4Color(cgcolors[0]),C4Color(cgcolors[1])]
+                var array = [C4Color]()
+                for c in cgcolors {
+                    array.append(C4Color(c))
+                }
+                return array
             }
             return [C4Blue,C4Pink]
         } set {
-            assert(newValue.count == 2)
-            if let c1 : C4Color = newValue.first,
-                let c2 : C4Color = newValue.last {
-                    self.gradientLayer.colors = [c1.CGColor,c2.CGColor]
+            assert(newValue.count >= 2, "colors must have at least 2 elements")
+            var cgcolors = [CGColorRef]()
+            for c in newValue {
+                cgcolors.append(c.CGColor)
             }
+            self.gradientLayer.colors = cgcolors
         }
     }
     
@@ -101,5 +88,13 @@ public class C4Gradient : C4View {
         } set {
             gradientLayer.endPoint = CGPoint(newValue)
         }
+    }
+
+    public convenience init(frame: C4Rect, colors: [C4Color] = [C4Blue, C4Purple], locations: [Double] = [0,1]) {
+        assert(colors.count == locations.count, "colors and locations need to have the same number of elements")
+        self.init()
+        self.view = GradientView(frame: CGRect(frame))
+        self.colors = colors
+        self.locations = locations
     }
 }
