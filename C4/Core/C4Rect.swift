@@ -23,7 +23,21 @@ import CoreGraphics
 public struct C4Rect : Equatable, CustomStringConvertible {
     public var origin: C4Point
     public var size: C4Size
-    
+    public var width : Double {
+        get {
+            return size.width
+        } set {
+            size.width = newValue
+        }
+    }
+    public var height : Double {
+        get {
+            return size.height
+        } set {
+            size.height = newValue
+        }
+    }
+
     /**
     Initializes a new C4Rect with the origin {0,0} and the size {0,0}
     
