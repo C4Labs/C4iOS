@@ -74,7 +74,7 @@ Linear mapping. Maps a value in the source range [min, max] to a value in the ta
 - returns: The mapped value.
 */
 public func map(val: Double, min: Double, max: Double, toMin: Double, toMax: Double) -> Double {
-    let param = val / (max - min) - min
+    let param = (val - min)/(max -  min)
     return lerp(a: toMin, b: toMax, param: param)
 }
 
