@@ -77,6 +77,17 @@ public class C4Line: C4Polygon {
             }
         }
     }
+    
+    public override var points : [C4Point] {
+        get {
+            return [endPoints.0,endPoints.1]
+        } set {
+            batchUpdates() {
+                self.endPoints.0 = newValue[0]
+                self.endPoints.1 = newValue[1]
+            }
+        }
+    }
 
     /**
     Initializes a new C4Polygon using the specified array of points.
