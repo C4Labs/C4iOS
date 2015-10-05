@@ -96,5 +96,7 @@ public class C4Gradient : C4View {
         self.view = GradientView(frame: CGRect(frame))
         self.colors = colors
         self.locations = locations
+        self.startPoint = C4Point()
+        self.endPoint = C4Point(1,0)
     }
 }
