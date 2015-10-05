@@ -37,13 +37,11 @@ public class C4Line: C4Polygon {
             return
         }
 
-        if points.count > 1 {
-            let p = C4Path()
-            p.moveToPoint(endPoints.0)
-            p.addLineToPoint(endPoints.1)
-            path = p
-            adjustToFitPath()
-        }
+        let p = C4Path()
+        p.moveToPoint(endPoints.0)
+        p.addLineToPoint(endPoints.1)
+        path = p
+        adjustToFitPath()
     }
 
     /**
