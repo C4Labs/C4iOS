@@ -52,10 +52,14 @@ public class C4Line: C4Polygon {
             return C4Point(view.center)
         }
         set {
-            let diff = newValue - center
-            batchUpdates() {
-                self.endPoints.0 += diff
-                self.endPoints.1 += diff
+            if self.anchorPoint == C4Point(0.5,0.5) {
+                let diff = newValue - center
+                batchUpdates() {
+                    self.endPoints.0 += diff
+                    self.endPoints.1 += diff
+                }
+            } else {
+                view.center = CGPoint(newValue)
             }
         }
     }
@@ -68,10 +72,14 @@ public class C4Line: C4Polygon {
             return C4Point(view.frame.origin)
         }
         set {
-            let diff = newValue - origin
-            batchUpdates() {
-                self.endPoints.0 += diff
-                self.endPoints.1 += diff
+            if self.anchorPoint == C4Point(0.5,0.5) {
+                let diff = newValue - origin
+                batchUpdates() {
+                    self.endPoints.0 += diff
+                    self.endPoints.1 += diff
+                }
+            } else {
+                view.center = CGPoint(newValue)
             }
         }
     }
