@@ -88,6 +88,24 @@ public class C4Line: C4Polygon {
             }
         }
     }
+    
+    public override var points : [C4Point] {
+        get {
+            return [endPoints.0,endPoints.1]
+        } set {
+            if newValue.count < 2 {
+                print("Invalid point array. There must be at least 2 points to update the line.")
+            } else {
+                if newValue.count > 2 {
+                    print("Warning. The passed array has more than 2 points, only the first two will be used.")
+                }
+                batchUpdates() {
+                    self.endPoints.0 = newValue[0]
+                    self.endPoints.1 = newValue[1]
+                }
+            }
+        }
+    }
 
     /**
     Initializes a new C4Polygon using the specified array of points.
