@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1F8252CC1BB3C65E0090E98A /* C4Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8252CB1BB3C65E0090E98A /* C4Timer.swift */; settings = {ASSET_TAGS = (); }; };
+		61BBAF631BC372BD00A03FD0 /* C4StoredAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BBAF621BC372BD00A03FD0 /* C4StoredAnimation.swift */; settings = {ASSET_TAGS = (); }; };
+		61BBAF651BC38C1200A03FD0 /* C4View+KeyValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BBAF641BC38C1200A03FD0 /* C4View+KeyValues.swift */; settings = {ASSET_TAGS = (); }; };
 		A94E3BD419E0E9390039A9C4 /* C4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 614F824319DB5ED3001DF1D4 /* C4.framework */; };
 		A96F4F451B538330002B3A46 /* C4ColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D401A054B4F0023323D /* C4ColorTests.swift */; };
 		A96F4F461B538330002B3A46 /* C4MathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D411A054B4F0023323D /* C4MathTests.swift */; };
@@ -125,6 +127,8 @@
 		1F8CB1D91A05781700A20783 /* C4RectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4RectTests.swift; sourceTree = "<group>"; };
 		614F824319DB5ED3001DF1D4 /* C4.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = C4.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		614F824E19DB5ED4001DF1D4 /* C4Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = C4Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		61BBAF621BC372BD00A03FD0 /* C4StoredAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4StoredAnimation.swift; sourceTree = "<group>"; };
+		61BBAF641BC38C1200A03FD0 /* C4View+KeyValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "C4View+KeyValues.swift"; sourceTree = "<group>"; };
 		A9596D291A054A960023323D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A9596D401A054B4F0023323D /* C4ColorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4ColorTests.swift; sourceTree = "<group>"; };
 		A9596D411A054B4F0023323D /* C4MathTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4MathTests.swift; sourceTree = "<group>"; };
@@ -355,10 +359,12 @@
 				A9D4F69A1B534F9F00F937AB /* C4View+Border.swift */,
 				A9D4F69B1B534F9F00F937AB /* C4View+Shadow.swift */,
 				A9D4F69C1B534F9F00F937AB /* C4View.swift */,
+				61BBAF641BC38C1200A03FD0 /* C4View+KeyValues.swift */,
 				A9D4F69D1B534F9F00F937AB /* C4ViewAnimation.swift */,
 				A9D4F69E1B534F9F00F937AB /* C4Wedge.swift */,
 				A9D4F6AA1B534F9F00F937AB /* UIGestureRecognizer+Closure.swift */,
 				A9D4F6AB1B534F9F00F937AB /* UIViewController+C4View.swift */,
+				61BBAF621BC372BD00A03FD0 /* C4StoredAnimation.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -531,6 +537,7 @@
 				A9D4F6B51B534F9F00F937AB /* C4Size.swift in Sources */,
 				A9D4F6C91B534F9F00F937AB /* C4Movie.swift in Sources */,
 				D917E1361B83E0920084BC82 /* C4Gradient.swift in Sources */,
+				61BBAF631BC372BD00A03FD0 /* C4StoredAnimation.swift in Sources */,
 				A9D4F6C11B534F9F00F937AB /* C4Filter.swift in Sources */,
 				A9D4F6DA1B534F9F00F937AB /* C4Bloom.swift in Sources */,
 				A9D4F6BE1B534F9F00F937AB /* C4Circle.swift in Sources */,
@@ -555,6 +562,7 @@
 				A9D4F6B71B534F9F00F937AB /* C4Vector.swift in Sources */,
 				A9D4F6C61B534F9F00F937AB /* C4Image+Generator.swift in Sources */,
 				A9D4F6E31B534F9F00F937AB /* C4Twirl.swift in Sources */,
+				61BBAF651BC38C1200A03FD0 /* C4View+KeyValues.swift in Sources */,
 				A9D4F6AF1B534F9F00F937AB /* C4Foundation.swift in Sources */,
 				A9D4F6D41B534F9F00F937AB /* C4View+Animation.swift in Sources */,
 				A9D4F6CB1B534F9F00F937AB /* C4QuadCurve.swift in Sources */,

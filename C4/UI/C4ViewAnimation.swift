@@ -22,7 +22,7 @@ import UIKit
 
 public class C4ViewAnimation : C4Animation {
     public var delay: NSTimeInterval = 0
-    
+
     public var animations: () -> Void
     
     public init(_ animations: () -> Void) {
@@ -99,11 +99,6 @@ public class C4ViewAnimation : C4Animation {
             C4ViewAnimation.stack.removeLast()
         }, completion:nil)
         C4ShapeLayer.disableActions = disable
-    }
-
-    static var stack = [C4ViewAnimation]()
-    static var currentAnimation: C4ViewAnimation? {
-        return stack.last
     }
 }
 

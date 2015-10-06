@@ -80,7 +80,7 @@ public class C4Shape: C4View {
         lineCap = .Round
         lineJoin = .Round
     }
-    
+
     /**
     The path defining the shape to be rendered. If the path extends outside the layer bounds it will not automatically
     be clipped to the layer. Defaults to nil. Animatable.

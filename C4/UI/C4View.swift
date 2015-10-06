@@ -19,6 +19,12 @@
 
 import UIKit
 
+extension NSValue {
+    convenience init(C4Point point: C4Point) {
+        self.init(CGPoint: CGPoint(point))
+    }
+}
+
 public class C4View : NSObject {
     public var view : UIView = UIView()
     
@@ -51,7 +57,7 @@ public class C4View : NSObject {
     /**
     Returns the receiver's layer.
     */
-    public var layer: CALayer? {
+    public dynamic var layer: CALayer? {
         get {
             return view.layer
         }
@@ -104,7 +110,7 @@ public class C4View : NSObject {
             frame = C4Rect(newValue, self.size)
         }
     }
-    
+
     /**
     Returns the receiver's frame size. Animatable.
     */
@@ -120,7 +126,7 @@ public class C4View : NSObject {
     /**
     Returns the receiver's frame width. Animatable.
     */
-    public var width: Double {
+    public dynamic var width: Double {
         get {
             return Double(bounds.size.width)
         }
@@ -129,7 +135,7 @@ public class C4View : NSObject {
     /**
     Returns the receiver's frame height. Animatable.
     */
-   public var height: Double {
+   public dynamic var height: Double {
         get {
             return Double(bounds.size.height)
         }
@@ -158,7 +164,7 @@ public class C4View : NSObject {
     /**
     Returns the receiver's opacity. Animatable.
     */
-    public var opacity: Double {
+    public dynamic var opacity: Double {
         get {
             return Double(view.alpha)
         }
@@ -208,7 +214,7 @@ public class C4View : NSObject {
         }
     }
     
-    public var zPosition : Double {
+    public dynamic var zPosition : Double {
         get {
             return Double(self.layer!.zPosition)
         } set {
@@ -525,7 +531,6 @@ public class C4View : NSObject {
     public func convert(point: C4Point, from: C4View) -> C4Point {
         return C4Point(view.convertPoint(CGPoint(point), fromCoordinateSpace: from.view))
     }
-
 }
 
 /**

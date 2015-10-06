@@ -57,7 +57,12 @@ public class C4Animation {
 
     private var completionObservers: [AnyObject] = []
     private var cancelObservers: [AnyObject] = []
-    
+
+    static var stack = [C4Animation]()
+    static var currentAnimation: C4Animation? {
+        return stack.last
+    }
+
     public init() {
         
     }
