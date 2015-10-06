@@ -216,6 +216,17 @@ public class C4View : NSObject {
         }
     }
 
+    public var mask: C4View? {
+        didSet {
+            if let mask = mask, let _ = mask.view.superview {
+                print("Invalid Mask. The view you are using as a mask has already been added to another view.")
+                self.mask = nil
+            } else {
+                self.layer?.mask = mask?.layer
+            }
+        }
+    }
+
     //MARK: - Touchable
     /**
     Returns true if the receiver accepts touch events.
