@@ -34,7 +34,6 @@
 		A9D4F6B61B534F9F00F937AB /* C4Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F67A1B534F9F00F937AB /* C4Transform.swift */; };
 		A9D4F6B71B534F9F00F937AB /* C4Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F67B1B534F9F00F937AB /* C4Vector.swift */; };
 		A9D4F6B91B534F9F00F937AB /* C4Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F67E1B534F9F00F937AB /* C4Animation.swift */; };
-		A9D4F6BA1B534F9F00F937AB /* C4Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F67F1B534F9F00F937AB /* C4Animator.swift */; };
 		A9D4F6BB1B534F9F00F937AB /* C4Arc.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6801B534F9F00F937AB /* C4Arc.swift */; };
 		A9D4F6BC1B534F9F00F937AB /* C4AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6811B534F9F00F937AB /* C4AudioPlayer.swift */; };
 		A9D4F6BD1B534F9F00F937AB /* C4CanvasController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6821B534F9F00F937AB /* C4CanvasController.swift */; };
@@ -152,7 +151,6 @@
 		A9D4F67B1B534F9F00F937AB /* C4Vector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Vector.swift; sourceTree = "<group>"; };
 		A9D4F67C1B534F9F00F937AB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A9D4F67E1B534F9F00F937AB /* C4Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Animation.swift; sourceTree = "<group>"; };
-		A9D4F67F1B534F9F00F937AB /* C4Animator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Animator.swift; sourceTree = "<group>"; };
 		A9D4F6801B534F9F00F937AB /* C4Arc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Arc.swift; sourceTree = "<group>"; };
 		A9D4F6811B534F9F00F937AB /* C4AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4AudioPlayer.swift; sourceTree = "<group>"; };
 		A9D4F6821B534F9F00F937AB /* C4CanvasController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4CanvasController.swift; sourceTree = "<group>"; };
@@ -325,7 +323,6 @@
 			children = (
 				A9D4F69F1B534F9F00F937AB /* Filters */,
 				A9D4F67E1B534F9F00F937AB /* C4Animation.swift */,
-				A9D4F67F1B534F9F00F937AB /* C4Animator.swift */,
 				A9D4F6801B534F9F00F937AB /* C4Arc.swift */,
 				A9D4F6811B534F9F00F937AB /* C4AudioPlayer.swift */,
 				A9D4F6821B534F9F00F937AB /* C4CanvasController.swift */,
@@ -561,7 +558,6 @@
 				A9D4F6AF1B534F9F00F937AB /* C4Foundation.swift in Sources */,
 				A9D4F6D41B534F9F00F937AB /* C4View+Animation.swift in Sources */,
 				A9D4F6CB1B534F9F00F937AB /* C4QuadCurve.swift in Sources */,
-				A9D4F6BA1B534F9F00F937AB /* C4Animator.swift in Sources */,
 				A9D4F6D11B534F9F00F937AB /* C4Star.swift in Sources */,
 				A9D4F6C31B534F9F00F937AB /* C4Generator.swift in Sources */,
 				A9D4F6CF1B534F9F00F937AB /* C4Shape.swift in Sources */,
