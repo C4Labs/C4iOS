@@ -20,63 +20,63 @@
 import Foundation
 
 public protocol C4EventSource {
-    /**
-      Register an action to run when an event is triggered. Returns an observer handle you can use to cancel the action.
-     */
+    
+    /// Register an action to run when an event is triggered. Returns an observer handle you can use to cancel the action.
     func on(event notificationName: String, run: Void -> Void) -> AnyObject
     
-    /**
-      Cancel a previously registered action from an observer handle.
-     */
+    /// Cancel a previously registered action from an observer handle.
     func cancel(observer: AnyObject)
 }
 
 extension NSObject : C4EventSource {
+    
     //MARK: - EventSource
-    /**
-    Posts a new notification originating from the receiver.
-
-        canvas.addTapGestureRecognizer { location, state in
-            self.canvas.post("tapped")
-        }
-
-    - parameter event: The notification name for the event
-    */
+    
+    
+    /// Posts a new notification originating from the receiver.
+    ///
+    /// ````
+    /// canvas.addTapGestureRecognizer { location, state in
+    ///     self.canvas.post("tapped")
+    /// }
+    /// ````
+    ///
+    /// - parameter event: The notification name for the event
     public func post(event: String) {
         NSNotificationCenter.defaultCenter().postNotificationName(event, object: self)
     }
-
-    /**
-    An action to run on receipt of a given event.
-
-        canvas.on(event: "tapped") {
-            println("received tap")
-        }
-
-    - parameter event: The notification name to listen for
-    - parameter run: A block of code to run when the receiver "hears" the specified event name
-    */
+    
+    /// An action to run on receipt of a given event.
+    ///
+    /// ````
+    /// canvas.on(event: "tapped") {
+    ///     println("received tap")
+    /// }
+    /// ````
+    ///
+    /// - parameter event: The notification name to listen for
+    /// - parameter run:   A block of code to run when the receiver "hears" the specified event name
     public func on(event notificationName: String, run executionBlock: Void -> Void) -> AnyObject {
-       return on(event: notificationName, from: nil, run: executionBlock)
+        return on(event: notificationName, from: nil, run: executionBlock)
     }
-
+    
     public func on(event notificationName: String, from sender: AnyObject?, run executionBlock: Void -> Void) -> AnyObject {
         let nc = NSNotificationCenter.defaultCenter()
         return nc.addObserverForName(notificationName, object: sender, queue: NSOperationQueue.currentQueue(), usingBlock: { notification in
             executionBlock()
         });
     }
-
-    /**
-    Cancels any actions registered to run for a specified object.
-
-        canvas.cancel(self)
-
-    - parameter observer: An object whose actions are to be removed from the notification center.
-    */
+    
+    /// Cancels any actions registered to run for a specified object.
+    ///
+    /// ````
+    /// canvas.cancel(self)
+    /// ````
+    ///
+    /// - parameter observer: An object whose actions are to be removed from the notification center.
     public func cancel(observer: AnyObject) {
         let nc = NSNotificationCenter.defaultCenter()
         nc.removeObserver(observer)
     }
-
+    
 }
