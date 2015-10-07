@@ -21,30 +21,35 @@ import QuartzCore
 import UIKit
 
 public class C4Arc : C4Shape {
-    /**
-    Creates an arc, whose edge is always drawn on the shorter circumference.
 
-        let a = C4Arc(center: canvas.center,radius: 50, start: M_PI, end: 2*M_PI)
-
-    - parameter center: The center-point of the arc
-    - parameter radius: The radius of the arc
-    - parameter startAngle:	The angle (in radians) that determines the starting point of the arc, measured from the x-axis in the current user space.
-    - parameter endAngle:	The angle (in radians) that determines the ending point of the arc, measured from the x-axis in the current user space.
-    */
+    /// Creates an arc, whose edge is always drawn on the shorter circumference.
+    ///
+    /// ````
+    /// let a = C4Arc(center: canvas.center,radius: 50, start: M_PI, end: 2*M_PI)
+    /// ````
+    ///
+    /// - parameter center:     The center-point of the arc
+    /// - parameter radius:     The radius of the arc
+    /// - parameter startAngle:	The angle (in radians) that determines the starting point of the arc, measured from the 
+    ///                         x-axis in the current user space.
+    /// - parameter endAngle:	The angle (in radians) that determines the ending point of the arc, measured from the 
+    ///                         x-axis in the current user space.
     convenience public init(center: C4Point, radius: Double, start: Double, end: Double) {
         self.init(center: center,radius: radius,start: start,end: end,clockwise: end>start ? false : true)
     }
 
-    /**
-    Creates an arc, whose edge is drawn based on the input for `clockwise`.
-
-        let a = C4Arc(center: canvas.center,radius: 50, start: M_PI, end: 2*M_PI, clockwise: clockwise: false)
-
-    - parameter center: The center-point of the arc
-    - parameter radius: The radius of the arc
-    - parameter startAngle:	The angle (in radians) that determines the starting point of the arc, measured from the x-axis in the current user space.
-    - parameter endAngle:	The angle (in radians) that determines the ending point of the arc, measured from the x-axis in the current user space.
-    */
+    /// Creates an arc, whose edge is drawn based on the input for `clockwise`.
+    ///
+    /// ````
+    /// let a = C4Arc(center: canvas.center,radius: 50, start: M_PI, end: 2*M_PI, clockwise: clockwise: false)
+    /// ````
+    ///
+    /// - parameter center:     The center-point of the arc
+    /// - parameter radius:     The radius of the arc
+    /// - parameter startAngle:	The angle (in radians) that determines the starting point of the arc, measured from the 
+    ///                         x-axis in the current user space.
+    /// - parameter endAngle:	The angle (in radians) that determines the ending point of the arc, measured from the 
+    ///                         x-axis in the current user space.
     convenience public init(center: C4Point, radius: Double, start: Double, end: Double, clockwise: Bool) {
         let arcRect = CGRectMakeFromArc(CGPoint(center),radius: CGFloat(radius),startAngle: CGFloat(start),endAngle: CGFloat(end), clockwise: clockwise);
         self.init(frame: C4Rect(arcRect))
