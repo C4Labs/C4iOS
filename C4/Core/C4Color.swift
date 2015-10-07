@@ -43,6 +43,7 @@ public let C4Grey    = C4Color(red: 0.98, green: 0.98, blue: 0.98, alpha: 1.0)
 /**
 This document describes the C4Color object which represents color and sometimes opacity (alpha value). You can use C4Color objects to store color data, and pass them between various C4 objects such as C4Shape, C4Image, etc.
 
+gogogoogo
 C4Color internally wraps a CGColorSpaceRef called colorSpace, as well as a CGColorRef. From these two objects C4Color is able to properly maintain color data and convert it to / from other color objects such as UIColor, CIColor, C4Color, etc.
 */
 public class C4Color {
