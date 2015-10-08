@@ -2,12 +2,11 @@
 
 import QuartzCore
 
-/**
-Extension for CAShapeLayer that allows overriding the actions for specific properties.
-*/
+
+/// Extension for CAShapeLayer that allows overriding the actions for specific properties.
 public class C4ShapeLayer: CAShapeLayer {
     public static var disableActions = true
-
+    
     public override func actionForKey(key: String) -> CAAction? {
         if C4ShapeLayer.disableActions == true {
             return nil
