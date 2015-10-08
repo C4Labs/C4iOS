@@ -24,20 +24,20 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
     internal var currentPlayer = AVAudioPlayer()
     internal var audiofiles = [AVAudioPlayer]()
     
-    /**
-    Initializes a new audio player from a given file name
-    
-        let ap = C4AudioPlayer("audioTrackFileName")
-    */
+    /// Initializes a new audio player from a given file name
+    ///
+    /// ````
+    /// let ap = C4AudioPlayer("audioTrackFileName")
+    /// ````
     convenience public init(_ filename: String) {
         self.init(filenames: [filename])
     }
     
-    /**
-    Initializes a new audio player from a given set of file names. The files will be played in sequence.
-
-        let ap = C4AudioPlayer(["audioTrackFileName", "anotherTrackFileName"])
-    */
+    /// Initializes a new audio player from a given set of file names. The files will be played in sequence.
+    ///
+    /// ````
+    /// let ap = C4AudioPlayer(["audioTrackFileName", "anotherTrackFileName"])
+    /// ````
     convenience public init(filenames: [String]) {
         self.init()
         
@@ -59,52 +59,44 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
         currentPlayer.enableRate = true
     }
     
-    /**
-    Plays a sound asynchronously.
-    */
+    /// Plays a sound asynchronously.
     public func play() {
         currentPlayer.play()
     }
     
-    /**
-    Pauses playback; sound remains ready to resume playback from where it left off.
-    Calling pause leaves the audio player prepared to play; it does not release the audio hardware that was acquired upon calling play or prepareToPlay.
-    */
+    /// Pauses playback; sound remains ready to resume playback from where it left off.
+    /// Calling pause leaves the audio player prepared to play; it does not release the audio hardware that was acquired upon
+    /// calling play or prepareToPlay.
     public func pause() {
         currentPlayer.pause()
     }
-
-    /**
-    Stops playback and undoes the setup needed for playback.
-    Calling this method, or allowing a sound to finish playing, undoes the setup performed upon calling the play or prepareToPlay methods.
-    The stop method does not reset the value of the currentTime property to 0. In other words, if you call stop during playback and then call play, playback resumes at the point where it left off.
-    */
+    
+    /// Stops playback and undoes the setup needed for playback.
+    /// Calling this method, or allowing a sound to finish playing, undoes the setup performed upon calling the play or
+    /// prepareToPlay methods.
+    /// The stop method does not reset the value of the currentTime property to 0. In other words, if you call stop during
+    /// playback and then call play, playback resumes at the point where it left off.
     public func stop() {
         currentPlayer.stop()
     }
-
-    /**
-    Returns the total duration, in seconds, of the sound associated with the audio player. (read-only)
-    */
+    
+    /// Returns the total duration, in seconds, of the sound associated with the audio player. (read-only)
     public var duration : Double {
         get {
             return Double(currentPlayer.duration)
         }
     }
     
-    /**
-    Returns true if the receiver's current playback rate > 0. Otherwise returns false.
-    */
+    /// Returns true if the receiver's current playback rate > 0. Otherwise returns false.
     public var playing : Bool {
         get {
             return currentPlayer.playing
         }
     }
     
-    /**
-    The audio player’s stereo pan position.
-    By setting this property you can position a sound in the stereo field. A value of –1.0 is full left, 0.0 is center, and 1.0 is full right.
-    */
+    /// The audio player’s stereo pan position.
+    /// By setting this property you can position a sound in the stereo field. A value of –1.0 is full left, 0.0 is center, and
+    /// 1.0 is full right.
     public var pan : Double {
         get {
             return Double(currentPlayer.pan)
@@ -113,12 +105,11 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
         }
     }
     
-    /**
-    The playback volume for the audio player, ranging from 0.0 through 1.0 on a linear scale.
-    A value of 0.0 indicates silence; a value of 1.0 (the default) indicates full volume for the audio player instance.
-    Use this property to control an audio player’s volume relative to other audio output.
-    To provide UI in iOS for adjusting system audio playback volume, use the MPVolumeView class, which provides media playback controls that users expect and whose appearance you can customize.
-    */
+    /// The playback volume for the audio player, ranging from 0.0 through 1.0 on a linear scale.
+    /// A value of 0.0 indicates silence; a value of 1.0 (the default) indicates full volume for the audio player instance.
+    /// Use this property to control an audio player’s volume relative to other audio output.
+    /// To provide UI in iOS for adjusting system audio playback volume, use the MPVolumeView class, which provides media
+    /// playback controls that users expect and whose appearance you can customize.
     public var volume : Double {
         get {
             return Double(currentPlayer.volume)
@@ -127,11 +118,12 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
         }
     }
     
-    /**
-    The playback point, in seconds, within the timeline of the sound associated with the audio player.
-    If the sound is playing, currentTime is the offset of the current playback position, measured in seconds from the start of the sound. If the sound is not playing, currentTime is the offset of where playing starts upon calling the play method, measured in seconds from the start of the sound.
-    By setting this property you can seek to a specific point in a sound file or implement audio fast-forward and rewind functions.
-    */
+    /// The playback point, in seconds, within the timeline of the sound associated with the audio player.
+    /// If the sound is playing, currentTime is the offset of the current playback position, measured in seconds from the start
+    /// of the sound. If the sound is not playing, currentTime is the offset of where playing starts upon calling the play
+    /// method, measured in seconds from the start of the sound.
+    /// By setting this property you can seek to a specific point in a sound file or implement audio fast-forward and rewind
+    /// functions.
     public var currentTime: Double {
         get {
             return currentPlayer.currentTime
@@ -140,17 +132,18 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
         }
     }
     
-    /**
-    The audio player’s playback rate.
-    This property’s default value of 1.0 provides normal playback rate. The available range is from 0.5 for half-speed playback through 2.0 for double-speed playback.
-    To set an audio player’s playback rate, you must first enable rate adjustment as described in the enableRate property description.
-        
-        let ap = C4AudioPlayer("audioTrackFileName")
-        ap.enableRate = true
-        ap.rate = 0.5
-        ap.play()
-
-    */
+    /// The audio player’s playback rate.
+    /// This property’s default value of 1.0 provides normal playback rate. The available range is from 0.5 for half-speed
+    /// playback through 2.0 for double-speed playback.
+    /// To set an audio player’s playback rate, you must first enable rate adjustment as described in the enableRate property
+    /// description.
+    ///
+    /// ````
+    /// let ap = C4AudioPlayer("audioTrackFileName")
+    /// ap.enableRate = true
+    /// ap.rate = 0.5
+    /// ap.play()
+    /// ````
     public var rate: Double {
         get {
             return Double(currentPlayer.rate)
@@ -159,10 +152,9 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
         }
     }
     
-    /**
-    Advances the audioplayer to the next sound / audio file. 
-    The player pauses, then advances if possible. If there is another file in the queue the audioplayer automatically starts playing again.
-    */
+    /// Advances the audioplayer to the next sound / audio file.
+    /// The player pauses, then advances if possible. If there is another file in the queue the audioplayer automatically starts
+    /// playing again.
     public func next() {
         currentPlayer.pause()
         
@@ -174,10 +166,9 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
         }
     }
     
-    /**
-    Plays the previous sound or sound / audio file in the queue.
-    The player pauses, then positions the playhead to the previous sound / audio file if possible. If there is a previous file in the queue the audioplayer automatically starts playing again.
-    */
+    /// Plays the previous sound or sound / audio file in the queue.
+    /// The player pauses, then positions the playhead to the previous sound / audio file if possible. If there is a previous
+    /// file in the queue the audioplayer automatically starts playing again.
     public func prev() {
         currentPlayer.pause()
         let index = audiofiles.indexOf(currentPlayer)
@@ -187,13 +178,13 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
             currentPlayer.play()
         }
     }
-
-    /**
-    The number of times a sound will return to the beginning, upon reaching the end, to repeat playback.
-    A value of 0, which is the default, means to play the sound once. Set a positive integer value to specify the number of times to return to the start and play again. For example, specifying a value of 1 results in a total of two plays of the sound. Set any negative integer value to loop the sound indefinitely until you call the stop method.
     
-    Defaults to 1000000.
-    */
+    /// The number of times a sound will return to the beginning, upon reaching the end, to repeat playback.
+    /// A value of 0, which is the default, means to play the sound once. Set a positive integer value to specify the number of
+    /// times to return to the start and play again. For example, specifying a value of 1 results in a total of two plays of the
+    /// sound. Set any negative integer value to loop the sound indefinitely until you call the stop method.
+    ///
+    /// Defaults to 1000000.
     public var loops : Bool {
         get {
             return currentPlayer.numberOfLoops > 0 ? true : false
@@ -206,15 +197,15 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
             }
         }
     }
-
-    /**
-    A Boolean value that specifies the audio-level metering on/off state for the audio player.
-    The default value for the meteringEnabled property is off (Boolean false). Before using metering for an audio player, you need to enable it by setting this property to true. If player is an audio player instance variable of your controller class, you enable metering as shown here:
-
-        let ap = C4AudioPlayer("audioTrackFileName")
-        ap.meteringEnabled = true
-
-    */
+    
+    /// A Boolean value that specifies the audio-level metering on/off state for the audio player.
+    /// The default value for the meteringEnabled property is off (Boolean false). Before using metering for an audio player, you need to enable it by setting this
+    /// property to true. If player is an audio player instance variable of your controller class, you enable metering as shown here:
+    ///
+    /// ````
+    /// let ap = C4AudioPlayer("audioTrackFileName")
+    /// ap.meteringEnabled = true
+    /// ````
     public var meteringEnabled : Bool {
         get {
             return currentPlayer.meteringEnabled
@@ -222,11 +213,10 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
             currentPlayer.meteringEnabled = v
         }
     }
-
-    /**
-    A Boolean value that specifies whether playback rate adjustment is enabled for an audio player.
-    To enable adjustable playback rate for an audio player, set this property to true after you initialize the player and before you call the prepareToPlay instance method for the player.
-    */
+    
+    /// A Boolean value that specifies whether playback rate adjustment is enabled for an audio player.
+    /// To enable adjustable playback rate for an audio player, set this property to true after you initialize the player and before you call the prepareToPlay
+    /// instance method for the player.
     public var enableRate : Bool {
         get {
             return currentPlayer.enableRate
@@ -234,50 +224,51 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
             currentPlayer.enableRate = v
         }
     }
-    /**
-    Refreshes the average and peak power values for all channels of an audio player.
-    To obtain current audio power values, you must call this method before calling averagePowerForChannel: or peakPowerForChannel:.
     
-        let t = NSTimer.scheduledTimerWithTimeInterval(1.0/60.0,
-                    target: self,
-                    selector: "update",
-                    userInfo: nil,
-                    repeats: true)
-
-        let ap = C4AudioPlayer("audioTrackFileName")
-        ap.meteringEnabled = true
-
-        func update() {
-            ap.updateMeters()
-        }
-    */
+    /// Refreshes the average and peak power values for all channels of an audio player.
+    /// To obtain current audio power values, you must call this method before calling averagePowerForChannel: or peakPowerForChannel:.
+    ///
+    /// ````
+    /// let t = NSTimer.scheduledTimerWithTimeInterval(1.0/60.0,
+    ///                                        target: self,
+    ///                                      selector: "update",
+    ///                                      userInfo: nil,
+    ///                                       repeats: true)
+    ///
+    /// let ap = C4AudioPlayer("audioTrackFileName")
+    /// ap.meteringEnabled = true
+    ///
+    /// func update() {
+    ///     ap.updateMeters()
+    /// }
+    /// ````
     public func updateMeters() {
         currentPlayer.updateMeters()
     }
-
-    /**
-    Returns the average power for a given channel, in decibels, for the sound being played.
     
-        func update() {
-            let av = player.averagePower(channel: 0)
-        }
-    - parameter channelNumber: The audio channel whose average power value you want to obtain.
-    - returns: A floating-point representation, in decibels, of a given audio channel’s current average power.
-    */
+    /// Returns the average power for a given channel, in decibels, for the sound being played.
+    ///
+    /// ````
+    /// func update() {
+    ///     let av = player.averagePower(channel: 0)
+    /// }
+    /// ````
+    /// - parameter channelNumber: The audio channel whose average power value you want to obtain.
+    ///
+    /// - returns: A floating-point representation, in decibels, of a given audio channel’s current average power.
     public func averagePower(channel: Int) -> Double {
         return Double(currentPlayer.averagePowerForChannel(channel))
     }
-
-    /**
-    Returns the peak power for a given channel, in decibels, for the sound being played.
-
-        func update() {
-            let pk = player.peakPower(channel: 0)
-        }
-
-    - parameter channelNumber: The audio channel whose peak power value you want to obtain.
-    - returns: A floating-point representation, in decibels, of a given audio channel’s current peak power.    
-    */
+    
+    /// Returns the peak power for a given channel, in decibels, for the sound being played.
+    ///
+    /// ````
+    /// func update() {
+    ///     let pk = player.peakPower(channel: 0)
+    /// }
+    /// - parameter channelNumber: The audio channel whose peak power value you want to obtain.
+    ///
+    /// - returns: A floating-point representation, in decibels, of a given audio channel’s current peak power.
     public func peakPower(channel: Int) -> Double {
         return Double(currentPlayer.peakPowerForChannel(channel))
     }

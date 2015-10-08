@@ -20,25 +20,21 @@
 import UIKit
 
 public class C4CanvasController : UIViewController {
-    /**
-    Called after the controller's view is loaded into memory.
     
-    This override disables implicit CALayer animations, calls `setup()` and then re-enables animations.
-    
-    You should **not** override this method, instead use **setup()**.
-    */
+    /// Called after the controller's view is loaded into memory.
+    ///
+    /// This override disables implicit CALayer animations, calls `setup()` and then re-enables animations.
+    ///
+    /// You should **not** override this method, instead use **setup()**.
     public override func viewDidLoad() {
         canvas.backgroundColor = C4Grey
-        C4ShapeLayer.disableActions = true
         self.setup()
         C4ShapeLayer.disableActions = false
     }
-
-    /**
-    Called during the controller's `viewDidLoad()` method. 
     
-    This method should be used to set up any objects or behaviours necessary when the controller's view loads.
-    */
+    /// Called during the controller's `viewDidLoad()` method.
+    ///
+    /// This method should be used to set up any objects or behaviours necessary when the controller's view loads.
     public func setup() {
     }
     
