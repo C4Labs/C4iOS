@@ -21,37 +21,38 @@ import QuartzCore
 import UIKit
 
 public class C4Wedge : C4Shape {
-    /**
-    Initializes a new C4Wedge, with the wedge always taking the shortest distance between start and end.
-
-    This shape differs from C4Arc in that is adds a point at the "center" of the circle on which the wedge exists.
     
-        let w = C4Wedge(center: canvas.center, radius: 50, start: M_PI_4 * 3, end: M_PI_4)
-        canvas.add(w)
-
-    - parameter center: The center of the wedge.
-    - parameter radius: The radius of the wedge.
-    - parameter start: The start angle of the wedge.
-    - parameter end: The end angle of the wedge.
-    */
+    /// Initializes a new C4Wedge, with the wedge always taking the shortest distance between start and end.
+    ///
+    /// This shape differs from C4Arc in that is adds a point at the "center" of the circle on which the wedge exists.
+    ///
+    /// ````
+    /// let w = C4Wedge(center: canvas.center, radius: 50, start: M_PI_4 * 3, end: M_PI_4)
+    /// canvas.add(w)
+    /// ````
+    ///
+    /// - parameter center: The center of the wedge.
+    /// - parameter radius: The radius of the wedge.
+    /// - parameter start: The start angle of the wedge.
+    /// - parameter end: The end angle of the wedge.
     convenience public init(center: C4Point, radius: Double, start: Double, end: Double) {
         self.init(center: center, radius: radius, start: start, end: end, clockwise: end > start ? false : true)
     }
-
-    /**
-    Initializes a new C4Wedge, with the wedge always taking the shortest distance between start and end.
-
-    This shape differs from C4Arc in that is adds a point at the "center" of the circle on which the wedge exists.
-
-    let w = C4Wedge(center: canvas.center, radius: 50, start: M_PI_4 * 3, end: M_PI_4, clockwise: true)
-    canvas.add(w)
-
-    - parameter center: The center of the wedge.
-    - parameter radius: The radius of the wedge.
-    - parameter start: The start angle of the wedge.
-    - parameter end: The end angle of the wedge.
-    - parameter clockwise: Whether or not to close the shape in a clockwise fashion.
-    */
+    
+    /// Initializes a new C4Wedge, with the wedge always taking the shortest distance between start and end.
+    ///
+    /// This shape differs from C4Arc in that is adds a point at the "center" of the circle on which the wedge exists.
+    ///
+    /// ````
+    /// let w = C4Wedge(center: canvas.center, radius: 50, start: M_PI_4 * 3, end: M_PI_4, clockwise: true)
+    /// canvas.add(w)
+    /// ````
+    ///
+    /// - parameter center:    The center of the wedge.
+    /// - parameter radius:    The radius of the wedge.
+    /// - parameter start:     The start angle of the wedge.
+    /// - parameter end:       The end angle of the wedge.
+    /// - parameter clockwise: Whether or not to close the shape in a clockwise fashion.
     convenience public init(center: C4Point, radius: Double, start: Double, end: Double, clockwise: Bool) {
         let wedgeRect = CGRectMakeFromWedge(CGPoint(center),radius: CGFloat(radius),startAngle: CGFloat(start),endAngle: CGFloat(end), clockwise: clockwise);
         self.init(frame: C4Rect(wedgeRect))
