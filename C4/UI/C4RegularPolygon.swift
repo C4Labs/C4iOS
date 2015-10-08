@@ -21,17 +21,19 @@ import Foundation
 import CoreGraphics
 
 public class C4RegularPolygon: C4Shape {
-
-    /**
-    Returns the number of sides in the polygon.
-
-    Assigning a value to this property will change the number of sides and cause the receiver to automatically update its path.
-
-        let f = C4Rect(100,100,100,100)
-        var p = C4RegularPolygon(frame: f)
-        p.sides = 3
-        canvas.add(p)
-    */
+    
+    
+    /// Returns the number of sides in the polygon.
+    ///
+    /// Assigning a value to this property will change the number of sides and cause the receiver to automatically update its
+    /// path.
+    ///
+    /// ````
+    /// let f = C4Rect(100,100,100,100)
+    /// var p = C4RegularPolygon(frame: f)
+    /// p.sides = 3
+    /// canvas.add(p)
+    /// ````
     @IBInspectable
     public var sides: Int = 6 {
         didSet {
@@ -39,16 +41,18 @@ public class C4RegularPolygon: C4Shape {
         }
     }
     
-    /**
-    Returns the phase (i.e. "rotated" beginning position) of the shape. This is not actual rotation, it simply changes where the beginning of the shape is.
-
-    Assigning a value to this property will change the starting position of the beginning of the shape. The shape will still calculate its points based on the frame.
-    
-        let f = C4Rect(100,100,100,100)
-        var p = C4RegularPolygon(frame: f)
-        p.phase = M_PI_2
-        canvas.add(p)
-    */
+    /// Returns the phase (i.e. "rotated" beginning position) of the shape. This is not actual rotation, it simply changes
+    /// where the beginning of the shape is.
+    ///
+    /// Assigning a value to this property will change the starting position of the beginning of the shape. The shape will
+    /// still calculate its points based on the frame.
+    ///
+    /// ````
+    /// let f = C4Rect(100,100,100,100)
+    /// var p = C4RegularPolygon(frame: f)
+    /// p.phase = M_PI_2
+    /// canvas.add(p)
+    /// ````
     @IBInspectable
     public var phase: Double = 0 {
         didSet {
@@ -56,17 +60,18 @@ public class C4RegularPolygon: C4Shape {
         }
     }
     
-    /**
-    Initializes a new C4RegularPolygon.
-    
-    Default values are are sides = 6 (i.e. a hexagon) and phase = 0.
-    
-        let f = C4Rect(100,100,100,100)
-        var p = C4RegularPolygon(frame: f)
-        canvas.add(p)
-
-    - parameter frame: A C4Rect into which the shape of the polygon will be generated (taking into consideration `sides` and `phase`).
-    */
+    /// Initializes a new C4RegularPolygon.
+    ///
+    /// Default values are are sides = 6 (i.e. a hexagon) and phase = 0.
+    ///
+    /// ````
+    /// let f = C4Rect(100,100,100,100)
+    /// var p = C4RegularPolygon(frame: f)
+    /// canvas.add(p)
+    /// ````
+    ///
+    /// - parameter frame: A C4Rect into which the shape of the polygon will be generated (taking into consideration `sides`
+    /// and `phase`).
     convenience public init(frame: C4Rect) {
         self.init()
         self.view.frame = CGRect(frame)
@@ -89,7 +94,7 @@ public class C4RegularPolygon: C4Shape {
             // Don't try to generate invalid polygons, we'll get undefined behaviour
             return
         }
-    
+        
         let center = rect.center
         let delta = 2.0*M_PI / Double(sides)
         let newPath = C4Path()
