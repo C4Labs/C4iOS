@@ -21,11 +21,10 @@ import Foundation
 import CoreGraphics
 
 public class C4Line: C4Polygon {
-    /**
-    Returns a tuple of points that make up the the begin and end points of the line.
 
-    Assigning a tuple of C4Point values to this object will cause the receiver to update itself.
-    */
+    /// Returns a tuple of points that make up the the begin and end points of the line.
+    ///
+    /// Assigning a tuple of C4Point values to this object will cause the receiver to update itself.
     public var endPoints: (C4Point,C4Point) = (C4Point(),C4Point(100,0)){
         didSet {
             updatePath()
@@ -44,9 +43,7 @@ public class C4Line: C4Polygon {
         adjustToFitPath()
     }
 
-    /**
-    Returns the receiver's center. Animatable.
-    */
+    /// Returns the receiver's center. Animatable.
     public override var center : C4Point {
         get {
             return C4Point(view.center)
@@ -60,9 +57,7 @@ public class C4Line: C4Polygon {
         }
     }
 
-    /**
-    Returns the receiver's origin. Animatable.
-    */
+    /// Returns the receiver's origin. Animatable.
     public override var origin : C4Point {
         get {
             return C4Point(view.frame.origin)
@@ -94,19 +89,19 @@ public class C4Line: C4Polygon {
         }
     }
 
-    /**
-    Initializes a new C4Polygon using the specified array of points.
-
-    Protects against trying to create a polygon with only 1 point (i.e. requires 2 points).
-    Trims point array if count > 2.
-
-    let a = C4Point(100,100)
-    let b = C4Point(200,200)
-
-    let l = C4Line([a,b])
-
-    - parameter points: An array of C4Point structs.
-    */
+    /// Initializes a new C4Polygon using the specified array of points.
+    ///
+    /// Protects against trying to create a polygon with only 1 point (i.e. requires 2 points).
+    /// Trims point array if count > 2.
+    ///
+    /// ````
+    /// let a = C4Point(100,100)
+    /// let b = C4Point(200,200)
+    ///
+    /// let l = C4Line([a,b])
+    /// ````
+    ///
+    /// - parameter points: An array of C4Point structs.
     convenience public init(var _ points: [C4Point]) {
 
         if points.count > 2 {
@@ -126,17 +121,16 @@ public class C4Line: C4Polygon {
         adjustToFitPath()
     }
 
-    /**
-    Initializes a new C4Line using the specified tuple of points.
-
-
-    let a = C4Point(100,100)
-    let b = C4Point(200,200)
-
-    let l = C4Line((a,b))
-
-    - parameter points: An tuple of C4Point structs.
-    */
+    /// Initializes a new C4Line using the specified tuple of points.
+    ///
+    /// ````
+    /// let a = C4Point(100,100)
+    /// let b = C4Point(200,200)
+    ///
+    /// let l = C4Line((a,b))
+    /// ````
+    ///
+    /// - parameter points: An tuple of C4Point structs.
     convenience public init(_ points: (C4Point, C4Point)) {
         self.init(frame: C4Rect(points))
         let path = C4Path()
@@ -146,19 +140,18 @@ public class C4Line: C4Polygon {
         self.path = path
         adjustToFitPath()
     }
-
-    /**
-    Initializes a new C4Line using two specified points.
-
-
-    let a = C4Point(100,100)
-    let b = C4Point(200,200)
-
-    let l = C4Line(begin: a, end: b)
-
-    - parameter begin: The start point of the line.
-    - parameter end: The end point of the line.
-    */
+    
+    /// Initializes a new C4Line using two specified points.
+    ///
+    /// ````
+    /// let a = C4Point(100,100)
+    /// let b = C4Point(200,200)
+    ///
+    /// let l = C4Line(begin: a, end: b)
+    /// ````
+    ///
+    /// - parameter begin: The start point of the line.
+    /// - parameter end: The end point of the line.
     convenience public init(begin: C4Point, end: C4Point) {
         let points = (begin,end)
         self.init(points)
