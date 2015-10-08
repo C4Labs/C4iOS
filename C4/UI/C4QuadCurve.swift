@@ -26,17 +26,17 @@ public class C4QuadCurve : C4Curve {
             self.controlPoints = (controlPoint,controlPoint)
         }
     }
-
-    /**
-    Initializes a new C4QuadCurve.
-
-        let curve = C4QuadCurve(a: C4Point(), b: C4Point(50,50), c: C4Point(100,0))
-        canvas.add(curve)
-
-    - parameter a: The beginning point of the curve.
-    - parameter b: A single C4Point used to calculate the shape of the curve.
-    - parameter c: The end point of the curve.
-    */
+    
+    /// Initializes a new C4QuadCurve.
+    ///
+    /// ````
+    /// let curve = C4QuadCurve(a: C4Point(), b: C4Point(50,50), c: C4Point(100,0))
+    /// canvas.add(curve)
+    /// ````
+    ///
+    /// - parameter a: The beginning point of the curve.
+    /// - parameter b: A single C4Point used to calculate the shape of the curve.
+    /// - parameter c: The end point of the curve.
     convenience public init(begin: C4Point, control: C4Point, end: C4Point) {
         self.init(begin: begin, control0: control, control1: control, end: end)
     }
