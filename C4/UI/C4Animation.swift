@@ -45,14 +45,10 @@ public class C4Animation {
         }
     }
     
-    /**
-    The duration of the animation, measured in seconds.
-    */
+    /// The duration of the animation, measured in seconds.
     public var duration: NSTimeInterval = 1
-
-    /**
-    The animation curve that the receiver will apply to the changes it is supposed to animate.
-    */
+    
+    /// The animation curve that the receiver will apply to the changes it is supposed to animate.
     public var curve: Curve = .Linear
 
     private var completionObservers: [AnyObject] = []
