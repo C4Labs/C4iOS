@@ -21,24 +21,21 @@ import QuartzCore
 import UIKit
 
 public class C4Curve : C4Shape {
-    /**
-    The beginning and end points of the receiver. Animatable.
-    */
+    
+    /// The beginning and end points of the receiver. Animatable.
     public var endPoints = (C4Point(), C4Point()) {
         didSet {
             updatePath()
         }
     }
-
-    /**
-    The control points of the receiver. Animatable.
-    */
+    
+    /// The control points of the receiver. Animatable.
     public var controlPoints = (C4Point(), C4Point()) {
         didSet {
             updatePath()
         }
     }
-
+    
     public override var center : C4Point {
         get {
             return C4Point(view.center)
@@ -53,8 +50,8 @@ public class C4Curve : C4Shape {
             }
         }
     }
-
-
+    
+    
     public override var origin : C4Point {
         get {
             return C4Point(view.frame.origin)
@@ -69,24 +66,24 @@ public class C4Curve : C4Shape {
             }
         }
     }
-
-    /**
-    Creates a bezier curve.
-
-        let crv = C4Curve(a: C4Point(), b: C4Point(0,50), c: C4Point(100,50), d: C4Point(100,0))
-
-    - parameter a: The beginning point of the curve.
-    - parameter b: The first control point used to define the shape of the curve.
-    - parameter c: The second control point used to define the shape of the curve.
-    - parameter d: The end point of the curve.
-    */
+    
+    /// Creates a bezier curve.
+    ///
+    /// ````
+    /// let crv = C4Curve(a: C4Point(), b: C4Point(0,50), c: C4Point(100,50), d: C4Point(100,0))
+    /// ````
+    ///
+    /// - parameter a: The beginning point of the curve.
+    /// - parameter b: The first control point used to define the shape of the curve.
+    /// - parameter c: The second control point used to define the shape of the curve.
+    /// - parameter d: The end point of the curve.
     convenience public init(begin: C4Point, control0: C4Point, control1: C4Point, end: C4Point) {
         self.init()
         endPoints = (begin, end)
         controlPoints = (control0, control1)
         updatePath()
     }
-
+    
     private var pauseUpdates = false
     func batchUpdates(updates: Void -> Void) {
         pauseUpdates = true
@@ -94,12 +91,12 @@ public class C4Curve : C4Shape {
         pauseUpdates = false
         updatePath()
     }
-
+    
     override func updatePath() {
         if pauseUpdates {
             return
         }
-
+        
         let curve = CGPathCreateMutable()
         CGPathMoveToPoint(curve, nil,
             CGFloat(endPoints.0.x), CGFloat(endPoints.0.y))
@@ -107,7 +104,7 @@ public class C4Curve : C4Shape {
             CGFloat(controlPoints.0.x), CGFloat(controlPoints.0.y),
             CGFloat(controlPoints.1.x), CGFloat(controlPoints.1.y),
             CGFloat(endPoints.1.x), CGFloat(endPoints.1.y))
-
+        
         self.frame = C4Rect(CGPathGetBoundingBox(curve))
         self.path = C4Path(path: curve)
         adjustToFitPath()
