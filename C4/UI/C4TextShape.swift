@@ -22,12 +22,12 @@ import UIKit
 import Foundation
 
 public class C4TextShape : C4Shape {
-    private var text: String = "" {
+    public var text: String = "" {
         didSet {
             updatePath()
         }
     }
-    private var font: C4Font {
+    public var font: C4Font {
         didSet {
             updatePath()
         }
