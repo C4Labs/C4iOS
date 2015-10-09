@@ -70,6 +70,8 @@ public class C4Image: C4View {
             return
         }
         let image = UIImage(named: filename, inBundle: NSBundle.mainBundle(), compatibleWithTraitCollection: nil)
+        
+        assert(image != nil, "Could not create an image from the filename you passed.")
         self.init(uiimage: image!, scale: scale)
     }
     
@@ -196,6 +198,7 @@ public class C4Image: C4View {
     /// - parameter data: An NSData object.
     convenience public init(data: NSData, scale: Double) {
         let image = UIImage(data: data)
+        assert(image != nil, "Could not create an image from the data you provided")
         self.init(uiimage: image!, scale: scale)
     }
     
@@ -276,6 +279,8 @@ public class C4Image: C4View {
             true,
             CGColorRenderingIntent.RenderingIntentDefault
         )
+        
+        assert(cgim != nil, "CGImageCreate failed to produce a valid image from the pixel data and size you specified.")
         
         self.init(cgimage: cgim!)
     }
