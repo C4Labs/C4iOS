@@ -20,6 +20,11 @@
 import UIKit
 import AVFoundation
 
+///This document describes the C4Movie class. You use a C4Movie object to implement the playback of video files, it encapulates an AVQueuePlayer object which handles the loading and control of assets.
+///
+///The C4Movie class is meant to simplify the addition of videos to your application. It is also a subclass of C4View, and so has all the common animation, interaction and notification capabilities.
+///
+///A C4Movie’s resizing behaviour is to map itself to the edges of its visible frame. This functionality implicitly uses AVLayerVideoGravityResize as its layer’s default gravity. You can change the frame of the movie from an arbitrary shape back to its original proportion by using its originalSize, originalRatio, or by independently setting either its width or height properties.
 public class C4Movie: C4View {
     var player : AVQueuePlayer?
     var currentItem : AVPlayerItem?
