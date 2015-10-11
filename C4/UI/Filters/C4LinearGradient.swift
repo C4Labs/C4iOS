@@ -19,11 +19,27 @@
 
 import CoreImage
 
+///  Generates a gradient that varies along a linear axis between two defined endpoints.
+///
+///  ````
+///  let logo = C4Image(frame: canvas.frame)
+///  var gradient = C4LinearGradient()
+///  gradient.points = [logo.origin,logo.frame.max]
+///  logo.generate(gradient)
+///  canvas.add(logo)
+///  ````
 public struct C4LinearGradient : C4Generator {
+    /// The name of the Core Image filter.
     public let filterName = "CISmoothLinearGradient"
-    public var colors: [C4Color] = [C4Color(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0),C4Color(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)]
-    public var points: [C4Point] = [C4Point(),C4Point(1,1)]
+    /// The colors of the filter. Defaults to [C4Pink,C4Blue]
+    public var colors: [C4Color] = [C4Pink,C4Blue]
+    /// The endpoints of the filter. Defaults to [C4Point(),C4Point(100,100)]'
+    public var points: [C4Point] = [C4Point(),C4Point(100,100)]
+
+    ///Initializes a new filter
     public init() {}
+
+    ///Applies the properties of the receiver to create a new CIFilter object
     public func createCoreImageFilter() -> CIFilter {
         let filter = CIFilter(name: filterName)!
         filter.setDefaults()
