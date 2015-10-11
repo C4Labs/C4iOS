@@ -19,7 +19,13 @@
 
 import UIKit
 
+/// C4StoredAnimation is a concrete subclass of C4Animation. 
+///
+/// A C4StoredAnimation object is able to apply a set of stored animation properties to an object.
+///
+/// This class is useful for serializing and deserializing animations.
 public class C4StoredAnimation : C4Animation {
+    /// A dictionary of keys whose values will be applied to animatable properties of the receiver. The keys should map directly to the names of animatable properies.
     public var values = [String: AnyObject]()
 
     /// Initiates the changes specified in the receivers `animations` block.
