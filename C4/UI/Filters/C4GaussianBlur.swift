@@ -19,13 +19,25 @@
 
 import CoreImage
 
+///  Spreads source pixels by an amount specified by a Gaussian distribution.
+///
+///  ````
+///  let logo = C4Image("logo")
+///  logo.apply(C4GaussianBlur())
+///  canvas.add(logo)
+///  ````
 public struct C4GaussianBlur : C4Filter {
+    /// The name of the Core Image filter.
     public let filterName = "CIGaussianBlur"
-    public var radius: Double = 10
-    
-    public init() {}
-    public init(radius: Double) { self.radius = radius }
-    
+
+    /// The radius of the blur. Defaults to 10.0
+    public var radius: Double
+
+    ///  Initializes a new filter
+    ///  - parameter radius: a Double value
+    public init(radius: Double = 5.0) { self.radius = radius }
+
+    ///Applies the properties of the receiver to create a new CIFilter object
     public func createCoreImageFilter(inputImage: CIImage) -> CIFilter {
         let filter = CIFilter(name: filterName)!
         filter.setDefaults()
