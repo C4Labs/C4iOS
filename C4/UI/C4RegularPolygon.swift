@@ -20,8 +20,10 @@
 import Foundation
 import CoreGraphics
 
+///C4RegularPolygon is a is a concrete subclass of C4Polygon that defines a shape whose sides are uniform (e.g. pentagon, octagon, etc.).
+///
+/// This class defines two variables called `sides` and `phase` that represent the number of sides and the initial rotation of the shape (respectively). The default shape is a hexagon.
 public class C4RegularPolygon: C4Shape {
-    
     
     /// Returns the number of sides in the polygon.
     ///
@@ -77,11 +79,15 @@ public class C4RegularPolygon: C4Shape {
         self.view.frame = CGRect(frame)
         updatePath()
     }
-    
+
+    /// Initializes a new C4RegularPolygon.
+    ///
+    /// Default values are are sides = 6 (i.e. a hexagon), phase = 0 and frame = {0,0,0,0}.
     public override init() {
         super.init()
     }
-    
+
+    /// Initializes a new C4RegularPolygon from data in a given unarchiver.
     required public init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
