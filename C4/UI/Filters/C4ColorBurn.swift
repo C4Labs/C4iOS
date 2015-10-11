@@ -19,10 +19,25 @@
 
 import CoreImage
 
+///  Darkens the background image samples to reflect the source image samples.
+///
+///  The following example uses an image to burn itself.
+///  ````
+///  let logo = C4Image("logo")
+///  var colorburn = C4ColorBurn()
+///  colorburn.background = logo
+///  logo.apply(colorburn)
+///  canvas.add(logo)
+///  ````
 public struct C4ColorBurn : C4Filter {
+    /// The name of the Core Image filter.
     public let filterName = "CIColorBurnBlendMode"
+    /// The background image to use for the burn.
     public var background: C4Image = C4Image()
+    ///Initializes a new filter
     public init() {}
+
+    ///Applies the properties of the receiver to create a new CIFilter object
     public func createCoreImageFilter(inputImage: CIImage) -> CIFilter {
         let filter = CIFilter(name: filterName)!
         filter.setDefaults()
