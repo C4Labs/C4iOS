@@ -19,13 +19,29 @@
 
 import CoreImage
 
+///  Generates a checkerboard pattern
+///
+///  ````
+///  let image = C4Image(frame: canvas.frame)
+///  image.generate(C4Checkerboard())
+///  canvas.add(image)
+///  ````
 public struct C4Checkerboard : C4Generator {
+    ///The name of the Core Image filter.
     public let filterName = "CICheckerboardGenerator"
-    public var colors: [C4Color] = [C4Color(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0),C4Color(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)]
+    ///The colors of the checkerboard. Defaults to: [C4Pink, C4Blue]
+    public var colors: [C4Color] = [C4Pink, C4Blue]
+    ///The center of the pattern. Defaults to {0,0}
     public var center: C4Point = C4Point()
+    ///The sharpness of the pattern's edges. Defaults to 1.0
     public var sharpness: Double = 1
+    ///The width of the pattern's segments. Defaults to 5.0
     public var width: Double = 5.0
+
+    ///Initializes a new filter
     public init() {}
+
+    ///Applies the properties of the receiver to create a new CIFilter object
     public func createCoreImageFilter() -> CIFilter {
         let filter = CIFilter(name: filterName)!
         filter.setDefaults()
