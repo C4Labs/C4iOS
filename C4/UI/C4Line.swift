@@ -20,11 +20,16 @@
 import Foundation
 import CoreGraphics
 
+///C4Line is a is a concrete subclass of C4Polygon that contains only two points.
+///
+///This subclass overrides the `points` variable so that it can only ever have 2 points, and also has an `endPoints` variable that allows the user to edit either end of the line (animatable).
 public class C4Line: C4Polygon {
 
-    /// Returns a tuple of points that make up the the begin and end points of the line.
+    /// The end points the receiver's line. Animatable.
     ///
     /// Assigning a tuple of C4Point values to this object will cause the receiver to update itself.
+    ///
+    /// - returns: A tuple (2) of C4Points that make up the the begin and end points of the line.
     public var endPoints: (C4Point,C4Point) = (C4Point(),C4Point(100,0)){
         didSet {
             updatePath()
@@ -43,7 +48,9 @@ public class C4Line: C4Polygon {
         adjustToFitPath()
     }
 
-    /// Returns the receiver's center. Animatable.
+    /// The center point (top-left) of the receiver's frame. Animatable.
+    ///
+    /// - returns: A C4Point, the receiver's center.
     public override var center : C4Point {
         get {
             return C4Point(view.center)
@@ -57,7 +64,9 @@ public class C4Line: C4Polygon {
         }
     }
 
-    /// Returns the receiver's origin. Animatable.
+    /// The origin point (top-left) of the receiver's frame. Animatable.
+    ///
+    /// - returns: A C4Point, the receiver's origin.
     public override var origin : C4Point {
         get {
             return C4Point(view.frame.origin)
@@ -71,6 +80,11 @@ public class C4Line: C4Polygon {
         }
     }
 
+    /// The points that make up the line. Animatable.
+    ///
+    /// Assigning an array of C4Point values to this object will cause the receiver to update itself.
+    ///
+    /// - returns: A C4Point array of 2 points.
     public override var points : [C4Point] {
         get {
             return [endPoints.0,endPoints.1]
@@ -130,7 +144,7 @@ public class C4Line: C4Polygon {
     /// let l = C4Line((a,b))
     /// ````
     ///
-    /// - parameter points: An tuple of C4Point structs.
+    /// - parameter points: A tuple of C4Point structs.
     convenience public init(_ points: (C4Point, C4Point)) {
         self.init(frame: C4Rect(points))
         let path = C4Path()
