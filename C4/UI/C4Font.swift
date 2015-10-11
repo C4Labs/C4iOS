@@ -20,6 +20,7 @@
 import QuartzCore
 import UIKit
 
+/// C4Font objects represent fonts to an application, providing access to characteristics of the font and assistance in laying out glyphs relative to one another.
 public class C4Font : NSObject {
     internal var internalFont: UIFont?
     
@@ -164,7 +165,7 @@ public class C4Font : NSObject {
         }
     }
     
-    /// The receiver’s point size, or the effective vertical point size for a font with a nonstandard matrix. (read-only)
+    /// The receiver’s point size, or the effective vertical point size for a font with a nonstandard matrix. (read-only) Defaults to 12.0
     public var pointSize : Double {
         get {
             return Double(internalFont!.pointSize)
