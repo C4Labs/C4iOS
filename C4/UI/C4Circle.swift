@@ -20,6 +20,7 @@
 import Foundation
 import CoreGraphics
 
+///C4Circle is a concrete subclass of C4Ellipse that has a special initialzer that creates a uniform ellipse.
 public class C4Circle: C4Ellipse {
     
     /// Creates a circle.
