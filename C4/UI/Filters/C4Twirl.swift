@@ -19,12 +19,27 @@
 
 import CoreImage
 
+///  Rotates pixels around a point to give a twirling effect.
+///
+///  ````
+///  let logo = C4Image("logo")
+///  logo.apply(C4Twirl())
+///  canvas.add(logo)
+///  ````
 public struct C4Twirl : C4Filter {
+    /// The name of the Core Image filter.
     public let filterName = "CITwirlDistortion"
-    public var center: C4Point = C4Point(150,150)
-    public var radius: Double = 300.0
-    public var angle: Double = M_PI_4
+    /// The center of the twirl effet. Defaults to {0,0}
+    public var center: C4Point = C4Point()
+    /// The radius of the twirl effect. Defaults to 100.o
+    public var radius: Double = 100.0
+    /// The angle of the twirl effect. Defaults to 𝞹
+    public var angle: Double = M_PI
+
+    ///Initializes a new filter
     public init() {}
+
+    ///Applies the properties of the receiver to create a new CIFilter object
     public func createCoreImageFilter(inputImage: CIImage) -> CIFilter {
         let filter = CIFilter(name: filterName)!
         filter.setDefaults()
