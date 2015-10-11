@@ -352,6 +352,7 @@
 				A9D4F6941B534F9F00F937AB /* C4Shape.swift */,
 				A9D4F6951B534F9F00F937AB /* C4ShapeLayer.swift */,
 				A9D4F6961B534F9F00F937AB /* C4Star.swift */,
+				61BBAF621BC372BD00A03FD0 /* C4StoredAnimation.swift */,
 				A9D4F6971B534F9F00F937AB /* C4TextShape.swift */,
 				1F8252CB1BB3C65E0090E98A /* C4Timer.swift */,
 				A9D4F6981B534F9F00F937AB /* C4Triangle.swift */,
@@ -364,7 +365,6 @@
 				A9D4F69E1B534F9F00F937AB /* C4Wedge.swift */,
 				A9D4F6AA1B534F9F00F937AB /* UIGestureRecognizer+Closure.swift */,
 				A9D4F6AB1B534F9F00F937AB /* UIViewController+C4View.swift */,
-				61BBAF621BC372BD00A03FD0 /* C4StoredAnimation.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
