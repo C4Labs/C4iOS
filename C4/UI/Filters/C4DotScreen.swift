@@ -19,13 +19,29 @@
 
 import CoreImage
 
+///  Simulates the dot patterns of a halftone screen.
+///
+///  ````
+///  let logo = C4Image("logo")
+///  logo.apply(C4DotScreen())
+///  canvas.add(logo)
+///  ````
 public struct C4DotScreen : C4Filter {
+    /// The name of the Core Image filter.
     public let filterName = "CIDotScreen"
+    /// The center of the pattern. Defaults to {0,0}
     public var center: C4Point = C4Point()
+    /// The width of the dots. Defaults to 2.0
     public var width: Double = 2.0
+    /// The angle of the pattern. Defaults to 0.0
     public var angle: Double = 0
+    /// The sharpness of the edges of the pattern. Defaults to 0.5
     public var sharpness: Double = 0.5
+
+    ///Initializes a new filter
     public init() {}
+
+    ///Applies the properties of the receiver to create a new CIFilter object
     public func createCoreImageFilter(inputImage: CIImage) -> CIFilter {
         let filter = CIFilter(name: filterName)!
         filter.setDefaults()
