@@ -2,11 +2,23 @@
 
 import QuartzCore
 
-
 /// Extension for CAShapeLayer that allows overriding the actions for specific properties.
 public class C4ShapeLayer: CAShapeLayer {
+    /// A boolean value that, when true, prevents the animation of a shape's properties.
+    ///
+    /// ````
+    /// C4ShapeLayer.disableActions = true
+    /// circle.fillColor = red
+    /// C4ShapeLayer.disableActions = false
+    ///
+    /// This value can be set globally, after which changes to any shape's properties will be immediate.
     public static var disableActions = true
-    
+
+    ///  This method searches for the given action object of the layer. Actions define dynamic behaviors for a layer. For example, the animatable properties of a layer typically have corresponding action objects to initiate the actual animations. When that property changes, the layer looks for the action object associated with the property name and executes it. You can also associate custom action objects with your layer to implement app-specific actions.
+    ///
+    ///  - parameter key: The identifier of the action.
+    ///
+    ///  - returns: the action object assigned to the specified key.
     public override func actionForKey(key: String) -> CAAction? {
         if C4ShapeLayer.disableActions == true {
             return nil
@@ -59,6 +71,9 @@ public class C4ShapeLayer: CAShapeLayer {
 }
 
 extension CABasicAnimation {
+    ///  Configures basic options for a CABasicAnimation.
+    ///
+    ///  The options set in this method are favorable for the inner workings of C4's animation behaviours.
     public func configureOptions() {
         if let animation = C4ViewAnimation.currentAnimation {
             self.autoreverses = animation.autoreverses
