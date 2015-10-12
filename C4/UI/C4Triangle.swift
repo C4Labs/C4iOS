@@ -20,6 +20,7 @@
 import Foundation
 import CoreGraphics
 
+/// C4Triangle defines a concrete subclass of C4Polygon whose shape is a closed triangle.
 public class C4Triangle: C4Polygon {
     
     /// Initializes a new C4Triangle using the specified array of points.
