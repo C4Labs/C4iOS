@@ -20,6 +20,7 @@
 import QuartzCore
 import UIKit
 
+/// C4Shape is a concrete subclass of C4View that draws a bezier path in its coordinate space.
 public class C4Shape: C4View {
     
     internal class ShapeView : UIView {
@@ -33,7 +34,8 @@ public class C4Shape: C4View {
             return C4ShapeLayer.self
         }
     }
-    
+
+    /// C4Shape's contents are drawn on a C4ShapeLayer.
     public var shapeLayer: C4ShapeLayer {
         get {
             return self.shapeView.shapeLayer
@@ -67,7 +69,8 @@ public class C4Shape: C4View {
         self.init()
         self.view.frame = CGRect(frame)
     }
-    
+
+    ///  Initializes a basic C4Shape.
     public override init() {
         super.init()
         self.view = ShapeView()
