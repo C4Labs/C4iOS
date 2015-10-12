@@ -21,20 +21,23 @@ import QuartzCore
 import UIKit
 import Foundation
 
+/// C4TextShape defines a concrete subclass of C4Shape that draws a bezier curve whose shape looks like text.
 public class C4TextShape : C4Shape {
-    public var text: String = "" {
+    /// The text used to define the shape's path. Defaults to "C4".
+    public var text: String = "C4" {
         didSet {
             updatePath()
         }
     }
-    public var font: C4Font {
+    /// The font used to define the shape's path. Defaults to AvenirNext-DemiBold, 80pt.
+    public var font = C4Font(name: "AvenirNext-DemiBold", size:80){
         didSet {
             updatePath()
         }
     }
-    
+
+    ///  Initializes a basic C4 text shape.
     public override init() {
-        font = C4Font(name: "AvenirNext-DemiBold", size:80)
     }
     
     /// Initializes a new C4TextShape from a specifed string and a font
