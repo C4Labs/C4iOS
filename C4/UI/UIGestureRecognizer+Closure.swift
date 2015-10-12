@@ -125,7 +125,10 @@ extension UIPanGestureRecognizer {
             }
         }
     }
-    
+
+    /// The translation of the pan gesture in the coordinate system of the specified view.
+    ///
+    /// The x and y values report the total translation over time. They are not delta values from the last time that the translation was reported. Apply the translation value to the state of the view when the gesture is first recognized—do not concatenate the value each time the handler is called.
     public var translation: C4Vector {
         get {
             if let view = referenceView {
@@ -134,7 +137,10 @@ extension UIPanGestureRecognizer {
             return C4Vector()
         }
     }
-    
+
+    /// The velocity of the pan gesture in the coordinate system of the specified view.
+    ///
+    /// The velocity of the pan gesture, which is expressed in points per second. The velocity is broken into horizontal and vertical components.
     public var velocity: C4Vector {
         get {
             return C4Vector(velocityInView(view))
