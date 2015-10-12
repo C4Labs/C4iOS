@@ -19,9 +19,13 @@
 
 import CoreGraphics
 
+///  The C4Vector class is used for coordinate values and direction vectors.
 public struct C4Vector : Equatable, CustomStringConvertible {
+    /// The x-value of the vector.
     public var x: Double = 0
+    /// The y-value of the vector.
     public var y: Double = 0
+    /// The z-value of the vector.
     public var z: Double = 0
     
     /// Creates a vector with default values {0,0,0,}
@@ -31,8 +35,7 @@ public struct C4Vector : Equatable, CustomStringConvertible {
     /// ````
     public init() {
     }
-    
-    
+
     /// Create a vector with a cartesian representation: an x and a y coordinates. The `z` variable is optional.
     ///
     /// ````
@@ -70,7 +73,25 @@ public struct C4Vector : Equatable, CustomStringConvertible {
         y = magnitude * sin(heading)
         self.z = z
     }
-    
+
+    ///  Initializes a C4Vector from a CGPoint
+    ///
+    ///  - parameter point: a previously initialized CGPoint
+    public init(_ point: CGPoint) {
+        x = Double(point.x)
+        y = Double(point.y)
+        z = 0
+    }
+
+    ///  Initializes a C4Vector from a C4Point
+    ///
+    ///  - parameter point: a previously initialized C4Point
+    public init(_ point: C4Point) {
+        x = point.x
+        y = point.y
+        z = 0
+    }
+
     /// The polar representation magnitude of the vector.
     ///
     /// ````
@@ -273,6 +294,8 @@ public func - (lhs: C4Vector, rhs: C4Vector) -> C4Vector {
     return C4Vector(x: lhs.x - rhs.x, y: lhs.y - rhs.y, z: lhs.z - rhs.z)
 }
 
+infix operator ⋅ { associativity left precedence 150 }
+
 /// Returns a new vector that is the dot product of the both input vectors. **Use this instead of v.dot(v)**
 ///
 /// ````
@@ -280,7 +303,6 @@ public func - (lhs: C4Vector, rhs: C4Vector) -> C4Vector {
 /// let v2 = C4Vector(x: -1, y: 1)
 /// v1 ⋅ v2 //-> 0.0
 /// ````
-infix operator ⋅ { associativity left precedence 150 }
 public func ⋅ (lhs: C4Vector, rhs: C4Vector) -> Double {
     return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z
 }
@@ -318,13 +340,4 @@ public func * (lhs: C4Vector, rhs: Double) -> C4Vector {
 /// ````
 public prefix func - (vector: C4Vector) -> C4Vector {
     return C4Vector(x: -vector.x, y: -vector.y, z: -vector.z)
-}
-
-/// Initializes a C4Vector from a CGPoint
-public extension C4Vector {
-    public init(_ point: CGPoint) {
-        x = Double(point.x)
-        y = Double(point.y)
-        z = 0
-    }
 }
