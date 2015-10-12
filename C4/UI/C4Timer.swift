@@ -19,13 +19,27 @@
 
 import Foundation
 
+/// You use the C4Timer class to create timer objects or, more simply, timers. A timer waits until a certain time interval has elapsed and then fires, executing a specified block of code.
 public final class C4Timer : NSObject {
+    /// The current number of times the timer has fired.
     public internal(set) var step = 0
+    /// The number of times the timer will fire.
     public internal(set) var count: Int
+    /// The time interval between firing.
     public internal(set) var interval: Double
     var action: () -> ()
     weak var timer: NSTimer?
 
+    ///  Initializes a new timer.
+    ///
+    ///  ````
+    ///  let t = C4Timer(0.25) {
+    ///      print("tick")
+    ///  }
+    ///  ````
+    ///  - parameter interval: the time between firing
+    ///  - parameter count:    the total number of times the timer should fire, defaults to Int.max
+    ///  - parameter action:   a block of code to execute
     public init(interval: Double, count: Int = Int.max, action: () -> ()) {
         self.action = action
         self.count = count
@@ -33,6 +47,7 @@ public final class C4Timer : NSObject {
         super.init()
     }
 
+    ///  Tells the timer to fire, i.e. execute its block of code.
     public func fire() {
         action()
         step++
@@ -41,6 +56,7 @@ public final class C4Timer : NSObject {
         }
     }
 
+    ///  Tells the timer to attach itself to the main run loop of an application, after calling `start` the timer will continue firing until the timer reaches its `count` or is otherwise stopped.
     public func start() {
         guard timer == nil else {
             return // Timer already running
@@ -51,10 +67,12 @@ public final class C4Timer : NSObject {
         timer = t
     }
 
+    ///  Pauses the execution of the timer.
     public func pause() {
         timer?.invalidate()
     }
 
+    ///  Stops the timer and resets its step to 0.
     public func stop() {
         pause()
         step = 0
