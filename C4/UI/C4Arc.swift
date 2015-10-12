@@ -20,6 +20,7 @@
 import QuartzCore
 import UIKit
 
+///  C4Arc is a concrete subclass of C4Shape that has a special initialzer that creates an arc whose shape is defined by rotating around a specified point.
 public class C4Arc : C4Shape {
     
     /// Creates an arc, whose edge is always drawn on the shorter circumference.
