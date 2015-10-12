@@ -20,6 +20,7 @@
 import Foundation
 import CoreGraphics
 
+///  C4Polygon is a concrete subclass of C4Shape that has a special initialzer that creates a non-uniform shape made up of 3 or more points.
 public class C4Polygon: C4Shape {
     
     /// Returns the array of points that make up the polygon.
@@ -75,12 +76,13 @@ public class C4Polygon: C4Shape {
         self.points = [C4Point]()
         super.init()
     }
-    
+
+    /// Initializes a new C4Polygon from data in a given unarchiver.
     required public init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    internal override func updatePath() {
+    override func updatePath() {
         if points.count > 1 {
             let p = C4Path()
             p.moveToPoint(points[0])
@@ -93,7 +95,10 @@ public class C4Polygon: C4Shape {
             adjustToFitPath()
         }
     }
-    
+
+    ///  Closes the shape.
+    ///
+    ///  This method appends a line between the shape's last point and its first point.
     public func close() {
         let p = path
         p?.closeSubpath()
