@@ -20,6 +20,7 @@
 import QuartzCore
 import UIKit
 
+///  C4Curve is a concrete subclass of C4Shape that has a special initialzer that creates an bezier whose shape is defined by its end points and two control points.
 public class C4Curve : C4Shape {
     
     /// The beginning and end points of the receiver. Animatable.
@@ -35,7 +36,8 @@ public class C4Curve : C4Shape {
             updatePath()
         }
     }
-    
+
+    /// The center of the curve's view.
     public override var center : C4Point {
         get {
             return C4Point(view.center)
@@ -51,7 +53,7 @@ public class C4Curve : C4Shape {
         }
     }
     
-    
+    /// The origin of the curve's view.
     public override var origin : C4Point {
         get {
             return C4Point(view.frame.origin)
