@@ -21,6 +21,9 @@ import QuartzCore
 import UIKit
 
 extension C4Image {
+    ///  Applies a generator to the receiver's contents.
+    ///
+    ///  - parameter generator: a C4Generator
     public func generate(generator: C4Generator) {
         let crop = CIFilter(name: "CICrop")!
         crop.setDefaults()
