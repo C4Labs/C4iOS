@@ -20,11 +20,21 @@
 import Foundation
 import UIKit
 
+/// C4ViewAnimation is a concrete subclass of C4Animation whose execution blocks affect properties of view-based objects.
 public class C4ViewAnimation : C4Animation {
+    /// The amount of time to way before executing the animation.
     public var delay: NSTimeInterval = 0
 
+    /// A block animations to execute.
     public var animations: () -> Void
-    
+
+    ///  Initializes an animation object with a block of animtinos to execute.
+    ///
+    ///  let anim = C4ViewAnimation() {
+    ///       aView.backgroundColor = C4Blue
+    ///  }
+    ///
+    ///  - parameter animations: a block of animations to execute.
     public init(_ animations: () -> Void) {
         self.animations = animations
     }
@@ -125,7 +135,8 @@ public class C4ViewAnimationSequence: C4Animation {
     public init(animations: [C4ViewAnimation]) {
         self.animations = animations
     }
-    
+
+    ///  Calling this method will tell the receiver to begin animating.
     public func animate() {
         if currentAnimationIndex != -1 {
             // Animation is already running
@@ -185,7 +196,8 @@ public class C4ViewAnimationGroup: C4Animation {
         self.animations = animations
         completed = [Bool](count: animations.count, repeatedValue: false)
     }
-    
+
+    ///  Calling this method will tell the receiver to begin animating.
     public func animate() {
         if !observers.isEmpty {
             // Animation is already running
