@@ -1,5 +1,22 @@
-//  Created by Alejandro Isaza on 2014-12-23.
-//  Copyright (c) 2014 C4. All rights reserved.
+// Copyright © 2014 C4
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions: The above copyright
+// notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+// IN THE SOFTWARE.
+
 
 import Foundation
 import UIKit
@@ -125,7 +142,10 @@ extension UIPanGestureRecognizer {
             }
         }
     }
-    
+
+    /// The translation of the pan gesture in the coordinate system of the specified view.
+    ///
+    /// The x and y values report the total translation over time. They are not delta values from the last time that the translation was reported. Apply the translation value to the state of the view when the gesture is first recognized—do not concatenate the value each time the handler is called.
     public var translation: C4Vector {
         get {
             if let view = referenceView {
@@ -134,7 +154,10 @@ extension UIPanGestureRecognizer {
             return C4Vector()
         }
     }
-    
+
+    /// The velocity of the pan gesture in the coordinate system of the specified view.
+    ///
+    /// The velocity of the pan gesture, which is expressed in points per second. The velocity is broken into horizontal and vertical components.
     public var velocity: C4Vector {
         get {
             return C4Vector(velocityInView(view))
