@@ -20,24 +20,44 @@
 import UIKit
 import CoreGraphics
 
+/// A C4Color object whose RGB value is 0, 0, 0 and whose alpha value is 1.0.
 public let black     = C4Color(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
+/// A C4Color object whose RGB value is 0.33, 0.33, 0.33 and whose alpha value is 1.0.
 public let darkGray  = C4Color(red: 1.0/3.0, green: 1.0/3.0, blue: 1.0/3.0, alpha: 1.0)
+/// A C4Color object whose RGB value is 0.66, 0.66, 0.66 and whose alpha value is 1.0.
 public let lightGray = C4Color(red: 2.0/3.0, green: 2.0/3.0, blue: 2.0/3.0, alpha: 1.0)
+/// A C4Color object whose RGB value is 1.0, 1.0, 1.0 and whose alpha value is 1.0.
 public let white     = C4Color(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+/// A C4Color object whose RGB value is 0.5, 0.5, 0.5 and whose alpha value is 1.0.
 public let gray      = C4Color(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0)
+/// A C4Color object whose RGB value is 1.0, 0.0, 0.0 and whose alpha value is 1.0.
 public let red       = C4Color(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0)
+/// A C4Color object whose RGB value is 0.0, 1.0, 0.0 and whose alpha value is 1.0.
 public let green     = C4Color(red: 0.0, green: 1.0, blue: 0.0, alpha: 1.0)
+/// A C4Color object whose RGB value is 0.0, 0.0, 1.0 and whose alpha value is 1.0.
 public let blue      = C4Color(red: 0.0, green: 0.0, blue: 1.0, alpha: 1.0)
+/// A C4Color object whose RGB value is 0.0, 1.0, 1.0 and whose alpha value is 1.0.
 public let cyan      = C4Color(red: 0.0, green: 1.0, blue: 1.0, alpha: 1.0)
+/// A C4Color object whose RGB value is 1.0, 1.0, 0.0 and whose alpha value is 1.0.
 public let yellow    = C4Color(red: 1.0, green: 1.0, blue: 0.0, alpha: 1.0)
+/// A C4Color object whose RGB value is 1.0, 0.0, 1.0 and whose alpha value is 1.0.
 public let magenta   = C4Color(red: 1.0, green: 0.0, blue: 1.0, alpha: 1.0)
+/// A C4Color object whose RGB value is 1.0, 0.5, 0.0 and whose alpha value is 1.0.
 public let orange    = C4Color(red: 1.0, green: 0.5, blue: 0.0, alpha: 1.0)
+/// A C4Color object whose RGB value is 0.5, 0.0, 0.5 and whose alpha value is 1.0.
 public let purple    = C4Color(red: 0.5, green: 0.0, blue: 0.5, alpha: 1.0)
+/// A C4Color object whose RGB value is 0.6, 0.4, 0.2 and whose alpha value is 1.0.
 public let brown     = C4Color(red: 0.6, green: 0.4, blue: 0.2, alpha: 1.0)
+/// A C4Color object whose RGB value is 0.0, 0.0, 0.0 and whose alpha value is 0.0.
 public let clear     = C4Color(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
+
+///A C4Color object whose RGB value is 1.0, 0.0, 0.475 and whose alpha value is 1.0.
 public let C4Pink    = C4Color(red: 1.0, green: 0.0, blue: 0.475, alpha: 1.0)
+///A C4Color object whose RGB value is 0.098, 0.271, 1.0 and whose alpha value is 1.0.
 public let C4Blue    = C4Color(red: 0.098, green: 0.271, blue: 1.0, alpha: 1.0)
+///A C4Color object whose RGB value is 0.0, 0.0, 0.541 and whose alpha value is 1.0.
 public let C4Purple  = C4Color(red: 0.0, green: 0.0, blue: 0.541, alpha: 1.0)
+///A C4Color object whose RGB value is 0.98, 0.98, 0.98 and whose alpha value is 1.0.
 public let C4Grey    = C4Color(red: 0.98, green: 0.98, blue: 0.98, alpha: 1.0)
 
 /// This document describes the C4Color object which represents color and sometimes opacity (alpha value). You can use C4Color
@@ -96,7 +116,14 @@ public class C4Color {
     public convenience init(_ color: UIColor) {
         self.init(color.CGColor)
     }
-    
+
+    ///  Initializes and returns a new C4Color object made up of a repeating pattern based on a specified C4Image.
+    ///
+    ///  ````
+    ///  let p = C4Color("pattern")
+    ///  ````
+    ///
+    ///  - parameter pattern: a String, the name of an image to use as a pattern.
     public convenience init(_ pattern: String) {
         self.init(UIColor(patternImage: UIImage(named: pattern)!))
     }
@@ -239,22 +266,21 @@ public class C4Color {
     }
 }
 
-// MARK: - Casting to UIColor
+// MARK: - Casting to UIColor and CIColor
 
-
-/// Initializes a UIColor object from a C4Color object.
-///
-/// - returns: A UIColor whose characteristics match the specified C4Color
 public extension UIColor {
+    /// Initializes a UIColor object from a C4Color object.
+    ///
+    /// - returns: A UIColor whose characteristics match the specified C4Color
     public convenience init?(_ color: C4Color) {
         self.init(CGColor: color.CGColor)
     }
 }
 
-/// Initializes a CIColor object from a C4Color object.
-///
-/// - returns: A CIColor whose characteristics match the specified C4Color.
 public extension CIColor {
+    /// Initializes a CIColor object from a C4Color object.
+    ///
+    /// - returns: A CIColor whose characteristics match the specified C4Color.
     public convenience init(_ color: C4Color) {
         self.init(CGColor: color.CGColor)
     }
