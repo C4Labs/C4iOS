@@ -20,6 +20,10 @@
 import UIKit
 
 extension C4View {
+    ///  Sets the arbitrary keyed-data for the specified key.
+    ///
+    ///  - parameter value: The value for the key identified by _key_.
+    ///  - parameter key:   The name of one of the receiver's properties.
     public override func setValue(value: AnyObject?, forKey key: String) {
         switch key {
         case "frame":
@@ -51,6 +55,11 @@ extension C4View {
         }
     }
 
+    ///  Returns the arbitrary keyed-data specified by the given key.
+    ///
+    ///  - parameter key: The name of one of the receiver's properties.
+    ///
+    ///  - returns: The value for the data specified by the key.
     public override func valueForKey(key: String) -> AnyObject? {
         switch key {
         case "frame":
