@@ -198,7 +198,7 @@ public class C4Movie: C4View {
         reachedEndAction = action
     }
     
-    public func handleReachedEnd() {
+    func handleReachedEnd() {
         if self.loops {
             self.stop()
             self.play()
