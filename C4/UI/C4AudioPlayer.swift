@@ -20,6 +20,23 @@
 import UIKit
 import AVFoundation
 
+/// C4AudioPlayer provides playback of audio data from a file or memory.
+///
+///  Using an audio player you can:
+///
+///  Play sounds of any duration
+///
+///  Play sounds from files or memory buffers
+///
+///  Loop sounds
+///
+///  Play multiple sounds simultaneously, one sound per audio player, with precise synchronization
+///
+///  Control relative playback level, stereo positioning, and playback rate for each sound you are playing
+///
+///  Seek to a particular point in a sound file, which supports such application features as fast forward and rewind
+///
+///  Obtain data you can use for playback-level metering
 public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
     internal var currentPlayer = AVAudioPlayer()
     internal var audiofiles = [AVAudioPlayer]()
