@@ -20,6 +20,7 @@
 import Foundation
 import CoreGraphics
 
+///  C4Rectangle is a concrete subclass of C4Shape that has a special initialzer that creates a rectangle whose shape is determined by its frame.
 public class C4Rectangle: C4Shape {
     
     /// Returns the corner size for the receiver.
@@ -58,7 +59,7 @@ public class C4Rectangle: C4Shape {
         updatePath()
     }
     
-    override public func updatePath() {
+    override func updatePath() {
         let newPath = C4Path()
         newPath.addRoundedRect(bounds, cornerWidth: corner.width, cornerHeight: corner.height)
         path = newPath
