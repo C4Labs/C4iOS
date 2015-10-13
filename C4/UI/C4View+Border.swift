@@ -31,7 +31,12 @@ public struct Border {
     
     /// Returns the width of the border.
     public var width: Double
-    
+
+    /// Initializes a new border struct with the following defaults:
+    ///
+    /// radius = 0.0
+    /// color = black
+    /// width = 0.0
     public init() {
         color = C4Color(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
         radius = 0.0
