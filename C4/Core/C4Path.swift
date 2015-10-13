@@ -38,12 +38,16 @@ public enum FillRule {
 @IBDesignable
 public class C4Path: Equatable {
     internal var internalPath: CGMutablePathRef = CGPathCreateMutable()
-    
+
+    ///  Initializes an empty C4Path.
     public init() {
         internalPath = CGPathCreateMutable()
         CGPathMoveToPoint(internalPath, nil, 0, 0)
     }
-    
+
+    ///  Initializes a new C4Path from an existing CGPathRef.
+    ///
+    ///  - parameter path: a previously initialized CGPathRef
     public init(path: CGPathRef) {
         internalPath = CGPathCreateMutableCopy(path)!
     }
@@ -71,7 +75,8 @@ public class C4Path: Equatable {
     public func copy() -> C4Path {
         return C4Path(path: CGPathCreateMutableCopy(internalPath)!)
     }
-    
+
+    /// A CGPathRef representation of the receiver's path.
     public var CGPath: CGPathRef {
         get {
             return internalPath
@@ -85,7 +90,7 @@ public func == (left: C4Path, right: C4Path) -> Bool {
 }
 
 extension C4Path {
-    
+
     /// Return the current point of the current subpath.
     public var currentPoint: C4Point {
         get {
