@@ -154,8 +154,8 @@ public func <= (lhs: C4Size, rhs: C4Size) -> Bool {
 }
 
 // MARK: - Casting to CGSize
-/// Initializes a new CGSize from a C4Size
 public extension CGSize {
+    /// Initializes a new CGSize from a C4Size
     public init(_ size: C4Size) {
         width = CGFloat(size.width)
         height = CGFloat(size.height)
