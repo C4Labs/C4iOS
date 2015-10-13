@@ -20,6 +20,7 @@
 import Foundation
 import CoreGraphics
 
+///  C4Ellipse is a concrete subclass of C4Shape that has a special initialzer that creates an ellipse whose shape is defined by the object's frame.
 public class C4Ellipse: C4Shape {
     
     /// Creates an ellipse.
@@ -36,7 +37,7 @@ public class C4Ellipse: C4Shape {
         updatePath()
     }
     
-    override public func updatePath() {
+    override func updatePath() {
         let newPath = C4Path()
         newPath.addEllipse(bounds)
         path = newPath
