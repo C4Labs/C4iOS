@@ -47,6 +47,7 @@ public class C4Arc : C4Shape {
     /// - parameter radius:    The radius of the arc
     /// - parameter start:     The angle (in radians) that determines the starting point of the arc, measured from the x-axis in the current user space.
     /// - parameter end:       The angle (in radians) that determines the ending point of the arc, measured from the x-axis in the current user space.    ///
+    /// - parameter clockwise: If true, the arc draws clockwise from start to end (counter clockwise if false)
     convenience public init(center: C4Point, radius: Double, start: Double, end: Double, clockwise: Bool) {
         let arcRect = CGRectMakeFromArc(CGPoint(center),radius: CGFloat(radius),startAngle: CGFloat(start),endAngle: CGFloat(end), clockwise: clockwise);
         self.init(frame: C4Rect(arcRect))
