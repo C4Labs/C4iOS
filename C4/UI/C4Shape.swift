@@ -90,6 +90,17 @@ public class C4Shape: C4View {
         view.frame = view.bounds
     }
     
+    /// Returns the receiver's frame. Animatable.
+    public override var frame: C4Rect {
+        get {
+            return C4Rect(view.frame)
+        }
+        set {
+            view.frame = CGRect(newValue)
+            updatePath()
+        }
+    }
+    
     /// The line width used when stroking the path. Defaults to 1.0. Animatable.
     @IBInspectable
     public var lineWidth: Double {
