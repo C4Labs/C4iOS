@@ -116,22 +116,16 @@ public class C4Line: C4Polygon {
     /// ````
     ///
     /// - parameter points: An array of C4Point structs.
-    convenience public init(var _ points: [C4Point]) {
+    public override init(_ points: [C4Point]) {
+        let firstTwo = [C4Point](points[0...1])
+        super.init(firstTwo)
 
-        if points.count > 2 {
-            repeat {
-                points.removeLast()
-            } while points.count > 2
-        }
-
-        self.init(frame: C4Rect(points))
         let path = C4Path()
-        self.points = points
         path.moveToPoint(points[0])
         for i in 1..<points.count {
             path.addLineToPoint(points[i])
         }
-        self.path = path
+
         adjustToFitPath()
     }
 
@@ -145,14 +139,9 @@ public class C4Line: C4Polygon {
     /// ````
     ///
     /// - parameter points: A tuple of C4Point structs.
-    convenience public init(_ points: (C4Point, C4Point)) {
-        self.init(frame: C4Rect(points))
-        let path = C4Path()
+    public init(_ points: (C4Point, C4Point)) {
         self.endPoints = points
-        path.moveToPoint(endPoints.0)
-        path.addLineToPoint(endPoints.1)
-        self.path = path
-        adjustToFitPath()
+        super.init([points.0, points.1])
     }
     
     /// Initializes a new C4Line using two specified points.
@@ -166,9 +155,13 @@ public class C4Line: C4Polygon {
     ///
     /// - parameter begin: The start point of the line.
     /// - parameter end: The end point of the line.
-    convenience public init(begin: C4Point, end: C4Point) {
-        let points = (begin,end)
+    public convenience init(begin: C4Point, end: C4Point) {
+        let points = (begin, end)
         self.init(points)
+    }
+
+    required public init(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     private var pauseUpdates = false

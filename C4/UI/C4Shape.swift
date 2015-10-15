@@ -45,40 +45,31 @@ public class C4Shape: C4View {
     internal var shapeView: ShapeView {
         return self.view as! ShapeView
     }
-    
-    /// Initializest a new C4Shape from a specified C4Path.
-    ///
-    /// - parameter path: A C4Path around which the new shape is created with the frame of the new shape fitting the path on
-    /// screen.
-    convenience public init(_ path: C4Path) {
-        self.init(frame: path.boundingBox())
-        self.path = path
-        updatePath()
-        //init methods in swift don't run instance methods, so we have to add the adjustToFitPath functionality manually
-        var t = CGAffineTransformMakeTranslation(CGFloat(-origin.x),CGFloat(-origin.y))
-        let p = CGPathCreateCopyByTransformingPath(path.CGPath, &t)
-        self.shapeLayer.path = p
-    }
-    
-    /// Initializes a new C4Shape from a specified frame.
-    ///
-    /// Shapes initialized this way will not have a path.
-    ///
-    /// - parameter frame: The frame for the new shape.
-    convenience public init(frame: C4Rect) {
-        self.init()
-        self.view.frame = CGRect(frame)
-    }
 
-    ///  Initializes a basic C4Shape.
-    public override init() {
+    ///  Initializes an empty C4Shape.
+    override init() {
         super.init()
+
         self.view = ShapeView()
         strokeColor = C4Purple
         fillColor = C4Blue
         lineWidth = 1
         lineCap = .Round
         lineJoin = .Round
+    }
+    
+    /// Initializest a new C4Shape from a specified C4Path.
+    ///
+    /// - parameter path: A C4Path around which the new shape is created with the frame of the new shape fitting the path on
+    /// screen.
+    public convenience init(_ path: C4Path) {
+        self.init()
+
+        self.path = path
+        shapeLayer.path = path.CGPath
+
+        updatePath()
+        adjustToFitPath()
     }
     
     /// The path defining the shape to be rendered. If the path extends outside the layer bounds it will not automatically
