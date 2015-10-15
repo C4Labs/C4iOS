@@ -68,8 +68,8 @@ public class C4Image: C4View {
     /// ````
     ///
     /// - parameter name:	The name of the image included in your project, or a web address.
-    convenience public init(_ filename: String) {
-        self.init(filename, scale: 1.0)
+    convenience public init?(_ name: String) {
+        self.init(name, scale: 1.0)
     }
     
     /// Initializes a new C4Image using the specified filename from the bundle (i.e. your project), it will also grab images
@@ -81,13 +81,11 @@ public class C4Image: C4View {
     /// ````
     ///
     /// - parameter name:	The name of the image included in your project, or a web address.
-    convenience public init(_ filename: String, scale: Double) {
-        if filename.hasPrefix("http") {
-            self.init(url: NSURL(string: filename)!, scale: scale)
-            return
+    convenience public init?(_ name: String, scale: Double) {
+        guard let image = UIImage(named: name) else {
+            return nil
         }
-        let image = UIImage(named: filename, inBundle: NSBundle.mainBundle(), compatibleWithTraitCollection: nil)
-        self.init(uiimage: image!, scale: scale)
+        self.init(uiimage: image, scale: scale)
     }
     
     /// Initializes a new C4Image using an existing C4Image (basically like copying).

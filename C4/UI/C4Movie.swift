@@ -113,14 +113,12 @@ public class C4Movie: C4View {
     /// Initializes a new C4Movie using the specified filename from the bundle (i.e. your project).
     ///
     /// - parameter name:	The name of the movie file included in your project.
-    convenience public init(_ filename: String) {
-        //grab url for movie file
+    public convenience init?(_ filename: String) {
+        guard let url = NSBundle.mainBundle().URLForResource(filename, withExtension: nil) else {
+            return nil
+        }
         
-        let url = NSBundle.mainBundle().URLForResource(filename, withExtension: nil)
-        assert(url != nil, "Could not locate movie with the given filename: \(filename)")
-        //create asset from url
-        
-        let asset = AVAsset(URL: url!)
+        let asset = AVAsset(URL: url)
         let tracks = asset.tracksWithMediaType(AVMediaTypeVideo)
         
         //grab the movie track and size
@@ -149,8 +147,8 @@ public class C4Movie: C4View {
     /// Initializes a new C4Movie using the specified frame.
     ///
     /// - parameter frame:	The frame of the new movie object.
-    convenience public init(frame: C4Rect) {
-        self.init()
+    public init(frame: C4Rect) {
+        super.init()
         self.view = MovieView(frame: CGRect(frame))
     }
     

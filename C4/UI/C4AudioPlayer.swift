@@ -38,54 +38,39 @@ import AVFoundation
 ///
 ///  Obtain data you can use for playback-level metering
 public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
-    internal var currentPlayer = AVAudioPlayer()
-    internal var audiofiles = [AVAudioPlayer]()
+    internal var player: AVAudioPlayer!
     
     /// Initializes a new audio player from a given file name
     ///
     /// ````
     /// let ap = C4AudioPlayer("audioTrackFileName")
     /// ````
-    convenience public init(_ filename: String) {
-        self.init(filenames: [filename])
-    }
-    
-    /// Initializes a new audio player from a given set of file names. The files will be played in sequence.
-    ///
-    /// ````
-    /// let ap = C4AudioPlayer(["audioTrackFileName", "anotherTrackFileName"])
-    /// ````
-    convenience public init(filenames: [String]) {
-        self.init()
-        
-        for filename in filenames {
-            if let url = NSBundle.mainBundle().URLForResource(filename, withExtension:nil) {
-                let player: AVAudioPlayer!
-                do {
-                    player = try AVAudioPlayer(contentsOfURL: url)
-                } catch _ {
-                    player = nil
-                }
-                player.delegate = self
-                audiofiles.append(player)
-            }
+    public init?(_ name: String) {
+        self.player = nil
+        super.init()
+
+        guard let url = NSBundle.mainBundle().URLForResource(name, withExtension:nil) else {
+            return nil
         }
-        
-        currentPlayer = audiofiles[0]
-        currentPlayer.meteringEnabled = true
-        currentPlayer.enableRate = true
+
+        guard let player = try? AVAudioPlayer(contentsOfURL: url) else {
+            return nil
+        }
+
+        self.player = player
+        player.delegate = self
     }
     
     /// Plays a sound asynchronously.
     public func play() {
-        currentPlayer.play()
+        player.play()
     }
     
     /// Pauses playback; sound remains ready to resume playback from where it left off.
     /// Calling pause leaves the audio player prepared to play; it does not release the audio hardware that was acquired upon
     /// calling play or prepareToPlay.
     public func pause() {
-        currentPlayer.pause()
+        player.pause()
     }
     
     /// Stops playback and undoes the setup needed for playback.
@@ -94,20 +79,20 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
     /// The stop method does not reset the value of the currentTime property to 0. In other words, if you call stop during
     /// playback and then call play, playback resumes at the point where it left off.
     public func stop() {
-        currentPlayer.stop()
+        player.stop()
     }
     
     /// Returns the total duration, in seconds, of the sound associated with the audio player. (read-only)
     public var duration : Double {
         get {
-            return Double(currentPlayer.duration)
+            return Double(player.duration)
         }
     }
     
     /// Returns true if the receiver's current playback rate > 0. Otherwise returns false.
     public var playing : Bool {
         get {
-            return currentPlayer.playing
+            return player.playing
         }
     }
     
@@ -116,9 +101,9 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
     /// 1.0 is full right.
     public var pan : Double {
         get {
-            return Double(currentPlayer.pan)
+            return Double(player.pan)
         } set(val) {
-            currentPlayer.pan = clamp(Float(val), min: -1.0, max: 1.0)
+            player.pan = clamp(Float(val), min: -1.0, max: 1.0)
         }
     }
     
@@ -129,9 +114,9 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
     /// playback controls that users expect and whose appearance you can customize.
     public var volume : Double {
         get {
-            return Double(currentPlayer.volume)
+            return Double(player.volume)
         } set(val) {
-            currentPlayer.volume = Float(val)
+            player.volume = Float(val)
         }
     }
     
@@ -143,9 +128,9 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
     /// functions.
     public var currentTime: Double {
         get {
-            return currentPlayer.currentTime
+            return player.currentTime
         } set(val) {
-            currentPlayer.currentTime = NSTimeInterval(val)
+            player.currentTime = NSTimeInterval(val)
         }
     }
     
@@ -163,36 +148,9 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
     /// ````
     public var rate: Double {
         get {
-            return Double(currentPlayer.rate)
+            return Double(player.rate)
         } set(val) {
-            currentPlayer.rate = Float(rate)
-        }
-    }
-    
-    /// Advances the audioplayer to the next sound / audio file.
-    /// The player pauses, then advances if possible. If there is another file in the queue the audioplayer automatically starts
-    /// playing again.
-    public func next() {
-        currentPlayer.pause()
-        
-        let index = audiofiles.indexOf(currentPlayer)
-        if let index = index {
-            currentPlayer = audiofiles[index + 1]
-            currentPlayer.currentTime = 0.0
-            currentPlayer.play()
-        }
-    }
-    
-    /// Plays the previous sound or sound / audio file in the queue.
-    /// The player pauses, then positions the playhead to the previous sound / audio file if possible. If there is a previous
-    /// file in the queue the audioplayer automatically starts playing again.
-    public func prev() {
-        currentPlayer.pause()
-        let index = audiofiles.indexOf(currentPlayer)
-        if let index = index {
-            currentPlayer = audiofiles[index - 1]
-            currentPlayer.currentTime = 0.0
-            currentPlayer.play()
+            player.rate = Float(rate)
         }
     }
     
@@ -204,13 +162,13 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
     /// Defaults to 1000000.
     public var loops : Bool {
         get {
-            return currentPlayer.numberOfLoops > 0 ? true : false
+            return player.numberOfLoops > 0 ? true : false
         }
         set(val) {
             if val {
-                currentPlayer.numberOfLoops = 1000000
+                player.numberOfLoops = 1000000
             } else {
-                currentPlayer.numberOfLoops = 0
+                player.numberOfLoops = 0
             }
         }
     }
@@ -225,9 +183,9 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
     /// ````
     public var meteringEnabled : Bool {
         get {
-            return currentPlayer.meteringEnabled
+            return player.meteringEnabled
         } set(v) {
-            currentPlayer.meteringEnabled = v
+            player.meteringEnabled = v
         }
     }
     
@@ -236,9 +194,9 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
     /// instance method for the player.
     public var enableRate : Bool {
         get {
-            return currentPlayer.enableRate
+            return player.enableRate
         } set(v) {
-            currentPlayer.enableRate = v
+            player.enableRate = v
         }
     }
     
@@ -260,7 +218,7 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
     /// }
     /// ````
     public func updateMeters() {
-        currentPlayer.updateMeters()
+        player.updateMeters()
     }
     
     /// Returns the average power for a given channel, in decibels, for the sound being played.
@@ -274,7 +232,7 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
     ///
     /// - returns: A floating-point representation, in decibels, of a given audio channel’s current average power.
     public func averagePower(channel: Int) -> Double {
-        return Double(currentPlayer.averagePowerForChannel(channel))
+        return Double(player.averagePowerForChannel(channel))
     }
     
     /// Returns the peak power for a given channel, in decibels, for the sound being played.
@@ -287,6 +245,6 @@ public class C4AudioPlayer : NSObject, AVAudioPlayerDelegate {
     ///
     /// - returns: A floating-point representation, in decibels, of a given audio channel’s current peak power.
     public func peakPower(channel: Int) -> Double {
-        return Double(currentPlayer.peakPowerForChannel(channel))
+        return Double(player.peakPowerForChannel(channel))
     }
 }

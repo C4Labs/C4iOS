@@ -30,7 +30,7 @@ public class C4TextShape : C4Shape {
         }
     }
     /// The font used to define the shape's path. Defaults to AvenirNext-DemiBold, 80pt.
-    public var font = C4Font(name: "AvenirNext-DemiBold", size:80){
+    public var font = C4Font(name: "AvenirNext-DemiBold", size: 80)! {
         didSet {
             updatePath()
         }
