@@ -25,6 +25,9 @@ import AppKit
 #endif
 
 extension C4Image {
+    ///  Crops the receiver's contents to the specified frame within the receiver's coordinate space.
+    ///
+    ///  - parameter rect: a C4Rect
     public func crop(rect: C4Rect) {
         let intersection = CGRectIntersection(CGRect(rect),CGRect(self.bounds))
         if(CGRectIsNull(intersection)) { return }

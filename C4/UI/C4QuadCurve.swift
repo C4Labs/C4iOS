@@ -19,20 +19,27 @@
 
 import QuartzCore
 
+///  C4QuadCurve is a concrete subclass of C4Curve that modifies it shape based on a single point rather than 2 used by its parent class.
 public class C4QuadCurve : C4Curve {
-    /**
-    Initializes a new C4QuadCurve.
-    
-        let a = C4Point()
-        let b = C4Point(100,0)
-        let c = C4Point(50,50)
-        let curve = C4QuadCurve(points:[a,b], control: c)
-        canvas.add(curve)
 
-    - parameter points: A two-point array specifying the beginning and end points of the curve.
-    - parameter control: A single C4Point used to calculate the shape of the curve.
-    */
-    convenience public init(points: [C4Point], control: C4Point) {
-        self.init(points: points, controls: [control, control])
+    /// A C4Point used to calculate the shape of the quadratic curve.
+    public var controlPoint = C4Point() {
+        didSet {
+            self.controlPoints = (controlPoint,controlPoint)
+        }
+    }
+    
+    /// Initializes a new C4QuadCurve.
+    ///
+    /// ````
+    /// let curve = C4QuadCurve(a: C4Point(), b: C4Point(50,50), c: C4Point(100,0))
+    /// canvas.add(curve)
+    /// ````
+    ///
+    /// - parameter a: The beginning point of the curve.
+    /// - parameter b: A single C4Point used to calculate the shape of the curve.
+    /// - parameter c: The end point of the curve.
+    convenience public init(begin: C4Point, control: C4Point, end: C4Point) {
+        self.init(begin: begin, control0: control, control1: control, end: end)
     }
 }

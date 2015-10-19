@@ -20,71 +20,72 @@
 import Foundation
 import CoreGraphics
 
+///  C4Polygon is a concrete subclass of C4Shape that has a special initialzer that creates a non-uniform shape made up of 3 or more points.
 public class C4Polygon: C4Shape {
-    /**
-    Returns the array of points that make up the polygon.
-
-    Assigning an array of C4Point values to this object will cause the receiver to update itself.
-
-        let p = C4Polygon()
-        let a = C4Point()
-        let b = C4Point(100,100)
-        let c = C4Point(200,0)
-        p.points = [a,b,c]
-        p.center = canvas.center
-        canvas.add(p)
-    */
+    
+    /// Returns the array of points that make up the polygon.
+    ///
+    /// Assigning an array of C4Point values to this object will cause the receiver to update itself.
+    ///
+    /// ````
+    /// let p = C4Polygon()
+    /// let a = C4Point()
+    /// let b = C4Point(100,100)
+    /// let c = C4Point(200,0)
+    /// p.points = [a,b,c]
+    /// p.center = canvas.center
+    /// canvas.add(p)
+    /// ````
     public var points: [C4Point] {
         didSet {
             updatePath()
         }
     }
-    
-    /**
-    Initializes a new C4Polygon using the specified array of points.
-    
-    Protects against trying to create a polygon with only 1 point (i.e. requires 2 or more points).
-    
-        let a = C4Point()
-        let b = C4Point(100,100)
-        let c = C4Point(200,0)
-        let p = C4Polygon([a,b,c])
-        p.center = canvas.center
-        canvas.add(p)
 
-    - parameter points: An array of C4Point structs.
-    */
-    convenience public init(_ points: [C4Point]) {
+    ///  Initializes a default C4Polygon.
+    override init() {
+        self.points = []
+        super.init()
+        fillColor = clear
+    }
+    
+    /// Initializes a new C4Polygon using the specified array of points.
+    ///
+    /// Protects against trying to create a polygon with only 1 point (i.e. requires 2 or more points).
+    ///
+    /// ````
+    /// let a = C4Point()
+    /// let b = C4Point(100,100)
+    /// let c = C4Point(200,0)
+    /// let p = C4Polygon([a,b,c])
+    /// p.center = canvas.center
+    /// canvas.add(p)
+    /// ````
+    /// - parameter points: An array of C4Point structs.
+    public init(_ points: [C4Point]) {
         assert(points.count >= 2, "To create a Polygon you need to specify an array of at least 2 points")
-        self.init(frame: C4Rect(points))
-        let path = C4Path()
         self.points = points
+        super.init()
+
+        fillColor = clear
+
+        let path = C4Path()
         path.moveToPoint(points[0])
         for i in 1..<points.count {
             path.addLineToPoint(points[i])
         }
+        path.closeSubpath()
         self.path = path
-        C4ShapeLayer.disableActions = true
-        self.fillColor = clear
-        C4ShapeLayer.disableActions = false
+
         adjustToFitPath()
     }
 
-    /**
-    Initializes a polygon without any points.
-    
-    Properly constructs the self.points array.
-    */
-    public override init() {
-        self.points = [C4Point]()
-        super.init()
-    }
-    
-    required public init(coder aDecoder: NSCoder) {
+    /// Initializes a new C4Polygon from data in a given unarchiver.
+    required public init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    internal override func updatePath() {
+    override func updatePath() {
         if points.count > 1 {
             let p = C4Path()
             p.moveToPoint(points[0])
@@ -97,7 +98,10 @@ public class C4Polygon: C4Shape {
             adjustToFitPath()
         }
     }
-    
+
+    ///  Closes the shape.
+    ///
+    ///  This method appends a line between the shape's last point and its first point.
     public func close() {
         let p = path
         p?.closeSubpath()

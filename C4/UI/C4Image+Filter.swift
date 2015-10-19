@@ -25,10 +25,16 @@ import AppKit
 #endif
 
 extension C4Image {
+    ///  Applies a fiter to the receiver's contents.
+    ///
+    ///  - parameter fiter: a C4Filter
     public func apply(filter: C4Filter) {
         self.apply(filters:[filter])
     }
     
+    ///  Applies an array of fiters to the receiver's contents.
+    ///
+    ///  - parameter fiters: an array of C4Filter objects
     public func apply(filters filters: [C4Filter]) {
         for filter in filters {
             let cifilter = filter.createCoreImageFilter(output)
@@ -40,8 +46,8 @@ extension C4Image {
         }
         self.renderFilteredImage()
     }
-    
-    public func renderFilteredImage() {
+
+    func renderFilteredImage() {
         var extent = self.output.extent
         if CGRectIsInfinite(extent) {
             extent = self.ciimage.extent

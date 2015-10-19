@@ -20,45 +20,46 @@
 import Foundation
 import CoreGraphics
 
+///  C4Rectangle is a concrete subclass of C4Shape that has a special initialzer that creates a rectangle whose shape is determined by its frame.
 public class C4Rectangle: C4Shape {
     
-    /**
-    Returns the corner size for the receiver.
-    
-    The shape of a C4Rectangle's corners are specified with width and height.
-    
-    Automatically updates the shape of the receiver's corners when set.
-    
-        let f = C4Rect(100,100,100,100)
-        let r = C4Rectangle(frame: f)
-        r.corner = C4Size(10,10)
-        canvas.add(r)
-    */
+    /// Returns the corner size for the receiver.
+    ///
+    /// The shape of a C4Rectangle's corners are specified with width and height.
+    ///
+    /// Automatically updates the shape of the receiver's corners when set.
+    ///
+    /// ````
+    /// let f = C4Rect(100,100,100,100)
+    /// let r = C4Rectangle(frame: f)
+    /// r.corner = C4Size(10,10)
+    /// canvas.add(r)
+    /// ````
     public var corner: C4Size = C4Size(8,8) {
         didSet {
             updatePath()
         }
     }
     
-    /**
-    Initializes a new C4Rectangle using the specified frame.
-    
-        let f = C4Rect(100,100,100,100)
-        let r = C4Rectangle(frame: f)
-        canvas.add(r)
-
-    - parameter frame: A C4Rect whose dimensions are used to construct the C4Rectangle.
-    */
+    /// Initializes a new C4Rectangle using the specified frame.
+    ///
+    /// ````
+    /// let f = C4Rect(100,100,100,100)
+    /// let r = C4Rectangle(frame: f)
+    /// canvas.add(r)
+    /// ````
+    ///
+    /// - parameter frame: A C4Rect whose dimensions are used to construct the C4Rectangle.
     convenience public init(frame: C4Rect) {
         self.init()
-        if frame.size.width <= corner.width * 2.0 {
+        if frame.size.width <= corner.width * 2.0 || frame.size.height <= corner.width / 2.0 {
             corner = C4Size()
         }
         view.frame = CGRect(frame)
         updatePath()
     }
     
-    override public func updatePath() {
+    override func updatePath() {
         let newPath = C4Path()
         newPath.addRoundedRect(bounds, cornerWidth: corner.width, cornerHeight: corner.height)
         path = newPath

@@ -1,5 +1,22 @@
-//  Created by Alejandro Isaza on 2014-12-23.
-//  Copyright (c) 2014 C4. All rights reserved.
+// Copyright © 2014 C4
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions: The above copyright
+// notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+// IN THE SOFTWARE.
+
 
 import Foundation
 import UIKit
@@ -8,9 +25,8 @@ private var handlerAssociationKey: UInt8 = 0
 private var viewAssociationKey: UInt8 = 0
 
 extension UIGestureRecognizer {
-    /**
-      The current location of the gesture in the reference view.
-     */
+    
+    /// The current location of the gesture in the reference view.
     public var location: C4Point {
         get {
             return C4Point(locationInView(referenceView))
@@ -47,11 +63,9 @@ extension UIGestureRecognizer {
         self.referenceView = view
     }
     
-    /**
-      Keeps a weak reference to a view. Used to work around the limitation that extensions cannot have stored
-      properties and objc_setAssociatedObject does not support zeroing weak references. See
-      http://stackoverflow.com/questions/27632867/how-do-i-create-a-weak-stored-property-in-a-swift-extension
-    */
+    /// Keeps a weak reference to a view. Used to work around the limitation that extensions cannot have stored
+    /// properties and objc_setAssociatedObject does not support zeroing weak references. See
+    /// [on Stack Overflow](http://stackoverflow.com/questions/27632867/how-do-i-create-a-weak-stored-property-in-a-swift-extension)
     internal class WeakViewWrapper : NSObject {
         weak var view : UIView?
         
@@ -65,9 +79,8 @@ extension UIGestureRecognizer {
 public typealias TapAction = (location: C4Point, state: UIGestureRecognizerState) -> ()
 
 extension UITapGestureRecognizer {
-    /**
-    The closure to call when there is a gesture event.
-    */
+    
+    /// The closure to call when there is a gesture event.
     public var tapAction: TapAction? {
         get {
             return (actionHandler as? TapGestureHandler)?.action
@@ -92,9 +105,7 @@ extension UITapGestureRecognizer {
         self.tapAction = action
     }
     
-    /**
-    This class is used as the target of the gesture recognizer action. It forwards the method call to the closure.
-    */
+    /// This class is used as the target of the gesture recognizer action. It forwards the method call to the closure.
     internal class TapGestureHandler : NSObject {
         let action: TapAction
         
@@ -112,9 +123,8 @@ extension UITapGestureRecognizer {
 public typealias PanAction = (location: C4Point, translation: C4Vector, velocity: C4Vector, state: UIGestureRecognizerState) -> ()
 
 extension UIPanGestureRecognizer {
-    /**
-    The closure to call when there is a gesture event.
-    */
+    
+    /// The closure to call when there is a gesture event.
     public var panAction: PanAction? {
         get {
             return (actionHandler as? PanGestureHandler)?.action
@@ -132,7 +142,10 @@ extension UIPanGestureRecognizer {
             }
         }
     }
-    
+
+    /// The translation of the pan gesture in the coordinate system of the specified view.
+    ///
+    /// The x and y values report the total translation over time. They are not delta values from the last time that the translation was reported. Apply the translation value to the state of the view when the gesture is first recognized—do not concatenate the value each time the handler is called.
     public var translation: C4Vector {
         get {
             if let view = referenceView {
@@ -141,7 +154,10 @@ extension UIPanGestureRecognizer {
             return C4Vector()
         }
     }
-    
+
+    /// The velocity of the pan gesture in the coordinate system of the specified view.
+    ///
+    /// The velocity of the pan gesture, which is expressed in points per second. The velocity is broken into horizontal and vertical components.
     public var velocity: C4Vector {
         get {
             return C4Vector(velocityInView(view))
@@ -155,9 +171,7 @@ extension UIPanGestureRecognizer {
         self.panAction = action
     }
     
-    /**
-      This class is used as the target of the gesture recognizer action. It forwards the method call to the closure.
-    */
+    /// This class is used as the target of the gesture recognizer action. It forwards the method call to the closure.
     internal class PanGestureHandler : NSObject {
         let action: PanAction
         
@@ -175,9 +189,8 @@ extension UIPanGestureRecognizer {
 public typealias PinchAction = (scale: Double, velocity: Double, state: UIGestureRecognizerState) -> ()
 
 extension UIPinchGestureRecognizer {
-    /**
-    The closure to call when there is a gesture event.
-    */
+    
+    /// The closure to call when there is a gesture event.
     public var pinchAction: PinchAction? {
         get {
             return (actionHandler as? PinchGestureHandler)?.action
@@ -202,9 +215,7 @@ extension UIPinchGestureRecognizer {
         self.pinchAction = action
     }
     
-    /**
-    This class is used as the target of the gesture recognizer action. It forwards the method call to the closure.
-    */
+    /// This class is used as the target of the gesture recognizer action. It forwards the method call to the closure.
     internal class PinchGestureHandler : NSObject {
         let action: PinchAction
         
@@ -223,9 +234,7 @@ public typealias RotationAction = (rotation: Double, velocity: Double, state: UI
 
 extension UIRotationGestureRecognizer {
     
-    /**
-    The closure to call when there is a gesture event.
-    */
+    /// The closure to call when there is a gesture event.
     public var rotationAction: RotationAction? {
         get {
             return (actionHandler as? RotationGestureHandler)?.action
@@ -250,9 +259,7 @@ extension UIRotationGestureRecognizer {
         self.rotationAction = action
     }
     
-    /**
-    This class is used as the target of the gesture recognizer action. It forwards the method call to the closure.
-    */
+    /// This class is used as the target of the gesture recognizer action. It forwards the method call to the closure.
     internal class RotationGestureHandler : NSObject {
         let action: RotationAction
         
@@ -270,9 +277,8 @@ extension UIRotationGestureRecognizer {
 public typealias LongPressAction = (location: C4Point, state: UIGestureRecognizerState) -> ()
 
 extension UILongPressGestureRecognizer {
-    /**
-    The closure to call when there is a gesture event.
-    */
+    
+    /// The closure to call when there is a gesture event.
     public var longPressAction: LongPressAction? {
         get {
             return (actionHandler as? LongPressGestureHandler)?.action
@@ -297,9 +303,7 @@ extension UILongPressGestureRecognizer {
         self.longPressAction = action
     }
     
-    /**
-    This class is used as the target of the gesture recognizer action. It forwards the method call to the closure.
-    */
+    /// This class is used as the target of the gesture recognizer action. It forwards the method call to the closure.
     internal class LongPressGestureHandler : NSObject {
         let action: LongPressAction
         
@@ -317,9 +321,8 @@ extension UILongPressGestureRecognizer {
 public typealias SwipeAction = (location: C4Point, state: UIGestureRecognizerState, direction: UISwipeGestureRecognizerDirection) -> ()
 
 extension UISwipeGestureRecognizer {
-    /**
-    The closure to call when there is a gesture event.
-    */
+    
+    /// The closure to call when there is a gesture event.
     public var swipeAction: SwipeAction? {
         get {
             return (actionHandler as? SwipeGestureHandler)?.action
@@ -344,9 +347,7 @@ extension UISwipeGestureRecognizer {
         self.swipeAction = action
     }
     
-    /**
-    This class is used as the target of the gesture recognizer action. It forwards the method call to the closure.
-    */
+    /// This class is used as the target of the gesture recognizer action. It forwards the method call to the closure.
     internal class SwipeGestureHandler : NSObject {
         let action: SwipeAction
         
@@ -365,9 +366,7 @@ public typealias ScreenEdgePanAction = (location: C4Point, state: UIGestureRecog
 
 extension UIScreenEdgePanGestureRecognizer {
     
-    /**
-    The closure to call when there is a gesture event.
-    */
+    /// The closure to call when there is a gesture event.
     public var screenEdgePanAction: ScreenEdgePanAction? {
         get {
             return (actionHandler as? ScreenEdgePanGestureHandler)?.action
@@ -392,9 +391,7 @@ extension UIScreenEdgePanGestureRecognizer {
         self.screenEdgePanAction = action
     }
     
-    /**
-    This class is used as the target of the gesture recognizer action. It forwards the method call to the closure.
-    */
+    /// This class is used as the target of the gesture recognizer action. It forwards the method call to the closure.
     internal class ScreenEdgePanGestureHandler : NSObject {
         let action: ScreenEdgePanAction
         

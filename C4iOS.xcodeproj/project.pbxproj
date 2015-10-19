@@ -7,71 +7,69 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6114EDC41BA4B40600A29541 /* C4Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6711B534F9F00F937AB /* C4Color.swift */; };
-		6114EDC51BA4B40600A29541 /* C4EventSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6721B534F9F00F937AB /* C4EventSource.swift */; };
-		6114EDC61BA4B40600A29541 /* C4Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6731B534F9F00F937AB /* C4Foundation.swift */; };
-		6114EDC71BA4B40600A29541 /* C4Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6741B534F9F00F937AB /* C4Math.swift */; };
-		6114EDC81BA4B40600A29541 /* C4MediaObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6751B534F9F00F937AB /* C4MediaObject.swift */; };
-		6114EDC91BA4B40600A29541 /* C4Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6761B534F9F00F937AB /* C4Path.swift */; };
-		6114EDCA1BA4B40600A29541 /* C4Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6771B534F9F00F937AB /* C4Point.swift */; };
-		6114EDCB1BA4B40600A29541 /* C4Rect.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6781B534F9F00F937AB /* C4Rect.swift */; };
-		6114EDCC1BA4B40600A29541 /* C4Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6791B534F9F00F937AB /* C4Size.swift */; };
-		6114EDCD1BA4B40600A29541 /* C4Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F67A1B534F9F00F937AB /* C4Transform.swift */; };
-		6114EDCE1BA4B40600A29541 /* C4Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F67B1B534F9F00F937AB /* C4Vector.swift */; };
-		6114EDCF1BA4B40D00A29541 /* C4Bloom.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6A01B534F9F00F937AB /* C4Bloom.swift */; };
-		6114EDD01BA4B40D00A29541 /* C4Checkerboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6A11B534F9F00F937AB /* C4Checkerboard.swift */; };
-		6114EDD11BA4B40D00A29541 /* C4ColorBurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6A21B534F9F00F937AB /* C4ColorBurn.swift */; };
-		6114EDD21BA4B40D00A29541 /* C4DotScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6A31B534F9F00F937AB /* C4DotScreen.swift */; };
-		6114EDD31BA4B40D00A29541 /* C4GaussianBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6A41B534F9F00F937AB /* C4GaussianBlur.swift */; };
-		6114EDD41BA4B40D00A29541 /* C4HueAdjust.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6A51B534F9F00F937AB /* C4HueAdjust.swift */; };
-		6114EDD51BA4B40D00A29541 /* C4LinearGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6A61B534F9F00F937AB /* C4LinearGradient.swift */; };
-		6114EDD61BA4B40D00A29541 /* C4Sepia.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6A71B534F9F00F937AB /* C4Sepia.swift */; };
-		6114EDD71BA4B40D00A29541 /* C4Sharpen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6A81B534F9F00F937AB /* C4Sharpen.swift */; };
-		6114EDD81BA4B40D00A29541 /* C4Twirl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6A91B534F9F00F937AB /* C4Twirl.swift */; };
-		6114EDDB1BA4B41900A29541 /* C4Arc.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6801B534F9F00F937AB /* C4Arc.swift */; };
-		6114EDDC1BA4B41900A29541 /* C4AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6811B534F9F00F937AB /* C4AudioPlayer.swift */; };
-		6114EDDD1BA4B41900A29541 /* C4CanvasController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6821B534F9F00F937AB /* C4CanvasController.swift */; };
-		6114EDDE1BA4B41900A29541 /* C4Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6831B534F9F00F937AB /* C4Circle.swift */; };
-		6114EDDF1BA4B41900A29541 /* C4Curve.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6841B534F9F00F937AB /* C4Curve.swift */; };
-		6114EDE01BA4B41900A29541 /* C4Ellipse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6851B534F9F00F937AB /* C4Ellipse.swift */; };
-		6114EDE11BA4B41900A29541 /* C4Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6861B534F9F00F937AB /* C4Filter.swift */; };
-		6114EDE31BA4B41900A29541 /* C4Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6881B534F9F00F937AB /* C4Generator.swift */; };
-		6114EDE41BA4B41900A29541 /* C4Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D917E1351B83E0920084BC82 /* C4Gradient.swift */; };
-		6114EDE51BA4B41900A29541 /* C4GradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D917E1371B83E1DB0084BC82 /* C4GradientLayer.swift */; };
-		6114EDE61BA4B41900A29541 /* C4Image+Crop.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6891B534F9F00F937AB /* C4Image+Crop.swift */; };
-		6114EDE71BA4B41900A29541 /* C4Image+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F68A1B534F9F00F937AB /* C4Image+Filter.swift */; };
-		6114EDE81BA4B41900A29541 /* C4Image+Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F68B1B534F9F00F937AB /* C4Image+Generator.swift */; };
-		6114EDE91BA4B41900A29541 /* C4Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F68C1B534F9F00F937AB /* C4Image.swift */; };
-		6114EDEA1BA4B41900A29541 /* C4Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F68D1B534F9F00F937AB /* C4Line.swift */; };
-		6114EDEB1BA4B41900A29541 /* C4Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F68E1B534F9F00F937AB /* C4Movie.swift */; };
-		6114EDEC1BA4B41900A29541 /* C4Polygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F68F1B534F9F00F937AB /* C4Polygon.swift */; };
-		6114EDED1BA4B41900A29541 /* C4QuadCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6901B534F9F00F937AB /* C4QuadCurve.swift */; };
-		6114EDEE1BA4B41900A29541 /* C4Rectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6911B534F9F00F937AB /* C4Rectangle.swift */; };
-		6114EDEF1BA4B41900A29541 /* C4RegularPolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6921B534F9F00F937AB /* C4RegularPolygon.swift */; };
-		6114EDF01BA4B41900A29541 /* C4Shape+Creation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6931B534F9F00F937AB /* C4Shape+Creation.swift */; };
-		6114EDF11BA4B41900A29541 /* C4Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6941B534F9F00F937AB /* C4Shape.swift */; };
-		6114EDF21BA4B41900A29541 /* C4ShapeLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6951B534F9F00F937AB /* C4ShapeLayer.swift */; };
-		6114EDF31BA4B41900A29541 /* C4Star.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6961B534F9F00F937AB /* C4Star.swift */; };
-		6114EDF41BA4B41900A29541 /* C4TextShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6971B534F9F00F937AB /* C4TextShape.swift */; };
-		6114EDF51BA4B41900A29541 /* C4Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6981B534F9F00F937AB /* C4Triangle.swift */; };
-		6114EDF71BA4B41900A29541 /* C4View+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F69A1B534F9F00F937AB /* C4View+Border.swift */; };
-		6114EDF81BA4B41900A29541 /* C4View+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F69B1B534F9F00F937AB /* C4View+Shadow.swift */; };
-		6114EDF91BA4B41900A29541 /* C4View.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F69C1B534F9F00F937AB /* C4View.swift */; };
-		6114EDFB1BA4B41900A29541 /* C4Wedge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F69E1B534F9F00F937AB /* C4Wedge.swift */; };
-		6114EDFC1BA4B57900A29541 /* C4Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6871B534F9F00F937AB /* C4Font.swift */; };
-		61511E721BB2597B0063B9AA /* C4OS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61511E711BB2597B0063B9AA /* C4OS.swift */; };
-		61511E731BB25B880063B9AA /* C4OS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61511E711BB2597B0063B9AA /* C4OS.swift */; };
-		61511E751BB25BD50063B9AA /* C4View+Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61511E741BB25BD50063B9AA /* C4View+Gestures.swift */; };
-		61511E761BB26DD10063B9AA /* C4ViewAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F69D1B534F9F00F937AB /* C4ViewAnimation.swift */; };
-		61511E771BB26DE10063B9AA /* C4Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F67E1B534F9F00F937AB /* C4Animation.swift */; };
-		61511E811BB2755D0063B9AA /* C4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6114EDBC1BA4B36700A29541 /* C4.framework */; };
-		61511E871BB275870063B9AA /* C4ColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D401A054B4F0023323D /* C4ColorTests.swift */; };
-		61511E881BB275870063B9AA /* C4MathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D411A054B4F0023323D /* C4MathTests.swift */; };
-		61511E891BB275870063B9AA /* C4PointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D421A054B4F0023323D /* C4PointTests.swift */; };
-		61511E8A1BB275870063B9AA /* C4RectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8CB1D91A05781700A20783 /* C4RectTests.swift */; };
-		61511E8B1BB275870063B9AA /* C4VectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D431A054B4F0023323D /* C4VectorTests.swift */; };
-		61511E8C1BB275870063B9AA /* C4TransformTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A988A9161A4F57330044007C /* C4TransformTests.swift */; };
-		61511EC21BB27AB50063B9AA /* UIViewController+C4View.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6AB1B534F9F00F937AB /* UIViewController+C4View.swift */; };
+		1F8252CC1BB3C65E0090E98A /* C4Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8252CB1BB3C65E0090E98A /* C4Timer.swift */; settings = {ASSET_TAGS = (); }; };
+		619456C11BD4B23B001ACDAD /* C4OS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619456C01BD4B23B001ACDAD /* C4OS.swift */; settings = {ASSET_TAGS = (); }; };
+		619456C21BD4B3CA001ACDAD /* C4.h in Headers */ = {isa = PBXBuildFile; fileRef = A9D4F6E61B53516400F937AB /* C4.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		619456C41BD4B8C0001ACDAD /* C4Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6711B534F9F00F937AB /* C4Color.swift */; settings = {ASSET_TAGS = (); }; };
+		619456C51BD4B8C0001ACDAD /* C4EventSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6721B534F9F00F937AB /* C4EventSource.swift */; settings = {ASSET_TAGS = (); }; };
+		619456C61BD4B8C0001ACDAD /* C4Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6731B534F9F00F937AB /* C4Foundation.swift */; settings = {ASSET_TAGS = (); }; };
+		619456C71BD4B8C0001ACDAD /* C4Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6741B534F9F00F937AB /* C4Math.swift */; settings = {ASSET_TAGS = (); }; };
+		619456C81BD4B8C0001ACDAD /* C4OS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619456C01BD4B23B001ACDAD /* C4OS.swift */; settings = {ASSET_TAGS = (); }; };
+		619456C91BD4B8C0001ACDAD /* C4Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6761B534F9F00F937AB /* C4Path.swift */; settings = {ASSET_TAGS = (); }; };
+		619456CA1BD4B8C0001ACDAD /* C4Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6771B534F9F00F937AB /* C4Point.swift */; settings = {ASSET_TAGS = (); }; };
+		619456CB1BD4B8C0001ACDAD /* C4Rect.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6781B534F9F00F937AB /* C4Rect.swift */; settings = {ASSET_TAGS = (); }; };
+		619456CC1BD4B8C0001ACDAD /* C4Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6791B534F9F00F937AB /* C4Size.swift */; settings = {ASSET_TAGS = (); }; };
+		619456CD1BD4B8C0001ACDAD /* C4Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F67A1B534F9F00F937AB /* C4Transform.swift */; settings = {ASSET_TAGS = (); }; };
+		619456CE1BD4B8C0001ACDAD /* C4Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F67B1B534F9F00F937AB /* C4Vector.swift */; settings = {ASSET_TAGS = (); }; };
+		619456CF1BD4B8C8001ACDAD /* C4Bloom.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6A01B534F9F00F937AB /* C4Bloom.swift */; settings = {ASSET_TAGS = (); }; };
+		619456D01BD4B8C8001ACDAD /* C4Checkerboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6A11B534F9F00F937AB /* C4Checkerboard.swift */; settings = {ASSET_TAGS = (); }; };
+		619456D11BD4B8C8001ACDAD /* C4ColorBurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6A21B534F9F00F937AB /* C4ColorBurn.swift */; settings = {ASSET_TAGS = (); }; };
+		619456D21BD4B8C8001ACDAD /* C4DotScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6A31B534F9F00F937AB /* C4DotScreen.swift */; settings = {ASSET_TAGS = (); }; };
+		619456D31BD4B8C8001ACDAD /* C4GaussianBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6A41B534F9F00F937AB /* C4GaussianBlur.swift */; settings = {ASSET_TAGS = (); }; };
+		619456D41BD4B8C8001ACDAD /* C4HueAdjust.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6A51B534F9F00F937AB /* C4HueAdjust.swift */; settings = {ASSET_TAGS = (); }; };
+		619456D51BD4B8C8001ACDAD /* C4LinearGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6A61B534F9F00F937AB /* C4LinearGradient.swift */; settings = {ASSET_TAGS = (); }; };
+		619456D61BD4B8C8001ACDAD /* C4Sepia.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6A71B534F9F00F937AB /* C4Sepia.swift */; settings = {ASSET_TAGS = (); }; };
+		619456D71BD4B8C8001ACDAD /* C4Sharpen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6A81B534F9F00F937AB /* C4Sharpen.swift */; settings = {ASSET_TAGS = (); }; };
+		619456D81BD4B8C8001ACDAD /* C4Twirl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6A91B534F9F00F937AB /* C4Twirl.swift */; settings = {ASSET_TAGS = (); }; };
+		619456D91BD4B8CE001ACDAD /* C4Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F67E1B534F9F00F937AB /* C4Animation.swift */; settings = {ASSET_TAGS = (); }; };
+		619456DA1BD4B8CE001ACDAD /* C4Arc.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6801B534F9F00F937AB /* C4Arc.swift */; settings = {ASSET_TAGS = (); }; };
+		619456DB1BD4B8CE001ACDAD /* C4AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6811B534F9F00F937AB /* C4AudioPlayer.swift */; settings = {ASSET_TAGS = (); }; };
+		619456DC1BD4B8CE001ACDAD /* C4CanvasController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6821B534F9F00F937AB /* C4CanvasController.swift */; settings = {ASSET_TAGS = (); }; };
+		619456DD1BD4B8CE001ACDAD /* C4Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6831B534F9F00F937AB /* C4Circle.swift */; settings = {ASSET_TAGS = (); }; };
+		619456DE1BD4B8CE001ACDAD /* C4Curve.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6841B534F9F00F937AB /* C4Curve.swift */; settings = {ASSET_TAGS = (); }; };
+		619456DF1BD4B8CE001ACDAD /* C4Ellipse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6851B534F9F00F937AB /* C4Ellipse.swift */; settings = {ASSET_TAGS = (); }; };
+		619456E01BD4B8CE001ACDAD /* C4Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6861B534F9F00F937AB /* C4Filter.swift */; settings = {ASSET_TAGS = (); }; };
+		619456E11BD4B8CE001ACDAD /* C4Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6871B534F9F00F937AB /* C4Font.swift */; settings = {ASSET_TAGS = (); }; };
+		619456E21BD4B8CE001ACDAD /* C4Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6881B534F9F00F937AB /* C4Generator.swift */; settings = {ASSET_TAGS = (); }; };
+		619456E31BD4B8CE001ACDAD /* C4Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D917E1351B83E0920084BC82 /* C4Gradient.swift */; settings = {ASSET_TAGS = (); }; };
+		619456E41BD4B8CE001ACDAD /* C4GradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D917E1371B83E1DB0084BC82 /* C4GradientLayer.swift */; settings = {ASSET_TAGS = (); }; };
+		619456E51BD4B8CE001ACDAD /* C4Image+Crop.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6891B534F9F00F937AB /* C4Image+Crop.swift */; settings = {ASSET_TAGS = (); }; };
+		619456E61BD4B8CE001ACDAD /* C4Image+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F68A1B534F9F00F937AB /* C4Image+Filter.swift */; settings = {ASSET_TAGS = (); }; };
+		619456E71BD4B8CE001ACDAD /* C4Image+Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F68B1B534F9F00F937AB /* C4Image+Generator.swift */; settings = {ASSET_TAGS = (); }; };
+		619456E81BD4B8CE001ACDAD /* C4Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F68C1B534F9F00F937AB /* C4Image.swift */; settings = {ASSET_TAGS = (); }; };
+		619456E91BD4B8CE001ACDAD /* C4Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F68D1B534F9F00F937AB /* C4Line.swift */; settings = {ASSET_TAGS = (); }; };
+		619456EA1BD4B8CE001ACDAD /* C4Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F68E1B534F9F00F937AB /* C4Movie.swift */; settings = {ASSET_TAGS = (); }; };
+		619456EB1BD4B8CE001ACDAD /* C4Polygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F68F1B534F9F00F937AB /* C4Polygon.swift */; settings = {ASSET_TAGS = (); }; };
+		619456EC1BD4B8CE001ACDAD /* C4QuadCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6901B534F9F00F937AB /* C4QuadCurve.swift */; settings = {ASSET_TAGS = (); }; };
+		619456ED1BD4B8CE001ACDAD /* C4Rectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6911B534F9F00F937AB /* C4Rectangle.swift */; settings = {ASSET_TAGS = (); }; };
+		619456EE1BD4B8CE001ACDAD /* C4RegularPolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6921B534F9F00F937AB /* C4RegularPolygon.swift */; settings = {ASSET_TAGS = (); }; };
+		619456EF1BD4B8CE001ACDAD /* C4Shape+Creation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6931B534F9F00F937AB /* C4Shape+Creation.swift */; settings = {ASSET_TAGS = (); }; };
+		619456F01BD4B8CE001ACDAD /* C4Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6941B534F9F00F937AB /* C4Shape.swift */; settings = {ASSET_TAGS = (); }; };
+		619456F11BD4B8CE001ACDAD /* C4ShapeLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6951B534F9F00F937AB /* C4ShapeLayer.swift */; settings = {ASSET_TAGS = (); }; };
+		619456F21BD4B8CE001ACDAD /* C4Star.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6961B534F9F00F937AB /* C4Star.swift */; settings = {ASSET_TAGS = (); }; };
+		619456F41BD4B8CE001ACDAD /* C4TextShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6971B534F9F00F937AB /* C4TextShape.swift */; settings = {ASSET_TAGS = (); }; };
+		619456F51BD4B8CE001ACDAD /* C4Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8252CB1BB3C65E0090E98A /* C4Timer.swift */; settings = {ASSET_TAGS = (); }; };
+		619456F61BD4B8CE001ACDAD /* C4Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6981B534F9F00F937AB /* C4Triangle.swift */; settings = {ASSET_TAGS = (); }; };
+		619456F81BD4B8CE001ACDAD /* C4View+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F69A1B534F9F00F937AB /* C4View+Border.swift */; settings = {ASSET_TAGS = (); }; };
+		619456F91BD4B8CE001ACDAD /* C4View+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F69B1B534F9F00F937AB /* C4View+Shadow.swift */; settings = {ASSET_TAGS = (); }; };
+		619456FA1BD4B8CE001ACDAD /* C4View.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F69C1B534F9F00F937AB /* C4View.swift */; settings = {ASSET_TAGS = (); }; };
+		619456FB1BD4B8CE001ACDAD /* C4View+KeyValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BBAF641BC38C1200A03FD0 /* C4View+KeyValues.swift */; settings = {ASSET_TAGS = (); }; };
+		619456FC1BD4B8CE001ACDAD /* C4ViewAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F69D1B534F9F00F937AB /* C4ViewAnimation.swift */; settings = {ASSET_TAGS = (); }; };
+		619456FD1BD4B8CE001ACDAD /* C4Wedge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F69E1B534F9F00F937AB /* C4Wedge.swift */; settings = {ASSET_TAGS = (); }; };
+		619456FF1BD4B8CE001ACDAD /* UIViewController+C4View.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6AB1B534F9F00F937AB /* UIViewController+C4View.swift */; settings = {ASSET_TAGS = (); }; };
+		619457011BD4B8DA001ACDAD /* C4View+Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619457001BD4B8DA001ACDAD /* C4View+Gestures.swift */; settings = {ASSET_TAGS = (); }; };
+		61BBAF631BC372BD00A03FD0 /* C4StoredAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BBAF621BC372BD00A03FD0 /* C4StoredAnimation.swift */; settings = {ASSET_TAGS = (); }; };
+		61BBAF651BC38C1200A03FD0 /* C4View+KeyValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BBAF641BC38C1200A03FD0 /* C4View+KeyValues.swift */; settings = {ASSET_TAGS = (); }; };
 		A94E3BD419E0E9390039A9C4 /* C4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 614F824319DB5ED3001DF1D4 /* C4.framework */; };
 		A96F4F451B538330002B3A46 /* C4ColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D401A054B4F0023323D /* C4ColorTests.swift */; };
 		A96F4F461B538330002B3A46 /* C4MathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D411A054B4F0023323D /* C4MathTests.swift */; };
@@ -90,7 +88,6 @@
 		A9D4F6AE1B534F9F00F937AB /* C4EventSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6721B534F9F00F937AB /* C4EventSource.swift */; };
 		A9D4F6AF1B534F9F00F937AB /* C4Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6731B534F9F00F937AB /* C4Foundation.swift */; };
 		A9D4F6B01B534F9F00F937AB /* C4Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6741B534F9F00F937AB /* C4Math.swift */; };
-		A9D4F6B11B534F9F00F937AB /* C4MediaObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6751B534F9F00F937AB /* C4MediaObject.swift */; };
 		A9D4F6B21B534F9F00F937AB /* C4Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6761B534F9F00F937AB /* C4Path.swift */; };
 		A9D4F6B31B534F9F00F937AB /* C4Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6771B534F9F00F937AB /* C4Point.swift */; };
 		A9D4F6B41B534F9F00F937AB /* C4Rect.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6781B534F9F00F937AB /* C4Rect.swift */; };
@@ -98,7 +95,6 @@
 		A9D4F6B61B534F9F00F937AB /* C4Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F67A1B534F9F00F937AB /* C4Transform.swift */; };
 		A9D4F6B71B534F9F00F937AB /* C4Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F67B1B534F9F00F937AB /* C4Vector.swift */; };
 		A9D4F6B91B534F9F00F937AB /* C4Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F67E1B534F9F00F937AB /* C4Animation.swift */; };
-		A9D4F6BA1B534F9F00F937AB /* C4Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F67F1B534F9F00F937AB /* C4Animator.swift */; };
 		A9D4F6BB1B534F9F00F937AB /* C4Arc.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6801B534F9F00F937AB /* C4Arc.swift */; };
 		A9D4F6BC1B534F9F00F937AB /* C4AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6811B534F9F00F937AB /* C4AudioPlayer.swift */; };
 		A9D4F6BD1B534F9F00F937AB /* C4CanvasController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6821B534F9F00F937AB /* C4CanvasController.swift */; };
@@ -193,13 +189,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1F8252CB1BB3C65E0090E98A /* C4Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Timer.swift; sourceTree = "<group>"; };
 		1F8CB1D91A05781700A20783 /* C4RectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4RectTests.swift; sourceTree = "<group>"; };
 		6114EDBC1BA4B36700A29541 /* C4.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = C4.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		614F824319DB5ED3001DF1D4 /* C4.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = C4.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		614F824E19DB5ED4001DF1D4 /* C4Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = C4Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		61511E711BB2597B0063B9AA /* C4OS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4OS.swift; sourceTree = "<group>"; };
-		61511E741BB25BD50063B9AA /* C4View+Gestures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "C4View+Gestures.swift"; sourceTree = "<group>"; };
-		61511E7C1BB2755D0063B9AA /* C4Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = C4Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		619456C01BD4B23B001ACDAD /* C4OS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4OS.swift; sourceTree = "<group>"; };
+		619457001BD4B8DA001ACDAD /* C4View+Gestures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "C4View+Gestures.swift"; sourceTree = "<group>"; };
+		61BBAF621BC372BD00A03FD0 /* C4StoredAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4StoredAnimation.swift; sourceTree = "<group>"; };
+		61BBAF641BC38C1200A03FD0 /* C4View+KeyValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "C4View+KeyValues.swift"; sourceTree = "<group>"; };
 		A9596D291A054A960023323D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A9596D401A054B4F0023323D /* C4ColorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4ColorTests.swift; sourceTree = "<group>"; };
 		A9596D411A054B4F0023323D /* C4MathTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4MathTests.swift; sourceTree = "<group>"; };
@@ -217,7 +215,6 @@
 		A9D4F6721B534F9F00F937AB /* C4EventSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4EventSource.swift; sourceTree = "<group>"; };
 		A9D4F6731B534F9F00F937AB /* C4Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Foundation.swift; sourceTree = "<group>"; };
 		A9D4F6741B534F9F00F937AB /* C4Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Math.swift; sourceTree = "<group>"; };
-		A9D4F6751B534F9F00F937AB /* C4MediaObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4MediaObject.swift; sourceTree = "<group>"; };
 		A9D4F6761B534F9F00F937AB /* C4Path.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Path.swift; sourceTree = "<group>"; };
 		A9D4F6771B534F9F00F937AB /* C4Point.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Point.swift; sourceTree = "<group>"; };
 		A9D4F6781B534F9F00F937AB /* C4Rect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Rect.swift; sourceTree = "<group>"; };
@@ -226,7 +223,6 @@
 		A9D4F67B1B534F9F00F937AB /* C4Vector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Vector.swift; sourceTree = "<group>"; };
 		A9D4F67C1B534F9F00F937AB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A9D4F67E1B534F9F00F937AB /* C4Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Animation.swift; sourceTree = "<group>"; };
-		A9D4F67F1B534F9F00F937AB /* C4Animator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Animator.swift; sourceTree = "<group>"; };
 		A9D4F6801B534F9F00F937AB /* C4Arc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Arc.swift; sourceTree = "<group>"; };
 		A9D4F6811B534F9F00F937AB /* C4AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4AudioPlayer.swift; sourceTree = "<group>"; };
 		A9D4F6821B534F9F00F937AB /* C4CanvasController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4CanvasController.swift; sourceTree = "<group>"; };
@@ -302,7 +298,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				61511E811BB2755D0063B9AA /* C4.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,7 +329,6 @@
 				614F824E19DB5ED4001DF1D4 /* C4Tests.xctest */,
 				A96F505A1B5385A5002B3A46 /* C4App.app */,
 				6114EDBC1BA4B36700A29541 /* C4.framework */,
-				61511E7C1BB2755D0063B9AA /* C4Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -400,14 +394,13 @@
 				A9D4F6721B534F9F00F937AB /* C4EventSource.swift */,
 				A9D4F6731B534F9F00F937AB /* C4Foundation.swift */,
 				A9D4F6741B534F9F00F937AB /* C4Math.swift */,
-				A9D4F6751B534F9F00F937AB /* C4MediaObject.swift */,
+				619456C01BD4B23B001ACDAD /* C4OS.swift */,
 				A9D4F6761B534F9F00F937AB /* C4Path.swift */,
 				A9D4F6771B534F9F00F937AB /* C4Point.swift */,
 				A9D4F6781B534F9F00F937AB /* C4Rect.swift */,
 				A9D4F6791B534F9F00F937AB /* C4Size.swift */,
 				A9D4F67A1B534F9F00F937AB /* C4Transform.swift */,
 				A9D4F67B1B534F9F00F937AB /* C4Vector.swift */,
-				61511E711BB2597B0063B9AA /* C4OS.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -417,7 +410,6 @@
 			children = (
 				A9D4F69F1B534F9F00F937AB /* Filters */,
 				A9D4F67E1B534F9F00F937AB /* C4Animation.swift */,
-				A9D4F67F1B534F9F00F937AB /* C4Animator.swift */,
 				A9D4F6801B534F9F00F937AB /* C4Arc.swift */,
 				A9D4F6811B534F9F00F937AB /* C4AudioPlayer.swift */,
 				A9D4F6821B534F9F00F937AB /* C4CanvasController.swift */,
@@ -443,13 +435,16 @@
 				A9D4F6941B534F9F00F937AB /* C4Shape.swift */,
 				A9D4F6951B534F9F00F937AB /* C4ShapeLayer.swift */,
 				A9D4F6961B534F9F00F937AB /* C4Star.swift */,
+				61BBAF621BC372BD00A03FD0 /* C4StoredAnimation.swift */,
 				A9D4F6971B534F9F00F937AB /* C4TextShape.swift */,
+				1F8252CB1BB3C65E0090E98A /* C4Timer.swift */,
 				A9D4F6981B534F9F00F937AB /* C4Triangle.swift */,
 				A9D4F6991B534F9F00F937AB /* C4View+Animation.swift */,
 				A9D4F69A1B534F9F00F937AB /* C4View+Border.swift */,
 				A9D4F69B1B534F9F00F937AB /* C4View+Shadow.swift */,
 				A9D4F69C1B534F9F00F937AB /* C4View.swift */,
-				61511E741BB25BD50063B9AA /* C4View+Gestures.swift */,
+				619457001BD4B8DA001ACDAD /* C4View+Gestures.swift */,
+				61BBAF641BC38C1200A03FD0 /* C4View+KeyValues.swift */,
 				A9D4F69D1B534F9F00F937AB /* C4ViewAnimation.swift */,
 				A9D4F69E1B534F9F00F937AB /* C4Wedge.swift */,
 				A9D4F6AA1B534F9F00F937AB /* UIGestureRecognizer+Closure.swift */,
@@ -482,6 +477,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				619456C21BD4B3CA001ACDAD /* C4.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -566,7 +562,6 @@
 			);
 			name = "C4Tests (OSX)";
 			productName = "C4Tests (OSX)";
-			productReference = 61511E7C1BB2755D0063B9AA /* C4Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		A96F50591B5385A5002B3A46 /* C4App */ = {
@@ -685,62 +680,63 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6114EDCF1BA4B40D00A29541 /* C4Bloom.swift in Sources */,
-				6114EDD21BA4B40D00A29541 /* C4DotScreen.swift in Sources */,
-				6114EDF41BA4B41900A29541 /* C4TextShape.swift in Sources */,
-				6114EDFB1BA4B41900A29541 /* C4Wedge.swift in Sources */,
-				6114EDF81BA4B41900A29541 /* C4View+Shadow.swift in Sources */,
-				6114EDE41BA4B41900A29541 /* C4Gradient.swift in Sources */,
-				6114EDF21BA4B41900A29541 /* C4ShapeLayer.swift in Sources */,
-				6114EDEC1BA4B41900A29541 /* C4Polygon.swift in Sources */,
-				6114EDDD1BA4B41900A29541 /* C4CanvasController.swift in Sources */,
-				6114EDD01BA4B40D00A29541 /* C4Checkerboard.swift in Sources */,
-				61511EC21BB27AB50063B9AA /* UIViewController+C4View.swift in Sources */,
-				6114EDEF1BA4B41900A29541 /* C4RegularPolygon.swift in Sources */,
-				6114EDF71BA4B41900A29541 /* C4View+Border.swift in Sources */,
-				6114EDF31BA4B41900A29541 /* C4Star.swift in Sources */,
-				6114EDDB1BA4B41900A29541 /* C4Arc.swift in Sources */,
-				6114EDE71BA4B41900A29541 /* C4Image+Filter.swift in Sources */,
-				6114EDC71BA4B40600A29541 /* C4Math.swift in Sources */,
-				61511E731BB25B880063B9AA /* C4OS.swift in Sources */,
-				6114EDED1BA4B41900A29541 /* C4QuadCurve.swift in Sources */,
-				6114EDE81BA4B41900A29541 /* C4Image+Generator.swift in Sources */,
-				6114EDCC1BA4B40600A29541 /* C4Size.swift in Sources */,
-				6114EDCA1BA4B40600A29541 /* C4Point.swift in Sources */,
-				6114EDDF1BA4B41900A29541 /* C4Curve.swift in Sources */,
-				6114EDDC1BA4B41900A29541 /* C4AudioPlayer.swift in Sources */,
-				6114EDF11BA4B41900A29541 /* C4Shape.swift in Sources */,
-				6114EDE31BA4B41900A29541 /* C4Generator.swift in Sources */,
-				6114EDD71BA4B40D00A29541 /* C4Sharpen.swift in Sources */,
-				6114EDD61BA4B40D00A29541 /* C4Sepia.swift in Sources */,
-				6114EDD31BA4B40D00A29541 /* C4GaussianBlur.swift in Sources */,
-				6114EDE61BA4B41900A29541 /* C4Image+Crop.swift in Sources */,
-				6114EDD51BA4B40D00A29541 /* C4LinearGradient.swift in Sources */,
-				6114EDCD1BA4B40600A29541 /* C4Transform.swift in Sources */,
-				6114EDC81BA4B40600A29541 /* C4MediaObject.swift in Sources */,
-				6114EDE51BA4B41900A29541 /* C4GradientLayer.swift in Sources */,
-				6114EDCE1BA4B40600A29541 /* C4Vector.swift in Sources */,
-				6114EDEB1BA4B41900A29541 /* C4Movie.swift in Sources */,
-				61511E771BB26DE10063B9AA /* C4Animation.swift in Sources */,
-				6114EDDE1BA4B41900A29541 /* C4Circle.swift in Sources */,
-				6114EDC61BA4B40600A29541 /* C4Foundation.swift in Sources */,
-				6114EDCB1BA4B40600A29541 /* C4Rect.swift in Sources */,
-				6114EDF91BA4B41900A29541 /* C4View.swift in Sources */,
-				6114EDE91BA4B41900A29541 /* C4Image.swift in Sources */,
-				6114EDE11BA4B41900A29541 /* C4Filter.swift in Sources */,
-				6114EDEE1BA4B41900A29541 /* C4Rectangle.swift in Sources */,
-				6114EDF01BA4B41900A29541 /* C4Shape+Creation.swift in Sources */,
-				6114EDC51BA4B40600A29541 /* C4EventSource.swift in Sources */,
-				6114EDD11BA4B40D00A29541 /* C4ColorBurn.swift in Sources */,
-				6114EDF51BA4B41900A29541 /* C4Triangle.swift in Sources */,
-				6114EDC41BA4B40600A29541 /* C4Color.swift in Sources */,
-				6114EDEA1BA4B41900A29541 /* C4Line.swift in Sources */,
-				61511E761BB26DD10063B9AA /* C4ViewAnimation.swift in Sources */,
-				6114EDD41BA4B40D00A29541 /* C4HueAdjust.swift in Sources */,
-				6114EDE01BA4B41900A29541 /* C4Ellipse.swift in Sources */,
-				6114EDFC1BA4B57900A29541 /* C4Font.swift in Sources */,
-				6114EDD81BA4B40D00A29541 /* C4Twirl.swift in Sources */,
-				6114EDC91BA4B40600A29541 /* C4Path.swift in Sources */,
+				619456E61BD4B8CE001ACDAD /* C4Image+Filter.swift in Sources */,
+				619456E01BD4B8CE001ACDAD /* C4Filter.swift in Sources */,
+				619456F51BD4B8CE001ACDAD /* C4Timer.swift in Sources */,
+				619456F91BD4B8CE001ACDAD /* C4View+Shadow.swift in Sources */,
+				619456F41BD4B8CE001ACDAD /* C4TextShape.swift in Sources */,
+				619456CF1BD4B8C8001ACDAD /* C4Bloom.swift in Sources */,
+				619456EA1BD4B8CE001ACDAD /* C4Movie.swift in Sources */,
+				619456D21BD4B8C8001ACDAD /* C4DotScreen.swift in Sources */,
+				619456D01BD4B8C8001ACDAD /* C4Checkerboard.swift in Sources */,
+				619456DA1BD4B8CE001ACDAD /* C4Arc.swift in Sources */,
+				619456E41BD4B8CE001ACDAD /* C4GradientLayer.swift in Sources */,
+				619456F21BD4B8CE001ACDAD /* C4Star.swift in Sources */,
+				619456C81BD4B8C0001ACDAD /* C4OS.swift in Sources */,
+				619456EB1BD4B8CE001ACDAD /* C4Polygon.swift in Sources */,
+				619456CC1BD4B8C0001ACDAD /* C4Size.swift in Sources */,
+				619456EE1BD4B8CE001ACDAD /* C4RegularPolygon.swift in Sources */,
+				619456FD1BD4B8CE001ACDAD /* C4Wedge.swift in Sources */,
+				619456F61BD4B8CE001ACDAD /* C4Triangle.swift in Sources */,
+				619456F81BD4B8CE001ACDAD /* C4View+Border.swift in Sources */,
+				619456DC1BD4B8CE001ACDAD /* C4CanvasController.swift in Sources */,
+				619456CA1BD4B8C0001ACDAD /* C4Point.swift in Sources */,
+				619456FA1BD4B8CE001ACDAD /* C4View.swift in Sources */,
+				619456E21BD4B8CE001ACDAD /* C4Generator.swift in Sources */,
+				619456D71BD4B8C8001ACDAD /* C4Sharpen.swift in Sources */,
+				619456FF1BD4B8CE001ACDAD /* UIViewController+C4View.swift in Sources */,
+				619456D61BD4B8C8001ACDAD /* C4Sepia.swift in Sources */,
+				619456D31BD4B8C8001ACDAD /* C4GaussianBlur.swift in Sources */,
+				619456DF1BD4B8CE001ACDAD /* C4Ellipse.swift in Sources */,
+				619456D51BD4B8C8001ACDAD /* C4LinearGradient.swift in Sources */,
+				619456E51BD4B8CE001ACDAD /* C4Image+Crop.swift in Sources */,
+				619456E81BD4B8CE001ACDAD /* C4Image.swift in Sources */,
+				619456F01BD4B8CE001ACDAD /* C4Shape.swift in Sources */,
+				619456DD1BD4B8CE001ACDAD /* C4Circle.swift in Sources */,
+				619456E31BD4B8CE001ACDAD /* C4Gradient.swift in Sources */,
+				619456CD1BD4B8C0001ACDAD /* C4Transform.swift in Sources */,
+				619456DB1BD4B8CE001ACDAD /* C4AudioPlayer.swift in Sources */,
+				619456C71BD4B8C0001ACDAD /* C4Math.swift in Sources */,
+				619456CE1BD4B8C0001ACDAD /* C4Vector.swift in Sources */,
+				619456E11BD4B8CE001ACDAD /* C4Font.swift in Sources */,
+				619456F11BD4B8CE001ACDAD /* C4ShapeLayer.swift in Sources */,
+				619456D91BD4B8CE001ACDAD /* C4Animation.swift in Sources */,
+				619456C61BD4B8C0001ACDAD /* C4Foundation.swift in Sources */,
+				619456CB1BD4B8C0001ACDAD /* C4Rect.swift in Sources */,
+				619456C51BD4B8C0001ACDAD /* C4EventSource.swift in Sources */,
+				619456EF1BD4B8CE001ACDAD /* C4Shape+Creation.swift in Sources */,
+				619456D11BD4B8C8001ACDAD /* C4ColorBurn.swift in Sources */,
+				619456EC1BD4B8CE001ACDAD /* C4QuadCurve.swift in Sources */,
+				619456FB1BD4B8CE001ACDAD /* C4View+KeyValues.swift in Sources */,
+				619456C41BD4B8C0001ACDAD /* C4Color.swift in Sources */,
+				619456DE1BD4B8CE001ACDAD /* C4Curve.swift in Sources */,
+				619456D41BD4B8C8001ACDAD /* C4HueAdjust.swift in Sources */,
+				619456E91BD4B8CE001ACDAD /* C4Line.swift in Sources */,
+				619456ED1BD4B8CE001ACDAD /* C4Rectangle.swift in Sources */,
+				619456D81BD4B8C8001ACDAD /* C4Twirl.swift in Sources */,
+				619456FC1BD4B8CE001ACDAD /* C4ViewAnimation.swift in Sources */,
+				619456E71BD4B8CE001ACDAD /* C4Image+Generator.swift in Sources */,
+				619456C91BD4B8C0001ACDAD /* C4Path.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -754,9 +750,11 @@
 				A9D4F6B51B534F9F00F937AB /* C4Size.swift in Sources */,
 				A9D4F6C91B534F9F00F937AB /* C4Movie.swift in Sources */,
 				D917E1361B83E0920084BC82 /* C4Gradient.swift in Sources */,
+				61BBAF631BC372BD00A03FD0 /* C4StoredAnimation.swift in Sources */,
 				A9D4F6C11B534F9F00F937AB /* C4Filter.swift in Sources */,
 				A9D4F6DA1B534F9F00F937AB /* C4Bloom.swift in Sources */,
 				A9D4F6BE1B534F9F00F937AB /* C4Circle.swift in Sources */,
+				619456C11BD4B23B001ACDAD /* C4OS.swift in Sources */,
 				A9D4F6CA1B534F9F00F937AB /* C4Polygon.swift in Sources */,
 				A9D4F6E21B534F9F00F937AB /* C4Sharpen.swift in Sources */,
 				A9D4F6E51B534F9F00F937AB /* UIViewController+C4View.swift in Sources */,
@@ -765,6 +763,7 @@
 				A9D4F6DD1B534F9F00F937AB /* C4DotScreen.swift in Sources */,
 				A9D4F6E41B534F9F00F937AB /* UIGestureRecognizer+Closure.swift in Sources */,
 				A9D4F6D51B534F9F00F937AB /* C4View+Border.swift in Sources */,
+				619457011BD4B8DA001ACDAD /* C4View+Gestures.swift in Sources */,
 				A9D4F6E01B534F9F00F937AB /* C4LinearGradient.swift in Sources */,
 				A9D4F6B31B534F9F00F937AB /* C4Point.swift in Sources */,
 				A9D4F6D21B534F9F00F937AB /* C4TextShape.swift in Sources */,
@@ -773,19 +772,19 @@
 				A9D4F6B91B534F9F00F937AB /* C4Animation.swift in Sources */,
 				A9D4F6CE1B534F9F00F937AB /* C4Shape+Creation.swift in Sources */,
 				A9D4F6B61B534F9F00F937AB /* C4Transform.swift in Sources */,
-				A9D4F6B11B534F9F00F937AB /* C4MediaObject.swift in Sources */,
 				D917E1381B83E1DB0084BC82 /* C4GradientLayer.swift in Sources */,
 				A9D4F6B71B534F9F00F937AB /* C4Vector.swift in Sources */,
 				A9D4F6C61B534F9F00F937AB /* C4Image+Generator.swift in Sources */,
 				A9D4F6E31B534F9F00F937AB /* C4Twirl.swift in Sources */,
+				61BBAF651BC38C1200A03FD0 /* C4View+KeyValues.swift in Sources */,
 				A9D4F6AF1B534F9F00F937AB /* C4Foundation.swift in Sources */,
 				A9D4F6D41B534F9F00F937AB /* C4View+Animation.swift in Sources */,
 				A9D4F6CB1B534F9F00F937AB /* C4QuadCurve.swift in Sources */,
-				A9D4F6BA1B534F9F00F937AB /* C4Animator.swift in Sources */,
 				A9D4F6D11B534F9F00F937AB /* C4Star.swift in Sources */,
 				A9D4F6C31B534F9F00F937AB /* C4Generator.swift in Sources */,
 				A9D4F6CF1B534F9F00F937AB /* C4Shape.swift in Sources */,
 				A9D4F6CC1B534F9F00F937AB /* C4Rectangle.swift in Sources */,
+				1F8252CC1BB3C65E0090E98A /* C4Timer.swift in Sources */,
 				A9D4F6B41B534F9F00F937AB /* C4Rect.swift in Sources */,
 				A9D4F6E11B534F9F00F937AB /* C4Sepia.swift in Sources */,
 				A9D4F6BD1B534F9F00F937AB /* C4CanvasController.swift in Sources */,
@@ -795,8 +794,6 @@
 				A9D4F6C71B534F9F00F937AB /* C4Image.swift in Sources */,
 				A9D4F6D31B534F9F00F937AB /* C4Triangle.swift in Sources */,
 				A9D4F6AE1B534F9F00F937AB /* C4EventSource.swift in Sources */,
-				61511E751BB25BD50063B9AA /* C4View+Gestures.swift in Sources */,
-				61511E721BB2597B0063B9AA /* C4OS.swift in Sources */,
 				A9D4F6C41B534F9F00F937AB /* C4Image+Crop.swift in Sources */,
 				A9D4F6AD1B534F9F00F937AB /* C4Color.swift in Sources */,
 				A9D4F6C51B534F9F00F937AB /* C4Image+Filter.swift in Sources */,
@@ -828,12 +825,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				61511E881BB275870063B9AA /* C4MathTests.swift in Sources */,
-				61511E8C1BB275870063B9AA /* C4TransformTests.swift in Sources */,
-				61511E891BB275870063B9AA /* C4PointTests.swift in Sources */,
-				61511E871BB275870063B9AA /* C4ColorTests.swift in Sources */,
-				61511E8A1BB275870063B9AA /* C4RectTests.swift in Sources */,
-				61511E8B1BB275870063B9AA /* C4VectorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -972,6 +963,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1013,6 +1005,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

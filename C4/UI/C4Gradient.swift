@@ -23,8 +23,9 @@ import UIKit
 import AppKit
 #endif
 
+///The C4Gradient class draws a color gradient over its background color, filling the shape of the view (including rounded corners).
 public class C4Gradient : C4View {
-    internal class GradientView : NativeView {
+    class GradientView : NativeView {
         var gradientLayer: C4GradientLayer {
             get {
                 return self.layer as! C4GradientLayer
@@ -49,50 +50,42 @@ public class C4Gradient : C4View {
             super.init(coder: coder)
         }
     }
-    
+
+    ///The background layer of the receiver.
     public var gradientLayer: C4GradientLayer {
         get {
             return self.gradientView.gradientLayer
         }
     }
-    
-    internal var gradientView: GradientView {
+
+    var gradientView: GradientView {
         return self.view as! GradientView
     }
-    
-    public convenience init(frame: C4Rect) {
-        self.init()
-        self.view.frame = CGRect(frame)
-    }
-    
-    public override init() {
-        super.init()
-        self.view = GradientView()
-        self.colors = [C4Blue,C4Pink]
-        self.locations = [0]
-    }
-    
-    public convenience init(frame: C4Rect, colors: [C4Color], locations: [Double]) {
-        self.init(frame: frame)
-        self.colors = colors
-        self.locations = locations
-    }
-    
+
+    ///An array of C4Color objects defining the color of each gradient stop. Animatable.
     public var colors : [C4Color] {
         get {
             if let cgcolors = gradientLayer.colors as? [CGColorRef] {
-                return [C4Color(cgcolors[0]),C4Color(cgcolors[1])]
+                var array = [C4Color]()
+                for c in cgcolors {
+                    array.append(C4Color(c))
+                }
+                return array
             }
             return [C4Blue,C4Pink]
         } set {
-            assert(newValue.count == 2)
-            if let c1 : C4Color = newValue.first,
-                let c2 : C4Color = newValue.last {
-                    self.gradientLayer.colors = [c1.CGColor,c2.CGColor]
+            assert(newValue.count >= 2, "colors must have at least 2 elements")
+            var cgcolors = [CGColorRef]()
+            for c in newValue {
+                cgcolors.append(c.CGColor)
             }
+            self.gradientLayer.colors = cgcolors
         }
     }
-    
+
+    ///An optional array of Double values defining the location of each gradient stop. Animatable.
+    ///
+    ///Defaults to [0,1]
     public var locations : [Double] {
         get {
             return gradientLayer.locations as! [Double]
@@ -104,7 +97,10 @@ public class C4Gradient : C4View {
             gradientLayer.locations = numbers
         }
     }
-    
+
+    ///The start point of the gradient when drawn in the layer’s coordinate space. Animatable.
+    ///
+    ///Defaults to the top-left corner of the frame {0.0,0.0}
     public var startPoint : C4Point {
         get {
             return C4Point(gradientLayer.startPoint)
@@ -113,11 +109,29 @@ public class C4Gradient : C4View {
         }
     }
 
+    ///The end point of the gradient when drawn in the layer’s coordinate space. Animatable.
+    ///
+    ///Defaults to the top-right corner of the frame {1.0,0.0}
     public var endPoint : C4Point {
         get {
             return C4Point(gradientLayer.endPoint)
         } set {
             gradientLayer.endPoint = CGPoint(newValue)
         }
+    }
+
+    ///  Initializes a new C4Gradient.
+    ///
+    ///  - parameter frame:     A C4Rect that defines the frame for the gradient's view.
+    ///  - parameter colors:    An array of C4Color objects that define the gradient's colors. Defaults to [C4Blue, C4Purple].
+    ///  - parameter locations: An array of Double values that define the location of each gradient stop. Defaults to [0,1]
+    public convenience init(frame: C4Rect, colors: [C4Color] = [C4Blue, C4Purple], locations: [Double] = [0,1]) {
+        assert(colors.count == locations.count, "colors and locations need to have the same number of elements")
+        self.init()
+        self.view = GradientView(frame: CGRect(frame))
+        self.colors = colors
+        self.locations = locations
+        self.startPoint = C4Point()
+        self.endPoint = C4Point(1,0)
     }
 }

@@ -20,125 +20,128 @@
 import UIKit
 
 extension C4View {
-    /**
-    Adds a tap gesture recognizer to the receiver's view.
-
-    let f = C4Rect(0,0,100,100)
-    let v = C4View(frame: f)
-    v.addTapGestureRecognizer { location, state in
-    println("tapped")
-    }
-
-    - parameter action: A block of code to be executed when the receiver recognizes a tap gesture.
-    - returns: A UITapGestureRecognizer that can be customized.
-    */
+    /// Adds a tap gesture recognizer to the receiver's view.
+    ///
+    /// ````
+    /// let f = C4Rect(0,0,100,100)
+    /// let v = C4View(frame: f)
+    /// v.addTapGestureRecognizer { location, state in
+    ///     println("tapped")
+    /// }
+    /// ````
+    ///
+    /// - parameter action: A block of code to be executed when the receiver recognizes a tap gesture.
+    ///
+    /// - returns: A UITapGestureRecognizer that can be customized.
     public func addTapGestureRecognizer(action: TapAction) -> UITapGestureRecognizer {
         let gestureRecognizer = UITapGestureRecognizer(view: self.view, action: action)
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
     }
 
-    /**
-    Adds a pan gesture recognizer to the receiver's view.
-
-    let f = C4Rect(0,0,100,100)
-    let v = C4View(frame: f)
-    v.addPanGestureRecognizer { location, translation, velocity, state in
-    println("panned")
-    }
-
-    - parameter action: A block of code to be executed when the receiver recognizes a pan gesture.
-    - returns: A UIPanGestureRecognizer that can be customized.
-    */
+    /// Adds a pan gesture recognizer to the receiver's view.
+    ///
+    /// ````
+    /// let f = C4Rect(0,0,100,100)
+    /// let v = C4View(frame: f)
+    /// v.addPanGestureRecognizer { location, translation, velocity, state in
+    ///     println("panned")
+    /// }
+    ///
+    /// - parameter action: A block of code to be executed when the receiver recognizes a pan gesture.
+    ///
+    /// - returns: A UIPanGestureRecognizer that can be customized.
     public func addPanGestureRecognizer(action: PanAction) -> UIPanGestureRecognizer {
         let gestureRecognizer = UIPanGestureRecognizer(view: self.view, action: action)
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
     }
 
-    /**
-    Adds a pinch gesture recognizer to the receiver's view.
-
-    let f = C4Rect(0,0,100,100)
-    let v = C4View(frame: f)
-    v.addPinchGestureRecognizer { scale, velocity, state in
-    println("pinched")
-    }
-
-    - parameter action: A block of code to be executed when the receiver recognizes a pinch gesture.
-    - returns: A UIPinchGestureRecognizer that can be customized.
-    */
+    /// Adds a pinch gesture recognizer to the receiver's view.
+    ///
+    /// ````
+    /// let f = C4Rect(0,0,100,100)
+    /// let v = C4View(frame: f)
+    /// v.addPinchGestureRecognizer { scale, velocity, state in
+    ///     println("pinched")
+    /// }
+    ///
+    /// - parameter action: A block of code to be executed when the receiver recognizes a pinch gesture.
+    ///
+    /// - returns: A UIPinchGestureRecognizer that can be customized.
     public func addPinchGestureRecognizer(action: PinchAction) -> UIPinchGestureRecognizer {
         let gestureRecognizer = UIPinchGestureRecognizer(view: view, action: action)
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
     }
 
-    /**
-    Adds a rotation gesture recognizer to the receiver's view.
-
-    let f = C4Rect(0,0,100,100)
-    let v = C4View(frame: f)
-    v.addRotationGestureRecognizer { rotation, velocity, state in
-    println("rotated")
-    }
-
-    - parameter action: A block of code to be executed when the receiver recognizes a rotation gesture.
-    - returns: A UIRotationGestureRecognizer that can be customized.
-    */
+    /// Adds a rotation gesture recognizer to the receiver's view.
+    ///
+    /// ````
+    /// let f = C4Rect(0,0,100,100)
+    /// let v = C4View(frame: f)
+    /// v.addRotationGestureRecognizer { rotation, velocity, state in
+    ///     println("rotated")
+    /// }
+    /// ````
+    ///
+    /// - parameter action: A block of code to be executed when the receiver recognizes a rotation gesture.
+    ///
+    /// - returns: A UIRotationGestureRecognizer that can be customized.
     public func addRotationGestureRecognizer(action: RotationAction) -> UIRotationGestureRecognizer {
         let gestureRecognizer = UIRotationGestureRecognizer(view: view, action: action)
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
     }
 
-    /**
-    Adds a longpress gesture recognizer to the receiver's view.
-
-    let f = C4Rect(0,0,100,100)
-    let v = C4View(frame: f)
-    v.addLongPressGestureRecognizer { location, state in
-    println("longpress")
-    }
-
-    - parameter action: A block of code to be executed when the receiver recognizes a longpress gesture.
-    - returns: A UILongPressGestureRecognizer that can be customized.
-    */
+    /// Adds a longpress gesture recognizer to the receiver's view.
+    ///
+    /// ````
+    /// let f = C4Rect(0,0,100,100)
+    /// let v = C4View(frame: f)
+    /// v.addLongPressGestureRecognizer { location, state in
+    ///     println("longpress")
+    /// }
+    /// ````
+    /// - parameter action: A block of code to be executed when the receiver recognizes a longpress gesture.
+    ///
+    /// - returns: A UILongPressGestureRecognizer that can be customized.
     public func addLongPressGestureRecognizer(action: LongPressAction) -> UILongPressGestureRecognizer {
         let gestureRecognizer = UILongPressGestureRecognizer(view: view, action: action)
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
     }
 
-    /**
-    Adds a swipe gesture recognizer to the receiver's view.
-
-    let f = C4Rect(0,0,100,100)
-    let v = C4View(frame: f)
-    v.addSwipeGestureRecognizer { location, state in
-    println("swiped")
-    }
-
-    - parameter action: A block of code to be executed when the receiver recognizes a swipe gesture.
-    - returns: A UISwipeGestureRecognizer that can be customized.
-    */
+    /// Adds a swipe gesture recognizer to the receiver's view.
+    ///
+    /// ````
+    /// let f = C4Rect(0,0,100,100)
+    /// let v = C4View(frame: f)
+    /// v.addSwipeGestureRecognizer { location, state in
+    ///     println("swiped")
+    /// }
+    /// ````
+    ///
+    /// - parameter action: A block of code to be executed when the receiver recognizes a swipe gesture.
+    ///
+    /// - returns: A UISwipeGestureRecognizer that can be customized.
     public func addSwipeGestureRecognizer(action: SwipeAction) -> UISwipeGestureRecognizer {
         let gestureRecognizer = UISwipeGestureRecognizer(view: view, action: action)
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
     }
 
-    /**
-    Adds a screen edge pan gesture recognizer to the receiver's view.
-
-    let v = C4View(frame: canvas.bounds)
-    v.addSwipeGestureRecognizer { location, state in
-    println("edge pan")
-    }
-
-    - parameter action: A block of code to be executed when the receiver recognizes a screen edge pan gesture.
-    - returns: A UIScreenEdgePanGestureRecognizer that can be customized.
-    */
+    /// Adds a screen edge pan gesture recognizer to the receiver's view.
+    ///
+    /// ````
+    /// let v = C4View(frame: canvas.bounds)
+    /// v.addSwipeGestureRecognizer { location, state in
+    /// println("edge pan")
+    /// }
+    /// ````
+    /// - parameter action: A block of code to be executed when the receiver recognizes a screen edge pan gesture.
+    ///
+    /// - returns: A UIScreenEdgePanGestureRecognizer that can be customized.
     public func addScreenEdgePanGestureRecognizer(action: ScreenEdgePanAction) -> UIScreenEdgePanGestureRecognizer {
         let gestureRecognizer = UIScreenEdgePanGestureRecognizer(view: view, action: action)
         self.view.addGestureRecognizer(gestureRecognizer)

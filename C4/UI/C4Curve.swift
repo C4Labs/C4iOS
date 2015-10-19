@@ -19,32 +19,95 @@
 
 import QuartzCore
 
+///  C4Curve is a concrete subclass of C4Shape that has a special initialzer that creates an bezier whose shape is defined by its end points and two control points.
 public class C4Curve : C4Shape {
-    /**
-    Creates a bezier curve.
     
-        let p1 = C4Point()
-        let p2 = C4Point(100,0)
-        let c1 = C4Point(0,50)
-        let c2 = C4Point(100,50)
-        let crv = C4Curve(points: [p1,p2], controls: [c1,c2])
+    /// The beginning and end points of the receiver. Animatable.
+    public var endPoints = (C4Point(), C4Point()) {
+        didSet {
+            updatePath()
+        }
+    }
+    
+    /// The control points of the receiver. Animatable.
+    public var controlPoints = (C4Point(), C4Point()) {
+        didSet {
+            updatePath()
+        }
+    }
 
-    - parameter points: The beginning and end points	of the curve.
-    - parameter controls: The control points used to define the shape of the curve.
-    */
-    convenience public init(points: [C4Point], controls: [C4Point]) {
-        let p0 = CGPoint(points[0])
-        let p1 = CGPoint(points[1])
-        let c0 = CGPoint(controls[0])
-        let c1 = CGPoint(controls[1])
+    /// The center of the curve's view.
+    public override var center : C4Point {
+        get {
+            return C4Point(view.center)
+        }
+        set {
+            let diff = newValue - center
+            batchUpdates() {
+                self.endPoints.0 += diff
+                self.endPoints.1 += diff
+                self.controlPoints.0 += diff
+                self.controlPoints.1 += diff
+            }
+        }
+    }
+    
+    /// The origin of the curve's view.
+    public override var origin : C4Point {
+        get {
+            return C4Point(view.frame.origin)
+        }
+        set {
+            let diff = newValue - origin
+            batchUpdates() {
+                self.endPoints.0 += diff
+                self.endPoints.1 += diff
+                self.controlPoints.0 += diff
+                self.controlPoints.1 += diff
+            }
+        }
+    }
+    
+    /// Creates a bezier curve.
+    ///
+    /// ````
+    /// let crv = C4Curve(a: C4Point(), b: C4Point(0,50), c: C4Point(100,50), d: C4Point(100,0))
+    /// ````
+    ///
+    /// - parameter a: The beginning point of the curve.
+    /// - parameter b: The first control point used to define the shape of the curve.
+    /// - parameter c: The second control point used to define the shape of the curve.
+    /// - parameter d: The end point of the curve.
+    convenience public init(begin: C4Point, control0: C4Point, control1: C4Point, end: C4Point) {
+        self.init()
+        endPoints = (begin, end)
+        controlPoints = (control0, control1)
+        updatePath()
+    }
+    
+    private var pauseUpdates = false
+    func batchUpdates(updates: Void -> Void) {
+        pauseUpdates = true
+        updates()
+        pauseUpdates = false
+        updatePath()
+    }
+    
+    override func updatePath() {
+        if pauseUpdates {
+            return
+        }
         
         let curve = CGPathCreateMutable()
-        CGPathMoveToPoint(curve, nil, p0.x, p0.y)
-        CGPathAddCurveToPoint(curve, nil, c0.x,c0.y,c1.x,c1.y,p1.x,p1.y)
-        let curveRect = CGPathGetBoundingBox(curve)
+        CGPathMoveToPoint(curve, nil,
+            CGFloat(endPoints.0.x), CGFloat(endPoints.0.y))
+        CGPathAddCurveToPoint(curve, nil,
+            CGFloat(controlPoints.0.x), CGFloat(controlPoints.0.y),
+            CGFloat(controlPoints.1.x), CGFloat(controlPoints.1.y),
+            CGFloat(endPoints.1.x), CGFloat(endPoints.1.y))
         
-        self.init(frame: C4Rect(curveRect))
-        self.path = C4Path(path:curve)
+        self.frame = C4Rect(CGPathGetBoundingBox(curve))
+        self.path = C4Path(path: curve)
         adjustToFitPath()
     }
 }

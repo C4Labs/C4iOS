@@ -20,23 +20,24 @@
 import Foundation
 import CoreGraphics
 
+/// C4Star is a concrete subclass of C4Polygon that defines a star shape.
 public class C4Star: C4Polygon {
-    
-    /**
-    Initializes a new C4Star shape.
 
-        let star = C4Star(
-            center: canvas.center,
-            pointCount: 5,
-            innerRadius: 50,
-            outerRadius: 100)
-        canvas.add(star)
-
-    - parameter center: The center of the star
-    - parameter pointCount: The number of points on the star
-    - parameter innerRadius: The radial distance from the center of the star to the inner points
-    - parameter outerRadius: The radial distance from the center of the start to the outer points
-    */
+    /// Initializes a new C4Star shape.
+    ///
+    /// ````
+    /// let star = C4Star(
+    ///         center: canvas.center,
+    ///     pointCount: 5,
+    ///    innerRadius: 50,
+    ///    outerRadius: 100)
+    /// canvas.add(star)
+    /// ````
+    ///
+    /// - parameter center: The center of the star
+    /// - parameter pointCount: The number of points on the star
+    /// - parameter innerRadius: The radial distance from the center of the star to the inner points
+    /// - parameter outerRadius: The radial distance from the center of the start to the outer points
     convenience public init(center: C4Point, pointCount: Int, innerRadius: Double, outerRadius: Double) {
         let wedgeAngle = 2.0 * M_PI / Double(pointCount)
         var angle = M_PI_2
@@ -53,5 +54,7 @@ public class C4Star: C4Polygon {
         }
         
         self.init(pointArray)
+        self.close()
+        self.fillColor = C4Blue
     }
 }
