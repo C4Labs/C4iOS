@@ -101,7 +101,11 @@ public class C4TextShape : C4Shape {
         CTFontGetAdvancesForGlyphs(ctfont!, .Default, &glyphs, &advances, glyphs.count)
         
         let textPath = CGPathCreateMutable()
-        var invert = CGAffineTransformMakeScale(1, -1)
+        #if os(iOS)
+            var invert = CGAffineTransformMakeScale(1, -1)
+        #elseif os(OSX)
+            var invert = CGAffineTransformIdentity
+        #endif
         var origin = CGPointZero
         for i in 0..<glyphs.count {
             let glyphPath = CTFontCreatePathForGlyph(ctfont!, glyphs[i], &invert)

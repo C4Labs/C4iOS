@@ -17,7 +17,7 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-import QuartzCore
+import UIKit
 
 /// C4StoredAnimation is a concrete subclass of C4Animation. 
 ///

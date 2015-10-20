@@ -66,9 +66,7 @@ public class C4Shape: C4View {
 
     ///  Initializes an empty C4Shape.
     override init() {
-        super.init()
-
-        self.view = ShapeView()
+        super.init(view: ShapeView(frame: CGRectMake(0, 0, 1, 1)))
         strokeColor = C4Purple
         fillColor = C4Blue
         lineWidth = 1
@@ -104,8 +102,12 @@ public class C4Shape: C4View {
         if shapeLayer.path == nil {
             return
         }
-        view.bounds = CGPathGetPathBoundingBox(shapeLayer.path)
-        view.frame = view.bounds
+
+        let bounds = CGPathGetPathBoundingBox(shapeLayer.path)
+        view.bounds = bounds
+
+        view.heightAnchor.constraintEqualToConstant(bounds.height)
+        view.widthAnchor.constraintEqualToConstant(bounds.width)
     }
     
     /// Returns the receiver's frame. Animatable.

@@ -32,6 +32,8 @@ public class C4CanvasController : NativeViewController {
     ///
     /// You should **not** override this method, instead use **setup()**.
     public override func viewDidLoad() {
+        super.viewDidLoad()
+
         #if os(iOS)
             canvas.backgroundColor = C4Grey
         #endif
