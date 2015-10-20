@@ -103,7 +103,8 @@ public class C4Shape: C4View {
             return
         }
 
-        let bounds = CGPathGetPathBoundingBox(shapeLayer.path)
+        var bounds = CGPathGetPathBoundingBox(shapeLayer.path)
+        bounds = CGRectInset(bounds, -shapeLayer.lineWidth/2, -shapeLayer.lineWidth/2)
         view.bounds = bounds
 
         view.heightAnchor.constraintEqualToConstant(bounds.height)
@@ -124,8 +125,13 @@ public class C4Shape: C4View {
     /// The line width used when stroking the path. Defaults to 1.0. Animatable.
     @IBInspectable
     public var lineWidth: Double {
-        get { return Double(shapeLayer.lineWidth) }
-        set(width) { shapeLayer.lineWidth = CGFloat(width) }
+        get {
+            return Double(shapeLayer.lineWidth)
+        }
+        set(width) {
+            shapeLayer.lineWidth = CGFloat(width)
+            adjustToFitPath()
+        }
     }
     
     /// The color to stroke the path, or nil for no fill. Defaults to opaque black. Animatable.
