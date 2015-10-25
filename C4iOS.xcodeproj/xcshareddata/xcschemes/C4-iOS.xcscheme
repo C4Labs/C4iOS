@@ -14,23 +14,23 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6114EDBB1BA4B36700A29541"
+               BlueprintIdentifier = "614F824219DB5ED3001DF1D4"
                BuildableName = "C4.framework"
-               BlueprintName = "C4 (OSX)"
+               BlueprintName = "C4-iOS"
                ReferencedContainer = "container:C4iOS.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
             buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "614F824219DB5ED3001DF1D4"
-               BuildableName = "C4.framework"
-               BlueprintName = "C4"
+               BlueprintIdentifier = "614F824D19DB5ED4001DF1D4"
+               BuildableName = "C4Tests-iOS.xctest"
+               BlueprintName = "C4Tests-iOS"
                ReferencedContainer = "container:C4iOS.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,9 +46,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "61511E7B1BB2755D0063B9AA"
-               BuildableName = "C4Tests (OSX)"
-               BlueprintName = "C4Tests (OSX)"
+               BlueprintIdentifier = "614F824D19DB5ED4001DF1D4"
+               BuildableName = "C4Tests-iOS.xctest"
+               BlueprintName = "C4Tests-iOS"
                ReferencedContainer = "container:C4iOS.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -56,9 +56,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6114EDBB1BA4B36700A29541"
+            BlueprintIdentifier = "614F824219DB5ED3001DF1D4"
             BuildableName = "C4.framework"
-            BlueprintName = "C4 (OSX)"
+            BlueprintName = "C4-iOS"
             ReferencedContainer = "container:C4iOS.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -78,9 +78,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6114EDBB1BA4B36700A29541"
+            BlueprintIdentifier = "614F824219DB5ED3001DF1D4"
             BuildableName = "C4.framework"
-            BlueprintName = "C4 (OSX)"
+            BlueprintName = "C4-iOS"
             ReferencedContainer = "container:C4iOS.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -96,9 +96,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6114EDBB1BA4B36700A29541"
+            BlueprintIdentifier = "614F824219DB5ED3001DF1D4"
             BuildableName = "C4.framework"
-            BlueprintName = "C4 (OSX)"
+            BlueprintName = "C4-iOS"
             ReferencedContainer = "container:C4iOS.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
