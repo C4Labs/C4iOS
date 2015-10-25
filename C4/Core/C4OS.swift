@@ -23,6 +23,7 @@ import UIKit
 
 public typealias NativeColor = UIColor
 public typealias NativeFont = UIFont
+public typealias NativeGestureRecognizer = UIGestureRecognizer
 public typealias NativeImage = UIImage
 public typealias NativeView = UIView
 public typealias NativeImageView = UIImageView
@@ -47,6 +48,7 @@ import AppKit
 
 public typealias NativeColor = NSColor
 public typealias NativeFont = NSFont
+public typealias NativeGestureRecognizer = NSGestureRecognizer
 public typealias NativeImage = NSImage
 public typealias NativeView = NSView
 public typealias NativeImageView = NSImageView

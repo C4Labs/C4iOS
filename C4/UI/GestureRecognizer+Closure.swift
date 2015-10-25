@@ -17,14 +17,31 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
+#if os(iOS)
+    import UIKit
+    public typealias NativeGestureRecognizerState = UIGestureRecognizerState
+    public typealias NativeTapGestureRecognizer = UITapGestureRecognizer
+    public typealias NativeClickGestureRecognizer = UITapGestureRecognizer
+    public typealias NativePanGestureRecognizer = UIPanGestureRecognizer
+    public typealias NativePinchGestureRecognizer = UIPinchGestureRecognizer
+    public typealias NativeRotationGestureRecognizer = UIRotationGestureRecognizer
+    public typealias NativePressGestureRecognizer = UILongPressGestureRecognizer
+#elseif os(OSX)
+    import AppKit
+    public typealias NativeGestureRecognizerState = NSGestureRecognizerState
+    public typealias NativeTapGestureRecognizer = NSClickGestureRecognizer
+    public typealias NativeClickGestureRecognizer = NSClickGestureRecognizer
+    public typealias NativePanGestureRecognizer = NSPanGestureRecognizer
+    public typealias NativePinchGestureRecognizer = NSMagnificationGestureRecognizer
+    public typealias NativeRotationGestureRecognizer = NSRotationGestureRecognizer
+    public typealias NativePressGestureRecognizer = NSPressGestureRecognizer
 
-import Foundation
-import UIKit
+#endif
 
 private var handlerAssociationKey: UInt8 = 0
 private var viewAssociationKey: UInt8 = 0
 
-extension UIGestureRecognizer {
+extension NativeGestureRecognizer {
     
     /// The current location of the gesture in the reference view.
     public var location: C4Point {
@@ -33,7 +50,7 @@ extension UIGestureRecognizer {
         }
     }
     
-    internal var referenceView: UIView? {
+    internal var referenceView: NativeView? {
         get {
             let weakViewWrapper: WeakViewWrapper? = objc_getAssociatedObject(self, &viewAssociationKey) as? WeakViewWrapper
             return weakViewWrapper?.view
@@ -58,7 +75,7 @@ extension UIGestureRecognizer {
         }
     }
     
-    internal convenience init(view: UIView) {
+    internal convenience init(view: NativeView) {
         self.init()
         self.referenceView = view
     }
@@ -67,18 +84,18 @@ extension UIGestureRecognizer {
     /// properties and objc_setAssociatedObject does not support zeroing weak references. See
     /// [on Stack Overflow](http://stackoverflow.com/questions/27632867/how-do-i-create-a-weak-stored-property-in-a-swift-extension)
     internal class WeakViewWrapper : NSObject {
-        weak var view : UIView?
+        weak var view : NativeView?
         
-        init(_ view: UIView?) {
+        init(_ view: NativeView?) {
             self.view = view
         }
     }
 }
 
 
-public typealias TapAction = (location: C4Point, state: UIGestureRecognizerState) -> ()
+public typealias TapAction = (location: C4Point, state: NativeGestureRecognizerState) -> ()
 
-extension UITapGestureRecognizer {
+extension NativeTapGestureRecognizer {
     
     /// The closure to call when there is a gesture event.
     public var tapAction: TapAction? {
@@ -87,19 +104,29 @@ extension UITapGestureRecognizer {
         }
         set {
             if let handler: AnyObject = actionHandler {
-                removeTarget(handler, action: "handleGesture:")
+                #if os(iOS)
+                    removeTarget(handler, action: "handleGesture:")
+                #elseif os(OSX)
+                    target = nil
+                    action = nil
+                #endif
             }
             
-            if let action = newValue {
-                actionHandler = TapGestureHandler(action)
-                addTarget(actionHandler!, action: "handleGesture:")
+            if let newAction = newValue {
+                actionHandler = TapGestureHandler(newAction)
+                #if os(iOS)
+                    addTarget(actionHandler!, action: "handleGesture:")
+                #elseif os(OSX)
+                    target = actionHandler
+                    action = "handleGesture:"
+                #endif
             } else {
                 actionHandler = nil
             }
         }
     }
     
-    internal convenience init(view: UIView, action: TapAction) {
+    internal convenience init(view: NativeView, action: TapAction) {
         self.init()
         self.referenceView = view
         self.tapAction = action
@@ -113,16 +140,16 @@ extension UITapGestureRecognizer {
             self.action = action
         }
         
-        func handleGesture(gestureRecognizer: UIPanGestureRecognizer) {
+        func handleGesture(gestureRecognizer: NativePanGestureRecognizer) {
             action(location: gestureRecognizer.location, state: gestureRecognizer.state)
         }
     }
 }
 
 
-public typealias PanAction = (location: C4Point, translation: C4Vector, velocity: C4Vector, state: UIGestureRecognizerState) -> ()
+public typealias PanAction = (location: C4Point, translation: C4Vector, velocity: C4Vector, state: NativeGestureRecognizerState) -> ()
 
-extension UIPanGestureRecognizer {
+extension NativePanGestureRecognizer {
     
     /// The closure to call when there is a gesture event.
     public var panAction: PanAction? {
@@ -131,12 +158,22 @@ extension UIPanGestureRecognizer {
         }
         set {
             if let handler: AnyObject = actionHandler {
-                removeTarget(handler, action: "handleGesture:")
+                #if os(iOS)
+                    removeTarget(handler, action: "handleGesture:")
+                #elseif os(OSX)
+                    target = nil
+                    action = nil
+                #endif
             }
             
-            if let action = newValue {
-                actionHandler = PanGestureHandler(action)
-                addTarget(actionHandler!, action: "handleGesture:")
+            if let newAction = newValue {
+                actionHandler = PanGestureHandler(newAction)
+                #if os(iOS)
+                    addTarget(actionHandler!, action: "handleGesture:")
+                #elseif os(OSX)
+                    target = actionHandler
+                    action = "handleGesture:"
+                #endif
             } else {
                 actionHandler = nil
             }
@@ -165,7 +202,7 @@ extension UIPanGestureRecognizer {
         
     }
     
-    internal convenience init(view: UIView, action: PanAction) {
+    internal convenience init(view: NativeView, action: PanAction) {
         self.init()
         self.referenceView = view
         self.panAction = action
@@ -179,16 +216,16 @@ extension UIPanGestureRecognizer {
             self.action = action
         }
         
-        func handleGesture(gestureRecognizer: UIPanGestureRecognizer) {
+        func handleGesture(gestureRecognizer: NativePanGestureRecognizer) {
             action(location: gestureRecognizer.location, translation: gestureRecognizer.translation, velocity: gestureRecognizer.velocity, state: gestureRecognizer.state)
         }
     }
 }
 
 
-public typealias PinchAction = (scale: Double, velocity: Double, state: UIGestureRecognizerState) -> ()
+public typealias PinchAction = (scale: Double, state: NativeGestureRecognizerState) -> ()
 
-extension UIPinchGestureRecognizer {
+extension NativePinchGestureRecognizer {
     
     /// The closure to call when there is a gesture event.
     public var pinchAction: PinchAction? {
@@ -197,19 +234,29 @@ extension UIPinchGestureRecognizer {
         }
         set {
             if let handler: AnyObject = actionHandler {
-                removeTarget(handler, action: "handleGesture:")
+                #if os(iOS)
+                    removeTarget(handler, action: "handleGesture:")
+                #elseif os(OSX)
+                    target = nil
+                    action = nil
+                #endif
             }
             
-            if let action = newValue {
-                actionHandler = PinchGestureHandler(action)
-                addTarget(actionHandler!, action: "handleGesture:")
+            if let newAction = newValue {
+                actionHandler = PinchGestureHandler(newAction)
+                #if os(iOS)
+                    addTarget(actionHandler!, action: "handleGesture:")
+                #elseif os(OSX)
+                    target = actionHandler
+                    action = "handleGesture:"
+                #endif
             } else {
                 actionHandler = nil
             }
         }
     }
     
-    internal convenience init(view: UIView, action: PinchAction) {
+    internal convenience init(view: NativeView, action: PinchAction) {
         self.init()
         self.referenceView = view
         self.pinchAction = action
@@ -223,16 +270,21 @@ extension UIPinchGestureRecognizer {
             self.action = action
         }
         
-        func handleGesture(gestureRecognizer: UIPinchGestureRecognizer) {
-            action(scale: Double(gestureRecognizer.scale), velocity: Double(gestureRecognizer.velocity), state: gestureRecognizer.state)
+        func handleGesture(gestureRecognizer: NativePinchGestureRecognizer) {
+            #if os(iOS)
+                let scale = gestureRecognizer.scale
+            #elseif os(OSX)
+                let scale = gestureRecognizer.magnification
+            #endif
+            action(scale: Double(scale), state: gestureRecognizer.state)
         }
     }
 }
 
 
-public typealias RotationAction = (rotation: Double, velocity: Double, state: UIGestureRecognizerState) -> ()
+public typealias RotationAction = (rotation: Double, state: NativeGestureRecognizerState) -> ()
 
-extension UIRotationGestureRecognizer {
+extension NativeRotationGestureRecognizer {
     
     /// The closure to call when there is a gesture event.
     public var rotationAction: RotationAction? {
@@ -241,19 +293,29 @@ extension UIRotationGestureRecognizer {
         }
         set {
             if let handler: AnyObject = actionHandler {
-                removeTarget(handler, action: "handleGesture:")
+                #if os(iOS)
+                    removeTarget(handler, action: "handleGesture:")
+                #elseif os(OSX)
+                    target = nil
+                    action = nil
+                #endif
             }
             
-            if let action = newValue {
-                actionHandler = RotationGestureHandler(action)
-                addTarget(actionHandler!, action: "handleGesture:")
+            if let newAction = newValue {
+                actionHandler = RotationGestureHandler(newAction)
+                #if os(iOS)
+                    addTarget(actionHandler!, action: "handleGesture:")
+                #elseif os(OSX)
+                    target = actionHandler
+                    action = "handleGesture:"
+                #endif
             } else {
                 actionHandler = nil
             }
         }
     }
     
-    internal convenience init(view: UIView, action: RotationAction) {
+    internal convenience init(view: NativeView, action: RotationAction) {
         self.init()
         self.referenceView = view
         self.rotationAction = action
@@ -267,16 +329,16 @@ extension UIRotationGestureRecognizer {
             self.action = action
         }
         
-        func handleGesture(gestureRecognizer: UIRotationGestureRecognizer) {
-            action(rotation: Double(gestureRecognizer.rotation), velocity: Double(gestureRecognizer.velocity), state: gestureRecognizer.state)
+        func handleGesture(gestureRecognizer: NativeRotationGestureRecognizer) {
+            action(rotation: Double(gestureRecognizer.rotation), state: gestureRecognizer.state)
         }
     }
 }
 
 
-public typealias LongPressAction = (location: C4Point, state: UIGestureRecognizerState) -> ()
+public typealias LongPressAction = (location: C4Point, state: NativeGestureRecognizerState) -> ()
 
-extension UILongPressGestureRecognizer {
+extension NativePressGestureRecognizer {
     
     /// The closure to call when there is a gesture event.
     public var longPressAction: LongPressAction? {
@@ -285,19 +347,29 @@ extension UILongPressGestureRecognizer {
         }
         set {
             if let handler: AnyObject = actionHandler {
-                removeTarget(handler, action: "handleGesture:")
+                #if os(iOS)
+                    removeTarget(handler, action: "handleGesture:")
+                #elseif os(OSX)
+                    target = nil
+                    action = nil
+                #endif
             }
             
-            if let action = newValue {
-                actionHandler = LongPressGestureHandler(action)
-                addTarget(actionHandler!, action: "handleGesture:")
+            if let newAction = newValue {
+                actionHandler = LongPressGestureHandler(newAction)
+                #if os(iOS)
+                    addTarget(actionHandler!, action: "handleGesture:")
+                #elseif os(OSX)
+                    target = actionHandler
+                    action = "handleGesture:"
+                #endif
             } else {
                 actionHandler = nil
             }
         }
     }
     
-    internal convenience init(view: UIView, action: LongPressAction) {
+    internal convenience init(view: NativeView, action: LongPressAction) {
         self.init()
         self.referenceView = view
         self.longPressAction = action
@@ -311,14 +383,15 @@ extension UILongPressGestureRecognizer {
             self.action = action
         }
         
-        func handleGesture(gestureRecognizer: UILongPressGestureRecognizer) {
+        func handleGesture(gestureRecognizer: NativePressGestureRecognizer) {
             action(location: gestureRecognizer.location, state: gestureRecognizer.state)
         }
     }
 }
 
 
-public typealias SwipeAction = (location: C4Point, state: UIGestureRecognizerState, direction: UISwipeGestureRecognizerDirection) -> ()
+#if os(iOS)
+public typealias SwipeAction = (location: C4Point, state: NativeGestureRecognizerState, direction: UISwipeGestureRecognizerDirection) -> ()
 
 extension UISwipeGestureRecognizer {
     
@@ -341,7 +414,7 @@ extension UISwipeGestureRecognizer {
         }
     }
     
-    internal convenience init(view: UIView, action: SwipeAction) {
+    internal convenience init(view: NativeView, action: SwipeAction) {
         self.init()
         self.referenceView = view
         self.swipeAction = action
@@ -360,9 +433,10 @@ extension UISwipeGestureRecognizer {
         }
     }
 }
+#endif
 
-
-public typealias ScreenEdgePanAction = (location: C4Point, state: UIGestureRecognizerState) -> ()
+#if os(iOS)
+public typealias ScreenEdgePanAction = (location: C4Point, state: NativeGestureRecognizerState) -> ()
 
 extension UIScreenEdgePanGestureRecognizer {
     
@@ -385,7 +459,7 @@ extension UIScreenEdgePanGestureRecognizer {
         }
     }
     
-    internal convenience init(view: UIView, action: ScreenEdgePanAction) {
+    internal convenience init(view: NativeView, action: ScreenEdgePanAction) {
         self.init()
         self.referenceView = view
         self.screenEdgePanAction = action
@@ -404,3 +478,4 @@ extension UIScreenEdgePanGestureRecognizer {
         }
     }
 }
+#endif

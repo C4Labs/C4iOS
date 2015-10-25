@@ -17,7 +17,11 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
+#if os(iOS)
 import UIKit
+#elseif os(OSX)
+import AppKit
+#endif
 
 extension C4View {
     /// Adds a tap gesture recognizer to the receiver's view.
@@ -33,8 +37,8 @@ extension C4View {
     /// - parameter action: A block of code to be executed when the receiver recognizes a tap gesture.
     ///
     /// - returns: A UITapGestureRecognizer that can be customized.
-    public func addTapGestureRecognizer(action: TapAction) -> UITapGestureRecognizer {
-        let gestureRecognizer = UITapGestureRecognizer(view: self.view, action: action)
+    public func addTapGestureRecognizer(action: TapAction) -> NativeTapGestureRecognizer {
+        let gestureRecognizer = NativeTapGestureRecognizer(view: self.view, action: action)
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
     }
@@ -51,11 +55,19 @@ extension C4View {
     /// - parameter action: A block of code to be executed when the receiver recognizes a pan gesture.
     ///
     /// - returns: A UIPanGestureRecognizer that can be customized.
+    #if os(iOS)
     public func addPanGestureRecognizer(action: PanAction) -> UIPanGestureRecognizer {
         let gestureRecognizer = UIPanGestureRecognizer(view: self.view, action: action)
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
     }
+    #elseif os(OSX)
+    public func addPanGestureRecognizer(action: PanAction) -> NSPanGestureRecognizer {
+        let gestureRecognizer = NSPanGestureRecognizer(view: self.view, action: action)
+        self.view.addGestureRecognizer(gestureRecognizer)
+        return gestureRecognizer
+    }
+    #endif
 
     /// Adds a pinch gesture recognizer to the receiver's view.
     ///
@@ -68,9 +80,9 @@ extension C4View {
     ///
     /// - parameter action: A block of code to be executed when the receiver recognizes a pinch gesture.
     ///
-    /// - returns: A UIPinchGestureRecognizer that can be customized.
-    public func addPinchGestureRecognizer(action: PinchAction) -> UIPinchGestureRecognizer {
-        let gestureRecognizer = UIPinchGestureRecognizer(view: view, action: action)
+    /// - returns: A NativePinchGestureRecognizer that can be customized.
+    public func addPinchGestureRecognizer(action: PinchAction) -> NativePinchGestureRecognizer {
+        let gestureRecognizer = NativePinchGestureRecognizer(view: view, action: action)
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
     }
@@ -87,9 +99,9 @@ extension C4View {
     ///
     /// - parameter action: A block of code to be executed when the receiver recognizes a rotation gesture.
     ///
-    /// - returns: A UIRotationGestureRecognizer that can be customized.
-    public func addRotationGestureRecognizer(action: RotationAction) -> UIRotationGestureRecognizer {
-        let gestureRecognizer = UIRotationGestureRecognizer(view: view, action: action)
+    /// - returns: A NativeRotationGestureRecognizer that can be customized.
+    public func addRotationGestureRecognizer(action: RotationAction) -> NativeRotationGestureRecognizer {
+        let gestureRecognizer = NativeRotationGestureRecognizer(view: view, action: action)
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
     }
@@ -105,13 +117,14 @@ extension C4View {
     /// ````
     /// - parameter action: A block of code to be executed when the receiver recognizes a longpress gesture.
     ///
-    /// - returns: A UILongPressGestureRecognizer that can be customized.
-    public func addLongPressGestureRecognizer(action: LongPressAction) -> UILongPressGestureRecognizer {
-        let gestureRecognizer = UILongPressGestureRecognizer(view: view, action: action)
+    /// - returns: A NativePressGestureRecognizer that can be customized.
+    public func addLongPressGestureRecognizer(action: LongPressAction) -> NativePressGestureRecognizer {
+        let gestureRecognizer = NativePressGestureRecognizer(view: view, action: action)
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
     }
 
+    #if os(iOS)
     /// Adds a swipe gesture recognizer to the receiver's view.
     ///
     /// ````
@@ -130,7 +143,9 @@ extension C4View {
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
     }
+    #endif
 
+    #if os(iOS)
     /// Adds a screen edge pan gesture recognizer to the receiver's view.
     ///
     /// ````
@@ -147,4 +162,5 @@ extension C4View {
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
     }
+    #endif
 }
