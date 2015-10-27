@@ -36,6 +36,8 @@ public class C4CanvasController : NativeViewController {
 
         #if os(iOS)
             canvas.backgroundColor = C4Grey
+        #elseif os(OSX)
+            view.wantsLayer = true
         #endif
         C4ShapeLayer.disableActions = true
         self.setup()

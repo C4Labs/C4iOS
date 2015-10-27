@@ -106,7 +106,6 @@ public class C4Movie: C4View {
             super.init(frame: frame)
             #if os(OSX)
                 layer = AVPlayerLayer()
-                wantsLayer = true
             #endif
         }
 

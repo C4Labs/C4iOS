@@ -41,8 +41,7 @@ public class C4Gradient : C4View {
         override init(frame: CGRect) {
             super.init(frame: frame)
             #if os(OSX)
-            layer = C4GradientLayer()
-            wantsLayer = true
+                layer = C4GradientLayer()
             #endif
         }
 

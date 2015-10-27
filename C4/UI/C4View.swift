@@ -43,7 +43,10 @@ public class C4View : NSObject {
 
     ///  Initializes a C4View.
     public override init() {
-        view = NativeView(frame: CGRectMake(0, 0, 200, 200))
+        view = LayerView(frame: CGRectMake(0, 0, 200, 200))
+        #if os(OSX)
+            view.layerContentsRedrawPolicy = .OnSetNeedsDisplay
+        #endif
     }
     
     /// Initializes a new C4View from a NativeView.

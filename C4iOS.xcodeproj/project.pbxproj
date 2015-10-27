@@ -1179,6 +1179,7 @@
 				613A41831BDD998A000731E7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		614F823D19DB5ED3001DF1D4 /* Build configuration list for PBXProject "C4iOS" */ = {
 			isa = XCConfigurationList;

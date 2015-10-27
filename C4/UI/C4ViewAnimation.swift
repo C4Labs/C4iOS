@@ -99,16 +99,11 @@ public class C4ViewAnimation : C4Animation {
             context.duration = self.duration
             context.timingFunction = timing
             C4ViewAnimation.stack.append(self)
-            CATransaction.begin()
-            CATransaction.setAnimationDuration(self.duration)
-            CATransaction.setAnimationTimingFunction(timing)
-            CATransaction.setCompletionBlock() {
-                self.postCompletedEvent()
-            }
             self.animations()
-            CATransaction.commit()
             C4ViewAnimation.stack.removeLast()
-        }, completionHandler: nil)
+        }, completionHandler: {
+            self.postCompletedEvent()
+        })
         #endif
         C4ShapeLayer.disableActions = disable
     }
