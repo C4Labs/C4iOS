@@ -43,7 +43,11 @@ public class C4CanvasController : NativeViewController {
         self.setup()
         C4ShapeLayer.disableActions = false
     }
-    
+
+    public override func loadView() {
+        view = LayerView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+    }
+
     /// Called during the controller's `viewDidLoad()` method.
     ///
     /// This method should be used to set up any objects or behaviours necessary when the controller's view loads.
