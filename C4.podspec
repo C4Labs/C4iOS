@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "C4"
-  s.version      = "1.0.1"
+  s.version      = "1.0.2"
   s.summary      = "Code, Creatively."
   s.description  = <<-DESC
                     C4 is a fast prototyping and creative-coding framework.
