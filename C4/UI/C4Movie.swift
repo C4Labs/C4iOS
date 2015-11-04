@@ -75,7 +75,7 @@ public class C4Movie: C4View {
     /// Assigning a value of true to this property will cause the receiver to scale its entire frame whenever its `width` or
     /// `height` variables are set.
     /// The default value of this property is `false`.
-    public var constrainsProportions : Bool = false
+    public var constrainsProportions : Bool = true
     
     /// The original size of the receiver when it was initialized.
     public internal(set) var originalSize : C4Size = C4Size(1,1)
