@@ -160,6 +160,7 @@ public class C4Line: C4Polygon {
         self.init(points)
     }
 
+    ///Returns an object initialized from data in a given unarchiver.
     required public init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
