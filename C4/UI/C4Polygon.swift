@@ -74,7 +74,6 @@ public class C4Polygon: C4Shape {
         for i in 1..<points.count {
             path.addLineToPoint(points[i])
         }
-        path.closeSubpath()
         self.path = path
 
         adjustToFitPath()

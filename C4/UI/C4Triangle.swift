@@ -31,6 +31,8 @@ public class C4Triangle: C4Polygon {
     public override init(_ points: [C4Point]) {
         assert(points.count >= 3, "To create a Triangle you need to specify an array of at least 3 points")
         super.init(points)
+        self.fillColor = C4Blue
+        self.close()
     }
 
     ///Returns an object initialized from data in a given unarchiver.

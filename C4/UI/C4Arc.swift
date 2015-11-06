@@ -34,7 +34,7 @@ public class C4Arc : C4Shape {
     /// - parameter start:  The angle (in radians) that determines the starting point of the arc, measured from the x-axis in the current user space.
     /// - parameter end:    The angle (in radians) that determines the ending point of the arc, measured from the x-axis in the current user space.
     public convenience init(center: C4Point, radius: Double, start: Double, end: Double) {
-        self.init(center: center,radius: radius,start: start,end: end,clockwise: end>start ? false : true)
+        self.init(center: center,radius: radius,start: start,end: end,clockwise: end>start ? true : false)
     }
     
     ///     Creates an arc, whose edge is drawn based on the input for `clockwise`.
@@ -53,7 +53,6 @@ public class C4Arc : C4Shape {
 
         let arc = CGPathCreateMutable()
         CGPathAddArc(arc, nil, CGFloat(center.x), CGFloat(center.y), CGFloat(radius), CGFloat(start), CGFloat(end), !clockwise)
-        CGPathCloseSubpath(arc)
         path = C4Path(path: arc)
         adjustToFitPath()
     }

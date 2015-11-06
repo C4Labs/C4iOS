@@ -37,7 +37,7 @@ public class C4Wedge : C4Shape {
     /// - parameter start: The start angle of the wedge.
     /// - parameter end: The end angle of the wedge.
     convenience public init(center: C4Point, radius: Double, start: Double, end: Double) {
-        self.init(center: center, radius: radius, start: start, end: end, clockwise: end > start ? false : true)
+        self.init(center: center, radius: radius, start: start, end: end, clockwise: end > start ? true : false)
     }
     
     /// Initializes a new C4Wedge, with the wedge always taking the shortest distance between start and end.
