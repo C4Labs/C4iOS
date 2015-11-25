@@ -1,3 +1,5 @@
+![C4](http://www.c4ios.com/images/c4logo.png)
+
 # Code, Creatively.
 
 C4 is an open-source creative coding framework that harnesses the power of native iOS programming with a simplified API that gets you working with media right away. Build artworks, design interfaces and explore new possibilities working with media and interaction.
