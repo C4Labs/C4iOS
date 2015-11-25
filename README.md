@@ -29,28 +29,24 @@ Instead of this:
 let m = movie.frame.size.width
 ```
 
-Animating the center position of an object in C4 looks like this:
+Animating both view and property changes in C4 is much cleaner, and looks like this:
 ```Swift
-let anim = C4ViewAnimation(duration: 0.25) {
-  movie?.center = self.canvas.center
-}
+C4ViewAnimation(duration: 0.5) {
+    shape.center = self.canvas.center
+    shape.lineWidth = 5
+}.animate()
 ```
 
-Whereas using UIKit and Core Animation you'd have to do something like this:
+Whereas using UIKit + Core Animation you'd have to do something like this:
 ```Swift
-let options : UIViewAnimationOptions = [UIViewAnimationOptions.BeginFromCurrentState, UIViewAnimationOptions.CurveEaseInOut]
-let timing = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-UIView.animateWithDuration(0.25, delay: 0.0, options: options, animations: {
-    UIView.setAnimationRepeatCount(0)
-    CATransaction.begin()
-    CATransaction.setAnimationDuration(0.25)
-    CATransaction.setAnimationTimingFunction(timing)
-    CATransaction.setCompletionBlock() {
-        print(“animation completed”)
-    }
-    movie?.center = self.canvas.center
-    CATransaction.commit()
-}, completion:nil)
+UIView.animateWithDuration(0.5) {
+    shape.center = self.canvas.center
+}
+
+CATransaction.begin()
+CATransaction.setValue(NSNumber(float: 0.5), forKey: kCATransactionAnimationDuration)
+shape.lineWidth = 5
+CATransaction.commit()
 ```
 
 C4 takes advantage of all of Swift’s modernity: closures, tuples, generics, interaction, structs, error handling. And, YES, you can even do this:
@@ -73,7 +69,7 @@ The current release of C4 also includes a full end-to-end tutorial that will wal
 
 [Get COSMOS from the App Store](https://itunes.apple.com/us/app/c4smos/id985883701?ls=1&mt=8)
 
-[Build COSMOS from start to finish](http://http//www.c4ios.com/cosmos) 
+[Build COSMOS from start to finish](http://www.c4ios.com/cosmos) 
 
 We’re currently converting over 200 code examples and 30 tutorials to C4's new modern syntax. These examples and tutorials (coming soon) guide new users through core concepts and provide seasoned developers with the reference they need to keep up the pace.
 
@@ -117,34 +113,22 @@ func setup() {
 }
 ```
 
-Using AVFoundation, you'd have to construct the movie object from scratch like this:
+Using UIKit + AVFoundation, you'd have to construct the movie object from scratch like this:
 ```Swift
-public convenience init?(_ filename: String) {
-    guard let url = NSBundle.mainBundle().URLForResource(filename, withExtension: nil) else {
-        return nil
+func viewDidLoad() {
+    guard let url = NSBundle.mainBundle().URLForResource("myClip.mov", withExtension: nil) else {
+        fatalError("File not found")
     }
-    
+
     let asset = AVAsset(URL: url)
-    let tracks = asset.tracksWithMediaType(AVMediaTypeVideo)
-    
-    let movieTrack = tracks[0]
-    let size = C4Size(movieTrack.naturalSize)
-    
-    self.init(frame: C4Rect(0,0,Double(size.width),Double(size.height)))
-    let newPlayer = AVQueuePlayer(playerItem: AVPlayerItem(asset: asset))
-    newPlayer.actionAtItemEnd = .Pause
-    currentItem = newPlayer.currentItem
-    player = newPlayer
-    
-    on(event: AVPlayerItemDidPlayToEndTimeNotification) {
-        self.handleReachedEnd()
-    }
-    
-    //movie view's player
-    movieLayer.player = player
+    let player = AVQueuePlayer(playerItem: AVPlayerItem(asset: asset))
+    player.actionAtItemEnd = .Pause
+
+    let movieLayer = AVPlayerLayer(player: player)
     movieLayer.videoGravity = AVLayerVideoGravityResize
-    
-    originalSize = self.size
+    self.view.layer.addSublayer(movieLayer)
+
+    player.play()
 }
 ```
 
