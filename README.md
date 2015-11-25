@@ -6,7 +6,7 @@ C4 is an open-source creative coding framework that harnesses the power of nativ
 
 ## Version 2.0
 
-Built on top of Swift, C4 puts the power of UIKit and Core Animation at your disposal, allowing you to create inventive digital interactions` with far less time and effort. Plus, you get all the interactivity, fun and expressiveness of Swift. Your apps will run lightning-fast.
+Built on top of Swift, C4 puts the power of UIKit and Core Animation at your disposal, allowing you to create inventive digital interactions with far less time and effort. Plus, you get all the interactivity, fun and expressiveness of Swift. Your apps will run lightning-fast.
 
 The API of C4 is simple and streamlined allowing beginners to get into programming very easily. For seasoned developers, C4 can be dropped into any existing project with as little effort as linking any other native framework . With C4, you’ll save a ton of time working with interactions, animation and media.
 
@@ -20,17 +20,19 @@ C4 brings your ideas to life by allowing you to focus on experimenting, designin
 
 For example, C4 compresses the access of properties:
 
-```Swift
+```
 let m = movie.width
 ```
 
 Instead of this:
-```Swift
+
+```
 let m = movie.frame.size.width
 ```
 
 Animating both view and property changes in C4 is much cleaner, and looks like this:
-```Swift
+
+```
 C4ViewAnimation(duration: 0.5) {
     shape.center = self.canvas.center
     shape.lineWidth = 5
@@ -38,7 +40,8 @@ C4ViewAnimation(duration: 0.5) {
 ```
 
 Whereas using UIKit + Core Animation you'd have to do something like this:
-```Swift
+
+```
 UIView.animateWithDuration(0.5) {
     shape.center = self.canvas.center
 }
@@ -51,7 +54,7 @@ CATransaction.commit()
 
 C4 takes advantage of all of Swift’s modernity: closures, tuples, generics, interaction, structs, error handling. And, YES, you can even do this:
 
-```Swift
+```
 let bananaName = “Jimmy”.banana
 ```
 
@@ -105,7 +108,7 @@ Simplicity is a major accomplishment for C4. Across the board, C4 is simple to l
 
 Take movies, for example. Instead of needing to AVQueuePlayer, AVPlayerItem, navigating asset tracks and learning how to load files through NSBundle, you only have to create a movie from its file name and add it to the canvas:
 
-```Swift
+```
 func setup() {
     let movie = C4Movie(“myClip.mov”)
     canvas.add(movie)
@@ -114,7 +117,8 @@ func setup() {
 ```
 
 Using UIKit + AVFoundation, you'd have to construct the movie object from scratch like this:
-```Swift
+
+```
 func viewDidLoad() {
     guard let url = NSBundle.mainBundle().URLForResource("myClip.mov", withExtension: nil) else {
         fatalError("File not found")
