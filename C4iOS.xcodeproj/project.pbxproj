@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1F8252CC1BB3C65E0090E98A /* C4Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8252CB1BB3C65E0090E98A /* C4Timer.swift */; settings = {ASSET_TAGS = (); }; };
-		61BBAF631BC372BD00A03FD0 /* C4StoredAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BBAF621BC372BD00A03FD0 /* C4StoredAnimation.swift */; settings = {ASSET_TAGS = (); }; };
-		61BBAF651BC38C1200A03FD0 /* C4View+KeyValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BBAF641BC38C1200A03FD0 /* C4View+KeyValues.swift */; settings = {ASSET_TAGS = (); }; };
+		1F8252CC1BB3C65E0090E98A /* C4Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8252CB1BB3C65E0090E98A /* C4Timer.swift */; };
+		1FEE86CC1C057954003FE148 /* C4.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 614F824319DB5ED3001DF1D4 /* C4.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		61BBAF631BC372BD00A03FD0 /* C4StoredAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BBAF621BC372BD00A03FD0 /* C4StoredAnimation.swift */; };
+		61BBAF651BC38C1200A03FD0 /* C4View+KeyValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BBAF641BC38C1200A03FD0 /* C4View+KeyValues.swift */; };
 		A94E3BD419E0E9390039A9C4 /* C4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 614F824319DB5ED3001DF1D4 /* C4.framework */; };
 		A96F4F451B538330002B3A46 /* C4ColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D401A054B4F0023323D /* C4ColorTests.swift */; };
 		A96F4F461B538330002B3A46 /* C4MathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D411A054B4F0023323D /* C4MathTests.swift */; };
@@ -108,6 +109,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		1FEE86CB1C057947003FE148 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1FEE86CC1C057954003FE148 /* C4.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A96F50821B538650002B3A46 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -422,6 +433,7 @@
 				614F824A19DB5ED4001DF1D4 /* Sources */,
 				614F824B19DB5ED4001DF1D4 /* Frameworks */,
 				614F824C19DB5ED4001DF1D4 /* Resources */,
+				1FEE86CB1C057947003FE148 /* CopyFiles */,
 			);
 			buildRules = (
 			);
