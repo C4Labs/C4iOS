@@ -105,8 +105,12 @@ public class C4Shape: C4View {
 
         var bounds = CGPathGetPathBoundingBox(shapeLayer.path)
         bounds = CGRectInset(bounds, -shapeLayer.lineWidth/2, -shapeLayer.lineWidth/2)
-        view.bounds = bounds
-
+        #if os(OSX)
+            view.frame = bounds
+        #elseif os(iOS)
+            view.bounds = bounds
+        #endif
+        
         view.heightAnchor.constraintEqualToConstant(bounds.height)
         view.widthAnchor.constraintEqualToConstant(bounds.width)
     }
