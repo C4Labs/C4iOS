@@ -20,19 +20,19 @@ C4 brings your ideas to life by allowing you to focus on experimenting, designin
 
 For example, C4 compresses the access of properties:
 
-```
+```swift
 let m = movie.width
 ```
 
 Instead of this:
 
-```
+```swift
 let m = movie.frame.size.width
 ```
 
 Animating both view and property changes in C4 is much cleaner, and looks like this:
 
-```
+```swift
 C4ViewAnimation(duration: 0.5) {
     shape.center = self.canvas.center
     shape.lineWidth = 5
@@ -41,7 +41,7 @@ C4ViewAnimation(duration: 0.5) {
 
 Whereas using UIKit + Core Animation you'd have to do something like this:
 
-```
+```swift
 UIView.animateWithDuration(0.5) {
     shape.center = self.canvas.center
 }
@@ -54,8 +54,8 @@ CATransaction.commit()
 
 C4 takes advantage of all of Swift’s modernity: closures, tuples, generics, interaction, structs, error handling. And, YES, you can even do this:
 
-```
-let bananaName = “Jimmy”.banana
+```swift
+let bananaName = "Jimmy".banana
 ```
 
 Check the [Swift Overview](https://developer.apple.com/swift/) for more.
@@ -108,9 +108,9 @@ Simplicity is a major accomplishment for C4. Across the board, C4 is simple to l
 
 Take movies, for example. Instead of needing to AVQueuePlayer, AVPlayerItem, navigating asset tracks and learning how to load files through NSBundle, you only have to create a movie from its file name and add it to the canvas:
 
-```
+```swift
 func setup() {
-    let movie = C4Movie(“myClip.mov”)
+    let movie = C4Movie("myClip.mov")
     canvas.add(movie)
     movie.play()
 }
@@ -118,7 +118,7 @@ func setup() {
 
 Using UIKit + AVFoundation, you'd have to construct the movie object from scratch like this:
 
-```
+```swift
 func viewDidLoad() {
     guard let url = NSBundle.mainBundle().URLForResource("myClip.mov", withExtension: nil) else {
         fatalError("File not found")
