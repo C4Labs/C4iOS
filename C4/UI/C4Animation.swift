@@ -90,6 +90,9 @@ public class C4Animation {
         }
     }
 
+    /// Run the animation
+    func animate() {}
+
     ///  Adds a completion observer to an animation.
     ///
     ///  The completion observer listens for the end of the animation then executes a specified block of code.

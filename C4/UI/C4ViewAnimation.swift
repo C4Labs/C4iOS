@@ -60,7 +60,7 @@ public class C4ViewAnimation : C4Animation {
     }
 
     /// Initiates the changes specified in the receivers `animations` block.
-    public func animate() {
+    public override func animate() {
         let disable = C4ShapeLayer.disableActions
         C4ShapeLayer.disableActions = false
         var timing: CAMediaTimingFunction
@@ -112,7 +112,7 @@ public class C4ViewAnimation : C4Animation {
 
 /// A sequence of animations that run one after the other. This class ignores the duration property.
 public class C4ViewAnimationSequence: C4Animation {
-    private var animations: [C4ViewAnimation]
+    private var animations: [C4Animation]
     private var currentAnimationIndex: Int = -1
     private var currentObserver: AnyObject?
 
@@ -132,12 +132,12 @@ public class C4ViewAnimationSequence: C4Animation {
     ///     seq.animate()
     /// }
     /// ````
-    public init(animations: [C4ViewAnimation]) {
+    public init(animations: [C4Animation]) {
         self.animations = animations
     }
 
     ///  Calling this method will tell the receiver to begin animating.
-    public func animate() {
+    public override func animate() {
         if currentAnimationIndex != -1 {
             // Animation is already running
             return
@@ -172,7 +172,7 @@ public class C4ViewAnimationSequence: C4Animation {
 /// Groups animations so that they can all be run at the same time. The completion call is dispatched when all the
 /// animations in the group have finished. This class ignores the duration property.
 public class C4ViewAnimationGroup: C4Animation {
-    private var animations: [C4ViewAnimation]
+    private var animations: [C4Animation]
     private var observers: [AnyObject] = []
     private var completed: [Bool]
 
@@ -192,13 +192,13 @@ public class C4ViewAnimationGroup: C4Animation {
     ///     grp.animate()
     /// }
     /// ````
-    public init(animations: [C4ViewAnimation]) {
+    public init(animations: [C4Animation]) {
         self.animations = animations
         completed = [Bool](count: animations.count, repeatedValue: false)
     }
 
     ///  Calling this method will tell the receiver to begin animating.
-    public func animate() {
+    public override func animate() {
         if !observers.isEmpty {
             // Animation is already running
             return
