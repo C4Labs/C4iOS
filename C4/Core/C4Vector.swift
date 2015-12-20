@@ -331,6 +331,19 @@ public func * (lhs: C4Vector, rhs: Double) -> C4Vector {
     return C4Vector(x: lhs.x * rhs, y: lhs.y * rhs, z: lhs.z * rhs)
 }
 
+
+/// Returns a new vector whose coordinates are the multiplication of the right-hand vector coordinates by the left-hand scalar
+///
+/// ````
+/// var v1 = C4Vector(x: 1, y: 1)
+/// var v2 = 2.0 * v2
+/// v2 //-> {2,2,0}
+///
+public func * (lhs: Double, rhs: C4Vector) -> C4Vector {
+    return C4Vector(x: rhs.x * lhs, y: rhs.y * lhs, z: rhs.z * lhs)
+}
+
+
 /// Returns a new vector whose coordinates are the negative values of the receiver
 ///
 /// ````
