@@ -98,10 +98,10 @@ public class C4View : NSObject {
     /// Returns the receiver's origin. Animatable.
     public var origin: C4Point {
         get {
-            return frame.origin
+            return center - C4Vector(x: size.width/2, y: size.height/2)
         }
         set {
-            frame = C4Rect(newValue, self.size)
+            center = newValue + C4Vector(x: size.width/2, y: size.height/2)
         }
     }
     

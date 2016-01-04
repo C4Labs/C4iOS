@@ -142,6 +142,16 @@ public func + (lhs: C4Point, rhs: C4Vector) -> C4Point {
     return C4Point(lhs.x + rhs.x,lhs.y + rhs.y)
 }
 
+///  Translate a point by the negative of the vector.
+///
+///  - parameter lhs: a C4Point to translate
+///  - parameter rhs: a C4Vector whose values will be applied to the point
+///
+///  - returns: A new point whose coordinates have been translated by the negative vector (e.g. point.x = lhs.x - rhs.x)
+public func - (lhs: C4Point, rhs: C4Vector) -> C4Point {
+    return C4Point(lhs.x - rhs.x,lhs.y - rhs.y)
+}
+
 ///  Calculates the distance between two points.
 ///
 ///  - parameter lhs: left-hand point
