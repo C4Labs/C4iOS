@@ -64,7 +64,7 @@ public class C4Animation {
     public var duration: NSTimeInterval = 1
     
     /// The animation curve that the receiver will apply to the changes it is supposed to animate.
-    public var curve: Curve = .Linear
+    public var curve: Curve = .EaseInOut
 
     private var completionObservers: [AnyObject] = []
     private var cancelObservers: [AnyObject] = []
