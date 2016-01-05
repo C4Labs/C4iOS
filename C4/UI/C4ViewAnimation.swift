@@ -24,10 +24,10 @@ import UIKit
 public class C4ViewAnimation : C4Animation {
     /// The amount of time to way before executing the animation.
     public var delay: NSTimeInterval = 0
-
+    
     /// A block animations to execute.
     public var animations: () -> Void
-
+    
     ///  Initializes an animation object with a block of animtinos to execute.
     ///
     ///  let anim = C4ViewAnimation() {
@@ -38,9 +38,9 @@ public class C4ViewAnimation : C4Animation {
     public init(_ animations: () -> Void) {
         self.animations = animations
     }
-
+    
     /// Initializes a new C4ViewAnimation.
-    /// 
+    ///
     /// ````
     /// let v = C4View(frame: C4Rect(0,0,100,100))
     /// canvas.add(v)
@@ -58,27 +58,32 @@ public class C4ViewAnimation : C4Animation {
         self.init(animations)
         self.duration = duration
     }
-
-    /// Initiates the changes specified in the receivers `animations` block.
-    public override func animate() {
-        let disable = C4ShapeLayer.disableActions
-        C4ShapeLayer.disableActions = false
-        var timing: CAMediaTimingFunction
+    
+    public var timingFunction: CAMediaTimingFunction {
+        switch curve {
+        case .Linear:
+            return CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        case .EaseOut:
+            return CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+        case .EaseIn:
+            return CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+        case .EaseInOut:
+            return CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        }
+    }
+    
+    public var options: UIViewAnimationOptions {
         var options : UIViewAnimationOptions = [UIViewAnimationOptions.BeginFromCurrentState]
         
         switch curve {
         case .Linear:
             options = [options, UIViewAnimationOptions.CurveLinear]
-            timing = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
         case .EaseOut:
             options = [options, UIViewAnimationOptions.CurveEaseOut]
-            timing = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
         case .EaseIn:
             options = [options, UIViewAnimationOptions.CurveEaseIn]
-            timing = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
         case .EaseInOut:
             options = [options, UIViewAnimationOptions.CurveEaseInOut]
-            timing = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         }
         
         if autoreverses == true {
@@ -86,27 +91,43 @@ public class C4ViewAnimation : C4Animation {
         } else {
             options.subtractInPlace(.Autoreverse)
         }
-
+        
         if repeatCount > 0  {
             options.unionInPlace(.Repeat)
         } else {
             options.subtractInPlace(.Repeat)
         }
         
-        UIView.animateWithDuration(duration, delay: delay, options: options, animations: {
-            C4ViewAnimation.stack.append(self)
-            UIView.setAnimationRepeatCount(Float(self.repeatCount))
-            CATransaction.begin()
-            CATransaction.setAnimationDuration(self.duration)
-            CATransaction.setAnimationTimingFunction(timing)
-            CATransaction.setCompletionBlock() {
-                self.postCompletedEvent()
-            }
-            self.animations()
-            CATransaction.commit()
-            C4ViewAnimation.stack.removeLast()
-        }, completion:nil)
+        return options
+    }
+    
+    /// Initiates the changes specified in the receivers `animations` block.
+    public override func animate() {
+        let disable = C4ShapeLayer.disableActions
+        C4ShapeLayer.disableActions = false
+        
+        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC)))
+        dispatch_after(time, dispatch_get_main_queue()) {
+            UIView.animateWithDuration(self.duration, delay: 0, options: self.options, animations: {
+                C4ViewAnimation.stack.append(self)
+                UIView.setAnimationRepeatCount(Float(self.repeatCount))
+                self.doInTransaction(self.animations)
+                C4ViewAnimation.stack.removeLast()
+                }, completion:nil)
+        }
+        
         C4ShapeLayer.disableActions = disable
+    }
+    
+    private func doInTransaction(action: () -> Void) {
+        CATransaction.begin()
+        CATransaction.setAnimationDuration(duration)
+        CATransaction.setAnimationTimingFunction(timingFunction)
+        CATransaction.setCompletionBlock() {
+            self.postCompletedEvent()
+        }
+        action()
+        CATransaction.commit()
     }
 }
 
