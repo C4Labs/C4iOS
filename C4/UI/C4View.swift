@@ -531,6 +531,18 @@ public class C4View : NSObject {
         return C4Point(view.convertPoint(CGPoint(point), fromCoordinateSpace: from.view))
     }
     
+
+    //MARK: - Positioning
+
+    /// Moves the receiver so that it appears on top of the specified view.
+    public func positionAbove(view: C4View) {
+        zPosition = view.zPosition + 1
+    }
+
+    /// Moves the receiver so that it appears on below of the specified view.
+    public func positionBelow(view: C4View) {
+        zPosition = view.zPosition - 1
+    }
 }
 
 
