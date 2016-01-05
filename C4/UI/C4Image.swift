@@ -55,7 +55,7 @@ public struct Pixel {
 }
 
 /// A C4Image provides a view-based container for displaying a single image. You can create images from files, from other image objects, or from raw image data you receive.
-public class C4Image: C4View {
+public class C4Image: C4View, NSCopying {
     
     //MARK: Initializers
     
@@ -294,7 +294,21 @@ public class C4Image: C4View {
         
         self.init(cgimage: cgim!)
     }
-    
+
+    convenience public init(c4image: C4Image) {
+        let cgim = c4image.cgimage
+        self.init(cgimage: cgim)
+    }
+
+    public func copyWithZone(zone: NSZone) -> AnyObject {
+        let uiimage = UIImage(CGImage: self.contents)
+        let img = C4Image(uiimage: uiimage, scale: scale)
+        img.frame = self.frame
+        img.constrainsProportions = self.constrainsProportions
+        img._originalSize = _originalSize
+        return img
+    }
+
     //MARK: Properties
     
     /// Returns the UIImageView of the object.
@@ -350,6 +364,11 @@ public class C4Image: C4View {
         }
     }
     
+    /// The scale factor of the image. (read-only)
+    var scale: Double {
+        return Double(uiimage.scale)
+    }
+
     /// A variable that provides access to the width of the receiver. Animatable.
     /// The default value of this property is defined by the image being created.
     /// Assigning a value to this property causes the receiver to change the width of its frame. If the receiver's
