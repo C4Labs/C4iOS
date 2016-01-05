@@ -20,8 +20,9 @@
 import QuartzCore
 import UIKit
 
+/// C4Font objects represent fonts to an application, providing access to characteristics of the font and assistance in laying out glyphs relative to one another.
 public class C4Font : NSObject {
-    internal var internalFont: UIFont?
+    internal var internalFont: UIFont!
     
     /// The UIFont representation of the receiver.
     ///
@@ -30,7 +31,7 @@ public class C4Font : NSObject {
     /// ````
     public var uiifont : UIFont {
         get {
-            return internalFont!;
+            return internalFont
         }
     }
     
@@ -39,9 +40,12 @@ public class C4Font : NSObject {
     /// ````
     /// let f = C4Font("Helvetica", 20)
     /// ````
-    convenience public init(name: String, size: Double) {
-        self.init()
-        internalFont = UIFont(name: name, size: CGFloat(size))
+    public init?(name: String, size: Double) {
+        super.init()
+        guard let font = UIFont(name: name, size: CGFloat(size)) else {
+            return nil
+        }
+        internalFont = font
     }
     
     /// Initializes a new C4Font using the specified font name and default size of 12.0 pt.
@@ -49,7 +53,7 @@ public class C4Font : NSObject {
     /// ````
     /// let f = C4Font("Helvetica")
     /// ````
-    convenience public init(name: String) {
+    public convenience init?(name: String) {
         self.init(name: name, size: 12.0)
     }
     
@@ -60,8 +64,7 @@ public class C4Font : NSObject {
     ///     let f = C4Font(font: uif)
     /// }
     /// ````
-    convenience public init(font: UIFont) {
-        self.init()
+    public init(font: UIFont) {
         internalFont = font
     }
     
@@ -164,7 +167,7 @@ public class C4Font : NSObject {
         }
     }
     
-    /// The receiver’s point size, or the effective vertical point size for a font with a nonstandard matrix. (read-only)
+    /// The receiver’s point size, or the effective vertical point size for a font with a nonstandard matrix. (read-only) Defaults to 12.0
     public var pointSize : Double {
         get {
             return Double(internalFont!.pointSize)

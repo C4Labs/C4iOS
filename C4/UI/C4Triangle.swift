@@ -20,6 +20,7 @@
 import Foundation
 import CoreGraphics
 
+/// C4Triangle defines a concrete subclass of C4Polygon whose shape is a closed triangle.
 public class C4Triangle: C4Polygon {
     
     /// Initializes a new C4Triangle using the specified array of points.
@@ -27,16 +28,15 @@ public class C4Triangle: C4Polygon {
     /// Protects against trying to create a triangle with less than three points.
     ///
     /// - parameter points: An array of C4Point structs.
-    convenience public init(_ points: [C4Point]) {
+    public override init(_ points: [C4Point]) {
         assert(points.count >= 3, "To create a Triangle you need to specify an array of at least 3 points")
-        self.init(frame: C4Rect(points))
-        let path = C4Path()
-        self.points = points
-        path.moveToPoint(points[0])
-        path.addLineToPoint(points[1])
-        path.addLineToPoint(points[2])
-        path.closeSubpath()
-        self.path = path
-        adjustToFitPath()
+        super.init(points)
+        self.fillColor = C4Blue
+        self.close()
+    }
+
+    ///Returns an object initialized from data in a given unarchiver.
+    required public init(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

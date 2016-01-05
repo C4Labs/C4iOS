@@ -1,33 +1,140 @@
+![C4](http://www.c4ios.com/images/c4logo.png)
+
+[![Build Status](https://travis-ci.org/C4Framework/C4iOS.svg?branch=master)](https://travis-ci.org/C4Framework/C4iOS)
 # Code, Creatively.
 
-C4 is a fast prototyping and creative-coding framework. It lets you build expressive user experiences and create works of art. C4 gives you the power of a native Swift iOS programming environment with a simplified interface that lets you get down to working with media right away. Build artworks, design interfaces, explore new possibilities of working with media and interaction.
+C4 is an open-source creative coding framework that harnesses the power of native iOS programming with a simplified API that gets you working with media right away. Build artworks, design interfaces and explore new possibilities working with media and interaction.
 
-## To The New Ones
+## Version 2.0
 
-Creating an expressive, intuitive mobile application is hard work. C4 makes this simple by letting you build projects that already deal with a lot of boring stuff. You get to start creating gorgeous elements faster and with more ease than tackling app development on your own.
+Built on top of Swift, C4 puts the power of UIKit and Core Animation at your disposal, allowing you to create inventive digital interactions with far less time and effort. Plus, you get all the interactivity, fun and expressiveness of Swift. Your apps will run lightning-fast.
 
-C4 will help you learn how to make things move and interact in a very short amount of time. It is designed to look and feel like a simpler version of Swift, so that when you're ready to venture out on your own, the step from build C4 apps to native mobile applications for iOS is tiny.
+The API of C4 is simple and streamlined allowing beginners to get into programming very easily. For seasoned developers, C4 can be dropped into any existing project with as little effort as linking any other native framework . With C4, you’ll save a ton of time working with interactions, animation and media.
 
-## To The Crazy Ones
+## Efficient
 
-If you're already a developer and you know the ins and outs of developing for mobile platforms C4 still has a lot to offer you. First, C4 approaches animation and interaction in a synthetic way so that all its media objects are consistent and similar. If you want to learn from the way we build things the API is open. If you don't want to learn how we do things, but just get down to using the core API you can include a compiled C4 library in your own projects and take advantage of all the work we've been doing.
+Spend less time navigating between different frameworks and focus on bringing your ideas to life. C4 combines the power of UIKit and Core Animation into a single set of objects whose APIs are easy to understand and straightforward. And because C4's foundation is built on native frameworks, you’ll be inheriting Swift’s faster code, compile times and optimization for modern hardware.
 
+## Expressive
 
-## How To Get Started
+C4 brings your ideas to life by allowing you to focus on experimenting, designing, visualizing and building rather than on learning low-level technologies. Objects are consistent and intuitive — they all essentially work the same way .  C4's language has been designed to be as simple and expressive as possible.
 
-C4 is currently undergoing extensive modifications. We decided to switch the codebase entirely to Swift. We hadn't had a chance to update the documentation an examples, but we will do that soon. In the meantime clone the repository and start playing with it. Send us feedback and pull requests!
+For example, C4 compresses the access of properties:
 
-## Get Involved
+```swift
+let m = movie.width
+```
 
-The C4 community is just starting to grow. To get involved, we suggest the following
+Instead of this:
 
-* **Start building!** Use the API, abuse it, do what you want with it.
+```swift
+let m = movie.frame.size.width
+```
 
-* Contribute to the Q&A. Use the [C4 tag in StackOverflow](http://stackoverflow.com/questions/tagged/c4?sort=votes) or see the [StackOverflow tutorial](http://www.c4ios.com/tutorials/stackoverflow.php).
+Animating both view and property changes in C4 is much cleaner, and looks like this:
 
-* Submit new issues. Go to the [C4iOS Issues page](https://github.com/C4Framework/C4iOS/issues) and start adding to it by posting new issues or suggesting fixes.
+```swift
+C4ViewAnimation(duration: 0.5) {
+    shape.center = self.canvas.center
+    shape.lineWidth = 5
+}.animate()
+```
 
+Whereas using UIKit + Core Animation you'd have to do something like this:
 
-## License
+```swift
+UIView.animateWithDuration(0.5) {
+    shape.center = self.canvas.center
+}
 
-C4 is available under the MIT license. See the LICENSE file for more info.
+CATransaction.begin()
+CATransaction.setValue(NSNumber(float: 0.5), forKey: kCATransactionAnimationDuration)
+shape.lineWidth = 5
+CATransaction.commit()
+```
+
+C4 takes advantage of all of Swift’s modernity: closures, tuples, generics, interaction, structs, error handling. And, YES, you can even do this:
+
+```swift
+let bananaName = "Jimmy".banana
+```
+
+Check the [Swift Overview](https://developer.apple.com/swift/) for more.
+
+## Easy To Learn
+
+Through both its simplified API and consistent objects, C4 is incredibly easy to learn compared to the frameworks it’s built upon: UIKit, Core Animation, etc. C4’s language has been designed to make it easy for both novice and experienced programmers to pick up and use right away.
+
+## Well Supported
+
+The C4 team has always been highly committed to publishing excellent documentation, examples and tutorials for learning how to program with C4.
+
+The current release of C4 also includes a full end-to-end tutorial that will walk you through the design, creation and publication of a full-blown app: COSMOS
+
+[Get COSMOS from the App Store](https://itunes.apple.com/us/app/c4smos/id985883701?ls=1&mt=8)
+
+[Build COSMOS from start to finish](http://www.c4ios.com/cosmos) 
+
+We’re currently converting over 200 code examples and 30 tutorials to C4's new modern syntax. These examples and tutorials (coming soon) guide new users through core concepts and provide seasoned developers with the reference they need to keep up the pace.
+
+## Powerful
+
+Originally based on Objective-C, C4 now takes entire advantage of the Swift programming language — which itself was built to be fast and powerful. Where Swift has been tuned to make intuitive, natural coding perform best, the guts of each component in C4 — every class, every method and every structure –  make that performance sing.
+
+Through C4 you are able to work with media, animations and interactions in a way that dissolves the differences between the many frameworks you need to create beautiful user experiences. It seamlessly combines many important components of UIKit, Core Animation, Core Graphics, AVFoundation and QuartzCore.
+
+## Multipurpose
+
+C4 is built for anyone who wants to build beautiful user experiences for iOS and has been designed to reach an incredibly broad set of possible uses. This flexibility is one of the most important aspects of C4, demonstrating its strength across a variety of different use cases and disciplines.
+
+C4 has been used for:
+
+- Prototyping
+- Mobile Applications
+- Data Visualization
+- Interactive Artworks
+- Computational Design Education
+- Communication Design
+- Print Design
+
+## Open Source
+
+Sporting the [MIT License](https://en.wikipedia.org/wiki/MIT_License), C4 is an open-source project whose features and functions can be used freely in educational, artistic and even professional settings. The project is open to anyone who wants to contribute, and the project’s code, documentation, and process are completely available for you to read through, learn from and take advantage of. Ongoing commitment by our core team and other developers guarantees that C4 will be constantly updated and focused on user’s interests.
+
+[Join our Slack community!](https://join-c4.herokuapp.com/)
+
+## Simplicity
+
+Simplicity is a major accomplishment for C4. Across the board, C4 is simple to learn, to use, to read and to adopt. C4 reduces the amount of code you need to the most powerful essentials.
+
+Take movies, for example. Instead of needing to AVQueuePlayer, AVPlayerItem, navigating asset tracks and learning how to load files through NSBundle, you only have to create a movie from its file name and add it to the canvas:
+
+```swift
+func setup() {
+    let movie = C4Movie("myClip.mov")
+    canvas.add(movie)
+    movie.play()
+}
+```
+
+Using UIKit + AVFoundation, you'd have to construct the movie object from scratch like this:
+
+```swift
+func viewDidLoad() {
+    guard let url = NSBundle.mainBundle().URLForResource("myClip.mov", withExtension: nil) else {
+        fatalError("File not found")
+    }
+
+    let asset = AVAsset(URL: url)
+    let player = AVQueuePlayer(playerItem: AVPlayerItem(asset: asset))
+    player.actionAtItemEnd = .Pause
+
+    let movieLayer = AVPlayerLayer(player: player)
+    movieLayer.videoGravity = AVLayerVideoGravityResize
+    self.view.layer.addSublayer(movieLayer)
+
+    player.play()
+}
+```
+
+… And a whole lot more.

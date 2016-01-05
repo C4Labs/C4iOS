@@ -21,6 +21,9 @@ import Accelerate
 import CoreGraphics
 import QuartzCore
 
+///  A structure for holding a transform matrix.
+///
+///  Transform can translate, rotate, scale.
 public struct C4Transform : Equatable {
     private var matrix = [Double](count: 16, repeatedValue: 0)
     
@@ -36,7 +39,8 @@ public struct C4Transform : Equatable {
             matrix[row + col * 4] = newValue
         }
     }
-    
+
+    ///  Initializes a C4Transform. Defaults to an identity transform.
     public init() {
         self[0, 0] = 1
         self[1, 1] = 1

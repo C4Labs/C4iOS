@@ -20,14 +20,20 @@
 import UIKit
 
 extension NSValue {
+    ///  Initializes an NSValue with a C4Point
+    ///
+    ///  - parameter point: a C4Point
     convenience init(C4Point point: C4Point) {
         self.init(CGPoint: CGPoint(point))
     }
 }
 
+/// The C4View class defines a rectangular area on the screen and the interfaces for managing visual content in that area. The C4View class itself provides basic behavior for filling its rectangular area with a background color. More sophisticated content can be presented by subclassing UIView and implementing the necessary drawing and event-handling code yourself. The C4 framework also includes a set of standard subclasses that range from simple shapes to movies and images that can be used as-is.
 public class C4View : NSObject {
+    /// A UIView. Internally, C4View wraps and provides access to an internal UIView.
     public var view : UIView = UIView()
-    
+
+    ///  Initializes a C4View.
     public override init() {
     }
     
@@ -92,10 +98,10 @@ public class C4View : NSObject {
     /// Returns the receiver's origin. Animatable.
     public var origin: C4Point {
         get {
-            return frame.origin
+            return center - C4Vector(x: size.width/2, y: size.height/2)
         }
         set {
-            frame = C4Rect(newValue, self.size)
+            center = newValue + C4Vector(x: size.width/2, y: size.height/2)
         }
     }
     
@@ -185,7 +191,11 @@ public class C4View : NSObject {
             view.frame = oldFrame
         }
     }
-    
+
+    ///  The layer’s position on the z axis. Animatable.
+    ///
+    ///  The default value of this property is 0. Changing the value of this property changes the the front-to-back ordering of layers onscreen. This can affect the visibility of layers whose frame rectangles overlap.
+    ///  The value of this property is measured in points.
     public dynamic var zPosition : Double {
         get {
             return Double(self.layer!.zPosition)
@@ -194,6 +204,11 @@ public class C4View : NSObject {
         }
     }
 
+    ///  An optional view whose alpha channel is used to mask the receiver's content.
+    ///
+    ///  The mask view's alpha channel determines how much of the receiver's content and background shows through. Fully or partially opaque pixels allow the underlying content to show through but fully transparent pixels block that content.
+    ///  The default value of this property is nil. When configuring a mask, remember to set the size and position of the mask layer to ensure it is aligned properly with the layer it masks.
+    ///  The layer you assign to this property must not have a superlayer. If it does, the behavior is undefined.
     public var mask: C4View? {
         didSet {
             if let mask = mask, let _ = mask.view.superview {

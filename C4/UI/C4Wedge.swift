@@ -20,6 +20,7 @@
 import QuartzCore
 import UIKit
 
+/// C4Wedge is a concrete subclass of C4Shape whose shape is a wedge with a rounded outer edge. 
 public class C4Wedge : C4Shape {
     
     /// Initializes a new C4Wedge, with the wedge always taking the shortest distance between start and end.
@@ -36,7 +37,7 @@ public class C4Wedge : C4Shape {
     /// - parameter start: The start angle of the wedge.
     /// - parameter end: The end angle of the wedge.
     convenience public init(center: C4Point, radius: Double, start: Double, end: Double) {
-        self.init(center: center, radius: radius, start: start, end: end, clockwise: end > start ? false : true)
+        self.init(center: center, radius: radius, start: start, end: end, clockwise: end > start ? true : false)
     }
     
     /// Initializes a new C4Wedge, with the wedge always taking the shortest distance between start and end.
@@ -53,14 +54,14 @@ public class C4Wedge : C4Shape {
     /// - parameter start:     The start angle of the wedge.
     /// - parameter end:       The end angle of the wedge.
     /// - parameter clockwise: Whether or not to close the shape in a clockwise fashion.
-    convenience public init(center: C4Point, radius: Double, start: Double, end: Double, clockwise: Bool) {
-        let wedgeRect = CGRectMakeFromWedge(CGPoint(center),radius: CGFloat(radius),startAngle: CGFloat(start),endAngle: CGFloat(end), clockwise: clockwise);
-        self.init(frame: C4Rect(wedgeRect))
+    public init(center: C4Point, radius: Double, start: Double, end: Double, clockwise: Bool) {
+        super.init()
+
         let wedge = CGPathCreateMutable()
         CGPathAddArc(wedge, nil, CGFloat(center.x), CGFloat(center.y), CGFloat(radius), CGFloat(start), CGFloat(end), !clockwise)
         CGPathAddLineToPoint(wedge, nil, CGFloat(center.x), CGFloat(center.y))
         CGPathCloseSubpath(wedge)
-        self.path = C4Path(path: wedge)
+        path = C4Path(path: wedge)
         adjustToFitPath()
     }
 }

@@ -20,9 +20,9 @@
 import Foundation
 import CoreGraphics
 
+/// C4Star is a concrete subclass of C4Polygon that defines a star shape.
 public class C4Star: C4Polygon {
-    
-    
+
     /// Initializes a new C4Star shape.
     ///
     /// ````

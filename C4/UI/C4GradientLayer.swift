@@ -19,9 +19,18 @@
 
 import QuartzCore
 
+/// The C4GradientLayer class draws a color gradient over its background color, filling the shape of the layer (including rounded corners)
 public class C4GradientLayer: CAGradientLayer {
+    /// A boolean value that, when true, prevents the animation of a shape's properties.
+    ///
+    /// This value can be set globally, after which changes to any shape's properties will be immediate.
     public static var disableActions = true
-    
+
+    ///  This method searches for the given action object of the layer. Actions define dynamic behaviors for a layer. For example, the animatable properties of a layer typically have corresponding action objects to initiate the actual animations. When that property changes, the layer looks for the action object associated with the property name and executes it. You can also associate custom action objects with your layer to implement app-specific actions.
+    ///
+    ///  - parameter key: The identifier of the action.
+    ///
+    ///  - returns: the action object assigned to the specified key.
     public override func actionForKey(key: String) -> CAAction? {
         if C4ShapeLayer.disableActions == true {
             return nil

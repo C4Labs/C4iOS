@@ -20,8 +20,10 @@
 import Foundation
 import CoreGraphics
 
+///C4RegularPolygon is a is a concrete subclass of C4Polygon that defines a shape whose sides are uniform (e.g. pentagon, octagon, etc.).
+///
+/// This class defines two variables called `sides` and `phase` that represent the number of sides and the initial rotation of the shape (respectively). The default shape is a hexagon.
 public class C4RegularPolygon: C4Shape {
-    
     
     /// Returns the number of sides in the polygon.
     ///
@@ -37,6 +39,7 @@ public class C4RegularPolygon: C4Shape {
     @IBInspectable
     public var sides: Int = 6 {
         didSet {
+            assert(sides > 0)
             updatePath()
         }
     }
@@ -59,29 +62,16 @@ public class C4RegularPolygon: C4Shape {
             updatePath()
         }
     }
-    
+
     /// Initializes a new C4RegularPolygon.
     ///
-    /// Default values are are sides = 6 (i.e. a hexagon) and phase = 0.
-    ///
-    /// ````
-    /// let f = C4Rect(100,100,100,100)
-    /// var p = C4RegularPolygon(frame: f)
-    /// canvas.add(p)
-    /// ````
-    ///
-    /// - parameter frame: A C4Rect into which the shape of the polygon will be generated (taking into consideration `sides`
-    /// and `phase`).
-    convenience public init(frame: C4Rect) {
-        self.init()
-        self.view.frame = CGRect(frame)
-        updatePath()
-    }
-    
+    /// Default values are are sides = 6 (i.e. a hexagon), phase = 0 and frame = {0,0,0,0}.
     public override init() {
         super.init()
+        updatePath()
     }
-    
+
+    /// Initializes a new C4RegularPolygon from data in a given unarchiver.
     required public init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -94,11 +84,11 @@ public class C4RegularPolygon: C4Shape {
             // Don't try to generate invalid polygons, we'll get undefined behaviour
             return
         }
-        
+
         let center = rect.center
         let delta = 2.0*M_PI / Double(sides)
         let newPath = C4Path()
-        
+
         for i in 0..<sides {
             let angle = phase + delta*Double(i)
             let point = C4Point(center.x + rx*cos(angle), center.y + ry*sin(angle))

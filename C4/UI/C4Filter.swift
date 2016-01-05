@@ -19,7 +19,30 @@
 
 import CoreImage
 
+///  The C4Filter protocol declares a variable and a method that are required by C4Filter object so it can properly interface with Core Image.
 public protocol C4Filter {
+    /// The name of the Core Image filter (e.g. "CIBloom")
     var filterName : String { get }
+
+    ///  Creates a Core Image filter using specified input image.
+    ///
+    ///  This method is used internally by C4Image when applying filters to its layer's contents.
+    ///
+    ///  ````
+    ///  public func createCoreImageFilter(inputImage: CIImage) -> CIFilter {
+    ///      let filter = CIFilter(name: filterName)!
+    ///      filter.setDefaults()
+    ///      filter.setValue(radius, forKey:"inputRadius")
+    ///      filter.setValue(intensity, forKey:"inputIntensity")
+    ///      filter.setValue(inputImage, forKey:"inputImage")
+    ///      return filter
+    ///  }
+    ///  ````
+    ///
+    ///  A specific filter will have internal properties whose values are applied to the CIFilter being generated. However, those properties are object / filter specific and so cannot be defined in the protocol.
+    ///
+    ///  - parameter inputImage: A CIImage to be used in generating the filter.
+    ///
+    ///  - returns: A CIFilter whose name is `filterName` and whose contents are based on `inputImage`.
     func createCoreImageFilter(inputImage: CIImage) -> CIFilter
 }

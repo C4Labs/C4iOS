@@ -50,34 +50,6 @@ public func CGRectMakeFromPoints(points: [CGPoint]) -> CGRect {
     return CGPathGetBoundingBox(path)
 }
 
-/// Returns a bounding rectangle with the specified values for building an arc.
-///
-/// - parameter center: The center coordinate around which the arc will be drawn
-/// - parameter radius: The radius of the arc
-/// - parameter startAngle: The start angle of the arc
-/// - parameter endAngle: The end angle of the arc
-/// - parameter clockwise: The direction to draw the arc
-public func CGRectMakeFromArc(center: CGPoint, radius: CGFloat, startAngle: CGFloat, endAngle: CGFloat, clockwise: Bool) -> CGRect {
-    let path = CGPathCreateMutable()
-    CGPathAddArc(path, nil, center.x, center.y, radius, startAngle, endAngle, clockwise)
-    return CGPathGetBoundingBox(path)
-}
-
-/// Returns a bounding rectangle with the specified values for building an wedge (includes the centerpoint when calculating the
-/// shape).
-///
-/// - parameter center: The center coordinate around which the wedge will be drawn
-/// - parameter radius: The radius of the wedge
-/// - parameter startAngle: The start angle of the wedge
-/// - parameter endAngle: The end angle of the wedge
-/// - parameter clockwise: The direction to draw the wedge
-public func CGRectMakeFromWedge(center: CGPoint, radius: CGFloat, startAngle: CGFloat, endAngle: CGFloat, clockwise: Bool) -> CGRect {
-    let path = CGPathCreateMutable()
-    CGPathAddArc(path, nil, center.x, center.y, radius, startAngle, endAngle, clockwise)
-    CGPathAddLineToPoint(path, nil, center.x, center.y)
-    return CGPathGetBoundingBox(path)
-}
-
 /// Delays the execution of a block of code.
 ///
 /// ````

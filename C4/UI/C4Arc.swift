@@ -20,6 +20,7 @@
 import QuartzCore
 import UIKit
 
+///  C4Arc is a concrete subclass of C4Shape that has a special initialzer that creates an arc whose shape is defined by rotating around a specified point.
 public class C4Arc : C4Shape {
     
     /// Creates an arc, whose edge is always drawn on the shorter circumference.
@@ -32,8 +33,8 @@ public class C4Arc : C4Shape {
     /// - parameter radius: The radius of the arc
     /// - parameter start:  The angle (in radians) that determines the starting point of the arc, measured from the x-axis in the current user space.
     /// - parameter end:    The angle (in radians) that determines the ending point of the arc, measured from the x-axis in the current user space.
-    convenience public init(center: C4Point, radius: Double, start: Double, end: Double) {
-        self.init(center: center,radius: radius,start: start,end: end,clockwise: end>start ? false : true)
+    public convenience init(center: C4Point, radius: Double, start: Double, end: Double) {
+        self.init(center: center,radius: radius,start: start,end: end,clockwise: end>start ? true : false)
     }
     
     ///     Creates an arc, whose edge is drawn based on the input for `clockwise`.
@@ -46,13 +47,13 @@ public class C4Arc : C4Shape {
     /// - parameter radius:    The radius of the arc
     /// - parameter start:     The angle (in radians) that determines the starting point of the arc, measured from the x-axis in the current user space.
     /// - parameter end:       The angle (in radians) that determines the ending point of the arc, measured from the x-axis in the current user space.    ///
-    convenience public init(center: C4Point, radius: Double, start: Double, end: Double, clockwise: Bool) {
-        let arcRect = CGRectMakeFromArc(CGPoint(center),radius: CGFloat(radius),startAngle: CGFloat(start),endAngle: CGFloat(end), clockwise: clockwise);
-        self.init(frame: C4Rect(arcRect))
+    /// - parameter clockwise: If true, the arc draws clockwise from start to end (counter clockwise if false)
+    public init(center: C4Point, radius: Double, start: Double, end: Double, clockwise: Bool) {
+        super.init()
+
         let arc = CGPathCreateMutable()
         CGPathAddArc(arc, nil, CGFloat(center.x), CGFloat(center.y), CGFloat(radius), CGFloat(start), CGFloat(end), !clockwise)
-        CGPathCloseSubpath(arc)
-        self.path = C4Path(path: arc)
+        path = C4Path(path: arc)
         adjustToFitPath()
     }
 }

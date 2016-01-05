@@ -20,16 +20,32 @@
 import QuartzCore
 import UIKit
 
+///  A structure of 4 8-bit values that represent r,g,b,a values of a single point (i.e. a pixel)
 public struct Pixel {
     var r : UInt8 = 0
     var g : UInt8 = 0
     var b : UInt8 = 0
     var a : UInt8 = 255
-    
+
+    ///  Initializes a pixel whose color is a specified gray.
+    ///
+    ///  - parameter gray: the gray color of the pixel
     public init(gray: Int) {
         self.init(gray,gray,gray,255)
     }
-    
+
+    ///  Initializes a Pixel structure
+    ///
+    ///  ````
+    ///  let p = Pixel(255,255,255,255) // -> white
+    ///  ````
+    ///
+    ///  Values are calculated from 0...255
+    ///
+    ///  - parameter r: the red component
+    ///  - parameter g: the green component
+    ///  - parameter b: the blue component
+    ///  - parameter a: the alpha component
     public init(_ r : Int, _ g: Int, _ b: Int, _ a: UInt8) {
         self.r = UInt8(r)
         self.g = UInt8(g)
@@ -38,6 +54,7 @@ public struct Pixel {
     }
 }
 
+/// A C4Image provides a view-based container for displaying a single image. You can create images from files, from other image objects, or from raw image data you receive.
 public class C4Image: C4View {
     
     //MARK: Initializers
@@ -51,8 +68,8 @@ public class C4Image: C4View {
     /// ````
     ///
     /// - parameter name:	The name of the image included in your project, or a web address.
-    convenience public init(_ filename: String) {
-        self.init(filename, scale: 1.0)
+    convenience public init?(_ name: String) {
+        self.init(name, scale: 1.0)
     }
     
     /// Initializes a new C4Image using the specified filename from the bundle (i.e. your project), it will also grab images
@@ -64,13 +81,11 @@ public class C4Image: C4View {
     /// ````
     ///
     /// - parameter name:	The name of the image included in your project, or a web address.
-    convenience public init(_ filename: String, scale: Double) {
-        if filename.hasPrefix("http") {
-            self.init(url: NSURL(string: filename)!, scale: scale)
-            return
+    convenience public init?(_ name: String, scale: Double) {
+        guard let image = UIImage(named: name) else {
+            return nil
         }
-        let image = UIImage(named: filename, inBundle: NSBundle.mainBundle(), compatibleWithTraitCollection: nil)
-        self.init(uiimage: image!, scale: scale)
+        self.init(uiimage: image, scale: scale)
     }
     
     /// Initializes a new C4Image using an existing C4Image (basically like copying).
@@ -379,8 +394,8 @@ public class C4Image: C4View {
     /// The default value of this property is `false`.
     public var constrainsProportions : Bool = false
     
-    /// The original size of the receiver when it was initialized.
     internal var _originalSize : C4Size = C4Size()
+    /// The original size of the receiver when it was initialized.
     public var originalSize : C4Size {
         get {
             return _originalSize

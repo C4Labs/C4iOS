@@ -19,13 +19,28 @@
 
 import CoreImage
 
+///  Maps the colors of an image to various shades of brown.
+///
+///  ````
+///  let logo = C4Image("logo")
+///  logo.apply(C4Sepia())
+///  canvas.add(logo)
+///  ````
 public struct C4Sepia : C4Filter {
+    /// The name of the Core Image filter.
     public let filterName = "CISepiaTone"
+    /// The intensity of the filter. Defaults to 1.0
     public var intensity: Double = 1.0
     
+    ///Initializes a new filter
     public init() {}
+
+    ///  Initializes a new filter, with a specified intensity.
+    ///
+    ///  - parameter intensity: a Double value
     public init(intensity: Double) { self.intensity = intensity }
     
+    ///Applies the properties of the receiver to create a new CIFilter object
     public func createCoreImageFilter(inputImage: CIImage) -> CIFilter {
         let filter = CIFilter(name: filterName)!
         filter.setDefaults()

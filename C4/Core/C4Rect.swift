@@ -20,9 +20,15 @@
 import Foundation
 import CoreGraphics
 
+///  A structure that contains the location and dimensions of a rectangle.
 public struct C4Rect : Equatable, CustomStringConvertible {
+    /// The origin (top-left) of the rect.
     public var origin: C4Point
+
+    /// The size (width / height) of the rect.
     public var size: C4Size
+
+    /// The width of the rect.
     public var width : Double {
         get {
             return size.width
@@ -30,6 +36,8 @@ public struct C4Rect : Equatable, CustomStringConvertible {
             size.width = newValue
         }
     }
+
+    /// The height of the rect.
     public var height : Double {
         get {
             return size.height
@@ -78,7 +86,12 @@ public struct C4Rect : Equatable, CustomStringConvertible {
         origin = o
         size = s
     }
-    
+
+    /// Initializes a C4Rect from a CGRect
+    public init(_ rect: CGRect) {
+        origin = C4Point(rect.origin)
+        size = C4Size(rect.size)
+    }
     
     /// Returns a rectangle that contains all of the specified coordinates in an array.
     ///
@@ -318,18 +331,9 @@ public func inset(r: C4Rect, dx: Double, dy: Double) -> C4Rect {
     return C4Rect(CGRectInset(CGRect(r), CGFloat(dx), CGFloat(dy)))
 }
 
-// MARK: - Casting to and from CGRect
-
-/// Initializes a C4Rect from a CGRect
-public extension C4Rect {
-    public init(_ rect: CGRect) {
-        origin = C4Point(rect.origin)
-        size = C4Size(rect.size)
-    }
-}
-
-/// Initializes a CGRect from a C4Rect
+// MARK: - Casting to CGRect
 public extension CGRect {
+    /// Initializes a CGRect from a C4Rect
     public init(_ rect: C4Rect) {
         origin = CGPoint(rect.origin)
         size = CGSize(rect.size)

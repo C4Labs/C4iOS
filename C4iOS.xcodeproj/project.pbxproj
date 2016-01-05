@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1F8252CC1BB3C65E0090E98A /* C4Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8252CB1BB3C65E0090E98A /* C4Timer.swift */; settings = {ASSET_TAGS = (); }; };
-		61BBAF631BC372BD00A03FD0 /* C4StoredAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BBAF621BC372BD00A03FD0 /* C4StoredAnimation.swift */; settings = {ASSET_TAGS = (); }; };
-		61BBAF651BC38C1200A03FD0 /* C4View+KeyValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BBAF641BC38C1200A03FD0 /* C4View+KeyValues.swift */; settings = {ASSET_TAGS = (); }; };
+		1F8252CC1BB3C65E0090E98A /* C4Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8252CB1BB3C65E0090E98A /* C4Timer.swift */; };
+		61BBAF631BC372BD00A03FD0 /* C4StoredAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BBAF621BC372BD00A03FD0 /* C4StoredAnimation.swift */; };
+		61BBAF651BC38C1200A03FD0 /* C4View+KeyValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BBAF641BC38C1200A03FD0 /* C4View+KeyValues.swift */; };
 		A94E3BD419E0E9390039A9C4 /* C4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 614F824319DB5ED3001DF1D4 /* C4.framework */; };
 		A96F4F451B538330002B3A46 /* C4ColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D401A054B4F0023323D /* C4ColorTests.swift */; };
 		A96F4F461B538330002B3A46 /* C4MathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D411A054B4F0023323D /* C4MathTests.swift */; };
@@ -28,7 +28,6 @@
 		A9D4F6AE1B534F9F00F937AB /* C4EventSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6721B534F9F00F937AB /* C4EventSource.swift */; };
 		A9D4F6AF1B534F9F00F937AB /* C4Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6731B534F9F00F937AB /* C4Foundation.swift */; };
 		A9D4F6B01B534F9F00F937AB /* C4Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6741B534F9F00F937AB /* C4Math.swift */; };
-		A9D4F6B11B534F9F00F937AB /* C4MediaObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6751B534F9F00F937AB /* C4MediaObject.swift */; };
 		A9D4F6B21B534F9F00F937AB /* C4Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6761B534F9F00F937AB /* C4Path.swift */; };
 		A9D4F6B31B534F9F00F937AB /* C4Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6771B534F9F00F937AB /* C4Point.swift */; };
 		A9D4F6B41B534F9F00F937AB /* C4Rect.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6781B534F9F00F937AB /* C4Rect.swift */; };
@@ -146,7 +145,6 @@
 		A9D4F6721B534F9F00F937AB /* C4EventSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4EventSource.swift; sourceTree = "<group>"; };
 		A9D4F6731B534F9F00F937AB /* C4Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Foundation.swift; sourceTree = "<group>"; };
 		A9D4F6741B534F9F00F937AB /* C4Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Math.swift; sourceTree = "<group>"; };
-		A9D4F6751B534F9F00F937AB /* C4MediaObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4MediaObject.swift; sourceTree = "<group>"; };
 		A9D4F6761B534F9F00F937AB /* C4Path.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Path.swift; sourceTree = "<group>"; };
 		A9D4F6771B534F9F00F937AB /* C4Point.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Point.swift; sourceTree = "<group>"; };
 		A9D4F6781B534F9F00F937AB /* C4Rect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Rect.swift; sourceTree = "<group>"; };
@@ -311,7 +309,6 @@
 				A9D4F6721B534F9F00F937AB /* C4EventSource.swift */,
 				A9D4F6731B534F9F00F937AB /* C4Foundation.swift */,
 				A9D4F6741B534F9F00F937AB /* C4Math.swift */,
-				A9D4F6751B534F9F00F937AB /* C4MediaObject.swift */,
 				A9D4F6761B534F9F00F937AB /* C4Path.swift */,
 				A9D4F6771B534F9F00F937AB /* C4Point.swift */,
 				A9D4F6781B534F9F00F937AB /* C4Rect.swift */,
@@ -352,6 +349,7 @@
 				A9D4F6941B534F9F00F937AB /* C4Shape.swift */,
 				A9D4F6951B534F9F00F937AB /* C4ShapeLayer.swift */,
 				A9D4F6961B534F9F00F937AB /* C4Star.swift */,
+				61BBAF621BC372BD00A03FD0 /* C4StoredAnimation.swift */,
 				A9D4F6971B534F9F00F937AB /* C4TextShape.swift */,
 				1F8252CB1BB3C65E0090E98A /* C4Timer.swift */,
 				A9D4F6981B534F9F00F937AB /* C4Triangle.swift */,
@@ -364,7 +362,6 @@
 				A9D4F69E1B534F9F00F937AB /* C4Wedge.swift */,
 				A9D4F6AA1B534F9F00F937AB /* UIGestureRecognizer+Closure.swift */,
 				A9D4F6AB1B534F9F00F937AB /* UIViewController+C4View.swift */,
-				61BBAF621BC372BD00A03FD0 /* C4StoredAnimation.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -557,7 +554,6 @@
 				A9D4F6B91B534F9F00F937AB /* C4Animation.swift in Sources */,
 				A9D4F6CE1B534F9F00F937AB /* C4Shape+Creation.swift in Sources */,
 				A9D4F6B61B534F9F00F937AB /* C4Transform.swift in Sources */,
-				A9D4F6B11B534F9F00F937AB /* C4MediaObject.swift in Sources */,
 				D917E1381B83E1DB0084BC82 /* C4GradientLayer.swift in Sources */,
 				A9D4F6B71B534F9F00F937AB /* C4Vector.swift in Sources */,
 				A9D4F6C61B534F9F00F937AB /* C4Image+Generator.swift in Sources */,
@@ -693,7 +689,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -734,7 +730,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
