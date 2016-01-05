@@ -84,6 +84,16 @@ public class C4View : NSObject {
             view.bounds = CGRect(newValue)
         }
     }
+
+    /// A Boolean indicating whether subviews, and layers are clipped to the object’s bounds. Animatable.
+    public var masksToBounds: Bool {
+        get {
+            return layer!.masksToBounds
+        }
+        set {
+            layer?.masksToBounds = newValue
+        }
+    }
     
     /// Returns the receiver's center point. Animatable.
     public var center: C4Point {
