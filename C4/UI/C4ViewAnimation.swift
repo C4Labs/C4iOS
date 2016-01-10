@@ -175,6 +175,11 @@ public class C4ViewAnimationSequence: C4Animation {
         }
         
         currentAnimationIndex += 1
+        if currentAnimationIndex >= animations.count && self.repeats {
+            // Start from the beginning if sequence repeats
+            currentAnimationIndex = 0
+        }
+        
         if currentAnimationIndex >= animations.count {
             // Reached the end
             currentAnimationIndex = -1
