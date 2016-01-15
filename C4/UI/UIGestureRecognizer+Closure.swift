@@ -120,7 +120,7 @@ extension UITapGestureRecognizer {
 }
 
 
-public typealias PanAction = (location: C4Point, translation: C4Vector, velocity: C4Vector, state: UIGestureRecognizerState) -> ()
+public typealias PanAction = (location: C4Point, translation: C4Vector, velocity: C4Vector, state: UIGestureRecognizerState, locations: [C4Point]) -> ()
 
 extension UIPanGestureRecognizer {
     
@@ -135,7 +135,7 @@ extension UIPanGestureRecognizer {
             }
             
             if let action = newValue {
-                actionHandler = PanGestureHandler(action)
+                actionHandler = PanGestureHandler(action, referenceView)
                 addTarget(actionHandler!, action: "handleGesture:")
             } else {
                 actionHandler = nil
@@ -174,13 +174,19 @@ extension UIPanGestureRecognizer {
     /// This class is used as the target of the gesture recognizer action. It forwards the method call to the closure.
     internal class PanGestureHandler : NSObject {
         let action: PanAction
+        let referenceView: UIView?
         
-        init(_ action: PanAction) {
+        init(_ action: PanAction, _ view: UIView?) {
             self.action = action
+            self.referenceView = view
         }
         
         func handleGesture(gestureRecognizer: UIPanGestureRecognizer) {
-            action(location: gestureRecognizer.location, translation: gestureRecognizer.translation, velocity: gestureRecognizer.velocity, state: gestureRecognizer.state)
+            var touches = [C4Point]()
+            for i in 0..<gestureRecognizer.numberOfTouches() {
+                touches.append(C4Point(gestureRecognizer.locationOfTouch(i, inView: self.referenceView)))
+            }
+            action(location: gestureRecognizer.location, translation: gestureRecognizer.translation, velocity: gestureRecognizer.velocity, state: gestureRecognizer.state, locations: touches)
         }
     }
 }

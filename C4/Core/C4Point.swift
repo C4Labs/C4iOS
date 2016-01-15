@@ -122,6 +122,14 @@ public func -= (inout lhs: C4Point, rhs: C4Vector) {
     lhs.y -= rhs.y
 }
 
+///  Translate a point by the negative of the given vector
+///
+///  - parameter lhs: a C4Point to translate
+///  - parameter rhs: a C4Vector whose values will be applied to the point
+public func * (lhs: C4Point, rhs: Int) -> C4Point {
+    return C4Point(lhs.x * Double(rhs), lhs.y * Double(rhs))
+}
+
 ///  Calculate the vector between two points
 ///
 ///  - parameter lhs: a C4Point
@@ -139,6 +147,16 @@ public func - (lhs: C4Point, rhs: C4Point) -> C4Vector {
 ///
 ///  - returns: A new point whose coordinates have been translated by the values from the vector (e.g. point.x = lhs.x + rhs.x)
 public func + (lhs: C4Point, rhs: C4Vector) -> C4Point {
+    return C4Point(lhs.x + rhs.x,lhs.y + rhs.y)
+}
+
+///  Adds two points together.
+///
+///  - parameter lhs: a C4Point
+///  - parameter rhs: a C4Vector
+///
+///  - returns: A new point whose coordinates are the sum of lhs and rhs
+public func + (lhs: C4Point, rhs: C4Point) -> C4Point {
     return C4Point(lhs.x + rhs.x,lhs.y + rhs.y)
 }
 
