@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F754DCB1C48EE600036D39F /* C4ImageLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F754DCA1C48EE600036D39F /* C4ImageLayer.swift */; };
 		1F8252CC1BB3C65E0090E98A /* C4Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8252CB1BB3C65E0090E98A /* C4Timer.swift */; };
 		61BBAF631BC372BD00A03FD0 /* C4StoredAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BBAF621BC372BD00A03FD0 /* C4StoredAnimation.swift */; };
 		61BBAF651BC38C1200A03FD0 /* C4View+KeyValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BBAF641BC38C1200A03FD0 /* C4View+KeyValues.swift */; };
@@ -122,6 +123,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1F754DCA1C48EE600036D39F /* C4ImageLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4ImageLayer.swift; sourceTree = "<group>"; };
 		1F8252CB1BB3C65E0090E98A /* C4Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Timer.swift; sourceTree = "<group>"; };
 		1F8CB1D91A05781700A20783 /* C4RectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4RectTests.swift; sourceTree = "<group>"; };
 		614F824319DB5ED3001DF1D4 /* C4.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = C4.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -339,6 +341,7 @@
 				A9D4F68A1B534F9F00F937AB /* C4Image+Filter.swift */,
 				A9D4F68B1B534F9F00F937AB /* C4Image+Generator.swift */,
 				A9D4F68C1B534F9F00F937AB /* C4Image.swift */,
+				1F754DCA1C48EE600036D39F /* C4ImageLayer.swift */,
 				A9D4F68D1B534F9F00F937AB /* C4Line.swift */,
 				A9D4F68E1B534F9F00F937AB /* C4Movie.swift */,
 				A9D4F68F1B534F9F00F937AB /* C4Polygon.swift */,
@@ -528,6 +531,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F754DCB1C48EE600036D39F /* C4ImageLayer.swift in Sources */,
 				A9D4F6C81B534F9F00F937AB /* C4Line.swift in Sources */,
 				A9D4F6B01B534F9F00F937AB /* C4Math.swift in Sources */,
 				A9D4F6CD1B534F9F00F937AB /* C4RegularPolygon.swift in Sources */,
