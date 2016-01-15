@@ -309,6 +309,10 @@ public class C4Image: C4View, NSCopying {
         return img
     }
 
+    public func mutableCopyWithZone(zone: NSZone) -> AnyObject {
+        return copyWithZone(zone)
+    }
+
     //MARK: Properties
     
     /// Returns the UIImageView of the object.
