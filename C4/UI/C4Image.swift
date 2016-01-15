@@ -55,7 +55,7 @@ public struct Pixel {
 }
 
 /// A C4Image provides a view-based container for displaying a single image. You can create images from files, from other image objects, or from raw image data you receive.
-public class C4Image: C4View, NSCopying, NSMutableCopying {
+public class C4Image: C4View, NSCopying {
     
     //MARK: Initializers
     
@@ -294,7 +294,11 @@ public class C4Image: C4View, NSCopying, NSMutableCopying {
         
         self.init(cgimage: cgim!)
     }
-    
+
+    convenience public init(c4image: C4Image) {
+        let cgim = c4image.cgimage
+        self.init(cgimage: cgim)
+    }
 
     public func copyWithZone(zone: NSZone) -> AnyObject {
         let uiimage = UIImage(CGImage: self.contents)
@@ -303,10 +307,6 @@ public class C4Image: C4View, NSCopying, NSMutableCopying {
         img.constrainsProportions = self.constrainsProportions
         img._originalSize = _originalSize
         return img
-    }
-
-    public func mutableCopyWithZone(zone: NSZone) -> AnyObject {
-        return copyWithZone(zone)
     }
 
     //MARK: Properties
