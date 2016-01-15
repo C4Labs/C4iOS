@@ -56,7 +56,26 @@ public struct Pixel {
 
 /// A C4Image provides a view-based container for displaying a single image. You can create images from files, from other image objects, or from raw image data you receive.
 public class C4Image: C4View {
-    
+
+    internal class ImageView : UIImageView {
+        var imageLayer: C4ImageLayer {
+            get {
+                return self.layer as! C4ImageLayer
+            }
+        }
+
+        override class func layerClass() -> AnyClass {
+            return C4ImageLayer.self
+        }
+    }
+
+    /// C4Shape's contents are drawn on a C4ShapeLayer.
+    public var imageLayer: C4ImageLayer {
+        get {
+            return self.imageView.imageLayer
+        }
+    }
+
     //MARK: Initializers
     
     /// Initializes a new C4Image using the specified filename from the bundle (i.e. your project), it will also grab images
@@ -102,7 +121,7 @@ public class C4Image: C4View {
     convenience public init(image: C4Image) {
         self.init()
         let uiimage = image.uiimage
-        self.view = UIImageView(image: uiimage)
+        self.view = ImageView(image: uiimage)
     }
     
     /// Initializes a new C4Image using a UIImage.
@@ -135,9 +154,9 @@ public class C4Image: C4View {
         
         if scale != 1.0 {
             let scaledImage = UIImage(CGImage: uiimage.CGImage!, scale: CGFloat(scale), orientation: uiimage.imageOrientation)
-            self.view = UIImageView(image: scaledImage)
+            self.view = ImageView(image: scaledImage)
         } else {
-            self.view = UIImageView(image: uiimage)
+            self.view = ImageView(image: uiimage)
         }
         _originalSize = C4Size(view.frame.size)
     }
@@ -300,12 +319,10 @@ public class C4Image: C4View {
     /// Returns the UIImageView of the object.
     ///
     /// - returns: A UIImageView object.
-    internal var imageView : UIImageView {
-        get {
-            return self.view as! UIImageView
-        }
+    internal var imageView: ImageView {
+        return self.view as! ImageView
     }
-    
+
     /// Returns a UIImage representation of the receiver.
     ///
     /// - returns:	A UIImage object.
