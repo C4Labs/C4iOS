@@ -38,5 +38,40 @@ class C4PointTests: XCTestCase {
         let lerped = lerp(a: C4Point(), b: target, param: 0.2)
         XCTAssertEqual(lerped, C4Point(2,2), "Point should be {2,2}")
     }
+
+    func testAddition() {
+        var target = C4Point(10,10)
+        let result = target + target
+        XCTAssertEqual(result, C4Point(20,20), "Point should be {20,20}")
+
+        target += target
+        XCTAssertEqual(target, result, "Target should now be {20,20}")
+    }
     
+    func testSubtraction() {
+        var target = C4Point(10,10)
+        let result = target - target
+        XCTAssertEqual(result, C4Point(0,0), "Point should be {0,0}")
+
+        target -= target
+        XCTAssertEqual(target, result, "Point should be {0,0}")
+    }
+
+    func testMultiplication() {
+        var target = C4Point(10,10)
+        let result = target * 10.0
+        XCTAssertEqual(result, C4Point(100,100), "Point should be {100,100}")
+
+        target *= 10.0
+        XCTAssertEqual(target, result, "Target should now be {100,100}")
+    }
+
+    func testDivision() {
+        var target = C4Point(10,10)
+        let result = target / 10.0
+        XCTAssertEqual(result, C4Point(1,1), "Point should be {1,1}")
+
+        target /= 10.0
+        XCTAssertEqual(target, result, "Target should now be {1,1}")
+    }
 }
