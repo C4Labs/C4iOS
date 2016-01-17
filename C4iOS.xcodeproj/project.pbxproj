@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1F754DCB1C48EE600036D39F /* C4ImageLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F754DCA1C48EE600036D39F /* C4ImageLayer.swift */; };
 		1F8252CC1BB3C65E0090E98A /* C4Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8252CB1BB3C65E0090E98A /* C4Timer.swift */; };
+		1F8A2FEB1C4C24FD0087063A /* C4View+Render.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A2FEA1C4C24FD0087063A /* C4View+Render.swift */; };
 		61BBAF631BC372BD00A03FD0 /* C4StoredAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BBAF621BC372BD00A03FD0 /* C4StoredAnimation.swift */; };
 		61BBAF651BC38C1200A03FD0 /* C4View+KeyValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BBAF641BC38C1200A03FD0 /* C4View+KeyValues.swift */; };
 		A94E3BD419E0E9390039A9C4 /* C4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 614F824319DB5ED3001DF1D4 /* C4.framework */; };
@@ -125,6 +126,7 @@
 /* Begin PBXFileReference section */
 		1F754DCA1C48EE600036D39F /* C4ImageLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4ImageLayer.swift; sourceTree = "<group>"; };
 		1F8252CB1BB3C65E0090E98A /* C4Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Timer.swift; sourceTree = "<group>"; };
+		1F8A2FEA1C4C24FD0087063A /* C4View+Render.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "C4View+Render.swift"; sourceTree = "<group>"; };
 		1F8CB1D91A05781700A20783 /* C4RectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4RectTests.swift; sourceTree = "<group>"; };
 		614F824319DB5ED3001DF1D4 /* C4.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = C4.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		614F824E19DB5ED4001DF1D4 /* C4Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = C4Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -360,6 +362,7 @@
 				A9D4F69A1B534F9F00F937AB /* C4View+Border.swift */,
 				A9D4F69B1B534F9F00F937AB /* C4View+Shadow.swift */,
 				A9D4F69C1B534F9F00F937AB /* C4View.swift */,
+				1F8A2FEA1C4C24FD0087063A /* C4View+Render.swift */,
 				61BBAF641BC38C1200A03FD0 /* C4View+KeyValues.swift */,
 				A9D4F69D1B534F9F00F937AB /* C4ViewAnimation.swift */,
 				A9D4F69E1B534F9F00F937AB /* C4Wedge.swift */,
@@ -584,6 +587,7 @@
 				A9D4F6AD1B534F9F00F937AB /* C4Color.swift in Sources */,
 				A9D4F6C51B534F9F00F937AB /* C4Image+Filter.swift in Sources */,
 				A9D4F6BF1B534F9F00F937AB /* C4Curve.swift in Sources */,
+				1F8A2FEB1C4C24FD0087063A /* C4View+Render.swift in Sources */,
 				A9D4F6BC1B534F9F00F937AB /* C4AudioPlayer.swift in Sources */,
 				A9D4F6B21B534F9F00F937AB /* C4Path.swift in Sources */,
 				A9D4F6D71B534F9F00F937AB /* C4View.swift in Sources */,
