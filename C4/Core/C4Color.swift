@@ -272,7 +272,7 @@ public class C4Color {
     /// ````
     ///
     /// - parameter: alpha The opacity value of the new UIColor object.
-    public func colorWithAlpha(alpha a: Double) -> C4Color {
+    public func colorWithAlpha(a: Double) -> C4Color {
         return C4Color(red: red, green: green, blue: blue, alpha: a)
     }
 }
