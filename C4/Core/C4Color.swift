@@ -264,6 +264,17 @@ public class C4Color {
             return internalColor
         }
     }
+
+    ///Creates and returns a color object that has the same color space and component values as the receiver, but has the specified alpha component.
+    ///
+    /// ````
+    /// let c = aColor.colorWithAlpha(0.2)
+    /// ````
+    ///
+    /// - parameter: alpha The opacity value of the new UIColor object.
+    public func colorWithAlpha(a: Double) -> C4Color {
+        return C4Color(red: red, green: green, blue: blue, alpha: a)
+    }
 }
 
 // MARK: - Casting to UIColor and CIColor
