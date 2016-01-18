@@ -81,6 +81,11 @@ public class C4ShapeLayer: CAShapeLayer {
             animation.configureOptions()
             animation.fromValue = self.lineDashPhase
             return animation;
+        } else if key == "contents" {
+            let animation = CABasicAnimation(keyPath: key)
+            animation.configureOptions()
+            animation.fromValue = self.contents
+            return animation;
         }
         
         return super.actionForKey(key)

@@ -26,6 +26,7 @@
 		A96F50691B5385A5002B3A46 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A96F50671B5385A5002B3A46 /* LaunchScreen.xib */; };
 		A96F507E1B538650002B3A46 /* C4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 614F824319DB5ED3001DF1D4 /* C4.framework */; };
 		A96F507F1B538650002B3A46 /* C4.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 614F824319DB5ED3001DF1D4 /* C4.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A9BC57271C50ABA80068BBA3 /* UIImage+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BC57261C50ABA80068BBA3 /* UIImage+Color.swift */; };
 		A9D4F6AD1B534F9F00F937AB /* C4Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6711B534F9F00F937AB /* C4Color.swift */; };
 		A9D4F6AE1B534F9F00F937AB /* C4EventSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6721B534F9F00F937AB /* C4EventSource.swift */; };
 		A9D4F6AF1B534F9F00F937AB /* C4Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6731B534F9F00F937AB /* C4Foundation.swift */; };
@@ -145,6 +146,7 @@
 		A96F50651B5385A5002B3A46 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A96F50681B5385A5002B3A46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		A988A9161A4F57330044007C /* C4TransformTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4TransformTests.swift; sourceTree = "<group>"; };
+		A9BC57261C50ABA80068BBA3 /* UIImage+Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Color.swift"; sourceTree = "<group>"; };
 		A9D4F6711B534F9F00F937AB /* C4Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Color.swift; sourceTree = "<group>"; };
 		A9D4F6721B534F9F00F937AB /* C4EventSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4EventSource.swift; sourceTree = "<group>"; };
 		A9D4F6731B534F9F00F937AB /* C4Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Foundation.swift; sourceTree = "<group>"; };
@@ -368,6 +370,7 @@
 				A9D4F69E1B534F9F00F937AB /* C4Wedge.swift */,
 				A9D4F6AA1B534F9F00F937AB /* UIGestureRecognizer+Closure.swift */,
 				A9D4F6AB1B534F9F00F937AB /* UIViewController+C4View.swift */,
+				A9BC57261C50ABA80068BBA3 /* UIImage+Color.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -565,6 +568,7 @@
 				A9D4F6B71B534F9F00F937AB /* C4Vector.swift in Sources */,
 				A9D4F6C61B534F9F00F937AB /* C4Image+Generator.swift in Sources */,
 				A9D4F6E31B534F9F00F937AB /* C4Twirl.swift in Sources */,
+				A9BC57271C50ABA80068BBA3 /* UIImage+Color.swift in Sources */,
 				61BBAF651BC38C1200A03FD0 /* C4View+KeyValues.swift in Sources */,
 				A9D4F6AF1B534F9F00F937AB /* C4Foundation.swift in Sources */,
 				A9D4F6D41B534F9F00F937AB /* C4View+Animation.swift in Sources */,

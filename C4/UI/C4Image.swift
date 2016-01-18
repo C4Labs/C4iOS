@@ -78,6 +78,13 @@ public class C4Image: C4View, NSCopying {
 
     //MARK: Initializers
     
+    /// Initializes an empty C4Image
+    public override init() {
+        super.init()
+        let uiimage = UIImage()
+        self.view = ImageView(image: uiimage)
+    }
+
     /// Initializes a new C4Image using the specified filename from the bundle (i.e. your project), it will also grab images
     /// from the web if the filename starts with http.
     ///
