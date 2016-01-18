@@ -20,12 +20,10 @@
 import UIKit
 
 ///The C4Gradient class draws a color gradient over its background color, filling the shape of the view (including rounded corners).
-public class C4Gradient : C4View {
-    class GradientView : UIView {
+public class C4Gradient: C4View {
+    class GradientView: UIView {
         var gradientLayer: C4GradientLayer {
-            get {
-                return self.layer as! C4GradientLayer
-            }
+            return self.layer as! C4GradientLayer
         }
         
         override class func layerClass() -> AnyClass {
@@ -35,13 +33,11 @@ public class C4Gradient : C4View {
 
     ///The background layer of the receiver.
     public var gradientLayer: C4GradientLayer {
-        get {
-            return self.gradientView.gradientLayer
-        }
+        return gradientView.gradientLayer
     }
 
     var gradientView: GradientView {
-        return self.view as! GradientView
+        return view as! GradientView
     }
 
     ///An array of C4Color objects defining the color of each gradient stop. Animatable.

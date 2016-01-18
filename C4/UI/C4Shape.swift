@@ -22,7 +22,6 @@ import UIKit
 
 /// C4Shape is a concrete subclass of C4View that draws a bezier path in its coordinate space.
 public class C4Shape: C4View {
-    
     internal class ShapeView : UIView {
         var shapeLayer: C4ShapeLayer {
             get {
@@ -56,6 +55,9 @@ public class C4Shape: C4View {
         lineWidth = 1
         lineCap = .Round
         lineJoin = .Round
+
+        let image = UIImage.createWithColor(UIColor.clearColor(), size: CGSize(width: 1, height: 1)).CGImage
+        shapeLayer.contents = image
     }
     
     /// Initializest a new C4Shape from a specified C4Path.
@@ -71,7 +73,49 @@ public class C4Shape: C4View {
         updatePath()
         adjustToFitPath()
     }
-    
+
+    public convenience init(_ shape: C4Shape) {
+        self.init()
+        let disable = C4ShapeLayer.disableActions
+        C4ShapeLayer.disableActions = true
+        self.path = shape.path
+        shapeLayer.path = path?.CGPath
+        self.frame = shape.frame
+        self.lineWidth = shape.lineWidth
+        self.lineDashPhase = shape.lineDashPhase
+        self.lineCap = shape.lineCap
+        self.lineJoin = shape.lineJoin
+        self.lineDashPattern = shape.lineDashPattern
+        self.fillColor = shape.fillColor
+        self.strokeColor = shape.strokeColor
+        self.strokeStart = shape.strokeStart
+        self.strokeEnd = shape.strokeEnd
+        self.miterLimit = shape.miterLimit
+        updatePath()
+        adjustToFitPath()
+        C4ShapeLayer.disableActions = disable
+    }
+
+    public var gradientFill: C4Gradient? {
+        didSet {
+            if let fill = gradientFill {
+                if mask == nil  {
+                    let m = C4Shape(self)
+                    m.fillColor = black
+                    m.strokeColor = black
+                    mask = m
+                }
+                fillColor = nil
+                shapeLayer.contents = fill.render()?.cgimage
+            } else {
+                let image = UIImage.createWithColor(UIColor.clearColor(), size: CGSize(width: 1, height: 1)).CGImage
+                shapeLayer.contents = image
+                return
+            }
+
+        }
+    }
+
     /// The path defining the shape to be rendered. If the path extends outside the layer bounds it will not automatically
     /// be clipped to the layer. Defaults to nil. Animatable.
     public var path: C4Path? {
@@ -133,6 +177,9 @@ public class C4Shape: C4View {
         }
         set(color) {
             shapeLayer.fillColor = color?.CGColor
+            if color != nil {
+                gradientFill = nil
+            }
         }
     }
     
