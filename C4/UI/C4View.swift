@@ -28,10 +28,104 @@ extension NSValue {
     }
 }
 
+public class C4Layer: CALayer {
+    static let rotationKey = "rotation"
+
+    private var _rotation = 0.0
+
+    public dynamic var rotation: Double {
+        return _rotation
+    }
+
+    public override init() {
+        super.init()
+    }
+    
+    public override init(layer: AnyObject) {
+        super.init(layer: layer)
+        if let layer = layer as? C4Layer {
+            _rotation = layer._rotation
+        }
+    }
+
+    public required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+
+    public override func setValue(value: AnyObject?, forKey key: String) {
+        super.setValue(value, forKey: key)
+        if key == C4Layer.rotationKey {
+            _rotation = value as? Double ?? 0.0
+        }
+    }
+
+    public override func actionForKey(key: String) -> CAAction? {
+        if key == C4Layer.rotationKey {
+            let animation = CABasicAnimation(keyPath: key)
+            animation.configureOptions()
+            if let layer = presentationLayer() as? C4Layer {
+                animation.fromValue = layer.valueForKey(key)
+            }
+            return animation
+        }
+        return super.actionForKey(key)
+    }
+
+    public override class func needsDisplayForKey(key: String) -> Bool {
+        if  key == C4Layer.rotationKey {
+            return true
+        }
+        return super.needsDisplayForKey(key)
+    }
+
+    public override func display() {
+        guard let presentation = presentationLayer() as? C4Layer else {
+            return
+        }
+        setValue(presentation._rotation, forKeyPath: "transform.rotation.z")
+    }
+}
+
 /// The C4View class defines a rectangular area on the screen and the interfaces for managing visual content in that area. The C4View class itself provides basic behavior for filling its rectangular area with a background color. More sophisticated content can be presented by subclassing UIView and implementing the necessary drawing and event-handling code yourself. The C4 framework also includes a set of standard subclasses that range from simple shapes to movies and images that can be used as-is.
 public class C4View : NSObject {
     /// A UIView. Internally, C4View wraps and provides access to an internal UIView.
-    public var view : UIView = UIView()
+    public var view : UIView = LayerView()
+
+    /// The current rotation value of the view. Animatable.
+    ///
+    /// - returns: A Double value representing the cumulative rotation of the view, measured in Radians.
+    public var rotation: Double {
+        get {
+            if let number = animatableLayer.valueForKeyPath(C4Layer.rotationKey) as? NSNumber {
+                return number.doubleValue
+            }
+            return  0.0
+        }
+        set {
+            animatableLayer.setValue(newValue, forKeyPath: C4Layer.rotationKey)
+        }
+    }
+
+    internal var layerView: LayerView {
+        return self.view as! LayerView
+    }
+
+    internal class LayerView: UIView {
+        var animatableLayer: C4Layer {
+            return self.layer as! C4Layer
+        }
+
+        override class func layerClass() -> AnyClass {
+            return C4Layer.self
+        }
+    }
+
+    /// The view's primary layer.
+    ///
+    /// - returns: A C4Layer, whose properties are animatable (e.g. rotation)
+    public var animatableLayer: C4Layer {
+        return self.layerView.animatableLayer
+    }
 
     ///  Initializes a C4View.
     public override init() {
