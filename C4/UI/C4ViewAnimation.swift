@@ -20,8 +20,26 @@
 import Foundation
 import UIKit
 
+public struct Spring {
+    public var mass: Double
+    public var stiffness: Double
+    public var damping: Double
+    public var initialVelocity: Double
+
+    public init(mass: Double = 1.0, stiffness: Double = 100.0, damping: Double = 10.0, initialVelocity: Double = 1.0) {
+        self.mass = mass
+        self.stiffness = stiffness
+        self.damping = damping
+        self.initialVelocity = initialVelocity
+    }
+}
+
 /// C4ViewAnimation is a concrete subclass of C4Animation whose execution blocks affect properties of view-based objects.
 public class C4ViewAnimation : C4Animation {
+    public static var spring: Spring?
+
+    public var spring: Spring? 
+
     /// The amount of time to way before executing the animation.
     public var delay: NSTimeInterval = 0
     
@@ -108,18 +126,33 @@ public class C4ViewAnimation : C4Animation {
         
         let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC)))
         dispatch_after(time, dispatch_get_main_queue()) {
-            UIView.animateWithDuration(self.duration, delay: 0, options: self.options, animations: {
-                C4ViewAnimation.stack.append(self)
-                UIView.setAnimationRepeatCount(Float(self.repeatCount))
-                self.doInTransaction(self.animations)
-                C4ViewAnimation.stack.removeLast()
-                }, completion:nil)
+            if let spring = self.spring {
+                UIView.animateWithDuration(self.duration, delay: 0, usingSpringWithDamping: CGFloat(spring.damping), initialSpringVelocity: CGFloat(spring.initialVelocity), options: self.options, animations:{
+                    self.doAnimationStack()
+                    }, completion:nil)
+
+            } else {
+                UIView.animateWithDuration(self.duration, delay: 0, options: self.options, animations: {
+                    self.doAnimationStack()
+                    }, completion:nil)
+            }
+
         }
-        
+
+
+
         C4ShapeLayer.disableActions = disable
     }
-    
+
+    private func doAnimationStack() {
+        C4ViewAnimation.stack.append(self)
+        UIView.setAnimationRepeatCount(Float(self.repeatCount))
+        self.doInTransaction(self.animations)
+        C4ViewAnimation.stack.removeLast()
+    }
+
     private func doInTransaction(action: () -> Void) {
+        C4ViewAnimation.spring = spring
         CATransaction.begin()
         CATransaction.setAnimationDuration(duration)
         CATransaction.setAnimationTimingFunction(timingFunction)

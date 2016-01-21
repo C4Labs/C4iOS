@@ -29,7 +29,7 @@ public class C4ImageLayer: CALayer {
         }
 
         if key == "contents" {
-            let animation = CABasicAnimation(keyPath: key)
+            let animation = C4ViewAnimation.spring == nil ? CABasicAnimation(keyPath: key) : CASpringAnimation(keyPath: key)
             animation.configureOptions()
             animation.fromValue = self.contents
             return animation;
