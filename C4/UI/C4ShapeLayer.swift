@@ -40,62 +40,30 @@ public class C4ShapeLayer: CAShapeLayer {
         if C4ShapeLayer.disableActions == true {
             return nil
         }
-        
-        if key == "lineWidth" {
-            let animation = C4ViewAnimation.spring == nil ? CABasicAnimation(keyPath: key) : CASpringAnimation(keyPath: key)
-            animation.configureOptions()
-            animation.fromValue = self.lineWidth
-            return animation;
+
+        let animatableProperties = ["lineWidth", "strokeEnd", "strokeStart", "strokeColor", "path", "fillColor", "lineDashPhase", "contents"]
+        if !animatableProperties.contains(key) {
+            return super.actionForKey(key)
         }
-        else if key == "strokeEnd" {
-            let animation = C4ViewAnimation.spring == nil ? CABasicAnimation(keyPath: key) : CASpringAnimation(keyPath: key)
-            animation.configureOptions()
-            animation.fromValue = self.strokeEnd
-            return animation;
+
+        let animation: CABasicAnimation
+        if let viewAnimation = C4ViewAnimation.stack.last as? C4ViewAnimation where viewAnimation.spring != nil {
+            animation = CASpringAnimation(keyPath: key)
+        } else {
+            animation = CABasicAnimation(keyPath: key)
         }
-        else if key == "strokeStart" {
-            let animation = C4ViewAnimation.spring == nil ? CABasicAnimation(keyPath: key) : CASpringAnimation(keyPath: key)
-            animation.configureOptions()
-            animation.fromValue = self.strokeStart
-            return animation;
-        }
-        else if key == "strokeColor" {
-            let animation = C4ViewAnimation.spring == nil ? CABasicAnimation(keyPath: key) : CASpringAnimation(keyPath: key)
-            animation.configureOptions()
-            animation.fromValue = self.strokeColor
-            return animation;
-        }
-        else if key == "path" {
-            let animation = C4ViewAnimation.spring == nil ? CABasicAnimation(keyPath: key) : CASpringAnimation(keyPath: key)
-            animation.configureOptions()
-            animation.fromValue = self.path
-            return animation;
-        }
-        else if key == "fillColor" {
-            let animation = C4ViewAnimation.spring == nil ? CABasicAnimation(keyPath: key) : CASpringAnimation(keyPath: key)
-            animation.configureOptions()
-            animation.fromValue = self.fillColor
-            return animation;
-        } else if key == "lineDashPhase" {
-            let animation = C4ViewAnimation.spring == nil ? CABasicAnimation(keyPath: key) : CASpringAnimation(keyPath: key)
-            animation.configureOptions()
-            animation.fromValue = self.lineDashPhase
-            return animation;
-        } else if key == "contents" {
-            let animation = CABasicAnimation(keyPath: key)
-            animation.configureOptions()
-            animation.fromValue = self.contents
-            return animation;
-        }
-        
-        return super.actionForKey(key)
+
+        animation.configureOptions()
+        animation.fromValue = valueForKey(key)
+
+        return animation
     }
 }
 
 extension CABasicAnimation {
     ///  Configures basic options for a CABasicAnimation.
     ///
-    ///  The options set in this method are favorable for the inner workings of C4's animation behaviours.
+    ///  The options set in this method are favorable for the inner workings of C4's action behaviours.
     public func configureOptions() {
         if let animation = C4ViewAnimation.currentAnimation {
             self.autoreverses = animation.autoreverses
@@ -112,11 +80,11 @@ extension CASpringAnimation {
     ///  The options set in this method are favorable for the inner workings of C4's animation behaviours.
     public override func configureOptions() {
         super.configureOptions()
-        if let spring = C4ViewAnimation.spring {
-            self.mass = CGFloat(spring.mass)
-            self.damping = CGFloat(spring.damping)
-            self.stiffness = CGFloat(spring.stiffness)
-            self.initialVelocity = CGFloat(spring.initialVelocity)
+        if let animation = C4ViewAnimation.currentAnimation as? C4ViewAnimation, spring = animation.spring {
+            mass = CGFloat(spring.mass)
+            damping = CGFloat(spring.damping)
+            stiffness = CGFloat(spring.stiffness)
+            initialVelocity = CGFloat(spring.initialVelocity)
         }
     }
 }

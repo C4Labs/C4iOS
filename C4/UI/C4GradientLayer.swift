@@ -35,14 +35,21 @@ public class C4GradientLayer: CAGradientLayer {
         if C4ShapeLayer.disableActions == true {
             return nil
         }
-        
-        if key == "colors" {
-            let animation = C4ViewAnimation.spring == nil ? CABasicAnimation(keyPath: key) : CASpringAnimation(keyPath: key)
-            animation.configureOptions()
-            animation.fromValue = self.colors
-            return animation;
+
+        if key != "colors" {
+            return super.actionForKey(key)
         }
-        
-        return super.actionForKey(key)
+
+        let animation: CABasicAnimation
+        if let viewAnimation = C4ViewAnimation.stack.last as? C4ViewAnimation where viewAnimation.spring != nil {
+            animation = CASpringAnimation(keyPath: key)
+        } else {
+            animation = CABasicAnimation(keyPath: key)
+        }
+
+        animation.configureOptions()
+        animation.fromValue = self.colors
+
+        return animation;
     }
 }

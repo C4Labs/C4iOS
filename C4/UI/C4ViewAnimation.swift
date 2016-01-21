@@ -36,7 +36,6 @@ public struct Spring {
 
 /// C4ViewAnimation is a concrete subclass of C4Animation whose execution blocks affect properties of view-based objects.
 public class C4ViewAnimation : C4Animation {
-    public static var spring: Spring?
 
     public var spring: Spring? 
 
@@ -123,28 +122,27 @@ public class C4ViewAnimation : C4Animation {
     public override func animate() {
         let disable = C4ShapeLayer.disableActions
         C4ShapeLayer.disableActions = false
-        
-        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC)))
-        dispatch_after(time, dispatch_get_main_queue()) {
+
+        C4.delay(delay) {
             if let spring = self.spring {
-                UIView.animateWithDuration(self.duration, delay: 0, usingSpringWithDamping: CGFloat(spring.damping), initialSpringVelocity: CGFloat(spring.initialVelocity), options: self.options, animations:{
-                    self.doAnimationStack()
-                    }, completion:nil)
-
+                self.animateWithSpring(spring)
             } else {
-                UIView.animateWithDuration(self.duration, delay: 0, options: self.options, animations: {
-                    self.doAnimationStack()
-                    }, completion:nil)
+                self.animateNormal()
             }
-
         }
-
-
 
         C4ShapeLayer.disableActions = disable
     }
 
-    private func doAnimationStack() {
+    private func animateWithSpring(spring: Spring) {
+        UIView.animateWithDuration(self.duration, delay: 0, usingSpringWithDamping: CGFloat(spring.damping), initialSpringVelocity: CGFloat(spring.initialVelocity), options: self.options, animations: self.animationBlock, completion:nil)
+    }
+
+    private func animateNormal() {
+        UIView.animateWithDuration(self.duration, delay: 0, options: self.options, animations: self.animationBlock, completion:nil)
+    }
+
+    private func animationBlock() {
         C4ViewAnimation.stack.append(self)
         UIView.setAnimationRepeatCount(Float(self.repeatCount))
         self.doInTransaction(self.animations)
@@ -152,7 +150,6 @@ public class C4ViewAnimation : C4Animation {
     }
 
     private func doInTransaction(action: () -> Void) {
-        C4ViewAnimation.spring = spring
         CATransaction.begin()
         CATransaction.setAnimationDuration(duration)
         CATransaction.setAnimationTimingFunction(timingFunction)
