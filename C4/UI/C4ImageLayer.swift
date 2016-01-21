@@ -28,8 +28,12 @@ public class C4ImageLayer: CALayer {
             return nil
         }
 
+        let animation = C4ViewAnimation.stack.first as? C4ViewAnimation
+
+        let shouldSpring = animation?.spring == nil ? false : true
+
         if key == "contents" {
-            let animation = C4ViewAnimation.spring == nil ? CABasicAnimation(keyPath: key) : CASpringAnimation(keyPath: key)
+            let animation = shouldSpring ? CASpringAnimation(keyPath: key) : CABasicAnimation(keyPath: key)
             animation.configureOptions()
             animation.fromValue = self.contents
             return animation;

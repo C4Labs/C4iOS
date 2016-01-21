@@ -36,7 +36,6 @@ public struct Spring {
 
 /// C4ViewAnimation is a concrete subclass of C4Animation whose execution blocks affect properties of view-based objects.
 public class C4ViewAnimation : C4Animation {
-    public static var spring: Spring?
 
     public var spring: Spring? 
 
@@ -152,7 +151,6 @@ public class C4ViewAnimation : C4Animation {
     }
 
     private func doInTransaction(action: () -> Void) {
-        C4ViewAnimation.spring = spring
         CATransaction.begin()
         CATransaction.setAnimationDuration(duration)
         CATransaction.setAnimationTimingFunction(timingFunction)

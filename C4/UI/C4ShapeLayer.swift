@@ -40,44 +40,48 @@ public class C4ShapeLayer: CAShapeLayer {
         if C4ShapeLayer.disableActions == true {
             return nil
         }
-        
+
+        let animation = C4ViewAnimation.stack.first as? C4ViewAnimation
+
+        let shouldSpring = animation?.spring == nil ? false : true
+
         if key == "lineWidth" {
-            let animation = C4ViewAnimation.spring == nil ? CABasicAnimation(keyPath: key) : CASpringAnimation(keyPath: key)
+            let animation = shouldSpring ? CASpringAnimation(keyPath: key) : CABasicAnimation(keyPath: key)
             animation.configureOptions()
             animation.fromValue = self.lineWidth
             return animation;
         }
         else if key == "strokeEnd" {
-            let animation = C4ViewAnimation.spring == nil ? CABasicAnimation(keyPath: key) : CASpringAnimation(keyPath: key)
+            let animation = shouldSpring ? CASpringAnimation(keyPath: key) : CABasicAnimation(keyPath: key)
             animation.configureOptions()
             animation.fromValue = self.strokeEnd
             return animation;
         }
         else if key == "strokeStart" {
-            let animation = C4ViewAnimation.spring == nil ? CABasicAnimation(keyPath: key) : CASpringAnimation(keyPath: key)
+            let animation = shouldSpring ? CASpringAnimation(keyPath: key) : CABasicAnimation(keyPath: key)
             animation.configureOptions()
             animation.fromValue = self.strokeStart
             return animation;
         }
         else if key == "strokeColor" {
-            let animation = C4ViewAnimation.spring == nil ? CABasicAnimation(keyPath: key) : CASpringAnimation(keyPath: key)
+            let animation = shouldSpring ? CASpringAnimation(keyPath: key) : CABasicAnimation(keyPath: key)
             animation.configureOptions()
             animation.fromValue = self.strokeColor
             return animation;
         }
         else if key == "path" {
-            let animation = C4ViewAnimation.spring == nil ? CABasicAnimation(keyPath: key) : CASpringAnimation(keyPath: key)
+            let animation = shouldSpring ? CASpringAnimation(keyPath: key) : CABasicAnimation(keyPath: key)
             animation.configureOptions()
             animation.fromValue = self.path
             return animation;
         }
         else if key == "fillColor" {
-            let animation = C4ViewAnimation.spring == nil ? CABasicAnimation(keyPath: key) : CASpringAnimation(keyPath: key)
+            let animation = shouldSpring ? CASpringAnimation(keyPath: key) : CABasicAnimation(keyPath: key)
             animation.configureOptions()
             animation.fromValue = self.fillColor
             return animation;
         } else if key == "lineDashPhase" {
-            let animation = C4ViewAnimation.spring == nil ? CABasicAnimation(keyPath: key) : CASpringAnimation(keyPath: key)
+            let animation = shouldSpring ? CASpringAnimation(keyPath: key) : CABasicAnimation(keyPath: key)
             animation.configureOptions()
             animation.fromValue = self.lineDashPhase
             return animation;
@@ -107,7 +111,9 @@ extension CASpringAnimation {
     ///  The options set in this method are favorable for the inner workings of C4's animation behaviours.
     public override func configureOptions() {
         super.configureOptions()
-        if let spring = C4ViewAnimation.spring {
+        if let animation = C4ViewAnimation.stack.last as? C4ViewAnimation,
+            let spring = animation.spring {
+
             self.mass = CGFloat(spring.mass)
             self.damping = CGFloat(spring.damping)
             self.stiffness = CGFloat(spring.stiffness)
