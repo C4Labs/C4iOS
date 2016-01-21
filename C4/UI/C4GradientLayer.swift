@@ -37,7 +37,7 @@ public class C4GradientLayer: CAGradientLayer {
         }
         
         if key == "colors" {
-            let animation = CABasicAnimation(keyPath: key)
+            let animation = C4ViewAnimation.spring == nil ? CABasicAnimation(keyPath: key) : CASpringAnimation(keyPath: key)
             animation.configureOptions()
             animation.fromValue = self.colors
             return animation;
