@@ -62,8 +62,6 @@ public struct C4Point: Equatable, CustomStringConvertible {
     ///  Initializes a C4Point initialized with a CGPoint.
     ///
     ///  - parameter point: a previously initialized CGPoint
-    ///
-    ///  - returns: a C4Point whose values are the same as the CGPoint
     public init(_ point: CGPoint) {
         x = Double(point.x)
         y = Double(point.y)

@@ -93,6 +93,9 @@ public struct C4Size: Equatable, Comparable, CustomStringConvertible {
 /// let s2 = C4Size(1,1)
 /// s1 == s2 //-> false
 /// ````
+/// - parameter lhs: The first size to compare
+/// - parameter rhs: The second size to compare
+/// - returns: A boolean, `true` if the sizes are equal, otherwise `false`
 public func == (lhs: C4Size, rhs: C4Size) -> Bool {
     return lhs.width == rhs.width && lhs.height == rhs.height
 }
@@ -107,6 +110,9 @@ public func == (lhs: C4Size, rhs: C4Size) -> Bool {
 /// s1 > s2 //-> false
 /// s2 > s3 //-> true
 /// ````
+/// - parameter lhs: The first size to compare
+/// - parameter rhs: The second size to compare
+/// - returns: A boolean, `true` if the area of lhs is greater than that of rhs
 public func > (lhs: C4Size, rhs: C4Size) -> Bool {
     return lhs.width * lhs.height > rhs.width * rhs.height
 }
@@ -121,6 +127,9 @@ public func > (lhs: C4Size, rhs: C4Size) -> Bool {
 /// s1 < s2 //-> false
 /// s2 < s3 //-> false
 /// ````
+/// - parameter lhs: The first size to compare
+/// - parameter rhs: The second size to compare
+/// - returns: A boolean, `true` if the area of lhs is less than that of rhs
 public func < (lhs: C4Size, rhs: C4Size) -> Bool {
     return lhs.width * lhs.height < rhs.width * rhs.height
 }
@@ -135,6 +144,9 @@ public func < (lhs: C4Size, rhs: C4Size) -> Bool {
 /// s1 => s2 //-> true
 /// s2 => s3 //-> true
 /// ````
+/// - parameter lhs: The first size to compare
+/// - parameter rhs: The second size to compare
+/// - returns: A boolean, `true` if the area of lhs is greater than or equal to that of rhs
 public func >= (lhs: C4Size, rhs: C4Size) -> Bool {
     return lhs.width * lhs.height >= rhs.width * rhs.height
 }
@@ -149,6 +161,9 @@ public func >= (lhs: C4Size, rhs: C4Size) -> Bool {
 /// s1 <= s2 //-> true
 /// s2 <= s3 //-> false
 /// ````
+/// - parameter lhs: The first size to compare
+/// - parameter rhs: The second size to compare
+/// - returns: A boolean, `true` if the area of lhs is less than or equal to that of rhs
 public func <= (lhs: C4Size, rhs: C4Size) -> Bool {
     return lhs.width * lhs.height <= rhs.width * rhs.height
 }

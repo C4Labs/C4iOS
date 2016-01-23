@@ -93,7 +93,7 @@ public struct C4Rect: Equatable, CustomStringConvertible {
         size = C4Size(rect.size)
     }
 
-    /// Returns a rectangle that contains all of the specified coordinates in an array.
+    /// Initializes a rectangle that contains all of the specified coordinates in an array.
     ///
     /// ````
     /// let pts = [C4Point(), C4Point(0,5), C4Point(10,10), C4Point(9,8)]
@@ -113,7 +113,7 @@ public struct C4Rect: Equatable, CustomStringConvertible {
         self.init(f.origin, f.size)
     }
 
-    /// Returns a rectangle that contains the specified coordinates in a tuple.
+    /// Initializes a rectangle that contains the specified coordinates in a tuple.
     ///
     /// ````
     /// let pts = (C4Point(), C4Point(0,5))
@@ -241,7 +241,8 @@ public struct C4Rect: Equatable, CustomStringConvertible {
 /// let r2 = C4Rect(0,0,10,10.5)
 /// println(r1 == r2) //-> false
 /// ````
-///
+/// - parameter lhs: The first rectangle to compare
+/// - parameter rhs: The second rectangle to compare
 /// - returns: A bool, `true` if the rects are identical, otherwise `false`.
 public func == (lhs: C4Rect, rhs: C4Rect) -> Bool {
     return lhs.origin == rhs.origin && lhs.size == rhs.size
@@ -273,11 +274,9 @@ public func intersection(rect1: C4Rect, rect2: C4Rect) -> C4Rect {
 /// intersection(r1,r2) //-> {0,0,15,15}
 /// ````
 ///
-/// - parameter r1:	The first source rectangle.
-/// - parameter r2:	The second source rectangle.
-///
+/// - parameter rect1:	The first source rectangle.
+/// - parameter rect2:	The second source rectangle.
 /// - returns:	The smallest rectangle that completely contains both of the source rectangles.
-
 public func union(rect1: C4Rect, rect2: C4Rect) -> C4Rect {
     return C4Rect(CGRectUnion(CGRect(rect1), CGRect(rect2)))
 }
@@ -290,8 +289,7 @@ public func union(rect1: C4Rect, rect2: C4Rect) -> C4Rect {
 /// intersection(r1,r2) //-> {5,5,5,5}
 /// ````
 ///
-/// - parameter rect:	The source rectangle.
-///
+/// - parameter r:	The source rectangle.
 /// - returns: A rectangle with the smallest integer values for its origin and size that contains the source rectangle.
 public func integral(r: C4Rect) -> C4Rect {
     return C4Rect(CGRectIntegral(CGRect(r)))
@@ -304,8 +302,7 @@ public func integral(r: C4Rect) -> C4Rect {
 /// integral(r) //-> {0,0,11,11}
 /// ````
 ///
-/// - parameter rect:	The source rectangle.
-///
+/// - parameter r:	The source rectangle.
 /// - returns:	A rectangle that represents the source rectangle, but with positive width and height values.
 public func standardize(r: C4Rect) -> C4Rect {
     return C4Rect(CGRectStandardize(CGRect(r)))
@@ -318,10 +315,9 @@ public func standardize(r: C4Rect) -> C4Rect {
 /// inset(r, 1, 1) //-> {1,1,8,8}
 /// ````
 ///
-/// - parameter rect:	The source C4Rect structure.
+/// - parameter r:	The source C4Rect structure.
 /// - parameter dx:	The x-coordinate value to use for adjusting the source rectangle.
 /// - parameter dy:	The y-coordinate value to use for adjusting the source rectangle.
-///
 /// - returns:	A rectangle.
 public func inset(r: C4Rect, dx: Double, dy: Double) -> C4Rect {
     return C4Rect(CGRectInset(CGRect(r), CGFloat(dx), CGFloat(dy)))

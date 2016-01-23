@@ -40,6 +40,8 @@ public class C4Font: NSObject {
     /// ````
     /// let f = C4Font("Helvetica", 20)
     /// ````
+    /// - parameter name: The name of the font.
+    /// - parameter size: The point-size of the font.
     public init?(name: String, size: Double) {
         super.init()
         guard let font = UIFont(name: name, size: CGFloat(size)) else {
@@ -53,6 +55,7 @@ public class C4Font: NSObject {
     /// ````
     /// let f = C4Font("Helvetica")
     /// ````
+    /// - parameter name: The name of the font
     public convenience init?(name: String) {
         self.init(name: name, size: 12.0)
     }
@@ -64,6 +67,7 @@ public class C4Font: NSObject {
     ///     let f = C4Font(font: uif)
     /// }
     /// ````
+    /// - parameter font: A UIFont
     public init(font: UIFont) {
         internalFont = font
     }

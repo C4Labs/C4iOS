@@ -59,7 +59,6 @@ public class C4Shape: C4View {
         shapeLayer.contents = image
     }
 
-
     /// Initializest a new C4Shape from a specified C4Path.
     ///
     /// - parameter path: A C4Path around which the new shape is created with the frame of the new shape fitting the path on
@@ -74,6 +73,9 @@ public class C4Shape: C4View {
         adjustToFitPath()
     }
 
+    /// Initializest a new C4Shape from the properties of another C4Shape. Essentially, this copies the provided shape.
+    ///
+    /// - parameter shape: A C4Shape around which the new shape is created.
     public convenience init(_ shape: C4Shape) {
         self.init()
         let disable = C4ShapeLayer.disableActions
@@ -96,6 +98,7 @@ public class C4Shape: C4View {
         C4ShapeLayer.disableActions = disable
     }
 
+    ///An optional variable representing a gradient. If this is non-nil, then the shape will appear to be filled with a gradient.
     public var gradientFill: C4Gradient? {
         didSet {
             if let fill = gradientFill {
@@ -146,14 +149,12 @@ public class C4Shape: C4View {
         }
     }
 
-
     /// The line width used when stroking the path. Defaults to 1.0. Animatable.
     @IBInspectable
     public var lineWidth: Double {
         get { return Double(shapeLayer.lineWidth) }
         set(width) { shapeLayer.lineWidth = CGFloat(width) }
     }
-
 
     /// The color to stroke the path, or nil for no fill. Defaults to opaque black. Animatable.
     public var strokeColor: C4Color? {
@@ -168,7 +169,6 @@ public class C4Shape: C4View {
             shapeLayer.strokeColor = color?.CGColor
         }
     }
-
 
     /// The color to fill the path, or nil for no fill. Defaults to opaque black. Animatable.
     public var fillColor: C4Color? {
@@ -186,7 +186,6 @@ public class C4Shape: C4View {
             }
         }
     }
-
 
     /// The fill rule used when filling the path. Defaults to `NonZero`.
     public var fillRule: FillRule {
@@ -210,7 +209,6 @@ public class C4Shape: C4View {
         }
     }
 
-
     /// This value defines the start of the path used to draw the stroked outline. The value must be in the range [0,1]
     /// with zero representing the start of the path and one the end. Values in between zero and one are interpolated
     /// linearly along the path length. Defaults to zero. Animatable.
@@ -218,9 +216,6 @@ public class C4Shape: C4View {
         get { return Double(shapeLayer.strokeStart) }
         set(start) { shapeLayer.strokeStart = CGFloat(start) }
     }
-
-
-
 
     /// This value defines the end of the path used to draw the stroked outline. The value must be in the range [0,1]
     /// with zero representing the start of the path and one the end. Values in between zero and one are interpolated
@@ -230,16 +225,12 @@ public class C4Shape: C4View {
         set(end) { shapeLayer.strokeEnd = CGFloat(end) }
     }
 
-
-
-
     /// The miter limit used when stroking the path. Defaults to ten. Animatable.
     @IBInspectable
     public var miterLimit: Double {
         get { return Double(shapeLayer.miterLimit) }
         set(miterLimit) { shapeLayer.miterLimit = CGFloat(miterLimit) }
     }
-
 
     /// The cap style used when stroking the path. Defaults to `Butt`.
     public var lineCap: LineCap {
@@ -267,7 +258,6 @@ public class C4Shape: C4View {
         }
     }
 
-
     /// The join style used when stroking the path. Defaults to `Miter`.
     public var lineJoin: LineJoin {
         get {
@@ -294,7 +284,6 @@ public class C4Shape: C4View {
         }
     }
 
-
     /// The phase of the dashing pattern applied when creating the stroke. Defaults to zero. Animatable.
     public var lineDashPhase: Double {
         get { return Double(shapeLayer.lineDashPhase) }
@@ -308,8 +297,8 @@ public class C4Shape: C4View {
         set(pattern) { shapeLayer.lineDashPattern = pattern }
     }
 
-
     /// The size of the receiver including the width of its stroke.
+    /// - returns: The bounding box that surrounds the shape and its line.
     public func intrinsicContentSize() -> CGSize {
         if let path = path {
             let boundingBox = path.boundingBox()
@@ -318,9 +307,6 @@ public class C4Shape: C4View {
             return CGSize()
         }
     }
-
-
-
 
     /// Returns true if there is no path.
     public func isEmpty() -> Bool {

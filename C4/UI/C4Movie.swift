@@ -109,7 +109,7 @@ public class C4Movie: C4View {
 
     /// Initializes a new C4Movie using the specified filename from the bundle (i.e. your project).
     ///
-    /// - parameter name:	The name of the movie file included in your project.
+    /// - parameter filename:	The name of the movie file included in your project.
     public convenience init?(_ filename: String) {
         guard let url = NSBundle.mainBundle().URLForResource(filename, withExtension: nil) else {
             return nil
@@ -184,15 +184,18 @@ public class C4Movie: C4View {
         p.pause()
     }
 
-    /// Called at the end of playback (i.e. when the movie reaches its end).
+    /// The action to perform at the end of playback.
     ///
-    /// You can override this function to add your own custom actions.
-    ///
-    /// Default behaviour: if the movie should loop then the method calls `stop()` and `play()`.
+    /// - parameter action: A block of code to execute at the end of playback.
     public func reachedEnd(action: ()->()) {
         reachedEndAction = action
     }
 
+    /// Called at the end of playback (i.e. when the movie reaches its end).
+    ///
+    /// You can override this function to add your own custom actions.
+    ///
+    /// By default, the movie should loop then the method calls `stop()` and `play()`.
     func handleReachedEnd() {
         if self.loops {
             self.stop()

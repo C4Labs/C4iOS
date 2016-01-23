@@ -20,12 +20,25 @@
 import Foundation
 import UIKit
 
+///A structure representing the characteristics of spring motion.
 public struct Spring {
+    /// The mass of the object attached to the end of the spring. Must be greater than 0. Defaults to one.
     public var mass: Double
+    /// The spring stiffness coefficient. Must be greater than 0. Defaults to 100.
     public var stiffness: Double
+    /// The damping coefficient. Must be greater than or equal to 0. Defaults to 10.
     public var damping: Double
+    /// The initial velocity of the object attached to the spring. 
+    /// Defaults to zero, which represents an unmoving object. 
+    /// Negative values represent the object moving away from the spring attachment point,
+    /// positive values represent the object moving towards the spring attachment point.
     public var initialVelocity: Double
 
+    /// Initializes a new Spring structure
+    /// - parameter mass: The mass for the object
+    /// - parameter stiffness: The stiffness of the spring
+    /// - parameter damping: The damping coefficient used to calculate the motion of the object
+    /// - parameter initialVelocity: The initial velocity for the object
     public init(mass: Double = 1.0, stiffness: Double = 100.0, damping: Double = 10.0, initialVelocity: Double = 1.0) {
         self.mass = mass
         self.stiffness = stiffness
@@ -36,7 +49,8 @@ public struct Spring {
 
 /// C4ViewAnimation is a concrete subclass of C4Animation whose execution blocks affect properties of view-based objects.
 public class C4ViewAnimation: C4Animation {
-
+    /// An optional Spring structure.
+    /// If this value is non-nil, property animations will default to CASpringAnimation if they are able.
     public var spring: Spring?
 
     /// The amount of time to way before executing the animation.
@@ -76,6 +90,8 @@ public class C4ViewAnimation: C4Animation {
         self.duration = duration
     }
 
+    /// This timingFunction represents one segment of a function that defines the pacing of an animation as a timing curve. The function maps an input time normalized to the range [0,1] to an output time also in the range [0,1].
+    /// Options are `Linear`, `EaseOut`, `EaseIn`, `EaseInOut`
     public var timingFunction: CAMediaTimingFunction {
         switch curve {
         case .Linear:
@@ -89,6 +105,7 @@ public class C4ViewAnimation: C4Animation {
         }
     }
 
+    ///Options for animating views using block objects.
     public var options: UIViewAnimationOptions {
         var options: UIViewAnimationOptions = [UIViewAnimationOptions.BeginFromCurrentState]
         switch curve {
@@ -181,6 +198,7 @@ public class C4ViewAnimationSequence: C4Animation {
     ///     seq.animate()
     /// }
     /// ````
+    /// - parameter animations: An array of C4Animations
     public init(animations: [C4Animation]) {
         self.animations = animations
     }
@@ -245,6 +263,7 @@ public class C4ViewAnimationGroup: C4Animation {
     ///     grp.animate()
     /// }
     /// ````
+    /// - parameter animations: An array of C4Animations
     public init(animations: [C4Animation]) {
         self.animations = animations
         completed = [Bool](count: animations.count, repeatedValue: false)

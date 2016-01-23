@@ -29,6 +29,7 @@ public class C4StoredAnimation: C4Animation {
     public var values = [String: AnyObject]()
 
     /// Initiates the changes specified in the receivers `animations` block.
+    /// - parameter object: An object to which the animations apply
     public func animate(object: NSObject) {
         let disable = C4ShapeLayer.disableActions
         C4ShapeLayer.disableActions = false

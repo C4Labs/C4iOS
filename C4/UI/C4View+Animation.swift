@@ -22,6 +22,9 @@ import UIKit
 
 /// Extension to C4View that handles animating of basic properties.
 public extension C4View {
+    /// Internal function for creating a basic animation and applying that to the receiver.
+    /// - parameter keyPath: The identifier to animate
+    /// - parameter toValue: The value to which the identifier will be animated
     internal func animateKeyPath(keyPath: String, toValue: AnyObject) {
         let anim = CABasicAnimation()
         anim.duration = 0.25
@@ -33,7 +36,7 @@ public extension C4View {
         view.layer.setValue(toValue, forKeyPath: keyPath)
     }
 
-    /// Class level function that executes an animation using a specified block of code.
+    /// A class-level function that executes an animation using a specified block of code.
     ///
     /// - parameter duration: The length of time in seconds for the animation to execute.
     /// - parameter animations: A block of code with specified animations to execute.
@@ -41,17 +44,17 @@ public extension C4View {
         UIView.animateWithDuration(duration, animations: animations)
     }
 
-    /// Class level function that executes an animation using a specified block of code.
+    /// A class-level function that executes an animation using a specified block of code, with parameters for delaying and completion.
     ///
-    /// - parameter duration: The length of time in seconds for the animation to execute.
-    /// - parameter delay: The length of time in seconds to wait before executing the specified block of code.
-    /// - parameter animations: A block of code with specified animations to execute.
+    /// - parameter duration:   The length of time in seconds for the animation to execute.
+    /// - parameter delay:      The length of time in seconds to wait before executing the specified block of code.
     /// - parameter completion: A block of code to execute when the animation completes.
+    /// - parameter animations: A block of code with specified animations to execute.
     public class func animate(duration duration: Double, delay: Double, animations: () -> Void, completion: (Bool -> Void)?) {
         UIView.animateWithDuration(duration, animations: animations, completion: completion)
     }
-
-    /// Class level function that executes an animation using a specified block of code.
+    
+    /// A class-level function that executes an animation using a specified block of code, with parameters for delaying, completion and animation options.
     ///
     /// - parameter duration: The length of time in seconds for the animation to execute.
     /// - parameter delay: The length of time in seconds to wait before executing the specified block of code.

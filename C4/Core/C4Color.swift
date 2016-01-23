@@ -284,7 +284,6 @@ public extension UIColor {
     /// Initializes a UIColor object from a C4Color object.
     ///
     /// - parameter color: The C4 color object.
-    /// - returns: A UIColor whose characteristics match the specified C4Color
     public convenience init?(_ color: C4Color) {
         self.init(CGColor: color.CGColor)
     }
@@ -294,7 +293,6 @@ public extension CIColor {
     /// Initializes a CIColor object from a C4Color object.
     ///
     /// - parameter color: The C4 color object.
-    /// - returns: A CIColor whose characteristics match the specified C4Color.
     public convenience init(_ color: C4Color) {
         self.init(CGColor: color.CGColor)
     }

@@ -198,8 +198,6 @@ public struct C4Transform: Equatable {
     /// - parameter sx: The amount to scale in the `x` axis
     /// - parameter sy: The amount to scale in the `y` axis
     /// - parameter sz: The amount to scale in the `z` axis
-    ///
-    /// - returns: A `C4Transform` that can be used to rotate a receiver.
     public mutating func scale(sx: Double, _ sy: Double, _ sz: Double = 1) {
         let s = C4Transform.makeScale(sx, sy, sz)
         self = concat(self, t2: s)
@@ -259,6 +257,9 @@ public struct C4Transform: Equatable {
 }
 
 /// Returns true if the two source C4Transform structs share identical dimensions
+/// - parameter lhs: The first transform to compare
+/// - parameter rhs: The second transform to compare
+/// - returns: A boolean, `true` if the both transforms are equal
 public func == (lhs: C4Transform, rhs: C4Transform) -> Bool {
     var equal = true
     for col in 0...3 {
@@ -270,6 +271,9 @@ public func == (lhs: C4Transform, rhs: C4Transform) -> Bool {
 }
 
 /// Transform matrix multiplication
+/// - parameter lhs: The first transform to multiply
+/// - parameter rhs: The second transform to multiply
+/// - returns: A new transform that is the result of multiplying `lhs` and `rhs`
 public func * (lhs: C4Transform, rhs: C4Transform) -> C4Transform {
     var t = C4Transform()
     for col in 0...3 {
@@ -281,6 +285,9 @@ public func * (lhs: C4Transform, rhs: C4Transform) -> C4Transform {
 }
 
 /// Transform matrix scalar multiplication
+/// - parameter t: The transform to scale
+/// - parameter s: A scalar value to apply to the transform
+/// - returns: A new trasform whose values are the scalar multiple of `t`
 public func * (t: C4Transform, s: Double) -> C4Transform {
     var r = C4Transform()
     for col in 0...3 {
@@ -293,17 +300,25 @@ public func * (t: C4Transform, s: Double) -> C4Transform {
 
 
 /// Transform matrix scalar multiplication
+/// - parameter s: A scalar value to apply to the transform
+/// - parameter t: The transform to scale
+/// - returns: A new trasform whose values are the scalar multiple of `t`
 public func * (s: Double, t: C4Transform) -> C4Transform {
     return t * s
 }
 
 
 /// Concatenate two transformations. This is the same as t2 * t1.
+/// - parameter t1: The first transform to contatenate
+/// - parameter t2: The second transform to contatenate
+/// - returns: A new transform that is the contcatenation of `t1` and `t2`
 public func concat(t1: C4Transform, t2: C4Transform) -> C4Transform {
     return t2 * t1
 }
 
 /// Calculates the inverse of a transfomation.
+/// - parameter t: The transform to invert
+/// - returns: A new transform that is the inverse of `t`
 public func inverse(t: C4Transform) -> C4Transform? {
     var N: __CLPK_integer = 4
     var error: __CLPK_integer = 0

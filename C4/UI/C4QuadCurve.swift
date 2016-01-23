@@ -37,9 +37,9 @@ public class C4QuadCurve: C4Curve {
     /// canvas.add(curve)
     /// ````
     ///
-    /// - parameter a: The beginning point of the curve.
-    /// - parameter b: A single C4Point used to calculate the shape of the curve.
-    /// - parameter c: The end point of the curve.
+    /// - parameter begin: The beginning point of the curve.
+    /// - parameter control: A single C4Point used to calculate the shape of the curve.
+    /// - parameter end: The end point of the curve.
     convenience public init(begin: C4Point, control: C4Point, end: C4Point) {
         self.init(begin: begin, control0: control, control1: control, end: end)
     }

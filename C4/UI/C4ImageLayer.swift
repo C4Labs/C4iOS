@@ -19,10 +19,13 @@
 
 import QuartzCore
 
+///Subclass of CALayer that handles animating its contents.
 public class C4ImageLayer: CALayer {
-    ///  Configures basic options for a CABasicAnimation.
+    /// Configures basic options for a CABasicAnimation.
     ///
-    ///  The options set in this method are favorable for the inner workings of C4's animation behaviours.
+    /// The options set in this method are favorable for the inner workings of C4's animation behaviours.
+    /// - parameter key: The identifier of the action.
+    /// - returns: The object that provides the action for key.
     public override func actionForKey(key: String) -> CAAction? {
         if C4ShapeLayer.disableActions == true {
             return nil

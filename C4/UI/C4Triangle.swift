@@ -35,7 +35,8 @@ public class C4Triangle: C4Polygon {
         self.close()
     }
 
-    ///Returns an object initialized from data in a given unarchiver.
+    /// Initializes a new C4Polygon from data in a given unarchiver.
+    /// - parameter coder: An unarchiver object.
     required public init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

@@ -80,6 +80,7 @@ public class C4Polygon: C4Shape {
     }
 
     /// Initializes a new C4Polygon from data in a given unarchiver.
+    /// - parameter coder: An unarchiver object.
     required public init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

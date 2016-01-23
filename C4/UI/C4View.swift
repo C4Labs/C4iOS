@@ -20,39 +20,49 @@
 import UIKit
 
 extension NSValue {
-    ///  Initializes an NSValue with a C4Point
+    /// Initializes an NSValue with a C4Point
     ///
-    ///  - parameter point: a C4Point
+    /// - parameter point: a C4Point
     convenience init(C4Point point: C4Point) {
         self.init(CGPoint: CGPoint(point))
     }
 }
 
+/// A subclass of CALayer that has a rotation property.
 public class C4Layer: CALayer {
     static let rotationKey = "rotation"
 
     private var _rotation = 0.0
 
+    /// The value of the receiver's current rotation state.
+    /// This value is cumulative, and can represent values beyong +/- π
     public dynamic var rotation: Double {
         return _rotation
     }
 
+    /// Initializes a new C4Layer
     public override init() {
         super.init()
     }
 
-
-public override init(layer: AnyObject) {
+    /// Initializes a new C4Layer from a specified layer of any other type.
+    /// - parameter layer: Another CALayer
+    public override init(layer: AnyObject) {
         super.init(layer: layer)
         if let layer = layer as? C4Layer {
             _rotation = layer._rotation
         }
     }
 
+    /// Initializes a new C4Layer from data in a given unarchiver.
+    /// - parameter coder: An unarchiver object.
     public required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
 
+    /// Sets a value for a given key.
+    /// - parameter value: The value for the property identified by key.
+    /// - parameter key: The name of one of the receiver's properties
     public override func setValue(value: AnyObject?, forKey key: String) {
         super.setValue(value, forKey: key)
         if key == C4Layer.rotationKey {
@@ -60,6 +70,10 @@ public override init(layer: AnyObject) {
         }
     }
 
+    ///  This method searches for the given action object of the layer. Actions define dynamic behaviors for a layer. For example, the animatable properties of a layer typically have corresponding action objects to initiate the actual animations. When that property changes, the layer looks for the action object associated with the property name and executes it. You can also associate custom action objects with your layer to implement app-specific actions.
+    ///
+    ///  - parameter key: The identifier of the action.
+    ///  - returns: the action object assigned to the specified key.
     public override func actionForKey(key: String) -> CAAction? {
         if key == C4Layer.rotationKey {
             let animation = CABasicAnimation(keyPath: key)
@@ -72,6 +86,9 @@ public override init(layer: AnyObject) {
         return super.actionForKey(key)
     }
 
+    /// Returns a Boolean indicating whether changes to the specified key require the layer to be redisplayed.
+    /// - parameter key: A string that specifies an attribute of the layer.
+    /// - returns: A Boolean indicating whether changes to the specified key require the layer to be redisplayed.
     public override class func needsDisplayForKey(key: String) -> Bool {
         if  key == C4Layer.rotationKey {
             return true
@@ -79,6 +96,8 @@ public override init(layer: AnyObject) {
         return super.needsDisplayForKey(key)
     }
 
+    /// Reloads the content of this layer.
+    /// Do not call this method directly.
     public override func display() {
         guard let presentation = presentationLayer() as? C4Layer else {
             return
@@ -107,6 +126,7 @@ public class C4View: NSObject {
         }
     }
 
+    /// The view that contains the receiver's animatable layer.
     internal var layerView: LayerView {
         return self.view as! LayerView // swiftlint:disable:this force_cast
     }
@@ -132,16 +152,14 @@ public class C4View: NSObject {
     public override init() {
     }
 
-
-/// Initializes a new C4View from a UIView.
+    /// Initializes a new C4View from a UIView.
     ///
     /// - parameter view: A UIView.
     public init(view: UIView) {
         self.view = view
     }
 
-
-/// Initializes a new C4View with the specifed frame.
+    /// Initializes a new C4View with the specifed frame.
     ///
     /// ````
     /// let f = C4Rect(0,0,100,100)
@@ -155,16 +173,14 @@ public class C4View: NSObject {
         self.view.frame = CGRect(frame)
     }
 
-
-/// Returns the receiver's layer.
+    /// Returns the receiver's layer.
     public dynamic var layer: CALayer? {
         get {
             return view.layer
         }
     }
 
-
-/// Returns the receiver's frame. Animatable.
+    /// Returns the receiver's frame. Animatable.
     public var frame: C4Rect {
         get {
             return C4Rect(view.frame)
@@ -174,8 +190,7 @@ public class C4View: NSObject {
         }
     }
 
-
-/// Returns the receiver's bounds. Animatable.
+    /// Returns the receiver's bounds. Animatable.
     public var bounds: C4Rect {
         get {
             return C4Rect(view.bounds)
@@ -195,8 +210,7 @@ public class C4View: NSObject {
         }
     }
 
-
-/// Returns the receiver's center point. Animatable.
+    /// Returns the receiver's center point. Animatable.
     public var center: C4Point {
         get {
             return C4Point(view.center)
@@ -206,8 +220,7 @@ public class C4View: NSObject {
         }
     }
 
-
-/// Returns the receiver's origin. Animatable.
+    /// Returns the receiver's origin. Animatable.
     public var origin: C4Point {
         get {
             return center - C4Vector(x: size.width/2, y: size.height/2)
@@ -217,8 +230,7 @@ public class C4View: NSObject {
         }
     }
 
-
-/// Returns the receiver's frame size. Animatable.
+    /// Returns the receiver's frame size. Animatable.
     public var size: C4Size {
         get {
             return bounds.size
@@ -228,17 +240,15 @@ public class C4View: NSObject {
         }
     }
 
-
-/// Returns the receiver's frame width. Animatable.
+    /// Returns the receiver's frame width. Animatable.
     public dynamic var width: Double {
         get {
             return Double(bounds.size.width)
         }
     }
 
-
-/// Returns the receiver's frame height. Animatable.
-   public dynamic var height: Double {
+    /// Returns the receiver's frame height. Animatable.
+    public dynamic var height: Double {
         get {
             return Double(bounds.size.height)
         }
@@ -262,8 +272,7 @@ public class C4View: NSObject {
         }
     }
 
-
-/// Returns the receiver's opacity. Animatable.
+    /// Returns the receiver's opacity. Animatable.
     public dynamic var opacity: Double {
         get {
             return Double(view.alpha)
@@ -273,8 +282,7 @@ public class C4View: NSObject {
         }
     }
 
-
-/// Returns true if the receiver is hidden, false if visible.
+    /// Returns true if the receiver is hidden, false if visible.
     public var hidden: Bool {
         get {
             return view.hidden
@@ -284,8 +292,7 @@ public class C4View: NSObject {
         }
     }
 
-
-/// Returns the receiver's current transform.
+    /// Returns the receiver's current transform.
     public var transform: C4Transform {
         get {
             return C4Transform(view.layer.transform)
@@ -295,8 +302,7 @@ public class C4View: NSObject {
         }
     }
 
-
-/// Defines the anchor point of the layer's bounds rect, as a point in
+    /// Defines the anchor point of the layer's bounds rect, as a point in
     /// normalized layer coordinates - '(0, 0)' is the bottom left corner of
     /// the bounds rect, '(1, 1)' is the top right corner. Defaults to
     /// '(0.5, 0.5)', i.e. the center of the bounds rect. Animatable.
@@ -341,16 +347,14 @@ public class C4View: NSObject {
 
     //MARK: - Touchable
 
-
-/// Returns true if the receiver accepts touch events.
+    /// Returns true if the receiver accepts touch events.
     public var interactionEnabled: Bool = true {
         didSet {
             self.view.userInteractionEnabled = interactionEnabled
         }
     }
 
-
-/// Adds a tap gesture recognizer to the receiver's view.
+    /// Adds a tap gesture recognizer to the receiver's view.
     ///
     /// ````
     /// let f = C4Rect(0,0,100,100)
@@ -369,8 +373,7 @@ public class C4View: NSObject {
         return gestureRecognizer
     }
 
-
-/// Adds a pan gesture recognizer to the receiver's view.
+    /// Adds a pan gesture recognizer to the receiver's view.
     ///
     /// ````
     /// let f = C4Rect(0,0,100,100)
@@ -388,8 +391,7 @@ public class C4View: NSObject {
         return gestureRecognizer
     }
 
-
-/// Adds a pinch gesture recognizer to the receiver's view.
+    /// Adds a pinch gesture recognizer to the receiver's view.
     ///
     /// ````
     /// let f = C4Rect(0,0,100,100)
@@ -407,8 +409,7 @@ public class C4View: NSObject {
         return gestureRecognizer
     }
 
-
-/// Adds a rotation gesture recognizer to the receiver's view.
+    /// Adds a rotation gesture recognizer to the receiver's view.
     ///
     /// ````
     /// let f = C4Rect(0,0,100,100)
@@ -427,8 +428,7 @@ public class C4View: NSObject {
         return gestureRecognizer
     }
 
-
-/// Adds a longpress gesture recognizer to the receiver's view.
+    /// Adds a longpress gesture recognizer to the receiver's view.
     ///
     /// ````
     /// let f = C4Rect(0,0,100,100)
@@ -446,8 +446,7 @@ public class C4View: NSObject {
         return gestureRecognizer
     }
 
-
-/// Adds a swipe gesture recognizer to the receiver's view.
+    /// Adds a swipe gesture recognizer to the receiver's view.
     ///
     /// ````
     /// let f = C4Rect(0,0,100,100)
@@ -466,8 +465,7 @@ public class C4View: NSObject {
         return gestureRecognizer
     }
 
-
-/// Adds a screen edge pan gesture recognizer to the receiver's view.
+    /// Adds a screen edge pan gesture recognizer to the receiver's view.
     ///
     /// ````
     /// let v = C4View(frame: canvas.bounds)
@@ -484,11 +482,9 @@ public class C4View: NSObject {
         return gestureRecognizer
     }
 
+    //MARK: - AddRemoveSubview
 
-//MARK: - AddRemoveSubview
-
-
-/// Adds a view to the end of the receiver’s list of subviews.
+    /// Adds a view to the end of the receiver’s list of subviews.
     ///
     /// When working with C4, use this method to add views because it handles the addition of both UIView and C4View.
     ///
@@ -497,7 +493,7 @@ public class C4View: NSObject {
     /// let subv = C4View(frame: C4Rect(25,25,50,50))
     /// v.add(subv)
     /// ````
-    /// - parameter view:	The view to be added.
+    /// - parameter subview: The view to be added.
     public func add<T>(subview: T?) {
         if let v = subview as? UIView {
             view.addSubview(v)
@@ -509,10 +505,10 @@ public class C4View: NSObject {
     }
 
 
-//MARK: - AddRemoveSubview
+    //MARK: - AddRemoveSubview
 
 
-/// Adds an array of views to the end of the receiver’s list of subviews.
+    /// Adds an array of views to the end of the receiver’s list of subviews.
     ///
     /// When working with C4, use this method to add views because it handles the addition of both UIView and C4View.
     ///
@@ -523,7 +519,7 @@ public class C4View: NSObject {
     /// v.add([subv1,subv2])
     /// ````
     ///
-    /// - parameter view:	The view to be added.
+    /// - parameter subviews:	An array of UIView or C4View objects to be added to the receiver.
     public func add<T>(subviews: [T?]) {
         for subv in subviews {
             self.add(subv)
@@ -531,7 +527,7 @@ public class C4View: NSObject {
     }
 
 
-/// Unlinks the view from the receiver and its window, and removes it from the responder chain.
+    /// Unlinks the view from the receiver and its window, and removes it from the responder chain.
     ///
     /// Calling this method removes any constraints that refer to the view you are removing, or that refer to any view in the
     /// subtree of the view you are removing.
@@ -545,7 +541,7 @@ public class C4View: NSObject {
     /// v.remove(subv)
     /// ````
     ///
-    /// - parameter view:	The view to be removed.
+    /// - parameter subview:	The view to be removed.
     public func remove<T>(subview: T?) {
         if let v = subview as? UIView {
             v.removeFromSuperview()
@@ -557,7 +553,7 @@ public class C4View: NSObject {
     }
 
 
-/// Unlinks the view from its superview and its window, and removes it from the responder chain.
+    /// Unlinks the view from its superview and its window, and removes it from the responder chain.
     ///
     /// If the view’s superview is not nil, the superview releases the view.
     ///
@@ -575,9 +571,9 @@ public class C4View: NSObject {
     }
 
 
-/// Moves the specified subview so that it appears behind its siblings.
+    /// Moves the specified subview so that it appears behind its siblings.
     ///
-    /// - parameter view: The subview to move to the back.
+    /// - parameter subview: The subview to move to the back.
     public func sendToBack<T>(subview: T?) {
         if let v = subview as? UIView {
             view.sendSubviewToBack(v)
@@ -588,10 +584,9 @@ public class C4View: NSObject {
         }
     }
 
-
-/// Moves the specified subview so that it appears on top of its siblings.
+    /// Moves the specified subview so that it appears on top of its siblings.
     ///
-    /// - parameter view: The subview to move to the front.
+    /// - parameter subview: The subview to move to the front.
     public func bringToFront<T>(subview: T?) {
         if let v = subview as? UIView {
             view.bringSubviewToFront(v)
@@ -602,9 +597,7 @@ public class C4View: NSObject {
         }
     }
 
-
-//MARK: - HitTest
-
+    //MARK: - HitTest
 
     /// Checks if a specified point falls within the bounds of the current object.
     ///
@@ -638,13 +631,15 @@ public class C4View: NSObject {
     /// }
     /// ````
     ///
+    /// - parameter point: The point to check
+    /// - parameter from: The view whose coordinate system the point is to be converted from
     /// - returns: `true` if the point is within the object's frame, otherwise `false`.
     public func hitTest(point: C4Point, from: C4View) -> Bool {
         let p = convert(point, from:from)
         return hitTest(p)
     }
 
-//MARK: – Convert
+    //MARK: – Convert
 
     /// Converts a specified point from a given view's coordinate system to that of the receiver.
     ///
@@ -653,6 +648,8 @@ public class C4View: NSObject {
     /// let cp = aView.convert(p, from:canvas)
     /// ````
     ///
+    /// - parameter point: The point to convert
+    /// - parameter from: The view whose coordinate system the point is to be converted from
     /// - returns: A `C4Point` whose values have been translated into the receiver's coordinate system.
     public func convert(point: C4Point, from: C4View) -> C4Point {
         return C4Point(view.convertPoint(CGPoint(point), fromCoordinateSpace: from.view))
@@ -661,11 +658,13 @@ public class C4View: NSObject {
     //MARK: - Positioning
 
     /// Moves the receiver so that it appears on top of the specified view.
+    /// - parameter view: The view above which the receive will be positioned
     public func positionAbove(view: C4View) {
         zPosition = view.zPosition + 1
     }
 
     /// Moves the receiver so that it appears on below of the specified view.
+    /// - parameter view: The view below which the receive will be positioned
     public func positionBelow(view: C4View) {
         zPosition = view.zPosition - 1
     }
@@ -675,12 +674,11 @@ public class C4View: NSObject {
 /// Extension to UIView that adds handling addition and removal of C4View objects.
 extension UIView {
 
-
-/// Adds a view to the end of the receiver’s list of subviews.
+    /// Adds a view to the end of the receiver’s list of subviews.
     ///
     /// When working with C4, use this method to add views because it handles the addition of both UIView and C4View.
     ///
-    /// - parameter view:	The view to be added.
+    /// - parameter subview:	The view to be added.
     public func add<T>(subview: T?) {
         if let v = subview as? UIView {
             self.addSubview(v)
@@ -691,8 +689,7 @@ extension UIView {
         }
     }
 
-
-//MARK: - AddRemoveSubview
+    //MARK: - AddRemoveSubview
 
     /// Adds an array of views to the end of the receiver’s list of subviews.
     ///
@@ -705,13 +702,12 @@ extension UIView {
     /// v.add([subv1,subv2])
     /// ````
     ///
-    /// - parameter view:	The view to be added.
+    /// - parameter subviews: An array of UIView or C4View subclasses to be added to the receiver
     public func add<T>(subviews: [T?]) {
         for subv in subviews {
             self.add(subv)
         }
     }
-
 
     /// Unlinks the view from the receiver and its window, and removes it from the responder chain.
     ///
@@ -720,7 +716,7 @@ extension UIView {
     ///
     /// When working with C4, use this method to remove views because it handles the removal of both UIView and C4View.
     ///
-    /// - parameter view:	The view to be removed.
+    /// - parameter subview: The view to be removed.
     public func remove<T>(subview: T?) {
         if let v = subview as? UIView {
             v.removeFromSuperview()
@@ -731,12 +727,11 @@ extension UIView {
         }
     }
 
-
     /// Moves the specified subview so that it appears behind its siblings.
     ///
     /// When working with C4, use this method because it handles both UIView and C4View.
     ///
-    /// - parameter view: The subview to move to the back.
+    /// - parameter subview: The subview to move to the back.
     public func sendToBack<T>(subview: T?) {
         if let v = subview as? UIView {
             self.sendSubviewToBack(v)
@@ -751,7 +746,7 @@ extension UIView {
     ///
     /// When working with C4, use this method because it handles both UIView and C4View.
     ///
-    /// - parameter view: The subview to move to the front.
+    /// - parameter subview: The subview to move to the front.
     public func bringToFront<T>(subview: T?) {
         if let v = subview as? UIView {
             self.bringSubviewToFront(v)

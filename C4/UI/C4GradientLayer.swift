@@ -29,7 +29,6 @@ public class C4GradientLayer: CAGradientLayer {
     ///  This method searches for the given action object of the layer. Actions define dynamic behaviors for a layer. For example, the animatable properties of a layer typically have corresponding action objects to initiate the actual animations. When that property changes, the layer looks for the action object associated with the property name and executes it. You can also associate custom action objects with your layer to implement app-specific actions.
     ///
     ///  - parameter key: The identifier of the action.
-    ///
     ///  - returns: the action object assigned to the specified key.
     public override func actionForKey(key: String) -> CAAction? {
         if C4ShapeLayer.disableActions == true {

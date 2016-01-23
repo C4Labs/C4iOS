@@ -190,7 +190,8 @@ public class C4Image: C4View, NSCopying {
     /// canvas.add(img)
     /// ````
     ///
-    /// - parameter uiimage: A CGImageRef object.
+    /// - parameter cgimage: A CGImageRef object.
+    /// - parameter scale: The scale of the image.
     convenience public init(cgimage: CGImageRef, scale: Double) {
         let image = UIImage(CGImage: cgimage)
         self.init(uiimage: image, scale: scale)
@@ -209,7 +210,8 @@ public class C4Image: C4View, NSCopying {
     ///
     /// Use this method if you're working with the output of a CIFilter.
     ///
-    /// - parameter uiimage: A CIImage object.
+    /// - parameter ciimage: A CIImage object.
+    /// - parameter scale: The scale of the image.
     convenience public init(ciimage: CIImage, scale: Double) {
         let image = UIImage(CIImage: ciimage)
         self.init(uiimage: image, scale: scale)
@@ -233,6 +235,7 @@ public class C4Image: C4View, NSCopying {
     /// See the body of init(url:) to see how to download an image as data.
     ///
     /// - parameter data: An NSData object.
+    /// - parameter scale: The scale of the image.
     convenience public init(data: NSData, scale: Double) {
         let image = UIImage(data: data)
         self.init(uiimage: image!, scale: scale)
@@ -262,6 +265,7 @@ public class C4Image: C4View, NSCopying {
     /// ````
     ///
     /// - parameter url: An NSURL object.
+    /// - parameter scale: The scale of the image.
     convenience public init(url: NSURL, scale: Double) {
         var error: NSError?
         var data: NSData?
@@ -285,7 +289,7 @@ public class C4Image: C4View, NSCopying {
     /// raw data to the initializer. This works if you're creating your own raw images by changing the values of individual
     /// pixels. Pixel data should be RGBA.
     ///
-    /// - parameter rawData: An array of raw pixel data.
+    /// - parameter pixels: An array of raw pixel data.
     /// - parameter size: The size {w, h} of the image you're creating based on the pixel array.
     convenience public init(pixels: [Pixel], size: C4Size) {
         let rgbColorSpace = CGColorSpaceCreateDeviceRGB()
@@ -319,11 +323,16 @@ public class C4Image: C4View, NSCopying {
         self.init(cgimage: cgim!)
     }
 
+    /// Initializes a new C4Image using another image.
+    /// - parameter c4image: An C4Image around which the new image is created.
     convenience public init(c4image: C4Image) {
         let cgim = c4image.cgimage
         self.init(cgimage: cgim)
     }
 
+    /// Initializes a new copy of the receiver.
+    /// - parameter zone: This parameter is ignored. Memory zones are no longer used by Objective-C.
+    /// - returns: a new instance that’s a copy of the receiver.
     public func copyWithZone(zone: NSZone) -> AnyObject {
         let uiimage = UIImage(CGImage: self.contents)
         let img = C4Image(uiimage: uiimage, scale: scale)

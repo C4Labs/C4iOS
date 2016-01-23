@@ -28,6 +28,7 @@ public final class C4Timer: NSObject {
     /// The time interval between firing.
     public internal(set) var interval: Double
     var action: () -> ()
+    /// The timer that the receiver manages
     weak var timer: NSTimer?
 
     ///  Initializes a new timer.

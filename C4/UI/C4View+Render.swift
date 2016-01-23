@@ -20,6 +20,8 @@
 import UIKit
 
 public extension C4View {
+    /// Creates a flattened image of the receiver and its subviews / layers.
+    /// - returns: A new C4Image
     public func render() -> C4Image? {
         guard let l = layer else {
             print("Could not retrieve layer for current object: \(self)")
@@ -35,6 +37,9 @@ public extension C4View {
 }
 
 public extension C4Shape {
+    /// Creates a flattened image of the receiver and its subviews / layers.
+    /// This override takes into consideration the lineWidth of the receiver.
+    /// - returns: A new C4Image
     public override func render() -> C4Image? {
         var s = CGSize(size)
         var inset: CGFloat = 0
