@@ -23,7 +23,7 @@ import UIKit
 public class C4Gradient: C4View {
     class GradientView: UIView {
         var gradientLayer: C4GradientLayer {
-            return self.layer as! C4GradientLayer
+            return self.layer as! C4GradientLayer // swiftlint:disable:this force_cast
         }
 
         override class func layerClass() -> AnyClass {
@@ -37,7 +37,7 @@ public class C4Gradient: C4View {
     }
 
     var gradientView: GradientView {
-        return view as! GradientView
+        return view as! GradientView // swiftlint:disable:this force_cast
     }
 
     ///An array of C4Color objects defining the color of each gradient stop. Animatable.
@@ -66,7 +66,10 @@ public class C4Gradient: C4View {
     ///Defaults to [0,1]
     public var locations: [Double] {
         get {
-            return gradientLayer.locations as! [Double]
+            if let locations = gradientLayer.locations as? [Double] {
+                return locations
+            }
+            return []
         } set {
             var numbers = [NSNumber]()
             for n in newValue {

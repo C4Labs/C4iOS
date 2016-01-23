@@ -59,9 +59,7 @@ public class C4Image: C4View, NSCopying {
 
     internal class ImageView: UIImageView {
         var imageLayer: C4ImageLayer {
-            get {
-                return self.layer as! C4ImageLayer
-            }
+            return self.layer as! C4ImageLayer // swiftlint:disable:this force_cast
         }
 
         override class func layerClass() -> AnyClass {
@@ -341,7 +339,7 @@ public class C4Image: C4View, NSCopying {
     ///
     /// - returns: A UIImageView object.
     internal var imageView: ImageView {
-        return self.view as! ImageView
+        return self.view as! ImageView // swiftlint:disable:this force_cast
     }
 
     /// Returns a UIImage representation of the receiver.
@@ -379,10 +377,10 @@ public class C4Image: C4View, NSCopying {
     /// If the layer object is tied to a view object, you should avoid setting the contents of this property directly. The
     /// interplay between views and layers usually results in the view replacing the contents of this property during a
     /// subsequent update.
-    public var contents: CGImageRef {
+    public var contents: CGImage {
         get {
             let layer = imageView.layer as CALayer
-            return layer.contents as! CGImageRef
+            return layer.contents as! CGImage // swiftlint:disable:this force_cast
         } set(val) {
             imageView.layer.contents = val
         }

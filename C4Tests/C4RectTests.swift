@@ -28,15 +28,15 @@ class C4RectTests: XCTestCase {
         XCTAssertTrue(a.intersects(b), "a and b intersect")
         XCTAssertFalse(a.intersects(c), "a and c do not intersect")
     }
-    
+
     func testCenter() {
         for _ in 1...10 {
             let val = Double(random(below:100))
-            let rect = C4Rect(0,0,val,val)
+            let rect = C4Rect(0, 0, val, val)
             XCTAssertEqual(rect.center, C4Point(val/2.0, val/2.0), "Center point should be half the width and height of the C4Rect")
         }
     }
-    
+
     func testMax() {
         for _ in 1...10 {
             let x = Double(random(below:100))
@@ -79,7 +79,7 @@ class C4RectTests: XCTestCase {
         func r() -> Double {
             return Double(random(below: 90) + 10)
         }
-        
+
         let a = C4Rect(0, 0, r(), r())
         let b = C4Rect(10, 10, r(), r())
         let c = intersection(a, rect2: b)
@@ -88,7 +88,7 @@ class C4RectTests: XCTestCase {
         let d = C4Rect(b.origin.x, b.origin.y, x - b.origin.x, y - b.origin.y)
         XCTAssertEqual(c, d, "C should be equal to D")
     }
-    
+
     func testUnion() {
         func r() -> Double {
             return Double(random(below: 100))
@@ -117,7 +117,7 @@ class C4RectTests: XCTestCase {
         let d = standardize(C4Rect(a, b))
         XCTAssertEqual(c, d, "C should equal D")
     }
-    
+
     func testInset() {
         func r() -> Double {
             return Double(random(below: 100))

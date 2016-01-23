@@ -108,12 +108,12 @@ public class C4View: NSObject {
     }
 
     internal var layerView: LayerView {
-        return self.view as! LayerView
+        return self.view as! LayerView // swiftlint:disable:this force_cast
     }
 
     internal class LayerView: UIView {
         var animatableLayer: C4Layer {
-            return self.layer as! C4Layer
+            return self.layer as! C4Layer // swiftlint:disable:this force_cast
         }
 
         override class func layerClass() -> AnyClass {

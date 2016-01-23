@@ -27,7 +27,7 @@ class C4VectorTests: XCTestCase {
         XCTAssertEqualWithAccuracy(unitVector.magnitude, 1, accuracy: 1e-15, "Magnitude of unit vector should be 1")
         XCTAssertEqual(unitVector.heading, vector.heading, "Heading of unit vector should be the same as the original")
     }
-    
+
     func testNilUnitVector() {
         let vector = C4Vector(x: 0, y: 0, z: 0)
         let unitVector = vector.unitVector()
@@ -39,7 +39,7 @@ class C4VectorTests: XCTestCase {
         let vectorB = C4Vector(x: 0, y: 1)
         XCTAssertEqualWithAccuracy(vectorA ⋅ vectorB, 0, accuracy: 1e-15, "Dot product of perpendicular vectors should be 0")
     }
-    
+
     func testAngleTo() {
         let vectorA = C4Vector(x: 2, y: 0)
         let vectorB = C4Vector(x: 1, y: 1)
@@ -63,7 +63,7 @@ class C4VectorTests: XCTestCase {
             XCTAssertEqual(vector.x, 1.0, "Vector should equal 1")
         }
     }
-    
+
     func testMultiplyScalar() {
         for i in 10...1000 {
             let val = Double(i)

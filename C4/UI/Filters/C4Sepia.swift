@@ -39,7 +39,7 @@ public struct C4Sepia: C4Filter {
     ///
     ///  - parameter intensity: a Double value
     public init(intensity: Double) { self.intensity = intensity }
-    
+
     /// Applies the properties of the receiver to create a new CIFilter object
     ///
     /// - parameter inputImage: The image to use as input to the filter.

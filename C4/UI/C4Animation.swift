@@ -59,10 +59,10 @@ public class C4Animation {
             }
         }
     }
-    
+
     /// The duration of the animation, measured in seconds.
     public var duration: NSTimeInterval = 1
-    
+
     /// The animation curve that the receiver will apply to the changes it is supposed to animate.
     public var curve: Curve = .EaseInOut
 
@@ -77,9 +77,9 @@ public class C4Animation {
 
     ///Intializes an empty animation object.
     public init() {
-        
+
     }
-    
+
     deinit {
         let nc = NSNotificationCenter.defaultCenter()
         for observer in completionObservers {
@@ -149,7 +149,7 @@ public class C4Animation {
         let nc = NSNotificationCenter.defaultCenter()
         nc.removeObserver(observer, name: C4AnimationCancelledEvent, object: self)
     }
-    
+
     ///  Posts a cancellation event.
     ///
     ///  This method is triggered when an animation is canceled. This can be used in place of `addCancelObserver` for objects outside the scope of the context in which the animation is created.

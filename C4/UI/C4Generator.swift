@@ -22,7 +22,7 @@ import CoreImage
 ///  The C4Generator protocol declares a variable and a method that are required by C4Generator object so it can properly interface with Core Image.
 public protocol C4Generator {
     /// The name of the Core Image filter (e.g. "CICheckerboardGenerator")
-    var filterName : String { get }
+    var filterName: String { get }
 
     ///  Creates a Core Image filter using specified input image.
     ///

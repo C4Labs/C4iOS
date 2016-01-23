@@ -19,10 +19,9 @@
 
 import CoreGraphics
 
-
 /// Defines a structure representing the border of a C4View.
 public struct Border {
-    
+
     /// Returns the color of the border.
     public var color: C4Color?
 

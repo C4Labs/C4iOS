@@ -40,13 +40,10 @@ public extension UIViewController {
     /// Returns a C4View object representation of the controller's `view` property.
     public var canvas: C4View {
         get {
-            guard let optionalCanvas = objc_getAssociatedObject(self, &canvasAssociationKey) as? C4View? else {
-                print("Could not retrieve associated object for optional canvas in \(self)")
-                return C4View()
-            }
-            if let canvas = optionalCanvas {
+            if let canvas = objc_getAssociatedObject(self, &canvasAssociationKey) as? C4View {
                 return canvas
             }
+
             let canvas = C4View(view: view)
             objc_setAssociatedObject(
                 self,

@@ -22,7 +22,7 @@ import UIKit
 
 /// C4Wedge is a concrete subclass of C4Shape whose shape is a wedge with a rounded outer edge.
 public class C4Wedge: C4Shape {
-    
+
     /// Initializes a new C4Wedge, with the wedge always taking the shortest distance between start and end.
     ///
     /// This shape differs from C4Arc in that is adds a point at the "center" of the circle on which the wedge exists.

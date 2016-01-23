@@ -94,14 +94,12 @@ public class C4Movie: C4View {
     }
 
     var movieView: MovieView {
-        return self.view as! MovieView
+        return self.view as! MovieView // swiftlint:disable:this force_cast
     }
 
     class MovieView: UIView {
         var movieLayer: AVPlayerLayer {
-            get {
-                return self.layer as! AVPlayerLayer
-            }
+            return self.layer as! AVPlayerLayer // swiftlint:disable:this force_cast
         }
 
         override class func layerClass() -> AnyClass {

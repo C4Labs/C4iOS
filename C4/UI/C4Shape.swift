@@ -24,9 +24,7 @@ import UIKit
 public class C4Shape: C4View {
     internal class ShapeView: UIView {
         var shapeLayer: C4ShapeLayer {
-            get {
-                return self.layer as! C4ShapeLayer
-            }
+            return self.layer as! C4ShapeLayer // swiftlint:disable:this force_cast
         }
 
         override class func layerClass() -> AnyClass {
@@ -43,7 +41,7 @@ public class C4Shape: C4View {
 
 
     internal var shapeView: ShapeView {
-        return self.view as! ShapeView
+        return self.view as! ShapeView // swiftlint:disable:this force_cast
     }
 
     ///  Initializes an empty C4Shape.

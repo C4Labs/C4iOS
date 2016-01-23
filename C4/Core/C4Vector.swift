@@ -204,7 +204,7 @@ public struct C4Vector: Equatable, CustomStringConvertible {
     /// A string representation of the vector.
     ///
     /// - returns: A string formatted to look like {x,y,z}
-    public var description : String {
+    public var description: String {
         get {
             return "{\(x), \(y), \(z)}"
         }
