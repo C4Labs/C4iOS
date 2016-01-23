@@ -58,7 +58,7 @@ public func CGRectMakeFromPoints(points: [CGPoint]) -> CGRect {
 /// }
 /// ````
 ///
-/// - parameter time:   The amount of time in seconds to wait before executing the block of code.
+/// - parameter delay:  The amount of time in seconds to wait before executing the block of code.
 /// - parameter action: The action to perform after the delay.
 public func delay(delay: Double, action: ()->()) {
     dispatch_after(
@@ -68,4 +68,3 @@ public func delay(delay: Double, action: ()->()) {
         ),
         dispatch_get_main_queue(), action)
 }
-

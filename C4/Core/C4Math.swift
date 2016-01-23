@@ -127,6 +127,7 @@ public func random01() -> Double {
 /// radToDeg(M_PI_2) = 90
 /// ````
 ///
+/// - parameter val: The value in radians.
 /// - returns: A double value representation of the radian value in degrees.
 public func radToDeg(val: Double) -> Double {
     return 180.0 * val / M_PI
@@ -141,6 +142,7 @@ public func radToDeg(val: Double) -> Double {
 /// degToRad(360) = 2*PI (6.283...)
 /// ````
 ///
+/// - parameter val: The value in degrees.
 /// - returns: A double value representation of the degree value in radians.
 public func degToRad(val: Double) -> Double {
     return M_PI * val / 180.0

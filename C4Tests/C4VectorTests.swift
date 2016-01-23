@@ -33,7 +33,7 @@ class C4VectorTests: XCTestCase {
         let unitVector = vector.unitVector()
         XCTAssert(unitVector == nil, "Callin unitVector on a zero vector should return nil")
     }
-    
+
     func testDotProduct() {
         let vectorA = C4Vector(x: 1, y: 0)
         let vectorB = C4Vector(x: 0, y: 1)
@@ -54,11 +54,11 @@ class C4VectorTests: XCTestCase {
         let angle = vectorA.angleTo(vectorB, basedOn:vectorC)
         XCTAssertEqualWithAccuracy(angle, Double(M_PI)/2.0, accuracy: 1e-15, "Product should be PI/2")
     }
-    
+
     func testDivideScalar() {
         for i in 10...1000 {
             let v = Double(random(below:i))+1.0
-            var vector = C4Vector(x:v,y:v)
+            var vector = C4Vector(x:v, y:v)
             vector /= v
             XCTAssertEqual(vector.x, 1.0, "Vector should equal 1")
         }
@@ -81,7 +81,7 @@ class C4VectorTests: XCTestCase {
             XCTAssertEqual(vector.x, val+1, "Vectore should be original value + 1")
         }
     }
-    
+
     func testSubtraction() {
         for i in 10...1000 {
             let val = Double(i)

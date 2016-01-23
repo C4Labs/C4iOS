@@ -20,14 +20,14 @@
 import CoreGraphics
 
 ///  The C4Vector class is used for coordinate values and direction vectors.
-public struct C4Vector : Equatable, CustomStringConvertible {
+public struct C4Vector: Equatable, CustomStringConvertible {
     /// The x-value of the vector.
     public var x: Double = 0
     /// The y-value of the vector.
     public var y: Double = 0
     /// The z-value of the vector.
     public var z: Double = 0
-    
+
     /// Creates a vector with default values {0,0,0,}
     ///
     /// ````
@@ -47,7 +47,7 @@ public struct C4Vector : Equatable, CustomStringConvertible {
         self.y = y
         self.z = z
     }
-    
+
     /// Create a vector with a cartesian representation: an x and a y coordinates.
     ///
     /// ````
@@ -58,7 +58,7 @@ public struct C4Vector : Equatable, CustomStringConvertible {
         self.y = Double(y)
         self.z = Double(z)
     }
-    
+
     /// Create a vector with a polar representation: a magnitude and an angle in radians. The `z` variable is optional.
     /// [Polar coordinate system - Wikipedia](http://en.wikipedia.org/wiki/Polar_coordinate_system)
     ///
@@ -107,23 +107,23 @@ public struct C4Vector : Equatable, CustomStringConvertible {
             y = newValue * sin(heading)
         }
     }
-    
+
     /// The polar representation heading angle of the vector, in radians.
     ///
     /// ````
     /// let v = C4Vector(1,1,0)
     /// v.heading //-> M_PI_4
     /// ````
-    public var heading : Double {
+    public var heading: Double {
         get {
-            return atan2(y, x);
+            return atan2(y, x)
         }
         set {
             x = magnitude * cos(newValue)
             y = magnitude * sin(newValue)
         }
     }
-    
+
     /// The angle between two vectors, based on {0,0}
     ///
     /// ````
@@ -134,7 +134,7 @@ public struct C4Vector : Equatable, CustomStringConvertible {
     public func angleTo(vec: C4Vector) -> Double {
         return acos(self ⋅ vec / (self.magnitude * vec.magnitude))
     }
-    
+
     /// The angle between two vectors, based on a provided point
     ///
     /// ````
@@ -146,13 +146,13 @@ public struct C4Vector : Equatable, CustomStringConvertible {
     public func angleTo(vec: C4Vector, basedOn: C4Vector) -> Double {
         var vecA = self
         var vecB = vec
-        
+
         vecA -= basedOn
         vecB -= basedOn
-        
+
         return acos(vecA ⋅ vecB / (vecA.magnitude * vecB.magnitude))
     }
-    
+
     /// Return the dot product. **You should use the ⋅ operator instead.**
     ///
     /// ````
@@ -163,7 +163,7 @@ public struct C4Vector : Equatable, CustomStringConvertible {
     public func dot(vec: C4Vector) -> Double {
         return x * vec.x + y * vec.y + z * vec.z
     }
-    
+
     /// Return a vector with the same heading but a magnitude of 1.
     ///
     /// ````
@@ -177,7 +177,7 @@ public struct C4Vector : Equatable, CustomStringConvertible {
         }
         return C4Vector(x: x / mag, y: y / mag, z: z / mag)
     }
-    
+
     /// Return `true` if the vector is zero.
     ///
     /// ````
@@ -187,7 +187,7 @@ public struct C4Vector : Equatable, CustomStringConvertible {
     public func isZero() -> Bool {
         return x == 0 && y == 0 && z == 0
     }
-    
+
     /// Transform the vector.
     ///
     /// ````
@@ -200,7 +200,7 @@ public struct C4Vector : Equatable, CustomStringConvertible {
         y = x * t[1, 0] + y * t[1, 1] + z * t[1, 2]
         z = x * t[2, 0] + y * t[2, 1] + z * t[2, 2]
     }
-    
+
     /// A string representation of the vector.
     ///
     /// - returns: A string formatted to look like {x,y,z}

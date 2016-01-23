@@ -21,13 +21,13 @@ import Foundation
 import CoreGraphics
 
 /// A structure that contains width and height values. Values stored as Double, otherwise synonymous with CGSize.
-public struct C4Size : Equatable, Comparable, CustomStringConvertible {
+public struct C4Size: Equatable, Comparable, CustomStringConvertible {
     ///The width of the size.
     public var width: Double
 
     ///The height of the size.
     public var height: Double
-    
+
     /// Initializes a new C4Size with the dimensions {0,0}
     ///
     /// ````
@@ -37,7 +37,7 @@ public struct C4Size : Equatable, Comparable, CustomStringConvertible {
         width = 0
         height = 0
     }
-    
+
     /// Initializes a new C4Size with the dimensions {width,height}
     ///
     /// ````
@@ -47,7 +47,7 @@ public struct C4Size : Equatable, Comparable, CustomStringConvertible {
         self.width = width
         self.height = height
     }
-    
+
     /// Initializes a new C4Size with the dimensions {width,height}, converting Int values to Double
     ///
     /// ````
@@ -75,11 +75,11 @@ public struct C4Size : Equatable, Comparable, CustomStringConvertible {
     public func isZero() -> Bool {
         return width == 0 && height == 0
     }
-    
+
     /// A string representation of the size.
     ///
     /// - returns: A string formatted to look like {w,h}
-    public var description : String {
+    public var description: String {
         get {
             return "{\(width),\(height)}"
         }

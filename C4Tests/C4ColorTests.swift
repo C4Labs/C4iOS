@@ -36,7 +36,7 @@ class C4ColorTests: XCTestCase {
         XCTAssertEqual(greenColor.blue,  0.0, "Blue value should be 0.0")
         XCTAssertEqual(greenColor.alpha, 1.0, "Alpha value should be 1.0")
     }
-    
+
     func testInitWithBlueHexValue() {
         let blueColor  = C4Color(0x0000FFFF)
         XCTAssertEqual(blueColor.red,   0.0, "Red value should be 0.0")
