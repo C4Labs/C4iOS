@@ -29,7 +29,7 @@ public extension C4View {
         let context = UIGraphicsGetCurrentContext()!
         l.renderInContext(context)
         let uiimage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext();
+        UIGraphicsEndImageContext()
         return C4Image(uiimage: uiimage)
     }
 }
@@ -49,7 +49,7 @@ public extension C4Shape {
         CGContextTranslateCTM(context, CGFloat(-bounds.origin.x)+inset, CGFloat(-bounds.origin.y)+inset)
         shapeLayer.renderInContext(context)
         let uiimage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext();
+        UIGraphicsEndImageContext()
         return C4Image(uiimage: uiimage)
     }
 }

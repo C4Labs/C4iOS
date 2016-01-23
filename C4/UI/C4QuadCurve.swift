@@ -21,15 +21,15 @@ import QuartzCore
 import UIKit
 
 ///  C4QuadCurve is a concrete subclass of C4Curve that modifies it shape based on a single point rather than 2 used by its parent class.
-public class C4QuadCurve : C4Curve {
+public class C4QuadCurve: C4Curve {
 
     /// A C4Point used to calculate the shape of the quadratic curve.
     public var controlPoint = C4Point() {
         didSet {
-            self.controlPoints = (controlPoint,controlPoint)
+            self.controlPoints = (controlPoint, controlPoint)
         }
     }
-    
+
     /// Initializes a new C4QuadCurve.
     ///
     /// ````

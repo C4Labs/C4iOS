@@ -35,16 +35,16 @@ public struct Spring {
 }
 
 /// C4ViewAnimation is a concrete subclass of C4Animation whose execution blocks affect properties of view-based objects.
-public class C4ViewAnimation : C4Animation {
+public class C4ViewAnimation: C4Animation {
 
-    public var spring: Spring? 
+    public var spring: Spring?
 
     /// The amount of time to way before executing the animation.
     public var delay: NSTimeInterval = 0
-    
+
     /// A block animations to execute.
     public var animations: () -> Void
-    
+
     ///  Initializes an animation object with a block of animtinos to execute.
     ///
     ///  let anim = C4ViewAnimation() {
@@ -55,7 +55,7 @@ public class C4ViewAnimation : C4Animation {
     public init(_ animations: () -> Void) {
         self.animations = animations
     }
-    
+
     /// Initializes a new C4ViewAnimation.
     ///
     /// ````
@@ -75,7 +75,7 @@ public class C4ViewAnimation : C4Animation {
         self.init(animations)
         self.duration = duration
     }
-    
+
     public var timingFunction: CAMediaTimingFunction {
         switch curve {
         case .Linear:
@@ -88,10 +88,9 @@ public class C4ViewAnimation : C4Animation {
             return CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         }
     }
-    
+
     public var options: UIViewAnimationOptions {
-        var options : UIViewAnimationOptions = [UIViewAnimationOptions.BeginFromCurrentState]
-        
+        var options: UIViewAnimationOptions = [UIViewAnimationOptions.BeginFromCurrentState]
         switch curve {
         case .Linear:
             options = [options, UIViewAnimationOptions.CurveLinear]
@@ -102,22 +101,21 @@ public class C4ViewAnimation : C4Animation {
         case .EaseInOut:
             options = [options, UIViewAnimationOptions.CurveEaseInOut]
         }
-        
+
         if autoreverses == true {
             options.unionInPlace(.Autoreverse)
         } else {
             options.subtractInPlace(.Autoreverse)
         }
-        
-        if repeatCount > 0  {
+
+        if repeatCount > 0 {
             options.unionInPlace(.Repeat)
         } else {
             options.subtractInPlace(.Repeat)
         }
-        
         return options
     }
-    
+
     /// Initiates the changes specified in the receivers `animations` block.
     public override func animate() {
         let disable = C4ShapeLayer.disableActions
@@ -193,30 +191,29 @@ public class C4ViewAnimationSequence: C4Animation {
             // Animation is already running
             return
         }
-        
         startNext()
     }
-    
+
     private func startNext() {
         if let observer: AnyObject = currentObserver {
             let currentAnimation = animations[currentAnimationIndex]
             currentAnimation.removeCompletionObserver(observer)
             currentObserver = nil
         }
-        
+
         currentAnimationIndex += 1
         if currentAnimationIndex >= animations.count && self.repeats {
             // Start from the beginning if sequence repeats
             currentAnimationIndex = 0
         }
-        
+
         if currentAnimationIndex >= animations.count {
             // Reached the end
             currentAnimationIndex = -1
             postCompletedEvent()
             return
         }
-        
+
         let animation = animations[currentAnimationIndex]
         currentObserver = animation.addCompletionObserver({
             self.startNext()
@@ -233,7 +230,7 @@ public class C4ViewAnimationGroup: C4Animation {
     private var completed: [Bool]
 
     /// Initializes a set of animations to be executed at the same time.
-    /// 
+    ///
     /// ````
     /// let v = C4View(frame: C4Rect(0,0,100,100))
     /// canvas.add(v)
@@ -259,7 +256,7 @@ public class C4ViewAnimationGroup: C4Animation {
             // Animation is already running
             return
         }
-        
+
         for i in 0..<animations.count {
             let animation = animations[i]
             let observer: AnyObject = animation.addCompletionObserver({
@@ -269,12 +266,11 @@ public class C4ViewAnimationGroup: C4Animation {
             animation.animate()
         }
     }
-    
+
     private func completedAnimation(index: Int) {
         let animation = animations[index]
         animation.removeCompletionObserver(observers[index])
         completed[index] = true
-        
         var allCompleted = true
         for c in completed {
             allCompleted = allCompleted && c
@@ -283,11 +279,10 @@ public class C4ViewAnimationGroup: C4Animation {
             cleanUp()
         }
     }
-    
+
     private func cleanUp() {
         observers.removeAll(keepCapacity: true)
         completed = [Bool](count: animations.count, repeatedValue: false)
         postCompletedEvent()
-        
     }
 }

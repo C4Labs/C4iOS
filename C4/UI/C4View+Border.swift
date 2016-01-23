@@ -25,10 +25,10 @@ public struct Border {
     
     /// Returns the color of the border.
     public var color: C4Color?
-    
+
     /// Returns the corner radius of the border.
     public var radius: Double
-    
+
     /// Returns the width of the border.
     public var width: Double
 
@@ -46,7 +46,6 @@ public struct Border {
 
 /// Extension to C4View that adds a border property.
 public extension C4View {
-    
     /// Returns a struct that represents the current visible state of the receiver's border. Animatable.
     ///
     /// ````

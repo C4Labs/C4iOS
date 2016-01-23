@@ -41,7 +41,7 @@ public class C4ImageLayer: CALayer {
 
         animation.configureOptions()
         animation.fromValue = self.contents
-        
-        return animation;
+
+        return animation
     }
 }

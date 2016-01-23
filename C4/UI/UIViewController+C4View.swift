@@ -37,15 +37,16 @@ private var canvasAssociationKey: UInt8 = 0
 ///
 /// Where, `canvas` is essentially equal to `self.viewController.view`, keeping the interaction with a controller's main view consistent with using other C4View objects.
 public extension UIViewController {
-    
     /// Returns a C4View object representation of the controller's `view` property.
-    public var canvas : C4View {
+    public var canvas: C4View {
         get {
-            let optionalCanvas = objc_getAssociatedObject(self, &canvasAssociationKey) as! C4View?
+            guard let optionalCanvas = objc_getAssociatedObject(self, &canvasAssociationKey) as? C4View? else {
+                print("Could not retrieve associated object for optional canvas in \(self)")
+                return C4View()
+            }
             if let canvas = optionalCanvas {
                 return canvas
             }
-            
             let canvas = C4View(view: view)
             objc_setAssociatedObject(
                 self,

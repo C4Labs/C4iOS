@@ -27,7 +27,7 @@ extension C4Image {
     public func apply(filter: C4Filter) {
         self.apply(filters:[filter])
     }
-    
+
     ///  Applies an array of fiters to the receiver's contents.
     ///
     ///  - parameter fiters: an array of C4Filter objects
@@ -50,10 +50,9 @@ extension C4Image {
         }
         let filterContext = CIContext(options:nil)
         let filteredImage = filterContext.createCGImage(self.output, fromRect:extent)
-        
+
         dispatch_async(dispatch_get_main_queue()) {
             self.imageView.layer.contents = filteredImage
         }
     }
-    
 }

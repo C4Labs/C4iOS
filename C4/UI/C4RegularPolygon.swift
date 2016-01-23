@@ -24,7 +24,6 @@ import CoreGraphics
 ///
 /// This class defines two variables called `sides` and `phase` that represent the number of sides and the initial rotation of the shape (respectively). The default shape is a hexagon.
 public class C4RegularPolygon: C4Shape {
-    
     /// Returns the number of sides in the polygon.
     ///
     /// Assigning a value to this property will change the number of sides and cause the receiver to automatically update its
@@ -43,7 +42,7 @@ public class C4RegularPolygon: C4Shape {
             updatePath()
         }
     }
-    
+
     /// Returns the phase (i.e. "rotated" beginning position) of the shape. This is not actual rotation, it simply changes
     /// where the beginning of the shape is.
     ///
@@ -75,7 +74,7 @@ public class C4RegularPolygon: C4Shape {
     required public init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     internal override func updatePath() {
         let rect = inset(C4Rect(view.bounds), dx: lineWidth, dy: lineWidth)
         let rx = rect.size.width / 2.0

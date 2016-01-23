@@ -32,7 +32,7 @@ public extension C4View {
         view.layer.addAnimation(anim, forKey:"C4AnimateKeyPath: \(keyPath)")
         view.layer.setValue(toValue, forKeyPath: keyPath)
     }
-    
+
     /// Class level function that executes an animation using a specified block of code.
     ///
     /// - parameter duration: The length of time in seconds for the animation to execute.
@@ -40,7 +40,7 @@ public extension C4View {
     public class func animate(duration duration: Double, animations: Void -> Void) {
         UIView.animateWithDuration(duration, animations: animations)
     }
-    
+
     /// Class level function that executes an animation using a specified block of code.
     ///
     /// - parameter duration: The length of time in seconds for the animation to execute.
@@ -50,7 +50,7 @@ public extension C4View {
     public class func animate(duration duration: Double, delay: Double, animations: () -> Void, completion: (Bool -> Void)?) {
         UIView.animateWithDuration(duration, animations: animations, completion: completion)
     }
-    
+
     /// Class level function that executes an animation using a specified block of code.
     ///
     /// - parameter duration: The length of time in seconds for the animation to execute.

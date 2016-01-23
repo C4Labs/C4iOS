@@ -30,7 +30,7 @@ public class C4Line: C4Polygon {
     /// Assigning a tuple of C4Point values to this object will cause the receiver to update itself.
     ///
     /// - returns: A tuple (2) of C4Points that make up the the begin and end points of the line.
-    public var endPoints: (C4Point,C4Point) = (C4Point(),C4Point(100,0)){
+    public var endPoints: (C4Point, C4Point) = (C4Point(), C4Point(100, 0)) {
         didSet {
             updatePath()
         }
@@ -51,7 +51,7 @@ public class C4Line: C4Polygon {
     /// The center point (top-left) of the receiver's frame. Animatable.
     ///
     /// - returns: A C4Point, the receiver's center.
-    public override var center : C4Point {
+    public override var center: C4Point {
         get {
             return C4Point(view.center)
         }
@@ -67,7 +67,7 @@ public class C4Line: C4Polygon {
     /// The origin point (top-left) of the receiver's frame. Animatable.
     ///
     /// - returns: A C4Point, the receiver's origin.
-    public override var origin : C4Point {
+    public override var origin: C4Point {
         get {
             return C4Point(view.frame.origin)
         }
@@ -85,9 +85,9 @@ public class C4Line: C4Polygon {
     /// Assigning an array of C4Point values to this object will cause the receiver to update itself.
     ///
     /// - returns: A C4Point array of 2 points.
-    public override var points : [C4Point] {
+    public override var points: [C4Point] {
         get {
-            return [endPoints.0,endPoints.1]
+            return [endPoints.0, endPoints.1]
         } set {
             if newValue.count < 2 {
                 print("Invalid point array. There must be at least 2 points to update the line.")
@@ -143,7 +143,7 @@ public class C4Line: C4Polygon {
         self.endPoints = points
         super.init([points.0, points.1])
     }
-    
+
     /// Initializes a new C4Line using two specified points.
     ///
     /// ````

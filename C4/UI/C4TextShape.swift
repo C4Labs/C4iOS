@@ -22,7 +22,7 @@ import UIKit
 import Foundation
 
 /// C4TextShape defines a concrete subclass of C4Shape that draws a bezier curve whose shape looks like text.
-public class C4TextShape : C4Shape {
+public class C4TextShape: C4Shape {
     /// The text used to define the shape's path. Defaults to "C4".
     public var text: String = "C4" {
         didSet {
@@ -43,7 +43,7 @@ public class C4TextShape : C4Shape {
         lineWidth = 0.0
         fillColor = C4Pink
     }
-    
+
     /// Initializes a new C4TextShape from a specifed string and a font
     ///
     /// ````
@@ -63,7 +63,7 @@ public class C4TextShape : C4Shape {
         updatePath()
         origin = C4Point()
     }
-    
+
     /// Initializes a new C4TextShape from a specifed string, using C4's default font.
     ///
     /// ````
@@ -79,40 +79,37 @@ public class C4TextShape : C4Shape {
         }
         self.init(text: text, font: font)
     }
-    
+
     override func updatePath() {
         path = C4TextShape.createTextPath(text: text, font: font)
         adjustToFitPath()
     }
-    
+
     internal class func createTextPath(text text: String, font: C4Font) -> C4Path? {
         let ctfont = font.CTFont as CTFont?
         if ctfont == nil {
             return nil
         }
-        
+
         var unichars = [UniChar](text.utf16)
         var glyphs = [CGGlyph](count: unichars.count, repeatedValue: 0)
         if !CTFontGetGlyphsForCharacters(ctfont!, &unichars, &glyphs, unichars.count) {
             // Failed to encode characters into glyphs
             return nil
         }
-        
-        var advances = [CGSize](count: glyphs.count, repeatedValue: CGSizeZero)
+
+        var advances = [CGSize](count: glyphs.count, repeatedValue: CGSize())
         CTFontGetAdvancesForGlyphs(ctfont!, .Default, &glyphs, &advances, glyphs.count)
-        
         let textPath = CGPathCreateMutable()
         var invert = CGAffineTransformMakeScale(1, -1)
-        var origin = CGPointZero
+        var origin = CGPoint()
         for i in 0..<glyphs.count {
             let glyphPath = CTFontCreatePathForGlyph(ctfont!, glyphs[i], &invert)
             var translation = CGAffineTransformMakeTranslation(origin.x, origin.y)
             CGPathAddPath(textPath, &translation, glyphPath)
-            
             origin.x += CGFloat(advances[i].width)
             origin.y += CGFloat(advances[i].height)
         }
-        
         return C4Path(path: textPath)
     }
 }

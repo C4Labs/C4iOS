@@ -50,6 +50,6 @@ public class C4GradientLayer: CAGradientLayer {
         animation.configureOptions()
         animation.fromValue = self.colors
 
-        return animation;
+        return animation
     }
 }

@@ -40,8 +40,9 @@ public class C4Layer: CALayer {
     public override init() {
         super.init()
     }
-    
-    public override init(layer: AnyObject) {
+
+
+public override init(layer: AnyObject) {
         super.init(layer: layer)
         if let layer = layer as? C4Layer {
             _rotation = layer._rotation
@@ -87,9 +88,9 @@ public class C4Layer: CALayer {
 }
 
 /// The C4View class defines a rectangular area on the screen and the interfaces for managing visual content in that area. The C4View class itself provides basic behavior for filling its rectangular area with a background color. More sophisticated content can be presented by subclassing UIView and implementing the necessary drawing and event-handling code yourself. The C4 framework also includes a set of standard subclasses that range from simple shapes to movies and images that can be used as-is.
-public class C4View : NSObject {
+public class C4View: NSObject {
     /// A UIView. Internally, C4View wraps and provides access to an internal UIView.
-    public var view : UIView = LayerView()
+    public var view: UIView = LayerView()
 
     /// The current rotation value of the view. Animatable.
     ///
@@ -130,15 +131,17 @@ public class C4View : NSObject {
     ///  Initializes a C4View.
     public override init() {
     }
-    
-    /// Initializes a new C4View from a UIView.
+
+
+/// Initializes a new C4View from a UIView.
     ///
     /// - parameter view: A UIView.
     public init(view: UIView) {
-        self.view = view;
+        self.view = view
     }
-    
-    /// Initializes a new C4View with the specifed frame.
+
+
+/// Initializes a new C4View with the specifed frame.
     ///
     /// ````
     /// let f = C4Rect(0,0,100,100)
@@ -151,15 +154,17 @@ public class C4View : NSObject {
         self.init()
         self.view.frame = CGRect(frame)
     }
-    
-    /// Returns the receiver's layer.
+
+
+/// Returns the receiver's layer.
     public dynamic var layer: CALayer? {
         get {
             return view.layer
         }
     }
-    
-    /// Returns the receiver's frame. Animatable.
+
+
+/// Returns the receiver's frame. Animatable.
     public var frame: C4Rect {
         get {
             return C4Rect(view.frame)
@@ -168,8 +173,9 @@ public class C4View : NSObject {
             view.frame = CGRect(newValue)
         }
     }
-    
-    /// Returns the receiver's bounds. Animatable.
+
+
+/// Returns the receiver's bounds. Animatable.
     public var bounds: C4Rect {
         get {
             return C4Rect(view.bounds)
@@ -188,8 +194,9 @@ public class C4View : NSObject {
             layer?.masksToBounds = newValue
         }
     }
-    
-    /// Returns the receiver's center point. Animatable.
+
+
+/// Returns the receiver's center point. Animatable.
     public var center: C4Point {
         get {
             return C4Point(view.center)
@@ -198,8 +205,9 @@ public class C4View : NSObject {
             view.center = CGPoint(newValue)
         }
     }
-    
-    /// Returns the receiver's origin. Animatable.
+
+
+/// Returns the receiver's origin. Animatable.
     public var origin: C4Point {
         get {
             return center - C4Vector(x: size.width/2, y: size.height/2)
@@ -208,8 +216,9 @@ public class C4View : NSObject {
             center = newValue + C4Vector(x: size.width/2, y: size.height/2)
         }
     }
-    
-    /// Returns the receiver's frame size. Animatable.
+
+
+/// Returns the receiver's frame size. Animatable.
     public var size: C4Size {
         get {
             return bounds.size
@@ -218,21 +227,23 @@ public class C4View : NSObject {
             bounds = C4Rect(origin, newValue)
         }
     }
-    
-    /// Returns the receiver's frame width. Animatable.
+
+
+/// Returns the receiver's frame width. Animatable.
     public dynamic var width: Double {
         get {
             return Double(bounds.size.width)
         }
     }
-    
-    /// Returns the receiver's frame height. Animatable.
+
+
+/// Returns the receiver's frame height. Animatable.
    public dynamic var height: Double {
         get {
             return Double(bounds.size.height)
         }
     }
- 
+
     /// Returns the receiver's background color. Animatable.
     public var backgroundColor: C4Color? {
         get {
@@ -250,8 +261,9 @@ public class C4View : NSObject {
             }
         }
     }
-    
-    /// Returns the receiver's opacity. Animatable.
+
+
+/// Returns the receiver's opacity. Animatable.
     public dynamic var opacity: Double {
         get {
             return Double(view.alpha)
@@ -260,8 +272,9 @@ public class C4View : NSObject {
             view.alpha = CGFloat(newValue)
         }
     }
-    
-    /// Returns true if the receiver is hidden, false if visible.
+
+
+/// Returns true if the receiver is hidden, false if visible.
     public var hidden: Bool {
         get {
             return view.hidden
@@ -270,8 +283,9 @@ public class C4View : NSObject {
             view.hidden = newValue
         }
     }
-    
-    /// Returns the receiver's current transform.
+
+
+/// Returns the receiver's current transform.
     public var transform: C4Transform {
         get {
             return C4Transform(view.layer.transform)
@@ -280,8 +294,9 @@ public class C4View : NSObject {
             view.layer.transform = newValue.transform3D
         }
     }
-    
-    /// Defines the anchor point of the layer's bounds rect, as a point in
+
+
+/// Defines the anchor point of the layer's bounds rect, as a point in
     /// normalized layer coordinates - '(0, 0)' is the bottom left corner of
     /// the bounds rect, '(1, 1)' is the top right corner. Defaults to
     /// '(0.5, 0.5)', i.e. the center of the bounds rect. Animatable.
@@ -300,7 +315,7 @@ public class C4View : NSObject {
     ///
     ///  The default value of this property is 0. Changing the value of this property changes the the front-to-back ordering of layers onscreen. This can affect the visibility of layers whose frame rectangles overlap.
     ///  The value of this property is measured in points.
-    public dynamic var zPosition : Double {
+    public dynamic var zPosition: Double {
         get {
             return Double(self.layer!.zPosition)
         } set {
@@ -325,15 +340,17 @@ public class C4View : NSObject {
     }
 
     //MARK: - Touchable
-    
-    /// Returns true if the receiver accepts touch events.
+
+
+/// Returns true if the receiver accepts touch events.
     public var interactionEnabled: Bool = true {
         didSet {
             self.view.userInteractionEnabled = interactionEnabled
         }
     }
-    
-    /// Adds a tap gesture recognizer to the receiver's view.
+
+
+/// Adds a tap gesture recognizer to the receiver's view.
     ///
     /// ````
     /// let f = C4Rect(0,0,100,100)
@@ -351,8 +368,9 @@ public class C4View : NSObject {
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
     }
-    
-    /// Adds a pan gesture recognizer to the receiver's view.
+
+
+/// Adds a pan gesture recognizer to the receiver's view.
     ///
     /// ````
     /// let f = C4Rect(0,0,100,100)
@@ -369,8 +387,9 @@ public class C4View : NSObject {
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
     }
-    
-    /// Adds a pinch gesture recognizer to the receiver's view.
+
+
+/// Adds a pinch gesture recognizer to the receiver's view.
     ///
     /// ````
     /// let f = C4Rect(0,0,100,100)
@@ -387,8 +406,9 @@ public class C4View : NSObject {
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
     }
-    
-    /// Adds a rotation gesture recognizer to the receiver's view.
+
+
+/// Adds a rotation gesture recognizer to the receiver's view.
     ///
     /// ````
     /// let f = C4Rect(0,0,100,100)
@@ -406,8 +426,9 @@ public class C4View : NSObject {
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
     }
-    
-    /// Adds a longpress gesture recognizer to the receiver's view.
+
+
+/// Adds a longpress gesture recognizer to the receiver's view.
     ///
     /// ````
     /// let f = C4Rect(0,0,100,100)
@@ -424,8 +445,9 @@ public class C4View : NSObject {
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
     }
-    
-    /// Adds a swipe gesture recognizer to the receiver's view.
+
+
+/// Adds a swipe gesture recognizer to the receiver's view.
     ///
     /// ````
     /// let f = C4Rect(0,0,100,100)
@@ -443,8 +465,9 @@ public class C4View : NSObject {
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
     }
-    
-    /// Adds a screen edge pan gesture recognizer to the receiver's view.
+
+
+/// Adds a screen edge pan gesture recognizer to the receiver's view.
     ///
     /// ````
     /// let v = C4View(frame: canvas.bounds)
@@ -460,10 +483,12 @@ public class C4View : NSObject {
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
     }
-    
-    //MARK: - AddRemoveSubview
-    
-    /// Adds a view to the end of the receiver’s list of subviews.
+
+
+//MARK: - AddRemoveSubview
+
+
+/// Adds a view to the end of the receiver’s list of subviews.
     ///
     /// When working with C4, use this method to add views because it handles the addition of both UIView and C4View.
     ///
@@ -482,10 +507,12 @@ public class C4View : NSObject {
             fatalError("Can't add subview of class `\(subview.dynamicType)`")
         }
     }
-    
-    //MARK: - AddRemoveSubview
-    
-    /// Adds an array of views to the end of the receiver’s list of subviews.
+
+
+//MARK: - AddRemoveSubview
+
+
+/// Adds an array of views to the end of the receiver’s list of subviews.
     ///
     /// When working with C4, use this method to add views because it handles the addition of both UIView and C4View.
     ///
@@ -502,8 +529,9 @@ public class C4View : NSObject {
             self.add(subv)
         }
     }
-    
-    /// Unlinks the view from the receiver and its window, and removes it from the responder chain.
+
+
+/// Unlinks the view from the receiver and its window, and removes it from the responder chain.
     ///
     /// Calling this method removes any constraints that refer to the view you are removing, or that refer to any view in the
     /// subtree of the view you are removing.
@@ -527,8 +555,9 @@ public class C4View : NSObject {
             fatalError("Can't remove subview of class `\(subview.dynamicType)`")
         }
     }
-    
-    /// Unlinks the view from its superview and its window, and removes it from the responder chain.
+
+
+/// Unlinks the view from its superview and its window, and removes it from the responder chain.
     ///
     /// If the view’s superview is not nil, the superview releases the view.
     ///
@@ -544,8 +573,9 @@ public class C4View : NSObject {
     public func removeFromSuperview() {
         self.view.removeFromSuperview()
     }
-    
-    /// Moves the specified subview so that it appears behind its siblings.
+
+
+/// Moves the specified subview so that it appears behind its siblings.
     ///
     /// - parameter view: The subview to move to the back.
     public func sendToBack<T>(subview: T?) {
@@ -557,8 +587,9 @@ public class C4View : NSObject {
             fatalError("Can't operate on subview of class `\(subview.dynamicType)`")
         }
     }
-    
-    /// Moves the specified subview so that it appears on top of its siblings.
+
+
+/// Moves the specified subview so that it appears on top of its siblings.
     ///
     /// - parameter view: The subview to move to the front.
     public func bringToFront<T>(subview: T?) {
@@ -570,9 +601,11 @@ public class C4View : NSObject {
             fatalError("Can't operate on subview of class `\(subview.dynamicType)`")
         }
     }
-    
-    //MARK: - HitTest
-    
+
+
+//MARK: - HitTest
+
+
     /// Checks if a specified point falls within the bounds of the current object.
     ///
     /// - note:
@@ -591,7 +624,7 @@ public class C4View : NSObject {
     public func hitTest(point: C4Point) -> Bool {
         return CGRectContainsPoint(CGRect(bounds), CGPoint(point))
     }
-    
+
     /// Checks if a specified point, from another view, falls within the frame of the receiver.
     ///
     /// ````
@@ -610,9 +643,9 @@ public class C4View : NSObject {
         let p = convert(point, from:from)
         return hitTest(p)
     }
-    
-    //MARK: – Convert
-    
+
+//MARK: – Convert
+
     /// Converts a specified point from a given view's coordinate system to that of the receiver.
     ///
     /// ````
@@ -624,7 +657,6 @@ public class C4View : NSObject {
     public func convert(point: C4Point, from: C4View) -> C4Point {
         return C4Point(view.convertPoint(CGPoint(point), fromCoordinateSpace: from.view))
     }
-    
 
     //MARK: - Positioning
 
@@ -642,8 +674,9 @@ public class C4View : NSObject {
 
 /// Extension to UIView that adds handling addition and removal of C4View objects.
 extension UIView {
-    
-    /// Adds a view to the end of the receiver’s list of subviews.
+
+
+/// Adds a view to the end of the receiver’s list of subviews.
     ///
     /// When working with C4, use this method to add views because it handles the addition of both UIView and C4View.
     ///
@@ -657,9 +690,10 @@ extension UIView {
             fatalError("Can't add subview of class `\(subview.dynamicType)`")
         }
     }
-    
-    //MARK: - AddRemoveSubview
-    
+
+
+//MARK: - AddRemoveSubview
+
     /// Adds an array of views to the end of the receiver’s list of subviews.
     ///
     /// When working with C4, use this method to add views because it handles the addition of both UIView and C4View.
@@ -677,7 +711,8 @@ extension UIView {
             self.add(subv)
         }
     }
-    
+
+
     /// Unlinks the view from the receiver and its window, and removes it from the responder chain.
     ///
     /// Calling this method removes any constraints that refer to the view you are removing, or that refer to any view in the
@@ -695,7 +730,8 @@ extension UIView {
             fatalError("Can't remove subview of class `\(subview.dynamicType)`")
         }
     }
-    
+
+
     /// Moves the specified subview so that it appears behind its siblings.
     ///
     /// When working with C4, use this method because it handles both UIView and C4View.
@@ -710,7 +746,7 @@ extension UIView {
             fatalError("Can't operate on subview of class `\(subview.dynamicType)`")
         }
     }
-    
+
     /// Moves the specified subview so that it appears on top of its siblings.
     ///
     /// When working with C4, use this method because it handles both UIView and C4View.

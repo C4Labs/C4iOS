@@ -23,7 +23,7 @@ import CoreImage
 public protocol C4Generator {
     /// The name of the Core Image filter (e.g. "CICheckerboardGenerator")
     var filterName : String { get }
-    
+
     ///  Creates a Core Image filter using specified input image.
     ///
     ///  This method is used internally by C4Image when applying filters to its layer's contents.
