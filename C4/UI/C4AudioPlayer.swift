@@ -41,7 +41,6 @@ public class C4AudioPlayer: NSObject, AVAudioPlayerDelegate {
     internal var player: AVAudioPlayer!
 
     /// Initializes a new audio player from a given file name
-    ///
     /// ````
     /// let ap = C4AudioPlayer("audioTrackFileName")
     /// ````
@@ -139,7 +138,6 @@ public class C4AudioPlayer: NSObject, AVAudioPlayerDelegate {
     /// playback through 2.0 for double-speed playback.
     /// To set an audio player’s playback rate, you must first enable rate adjustment as described in the enableRate property
     /// description.
-    ///
     /// ````
     /// let ap = C4AudioPlayer("audioTrackFileName")
     /// ap.enableRate = true
@@ -158,7 +156,6 @@ public class C4AudioPlayer: NSObject, AVAudioPlayerDelegate {
     /// A value of 0, which is the default, means to play the sound once. Set a positive integer value to specify the number of
     /// times to return to the start and play again. For example, specifying a value of 1 results in a total of two plays of the
     /// sound. Set any negative integer value to loop the sound indefinitely until you call the stop method.
-    ///
     /// Defaults to 1000000.
     public var loops: Bool {
         get {
@@ -176,7 +173,6 @@ public class C4AudioPlayer: NSObject, AVAudioPlayerDelegate {
     /// A Boolean value that specifies the audio-level metering on/off state for the audio player.
     /// The default value for the meteringEnabled property is off (Boolean false). Before using metering for an audio player, you need to enable it by setting this
     /// property to true. If player is an audio player instance variable of your controller class, you enable metering as shown here:
-    ///
     /// ````
     /// let ap = C4AudioPlayer("audioTrackFileName")
     /// ap.meteringEnabled = true
@@ -202,17 +198,14 @@ public class C4AudioPlayer: NSObject, AVAudioPlayerDelegate {
 
     /// Refreshes the average and peak power values for all channels of an audio player.
     /// To obtain current audio power values, you must call this method before calling averagePowerForChannel: or peakPowerForChannel:.
-    ///
     /// ````
     /// let t = NSTimer.scheduledTimerWithTimeInterval(1.0/60.0,
     ///                                        target: self,
     ///                                      selector: "update",
     ///                                      userInfo: nil,
     ///                                       repeats: true)
-    ///
     /// let ap = C4AudioPlayer("audioTrackFileName")
     /// ap.meteringEnabled = true
-    ///
     /// func update() {
     ///     ap.updateMeters()
     /// }
@@ -222,27 +215,23 @@ public class C4AudioPlayer: NSObject, AVAudioPlayerDelegate {
     }
 
     /// Returns the average power for a given channel, in decibels, for the sound being played.
-    ///
     /// ````
     /// func update() {
     ///     let av = player.averagePower(channel: 0)
     /// }
     /// ````
     /// - parameter channel: The audio channel whose average power value you want to obtain.
-    ///
     /// - returns: A floating-point representation, in decibels, of a given audio channel’s current average power.
     public func averagePower(channel: Int) -> Double {
         return Double(player.averagePowerForChannel(channel))
     }
 
     /// Returns the peak power for a given channel, in decibels, for the sound being played.
-    ///
     /// ````
     /// func update() {
     ///     let pk = player.peakPower(channel: 0)
     /// }
     /// - parameter channel: The audio channel whose peak power value you want to obtain.
-    ///
     /// - returns: A floating-point representation, in decibels, of a given audio channel’s current peak power.
     public func peakPower(channel: Int) -> Double {
         return Double(player.peakPowerForChannel(channel))

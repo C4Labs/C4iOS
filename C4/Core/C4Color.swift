@@ -70,7 +70,6 @@ public class C4Color {
     internal var internalColor: CGColorRef
 
     /// Initializes and returns a new color object. Defaults to black with 0 opacity (i.e. clear).
-    ///
     /// ````
     /// let c = C4Color()
     /// ````
@@ -80,11 +79,9 @@ public class C4Color {
     }
 
     /// Initializes and returns a new C4Color object based on specified color values.
-    ///
     /// ````
     /// let c = C4Color(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0)
     /// ````
-    ///
     /// - parameter red:   The red value for the new color [0.0 ... 1.0]
     /// - parameter green: The green value for the new color [0.0 ... 1.0]
     /// - parameter blue:  The blue value for the new color [0.0 ... 1.0]
@@ -95,11 +92,9 @@ public class C4Color {
     }
 
     /// Initializes and returns a new C4Color object based on a provided CGColor object.
-    ///
     /// ````
     /// let c = C4Color(UIColor.redColor().CGColor)
     /// ````
-    ///
     /// - parameter color: A CGColor object that will be used to create a new C4Color.
     public init(_ color: CGColorRef) {
         colorSpace = CGColorSpaceCreateDeviceRGB()!
@@ -107,33 +102,27 @@ public class C4Color {
     }
 
     /// Initializes and returns a new C4Color object based on a provided UIColor object.
-    ///
     /// ````
     /// let c = C4Color(UIColor.redColor())
     /// ````
-    ///
     /// - parameter color: A UIColor object whose components will be extrated to create a new C4Color.
     public convenience init(_ color: UIColor) {
         self.init(color.CGColor)
     }
 
     ///  Initializes and returns a new C4Color object made up of a repeating pattern based on a specified C4Image.
-    ///
     ///  ````
     ///  let p = C4Color("pattern")
     ///  ````
-    ///
     ///  - parameter pattern: a String, the name of an image to use as a pattern.
     public convenience init(_ pattern: String) {
         self.init(UIColor(patternImage: UIImage(named: pattern)!))
     }
 
     /// Initializes and returns a new C4Color object based on specified color values.
-    ///
     /// ````
     /// let c = C4Color(red: 255, green: 0, blue: 0, alpha: 255)
     /// ````
-    ///
     /// - parameter red:   The red value for the new color [0 ... 255]
     /// - parameter green: The green value for the new color [0 ... 255]
     /// - parameter blue:  The blue value for the new color [0 ... 255]
@@ -143,13 +132,10 @@ public class C4Color {
     }
 
     /// Initializes and returns a new C4Color object based on a specified hex value.
-    ///
     /// Remember to precede with `0x` and include the alpha component at the end (i.e. 7th + 8th characters)
-    ///
     /// ````
     /// let c = C4Color(0xFF0000FF)
     /// ````
-    ///
     /// - parameter hexValue: A color value expressed in hexadecimal.
     public convenience init(_ hexValue: UInt32) {
         let red   = Int((hexValue & 0xFF000000) >> 12)
@@ -160,7 +146,6 @@ public class C4Color {
     }
 
     /// The set of 3 color values + alpha that define the current color.
-    ///
     /// - returns: An array of 4 Double values in the range [0.0 ... 1.0]
     public var components: [Double] {
         get {
@@ -184,12 +169,10 @@ public class C4Color {
     }
 
     /// The value of the red component of the current color, [0.0 ... 1.0]
-    ///
     /// ````
     /// let c = C4Color()
     /// let redVal = c.red
     /// ````
-    ///
     /// - returns: Double value in the range [0.0 ... 1.0]
     public var red: Double {
         get {
@@ -201,12 +184,10 @@ public class C4Color {
     }
 
     /// The value of the green component of the current color
-    ///
     /// ````
     /// let c = C4Color()
     ///  let greenVal = c.green
     /// ````
-    ///
     /// - returns: Double value in the range [0.0 ... 1.0]
     public var green: Double {
         get {
@@ -218,12 +199,10 @@ public class C4Color {
     }
 
     /// The value of the blue component of the current color
-    ///
     /// ````
     /// let c = C4Color()
     /// let blueVal = c.blue
     /// ````
-    ///
     /// - returns: Double value in the range [0.0 ... 1.0]
     public var blue: Double {
         get {
@@ -235,12 +214,10 @@ public class C4Color {
     }
 
     /// The value of the alpha component of the current color.
-    ///
     /// ````
     /// let c = C4Color()
     /// let alphaVal = c.alpha
     /// ````
-    ///
     /// - returns: Double value in the range [0.0 ... 1.0]
     public var alpha: Double {
         get {
@@ -252,12 +229,10 @@ public class C4Color {
     }
 
     /// A CGColor representation of the current color.
-    ///
     /// ````
     /// let c = C4Color()
     /// let cg = c.CGColor
     /// ````
-    ///
     /// - returns: CGColorRef object that matches the color's `internalColor` property
     public var CGColor: CGColorRef {
         get {
@@ -266,11 +241,9 @@ public class C4Color {
     }
 
     /// Creates and returns a color object that has the same color space and component values as the receiver, but has the specified alpha component.
-    ///
     /// ````
     /// let c = aColor.colorWithAlpha(0.2)
     /// ````
-    ///
     /// - parameter alpha: The opacity value of the new UIColor object.
     /// - returns: A new color with a modified alpha component.
     public func colorWithAlpha(alpha: Double) -> C4Color {
@@ -282,7 +255,6 @@ public class C4Color {
 
 public extension UIColor {
     /// Initializes a UIColor object from a C4Color object.
-    ///
     /// - parameter color: The C4 color object.
     public convenience init?(_ color: C4Color) {
         self.init(CGColor: color.CGColor)
@@ -291,7 +263,6 @@ public extension UIColor {
 
 public extension CIColor {
     /// Initializes a CIColor object from a C4Color object.
-    ///
     /// - parameter color: The C4 color object.
     public convenience init(_ color: C4Color) {
         self.init(CGColor: color.CGColor)

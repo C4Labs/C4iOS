@@ -29,7 +29,6 @@ public struct C4Vector: Equatable, CustomStringConvertible {
     public var z: Double = 0
 
     /// Creates a vector with default values {0,0,0,}
-    ///
     /// ````
     /// let v = C4Vector()
     /// ````
@@ -37,7 +36,6 @@ public struct C4Vector: Equatable, CustomStringConvertible {
     }
 
     /// Create a vector with a cartesian representation: an x and a y coordinates. The `z` variable is optional.
-    ///
     /// ````
     /// let v = C4Vector(x: 1.0, y: 1.0, z: 1.0)
     /// let v = C4Vector(x: 1.0, y: 1.0)
@@ -52,7 +50,6 @@ public struct C4Vector: Equatable, CustomStringConvertible {
     }
 
     /// Create a vector with a cartesian representation: an x and a y coordinates.
-    ///
     /// ````
     /// let v = C4Vector(x: 1, y: 1, z: 1)
     /// ````
@@ -67,7 +64,6 @@ public struct C4Vector: Equatable, CustomStringConvertible {
 
     /// Create a vector with a polar representation: a magnitude and an angle in radians. The `z` variable is optional.
     /// [Polar coordinate system - Wikipedia](http://en.wikipedia.org/wiki/Polar_coordinate_system)
-    ///
     /// ````
     /// let m = sqrt(2.0)
     /// let h = M_PI_4
@@ -84,7 +80,6 @@ public struct C4Vector: Equatable, CustomStringConvertible {
     }
 
     ///  Initializes a C4Vector from a CGPoint
-    ///
     ///  - parameter point: a previously initialized CGPoint
     public init(_ point: CGPoint) {
         x = Double(point.x)
@@ -93,7 +88,6 @@ public struct C4Vector: Equatable, CustomStringConvertible {
     }
 
     ///  Initializes a C4Vector from a C4Point
-    ///
     ///  - parameter point: a previously initialized C4Point
     public init(_ point: C4Point) {
         x = point.x
@@ -102,7 +96,6 @@ public struct C4Vector: Equatable, CustomStringConvertible {
     }
 
     /// The polar representation magnitude of the vector.
-    ///
     /// ````
     /// let v = C4Vector(x: 2.0, y: 1.0, z: 0.0)
     /// v.magnitude //-> √2
@@ -118,7 +111,6 @@ public struct C4Vector: Equatable, CustomStringConvertible {
     }
 
     /// The polar representation heading angle of the vector, in radians.
-    ///
     /// ````
     /// let v = C4Vector(1,1,0)
     /// v.heading //-> M_PI_4
@@ -134,7 +126,6 @@ public struct C4Vector: Equatable, CustomStringConvertible {
     }
 
     /// The angle between two vectors, based on {0,0}
-    ///
     /// ````
     /// let v1 = C4Vector(x: 1, y: 1, z: 0)
     /// let v2 = C4Vector(x: -1, y: 1, z: 0)
@@ -147,7 +138,6 @@ public struct C4Vector: Equatable, CustomStringConvertible {
     }
 
     /// The angle between two vectors, based on a provided point
-    ///
     /// ````
     /// let v1 = C4Vector(x: 1, y: 1, z: 0)
     /// let v2 = C4Vector(x: -1, y: 1, z: 0)
@@ -168,7 +158,6 @@ public struct C4Vector: Equatable, CustomStringConvertible {
     }
 
     /// Return the dot product. **You should use the ⋅ operator instead.**
-    ///
     /// ````
     /// let v1 = C4Vector(x: 1, y: 1, z: 0)
     /// let v2 = C4Vector(x: -1, y: 1, z: 0)
@@ -181,22 +170,19 @@ public struct C4Vector: Equatable, CustomStringConvertible {
     }
 
     /// Return a vector with the same heading but a magnitude of 1.
-    ///
     /// ````
     /// let v1 = C4Vector(x: 1, y: 1, z: 0)
     /// v1.unitVector() //-> {M_PI_4,M_PI_4,0}
     /// ````
     /// - returns: A new vector that is the unit vector of the receiver
     public func unitVector() -> C4Vector? {
-        let mag = self.magnitude
-        if mag == 0 {
+        guard self.magnitude != 0.0 else {
             return nil
         }
-        return C4Vector(x: x / mag, y: y / mag, z: z / mag)
+        return C4Vector(x: x / self.magnitude, y: y / self.magnitude, z: z / self.magnitude)
     }
 
     /// Return `true` if the vector is zero.
-    ///
     /// ````
     /// let v = C4Vector()
     /// v.isZero() //-> true
@@ -207,7 +193,6 @@ public struct C4Vector: Equatable, CustomStringConvertible {
     }
 
     /// Transform the vector.
-    ///
     /// ````
     /// var v = C4Vector(x: 1, y: 1, z:0)
     /// let t = C4Transform.makeRotation(M_PI, axis: C4Vector(x: 0, y:0, z:1))
@@ -221,12 +206,9 @@ public struct C4Vector: Equatable, CustomStringConvertible {
     }
 
     /// A string representation of the vector.
-    ///
     /// - returns: A string formatted to look like {x,y,z}
     public var description: String {
-        get {
-            return "{\(x), \(y), \(z)}"
-        }
+        return "{\(x), \(y), \(z)}"
     }
 }
 
@@ -375,14 +357,12 @@ public func * (lhs: C4Vector, rhs: Double) -> C4Vector {
     return C4Vector(x: lhs.x * rhs, y: lhs.y * rhs, z: lhs.z * rhs)
 }
 
-
 /// Returns a new vector whose coordinates are the multiplication of the right-hand vector coordinates by the left-hand scalar
 ///
 /// ````
 /// var v1 = C4Vector(x: 1, y: 1)
 /// var v2 = 2.0 * v2
 /// v2 //-> {2,2,0}
-///
 /// - parameter lhs: A scalar
 /// - parameter rhs: A C4Vector
 /// - returns: A new vector whose values are those of `lhs` divided by `rhs`
@@ -390,20 +370,12 @@ public func * (lhs: Double, rhs: C4Vector) -> C4Vector {
     return C4Vector(x: rhs.x * lhs, y: rhs.y * lhs, z: rhs.z * lhs)
 }
 
-
 /// Returns a new vector whose coordinates are the negative values of the receiver
 ///
 /// ````
 /// var v1 = C4Vector(x: 1, y: 1)
 /// var v2 = -v1
 /// v2 //-> {-1,-1}
-/// ````
-/// Returns a new vector whose coordinates are the subtraction of the right-hand vector from the left-hand vector
-///
-/// ````
-/// var v1 = C4Vector(x: 1, y: 1)
-/// var v2 = C4Vector(x: 1, y: 1)
-/// v1-v2 //-> {0,0,0}
 /// ````
 /// - parameter vector: A C4Vector
 /// - returns: A new vector whose values are the negative of `vector`

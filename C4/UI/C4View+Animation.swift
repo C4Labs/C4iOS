@@ -53,7 +53,7 @@ public extension C4View {
     public class func animate(duration duration: Double, delay: Double, animations: () -> Void, completion: (Bool -> Void)?) {
         UIView.animateWithDuration(duration, animations: animations, completion: completion)
     }
-    
+
     /// A class-level function that executes an animation using a specified block of code, with parameters for delaying, completion and animation options.
     ///
     /// - parameter duration: The length of time in seconds for the animation to execute.

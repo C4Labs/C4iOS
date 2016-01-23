@@ -47,7 +47,6 @@ public struct C4Rect: Equatable, CustomStringConvertible {
     }
 
     /// Initializes a new C4Rect with the origin {0,0} and the size {0,0}
-    ///
     /// ````
     /// let r = C4Rect()
     /// ````
@@ -56,7 +55,6 @@ public struct C4Rect: Equatable, CustomStringConvertible {
     }
 
     /// Initializes a new C4Rect with the origin {x,y} and the size {w,h}
-    ///
     /// ````
     /// let r = C4Rect(0.0,0.0,10.0,10.0)
     /// ````
@@ -66,7 +64,6 @@ public struct C4Rect: Equatable, CustomStringConvertible {
     }
 
     /// Initializes a new C4Rect with the origin {x,y} and the size {w,h}, converting values from Int to Double
-    ///
     /// ````
     /// let r = C4Rect(0,0,10,10)
     /// ````
@@ -76,7 +73,6 @@ public struct C4Rect: Equatable, CustomStringConvertible {
     }
 
     /// Initializes a new C4Rect with the origin {o.x,o.y} and the size {s.w,s.h}
-    ///
     /// ````
     /// let p = C4Point()
     /// let s = C4Size()
@@ -94,12 +90,10 @@ public struct C4Rect: Equatable, CustomStringConvertible {
     }
 
     /// Initializes a rectangle that contains all of the specified coordinates in an array.
-    ///
     /// ````
     /// let pts = [C4Point(), C4Point(0,5), C4Point(10,10), C4Point(9,8)]
     /// let r = C4Rect(pts) //-> {{0.0, 0.0}, {10.0, 10.0}}
     /// ````
-    ///
     /// - parameter points: An array of C4Point coordinates
     public init(_ points: [C4Point]) {
         let count = points.count
@@ -114,12 +108,10 @@ public struct C4Rect: Equatable, CustomStringConvertible {
     }
 
     /// Initializes a rectangle that contains the specified coordinates in a tuple.
-    ///
     /// ````
     /// let pts = (C4Point(), C4Point(0,5))
     /// let r = C4Rect(pts)
     /// ````
-    ///
     /// - parameter points: An tuple of C4Point coordinates
     public init(_ points: (C4Point, C4Point)) {
         let r = CGRectMakeFromPoints([CGPoint(points.0), CGPoint(points.1)])
@@ -130,7 +122,6 @@ public struct C4Rect: Equatable, CustomStringConvertible {
     //MARK: - Comparing
 
     /// Returns whether two rectangles intersect.
-    ///
     /// ````
     /// let r1 = C4Rect(0,0,10,10)
     /// let r2 = C4Rect(5,5,10,10)
@@ -138,7 +129,6 @@ public struct C4Rect: Equatable, CustomStringConvertible {
     /// r1.intersects(r2) //-> true
     /// r1.intersects(r3) //-> false
     /// ````
-    ///
     /// - parameter rect: The rectangle to examine.
     /// - returns:	true if the two specified rectangles intersect; otherwise, false.
     public func intersects(rect: C4Rect) -> Bool {
@@ -148,7 +138,6 @@ public struct C4Rect: Equatable, CustomStringConvertible {
     //MARK: - Center & Max
 
     /// The center point of the receiver.
-    ///
     /// ````
     /// let r = C4Rect(0,0,10,10)
     /// r.center //-> {5,5}
@@ -164,7 +153,6 @@ public struct C4Rect: Equatable, CustomStringConvertible {
     }
 
     /// The bottom-right point of the receiver.
-    ///
     /// ````
     /// let r = C4Rect(5,5,10,10)
     /// r.max //-> {15,15}
@@ -176,12 +164,10 @@ public struct C4Rect: Equatable, CustomStringConvertible {
     }
 
     /// Checks to see if the receiver has zero size and position
-    ///
     /// ````
     /// let r = C4Point()
     /// r.isZero() //-> true
     /// ````
-    ///
     /// - returns: true if origin = {0,0} and size = {0,0}
     public func isZero() -> Bool {
         return origin.isZero() && size.isZero()
@@ -190,7 +176,6 @@ public struct C4Rect: Equatable, CustomStringConvertible {
     //MARK: - Membership
 
     /// Returns whether a rectangle contains a specified point.
-    ///
     /// ````
     /// let r1 = C4Rect(0,0,10,10)
     /// let r2 = C4Rect(5,5,10,10)
@@ -198,16 +183,13 @@ public struct C4Rect: Equatable, CustomStringConvertible {
     /// r1.contains(p) //-> true
     /// r2.contains(p) //-> false
     /// ````
-    ///
     /// - parameter point:	The point to examine.
-    ///
     /// - returns: true if the rectangle is not null or empty and the point is located within the rectangle; otherwise, false.
     public func contains(point: C4Point) -> Bool {
         return CGRectContainsPoint(CGRect(self), CGPoint(point))
     }
 
     /// Returns whether the first rectangle contains the second rectangle.
-    ///
     /// ````
     /// let r1 = C4Rect(0,0,10,10)
     /// let r2 = C4Rect(5,5,10,10)
@@ -215,7 +197,6 @@ public struct C4Rect: Equatable, CustomStringConvertible {
     /// r1.contains(r2) //-> false
     /// r1.contains(r3) //-> true
     /// ````
-    ///
     /// - parameter rect:	The rectangle to examine for containment.
     /// - returns: `true` if the rectangle is contained in this rectangle; otherwise, `false`.
     public func contains(rect: C4Rect) -> Bool {
@@ -223,7 +204,6 @@ public struct C4Rect: Equatable, CustomStringConvertible {
     }
 
     /// A string representation of the rect.
-    ///
     /// - returns: A string formatted to look like {{x,y},{w,h}}
     public var description: String {
         get {

@@ -17,46 +17,10 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-import QuartzCore
 import UIKit
-
-///  A structure of 4 8-bit values that represent r, g, b, a values of a single point (i.e. a pixel)
-public struct Pixel {
-    var r: UInt8 = 0
-    var g: UInt8 = 0
-    var b: UInt8 = 0
-    var a: UInt8 = 255
-
-    ///  Initializes a pixel whose color is a specified gray.
-    ///
-    ///  - parameter gray: the gray color of the pixel
-    public init(gray: Int) {
-        self.init(gray, gray, gray, 255)
-    }
-
-    ///  Initializes a Pixel structure
-    ///
-    ///  ````
-    ///  let p = Pixel(255, 255, 255, 255) // -> white
-    ///  ````
-    ///
-    ///  Values are calculated from 0...255
-    ///
-    ///  - parameter r: the red component
-    ///  - parameter g: the green component
-    ///  - parameter b: the blue component
-    ///  - parameter a: the alpha component
-    public init(_ r: Int, _ g: Int, _ b: Int, _ a: UInt8) {
-        self.r = UInt8(r)
-        self.g = UInt8(g)
-        self.b = UInt8(b)
-        self.a = UInt8(a)
-    }
-}
 
 /// A C4Image provides a view-based container for displaying a single image. You can create images from files, from other image objects, or from raw image data you receive.
 public class C4Image: C4View, NSCopying {
-
     internal class ImageView: UIImageView {
         var imageLayer: C4ImageLayer {
             return self.layer as! C4ImageLayer // swiftlint:disable:this force_cast
@@ -85,12 +49,10 @@ public class C4Image: C4View, NSCopying {
 
     /// Initializes a new C4Image using the specified filename from the bundle (i.e. your project), it will also grab images
     /// from the web if the filename starts with http.
-    ///
     /// ````
     /// let img = C4Image("logo")
     /// canvas.add(img)
     /// ````
-    ///
     /// - parameter name:	The name of the image included in your project, or a web address.
     convenience public init?(_ name: String) {
         self.init(name, scale: 1.0)
@@ -98,12 +60,10 @@ public class C4Image: C4View, NSCopying {
 
     /// Initializes a new C4Image using the specified filename from the bundle (i.e. your project), it will also grab images
     /// from the web if the filename starts with http.
-    ///
     /// ````
     /// let img = C4Image("http://www.c4ios.com/images/logo@2x.png", scale: 2.0)
     /// canvas.add(img)
     /// ````
-    ///
     /// - parameter name:	The name of the image included in your project, or a web address.
     convenience public init?(_ name: String, scale: Double) {
         guard let image = UIImage(named: name) else {
@@ -113,7 +73,6 @@ public class C4Image: C4View, NSCopying {
     }
 
     /// Initializes a new C4Image using an existing C4Image (basically like copying).
-    ///
     /// ````
     /// let a = C4Image("logo")
     /// canvas.add(a)
@@ -121,7 +80,6 @@ public class C4Image: C4View, NSCopying {
     /// b.center = canvas.center
     /// canvas.add(b)
     /// ````
-    ///
     /// - parameter image: A C4Image.
     convenience public init(image: C4Image) {
         self.init()
@@ -130,28 +88,24 @@ public class C4Image: C4View, NSCopying {
     }
 
     /// Initializes a new C4Image using a UIImage.
-    ///
     /// ````
     /// if let uii = UIImage(named:"logo") {
     ///     let img = C4Image(uiimage: uii)
     ///     canvas.add(img)
     /// }
     /// ````
-    ///
     /// - parameter uiimage: A UIImage object.
     convenience public init(uiimage: UIImage) {
         self.init(uiimage: uiimage, scale: 1.0)
     }
 
     /// Initializes a new C4Image using a UIImage, with option for specifying the scale of the image.
-    ///
     /// ````
     /// if let uii = UIImage(named:"logo") {
     ///     let img = C4Image(uiimage: uii, scale: 2.0)
     ///     canvas.add(img)
     /// }
     /// ````
-    ///
     /// - parameter uiimage: A UIImage object.
     /// - parameter scale: A `Double` should be larger than 0.0
     convenience public init(uiimage: UIImage, let scale: Double) {
@@ -167,15 +121,12 @@ public class C4Image: C4View, NSCopying {
     }
 
     /// Initializes a new C4Image using a CGImageRef.
-    ///
     /// ````
     /// let cgi = CGImageCreate()
     /// let img = C4Image(cgimage: cgi)
     /// canvas.add(img)
     /// ````
-    ///
     /// [Example](https://gist.github.com/C4Framework/06319d420426cb0f1cb3)
-    ///
     /// - parameter cgimage: A CGImageRef object.
     convenience public init(cgimage: CGImageRef) {
         let image = UIImage(CGImage: cgimage)
@@ -183,13 +134,11 @@ public class C4Image: C4View, NSCopying {
     }
 
     /// Initializes a new C4Image using a CGImageRef, with option for specifying the scale of the image.
-    ///
     /// ````
     /// let cgi = CGImageCreate()
     /// let img = C4Image(cgimage: cgi, scale: 2.0)
     /// canvas.add(img)
     /// ````
-    ///
     /// - parameter cgimage: A CGImageRef object.
     /// - parameter scale: The scale of the image.
     convenience public init(cgimage: CGImageRef, scale: Double) {
@@ -198,18 +147,14 @@ public class C4Image: C4View, NSCopying {
     }
 
     /// Initializes a new C4Image using a CIImage.
-    ///
     /// Use this method if you're working with the output of a CIFilter.
-    ///
     /// - parameter ciimage: A CIImage object.
     convenience public init(ciimage: CIImage) {
         self.init(ciimage: ciimage, scale: 1.0)
     }
 
     /// Initializes a new C4Image using a CIImage, with option for specifying the scale of the image.
-    ///
     /// Use this method if you're working with the output of a CIFilter.
-    ///
     /// - parameter ciimage: A CIImage object.
     /// - parameter scale: The scale of the image.
     convenience public init(ciimage: CIImage, scale: Double) {
@@ -218,22 +163,16 @@ public class C4Image: C4View, NSCopying {
     }
 
     /// Initializes a new C4Image using raw data.
-    ///
     /// Use this if you download an image as data you can pass it here to create an image.
-    ///
     /// See the body of init(url:) to see how to download an image as data.
-    ///
     /// - parameter data: An NSData object.
     convenience public init(data: NSData) {
         self.init(data: data, scale: 1.0)
     }
 
     /// Initializes a new C4Image using raw data, with option for specifying the scale of the image.
-    ///
     /// Use this if you download an image as data you can pass it here to create an image.
-    ///
     /// See the body of init(url:) to see how to download an image as data.
-    ///
     /// - parameter data: An NSData object.
     /// - parameter scale: The scale of the image.
     convenience public init(data: NSData, scale: Double) {
@@ -242,28 +181,24 @@ public class C4Image: C4View, NSCopying {
     }
 
     /// Initializes a new C4Image from an URL.
-    ///
     /// ````
     ///  if let url = NSURL(string: "http://www.c4ios.com/images/logo@2x.png") {
     ///      let img = C4Image(url: url)
     ///      canvas.add(img)
     /// }
     /// ````
-    ///
     /// - parameter url: An NSURL object.
     convenience public init(url: NSURL) {
         self.init(url: url, scale: 1.0)
     }
 
     /// Initializes a new C4Image from an URL, with option for specifying the scale of the image.
-    ///
     /// ````
     /// if let url = NSURL(string: "http://www.c4ios.com/images/logo@2x.png") {
     ///     let img = C4Image(url: url, scale: 2.0)
     ///     canvas.add(img)
     /// }
     /// ````
-    ///
     /// - parameter url: An NSURL object.
     /// - parameter scale: The scale of the image.
     convenience public init(url: NSURL, scale: Double) {
@@ -288,7 +223,6 @@ public class C4Image: C4View, NSCopying {
     /// Initializes a new C4Image using raw data. This method differs from `C4Image(data:...)` in that you can pass an array of
     /// raw data to the initializer. This works if you're creating your own raw images by changing the values of individual
     /// pixels. Pixel data should be RGBA.
-    ///
     /// - parameter pixels: An array of raw pixel data.
     /// - parameter size: The size {w, h} of the image you're creating based on the pixel array.
     convenience public init(pixels: [Pixel], size: C4Size) {
@@ -345,14 +279,12 @@ public class C4Image: C4View, NSCopying {
     //MARK: Properties
 
     /// Returns the UIImageView of the object.
-    ///
     /// - returns: A UIImageView object.
     internal var imageView: ImageView {
         return self.view as! ImageView // swiftlint:disable:this force_cast
     }
 
     /// Returns a UIImage representation of the receiver.
-    ///
     /// - returns:	A UIImage object.
     public var uiimage: UIImage {
         get {
@@ -361,7 +293,6 @@ public class C4Image: C4View, NSCopying {
     }
 
     /// Returns a CGImageRef representation of the receiver.
-    ///
     /// - returns:	A CGImageRef object.
     public var cgimage: CGImageRef {
         get {
@@ -370,7 +301,6 @@ public class C4Image: C4View, NSCopying {
     }
 
     /// Returns a CIImage representation of the receiver. Generally, this would be used to work with filters.
-    ///
     /// - returns:	A CIImage object.
     public var ciimage: CIImage {
         get {
@@ -383,9 +313,6 @@ public class C4Image: C4View, NSCopying {
     /// If you are using the layer to display a static image, you can set this property to the CGImageRef containing the image
     /// you want to display. Assigning a value to this property causes the layer to use your image rather than create a
     /// separate backing store.
-    /// If the layer object is tied to a view object, you should avoid setting the contents of this property directly. The
-    /// interplay between views and layers usually results in the view replacing the contents of this property during a
-    /// subsequent update.
     public var contents: CGImage {
         get {
             let layer = imageView.layer as CALayer
@@ -437,7 +364,6 @@ public class C4Image: C4View, NSCopying {
             self.frame = rect
         }
     }
-
 
     /// Assigning a value of true to this property will cause the receiver to scale its entire frame whenever its `width` or
     /// `height` variables are set.

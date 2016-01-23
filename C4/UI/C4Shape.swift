@@ -59,8 +59,7 @@ public class C4Shape: C4View {
         shapeLayer.contents = image
     }
 
-    /// Initializest a new C4Shape from a specified C4Path.
-    ///
+    /// Initializes a new C4Shape from a specified C4Path.
     /// - parameter path: A C4Path around which the new shape is created with the frame of the new shape fitting the path on
     /// screen.
     public convenience init(_ path: C4Path) {
@@ -73,8 +72,7 @@ public class C4Shape: C4View {
         adjustToFitPath()
     }
 
-    /// Initializest a new C4Shape from the properties of another C4Shape. Essentially, this copies the provided shape.
-    ///
+    /// Initializes a new C4Shape from the properties of another C4Shape. Essentially, this copies the provided shape.
     /// - parameter shape: A C4Shape around which the new shape is created.
     public convenience init(_ shape: C4Shape) {
         self.init()

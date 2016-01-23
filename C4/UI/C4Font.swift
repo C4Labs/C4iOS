@@ -25,18 +25,14 @@ public class C4Font: NSObject {
     internal var internalFont: UIFont!
 
     /// The UIFont representation of the receiver.
-    ///
     /// ````
     /// let uif = font.UIFont
     /// ````
     public var uiifont: UIFont {
-        get {
-            return internalFont
-        }
+        return internalFont
     }
 
     /// Initializes a new C4Font using the specified font name and size.
-    ///
     /// ````
     /// let f = C4Font("Helvetica", 20)
     /// ````
@@ -51,7 +47,6 @@ public class C4Font: NSObject {
     }
 
     /// Initializes a new C4Font using the specified font name and default size of 12.0 pt.
-    ///
     /// ````
     /// let f = C4Font("Helvetica")
     /// ````
@@ -61,7 +56,6 @@ public class C4Font: NSObject {
     }
 
     /// Initializes a new C4Font using a specified UIFont.
-    ///
     /// ````
     /// if let uif = UIFont(name: "Helvetica", size: 24) {
     ///     let f = C4Font(font: uif)
@@ -73,61 +67,48 @@ public class C4Font: NSObject {
     }
 
     /// Returns an array of font family names available on the system.
-    ///
     /// - returns:	An array of String objects, each of which contains the name of a font family.
     public class func familyNames() -> [AnyObject] {
         return UIFont.familyNames()
     }
 
     /// Returns an array of font names available in a particular font family.
-    ///
     /// ````
     /// for n in C4Font.fontNames("Avenir Next") {
     ///     println(n)
     /// }
     /// ````
-    ///
     /// - parameter familyName:	The name of the font family.
-    ///
     /// - returns:	An array of String objects, each of which contains a font name associated with the specified family.
     public class func fontNames(familyName: String) -> [AnyObject] {
         return UIFont.fontNamesForFamilyName(familyName)
     }
 
     /// Returns the font object used for standard interface items in the specified size.
-    ///
     /// ````
     /// let f = C4Font.systemFont(20)
     /// ````
-    ///
     /// - parameter size:	The size (in points) to which the font is scaled.
-    ///
     /// - returns:	A font object of the specified size.
     public class func systemFont(size: Double) -> C4Font {
         return C4Font(font: UIFont.systemFontOfSize(CGFloat(size)))
     }
 
     /// Returns the font object used for standard interface items that are rendered in boldface type in the specified size.
-    ///
     /// ````
     /// let f = C4Font.boldSystemFont(20)
     /// ````
-    ///
     /// - parameter size:	The size (in points) to which the font is scaled.
-    ///
     /// - returns:	A font object of the specified size.
     public class func boldSystemFont(size: Double) -> C4Font {
         return C4Font(font: UIFont.boldSystemFontOfSize(CGFloat(size)))
     }
 
     /// Returns the font object used for standard interface items that are rendered in italic type in the specified size.
-    ///
     /// ````
     /// let f = C4Font.italicSystemFont(20)
     /// ````
-    ///
     /// - parameter size:	The size (in points) to which the font is scaled.
-    ///
     /// - returns: A font object of the specified size.
     public class func italicSystemFont(size: Double) -> C4Font {
         return C4Font(font: UIFont.italicSystemFontOfSize(CGFloat(size)))
@@ -135,14 +116,11 @@ public class C4Font: NSObject {
 
 
     /// Returns a font object that is the same as the receiver but which has the specified size instead.
-    ///
     /// ````
     /// let f = C4Font(name: "Avenir Next")
     /// let f2 = f.font(20)
     /// ````
-    ///
     /// - parameter size:	The desired size (in points) of the new font object.
-    ///
     /// - returns:	A font object of the specified size.
     public func font(size: Double) -> C4Font {
         return C4Font(font: internalFont!.fontWithSize(CGFloat(size)))
@@ -158,7 +136,6 @@ public class C4Font: NSObject {
     /// The font face name. (read-only)
     /// The font name is a name such as HelveticaBold that incorporates the family name and any specific style information for
     /// the font. The value in this property is intended for an application’s internal usage only and should not be displayed.
-    ///
     /// ````
     /// let f = C4Font(name: "Avenir Next")
     /// let n = f.fontName
@@ -203,28 +180,24 @@ public class C4Font: NSObject {
     }
 
     /// Returns the standard font size used for labels.
-    ///
     /// - returns:	The standard label font size in points.
     public var labelFontSize: Double {
         return Double(UIFont.labelFontSize())
     }
 
     /// Returns the standard font size used for buttons.
-    ///
     /// - returns:	The standard button font size in points.
     public var buttonFontSize: Double {
         return Double(UIFont.buttonFontSize())
     }
 
     /// Returns the size of the standard system font.
-    ///
     /// - returns:	The standard system font size in points.
     public var systemFontSize: Double {
         return Double(UIFont.systemFontSize())
     }
 
     /// Returns the size of the standard small system font.
-    ///
     /// - returns:	The standard small system font size in points.
     public var smallSystemFontSize: Double {
         return Double(UIFont.smallSystemFontSize())
