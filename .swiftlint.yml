@@ -1,0 +1,4 @@
+disabled_rules:
+  - variable_name
+  - line_length
+  - type_body_length

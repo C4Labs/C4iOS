@@ -35,7 +35,7 @@ import Foundation
 /// - parameter max: The upper bound
 ///
 /// - returns: The clamped value
-public func clamp<T : Comparable>(val: T, min: T, max: T) -> T {
+public func clamp<T: Comparable>(val: T, min: T, max: T) -> T {
     assert(min < max, "min has to be less than max")
     if val < min { return min }
     if val > max { return max }

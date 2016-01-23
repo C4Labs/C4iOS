@@ -27,7 +27,7 @@ import CoreGraphics
 /// C4Log(0)
 /// ````
 ///
-/// - parameter string: A formatted string that will print to the console
+/// - parameter value: An object to print to the console
 public func C4Log<T>(value: T) {
     print("[C4Log] \(value)")
 }
@@ -58,12 +58,14 @@ public func CGRectMakeFromPoints(points: [CGPoint]) -> CGRect {
 /// }
 /// ````
 ///
-/// - parameter time: The amount of time in seconds to wait before executing the block of code.
-public func delay(delay: Double, closure: ()->()) {
+/// - parameter time:   The amount of time in seconds to wait before executing the block of code.
+/// - parameter action: The action to perform after the delay.
+public func delay(delay: Double, action: ()->()) {
     dispatch_after(
         dispatch_time(
             DISPATCH_TIME_NOW,
             Int64(delay * Double(NSEC_PER_SEC))
         ),
-        dispatch_get_main_queue(), closure)
+        dispatch_get_main_queue(), action)
 }
+
