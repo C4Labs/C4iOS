@@ -20,7 +20,7 @@
 import CoreImage
 
 ///Softens edges and applies a pleasant glow to an image.
-public struct C4Bloom : C4Filter {
+public struct C4Bloom: C4Filter {
     ///The name of the corresponding CIFilter
     public let filterName = "CIBloom"
     ///A Double value whose attribute type is CIAttributeTypeDistance and whose display name is Radius. Default value: 10.0
@@ -31,7 +31,10 @@ public struct C4Bloom : C4Filter {
     ///Initializes a new filter
     public init() {}
 
-    ///Applies the properties of the receiver to create a new CIFilter object
+    /// Applies the properties of the receiver to create a new CIFilter object
+    ///
+    /// - parameter inputImage: The image to use as input to the filter.
+    /// - returns: The new CIFilter object.
     public func createCoreImageFilter(inputImage: CIImage) -> CIFilter {
         let filter = CIFilter(name: filterName)!
         filter.setDefaults()

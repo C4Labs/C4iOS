@@ -26,12 +26,12 @@ import CoreImage
 ///  logo.apply(C4Sepia())
 ///  canvas.add(logo)
 ///  ````
-public struct C4Sepia : C4Filter {
+public struct C4Sepia: C4Filter {
     /// The name of the Core Image filter.
     public let filterName = "CISepiaTone"
     /// The intensity of the filter. Defaults to 1.0
     public var intensity: Double = 1.0
-    
+
     ///Initializes a new filter
     public init() {}
 
@@ -40,7 +40,10 @@ public struct C4Sepia : C4Filter {
     ///  - parameter intensity: a Double value
     public init(intensity: Double) { self.intensity = intensity }
     
-    ///Applies the properties of the receiver to create a new CIFilter object
+    /// Applies the properties of the receiver to create a new CIFilter object
+    ///
+    /// - parameter inputImage: The image to use as input to the filter.
+    /// - returns: The new CIFilter object.
     public func createCoreImageFilter(inputImage: CIImage) -> CIFilter {
         let filter = CIFilter(name: filterName)!
         filter.setDefaults()

@@ -26,7 +26,7 @@ import CoreImage
 ///  logo.apply(C4DotScreen())
 ///  canvas.add(logo)
 ///  ````
-public struct C4DotScreen : C4Filter {
+public struct C4DotScreen: C4Filter {
     /// The name of the Core Image filter.
     public let filterName = "CIDotScreen"
     /// The center of the pattern. Defaults to {0,0}
@@ -41,7 +41,10 @@ public struct C4DotScreen : C4Filter {
     ///Initializes a new filter
     public init() {}
 
-    ///Applies the properties of the receiver to create a new CIFilter object
+    /// Applies the properties of the receiver to create a new CIFilter object
+    ///
+    /// - parameter inputImage: The image to use as input to the filter.
+    /// - returns: The new CIFilter object.
     public func createCoreImageFilter(inputImage: CIImage) -> CIFilter {
         let filter = CIFilter(name: filterName)!
         filter.setDefaults()

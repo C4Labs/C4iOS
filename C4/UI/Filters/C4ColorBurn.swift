@@ -29,7 +29,7 @@ import CoreImage
 ///  logo.apply(colorburn)
 ///  canvas.add(logo)
 ///  ````
-public struct C4ColorBurn : C4Filter {
+public struct C4ColorBurn: C4Filter {
     /// The name of the Core Image filter.
     public let filterName = "CIColorBurnBlendMode"
     /// The background image to use for the burn.
@@ -37,7 +37,10 @@ public struct C4ColorBurn : C4Filter {
     ///Initializes a new filter
     public init() {}
 
-    ///Applies the properties of the receiver to create a new CIFilter object
+    /// Applies the properties of the receiver to create a new CIFilter object
+    ///
+    /// - parameter inputImage: The image to use as input to the filter.
+    /// - returns: The new CIFilter object.
     public func createCoreImageFilter(inputImage: CIImage) -> CIFilter {
         let filter = CIFilter(name: filterName)!
         filter.setDefaults()

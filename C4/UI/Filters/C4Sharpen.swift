@@ -20,7 +20,7 @@
 import CoreImage
 
 ///Increases image detail by sharpening.
-public struct C4Sharpen : C4Filter {
+public struct C4Sharpen: C4Filter {
     /// The name of the Core Image filter (e.g. "CIBloom")
     public let filterName = "CISharpenLuminance"
     /// A Double value by which to sharpen the image. Default value: 0.4
@@ -29,7 +29,10 @@ public struct C4Sharpen : C4Filter {
     ///Initializes a new filter
     public init() {}
 
-    ///Applies the properties of the receiver to create a new CIFilter object
+    /// Applies the properties of the receiver to create a new CIFilter object
+    ///
+    /// - parameter inputImage: The image to use as input to the filter.
+    /// - returns: The new CIFilter object.
     public func createCoreImageFilter(inputImage: CIImage) -> CIFilter {
         let filter = CIFilter(name: filterName)!
         filter.setDefaults()

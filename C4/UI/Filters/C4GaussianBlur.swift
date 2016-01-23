@@ -26,7 +26,7 @@ import CoreImage
 ///  logo.apply(C4GaussianBlur())
 ///  canvas.add(logo)
 ///  ````
-public struct C4GaussianBlur : C4Filter {
+public struct C4GaussianBlur: C4Filter {
     /// The name of the Core Image filter.
     public let filterName = "CIGaussianBlur"
 
@@ -37,7 +37,10 @@ public struct C4GaussianBlur : C4Filter {
     ///  - parameter radius: a Double value
     public init(radius: Double = 5.0) { self.radius = radius }
 
-    ///Applies the properties of the receiver to create a new CIFilter object
+    /// Applies the properties of the receiver to create a new CIFilter object
+    ///
+    /// - parameter inputImage: The image to use as input to the filter.
+    /// - returns: The new CIFilter object.
     public func createCoreImageFilter(inputImage: CIImage) -> CIFilter {
         let filter = CIFilter(name: filterName)!
         filter.setDefaults()
