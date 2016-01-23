@@ -104,18 +104,11 @@ class C4RectTests: XCTestCase {
     }
 
     func testIntegral() {
-        //couldn't figure out how to build a dynamic test for this
+        XCTAssertEqual(integral(C4Rect(0.1, 0.9, 9.9, 9.1)), C4Rect(0, 0, 10, 10))
     }
 
     func testStandardize() {
-        func r() -> Double {
-            return Double(random(below: 100))
-        }
-        let a = C4Point(r(), r())
-        let b = C4Size(-r(), -r())
-        let c = C4Rect(a.x + b.width, a.y + b.height, -b.width, -b.height)
-        let d = standardize(C4Rect(a, b))
-        XCTAssertEqual(c, d, "C should equal D")
+        XCTAssertEqual(standardize(C4Rect(0, 0, -10, -10)), C4Rect(-10, -10, 10, 10))
     }
 
     func testInset() {

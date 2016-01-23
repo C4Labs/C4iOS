@@ -264,9 +264,8 @@ public func union(rect1: C4Rect, rect2: C4Rect) -> C4Rect {
 /// Returns the smallest rectangle that results from converting the source rectangle values to integers.
 ///
 /// ````
-/// let r1 = C4Rect(0.1,0.1,10.6,10.6)
-/// let r2 = C4Rect(5,5,10,10)
-/// intersection(r1,r2) //-> {5,5,5,5}
+/// let r = C4Rect(0.1, 0.9, 9.1, 9.9)
+/// integral(r) //-> {0, 0, 10, 10}
 /// ````
 ///
 /// - parameter r:	The source rectangle.
@@ -278,8 +277,8 @@ public func integral(r: C4Rect) -> C4Rect {
 /// Returns a rectangle with a positive width and height.
 ///
 /// ````
-/// let r = C4Rect(0.1,0.1,10.6,10.6)
-/// integral(r) //-> {0,0,11,11}
+/// let r = C4Rect(0, 0, -10, -10)
+/// standardize(r) //-> {-10, -10, 10, 10}
 /// ````
 ///
 /// - parameter r:	The source rectangle.

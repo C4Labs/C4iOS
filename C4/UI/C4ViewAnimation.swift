@@ -28,8 +28,8 @@ public struct Spring {
     public var stiffness: Double
     /// The damping coefficient. Must be greater than or equal to 0. Defaults to 10.
     public var damping: Double
-    /// The initial velocity of the object attached to the spring. 
-    /// Defaults to zero, which represents an unmoving object. 
+    /// The initial velocity of the object attached to the spring.
+    /// Defaults to zero, which represents an unmoving object.
     /// Negative values represent the object moving away from the spring attachment point,
     /// positive values represent the object moving towards the spring attachment point.
     public var initialVelocity: Double
