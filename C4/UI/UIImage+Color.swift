@@ -17,27 +17,21 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-import CoreImage
+import UIKit
 
-///Increases image detail by sharpening.
-public struct C4Sharpen: C4Filter {
-    /// The name of the Core Image filter (e.g. "CIBloom")
-    public let filterName = "CISharpenLuminance"
-    /// A Double value by which to sharpen the image. Default value: 0.4
-    public var sharpness: Double = 0.4
-
-    ///Initializes a new filter
-    public init() {}
-
-    /// Applies the properties of the receiver to create a new CIFilter object
+public extension UIImage {
+    /// Create an image with a solid color.
     ///
-    /// - parameter inputImage: The image to use as input to the filter.
-    /// - returns: The new CIFilter object.
-    public func createCoreImageFilter(inputImage: CIImage) -> CIFilter {
-        let filter = CIFilter(name: filterName)!
-        filter.setDefaults()
-        filter.setValue(sharpness, forKey:"inputSharpness")
-        filter.setValue(inputImage, forKey:"inputImage")
-        return filter
+    /// - parameter color: The color to use when creating the image.
+    /// - parameter size:  The size of image to create.
+    /// - returns: A UIImage filled with the specified color and whose dimensions equal the give size
+    public class func createWithColor(color: UIColor, size: CGSize) -> UIImage {
+        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        color.setFill()
+        UIRectFill(rect)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
     }
 }

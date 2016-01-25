@@ -22,32 +22,32 @@ import CoreGraphics
 
 /// Defines a structure representing the border of a C4View.
 public struct Shadow {
-    
+
     /// Returns the corner radius of the border. Animatable.
     ///
     /// Assigning an new value to this will change the corner radius of the shadow.
     public var radius: Double
-    
+
     /// Returns the color of the shadow. Animatable.
     ///
     /// Assigning an new value to this will change the color of the shadow.
     public var color: C4Color?
-    
+
     /// Returns the offset of the shadow. Animatable.
     ///
     /// Assigning an new value to this will change the offset of the shadow.
     public var offset: C4Size
-    
+
     /// Returns the opacity of the shadow. Animatable.
     ///
     /// Assigning an new value to this will change the opacity of the shadow.
     public var opacity: Double
-    
+
     /// Returns the outline of the shadow. Animatable.
     ///
     /// Assigning an new value to this will change the path of the shadow.
     public var path: C4Path?
-    
+
     /// Initializes a new C4Shadow struct with the following defaults:
     ///
     /// radius = 5.0
@@ -57,14 +57,14 @@ public struct Shadow {
     public init() {
         radius = 5.0
         color = C4Color(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
-        offset = C4Size(5,5)
+        offset = C4Size(5, 5)
         opacity = 0.0
     }
 }
 
 /// Extension to C4View that adds a shadow property.
 public extension C4View {
-    
+
     /// Returns a struct that represents the current visible state of the receiver's shadow. Animatable.
     ///
     /// Assigning a new value to this will change the `shadowRadius`, `shadowColor`, `shadowOpacity`, `shadowPath` and

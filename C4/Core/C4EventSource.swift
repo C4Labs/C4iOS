@@ -46,9 +46,6 @@ public protocol C4EventSource {
 
 /// This extension allows any NSObject to post and listen for events in the same way as C4 objects.
 extension NSObject : C4EventSource {
-    
-    //MARK: - EventSource
-
     /// Posts a new notification originating from the receiver.
     ///
     /// ````
@@ -61,7 +58,7 @@ extension NSObject : C4EventSource {
     public func post(event: String) {
         NSNotificationCenter.defaultCenter().postNotificationName(event, object: self)
     }
-    
+
     /// An action to run on receipt of a given event.
     ///
     /// ````
@@ -72,6 +69,7 @@ extension NSObject : C4EventSource {
     ///
     /// - parameter event: The notification name to listen for
     /// - parameter run:   A block of code to run when the receiver "hears" the specified event name
+    /// - returns: A token to use for cancelling the action.
     public func on(event notificationName: String, run executionBlock: Void -> Void) -> AnyObject {
         return on(event: notificationName, from: nil, run: executionBlock)
     }
@@ -84,26 +82,26 @@ extension NSObject : C4EventSource {
     ///  }
     ///  ````
     ///
-    ///  - parameter notificationName: The notification name to listen for
-    ///  - parameter sender:           The object from which to listen for the notification
-    ///  - parameter executionBlock:   A block of code to run when the receiver "hears" the specified notification name
+    /// - parameter notificationName: The notification name to listen for
+    /// - parameter sender:           The object from which to listen for the notification
+    /// - parameter executionBlock:   A block of code to run when the receiver "hears" the specified notification name
+    /// - returns: A token to use for cancelling the action.
     public func on(event notificationName: String, from sender: AnyObject?, run executionBlock: Void -> Void) -> AnyObject {
         let nc = NSNotificationCenter.defaultCenter()
         return nc.addObserverForName(notificationName, object: sender, queue: NSOperationQueue.currentQueue(), usingBlock: { notification in
             executionBlock()
-        });
+        })
     }
-    
+
     /// Cancels any actions registered to run for a specified object.
     ///
     /// ````
     /// canvas.cancel(self)
     /// ````
     ///
-    /// - parameter observer: An object whose actions are to be removed from the notification center.
-    public func cancel(observer: AnyObject) {
+    /// - parameter token: A token returned from a call to `on(event:run:)` method
+    public func cancel(token: AnyObject) {
         let nc = NSNotificationCenter.defaultCenter()
-        nc.removeObserver(observer)
+        nc.removeObserver(token)
     }
-    
 }

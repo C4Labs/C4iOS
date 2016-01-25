@@ -26,7 +26,7 @@ import CoreImage
 ///  image.generate(C4Checkerboard())
 ///  canvas.add(image)
 ///  ````
-public struct C4Checkerboard : C4Generator {
+public struct C4Checkerboard: C4Generator {
     ///The name of the Core Image filter.
     public let filterName = "CICheckerboardGenerator"
     ///The colors of the checkerboard. Defaults to: [C4Pink, C4Blue]
@@ -41,7 +41,9 @@ public struct C4Checkerboard : C4Generator {
     ///Initializes a new filter
     public init() {}
 
-    ///Applies the properties of the receiver to create a new CIFilter object
+    /// Applies the properties of the receiver to create a new CIFilter object
+    ///
+    /// - returns: The new CIFilter object.
     public func createCoreImageFilter() -> CIFilter {
         let filter = CIFilter(name: filterName)!
         filter.setDefaults()

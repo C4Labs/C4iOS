@@ -20,16 +20,15 @@
 import CoreGraphics
 
 ///  The C4Vector class is used for coordinate values and direction vectors.
-public struct C4Vector : Equatable, CustomStringConvertible {
+public struct C4Vector: Equatable, CustomStringConvertible {
     /// The x-value of the vector.
     public var x: Double = 0
     /// The y-value of the vector.
     public var y: Double = 0
     /// The z-value of the vector.
     public var z: Double = 0
-    
+
     /// Creates a vector with default values {0,0,0,}
-    ///
     /// ````
     /// let v = C4Vector()
     /// ````
@@ -37,37 +36,43 @@ public struct C4Vector : Equatable, CustomStringConvertible {
     }
 
     /// Create a vector with a cartesian representation: an x and a y coordinates. The `z` variable is optional.
-    ///
     /// ````
     /// let v = C4Vector(x: 1.0, y: 1.0, z: 1.0)
     /// let v = C4Vector(x: 1.0, y: 1.0)
     /// ````
+    /// - parameter x: the x-value of the new vector
+    /// - parameter y: the y-value of the new vector
+    /// - parameter z: the z-value of the new vector (defaults to 0)
     public init(x: Double, y: Double, z: Double = 0) {
         self.x = x
         self.y = y
         self.z = z
     }
-    
+
     /// Create a vector with a cartesian representation: an x and a y coordinates.
-    ///
     /// ````
     /// let v = C4Vector(x: 1, y: 1, z: 1)
     /// ````
+    /// - parameter x: the x-value of the new vector
+    /// - parameter y: the y-value of the new vector
+    /// - parameter z: the z-value of the new vector (defaults to 0)
     public init(x: Int, y: Int, z: Int = 0) {
         self.x = Double(x)
         self.y = Double(y)
         self.z = Double(z)
     }
-    
+
     /// Create a vector with a polar representation: a magnitude and an angle in radians. The `z` variable is optional.
     /// [Polar coordinate system - Wikipedia](http://en.wikipedia.org/wiki/Polar_coordinate_system)
-    ///
     /// ````
     /// let m = sqrt(2.0)
     /// let h = M_PI_4
     /// let v = C4Vector(magnitude: m, heading: h)
     /// v //-> {1,1,0}
     /// ````
+    /// - parameter magnitude: the magnitude of the new vector
+    /// - parameter heading: the heading (angle) of the new vector
+    /// - parameter z: the z-value of the new vector (defaults to 0)
     public init(magnitude: Double, heading: Double, z: Double = 0) {
         x = magnitude * cos(heading)
         y = magnitude * sin(heading)
@@ -75,7 +80,6 @@ public struct C4Vector : Equatable, CustomStringConvertible {
     }
 
     ///  Initializes a C4Vector from a CGPoint
-    ///
     ///  - parameter point: a previously initialized CGPoint
     public init(_ point: CGPoint) {
         x = Double(point.x)
@@ -84,7 +88,6 @@ public struct C4Vector : Equatable, CustomStringConvertible {
     }
 
     ///  Initializes a C4Vector from a C4Point
-    ///
     ///  - parameter point: a previously initialized C4Point
     public init(_ point: C4Point) {
         x = point.x
@@ -93,7 +96,6 @@ public struct C4Vector : Equatable, CustomStringConvertible {
     }
 
     /// The polar representation magnitude of the vector.
-    ///
     /// ````
     /// let v = C4Vector(x: 2.0, y: 1.0, z: 0.0)
     /// v.magnitude //-> √2
@@ -107,107 +109,106 @@ public struct C4Vector : Equatable, CustomStringConvertible {
             y = newValue * sin(heading)
         }
     }
-    
+
     /// The polar representation heading angle of the vector, in radians.
-    ///
     /// ````
     /// let v = C4Vector(1,1,0)
     /// v.heading //-> M_PI_4
     /// ````
-    public var heading : Double {
+    public var heading: Double {
         get {
-            return atan2(y, x);
+            return atan2(y, x)
         }
         set {
             x = magnitude * cos(newValue)
             y = magnitude * sin(newValue)
         }
     }
-    
+
     /// The angle between two vectors, based on {0,0}
-    ///
     /// ````
     /// let v1 = C4Vector(x: 1, y: 1, z: 0)
     /// let v2 = C4Vector(x: -1, y: 1, z: 0)
     /// v1.angleTo(v2) //-> M_PI_2
     /// ````
+    /// - parameter vec: The vector used to calcuate the angle to the receiver
+    /// - returns: The angle, measured in radians, between the receiver and `vec`
     public func angleTo(vec: C4Vector) -> Double {
         return acos(self ⋅ vec / (self.magnitude * vec.magnitude))
     }
-    
+
     /// The angle between two vectors, based on a provided point
-    ///
     /// ````
     /// let v1 = C4Vector(x: 1, y: 1, z: 0)
     /// let v2 = C4Vector(x: -1, y: 1, z: 0)
     /// let b = C4Vector(x: 0, y: 1, z: 0)
     /// v1.angleTo(v2, basedOn: b) //-> PI
     /// ````
+    /// - parameter vec: The vector used to calcuate the angle to the receiver
+    /// - parameter basedOn: A second vector used to calcuate the angle to the receiver
+    /// - returns: The angle, measured in radians, between the receiver and `vec`
     public func angleTo(vec: C4Vector, basedOn: C4Vector) -> Double {
         var vecA = self
         var vecB = vec
-        
+
         vecA -= basedOn
         vecB -= basedOn
-        
+
         return acos(vecA ⋅ vecB / (vecA.magnitude * vecB.magnitude))
     }
-    
+
     /// Return the dot product. **You should use the ⋅ operator instead.**
-    ///
     /// ````
     /// let v1 = C4Vector(x: 1, y: 1, z: 0)
     /// let v2 = C4Vector(x: -1, y: 1, z: 0)
     /// v1.dot(v2) //-> 0.0
     /// ````
+    /// - parameter vec: The vector used to calcuate the dot product
+    /// - returns: The dot product of the receiver and `vec`
     public func dot(vec: C4Vector) -> Double {
         return x * vec.x + y * vec.y + z * vec.z
     }
-    
+
     /// Return a vector with the same heading but a magnitude of 1.
-    ///
     /// ````
     /// let v1 = C4Vector(x: 1, y: 1, z: 0)
     /// v1.unitVector() //-> {M_PI_4,M_PI_4,0}
     /// ````
+    /// - returns: A new vector that is the unit vector of the receiver
     public func unitVector() -> C4Vector? {
-        let mag = self.magnitude
-        if mag == 0 {
+        guard self.magnitude != 0.0 else {
             return nil
         }
-        return C4Vector(x: x / mag, y: y / mag, z: z / mag)
+        return C4Vector(x: x / self.magnitude, y: y / self.magnitude, z: z / self.magnitude)
     }
-    
+
     /// Return `true` if the vector is zero.
-    ///
     /// ````
     /// let v = C4Vector()
     /// v.isZero() //-> true
     /// ````
+    /// - returns: A boolean, `true` if all values are 0, `false` otherwise
     public func isZero() -> Bool {
         return x == 0 && y == 0 && z == 0
     }
-    
+
     /// Transform the vector.
-    ///
     /// ````
     /// var v = C4Vector(x: 1, y: 1, z:0)
     /// let t = C4Transform.makeRotation(M_PI, axis: C4Vector(x: 0, y:0, z:1))
     /// v.transform(t) //-> {-1, -1, 0}
     /// ````
+    /// - parameter t: A C4Transform to apply to the receiver
     public mutating func transform(t: C4Transform) {
         x = x * t[0, 0] + y * t[0, 1] + z * t[0, 2]
         y = x * t[1, 0] + y * t[1, 1] + z * t[1, 2]
         z = x * t[2, 0] + y * t[2, 1] + z * t[2, 2]
     }
-    
+
     /// A string representation of the vector.
-    ///
     /// - returns: A string formatted to look like {x,y,z}
-    public var description : String {
-        get {
-            return "{\(x), \(y), \(z)}"
-        }
+    public var description: String {
+        return "{\(x), \(y), \(z)}"
     }
 }
 
@@ -218,6 +219,9 @@ public struct C4Vector : Equatable, CustomStringConvertible {
 /// let v2 = C4Vector(x: 1, y: 0)
 /// v1 == v2 //-> false
 /// ````
+/// - parameter lhs: A C4Vector
+/// - parameter rhs: A C4Vector
+/// - returns: A boolean, `true` if the vectors are equal, `false` otherwise
 public func == (lhs: C4Vector, rhs: C4Vector) -> Bool {
     return lhs.x == rhs.x && lhs.y == rhs.y && lhs.z == rhs.z
 }
@@ -229,6 +233,8 @@ public func == (lhs: C4Vector, rhs: C4Vector) -> Bool {
 /// let v2 = C4Vector(x: 1, y: 0)
 /// v1 += v2 //-> v1 = {2,1,0}
 /// ````
+/// - parameter lhs: A C4Vector to which the values of `rhs` will be added
+/// - parameter rhs: A C4Vector
 public func += (inout lhs: C4Vector, rhs: C4Vector) {
     lhs.x += rhs.x
     lhs.y += rhs.y
@@ -242,6 +248,8 @@ public func += (inout lhs: C4Vector, rhs: C4Vector) {
 /// let v2 = C4Vector(x: 1, y: 0)
 /// v1 += v2 //-> v1 = {0,1,0}
 /// ````
+/// - parameter lhs: A C4Vector to which the values of `rhs` will be subtracted
+/// - parameter rhs: A C4Vector
 public func -= (inout lhs: C4Vector, rhs: C4Vector) {
     lhs.x -= rhs.x
     lhs.y -= rhs.y
@@ -254,6 +262,8 @@ public func -= (inout lhs: C4Vector, rhs: C4Vector) {
 /// let v1 = C4Vector(x: 1, y: 1)
 /// v *= 2.0 //-> v1 = {2,2,0}
 /// ````
+/// - parameter lhs: A C4Vector whose values will be multiplied by `rhs`
+/// - parameter rhs: A scalar value
 public func *= (inout lhs: C4Vector, rhs: Double) {
     lhs.x *= rhs
     lhs.y *= rhs
@@ -266,6 +276,8 @@ public func *= (inout lhs: C4Vector, rhs: Double) {
 /// let v1 = C4Vector(x: 1, y: 1)
 /// v /= 2.0 //-> v = {0.5,0.5,0.0}
 /// ````
+/// - parameter lhs: A C4Vector whose values will be divided by `rhs`
+/// - parameter rhs: A scalar value
 public func /= (inout lhs: C4Vector, rhs: Double) {
     lhs.x /= rhs
     lhs.y /= rhs
@@ -279,6 +291,9 @@ public func /= (inout lhs: C4Vector, rhs: Double) {
 /// let v2 = C4Vector(x: 1, y: 0)
 /// v1+v2 //-> {2,1,0}
 /// ````
+/// - parameter lhs: A C4Vector
+/// - parameter rhs: A C4Vector
+/// - returns: A new vector whose values are the sum of `lhs` and `rhs`
 public func + (lhs: C4Vector, rhs: C4Vector) -> C4Vector {
     return C4Vector(x: lhs.x + rhs.x, y: lhs.y + rhs.y, z: lhs.z + rhs.z)
 }
@@ -290,6 +305,9 @@ public func + (lhs: C4Vector, rhs: C4Vector) -> C4Vector {
 /// var v2 = C4Vector(x: 1, y: 1)
 /// v1-v2 //-> {0,0,0}
 /// ````
+/// - parameter lhs: A C4Vector
+/// - parameter rhs: A C4Vector
+/// - returns: A new vector whose values are the difference of `lhs` and `rhs`
 public func - (lhs: C4Vector, rhs: C4Vector) -> C4Vector {
     return C4Vector(x: lhs.x - rhs.x, y: lhs.y - rhs.y, z: lhs.z - rhs.z)
 }
@@ -303,6 +321,9 @@ infix operator ⋅ { associativity left precedence 150 }
 /// let v2 = C4Vector(x: -1, y: 1)
 /// v1 ⋅ v2 //-> 0.0
 /// ````
+/// - parameter lhs: A C4Vector
+/// - parameter rhs: A C4Vector
+/// - returns: The dot product of `lhs` and `rhs`
 public func ⋅ (lhs: C4Vector, rhs: C4Vector) -> Double {
     return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z
 }
@@ -314,10 +335,12 @@ public func ⋅ (lhs: C4Vector, rhs: C4Vector) -> Double {
 /// var v2 = v1 / 2.0
 /// v2 //-> {0.5,0.5,0}
 /// ````
+/// - parameter lhs: A C4Vector
+/// - parameter rhs: A scalar
+/// - returns: A new vector whose values are those of `lhs` divided by `rhs`
 public func / (lhs: C4Vector, rhs: Double) -> C4Vector {
     return C4Vector(x: lhs.x / rhs, y: lhs.y / rhs, z: lhs.z / rhs)
 }
-
 
 /// Returns a new vector whose coordinates are the multiplication of the left-hand vector coordinates by those of the right-hand
 /// vector
@@ -327,10 +350,12 @@ public func / (lhs: C4Vector, rhs: Double) -> C4Vector {
 /// var v2 = v2 * 2.0
 /// v2 //-> {2,2,0}
 /// ````
+/// - parameter lhs: A C4Vector
+/// - parameter rhs: A scalar
+/// - returns: A new vector whose values are those of `lhs` multiplied by `rhs`
 public func * (lhs: C4Vector, rhs: Double) -> C4Vector {
     return C4Vector(x: lhs.x * rhs, y: lhs.y * rhs, z: lhs.z * rhs)
 }
-
 
 /// Returns a new vector whose coordinates are the multiplication of the right-hand vector coordinates by the left-hand scalar
 ///
@@ -338,11 +363,12 @@ public func * (lhs: C4Vector, rhs: Double) -> C4Vector {
 /// var v1 = C4Vector(x: 1, y: 1)
 /// var v2 = 2.0 * v2
 /// v2 //-> {2,2,0}
-///
+/// - parameter lhs: A scalar
+/// - parameter rhs: A C4Vector
+/// - returns: A new vector whose values are those of `lhs` divided by `rhs`
 public func * (lhs: Double, rhs: C4Vector) -> C4Vector {
     return C4Vector(x: rhs.x * lhs, y: rhs.y * lhs, z: rhs.z * lhs)
 }
-
 
 /// Returns a new vector whose coordinates are the negative values of the receiver
 ///
@@ -351,6 +377,8 @@ public func * (lhs: Double, rhs: C4Vector) -> C4Vector {
 /// var v2 = -v1
 /// v2 //-> {-1,-1}
 /// ````
+/// - parameter vector: A C4Vector
+/// - returns: A new vector whose values are the negative of `vector`
 public prefix func - (vector: C4Vector) -> C4Vector {
     return C4Vector(x: -vector.x, y: -vector.y, z: -vector.z)
 }

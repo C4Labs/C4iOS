@@ -19,21 +19,22 @@
 
 import UIKit
 
-/// C4StoredAnimation is a concrete subclass of C4Animation. 
+/// C4StoredAnimation is a concrete subclass of C4Animation.
 ///
 /// A C4StoredAnimation object is able to apply a set of stored animation properties to an object.
 ///
 /// This class is useful for serializing and deserializing animations.
-public class C4StoredAnimation : C4Animation {
+public class C4StoredAnimation: C4Animation {
     /// A dictionary of keys whose values will be applied to animatable properties of the receiver. The keys should map directly to the names of animatable properies.
     public var values = [String: AnyObject]()
 
     /// Initiates the changes specified in the receivers `animations` block.
+    /// - parameter object: An object to which the animations apply
     public func animate(object: NSObject) {
         let disable = C4ShapeLayer.disableActions
         C4ShapeLayer.disableActions = false
         var timing: CAMediaTimingFunction
-        var options : UIViewAnimationOptions = [UIViewAnimationOptions.BeginFromCurrentState]
+        var options: UIViewAnimationOptions = [UIViewAnimationOptions.BeginFromCurrentState]
 
         switch curve {
         case .Linear:
@@ -50,17 +51,8 @@ public class C4StoredAnimation : C4Animation {
             timing = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         }
 
-        if autoreverses == true {
-            options.unionInPlace(.Autoreverse)
-        } else {
-            options.subtractInPlace(.Autoreverse)
-        }
-
-        if repeatCount > 0  {
-            options.unionInPlace(.Repeat)
-        } else {
-            options.subtractInPlace(.Repeat)
-        }
+        autoreverses == true ? options.unionInPlace(.Autoreverse) : options.subtractInPlace(.Autoreverse)
+        repeatCount > 0 ? options.unionInPlace(.Repeat) : options.subtractInPlace(.Repeat)
 
         UIView.animateWithDuration(duration, delay: 0, options: options, animations: {
             C4ViewAnimation.stack.append(self)

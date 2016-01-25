@@ -17,27 +17,36 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-import CoreImage
+///  A structure of 4 8-bit values that represent r, g, b, a values of a single point (i.e. a pixel)
+public struct Pixel {
+    var r: UInt8 = 0
+    var g: UInt8 = 0
+    var b: UInt8 = 0
+    var a: UInt8 = 255
 
-///Increases image detail by sharpening.
-public struct C4Sharpen: C4Filter {
-    /// The name of the Core Image filter (e.g. "CIBloom")
-    public let filterName = "CISharpenLuminance"
-    /// A Double value by which to sharpen the image. Default value: 0.4
-    public var sharpness: Double = 0.4
-
-    ///Initializes a new filter
-    public init() {}
-
-    /// Applies the properties of the receiver to create a new CIFilter object
+    ///  Initializes a pixel whose color is a specified gray.
     ///
-    /// - parameter inputImage: The image to use as input to the filter.
-    /// - returns: The new CIFilter object.
-    public func createCoreImageFilter(inputImage: CIImage) -> CIFilter {
-        let filter = CIFilter(name: filterName)!
-        filter.setDefaults()
-        filter.setValue(sharpness, forKey:"inputSharpness")
-        filter.setValue(inputImage, forKey:"inputImage")
-        return filter
+    ///  - parameter gray: the gray color of the pixel
+    public init(gray: Int) {
+        self.init(gray, gray, gray, 255)
+    }
+
+    ///  Initializes a Pixel structure
+    ///
+    ///  ````
+    ///  let p = Pixel(255, 255, 255, 255) // -> white
+    ///  ````
+    ///
+    ///  Values are calculated from 0...255
+    ///
+    ///  - parameter r: the red component
+    ///  - parameter g: the green component
+    ///  - parameter b: the blue component
+    ///  - parameter a: the alpha component
+    public init(_ r: Int, _ g: Int, _ b: Int, _ a: UInt8) {
+        self.r = UInt8(r)
+        self.g = UInt8(g)
+        self.b = UInt8(b)
+        self.a = UInt8(a)
     }
 }

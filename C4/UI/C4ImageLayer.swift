@@ -17,27 +17,34 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-import CoreImage
+import QuartzCore
 
-///Increases image detail by sharpening.
-public struct C4Sharpen: C4Filter {
-    /// The name of the Core Image filter (e.g. "CIBloom")
-    public let filterName = "CISharpenLuminance"
-    /// A Double value by which to sharpen the image. Default value: 0.4
-    public var sharpness: Double = 0.4
-
-    ///Initializes a new filter
-    public init() {}
-
-    /// Applies the properties of the receiver to create a new CIFilter object
+///Subclass of CALayer that handles animating its contents.
+public class C4ImageLayer: CALayer {
+    /// Configures basic options for a CABasicAnimation.
     ///
-    /// - parameter inputImage: The image to use as input to the filter.
-    /// - returns: The new CIFilter object.
-    public func createCoreImageFilter(inputImage: CIImage) -> CIFilter {
-        let filter = CIFilter(name: filterName)!
-        filter.setDefaults()
-        filter.setValue(sharpness, forKey:"inputSharpness")
-        filter.setValue(inputImage, forKey:"inputImage")
-        return filter
+    /// The options set in this method are favorable for the inner workings of C4's animation behaviours.
+    /// - parameter key: The identifier of the action.
+    /// - returns: The object that provides the action for key.
+    public override func actionForKey(key: String) -> CAAction? {
+        if C4ShapeLayer.disableActions == true {
+            return nil
+        }
+
+        if key != "contents" {
+            return super.actionForKey(key)
+        }
+
+        let animation: CABasicAnimation
+        if let viewAnimation = C4ViewAnimation.stack.last as? C4ViewAnimation where viewAnimation.spring != nil {
+            animation = CASpringAnimation(keyPath: key)
+        } else {
+            animation = CABasicAnimation(keyPath: key)
+        }
+
+        animation.configureOptions()
+        animation.fromValue = self.contents
+
+        return animation
     }
 }

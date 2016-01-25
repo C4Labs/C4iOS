@@ -20,14 +20,14 @@
 import CoreGraphics
 
 ///A structure that contains a point in a two-dimensional coordinate system.
-public struct C4Point : Equatable, CustomStringConvertible {
+public struct C4Point: Equatable, CustomStringConvertible {
 
     ///The x value of the coordinate.
     public var x: Double = 0
 
     /// The y value of the coordinate.
     public var y: Double = 0
-    
+
     ///  Initializes a new point with the coordinates {0,0}
     ///
     ///  ````
@@ -35,7 +35,7 @@ public struct C4Point : Equatable, CustomStringConvertible {
     ///  ````
     public init() {
     }
-    
+
     ///  Initializes a new point with the specified coordinates {x,y}
     ///
     ///  ````
@@ -48,7 +48,7 @@ public struct C4Point : Equatable, CustomStringConvertible {
         self.x = x
         self.y = y
     }
-    
+
     ///  Initializes a new point with the specified coordinates {x,y}, converting integer values to doubles
     ///
     ///  ````
@@ -62,8 +62,6 @@ public struct C4Point : Equatable, CustomStringConvertible {
     ///  Initializes a C4Point initialized with a CGPoint.
     ///
     ///  - parameter point: a previously initialized CGPoint
-    ///
-    ///  - returns: a C4Point whose values are the same as the CGPoint
     public init(_ point: CGPoint) {
         x = Double(point.x)
         y = Double(point.y)
@@ -73,7 +71,7 @@ public struct C4Point : Equatable, CustomStringConvertible {
     public func isZero() -> Bool {
         return x == 0 && y == 0
     }
-    
+
     ///  Transforms the point.
     ///
     ///  ````
@@ -88,16 +86,16 @@ public struct C4Point : Equatable, CustomStringConvertible {
         x = x * t[0, 0] + y * t[0, 1] + t[3, 0]
         y = x * t[1, 0] + y * t[1, 1] + t[3, 1]
     }
-    
+
     ///  A string representation of the point.
-    /// 
+    ///
     ///  ````
     ///  let p = C4Point()
     ///  println(p)
     ///  ````
     ///
     ///  - returns: A string formatted to look like {x,y}
-    public var description : String {
+    public var description: String {
         get {
             return "{\(x), \(y)}"
         }
@@ -139,7 +137,7 @@ public func - (lhs: C4Point, rhs: C4Point) -> C4Vector {
 ///
 ///  - returns: A new point whose coordinates have been translated by the values from the vector (e.g. point.x = lhs.x + rhs.x)
 public func + (lhs: C4Point, rhs: C4Vector) -> C4Point {
-    return C4Point(lhs.x + rhs.x,lhs.y + rhs.y)
+    return C4Point(lhs.x + rhs.x, lhs.y + rhs.y)
 }
 
 ///  Translate a point by the negative of the vector.
@@ -149,7 +147,7 @@ public func + (lhs: C4Point, rhs: C4Vector) -> C4Point {
 ///
 ///  - returns: A new point whose coordinates have been translated by the negative vector (e.g. point.x = lhs.x - rhs.x)
 public func - (lhs: C4Point, rhs: C4Vector) -> C4Point {
-    return C4Point(lhs.x - rhs.x,lhs.y - rhs.y)
+    return C4Point(lhs.x - rhs.x, lhs.y - rhs.y)
 }
 
 ///  Calculates the distance between two points.
@@ -175,7 +173,7 @@ public func == (lhs: C4Point, rhs: C4Point) -> Bool {
 }
 
 ///  Linear interpolation.
-///  
+///
 ///  For any two points `a` and `b` return a point that is the linear interpolation between a and b
 ///  for interpolation parameter `param`. For instance, a parameter of 0 will return `a`, a parameter of 1 will return `b`
 ///  and a parameter of 0.5 will return the midpoint between `a` and `b`.

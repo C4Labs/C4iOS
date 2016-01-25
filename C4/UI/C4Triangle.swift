@@ -22,7 +22,7 @@ import CoreGraphics
 
 /// C4Triangle defines a concrete subclass of C4Polygon whose shape is a closed triangle.
 public class C4Triangle: C4Polygon {
-    
+
     /// Initializes a new C4Triangle using the specified array of points.
     ///
     /// Protects against trying to create a triangle with less than three points.
@@ -35,7 +35,8 @@ public class C4Triangle: C4Polygon {
         self.close()
     }
 
-    ///Returns an object initialized from data in a given unarchiver.
+    /// Initializes a new C4Polygon from data in a given unarchiver.
+    /// - parameter coder: An unarchiver object.
     required public init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

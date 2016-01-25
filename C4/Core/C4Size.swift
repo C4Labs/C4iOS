@@ -21,13 +21,13 @@ import Foundation
 import CoreGraphics
 
 /// A structure that contains width and height values. Values stored as Double, otherwise synonymous with CGSize.
-public struct C4Size : Equatable, Comparable, CustomStringConvertible {
+public struct C4Size: Equatable, Comparable, CustomStringConvertible {
     ///The width of the size.
     public var width: Double
 
     ///The height of the size.
     public var height: Double
-    
+
     /// Initializes a new C4Size with the dimensions {0,0}
     ///
     /// ````
@@ -37,7 +37,7 @@ public struct C4Size : Equatable, Comparable, CustomStringConvertible {
         width = 0
         height = 0
     }
-    
+
     /// Initializes a new C4Size with the dimensions {width,height}
     ///
     /// ````
@@ -47,7 +47,7 @@ public struct C4Size : Equatable, Comparable, CustomStringConvertible {
         self.width = width
         self.height = height
     }
-    
+
     /// Initializes a new C4Size with the dimensions {width,height}, converting Int values to Double
     ///
     /// ````
@@ -75,11 +75,11 @@ public struct C4Size : Equatable, Comparable, CustomStringConvertible {
     public func isZero() -> Bool {
         return width == 0 && height == 0
     }
-    
+
     /// A string representation of the size.
     ///
     /// - returns: A string formatted to look like {w,h}
-    public var description : String {
+    public var description: String {
         get {
             return "{\(width),\(height)}"
         }
@@ -93,6 +93,9 @@ public struct C4Size : Equatable, Comparable, CustomStringConvertible {
 /// let s2 = C4Size(1,1)
 /// s1 == s2 //-> false
 /// ````
+/// - parameter lhs: The first size to compare
+/// - parameter rhs: The second size to compare
+/// - returns: A boolean, `true` if the sizes are equal, otherwise `false`
 public func == (lhs: C4Size, rhs: C4Size) -> Bool {
     return lhs.width == rhs.width && lhs.height == rhs.height
 }
@@ -107,6 +110,9 @@ public func == (lhs: C4Size, rhs: C4Size) -> Bool {
 /// s1 > s2 //-> false
 /// s2 > s3 //-> true
 /// ````
+/// - parameter lhs: The first size to compare
+/// - parameter rhs: The second size to compare
+/// - returns: A boolean, `true` if the area of lhs is greater than that of rhs
 public func > (lhs: C4Size, rhs: C4Size) -> Bool {
     return lhs.width * lhs.height > rhs.width * rhs.height
 }
@@ -121,6 +127,9 @@ public func > (lhs: C4Size, rhs: C4Size) -> Bool {
 /// s1 < s2 //-> false
 /// s2 < s3 //-> false
 /// ````
+/// - parameter lhs: The first size to compare
+/// - parameter rhs: The second size to compare
+/// - returns: A boolean, `true` if the area of lhs is less than that of rhs
 public func < (lhs: C4Size, rhs: C4Size) -> Bool {
     return lhs.width * lhs.height < rhs.width * rhs.height
 }
@@ -135,6 +144,9 @@ public func < (lhs: C4Size, rhs: C4Size) -> Bool {
 /// s1 => s2 //-> true
 /// s2 => s3 //-> true
 /// ````
+/// - parameter lhs: The first size to compare
+/// - parameter rhs: The second size to compare
+/// - returns: A boolean, `true` if the area of lhs is greater than or equal to that of rhs
 public func >= (lhs: C4Size, rhs: C4Size) -> Bool {
     return lhs.width * lhs.height >= rhs.width * rhs.height
 }
@@ -149,6 +161,9 @@ public func >= (lhs: C4Size, rhs: C4Size) -> Bool {
 /// s1 <= s2 //-> true
 /// s2 <= s3 //-> false
 /// ````
+/// - parameter lhs: The first size to compare
+/// - parameter rhs: The second size to compare
+/// - returns: A boolean, `true` if the area of lhs is less than or equal to that of rhs
 public func <= (lhs: C4Size, rhs: C4Size) -> Bool {
     return lhs.width * lhs.height <= rhs.width * rhs.height
 }

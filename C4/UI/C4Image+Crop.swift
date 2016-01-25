@@ -25,15 +25,13 @@ extension C4Image {
     ///
     ///  - parameter rect: a C4Rect
     public func crop(rect: C4Rect) {
-        let intersection = CGRectIntersection(CGRect(rect),CGRect(self.bounds))
-        if(CGRectIsNull(intersection)) { return }
-        
-        
-        let inputRectangle = CGRectMake(
-            intersection.origin.x,
-            CGFloat(self.height) - intersection.origin.y - intersection.size.height,
-            intersection.size.width,
-            intersection.size.height)
+        let intersection = CGRectIntersection(CGRect(rect), CGRect(self.bounds))
+        if CGRectIsNull(intersection) { return }
+        let inputRectangle = CGRect(
+            x: intersection.origin.x,
+            y: CGFloat(self.height) - intersection.origin.y - intersection.size.height,
+            width: intersection.size.width,
+            height: intersection.size.height)
 
         let crop = CIFilter(name: "CICrop")!
         crop.setDefaults()

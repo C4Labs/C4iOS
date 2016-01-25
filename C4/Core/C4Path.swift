@@ -21,12 +21,12 @@ import QuartzCore
 
 /// Rules for determining the region of a path that gets filled with color.
 public enum FillRule {
-    
+
     /// Specifies the non-zero winding rule. Count each left-to-right path as +1 and each right-to-left path as -1. If the
     /// sum of all crossings is 0, the point is outside the path. If the sum is nonzero, the point is inside the path and
     /// the region containing it is filled.
     case NonZero
-    
+
     /// Specifies the even-odd winding rule. Count the total number of path crossings. If the number of crossings is even,
     /// the point is outside the path. If the number of crossings is odd, the point is inside the path and the region
     /// containing it should be filled.
@@ -51,27 +51,34 @@ public class C4Path: Equatable {
     public init(path: CGPathRef) {
         internalPath = CGPathCreateMutableCopy(path)!
     }
-    
+
     /// Determine if the path is empty
+    /// - returns: A boolean, `false` if the path contains no points, otherwise `true`
     public func isEmpty() -> Bool {
         return CGPathIsEmpty(internalPath)
     }
-    
+
     /// Return the path bounding box. The path bounding box is the smallest rectangle completely enclosing all points
     /// in the path, *not* including control points for Bézier cubic and quadratic curves. If the path is empty, then
     /// return `CGRectNull`.
+    /// - returns: A rectangle that represents the path bounding box of the specified path
     public func boundingBox() -> C4Rect {
         return C4Rect(CGPathGetPathBoundingBox(internalPath))
     }
-    
+
     /// Return true if `point` is contained in `path`; false otherwise. A point is contained in a path if it is inside the
     /// painted region when the path is filled; if `fillRule` is `EvenOdd`, then the even-odd fill rule is used to evaluate
     /// the painted region of the path, otherwise, the winding-number fill rule is used.
+    ///
+    /// - parameter point: The point to test.
+    /// - parameter fillRule: The fill rule to use when testing for containment.
+    /// - returns: `true` if `point` is inside the path, `false` otherwise.
     public func containsPoint(point: C4Point, fillRule: FillRule = .NonZero) -> Bool {
         return CGPathContainsPoint(internalPath, nil, CGPoint(point), fillRule == .EvenOdd)
     }
-    
+
     /// Create a copy of the path
+    /// - returns: A new copy of the specified path.
     public func copy() -> C4Path {
         return C4Path(path: CGPathCreateMutableCopy(internalPath)!)
     }
@@ -85,6 +92,9 @@ public class C4Path: Equatable {
 }
 
 /// Determine if two paths are equal
+/// - parameter left: the first path to compare
+/// - parameter right: the second path to compare
+/// - returns: a boolean, `true` if the patrhs are equal, otherwise `false`
 public func == (left: C4Path, right: C4Path) -> Bool {
     return CGPathEqualToPath(left.internalPath, right.internalPath)
 }
@@ -100,56 +110,68 @@ extension C4Path {
             moveToPoint(point)
         }
     }
-    
+
     /// Move the current point of the current subpath.
+    /// - parameter point: A C4Point
     public func moveToPoint(point: C4Point) {
         CGPathMoveToPoint(internalPath, nil, CGFloat(point.x), CGFloat(point.y))
     }
-    
+
     /// Append a straight-line segment fron the current point to `point` and move the current point to `point`.
+    /// - parameter point: A C4Point
     public func addLineToPoint(point: C4Point) {
         CGPathAddLineToPoint(internalPath, nil, CGFloat(point.x), CGFloat(point.y))
     }
-    
+
     /// Append a quadratic curve from the current point to `point` with control point `control` and move the current
     /// point to `point`.
+    /// - parameter control: A C4Point used to shape the curve
+    /// - parameter point: A C4Point
     public func addQuadCurveToPoint(control control: C4Point, point: C4Point) {
         CGPathAddQuadCurveToPoint(internalPath, nil, CGFloat(control.x), CGFloat(control.y), CGFloat(point.x), CGFloat(point.y))
     }
-    
+
     /// Append a cubic Bézier curve from the current point to `point` with control points `control1` and `control2`
     /// and move the current point to `point`.
+    /// - parameter control1: A C4Point used to shape the curve
+    /// - parameter control2: A C4Point used to shape the curve
+    /// - parameter point: A C4Point
     public func addCurveToPoint(control1: C4Point, control2: C4Point, point: C4Point) {
         CGPathAddCurveToPoint(internalPath, nil, CGFloat(control1.x), CGFloat(control1.y), CGFloat(control2.x), CGFloat(control2.y), CGFloat(point.x), CGFloat(point.y))
     }
-    
+
     /// Append a line from the current point to the starting point of the current subpath and end the subpath.
     public func closeSubpath() {
         CGPathCloseSubpath(internalPath)
     }
-    
+
     /// Add a rectangle to the path.
+    /// - parameter rect: a C4Rect to add to the path
     public func addRect(rect: C4Rect) {
         CGPathAddRect(internalPath, nil, CGRect(rect))
     }
-    
+
     /// Add a rounded rectangle to the path. The rounded rectangle coincides with the edges of `rect`. Each corner consists
     /// of one-quarter of an ellipse with axes equal to `cornerWidth` and `cornerHeight`. The rounded rectangle forms a
     /// complete subpath of the path --- that is, it begins with a "move to" and ends with a "close subpath" --- oriented
     /// in the clockwise direction.
+    /// - parameter rect: a C4Rect to add to the path
+    /// - parameter cornerWidth: the width of the shape's rounded corners
+    /// - parameter cornerHeight: the width of the shape's rounded corners
     public func addRoundedRect(rect: C4Rect, cornerWidth: Double, cornerHeight: Double) {
         CGPathAddRoundedRect(internalPath, nil, CGRect(rect), CGFloat(cornerWidth), CGFloat(cornerHeight))
     }
-    
+
     /// Add an ellipse (an oval) inside `rect`. The ellipse is approximated by a sequence of Bézier curves. The center of
     /// the ellipse is the midpoint of `rect`. If `rect` is square, then the ellipse will be circular with radius equal to
     /// one-half the width (equivalently, one-half the height) of `rect`. If `rect` is rectangular, then the major- and
     /// minor-axes will be the width and height of `rect`. The ellipse forms a complete subpath --- that is, it begins with
     /// a "move to" and ends with a "close subpath" --- oriented in the clockwise direction.
+    /// - parameter rect: a C4Rect into which an ellipse will be created and added to the path
     public func addEllipse(rect: C4Rect) {
         CGPathAddEllipseInRect(internalPath, nil, CGRect(rect))
     }
-    
+
     /// Add an arc of a circle, possibly preceded by a straight line segment. The arc is approximated by a sequence of
     /// Bézier curves.
     ///
@@ -162,7 +184,7 @@ extension C4Path {
     public func addRelativeArc(center: C4Point, radius: Double, startAngle: Double, delta: Double) {
         CGPathAddRelativeArc(internalPath, nil, CGFloat(center.x), CGFloat(center.y), CGFloat(radius), CGFloat(startAngle), CGFloat(delta))
     }
-    
+
     /// Add an arc of a circle, possibly preceded by a straight line segment. The arc is approximated by a sequence of
     /// Bézier curves.
     ///
@@ -183,21 +205,24 @@ extension C4Path {
     public func addArc(center: C4Point, radius: Double, startAngle: Double, endAngle: Double, clockwise: Bool) {
         CGPathAddArc(internalPath, nil, CGFloat(center.x), CGFloat(center.y), CGFloat(radius), CGFloat(startAngle), CGFloat(endAngle), clockwise)
     }
-    
+
     /// Add an arc of a circle, possibly preceded by a straight line segment. The arc is approximated by a sequence of
     /// Bézier curves. The resulting arc is tangent to the line from the current point to `point1`, and the line from
     /// `point1` to `point2`.
+    /// - parameter point1: the begin point of the arc
+    /// - parameter point2: the end point of the arc
+    /// - parameter radius: the radius of the arc
     public func addArcToPoint(point1: C4Point, point2: C4Point, radius: Double) {
         CGPathAddArcToPoint(internalPath, nil, CGFloat(point1.x), CGFloat(point1.y), CGFloat(point2.x), CGFloat(point2.y), CGFloat(radius))
     }
-    
+
     /// Append a path.
     ///
     /// - parameter path:      A new C4Path that is added to the end of the receiver.
     public func addPath(path: C4Path) {
         CGPathAddPath(internalPath, nil, path.internalPath)
     }
-    
+
     /// Transform a path.
     ///
     /// - parameter transform: A C4Transform to be applied to the receiver.

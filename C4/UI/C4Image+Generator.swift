@@ -36,7 +36,7 @@ extension C4Image {
             let translate = CGAffineTransformTranslate(scale, 0, outputImage.extent.size.height)
             outputImage = outputImage.imageByApplyingTransform(translate)
             self.output = outputImage
-            
+
             let img = UIImage(CIImage: output)
             let orig = self.origin
             self.view = UIImageView(image: img)

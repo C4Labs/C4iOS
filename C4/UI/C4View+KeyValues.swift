@@ -27,28 +27,34 @@ extension C4View {
     public override func setValue(value: AnyObject?, forKey key: String) {
         switch key {
         case "frame":
-            let nsvalue = value as! NSValue
-            frame = C4Rect(nsvalue.CGRectValue())
+            if let nsvalue = value as? NSValue {
+                frame = C4Rect(nsvalue.CGRectValue())
+            }
 
         case "bounds":
-            let nsvalue = value as! NSValue
-            bounds = C4Rect(nsvalue.CGRectValue())
+            if let nsvalue = value as? NSValue {
+                bounds = C4Rect(nsvalue.CGRectValue())
+            }
 
         case "center":
-            let nsvalue = value as! NSValue
-            center = C4Point(nsvalue.CGPointValue())
+            if let nsvalue = value as? NSValue {
+                center = C4Point(nsvalue.CGPointValue())
+            }
 
         case "origin":
-            let nsvalue = value as! NSValue
-            origin = C4Point(nsvalue.CGPointValue())
+            if let nsvalue = value as? NSValue {
+                origin = C4Point(nsvalue.CGPointValue())
+            }
 
         case "size":
-            let nsvalue = value as! NSValue
-            size = C4Size(nsvalue.CGSizeValue())
+            if let nsvalue = value as? NSValue {
+                size = C4Size(nsvalue.CGSizeValue())
+            }
 
         case "backgroundColor":
-            let color = value as! UIColor
-            backgroundColor = C4Color(color)
+            if let color = value as? UIColor {
+                backgroundColor = C4Color(color)
+            }
 
         default:
             super.setValue(value, forKey: key)

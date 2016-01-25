@@ -41,9 +41,9 @@ public class C4Star: C4Polygon {
     convenience public init(center: C4Point, pointCount: Int, innerRadius: Double, outerRadius: Double) {
         let wedgeAngle = 2.0 * M_PI / Double(pointCount)
         var angle = M_PI_2
-        
+
         var pointArray = [C4Point]()
-        
+
         for i in 0..<pointCount * 2 {
             angle += wedgeAngle / 2.0
             if i % 2 != 0 {
@@ -52,7 +52,7 @@ public class C4Star: C4Polygon {
                 pointArray.append(C4Point(center.x + outerRadius * cos(angle), center.y + outerRadius * sin(angle)))
             }
         }
-        
+
         self.init(pointArray)
         self.close()
         self.fillColor = C4Blue

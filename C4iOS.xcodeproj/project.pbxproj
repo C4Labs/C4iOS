@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F754DCB1C48EE600036D39F /* C4ImageLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F754DCA1C48EE600036D39F /* C4ImageLayer.swift */; };
 		1F8252CC1BB3C65E0090E98A /* C4Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8252CB1BB3C65E0090E98A /* C4Timer.swift */; };
+		1F8A2FEB1C4C24FD0087063A /* C4View+Render.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A2FEA1C4C24FD0087063A /* C4View+Render.swift */; };
+		1FAB35E81C5372CE00620741 /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAB35E71C5372CE00620741 /* Pixel.swift */; };
+		1FAB35EA1C53745300620741 /* C4Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAB35E91C53745300620741 /* C4Layer.swift */; };
+		1FAB35EC1C53749500620741 /* UIView+AddRemove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAB35EB1C53749500620741 /* UIView+AddRemove.swift */; };
 		61BBAF631BC372BD00A03FD0 /* C4StoredAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BBAF621BC372BD00A03FD0 /* C4StoredAnimation.swift */; };
 		61BBAF651BC38C1200A03FD0 /* C4View+KeyValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BBAF641BC38C1200A03FD0 /* C4View+KeyValues.swift */; };
 		A94E3BD419E0E9390039A9C4 /* C4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 614F824319DB5ED3001DF1D4 /* C4.framework */; };
@@ -24,6 +29,7 @@
 		A96F50691B5385A5002B3A46 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A96F50671B5385A5002B3A46 /* LaunchScreen.xib */; };
 		A96F507E1B538650002B3A46 /* C4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 614F824319DB5ED3001DF1D4 /* C4.framework */; };
 		A96F507F1B538650002B3A46 /* C4.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 614F824319DB5ED3001DF1D4 /* C4.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A9BC57271C50ABA80068BBA3 /* UIImage+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BC57261C50ABA80068BBA3 /* UIImage+Color.swift */; };
 		A9D4F6AD1B534F9F00F937AB /* C4Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6711B534F9F00F937AB /* C4Color.swift */; };
 		A9D4F6AE1B534F9F00F937AB /* C4EventSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6721B534F9F00F937AB /* C4EventSource.swift */; };
 		A9D4F6AF1B534F9F00F937AB /* C4Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6731B534F9F00F937AB /* C4Foundation.swift */; };
@@ -122,8 +128,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1F754DCA1C48EE600036D39F /* C4ImageLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4ImageLayer.swift; sourceTree = "<group>"; };
 		1F8252CB1BB3C65E0090E98A /* C4Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Timer.swift; sourceTree = "<group>"; };
+		1F8A2FEA1C4C24FD0087063A /* C4View+Render.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "C4View+Render.swift"; sourceTree = "<group>"; };
 		1F8CB1D91A05781700A20783 /* C4RectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4RectTests.swift; sourceTree = "<group>"; };
+		1FAB35E71C5372CE00620741 /* Pixel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pixel.swift; sourceTree = "<group>"; };
+		1FAB35E91C53745300620741 /* C4Layer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Layer.swift; sourceTree = "<group>"; };
+		1FAB35EB1C53749500620741 /* UIView+AddRemove.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+AddRemove.swift"; sourceTree = "<group>"; };
 		614F824319DB5ED3001DF1D4 /* C4.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = C4.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		614F824E19DB5ED4001DF1D4 /* C4Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = C4Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		61BBAF621BC372BD00A03FD0 /* C4StoredAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4StoredAnimation.swift; sourceTree = "<group>"; };
@@ -141,6 +152,7 @@
 		A96F50651B5385A5002B3A46 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A96F50681B5385A5002B3A46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		A988A9161A4F57330044007C /* C4TransformTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4TransformTests.swift; sourceTree = "<group>"; };
+		A9BC57261C50ABA80068BBA3 /* UIImage+Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Color.swift"; sourceTree = "<group>"; };
 		A9D4F6711B534F9F00F937AB /* C4Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Color.swift; sourceTree = "<group>"; };
 		A9D4F6721B534F9F00F937AB /* C4EventSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4EventSource.swift; sourceTree = "<group>"; };
 		A9D4F6731B534F9F00F937AB /* C4Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Foundation.swift; sourceTree = "<group>"; };
@@ -339,6 +351,8 @@
 				A9D4F68A1B534F9F00F937AB /* C4Image+Filter.swift */,
 				A9D4F68B1B534F9F00F937AB /* C4Image+Generator.swift */,
 				A9D4F68C1B534F9F00F937AB /* C4Image.swift */,
+				1F754DCA1C48EE600036D39F /* C4ImageLayer.swift */,
+				1FAB35E91C53745300620741 /* C4Layer.swift */,
 				A9D4F68D1B534F9F00F937AB /* C4Line.swift */,
 				A9D4F68E1B534F9F00F937AB /* C4Movie.swift */,
 				A9D4F68F1B534F9F00F937AB /* C4Polygon.swift */,
@@ -357,11 +371,15 @@
 				A9D4F69A1B534F9F00F937AB /* C4View+Border.swift */,
 				A9D4F69B1B534F9F00F937AB /* C4View+Shadow.swift */,
 				A9D4F69C1B534F9F00F937AB /* C4View.swift */,
+				1F8A2FEA1C4C24FD0087063A /* C4View+Render.swift */,
 				61BBAF641BC38C1200A03FD0 /* C4View+KeyValues.swift */,
 				A9D4F69D1B534F9F00F937AB /* C4ViewAnimation.swift */,
 				A9D4F69E1B534F9F00F937AB /* C4Wedge.swift */,
 				A9D4F6AA1B534F9F00F937AB /* UIGestureRecognizer+Closure.swift */,
+				1FAB35EB1C53749500620741 /* UIView+AddRemove.swift */,
 				A9D4F6AB1B534F9F00F937AB /* UIViewController+C4View.swift */,
+				A9BC57261C50ABA80068BBA3 /* UIImage+Color.swift */,
+				1FAB35E71C5372CE00620741 /* Pixel.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -405,6 +423,7 @@
 				614F823F19DB5ED3001DF1D4 /* Frameworks */,
 				614F824019DB5ED3001DF1D4 /* Headers */,
 				614F824119DB5ED3001DF1D4 /* Resources */,
+				61A979591C533E8A00899F73 /* Swift Lint */,
 			);
 			buildRules = (
 			);
@@ -523,11 +542,30 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		61A979591C533E8A00899F73 /* Swift Lint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Swift Lint";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		614F823E19DB5ED3001DF1D4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F754DCB1C48EE600036D39F /* C4ImageLayer.swift in Sources */,
 				A9D4F6C81B534F9F00F937AB /* C4Line.swift in Sources */,
 				A9D4F6B01B534F9F00F937AB /* C4Math.swift in Sources */,
 				A9D4F6CD1B534F9F00F937AB /* C4RegularPolygon.swift in Sources */,
@@ -539,6 +577,7 @@
 				A9D4F6DA1B534F9F00F937AB /* C4Bloom.swift in Sources */,
 				A9D4F6BE1B534F9F00F937AB /* C4Circle.swift in Sources */,
 				A9D4F6CA1B534F9F00F937AB /* C4Polygon.swift in Sources */,
+				1FAB35EC1C53749500620741 /* UIView+AddRemove.swift in Sources */,
 				A9D4F6E21B534F9F00F937AB /* C4Sharpen.swift in Sources */,
 				A9D4F6E51B534F9F00F937AB /* UIViewController+C4View.swift in Sources */,
 				A9D4F6C21B534F9F00F937AB /* C4Font.swift in Sources */,
@@ -555,9 +594,11 @@
 				A9D4F6CE1B534F9F00F937AB /* C4Shape+Creation.swift in Sources */,
 				A9D4F6B61B534F9F00F937AB /* C4Transform.swift in Sources */,
 				D917E1381B83E1DB0084BC82 /* C4GradientLayer.swift in Sources */,
+				1FAB35EA1C53745300620741 /* C4Layer.swift in Sources */,
 				A9D4F6B71B534F9F00F937AB /* C4Vector.swift in Sources */,
 				A9D4F6C61B534F9F00F937AB /* C4Image+Generator.swift in Sources */,
 				A9D4F6E31B534F9F00F937AB /* C4Twirl.swift in Sources */,
+				A9BC57271C50ABA80068BBA3 /* UIImage+Color.swift in Sources */,
 				61BBAF651BC38C1200A03FD0 /* C4View+KeyValues.swift in Sources */,
 				A9D4F6AF1B534F9F00F937AB /* C4Foundation.swift in Sources */,
 				A9D4F6D41B534F9F00F937AB /* C4View+Animation.swift in Sources */,
@@ -575,11 +616,13 @@
 				A9D4F6D61B534F9F00F937AB /* C4View+Shadow.swift in Sources */,
 				A9D4F6C71B534F9F00F937AB /* C4Image.swift in Sources */,
 				A9D4F6D31B534F9F00F937AB /* C4Triangle.swift in Sources */,
+				1FAB35E81C5372CE00620741 /* Pixel.swift in Sources */,
 				A9D4F6AE1B534F9F00F937AB /* C4EventSource.swift in Sources */,
 				A9D4F6C41B534F9F00F937AB /* C4Image+Crop.swift in Sources */,
 				A9D4F6AD1B534F9F00F937AB /* C4Color.swift in Sources */,
 				A9D4F6C51B534F9F00F937AB /* C4Image+Filter.swift in Sources */,
 				A9D4F6BF1B534F9F00F937AB /* C4Curve.swift in Sources */,
+				1F8A2FEB1C4C24FD0087063A /* C4View+Render.swift in Sources */,
 				A9D4F6BC1B534F9F00F937AB /* C4AudioPlayer.swift in Sources */,
 				A9D4F6B21B534F9F00F937AB /* C4Path.swift in Sources */,
 				A9D4F6D71B534F9F00F937AB /* C4View.swift in Sources */,

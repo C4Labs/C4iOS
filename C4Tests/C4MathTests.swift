@@ -62,7 +62,7 @@ class C4MathTests: XCTestCase {
         let correctValue = 12.0
         XCTAssertEqual(testValue, correctValue, "Double value should be mapped to the target range")
     }
-        
+
     func testRandom() {
         let testValue = random(below:100)
         XCTAssertLessThan(testValue, 100, "Returned value for random is not below provided value")

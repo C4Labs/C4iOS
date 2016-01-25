@@ -20,8 +20,8 @@
 import UIKit
 
 /// The C4CanvasController class provides the infrastructure for managing the views of your iOS apps. A canvas controller manages a set of views that make up a portion of your app’s user interface. It is responsible for loading and disposing of those views, for managing interactions with those views, and for coordinating responses with any appropriate data objects. Canvas controllers also coordinate their efforts with other controller objects—including other view controllers—and help manage your app’s overall interface.
-public class C4CanvasController : UIViewController {
-    
+public class C4CanvasController: UIViewController {
+
     /// Called after the controller's view is loaded into memory.
     ///
     /// This override disables implicit CALayer animations, calls `setup()` and then re-enables animations.
@@ -33,7 +33,7 @@ public class C4CanvasController : UIViewController {
         self.setup()
         C4ShapeLayer.disableActions = false
     }
-    
+
     /// Called during the controller's `viewDidLoad()` method.
     ///
     /// This method should be used to set up any objects or behaviours necessary when the controller's view loads.

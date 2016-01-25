@@ -19,8 +19,8 @@
 
 import CoreImage
 
-///  Changes the overall hue, or tint, of the source pixels.
-public struct C4Hue : C4Filter {
+/// Changes the overall hue, or tint, of the source pixels.
+public struct C4Hue: C4Filter {
     ///The name of the Core Image filter
     public let filterName = "CIHueAdjust"
     ///The angle to apply to the hue filter. Default value: 1.0
@@ -29,7 +29,10 @@ public struct C4Hue : C4Filter {
     ///Initializes a new filter
     public init() {}
 
-    ///Applies the properties of the receiver to create a new CIFilter object
+    /// Applies the properties of the receiver to create a new CIFilter object
+    ///
+    /// - parameter inputImage: The image to use as input to the filter.
+    /// - returns: The new CIFilter object.
     public func createCoreImageFilter(inputImage: CIImage) -> CIFilter {
         let filter = CIFilter(name: filterName)!
         filter.setDefaults()

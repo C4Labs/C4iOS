@@ -22,14 +22,11 @@ import UIKit
 
 /// C4Shape is a concrete subclass of C4View that draws a bezier path in its coordinate space.
 public class C4Shape: C4View {
-    
-    internal class ShapeView : UIView {
+    internal class ShapeView: UIView {
         var shapeLayer: C4ShapeLayer {
-            get {
-                return self.layer as! C4ShapeLayer
-            }
+            return self.layer as! C4ShapeLayer // swiftlint:disable:this force_cast
         }
-        
+
         override class func layerClass() -> AnyClass {
             return C4ShapeLayer.self
         }
@@ -41,9 +38,10 @@ public class C4Shape: C4View {
             return self.shapeView.shapeLayer
         }
     }
-    
+
+
     internal var shapeView: ShapeView {
-        return self.view as! ShapeView
+        return self.view as! ShapeView // swiftlint:disable:this force_cast
     }
 
     ///  Initializes an empty C4Shape.
@@ -56,10 +54,12 @@ public class C4Shape: C4View {
         lineWidth = 1
         lineCap = .Round
         lineJoin = .Round
+
+        let image = UIImage.createWithColor(UIColor.clearColor(), size: CGSize(width: 1, height: 1)).CGImage
+        shapeLayer.contents = image
     }
-    
-    /// Initializest a new C4Shape from a specified C4Path.
-    ///
+
+    /// Initializes a new C4Shape from a specified C4Path.
     /// - parameter path: A C4Path around which the new shape is created with the frame of the new shape fitting the path on
     /// screen.
     public convenience init(_ path: C4Path) {
@@ -71,7 +71,52 @@ public class C4Shape: C4View {
         updatePath()
         adjustToFitPath()
     }
-    
+
+    /// Initializes a new C4Shape from the properties of another C4Shape. Essentially, this copies the provided shape.
+    /// - parameter shape: A C4Shape around which the new shape is created.
+    public convenience init(_ shape: C4Shape) {
+        self.init()
+        let disable = C4ShapeLayer.disableActions
+        C4ShapeLayer.disableActions = true
+        self.path = shape.path
+        shapeLayer.path = path?.CGPath
+        self.frame = shape.frame
+        self.lineWidth = shape.lineWidth
+        self.lineDashPhase = shape.lineDashPhase
+        self.lineCap = shape.lineCap
+        self.lineJoin = shape.lineJoin
+        self.lineDashPattern = shape.lineDashPattern
+        self.fillColor = shape.fillColor
+        self.strokeColor = shape.strokeColor
+        self.strokeStart = shape.strokeStart
+        self.strokeEnd = shape.strokeEnd
+        self.miterLimit = shape.miterLimit
+        updatePath()
+        adjustToFitPath()
+        C4ShapeLayer.disableActions = disable
+    }
+
+    ///An optional variable representing a gradient. If this is non-nil, then the shape will appear to be filled with a gradient.
+    public var gradientFill: C4Gradient? {
+        didSet {
+            if let fill = gradientFill {
+                if mask == nil {
+                    let m = C4Shape(self)
+                    m.fillColor = black
+                    m.strokeColor = black
+                    mask = m
+                }
+                fillColor = nil
+                shapeLayer.contents = fill.render()?.cgimage
+            } else {
+                let image = UIImage.createWithColor(UIColor.clearColor(), size: CGSize(width: 1, height: 1)).CGImage
+                shapeLayer.contents = image
+                return
+            }
+
+        }
+    }
+
     /// The path defining the shape to be rendered. If the path extends outside the layer bounds it will not automatically
     /// be clipped to the layer. Defaults to nil. Animatable.
     public var path: C4Path? {
@@ -79,9 +124,9 @@ public class C4Shape: C4View {
             shapeLayer.path = path?.CGPath
         }
     }
-    
+
     internal func updatePath() {}
-    
+
     func adjustToFitPath() {
         if shapeLayer.path == nil {
             return
@@ -89,7 +134,8 @@ public class C4Shape: C4View {
         view.bounds = CGPathGetPathBoundingBox(shapeLayer.path)
         view.frame = view.bounds
     }
-    
+
+
     /// Returns the receiver's frame. Animatable.
     public override var frame: C4Rect {
         get {
@@ -100,14 +146,14 @@ public class C4Shape: C4View {
             updatePath()
         }
     }
-    
+
     /// The line width used when stroking the path. Defaults to 1.0. Animatable.
     @IBInspectable
     public var lineWidth: Double {
         get { return Double(shapeLayer.lineWidth) }
         set(width) { shapeLayer.lineWidth = CGFloat(width) }
     }
-    
+
     /// The color to stroke the path, or nil for no fill. Defaults to opaque black. Animatable.
     public var strokeColor: C4Color? {
         get {
@@ -121,7 +167,7 @@ public class C4Shape: C4View {
             shapeLayer.strokeColor = color?.CGColor
         }
     }
-    
+
     /// The color to fill the path, or nil for no fill. Defaults to opaque black. Animatable.
     public var fillColor: C4Color? {
         get {
@@ -133,13 +179,16 @@ public class C4Shape: C4View {
         }
         set(color) {
             shapeLayer.fillColor = color?.CGColor
+            if color != nil {
+                gradientFill = nil
+            }
         }
     }
-    
+
     /// The fill rule used when filling the path. Defaults to `NonZero`.
     public var fillRule: FillRule {
         get {
-            switch (shapeLayer.fillRule) {
+            switch shapeLayer.fillRule {
             case kCAFillRuleNonZero:
                 return .NonZero
             case kCAFillRuleEvenOdd:
@@ -149,7 +198,7 @@ public class C4Shape: C4View {
             }
         }
         set(fillRule) {
-            switch (fillRule) {
+            switch fillRule {
             case .NonZero:
                 shapeLayer.fillRule = kCAFillRuleNonZero
             case .EvenOdd:
@@ -157,42 +206,40 @@ public class C4Shape: C4View {
             }
         }
     }
-    
+
     /// This value defines the start of the path used to draw the stroked outline. The value must be in the range [0,1]
     /// with zero representing the start of the path and one the end. Values in between zero and one are interpolated
     /// linearly along the path length. Defaults to zero. Animatable.
     public var strokeStart: Double {
         get { return Double(shapeLayer.strokeStart) }
-        set(start) { shapeLayer.strokeStart = CGFloat(start); }
+        set(start) { shapeLayer.strokeStart = CGFloat(start) }
     }
-    
-    
+
     /// This value defines the end of the path used to draw the stroked outline. The value must be in the range [0,1]
     /// with zero representing the start of the path and one the end. Values in between zero and one are interpolated
     /// linearly along the path length. Defaults to 1.0. Animatable.
     public var strokeEnd: Double {
         get { return Double(shapeLayer.strokeEnd) }
-        set(end) { shapeLayer.strokeEnd = CGFloat(end); }
+        set(end) { shapeLayer.strokeEnd = CGFloat(end) }
     }
-    
-    
+
     /// The miter limit used when stroking the path. Defaults to ten. Animatable.
     @IBInspectable
     public var miterLimit: Double {
         get { return Double(shapeLayer.miterLimit) }
         set(miterLimit) { shapeLayer.miterLimit = CGFloat(miterLimit) }
     }
-    
+
     /// The cap style used when stroking the path. Defaults to `Butt`.
-    public var lineCap: LineCap  {
+    public var lineCap: LineCap {
         get {
             switch shapeLayer.lineCap {
             case kCALineCapButt:
                 return .Butt
             case kCALineCapRound:
-                return .Round;
+                return .Round
             case kCALineCapSquare:
-                return .Square;
+                return .Square
             default:
                 return .Butt
             }
@@ -200,15 +247,15 @@ public class C4Shape: C4View {
         set(lineCap) {
             switch lineCap {
             case .Butt:
-                shapeLayer.lineCap = kCALineCapButt;
+                shapeLayer.lineCap = kCALineCapButt
             case .Round:
-                shapeLayer.lineCap = kCALineCapRound;
+                shapeLayer.lineCap = kCALineCapRound
             case .Square:
-                shapeLayer.lineCap = kCALineCapSquare;
+                shapeLayer.lineCap = kCALineCapSquare
             }
         }
     }
-    
+
     /// The join style used when stroking the path. Defaults to `Miter`.
     public var lineJoin: LineJoin {
         get {
@@ -216,11 +263,11 @@ public class C4Shape: C4View {
             case kCALineJoinMiter:
                 return .Miter
             case kCALineJoinRound:
-                return .Round;
+                return .Round
             case kCALineJoinBevel:
-                return .Bevel;
+                return .Bevel
             default:
-                return .Miter;
+                return .Miter
             }
         }
         set(lineJoin) {
@@ -234,55 +281,58 @@ public class C4Shape: C4View {
             }
         }
     }
-    
+
     /// The phase of the dashing pattern applied when creating the stroke. Defaults to zero. Animatable.
     public var lineDashPhase: Double {
         get { return Double(shapeLayer.lineDashPhase) }
         set(phase) { shapeLayer.lineDashPhase = CGFloat(phase) }
     }
-    
+
+
     /// The dash pattern applied when creating the stroked version of the path. Defaults to nil.
     public var lineDashPattern: [NSNumber]? {
         get { return shapeLayer.lineDashPattern as [NSNumber]? }
         set(pattern) { shapeLayer.lineDashPattern = pattern }
     }
-    
+
     /// The size of the receiver including the width of its stroke.
+    /// - returns: The bounding box that surrounds the shape and its line.
     public func intrinsicContentSize() -> CGSize {
         if let path = path {
             let boundingBox = path.boundingBox()
             return CGSize(width: boundingBox.max.x + lineWidth/2, height: boundingBox.max.y + lineWidth/2)
         } else {
-            return CGSizeZero
+            return CGSize()
         }
     }
-    
-    
+
     /// Returns true if there is no path.
     public func isEmpty() -> Bool {
         return path == nil || path!.isEmpty()
     }
-    
+
+
     /// The join style for joints on the shape's path.
     public enum LineJoin {
         /// Specifies a miter line shape of the joints between connected segments of a stroked path.
         case Miter
-        
+
         /// Specifies a round line shape of the joints between connected segments of a stroked path.
         case Round
-        
+
         /// Specifies a bevel line shape of the joints between connected segments of a stroked path.
         case Bevel
     }
-    
+
+
     /// The cap style for the ends of the shape's path.
     public enum LineCap {
         /// Specifies a butt line cap style for endpoints for an open path when stroked.
         case Butt
-        
+
         /// Specifies a round line cap style for endpoints for an open path when stroked.
         case Round
-        
+
         /// Specifies a square line cap style for endpoints for an open path when stroked.
         case Square
     }

@@ -23,7 +23,6 @@ import CoreGraphics
 
 /// Extension for C4Shape that provides functionality for adding elements to a receiver's path.
 extension C4Shape {
-    
     /// Appends a circle to the end of the receiver's path.
     ///
     /// ````
@@ -39,13 +38,13 @@ extension C4Shape {
         if newPath == nil {
             newPath = C4Path()
         }
-        
+
         let r = C4Rect(center.x - radius, center.y - radius, radius*2, radius*2)
         newPath!.addEllipse(r)
         path = newPath
         adjustToFitPath()
     }
-    
+
     /// Appends a polygon to the end of the receiver's path.
     ///
     /// ````
@@ -67,7 +66,7 @@ extension C4Shape {
         if newPath == nil {
             newPath = C4Path()
         }
-        
+
         if !points.isEmpty {
             newPath!.moveToPoint(points[0])
         }
@@ -80,7 +79,7 @@ extension C4Shape {
         path = newPath
         adjustToFitPath()
     }
-    
+
     /// Appends a line segment to the end of the receiver's path.
     ///
     /// ````
@@ -90,12 +89,12 @@ extension C4Shape {
     /// ````
     ///
     /// - parameter points: An array of C4Point structs that defines the new line
-    public func addLine(points:[C4Point]) {
+    public func addLine(points: [C4Point]) {
         let newPath = path
         if path == nil {
             path = C4Path()
         }
-        
+
         if newPath!.currentPoint != points[0] {
             newPath!.moveToPoint(points[0])
         }
@@ -103,7 +102,7 @@ extension C4Shape {
         path = newPath
         adjustToFitPath()
     }
-    
+
     /// Appends a bezier curve to the end of the receiver's path.
     ///
     /// ````
@@ -116,16 +115,16 @@ extension C4Shape {
     ///
     /// - parameter points: An array of C4Point structs that defines the beginning and end points of the curve
     /// - parameter controls: An array of C4Point structs used to define the shape of the curve
-    public func addCurve(points points:[C4Point], controls:[C4Point]) {
+    public func addCurve(points points: [C4Point], controls: [C4Point]) {
         let newPath = path
         if path == nil {
             path = C4Path()
         }
-        
+
         if newPath!.currentPoint != points[0] {
             newPath!.moveToPoint(points[0])
         }
-        newPath!.addCurveToPoint(controls[0], control2: controls[1], point: points[1]);
+        newPath!.addCurveToPoint(controls[0], control2: controls[1], point: points[1])
         path = newPath
         adjustToFitPath()
     }

@@ -23,14 +23,14 @@ import UIKit
 extension C4Image {
     ///  Applies a fiter to the receiver's contents.
     ///
-    ///  - parameter fiter: a C4Filter
+    ///  - parameter filter: a C4Filter
     public func apply(filter: C4Filter) {
         self.apply(filters:[filter])
     }
-    
+
     ///  Applies an array of fiters to the receiver's contents.
     ///
-    ///  - parameter fiters: an array of C4Filter objects
+    ///  - parameter filters: an array of C4Filter objects
     public func apply(filters filters: [C4Filter]) {
         for filter in filters {
             let cifilter = filter.createCoreImageFilter(output)
@@ -50,10 +50,9 @@ extension C4Image {
         }
         let filterContext = CIContext(options:nil)
         let filteredImage = filterContext.createCGImage(self.output, fromRect:extent)
-        
+
         dispatch_async(dispatch_get_main_queue()) {
             self.imageView.layer.contents = filteredImage
         }
     }
-    
 }

@@ -28,7 +28,7 @@ class C4ColorTests: XCTestCase {
         XCTAssertEqual(redColor.blue,  0.0, "Blue value should be 0.0")
         XCTAssertEqual(redColor.alpha, 1.0, "Alpha value should be 1.0")
     }
-    
+
     func testInitWithGreenHexValue() {
         let greenColor = C4Color(0x00FF00FF)
         XCTAssertEqual(greenColor.red,   0.0, "Red value should be 0.0")
@@ -36,7 +36,7 @@ class C4ColorTests: XCTestCase {
         XCTAssertEqual(greenColor.blue,  0.0, "Blue value should be 0.0")
         XCTAssertEqual(greenColor.alpha, 1.0, "Alpha value should be 1.0")
     }
-    
+
     func testInitWithBlueHexValue() {
         let blueColor  = C4Color(0x0000FFFF)
         XCTAssertEqual(blueColor.red,   0.0, "Red value should be 0.0")
@@ -44,7 +44,7 @@ class C4ColorTests: XCTestCase {
         XCTAssertEqual(blueColor.blue,  1.0, "Blue value should be 1.0")
         XCTAssertEqual(blueColor.alpha, 1.0, "Alpha value should be 1.0")
     }
-    
+
     func testInitWithClearHexValue() {
         let clearColor = C4Color(0xFFFFFF00)
         XCTAssertEqual(clearColor.red,   1.0, "Red value should be 1.0")

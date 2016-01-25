@@ -20,7 +20,7 @@
 import Foundation
 
 /// You use the C4Timer class to create timer objects or, more simply, timers. A timer waits until a certain time interval has elapsed and then fires, executing a specified block of code.
-public final class C4Timer : NSObject {
+public final class C4Timer: NSObject {
     /// The current number of times the timer has fired.
     public internal(set) var step = 0
     /// The number of times the timer will fire.
@@ -28,6 +28,7 @@ public final class C4Timer : NSObject {
     /// The time interval between firing.
     public internal(set) var interval: Double
     var action: () -> ()
+    /// The timer that the receiver manages
     weak var timer: NSTimer?
 
     ///  Initializes a new timer.

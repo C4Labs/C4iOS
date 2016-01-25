@@ -22,7 +22,7 @@ import CoreImage
 ///  The C4Filter protocol declares a variable and a method that are required by C4Filter object so it can properly interface with Core Image.
 public protocol C4Filter {
     /// The name of the Core Image filter (e.g. "CIBloom")
-    var filterName : String { get }
+    var filterName: String { get }
 
     ///  Creates a Core Image filter using specified input image.
     ///
