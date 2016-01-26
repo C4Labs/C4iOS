@@ -17,11 +17,30 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-import C4
+import QuartzCore
 import UIKit
 
-class ViewController: CanvasController {
-    override func setup() {
+///  QuadCurve is a concrete subclass of Curve that modifies it shape based on a single point rather than 2 used by its parent class.
+public class QuadCurve: Curve {
 
+    /// A Point used to calculate the shape of the quadratic curve.
+    public var controlPoint = Point() {
+        didSet {
+            self.controlPoints = (controlPoint, controlPoint)
+        }
+    }
+
+    /// Initializes a new QuadCurve.
+    ///
+    /// ````
+    /// let curve = QuadCurve(a: Point(), b: Point(50,50), c: Point(100,0))
+    /// canvas.add(curve)
+    /// ````
+    ///
+    /// - parameter begin: The beginning point of the curve.
+    /// - parameter control: A single Point used to calculate the shape of the curve.
+    /// - parameter end: The end point of the curve.
+    convenience public init(begin: Point, control: Point, end: Point) {
+        self.init(begin: begin, control0: control, control1: control, end: end)
     }
 }

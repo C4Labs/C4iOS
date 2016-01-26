@@ -17,11 +17,34 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-import C4
-import UIKit
+import QuartzCore
 
-class ViewController: CanvasController {
-    override func setup() {
+///Subclass of CALayer that handles animating its contents.
+public class ImageLayer: CALayer {
+    /// Configures basic options for a CABasicAnimation.
+    ///
+    /// The options set in this method are favorable for the inner workings of C4's animation behaviours.
+    /// - parameter key: The identifier of the action.
+    /// - returns: The object that provides the action for key.
+    public override func actionForKey(key: String) -> CAAction? {
+        if ShapeLayer.disableActions == true {
+            return nil
+        }
 
+        if key != "contents" {
+            return super.actionForKey(key)
+        }
+
+        let animation: CABasicAnimation
+        if let viewAnimation = ViewAnimation.stack.last as? ViewAnimation where viewAnimation.spring != nil {
+            animation = CASpringAnimation(keyPath: key)
+        } else {
+            animation = CABasicAnimation(keyPath: key)
+        }
+
+        animation.configureOptions()
+        animation.fromValue = self.contents
+
+        return animation
     }
 }

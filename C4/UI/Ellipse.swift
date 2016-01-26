@@ -17,11 +17,29 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-import C4
-import UIKit
+import Foundation
+import CoreGraphics
 
-class ViewController: CanvasController {
-    override func setup() {
+///  Ellipse is a concrete subclass of Shape that has a special initialzer that creates an ellipse whose shape is defined by the object's frame.
+public class Ellipse: Shape {
 
+    /// Creates an ellipse.
+    ///
+    /// ````
+    /// let r = Rect(0,0,100,200)
+    /// let e = Ellipse(frame: r)
+    /// ````
+    ///
+    /// - parameter frame: The frame within which to draw an ellipse that touches each of the four sides of the frame.
+    convenience public init(frame: Rect) {
+        self.init()
+        view.frame = CGRect(frame)
+        updatePath()
+    }
+
+    override func updatePath() {
+        let newPath = Path()
+        newPath.addEllipse(bounds)
+        path = newPath
     }
 }
