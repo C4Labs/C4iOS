@@ -46,16 +46,17 @@ public class C4ShapeLayer: CAShapeLayer {
             return super.actionForKey(key)
         }
 
-        let animation: CABasicAnimation
         if let viewAnimation = C4ViewAnimation.stack.last as? C4ViewAnimation where viewAnimation.spring != nil {
-            animation = CASpringAnimation(keyPath: key)
-        } else {
-            animation = CABasicAnimation(keyPath: key)
+            let animation = CASpringAnimation(keyPath: key)
+            animation.configureOptions()
+            animation.fromValue = valueForKey(key)
+            return CASpringAnimation(keyPath: key)
         }
 
+        let animation: CABasicAnimation
+        animation = CABasicAnimation(keyPath: key)
         animation.configureOptions()
         animation.fromValue = valueForKey(key)
-
         return animation
     }
 }
