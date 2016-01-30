@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1F754DCB1C48EE600036D39F /* ImageLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F754DCA1C48EE600036D39F /* ImageLayer.swift */; };
+		1F75FE951C5CADBF00EB62C2 /* ScreenRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F75FE941C5CADBF00EB62C2 /* ScreenRecorder.swift */; };
 		1F8252CC1BB3C65E0090E98A /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8252CB1BB3C65E0090E98A /* Timer.swift */; };
 		1F8A2FEB1C4C24FD0087063A /* View+Render.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A2FEA1C4C24FD0087063A /* View+Render.swift */; };
 		1FAB35E81C5372CE00620741 /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAB35E71C5372CE00620741 /* Pixel.swift */; };
@@ -129,6 +130,7 @@
 
 /* Begin PBXFileReference section */
 		1F754DCA1C48EE600036D39F /* ImageLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLayer.swift; sourceTree = "<group>"; };
+		1F75FE941C5CADBF00EB62C2 /* ScreenRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenRecorder.swift; sourceTree = "<group>"; };
 		1F8252CB1BB3C65E0090E98A /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		1F8A2FEA1C4C24FD0087063A /* View+Render.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+Render.swift"; sourceTree = "<group>"; };
 		1F8CB1D91A05781700A20783 /* RectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RectTests.swift; sourceTree = "<group>"; };
@@ -380,6 +382,7 @@
 				A9D4F6AB1B534F9F00F937AB /* UIViewController+C4View.swift */,
 				A9BC57261C50ABA80068BBA3 /* UIImage+Color.swift */,
 				1FAB35E71C5372CE00620741 /* Pixel.swift */,
+				1F75FE941C5CADBF00EB62C2 /* ScreenRecorder.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -630,6 +633,7 @@
 				A9D4F6DB1B534F9F00F937AB /* Checkerboard.swift in Sources */,
 				A9D4F6BB1B534F9F00F937AB /* Arc.swift in Sources */,
 				A9D4F6D91B534F9F00F937AB /* Wedge.swift in Sources */,
+				1F75FE951C5CADBF00EB62C2 /* ScreenRecorder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -819,10 +823,6 @@
 		614F825A19DB5ED4001DF1D4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -840,10 +840,6 @@
 		614F825B19DB5ED4001DF1D4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = C4Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;

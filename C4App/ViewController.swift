@@ -22,6 +22,5 @@ import UIKit
 
 class ViewController: CanvasController {
     override func setup() {
-
     }
 }
