@@ -22,6 +22,19 @@ import UIKit
 
 class ViewController: C4CanvasController {
     override func setup() {
+        let v = C4Movie("halo.mp4")!
+        v.anchorPoint = C4Point(0.5, 1.0)
+        v.center = canvas.center
+        v.backgroundColor = C4Pink
+        canvas.add(v)
+
+        let a = C4ViewAnimation(duration: 1.0) {
+            v.rotation += M_PI
+        }
+        a.addCompletionObserver {
+            a.animate()
+        }
+        a.animate()
 
     }
 }
