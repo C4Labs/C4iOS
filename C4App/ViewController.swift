@@ -27,7 +27,7 @@ class ViewController: CanvasController {
         recorder.controller = self
 
         recorder.didStop = {
-            self.recorder.presentPreview(self)
+            self.recorder.showPreview()
         }
 
         recorder.previewFinished = { activities in
