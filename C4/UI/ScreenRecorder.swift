@@ -19,13 +19,18 @@
 
 import ReplayKit
 
-public typealias PreviewControllerFinishedAction = (activities: Set<String>?) -> ()
-public typealias RecorderStoppedAction = () -> ()
-
 public class ScreenRecorder: NSObject, RPPreviewViewControllerDelegate {
-    internal var recorder: RPScreenRecorder?
-    public var preview: RPPreviewViewController?
+    public typealias PreviewControllerFinishedAction = (activities: Set<String>?) -> ()
+    public typealias RecorderStoppedAction = () -> ()
+
+    var recorder: RPScreenRecorder?
+    var preview: RPPreviewViewController?
+    var activities: Set<String>?
+
     public var controller: UIViewController?
+    public var previewFinished: PreviewControllerFinishedAction?
+    public var didStop: RecorderStoppedAction?
+    public var microphoneEnabled = false
 
     public override init() {
         super.init()
@@ -33,12 +38,7 @@ public class ScreenRecorder: NSObject, RPPreviewViewControllerDelegate {
     }
 
     public func start() {
-        guard recorder != nil else {
-            print("Recorder was not initialized")
-            return
-        }
-
-        recorder!.startRecordingWithMicrophoneEnabled(false) { error in
+        recorder?.startRecordingWithMicrophoneEnabled(microphoneEnabled) { error in
             if error != nil {
                 print("Start Recording Error: \(error?.localizedDescription)")
             }
@@ -48,16 +48,15 @@ public class ScreenRecorder: NSObject, RPPreviewViewControllerDelegate {
     public func start(duration: Double) {
         preview = nil
 
-        self.start()
+        start()
         delay(duration) {
             self.stop()
         }
     }
 
-    public var didStop: RecorderStoppedAction?
 
     public func stop() {
-        self.recorder!.stopRecordingWithHandler { previewViewController, error in
+        recorder?.stopRecordingWithHandler { previewViewController, error in
             self.preview = previewViewController
             self.preview?.previewControllerDelegate = self
             self.didStop?()
@@ -65,33 +64,14 @@ public class ScreenRecorder: NSObject, RPPreviewViewControllerDelegate {
     }
 
     public func showPreview() {
-        guard controller != nil else {
-            print("Recorder has no controller in which to present preview.")
-            return
-        }
-
         guard let p = preview else {
             print("Recorder has no preview to show.")
             return
         }
 
-        self.controller?.presentViewController(p, animated: true, completion: nil)
+        controller?.presentViewController(p, animated: true, completion: nil)
     }
 
-    public func presentPreview(viewController: UIViewController) {
-        guard preview != nil else {
-            print("PreviewRecorder has no movie to preview.")
-            return
-        }
-        viewController.presentViewController(self.preview!, animated: true, completion: nil)
-    }
-
-    internal func screenRecorder(screenRecorder: RPScreenRecorder, didStopRecordingWithError error: NSError, previewViewController: RPPreviewViewController?) {
-    }
-
-    public var previewFinished: PreviewControllerFinishedAction?
-
-    var activities: Set<String>?
     public func previewController(previewController: RPPreviewViewController, didFinishWithActivityTypes activityTypes: Set<String>) {
         self.activities = activityTypes
     }
