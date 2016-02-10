@@ -18,9 +18,10 @@
 // IN THE SOFTWARE.
 
 import QuartzCore
+import AVFoundation
 
 /// Extension for CAShapeLayer that allows overriding the actions for specific properties.
-public class C4ShapeLayer: CAShapeLayer {
+public class C4PlayerLayer: AVPlayerLayer {
     /// A boolean value that, when true, prevents the animation of a shape's properties.
     ///
     /// ````
@@ -41,7 +42,7 @@ public class C4ShapeLayer: CAShapeLayer {
             return nil
         }
 
-        let animatableProperties = ["lineWidth", "strokeEnd", "strokeStart", "strokeColor", "path", "fillColor", "lineDashPhase", "contents", C4Layer.rotationKey, "shadowColor", "shadowRadius", "shadowOffset", "shadowOpacity", "shadowPath"]
+        let animatableProperties = [C4Layer.rotationKey]
         if !animatableProperties.contains(key) {
             return super.actionForKey(key)
         }
@@ -82,7 +83,7 @@ public class C4ShapeLayer: CAShapeLayer {
     /// - parameter layer: Another CALayer
     public override init(layer: AnyObject) {
         super.init(layer: layer)
-        if let layer = layer as? C4ShapeLayer {
+        if let layer = layer as? C4PlayerLayer {
             _rotation = layer._rotation
         }
     }
@@ -116,38 +117,9 @@ public class C4ShapeLayer: CAShapeLayer {
     /// Reloads the content of this layer.
     /// Do not call this method directly.
     public override func display() {
-        guard let presentation = presentationLayer() as? C4ShapeLayer else {
+        guard let presentation = presentationLayer() as? C4PlayerLayer else {
             return
         }
         setValue(presentation._rotation, forKeyPath: "transform.rotation.z")
-    }
-}
-
-extension CABasicAnimation {
-    ///  Configures basic options for a CABasicAnimation.
-    ///
-    ///  The options set in this method are favorable for the inner workings of C4's action behaviours.
-    public func configureOptions() {
-        if let animation = C4ViewAnimation.currentAnimation {
-            self.autoreverses = animation.autoreverses
-            self.repeatCount = Float(animation.repeatCount)
-        }
-        self.fillMode = kCAFillModeBoth
-        self.removedOnCompletion = false
-    }
-}
-
-extension CASpringAnimation {
-    ///  Configures basic options for a CABasicAnimation.
-    ///
-    ///  The options set in this method are favorable for the inner workings of C4's animation behaviours.
-    public override func configureOptions() {
-        super.configureOptions()
-        if let animation = C4ViewAnimation.currentAnimation as? C4ViewAnimation, spring = animation.spring {
-            mass = CGFloat(spring.mass)
-            damping = CGFloat(spring.damping)
-            stiffness = CGFloat(spring.stiffness)
-            initialVelocity = CGFloat(spring.initialVelocity)
-        }
     }
 }

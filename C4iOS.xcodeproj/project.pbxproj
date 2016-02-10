@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		1F754DCB1C48EE600036D39F /* C4ImageLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F754DCA1C48EE600036D39F /* C4ImageLayer.swift */; };
+		1F75FDEB1C5B1FE700EB62C2 /* C4Loop.aif in Resources */ = {isa = PBXBuildFile; fileRef = 1F75FDE81C5B1FE700EB62C2 /* C4Loop.aif */; };
+		1F75FDEC1C5B1FE700EB62C2 /* halo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1F75FDE91C5B1FE700EB62C2 /* halo.mp4 */; };
+		1F75FDED1C5B1FE700EB62C2 /* haloGray.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1F75FDEA1C5B1FE700EB62C2 /* haloGray.mp4 */; };
+		1F75FDEF1C5B20C900EB62C2 /* C4PlayerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F75FDEE1C5B20C900EB62C2 /* C4PlayerLayer.swift */; };
 		1F8252CC1BB3C65E0090E98A /* C4Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8252CB1BB3C65E0090E98A /* C4Timer.swift */; };
 		1F8A2FEB1C4C24FD0087063A /* C4View+Render.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A2FEA1C4C24FD0087063A /* C4View+Render.swift */; };
 		1FAB35E81C5372CE00620741 /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAB35E71C5372CE00620741 /* Pixel.swift */; };
@@ -129,6 +133,10 @@
 
 /* Begin PBXFileReference section */
 		1F754DCA1C48EE600036D39F /* C4ImageLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4ImageLayer.swift; sourceTree = "<group>"; };
+		1F75FDE81C5B1FE700EB62C2 /* C4Loop.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = C4Loop.aif; sourceTree = "<group>"; };
+		1F75FDE91C5B1FE700EB62C2 /* halo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = halo.mp4; sourceTree = "<group>"; };
+		1F75FDEA1C5B1FE700EB62C2 /* haloGray.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = haloGray.mp4; sourceTree = "<group>"; };
+		1F75FDEE1C5B20C900EB62C2 /* C4PlayerLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4PlayerLayer.swift; sourceTree = "<group>"; };
 		1F8252CB1BB3C65E0090E98A /* C4Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4Timer.swift; sourceTree = "<group>"; };
 		1F8A2FEA1C4C24FD0087063A /* C4View+Render.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "C4View+Render.swift"; sourceTree = "<group>"; };
 		1F8CB1D91A05781700A20783 /* C4RectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C4RectTests.swift; sourceTree = "<group>"; };
@@ -288,6 +296,9 @@
 				A96F505E1B5385A5002B3A46 /* AppDelegate.swift */,
 				A96F50601B5385A5002B3A46 /* ViewController.swift */,
 				A96F50621B5385A5002B3A46 /* Main.storyboard */,
+				1F75FDE81C5B1FE700EB62C2 /* C4Loop.aif */,
+				1F75FDE91C5B1FE700EB62C2 /* halo.mp4 */,
+				1F75FDEA1C5B1FE700EB62C2 /* haloGray.mp4 */,
 				A96F50651B5385A5002B3A46 /* Images.xcassets */,
 				A96F50671B5385A5002B3A46 /* LaunchScreen.xib */,
 				A96F505C1B5385A5002B3A46 /* Supporting Files */,
@@ -355,6 +366,7 @@
 				1FAB35E91C53745300620741 /* C4Layer.swift */,
 				A9D4F68D1B534F9F00F937AB /* C4Line.swift */,
 				A9D4F68E1B534F9F00F937AB /* C4Movie.swift */,
+				1F75FDEE1C5B20C900EB62C2 /* C4PlayerLayer.swift */,
 				A9D4F68F1B534F9F00F937AB /* C4Polygon.swift */,
 				A9D4F6901B534F9F00F937AB /* C4QuadCurve.swift */,
 				A9D4F6911B534F9F00F937AB /* C4Rectangle.swift */,
@@ -535,7 +547,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A96F50641B5385A5002B3A46 /* Main.storyboard in Resources */,
+				1F75FDEB1C5B1FE700EB62C2 /* C4Loop.aif in Resources */,
+				1F75FDED1C5B1FE700EB62C2 /* haloGray.mp4 in Resources */,
 				A96F50691B5385A5002B3A46 /* LaunchScreen.xib in Resources */,
+				1F75FDEC1C5B1FE700EB62C2 /* halo.mp4 in Resources */,
 				A96F50661B5385A5002B3A46 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -570,6 +585,7 @@
 				A9D4F6B01B534F9F00F937AB /* C4Math.swift in Sources */,
 				A9D4F6CD1B534F9F00F937AB /* C4RegularPolygon.swift in Sources */,
 				A9D4F6B51B534F9F00F937AB /* C4Size.swift in Sources */,
+				1F75FDEF1C5B20C900EB62C2 /* C4PlayerLayer.swift in Sources */,
 				A9D4F6C91B534F9F00F937AB /* C4Movie.swift in Sources */,
 				D917E1361B83E0920084BC82 /* C4Gradient.swift in Sources */,
 				61BBAF631BC372BD00A03FD0 /* C4StoredAnimation.swift in Sources */,
