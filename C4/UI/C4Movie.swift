@@ -35,6 +35,25 @@ public class C4Movie: C4View {
     /// The default value of this property is `true`.
     public var loops: Bool = true
 
+    
+    /// Mute/Unmute the audio track.
+    ///
+    /// The default value of this property is `false`.
+    public var muted: Bool {
+        get{
+            if let p = player {
+                return p.muted
+            } else {
+                return false
+            }
+        }
+        set(val){
+            if let p = player {
+                p.muted = val
+            }
+        }
+    }
+    
     /// A variable that provides access to the width of the receiver. Animatable.
     /// The default value of this property is defined by the movie being created.
     /// Assigning a value to this property causes the receiver to change the width of its frame. If the receiver's
@@ -153,6 +172,9 @@ public class C4Movie: C4View {
         movieLayer.videoGravity = AVLayerVideoGravityResize
 
         originalSize = self.size
+        
+        // unmute
+        muted = false
     }
 
     /// Initializes a new C4Movie using the specified frame.
@@ -197,7 +219,7 @@ public class C4Movie: C4View {
         p.seekToTime(CMTimeMake(0, 1))
         p.pause()
     }
-
+    
     /// The action to perform at the end of playback.
     ///
     /// - parameter action: A block of code to execute at the end of playback.
