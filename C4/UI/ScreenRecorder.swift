@@ -42,7 +42,7 @@ public class ScreenRecorder: NSObject, RPPreviewViewControllerDelegate {
 
     public func start(duration: Double) {
         start()
-        delay(duration) {
+        wait(duration) {
             self.stop()
         }
     }
