@@ -41,7 +41,7 @@ public class ShapeLayer: CAShapeLayer {
             return nil
         }
 
-        let animatableProperties = ["lineWidth", "strokeEnd", "strokeStart", "strokeColor", "path", "fillColor", "lineDashPhase", "contents"]
+        let animatableProperties = ["lineWidth", "strokeEnd", "strokeStart", "strokeColor", "path", "fillColor", "lineDashPhase", "contents", C4Layer.rotationKey, "shadowColor", "shadowRadius", "shadowOffset", "shadowOpacity", "shadowPath"]
         if !animatableProperties.contains(key) {
             return super.actionForKey(key)
         }
