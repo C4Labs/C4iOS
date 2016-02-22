@@ -17,10 +17,27 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-import C4
-import UIKit
+import CoreImage
 
-class ViewController: CanvasController {
-    override func setup() {
+/// Changes the overall hue, or tint, of the source pixels.
+public struct Hue: Filter {
+    ///The name of the Core Image filter
+    public let filterName = "CIHueAdjust"
+    ///The angle to apply to the hue filter. Default value: 1.0
+    public var angle: Double = 1.0
+
+    ///Initializes a new filter
+    public init() {}
+
+    /// Applies the properties of the receiver to create a new CIFilter object
+    ///
+    /// - parameter inputImage: The image to use as input to the filter.
+    /// - returns: The new CIFilter object.
+    public func createCoreImageFilter(inputImage: CIImage) -> CIFilter {
+        let filter = CIFilter(name: filterName)!
+        filter.setDefaults()
+        filter.setValue(angle, forKey:"inputAngle")
+        filter.setValue(inputImage, forKey: "inputImage")
+        return filter
     }
 }

@@ -17,10 +17,23 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-import C4
-import UIKit
+import Foundation
+import CoreGraphics
 
-class ViewController: CanvasController {
-    override func setup() {
+///Circle is a concrete subclass of Ellipse that has a special initialzer that creates a uniform ellipse.
+public class Circle: Ellipse {
+
+    /// Creates a circle.
+    ///
+    /// ````
+    /// let c = Circle(center: canvas.center, radius: 50)
+    /// canvas.add(c)
+    /// ````
+    ///
+    /// - parameter center: The center-point of the circle
+    /// - parameter radius: The radius of the circle
+    convenience public init(center: Point, radius: Double) {
+        let frame = Rect(center.x-radius, center.y-radius, radius * 2, radius * 2)
+        self.init(frame: frame)
     }
 }

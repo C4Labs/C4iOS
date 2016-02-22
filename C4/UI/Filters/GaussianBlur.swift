@@ -17,10 +17,35 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-import C4
-import UIKit
+import CoreImage
 
-class ViewController: CanvasController {
-    override func setup() {
+///  Spreads source pixels by an amount specified by a Gaussian distribution.
+///
+///  ````
+///  let logo = Image("logo")
+///  logo.apply(GaussianBlur())
+///  canvas.add(logo)
+///  ````
+public struct GaussianBlur: Filter {
+    /// The name of the Core Image filter.
+    public let filterName = "CIGaussianBlur"
+
+    /// The radius of the blur. Defaults to 10.0
+    public var radius: Double
+
+    ///  Initializes a new filter
+    ///  - parameter radius: a Double value
+    public init(radius: Double = 5.0) { self.radius = radius }
+
+    /// Applies the properties of the receiver to create a new CIFilter object
+    ///
+    /// - parameter inputImage: The image to use as input to the filter.
+    /// - returns: The new CIFilter object.
+    public func createCoreImageFilter(inputImage: CIImage) -> CIFilter {
+        let filter = CIFilter(name: filterName)!
+        filter.setDefaults()
+        filter.setValue(radius, forKey:"inputRadius")
+        filter.setValue(inputImage, forKey: "inputImage")
+        return filter
     }
 }

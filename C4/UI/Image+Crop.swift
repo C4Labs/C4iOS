@@ -17,10 +17,33 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-import C4
+import QuartzCore
 import UIKit
 
-class ViewController: CanvasController {
-    override func setup() {
+extension Image {
+    ///  Crops the receiver's contents to the specified frame within the receiver's coordinate space.
+    ///
+    ///  - parameter rect: a Rect
+    public func crop(rect: Rect) {
+        let intersection = CGRectIntersection(CGRect(rect), CGRect(self.bounds))
+        if CGRectIsNull(intersection) { return }
+        let inputRectangle = CGRect(
+            x: intersection.origin.x,
+            y: CGFloat(self.height) - intersection.origin.y - intersection.size.height,
+            width: intersection.size.width,
+            height: intersection.size.height)
+
+        let crop = CIFilter(name: "CICrop")!
+        crop.setDefaults()
+        crop.setValue(CIVector(CGRect: inputRectangle), forKey: "inputRectangle")
+        crop.setValue(ciimage, forKey: "inputImage")
+
+        if let outputImage = crop.outputImage {
+            self.output = outputImage
+            self.imageView.image = UIImage(CIImage: output)
+            self.frame = Rect(intersection)
+        } else {
+            print("Failed ot generate outputImage: \(__FUNCTION__)")
+        }
     }
 }
