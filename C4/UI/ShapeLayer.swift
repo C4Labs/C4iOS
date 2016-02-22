@@ -41,7 +41,7 @@ public class ShapeLayer: CAShapeLayer {
             return nil
         }
 
-        let animatableProperties = ["lineWidth", "strokeEnd", "strokeStart", "strokeColor", "path", "fillColor", "lineDashPhase", "contents"]
+        let animatableProperties = ["lineWidth", "strokeEnd", "strokeStart", "strokeColor", "path", "fillColor", "lineDashPhase", "contents", Layer.rotationKey, "shadowColor", "shadowRadius", "shadowOffset", "shadowOpacity", "shadowPath"]
         if !animatableProperties.contains(key) {
             return super.actionForKey(key)
         }
@@ -56,7 +56,70 @@ public class ShapeLayer: CAShapeLayer {
         animation.configureOptions()
         animation.fromValue = valueForKey(key)
 
+        if key == Layer.rotationKey {
+            if let layer = presentationLayer() as? ShapeLayer {
+                animation.fromValue = layer.valueForKey(key)
+            }
+        }
+
         return animation
+    }
+
+    private var _rotation = 0.0
+
+    /// The value of the receiver's current rotation state.
+    /// This value is cumulative, and can represent values beyong +/- π
+    public dynamic var rotation: Double {
+        return _rotation
+    }
+
+    /// Initializes a new C4Layer
+    public override init() {
+        super.init()
+    }
+
+    /// Initializes a new C4Layer from a specified layer of any other type.
+    /// - parameter layer: Another CALayer
+    public override init(layer: AnyObject) {
+        super.init(layer: layer)
+        if let layer = layer as? ShapeLayer {
+            _rotation = layer._rotation
+        }
+    }
+
+    /// Initializes a new C4Layer from data in a given unarchiver.
+    /// - parameter coder: An unarchiver object.
+    public required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+
+    /// Sets a value for a given key.
+    /// - parameter value: The value for the property identified by key.
+    /// - parameter key: The name of one of the receiver's properties
+    public override func setValue(value: AnyObject?, forKey key: String) {
+        super.setValue(value, forKey: key)
+        if key == Layer.rotationKey {
+            _rotation = value as? Double ?? 0.0
+        }
+    }
+
+    /// Returns a Boolean indicating whether changes to the specified key require the layer to be redisplayed.
+    /// - parameter key: A string that specifies an attribute of the layer.
+    /// - returns: A Boolean indicating whether changes to the specified key require the layer to be redisplayed.
+    public override class func needsDisplayForKey(key: String) -> Bool {
+        if  key == Layer.rotationKey {
+            return true
+        }
+        return super.needsDisplayForKey(key)
+    }
+
+    /// Reloads the content of this layer.
+    /// Do not call this method directly.
+    public override func display() {
+        guard let presentation = presentationLayer() as? ShapeLayer else {
+            return
+        }
+        setValue(presentation._rotation, forKeyPath: "transform.rotation.z")
     }
 }
 
