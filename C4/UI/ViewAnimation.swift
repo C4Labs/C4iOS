@@ -138,7 +138,7 @@ public class ViewAnimation: Animation {
         let disable = ShapeLayer.disableActions
         ShapeLayer.disableActions = false
 
-        C4.delay(delay) {
+        wait(delay) {
             if let spring = self.spring {
                 self.animateWithSpring(spring)
             } else {
