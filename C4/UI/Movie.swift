@@ -87,7 +87,7 @@ public class Movie: View {
         }
     }
 
-    var movieLayer: C4PlayerLayer {
+    var movieLayer: PlayerLayer {
         get {
             return self.movieView.movieLayer
         }
@@ -98,12 +98,12 @@ public class Movie: View {
     }
 
     class MovieView: UIView {
-        var movieLayer: C4PlayerLayer {
-            return self.layer as! C4PlayerLayer // swiftlint:disable:this force_cast
+        var movieLayer: PlayerLayer {
+            return self.layer as! PlayerLayer // swiftlint:disable:this force_cast
         }
 
         override class func layerClass() -> AnyClass {
-            return C4PlayerLayer.self
+            return PlayerLayer.self
         }
     }
 
@@ -111,13 +111,13 @@ public class Movie: View {
     /// - returns: A Double value representing the cumulative rotation of the view, measured in Radians.
     public override var rotation: Double {
         get {
-            if let number = movieLayer.valueForKeyPath(C4Layer.rotationKey) as? NSNumber {
+            if let number = movieLayer.valueForKeyPath(Layer.rotationKey) as? NSNumber {
                 return number.doubleValue
             }
             return  0.0
         }
         set {
-            movieLayer.setValue(newValue, forKeyPath: C4Layer.rotationKey)
+            movieLayer.setValue(newValue, forKeyPath: Layer.rotationKey)
         }
     }
 

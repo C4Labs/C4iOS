@@ -21,13 +21,13 @@ import QuartzCore
 import AVFoundation
 
 /// Extension for CAShapeLayer that allows overriding the actions for specific properties.
-public class C4PlayerLayer: AVPlayerLayer {
+public class PlayerLayer: AVPlayerLayer {
     /// A boolean value that, when true, prevents the animation of a shape's properties.
     ///
     /// ````
-    /// C4ShapeLayer.disableActions = true
+    /// ShapeLayer.disableActions = true
     /// circle.fillColor = red
-    /// C4ShapeLayer.disableActions = false
+    /// ShapeLayer.disableActions = false
     ///
     /// This value can be set globally, after which changes to any shape's properties will be immediate.
     public static var disableActions = true
@@ -38,17 +38,17 @@ public class C4PlayerLayer: AVPlayerLayer {
     ///
     ///  - returns: the action object assigned to the specified key.
     public override func actionForKey(key: String) -> CAAction? {
-        if C4ShapeLayer.disableActions == true {
+        if ShapeLayer.disableActions == true {
             return nil
         }
 
-        let animatableProperties = [C4Layer.rotationKey]
+        let animatableProperties = [Layer.rotationKey]
         if !animatableProperties.contains(key) {
             return super.actionForKey(key)
         }
 
         let animation: CABasicAnimation
-        if let viewAnimation = C4ViewAnimation.stack.last as? C4ViewAnimation where viewAnimation.spring != nil {
+        if let viewAnimation = ViewAnimation.stack.last as? ViewAnimation where viewAnimation.spring != nil {
             animation = CASpringAnimation(keyPath: key)
         } else {
             animation = CABasicAnimation(keyPath: key)
@@ -57,8 +57,8 @@ public class C4PlayerLayer: AVPlayerLayer {
         animation.configureOptions()
         animation.fromValue = valueForKey(key)
 
-        if key == C4Layer.rotationKey {
-            if let layer = presentationLayer() as? C4ShapeLayer {
+        if key == Layer.rotationKey {
+            if let layer = presentationLayer() as? ShapeLayer {
                 animation.fromValue = layer.valueForKey(key)
             }
         }
@@ -74,21 +74,21 @@ public class C4PlayerLayer: AVPlayerLayer {
         return _rotation
     }
 
-    /// Initializes a new C4Layer
+    /// Initializes a new Layer
     public override init() {
         super.init()
     }
 
-    /// Initializes a new C4Layer from a specified layer of any other type.
+    /// Initializes a new Layer from a specified layer of any other type.
     /// - parameter layer: Another CALayer
     public override init(layer: AnyObject) {
         super.init(layer: layer)
-        if let layer = layer as? C4PlayerLayer {
+        if let layer = layer as? PlayerLayer {
             _rotation = layer._rotation
         }
     }
 
-    /// Initializes a new C4Layer from data in a given unarchiver.
+    /// Initializes a new Layer from data in a given unarchiver.
     /// - parameter coder: An unarchiver object.
     public required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -99,7 +99,7 @@ public class C4PlayerLayer: AVPlayerLayer {
     /// - parameter key: The name of one of the receiver's properties
     public override func setValue(value: AnyObject?, forKey key: String) {
         super.setValue(value, forKey: key)
-        if key == C4Layer.rotationKey {
+        if key == Layer.rotationKey {
             _rotation = value as? Double ?? 0.0
         }
     }
@@ -108,7 +108,7 @@ public class C4PlayerLayer: AVPlayerLayer {
     /// - parameter key: A string that specifies an attribute of the layer.
     /// - returns: A Boolean indicating whether changes to the specified key require the layer to be redisplayed.
     public override class func needsDisplayForKey(key: String) -> Bool {
-        if  key == C4Layer.rotationKey {
+        if  key == Layer.rotationKey {
             return true
         }
         return super.needsDisplayForKey(key)
@@ -117,7 +117,7 @@ public class C4PlayerLayer: AVPlayerLayer {
     /// Reloads the content of this layer.
     /// Do not call this method directly.
     public override func display() {
-        guard let presentation = presentationLayer() as? C4PlayerLayer else {
+        guard let presentation = presentationLayer() as? PlayerLayer else {
             return
         }
         setValue(presentation._rotation, forKeyPath: "transform.rotation.z")
