@@ -207,6 +207,20 @@ public class Shape: View {
         }
     }
 
+    /// The current rotation value of the view. Animatable.
+    /// - returns: A Double value representing the cumulative rotation of the view, measured in Radians.
+    public override var rotation: Double {
+        get {
+            if let number = shapeLayer.valueForKeyPath(Layer.rotationKey) as? NSNumber {
+                return number.doubleValue
+            }
+            return  0.0
+        }
+        set {
+            shapeLayer.setValue(newValue, forKeyPath: Layer.rotationKey)
+        }
+    }
+
     /// This value defines the start of the path used to draw the stroked outline. The value must be in the range [0,1]
     /// with zero representing the start of the path and one the end. Values in between zero and one are interpolated
     /// linearly along the path length. Defaults to zero. Animatable.

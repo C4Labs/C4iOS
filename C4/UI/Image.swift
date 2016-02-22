@@ -322,6 +322,21 @@ public class Image: View, NSCopying {
         }
     }
 
+    /// The current rotation value of the view. Animatable.
+    /// - returns: A Double value representing the cumulative rotation of the view, measured in Radians.
+    public override var rotation: Double {
+        get {
+            if let number = imageLayer.valueForKeyPath(Layer.rotationKey) as? NSNumber {
+                return number.doubleValue
+            }
+            return  0.0
+        }
+        set {
+            imageLayer.setValue(newValue, forKeyPath: Layer.rotationKey)
+        }
+    }
+
+
     /// The scale factor of the image. (read-only)
     var scale: Double {
         return Double(uiimage.scale)
