@@ -41,7 +41,7 @@ public class ShapeLayer: CAShapeLayer {
             return nil
         }
 
-        let animatableProperties = ["lineWidth", "strokeEnd", "strokeStart", "strokeColor", "path", "fillColor", "lineDashPhase", "contents", C4Layer.rotationKey, "shadowColor", "shadowRadius", "shadowOffset", "shadowOpacity", "shadowPath"]
+        let animatableProperties = ["lineWidth", "strokeEnd", "strokeStart", "strokeColor", "path", "fillColor", "lineDashPhase", "contents", Layer.rotationKey, "shadowColor", "shadowRadius", "shadowOffset", "shadowOpacity", "shadowPath"]
         if !animatableProperties.contains(key) {
             return super.actionForKey(key)
         }
@@ -56,8 +56,8 @@ public class ShapeLayer: CAShapeLayer {
         animation.configureOptions()
         animation.fromValue = valueForKey(key)
 
-        if key == C4Layer.rotationKey {
-            if let layer = presentationLayer() as? C4ShapeLayer {
+        if key == Layer.rotationKey {
+            if let layer = presentationLayer() as? ShapeLayer {
                 animation.fromValue = layer.valueForKey(key)
             }
         }
@@ -82,7 +82,7 @@ public class ShapeLayer: CAShapeLayer {
     /// - parameter layer: Another CALayer
     public override init(layer: AnyObject) {
         super.init(layer: layer)
-        if let layer = layer as? C4ShapeLayer {
+        if let layer = layer as? ShapeLayer {
             _rotation = layer._rotation
         }
     }
@@ -98,7 +98,7 @@ public class ShapeLayer: CAShapeLayer {
     /// - parameter key: The name of one of the receiver's properties
     public override func setValue(value: AnyObject?, forKey key: String) {
         super.setValue(value, forKey: key)
-        if key == C4Layer.rotationKey {
+        if key == Layer.rotationKey {
             _rotation = value as? Double ?? 0.0
         }
     }
@@ -107,7 +107,7 @@ public class ShapeLayer: CAShapeLayer {
     /// - parameter key: A string that specifies an attribute of the layer.
     /// - returns: A Boolean indicating whether changes to the specified key require the layer to be redisplayed.
     public override class func needsDisplayForKey(key: String) -> Bool {
-        if  key == C4Layer.rotationKey {
+        if  key == Layer.rotationKey {
             return true
         }
         return super.needsDisplayForKey(key)
@@ -116,7 +116,7 @@ public class ShapeLayer: CAShapeLayer {
     /// Reloads the content of this layer.
     /// Do not call this method directly.
     public override func display() {
-        guard let presentation = presentationLayer() as? C4ShapeLayer else {
+        guard let presentation = presentationLayer() as? ShapeLayer else {
             return
         }
         setValue(presentation._rotation, forKeyPath: "transform.rotation.z")

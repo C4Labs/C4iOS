@@ -46,8 +46,8 @@ public class ImageLayer: CALayer {
         animation.configureOptions()
         animation.fromValue = valueForKey(key)
 
-        if key == C4Layer.rotationKey {
-            if let layer = presentationLayer() as? C4ShapeLayer {
+        if key == Layer.rotationKey {
+            if let layer = presentationLayer() as? ShapeLayer {
                 animation.fromValue = layer.valueForKey(key)
             }
         }
@@ -73,7 +73,7 @@ public class ImageLayer: CALayer {
     /// - parameter layer: Another CALayer
     public override init(layer: AnyObject) {
         super.init(layer: layer)
-        if let layer = layer as? C4ImageLayer {
+        if let layer = layer as? ImageLayer {
             _rotation = layer._rotation
         }
     }
@@ -89,7 +89,7 @@ public class ImageLayer: CALayer {
     /// - parameter key: The name of one of the receiver's properties
     public override func setValue(value: AnyObject?, forKey key: String) {
         super.setValue(value, forKey: key)
-        if key == C4Layer.rotationKey {
+        if key == Layer.rotationKey {
             _rotation = value as? Double ?? 0.0
         }
     }
@@ -98,7 +98,7 @@ public class ImageLayer: CALayer {
     /// - parameter key: A string that specifies an attribute of the layer.
     /// - returns: A Boolean indicating whether changes to the specified key require the layer to be redisplayed.
     public override class func needsDisplayForKey(key: String) -> Bool {
-        if  key == C4Layer.rotationKey {
+        if  key == Layer.rotationKey {
             return true
         }
         return super.needsDisplayForKey(key)
@@ -107,7 +107,7 @@ public class ImageLayer: CALayer {
     /// Reloads the content of this layer.
     /// Do not call this method directly.
     public override func display() {
-        guard let presentation = presentationLayer() as? C4ImageLayer else {
+        guard let presentation = presentationLayer() as? ImageLayer else {
             return
         }
         setValue(presentation._rotation, forKeyPath: "transform.rotation.z")

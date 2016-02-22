@@ -211,13 +211,13 @@ public class Shape: View {
     /// - returns: A Double value representing the cumulative rotation of the view, measured in Radians.
     public override var rotation: Double {
         get {
-            if let number = shapeLayer.valueForKeyPath(C4Layer.rotationKey) as? NSNumber {
+            if let number = shapeLayer.valueForKeyPath(Layer.rotationKey) as? NSNumber {
                 return number.doubleValue
             }
             return  0.0
         }
         set {
-            shapeLayer.setValue(newValue, forKeyPath: C4Layer.rotationKey)
+            shapeLayer.setValue(newValue, forKeyPath: Layer.rotationKey)
         }
     }
 
