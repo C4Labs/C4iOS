@@ -40,7 +40,7 @@ public class Star: Polygon {
     /// - parameter outerRadius: The radial distance from the center of the start to the outer points
     convenience public init(center: Point, pointCount: Int, innerRadius: Double, outerRadius: Double) {
         let wedgeAngle = 2.0 * M_PI / Double(pointCount)
-        var angle = M_PI_2
+        var angle = M_PI/Double(pointCount)-M_PI_2
 
         var pointArray = [Point]()
 
