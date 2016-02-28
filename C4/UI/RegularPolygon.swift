@@ -23,7 +23,7 @@ import CoreGraphics
 ///RegularPolygon is a is a concrete subclass of Polygon that defines a shape whose sides are uniform (e.g. pentagon, octagon, etc.).
 ///
 /// This class defines two variables called `sides` and `phase` that represent the number of sides and the initial rotation of the shape (respectively). The default shape is a hexagon.
-public class RegularPolygon: Shape {
+public class RegularPolygon: Polygon {
     /// Returns the number of sides in the polygon.
     ///
     /// Assigning a value to this property will change the number of sides and cause the receiver to automatically update its
@@ -64,41 +64,22 @@ public class RegularPolygon: Shape {
 
     /// Initializes a new RegularPolygon.
     ///
-    /// Default values are are sides = 6 (i.e. a hexagon), phase = 0 and frame = {0,0,0,0}.
-    public override init() {
-        super.init()
-        updatePath()
-    }
+    /// Default values are are sides = 6 (i.e. a hexagon), phase = 0.
+    convenience public init(center: Point, radius: Double = 50.0, sides: Int = 6, phase: Double = 0.0) {
+        let dΘ = 2.0*M_PI / Double(sides)
+        var pointArray = [Point]()
+        for i in 0..<sides {
+            let Θ = phase + dΘ * Double(i)
+            pointArray.append(Point(radius*cos(Θ), radius*sin(Θ)))
+        }
 
-    /// Initializes a new RegularPolygon from data in a given unarchiver.
-    /// - parameter coder: An unarchiver object.
-    required public init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        self.init(pointArray)
+        self.close()
+        self.fillColor = C4Blue
+        self.center = center
     }
 
     internal override func updatePath() {
-        let rect = inset(Rect(view.bounds), dx: lineWidth, dy: lineWidth)
-        let rx = rect.size.width / 2.0
-        let ry = rect.size.height / 2.0
-        if sides == 0 || rx <= 0 || ry <= 0 {
-            // Don't try to generate invalid polygons, we'll get undefined behaviour
-            return
-        }
-
-        let center = rect.center
-        let delta = 2.0*M_PI / Double(sides)
-        let newPath = Path()
-
-        for i in 0..<sides {
-            let angle = phase + delta*Double(i)
-            let point = Point(center.x + rx*cos(angle), center.y + ry*sin(angle))
-            if i == 0 {
-                newPath.moveToPoint(point)
-            } else {
-                newPath.addLineToPoint(point)
-            }
-        }
-        newPath.closeSubpath()
-        path = newPath
+        self.path = RegularPolygon(center: center, radius: width/2.0, sides:self.sides, phase:self.phase).path
     }
 }
