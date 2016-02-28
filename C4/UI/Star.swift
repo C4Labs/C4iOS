@@ -47,14 +47,15 @@ public class Star: Polygon {
         for i in 0..<pointCount * 2 {
             angle += wedgeAngle / 2.0
             if i % 2 != 0 {
-                pointArray.append(Point(center.x + innerRadius * cos(angle), center.y + innerRadius * sin(angle)))
+                pointArray.append(Point(innerRadius * cos(angle), innerRadius * sin(angle)))
             } else {
-                pointArray.append(Point(center.x + outerRadius * cos(angle), center.y + outerRadius * sin(angle)))
+                pointArray.append(Point(outerRadius * cos(angle), outerRadius * sin(angle)))
             }
         }
 
         self.init(pointArray)
         self.close()
         self.fillColor = C4Blue
+        self.center = center
     }
 }
