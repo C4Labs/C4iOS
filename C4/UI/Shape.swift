@@ -137,7 +137,8 @@ public class Shape: View {
 
     internal func updatePath() {}
 
-    func adjustToFitPath() {
+    /// Adjusts the shape's frame to the bounding bounding box of its specified path.
+    public func adjustToFitPath() {
         if shapeLayer.path == nil {
             return
         }
