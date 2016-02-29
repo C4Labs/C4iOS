@@ -23,7 +23,7 @@ import XCTest
 class MathTests: XCTestCase {
 
     func testLerp() {
-        XCTAssert(lerp(a: 0.0, b: 10.0, param: 0.2) == 2.0, "Value should be interpolated")
+        XCTAssert(lerp(0.0, 10.0, at: 0.2) == 2.0, "Value should be interpolated")
     }
 
     func testClampLess() {

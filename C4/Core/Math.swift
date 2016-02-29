@@ -45,9 +45,9 @@ public func clamp<T: Comparable>(val: T, min: T, max: T) -> T {
 /// Linear interpolation. For any two values a and b return a linear interpolation with parameter `param`.
 ///
 /// ````
-/// lerp(0,100,0.5) = 50
-/// lerp(100,200,0.5) = 150
-/// lerp(500,1000,0.33) = 665
+/// lerp(0, 100, 0.5) = 50
+/// lerp(100, 200, 0.5) = 150
+/// lerp(500, 1000, 0.33) = 665
 /// ````
 ///
 /// - parameter a:     first value
@@ -55,8 +55,8 @@ public func clamp<T: Comparable>(val: T, min: T, max: T) -> T {
 /// - parameter param: parameter between 0 and 1 for interpolation
 ///
 /// - returns: The interpolated value
-public func lerp(a a: Double, b: Double, param: Double) -> Double {
-    return a + (b - a) * param
+public func lerp(a: Double, _ b: Double, at: Double) -> Double {
+    return a + (b - a) * at
 }
 
 /// Linear mapping. Maps a value in the source range [min, max] to a value in the target range [toMin, toMax] using linear interpolation.
@@ -76,7 +76,7 @@ public func lerp(a a: Double, b: Double, param: Double) -> Double {
 /// - returns: The mapped value.
 public func map(val: Double, min: Double, max: Double, toMin: Double, toMax: Double) -> Double {
     let param = (val - min)/(max -  min)
-    return lerp(a: toMin, b: toMax, param: param)
+    return lerp(toMin, toMax, at: param)
 }
 
 /// Return a random integer below `below`
