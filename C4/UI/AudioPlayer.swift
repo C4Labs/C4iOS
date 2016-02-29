@@ -45,14 +45,22 @@ public class AudioPlayer: NSObject, AVAudioPlayerDelegate {
     /// let ap = AudioPlayer("audioTrackFileName")
     /// ````
     public init?(_ name: String) {
-        self.player = nil
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("Couldn't set up AVAudioSession")
+        }
+
         super.init()
 
         guard let url = NSBundle.mainBundle().URLForResource(name, withExtension:nil) else {
+            print("Could not retrieve url for \(name)")
             return nil
         }
 
         guard let player = try? AVAudioPlayer(contentsOfURL: url) else {
+            print("Could not create player from contents of : \(url)")
             return nil
         }
 
