@@ -35,7 +35,7 @@ class PointTests: XCTestCase {
 
     func testLerp() {
         let target = Point(10, 10)
-        let lerped = lerp(a: Point(), b: target, param: 0.2)
+        let lerped = lerp(Point(), target, at: 0.2)
         XCTAssertEqual(lerped, Point(2, 2), "Point should be {2,2}")
     }
 

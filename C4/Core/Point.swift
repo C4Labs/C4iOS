@@ -183,8 +183,8 @@ public func == (lhs: Point, rhs: Point) -> Bool {
 ///  - parameter param: a Double value (between 0.0 and 1.0) used to calculate the point between a and b
 ///
 ///  - returns: an interpolated point
-public func lerp(a a: Point, b: Point, param: Double) -> Point {
-    return a + (b - a) * param
+public func lerp(a: Point, _ b: Point, at: Double) -> Point {
+    return a + (b - a) * at
 }
 
 public extension CGPoint {
