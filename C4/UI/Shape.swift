@@ -52,7 +52,7 @@ public class Shape: View {
     }
 
     ///  Initializes an empty Shape.
-    override init() {
+    public override init() {
         super.init()
 
         self.view = ShapeView()
