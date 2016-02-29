@@ -166,7 +166,7 @@ public class Movie: View {
     /// Initializes a new Movie using the specified frame.
     ///
     /// - parameter frame:	The frame of the new movie object.
-    public init(frame: Rect) {
+    public override init(frame: Rect) {
         super.init()
         self.view = MovieView(frame: CGRect(frame))
     }

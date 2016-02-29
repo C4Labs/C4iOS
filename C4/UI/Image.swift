@@ -47,6 +47,10 @@ public class Image: View, NSCopying {
         self.view = ImageView(image: uiimage)
     }
 
+    public override init(frame: Rect) {
+        super.init(frame: frame)
+    }
+
     /// Initializes a new Image using the specified filename from the bundle (i.e. your project), it will also grab images
     /// from the web if the filename starts with http.
     /// ````

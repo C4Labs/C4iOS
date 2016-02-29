@@ -84,8 +84,8 @@ public class View: NSObject {
     /// canvas.add(v)
     /// ````
     /// - parameter frame: A Rect, which describes the view’s location and size in its superview’s coordinate system.
-    convenience public init(frame: Rect) {
-        self.init()
+    public init(frame: Rect) {
+        super.init()
         self.view.frame = CGRect(frame)
     }
 
