@@ -70,7 +70,7 @@ extension UIGestureRecognizer {
 }
 
 
-public typealias TapAction = (location: Point, state: UIGestureRecognizerState) -> ()
+public typealias TapAction = (locations: [Point], center: Point, state: UIGestureRecognizerState) -> ()
 
 extension UITapGestureRecognizer {
     /// The closure to call when there is a gesture event.
@@ -102,13 +102,17 @@ extension UITapGestureRecognizer {
             self.action = action
         }
             func handleGesture(gestureRecognizer: UIPanGestureRecognizer) {
-            action(location: gestureRecognizer.location, state: gestureRecognizer.state)
+                var locations = [Point]()
+                for i in 0..<gestureRecognizer.numberOfTouches() {
+                    locations.append(Point(gestureRecognizer.locationOfTouch(i, inView: gestureRecognizer.referenceView)))
+                }
+                action(locations: locations, center: gestureRecognizer.location, state: gestureRecognizer.state)
         }
     }
 }
 
 
-public typealias PanAction = (location: Point, translation: Vector, velocity: Vector, state: UIGestureRecognizerState) -> ()
+public typealias PanAction = (locations: [Point], center: Point, translation: Vector, velocity: Vector, state: UIGestureRecognizerState) -> ()
 
 extension UIPanGestureRecognizer {
     /// The closure to call when there is a gesture event.
@@ -162,7 +166,11 @@ extension UIPanGestureRecognizer {
             self.action = action
         }
             func handleGesture(gestureRecognizer: UIPanGestureRecognizer) {
-            action(location: gestureRecognizer.location, translation: gestureRecognizer.translation, velocity: gestureRecognizer.velocity, state: gestureRecognizer.state)
+                var locations = [Point]()
+                for i in 0..<gestureRecognizer.numberOfTouches() {
+                    locations.append(Point(gestureRecognizer.locationOfTouch(i, inView: gestureRecognizer.referenceView)))
+                }
+                action(locations: locations, center: gestureRecognizer.location, translation: gestureRecognizer.translation, velocity: gestureRecognizer.velocity, state: gestureRecognizer.state)
         }
     }
 }
@@ -244,7 +252,7 @@ extension UIRotationGestureRecognizer {
 }
 
 
-public typealias LongPressAction = (location: Point, state: UIGestureRecognizerState) -> ()
+public typealias LongPressAction = (locations: [Point], center: Point, state: UIGestureRecognizerState) -> ()
 
 extension UILongPressGestureRecognizer {
     /// The closure to call when there is a gesture event.
@@ -276,13 +284,17 @@ extension UILongPressGestureRecognizer {
             self.action = action
         }
             func handleGesture(gestureRecognizer: UILongPressGestureRecognizer) {
-            action(location: gestureRecognizer.location, state: gestureRecognizer.state)
+                var locations = [Point]()
+                for i in 0..<gestureRecognizer.numberOfTouches() {
+                    locations.append(Point(gestureRecognizer.locationOfTouch(i, inView: gestureRecognizer.referenceView)))
+                }
+                action(locations: locations, center: gestureRecognizer.location, state: gestureRecognizer.state)
         }
     }
 }
 
 
-public typealias SwipeAction = (location: Point, state: UIGestureRecognizerState, direction: UISwipeGestureRecognizerDirection) -> ()
+public typealias SwipeAction = (locations: [Point], center: Point, state: UIGestureRecognizerState, direction: UISwipeGestureRecognizerDirection) -> ()
 
 extension UISwipeGestureRecognizer {
     /// The closure to call when there is a gesture event.
@@ -314,7 +326,11 @@ extension UISwipeGestureRecognizer {
             self.action = action
         }
             func handleGesture(gestureRecognizer: UISwipeGestureRecognizer) {
-            action(location: gestureRecognizer.location, state: gestureRecognizer.state, direction: gestureRecognizer.direction)
+                var locations = [Point]()
+                for i in 0..<gestureRecognizer.numberOfTouches() {
+                    locations.append(Point(gestureRecognizer.locationOfTouch(i, inView: gestureRecognizer.referenceView)))
+                }
+                action(locations: locations, center: gestureRecognizer.location, state: gestureRecognizer.state, direction: gestureRecognizer.direction)
         }
     }
 }
