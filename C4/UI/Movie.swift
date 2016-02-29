@@ -125,7 +125,15 @@ public class Movie: View {
     ///
     /// - parameter filename:	The name of the movie file included in your project.
     public convenience init?(_ filename: String) {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("Couldn't set up AVAudioSession")
+        }
+
         guard let url = NSBundle.mainBundle().URLForResource(filename, withExtension: nil) else {
+            print("Couldn't retrieve url for: \(filename)")
             return nil
         }
 
