@@ -124,7 +124,7 @@ extension Shape {
         if newPath!.currentPoint != points[0] {
             newPath!.moveToPoint(points[0])
         }
-        newPath!.addCurveToPoint(controls[0], control2: controls[1], point: points[1])
+        newPath!.addCurveToPoint(points[1], control1: controls[0], control2: controls[1])
         path = newPath
         adjustToFitPath()
     }

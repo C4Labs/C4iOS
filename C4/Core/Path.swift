@@ -127,7 +127,7 @@ extension Path {
     /// point to `point`.
     /// - parameter control: A Point used to shape the curve
     /// - parameter point: A Point
-    public func addQuadCurveToPoint(control control: Point, point: Point) {
+    public func addQuadCurveToPoint(point: Point, control: Point) {
         CGPathAddQuadCurveToPoint(internalPath, nil, CGFloat(control.x), CGFloat(control.y), CGFloat(point.x), CGFloat(point.y))
     }
 
@@ -136,7 +136,7 @@ extension Path {
     /// - parameter control1: A Point used to shape the curve
     /// - parameter control2: A Point used to shape the curve
     /// - parameter point: A Point
-    public func addCurveToPoint(control1: Point, control2: Point, point: Point) {
+    public func addCurveToPoint(point: Point, control1: Point, control2: Point) {
         CGPathAddCurveToPoint(internalPath, nil, CGFloat(control1.x), CGFloat(control1.y), CGFloat(control2.x), CGFloat(control2.y), CGFloat(point.x), CGFloat(point.y))
     }
 
