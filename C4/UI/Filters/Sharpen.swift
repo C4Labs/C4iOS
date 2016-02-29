@@ -17,10 +17,27 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-import C4
-import UIKit
+import CoreImage
 
-class ViewController: CanvasController {
-    override func setup() {
+///Increases image detail by sharpening.
+public struct Sharpen: Filter {
+    /// The name of the Core Image filter (e.g. "CIBloom")
+    public let filterName = "CISharpenLuminance"
+    /// A Double value by which to sharpen the image. Default value: 0.4
+    public var sharpness: Double = 0.4
+
+    ///Initializes a new filter
+    public init() {}
+
+    /// Applies the properties of the receiver to create a new CIFilter object
+    ///
+    /// - parameter inputImage: The image to use as input to the filter.
+    /// - returns: The new CIFilter object.
+    public func createCoreImageFilter(inputImage: CIImage) -> CIFilter {
+        let filter = CIFilter(name: filterName)!
+        filter.setDefaults()
+        filter.setValue(sharpness, forKey:"inputSharpness")
+        filter.setValue(inputImage, forKey:"inputImage")
+        return filter
     }
 }

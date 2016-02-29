@@ -17,10 +17,33 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-import C4
+import QuartzCore
 import UIKit
 
-class ViewController: CanvasController {
-    override func setup() {
+extension Image {
+    ///  Applies a generator to the receiver's contents.
+    ///
+    ///  - parameter generator: a Generator
+    public func generate(generator: Generator) {
+        let crop = CIFilter(name: "CICrop")!
+        crop.setDefaults()
+        crop.setValue(CIVector(CGRect:CGRect(self.bounds)), forKey: "inputRectangle")
+        let generatorFilter = generator.createCoreImageFilter()
+        crop.setValue(generatorFilter.outputImage, forKey: "inputImage")
+
+        if var outputImage = crop.outputImage {
+            let scale = CGAffineTransformMakeScale(1, -1)
+            let translate = CGAffineTransformTranslate(scale, 0, outputImage.extent.size.height)
+            outputImage = outputImage.imageByApplyingTransform(translate)
+            self.output = outputImage
+
+            let img = UIImage(CIImage: output)
+            let orig = self.origin
+            self.view = UIImageView(image: img)
+            self.origin = orig
+            _originalSize = Size(view.frame.size)
+        } else {
+            print("Failed to generate outputImage: \(__FUNCTION__)")
+        }
     }
 }

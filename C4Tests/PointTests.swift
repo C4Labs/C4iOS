@@ -18,9 +18,25 @@
 // IN THE SOFTWARE.
 
 import C4
-import UIKit
+import XCTest
 
-class ViewController: CanvasController {
-    override func setup() {
+class PointTests: XCTestCase {
+    func testDistance() {
+        let pointA = Point()
+        let pointB = Point(1, 1)
+        XCTAssertEqualWithAccuracy(distance(pointA, rhs: pointB), sqrt(2), accuracy: DBL_MIN, "Distance between origin and (1,1) should be √2")
     }
+
+    func testTranslate() {
+        let original = Point(2, 3)
+        let translated = original + Vector(x: 3, y: 2)
+        XCTAssertEqual(translated, Point(5, 5), "Point should be translated to (5, 5)")
+    }
+
+    func testLerp() {
+        let target = Point(10, 10)
+        let lerped = lerp(a: Point(), b: target, param: 0.2)
+        XCTAssertEqual(lerped, Point(2, 2), "Point should be {2,2}")
+    }
+
 }
