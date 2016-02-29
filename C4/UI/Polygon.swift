@@ -43,7 +43,7 @@ public class Polygon: Shape {
     }
 
     ///  Initializes a default Polygon.
-    override init() {
+    public override init() {
         self.points = []
         super.init()
         fillColor = clear

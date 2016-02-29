@@ -23,6 +23,9 @@ import CoreGraphics
 ///Circle is a concrete subclass of Ellipse that has a special initialzer that creates a uniform ellipse.
 public class Circle: Ellipse {
 
+    public override init() {
+        super.init()
+    }
     /// Creates a circle.
     ///
     /// ````
