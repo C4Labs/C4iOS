@@ -26,6 +26,7 @@ import AVFoundation
 ///
 ///A C4Movie’s resizing behaviour is to map itself to the edges of its visible frame. This functionality implicitly uses AVLayerVideoGravityResize as its layer’s default gravity. You can change the frame of the movie from an arbitrary shape back to its original proportion by using its originalSize, originalRatio, or by independently setting either its width or height properties.
 public class Movie: View {
+    var filename: String!
     var player: AVQueuePlayer?
     var currentItem: AVPlayerItem?
     var reachedEndAction: (()->())?
@@ -145,6 +146,7 @@ public class Movie: View {
         let size = Size(movieTrack.naturalSize)
 
         self.init(frame: Rect(0, 0, Double(size.width), Double(size.height)))
+        self.filename = filename
         //initialize player with item
         let newPlayer = AVQueuePlayer(playerItem: AVPlayerItem(asset: asset))
         newPlayer.actionAtItemEnd = .Pause
@@ -166,11 +168,16 @@ public class Movie: View {
     /// Initializes a new Movie using the specified frame.
     ///
     /// - parameter frame:	The frame of the new movie object.
-    public init(frame: Rect) {
+    public override init(frame: Rect) {
         super.init()
         self.view = MovieView(frame: CGRect(frame))
     }
 
+    public convenience init?(copy original: Movie) {
+        self.init(original.filename)
+        self.frame = original.frame
+        copyViewStyle(original)
+    }
 
     /// Begins playback of the current item.
     ///

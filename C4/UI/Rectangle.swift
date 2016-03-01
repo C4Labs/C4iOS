@@ -49,8 +49,8 @@ public class Rectangle: Shape {
     /// ````
     ///
     /// - parameter frame: A Rect whose dimensions are used to construct the Rectangle.
-    convenience public init(frame: Rect) {
-        self.init()
+    public override init(frame: Rect) {
+        super.init()
         if frame.size.width <= corner.width * 2.0 || frame.size.height <= corner.width / 2.0 {
             corner = Size()
         }

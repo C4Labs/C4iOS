@@ -81,10 +81,11 @@ public class Image: View, NSCopying {
     /// canvas.add(b)
     /// ````
     /// - parameter image: A Image.
-    convenience public init(image: Image) {
+    convenience public init(copy image: Image) {
         self.init()
         let uiimage = image.uiimage
         self.view = ImageView(image: uiimage)
+        copyViewStyle(image)
     }
 
     /// Initializes a new Image using a UIImage.
@@ -288,7 +289,9 @@ public class Image: View, NSCopying {
     /// - returns:	A UIImage object.
     public var uiimage: UIImage {
         get {
-            return imageView.image!
+            let layer = imageView.layer as CALayer
+            let contents = layer.contents as! CGImage // swiftlint:disable:this force_cast
+            return UIImage(CGImage: contents, scale: CGFloat(scale), orientation: imageView.image!.imageOrientation)
         }
     }
 
@@ -339,7 +342,7 @@ public class Image: View, NSCopying {
 
     /// The scale factor of the image. (read-only)
     var scale: Double {
-        return Double(uiimage.scale)
+        return Double(imageView.image!.scale)
     }
 
     /// A variable that provides access to the width of the receiver. Animatable.
