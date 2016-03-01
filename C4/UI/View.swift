@@ -77,6 +77,43 @@ public class View: NSObject {
         self.view = view
     }
 
+    public init(copyView: View) {
+        //If there is a scale transform we need to undo that
+        let t = CGAffineTransformInvert(copyView.view.transform)
+        let x = sqrt(t.a * t.a + t.c * t.c)
+        let y = sqrt(t.b * t.b + t.d * t.d)
+        let s = CGAffineTransformMakeScale(x, y)
+        let frame = Rect(CGRectApplyAffineTransform(copyView.view.frame, s))
+        super.init()
+        view.frame = CGRect(frame)
+        copyViewStyle(copyView)
+    }
+
+    public func copyViewStyle(viewToCopy: View) {
+        ShapeLayer.disableActions = true
+        anchorPoint = viewToCopy.anchorPoint
+        shadow = viewToCopy.shadow
+        border = viewToCopy.border
+        rotation = viewToCopy.rotation
+        interactionEnabled = viewToCopy.interactionEnabled
+        backgroundColor = viewToCopy.backgroundColor
+        opacity = viewToCopy.opacity
+
+        if let maskToCopy = viewToCopy.mask {
+            if viewToCopy.mask is Shape {
+                mask = Shape(copy: viewToCopy.mask as! Shape)
+            } else if viewToCopy.mask is Image {
+                mask = Image(copy: viewToCopy.mask as! Image)
+            } else {
+                mask = View(copyView: maskToCopy)
+            }
+            mask?.center = maskToCopy.center
+        }
+
+        transform = viewToCopy.transform
+        ShapeLayer.disableActions = false
+    }
+
     /// Initializes a new View with the specifed frame.
     /// ````
     /// let f = Rect(0,0,100,100)
@@ -531,3 +568,5 @@ public class View: NSObject {
         zPosition = view.zPosition - 1
     }
 }
+
+

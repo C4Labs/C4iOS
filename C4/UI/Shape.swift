@@ -46,7 +46,6 @@ public class Shape: View {
         }
     }
 
-
     internal var shapeView: ShapeView {
         return self.view as! ShapeView // swiftlint:disable:this force_cast
     }
@@ -54,8 +53,7 @@ public class Shape: View {
     ///  Initializes an empty Shape.
     public override init() {
         super.init()
-
-        self.view = ShapeView()
+        self.view = ShapeView(frame: CGRect(frame))
         strokeColor = C4Purple
         fillColor = C4Blue
         lineWidth = 1
@@ -79,27 +77,46 @@ public class Shape: View {
         adjustToFitPath()
     }
 
+    public override init(frame: Rect) {
+        super.init()
+        self.view = ShapeView(frame: CGRect(frame))
+        strokeColor = C4Purple
+        fillColor = C4Blue
+        lineWidth = 1
+        lineCap = .Round
+        lineJoin = .Round
+
+        let image = UIImage.createWithColor(UIColor.clearColor(), size: CGSize(width: 1, height: 1)).CGImage
+        shapeLayer.contents = image
+    }
+
     /// Initializes a new Shape from the properties of another Shape. Essentially, this copies the provided shape.
     /// - parameter shape: A Shape around which the new shape is created.
-    public convenience init(_ shape: Shape) {
-        self.init()
+    public convenience init(copy original: Shape) {
+        //If there is a scale transform we need to undo that
+        let t = CGAffineTransformInvert(original.view.transform)
+        let x = sqrt(t.a * t.a + t.c * t.c)
+        let y = sqrt(t.b * t.b + t.d * t.d)
+        let s = CGAffineTransformMakeScale(x, y)
+        self.init(frame: Rect(CGRectApplyAffineTransform(original.view.frame, s)))
+
         let disable = ShapeLayer.disableActions
         ShapeLayer.disableActions = true
-        self.path = shape.path
+        self.path = original.path
         shapeLayer.path = path?.CGPath
-        self.frame = shape.frame
-        self.lineWidth = shape.lineWidth
-        self.lineDashPhase = shape.lineDashPhase
-        self.lineCap = shape.lineCap
-        self.lineJoin = shape.lineJoin
-        self.lineDashPattern = shape.lineDashPattern
-        self.fillColor = shape.fillColor
-        self.strokeColor = shape.strokeColor
-        self.strokeStart = shape.strokeStart
-        self.strokeEnd = shape.strokeEnd
-        self.miterLimit = shape.miterLimit
+        self.lineWidth = original.lineWidth
+        self.lineDashPhase = original.lineDashPhase
+        self.lineCap = original.lineCap
+        self.lineJoin = original.lineJoin
+        self.lineDashPattern = original.lineDashPattern
+        self.fillColor = original.fillColor
+        self.strokeColor = original.strokeColor
+        self.strokeStart = original.strokeStart
+        self.strokeEnd = original.strokeEnd
+        self.miterLimit = original.miterLimit
         updatePath()
         adjustToFitPath()
+        copyViewStyle(original)
         ShapeLayer.disableActions = disable
     }
 

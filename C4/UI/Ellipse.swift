@@ -31,8 +31,8 @@ public class Ellipse: Shape {
     /// ````
     ///
     /// - parameter frame: The frame within which to draw an ellipse that touches each of the four sides of the frame.
-    convenience public init(frame: Rect) {
-        self.init()
+    public override init(frame: Rect) {
+        super.init()
         view.frame = CGRect(frame)
         updatePath()
     }
