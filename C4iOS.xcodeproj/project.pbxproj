@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F40C6FB1C82ADF0004AE1E7 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F40C6FA1C82ADF0004AE1E7 /* Camera.swift */; };
 		1F754DCB1C48EE600036D39F /* ImageLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F754DCA1C48EE600036D39F /* ImageLayer.swift */; };
 		1F75FDEB1C5B1FE700EB62C2 /* C4Loop.aif in Resources */ = {isa = PBXBuildFile; fileRef = 1F75FDE81C5B1FE700EB62C2 /* C4Loop.aif */; };
 		1F75FDEC1C5B1FE700EB62C2 /* halo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1F75FDE91C5B1FE700EB62C2 /* halo.mp4 */; };
@@ -133,6 +134,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1F40C6FA1C82ADF0004AE1E7 /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		1F754DCA1C48EE600036D39F /* ImageLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLayer.swift; sourceTree = "<group>"; };
 		1F75FDE81C5B1FE700EB62C2 /* C4Loop.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = C4Loop.aif; sourceTree = "<group>"; };
 		1F75FDE91C5B1FE700EB62C2 /* halo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = halo.mp4; sourceTree = "<group>"; };
@@ -351,6 +353,7 @@
 				A9D4F67E1B534F9F00F937AB /* Animation.swift */,
 				A9D4F6801B534F9F00F937AB /* Arc.swift */,
 				A9D4F6811B534F9F00F937AB /* AudioPlayer.swift */,
+				1F40C6FA1C82ADF0004AE1E7 /* Camera.swift */,
 				A9D4F6821B534F9F00F937AB /* CanvasController.swift */,
 				A9D4F6831B534F9F00F937AB /* Circle.swift */,
 				A9D4F6841B534F9F00F937AB /* Curve.swift */,
@@ -619,6 +622,7 @@
 				A9D4F6C61B534F9F00F937AB /* Image+Generator.swift in Sources */,
 				A9D4F6E31B534F9F00F937AB /* Twirl.swift in Sources */,
 				A9BC57271C50ABA80068BBA3 /* UIImage+Color.swift in Sources */,
+				1F40C6FB1C82ADF0004AE1E7 /* Camera.swift in Sources */,
 				61BBAF651BC38C1200A03FD0 /* View+KeyValues.swift in Sources */,
 				A9D4F6AF1B534F9F00F937AB /* Foundation.swift in Sources */,
 				A9D4F6D41B534F9F00F937AB /* View+Animation.swift in Sources */,
