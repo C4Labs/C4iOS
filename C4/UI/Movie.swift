@@ -88,6 +88,21 @@ public class Movie: View {
         }
     }
 
+    /// Mute/Unmute the audio track.
+    ///
+    /// The default value of this property is `false`.
+    public var muted: Bool {
+        get {
+            guard let p = player else {
+                return false
+            }
+            return p.muted
+        }
+        set {
+            player?.muted = newValue
+        }
+    }
+
     var movieLayer: PlayerLayer {
         get {
             return self.movieView.movieLayer
