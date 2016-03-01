@@ -35,25 +35,21 @@ public class C4Movie: C4View {
     /// The default value of this property is `true`.
     public var loops: Bool = true
 
-    
     /// Mute/Unmute the audio track.
     ///
     /// The default value of this property is `false`.
     public var muted: Bool {
-        get{
-            if let p = player {
-                return p.muted
-            } else {
+        get {
+            guard let p = player else {
                 return false
             }
+            return p.muted
         }
-        set(val){
-            if let p = player {
-                p.muted = val
-            }
+        set {
+            player?.muted = newValue
         }
     }
-    
+
     /// A variable that provides access to the width of the receiver. Animatable.
     /// The default value of this property is defined by the movie being created.
     /// Assigning a value to this property causes the receiver to change the width of its frame. If the receiver's
