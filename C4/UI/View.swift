@@ -101,9 +101,9 @@ public class View: NSObject {
 
         if let maskToCopy = viewToCopy.mask {
             if viewToCopy.mask is Shape {
-                mask = Shape(copy: viewToCopy.mask as! Shape)
+                mask = Shape(copy: viewToCopy.mask as! Shape) // swiftlint:disable:this force_cast
             } else if viewToCopy.mask is Image {
-                mask = Image(copy: viewToCopy.mask as! Image)
+                mask = Image(copy: viewToCopy.mask as! Image) // swiftlint:disable:this force_cast
             } else {
                 mask = View(copyView: maskToCopy)
             }
@@ -568,5 +568,3 @@ public class View: NSObject {
         zPosition = view.zPosition - 1
     }
 }
-
-
