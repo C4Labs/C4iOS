@@ -22,5 +22,22 @@ import UIKit
 
 class ViewController: CanvasController {
     override func setup() {
+        let c = Camera(frame: Rect(0, 0, 100, 100))
+        c.border.width = 1.0
+        c.startCapture()
+        canvas.add(c)
+
+        canvas.addTapGestureRecognizer { (location, state) -> () in
+            c.captureImage()
+        }
+
+        c.didCaptureImage {
+            let i = c.capturedImage
+            i?.interactionEnabled = false
+            i?.constrainsProportions = true
+            i?.width = self.canvas.width
+            i?.center = self.canvas.center
+            self.canvas.add(i)
+        }
     }
 }

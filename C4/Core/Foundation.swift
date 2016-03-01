@@ -19,6 +19,11 @@
 
 import CoreGraphics
 
+public let orientationPortraitKey = "Portrait"
+public let orientationPortraitUpsideDownKey = "PortraitUpsideDown"
+public let orientationLandscapeLeftKey = "LandscapeLeft"
+public let orientationLandscapeRightKey = "LandscapeRight"
+public let orientationUnknownKey = "Unknown"
 
 /// Prints a string to the console. Replacement for the noisy NSlog.
 ///
