@@ -36,7 +36,7 @@ public class Gradient: View {
         return gradientView.gradientLayer
     }
 
-    var gradientView: GradientView {
+    internal var gradientView: GradientView {
         return view as! GradientView // swiftlint:disable:this force_cast
     }
 
@@ -101,18 +101,38 @@ public class Gradient: View {
         }
     }
 
+    /// The current rotation value of the view. Animatable.
+    /// - returns: A Double value representing the cumulative rotation of the view, measured in Radians.
+    public override var rotation: Double {
+        get {
+            if let number = gradientLayer.valueForKeyPath(Layer.rotationKey) as? NSNumber {
+                return number.doubleValue
+            }
+            return  0.0
+        }
+        set {
+            gradientLayer.setValue(newValue, forKeyPath: Layer.rotationKey)
+        }
+    }
+
     ///  Initializes a new Gradient.
     ///
     ///  - parameter frame:     A Rect that defines the frame for the gradient's view.
     ///  - parameter colors:    An array of Color objects that define the gradient's colors. Defaults to [C4Blue, C4Purple].
     ///  - parameter locations: An array of Double values that define the location of each gradient stop. Defaults to [0,1]
-    public convenience init(frame: Rect, colors: [Color] = [C4Blue, C4Purple], locations: [Double] = [0, 1]) {
-        assert(colors.count == locations.count, "colors and locations need to have the same number of elements")
+    public convenience override init(frame: Rect) {
         self.init()
         self.view = GradientView(frame: CGRect(frame))
-        self.colors = colors
-        self.locations = locations
+        self.colors = [C4Pink, C4Purple]
+        self.locations = [0, 1]
         self.startPoint = Point()
         self.endPoint = Point(1, 0)
+    }
+
+    public convenience init(copy original: Gradient) {
+        self.init(frame: original.frame)
+        self.colors = original.colors
+        self.locations = original.locations
+        copyViewStyle(original)
     }
 }
