@@ -95,6 +95,14 @@ public struct Vector: Equatable, CustomStringConvertible {
         z = 0
     }
 
+    ///  Initializes a Vector from another Vector
+    ///  - parameter copy: a previously initialized Vector
+    public init(copy original: Vector) {
+        x = original.x
+        y = original.y
+        z = original.z
+    }
+
     /// The polar representation magnitude of the vector.
     /// ````
     /// let v = Vector(x: 2.0, y: 1.0, z: 0.0)

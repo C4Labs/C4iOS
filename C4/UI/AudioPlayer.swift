@@ -40,6 +40,8 @@ import AVFoundation
 public class AudioPlayer: NSObject, AVAudioPlayerDelegate {
     internal var player: AVAudioPlayer!
 
+    var filename: String!
+
     /// Initializes a new audio player from a given file name
     /// ````
     /// let ap = AudioPlayer("audioTrackFileName")
@@ -66,6 +68,11 @@ public class AudioPlayer: NSObject, AVAudioPlayerDelegate {
 
         self.player = player
         player.delegate = self
+        self.filename = name
+    }
+
+    public convenience init?(copy original: AudioPlayer) {
+        self.init(original.filename)
     }
 
     /// Plays a sound asynchronously.
