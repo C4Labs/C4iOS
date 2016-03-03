@@ -126,7 +126,7 @@ public class Gradient: View {
         self.colors = [C4Pink, C4Purple]
         self.locations = [0, 1]
         self.startPoint = Point()
-        self.endPoint = Point(1, 0)
+        self.endPoint = Point(0, 1)
     }
 
     public convenience init(copy original: Gradient) {
