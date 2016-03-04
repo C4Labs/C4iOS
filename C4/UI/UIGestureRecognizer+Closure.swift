@@ -176,7 +176,7 @@ extension UIPanGestureRecognizer {
 }
 
 
-public typealias PinchAction = (scale: Double, velocity: Double, state: UIGestureRecognizerState) -> ()
+public typealias PinchAction = (locations: [Point], center: Point, scale: Double, velocity: Double, state: UIGestureRecognizerState) -> ()
 
 extension UIPinchGestureRecognizer {
     /// The closure to call when there is a gesture event.
@@ -208,7 +208,11 @@ extension UIPinchGestureRecognizer {
             self.action = action
         }
             func handleGesture(gestureRecognizer: UIPinchGestureRecognizer) {
-            action(scale: Double(gestureRecognizer.scale), velocity: Double(gestureRecognizer.velocity), state: gestureRecognizer.state)
+                var locations = [Point]()
+                for i in 0..<gestureRecognizer.numberOfTouches() {
+                    locations.append(Point(gestureRecognizer.locationOfTouch(i, inView: gestureRecognizer.referenceView)))
+                }
+                action(locations: locations, center: gestureRecognizer.location, scale: Double(gestureRecognizer.scale), velocity: Double(gestureRecognizer.velocity), state: gestureRecognizer.state)
         }
     }
 }
