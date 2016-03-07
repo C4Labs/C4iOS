@@ -103,21 +103,6 @@ public class Movie: View {
         }
     }
 
-    /// Mute/Unmute the audio track.
-    ///
-    /// The default value of this property is `false`.
-    public var muted: Bool {
-        get {
-            guard let p = player else {
-                return false
-            }
-            return p.muted
-        }
-        set {
-            player?.muted = newValue
-        }
-    }
-
     var movieLayer: PlayerLayer {
         get {
             return self.movieView.movieLayer
@@ -193,7 +178,7 @@ public class Movie: View {
         movieLayer.videoGravity = AVLayerVideoGravityResize
 
         originalSize = self.size
-        
+
         // unmute
         muted = false
     }
@@ -245,7 +230,7 @@ public class Movie: View {
         p.seekToTime(CMTimeMake(0, 1))
         p.pause()
     }
-    
+
     /// The action to perform at the end of playback.
     ///
     /// - parameter action: A block of code to execute at the end of playback.
