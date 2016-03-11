@@ -17,10 +17,27 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-import C4
-import UIKit
+import Foundation
+import CoreGraphics
 
-class ViewController: CanvasController {
-    override func setup() {
+/// Triangle defines a concrete subclass of Polygon whose shape is a closed triangle.
+public class Triangle: Polygon {
+
+    /// Initializes a new Triangle using the specified array of points.
+    ///
+    /// Protects against trying to create a triangle with less than three points.
+    ///
+    /// - parameter points: An array of Point structs.
+    public override init(_ points: [Point]) {
+        assert(points.count >= 3, "To create a Triangle you need to specify an array of at least 3 points")
+        super.init(points)
+        self.fillColor = C4Blue
+        self.close()
+    }
+
+    /// Initializes a new Polygon from data in a given unarchiver.
+    /// - parameter coder: An unarchiver object.
+    required public init(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

@@ -26,9 +26,9 @@ private var viewAssociationKey: UInt8 = 0
 
 extension UIGestureRecognizer {
     /// The current location of the gesture in the reference view.
-    public var location: C4Point {
+    public var location: Point {
         get {
-            return C4Point(locationInView(referenceView))
+            return Point(locationInView(referenceView))
         }
     }
     internal var referenceView: UIView? {
@@ -70,7 +70,7 @@ extension UIGestureRecognizer {
 }
 
 
-public typealias TapAction = (location: C4Point, state: UIGestureRecognizerState) -> ()
+public typealias TapAction = (locations: [Point], center: Point, state: UIGestureRecognizerState) -> ()
 
 extension UITapGestureRecognizer {
     /// The closure to call when there is a gesture event.
@@ -102,13 +102,17 @@ extension UITapGestureRecognizer {
             self.action = action
         }
             func handleGesture(gestureRecognizer: UIPanGestureRecognizer) {
-            action(location: gestureRecognizer.location, state: gestureRecognizer.state)
+                var locations = [Point]()
+                for i in 0..<gestureRecognizer.numberOfTouches() {
+                    locations.append(Point(gestureRecognizer.locationOfTouch(i, inView: gestureRecognizer.referenceView)))
+                }
+                action(locations: locations, center: gestureRecognizer.location, state: gestureRecognizer.state)
         }
     }
 }
 
 
-public typealias PanAction = (location: C4Point, translation: C4Vector, velocity: C4Vector, state: UIGestureRecognizerState) -> ()
+public typealias PanAction = (locations: [Point], center: Point, translation: Vector, velocity: Vector, state: UIGestureRecognizerState) -> ()
 
 extension UIPanGestureRecognizer {
     /// The closure to call when there is a gesture event.
@@ -132,21 +136,21 @@ extension UIPanGestureRecognizer {
     /// The translation of the pan gesture in the coordinate system of the specified view.
     ///
     /// The x and y values report the total translation over time. They are not delta values from the last time that the translation was reported. Apply the translation value to the state of the view when the gesture is first recognized—do not concatenate the value each time the handler is called.
-    public var translation: C4Vector {
+    public var translation: Vector {
         get {
             if let view = referenceView {
-                return C4Vector(translationInView(view))
+                return Vector(translationInView(view))
             }
-            return C4Vector()
+            return Vector()
         }
     }
 
     /// The velocity of the pan gesture in the coordinate system of the specified view.
     ///
     /// The velocity of the pan gesture, which is expressed in points per second. The velocity is broken into horizontal and vertical components.
-    public var velocity: C4Vector {
+    public var velocity: Vector {
         get {
-            return C4Vector(velocityInView(view))
+            return Vector(velocityInView(view))
         }
     }
 
@@ -162,13 +166,17 @@ extension UIPanGestureRecognizer {
             self.action = action
         }
             func handleGesture(gestureRecognizer: UIPanGestureRecognizer) {
-            action(location: gestureRecognizer.location, translation: gestureRecognizer.translation, velocity: gestureRecognizer.velocity, state: gestureRecognizer.state)
+                var locations = [Point]()
+                for i in 0..<gestureRecognizer.numberOfTouches() {
+                    locations.append(Point(gestureRecognizer.locationOfTouch(i, inView: gestureRecognizer.referenceView)))
+                }
+                action(locations: locations, center: gestureRecognizer.location, translation: gestureRecognizer.translation, velocity: gestureRecognizer.velocity, state: gestureRecognizer.state)
         }
     }
 }
 
 
-public typealias PinchAction = (scale: Double, velocity: Double, state: UIGestureRecognizerState) -> ()
+public typealias PinchAction = (locations: [Point], center: Point, scale: Double, velocity: Double, state: UIGestureRecognizerState) -> ()
 
 extension UIPinchGestureRecognizer {
     /// The closure to call when there is a gesture event.
@@ -200,7 +208,11 @@ extension UIPinchGestureRecognizer {
             self.action = action
         }
             func handleGesture(gestureRecognizer: UIPinchGestureRecognizer) {
-            action(scale: Double(gestureRecognizer.scale), velocity: Double(gestureRecognizer.velocity), state: gestureRecognizer.state)
+                var locations = [Point]()
+                for i in 0..<gestureRecognizer.numberOfTouches() {
+                    locations.append(Point(gestureRecognizer.locationOfTouch(i, inView: gestureRecognizer.referenceView)))
+                }
+                action(locations: locations, center: gestureRecognizer.location, scale: Double(gestureRecognizer.scale), velocity: Double(gestureRecognizer.velocity), state: gestureRecognizer.state)
         }
     }
 }
@@ -244,7 +256,7 @@ extension UIRotationGestureRecognizer {
 }
 
 
-public typealias LongPressAction = (location: C4Point, state: UIGestureRecognizerState) -> ()
+public typealias LongPressAction = (locations: [Point], center: Point, state: UIGestureRecognizerState) -> ()
 
 extension UILongPressGestureRecognizer {
     /// The closure to call when there is a gesture event.
@@ -276,13 +288,17 @@ extension UILongPressGestureRecognizer {
             self.action = action
         }
             func handleGesture(gestureRecognizer: UILongPressGestureRecognizer) {
-            action(location: gestureRecognizer.location, state: gestureRecognizer.state)
+                var locations = [Point]()
+                for i in 0..<gestureRecognizer.numberOfTouches() {
+                    locations.append(Point(gestureRecognizer.locationOfTouch(i, inView: gestureRecognizer.referenceView)))
+                }
+                action(locations: locations, center: gestureRecognizer.location, state: gestureRecognizer.state)
         }
     }
 }
 
 
-public typealias SwipeAction = (location: C4Point, state: UIGestureRecognizerState, direction: UISwipeGestureRecognizerDirection) -> ()
+public typealias SwipeAction = (locations: [Point], center: Point, state: UIGestureRecognizerState, direction: UISwipeGestureRecognizerDirection) -> ()
 
 extension UISwipeGestureRecognizer {
     /// The closure to call when there is a gesture event.
@@ -314,12 +330,16 @@ extension UISwipeGestureRecognizer {
             self.action = action
         }
             func handleGesture(gestureRecognizer: UISwipeGestureRecognizer) {
-            action(location: gestureRecognizer.location, state: gestureRecognizer.state, direction: gestureRecognizer.direction)
+                var locations = [Point]()
+                for i in 0..<gestureRecognizer.numberOfTouches() {
+                    locations.append(Point(gestureRecognizer.locationOfTouch(i, inView: gestureRecognizer.referenceView)))
+                }
+                action(locations: locations, center: gestureRecognizer.location, state: gestureRecognizer.state, direction: gestureRecognizer.direction)
         }
     }
 }
 
-public typealias ScreenEdgePanAction = (location: C4Point, state: UIGestureRecognizerState) -> ()
+public typealias ScreenEdgePanAction = (location: Point, state: UIGestureRecognizerState) -> ()
 
 extension UIScreenEdgePanGestureRecognizer {
     /// The closure to call when there is a gesture event.
