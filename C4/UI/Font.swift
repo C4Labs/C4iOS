@@ -21,7 +21,7 @@ import QuartzCore
 import UIKit
 
 /// Font objects represent fonts to an application, providing access to characteristics of the font and assistance in laying out glyphs relative to one another.
-public class Font: NSObject {
+public class Font {
     internal var internalFont: UIFont!
 
     /// The UIFont representation of the receiver.
@@ -39,7 +39,6 @@ public class Font: NSObject {
     /// - parameter name: The name of the font.
     /// - parameter size: The point-size of the font.
     public init?(name: String, size: Double) {
-        super.init()
         guard let font = UIFont(name: name, size: CGFloat(size)) else {
             return nil
         }
