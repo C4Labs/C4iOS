@@ -156,12 +156,10 @@ public class Movie: View {
         let asset = AVAsset(URL: url)
         let tracks = asset.tracksWithMediaType(AVMediaTypeVideo)
 
-        //grab the movie track and size
         let movieTrack = tracks[0]
-        let size = Size(movieTrack.naturalSize)
-
-        self.init(frame: Rect(0, 0, Double(size.width), Double(size.height)))
+        self.init(frame: Rect(0, 0, Double(movieTrack.naturalSize.width), Double(movieTrack.naturalSize.height)))
         self.filename = filename
+
         //initialize player with item
         let newPlayer = AVQueuePlayer(playerItem: AVPlayerItem(asset: asset))
         newPlayer.actionAtItemEnd = .Pause
