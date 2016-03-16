@@ -54,7 +54,7 @@ public func CGRectMakeFromPoints(points: [CGPoint]) -> CGRect {
 /// Sets a time to wait before executing of a block of code.
 ///
 /// ````
-/// delay(0.25) {
+/// wait(0.25) {
 ///     //code to execute
 /// }
 /// ````

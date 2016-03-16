@@ -39,7 +39,7 @@ public class Shape: View {
         }
     }
 
-    /// C4Shape's contents are drawn on a ShapeLayer.
+    /// Shape's contents are drawn on a ShapeLayer.
     public var shapeLayer: ShapeLayer {
         get {
             return self.shapeView.shapeLayer

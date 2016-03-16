@@ -24,7 +24,7 @@ import CoreGraphics
 public class Rectangle: Shape {
     /// Returns the corner size for the receiver.
     ///
-    /// The shape of a C4Rectangle's corners are specified with width and height.
+    /// The shape of a Rectangle's corners are specified with width and height.
     ///
     /// Automatically updates the shape of the receiver's corners when set.
     ///

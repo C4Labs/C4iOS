@@ -25,9 +25,9 @@ public class PlayerLayer: AVPlayerLayer {
     /// A boolean value that, when true, prevents the animation of a shape's properties.
     ///
     /// ````
-    /// C4ShapeLayer.disableActions = true
+    /// ShapeLayer.disableActions = true
     /// circle.fillColor = red
-    /// C4ShapeLayer.disableActions = false
+    /// ShapeLayer.disableActions = false
     ///
     /// This value can be set globally, after which changes to any shape's properties will be immediate.
     public static var disableActions = true

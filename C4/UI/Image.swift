@@ -31,7 +31,7 @@ public class Image: View, NSCopying {
         }
     }
 
-    /// C4Shape's contents are drawn on a ShapeLayer.
+    /// Shape's contents are drawn on a ShapeLayer.
     public var imageLayer: ImageLayer {
         get {
             return self.imageView.imageLayer

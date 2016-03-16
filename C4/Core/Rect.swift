@@ -214,7 +214,7 @@ public struct Rect: Equatable, CustomStringConvertible {
 
 //MARK: - Comparing
 
-/// Checks to see if two C4Rects share identical origin and size
+/// Checks to see if two Rects share identical origin and size
 ///
 /// ````
 /// let r1 = Rect(0,0,10,10)

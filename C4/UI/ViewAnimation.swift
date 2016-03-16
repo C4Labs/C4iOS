@@ -78,7 +78,7 @@ public class ViewAnimation: Animation {
     /// let bg = ViewAnimation(duration: 0.25) {
     ///     v.backgroundColor = C4Blue
     /// }
-    /// delay(1.0) {
+    /// wait(1.0) {
     ///     bg.animate()
     /// }
     /// ````
@@ -194,7 +194,7 @@ public class ViewAnimationSequence: Animation {
     ///     v.center = self.canvas.center
     /// }
     /// let seq = ViewAnimationSequence(animations: [bg,ctr])
-    /// delay(1.0) {
+    /// wait(1.0) {
     ///     seq.animate()
     /// }
     /// ````
@@ -259,7 +259,7 @@ public class ViewAnimationGroup: Animation {
     ///     v.center = self.canvas.center
     /// }
     /// let grp = ViewAnimationGroup(animations: [bg,ctr])
-    /// delay(1.0) {
+    /// wait(1.0) {
     ///     grp.animate()
     /// }
     /// ````

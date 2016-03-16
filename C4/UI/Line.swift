@@ -29,7 +29,7 @@ public class Line: Polygon {
     ///
     /// Assigning a tuple of Point values to this object will cause the receiver to update itself.
     ///
-    /// - returns: A tuple (2) of C4Points that make up the the begin and end points of the line.
+    /// - returns: A tuple (2) of Points that make up the the begin and end points of the line.
     public var endPoints: (Point, Point) = (Point(), Point(100, 0)) {
         didSet {
             updatePath()
