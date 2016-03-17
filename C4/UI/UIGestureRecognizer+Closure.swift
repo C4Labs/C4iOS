@@ -218,7 +218,7 @@ extension UIPinchGestureRecognizer {
 }
 
 
-public typealias RotationAction = (rotation: Double, velocity: Double, state: UIGestureRecognizerState) -> ()
+public typealias RotationAction = (locations: [Point], center: Point, rotation: Double, velocity: Double, state: UIGestureRecognizerState) -> ()
 
 extension UIRotationGestureRecognizer {
     /// The closure to call when there is a gesture event.
@@ -250,7 +250,11 @@ extension UIRotationGestureRecognizer {
             self.action = action
         }
             func handleGesture(gestureRecognizer: UIRotationGestureRecognizer) {
-            action(rotation: Double(gestureRecognizer.rotation), velocity: Double(gestureRecognizer.velocity), state: gestureRecognizer.state)
+                var locations = [Point]()
+                for i in 0..<gestureRecognizer.numberOfTouches() {
+                    locations.append(Point(gestureRecognizer.locationOfTouch(i, inView: gestureRecognizer.referenceView)))
+                }
+                action(locations: locations, center: gestureRecognizer.location, rotation: Double(gestureRecognizer.rotation), velocity: Double(gestureRecognizer.velocity), state: gestureRecognizer.state)
         }
     }
 }
