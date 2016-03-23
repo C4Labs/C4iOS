@@ -43,7 +43,7 @@ extension Image {
             self.imageView.image = UIImage(CIImage: output)
             self.frame = Rect(intersection)
         } else {
-            print("Failed ot generate outputImage: \(__FUNCTION__)")
+            print("Failed ot generate outputImage: \(#function)")
         }
     }
 }

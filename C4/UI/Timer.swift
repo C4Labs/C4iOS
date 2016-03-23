@@ -51,7 +51,7 @@ public final class Timer: NSObject {
     ///  Tells the timer to fire, i.e. execute its block of code.
     public func fire() {
         action()
-        step++
+        step += 1
         if step >= count {
             stop()
         }
@@ -63,7 +63,7 @@ public final class Timer: NSObject {
             return // Timer already running
         }
 
-        let t = NSTimer(timeInterval: NSTimeInterval(interval), target: self, selector: "fire", userInfo: nil, repeats: true)
+        let t = NSTimer(timeInterval: NSTimeInterval(interval), target: self, selector: #selector(Timer.fire), userInfo: nil, repeats: true)
         NSRunLoop.mainRunLoop().addTimer(t, forMode: NSDefaultRunLoopMode)
         timer = t
     }
