@@ -22,7 +22,7 @@ import UIKit
 import Foundation
 
 /// TextShape defines a concrete subclass of Shape that draws a bezier curve whose shape looks like text.
-public class TextShape: Shape {
+public class TextShape: Shape, NSCopying {
     /// The text used to define the shape's path. Defaults to "C4".
     public var text: String = "C4" {
         didSet {
@@ -111,5 +111,9 @@ public class TextShape: Shape {
             origin.y += CGFloat(advances[i].height)
         }
         return Path(path: textPath)
+    }
+    
+    public func copyWithZone(zone: NSZone) -> AnyObject {
+        return TextShape(text: text, font: font)!
     }
 }
