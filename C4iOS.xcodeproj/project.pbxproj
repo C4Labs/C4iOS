@@ -23,6 +23,7 @@
 		61BBAF631BC372BD00A03FD0 /* StoredAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BBAF621BC372BD00A03FD0 /* StoredAnimation.swift */; };
 		61BBAF651BC38C1200A03FD0 /* View+KeyValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BBAF641BC38C1200A03FD0 /* View+KeyValues.swift */; };
 		A94E3BD419E0E9390039A9C4 /* C4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 614F824319DB5ED3001DF1D4 /* C4.framework */; };
+		A964C5E01CA4B5F2008D976B /* TextShapeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A964C5DF1CA4B5F2008D976B /* TextShapeTests.swift */; };
 		A96F4F451B538330002B3A46 /* ColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D401A054B4F0023323D /* ColorTests.swift */; };
 		A96F4F461B538330002B3A46 /* MathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D411A054B4F0023323D /* MathTests.swift */; };
 		A96F4F471B538330002B3A46 /* PointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9596D421A054B4F0023323D /* PointTests.swift */; };
@@ -156,6 +157,7 @@
 		A9596D411A054B4F0023323D /* MathTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathTests.swift; sourceTree = "<group>"; };
 		A9596D421A054B4F0023323D /* PointTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointTests.swift; sourceTree = "<group>"; };
 		A9596D431A054B4F0023323D /* VectorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VectorTests.swift; sourceTree = "<group>"; };
+		A964C5DF1CA4B5F2008D976B /* TextShapeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextShapeTests.swift; sourceTree = "<group>"; };
 		A96F505A1B5385A5002B3A46 /* C4App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = C4App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A96F505D1B5385A5002B3A46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A96F505E1B5385A5002B3A46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 				A9596D421A054B4F0023323D /* PointTests.swift */,
 				61B92B4B1C7B96B8003BD61C /* RectTests.swift */,
 				A9596D431A054B4F0023323D /* VectorTests.swift */,
+				A964C5DF1CA4B5F2008D976B /* TextShapeTests.swift */,
 				A988A9161A4F57330044007C /* TransformTests.swift */,
 				A9596D281A054A960023323D /* Supporting Files */,
 			);
@@ -664,6 +667,7 @@
 				A96F4F4A1B538330002B3A46 /* TransformTests.swift in Sources */,
 				A96F4F491B538330002B3A46 /* VectorTests.swift in Sources */,
 				A96F4F461B538330002B3A46 /* MathTests.swift in Sources */,
+				A964C5E01CA4B5F2008D976B /* TextShapeTests.swift in Sources */,
 				A96F4F451B538330002B3A46 /* ColorTests.swift in Sources */,
 				A96F4F471B538330002B3A46 /* PointTests.swift in Sources */,
 				61B92B4C1C7B96B8003BD61C /* RectTests.swift in Sources */,
