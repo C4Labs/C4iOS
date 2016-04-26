@@ -123,11 +123,12 @@ public class Shape: View {
     ///An optional variable representing a gradient. If this is non-nil, then the shape will appear to be filled with a gradient.
     public var gradientFill: Gradient? {
         didSet {
-            guard gradientFill != nil else {
+            guard let gradientFill = gradientFill else {
                 fillColor = clear
                 return
             }
-            let gim = gradientFill?.render()?.cgimage
+            
+            let gim = gradientFill.render()?.cgimage
 
             //inverts coordinate for graphics context rendering
             var b = bounds
@@ -185,11 +186,7 @@ public class Shape: View {
     /// The color to stroke the path, or nil for no fill. Defaults to opaque black. Animatable.
     public var strokeColor: Color? {
         get {
-            if let color = shapeLayer.strokeColor {
-                return Color(color)
-            } else {
-                return nil
-            }
+            return shapeLayer.strokeColor.map{ color in Color(color) }
         }
         set(color) {
             shapeLayer.strokeColor = color?.CGColor
@@ -199,11 +196,7 @@ public class Shape: View {
     /// The color to fill the path, or nil for no fill. Defaults to opaque black. Animatable.
     public var fillColor: Color? {
         get {
-            if let color = shapeLayer.fillColor {
-                return Color(color)
-            } else {
-                return nil
-            }
+            return shapeLayer.fillColor.map{ color in Color(color) }
         }
         set(color) {
             shapeLayer.fillColor = color?.CGColor
@@ -347,7 +340,7 @@ public class Shape: View {
 
     /// Returns true if there is no path.
     public func isEmpty() -> Bool {
-        return path == nil || path!.isEmpty()
+        return path?.isEmpty() ?? true
     }
 
 
@@ -377,9 +370,6 @@ public class Shape: View {
     }
 
     public override func hitTest(point: Point) -> Bool {
-        if let p = path {
-            return p.containsPoint(point)
-        }
-        return false
+        return path?.containsPoint(point) ?? false
     }
 }
