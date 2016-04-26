@@ -103,12 +103,12 @@ public class TextShape: Shape {
         let textPath = CGPathCreateMutable()
         var invert = CGAffineTransformMakeScale(1, -1)
         var origin = CGPoint()
-        for i in 0..<glyphs.count {
-            let glyphPath = CTFontCreatePathForGlyph(ctfont!, glyphs[i], &invert)
+        for (advance, glyph) in zip(advances, glyphs) {
+            let glyphPath = CTFontCreatePathForGlyph(ctfont!, glyph, &invert)
             var translation = CGAffineTransformMakeTranslation(origin.x, origin.y)
             CGPathAddPath(textPath, &translation, glyphPath)
-            origin.x += CGFloat(advances[i].width)
-            origin.y += CGFloat(advances[i].height)
+            origin.x += CGFloat(advance.width)
+            origin.y += CGFloat(advance.height)
         }
         return Path(path: textPath)
     }

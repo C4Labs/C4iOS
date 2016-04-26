@@ -67,8 +67,8 @@ extension Shape {
             newPath = Path()
         }
 
-        if !points.isEmpty {
-            newPath!.moveToPoint(points[0])
+        if let firstPoint = points.first {
+            newPath!.moveToPoint(firstPoint)
         }
         for point in points {
             newPath!.addLineToPoint(point)
@@ -95,8 +95,8 @@ extension Shape {
             path = Path()
         }
 
-        if newPath!.currentPoint != points[0] {
-            newPath!.moveToPoint(points[0])
+        if newPath!.currentPoint != points.first! {
+            newPath!.moveToPoint(points.first!)
         }
         newPath!.addLineToPoint(points[1])
         path = newPath
@@ -121,10 +121,10 @@ extension Shape {
             path = Path()
         }
 
-        if newPath!.currentPoint != points[0] {
-            newPath!.moveToPoint(points[0])
+        if newPath!.currentPoint != points.first! {
+            newPath!.moveToPoint(points.first!)
         }
-        newPath!.addCurveToPoint(points[1], control1: controls[0], control2: controls[1])
+        newPath!.addCurveToPoint(points[1], control1: controls.first!, control2: controls[1])
         path = newPath
         adjustToFitPath()
     }

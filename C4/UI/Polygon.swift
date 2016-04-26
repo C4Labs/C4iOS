@@ -70,9 +70,9 @@ public class Polygon: Shape {
         fillColor = clear
 
         let path = Path()
-        path.moveToPoint(points[0])
-        for i in 1..<points.count {
-            path.addLineToPoint(points[i])
+        path.moveToPoint(points.first!)
+        for point in points.dropFirst() {
+            path.addLineToPoint(point)
         }
         self.path = path
 
@@ -88,10 +88,9 @@ public class Polygon: Shape {
     override func updatePath() {
         if points.count > 1 {
             let p = Path()
-            p.moveToPoint(points[0])
-
-            for i in 1..<points.count {
-                p.addLineToPoint(points[i])
+            p.moveToPoint(points.first!)
+            for point in points.dropFirst() {
+                p.addLineToPoint(point)
             }
 
             path = p
