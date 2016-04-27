@@ -127,7 +127,7 @@ public class Shape: View {
                 fillColor = clear
                 return
             }
-            
+
             let gim = gradientFill.render()?.cgimage
 
             //inverts coordinate for graphics context rendering
@@ -186,7 +186,7 @@ public class Shape: View {
     /// The color to stroke the path, or nil for no fill. Defaults to opaque black. Animatable.
     public var strokeColor: Color? {
         get {
-            return shapeLayer.strokeColor.map{ color in Color(color) }
+            return shapeLayer.strokeColor.map({ Color($0) })
         }
         set(color) {
             shapeLayer.strokeColor = color?.CGColor
@@ -196,7 +196,7 @@ public class Shape: View {
     /// The color to fill the path, or nil for no fill. Defaults to opaque black. Animatable.
     public var fillColor: Color? {
         get {
-            return shapeLayer.fillColor.map{ color in Color(color) }
+            return shapeLayer.fillColor.map({ Color($0) })
         }
         set(color) {
             shapeLayer.fillColor = color?.CGColor
