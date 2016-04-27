@@ -278,8 +278,8 @@ public class Color {
         let g = components[1]
         let b = components[2]
 
-        let _min = min(r, min(g, b))
-        let _max = max(r, max(g, b))
+        let _min = min(r, g, b)
+        let _max = max(r, g, b)
 
         return _max == 0 ? 0 : (_max - _min)/_max
     }
