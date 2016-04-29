@@ -139,7 +139,7 @@ extension UIPanGestureRecognizer {
     public var translation: Vector {
         get {
             if let view = referenceView {
-                return Vector(translationInView(view))
+                return Vector(translationInView(view.superview))
             }
             return Vector()
         }
