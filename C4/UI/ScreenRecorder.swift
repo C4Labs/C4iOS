@@ -70,6 +70,6 @@ public class ScreenRecorder: NSObject, RPPreviewViewControllerDelegate {
 
     public func previewControllerDidFinish(previewController: RPPreviewViewController) {
         previewFinishedAction?(activities: activities)
-        preview?.parentViewController?.dismissViewControllerAnimated(true, completion: nil)
+        preview?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
 }
