@@ -31,11 +31,21 @@ public class ScreenRecorder: NSObject, RPPreviewViewControllerDelegate {
     public var recordingEndedAction: RecorderStoppedAction?
     public var enableMicrophone = false
 
+    public var recording: Bool {
+        return recorder.recording
+    }
+
+    public var available: Bool {
+        return recorder.available
+    }
+
     public func start() {
-        preview = nil
-        recorder.startRecordingWithMicrophoneEnabled(enableMicrophone) { error in
-            if let error = error {
-                print("Start Recording Error: \(error.localizedDescription)")
+        if !recording && available {
+            preview = nil
+            recorder.startRecordingWithMicrophoneEnabled(enableMicrophone) { error in
+                if let error = error {
+                    print("Start Recording Error: \(error.localizedDescription)")
+                }
             }
         }
     }
@@ -70,6 +80,6 @@ public class ScreenRecorder: NSObject, RPPreviewViewControllerDelegate {
 
     public func previewControllerDidFinish(previewController: RPPreviewViewController) {
         previewFinishedAction?(activities: activities)
-        preview?.parentViewController?.dismissViewControllerAnimated(true, completion: nil)
+        preview?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
 }

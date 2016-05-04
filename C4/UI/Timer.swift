@@ -51,7 +51,7 @@ public final class Timer: NSObject {
     ///  Tells the timer to fire, i.e. execute its block of code.
     public func fire() {
         action()
-        step++
+        step += 1
         if step >= count {
             stop()
         }

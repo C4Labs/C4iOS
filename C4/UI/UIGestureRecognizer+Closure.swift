@@ -82,7 +82,7 @@ extension UITapGestureRecognizer {
             if let handler: AnyObject = actionHandler {
                 removeTarget(handler, action: "handleGesture:")
             }
-                    if let action = newValue {
+            if let action = newValue {
                 actionHandler = TapGestureHandler(action)
                 addTarget(actionHandler!, action: "handleGesture:")
             } else {
@@ -101,12 +101,12 @@ extension UITapGestureRecognizer {
             init(_ action: TapAction) {
             self.action = action
         }
-            func handleGesture(gestureRecognizer: UIPanGestureRecognizer) {
-                var locations = [Point]()
-                for i in 0..<gestureRecognizer.numberOfTouches() {
-                    locations.append(Point(gestureRecognizer.locationOfTouch(i, inView: gestureRecognizer.referenceView)))
-                }
-                action(locations: locations, center: gestureRecognizer.location, state: gestureRecognizer.state)
+        func handleGesture(gestureRecognizer: UIPanGestureRecognizer) {
+            var locations = [Point]()
+            for i in 0..<gestureRecognizer.numberOfTouches() {
+                locations.append(Point(gestureRecognizer.locationOfTouch(i, inView: gestureRecognizer.referenceView)))
+            }
+            action(locations: locations, center: gestureRecognizer.location, state: gestureRecognizer.state)
         }
     }
 }
@@ -124,7 +124,7 @@ extension UIPanGestureRecognizer {
             if let handler: AnyObject = actionHandler {
                 removeTarget(handler, action: "handleGesture:")
             }
-                    if let action = newValue {
+            if let action = newValue {
                 actionHandler = PanGestureHandler(action)
                 addTarget(actionHandler!, action: "handleGesture:")
             } else {
@@ -165,12 +165,12 @@ extension UIPanGestureRecognizer {
             init(_ action: PanAction) {
             self.action = action
         }
-            func handleGesture(gestureRecognizer: UIPanGestureRecognizer) {
-                var locations = [Point]()
-                for i in 0..<gestureRecognizer.numberOfTouches() {
-                    locations.append(Point(gestureRecognizer.locationOfTouch(i, inView: gestureRecognizer.referenceView)))
-                }
-                action(locations: locations, center: gestureRecognizer.location, translation: gestureRecognizer.translation, velocity: gestureRecognizer.velocity, state: gestureRecognizer.state)
+        func handleGesture(gestureRecognizer: UIPanGestureRecognizer) {
+            var locations = [Point]()
+            for i in 0..<gestureRecognizer.numberOfTouches() {
+                locations.append(Point(gestureRecognizer.locationOfTouch(i, inView: gestureRecognizer.referenceView)))
+            }
+            action(locations: locations, center: gestureRecognizer.location, translation: gestureRecognizer.translation, velocity: gestureRecognizer.velocity, state: gestureRecognizer.state)
         }
     }
 }
@@ -188,7 +188,7 @@ extension UIPinchGestureRecognizer {
             if let handler: AnyObject = actionHandler {
                 removeTarget(handler, action: "handleGesture:")
             }
-                    if let action = newValue {
+            if let action = newValue {
                 actionHandler = PinchGestureHandler(action)
                 addTarget(actionHandler!, action: "handleGesture:")
             } else {
@@ -207,12 +207,12 @@ extension UIPinchGestureRecognizer {
             init(_ action: PinchAction) {
             self.action = action
         }
-            func handleGesture(gestureRecognizer: UIPinchGestureRecognizer) {
-                var locations = [Point]()
-                for i in 0..<gestureRecognizer.numberOfTouches() {
-                    locations.append(Point(gestureRecognizer.locationOfTouch(i, inView: gestureRecognizer.referenceView)))
-                }
-                action(locations: locations, center: gestureRecognizer.location, scale: Double(gestureRecognizer.scale), velocity: Double(gestureRecognizer.velocity), state: gestureRecognizer.state)
+        func handleGesture(gestureRecognizer: UIPinchGestureRecognizer) {
+            var locations = [Point]()
+            for i in 0..<gestureRecognizer.numberOfTouches() {
+                locations.append(Point(gestureRecognizer.locationOfTouch(i, inView: gestureRecognizer.referenceView)))
+            }
+            action(locations: locations, center: gestureRecognizer.location, scale: Double(gestureRecognizer.scale), velocity: Double(gestureRecognizer.velocity), state: gestureRecognizer.state)
         }
     }
 }
@@ -230,7 +230,7 @@ extension UIRotationGestureRecognizer {
             if let handler: AnyObject = actionHandler {
                 removeTarget(handler, action: "handleGesture:")
             }
-                    if let action = newValue {
+            if let action = newValue {
                 actionHandler = RotationGestureHandler(action)
                 addTarget(actionHandler!, action: "handleGesture:")
             } else {
@@ -272,7 +272,7 @@ extension UILongPressGestureRecognizer {
             if let handler: AnyObject = actionHandler {
                 removeTarget(handler, action: "handleGesture:")
             }
-                    if let action = newValue {
+            if let action = newValue {
                 actionHandler = LongPressGestureHandler(action)
                 addTarget(actionHandler!, action: "handleGesture:")
             } else {
@@ -291,12 +291,12 @@ extension UILongPressGestureRecognizer {
             init(_ action: LongPressAction) {
             self.action = action
         }
-            func handleGesture(gestureRecognizer: UILongPressGestureRecognizer) {
-                var locations = [Point]()
-                for i in 0..<gestureRecognizer.numberOfTouches() {
-                    locations.append(Point(gestureRecognizer.locationOfTouch(i, inView: gestureRecognizer.referenceView)))
-                }
-                action(locations: locations, center: gestureRecognizer.location, state: gestureRecognizer.state)
+        func handleGesture(gestureRecognizer: UILongPressGestureRecognizer) {
+            var locations = [Point]()
+            for i in 0..<gestureRecognizer.numberOfTouches() {
+                locations.append(Point(gestureRecognizer.locationOfTouch(i, inView: gestureRecognizer.referenceView)))
+            }
+            action(locations: locations, center: gestureRecognizer.location, state: gestureRecognizer.state)
         }
     }
 }
@@ -333,12 +333,12 @@ extension UISwipeGestureRecognizer {
             init(_ action: SwipeAction) {
             self.action = action
         }
-            func handleGesture(gestureRecognizer: UISwipeGestureRecognizer) {
-                var locations = [Point]()
-                for i in 0..<gestureRecognizer.numberOfTouches() {
-                    locations.append(Point(gestureRecognizer.locationOfTouch(i, inView: gestureRecognizer.referenceView)))
-                }
-                action(locations: locations, center: gestureRecognizer.location, state: gestureRecognizer.state, direction: gestureRecognizer.direction)
+        func handleGesture(gestureRecognizer: UISwipeGestureRecognizer) {
+            var locations = [Point]()
+            for i in 0..<gestureRecognizer.numberOfTouches() {
+                locations.append(Point(gestureRecognizer.locationOfTouch(i, inView: gestureRecognizer.referenceView)))
+            }
+            action(locations: locations, center: gestureRecognizer.location, state: gestureRecognizer.state, direction: gestureRecognizer.direction)
         }
     }
 }
@@ -355,7 +355,7 @@ extension UIScreenEdgePanGestureRecognizer {
             if let handler: AnyObject = actionHandler {
                 removeTarget(handler, action: "handleGesture:")
             }
-                    if let action = newValue {
+            if let action = newValue {
                 actionHandler = ScreenEdgePanGestureHandler(action)
                 addTarget(actionHandler!, action: "handleGesture:")
             } else {
@@ -375,7 +375,7 @@ extension UIScreenEdgePanGestureRecognizer {
             init(_ action: ScreenEdgePanAction) {
             self.action = action
         }
-            func handleGesture(gestureRecognizer: UIScreenEdgePanGestureRecognizer) {
+        func handleGesture(gestureRecognizer: UIScreenEdgePanGestureRecognizer) {
             action(location: gestureRecognizer.location, state: gestureRecognizer.state)
         }
     }

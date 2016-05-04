@@ -91,6 +91,22 @@ public class Color {
         internalColor = CGColorCreate(colorSpace, [CGFloat(red), CGFloat(green), CGFloat(blue), CGFloat(alpha)])!
     }
 
+
+    /// Initializes and returns a new Color object based on specified color values.
+    /// ````
+    /// let c = Color(hue: 1.0, saturation: 0.0, brightness: 0.0, alpha: 1.0)
+    /// ````
+    /// - parameter red:   The red value for the new color [0.0 ... 1.0]
+    /// - parameter green: The green value for the new color [0.0 ... 1.0]
+    /// - parameter blue:  The blue value for the new color [0.0 ... 1.0]
+    /// - parameter alpha: The alpha value for the new color [0.0 ... 1.0]
+    public init(hue: Double, saturation: Double, brightness: Double, alpha: Double) {
+        let color = UIColor(hue: CGFloat(hue), saturation: CGFloat(saturation), brightness: CGFloat(brightness), alpha: CGFloat(alpha))
+        let floatComponents = CGColorGetComponents(color.CGColor)
+        colorSpace = CGColorSpaceCreateDeviceRGB()!
+        internalColor = CGColorCreate(colorSpace, floatComponents)!
+    }
+
     /// Initializes and returns a new Color object based on a provided CGColor object.
     /// ````
     /// let c = Color(UIColor.redColor().CGColor)
@@ -226,6 +242,60 @@ public class Color {
         set {
             components[3] = newValue
         }
+    }
+
+    /// The value of the hue component of the current color.
+    /// ````
+    /// let c = Color()
+    /// let hue = c.hue
+    /// ````
+    /// - returns: Double value in the range [0.0 ... 1.0]
+    public var hue: Double {
+        let r = components[0]
+        let g = components[1]
+        let b = components[2]
+
+        let _min = min(r, min(g, b))
+        let _max = max(r, max(g, b))
+
+        if  _min == _max {
+            return 0.0
+        } else {
+            let d = red == _min ? green-blue : ( blue == _min ? red-green : blue-red)
+            let h = red == _min ? 3.0 : (blue == _min ? 1.0  :5.0)
+            return (h - d / (_max - _min)) / 6.0
+        }
+    }
+
+    /// The value of the saturation component of the current color.
+    /// ````
+    /// let c = Color()
+    /// let saturation = c.saturation
+    /// ````
+    /// - returns: Double value in the range [0.0 ... 1.0]
+    public var saturation: Double {
+        let r = components[0]
+        let g = components[1]
+        let b = components[2]
+
+        let _min = min(r, g, b)
+        let _max = max(r, g, b)
+
+        return _max == 0 ? 0 : (_max - _min)/_max
+    }
+
+    /// The value of the brightness component of the current color.
+    /// ````
+    /// let c = Color()
+    /// let brightness = c.brightness
+    /// ````
+    /// - returns: Double value in the range [0.0 ... 1.0]
+    public var brightness: Double {
+        let r = components[0]
+        let g = components[1]
+        let b = components[2]
+
+        return max(r, max(g, b))
     }
 
     /// A CGColor representation of the current color.

@@ -44,19 +44,13 @@ public class Gradient: View {
     public var colors: [Color] {
         get {
             if let cgcolors = gradientLayer.colors as? [CGColorRef] {
-                var array = [Color]()
-                for c in cgcolors {
-                    array.append(Color(c))
-                }
-                return array
+                return cgcolors.map({ Color($0) })
             }
             return [C4Blue, C4Pink]
         } set {
             assert(newValue.count >= 2, "colors must have at least 2 elements")
-            var cgcolors = [CGColorRef]()
-            for c in newValue {
-                cgcolors.append(c.CGColor)
-            }
+
+            let cgcolors = newValue.map({ $0.CGColor })
             self.gradientLayer.colors = cgcolors
         }
     }
@@ -71,10 +65,7 @@ public class Gradient: View {
             }
             return []
         } set {
-            var numbers = [NSNumber]()
-            for n in newValue {
-                numbers.append(n)
-            }
+            let numbers = newValue.map({ NSNumber(double: $0) })
             gradientLayer.locations = numbers
         }
     }

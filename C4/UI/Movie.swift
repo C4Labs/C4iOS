@@ -113,6 +113,10 @@ public class Movie: View {
         return self.view as! MovieView // swiftlint:disable:this force_cast
     }
 
+    public var playing: Bool {
+        return player?.rate != 0.0
+    }
+
     class MovieView: UIView {
         var movieLayer: PlayerLayer {
             return self.layer as! PlayerLayer // swiftlint:disable:this force_cast
