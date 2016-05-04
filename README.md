@@ -34,9 +34,9 @@ let m = movie.frame.size.width
 Animating both view and property changes in C4 is much cleaner, and looks like this:
 
 ```swift
-C4ViewAnimation(duration: 0.5) {
-    shape.center = self.canvas.center
-    shape.lineWidth = 5
+ViewAnimation(duration: 0.5) {
+  shape.center = self.canvas.center
+  shape.lineWidth = 5
 }.animate()
 ```
 
@@ -44,12 +44,14 @@ Whereas using UIKit + Core Animation you'd have to do something like this:
 
 ```swift
 UIView.animateWithDuration(0.5) {
-    shape.center = self.canvas.center
+    v.center = self.view.center
 }
 
 CATransaction.begin()
 CATransaction.setValue(NSNumber(float: 0.5), forKey: kCATransactionAnimationDuration)
-shape.lineWidth = 5
+if let shapeLayer = v.layer as? CAShapeLayer {
+    shapeLayer.lineWidth = 5
+}
 CATransaction.commit()
 ```
 
@@ -111,9 +113,9 @@ Take movies, for example. Instead of needing to AVQueuePlayer, AVPlayerItem, nav
 
 ```swift
 func setup() {
-    let movie = C4Movie("myClip.mov")
-    canvas.add(movie)
-    movie.play()
+  let movie = Movie("halo.mp4")
+  canvas.add(movie)
+  movie?.play()
 }
 ```
 
@@ -121,19 +123,25 @@ Using UIKit + AVFoundation, you'd have to construct the movie object from scratc
 
 ```swift
 func viewDidLoad() {
-    guard let url = NSBundle.mainBundle().URLForResource("myClip.mov", withExtension: nil) else {
-        fatalError("File not found")
-    }
+  guard let url = NSBundle.mainBundle().URLForResource("halo.mp4", withExtension: nil) else {
+      fatalError("File not found")
+  }
 
-    let asset = AVAsset(URL: url)
-    let player = AVQueuePlayer(playerItem: AVPlayerItem(asset: asset))
-    player.actionAtItemEnd = .Pause
+  let asset = AVAsset(URL: url)
+  let player = AVQueuePlayer(playerItem: AVPlayerItem(asset: asset))
+  player.actionAtItemEnd = .Pause
 
-    let movieLayer = AVPlayerLayer(player: player)
-    movieLayer.videoGravity = AVLayerVideoGravityResize
-    self.view.layer.addSublayer(movieLayer)
+  let movieLayer = AVPlayerLayer(player: player)
+  movieLayer.videoGravity = AVLayerVideoGravityResize
 
-    player.play()
+  let tracks = asset.tracksWithMediaType(AVMediaTypeVideo)
+
+  let movieTrack = tracks[0]
+  let size = movieTrack.naturalSize
+
+  movieLayer.frame = CGRect(x: 0,y: 0,width: size.width,height: size.height)
+  self.view.layer.addSublayer(movieLayer)
+  player.play()
 }
 ```
 
