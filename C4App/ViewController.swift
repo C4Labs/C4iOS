@@ -22,5 +22,8 @@ import UIKit
 
 class ViewController: CanvasController {
     override func setup() {
+        let example = Advanced01()
+        self.addChildViewController(example)
+        canvas.add(example.canvas)
     }
 }
