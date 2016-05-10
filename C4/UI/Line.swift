@@ -30,9 +30,11 @@ public class Line: Polygon {
     /// Assigning a tuple of Point values to this object will cause the receiver to update itself.
     ///
     /// - returns: A tuple (2) of Points that make up the the begin and end points of the line.
-    public var endPoints: (Point, Point) = (Point(), Point(100, 0)) {
-        didSet {
-            updatePath()
+    public var endPoints: (Point, Point) {
+        get {
+            return (points[0], points[1])
+        } set {
+            self.points = [newValue.0, newValue.1]
         }
     }
 
@@ -86,18 +88,15 @@ public class Line: Polygon {
     ///
     /// - returns: A Point array of 2 points.
     public override var points: [Point] {
-        get {
-            return [endPoints.0, endPoints.1]
-        } set {
-            if newValue.count < 2 {
+        didSet {
+            if points.count < 2 {
                 print("Invalid point array. There must be at least 2 points to update the line.")
             } else {
-                if newValue.count > 2 {
+                if points.count > 2 {
                     print("Warning. The passed array has more than 2 points, only the first two will be used.")
-                }
-                batchUpdates() {
-                    self.endPoints.0 = newValue[0]
-                    self.endPoints.1 = newValue[1]
+                    points = [points[0], points[1]]
+                } else {
+                    updatePath()
                 }
             }
         }
@@ -120,13 +119,7 @@ public class Line: Polygon {
         let firstTwo = [Point](points[0...1])
         super.init(firstTwo)
 
-        let path = Path()
-        path.moveToPoint(points[0])
-        for i in 1..<points.count {
-            path.addLineToPoint(points[i])
-        }
-
-        adjustToFitPath()
+        updatePath()
     }
 
     /// Initializes a new Line using the specified tuple of points.
@@ -140,7 +133,6 @@ public class Line: Polygon {
     ///
     /// - parameter points: A tuple of Point structs.
     public init(_ points: (Point, Point)) {
-        self.endPoints = points
         super.init([points.0, points.1])
     }
 
