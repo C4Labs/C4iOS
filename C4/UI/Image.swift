@@ -266,7 +266,7 @@ public class Image: View, NSCopying {
     /// - parameter c4image: An Image around which the new image is created.
     convenience public init(c4image: Image) {
         let cgim = c4image.cgimage
-        self.init(cgimage: cgim)
+        self.init(cgimage: cgim, scale: c4image.scale)
     }
 
     /// Initializes a new copy of the receiver.
