@@ -27,6 +27,7 @@ public class Curve: Shape {
     public var endPoints = (Point(), Point()) {
         didSet {
             updatePath()
+            adjustToFitPath()
         }
     }
 
@@ -34,6 +35,7 @@ public class Curve: Shape {
     public var controlPoints = (Point(), Point()) {
         didSet {
             updatePath()
+            adjustToFitPath()
         }
     }
 
@@ -84,6 +86,7 @@ public class Curve: Shape {
         endPoints = (begin, end)
         controlPoints = (control0, control1)
         updatePath()
+        adjustToFitPath()
     }
 
     private var pauseUpdates = false
@@ -92,6 +95,7 @@ public class Curve: Shape {
         updates()
         pauseUpdates = false
         updatePath()
+        adjustToFitPath()
     }
 
     override func updatePath() {
@@ -107,8 +111,6 @@ public class Curve: Shape {
             CGFloat(controlPoints.1.x), CGFloat(controlPoints.1.y),
             CGFloat(endPoints.1.x), CGFloat(endPoints.1.y))
 
-        self.frame = Rect(CGPathGetBoundingBox(curve))
-        self.path = Path(path: curve)
-        adjustToFitPath()
+        path = Path(path: curve)
     }
 }

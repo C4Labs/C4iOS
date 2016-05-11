@@ -24,9 +24,11 @@ import UIKit
 public class QuadCurve: Curve {
 
     /// A Point used to calculate the shape of the quadratic curve.
-    public var controlPoint = Point() {
-        didSet {
-            self.controlPoints = (controlPoint, controlPoint)
+    public var controlPoint: Point {
+        get {
+            return controlPoints.0
+        } set {
+            self.controlPoints = (newValue, newValue)
         }
     }
 
