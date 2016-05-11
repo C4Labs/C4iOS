@@ -162,8 +162,8 @@ public class AudioPlayer: NSObject, AVAudioPlayerDelegate {
     public var rate: Double {
         get {
             return Double(player.rate)
-        } set(val) {
-            player.rate = Float(rate)
+        } set {
+            player.rate = Float(newValue)
         }
     }
 
