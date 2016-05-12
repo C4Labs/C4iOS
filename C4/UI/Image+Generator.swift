@@ -37,10 +37,8 @@ extension Image {
             outputImage = outputImage.imageByApplyingTransform(translate)
             self.output = outputImage
 
-            let img = UIImage(CIImage: output)
-            let orig = self.origin
-            self.view = UIImageView(image: img)
-            self.origin = orig
+            let context = CIContext(options: nil)
+            self.view.layer.contents = context.createCGImage(output, fromRect: output.extent)
             _originalSize = Size(view.frame.size)
         } else {
             print("Failed to generate outputImage: \(__FUNCTION__)")
