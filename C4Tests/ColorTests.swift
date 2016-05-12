@@ -22,7 +22,7 @@ import XCTest
 
 class ColorTests: XCTestCase {
     func testInitWithRedHexValue() {
-        let redColor   = Color(0xFF0000FF)
+        let redColor   = Color(0xFF0000)
         XCTAssertEqual(redColor.red,   1.0, "Red value should be 1.0")
         XCTAssertEqual(redColor.green, 0.0, "Green value should be 0.0")
         XCTAssertEqual(redColor.blue,  0.0, "Blue value should be 0.0")
@@ -30,7 +30,7 @@ class ColorTests: XCTestCase {
     }
 
     func testInitWithGreenHexValue() {
-        let greenColor = Color(0x00FF00FF)
+        let greenColor = Color(0x00FF00)
         XCTAssertEqual(greenColor.red,   0.0, "Red value should be 0.0")
         XCTAssertEqual(greenColor.green, 1.0, "Green value should be 1.0")
         XCTAssertEqual(greenColor.blue,  0.0, "Blue value should be 0.0")
@@ -38,19 +38,11 @@ class ColorTests: XCTestCase {
     }
 
     func testInitWithBlueHexValue() {
-        let blueColor  = Color(0x0000FFFF)
+        let blueColor  = Color(0x0000FF)
         XCTAssertEqual(blueColor.red,   0.0, "Red value should be 0.0")
         XCTAssertEqual(blueColor.green, 0.0, "Green value should be 0.0")
         XCTAssertEqual(blueColor.blue,  1.0, "Blue value should be 1.0")
         XCTAssertEqual(blueColor.alpha, 1.0, "Alpha value should be 1.0")
-    }
-
-    func testInitWithClearHexValue() {
-        let clearColor = Color(0xFFFFFF00)
-        XCTAssertEqual(clearColor.red,   1.0, "Red value should be 1.0")
-        XCTAssertEqual(clearColor.green, 1.0, "Green value should be 1.0")
-        XCTAssertEqual(clearColor.blue,  1.0, "Blue value should be 1.0")
-        XCTAssertEqual(clearColor.alpha, 0.0, "Alpha value should be 0.0")
     }
 
     func testHueSaturationBrightnesWithRGBColors() {
