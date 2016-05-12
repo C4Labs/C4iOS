@@ -43,10 +43,15 @@ public struct Pixel {
     ///  - parameter g: the green component
     ///  - parameter b: the blue component
     ///  - parameter a: the alpha component
-    public init(_ r: Int, _ g: Int, _ b: Int, _ a: UInt8) {
+    public init(_ r: Int, _ g: Int, _ b: Int, _ a: Int) {
         self.r = UInt8(r)
         self.g = UInt8(g)
         self.b = UInt8(b)
         self.a = UInt8(a)
+    }
+
+    public init(_ color: Color) {
+        let rgba: [Int] = color.components.map({ Int($0 * 255.0) })
+        self.init(rgba[0], rgba[1], rgba[2], rgba[3])
     }
 }
