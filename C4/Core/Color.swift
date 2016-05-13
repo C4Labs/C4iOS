@@ -154,11 +154,13 @@ public class Color {
     /// ````
     /// - parameter hexValue: A color value expressed in hexadecimal.
     public convenience init(_ hexValue: UInt32) {
-        let red   = Int((hexValue & 0xFF000000) >> 12)
-        let green = Int((hexValue & 0x00FF0000) >> 8)
-        let blue  = Int((hexValue & 0x0000FF00) >> 4)
-        let alpha = Double(hexValue & 0x000000FF) / 255.0
-        self.init(red: red, green: green, blue: blue, alpha: alpha)
+
+        let mask = 0x000000FF
+        let red = Int(hexValue >> 16) & mask
+        let green = Int(hexValue >> 8) & mask
+        let blue = Int(hexValue) & mask
+
+        self.init(red: red, green: green, blue: blue, alpha: 1.0)
     }
 
     /// The set of 3 color values + alpha that define the current color.
