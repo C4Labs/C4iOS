@@ -63,7 +63,7 @@ public final class Timer: NSObject {
             return // Timer already running
         }
 
-        let t = NSTimer(timeInterval: NSTimeInterval(interval), target: self, selector: "fire", userInfo: nil, repeats: true)
+        let t = NSTimer(timeInterval: NSTimeInterval(interval), target: self, selector: #selector(Timer.fire), userInfo: nil, repeats: true)
         NSRunLoop.mainRunLoop().addTimer(t, forMode: NSDefaultRunLoopMode)
         timer = t
     }

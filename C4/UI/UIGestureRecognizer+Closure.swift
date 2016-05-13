@@ -80,11 +80,11 @@ extension UITapGestureRecognizer {
         }
         set {
             if let handler: AnyObject = actionHandler {
-                removeTarget(handler, action: "handleGesture:")
+                removeTarget(handler, action: #selector(TapGestureHandler.handleGesture(_:)))
             }
             if let action = newValue {
                 actionHandler = TapGestureHandler(action)
-                addTarget(actionHandler!, action: "handleGesture:")
+                addTarget(actionHandler!, action: #selector(TapGestureHandler.handleGesture(_:)))
             } else {
                 actionHandler = nil
             }
@@ -122,11 +122,11 @@ extension UIPanGestureRecognizer {
         }
         set {
             if let handler: AnyObject = actionHandler {
-                removeTarget(handler, action: "handleGesture:")
+                removeTarget(handler, action: #selector(PanGestureHandler.handleGesture(_:)))
             }
             if let action = newValue {
                 actionHandler = PanGestureHandler(action)
-                addTarget(actionHandler!, action: "handleGesture:")
+                addTarget(actionHandler!, action: #selector(PanGestureHandler.handleGesture(_:)))
             } else {
                 actionHandler = nil
             }
@@ -186,11 +186,11 @@ extension UIPinchGestureRecognizer {
         }
         set {
             if let handler: AnyObject = actionHandler {
-                removeTarget(handler, action: "handleGesture:")
+                removeTarget(handler, action: #selector(PinchGestureHandler.handleGesture(_:)))
             }
             if let action = newValue {
                 actionHandler = PinchGestureHandler(action)
-                addTarget(actionHandler!, action: "handleGesture:")
+                addTarget(actionHandler!, action: #selector(PinchGestureHandler.handleGesture(_:)))
             } else {
                 actionHandler = nil
             }
@@ -228,11 +228,11 @@ extension UIRotationGestureRecognizer {
         }
         set {
             if let handler: AnyObject = actionHandler {
-                removeTarget(handler, action: "handleGesture:")
+                removeTarget(handler, action: #selector(RotationGestureHandler.handleGesture(_:)))
             }
             if let action = newValue {
                 actionHandler = RotationGestureHandler(action)
-                addTarget(actionHandler!, action: "handleGesture:")
+                addTarget(actionHandler!, action: #selector(RotationGestureHandler.handleGesture(_:)))
             } else {
                 actionHandler = nil
             }
@@ -266,11 +266,11 @@ extension UILongPressGestureRecognizer {
         }
         set {
             if let handler: AnyObject = actionHandler {
-                removeTarget(handler, action: "handleGesture:")
+                removeTarget(handler, action: #selector(LongPressGestureHandler.handleGesture(_:)))
             }
             if let action = newValue {
                 actionHandler = LongPressGestureHandler(action)
-                addTarget(actionHandler!, action: "handleGesture:")
+                addTarget(actionHandler!, action: #selector(LongPressGestureHandler.handleGesture(_:)))
             } else {
                 actionHandler = nil
             }
@@ -308,11 +308,11 @@ extension UISwipeGestureRecognizer {
         }
         set {
             if let handler: AnyObject = actionHandler {
-                removeTarget(handler, action: "handleGesture:")
+                removeTarget(handler, action: #selector(SwipeGestureHandler.handleGesture(_:)))
             }
                     if let action = newValue {
                 actionHandler = SwipeGestureHandler(action)
-                addTarget(actionHandler!, action: "handleGesture:")
+                addTarget(actionHandler!, action: #selector(SwipeGestureHandler.handleGesture(_:)))
             } else {
                 actionHandler = nil
             }
@@ -349,11 +349,11 @@ extension UIScreenEdgePanGestureRecognizer {
         }
         set {
             if let handler: AnyObject = actionHandler {
-                removeTarget(handler, action: "handleGesture:")
+                removeTarget(handler, action: #selector(ScreenEdgePanGestureHandler.handleGesture(_:)))
             }
             if let action = newValue {
                 actionHandler = ScreenEdgePanGestureHandler(action)
-                addTarget(actionHandler!, action: "handleGesture:")
+                addTarget(actionHandler!, action: #selector(ScreenEdgePanGestureHandler.handleGesture(_:)))
             } else {
                 actionHandler = nil
             }

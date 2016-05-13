@@ -40,7 +40,7 @@ extension Image {
             self.imageView.image = UIImage(CIImage: output)
             _originalSize = Size(view.frame.size)
         } else {
-            print("Failed to generate outputImage: \(__FUNCTION__)")
+            print("Failed to generate outputImage: \(#function)")
         }
     }
 }

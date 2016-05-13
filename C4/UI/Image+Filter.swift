@@ -37,7 +37,7 @@ extension Image {
             if let outputImage = cifilter.outputImage {
                 self.output = outputImage
             } else {
-                print("Failed ot generate outputImage: \(__FUNCTION__)")
+                print("Failed ot generate outputImage: \(#function)")
             }
         }
         self.renderFilteredImage()
