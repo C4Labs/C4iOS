@@ -33,12 +33,13 @@ extension Image {
 
         if var outputImage = crop.outputImage {
             let scale = CGAffineTransformMakeScale(1, -1)
-            let translate = CGAffineTransformTranslate(scale, 0, outputImage.extent.size.height)
-            outputImage = outputImage.imageByApplyingTransform(translate)
-            self.output = outputImage
+            outputImage = outputImage.imageByApplyingTransform(scale)
+            output = outputImage
 
-            self.imageView.image = UIImage(CIImage: output)
-            _originalSize = Size(view.frame.size)
+            //Need to output a CGImage that matches the current image's extent, {0, -h, w, h}
+            let cgimg = CIContext().createCGImage(self.output, fromRect: outputImage.extent)
+            self.imageView.image = UIImage(CGImage: cgimg)
+            _originalSize = Size(outputImage.extent.size)
         } else {
             print("Failed to generate outputImage: \(#function)")
         }
