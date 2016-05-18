@@ -49,6 +49,10 @@ public class Image: View, NSCopying {
 
     public override init(frame: Rect) {
         super.init(frame: frame)
+        let uiimage = UIImage()
+        let imageView = ImageView(image: uiimage)
+        imageView.frame = self.view.bounds
+        self.view = imageView
     }
 
     /// Initializes a new Image using the specified filename from the bundle (i.e. your project), it will also grab images
