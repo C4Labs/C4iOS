@@ -80,7 +80,7 @@ public struct Vector: Equatable, CustomStringConvertible {
     }
 
     ///  Initializes a Vector from a CGPoint
-    ///  - parameter point: a previously initialized CGPoint
+    /// - parameter point: a previously initialized CGPoint
     public init(_ point: CGPoint) {
         x = Double(point.x)
         y = Double(point.y)
@@ -88,7 +88,7 @@ public struct Vector: Equatable, CustomStringConvertible {
     }
 
     ///  Initializes a Vector from a Point
-    ///  - parameter point: a previously initialized Point
+    /// - parameter point: a previously initialized Point
     public init(_ point: Point) {
         x = point.x
         y = point.y
@@ -96,7 +96,7 @@ public struct Vector: Equatable, CustomStringConvertible {
     }
 
     ///  Initializes a Vector from another Vector
-    ///  - parameter copy: a previously initialized Vector
+    /// - parameter copy: a previously initialized Vector
     public init(copy original: Vector) {
         x = original.x
         y = original.y

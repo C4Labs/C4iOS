@@ -130,7 +130,7 @@ public class Color {
     ///  ````
     ///  let p = Color("pattern")
     ///  ````
-    ///  - parameter pattern: a String, the name of an image to use as a pattern.
+    /// - parameter pattern: a String, the name of an image to use as a pattern.
     public convenience init(_ pattern: String) {
         self.init(UIColor(patternImage: UIImage(named: pattern)!))
     }

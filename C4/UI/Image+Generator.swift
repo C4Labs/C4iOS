@@ -23,7 +23,7 @@ import UIKit
 extension Image {
     ///  Applies a generator to the receiver's contents.
     ///
-    ///  - parameter generator: a Generator
+    /// - parameter generator: a Generator
     public func generate(generator: Generator) {
         let crop = CIFilter(name: "CICrop")!
         crop.setDefaults()

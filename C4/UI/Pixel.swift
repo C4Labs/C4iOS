@@ -26,7 +26,7 @@ public struct Pixel {
 
     ///  Initializes a pixel whose color is a specified gray.
     ///
-    ///  - parameter gray: the gray color of the pixel
+    /// - parameter gray: the gray color of the pixel
     public init(gray: Int) {
         self.init(gray, gray, gray, 255)
     }
@@ -39,10 +39,10 @@ public struct Pixel {
     ///
     ///  Values are calculated from 0...255
     ///
-    ///  - parameter r: the red component
-    ///  - parameter g: the green component
-    ///  - parameter b: the blue component
-    ///  - parameter a: the alpha component
+    /// - parameter r: the red component
+    /// - parameter g: the green component
+    /// - parameter b: the blue component
+    /// - parameter a: the alpha component
     public init(_ r: Int, _ g: Int, _ b: Int, _ a: Int) {
         self.r = UInt8(r)
         self.g = UInt8(g)

@@ -47,7 +47,7 @@ public class Path: Equatable {
 
     ///  Initializes a new Path from an existing CGPathRef.
     ///
-    ///  - parameter path: a previously initialized CGPathRef
+    /// - parameter path: a previously initialized CGPathRef
     public init(path: CGPathRef) {
         internalPath = CGPathCreateMutableCopy(path)!
     }

@@ -29,15 +29,15 @@ public protocol EventSource {
 
     /// Register an action to run when an event is triggered. Returns an observer handle you can use to cancel the action.
     ///
-    ///  - parameter notificationName: The notification name to listen for
-    ///  - parameter executionBlock:   A block of code to run when the receiver "hears" the specified notification name
+    /// - parameter notificationName: The notification name to listen for
+    /// - parameter executionBlock:   A block of code to run when the receiver "hears" the specified notification name
     func on(event notificationName: String, run: Void -> Void) -> AnyObject
 
     ///  Register an action to run when an event is triggered by the specified sender. Returns an observer handle you can use to cancel the action.
     ///
-    ///  - parameter notificationName: The notification name to listen for
-    ///  - parameter sender:           The object from which to listen for the notification
-    ///  - parameter executionBlock:   A block of code to run when the receiver "hears" the specified notification name
+    /// - parameter notificationName: The notification name to listen for
+    /// - parameter sender:           The object from which to listen for the notification
+    /// - parameter executionBlock:   A block of code to run when the receiver "hears" the specified notification name
     func on(event notificationName: String, from sender: AnyObject?, run executionBlock: Void -> Void) -> AnyObject
 
     /// Cancel a previously registered action from an observer handle.

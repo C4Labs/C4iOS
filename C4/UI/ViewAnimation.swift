@@ -65,7 +65,7 @@ public class ViewAnimation: Animation {
     ///       aView.backgroundColor = C4Blue
     ///  }
     ///
-    ///  - parameter animations: a block of animations to execute.
+    /// - parameter animations: a block of animations to execute.
     public init(_ animations: () -> Void) {
         self.animations = animations
     }

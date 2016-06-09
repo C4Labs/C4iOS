@@ -42,8 +42,8 @@ public struct Point: Equatable, CustomStringConvertible {
     ///  let p = Point(10.5,10.5)
     ///  ````
     ///
-    ///  - parameter x: a Double value
-    ///  - parameter y: a Double value
+    /// - parameter x: a Double value
+    /// - parameter y: a Double value
     public init(_ x: Double, _ y: Double) {
         self.x = x
         self.y = y
@@ -61,7 +61,7 @@ public struct Point: Equatable, CustomStringConvertible {
 
     ///  Initializes a Point initialized with a CGPoint.
     ///
-    ///  - parameter point: a previously initialized CGPoint
+    /// - parameter point: a previously initialized CGPoint
     public init(_ point: CGPoint) {
         x = Double(point.x)
         y = Double(point.y)
@@ -81,7 +81,7 @@ public struct Point: Equatable, CustomStringConvertible {
     ///  p.transform(t) // -> {-10.0, -10.0}
     ///  ````
     ///
-    ///  - parameter t: A Transform to apply to the point
+    /// - parameter t: A Transform to apply to the point
     public mutating func transform(t: Transform) {
         x = x * t[0, 0] + y * t[0, 1] + t[3, 0]
         y = x * t[1, 0] + y * t[1, 1] + t[3, 1]
@@ -94,7 +94,7 @@ public struct Point: Equatable, CustomStringConvertible {
     ///  println(p)
     ///  ````
     ///
-    ///  - returns: A string formatted to look like {x,y}
+    /// - returns: A string formatted to look like {x,y}
     public var description: String {
         get {
             return "{\(x), \(y)}"
@@ -104,8 +104,8 @@ public struct Point: Equatable, CustomStringConvertible {
 
 ///  Translate a point by the given vector.
 ///
-///  - parameter lhs: a Point to translate
-///  - parameter rhs: a Vector whose values will be applied to the point
+/// - parameter lhs: a Point to translate
+/// - parameter rhs: a Vector whose values will be applied to the point
 public func += (inout lhs: Point, rhs: Vector) {
     lhs.x += rhs.x
     lhs.y += rhs.y
@@ -113,8 +113,8 @@ public func += (inout lhs: Point, rhs: Vector) {
 
 ///  Translate a point by the negative of the given vector
 ///
-///  - parameter lhs: a Point to translate
-///  - parameter rhs: a Vector whose values will be applied to the point
+/// - parameter lhs: a Point to translate
+/// - parameter rhs: a Vector whose values will be applied to the point
 public func -= (inout lhs: Point, rhs: Vector) {
     lhs.x -= rhs.x
     lhs.y -= rhs.y
@@ -122,40 +122,40 @@ public func -= (inout lhs: Point, rhs: Vector) {
 
 ///  Calculate the vector between two points
 ///
-///  - parameter lhs: a Point
-///  - parameter rhs: a Point
+/// - parameter lhs: a Point
+/// - parameter rhs: a Point
 ///
-///  - returns: a Vector whose value is the left-hand side _minus_ the right-hand side
+/// - returns: a Vector whose value is the left-hand side _minus_ the right-hand side
 public func - (lhs: Point, rhs: Point) -> Vector {
     return Vector(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
 }
 
 ///  Translate a point by the given vector.
 ///
-///  - parameter lhs: a Point to translate
-///  - parameter rhs: a Vector whose values will be applied to the point
+/// - parameter lhs: a Point to translate
+/// - parameter rhs: a Vector whose values will be applied to the point
 ///
-///  - returns: A new point whose coordinates have been translated by the values from the vector (e.g. point.x = lhs.x + rhs.x)
+/// - returns: A new point whose coordinates have been translated by the values from the vector (e.g. point.x = lhs.x + rhs.x)
 public func + (lhs: Point, rhs: Vector) -> Point {
     return Point(lhs.x + rhs.x, lhs.y + rhs.y)
 }
 
 ///  Translate a point by the negative of the vector.
 ///
-///  - parameter lhs: a Point to translate
-///  - parameter rhs: a Vector whose values will be applied to the point
+/// - parameter lhs: a Point to translate
+/// - parameter rhs: a Vector whose values will be applied to the point
 ///
-///  - returns: A new point whose coordinates have been translated by the negative vector (e.g. point.x = lhs.x - rhs.x)
+/// - returns: A new point whose coordinates have been translated by the negative vector (e.g. point.x = lhs.x - rhs.x)
 public func - (lhs: Point, rhs: Vector) -> Point {
     return Point(lhs.x - rhs.x, lhs.y - rhs.y)
 }
 
 ///  Calculates the distance between two points.
 ///
-///  - parameter lhs: left-hand point
-///  - parameter rhs: right-hand point
+/// - parameter lhs: left-hand point
+/// - parameter rhs: right-hand point
 ///
-///  - returns: The linear distance between two points
+/// - returns: The linear distance between two points
 public func distance(lhs: Point, rhs: Point) -> Double {
     let dx = rhs.x - lhs.x
     let dy = rhs.y - lhs.y
@@ -164,10 +164,10 @@ public func distance(lhs: Point, rhs: Point) -> Double {
 
 ///  Checks to see if two points are equal.
 ///
-///  - parameter lhs: a Point
-///  - parameter rhs: a Point
+/// - parameter lhs: a Point
+/// - parameter rhs: a Point
 ///
-///  - returns: true if the two structs have identical coordinates
+/// - returns: true if the two structs have identical coordinates
 public func == (lhs: Point, rhs: Point) -> Bool {
     return lhs.x == rhs.x && lhs.y == rhs.y
 }
@@ -178,11 +178,11 @@ public func == (lhs: Point, rhs: Point) -> Bool {
 ///  for interpolation parameter `param`. For instance, a parameter of 0 will return `a`, a parameter of 1 will return `b`
 ///  and a parameter of 0.5 will return the midpoint between `a` and `b`.
 ///
-///  - parameter a:     the first point
-///  - parameter b:     the second point
-///  - parameter param: a Double value (between 0.0 and 1.0) used to calculate the point between a and b
+/// - parameter a:     the first point
+/// - parameter b:     the second point
+/// - parameter param: a Double value (between 0.0 and 1.0) used to calculate the point between a and b
 ///
-///  - returns: an interpolated point
+/// - returns: an interpolated point
 public func lerp(a: Point, _ b: Point, at: Double) -> Point {
     return a + (b - a) * at
 }

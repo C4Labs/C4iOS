@@ -23,7 +23,7 @@ import UIKit
 extension Image {
     ///  Crops the receiver's contents to the specified frame within the receiver's coordinate space.
     ///
-    ///  - parameter rect: a Rect
+    /// - parameter rect: a Rect
     public func crop(rect: Rect) {
         let intersection = CGRectIntersection(CGRect(rect), CGRect(self.bounds))
         if CGRectIsNull(intersection) { return }

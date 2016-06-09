@@ -34,7 +34,7 @@ public struct GaussianBlur: Filter {
     public var radius: Double
 
     ///  Initializes a new filter
-    ///  - parameter radius: a Double value
+    /// - parameter radius: a Double value
     public init(radius: Double = 5.0) { self.radius = radius }
 
     /// Applies the properties of the receiver to create a new CIFilter object

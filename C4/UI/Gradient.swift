@@ -108,9 +108,9 @@ public class Gradient: View {
 
     ///  Initializes a new Gradient.
     ///
-    ///  - parameter frame:     A Rect that defines the frame for the gradient's view.
-    ///  - parameter colors:    An array of Color objects that define the gradient's colors. Defaults to [C4Blue, C4Purple].
-    ///  - parameter locations: An array of Double values that define the location of each gradient stop. Defaults to [0,1]
+    /// - parameter frame:     A Rect that defines the frame for the gradient's view.
+    /// - parameter colors:    An array of Color objects that define the gradient's colors. Defaults to [C4Blue, C4Purple].
+    /// - parameter locations: An array of Double values that define the location of each gradient stop. Defaults to [0,1]
     public convenience override init(frame: Rect) {
         self.init()
         self.view = GradientView(frame: CGRect(frame))

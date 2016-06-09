@@ -97,9 +97,9 @@ public class Animation {
     ///
     ///  The completion observer listens for the end of the animation then executes a specified block of code.
     ///
-    ///  - parameter action: a block of code to be executed at the end of an animation.
+    /// - parameter action: a block of code to be executed at the end of an animation.
     ///
-    ///  - returns: the observer object.
+    /// - returns: the observer object.
     public func addCompletionObserver(action: () -> Void) -> AnyObject {
         let nc = NSNotificationCenter.defaultCenter()
         let observer = nc.addObserverForName(AnimationCompletedEvent, object: self, queue: NSOperationQueue.currentQueue(), usingBlock: { notification in
@@ -111,7 +111,7 @@ public class Animation {
 
     ///  Removes a specified observer from an animation.
     ///
-    ///  - parameter observer: the observer object to remove.
+    /// - parameter observer: the observer object to remove.
     public func removeCompletionObserver(observer: AnyObject) {
         let nc = NSNotificationCenter.defaultCenter()
         nc.removeObserver(observer, name: AnimationCompletedEvent, object: self)
@@ -130,9 +130,9 @@ public class Animation {
     ///
     ///  The cancel observer listens for when an animation is canceled then executes a specified block of code.
     ///
-    ///  - parameter action: a block of code to be executed when an animation is canceled.
+    /// - parameter action: a block of code to be executed when an animation is canceled.
     ///
-    ///  - returns: the observer object.
+    /// - returns: the observer object.
     public func addCancelObserver(action: () -> Void) -> AnyObject {
         let nc = NSNotificationCenter.defaultCenter()
         let observer = nc.addObserverForName(AnimationCancelledEvent, object: self, queue: NSOperationQueue.currentQueue(), usingBlock: { notification in
@@ -144,7 +144,7 @@ public class Animation {
 
     ///  Removes a specified cancel observer from an animation.
     ///
-    ///  - parameter observer: the cancel observer object to remove.
+    /// - parameter observer: the cancel observer object to remove.
     public func removeCancelObserver(observer: AnyObject) {
         let nc = NSNotificationCenter.defaultCenter()
         nc.removeObserver(observer, name: AnimationCancelledEvent, object: self)

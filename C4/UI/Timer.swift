@@ -38,9 +38,9 @@ public final class Timer: NSObject {
     ///      print("tick")
     ///  }
     ///  ````
-    ///  - parameter interval: the time between firing
-    ///  - parameter count:    the total number of times the timer should fire, defaults to Int.max
-    ///  - parameter action:   a block of code to execute
+    /// - parameter interval: the time between firing
+    /// - parameter count:    the total number of times the timer should fire, defaults to Int.max
+    /// - parameter action:   a block of code to execute
     public init(interval: Double, count: Int = Int.max, action: () -> ()) {
         self.action = action
         self.count = count

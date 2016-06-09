@@ -41,8 +41,8 @@ public protocol Filter {
     ///
     ///  A specific filter will have internal properties whose values are applied to the CIFilter being generated. However, those properties are object / filter specific and so cannot be defined in the protocol.
     ///
-    ///  - parameter inputImage: A CIImage to be used in generating the filter.
+    /// - parameter inputImage: A CIImage to be used in generating the filter.
     ///
-    ///  - returns: A CIFilter whose name is `filterName` and whose contents are based on `inputImage`.
+    /// - returns: A CIFilter whose name is `filterName` and whose contents are based on `inputImage`.
     func createCoreImageFilter(inputImage: CIImage) -> CIFilter
 }

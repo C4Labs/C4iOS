@@ -23,14 +23,14 @@ import UIKit
 extension Image {
     ///  Applies a fiter to the receiver's contents.
     ///
-    ///  - parameter filter: a Filter
+    /// - parameter filter: a Filter
     public func apply(filter: Filter) {
         self.apply(filters:[filter])
     }
 
     ///  Applies an array of fiters to the receiver's contents.
     ///
-    ///  - parameter filters: an array of Filter objects
+    /// - parameter filters: an array of Filter objects
     public func apply(filters filters: [Filter]) {
         for filter in filters {
             let cifilter = filter.createCoreImageFilter(output)

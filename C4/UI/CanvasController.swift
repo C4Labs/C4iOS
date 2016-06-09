@@ -42,7 +42,7 @@ public class CanvasController: UIViewController {
 
     ///  Overrides default behaviour of showing the app's status bar. Defaults to `true`
     ///
-    ///  - returns: a boolean value representing whether or not the app should hide its status bar
+    /// - returns: a boolean value representing whether or not the app should hide its status bar
     public override func prefersStatusBarHidden() -> Bool {
         return true
     }
