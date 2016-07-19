@@ -1,4 +1,4 @@
-// Copyright © 2014 C4
+// Copyright © 2014
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to
@@ -23,28 +23,28 @@ private var canvasAssociationKey: UInt8 = 0
 
 /// Extension to UIViewController that adds a `canvas` object.
 ///
-/// The canvas is a C4View representation of the view controller's UIView property.
+/// The canvas is a View representation of the view controller's UIView property.
 ///
-/// This extension adds properties and functionality of C4View to the native contoller object.
+/// This extension adds properties and functionality of View to the native contoller object.
 ///
 /// For example:
 /// ````
-/// canvas.backgroundColor = C4Color(r,g,b,a)
+/// canvas.backgroundColor = Color(r,g,b,a)
 /// canvas.addTapGestureRecognizer(0.5){...}
 /// ````
 ///
-/// Where, `canvas` is essentially equal to `self.viewController.view`, keeping the interaction with a controller's main view consistent with using other C4View objects.
+/// Where, `canvas` is essentially equal to `self.viewController.view`, keeping the interaction with a controller's main view consistent with using other View objects.
 public extension NativeViewController {
     
-    /// Returns a C4View object representation of the controller's `view` property.
-    public var canvas : C4View {
+    /// Returns a View object representation of the controller's `view` property.
+    public var canvas : View {
         get {
-            let optionalCanvas = objc_getAssociatedObject(self, &canvasAssociationKey) as! C4View?
+            let optionalCanvas = objc_getAssociatedObject(self, &canvasAssociationKey) as! View?
             if let canvas = optionalCanvas {
                 return canvas
             }
             
-            let canvas = C4View(view: view)
+            let canvas = View(view: view)
             objc_setAssociatedObject(
                 self,
                 &canvasAssociationKey,

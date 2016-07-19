@@ -17,32 +17,29 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-import CoreImage
+import Foundation
+import CoreGraphics
 
-///  Darkens the background image samples to reflect the source image samples.
-///
-///  The following example uses an image to burn itself.
-///  ````
-///  let logo = Image("logo")
-///  var colorburn = ColorBurn()
-///  colorburn.background = logo
-///  logo.apply(colorburn)
-///  canvas.add(logo)
-///  ````
-public struct ColorBurn : Filter {
-    /// The name of the Core Image filter.
-    public let filterName = "CIColorBurnBlendMode"
-    /// The background image to use for the burn.
-    public var background: Image = Image()
-    ///Initializes a new filter
-    public init() {}
-
-    ///Applies the properties of the receiver to create a new CIFilter object
-    public func createCoreImageFilter(inputImage: CIImage) -> CIFilter {
-        let filter = CIFilter(name: filterName)!
-        filter.setDefaults()
-        filter.setValue(background.ciimage, forKey:"inputImage")
-        filter.setValue(inputImage, forKey: "inputBackgroundImage")
-        return filter
+///  C4Ellipse is a concrete subclass of C4Shape that has a special initialzer that creates an ellipse whose shape is defined by the object's frame.
+public class Ellipse: Shape {
+    
+    /// Creates an ellipse.
+    ///
+    /// ````
+    /// let r = C4Rect(0,0,100,200)
+    /// let e = C4Ellipse(frame: r)
+    /// ````
+    ///
+    /// - parameter frame: The frame within which to draw an ellipse that touches each of the four sides of the frame.
+    convenience public init(frame: Rect) {
+        self.init()
+        view.frame = CGRect(frame)
+        updatePath()
+    }
+    
+    override func updatePath() {
+        let newPath = Path()
+        newPath.addEllipse(bounds)
+        path = newPath
     }
 }

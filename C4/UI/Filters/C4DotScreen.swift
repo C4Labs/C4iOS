@@ -26,11 +26,11 @@ import CoreImage
 ///  logo.apply(C4DotScreen())
 ///  canvas.add(logo)
 ///  ````
-public struct C4DotScreen : C4Filter {
+public struct DotScreen : Filter {
     /// The name of the Core Image filter.
     public let filterName = "CIDotScreen"
     /// The center of the pattern. Defaults to {0,0}
-    public var center: C4Point = C4Point()
+    public var center: Point = Point()
     /// The width of the dots. Defaults to 2.0
     public var width: Double = 2.0
     /// The angle of the pattern. Defaults to 0.0

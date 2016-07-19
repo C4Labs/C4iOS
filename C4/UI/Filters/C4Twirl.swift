@@ -1,4 +1,5 @@
-// Copyright © 2014 C4
+
+
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to
@@ -22,15 +23,15 @@ import CoreImage
 ///  Rotates pixels around a point to give a twirling effect.
 ///
 ///  ````
-///  let logo = C4Image("logo")
-///  logo.apply(C4Twirl())
+///  let logo = Image("logo")
+///  logo.apply(Twirl())
 ///  canvas.add(logo)
 ///  ````
-public struct C4Twirl : C4Filter {
+public struct Twirl : Filter {
     /// The name of the Core Image filter.
     public let filterName = "CITwirlDistortion"
     /// The center of the twirl effet. Defaults to {0,0}
-    public var center: C4Point = C4Point()
+    public var center: Point = Point()
     /// The radius of the twirl effect. Defaults to 100.o
     public var radius: Double = 100.0
     /// The angle of the twirl effect. Defaults to 𝞹

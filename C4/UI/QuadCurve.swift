@@ -17,32 +17,29 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-import CoreImage
+import QuartzCore
 
-///  Darkens the background image samples to reflect the source image samples.
-///
-///  The following example uses an image to burn itself.
-///  ````
-///  let logo = Image("logo")
-///  var colorburn = ColorBurn()
-///  colorburn.background = logo
-///  logo.apply(colorburn)
-///  canvas.add(logo)
-///  ````
-public struct ColorBurn : Filter {
-    /// The name of the Core Image filter.
-    public let filterName = "CIColorBurnBlendMode"
-    /// The background image to use for the burn.
-    public var background: Image = Image()
-    ///Initializes a new filter
-    public init() {}
+///  C4QuadCurve is a concrete subclass of C4Curve that modifies it shape based on a single point rather than 2 used by its parent class.
+public class QuadCurve : Curve {
 
-    ///Applies the properties of the receiver to create a new CIFilter object
-    public func createCoreImageFilter(inputImage: CIImage) -> CIFilter {
-        let filter = CIFilter(name: filterName)!
-        filter.setDefaults()
-        filter.setValue(background.ciimage, forKey:"inputImage")
-        filter.setValue(inputImage, forKey: "inputBackgroundImage")
-        return filter
+    /// A Point used to calculate the shape of the quadratic curve.
+    public var controlPoint = Point() {
+        didSet {
+            self.controlPoints = (controlPoint,controlPoint)
+        }
+    }
+    
+    /// Initializes a new QuadCurve.
+    ///
+    /// ````
+    /// let curve = QuadCurve(a: Point(), b: Point(50,50), c: Point(100,0))
+    /// canvas.add(curve)
+    /// ````
+    ///
+    /// - parameter a: The beginning point of the curve.
+    /// - parameter b: A single Point used to calculate the shape of the curve.
+    /// - parameter c: The end point of the curve.
+    convenience public init(begin: Point, control: Point, end: Point) {
+        self.init(begin: begin, control0: control, control1: control, end: end)
     }
 }

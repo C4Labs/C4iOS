@@ -20,7 +20,7 @@
 import CoreImage
 
 ///Softens edges and applies a pleasant glow to an image.
-public struct C4Bloom : C4Filter {
+public struct C4Bloom : Filter {
     ///The name of the corresponding CIFilter
     public let filterName = "CIBloom"
     ///A Double value whose attribute type is CIAttributeTypeDistance and whose display name is Radius. Default value: 10.0

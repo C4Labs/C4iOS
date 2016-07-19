@@ -44,9 +44,9 @@ private var viewAssociationKey: UInt8 = 0
 extension NativeGestureRecognizer {
     
     /// The current location of the gesture in the reference view.
-    public var location: C4Point {
+    public var location: Point {
         get {
-            return C4Point(locationInView(referenceView))
+            return Point(locationInView(referenceView))
         }
     }
     
@@ -93,7 +93,7 @@ extension NativeGestureRecognizer {
 }
 
 
-public typealias TapAction = (location: C4Point, state: NativeGestureRecognizerState) -> ()
+public typealias TapAction = (location: Point, state: NativeGestureRecognizerState) -> ()
 
 extension NativeTapGestureRecognizer {
     
@@ -118,7 +118,7 @@ extension NativeTapGestureRecognizer {
                     addTarget(actionHandler!, action: "handleGesture:")
                 #elseif os(OSX)
                     target = actionHandler
-                    action = "handleGesture:"
+                    action = #selector(TapGestureHandler.handleGesture(_:))
                 #endif
             } else {
                 actionHandler = nil
@@ -147,7 +147,7 @@ extension NativeTapGestureRecognizer {
 }
 
 
-public typealias PanAction = (location: C4Point, translation: C4Vector, velocity: C4Vector, state: NativeGestureRecognizerState) -> ()
+public typealias PanAction = (location: Point, translation: Vector, velocity: Vector, state: NativeGestureRecognizerState) -> ()
 
 extension NativePanGestureRecognizer {
     
@@ -172,7 +172,7 @@ extension NativePanGestureRecognizer {
                     addTarget(actionHandler!, action: "handleGesture:")
                 #elseif os(OSX)
                     target = actionHandler
-                    action = "handleGesture:"
+                    action = #selector(PanGestureHandler.handleGesture(_:))
                 #endif
             } else {
                 actionHandler = nil
@@ -183,21 +183,21 @@ extension NativePanGestureRecognizer {
     /// The translation of the pan gesture in the coordinate system of the specified view.
     ///
     /// The x and y values report the total translation over time. They are not delta values from the last time that the translation was reported. Apply the translation value to the state of the view when the gesture is first recognized—do not concatenate the value each time the handler is called.
-    public var translation: C4Vector {
+    public var translation: Vector {
         get {
             if let view = referenceView {
-                return C4Vector(translationInView(view))
+                return Vector(translationInView(view))
             }
-            return C4Vector()
+            return Vector()
         }
     }
 
     /// The velocity of the pan gesture in the coordinate system of the specified view.
     ///
     /// The velocity of the pan gesture, which is expressed in points per second. The velocity is broken into horizontal and vertical components.
-    public var velocity: C4Vector {
+    public var velocity: Vector {
         get {
-            return C4Vector(velocityInView(view))
+            return Vector(velocityInView(view))
         }
         
     }
@@ -248,7 +248,7 @@ extension NativePinchGestureRecognizer {
                     addTarget(actionHandler!, action: "handleGesture:")
                 #elseif os(OSX)
                     target = actionHandler
-                    action = "handleGesture:"
+                    action = #selector(PinchGestureHandler.handleGesture(_:))
                 #endif
             } else {
                 actionHandler = nil
@@ -307,7 +307,7 @@ extension NativeRotationGestureRecognizer {
                     addTarget(actionHandler!, action: "handleGesture:")
                 #elseif os(OSX)
                     target = actionHandler
-                    action = "handleGesture:"
+                    action = #selector(RotationGestureHandler.handleGesture(_:))
                 #endif
             } else {
                 actionHandler = nil
@@ -336,7 +336,7 @@ extension NativeRotationGestureRecognizer {
 }
 
 
-public typealias LongPressAction = (location: C4Point, state: NativeGestureRecognizerState) -> ()
+public typealias LongPressAction = (location: Point, state: NativeGestureRecognizerState) -> ()
 
 extension NativePressGestureRecognizer {
     
@@ -361,7 +361,8 @@ extension NativePressGestureRecognizer {
                     addTarget(actionHandler!, action: "handleGesture:")
                 #elseif os(OSX)
                     target = actionHandler
-                    action = "handleGesture:"
+                    action = #selector(LongPressGestureHandler
+                        .handleGesture(_:))
                 #endif
             } else {
                 actionHandler = nil
@@ -391,7 +392,7 @@ extension NativePressGestureRecognizer {
 
 
 #if os(iOS)
-public typealias SwipeAction = (location: C4Point, state: NativeGestureRecognizerState, direction: UISwipeGestureRecognizerDirection) -> ()
+public typealias SwipeAction = (location: Point, state: NativeGestureRecognizerState, direction: UISwipeGestureRecognizerDirection) -> ()
 
 extension UISwipeGestureRecognizer {
     
@@ -436,7 +437,7 @@ extension UISwipeGestureRecognizer {
 #endif
 
 #if os(iOS)
-public typealias ScreenEdgePanAction = (location: C4Point, state: NativeGestureRecognizerState) -> ()
+public typealias ScreenEdgePanAction = (location: Point, state: NativeGestureRecognizerState) -> ()
 
 extension UIScreenEdgePanGestureRecognizer {
     

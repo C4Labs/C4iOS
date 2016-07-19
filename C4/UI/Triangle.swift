@@ -1,4 +1,4 @@
-// Copyright © 2014 C4
+// Copyright © 2014
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to
@@ -17,32 +17,23 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-import CoreImage
+import Foundation
+import CoreGraphics
 
-///  Darkens the background image samples to reflect the source image samples.
-///
-///  The following example uses an image to burn itself.
-///  ````
-///  let logo = Image("logo")
-///  var colorburn = ColorBurn()
-///  colorburn.background = logo
-///  logo.apply(colorburn)
-///  canvas.add(logo)
-///  ````
-public struct ColorBurn : Filter {
-    /// The name of the Core Image filter.
-    public let filterName = "CIColorBurnBlendMode"
-    /// The background image to use for the burn.
-    public var background: Image = Image()
-    ///Initializes a new filter
-    public init() {}
+/// Triangle defines a concrete subclass of Polygon whose shape is a closed triangle.
+public class Triangle: PolygonShape {
+    
+    /// Initializes a new Triangle using the specified array of points.
+    ///
+    /// Protects against trying to create a triangle with less than three points.
+    ///
+    /// - parameter points: An array of Point structs.
+    public override init(_ points: [Point]) {
+        assert(points.count >= 3, "To create a Triangle you need to specify an array of at least 3 points")
+        super.init(points)
+    }
 
-    ///Applies the properties of the receiver to create a new CIFilter object
-    public func createCoreImageFilter(inputImage: CIImage) -> CIFilter {
-        let filter = CIFilter(name: filterName)!
-        filter.setDefaults()
-        filter.setValue(background.ciimage, forKey:"inputImage")
-        filter.setValue(inputImage, forKey: "inputBackgroundImage")
-        return filter
+    required public init(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

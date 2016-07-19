@@ -22,11 +22,11 @@ import CoreImage
 ///  Spreads source pixels by an amount specified by a Gaussian distribution.
 ///
 ///  ````
-///  let logo = C4Image("logo")
-///  logo.apply(C4GaussianBlur())
+///  let logo = Image("logo")
+///  logo.apply(GaussianBlur())
 ///  canvas.add(logo)
 ///  ````
-public struct C4GaussianBlur : C4Filter {
+public struct GaussianBlur : Filter {
     /// The name of the Core Image filter.
     public let filterName = "CIGaussianBlur"
 

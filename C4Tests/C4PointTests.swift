@@ -22,21 +22,21 @@ import XCTest
 
 class C4PointTests: XCTestCase {
     func testDistance() {
-        let pointA = C4Point()
-        let pointB = C4Point(1, 1)
+        let pointA = Point()
+        let pointB = Point(1, 1)
         XCTAssertEqualWithAccuracy(distance(pointA, rhs: pointB), sqrt(2), accuracy: DBL_MIN, "Distance between origin and (1,1) should be √2")
     }
     
     func testTranslate() {
-        let original = C4Point(2, 3)
-        let translated = original + C4Vector(x: 3, y: 2)
-        XCTAssertEqual(translated, C4Point(5, 5), "Point should be translated to (5, 5)")
+        let original = Point(2, 3)
+        let translated = original + Vector(x: 3, y: 2)
+        XCTAssertEqual(translated, Point(5, 5), "Point should be translated to (5, 5)")
     }
     
     func testLerp() {
-        let target = C4Point(10,10)
-        let lerped = lerp(a: C4Point(), b: target, param: 0.2)
-        XCTAssertEqual(lerped, C4Point(2,2), "Point should be {2,2}")
+        let target = Point(10,10)
+        let lerped = lerp(a: Point(), b: target, param: 0.2)
+        XCTAssertEqual(lerped, Point(2,2), "Point should be {2,2}")
     }
     
 }
