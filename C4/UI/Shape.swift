@@ -103,7 +103,7 @@ public class Shape: View {
             return
         }
 
-        var bounds = CGPathGetPathBoundingBox(shapeLayer.path)
+        var bounds = CGPathGetPathBoundingBox(shapeLayer.path!)
         bounds = CGRectInset(bounds, -shapeLayer.lineWidth/2, -shapeLayer.lineWidth/2)
         #if os(OSX)
             view.frame = bounds

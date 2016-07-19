@@ -609,9 +609,11 @@
 				TargetAttributes = {
 					6114EDBB1BA4B36700A29541 = {
 						CreatedOnToolsVersion = 7.0;
+						LastSwiftMigration = 0800;
 					};
 					613A41781BDD9989000731E7 = {
 						CreatedOnToolsVersion = 7.1;
+						LastSwiftMigration = 0800;
 					};
 					614F824219DB5ED3001DF1D4 = {
 						CreatedOnToolsVersion = 6.0;
@@ -920,6 +922,7 @@
 				PRODUCT_NAME = C4;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -940,6 +943,7 @@
 				PRODUCT_NAME = C4;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
@@ -954,6 +958,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.c4ios.C4Tests-OSX";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -969,6 +974,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.c4ios.C4Tests-OSX";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};

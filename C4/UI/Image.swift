@@ -325,7 +325,7 @@ public class Image: View {
             width * Int(sizeof(Pixel)),
             rgbColorSpace,
             bitmapInfo,
-            providerRef,
+            providerRef!,
             nil,
             true,
             CGColorRenderingIntent.RenderingIntentDefault

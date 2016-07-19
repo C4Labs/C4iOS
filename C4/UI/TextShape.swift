@@ -110,7 +110,7 @@ public class TextShape : Shape {
         for i in 0..<glyphs.count {
             let glyphPath = CTFontCreatePathForGlyph(ctfont!, glyphs[i], &invert)
             var translation = CGAffineTransformMakeTranslation(origin.x, origin.y)
-            CGPathAddPath(textPath, &translation, glyphPath)
+            CGPathAddPath(textPath, &translation, glyphPath!)
             
             origin.x += CGFloat(advances[i].width)
             origin.y += CGFloat(advances[i].height)
