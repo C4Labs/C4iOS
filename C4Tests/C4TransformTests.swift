@@ -22,8 +22,8 @@ import XCTest
 
 class C4TransformTests: XCTestCase {
     func testMultiplyByIndentity() {
-        let identity = C4Transform()
-        var transform = C4Transform()
+        let identity = Transform()
+        var transform = Transform()
         for col in 0...3 {
             for row in 0...3 {
                 transform[row, col] = random01()
@@ -34,8 +34,8 @@ class C4TransformTests: XCTestCase {
     }
     
     func testMultiplyByInverse() {
-        let identity = C4Transform()
-        var transform = C4Transform()
+        let identity = Transform()
+        var transform = Transform()
         transform[0, 0] = 1
         transform[0, 1] = 2
         transform[1, 0] = 2
@@ -48,8 +48,8 @@ class C4TransformTests: XCTestCase {
     }
     
     func testTranslationProperty() {
-        let translation = C4Vector(x: 10, y: 20)
-        let transform = C4Transform.makeTranslation(translation)
+        let translation = Vector(x: 10, y: 20)
+        let transform = Transform.makeTranslation(translation)
         XCTAssertEqual(transform.translation, translation,
             "The transform's translation should match the translation used to create it")
     }

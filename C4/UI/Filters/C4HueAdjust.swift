@@ -1,4 +1,4 @@
-// Copyright © 2014 C4
+// Copyright © 2014 
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to
@@ -20,7 +20,7 @@
 import CoreImage
 
 ///  Changes the overall hue, or tint, of the source pixels.
-public struct C4Hue : C4Filter {
+public struct Hue : Filter {
     ///The name of the Core Image filter
     public let filterName = "CIHueAdjust"
     ///The angle to apply to the hue filter. Default value: 1.0

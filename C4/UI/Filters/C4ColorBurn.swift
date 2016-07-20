@@ -23,17 +23,17 @@ import CoreImage
 ///
 ///  The following example uses an image to burn itself.
 ///  ````
-///  let logo = C4Image("logo")
-///  var colorburn = C4ColorBurn()
+///  let logo = Image("logo")
+///  var colorburn = ColorBurn()
 ///  colorburn.background = logo
 ///  logo.apply(colorburn)
 ///  canvas.add(logo)
 ///  ````
-public struct C4ColorBurn : C4Filter {
+public struct ColorBurn : Filter {
     /// The name of the Core Image filter.
     public let filterName = "CIColorBurnBlendMode"
     /// The background image to use for the burn.
-    public var background: C4Image = C4Image()
+    public var background: Image = Image()
     ///Initializes a new filter
     public init() {}
 

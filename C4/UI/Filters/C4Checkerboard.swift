@@ -26,13 +26,13 @@ import CoreImage
 ///  image.generate(C4Checkerboard())
 ///  canvas.add(image)
 ///  ````
-public struct C4Checkerboard : C4Generator {
+public struct Checkerboard : Generator {
     ///The name of the Core Image filter.
     public let filterName = "CICheckerboardGenerator"
     ///The colors of the checkerboard. Defaults to: [C4Pink, C4Blue]
-    public var colors: [C4Color] = [C4Pink, C4Blue]
+    public var colors: [Color] = [C4Pink, C4Blue]
     ///The center of the pattern. Defaults to {0,0}
-    public var center: C4Point = C4Point()
+    public var center: Point = Point()
     ///The sharpness of the pattern's edges. Defaults to 1.0
     public var sharpness: Double = 1
     ///The width of the pattern's segments. Defaults to 5.0

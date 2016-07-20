@@ -28,13 +28,13 @@ import CoreImage
 ///  logo.generate(gradient)
 ///  canvas.add(logo)
 ///  ````
-public struct C4LinearGradient : C4Generator {
+public struct LinearGradient : Generator {
     /// The name of the Core Image filter.
     public let filterName = "CISmoothLinearGradient"
     /// The colors of the filter. Defaults to [C4Pink,C4Blue]
-    public var colors: [C4Color] = [C4Pink,C4Blue]
-    /// The endpoints of the filter. Defaults to [C4Point(),C4Point(100,100)]'
-    public var points: [C4Point] = [C4Point(),C4Point(100,100)]
+    public var colors: [Color] = [C4Pink,C4Blue]
+    /// The endpoints of the filter. Defaults to [Point(),Point(100,100)]'
+    public var points: [Point] = [Point(),Point(100,100)]
 
     ///Initializes a new filter
     public init() {}

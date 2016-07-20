@@ -20,7 +20,7 @@
 import CoreImage
 
 ///Increases image detail by sharpening.
-public struct C4Sharpen : C4Filter {
+public struct Sharpen : Filter {
     /// The name of the Core Image filter (e.g. "CIBloom")
     public let filterName = "CISharpenLuminance"
     /// A Double value by which to sharpen the image. Default value: 0.4

@@ -22,11 +22,11 @@ import CoreImage
 ///  Maps the colors of an image to various shades of brown.
 ///
 ///  ````
-///  let logo = C4Image("logo")
-///  logo.apply(C4Sepia())
+///  let logo = Image("logo")
+///  logo.apply(Sepia())
 ///  canvas.add(logo)
 ///  ````
-public struct C4Sepia : C4Filter {
+public struct Sepia : Filter {
     /// The name of the Core Image filter.
     public let filterName = "CISepiaTone"
     /// The intensity of the filter. Defaults to 1.0
