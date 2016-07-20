@@ -24,14 +24,14 @@ import UIKit
 /// A C4StoredAnimation object is able to apply a set of stored animation properties to an object.
 ///
 /// This class is useful for serializing and deserializing animations.
-public class C4StoredAnimation : C4Animation {
+public class StoredAnimation: Animation {
     /// A dictionary of keys whose values will be applied to animatable properties of the receiver. The keys should map directly to the names of animatable properies.
     public var values = [String: AnyObject]()
 
     /// Initiates the changes specified in the receivers `animations` block.
     public func animate(object: NSObject) {
-        let disable = C4ShapeLayer.disableActions
-        C4ShapeLayer.disableActions = false
+        let disable = ShapeLayer.disableActions
+        ShapeLayer.disableActions = false
         var timing: CAMediaTimingFunction
         var options : UIViewAnimationOptions = [UIViewAnimationOptions.BeginFromCurrentState]
 
@@ -63,7 +63,7 @@ public class C4StoredAnimation : C4Animation {
         }
 
         UIView.animateWithDuration(duration, delay: 0, options: options, animations: {
-            C4ViewAnimation.stack.append(self)
+            ViewAnimation.stack.append(self)
             UIView.setAnimationRepeatCount(Float(self.repeatCount))
             CATransaction.begin()
             CATransaction.setAnimationDuration(self.duration)
@@ -75,8 +75,8 @@ public class C4StoredAnimation : C4Animation {
                 object.setValue(value, forKeyPath: key)
             }
             CATransaction.commit()
-            C4ViewAnimation.stack.removeLast()
+            ViewAnimation.stack.removeLast()
         }, completion:nil)
-        C4ShapeLayer.disableActions = disable
+        ShapeLayer.disableActions = disable
     }
 }

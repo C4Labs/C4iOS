@@ -79,7 +79,7 @@ public class Color {
     /// let c = C4Color()
     /// ````
     public init() {
-        colorSpace = CGColorSpaceCreateDeviceRGB()
+        colorSpace = CGColorSpaceCreateDeviceRGB()!
         internalColor = CGColorCreate(colorSpace, [0, 0, 0, 0])!
     }
     
@@ -94,7 +94,7 @@ public class Color {
     /// - parameter blue:  The blue value for the new color [0.0 ... 1.0]
     /// - parameter alpha: The alpha value for the new color [0.0 ... 1.0]
     public init(red: Double, green: Double, blue: Double, alpha: Double) {
-        colorSpace = CGColorSpaceCreateDeviceRGB()
+        colorSpace = CGColorSpaceCreateDeviceRGB()!
         internalColor = CGColorCreate(colorSpace, [CGFloat(red), CGFloat(green), CGFloat(blue), CGFloat(alpha)])!
     }
     
@@ -106,7 +106,7 @@ public class Color {
     ///
     /// - parameter color: A CGColor object that will be used to create a new C4Color.
     public init(_ color: CGColorRef) {
-        colorSpace = CGColorSpaceCreateDeviceRGB()
+        colorSpace = CGColorSpaceCreateDeviceRGB()!
         internalColor = color
     }
     
