@@ -34,27 +34,27 @@ public class StoredAnimation: Animation {
         let disable = ShapeLayer.disableActions
         ShapeLayer.disableActions = false
         var timing: CAMediaTimingFunction
-        var options: UIViewAnimationOptions = [UIViewAnimationOptions.BeginFromCurrentState]
+        var options: UIViewAnimationOptions = [UIViewAnimationOptions.beginFromCurrentState]
 
         switch curve {
-        case .Linear:
-            options = [options, UIViewAnimationOptions.CurveLinear]
+        case .linear:
+            options = [options, .curveLinear]
             timing = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-        case .EaseOut:
-            options = [options, UIViewAnimationOptions.CurveEaseOut]
+        case .easeOut:
+            options = [options, .curveEaseOut]
             timing = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
-        case .EaseIn:
-            options = [options, UIViewAnimationOptions.CurveEaseIn]
+        case .easeIn:
+            options = [options, .curveEaseIn]
             timing = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-        case .EaseInOut:
-            options = [options, UIViewAnimationOptions.CurveEaseInOut]
+        case .easeInOut:
+            options = [options, .curveEaseIn, .curveEaseOut]
             timing = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         }
 
-        autoreverses == true ? options.unionInPlace(.Autoreverse) : options.subtractInPlace(.Autoreverse)
-        repeatCount > 0 ? options.unionInPlace(.Repeat) : options.subtractInPlace(.Repeat)
+        autoreverses == true ? options.formUnion(.autoreverse) : options.subtract(.autoreverse)
+        repeatCount > 0 ? options.formUnion(.repeat) : options.subtract(.repeat)
 
-        UIView.animateWithDuration(duration, delay: 0, options: options, animations: {
+        UIView.animate(withDuration: duration, delay: 0, options: options, animations: {
             ViewAnimation.stack.append(self)
             UIView.setAnimationRepeatCount(Float(self.repeatCount))
             CATransaction.begin()

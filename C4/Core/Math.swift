@@ -35,7 +35,7 @@ import Foundation
 /// - parameter max: The upper bound
 ///
 /// - returns: The clamped value
-public func clamp<T: Comparable>(val: T, min: T, max: T) -> T {
+public func clamp<T: Comparable>(_ val: T, min: T, max: T) -> T {
     assert(min < max, "min has to be less than max")
     if val < min { return min }
     if val > max { return max }
@@ -55,7 +55,7 @@ public func clamp<T: Comparable>(val: T, min: T, max: T) -> T {
 /// - parameter param: parameter between 0 and 1 for interpolation
 ///
 /// - returns: The interpolated value
-public func lerp(a: Double, _ b: Double, at: Double) -> Double {
+public func lerp(_ a: Double, _ b: Double, at: Double) -> Double {
     return a + (b - a) * at
 }
 
@@ -74,7 +74,7 @@ public func lerp(a: Double, _ b: Double, at: Double) -> Double {
 /// - parameter toMax: Target range upper bound
 ///
 /// - returns: The mapped value.
-public func map(val: Double, min: Double, max: Double, toMin: Double, toMax: Double) -> Double {
+public func map(_ val: Double, min: Double, max: Double, toMin: Double, toMax: Double) -> Double {
     let param = (val - min)/(max -  min)
     return lerp(toMin, toMax, at: param)
 }
@@ -88,7 +88,7 @@ public func map(val: Double, min: Double, max: Double, toMin: Double, toMax: Dou
 /// - parameter below: The upper bound
 ///
 /// - returns: A random value smaller than `below`
-public func random(below below: Int) -> Int {
+public func random(below: Int) -> Int {
     return Int(arc4random_uniform(UInt32(below)))
 }
 
@@ -102,7 +102,7 @@ public func random(below below: Int) -> Int {
 /// - parameter max: The upper bound
 ///
 /// - returns: A random value greater than or equal to min and less than max.
-public func random(min min: Int, max: Int) -> Int {
+public func random(min: Int, max: Int) -> Int {
     assert(min < max, "min must be less than max")
     return min + random(below: max - min)
 }
@@ -129,7 +129,7 @@ public func random01() -> Double {
 ///
 /// - parameter val: The value in radians.
 /// - returns: A double value representation of the radian value in degrees.
-public func radToDeg(val: Double) -> Double {
+public func radToDeg(_ val: Double) -> Double {
     return 180.0 * val / M_PI
 }
 
@@ -144,6 +144,6 @@ public func radToDeg(val: Double) -> Double {
 ///
 /// - parameter val: The value in degrees.
 /// - returns: A double value representation of the degree value in radians.
-public func degToRad(val: Double) -> Double {
+public func degToRad(_ val: Double) -> Double {
     return M_PI * val / 180.0
 }

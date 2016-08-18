@@ -44,10 +44,10 @@ public class Movie: View {
             guard let p = player else {
                 return false
             }
-            return p.muted
+            return p.isMuted
         }
         set {
-            player?.muted = newValue
+            player?.isMuted = newValue
         }
     }
 
@@ -131,7 +131,7 @@ public class Movie: View {
     /// - returns: A Double value representing the cumulative rotation of the view, measured in Radians.
     public override var rotation: Double {
         get {
-            if let number = movieLayer.valueForKeyPath(Layer.rotationKey) as? NSNumber {
+            if let number = movieLayer.value(forKeyPath: Layer.rotationKey) as? NSNumber {
                 return number.doubleValue
             }
             return  0.0
@@ -152,13 +152,13 @@ public class Movie: View {
             print("Couldn't set up AVAudioSession")
         }
 
-        guard let url = NSBundle.mainBundle().URLForResource(filename, withExtension: nil) else {
+        guard let url = Bundle.main().urlForResource(filename, withExtension: nil) else {
             print("Couldn't retrieve url for: \(filename)")
             return nil
         }
 
-        let asset = AVAsset(URL: url)
-        let tracks = asset.tracksWithMediaType(AVMediaTypeVideo)
+        let asset = AVAsset(url: url)
+        let tracks = asset.tracks(withMediaType: AVMediaTypeVideo)
 
         let movieTrack = tracks[0]
         self.init(frame: Rect(0, 0, Double(movieTrack.naturalSize.width), Double(movieTrack.naturalSize.height)))
@@ -166,12 +166,12 @@ public class Movie: View {
 
         //initialize player with item
         let newPlayer = AVQueuePlayer(playerItem: AVPlayerItem(asset: asset))
-        newPlayer.actionAtItemEnd = .Pause
+        newPlayer.actionAtItemEnd = .pause
         currentItem = newPlayer.currentItem
         player = newPlayer
 
         //runs an overrideable method for handling the end of the movie
-        on(event: AVPlayerItemDidPlayToEndTimeNotification) {
+        on(event: NSNotification.Name.AVPlayerItemDidPlayToEndTime.rawValue) {
             self.handleReachedEnd()
         }
 
@@ -229,14 +229,14 @@ public class Movie: View {
             print("The current movie's player is not properly initialized")
             return
         }
-        p.seekToTime(CMTimeMake(0, 1))
+        p.seek(to: CMTimeMake(0, 1))
         p.pause()
     }
 
     /// The action to perform at the end of playback.
     ///
     /// - parameter action: A block of code to execute at the end of playback.
-    public func reachedEnd(action: ()->()) {
+    public func reachedEnd(_ action: ()->()) {
         reachedEndAction = action
     }
 

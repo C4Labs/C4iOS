@@ -90,7 +90,7 @@ public class Curve: Shape {
     }
 
     private var pauseUpdates = false
-    func batchUpdates(updates: Void -> Void) {
+    func batchUpdates(_ updates: (Void) -> Void) {
         pauseUpdates = true
         updates()
         pauseUpdates = false
@@ -103,13 +103,13 @@ public class Curve: Shape {
             return
         }
 
-        let curve = CGPathCreateMutable()
-        CGPathMoveToPoint(curve, nil,
-            CGFloat(endPoints.0.x), CGFloat(endPoints.0.y))
-        CGPathAddCurveToPoint(curve, nil,
-            CGFloat(controlPoints.0.x), CGFloat(controlPoints.0.y),
-            CGFloat(controlPoints.1.x), CGFloat(controlPoints.1.y),
-            CGFloat(endPoints.1.x), CGFloat(endPoints.1.y))
+        let curve = CGMutablePath()
+        curve.moveTo(nil,
+            x: CGFloat(endPoints.0.x), y: CGFloat(endPoints.0.y))
+        curve.addCurve(nil,
+            cp1x: CGFloat(controlPoints.0.x), cp1y: CGFloat(controlPoints.0.y),
+            cp2x: CGFloat(controlPoints.1.x), cp2y: CGFloat(controlPoints.1.y),
+            endingAtX: CGFloat(endPoints.1.x), y: CGFloat(endPoints.1.y))
 
         path = Path(path: curve)
     }

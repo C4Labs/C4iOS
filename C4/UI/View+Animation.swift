@@ -25,14 +25,14 @@ public extension View {
     /// Internal function for creating a basic animation and applying that to the receiver.
     /// - parameter keyPath: The identifier to animate
     /// - parameter toValue: The value to which the identifier will be animated
-    internal func animateKeyPath(keyPath: String, toValue: AnyObject) {
+    internal func animateKeyPath(_ keyPath: String, toValue: AnyObject) {
         let anim = CABasicAnimation()
         anim.duration = 0.25
         anim.beginTime = CACurrentMediaTime()
         anim.keyPath = keyPath
-        anim.fromValue = view.layer.presentationLayer()?.valueForKeyPath(keyPath)
+        anim.fromValue = view.layer.presentation()?.value(forKeyPath: keyPath)
         anim.toValue = toValue
-        view.layer.addAnimation(anim, forKey:"C4AnimateKeyPath: \(keyPath)")
+        view.layer.add(anim, forKey:"C4AnimateKeyPath: \(keyPath)")
         view.layer.setValue(toValue, forKeyPath: keyPath)
     }
 
@@ -40,8 +40,8 @@ public extension View {
     ///
     /// - parameter duration: The length of time in seconds for the animation to execute.
     /// - parameter animations: A block of code with specified animations to execute.
-    public class func animate(duration duration: Double, animations: Void -> Void) {
-        UIView.animateWithDuration(duration, animations: animations)
+    public class func animate(duration: Double, animations: (Void) -> Void) {
+        UIView.animate(withDuration: duration, animations: animations)
     }
 
     /// A class-level function that executes an animation using a specified block of code, with parameters for delaying and completion.
@@ -50,8 +50,8 @@ public extension View {
     /// - parameter delay:      The length of time in seconds to wait before executing the specified block of code.
     /// - parameter completion: A block of code to execute when the animation completes.
     /// - parameter animations: A block of code with specified animations to execute.
-    public class func animate(duration duration: Double, delay: Double, animations: () -> Void, completion: (Bool -> Void)?) {
-        UIView.animateWithDuration(duration, animations: animations, completion: completion)
+    public class func animate(duration: Double, delay: Double, animations: () -> Void, completion: ((Bool) -> Void)?) {
+        UIView.animate(withDuration: duration, animations: animations, completion: completion)
     }
 
     /// A class-level function that executes an animation using a specified block of code, with parameters for delaying, completion and animation options.
@@ -61,7 +61,7 @@ public extension View {
     /// - parameter options: Options for animating views using block objects, see: UIViewAnimationOptions.
     /// - parameter animations: A block of code with specified animations to execute.
     /// - parameter completion: A block of code to execute when the animation completes.
-    public class func animate(duration duration: Double, delay: Double, options: UIViewAnimationOptions, animations: () -> Void, completion: (Bool -> Void)?) {
-        UIView.animateWithDuration(duration, delay: delay, options: options, animations: animations, completion: completion)
+    public class func animate(duration: Double, delay: Double, options: UIViewAnimationOptions, animations: () -> Void, completion: ((Bool) -> Void)?) {
+        UIView.animate(withDuration: duration, delay: delay, options: options, animations: animations, completion: completion)
     }
 }

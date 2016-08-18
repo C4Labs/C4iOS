@@ -25,7 +25,7 @@ extension UIView {
     /// Adds a view to the end of the receiver’s list of subviews.
     /// When working with C4, use this method to add views because it handles the addition of both UIView and View.
     /// - parameter subview:	The view to be added.
-    public func add<T>(subview: T?) {
+    public func add<T>(_ subview: T?) {
         if let v = subview as? UIView {
             self.addSubview(v)
         } else if let v = subview as? View {
@@ -46,7 +46,7 @@ extension UIView {
     /// v.add([subv1,subv2])
     /// ````
     /// - parameter subviews: An array of UIView or View subclasses to be added to the receiver
-    public func add<T>(subviews: [T?]) {
+    public func add<T>(_ subviews: [T?]) {
         for subv in subviews {
             self.add(subv)
         }
@@ -57,7 +57,7 @@ extension UIView {
     /// subtree of the view you are removing.
     /// When working with C4, use this method to remove views because it handles the removal of both UIView and View.
     /// - parameter subview: The view to be removed.
-    public func remove<T>(subview: T?) {
+    public func remove<T>(_ subview: T?) {
         if let v = subview as? UIView {
             v.removeFromSuperview()
         } else if let v = subview as? View {
@@ -70,11 +70,11 @@ extension UIView {
     /// Moves the specified subview so that it appears behind its siblings.
     /// When working with C4, use this method because it handles both UIView and View.
     /// - parameter subview: The subview to move to the back.
-    public func sendToBack<T>(subview: T?) {
+    public func sendToBack<T>(_ subview: T?) {
         if let v = subview as? UIView {
-            self.sendSubviewToBack(v)
+            self.sendSubview(toBack: v)
         } else if let v = subview as? View {
-            self.sendSubviewToBack(v.view)
+            self.sendSubview(toBack: v.view)
         } else {
             fatalError("Can't operate on subview of class `\(subview.dynamicType)`")
         }
@@ -83,11 +83,11 @@ extension UIView {
     /// Moves the specified subview so that it appears on top of its siblings.
     /// When working with C4, use this method because it handles both UIView and View.
     /// - parameter subview: The subview to move to the front.
-    public func bringToFront<T>(subview: T?) {
+    public func bringToFront<T>(_ subview: T?) {
         if let v = subview as? UIView {
-            self.bringSubviewToFront(v)
+            self.bringSubview(toFront: v)
         } else if let v = subview as? View {
-            self.bringSubviewToFront(v.view)
+            self.bringSubview(toFront: v.view)
         } else {
             fatalError("Can't operate on subview of class `\(subview.dynamicType)`")
         }

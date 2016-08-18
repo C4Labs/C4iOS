@@ -98,7 +98,7 @@ public extension View {
         }
         set {
             if let layer = layer {
-                layer.shadowColor = newValue.color?.CGColor
+                layer.shadowColor = newValue.color?.cgColor
                 layer.shadowRadius = CGFloat(newValue.radius)
                 layer.shadowOffset = CGSize(newValue.offset)
                 layer.shadowOpacity = Float(newValue.opacity)

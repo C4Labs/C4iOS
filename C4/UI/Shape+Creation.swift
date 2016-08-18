@@ -33,7 +33,7 @@ extension Shape {
     ///
     /// - parameter center: The center of the new circle
     /// - parameter radius: The radius of the new circle
-    public func addCircle(center center: Point, radius: Double) {
+    public func addCircle(center: Point, radius: Double) {
         var newPath = path
         if newPath == nil {
             newPath = Path()
@@ -61,7 +61,7 @@ extension Shape {
     ///
     /// - parameter points: An array of Point structs that defines the new polygon
     /// - parameter closed: If true then the polygon will have an additional line between its first and last points
-    public func addPolygon(points points: [Point], closed: Bool = true) {
+    public func addPolygon(points: [Point], closed: Bool = true) {
         var newPath = path
         if newPath == nil {
             newPath = Path()
@@ -89,7 +89,7 @@ extension Shape {
     /// ````
     ///
     /// - parameter points: An array of Point structs that defines the new line
-    public func addLine(points: [Point]) {
+    public func addLine(_ points: [Point]) {
         let newPath = path
         if path == nil {
             path = Path()
@@ -115,7 +115,7 @@ extension Shape {
     ///
     /// - parameter points: An array of Point structs that defines the beginning and end points of the curve
     /// - parameter controls: An array of Point structs used to define the shape of the curve
-    public func addCurve(points points: [Point], controls: [Point]) {
+    public func addCurve(points: [Point], controls: [Point]) {
         let newPath = path
         if path == nil {
             path = Path()

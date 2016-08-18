@@ -56,12 +56,12 @@ public class AudioPlayer: NSObject, AVAudioPlayerDelegate {
 
         super.init()
 
-        guard let url = NSBundle.mainBundle().URLForResource(name, withExtension:nil) else {
+        guard let url = Bundle.main().urlForResource(name, withExtension:nil) else {
             print("Could not retrieve url for \(name)")
             return nil
         }
 
-        guard let player = try? AVAudioPlayer(contentsOfURL: url) else {
+        guard let player = try? AVAudioPlayer(contentsOf: url) else {
             print("Could not create player from contents of : \(url)")
             return nil
         }
@@ -106,7 +106,7 @@ public class AudioPlayer: NSObject, AVAudioPlayerDelegate {
     /// Returns true if the receiver's current playback rate > 0. Otherwise returns false.
     public var playing: Bool {
         get {
-            return player.playing
+            return player.isPlaying
         }
     }
 
@@ -144,7 +144,7 @@ public class AudioPlayer: NSObject, AVAudioPlayerDelegate {
         get {
             return player.currentTime
         } set(val) {
-            player.currentTime = NSTimeInterval(val)
+            player.currentTime = TimeInterval(val)
         }
     }
 
@@ -194,9 +194,9 @@ public class AudioPlayer: NSObject, AVAudioPlayerDelegate {
     /// ````
     public var meteringEnabled: Bool {
         get {
-            return player.meteringEnabled
+            return player.isMeteringEnabled
         } set(v) {
-            player.meteringEnabled = v
+            player.isMeteringEnabled = v
         }
     }
 
@@ -237,8 +237,8 @@ public class AudioPlayer: NSObject, AVAudioPlayerDelegate {
     /// ````
     /// - parameter channel: The audio channel whose average power value you want to obtain.
     /// - returns: A floating-point representation, in decibels, of a given audio channel’s current average power.
-    public func averagePower(channel: Int) -> Double {
-        return Double(player.averagePowerForChannel(channel))
+    public func averagePower(_ channel: Int) -> Double {
+        return Double(player.averagePower(forChannel: channel))
     }
 
     /// Returns the peak power for a given channel, in decibels, for the sound being played.
@@ -248,7 +248,7 @@ public class AudioPlayer: NSObject, AVAudioPlayerDelegate {
     /// }
     /// - parameter channel: The audio channel whose peak power value you want to obtain.
     /// - returns: A floating-point representation, in decibels, of a given audio channel’s current peak power.
-    public func peakPower(channel: Int) -> Double {
-        return Double(player.peakPowerForChannel(channel))
+    public func peakPower(_ channel: Int) -> Double {
+        return Double(player.peakPower(forChannel: channel))
     }
 }

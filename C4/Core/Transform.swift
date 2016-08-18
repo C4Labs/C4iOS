@@ -25,7 +25,7 @@ import QuartzCore
 ///
 ///  Transform can translate, rotate, scale.
 public struct Transform: Equatable {
-    private var matrix = [Double](count: 16, repeatedValue: 0)
+    private var matrix = [Double](repeating: 0, count: 16)
 
     public subscript(row: Int, col: Int) -> Double {
         get {
@@ -105,7 +105,7 @@ public struct Transform: Equatable {
     /// ````
     /// - parameter translation: A `Vector` that represents the translation to apply.
     /// - returns: A `Transform` that can be used to apply a translation to a receiver.
-    public static func makeTranslation(translation: Vector) -> Transform {
+    public static func makeTranslation(_ translation: Vector) -> Transform {
         var t = Transform()
         t[3, 0] = translation.x
         t[3, 1] = translation.y
@@ -120,7 +120,7 @@ public struct Transform: Equatable {
     /// - parameter sy: The amount to scale in the `y` axis
     /// - parameter sz: The amount to scale in the `z` axis
     /// - returns: A `Transform` that can be used to scale a receiver.
-    public static func makeScale(sx: Double, _ sy: Double, _ sz: Double = 1) -> Transform {
+    public static func makeScale(_ sx: Double, _ sy: Double, _ sz: Double = 1) -> Transform {
         var t = Transform()
         t[0, 0] = sx
         t[1, 1] = sy
@@ -135,7 +135,7 @@ public struct Transform: Equatable {
     /// - parameter angle: The angle, in radians, to rotate
     /// - parameter axis: The axis around which to rotate, defaults to the z axis {0,0,1}
     /// - returns: A `Transform` that can be used to rotate a receiver.
-    public static func makeRotation(angle: Double, axis: Vector = Vector(x: 0, y: 0, z : 1)) -> Transform {
+    public static func makeRotation(_ angle: Double, axis: Vector = Vector(x: 0, y: 0, z : 1)) -> Transform {
         if axis.isZero() {
             return Transform()
         }
@@ -168,7 +168,7 @@ public struct Transform: Equatable {
     /// t.translate(v)
     /// ````
     /// - parameter translation: A `Vector` that represents the translation to apply.
-    public mutating func translate(translation: Vector) {
+    public mutating func translate(_ translation: Vector) {
         let t = Transform.makeTranslation(translation)
         self = concat(self, t2: t)
     }
@@ -181,7 +181,7 @@ public struct Transform: Equatable {
     /// - parameter sx: The amount to scale in the `x` axis
     /// - parameter sy: The amount to scale in the `y` axis
     /// - parameter sz: The amount to scale in the `z` axis
-    public mutating func scale(sx: Double, _ sy: Double, _ sz: Double = 1) {
+    public mutating func scale(_ sx: Double, _ sy: Double, _ sz: Double = 1) {
         let s = Transform.makeScale(sx, sy, sz)
         self = concat(self, t2: s)
     }
@@ -193,7 +193,7 @@ public struct Transform: Equatable {
     /// ````
     /// - parameter angle: The angle, in radians, to rotate
     /// - parameter axis: The axis around which to rotate, defaults to the z axis {0,0,1}
-    public mutating func rotate(angle: Double, axis: Vector = Vector(x: 0, y: 0, z: 1)) {
+    public mutating func rotate(_ angle: Double, axis: Vector = Vector(x: 0, y: 0, z: 1)) {
         let r = Transform.makeRotation(angle, axis: axis)
         self = concat(self, t2: r)
     }
@@ -291,17 +291,17 @@ public func * (s: Double, t: Transform) -> Transform {
 /// - parameter t1: The first transform to contatenate
 /// - parameter t2: The second transform to contatenate
 /// - returns: A new transform that is the contcatenation of `t1` and `t2`
-public func concat(t1: Transform, t2: Transform) -> Transform {
+public func concat(_ t1: Transform, t2: Transform) -> Transform {
     return t2 * t1
 }
 
 /// Calculates the inverse of a transfomation.
 /// - parameter t: The transform to invert
 /// - returns: A new transform that is the inverse of `t`
-public func inverse(t: Transform) -> Transform? {
+public func inverse(_ t: Transform) -> Transform? {
     var N: __CLPK_integer = 4
     var error: __CLPK_integer = 0
-    var pivot = [__CLPK_integer](count: 4, repeatedValue: 0)
+    var pivot = [__CLPK_integer](repeating: 0, count: 4)
     var matrix: [__CLPK_doublereal] = t.matrix
 
     // LU factorisation
@@ -311,7 +311,7 @@ public func inverse(t: Transform) -> Transform? {
     }
 
     // matrix inversion
-    var workspace = [__CLPK_doublereal](count: 4, repeatedValue: 0)
+    var workspace = [__CLPK_doublereal](repeating: 0, count: 4)
     dgetri_(&N, &matrix, &N, &pivot, &workspace, &N, &error)
     if error != 0 {
         return nil

@@ -131,8 +131,8 @@ public struct Rect: Equatable, CustomStringConvertible {
     /// ````
     /// - parameter rect: The rectangle to examine.
     /// - returns:	true if the two specified rectangles intersect; otherwise, false.
-    public func intersects(rect: Rect) -> Bool {
-        return CGRectIntersectsRect(CGRect(self), CGRect(rect))
+    public func intersects(_ rect: Rect) -> Bool {
+        return CGRect(self).intersects(CGRect(rect))
     }
 
     //MARK: - Center & Max
@@ -185,8 +185,8 @@ public struct Rect: Equatable, CustomStringConvertible {
     /// ````
     /// - parameter point:	The point to examine.
     /// - returns: true if the rectangle is not null or empty and the point is located within the rectangle; otherwise, false.
-    public func contains(point: Point) -> Bool {
-        return CGRectContainsPoint(CGRect(self), CGPoint(point))
+    public func contains(_ point: Point) -> Bool {
+        return CGRect(self).contains(CGPoint(point))
     }
 
     /// Returns whether the first rectangle contains the second rectangle.
@@ -199,8 +199,8 @@ public struct Rect: Equatable, CustomStringConvertible {
     /// ````
     /// - parameter rect:	The rectangle to examine for containment.
     /// - returns: `true` if the rectangle is contained in this rectangle; otherwise, `false`.
-    public func contains(rect: Rect) -> Bool {
-        return CGRectContainsRect(CGRect(self), CGRect(rect))
+    public func contains(_ rect: Rect) -> Bool {
+        return CGRect(self).contains(CGRect(rect))
     }
 
     /// A string representation of the rect.
@@ -242,8 +242,8 @@ public func == (lhs: Rect, rhs: Rect) -> Bool {
 /// - parameter rect2:	The second source rectangle.
 ///
 /// - returns: A rectangle that represents the intersection of the two specified rectangles.
-public func intersection(rect1: Rect, rect2: Rect) -> Rect {
-    return Rect(CGRectIntersection(CGRect(rect1), CGRect(rect2)))
+public func intersection(_ rect1: Rect, rect2: Rect) -> Rect {
+    return Rect(CGRect(rect1).intersection(CGRect(rect2)))
 }
 
 /// Returns the smallest rectangle that contains the two source rectangles.
@@ -257,8 +257,8 @@ public func intersection(rect1: Rect, rect2: Rect) -> Rect {
 /// - parameter rect1:	The first source rectangle.
 /// - parameter rect2:	The second source rectangle.
 /// - returns:	The smallest rectangle that completely contains both of the source rectangles.
-public func union(rect1: Rect, rect2: Rect) -> Rect {
-    return Rect(CGRectUnion(CGRect(rect1), CGRect(rect2)))
+public func union(_ rect1: Rect, rect2: Rect) -> Rect {
+    return Rect(CGRect(rect1).union(CGRect(rect2)))
 }
 
 /// Returns the smallest rectangle that results from converting the source rectangle values to integers.
@@ -270,8 +270,8 @@ public func union(rect1: Rect, rect2: Rect) -> Rect {
 ///
 /// - parameter r:	The source rectangle.
 /// - returns: A rectangle with the smallest integer values for its origin and size that contains the source rectangle.
-public func integral(r: Rect) -> Rect {
-    return Rect(CGRectIntegral(CGRect(r)))
+public func integral(_ r: Rect) -> Rect {
+    return Rect(CGRect(r).integral)
 }
 
 /// Returns a rectangle with a positive width and height.
@@ -283,8 +283,8 @@ public func integral(r: Rect) -> Rect {
 ///
 /// - parameter r:	The source rectangle.
 /// - returns:	A rectangle that represents the source rectangle, but with positive width and height values.
-public func standardize(r: Rect) -> Rect {
-    return Rect(CGRectStandardize(CGRect(r)))
+public func standardize(_ r: Rect) -> Rect {
+    return Rect(CGRect(r).standardized)
 }
 
 /// Returns a rectangle that is smaller or larger than the source rectangle, with the same center point.
@@ -298,8 +298,8 @@ public func standardize(r: Rect) -> Rect {
 /// - parameter dx:	The x-coordinate value to use for adjusting the source rectangle.
 /// - parameter dy:	The y-coordinate value to use for adjusting the source rectangle.
 /// - returns:	A rectangle.
-public func inset(r: Rect, dx: Double, dy: Double) -> Rect {
-    return Rect(CGRectInset(CGRect(r), CGFloat(dx), CGFloat(dy)))
+public func inset(_ r: Rect, dx: Double, dy: Double) -> Rect {
+    return Rect(CGRect(r).insetBy(dx: CGFloat(dx), dy: CGFloat(dy)))
 }
 
 // MARK: - Casting to CGRect

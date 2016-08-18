@@ -37,14 +37,14 @@ public class PlayerLayer: AVPlayerLayer {
     /// - parameter key: The identifier of the action.
     ///
     /// - returns: the action object assigned to the specified key.
-    public override func actionForKey(key: String) -> CAAction? {
+    public override func action(forKey key: String) -> CAAction? {
         if ShapeLayer.disableActions == true {
             return nil
         }
 
         let animatableProperties = [Layer.rotationKey]
         if !animatableProperties.contains(key) {
-            return super.actionForKey(key)
+            return super.action(forKey: key)
         }
 
         let animation: CABasicAnimation
@@ -55,11 +55,11 @@ public class PlayerLayer: AVPlayerLayer {
         }
 
         animation.configureOptions()
-        animation.fromValue = valueForKey(key)
+        animation.fromValue = value(forKey: key)
 
         if key == Layer.rotationKey {
-            if let layer = presentationLayer() as? ShapeLayer {
-                animation.fromValue = layer.valueForKey(key)
+            if let layer = presentation() {
+                animation.fromValue = layer.value(forKey: key)
             }
         }
 
@@ -97,7 +97,7 @@ public class PlayerLayer: AVPlayerLayer {
     /// Sets a value for a given key.
     /// - parameter value: The value for the property identified by key.
     /// - parameter key: The name of one of the receiver's properties
-    public override func setValue(value: AnyObject?, forKey key: String) {
+    public override func setValue(_ value: AnyObject?, forKey key: String) {
         super.setValue(value, forKey: key)
         if key == Layer.rotationKey {
             _rotation = value as? Double ?? 0.0
@@ -107,17 +107,17 @@ public class PlayerLayer: AVPlayerLayer {
     /// Returns a Boolean indicating whether changes to the specified key require the layer to be redisplayed.
     /// - parameter key: A string that specifies an attribute of the layer.
     /// - returns: A Boolean indicating whether changes to the specified key require the layer to be redisplayed.
-    public override class func needsDisplayForKey(key: String) -> Bool {
+    public override class func needsDisplay(forKey key: String) -> Bool {
         if  key == Layer.rotationKey {
             return true
         }
-        return super.needsDisplayForKey(key)
+        return super.needsDisplay(forKey: key)
     }
 
     /// Reloads the content of this layer.
     /// Do not call this method directly.
     public override func display() {
-        guard let presentation = presentationLayer() as? PlayerLayer else {
+        guard let presentation = presentation() else {
             return
         }
         setValue(presentation._rotation, forKeyPath: "transform.rotation.z")

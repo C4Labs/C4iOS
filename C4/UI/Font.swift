@@ -79,8 +79,8 @@ public class Font {
     /// ````
     /// - parameter familyName:	The name of the font family.
     /// - returns:	An array of String objects, each of which contains a font name associated with the specified family.
-    public class func fontNames(familyName: String) -> [AnyObject] {
-        return UIFont.fontNamesForFamilyName(familyName)
+    public class func fontNames(_ familyName: String) -> [AnyObject] {
+        return UIFont.fontNames(forFamilyName: familyName)
     }
 
     /// Returns the font object used for standard interface items in the specified size.
@@ -89,8 +89,8 @@ public class Font {
     /// ````
     /// - parameter size:	The size (in points) to which the font is scaled.
     /// - returns:	A font object of the specified size.
-    public class func systemFont(size: Double) -> Font {
-        return Font(font: UIFont.systemFontOfSize(CGFloat(size)))
+    public class func systemFont(_ size: Double) -> Font {
+        return Font(font: UIFont.systemFont(ofSize: CGFloat(size)))
     }
 
     /// Returns the font object used for standard interface items that are rendered in boldface type in the specified size.
@@ -99,8 +99,8 @@ public class Font {
     /// ````
     /// - parameter size:	The size (in points) to which the font is scaled.
     /// - returns:	A font object of the specified size.
-    public class func boldSystemFont(size: Double) -> Font {
-        return Font(font: UIFont.boldSystemFontOfSize(CGFloat(size)))
+    public class func boldSystemFont(_ size: Double) -> Font {
+        return Font(font: UIFont.boldSystemFont(ofSize: CGFloat(size)))
     }
 
     /// Returns the font object used for standard interface items that are rendered in italic type in the specified size.
@@ -109,8 +109,8 @@ public class Font {
     /// ````
     /// - parameter size:	The size (in points) to which the font is scaled.
     /// - returns: A font object of the specified size.
-    public class func italicSystemFont(size: Double) -> Font {
-        return Font(font: UIFont.italicSystemFontOfSize(CGFloat(size)))
+    public class func italicSystemFont(_ size: Double) -> Font {
+        return Font(font: UIFont.italicSystemFont(ofSize: CGFloat(size)))
     }
 
 
@@ -121,8 +121,8 @@ public class Font {
     /// ````
     /// - parameter size:	The desired size (in points) of the new font object.
     /// - returns:	A font object of the specified size.
-    public func font(size: Double) -> Font {
-        return Font(font: internalFont!.fontWithSize(CGFloat(size)))
+    public func font(_ size: Double) -> Font {
+        return Font(font: internalFont!.withSize(CGFloat(size)))
     }
 
     /// The font family name. (read-only)
@@ -181,7 +181,7 @@ public class Font {
     /// Returns the standard font size used for labels.
     /// - returns:	The standard label font size in points.
     public var labelFontSize: Double {
-        return Double(UIFont.labelFontSize())
+        return Double(UIFont.labelSize())
     }
 
     /// Returns the standard font size used for buttons.
@@ -203,12 +203,12 @@ public class Font {
     }
 
     /// Returns a CGFontRef version of the receiver.
-    public var CGFont: CGFontRef? {
-        return CGFontCreateWithFontName(fontName as NSString)
+    public var cgFont: CGFont? {
+        return CGFont(fontName as NSString)
     }
 
     /// Returns a CTFontRef version of the receiver.
-    public var CTFont: CTFontRef {
+    public var ctFont: CTFont {
         return CTFontCreateWithNameAndOptions(fontName as CFString!, CGFloat(pointSize), nil, [])
     }
 }

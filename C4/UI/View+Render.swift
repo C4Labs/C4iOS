@@ -27,12 +27,12 @@ public extension View {
             print("Could not retrieve layer for current object: \(self)")
             return nil
         }
-        UIGraphicsBeginImageContextWithOptions(CGSize(size), false, UIScreen.mainScreen().scale)
+        UIGraphicsBeginImageContextWithOptions(CGSize(size), false, UIScreen.main().scale)
         let context = UIGraphicsGetCurrentContext()!
-        l.renderInContext(context)
+        l.render(in: context)
         let uiimage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return Image(uiimage: uiimage)
+        return Image(uiimage: uiimage!)
     }
 }
 
@@ -45,16 +45,16 @@ public extension Shape {
         var inset: CGFloat = 0
         if lineWidth > 0 && strokeColor?.alpha > 0.0 {
             inset = CGFloat(lineWidth/2.0)
-            s = CGRectInset(CGRect(frame), -inset, -inset).size
+            s = CGRect(frame).insetBy(dx: -inset, dy: -inset).size
         }
 
-        let scale = CGFloat(UIScreen.mainScreen().scale)
+        let scale = CGFloat(UIScreen.main().scale)
         UIGraphicsBeginImageContextWithOptions(s, false, scale)
         let context = UIGraphicsGetCurrentContext()!
-        CGContextTranslateCTM(context, CGFloat(-bounds.origin.x)+inset, CGFloat(-bounds.origin.y)+inset)
-        shapeLayer.renderInContext(context)
+        context.translate(x: CGFloat(-bounds.origin.x)+inset, y: CGFloat(-bounds.origin.y)+inset)
+        shapeLayer.render(in: context)
         let uiimage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return Image(uiimage: uiimage)
+        return Image(uiimage: uiimage!)
     }
 }

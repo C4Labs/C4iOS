@@ -82,7 +82,7 @@ public struct Point: Equatable, CustomStringConvertible {
     ///  ````
     ///
     /// - parameter t: A Transform to apply to the point
-    public mutating func transform(t: Transform) {
+    public mutating func transform(_ t: Transform) {
         x = x * t[0, 0] + y * t[0, 1] + t[3, 0]
         y = x * t[1, 0] + y * t[1, 1] + t[3, 1]
     }
@@ -106,7 +106,7 @@ public struct Point: Equatable, CustomStringConvertible {
 ///
 /// - parameter lhs: a Point to translate
 /// - parameter rhs: a Vector whose values will be applied to the point
-public func += (inout lhs: Point, rhs: Vector) {
+public func += (lhs: inout Point, rhs: Vector) {
     lhs.x += rhs.x
     lhs.y += rhs.y
 }
@@ -115,7 +115,7 @@ public func += (inout lhs: Point, rhs: Vector) {
 ///
 /// - parameter lhs: a Point to translate
 /// - parameter rhs: a Vector whose values will be applied to the point
-public func -= (inout lhs: Point, rhs: Vector) {
+public func -= (lhs: inout Point, rhs: Vector) {
     lhs.x -= rhs.x
     lhs.y -= rhs.y
 }
@@ -156,7 +156,7 @@ public func - (lhs: Point, rhs: Vector) -> Point {
 /// - parameter rhs: right-hand point
 ///
 /// - returns: The linear distance between two points
-public func distance(lhs: Point, rhs: Point) -> Double {
+public func distance(_ lhs: Point, rhs: Point) -> Double {
     let dx = rhs.x - lhs.x
     let dy = rhs.y - lhs.y
     return sqrt(dx*dx + dy*dy)
@@ -183,7 +183,7 @@ public func == (lhs: Point, rhs: Point) -> Bool {
 /// - parameter param: a Double value (between 0.0 and 1.0) used to calculate the point between a and b
 ///
 /// - returns: an interpolated point
-public func lerp(a: Point, _ b: Point, at: Double) -> Point {
+public func lerp(_ a: Point, _ b: Point, at: Double) -> Point {
     return a + (b - a) * at
 }
 

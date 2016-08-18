@@ -24,9 +24,9 @@ extension Image {
     ///  Crops the receiver's contents to the specified frame within the receiver's coordinate space.
     ///
     /// - parameter rect: a Rect
-    public func crop(rect: Rect) {
-        let intersection = CGRectIntersection(CGRect(rect), CGRect(self.bounds))
-        if CGRectIsNull(intersection) { return }
+    public func crop(_ rect: Rect) {
+        let intersection = CGRect(rect).intersection(CGRect(self.bounds))
+        if intersection.isNull { return }
         let inputRectangle = CGRect(
             x: intersection.origin.x,
             y: CGFloat(self.height) - intersection.origin.y - intersection.size.height,
@@ -35,12 +35,12 @@ extension Image {
 
         let crop = CIFilter(name: "CICrop")!
         crop.setDefaults()
-        crop.setValue(CIVector(CGRect: inputRectangle), forKey: "inputRectangle")
-        crop.setValue(ciimage, forKey: "inputImage")
+        crop.setValue(CIVector(cgRect: inputRectangle), forKey: "inputRectangle")
+        crop.setValue(ciImage, forKey: "inputImage")
 
         if let outputImage = crop.outputImage {
             self.output = outputImage
-            self.imageView.image = UIImage(CIImage: output)
+            self.imageView.image = UIImage(ciImage: output)
             self.frame = Rect(intersection)
         } else {
             print("Failed ot generate outputImage: \(#function)")

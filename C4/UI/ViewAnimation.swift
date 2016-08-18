@@ -54,7 +54,7 @@ public class ViewAnimation: Animation {
     public var spring: Spring?
 
     /// The amount of time to way before executing the animation.
-    public var delay: NSTimeInterval = 0
+    public var delay: TimeInterval = 0
 
     /// A block animations to execute.
     public var animations: () -> Void
@@ -85,7 +85,7 @@ public class ViewAnimation: Animation {
     ///
     /// - parameter duration: The length of the animations, measured in seconds.
     /// - parameter animations: A block containing a variety of animations to execute
-    public convenience init(duration: NSTimeInterval, animations: () -> Void) {
+    public convenience init(duration: TimeInterval, animations: () -> Void) {
         self.init(animations)
         self.duration = duration
     }
@@ -94,41 +94,41 @@ public class ViewAnimation: Animation {
     /// Options are `Linear`, `EaseOut`, `EaseIn`, `EaseInOut`
     public var timingFunction: CAMediaTimingFunction {
         switch curve {
-        case .Linear:
+        case .linear:
             return CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-        case .EaseOut:
+        case .easeOut:
             return CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
-        case .EaseIn:
+        case .easeIn:
             return CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-        case .EaseInOut:
+        case .easeInOut:
             return CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         }
     }
 
     ///Options for animating views using block objects.
     public var options: UIViewAnimationOptions {
-        var options: UIViewAnimationOptions = [UIViewAnimationOptions.BeginFromCurrentState]
+        var options: UIViewAnimationOptions = [UIViewAnimationOptions.beginFromCurrentState]
         switch curve {
-        case .Linear:
-            options = [options, UIViewAnimationOptions.CurveLinear]
-        case .EaseOut:
-            options = [options, UIViewAnimationOptions.CurveEaseOut]
-        case .EaseIn:
-            options = [options, UIViewAnimationOptions.CurveEaseIn]
-        case .EaseInOut:
-            options = [options, UIViewAnimationOptions.CurveEaseInOut]
+        case .linear:
+            options = [options, .curveLinear]
+        case .easeOut:
+            options = [options, .curveEaseOut]
+        case .easeIn:
+            options = [options, .curveEaseIn]
+        case .easeInOut:
+            options = [options, .curveEaseIn, .curveEaseOut]
         }
 
         if autoreverses == true {
-            options.unionInPlace(.Autoreverse)
+            options.formUnion(.autoreverse)
         } else {
-            options.subtractInPlace(.Autoreverse)
+            options.subtract(.autoreverse)
         }
 
         if repeatCount > 0 {
-            options.unionInPlace(.Repeat)
+            options.formUnion(.repeat)
         } else {
-            options.subtractInPlace(.Repeat)
+            options.subtract(.repeat)
         }
         return options
     }
@@ -140,7 +140,7 @@ public class ViewAnimation: Animation {
 
         wait(delay) {
             if let spring = self.spring {
-                self.animateWithSpring(spring)
+                self.animateWithSpring(spring: spring)
             } else {
                 self.animateNormal()
             }
@@ -150,17 +150,17 @@ public class ViewAnimation: Animation {
     }
 
     private func animateWithSpring(spring: Spring) {
-        UIView.animateWithDuration(self.duration, delay: 0, usingSpringWithDamping: CGFloat(spring.damping), initialSpringVelocity: CGFloat(spring.initialVelocity), options: self.options, animations: self.animationBlock, completion:nil)
+        UIView.animate(withDuration: self.duration, delay: 0, usingSpringWithDamping: CGFloat(spring.damping), initialSpringVelocity: CGFloat(spring.initialVelocity), options: self.options, animations: self.animationBlock, completion:nil)
     }
 
     private func animateNormal() {
-        UIView.animateWithDuration(self.duration, delay: 0, options: self.options, animations: self.animationBlock, completion:nil)
+        UIView.animate(withDuration: self.duration, delay: 0, options: self.options, animations: self.animationBlock, completion:nil)
     }
 
     private func animationBlock() {
         ViewAnimation.stack.append(self)
         UIView.setAnimationRepeatCount(Float(self.repeatCount))
-        self.doInTransaction(self.animations)
+        self.doInTransaction(action: self.animations)
         ViewAnimation.stack.removeLast()
     }
 
@@ -266,7 +266,7 @@ public class ViewAnimationGroup: Animation {
     /// - parameter animations: An array of C4Animations
     public init(animations: [Animation]) {
         self.animations = animations
-        completed = [Bool](count: animations.count, repeatedValue: false)
+        completed = [Bool](repeating: false, count: animations.count)
     }
 
     ///  Calling this method will tell the receiver to begin animating.
@@ -279,7 +279,7 @@ public class ViewAnimationGroup: Animation {
         for i in 0..<animations.count {
             let animation = animations[i]
             let observer: AnyObject = animation.addCompletionObserver({
-                self.completedAnimation(i)
+                self.completedAnimation(index: i)
             })
             observers.append(observer)
             animation.animate()
@@ -300,8 +300,8 @@ public class ViewAnimationGroup: Animation {
     }
 
     private func cleanUp() {
-        observers.removeAll(keepCapacity: true)
-        completed = [Bool](count: animations.count, repeatedValue: false)
+        observers.removeAll(keepingCapacity: true)
+        completed = [Bool](repeating: false, count: animations.count)
         postCompletedEvent()
     }
 }
