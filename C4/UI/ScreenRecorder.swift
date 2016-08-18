@@ -20,7 +20,7 @@
 import ReplayKit
 
 public class ScreenRecorder: NSObject, RPPreviewViewControllerDelegate {
-    public typealias PreviewControllerFinishedAction = (activities: Set<String>?) -> ()
+    public typealias PreviewControllerFinishedAction = (_ activities: Set<String>?) -> ()
     public typealias RecorderStoppedAction = () -> ()
 
     let recorder = RPScreenRecorder.shared()
@@ -79,7 +79,7 @@ public class ScreenRecorder: NSObject, RPPreviewViewControllerDelegate {
     }
 
     public func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
-        previewFinishedAction?(activities: activities)
+        previewFinishedAction?(activities)
         preview?.presentingViewController?.dismiss(animated: true, completion: nil)
     }
 }

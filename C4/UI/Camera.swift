@@ -21,15 +21,15 @@ import UIKit
 import AVFoundation
 
 public enum CameraPosition: Int {
-    case unspecified = 0
-    case back
-    case front
+    case Unspecified = 0
+    case Back
+    case Front
 }
 
 public class Camera: View {
     public var capturedImage: Image?
     public var quality: String = AVCaptureSessionPresetPhoto
-    public var position: CameraPosition = .front
+    public var position: CameraPosition = .Front
 
     var imageOutput: AVCaptureStillImageOutput?
     var captureDevice: AVCaptureDevice?
@@ -45,7 +45,7 @@ public class Camera: View {
             return self.layer as! PreviewLayer // swiftlint:disable:this force_cast
         }
 
-        override class func layerClass() -> AnyClass {
+        override class var layerClass: AnyClass {
             return PreviewLayer.self
         }
     }
@@ -79,7 +79,7 @@ public class Camera: View {
         }
     }
 
-    public func startCapture(_ position: CameraPosition = .front) {
+    public func startCapture(_ position: CameraPosition = .Front) {
         self.position = position
         guard let cd = captureDevice(position) else {
             print("Could not retrieve capture device for \(position)")
@@ -103,7 +103,7 @@ public class Camera: View {
 
     func captureDevice(_ position: CameraPosition) -> AVCaptureDevice? {
             for device in AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo) {
-                if let d = device as? AVCaptureDevice where d.position.rawValue == position.rawValue {
+                if let d = device as? AVCaptureDevice, d.position.rawValue == position.rawValue {
                     return d
                 }
             }
@@ -111,8 +111,8 @@ public class Camera: View {
     }
 
     func updateOrientation() {
-        if let connection = previewLayer.connection where connection.isVideoOrientationSupported {
-            switch UIApplication.shared().statusBarOrientation {
+        if let connection = previewLayer.connection, connection.isVideoOrientationSupported {
+            switch UIApplication.shared.statusBarOrientation {
             case .portraitUpsideDown:
                 previewLayer.connection.videoOrientation = .portraitUpsideDown
             case .landscapeLeft:
@@ -201,7 +201,7 @@ public class Camera: View {
     func orientRawImage(_ image: UIImage) -> UIImage {
         if let cgimg = image.cgImage {
             var orientation: UIImageOrientation!
-            let shouldFlip = self.position == .front
+            let shouldFlip = self.position == .Front
 
             switch previewLayer.connection.videoOrientation {
             case .landscapeLeft:
@@ -218,7 +218,7 @@ public class Camera: View {
         return image
     }
 
-    public func didCaptureImage(_ action: ()->()) {
+    public func didCaptureImage(_ action: (()->())?) {
         didCaptureAction = action
     }
 }

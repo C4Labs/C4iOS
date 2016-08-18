@@ -25,12 +25,12 @@ public enum FillRule {
     /// Specifies the non-zero winding rule. Count each left-to-right path as +1 and each right-to-left path as -1. If the
     /// sum of all crossings is 0, the point is outside the path. If the sum is nonzero, the point is inside the path and
     /// the region containing it is filled.
-    case nonZero
+    case NonZero
 
     /// Specifies the even-odd winding rule. Count the total number of path crossings. If the number of crossings is even,
     /// the point is outside the path. If the number of crossings is odd, the point is inside the path and the region
     /// containing it should be filled.
-    case evenOdd
+    case EvenOdd
 }
 
 
@@ -42,7 +42,7 @@ public class Path: Equatable {
     ///  Initializes an empty Path.
     public init() {
         internalPath = CGMutablePath()
-        internalPath.moveTo(nil, x: 0, y: 0)
+        internalPath.move(to: CGPoint())
     }
 
     ///  Initializes a new Path from an existing CGPathRef.
@@ -73,8 +73,9 @@ public class Path: Equatable {
     /// - parameter point: The point to test.
     /// - parameter fillRule: The fill rule to use when testing for containment.
     /// - returns: `true` if `point` is inside the path, `false` otherwise.
-    public func containsPoint(_ point: Point, fillRule: FillRule = .nonZero) -> Bool {
-        return internalPath.containsPoint(nil, point: CGPoint(point), eoFill: fillRule == .evenOdd)
+    public func containsPoint(_ point: Point, fillRule: FillRule = .NonZero) -> Bool {
+        let rule = fillRule == .EvenOdd ? CGPathFillRule.evenOdd : CGPathFillRule.winding
+        return internalPath.contains(CGPoint(point), using: rule, transform: CGAffineTransform.identity)
     }
 
     /// Create a copy of the path
@@ -96,7 +97,7 @@ public class Path: Equatable {
 /// - parameter right: the second path to compare
 /// - returns: a boolean, `true` if the patrhs are equal, otherwise `false`
 public func == (left: Path, right: Path) -> Bool {
-    return left.internalPath.equalTo(right.internalPath)
+    return left.internalPath == right.internalPath
 }
 
 extension Path {
@@ -114,13 +115,13 @@ extension Path {
     /// Move the current point of the current subpath.
     /// - parameter point: A Point
     public func moveToPoint(_ point: Point) {
-        internalPath.moveTo(nil, x: CGFloat(point.x), y: CGFloat(point.y))
+        internalPath.move(to: CGPoint(point))
     }
 
     /// Append a straight-line segment fron the current point to `point` and move the current point to `point`.
     /// - parameter point: A Point
     public func addLineToPoint(_ point: Point) {
-        internalPath.addLineTo(nil, x: CGFloat(point.x), y: CGFloat(point.y))
+        internalPath.addLine(to: CGPoint(point))
     }
 
     /// Append a quadratic curve from the current point to `point` with control point `control` and move the current
@@ -128,7 +129,7 @@ extension Path {
     /// - parameter control: A Point used to shape the curve
     /// - parameter point: A Point
     public func addQuadCurveToPoint(_ point: Point, control: Point) {
-        internalPath.addQuadCurve(nil, cpx: CGFloat(control.x), cpy: CGFloat(control.y), endingAtX: CGFloat(point.x), y: CGFloat(point.y))
+        internalPath.addQuadCurve(to: CGPoint(point), control: CGPoint(control))
     }
 
     /// Append a cubic Bézier curve from the current point to `point` with control points `control1` and `control2`
@@ -137,7 +138,7 @@ extension Path {
     /// - parameter control2: A Point used to shape the curve
     /// - parameter point: A Point
     public func addCurveToPoint(_ point: Point, control1: Point, control2: Point) {
-        internalPath.addCurve(nil, cp1x: CGFloat(control1.x), cp1y: CGFloat(control1.y), cp2x: CGFloat(control2.x), cp2y: CGFloat(control2.y), endingAtX: CGFloat(point.x), y: CGFloat(point.y))
+        internalPath.addCurve(to: CGPoint(point), control1: CGPoint(control1), control2: CGPoint(control2))
     }
 
     /// Append a line from the current point to the starting point of the current subpath and end the subpath.
@@ -148,7 +149,7 @@ extension Path {
     /// Add a rectangle to the path.
     /// - parameter rect: a Rect to add to the path
     public func addRect(_ rect: Rect) {
-        internalPath.addRect(nil, rect: CGRect(rect))
+        internalPath.addRect(CGRect(rect))
     }
 
     /// Add a rounded rectangle to the path. The rounded rectangle coincides with the edges of `rect`. Each corner consists
@@ -159,7 +160,7 @@ extension Path {
     /// - parameter cornerWidth: the width of the shape's rounded corners
     /// - parameter cornerHeight: the width of the shape's rounded corners
     public func addRoundedRect(_ rect: Rect, cornerWidth: Double, cornerHeight: Double) {
-        internalPath.addRoundedRect(nil, rect: CGRect(rect), cornerWidth: CGFloat(cornerWidth), cornerHeight: CGFloat(cornerHeight))
+        internalPath.addRoundedRect(in: CGRect(rect), cornerWidth: CGFloat(cornerWidth), cornerHeight: CGFloat(cornerHeight))
     }
 
     /// Add an ellipse (an oval) inside `rect`. The ellipse is approximated by a sequence of Bézier curves. The center of
@@ -169,7 +170,7 @@ extension Path {
     /// a "move to" and ends with a "close subpath" --- oriented in the clockwise direction.
     /// - parameter rect: a Rect into which an ellipse will be created and added to the path
     public func addEllipse(_ rect: Rect) {
-        internalPath.addEllipseIn(nil, rect: CGRect(rect))
+        internalPath.addEllipse(in: CGRect(rect))
     }
 
     /// Add an arc of a circle, possibly preceded by a straight line segment. The arc is approximated by a sequence of
@@ -182,7 +183,7 @@ extension Path {
     /// - parameter delta:      The angle between `startAngle` and the second endpoint of the arc, in radians. If `delta' is positive,
     ///                         then the arc is drawn counter-clockwise; if negative, clockwise.
     public func addRelativeArc(_ center: Point, radius: Double, startAngle: Double, delta: Double) {
-        internalPath.addRelativeArc(matrix: nil, x: CGFloat(center.x), y: CGFloat(center.y), radius: CGFloat(radius), startAngle: CGFloat(startAngle), delta: CGFloat(delta))
+        internalPath.addRelativeArc(center: CGPoint(center), radius: CGFloat(radius), startAngle: CGFloat(startAngle), delta: CGFloat(delta))
     }
 
     /// Add an arc of a circle, possibly preceded by a straight line segment. The arc is approximated by a sequence of
@@ -203,7 +204,7 @@ extension Path {
     /// - parameter endAngle:   The angle to the second endpoint of the arc.
     /// - parameter clockwise:  If true the arc is drawn clockwise.
     public func addArc(_ center: Point, radius: Double, startAngle: Double, endAngle: Double, clockwise: Bool) {
-        internalPath.addArc(nil, x: CGFloat(center.x), y: CGFloat(center.y), radius: CGFloat(radius), startAngle: CGFloat(startAngle), endAngle: CGFloat(endAngle), clockwise: clockwise)
+        internalPath.addArc(center: CGPoint(center), radius: CGFloat(radius), startAngle: CGFloat(startAngle), endAngle: CGFloat(endAngle), clockwise: clockwise)
     }
 
     /// Add an arc of a circle, possibly preceded by a straight line segment. The arc is approximated by a sequence of
@@ -213,14 +214,14 @@ extension Path {
     /// - parameter point2: the end point of the arc
     /// - parameter radius: the radius of the arc
     public func addArcToPoint(_ point1: Point, point2: Point, radius: Double) {
-        internalPath.addArc(nil, x1: CGFloat(point1.x), y1: CGFloat(point1.y), x2: CGFloat(point2.x), y2: CGFloat(point2.y), radius: CGFloat(radius))
+        internalPath.addArc(tangent1End: CGPoint(point1), tangent2End: CGPoint(point2), radius: CGFloat(radius))
     }
 
     /// Append a path.
     ///
     /// - parameter path:      A new Path that is added to the end of the receiver.
     public func addPath(_ path: Path) {
-        internalPath.addPath(nil, path: path.internalPath)
+        internalPath.addPath(path.internalPath)
     }
 
     /// Transform a path.

@@ -44,9 +44,9 @@ public func C4Log<T>(_ value: T) {
 /// - returns: The smallest CGRect that contains all of the points in the specified array
 public func CGRectMakeFromPoints(_ points: [CGPoint]) -> CGRect {
     let path = CGMutablePath()
-    path.moveTo(nil, x: points[0].x, y: points[0].y)
+    path.move(to: points[0])
     for i in 1..<points.count {
-        path.addLineTo(nil, x: points[i].x, y: points[i].y)
+        path.addLine(to: points[i])
     }
     return path.boundingBox
 }
@@ -61,6 +61,6 @@ public func CGRectMakeFromPoints(_ points: [CGPoint]) -> CGRect {
 ///
 /// - parameter delay:  The amount of time in seconds to wait before executing the block of code.
 /// - parameter action: A block of code to perform after the delay.
-public func wait(_ seconds: Double, action: ()->()) {
-    DispatchQueue.main.after(walltime: DispatchWallTime.now() + seconds, execute: action)
+public func wait(_ seconds: Double, action: @escaping ()->()) {
+    DispatchQueue.main.asyncAfter(wallDeadline: DispatchWallTime.now() + seconds, execute: action)
 }

@@ -24,31 +24,31 @@ extension View {
     ///
     /// - parameter value: The value for the key identified by _key_.
     /// - parameter key:   The name of one of the receiver's properties.
-    public override func setValue(_ value: AnyObject?, forKey key: String) {
+    public override func setValue(_ value: Any?, forKey key: String) {
         switch key {
         case "frame":
             if let nsvalue = value as? NSValue {
-                frame = Rect(nsvalue.cgRectValue())
+                frame = Rect(nsvalue.cgRectValue)
             }
 
         case "bounds":
             if let nsvalue = value as? NSValue {
-                bounds = Rect(nsvalue.cgRectValue())
+                bounds = Rect(nsvalue.cgRectValue)
             }
 
         case "center":
             if let nsvalue = value as? NSValue {
-                center = Point(nsvalue.cgPointValue())
+                center = Point(nsvalue.cgPointValue)
             }
 
         case "origin":
             if let nsvalue = value as? NSValue {
-                origin = Point(nsvalue.cgPointValue())
+                origin = Point(nsvalue.cgPointValue)
             }
 
         case "size":
             if let nsvalue = value as? NSValue {
-                size = Size(nsvalue.cgSizeValue())
+                size = Size(nsvalue.cgSizeValue)
             }
 
         case "backgroundColor":
@@ -66,7 +66,7 @@ extension View {
     /// - parameter key: The name of one of the receiver's properties.
     ///
     /// - returns: The value for the data specified by the key.
-    public override func value(forKey key: String) -> AnyObject? {
+    public override func value(forKey key: String) -> Any? {
         switch key {
         case "frame":
             return NSValue(cgRect: CGRect(frame))

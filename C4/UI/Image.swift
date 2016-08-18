@@ -26,7 +26,7 @@ public class Image: View, NSCopying {
             return self.layer as! ImageLayer // swiftlint:disable:this force_cast
         }
 
-        override class func layerClass() -> AnyClass {
+        override class var layerClass: AnyClass {
             return ImageLayer.self
         }
     }
@@ -214,7 +214,7 @@ public class Image: View, NSCopying {
         var error: NSError?
         var data: Data?
         do {
-            data = try Data(contentsOf: url, options:.dataReadingMappedIfSafe)
+            data = try Data(contentsOf: url, options: NSData.ReadingOptions.mappedIfSafe)
         } catch let error1 as NSError {
             error = error1
             data = nil
@@ -247,8 +247,8 @@ public class Image: View, NSCopying {
         var provider: CGDataProvider? = nil
         pixels.withUnsafeBufferPointer { p in
             if let address = p.baseAddress {
-                let data = Data(bytes: UnsafePointer(address), count: pixels.count * sizeof(Pixel))
-                provider = CGDataProvider(data: data)
+                let data = Data(bytes: UnsafePointer(address), count: pixels.count * MemoryLayout<Pixel>.size)
+                provider = CGDataProvider(data: data as CFData)
             }
         }
 
@@ -257,7 +257,7 @@ public class Image: View, NSCopying {
             height: height,
             bitsPerComponent: bitsPerComponent,
             bitsPerPixel: bitsPerPixel,
-            bytesPerRow: width * Int(sizeof(Pixel)),
+            bytesPerRow: width * Int(MemoryLayout<Pixel>.size),
             space: rgbColorSpace,
             bitmapInfo: bitmapInfo,
             provider: provider!,
@@ -279,7 +279,7 @@ public class Image: View, NSCopying {
     /// Initializes a new copy of the receiver.
     /// - parameter zone: This parameter is ignored. Memory zones are no longer used by Objective-C.
     /// - returns: a new instance that’s a copy of the receiver.
-    public func copy(with zone: NSZone?) -> AnyObject {
+    public func copy(with zone: NSZone? = nil) -> Any {
         let uiimage = UIImage(cgImage: self.contents)
         let img = Image(uiimage: uiimage, scale: scale)
         img.frame = self.frame
@@ -417,7 +417,7 @@ public class Image: View, NSCopying {
     //MARK: Filters
     lazy internal var output: CIImage = self.ciImage
     lazy internal var filterQueue: DispatchQueue = {
-        return DispatchQueue.global(attributes: .qosBackground)
+        return DispatchQueue.global(qos: .background)
         }()
     lazy internal var renderImmediately = true
 }

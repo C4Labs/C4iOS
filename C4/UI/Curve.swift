@@ -104,12 +104,8 @@ public class Curve: Shape {
         }
 
         let curve = CGMutablePath()
-        curve.moveTo(nil,
-            x: CGFloat(endPoints.0.x), y: CGFloat(endPoints.0.y))
-        curve.addCurve(nil,
-            cp1x: CGFloat(controlPoints.0.x), cp1y: CGFloat(controlPoints.0.y),
-            cp2x: CGFloat(controlPoints.1.x), cp2y: CGFloat(controlPoints.1.y),
-            endingAtX: CGFloat(endPoints.1.x), y: CGFloat(endPoints.1.y))
+        curve.move(to: CGPoint(endPoints.0))
+        curve.addCurve(to: CGPoint(endPoints.1), control1: CGPoint(controlPoints.0), control2: CGPoint(controlPoints.1), transform: CGAffineTransform.identity)
 
         path = Path(path: curve)
     }

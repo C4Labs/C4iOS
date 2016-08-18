@@ -122,7 +122,7 @@ public class Movie: View {
             return self.layer as! PlayerLayer // swiftlint:disable:this force_cast
         }
 
-        override class func layerClass() -> AnyClass {
+        override class var layerClass: AnyClass {
             return PlayerLayer.self
         }
     }
@@ -152,7 +152,7 @@ public class Movie: View {
             print("Couldn't set up AVAudioSession")
         }
 
-        guard let url = Bundle.main().urlForResource(filename, withExtension: nil) else {
+        guard let url = Bundle.main.url(forResource: filename, withExtension: nil) else {
             print("Couldn't retrieve url for: \(filename)")
             return nil
         }
@@ -236,7 +236,7 @@ public class Movie: View {
     /// The action to perform at the end of playback.
     ///
     /// - parameter action: A block of code to execute at the end of playback.
-    public func reachedEnd(_ action: ()->()) {
+    public func reachedEnd(_ action: (()->())?) {
         reachedEndAction = action
     }
 

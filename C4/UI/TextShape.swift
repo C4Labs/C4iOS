@@ -105,8 +105,9 @@ public class TextShape: Shape {
         var origin = CGPoint()
         for (advance, glyph) in zip(advances, glyphs) {
             let glyphPath = CTFontCreatePathForGlyph(ctfont!, glyph, &invert)
-            var translation = CGAffineTransform(translationX: origin.x, y: origin.y)
-            textPath.addPath(&translation, path: glyphPath!)
+            let translation = CGAffineTransform(translationX: origin.x, y: origin.y)
+
+            textPath.addPath(glyphPath!, transform: translation)
             origin.x += CGFloat(advance.width)
             origin.y += CGFloat(advance.height)
         }

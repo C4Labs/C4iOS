@@ -25,7 +25,7 @@ import QuartzCore
 ///
 ///  Transform can translate, rotate, scale.
 public struct Transform: Equatable {
-    private var matrix = [Double](repeating: 0, count: 16)
+    var matrix = [Double](repeating: 0, count: 16)
 
     public subscript(row: Int, col: Int) -> Double {
         get {

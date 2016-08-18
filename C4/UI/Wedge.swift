@@ -58,8 +58,8 @@ public class Wedge: Shape {
         super.init()
 
         let wedge = CGMutablePath()
-        wedge.addArc(nil, x: CGFloat(center.x), y: CGFloat(center.y), radius: CGFloat(radius), startAngle: CGFloat(start), endAngle: CGFloat(end), clockwise: !clockwise)
-        wedge.addLineTo(nil, x: CGFloat(center.x), y: CGFloat(center.y))
+        wedge.addArc(center: CGPoint(center), radius: CGFloat(radius), startAngle: CGFloat(start), endAngle: CGFloat(end), clockwise: !clockwise)
+        wedge.addLine(to: CGPoint(center))
         wedge.closeSubpath()
         path = Path(path: wedge)
         adjustToFitPath()

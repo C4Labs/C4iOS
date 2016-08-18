@@ -27,12 +27,18 @@ public class Shape: View {
             return self.layer as! ShapeLayer // swiftlint:disable:this force_cast
         }
 
-        override class func layerClass() -> AnyClass {
+        override class var layerClass: AnyClass {
             return ShapeLayer.self
         }
 
         override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-            if ((shapeLayer.path?.containsPoint(nil, point: point, eoFill: shapeLayer.fillRule == kCAFillRuleNonZero ? false : true)) != nil) {
+            guard let path = shapeLayer.path else {
+                return nil
+            }
+
+            let fillRule = shapeLayer.fillRule == kCAFillRuleNonZero ? CGPathFillRule.evenOdd : CGPathFillRule.winding
+
+            if path.contains(point, using: fillRule, transform: CGAffineTransform.identity) {
                 return self
             }
             return nil
@@ -57,10 +63,10 @@ public class Shape: View {
         strokeColor = C4Purple
         fillColor = C4Blue
         lineWidth = 1
-        lineCap = .round
-        lineJoin = .round
+        lineCap = .Round
+        lineJoin = .Round
 
-        let image = UIImage.createWithColor(UIColor.clear(), size: CGSize(width: 1, height: 1)).cgImage
+        let image = UIImage.createWithColor(UIColor.clear, size: CGSize(width: 1, height: 1)).cgImage
         shapeLayer.contents = image
     }
 
@@ -83,10 +89,10 @@ public class Shape: View {
         strokeColor = C4Purple
         fillColor = C4Blue
         lineWidth = 1
-        lineCap = .round
-        lineJoin = .round
+        lineCap = .Round
+        lineJoin = .Round
 
-        let image = UIImage.createWithColor(UIColor.clear(), size: CGSize(width: 1, height: 1)).cgImage
+        let image = UIImage.createWithColor(UIColor.clear, size: CGSize(width: 1, height: 1)).cgImage
         shapeLayer.contents = image
     }
 
@@ -94,11 +100,11 @@ public class Shape: View {
     /// - parameter shape: A Shape around which the new shape is created.
     public convenience init(copy original: Shape) {
         //If there is a scale transform we need to undo that
-        let t = original.view.transform.invert()
+        let t = original.view.transform.inverted()
         let x = sqrt(t.a * t.a + t.c * t.c)
         let y = sqrt(t.b * t.b + t.d * t.d)
         let s = CGAffineTransform(scaleX: x, y: y)
-        self.init(frame: Rect(original.view.frame.apply(transform: s)))
+        self.init(frame: Rect(original.view.frame.applying(s)))
 
         let disable = ShapeLayer.disableActions
         ShapeLayer.disableActions = true
@@ -134,10 +140,10 @@ public class Shape: View {
             var b = bounds
             b.origin.y = self.height - b.origin.y
 
-            UIGraphicsBeginImageContextWithOptions(CGSize(b.size), false, UIScreen.main().scale)
+            UIGraphicsBeginImageContextWithOptions(CGSize(b.size), false, UIScreen.main.scale)
             let context = UIGraphicsGetCurrentContext()
 
-            context?.draw(in: CGRect(b), byTiling: gim!)
+            context?.draw(gim!, in: CGRect(b), byTiling: true)
             let uiimage = UIGraphicsGetImageFromCurrentImageContext()
             let uicolor = UIColor(patternImage: uiimage!)
             fillColor = Color(uicolor)
@@ -208,18 +214,18 @@ public class Shape: View {
         get {
             switch shapeLayer.fillRule {
             case kCAFillRuleNonZero:
-                return .nonZero
+                return .NonZero
             case kCAFillRuleEvenOdd:
-                return .evenOdd
+                return .EvenOdd
             default:
-                return .nonZero
+                return .NonZero
             }
         }
         set(fillRule) {
             switch fillRule {
-            case .nonZero:
+            case .NonZero:
                 shapeLayer.fillRule = kCAFillRuleNonZero
-            case .evenOdd:
+            case .EvenOdd:
                 shapeLayer.fillRule = kCAFillRuleEvenOdd
             }
         }
@@ -266,23 +272,21 @@ public class Shape: View {
     public var lineCap: LineCap {
         get {
             switch shapeLayer.lineCap {
-            case kCALineCapButt:
-                return .butt
             case kCALineCapRound:
-                return .round
+                return .Round
             case kCALineCapSquare:
-                return .square
+                return .Square
             default:
-                return .butt
+                return .Butt
             }
         }
         set(lineCap) {
             switch lineCap {
-            case .butt:
+            case .Butt:
                 shapeLayer.lineCap = kCALineCapButt
-            case .round:
+            case .Round:
                 shapeLayer.lineCap = kCALineCapRound
-            case .square:
+            case .Square:
                 shapeLayer.lineCap = kCALineCapSquare
             }
         }
@@ -292,23 +296,21 @@ public class Shape: View {
     public var lineJoin: LineJoin {
         get {
             switch shapeLayer.lineJoin {
-            case kCALineJoinMiter:
-                return .miter
             case kCALineJoinRound:
-                return .round
+                return .Round
             case kCALineJoinBevel:
-                return .bevel
+                return .Bevel
             default:
-                return .miter
+                return .Miter
             }
         }
         set(lineJoin) {
             switch lineJoin {
-            case .miter:
+            case .Miter:
                 shapeLayer.lineJoin = kCALineJoinMiter
-            case .round:
+            case .Round:
                 shapeLayer.lineJoin = kCALineJoinRound
-            case .bevel:
+            case .Bevel:
                 shapeLayer.lineJoin = kCALineJoinBevel
             }
         }
@@ -347,26 +349,26 @@ public class Shape: View {
     /// The join style for joints on the shape's path.
     public enum LineJoin {
         /// Specifies a miter line shape of the joints between connected segments of a stroked path.
-        case miter
+        case Miter
 
         /// Specifies a round line shape of the joints between connected segments of a stroked path.
-        case round
+        case Round
 
         /// Specifies a bevel line shape of the joints between connected segments of a stroked path.
-        case bevel
+        case Bevel
     }
 
 
     /// The cap style for the ends of the shape's path.
     public enum LineCap {
         /// Specifies a butt line cap style for endpoints for an open path when stroked.
-        case butt
+        case Butt
 
         /// Specifies a round line cap style for endpoints for an open path when stroked.
-        case round
+        case Round
 
         /// Specifies a square line cap style for endpoints for an open path when stroked.
-        case square
+        case Square
     }
 
     public override func hitTest(_ point: Point) -> Bool {

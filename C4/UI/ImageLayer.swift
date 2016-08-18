@@ -37,7 +37,7 @@ public class ImageLayer: CALayer {
         }
 
         let animation: CABasicAnimation
-        if let viewAnimation = ViewAnimation.stack.last as? ViewAnimation where viewAnimation.spring != nil {
+        if let viewAnimation = ViewAnimation.stack.last as? ViewAnimation, viewAnimation.spring != nil {
             animation = CASpringAnimation(keyPath: key)
         } else {
             animation = CABasicAnimation(keyPath: key)
@@ -71,7 +71,7 @@ public class ImageLayer: CALayer {
 
     /// Initializes a new C4Layer from a specified layer of any other type.
     /// - parameter layer: Another CALayer
-    public override init(layer: AnyObject) {
+    public override init(layer: Any) {
         super.init(layer: layer)
         if let layer = layer as? ImageLayer {
             _rotation = layer._rotation
@@ -87,7 +87,7 @@ public class ImageLayer: CALayer {
     /// Sets a value for a given key.
     /// - parameter value: The value for the property identified by key.
     /// - parameter key: The name of one of the receiver's properties
-    public override func setValue(_ value: AnyObject?, forKey key: String) {
+    public override func setValue(_ value: Any?, forKey key: String) {
         super.setValue(value, forKey: key)
         if key == Layer.rotationKey {
             _rotation = value as? Double ?? 0.0

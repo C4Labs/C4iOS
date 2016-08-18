@@ -31,7 +31,7 @@ extension UIView {
         } else if let v = subview as? View {
             self.addSubview(v.view)
         } else {
-            fatalError("Can't add subview of class `\(subview.dynamicType)`")
+            fatalError("Can't add subview of class `\(type(of: subview))`")
         }
     }
 
@@ -63,7 +63,7 @@ extension UIView {
         } else if let v = subview as? View {
             v.view.removeFromSuperview()
         } else {
-            fatalError("Can't remove subview of class `\(subview.dynamicType)`")
+            fatalError("Can't remove subview of class `\(type(of: subview))`")
         }
     }
 
@@ -76,7 +76,7 @@ extension UIView {
         } else if let v = subview as? View {
             self.sendSubview(toBack: v.view)
         } else {
-            fatalError("Can't operate on subview of class `\(subview.dynamicType)`")
+            fatalError("Can't operate on subview of class `\(type(of: subview))`")
         }
     }
 
@@ -89,7 +89,7 @@ extension UIView {
         } else if let v = subview as? View {
             self.bringSubview(toFront: v.view)
         } else {
-            fatalError("Can't operate on subview of class `\(subview.dynamicType)`")
+            fatalError("Can't operate on subview of class `\(type(of: subview))`")
         }
     }
 }

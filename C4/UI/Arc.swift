@@ -52,7 +52,7 @@ public class Arc: Shape {
         super.init()
 
         let arc = CGMutablePath()
-        arc.addArc(nil, x: CGFloat(center.x), y: CGFloat(center.y), radius: CGFloat(radius), startAngle: CGFloat(start), endAngle: CGFloat(end), clockwise: !clockwise)
+        arc.addArc(center: CGPoint(center), radius: CGFloat(radius), startAngle: CGFloat(start), endAngle: CGFloat(end), clockwise: !clockwise)
         path = Path(path: arc)
         adjustToFitPath()
     }

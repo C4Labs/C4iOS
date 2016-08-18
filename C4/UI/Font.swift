@@ -67,8 +67,8 @@ public class Font {
 
     /// Returns an array of font family names available on the system.
     /// - returns:	An array of String objects, each of which contains the name of a font family.
-    public class func familyNames() -> [AnyObject] {
-        return UIFont.familyNames()
+    public class func familyNames() -> [String] {
+        return UIFont.familyNames
     }
 
     /// Returns an array of font names available in a particular font family.
@@ -79,7 +79,7 @@ public class Font {
     /// ````
     /// - parameter familyName:	The name of the font family.
     /// - returns:	An array of String objects, each of which contains a font name associated with the specified family.
-    public class func fontNames(_ familyName: String) -> [AnyObject] {
+    public class func fontNames(_ familyName: String) -> [String] {
         return UIFont.fontNames(forFamilyName: familyName)
     }
 
@@ -181,25 +181,25 @@ public class Font {
     /// Returns the standard font size used for labels.
     /// - returns:	The standard label font size in points.
     public var labelFontSize: Double {
-        return Double(UIFont.labelSize())
+        return Double(UIFont.labelFontSize)
     }
 
     /// Returns the standard font size used for buttons.
     /// - returns:	The standard button font size in points.
     public var buttonFontSize: Double {
-        return Double(UIFont.buttonFontSize())
+        return Double(UIFont.buttonFontSize)
     }
 
     /// Returns the size of the standard system font.
     /// - returns:	The standard system font size in points.
     public var systemFontSize: Double {
-        return Double(UIFont.systemFontSize())
+        return Double(UIFont.systemFontSize)
     }
 
     /// Returns the size of the standard small system font.
     /// - returns:	The standard small system font size in points.
     public var smallSystemFontSize: Double {
-        return Double(UIFont.smallSystemFontSize())
+        return Double(UIFont.smallSystemFontSize)
     }
 
     /// Returns a CGFontRef version of the receiver.

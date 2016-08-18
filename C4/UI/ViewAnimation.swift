@@ -66,7 +66,7 @@ public class ViewAnimation: Animation {
     ///  }
     ///
     /// - parameter animations: a block of animations to execute.
-    public init(_ animations: () -> Void) {
+    public init(_ animations: @escaping () -> Void) {
         self.animations = animations
     }
 
@@ -85,7 +85,7 @@ public class ViewAnimation: Animation {
     ///
     /// - parameter duration: The length of the animations, measured in seconds.
     /// - parameter animations: A block containing a variety of animations to execute
-    public convenience init(duration: TimeInterval, animations: () -> Void) {
+    public convenience init(duration: TimeInterval, animations: @escaping () -> Void) {
         self.init(animations)
         self.duration = duration
     }
@@ -94,13 +94,13 @@ public class ViewAnimation: Animation {
     /// Options are `Linear`, `EaseOut`, `EaseIn`, `EaseInOut`
     public var timingFunction: CAMediaTimingFunction {
         switch curve {
-        case .linear:
+        case .Linear:
             return CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-        case .easeOut:
+        case .EaseOut:
             return CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
-        case .easeIn:
+        case .EaseIn:
             return CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-        case .easeInOut:
+        case .EaseInOut:
             return CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         }
     }
@@ -109,13 +109,13 @@ public class ViewAnimation: Animation {
     public var options: UIViewAnimationOptions {
         var options: UIViewAnimationOptions = [UIViewAnimationOptions.beginFromCurrentState]
         switch curve {
-        case .linear:
+        case .Linear:
             options = [options, .curveLinear]
-        case .easeOut:
+        case .EaseOut:
             options = [options, .curveEaseOut]
-        case .easeIn:
+        case .EaseIn:
             options = [options, .curveEaseIn]
-        case .easeInOut:
+        case .EaseInOut:
             options = [options, .curveEaseIn, .curveEaseOut]
         }
 

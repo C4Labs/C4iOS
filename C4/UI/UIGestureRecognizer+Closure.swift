@@ -48,7 +48,7 @@ extension UIGestureRecognizer {
     }
     internal var actionHandler: AnyObject? {
         get {
-            return objc_getAssociatedObject(self, &handlerAssociationKey)
+            return objc_getAssociatedObject(self, &handlerAssociationKey) as AnyObject?
         }
         set(newValue) {
             objc_setAssociatedObject(self, &handlerAssociationKey, newValue, .OBJC_ASSOCIATION_RETAIN)
@@ -70,7 +70,7 @@ extension UIGestureRecognizer {
 }
 
 
-public typealias TapAction = (locations: [Point], center: Point, state: UIGestureRecognizerState) -> ()
+public typealias TapAction = (_ locations: [Point], _ center: Point, _ state: UIGestureRecognizerState) -> ()
 
 extension UITapGestureRecognizer {
     /// The closure to call when there is a gesture event.
@@ -103,16 +103,16 @@ extension UITapGestureRecognizer {
         }
         func handleGesture(_ gestureRecognizer: UIPanGestureRecognizer) {
             var locations = [Point]()
-            for i in 0..<gestureRecognizer.numberOfTouches() {
+            for i in 0..<gestureRecognizer.numberOfTouches {
                 locations.append(Point(gestureRecognizer.location(ofTouch: i, in: gestureRecognizer.referenceView)))
             }
-            action(locations: locations, center: gestureRecognizer.location, state: gestureRecognizer.state)
+            action(locations, gestureRecognizer.location, gestureRecognizer.state)
         }
     }
 }
 
 
-public typealias PanAction = (locations: [Point], center: Point, translation: Vector, velocity: Vector, state: UIGestureRecognizerState) -> ()
+public typealias PanAction = (_ locations: [Point], _ center: Point, _ translation: Vector, _ velocity: Vector, _ state: UIGestureRecognizerState) -> ()
 
 extension UIPanGestureRecognizer {
     /// The closure to call when there is a gesture event.
@@ -167,16 +167,16 @@ extension UIPanGestureRecognizer {
         }
         func handleGesture(_ gestureRecognizer: UIPanGestureRecognizer) {
             var locations = [Point]()
-            for i in 0..<gestureRecognizer.numberOfTouches() {
+            for i in 0..<gestureRecognizer.numberOfTouches {
                 locations.append(Point(gestureRecognizer.location(ofTouch: i, in: gestureRecognizer.referenceView)))
             }
-            action(locations: locations, center: gestureRecognizer.location, translation: gestureRecognizer.translation, velocity: gestureRecognizer.velocity, state: gestureRecognizer.state)
+            action(locations, gestureRecognizer.location, gestureRecognizer.translation, gestureRecognizer.velocity, gestureRecognizer.state)
         }
     }
 }
 
 
-public typealias PinchAction = (locations: [Point], center: Point, scale: Double, velocity: Double, state: UIGestureRecognizerState) -> ()
+public typealias PinchAction = (_ locations: [Point], _ center: Point, _ scale: Double, _ velocity: Double, _ state: UIGestureRecognizerState) -> ()
 
 extension UIPinchGestureRecognizer {
     /// The closure to call when there is a gesture event.
@@ -209,16 +209,16 @@ extension UIPinchGestureRecognizer {
         }
         func handleGesture(_ gestureRecognizer: UIPinchGestureRecognizer) {
             var locations = [Point]()
-            for i in 0..<gestureRecognizer.numberOfTouches() {
+            for i in 0..<gestureRecognizer.numberOfTouches {
                 locations.append(Point(gestureRecognizer.location(ofTouch: i, in: gestureRecognizer.referenceView)))
             }
-            action(locations: locations, center: gestureRecognizer.location, scale: Double(gestureRecognizer.scale), velocity: Double(gestureRecognizer.velocity), state: gestureRecognizer.state)
+            action(locations, gestureRecognizer.location, Double(gestureRecognizer.scale), Double(gestureRecognizer.velocity), gestureRecognizer.state)
         }
     }
 }
 
 
-public typealias RotationAction = (rotation: Double, velocity: Double, state: UIGestureRecognizerState) -> ()
+public typealias RotationAction = (_ rotation: Double, _ velocity: Double, _ state: UIGestureRecognizerState) -> ()
 
 extension UIRotationGestureRecognizer {
     /// The closure to call when there is a gesture event.
@@ -250,13 +250,13 @@ extension UIRotationGestureRecognizer {
             self.action = action
         }
         func handleGesture(_ gestureRecognizer: UIRotationGestureRecognizer) {
-            action(rotation: Double(gestureRecognizer.rotation), velocity: Double(gestureRecognizer.velocity), state: gestureRecognizer.state)
+            action(Double(gestureRecognizer.rotation), Double(gestureRecognizer.velocity), gestureRecognizer.state)
         }
     }
 }
 
 
-public typealias LongPressAction = (locations: [Point], center: Point, state: UIGestureRecognizerState) -> ()
+public typealias LongPressAction = (_ locations: [Point], _ center: Point, _ state: UIGestureRecognizerState) -> ()
 
 extension UILongPressGestureRecognizer {
     /// The closure to call when there is a gesture event.
@@ -289,16 +289,16 @@ extension UILongPressGestureRecognizer {
         }
         func handleGesture(_ gestureRecognizer: UILongPressGestureRecognizer) {
             var locations = [Point]()
-            for i in 0..<gestureRecognizer.numberOfTouches() {
+            for i in 0..<gestureRecognizer.numberOfTouches {
                 locations.append(Point(gestureRecognizer.location(ofTouch: i, in: gestureRecognizer.referenceView)))
             }
-            action(locations: locations, center: gestureRecognizer.location, state: gestureRecognizer.state)
+            action(locations, gestureRecognizer.location, gestureRecognizer.state)
         }
     }
 }
 
 
-public typealias SwipeAction = (locations: [Point], center: Point, state: UIGestureRecognizerState, direction: UISwipeGestureRecognizerDirection) -> ()
+public typealias SwipeAction = (_ locations: [Point], _ center: Point, _ state: UIGestureRecognizerState, _ direction: UISwipeGestureRecognizerDirection) -> ()
 
 extension UISwipeGestureRecognizer {
     /// The closure to call when there is a gesture event.
@@ -331,15 +331,15 @@ extension UISwipeGestureRecognizer {
         }
         func handleGesture(_ gestureRecognizer: UISwipeGestureRecognizer) {
             var locations = [Point]()
-            for i in 0..<gestureRecognizer.numberOfTouches() {
+            for i in 0..<gestureRecognizer.numberOfTouches {
                 locations.append(Point(gestureRecognizer.location(ofTouch: i, in: gestureRecognizer.referenceView)))
             }
-            action(locations: locations, center: gestureRecognizer.location, state: gestureRecognizer.state, direction: gestureRecognizer.direction)
+            action(locations, gestureRecognizer.location, gestureRecognizer.state, gestureRecognizer.direction)
         }
     }
 }
 
-public typealias ScreenEdgePanAction = (location: Point, state: UIGestureRecognizerState) -> ()
+public typealias ScreenEdgePanAction = (_ location: Point, _ state: UIGestureRecognizerState) -> ()
 
 extension UIScreenEdgePanGestureRecognizer {
     /// The closure to call when there is a gesture event.
@@ -372,7 +372,7 @@ extension UIScreenEdgePanGestureRecognizer {
             self.action = action
         }
         func handleGesture(_ gestureRecognizer: UIScreenEdgePanGestureRecognizer) {
-            action(location: gestureRecognizer.location, state: gestureRecognizer.state)
+            action(gestureRecognizer.location, gestureRecognizer.state)
         }
     }
 }

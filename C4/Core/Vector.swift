@@ -142,7 +142,7 @@ public struct Vector: Equatable, CustomStringConvertible {
     /// - parameter vec: The vector used to calcuate the angle to the receiver
     /// - returns: The angle, measured in radians, between the receiver and `vec`
     public func angleTo(_ vec: Vector) -> Double {
-        return acos(self ⋅ vec / (self.magnitude * vec.magnitude))
+        return acos(self ⋅ (vec / (self.magnitude * vec.magnitude)))
     }
 
     /// The angle between two vectors, based on a provided point
@@ -162,7 +162,7 @@ public struct Vector: Equatable, CustomStringConvertible {
         vecA -= basedOn
         vecB -= basedOn
 
-        return acos(vecA ⋅ vecB / (vecA.magnitude * vecB.magnitude))
+        return acos(vecA ⋅ (vecB / (vecA.magnitude * vecB.magnitude)))
     }
 
     /// Return the dot product. **You should use the ⋅ operator instead.**
@@ -320,7 +320,7 @@ public func - (lhs: Vector, rhs: Vector) -> Vector {
     return Vector(x: lhs.x - rhs.x, y: lhs.y - rhs.y, z: lhs.z - rhs.z)
 }
 
-infix operator ⋅ { associativity left precedence 150 }
+infix operator ⋅
 
 /// Returns a new vector that is the dot product of the both input vectors. **Use this instead of v.dot(v)**
 ///

@@ -41,7 +41,7 @@ public final class Timer: NSObject {
     /// - parameter interval: the time between firing
     /// - parameter count:    the total number of times the timer should fire, defaults to Int.max
     /// - parameter action:   a block of code to execute
-    public init(interval: Double, count: Int = Int.max, action: () -> ()) {
+    public init(interval: Double, count: Int = Int.max, action: @escaping () -> ()) {
         self.action = action
         self.count = count
         self.interval = interval
@@ -64,7 +64,7 @@ public final class Timer: NSObject {
         }
 
         let t = Foundation.Timer(timeInterval: TimeInterval(interval), target: self, selector: #selector(Timer.fire), userInfo: nil, repeats: true)
-        RunLoop.main().add(t, forMode: RunLoopMode.defaultRunLoopMode)
+        RunLoop.main.add(t, forMode: RunLoopMode.defaultRunLoopMode)
         timer = t
     }
 

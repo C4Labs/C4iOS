@@ -56,7 +56,7 @@ public class View: NSObject {
             return self.layer as! Layer // swiftlint:disable:this force_cast
         }
 
-        override class func layerClass() -> AnyClass {
+        override class var layerClass: AnyClass {
             return Layer.self
         }
     }
@@ -79,11 +79,11 @@ public class View: NSObject {
 
     public init(copyView: View) {
         //If there is a scale transform we need to undo that
-        let t = copyView.view.transform.invert()
+        let t = copyView.view.transform.inverted()
         let x = sqrt(t.a * t.a + t.c * t.c)
         let y = sqrt(t.b * t.b + t.d * t.d)
         let s = CGAffineTransform(scaleX: x, y: y)
-        let frame = Rect(copyView.view.frame.apply(transform: s))
+        let frame = Rect(copyView.view.frame.applying(s))
         super.init()
         view.frame = CGRect(frame)
         copyViewStyle(copyView)
@@ -424,7 +424,7 @@ public class View: NSObject {
         } else if let v = subview as? View {
             view.addSubview(v.view)
         } else {
-            fatalError("Can't add subview of class `\(subview.dynamicType)`")
+            fatalError("Can't add subview of class `\(type(of: subview))`")
         }
     }
 
@@ -462,7 +462,7 @@ public class View: NSObject {
         } else if let v = subview as? View {
             v.view.removeFromSuperview()
         } else {
-            fatalError("Can't remove subview of class `\(subview.dynamicType)`")
+            fatalError("Can't remove subview of class `\(type(of: subview))`")
         }
     }
 
@@ -489,7 +489,7 @@ public class View: NSObject {
         } else if let v = subview as? View {
             view.sendSubview(toBack: v.view)
         } else {
-            fatalError("Can't operate on subview of class `\(subview.dynamicType)`")
+            fatalError("Can't operate on subview of class `\(type(of: subview))`")
         }
     }
 
@@ -501,7 +501,7 @@ public class View: NSObject {
         } else if let v = subview as? View {
             view.bringSubview(toFront: v.view)
         } else {
-            fatalError("Can't operate on subview of class `\(subview.dynamicType)`")
+            fatalError("Can't operate on subview of class `\(type(of: subview))`")
         }
     }
 
