@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
 
   s.platform     = :ios
   s.ios.deployment_target = '8.0'
-  s.source       = { :git => "https://github.com/C4Framework/C4iOS.git", :tag => s.version }
+  s.source       = { :git => "https://github.com/C4Labs/C4iOS.git", :tag => s.version }
 
   s.source_files  = "C4/**/*.swift"
 end
