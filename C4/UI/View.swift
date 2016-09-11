@@ -309,7 +309,7 @@ public class View: NSObject {
     /// ````
     /// - parameter action: A block of code to be executed when the receiver recognizes a tap gesture.
     /// - returns: A UITapGestureRecognizer that can be customized.
-    public func addTapGestureRecognizer(_ action: TapAction) -> UITapGestureRecognizer {
+    public func addTapGestureRecognizer(_ action: @escaping TapAction) -> UITapGestureRecognizer {
         let gestureRecognizer = UITapGestureRecognizer(view: self.view, action: action)
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
@@ -324,7 +324,7 @@ public class View: NSObject {
     /// }
     /// - parameter action: A block of code to be executed when the receiver recognizes a pan gesture.
     /// - returns: A UIPanGestureRecognizer that can be customized.
-    public func addPanGestureRecognizer(_ action: PanAction) -> UIPanGestureRecognizer {
+    public func addPanGestureRecognizer(_ action: @escaping PanAction) -> UIPanGestureRecognizer {
         let gestureRecognizer = UIPanGestureRecognizer(view: self.view, action: action)
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
@@ -339,7 +339,7 @@ public class View: NSObject {
     /// }
     /// - parameter action: A block of code to be executed when the receiver recognizes a pinch gesture.
     /// - returns: A UIPinchGestureRecognizer that can be customized.
-    public func addPinchGestureRecognizer(_ action: PinchAction) -> UIPinchGestureRecognizer {
+    public func addPinchGestureRecognizer(_ action: @escaping PinchAction) -> UIPinchGestureRecognizer {
         let gestureRecognizer = UIPinchGestureRecognizer(view: view, action: action)
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
@@ -355,7 +355,7 @@ public class View: NSObject {
     /// ````
     /// - parameter action: A block of code to be executed when the receiver recognizes a rotation gesture.
     /// - returns: A UIRotationGestureRecognizer that can be customized.
-    public func addRotationGestureRecognizer(_ action: RotationAction) -> UIRotationGestureRecognizer {
+    public func addRotationGestureRecognizer(_ action: @escaping RotationAction) -> UIRotationGestureRecognizer {
         let gestureRecognizer = UIRotationGestureRecognizer(view: view, action: action)
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
@@ -371,7 +371,7 @@ public class View: NSObject {
     /// ````
     /// - parameter action: A block of code to be executed when the receiver recognizes a longpress gesture.
     /// - returns: A UILongPressGestureRecognizer that can be customized.
-    public func addLongPressGestureRecognizer(_ action: LongPressAction) -> UILongPressGestureRecognizer {
+    public func addLongPressGestureRecognizer(_ action: @escaping LongPressAction) -> UILongPressGestureRecognizer {
         let gestureRecognizer = UILongPressGestureRecognizer(view: view, action: action)
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
@@ -387,7 +387,7 @@ public class View: NSObject {
     /// ````
     /// - parameter action: A block of code to be executed when the receiver recognizes a swipe gesture.
     /// - returns: A UISwipeGestureRecognizer that can be customized.
-    public func addSwipeGestureRecognizer(_ action: SwipeAction) -> UISwipeGestureRecognizer {
+    public func addSwipeGestureRecognizer(_ action: @escaping SwipeAction) -> UISwipeGestureRecognizer {
         let gestureRecognizer = UISwipeGestureRecognizer(view: view, action: action)
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
@@ -402,7 +402,7 @@ public class View: NSObject {
     /// ````
     /// - parameter action: A block of code to be executed when the receiver recognizes a screen edge pan gesture.
     /// - returns: A UIScreenEdgePanGestureRecognizer that can be customized.
-    public func addScreenEdgePanGestureRecognizer(_ action: ScreenEdgePanAction) -> UIScreenEdgePanGestureRecognizer {
+    public func addScreenEdgePanGestureRecognizer(_ action: @escaping ScreenEdgePanAction) -> UIScreenEdgePanGestureRecognizer {
         let gestureRecognizer = UIScreenEdgePanGestureRecognizer(view: view, action: action)
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
