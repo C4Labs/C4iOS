@@ -63,9 +63,9 @@ class RectTests: XCTestCase {
         let a = Rect(0, 0, 100, 100)
         let b = Rect(25, 25, 50, 50)
         let c = Rect(50, 50, 100, 100)
-        XCTAssertTrue(a.contains(b.center),"A should contain the center of B")
-        XCTAssertTrue(b.contains(c.origin),"B should contain the origin of C")
-        XCTAssertFalse(c.contains(b.origin),"C should not contain the center of A")
+        XCTAssertTrue(a.contains(b.center), "A should contain the center of B")
+        XCTAssertTrue(b.contains(c.origin), "B should contain the origin of C")
+        XCTAssertFalse(c.contains(b.origin), "C should not contain the center of A")
     }
 
     func testEquals() {
