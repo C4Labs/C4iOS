@@ -57,10 +57,10 @@ public class Wedge: Shape {
     public init(center: Point, radius: Double, start: Double, end: Double, clockwise: Bool) {
         super.init()
 
-        let wedge = CGPathCreateMutable()
-        CGPathAddArc(wedge, nil, CGFloat(center.x), CGFloat(center.y), CGFloat(radius), CGFloat(start), CGFloat(end), !clockwise)
-        CGPathAddLineToPoint(wedge, nil, CGFloat(center.x), CGFloat(center.y))
-        CGPathCloseSubpath(wedge)
+        let wedge = CGMutablePath()
+        wedge.addArc(center: CGPoint(center), radius: CGFloat(radius), startAngle: CGFloat(start), endAngle: CGFloat(end), clockwise: !clockwise)
+        wedge.addLine(to: CGPoint(center))
+        wedge.closeSubpath()
         path = Path(path: wedge)
         adjustToFitPath()
     }

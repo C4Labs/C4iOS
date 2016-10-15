@@ -61,7 +61,7 @@ public class Animation {
     }
 
     /// The duration of the animation, measured in seconds.
-    public var duration: NSTimeInterval = 1
+    public var duration: TimeInterval = 1
 
     /// The animation curve that the receiver will apply to the changes it is supposed to animate.
     public var curve: Curve = .EaseInOut
@@ -81,7 +81,7 @@ public class Animation {
     }
 
     deinit {
-        let nc = NSNotificationCenter.defaultCenter()
+        let nc = NotificationCenter.default
         for observer in completionObservers {
             nc.removeObserver(observer)
         }
@@ -100,9 +100,9 @@ public class Animation {
     /// - parameter action: a block of code to be executed at the end of an animation.
     ///
     /// - returns: the observer object.
-    public func addCompletionObserver(action: () -> Void) -> AnyObject {
-        let nc = NSNotificationCenter.defaultCenter()
-        let observer = nc.addObserverForName(AnimationCompletedEvent, object: self, queue: NSOperationQueue.currentQueue(), usingBlock: { notification in
+    public func addCompletionObserver(_ action: @escaping () -> Void) -> AnyObject {
+        let nc = NotificationCenter.default
+        let observer = nc.addObserver(forName: NSNotification.Name(rawValue: AnimationCompletedEvent), object: self, queue: OperationQueue.current, using: { notification in
             action()
         })
         completionObservers.append(observer)
@@ -112,17 +112,17 @@ public class Animation {
     ///  Removes a specified observer from an animation.
     ///
     /// - parameter observer: the observer object to remove.
-    public func removeCompletionObserver(observer: AnyObject) {
-        let nc = NSNotificationCenter.defaultCenter()
-        nc.removeObserver(observer, name: AnimationCompletedEvent, object: self)
+    public func removeCompletionObserver(_ observer: AnyObject) {
+        let nc = NotificationCenter.default
+        nc.removeObserver(observer, name: NSNotification.Name(rawValue: AnimationCompletedEvent), object: self)
     }
 
     ///  Posts a completion event.
     ///
     ///  This method is triggered when an animation completes. This can be used in place of `addCompletionObserver` for objects outside the scope of the context in which the animation is created.
     public func postCompletedEvent() {
-        dispatch_async(dispatch_get_main_queue()) {
-            NSNotificationCenter.defaultCenter().postNotificationName(AnimationCompletedEvent, object: self)
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: AnimationCompletedEvent), object: self)
         }
     }
 
@@ -133,9 +133,9 @@ public class Animation {
     /// - parameter action: a block of code to be executed when an animation is canceled.
     ///
     /// - returns: the observer object.
-    public func addCancelObserver(action: () -> Void) -> AnyObject {
-        let nc = NSNotificationCenter.defaultCenter()
-        let observer = nc.addObserverForName(AnimationCancelledEvent, object: self, queue: NSOperationQueue.currentQueue(), usingBlock: { notification in
+    public func addCancelObserver(_ action: @escaping () -> Void) -> AnyObject {
+        let nc = NotificationCenter.default
+        let observer = nc.addObserver(forName: NSNotification.Name(rawValue: AnimationCancelledEvent), object: self, queue: OperationQueue.current, using: { notification in
             action()
         })
         cancelObservers.append(observer)
@@ -145,17 +145,17 @@ public class Animation {
     ///  Removes a specified cancel observer from an animation.
     ///
     /// - parameter observer: the cancel observer object to remove.
-    public func removeCancelObserver(observer: AnyObject) {
-        let nc = NSNotificationCenter.defaultCenter()
-        nc.removeObserver(observer, name: AnimationCancelledEvent, object: self)
+    public func removeCancelObserver(_ observer: AnyObject) {
+        let nc = NotificationCenter.default
+        nc.removeObserver(observer, name: NSNotification.Name(rawValue: AnimationCancelledEvent), object: self)
     }
 
     ///  Posts a cancellation event.
     ///
     ///  This method is triggered when an animation is canceled. This can be used in place of `addCancelObserver` for objects outside the scope of the context in which the animation is created.
     public func postCancelledEvent() {
-        dispatch_async(dispatch_get_main_queue()) {
-            NSNotificationCenter.defaultCenter().postNotificationName(AnimationCancelledEvent, object: self)
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: AnimationCancelledEvent), object: self)
         }
     }
 }

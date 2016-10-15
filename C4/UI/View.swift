@@ -23,7 +23,7 @@ extension NSValue {
     /// Initializes an NSValue with a Point
     /// - parameter point: a Point
     convenience init(Point point: Point) {
-        self.init(CGPoint: CGPoint(point))
+        self.init(cgPoint: CGPoint(point))
     }
 }
 
@@ -36,7 +36,7 @@ public class View: NSObject {
     /// - returns: A Double value representing the cumulative rotation of the view, measured in Radians.
     public var rotation: Double {
         get {
-            if let number = animatableLayer.valueForKeyPath(Layer.rotationKey) as? NSNumber {
+            if let number = animatableLayer.value(forKeyPath: Layer.rotationKey) as? NSNumber {
                 return number.doubleValue
             }
             return  0.0
@@ -56,7 +56,7 @@ public class View: NSObject {
             return self.layer as! Layer // swiftlint:disable:this force_cast
         }
 
-        override class func layerClass() -> AnyClass {
+        override class var layerClass: AnyClass {
             return Layer.self
         }
     }
@@ -79,17 +79,17 @@ public class View: NSObject {
 
     public init(copyView: View) {
         //If there is a scale transform we need to undo that
-        let t = CGAffineTransformInvert(copyView.view.transform)
+        let t = copyView.view.transform.inverted()
         let x = sqrt(t.a * t.a + t.c * t.c)
         let y = sqrt(t.b * t.b + t.d * t.d)
-        let s = CGAffineTransformMakeScale(x, y)
-        let frame = Rect(CGRectApplyAffineTransform(copyView.view.frame, s))
+        let s = CGAffineTransform(scaleX: x, y: y)
+        let frame = Rect(copyView.view.frame.applying(s))
         super.init()
         view.frame = CGRect(frame)
         copyViewStyle(copyView)
     }
 
-    public func copyViewStyle(viewToCopy: View) {
+    public func copyViewStyle(_ viewToCopy: View) {
         ShapeLayer.disableActions = true
         anchorPoint = viewToCopy.anchorPoint
         shadow = viewToCopy.shadow
@@ -232,10 +232,10 @@ public class View: NSObject {
     /// Returns true if the receiver is hidden, false if visible.
     public var hidden: Bool {
         get {
-            return view.hidden
+            return view.isHidden
         }
         set {
-            view.hidden = newValue
+            view.isHidden = newValue
         }
     }
 
@@ -295,7 +295,7 @@ public class View: NSObject {
     /// Returns true if the receiver accepts touch events.
     public var interactionEnabled: Bool = true {
         didSet {
-            self.view.userInteractionEnabled = interactionEnabled
+            self.view.isUserInteractionEnabled = interactionEnabled
         }
     }
 
@@ -309,7 +309,7 @@ public class View: NSObject {
     /// ````
     /// - parameter action: A block of code to be executed when the receiver recognizes a tap gesture.
     /// - returns: A UITapGestureRecognizer that can be customized.
-    public func addTapGestureRecognizer(action: TapAction) -> UITapGestureRecognizer {
+    public func addTapGestureRecognizer(_ action: @escaping TapAction) -> UITapGestureRecognizer {
         let gestureRecognizer = UITapGestureRecognizer(view: self.view, action: action)
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
@@ -324,7 +324,7 @@ public class View: NSObject {
     /// }
     /// - parameter action: A block of code to be executed when the receiver recognizes a pan gesture.
     /// - returns: A UIPanGestureRecognizer that can be customized.
-    public func addPanGestureRecognizer(action: PanAction) -> UIPanGestureRecognizer {
+    public func addPanGestureRecognizer(_ action: @escaping PanAction) -> UIPanGestureRecognizer {
         let gestureRecognizer = UIPanGestureRecognizer(view: self.view, action: action)
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
@@ -339,7 +339,7 @@ public class View: NSObject {
     /// }
     /// - parameter action: A block of code to be executed when the receiver recognizes a pinch gesture.
     /// - returns: A UIPinchGestureRecognizer that can be customized.
-    public func addPinchGestureRecognizer(action: PinchAction) -> UIPinchGestureRecognizer {
+    public func addPinchGestureRecognizer(_ action: @escaping PinchAction) -> UIPinchGestureRecognizer {
         let gestureRecognizer = UIPinchGestureRecognizer(view: view, action: action)
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
@@ -355,7 +355,7 @@ public class View: NSObject {
     /// ````
     /// - parameter action: A block of code to be executed when the receiver recognizes a rotation gesture.
     /// - returns: A UIRotationGestureRecognizer that can be customized.
-    public func addRotationGestureRecognizer(action: RotationAction) -> UIRotationGestureRecognizer {
+    public func addRotationGestureRecognizer(_ action: @escaping RotationAction) -> UIRotationGestureRecognizer {
         let gestureRecognizer = UIRotationGestureRecognizer(view: view, action: action)
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
@@ -371,7 +371,7 @@ public class View: NSObject {
     /// ````
     /// - parameter action: A block of code to be executed when the receiver recognizes a longpress gesture.
     /// - returns: A UILongPressGestureRecognizer that can be customized.
-    public func addLongPressGestureRecognizer(action: LongPressAction) -> UILongPressGestureRecognizer {
+    public func addLongPressGestureRecognizer(_ action: @escaping LongPressAction) -> UILongPressGestureRecognizer {
         let gestureRecognizer = UILongPressGestureRecognizer(view: view, action: action)
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
@@ -387,7 +387,7 @@ public class View: NSObject {
     /// ````
     /// - parameter action: A block of code to be executed when the receiver recognizes a swipe gesture.
     /// - returns: A UISwipeGestureRecognizer that can be customized.
-    public func addSwipeGestureRecognizer(action: SwipeAction) -> UISwipeGestureRecognizer {
+    public func addSwipeGestureRecognizer(_ action: @escaping SwipeAction) -> UISwipeGestureRecognizer {
         let gestureRecognizer = UISwipeGestureRecognizer(view: view, action: action)
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
@@ -402,7 +402,7 @@ public class View: NSObject {
     /// ````
     /// - parameter action: A block of code to be executed when the receiver recognizes a screen edge pan gesture.
     /// - returns: A UIScreenEdgePanGestureRecognizer that can be customized.
-    public func addScreenEdgePanGestureRecognizer(action: ScreenEdgePanAction) -> UIScreenEdgePanGestureRecognizer {
+    public func addScreenEdgePanGestureRecognizer(_ action: @escaping ScreenEdgePanAction) -> UIScreenEdgePanGestureRecognizer {
         let gestureRecognizer = UIScreenEdgePanGestureRecognizer(view: view, action: action)
         self.view.addGestureRecognizer(gestureRecognizer)
         return gestureRecognizer
@@ -418,13 +418,13 @@ public class View: NSObject {
     /// v.add(subv)
     /// ````
     /// - parameter subview: The view to be added.
-    public func add<T>(subview: T?) {
+    public func add<T>(_ subview: T?) {
         if let v = subview as? UIView {
             view.addSubview(v)
         } else if let v = subview as? View {
             view.addSubview(v.view)
         } else {
-            fatalError("Can't add subview of class `\(subview.dynamicType)`")
+            fatalError("Can't add subview of class `\(type(of: subview))`")
         }
     }
 
@@ -439,7 +439,7 @@ public class View: NSObject {
     /// v.add([subv1,subv2])
     /// ````
     /// - parameter subviews:	An array of UIView or View objects to be added to the receiver.
-    public func add<T>(subviews: [T?]) {
+    public func add<T>(_ subviews: [T?]) {
         for subv in subviews {
             self.add(subv)
         }
@@ -456,13 +456,13 @@ public class View: NSObject {
     /// v.remove(subv)
     /// ````
     /// - parameter subview:	The view to be removed.
-    public func remove<T>(subview: T?) {
+    public func remove<T>(_ subview: T?) {
         if let v = subview as? UIView {
             v.removeFromSuperview()
         } else if let v = subview as? View {
             v.view.removeFromSuperview()
         } else {
-            fatalError("Can't remove subview of class `\(subview.dynamicType)`")
+            fatalError("Can't remove subview of class `\(type(of: subview))`")
         }
     }
 
@@ -483,25 +483,25 @@ public class View: NSObject {
 
     /// Moves the specified subview so that it appears behind its siblings.
     /// - parameter subview: The subview to move to the back.
-    public func sendToBack<T>(subview: T?) {
+    public func sendToBack<T>(_ subview: T?) {
         if let v = subview as? UIView {
-            view.sendSubviewToBack(v)
+            view.sendSubview(toBack: v)
         } else if let v = subview as? View {
-            view.sendSubviewToBack(v.view)
+            view.sendSubview(toBack: v.view)
         } else {
-            fatalError("Can't operate on subview of class `\(subview.dynamicType)`")
+            fatalError("Can't operate on subview of class `\(type(of: subview))`")
         }
     }
 
     /// Moves the specified subview so that it appears on top of its siblings.
     /// - parameter subview: The subview to move to the front.
-    public func bringToFront<T>(subview: T?) {
+    public func bringToFront<T>(_ subview: T?) {
         if let v = subview as? UIView {
-            view.bringSubviewToFront(v)
+            view.bringSubview(toFront: v)
         } else if let v = subview as? View {
-            view.bringSubviewToFront(v.view)
+            view.bringSubview(toFront: v.view)
         } else {
-            fatalError("Can't operate on subview of class `\(subview.dynamicType)`")
+            fatalError("Can't operate on subview of class `\(type(of: subview))`")
         }
     }
 
@@ -518,8 +518,8 @@ public class View: NSObject {
     /// ````
     /// - parameter point: A `Point` to examine
     /// - returns: `true` if the point is within the object's frame, otherwise `false`.
-    public func hitTest(point: Point) -> Bool {
-        return CGRectContainsPoint(CGRect(bounds), CGPoint(point))
+    public func hitTest(_ point: Point) -> Bool {
+        return CGRect(bounds).contains(CGPoint(point))
     }
 
     /// Checks if a specified point, from another view, falls within the frame of the receiver.
@@ -535,7 +535,7 @@ public class View: NSObject {
     /// - parameter point: The point to check
     /// - parameter from: The view whose coordinate system the point is to be converted from
     /// - returns: `true` if the point is within the object's frame, otherwise `false`.
-    public func hitTest(point: Point, from: View) -> Bool {
+    public func hitTest(_ point: Point, from: View) -> Bool {
         let p = convert(point, from:from)
         return hitTest(p)
     }
@@ -550,21 +550,21 @@ public class View: NSObject {
     /// - parameter point: The point to convert
     /// - parameter from: The view whose coordinate system the point is to be converted from
     /// - returns: A `Point` whose values have been translated into the receiver's coordinate system.
-    public func convert(point: Point, from: View) -> Point {
-        return Point(view.convertPoint(CGPoint(point), fromCoordinateSpace: from.view))
+    public func convert(_ point: Point, from: View) -> Point {
+        return Point(view.convert(CGPoint(point), from: from.view))
     }
 
     //MARK: - Positioning
 
     /// Moves the receiver so that it appears on top of the specified view.
     /// - parameter view: The view above which the receive will be positioned
-    public func positionAbove(view: View) {
+    public func positionAbove(_ view: View) {
         zPosition = view.zPosition + 1
     }
 
     /// Moves the receiver so that it appears on below of the specified view.
     /// - parameter view: The view below which the receive will be positioned
-    public func positionBelow(view: View) {
+    public func positionBelow(_ view: View) {
         zPosition = view.zPosition - 1
     }
 }

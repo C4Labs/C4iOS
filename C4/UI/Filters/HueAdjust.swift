@@ -33,7 +33,7 @@ public struct Hue: Filter {
     ///
     /// - parameter inputImage: The image to use as input to the filter.
     /// - returns: The new CIFilter object.
-    public func createCoreImageFilter(inputImage: CIImage) -> CIFilter {
+    public func createCoreImageFilter(_ inputImage: CIImage) -> CIFilter {
         let filter = CIFilter(name: filterName)!
         filter.setDefaults()
         filter.setValue(angle, forKey:"inputAngle")

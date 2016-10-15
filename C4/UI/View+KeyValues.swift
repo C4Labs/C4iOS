@@ -24,37 +24,25 @@ extension View {
     ///
     /// - parameter value: The value for the key identified by _key_.
     /// - parameter key:   The name of one of the receiver's properties.
-    public override func setValue(value: AnyObject?, forKey key: String) {
-        switch key {
-        case "frame":
-            if let nsvalue = value as? NSValue {
-                frame = Rect(nsvalue.CGRectValue())
-            }
+    public override func setValue(_ value: Any?, forKey key: String) {
+        switch (key, value) {
+        case ("frame", let nsvalue as NSValue):
+            frame = Rect(nsvalue.cgRectValue)
 
-        case "bounds":
-            if let nsvalue = value as? NSValue {
-                bounds = Rect(nsvalue.CGRectValue())
-            }
+        case ("bounds", let nsvalue as NSValue):
+            bounds = Rect(nsvalue.cgRectValue)
 
-        case "center":
-            if let nsvalue = value as? NSValue {
-                center = Point(nsvalue.CGPointValue())
-            }
+        case ("center", let nsvalue as NSValue):
+            center = Point(nsvalue.cgPointValue)
 
-        case "origin":
-            if let nsvalue = value as? NSValue {
-                origin = Point(nsvalue.CGPointValue())
-            }
+        case ("origin", let nsvalue as NSValue):
+            origin = Point(nsvalue.cgPointValue)
 
-        case "size":
-            if let nsvalue = value as? NSValue {
-                size = Size(nsvalue.CGSizeValue())
-            }
+        case ("size", let nsvalue as NSValue):
+            size = Size(nsvalue.cgSizeValue)
 
-        case "backgroundColor":
-            if let color = value as? UIColor {
-                backgroundColor = Color(color)
-            }
+        case ("backgroundColor", let color as UIColor):
+            backgroundColor = Color(color)
 
         default:
             super.setValue(value, forKey: key)
@@ -66,22 +54,22 @@ extension View {
     /// - parameter key: The name of one of the receiver's properties.
     ///
     /// - returns: The value for the data specified by the key.
-    public override func valueForKey(key: String) -> AnyObject? {
+    public override func value(forKey key: String) -> Any? {
         switch key {
         case "frame":
-            return NSValue(CGRect: CGRect(frame))
+            return NSValue(cgRect: CGRect(frame))
 
         case "bounds":
-            return NSValue(CGRect: CGRect(bounds))
+            return NSValue(cgRect: CGRect(bounds))
 
         case "center":
-            return NSValue(CGPoint: CGPoint(center))
+            return NSValue(cgPoint: CGPoint(center))
 
         case "origin":
-            return NSValue(CGPoint: CGPoint(origin))
+            return NSValue(cgPoint: CGPoint(origin))
 
         case "size":
-            return NSValue(CGSize: CGSize(size))
+            return NSValue(cgSize: CGSize(size))
 
         case "backgroundColor":
             if let color = backgroundColor {
@@ -91,7 +79,7 @@ extension View {
             }
 
         default:
-            return super.valueForKey(key)
+            return super.value(forKey: key)
         }
     }
 }

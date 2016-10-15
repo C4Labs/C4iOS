@@ -41,10 +41,10 @@ public struct ColorBurn: Filter {
     ///
     /// - parameter inputImage: The image to use as input to the filter.
     /// - returns: The new CIFilter object.
-    public func createCoreImageFilter(inputImage: CIImage) -> CIFilter {
+    public func createCoreImageFilter(_ inputImage: CIImage) -> CIFilter {
         let filter = CIFilter(name: filterName)!
         filter.setDefaults()
-        filter.setValue(background.ciimage, forKey:"inputImage")
+        filter.setValue(background.ciImage, forKey:"inputImage")
         filter.setValue(inputImage, forKey: "inputBackgroundImage")
         return filter
     }

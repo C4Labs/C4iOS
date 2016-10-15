@@ -26,7 +26,7 @@ public class Gradient: View {
             return self.layer as! GradientLayer // swiftlint:disable:this force_cast
         }
 
-        override class func layerClass() -> AnyClass {
+        override class var layerClass: AnyClass {
             return GradientLayer.self
         }
     }
@@ -43,14 +43,14 @@ public class Gradient: View {
     ///An array of Color objects defining the color of each gradient stop. Animatable.
     public var colors: [Color] {
         get {
-            if let cgcolors = gradientLayer.colors as? [CGColorRef] {
+            if let cgcolors = gradientLayer.colors as? [CGColor] {
                 return cgcolors.map({ Color($0) })
             }
             return [C4Blue, C4Pink]
         } set {
             assert(newValue.count >= 2, "colors must have at least 2 elements")
 
-            let cgcolors = newValue.map({ $0.CGColor })
+            let cgcolors = newValue.map({ $0.cgColor })
             self.gradientLayer.colors = cgcolors
         }
     }
@@ -65,7 +65,7 @@ public class Gradient: View {
             }
             return []
         } set {
-            let numbers = newValue.map({ NSNumber(double: $0) })
+            let numbers = newValue.map({ NSNumber(value: $0) })
             gradientLayer.locations = numbers
         }
     }
@@ -96,7 +96,7 @@ public class Gradient: View {
     /// - returns: A Double value representing the cumulative rotation of the view, measured in Radians.
     public override var rotation: Double {
         get {
-            if let number = gradientLayer.valueForKeyPath(Layer.rotationKey) as? NSNumber {
+            if let number = gradientLayer.value(forKeyPath: Layer.rotationKey) as? NSNumber {
                 return number.doubleValue
             }
             return  0.0
