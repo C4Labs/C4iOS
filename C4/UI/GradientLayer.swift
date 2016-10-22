@@ -38,17 +38,17 @@ public class GradientLayer: CAGradientLayer {
     ///
     /// - parameter key: The identifier of the action.
     /// - returns: the action object assigned to the specified key.
-    public override func actionForKey(key: String) -> CAAction? {
+    public override func action(forKey key: String) -> CAAction? {
         if ShapeLayer.disableActions == true {
             return nil
         }
 
         if key != "colors" {
-            return super.actionForKey(key)
+            return super.action(forKey: key)
         }
 
         let animation: CABasicAnimation
-        if let viewAnimation = ViewAnimation.stack.last as? ViewAnimation where viewAnimation.spring != nil {
+        if let viewAnimation = ViewAnimation.stack.last as? ViewAnimation, viewAnimation.spring != nil {
             animation = CASpringAnimation(keyPath: key)
         } else {
             animation = CABasicAnimation(keyPath: key)

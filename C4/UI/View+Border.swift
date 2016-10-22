@@ -73,7 +73,7 @@ public extension View {
             if let layer = layer {
                 layer.borderWidth = CGFloat(newValue.width)
                 if let color = newValue.color {
-                    layer.borderColor = color.CGColor
+                    layer.borderColor = color.cgColor
                 }
                 layer.cornerRadius = CGFloat(newValue.radius)
             }

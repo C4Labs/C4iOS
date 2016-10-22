@@ -44,5 +44,5 @@ public protocol Filter {
     /// - parameter inputImage: A CIImage to be used in generating the filter.
     ///
     /// - returns: A CIFilter whose name is `filterName` and whose contents are based on `inputImage`.
-    func createCoreImageFilter(inputImage: CIImage) -> CIFilter
+    func createCoreImageFilter(_ inputImage: CIImage) -> CIFilter
 }

@@ -24,21 +24,21 @@ extension Image {
     ///  Applies a generator to the receiver's contents.
     ///
     /// - parameter generator: a Generator
-    public func generate(generator: Generator) {
+    public func generate(_ generator: Generator) {
         let crop = CIFilter(name: "CICrop")!
         crop.setDefaults()
-        crop.setValue(CIVector(CGRect:CGRect(self.bounds)), forKey: "inputRectangle")
+        crop.setValue(CIVector(cgRect:CGRect(self.bounds)), forKey: "inputRectangle")
         let generatorFilter = generator.createCoreImageFilter()
         crop.setValue(generatorFilter.outputImage, forKey: "inputImage")
 
         if var outputImage = crop.outputImage {
-            let scale = CGAffineTransformMakeScale(1, -1)
-            outputImage = outputImage.imageByApplyingTransform(scale)
+            let scale = CGAffineTransform(scaleX: 1, y: -1)
+            outputImage = outputImage.applying(scale)
             output = outputImage
 
             //Need to output a CGImage that matches the current image's extent, {0, -h, w, h}
-            let cgimg = CIContext().createCGImage(self.output, fromRect: outputImage.extent)
-            self.imageView.image = UIImage(CGImage: cgimg)
+            let cgimg = CIContext().createCGImage(self.output, from: outputImage.extent)
+            self.imageView.image = UIImage(cgImage: cgimg!)
             _originalSize = Size(outputImage.extent.size)
         } else {
             print("Failed to generate outputImage: \(#function)")

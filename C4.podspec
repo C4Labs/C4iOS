@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "C4"
-  s.version      = "1.1.0"
+  s.version      = "2.0.0"
   s.summary      = "Code, Creatively."
   s.description  = <<-DESC
                     C4 is an open-source creative coding framework that harnesses the power 
@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.authors      = { "Travis" => "info@c4ios.com", "Alejandro Isaza" => "al@isaza.ca" }
 
   s.platform     = :ios
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '9.0'
   s.source       = { :git => "https://github.com/C4Labs/C4iOS.git", :tag => s.version }
 
   s.source_files  = "C4/**/*.swift"

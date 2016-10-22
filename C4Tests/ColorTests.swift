@@ -23,42 +23,42 @@ import XCTest
 class ColorTests: XCTestCase {
     func testInitWithRedHexValue() {
         let redColor   = Color(0xFF0000)
-        XCTAssertEqual(redColor.red,   1.0, "Red value should be 1.0")
+        XCTAssertEqual(redColor.red, 1.0, "Red value should be 1.0")
         XCTAssertEqual(redColor.green, 0.0, "Green value should be 0.0")
-        XCTAssertEqual(redColor.blue,  0.0, "Blue value should be 0.0")
+        XCTAssertEqual(redColor.blue, 0.0, "Blue value should be 0.0")
         XCTAssertEqual(redColor.alpha, 1.0, "Alpha value should be 1.0")
     }
 
     func testInitWithGreenHexValue() {
         let greenColor = Color(0x00FF00)
-        XCTAssertEqual(greenColor.red,   0.0, "Red value should be 0.0")
+        XCTAssertEqual(greenColor.red, 0.0, "Red value should be 0.0")
         XCTAssertEqual(greenColor.green, 1.0, "Green value should be 1.0")
-        XCTAssertEqual(greenColor.blue,  0.0, "Blue value should be 0.0")
+        XCTAssertEqual(greenColor.blue, 0.0, "Blue value should be 0.0")
         XCTAssertEqual(greenColor.alpha, 1.0, "Alpha value should be 1.0")
     }
 
     func testInitWithBlueHexValue() {
         let blueColor  = Color(0x0000FF)
-        XCTAssertEqual(blueColor.red,   0.0, "Red value should be 0.0")
+        XCTAssertEqual(blueColor.red, 0.0, "Red value should be 0.0")
         XCTAssertEqual(blueColor.green, 0.0, "Green value should be 0.0")
-        XCTAssertEqual(blueColor.blue,  1.0, "Blue value should be 1.0")
+        XCTAssertEqual(blueColor.blue, 1.0, "Blue value should be 1.0")
         XCTAssertEqual(blueColor.alpha, 1.0, "Alpha value should be 1.0")
     }
 
     func testHueSaturationBrightnesWithRGBColors() {
-        XCTAssertEqual(red.hue,  0.0/360.0, "Red value should be 0.0")
+        XCTAssertEqual(red.hue, 0.0/360.0, "Red value should be 0.0")
         XCTAssertEqual(red.saturation, 1.0, "Saturation value should be 0.0")
-        XCTAssertEqual(red.brightness,  1.0, "Brightness value should be 1.0")
+        XCTAssertEqual(red.brightness, 1.0, "Brightness value should be 1.0")
         XCTAssertEqual(red.alpha, 1.0, "Alpha value should be 1.0")
 
-        XCTAssertEqual(green.hue,  120.0/360.0, "Red value should be 0.0")
+        XCTAssertEqual(green.hue, 120.0/360.0, "Red value should be 0.0")
         XCTAssertEqual(green.saturation, 1.0, "Saturation value should be 1.0")
-        XCTAssertEqual(green.brightness,  1.0, "Brightness value should be 1.0")
+        XCTAssertEqual(green.brightness, 1.0, "Brightness value should be 1.0")
         XCTAssertEqual(green.alpha, 1.0, "Alpha value should be 1.0")
 
-        XCTAssertEqual(blue.hue,  240.0/360.0, "Red value should be 0.0")
+        XCTAssertEqual(blue.hue, 240.0/360.0, "Red value should be 0.0")
         XCTAssertEqual(blue.saturation, 1.0, "Saturation value should be 1.0")
-        XCTAssertEqual(blue.brightness,  1.0, "Brightness value should be 1.0")
+        XCTAssertEqual(blue.brightness, 1.0, "Brightness value should be 1.0")
         XCTAssertEqual(blue.alpha, 1.0, "Alpha value should be 1.0")
     }
 }

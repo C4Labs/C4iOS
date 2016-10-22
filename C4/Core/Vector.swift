@@ -141,8 +141,8 @@ public struct Vector: Equatable, CustomStringConvertible {
     /// ````
     /// - parameter vec: The vector used to calcuate the angle to the receiver
     /// - returns: The angle, measured in radians, between the receiver and `vec`
-    public func angleTo(vec: Vector) -> Double {
-        return acos(self ⋅ vec / (self.magnitude * vec.magnitude))
+    public func angleTo(_ vec: Vector) -> Double {
+        return acos(self ⋅ (vec / (self.magnitude * vec.magnitude)))
     }
 
     /// The angle between two vectors, based on a provided point
@@ -155,14 +155,14 @@ public struct Vector: Equatable, CustomStringConvertible {
     /// - parameter vec: The vector used to calcuate the angle to the receiver
     /// - parameter basedOn: A second vector used to calcuate the angle to the receiver
     /// - returns: The angle, measured in radians, between the receiver and `vec`
-    public func angleTo(vec: Vector, basedOn: Vector) -> Double {
+    public func angleTo(_ vec: Vector, basedOn: Vector) -> Double {
         var vecA = self
         var vecB = vec
 
         vecA -= basedOn
         vecB -= basedOn
 
-        return acos(vecA ⋅ vecB / (vecA.magnitude * vecB.magnitude))
+        return acos(vecA ⋅ (vecB / (vecA.magnitude * vecB.magnitude)))
     }
 
     /// Return the dot product. **You should use the ⋅ operator instead.**
@@ -173,7 +173,7 @@ public struct Vector: Equatable, CustomStringConvertible {
     /// ````
     /// - parameter vec: The vector used to calcuate the dot product
     /// - returns: The dot product of the receiver and `vec`
-    public func dot(vec: Vector) -> Double {
+    public func dot(_ vec: Vector) -> Double {
         return x * vec.x + y * vec.y + z * vec.z
     }
 
@@ -207,7 +207,7 @@ public struct Vector: Equatable, CustomStringConvertible {
     /// v.transform(t) //-> {-1, -1, 0}
     /// ````
     /// - parameter t: A Transform to apply to the receiver
-    public mutating func transform(t: Transform) {
+    public mutating func transform(_ t: Transform) {
         x = x * t[0, 0] + y * t[0, 1] + z * t[0, 2]
         y = x * t[1, 0] + y * t[1, 1] + z * t[1, 2]
         z = x * t[2, 0] + y * t[2, 1] + z * t[2, 2]
@@ -243,7 +243,7 @@ public func == (lhs: Vector, rhs: Vector) -> Bool {
 /// ````
 /// - parameter lhs: A Vector to which the values of `rhs` will be added
 /// - parameter rhs: A Vector
-public func += (inout lhs: Vector, rhs: Vector) {
+public func += (lhs: inout Vector, rhs: Vector) {
     lhs.x += rhs.x
     lhs.y += rhs.y
     lhs.z += rhs.z
@@ -258,7 +258,7 @@ public func += (inout lhs: Vector, rhs: Vector) {
 /// ````
 /// - parameter lhs: A Vector to which the values of `rhs` will be subtracted
 /// - parameter rhs: A Vector
-public func -= (inout lhs: Vector, rhs: Vector) {
+public func -= (lhs: inout Vector, rhs: Vector) {
     lhs.x -= rhs.x
     lhs.y -= rhs.y
     lhs.z -= rhs.z
@@ -272,7 +272,7 @@ public func -= (inout lhs: Vector, rhs: Vector) {
 /// ````
 /// - parameter lhs: A Vector whose values will be multiplied by `rhs`
 /// - parameter rhs: A scalar value
-public func *= (inout lhs: Vector, rhs: Double) {
+public func *= (lhs: inout Vector, rhs: Double) {
     lhs.x *= rhs
     lhs.y *= rhs
     lhs.z *= rhs
@@ -286,7 +286,7 @@ public func *= (inout lhs: Vector, rhs: Double) {
 /// ````
 /// - parameter lhs: A Vector whose values will be divided by `rhs`
 /// - parameter rhs: A scalar value
-public func /= (inout lhs: Vector, rhs: Double) {
+public func /= (lhs: inout Vector, rhs: Double) {
     lhs.x /= rhs
     lhs.y /= rhs
     lhs.z /= rhs
@@ -320,7 +320,7 @@ public func - (lhs: Vector, rhs: Vector) -> Vector {
     return Vector(x: lhs.x - rhs.x, y: lhs.y - rhs.y, z: lhs.z - rhs.z)
 }
 
-infix operator ⋅ { associativity left precedence 150 }
+infix operator ⋅
 
 /// Returns a new vector that is the dot product of the both input vectors. **Use this instead of v.dot(v)**
 ///

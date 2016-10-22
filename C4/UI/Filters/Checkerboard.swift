@@ -50,7 +50,7 @@ public struct Checkerboard: Generator {
         filter.setValue(CIColor(colors[0]), forKey:"inputColor0")
         filter.setValue(CIColor(colors[1]), forKey:"inputColor1")
         filter.setValue(width, forKey: "inputWidth")
-        filter.setValue(CIVector(CGPoint: CGPoint(center)), forKey:"inputCenter")
+        filter.setValue(CIVector(cgPoint: CGPoint(center)), forKey:"inputCenter")
         filter.setValue(sharpness, forKey: "inputSharpness")
         return filter
     }
