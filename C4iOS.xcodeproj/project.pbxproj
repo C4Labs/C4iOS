@@ -16,6 +16,7 @@
 		1FAB35E81C5372CE00620741 /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAB35E71C5372CE00620741 /* Pixel.swift */; };
 		1FAB35EA1C53745300620741 /* Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAB35E91C53745300620741 /* Layer.swift */; };
 		1FAB35EC1C53749500620741 /* UIView+AddRemove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAB35EB1C53749500620741 /* UIView+AddRemove.swift */; };
+		1FDB8B121DEF8E4B0082B461 /* Image+ColorAt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB8B111DEF8E4B0082B461 /* Image+ColorAt.swift */; };
 		61B92B481C7B963B003BD61C /* PlayerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B92B451C7B963B003BD61C /* PlayerLayer.swift */; };
 		61B92B491C7B963B003BD61C /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B92B461C7B963B003BD61C /* Timer.swift */; };
 		61B92B4A1C7B963B003BD61C /* View+Render.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B92B471C7B963B003BD61C /* View+Render.swift */; };
@@ -143,6 +144,7 @@
 		1FAB35E71C5372CE00620741 /* Pixel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pixel.swift; sourceTree = "<group>"; };
 		1FAB35E91C53745300620741 /* Layer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
 		1FAB35EB1C53749500620741 /* UIView+AddRemove.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+AddRemove.swift"; sourceTree = "<group>"; };
+		1FDB8B111DEF8E4B0082B461 /* Image+ColorAt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Image+ColorAt.swift"; sourceTree = "<group>"; };
 		614F824319DB5ED3001DF1D4 /* C4.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = C4.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		614F824E19DB5ED4001DF1D4 /* C4Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = C4Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		61B92B451C7B963B003BD61C /* PlayerLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerLayer.swift; sourceTree = "<group>"; };
@@ -365,6 +367,7 @@
 				D917E1371B83E1DB0084BC82 /* GradientLayer.swift */,
 				A9D4F68C1B534F9F00F937AB /* Image.swift */,
 				A9D4F6891B534F9F00F937AB /* Image+Crop.swift */,
+				1FDB8B111DEF8E4B0082B461 /* Image+ColorAt.swift */,
 				A9D4F68A1B534F9F00F937AB /* Image+Filter.swift */,
 				A9D4F68B1B534F9F00F937AB /* Image+Generator.swift */,
 				1F754DCA1C48EE600036D39F /* ImageLayer.swift */,
@@ -605,6 +608,7 @@
 				A9D4F6CA1B534F9F00F937AB /* Polygon.swift in Sources */,
 				1FAB35EC1C53749500620741 /* UIView+AddRemove.swift in Sources */,
 				A9D4F6E21B534F9F00F937AB /* Sharpen.swift in Sources */,
+				1FDB8B121DEF8E4B0082B461 /* Image+ColorAt.swift in Sources */,
 				A9D4F6E51B534F9F00F937AB /* UIViewController+C4View.swift in Sources */,
 				A9D4F6C21B534F9F00F937AB /* Font.swift in Sources */,
 				A9D4F6DF1B534F9F00F937AB /* HueAdjust.swift in Sources */,

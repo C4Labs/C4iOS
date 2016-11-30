@@ -60,6 +60,14 @@ public extension Image {
             print("Could not create pixel Image from CGImage")
             return clear
         }
-        return Color(Image(cgimage:pixelImage))
+
+        let imageProvider = pixelImage.dataProvider
+        let imageData = imageProvider?.data
+        let data: UnsafePointer<UInt8> = CFDataGetBytePtr(imageData)
+
+        return Color(red: Double(data[1])/255.0,
+                     green: Double(data[2])/255.0,
+                     blue: Double(data[3])/255.0,
+                     alpha: Double(data[0])/255.0)
     }
 }
