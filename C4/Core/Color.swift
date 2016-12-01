@@ -135,6 +135,16 @@ public class Color {
         self.init(UIColor(patternImage: UIImage(named: pattern)!))
     }
 
+    ///  Initializes and returns a new Color object made from an Image.
+    ///  ````
+    ///  let pattern = Image("pattern1")
+    ///  let p = Color(pattern)
+    ///  ````
+    /// - parameter patternImage: an Image.
+    public convenience init(_ patternImage: Image) {
+        self.init(UIColor(patternImage: patternImage.uiimage))
+    }
+
     /// Initializes and returns a new Color object based on specified color values.
     /// ````
     /// let c = Color(red: 255, green: 0, blue: 0, alpha: 255)
