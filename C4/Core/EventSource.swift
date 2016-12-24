@@ -93,7 +93,7 @@ extension NSObject : EventSource {
     @discardableResult
     public func on(event notificationName: String, from sender: AnyObject?, run executionBlock: @escaping (Void) -> Void) -> AnyObject {
         let nc = NotificationCenter.default
-        return nc.addObserver(forName: NSNotification.Name(rawValue: notificationName), object: sender, queue: OperationQueue.current, using: { notification in
+        return nc.addObserver(forName: NSNotification.Name(rawValue: notificationName), object: sender, queue: OperationQueue.current, using: { _ in
             executionBlock()
         })
     }

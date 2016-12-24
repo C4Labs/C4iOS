@@ -98,16 +98,12 @@ public class AudioPlayer: NSObject, AVAudioPlayerDelegate {
 
     /// Returns the total duration, in seconds, of the sound associated with the audio player. (read-only)
     public var duration: Double {
-        get {
-            return Double(player.duration)
-        }
+        return Double(player.duration)
     }
 
     /// Returns true if the receiver's current playback rate > 0. Otherwise returns false.
     public var playing: Bool {
-        get {
-            return player.isPlaying
-        }
+        return player.isPlaying
     }
 
     /// The audio player’s stereo pan position.

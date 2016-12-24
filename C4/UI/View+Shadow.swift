@@ -19,7 +19,6 @@
 
 import CoreGraphics
 
-
 /// Defines a structure representing the border of a View.
 public struct Shadow {
 

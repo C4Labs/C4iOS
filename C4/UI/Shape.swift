@@ -47,9 +47,7 @@ public class Shape: View {
 
     /// Shape's contents are drawn on a ShapeLayer.
     public var shapeLayer: ShapeLayer {
-        get {
-            return self.shapeView.shapeLayer
-        }
+        return self.shapeView.shapeLayer
     }
 
     internal var shapeView: ShapeView {
@@ -169,7 +167,6 @@ public class Shape: View {
         view.bounds = (shapeLayer.path?.boundingBoxOfPath)!
         view.frame = view.bounds
     }
-
 
     /// Returns the receiver's frame. Animatable.
     public override var frame: Rect {
@@ -322,7 +319,6 @@ public class Shape: View {
         set(phase) { shapeLayer.lineDashPhase = CGFloat(phase) }
     }
 
-
     /// The dash pattern applied when creating the stroked version of the path. Defaults to nil.
     public var lineDashPattern: [NSNumber]? {
         get { return shapeLayer.lineDashPattern as [NSNumber]? }
@@ -345,7 +341,6 @@ public class Shape: View {
         return path?.isEmpty() ?? true
     }
 
-
     /// The join style for joints on the shape's path.
     public enum LineJoin {
         /// Specifies a miter line shape of the joints between connected segments of a stroked path.
@@ -357,7 +352,6 @@ public class Shape: View {
         /// Specifies a bevel line shape of the joints between connected segments of a stroked path.
         case Bevel
     }
-
 
     /// The cap style for the ends of the shape's path.
     public enum LineCap {

@@ -96,9 +96,7 @@ public struct Point: Equatable, CustomStringConvertible {
     ///
     /// - returns: A string formatted to look like {x,y}
     public var description: String {
-        get {
-            return "{\(x), \(y)}"
-        }
+        return "{\(x), \(y)}"
     }
 }
 

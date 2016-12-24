@@ -29,7 +29,7 @@ public class Movie: View {
     var filename: String!
     var player: AVQueuePlayer?
     var currentItem: AVPlayerItem?
-    var reachedEndAction: (()->())?
+    var reachedEndAction: (() -> Void)?
 
     /// Assigning a value of true to this property will cause the receiver to loop at the end of playback.
     ///
@@ -98,15 +98,11 @@ public class Movie: View {
 
     /// The original width/height ratio of the receiver when it was initialized.
     public var originalRatio: Double {
-        get {
-            return originalSize.width / originalSize.height
-        }
+        return originalSize.width / originalSize.height
     }
 
     var movieLayer: PlayerLayer {
-        get {
-            return self.movieView.movieLayer
-        }
+        return self.movieView.movieLayer
     }
 
     var movieView: MovieView {
@@ -236,7 +232,7 @@ public class Movie: View {
     /// The action to perform at the end of playback.
     ///
     /// - parameter action: A block of code to execute at the end of playback.
-    public func reachedEnd(_ action: (()->())?) {
+    public func reachedEnd(_ action: (() -> Void)?) {
         reachedEndAction = action
     }
 

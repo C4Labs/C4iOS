@@ -55,7 +55,6 @@ public class ImageLayer: CALayer {
         return animation
     }
 
-
     private var _rotation = 0.0
 
     /// The value of the receiver's current rotation state.

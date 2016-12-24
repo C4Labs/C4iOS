@@ -69,7 +69,6 @@ public class Animation {
     private var completionObservers: [AnyObject] = []
     private var cancelObservers: [AnyObject] = []
 
-
     static var stack = [Animation]()
     static var currentAnimation: Animation? {
         return stack.last
@@ -102,7 +101,7 @@ public class Animation {
     /// - returns: the observer object.
     public func addCompletionObserver(_ action: @escaping () -> Void) -> AnyObject {
         let nc = NotificationCenter.default
-        let observer = nc.addObserver(forName: NSNotification.Name(rawValue: AnimationCompletedEvent), object: self, queue: OperationQueue.current, using: { notification in
+        let observer = nc.addObserver(forName: NSNotification.Name(rawValue: AnimationCompletedEvent), object: self, queue: OperationQueue.current, using: { _ in
             action()
         })
         completionObservers.append(observer)
@@ -135,7 +134,7 @@ public class Animation {
     /// - returns: the observer object.
     public func addCancelObserver(_ action: @escaping () -> Void) -> AnyObject {
         let nc = NotificationCenter.default
-        let observer = nc.addObserver(forName: NSNotification.Name(rawValue: AnimationCancelledEvent), object: self, queue: OperationQueue.current, using: { notification in
+        let observer = nc.addObserver(forName: NSNotification.Name(rawValue: AnimationCancelledEvent), object: self, queue: OperationQueue.current, using: { _ in
             action()
         })
         cancelObservers.append(observer)

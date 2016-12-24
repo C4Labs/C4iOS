@@ -80,9 +80,7 @@ public struct Size: Equatable, Comparable, CustomStringConvertible {
     ///
     /// - returns: A string formatted to look like {w,h}
     public var description: String {
-        get {
-            return "{\(width),\(height)}"
-        }
+        return "{\(width),\(height)}"
     }
 }
 

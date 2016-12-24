@@ -20,7 +20,6 @@
 import Foundation
 import CoreGraphics
 
-
 /// Extension for Shape that provides functionality for adding elements to a receiver's path.
 extension Shape {
     /// Appends a circle to the end of the receiver's path.

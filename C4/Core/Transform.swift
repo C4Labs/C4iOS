@@ -277,7 +277,6 @@ public func * (t: Transform, s: Double) -> Transform {
     return r
 }
 
-
 /// Transform matrix scalar multiplication
 /// - parameter s: A scalar value to apply to the transform
 /// - parameter t: The transform to scale
@@ -285,7 +284,6 @@ public func * (t: Transform, s: Double) -> Transform {
 public func * (s: Double, t: Transform) -> Transform {
     return t * s
 }
-
 
 /// Concatenate two transformations. This is the same as t2 * t1.
 /// - parameter t1: The first transform to contatenate

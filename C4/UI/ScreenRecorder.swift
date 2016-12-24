@@ -20,8 +20,8 @@
 import ReplayKit
 
 public class ScreenRecorder: NSObject, RPPreviewViewControllerDelegate {
-    public typealias PreviewControllerFinishedAction = (_ activities: Set<String>?) -> ()
-    public typealias RecorderStoppedAction = () -> ()
+    public typealias PreviewControllerFinishedAction = (_ activities: Set<String>?) -> Void
+    public typealias RecorderStoppedAction = () -> Void
 
     let recorder = RPScreenRecorder.shared()
     var preview: RPPreviewViewController?
@@ -58,7 +58,7 @@ public class ScreenRecorder: NSObject, RPPreviewViewControllerDelegate {
     }
 
     public func stop() {
-        recorder.stopRecording { previewViewController, error in
+        recorder.stopRecording { previewViewController, _ in
             self.preview = previewViewController
             self.preview?.previewControllerDelegate = self
             self.recordingEndedAction?()

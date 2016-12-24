@@ -33,7 +33,6 @@ public enum FillRule {
     case EvenOdd
 }
 
-
 /// A Path is a sequence of geometric segments which can be straight lines or curves.
 @IBDesignable
 public class Path: Equatable {
@@ -86,9 +85,7 @@ public class Path: Equatable {
 
     /// A CGPathRef representation of the receiver's path.
     public var CGPath: CoreGraphics.CGPath {
-        get {
-            return internalPath
-        }
+        return internalPath
     }
 }
 

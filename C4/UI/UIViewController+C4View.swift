@@ -39,18 +39,16 @@ private var canvasAssociationKey: UInt8 = 0
 public extension UIViewController {
     /// Returns a View object representation of the controller's `view` property.
     public var canvas: View {
-        get {
-            if let canvas = objc_getAssociatedObject(self, &canvasAssociationKey) as? View {
-                return canvas
-            }
-
-            let canvas = View(view: view)
-            objc_setAssociatedObject(
-                self,
-                &canvasAssociationKey,
-                canvas,
-                .OBJC_ASSOCIATION_RETAIN)
+        if let canvas = objc_getAssociatedObject(self, &canvasAssociationKey) as? View {
             return canvas
         }
+
+        let canvas = View(view: view)
+        objc_setAssociatedObject(
+            self,
+            &canvasAssociationKey,
+            canvas,
+            .OBJC_ASSOCIATION_RETAIN)
+        return canvas
     }
 }

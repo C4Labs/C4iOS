@@ -46,7 +46,7 @@ public class Curve: Shape {
         }
         set {
             let diff = newValue - center
-            batchUpdates() {
+            batchUpdates {
                 self.endPoints.0 += diff
                 self.endPoints.1 += diff
                 self.controlPoints.0 += diff
@@ -62,7 +62,7 @@ public class Curve: Shape {
         }
         set {
             let diff = newValue - origin
-            batchUpdates() {
+            batchUpdates {
                 self.endPoints.0 += diff
                 self.endPoints.1 += diff
                 self.controlPoints.0 += diff

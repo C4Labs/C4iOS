@@ -17,7 +17,6 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-
 import Foundation
 import UIKit
 
@@ -27,9 +26,7 @@ private var viewAssociationKey: UInt8 = 0
 extension UIGestureRecognizer {
     /// The current location of the gesture in the reference view.
     public var location: Point {
-        get {
-            return Point(self.location(in: referenceView))
-        }
+        return Point(self.location(in: referenceView))
     }
     internal var referenceView: UIView? {
         get {
@@ -69,8 +66,7 @@ extension UIGestureRecognizer {
     }
 }
 
-
-public typealias TapAction = (_ locations: [Point], _ center: Point, _ state: UIGestureRecognizerState) -> ()
+public typealias TapAction = (_ locations: [Point], _ center: Point, _ state: UIGestureRecognizerState) -> Void
 
 extension UITapGestureRecognizer {
     /// The closure to call when there is a gesture event.
@@ -111,8 +107,7 @@ extension UITapGestureRecognizer {
     }
 }
 
-
-public typealias PanAction = (_ locations: [Point], _ center: Point, _ translation: Vector, _ velocity: Vector, _ state: UIGestureRecognizerState) -> ()
+public typealias PanAction = (_ locations: [Point], _ center: Point, _ translation: Vector, _ velocity: Vector, _ state: UIGestureRecognizerState) -> Void
 
 extension UIPanGestureRecognizer {
     /// The closure to call when there is a gesture event.
@@ -137,21 +132,17 @@ extension UIPanGestureRecognizer {
     ///
     /// The x and y values report the total translation over time. They are not delta values from the last time that the translation was reported. Apply the translation value to the state of the view when the gesture is first recognized—do not concatenate the value each time the handler is called.
     public var translation: Vector {
-        get {
-            if let view = referenceView {
-                return Vector(self.translation(in: view))
-            }
-            return Vector()
+        if let view = referenceView {
+            return Vector(self.translation(in: view))
         }
+        return Vector()
     }
 
     /// The velocity of the pan gesture in the coordinate system of the specified view.
     ///
     /// The velocity of the pan gesture, which is expressed in points per second. The velocity is broken into horizontal and vertical components.
     public var velocity: Vector {
-        get {
-            return Vector(self.velocity(in: view))
-        }
+        return Vector(self.velocity(in: view))
     }
 
     internal convenience init(view: UIView, action: @escaping PanAction) {
@@ -175,8 +166,7 @@ extension UIPanGestureRecognizer {
     }
 }
 
-
-public typealias PinchAction = (_ locations: [Point], _ center: Point, _ scale: Double, _ velocity: Double, _ state: UIGestureRecognizerState) -> ()
+public typealias PinchAction = (_ locations: [Point], _ center: Point, _ scale: Double, _ velocity: Double, _ state: UIGestureRecognizerState) -> Void
 
 extension UIPinchGestureRecognizer {
     /// The closure to call when there is a gesture event.
@@ -217,8 +207,7 @@ extension UIPinchGestureRecognizer {
     }
 }
 
-
-public typealias RotationAction = (_ rotation: Double, _ velocity: Double, _ state: UIGestureRecognizerState) -> ()
+public typealias RotationAction = (_ rotation: Double, _ velocity: Double, _ state: UIGestureRecognizerState) -> Void
 
 extension UIRotationGestureRecognizer {
     /// The closure to call when there is a gesture event.
@@ -255,8 +244,7 @@ extension UIRotationGestureRecognizer {
     }
 }
 
-
-public typealias LongPressAction = (_ locations: [Point], _ center: Point, _ state: UIGestureRecognizerState) -> ()
+public typealias LongPressAction = (_ locations: [Point], _ center: Point, _ state: UIGestureRecognizerState) -> Void
 
 extension UILongPressGestureRecognizer {
     /// The closure to call when there is a gesture event.
@@ -297,8 +285,7 @@ extension UILongPressGestureRecognizer {
     }
 }
 
-
-public typealias SwipeAction = (_ locations: [Point], _ center: Point, _ state: UIGestureRecognizerState, _ direction: UISwipeGestureRecognizerDirection) -> ()
+public typealias SwipeAction = (_ locations: [Point], _ center: Point, _ state: UIGestureRecognizerState, _ direction: UISwipeGestureRecognizerDirection) -> Void
 
 extension UISwipeGestureRecognizer {
     /// The closure to call when there is a gesture event.
@@ -339,7 +326,7 @@ extension UISwipeGestureRecognizer {
     }
 }
 
-public typealias ScreenEdgePanAction = (_ location: Point, _ state: UIGestureRecognizerState) -> ()
+public typealias ScreenEdgePanAction = (_ location: Point, _ state: UIGestureRecognizerState) -> Void
 
 extension UIScreenEdgePanGestureRecognizer {
     /// The closure to call when there is a gesture event.

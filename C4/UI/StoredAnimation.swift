@@ -60,9 +60,9 @@ public class StoredAnimation: Animation {
             CATransaction.begin()
             CATransaction.setAnimationDuration(self.duration)
             CATransaction.setAnimationTimingFunction(timing)
-            CATransaction.setCompletionBlock() {
+            CATransaction.setCompletionBlock({
                 self.postCompletedEvent()
-            }
+            })
             for (key, value) in self.values {
                 object.setValue(value, forKeyPath: key)
             }

@@ -27,7 +27,7 @@ public final class Timer: NSObject {
     public internal(set) var count: Int
     /// The time interval between firing.
     public internal(set) var interval: Double
-    var action: () -> ()
+    var action: () -> Void
     /// The timer that the receiver manages
     weak var timer: Foundation.Timer?
 
@@ -41,7 +41,7 @@ public final class Timer: NSObject {
     /// - parameter interval: the time between firing
     /// - parameter count:    the total number of times the timer should fire, defaults to Int.max
     /// - parameter action:   a block of code to execute
-    public init(interval: Double, count: Int = Int.max, action: @escaping () -> ()) {
+    public init(interval: Double, count: Int = Int.max, action: @escaping () -> Void) {
         self.action = action
         self.count = count
         self.interval = interval

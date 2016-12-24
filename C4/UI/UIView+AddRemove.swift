@@ -35,7 +35,7 @@ extension UIView {
         }
     }
 
-    //MARK: - AddRemoveSubview
+    // MARK: - AddRemoveSubview
 
     /// Adds an array of views to the end of the receiver’s list of subviews.
     /// When working with C4, use this method to add views because it handles the addition of both UIView and View.

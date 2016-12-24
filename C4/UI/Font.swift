@@ -113,7 +113,6 @@ public class Font {
         return Font(font: UIFont.italicSystemFont(ofSize: CGFloat(size)))
     }
 
-
     /// Returns a font object that is the same as the receiver but which has the specified size instead.
     /// ````
     /// let f = Font(name: "Avenir Next")

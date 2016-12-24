@@ -44,7 +44,6 @@ class MathTests: XCTestCase {
         XCTAssertEqual(testValue, correctValue, "Value should be clamped to upper bound")
     }
 
-
     func testMap() {
         let testValue = map(5, min: 0, max: 10, toMin: 0, toMax: 20)
         let correctValue = 10.0

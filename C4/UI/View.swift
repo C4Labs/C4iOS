@@ -290,7 +290,7 @@ public class View: NSObject {
         }
     }
 
-    //MARK: - Touchable
+    // MARK: - Touchable
 
     /// Returns true if the receiver accepts touch events.
     public var interactionEnabled: Bool = true {
@@ -408,7 +408,7 @@ public class View: NSObject {
         return gestureRecognizer
     }
 
-    //MARK: - AddRemoveSubview
+    // MARK: - AddRemoveSubview
 
     /// Adds a view to the end of the receiver’s list of subviews.
     /// When working with C4, use this method to add views because it handles the addition of both UIView and View.
@@ -428,7 +428,7 @@ public class View: NSObject {
         }
     }
 
-    //MARK: - AddRemoveSubview
+    // MARK: - AddRemoveSubview
 
     /// Adds an array of views to the end of the receiver’s list of subviews.
     /// When working with C4, use this method to add views because it handles the addition of both UIView and View.
@@ -480,7 +480,6 @@ public class View: NSObject {
         self.view.removeFromSuperview()
     }
 
-
     /// Moves the specified subview so that it appears behind its siblings.
     /// - parameter subview: The subview to move to the back.
     public func sendToBack<T>(_ subview: T?) {
@@ -505,7 +504,7 @@ public class View: NSObject {
         }
     }
 
-    //MARK: - HitTest
+    // MARK: - HitTest
 
     /// Checks if a specified point falls within the bounds of the current object.
     /// - note:
@@ -540,7 +539,7 @@ public class View: NSObject {
         return hitTest(p)
     }
 
-    //MARK: – Convert
+    // MARK: – Convert
 
     /// Converts a specified point from a given view's coordinate system to that of the receiver.
     /// ````
@@ -554,7 +553,7 @@ public class View: NSObject {
         return Point(view.convert(CGPoint(point), from: from.view))
     }
 
-    //MARK: - Positioning
+    // MARK: - Positioning
 
     /// Moves the receiver so that it appears on top of the specified view.
     /// - parameter view: The view above which the receive will be positioned

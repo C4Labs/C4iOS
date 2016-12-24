@@ -91,7 +91,6 @@ public class Color {
         internalColor = CGColor(colorSpace: colorSpace, components: [CGFloat(red), CGFloat(green), CGFloat(blue), CGFloat(alpha)])!
     }
 
-
     /// Initializes and returns a new Color object based on specified color values.
     /// ````
     /// let c = Color(hue: 1.0, saturation: 0.0, brightness: 0.0, alpha: 1.0)

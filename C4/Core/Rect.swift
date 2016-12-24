@@ -119,7 +119,7 @@ public struct Rect: Equatable, CustomStringConvertible {
         self.init(f.origin, f.size)
     }
 
-    //MARK: - Comparing
+    // MARK: - Comparing
 
     /// Returns whether two rectangles intersect.
     /// ````
@@ -135,7 +135,7 @@ public struct Rect: Equatable, CustomStringConvertible {
         return CGRect(self).intersects(CGRect(rect))
     }
 
-    //MARK: - Center & Max
+    // MARK: - Center & Max
 
     /// The center point of the receiver.
     /// ````
@@ -158,9 +158,7 @@ public struct Rect: Equatable, CustomStringConvertible {
     /// r.max //-> {15,15}
     /// ````
     public var max: Point {
-        get {
-            return Point(origin.x + size.width, origin.y + size.height)
-        }
+        return Point(origin.x + size.width, origin.y + size.height)
     }
 
     /// Checks to see if the receiver has zero size and position
@@ -173,7 +171,7 @@ public struct Rect: Equatable, CustomStringConvertible {
         return origin.isZero() && size.isZero()
     }
 
-    //MARK: - Membership
+    // MARK: - Membership
 
     /// Returns whether a rectangle contains a specified point.
     /// ````
@@ -206,13 +204,11 @@ public struct Rect: Equatable, CustomStringConvertible {
     /// A string representation of the rect.
     /// - returns: A string formatted to look like {{x,y},{w,h}}
     public var description: String {
-        get {
-            return "{\(origin),\(size)}"
-        }
+        return "{\(origin),\(size)}"
     }
 }
 
-//MARK: - Comparing
+// MARK: - Comparing
 
 /// Checks to see if two Rects share identical origin and size
 ///
@@ -228,7 +224,7 @@ public func == (lhs: Rect, rhs: Rect) -> Bool {
     return lhs.origin == rhs.origin && lhs.size == rhs.size
 }
 
-//MARK: - Manipulating
+// MARK: - Manipulating
 
 /// Returns the intersection of two rectangles.
 ///

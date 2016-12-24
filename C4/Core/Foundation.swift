@@ -19,7 +19,6 @@
 
 import CoreGraphics
 
-
 /// Prints a string to the console. Replacement for the noisy NSlog.
 ///
 /// ````
@@ -31,7 +30,6 @@ import CoreGraphics
 public func C4Log<T>(_ value: T) {
     print("[C4Log] \(value)")
 }
-
 
 /// Returns a rectangle that contains all of the specified coordinates in an array.
 ///
@@ -61,6 +59,6 @@ public func CGRectMakeFromPoints(_ points: [CGPoint]) -> CGRect {
 ///
 /// - parameter delay:  The amount of time in seconds to wait before executing the block of code.
 /// - parameter action: A block of code to perform after the delay.
-public func wait(_ seconds: Double, action: @escaping ()->()) {
+public func wait(_ seconds: Double, action: @escaping () -> Void) {
     DispatchQueue.main.asyncAfter(wallDeadline: DispatchWallTime.now() + seconds, execute: action)
 }

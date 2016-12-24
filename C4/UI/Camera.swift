@@ -37,7 +37,7 @@ public class Camera: View {
     var input: AVCaptureDeviceInput?
     var stillImageOutput: AVCaptureStillImageOutput?
     var captureSession: AVCaptureSession?
-    var didCaptureAction: (()->())?
+    var didCaptureAction: (() -> Void)?
     var orientationObserver: AnyObject?
 
     class CameraView: UIView {
@@ -51,9 +51,7 @@ public class Camera: View {
     }
 
     var previewLayer: PreviewLayer {
-        get {
-            return self.cameraView.previewLayer
-        }
+        return self.cameraView.previewLayer
     }
 
     var cameraView: CameraView {
@@ -139,7 +137,7 @@ public class Camera: View {
     func initializeOutput(_ device: AVCaptureDevice) {
         if stillImageOutput == nil {
             stillImageOutput = AVCaptureStillImageOutput()
-            stillImageOutput?.outputSettings = [AVVideoCodecKey : AVVideoCodecJPEG]
+            stillImageOutput?.outputSettings = [AVVideoCodecKey: AVVideoCodecJPEG]
         }
     }
 
@@ -182,7 +180,7 @@ public class Camera: View {
             updateOrientation()
             connection.videoOrientation = previewLayer.connection.videoOrientation
 
-            stillImageOutput?.captureStillImageAsynchronously(from: connection) { imageSampleBuffer, error in
+            stillImageOutput?.captureStillImageAsynchronously(from: connection) { imageSampleBuffer, _ in
                 guard imageSampleBuffer != nil else {
                     print("Couldn't capture image from still image output")
                     return
@@ -218,7 +216,7 @@ public class Camera: View {
         return image
     }
 
-    public func didCaptureImage(_ action: (()->())?) {
+    public func didCaptureImage(_ action: (() -> Void)?) {
         didCaptureAction = action
     }
 }

@@ -33,12 +33,10 @@ public class Image: View, NSCopying {
 
     /// Shape's contents are drawn on a ShapeLayer.
     public var imageLayer: ImageLayer {
-        get {
-            return self.imageView.imageLayer
-        }
+        return self.imageView.imageLayer
     }
 
-    //MARK: Initializers
+    // MARK: Initializers
 
     /// Initializes an empty Image
     public override init() {
@@ -288,7 +286,7 @@ public class Image: View, NSCopying {
         return img
     }
 
-    //MARK: Properties
+    // MARK: Properties
 
     /// Returns the UIImageView of the object.
     /// - returns: A UIImageView object.
@@ -299,27 +297,21 @@ public class Image: View, NSCopying {
     /// Returns a UIImage representation of the receiver.
     /// - returns:	A UIImage object.
     public var uiimage: UIImage {
-        get {
-            let layer = imageView.layer as CALayer
-            let contents = layer.contents as! CGImage // swiftlint:disable:this force_cast
-            return UIImage(cgImage: contents, scale: CGFloat(scale), orientation: imageView.image!.imageOrientation)
-        }
+        let layer = imageView.layer as CALayer
+        let contents = layer.contents as! CGImage // swiftlint:disable:this force_cast
+        return UIImage(cgImage: contents, scale: CGFloat(scale), orientation: imageView.image!.imageOrientation)
     }
 
     /// Returns a CGImageRef representation of the receiver.
     /// - returns:	A CGImageRef object.
     public var cgImage: CGImage {
-        get {
-            return uiimage.cgImage!
-        }
+        return uiimage.cgImage!
     }
 
     /// Returns a CIImage representation of the receiver. Generally, this would be used to work with filters.
     /// - returns:	A CIImage object.
     public var ciImage: CIImage {
-        get {
-            return CIImage(cgImage: cgImage)
-        }
+        return CIImage(cgImage: cgImage)
     }
 
     /// An object that provides the contents of the layer. Animatable.
@@ -349,7 +341,6 @@ public class Image: View, NSCopying {
             imageLayer.setValue(newValue, forKeyPath: Layer.rotationKey)
         }
     }
-
 
     /// The scale factor of the image. (read-only)
     var scale: Double {
@@ -402,19 +393,15 @@ public class Image: View, NSCopying {
     internal var _originalSize: Size = Size()
     /// The original size of the receiver when it was initialized.
     public var originalSize: Size {
-        get {
-            return _originalSize
-        }
+        return _originalSize
     }
 
     /// The original width/height ratio of the receiver when it was initialized.
     public var originalRatio: Double {
-        get {
-            return _originalSize.width / _originalSize.height
-        }
+        return _originalSize.width / _originalSize.height
     }
 
-    //MARK: Filters
+    // MARK: Filters
     lazy internal var output: CIImage = self.ciImage
     lazy internal var filterQueue: DispatchQueue = {
         return DispatchQueue.global(qos: .background)

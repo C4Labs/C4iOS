@@ -168,9 +168,9 @@ public class ViewAnimation: Animation {
         CATransaction.begin()
         CATransaction.setAnimationDuration(duration)
         CATransaction.setAnimationTimingFunction(timingFunction)
-        CATransaction.setCompletionBlock() {
+        CATransaction.setCompletionBlock({
             self.postCompletedEvent()
-        }
+        })
         action()
         CATransaction.commit()
     }
