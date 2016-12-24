@@ -21,7 +21,7 @@ import QuartzCore
 import UIKit
 
 /// Shape is a concrete subclass of View that draws a bezier path in its coordinate space.
-public class Shape: View {
+open class Shape: View {
     internal class ShapeView: UIView {
         var shapeLayer: ShapeLayer {
             return self.layer as! ShapeLayer // swiftlint:disable:this force_cast
@@ -46,7 +46,7 @@ public class Shape: View {
     }
 
     /// Shape's contents are drawn on a ShapeLayer.
-    public var shapeLayer: ShapeLayer {
+    open var shapeLayer: ShapeLayer {
         return self.shapeView.shapeLayer
     }
 
@@ -230,7 +230,7 @@ public class Shape: View {
 
     /// The current rotation value of the view. Animatable.
     /// - returns: A Double value representing the cumulative rotation of the view, measured in Radians.
-    public override var rotation: Double {
+    open override var rotation: Double {
         get {
             if let number = shapeLayer.value(forKeyPath: Layer.rotationKey) as? NSNumber {
                 return number.doubleValue

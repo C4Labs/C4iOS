@@ -28,13 +28,13 @@ extension NSValue {
 }
 
 /// The View class defines a rectangular area on the screen and the interfaces for managing visual content in that area. The View class itself provides basic behavior for filling its rectangular area with a background color. More sophisticated content can be presented by subclassing UIView and implementing the necessary drawing and event-handling code yourself. The C4 framework also includes a set of standard subclasses that range from simple shapes to movies and images that can be used as-is.
-public class View: NSObject {
+open class View: NSObject {
     /// A UIView. Internally, View wraps and provides access to an internal UIView.
-    public var view: UIView = LayerView()
+    open var view: UIView = LayerView()
 
     /// The current rotation value of the view. Animatable.
     /// - returns: A Double value representing the cumulative rotation of the view, measured in Radians.
-    public var rotation: Double {
+    open var rotation: Double {
         get {
             if let number = animatableLayer.value(forKeyPath: Layer.rotationKey) as? NSNumber {
                 return number.doubleValue
@@ -47,23 +47,23 @@ public class View: NSObject {
     }
 
     /// The view that contains the receiver's animatable layer.
-    internal var layerView: LayerView {
+    open var layerView: LayerView {
         return self.view as! LayerView // swiftlint:disable:this force_cast
     }
 
-    internal class LayerView: UIView {
-        var animatableLayer: Layer {
+    open class LayerView: UIView {
+        open var animatableLayer: Layer {
             return self.layer as! Layer // swiftlint:disable:this force_cast
         }
 
-        override class var layerClass: AnyClass {
+        override open class var layerClass: AnyClass {
             return Layer.self
         }
     }
 
     /// The view's primary layer.
     /// - returns: A Layer, whose properties are animatable (e.g. rotation)
-    public var animatableLayer: Layer {
+    open var animatableLayer: Layer {
         return self.layerView.animatableLayer
     }
 

@@ -21,7 +21,7 @@ import Foundation
 import CoreGraphics
 
 ///  Polygon is a concrete subclass of Shape that has a special initialzer that creates a non-uniform shape made up of 3 or more points.
-public class Polygon: Shape {
+open class Polygon: Shape {
 
     /// Returns the array of points that make up the polygon.
     ///

@@ -24,7 +24,7 @@ extension View {
     ///
     /// - parameter value: The value for the key identified by _key_.
     /// - parameter key:   The name of one of the receiver's properties.
-    public override func setValue(_ value: Any?, forKey key: String) {
+    open override func setValue(_ value: Any?, forKey key: String) {
         switch (key, value) {
         case ("frame", let nsvalue as NSValue):
             frame = Rect(nsvalue.cgRectValue)
@@ -54,7 +54,7 @@ extension View {
     /// - parameter key: The name of one of the receiver's properties.
     ///
     /// - returns: The value for the data specified by the key.
-    public override func value(forKey key: String) -> Any? {
+    open override func value(forKey key: String) -> Any? {
         switch key {
         case "frame":
             return NSValue(cgRect: CGRect(frame))
