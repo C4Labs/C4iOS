@@ -20,19 +20,19 @@
 import UIKit
 
 /// A Image provides a view-based container for displaying a single image. You can create images from files, from other image objects, or from raw image data you receive.
-public class Image: View, NSCopying {
-    internal class ImageView: UIImageView {
+open class Image: View, NSCopying {
+    open class ImageView: UIImageView {
         var imageLayer: ImageLayer {
             return self.layer as! ImageLayer // swiftlint:disable:this force_cast
         }
 
-        override class var layerClass: AnyClass {
+        override open class var layerClass: AnyClass {
             return ImageLayer.self
         }
     }
 
     /// Shape's contents are drawn on a ShapeLayer.
-    public var imageLayer: ImageLayer {
+    open var imageLayer: ImageLayer {
         return self.imageView.imageLayer
     }
 
@@ -290,13 +290,13 @@ public class Image: View, NSCopying {
 
     /// Returns the UIImageView of the object.
     /// - returns: A UIImageView object.
-    internal var imageView: ImageView {
+    open var imageView: ImageView {
         return self.view as! ImageView // swiftlint:disable:this force_cast
     }
 
     /// Returns a UIImage representation of the receiver.
     /// - returns:	A UIImage object.
-    public var uiimage: UIImage {
+    open var uiimage: UIImage {
         let layer = imageView.layer as CALayer
         let contents = layer.contents as! CGImage // swiftlint:disable:this force_cast
         return UIImage(cgImage: contents, scale: CGFloat(scale), orientation: imageView.image!.imageOrientation)
@@ -304,13 +304,13 @@ public class Image: View, NSCopying {
 
     /// Returns a CGImageRef representation of the receiver.
     /// - returns:	A CGImageRef object.
-    public var cgImage: CGImage {
+    open var cgImage: CGImage {
         return uiimage.cgImage!
     }
 
     /// Returns a CIImage representation of the receiver. Generally, this would be used to work with filters.
     /// - returns:	A CIImage object.
-    public var ciImage: CIImage {
+    open var ciImage: CIImage {
         return CIImage(cgImage: cgImage)
     }
 
@@ -319,7 +319,7 @@ public class Image: View, NSCopying {
     /// If you are using the layer to display a static image, you can set this property to the CGImageRef containing the image
     /// you want to display. Assigning a value to this property causes the layer to use your image rather than create a
     /// separate backing store.
-    public var contents: CGImage {
+    open var contents: CGImage {
         get {
             let layer = imageView.layer as CALayer
             return layer.contents as! CGImage // swiftlint:disable:this force_cast
@@ -330,7 +330,7 @@ public class Image: View, NSCopying {
 
     /// The current rotation value of the view. Animatable.
     /// - returns: A Double value representing the cumulative rotation of the view, measured in Radians.
-    public override var rotation: Double {
+    open override var rotation: Double {
         get {
             if let number = imageLayer.value(forKeyPath: Layer.rotationKey) as? NSNumber {
                 return number.doubleValue
@@ -351,7 +351,7 @@ public class Image: View, NSCopying {
     /// The default value of this property is defined by the image being created.
     /// Assigning a value to this property causes the receiver to change the width of its frame. If the receiver's
     /// `contrainsProportions` variable is set to `true` the receiver's height will change to match the new width.
-    public override var width: Double {
+    open override var width: Double {
         get {
             return Double(view.frame.size.width)
         } set(val) {
@@ -370,7 +370,7 @@ public class Image: View, NSCopying {
     /// The default value of this property is defined by the image being created.
     /// Assigning a value to this property causes the receiver to change the height of its frame. If the receiver's
     /// `contrainsProportions` variable is set to `true` the receiver's width will change to match the new width.
-    public override var height: Double {
+    open override var height: Double {
         get {
             return Double(view.frame.size.height)
         } set(val) {
@@ -388,7 +388,7 @@ public class Image: View, NSCopying {
     /// Assigning a value of true to this property will cause the receiver to scale its entire frame whenever its `width` or
     /// `height` variables are set.
     /// The default value of this property is `false`.
-    public var constrainsProportions: Bool = false
+    open var constrainsProportions: Bool = false
 
     internal var _originalSize: Size = Size()
     /// The original size of the receiver when it was initialized.
