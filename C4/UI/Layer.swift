@@ -21,7 +21,7 @@ import QuartzCore
 
 /// A subclass of CALayer that has a rotation property.
 public class Layer: CALayer {
-    static let rotationKey = "rotation"
+    static let rotationKey = "transform.rotation.z"
 
     private var _rotation = 0.0
 
