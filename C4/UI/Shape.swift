@@ -32,6 +32,11 @@ open class Shape: View {
         }
 
         override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+            //check subviews first
+            if let subview = super.hitTest(point, with: event) {
+                return subview
+            }
+
             guard let path = shapeLayer.path else {
                 return nil
             }
@@ -41,6 +46,7 @@ open class Shape: View {
             if path.contains(point, using: fillRule, transform: CGAffineTransform.identity) {
                 return self
             }
+
             return nil
         }
     }
