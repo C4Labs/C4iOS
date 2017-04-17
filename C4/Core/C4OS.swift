@@ -39,7 +39,7 @@ public extension UIView {
 }
 
 /// In UIKit all views have layers, but this class is here for consistency with OS X
-public class LayerView : UIView {
+public class LayerView : NativeView {
 }
 
 // MARK: - AppKit
@@ -110,7 +110,7 @@ public extension NSView {
 }
 
 /// Hosted-layer NSView
-public class LayerView : NSView {
+public class LayerView : NativeView {
     public var backgroundColor: NSColor? {
         didSet {
             needsDisplay = true
