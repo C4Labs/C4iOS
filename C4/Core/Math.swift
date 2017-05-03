@@ -123,14 +123,14 @@ public func random01() -> Double {
 /// Uses the following equation: value * 180.0 / PI
 ///
 /// ````
-/// radToDeg(M_PI) = 180
-/// radToDeg(M_PI_2) = 90
+/// radToDeg(Double.pi) = 180
+/// radToDeg(Double.pi / 2.0) = 90
 /// ````
 ///
 /// - parameter val: The value in radians.
 /// - returns: A double value representation of the radian value in degrees.
 public func radToDeg(_ val: Double) -> Double {
-    return 180.0 * val / M_PI
+    return 180.0 * val / Double.pi
 }
 
 /// Converts degree values to radians.
@@ -138,12 +138,12 @@ public func radToDeg(_ val: Double) -> Double {
 /// Uses the following equation: value * PI / 180.0
 ///
 /// ````
-/// degToRad(270) = 3*M_PI_2 (4.712...)
+/// degToRad(270) = 3*Double.pi / 2.0 (4.712...)
 /// degToRad(360) = 2*PI (6.283...)
 /// ````
 ///
 /// - parameter val: The value in degrees.
 /// - returns: A double value representation of the degree value in radians.
 public func degToRad(_ val: Double) -> Double {
-    return M_PI * val / 180.0
+    return Double.pi * val / 180.0
 }

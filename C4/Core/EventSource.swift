@@ -93,9 +93,10 @@ extension NSObject : EventSource {
     @discardableResult
     public func on(event notificationName: String, from sender: AnyObject?, run executionBlock: @escaping (Void) -> Void) -> AnyObject {
         let nc = NotificationCenter.default
-        return nc.addObserver(forName: NSNotification.Name(rawValue: notificationName), object: sender, queue: OperationQueue.current, using: { _ in
+        let objectProtocol = nc.addObserver(forName: NSNotification.Name(rawValue: notificationName), object: sender, queue: OperationQueue.current, using: { _ in
             executionBlock()
         })
+        return objectProtocol
     }
 
     /// Cancels any actions registered to run for a specified object.

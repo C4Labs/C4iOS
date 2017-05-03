@@ -77,14 +77,14 @@ public struct Point: Equatable, CustomStringConvertible {
     ///  ````
     ///  var p = Point(10,10)
     ///  let v = Vector(x: 0, y: 0, z: 1)
-    ///  let t = Transform.makeRotation(M_PI, axis: v)
+    ///  let t = Transform.makeRotation(Double.pi, axis: v)
     ///  p.transform(t) // -> {-10.0, -10.0}
     ///  ````
     ///
     /// - parameter t: A Transform to apply to the point
     public mutating func transform(_ t: Transform) {
-        x = x * t[0, 0] + y * t[0, 1] + t[3, 0]
-        y = x * t[1, 0] + y * t[1, 1] + t[3, 1]
+        x = x * t[0, 0] + y * t[0, 1] + t[3, 0] // swiftlint:disable:this shorthand_operator
+        y = x * t[1, 0] + y * t[1, 1] + t[3, 1] // swiftlint:disable:this shorthand_operator
     }
 
     ///  A string representation of the point.

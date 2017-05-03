@@ -66,7 +66,7 @@ public struct Vector: Equatable, CustomStringConvertible {
     /// [Polar coordinate system - Wikipedia](http://en.wikipedia.org/wiki/Polar_coordinate_system)
     /// ````
     /// let m = sqrt(2.0)
-    /// let h = M_PI_4
+    /// let h = Double.pi_4
     /// let v = Vector(magnitude: m, heading: h)
     /// v //-> {1,1,0}
     /// ````
@@ -121,7 +121,7 @@ public struct Vector: Equatable, CustomStringConvertible {
     /// The polar representation heading angle of the vector, in radians.
     /// ````
     /// let v = Vector(1,1,0)
-    /// v.heading //-> M_PI_4
+    /// v.heading //-> Double.pi_4
     /// ````
     public var heading: Double {
         get {
@@ -137,7 +137,7 @@ public struct Vector: Equatable, CustomStringConvertible {
     /// ````
     /// let v1 = Vector(x: 1, y: 1, z: 0)
     /// let v2 = Vector(x: -1, y: 1, z: 0)
-    /// v1.angleTo(v2) //-> M_PI_2
+    /// v1.angleTo(v2) //-> Double.pi / 2.0
     /// ````
     /// - parameter vec: The vector used to calcuate the angle to the receiver
     /// - returns: The angle, measured in radians, between the receiver and `vec`
@@ -180,7 +180,7 @@ public struct Vector: Equatable, CustomStringConvertible {
     /// Return a vector with the same heading but a magnitude of 1.
     /// ````
     /// let v1 = Vector(x: 1, y: 1, z: 0)
-    /// v1.unitVector() //-> {M_PI_4,M_PI_4,0}
+    /// v1.unitVector() //-> {Double.pi_4,Double.pi_4,0}
     /// ````
     /// - returns: A new vector that is the unit vector of the receiver
     public func unitVector() -> Vector? {
@@ -203,14 +203,14 @@ public struct Vector: Equatable, CustomStringConvertible {
     /// Transform the vector.
     /// ````
     /// var v = Vector(x: 1, y: 1, z:0)
-    /// let t = Transform.makeRotation(M_PI, axis: Vector(x: 0, y:0, z:1))
+    /// let t = Transform.makeRotation(Double.pi, axis: Vector(x: 0, y:0, z:1))
     /// v.transform(t) //-> {-1, -1, 0}
     /// ````
     /// - parameter t: A Transform to apply to the receiver
     public mutating func transform(_ t: Transform) {
-        x = x * t[0, 0] + y * t[0, 1] + z * t[0, 2]
-        y = x * t[1, 0] + y * t[1, 1] + z * t[1, 2]
-        z = x * t[2, 0] + y * t[2, 1] + z * t[2, 2]
+        x = x * t[0, 0] + y * t[0, 1] + z * t[0, 2] // swiftlint:disable:this shorthand_operator
+        y = x * t[1, 0] + y * t[1, 1] + z * t[1, 2] // swiftlint:disable:this shorthand_operator
+        z = x * t[2, 0] + y * t[2, 1] + z * t[2, 2] // swiftlint:disable:this shorthand_operator
     }
 
     /// A string representation of the vector.

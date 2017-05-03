@@ -44,7 +44,7 @@ class VectorTests: XCTestCase {
         let vectorA = Vector(x: 2, y: 0)
         let vectorB = Vector(x: 1, y: 1)
         let angle = vectorA.angleTo(vectorB)
-        XCTAssertEqualWithAccuracy(angle, Double(M_PI)/4.0, accuracy: 1e-15, "Product should be PI/4")
+        XCTAssertEqualWithAccuracy(angle, Double(Double.pi)/4.0, accuracy: 1e-15, "Product should be PI/4")
     }
 
     func testAngleToBaseOn() {
@@ -52,7 +52,7 @@ class VectorTests: XCTestCase {
         let vectorB = Vector(x: 1, y: 1)
         let vectorC = Vector(x: 1, y: 0)
         let angle = vectorA.angleTo(vectorB, basedOn:vectorC)
-        XCTAssertEqualWithAccuracy(angle, Double(M_PI)/2.0, accuracy: 1e-15, "Product should be PI/2")
+        XCTAssertEqualWithAccuracy(angle, Double(Double.pi)/2.0, accuracy: 1e-15, "Product should be PI/2")
     }
 
     func testDivideScalar() {

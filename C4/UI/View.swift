@@ -281,7 +281,7 @@ open class View: NSObject {
     ///  The layer you assign to this property must not have a superlayer. If it does, the behavior is undefined.
     public var mask: View? {
         didSet {
-            if let mask = mask, let _ = mask.view.superview {
+            if let mask = mask, mask.view.superview != nil {
                 print("Invalid Mask. The view you are using as a mask has already been added to another view.")
                 self.mask = nil
             } else {
