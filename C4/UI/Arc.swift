@@ -26,7 +26,7 @@ public class Arc: Shape {
     /// Creates an arc, whose edge is always drawn on the shorter circumference.
     ///
     /// ````
-    /// let a = Arc(center: canvas.center,radius: 50, start: M_PI, end: 2*M_PI)
+    /// let a = Arc(center: canvas.center,radius: 50, start: Double.pi, end: 2*Double.pi)
     /// ````
     ///
     /// - parameter center: The center-point of the arc
@@ -40,7 +40,7 @@ public class Arc: Shape {
     ///     Creates an arc, whose edge is drawn based on the input for `clockwise`.
     ///
     /// ````
-    /// let a = Arc(center: canvas.center,radius: 50, start: M_PI, end: 2*M_PI, clockwise: clockwise: false)
+    /// let a = Arc(center: canvas.center,radius: 50, start: Double.pi, end: 2*Double.pi, clockwise: clockwise: false)
     /// ````
     ///
     /// - parameter center:    The center-point of the arc

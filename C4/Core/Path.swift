@@ -189,7 +189,7 @@ extension Path {
     /// Note that using values very near 2π can be problematic. For example, setting `startAngle` to 0, `endAngle` to 2π,
     /// and `clockwise` to true will draw nothing. (It's easy to see this by considering, instead of 0 and 2π, the values
     /// ε and 2π - ε, where ε is very small.) Due to round-off error, however, it's possible that passing the value
-    /// `2 * M_PI` to approximate 2π will numerically equal to 2π + δ, for some small δ; this will cause a full circle to
+    /// `2 * Double.pi` to approximate 2π will numerically equal to 2π + δ, for some small δ; this will cause a full circle to
     /// be drawn.
     ///
     /// If you want a full circle to be drawn clockwise, you should set `startAngle` to 2π, `endAngle` to 0, and

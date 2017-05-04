@@ -34,7 +34,7 @@ public struct Twirl: Filter {
     /// The radius of the twirl effect. Defaults to 100.0
     public var radius: Double = 100.0
     /// The angle of the twirl effect. Defaults to 𝞹
-    public var angle: Double = M_PI
+    public var angle: Double = Double.pi
 
     ///Initializes a new filter
     public init() {}

@@ -113,12 +113,12 @@ class MathTests: XCTestCase {
     }
 
     func testRadToDeg() {
-        let testValue = radToDeg(M_PI_2)
+        let testValue = radToDeg(Double.pi / 2.0)
         XCTAssert(testValue == 90.0, "Retured value for radToDeg is invalid, should be 90.0")
     }
 
     func testDegToRad() {
         let testValue = degToRad(90.0)
-        XCTAssert(testValue == M_PI_2, "Retured value for degToRag is invalid, should be M_PI_2")
+        XCTAssert(testValue == Double.pi / 2.0, "Retured value for degToRag is invalid, should be Double.pi / 2.0")
     }
 }

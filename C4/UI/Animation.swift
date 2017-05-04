@@ -53,7 +53,7 @@ public class Animation {
         }
         set {
             if newValue {
-                repeatCount = DBL_MAX
+                repeatCount = Double.greatestFiniteMagnitude
             } else {
                 repeatCount = 0
             }

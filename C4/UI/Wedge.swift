@@ -28,7 +28,7 @@ public class Wedge: Shape {
     /// This shape differs from Arc in that is adds a point at the "center" of the circle on which the wedge exists.
     ///
     /// ````
-    /// let w = Wedge(center: canvas.center, radius: 50, start: M_PI_4 * 3, end: M_PI_4)
+    /// let w = Wedge(center: canvas.center, radius: 50, start: Double.pi_4 * 3, end: Double.pi_4)
     /// canvas.add(w)
     /// ````
     ///
@@ -45,7 +45,7 @@ public class Wedge: Shape {
     /// This shape differs from Arc in that is adds a point at the "center" of the circle on which the wedge exists.
     ///
     /// ````
-    /// let w = Wedge(center: canvas.center, radius: 50, start: M_PI_4 * 3, end: M_PI_4, clockwise: true)
+    /// let w = Wedge(center: canvas.center, radius: 50, start: Double.pi_4 * 3, end: Double.pi_4, clockwise: true)
     /// canvas.add(w)
     /// ````
     ///

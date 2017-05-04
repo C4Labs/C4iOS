@@ -130,7 +130,7 @@ public struct Transform: Equatable {
 
     /// Creates a transform that represents a rotation. The `axis` component is optional.
     /// ````
-    /// let t = Transform.makeRotation(M_PI)
+    /// let t = Transform.makeRotation(Double.pi)
     /// ````
     /// - parameter angle: The angle, in radians, to rotate
     /// - parameter axis: The axis around which to rotate, defaults to the z axis {0,0,1}
@@ -189,7 +189,7 @@ public struct Transform: Equatable {
     /// Applies a rotation. The `axis` component is optional.
     /// ````
     /// let t = Transform()
-    /// t.rotate(M_PI)
+    /// t.rotate(Double.pi)
     /// ````
     /// - parameter angle: The angle, in radians, to rotate
     /// - parameter axis: The axis around which to rotate, defaults to the z axis {0,0,1}
