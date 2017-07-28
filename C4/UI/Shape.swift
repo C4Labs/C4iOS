@@ -248,6 +248,30 @@ open class Shape: View {
         }
     }
 
+    open override var rotationX: Double {
+        get {
+            if let number = shapeLayer.value(forKeyPath: Layer.rotationXKey) as? NSNumber {
+                return number.doubleValue
+            }
+            return  0.0
+        }
+        set {
+            shapeLayer.setValue(newValue, forKeyPath: Layer.rotationXKey)
+        }
+    }
+
+    open override var rotationY: Double {
+        get {
+            if let number = shapeLayer.value(forKeyPath: Layer.rotationYKey) as? NSNumber {
+                return number.doubleValue
+            }
+            return  0.0
+        }
+        set {
+            shapeLayer.setValue(newValue, forKeyPath: Layer.rotationYKey)
+        }
+    }
+
     /// This value defines the start of the path used to draw the stroked outline. The value must be in the range [0,1]
     /// with zero representing the start of the path and one the end. Values in between zero and one are interpolated
     /// linearly along the path length. Defaults to zero. Animatable.

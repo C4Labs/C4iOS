@@ -22,5 +22,17 @@ import UIKit
 
 class ViewController: CanvasController {
     override func setup() {
+        let t = TextShape(text: "JamesBeenie")
+        t?.center = canvas.center
+        canvas.add(t)
+
+        var perspective = CATransform3DIdentity
+        perspective.m34 = -1.0/500
+        t?.layer?.transform = perspective
+
+        ViewAnimation(duration: 3.0) {
+//            t?.rotationX = Double.pi
+            t?.rotationY = Double.pi
+        }.animate()
     }
 }

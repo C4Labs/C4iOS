@@ -46,6 +46,30 @@ open class View: NSObject {
         }
     }
 
+    open var rotationX: Double {
+        get {
+            if let number = animatableLayer.value(forKeyPath: Layer.rotationXKey) as? NSNumber {
+                return number.doubleValue
+            }
+            return  0.0
+        }
+        set {
+            animatableLayer.setValue(newValue, forKeyPath: Layer.rotationXKey)
+        }
+    }
+
+    open var rotationY: Double {
+        get {
+            if let number = animatableLayer.value(forKeyPath: Layer.rotationYKey) as? NSNumber {
+                return number.doubleValue
+            }
+            return  0.0
+        }
+        set {
+            animatableLayer.setValue(newValue, forKeyPath: Layer.rotationYKey)
+        }
+    }
+
     /// The view that contains the receiver's animatable layer.
     open var layerView: LayerView {
         return self.view as! LayerView // swiftlint:disable:this force_cast
