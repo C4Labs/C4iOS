@@ -5,7 +5,3 @@ script:
   - set -o pipefail && xcodebuild test -project C4iOS.xcodeproj -scheme C4 -destination 'platform=iOS Simulator,name=iPhone 6' | xcpretty
   - pod lib lint
 
-before_install:
-  - brew update
-  - brew install swiftlint
-  - gem install cocoapods --pre --no-rdoc --no-ri --no-document --quiet
