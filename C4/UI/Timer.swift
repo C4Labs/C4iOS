@@ -49,7 +49,7 @@ public final class Timer: NSObject {
     }
 
     ///  Tells the timer to fire, i.e. execute its block of code.
-    public func fire() {
+    @objc public func fire() {
         action()
         step += 1
         if step >= count {

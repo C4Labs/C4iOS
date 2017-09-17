@@ -154,7 +154,7 @@ public class Movie: View {
         }
 
         let asset = AVAsset(url: url)
-        let tracks = asset.tracks(withMediaType: AVMediaTypeVideo)
+        let tracks = asset.tracks(withMediaType: AVMediaType.video)
 
         let movieTrack = tracks[0]
         self.init(frame: Rect(0, 0, Double(movieTrack.naturalSize.width), Double(movieTrack.naturalSize.height)))
@@ -173,7 +173,7 @@ public class Movie: View {
 
         //movie view's player
         movieLayer.player = player
-        movieLayer.videoGravity = AVLayerVideoGravityResize
+        movieLayer.videoGravity = AVLayerVideoGravity.resize
 
         originalSize = self.size
 

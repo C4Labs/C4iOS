@@ -69,7 +69,7 @@ public class ShapeLayer: CAShapeLayer {
 
     /// The value of the receiver's current rotation state.
     /// This value is cumulative, and can represent values beyong +/- π
-    public dynamic var rotation: Double {
+    @objc public dynamic var rotation: Double {
         return _rotation
     }
 
@@ -127,7 +127,7 @@ extension CABasicAnimation {
     ///  Configures basic options for a CABasicAnimation.
     ///
     ///  The options set in this method are favorable for the inner workings of C4's action behaviours.
-    public func configureOptions() {
+    @objc public func configureOptions() {
         if let animation = ViewAnimation.currentAnimation {
             self.autoreverses = animation.autoreverses
             self.repeatCount = Float(animation.repeatCount)

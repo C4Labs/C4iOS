@@ -33,7 +33,7 @@ extension Image {
 
         if var outputImage = crop.outputImage {
             let scale = CGAffineTransform(scaleX: 1, y: -1)
-            outputImage = outputImage.applying(scale)
+            outputImage = outputImage.transformed(by: scale)
             output = outputImage
 
             //Need to output a CGImage that matches the current image's extent, {0, -h, w, h}

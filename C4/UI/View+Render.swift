@@ -22,7 +22,7 @@ import UIKit
 public extension View {
     /// Creates a flattened image of the receiver and its subviews / layers.
     /// - returns: A new Image
-    public func render() -> Image? {
+    @objc public func render() -> Image? {
         guard let l = layer else {
             print("Could not retrieve layer for current object: \(self)")
             return nil

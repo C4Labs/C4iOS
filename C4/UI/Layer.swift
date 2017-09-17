@@ -27,7 +27,7 @@ public class Layer: CALayer {
 
     /// The value of the receiver's current rotation state.
     /// This value is cumulative, and can represent values beyong +/- π
-    public dynamic var rotation: Double {
+    @objc public dynamic var rotation: Double {
         return _rotation
     }
 

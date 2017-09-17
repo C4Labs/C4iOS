@@ -21,15 +21,15 @@ import UIKit
 import AVFoundation
 
 public enum CameraPosition: Int {
-    case Unspecified = 0
-    case Back
-    case Front
+    case unspecified = 0
+    case back
+    case front
 }
 
 public class Camera: View {
     public var capturedImage: Image?
-    public var quality: String = AVCaptureSessionPresetPhoto
-    public var position: CameraPosition = .Front
+    public var quality = AVCaptureSession.Preset.photo
+    public var position = CameraPosition.front
 
     var imageOutput: AVCaptureStillImageOutput?
     var captureDevice: AVCaptureDevice?
@@ -64,7 +64,7 @@ public class Camera: View {
         view.frame = CGRect(frame)
 
         previewLayer.backgroundColor = clear.cgColor
-        previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
+        previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
 
         orientationObserver = on(event: NSNotification.Name.UIDeviceOrientationDidChange.rawValue) { [unowned self] in
             self.updateOrientation()
@@ -77,7 +77,7 @@ public class Camera: View {
         }
     }
 
-    public func startCapture(_ position: CameraPosition = .Front) {
+    public func startCapture(_ position: CameraPosition = .front) {
         self.position = position
         guard let cd = captureDevice(position) else {
             print("Could not retrieve capture device for \(position)")
@@ -100,26 +100,23 @@ public class Camera: View {
     }
 
     func captureDevice(_ position: CameraPosition) -> AVCaptureDevice? {
-            for device in AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo) {
-                if let d = device as? AVCaptureDevice, d.position.rawValue == position.rawValue {
-                    return d
-                }
-            }
-        return nil
+        return AVCaptureDevice.devices(for: AVMediaType.video).first(where: { $0.position.rawValue == position.rawValue })
     }
 
     func updateOrientation() {
-        if let connection = previewLayer.connection, connection.isVideoOrientationSupported {
-            switch UIApplication.shared.statusBarOrientation {
-            case .portraitUpsideDown:
-                previewLayer.connection.videoOrientation = .portraitUpsideDown
-            case .landscapeLeft:
-                previewLayer.connection.videoOrientation = .landscapeLeft
-            case .landscapeRight:
-                previewLayer.connection.videoOrientation = .landscapeRight
-            default:
-                previewLayer.connection.videoOrientation = .portrait
-            }
+        guard let connection = previewLayer.connection, connection.isVideoOrientationSupported else {
+            return
+        }
+
+        switch UIApplication.shared.statusBarOrientation {
+        case .portraitUpsideDown:
+            connection.videoOrientation = .portraitUpsideDown
+        case .landscapeLeft:
+            connection.videoOrientation = .landscapeLeft
+        case .landscapeRight:
+            connection.videoOrientation = .landscapeRight
+        default:
+            connection.videoOrientation = .portrait
         }
     }
 
@@ -146,28 +143,19 @@ public class Camera: View {
             captureSession = AVCaptureSession()
             previewLayer.session = captureSession
         }
+        let session = captureSession!
 
-        captureSession?.sessionPreset = quality
+        session.sessionPreset = quality
 
-        if let inputs = captureSession?.inputs {
-            for input in inputs {
-                if let i = input as? AVCaptureInput {
-                    captureSession?.removeInput(i)
-                }
-            }
+        for input in session.inputs {
+            session.removeInput(input)
         }
+        session.addInput(input!)
 
-        captureSession?.addInput(input)
-
-        if let outputs = captureSession?.outputs {
-            for output in outputs {
-                if let o = output as? AVCaptureOutput {
-                    captureSession?.removeOutput(o)
-                }
-            }
+        for output in session.outputs {
+            session.removeOutput(output)
         }
-
-        captureSession?.addOutput(stillImageOutput)
+        session.addOutput(stillImageOutput!)
     }
 
     public func captureImage() {
@@ -176,44 +164,47 @@ public class Camera: View {
             return
         }
 
-        if let connection = stillImageOutput?.connection(withMediaType: AVMediaTypeVideo) {
-            updateOrientation()
-            connection.videoOrientation = previewLayer.connection.videoOrientation
+        guard let connection = stillImageOutput?.connection(with: AVMediaType.video) else {
+            return
+        }
 
-            stillImageOutput?.captureStillImageAsynchronously(from: connection) { imageSampleBuffer, _ in
-                guard imageSampleBuffer != nil else {
-                    print("Couldn't capture image from still image output")
-                    return
-                }
+        updateOrientation()
+        connection.videoOrientation = previewLayer.connection!.videoOrientation
 
-                let data = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageSampleBuffer! as CMSampleBuffer)
+        stillImageOutput?.captureStillImageAsynchronously(from: connection) { imageSampleBuffer, _ in
+            guard imageSampleBuffer != nil else {
+                print("Couldn't capture image from still image output")
+                return
+            }
 
-                if let img = UIImage(data: data!) {
-                    self.capturedImage = Image(uiimage: self.orientRawImage(img))
-                    self.didCaptureAction?()
-                }
+            let data = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageSampleBuffer! as CMSampleBuffer)
+
+            if let img = UIImage(data: data!) {
+                self.capturedImage = Image(uiimage: self.orientRawImage(img))
+                self.didCaptureAction?()
             }
         }
     }
 
     func orientRawImage(_ image: UIImage) -> UIImage {
-        if let cgimg = image.cgImage {
-            var orientation: UIImageOrientation!
-            let shouldFlip = self.position == .Front
-
-            switch previewLayer.connection.videoOrientation {
-            case .landscapeLeft:
-                orientation = shouldFlip ? .upMirrored : .down
-            case .landscapeRight:
-                orientation = shouldFlip ? .downMirrored : .up
-            case .portrait:
-                orientation = shouldFlip ? .leftMirrored : .right
-            case .portraitUpsideDown:
-                orientation = shouldFlip ? .rightMirrored : .left
-            }
-            return UIImage(cgImage: cgimg, scale: image.scale, orientation: orientation)
+        guard let cgimg = image.cgImage, let videoOrientation = previewLayer.connection?.videoOrientation else {
+            return image
         }
-        return image
+
+        var orientation: UIImageOrientation
+        let shouldFlip = position == .front
+
+        switch videoOrientation {
+        case .landscapeLeft:
+            orientation = shouldFlip ? .upMirrored : .down
+        case .landscapeRight:
+            orientation = shouldFlip ? .downMirrored : .up
+        case .portrait:
+            orientation = shouldFlip ? .leftMirrored : .right
+        case .portraitUpsideDown:
+            orientation = shouldFlip ? .rightMirrored : .left
+        }
+        return UIImage(cgImage: cgimg, scale: image.scale, orientation: orientation)
     }
 
     public func didCaptureImage(_ action: (() -> Void)?) {

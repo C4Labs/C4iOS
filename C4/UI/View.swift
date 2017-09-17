@@ -127,7 +127,7 @@ open class View: NSObject {
     }
 
     /// Returns the receiver's layer.
-    public dynamic var layer: CALayer? {
+    @objc public dynamic var layer: CALayer? {
         return view.layer
     }
 
@@ -192,12 +192,12 @@ open class View: NSObject {
     }
 
     /// Returns the receiver's frame width. Animatable.
-    public dynamic var width: Double {
+    @objc public dynamic var width: Double {
         return Double(bounds.size.width)
     }
 
     /// Returns the receiver's frame height. Animatable.
-    public dynamic var height: Double {
+    @objc public dynamic var height: Double {
         return Double(bounds.size.height)
     }
 
@@ -220,7 +220,7 @@ open class View: NSObject {
     }
 
     /// Returns the receiver's opacity. Animatable.
-    public dynamic var opacity: Double {
+    @objc public dynamic var opacity: Double {
         get {
             return Double(view.alpha)
         }
@@ -267,7 +267,7 @@ open class View: NSObject {
     ///  The layer’s position on the z axis. Animatable.
     ///  The default value of this property is 0. Changing the value of this property changes the the front-to-back ordering of layers onscreen. This can affect the visibility of layers whose frame rectangles overlap.
     ///  The value of this property is measured in points.
-    public dynamic var zPosition: Double {
+    @objc public dynamic var zPosition: Double {
         get {
             return Double(self.layer!.zPosition)
         } set {
