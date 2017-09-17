@@ -24,7 +24,7 @@ class VectorTests: XCTestCase {
     func testUnitVector() {
         let vector = Vector(x: 8, y: 8, z: 8)
         let unitVector = vector.unitVector()!
-        XCTAssertEqualWithAccuracy(unitVector.magnitude, 1, accuracy: 1e-15, "Magnitude of unit vector should be 1")
+        XCTAssertEqual(unitVector.magnitude, 1, accuracy: 1e-15, "Magnitude of unit vector should be 1")
         XCTAssertEqual(unitVector.heading, vector.heading, "Heading of unit vector should be the same as the original")
     }
 
@@ -37,14 +37,14 @@ class VectorTests: XCTestCase {
     func testDotProduct() {
         let vectorA = Vector(x: 1, y: 0)
         let vectorB = Vector(x: 0, y: 1)
-        XCTAssertEqualWithAccuracy(vectorA ⋅ vectorB, 0, accuracy: 1e-15, "Dot product of perpendicular vectors should be 0")
+        XCTAssertEqual(vectorA ⋅ vectorB, 0, accuracy: 1e-15, "Dot product of perpendicular vectors should be 0")
     }
 
     func testAngleTo() {
         let vectorA = Vector(x: 2, y: 0)
         let vectorB = Vector(x: 1, y: 1)
         let angle = vectorA.angleTo(vectorB)
-        XCTAssertEqualWithAccuracy(angle, Double(Double.pi)/4.0, accuracy: 1e-15, "Product should be PI/4")
+        XCTAssertEqual(angle, Double(Double.pi)/4.0, accuracy: 1e-15, "Product should be PI/4")
     }
 
     func testAngleToBaseOn() {
@@ -52,7 +52,7 @@ class VectorTests: XCTestCase {
         let vectorB = Vector(x: 1, y: 1)
         let vectorC = Vector(x: 1, y: 0)
         let angle = vectorA.angleTo(vectorB, basedOn:vectorC)
-        XCTAssertEqualWithAccuracy(angle, Double(Double.pi)/2.0, accuracy: 1e-15, "Product should be PI/2")
+        XCTAssertEqual(angle, Double(Double.pi)/2.0, accuracy: 1e-15, "Product should be PI/2")
     }
 
     func testDivideScalar() {

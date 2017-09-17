@@ -208,9 +208,9 @@ public struct Vector: Equatable, CustomStringConvertible {
     /// ````
     /// - parameter t: A Transform to apply to the receiver
     public mutating func transform(_ t: Transform) {
-        x = x * t[0, 0] + y * t[0, 1] + z * t[0, 2] // swiftlint:disable:this shorthand_operator
-        y = x * t[1, 0] + y * t[1, 1] + z * t[1, 2] // swiftlint:disable:this shorthand_operator
-        z = x * t[2, 0] + y * t[2, 1] + z * t[2, 2] // swiftlint:disable:this shorthand_operator
+        x = x * t[0, 0] + y * t[0, 1] + z * t[0, 2]
+        y = x * t[1, 0] + y * t[1, 1] + z * t[1, 2]
+        z = x * t[2, 0] + y * t[2, 1] + z * t[2, 2]
     }
 
     /// A string representation of the vector.

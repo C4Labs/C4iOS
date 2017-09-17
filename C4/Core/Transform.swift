@@ -297,20 +297,23 @@ public func concat(_ t1: Transform, t2: Transform) -> Transform {
 /// - parameter t: The transform to invert
 /// - returns: A new transform that is the inverse of `t`
 public func inverse(_ t: Transform) -> Transform? {
-    var N: __CLPK_integer = 4
-    var error: __CLPK_integer = 0
-    var pivot = [__CLPK_integer](repeating: 0, count: 4)
-    var matrix: [__CLPK_doublereal] = t.matrix
+    var m: Int32 = 4
+    var n: Int32 = 4
+    var lda: Int32 = 4
+    var error: Int32 = 0
+    var pivot = [Int32](repeating: 0, count: 4)
+    var matrix: [Double] = t.matrix
 
     // LU factorisation
-    dgetrf_(&N, &N, &matrix, &N, &pivot, &error)
+    dgetrf_(&m, &n, &matrix, &lda, &pivot, &error)
     if error != 0 {
         return nil
     }
 
     // matrix inversion
-    var workspace = [__CLPK_doublereal](repeating: 0, count: 4)
-    dgetri_(&N, &matrix, &N, &pivot, &workspace, &N, &error)
+    var workSize: Int32 = 4
+    var workspace = [Double](repeating: 0, count: 4)
+    dgetri_(&n, &matrix, &lda, &pivot, &workspace, &workSize, &error)
     if error != 0 {
         return nil
     }

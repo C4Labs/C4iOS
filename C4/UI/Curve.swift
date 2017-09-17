@@ -90,7 +90,7 @@ public class Curve: Shape {
     }
 
     private var pauseUpdates = false
-    func batchUpdates(_ updates: (Void) -> Void) {
+    func batchUpdates(_ updates: () -> Void) {
         pauseUpdates = true
         updates()
         pauseUpdates = false

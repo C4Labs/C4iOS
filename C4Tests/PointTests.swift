@@ -24,7 +24,7 @@ class PointTests: XCTestCase {
     func testDistance() {
         let pointA = Point()
         let pointB = Point(1, 1)
-        XCTAssertEqualWithAccuracy(distance(pointA, rhs: pointB), sqrt(2), accuracy: DBL_MIN, "Distance between origin and (1,1) should be √2")
+        XCTAssertEqual(distance(pointA, rhs: pointB), sqrt(2), accuracy: Double.leastNormalMagnitude, "Distance between origin and (1,1) should be √2")
     }
 
     func testTranslate() {

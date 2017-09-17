@@ -83,8 +83,8 @@ public struct Point: Equatable, CustomStringConvertible {
     ///
     /// - parameter t: A Transform to apply to the point
     public mutating func transform(_ t: Transform) {
-        x = x * t[0, 0] + y * t[0, 1] + t[3, 0] // swiftlint:disable:this shorthand_operator
-        y = x * t[1, 0] + y * t[1, 1] + t[3, 1] // swiftlint:disable:this shorthand_operator
+        x = x * t[0, 0] + y * t[0, 1] + t[3, 0]
+        y = x * t[1, 0] + y * t[1, 1] + t[3, 1]
     }
 
     ///  A string representation of the point.

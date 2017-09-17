@@ -40,7 +40,7 @@ public extension View {
     ///
     /// - parameter duration: The length of time in seconds for the animation to execute.
     /// - parameter animations: A block of code with specified animations to execute.
-    public class func animate(duration: Double, animations: @escaping (Void) -> Void) {
+    public class func animate(duration: Double, animations: @escaping () -> Void) {
         UIView.animate(withDuration: duration, animations: animations)
     }
 
