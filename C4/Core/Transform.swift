@@ -17,7 +17,6 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-import Accelerate
 import CoreGraphics
 import QuartzCore
 
@@ -297,28 +296,5 @@ public func concat(_ t1: Transform, t2: Transform) -> Transform {
 /// - parameter t: The transform to invert
 /// - returns: A new transform that is the inverse of `t`
 public func inverse(_ t: Transform) -> Transform? {
-    var m: Int32 = 4
-    var n: Int32 = 4
-    var lda: Int32 = 4
-    var error: Int32 = 0
-    var pivot = [Int32](repeating: 0, count: 4)
-    var matrix: [Double] = t.matrix
-
-    // LU factorisation
-    dgetrf_(&m, &n, &matrix, &lda, &pivot, &error)
-    if error != 0 {
-        return nil
-    }
-
-    // matrix inversion
-    var workSize: Int32 = 4
-    var workspace = [Double](repeating: 0, count: 4)
-    dgetri_(&n, &matrix, &lda, &pivot, &workspace, &workSize, &error)
-    if error != 0 {
-        return nil
-    }
-
-    var r = Transform()
-    r.matrix = matrix
-    return r
+    return Transform(CATransform3DInvert(t.transform3D))
 }
