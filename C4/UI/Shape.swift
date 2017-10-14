@@ -67,8 +67,8 @@ open class Shape: View {
         strokeColor = C4Purple
         fillColor = C4Blue
         lineWidth = 1
-        lineCap = .Round
-        lineJoin = .Round
+        lineCap = .round
+        lineJoin = .round
 
         let image = UIImage.createWithColor(UIColor.clear, size: CGSize(width: 1, height: 1)).cgImage
         shapeLayer.contents = image
@@ -93,8 +93,8 @@ open class Shape: View {
         strokeColor = C4Purple
         fillColor = C4Blue
         lineWidth = 1
-        lineCap = .Round
-        lineJoin = .Round
+        lineCap = .round
+        lineJoin = .round
 
         let image = UIImage.createWithColor(UIColor.clear, size: CGSize(width: 1, height: 1)).cgImage
         shapeLayer.contents = image
@@ -212,23 +212,23 @@ open class Shape: View {
         }
     }
 
-    /// The fill rule used when filling the path. Defaults to `NonZero`.
+    /// The fill rule used when filling the path. Defaults to `nonZero`.
     public var fillRule: FillRule {
         get {
             switch shapeLayer.fillRule {
             case kCAFillRuleNonZero:
-                return .NonZero
+                return .nonZero
             case kCAFillRuleEvenOdd:
-                return .EvenOdd
+                return .evenOdd
             default:
-                return .NonZero
+                return .nonZero
             }
         }
         set(fillRule) {
             switch fillRule {
-            case .NonZero:
+            case .nonZero:
                 shapeLayer.fillRule = kCAFillRuleNonZero
-            case .EvenOdd:
+            case .evenOdd:
                 shapeLayer.fillRule = kCAFillRuleEvenOdd
             }
         }
@@ -276,20 +276,20 @@ open class Shape: View {
         get {
             switch shapeLayer.lineCap {
             case kCALineCapRound:
-                return .Round
+                return .round
             case kCALineCapSquare:
-                return .Square
+                return .square
             default:
-                return .Butt
+                return .butt
             }
         }
         set(lineCap) {
             switch lineCap {
-            case .Butt:
+            case .butt:
                 shapeLayer.lineCap = kCALineCapButt
-            case .Round:
+            case .round:
                 shapeLayer.lineCap = kCALineCapRound
-            case .Square:
+            case .square:
                 shapeLayer.lineCap = kCALineCapSquare
             }
         }
@@ -300,20 +300,20 @@ open class Shape: View {
         get {
             switch shapeLayer.lineJoin {
             case kCALineJoinRound:
-                return .Round
+                return .round
             case kCALineJoinBevel:
-                return .Bevel
+                return .bevel
             default:
-                return .Miter
+                return .miter
             }
         }
         set(lineJoin) {
             switch lineJoin {
-            case .Miter:
+            case .miter:
                 shapeLayer.lineJoin = kCALineJoinMiter
-            case .Round:
+            case .round:
                 shapeLayer.lineJoin = kCALineJoinRound
-            case .Bevel:
+            case .bevel:
                 shapeLayer.lineJoin = kCALineJoinBevel
             }
         }
@@ -350,25 +350,25 @@ open class Shape: View {
     /// The join style for joints on the shape's path.
     public enum LineJoin {
         /// Specifies a miter line shape of the joints between connected segments of a stroked path.
-        case Miter
+        case miter
 
         /// Specifies a round line shape of the joints between connected segments of a stroked path.
-        case Round
+        case round
 
         /// Specifies a bevel line shape of the joints between connected segments of a stroked path.
-        case Bevel
+        case bevel
     }
 
     /// The cap style for the ends of the shape's path.
     public enum LineCap {
         /// Specifies a butt line cap style for endpoints for an open path when stroked.
-        case Butt
+        case butt
 
         /// Specifies a round line cap style for endpoints for an open path when stroked.
-        case Round
+        case round
 
         /// Specifies a square line cap style for endpoints for an open path when stroked.
-        case Square
+        case square
     }
 
     public override func hitTest(_ point: Point) -> Bool {

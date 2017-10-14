@@ -94,13 +94,13 @@ public class ViewAnimation: Animation {
     /// Options are `Linear`, `EaseOut`, `EaseIn`, `EaseInOut`
     public var timingFunction: CAMediaTimingFunction {
         switch curve {
-        case .Linear:
+        case .linear:
             return CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-        case .EaseOut:
+        case .easeOut:
             return CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
-        case .EaseIn:
+        case .easeIn:
             return CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-        case .EaseInOut:
+        case .easeInOut:
             return CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         }
     }
@@ -109,13 +109,13 @@ public class ViewAnimation: Animation {
     public var options: UIViewAnimationOptions {
         var options: UIViewAnimationOptions = [UIViewAnimationOptions.beginFromCurrentState]
         switch curve {
-        case .Linear:
+        case .linear:
             options = [options, .curveLinear]
-        case .EaseOut:
+        case .easeOut:
             options = [options, .curveEaseOut]
-        case .EaseIn:
+        case .easeIn:
             options = [options, .curveEaseIn]
-        case .EaseInOut:
+        case .easeInOut:
             options = [options, .curveEaseIn, .curveEaseOut]
         }
 

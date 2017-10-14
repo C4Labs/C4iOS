@@ -25,12 +25,12 @@ public enum FillRule {
     /// Specifies the non-zero winding rule. Count each left-to-right path as +1 and each right-to-left path as -1. If the
     /// sum of all crossings is 0, the point is outside the path. If the sum is nonzero, the point is inside the path and
     /// the region containing it is filled.
-    case NonZero
+    case nonZero
 
     /// Specifies the even-odd winding rule. Count the total number of path crossings. If the number of crossings is even,
     /// the point is outside the path. If the number of crossings is odd, the point is inside the path and the region
     /// containing it should be filled.
-    case EvenOdd
+    case evenOdd
 }
 
 /// A Path is a sequence of geometric segments which can be straight lines or curves.
@@ -72,8 +72,8 @@ public class Path: Equatable {
     /// - parameter point: The point to test.
     /// - parameter fillRule: The fill rule to use when testing for containment.
     /// - returns: `true` if `point` is inside the path, `false` otherwise.
-    public func containsPoint(_ point: Point, fillRule: FillRule = .NonZero) -> Bool {
-        let rule = fillRule == .EvenOdd ? CGPathFillRule.evenOdd : CGPathFillRule.winding
+    public func containsPoint(_ point: Point, fillRule: FillRule = .nonZero) -> Bool {
+        let rule = fillRule == .evenOdd ? CGPathFillRule.evenOdd : CGPathFillRule.winding
         return internalPath.contains(CGPoint(point), using: rule, transform: CGAffineTransform.identity)
     }
 

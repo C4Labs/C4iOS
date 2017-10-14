@@ -31,13 +31,13 @@ public class Animation {
     ///  ````
     public enum Curve {
         /// A linear animation curve causes an animation to occur evenly over its duration.
-        case Linear
+        case linear
         /// An ease-out curve causes the animation to begin quickly, and then slow down as it completes.
-        case EaseOut
+        case easeOut
         /// An ease-in curve causes the animation to begin slowly, and then speed up as it progresses.
-        case EaseIn
+        case easeIn
         /// An ease-in ease-out curve causes the animation to begin slowly, accelerate through the middle of its duration, and then slow again before completing. This is the default curve for most animations.
-        case EaseInOut
+        case easeInOut
     }
 
     /// Determines if the animation plays in the reverse upon completion.
@@ -64,7 +64,7 @@ public class Animation {
     public var duration: TimeInterval = 1
 
     /// The animation curve that the receiver will apply to the changes it is supposed to animate.
-    public var curve: Curve = .EaseInOut
+    public var curve: Curve = .easeInOut
 
     private var completionObservers: [AnyObject] = []
     private var cancelObservers: [AnyObject] = []

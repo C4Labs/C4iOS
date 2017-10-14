@@ -37,16 +37,16 @@ public class StoredAnimation: Animation {
         var options: UIViewAnimationOptions = [UIViewAnimationOptions.beginFromCurrentState]
 
         switch curve {
-        case .Linear:
+        case .linear:
             options = [options, .curveLinear]
             timing = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-        case .EaseOut:
+        case .easeOut:
             options = [options, .curveEaseOut]
             timing = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
-        case .EaseIn:
+        case .easeIn:
             options = [options, .curveEaseIn]
             timing = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-        case .EaseInOut:
+        case .easeInOut:
             options = [options, .curveEaseIn, .curveEaseOut]
             timing = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         }
