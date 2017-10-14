@@ -80,6 +80,6 @@ public class RegularPolygon: Polygon {
     }
 
     internal override func updatePath() {
-        self.path = RegularPolygon(center: center, radius: width/2.0, sides:self.sides, phase:self.phase).path
+        self.path = RegularPolygon(center: center, radius: width/2.0, sides: self.sides, phase: self.phase).path
     }
 }

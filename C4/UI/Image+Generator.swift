@@ -27,7 +27,7 @@ extension Image {
     public func generate(_ generator: Generator) {
         let crop = CIFilter(name: "CICrop")!
         crop.setDefaults()
-        crop.setValue(CIVector(cgRect:CGRect(self.bounds)), forKey: "inputRectangle")
+        crop.setValue(CIVector(cgRect: CGRect(self.bounds)), forKey: "inputRectangle")
         let generatorFilter = generator.createCoreImageFilter()
         crop.setValue(generatorFilter.outputImage, forKey: "inputImage")
 

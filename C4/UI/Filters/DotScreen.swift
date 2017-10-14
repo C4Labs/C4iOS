@@ -48,10 +48,10 @@ public struct DotScreen: Filter {
     public func createCoreImageFilter(_ inputImage: CIImage) -> CIFilter {
         let filter = CIFilter(name: filterName)!
         filter.setDefaults()
-        filter.setValue(width, forKey:"inputWidth")
-        filter.setValue(angle, forKey:"inputAngle")
-        filter.setValue(sharpness, forKey:"inputSharpness")
-        filter.setValue(CIVector(cgPoint: CGPoint(center)), forKey:"inputCenter")
+        filter.setValue(width, forKey: "inputWidth")
+        filter.setValue(angle, forKey: "inputAngle")
+        filter.setValue(sharpness, forKey: "inputSharpness")
+        filter.setValue(CIVector(cgPoint: CGPoint(center)), forKey: "inputCenter")
         filter.setValue(inputImage, forKey: "inputImage")
         return filter
     }

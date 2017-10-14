@@ -47,7 +47,7 @@ public protocol EventSource {
 }
 
 /// This extension allows any NSObject to post and listen for events in the same way as C4 objects.
-extension NSObject : EventSource {
+extension NSObject: EventSource {
 
     /// Posts a new notification originating from the receiver.
     ///

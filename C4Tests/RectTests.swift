@@ -31,7 +31,7 @@ class RectTests: XCTestCase {
 
     func testCenter() {
         for _ in 1...10 {
-            let val = Double(random(below:100))
+            let val = Double(random(below: 100))
             let rect = Rect(0, 0, val, val)
             XCTAssertEqual(rect.center, Point(val/2.0, val/2.0), "Center point should be half the width and height of the Rect")
         }
@@ -39,8 +39,8 @@ class RectTests: XCTestCase {
 
     func testMax() {
         for _ in 1...10 {
-            let x = Double(random(below:100))
-            let y = Double(random(below:100))
+            let x = Double(random(below: 100))
+            let y = Double(random(below: 100))
             let rect = Rect(x, y, 100, 100)
             XCTAssertEqual(rect.max, Point(x + 100, y + 100), "Max point should equal the origin plus the size of the Rect")
         }

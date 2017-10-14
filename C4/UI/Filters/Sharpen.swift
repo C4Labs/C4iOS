@@ -36,8 +36,8 @@ public struct Sharpen: Filter {
     public func createCoreImageFilter(_ inputImage: CIImage) -> CIFilter {
         let filter = CIFilter(name: filterName)!
         filter.setDefaults()
-        filter.setValue(sharpness, forKey:"inputSharpness")
-        filter.setValue(inputImage, forKey:"inputImage")
+        filter.setValue(sharpness, forKey: "inputSharpness")
+        filter.setValue(inputImage, forKey: "inputImage")
         return filter
     }
 }

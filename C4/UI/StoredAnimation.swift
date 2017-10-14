@@ -68,7 +68,7 @@ public class StoredAnimation: Animation {
             }
             CATransaction.commit()
             ViewAnimation.stack.removeLast()
-        }, completion:nil)
+        }, completion: nil)
         ShapeLayer.disableActions = disable
     }
 }

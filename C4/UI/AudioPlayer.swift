@@ -56,7 +56,7 @@ public class AudioPlayer: NSObject, AVAudioPlayerDelegate {
 
         super.init()
 
-        guard let url = Bundle.main.url(forResource:name, withExtension:nil) else {
+        guard let url = Bundle.main.url(forResource: name, withExtension: nil) else {
             print("Could not retrieve url for \(name)")
             return nil
         }

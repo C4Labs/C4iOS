@@ -134,7 +134,7 @@ public struct Transform: Equatable {
     /// - parameter angle: The angle, in radians, to rotate
     /// - parameter axis: The axis around which to rotate, defaults to the z axis {0,0,1}
     /// - returns: A `Transform` that can be used to rotate a receiver.
-    public static func makeRotation(_ angle: Double, axis: Vector = Vector(x: 0, y: 0, z : 1)) -> Transform {
+    public static func makeRotation(_ angle: Double, axis: Vector = Vector(x: 0, y: 0, z: 1)) -> Transform {
         if axis.isZero() {
             return Transform()
         }
@@ -201,10 +201,10 @@ public struct Transform: Equatable {
     /// - returns: A `CGAffineTransform` that is equivalent to the receiver.
     public var affineTransform: CGAffineTransform {
         return CGAffineTransform(
-            a:  CGFloat(self[0, 0]),
-            b:  CGFloat(self[0, 1]),
-            c:  CGFloat(self[1, 0]),
-            d:  CGFloat(self[1, 1]),
+            a: CGFloat(self[0, 0]),
+            b: CGFloat(self[0, 1]),
+            c: CGFloat(self[1, 0]),
+            d: CGFloat(self[1, 1]),
             tx: CGFloat(self[0, 3]),
             ty: CGFloat(self[1, 3]))
     }

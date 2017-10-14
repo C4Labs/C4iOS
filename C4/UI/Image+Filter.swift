@@ -25,7 +25,7 @@ extension Image {
     ///
     /// - parameter filter: a Filter
     public func apply(_ filter: Filter) {
-        self.apply(filters:[filter])
+        self.apply(filters: [filter])
     }
 
     ///  Applies an array of fiters to the receiver's contents.
@@ -48,8 +48,8 @@ extension Image {
         if extent.isInfinite {
             extent = self.ciImage.extent
         }
-        let filterContext = CIContext(options:nil)
-        let filteredImage = filterContext.createCGImage(self.output, from:extent)
+        let filterContext = CIContext(options: nil)
+        let filteredImage = filterContext.createCGImage(self.output, from: extent)
 
         DispatchQueue.main.async {
             self.imageView.layer.contents = filteredImage

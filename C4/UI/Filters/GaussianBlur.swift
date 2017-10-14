@@ -44,7 +44,7 @@ public struct GaussianBlur: Filter {
     public func createCoreImageFilter(_ inputImage: CIImage) -> CIFilter {
         let filter = CIFilter(name: filterName)!
         filter.setDefaults()
-        filter.setValue(radius, forKey:"inputRadius")
+        filter.setValue(radius, forKey: "inputRadius")
         filter.setValue(inputImage, forKey: "inputImage")
         return filter
     }

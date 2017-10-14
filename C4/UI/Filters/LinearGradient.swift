@@ -45,10 +45,10 @@ public struct LinearGradient: Generator {
     public func createCoreImageFilter() -> CIFilter {
         let filter = CIFilter(name: filterName)!
         filter.setDefaults()
-        filter.setValue(CIColor(colors[0]), forKey:"inputColor0")
-        filter.setValue(CIColor(colors[1]), forKey:"inputColor1")
-        filter.setValue(CIVector(cgPoint: CGPoint(points[0])), forKey:"inputPoint0")
-        filter.setValue(CIVector(cgPoint: CGPoint(points[1])), forKey:"inputPoint1")
+        filter.setValue(CIColor(colors[0]), forKey: "inputColor0")
+        filter.setValue(CIColor(colors[1]), forKey: "inputColor1")
+        filter.setValue(CIVector(cgPoint: CGPoint(points[0])), forKey: "inputPoint0")
+        filter.setValue(CIVector(cgPoint: CGPoint(points[1])), forKey: "inputPoint1")
         return filter
     }
 }

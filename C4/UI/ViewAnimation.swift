@@ -150,11 +150,11 @@ public class ViewAnimation: Animation {
     }
 
     private func animateWithSpring(spring: Spring) {
-        UIView.animate(withDuration: self.duration, delay: 0, usingSpringWithDamping: CGFloat(spring.damping), initialSpringVelocity: CGFloat(spring.initialVelocity), options: self.options, animations: self.animationBlock, completion:nil)
+        UIView.animate(withDuration: self.duration, delay: 0, usingSpringWithDamping: CGFloat(spring.damping), initialSpringVelocity: CGFloat(spring.initialVelocity), options: self.options, animations: self.animationBlock, completion: nil)
     }
 
     private func animateNormal() {
-        UIView.animate(withDuration: self.duration, delay: 0, options: self.options, animations: self.animationBlock, completion:nil)
+        UIView.animate(withDuration: self.duration, delay: 0, options: self.options, animations: self.animationBlock, completion: nil)
     }
 
     private func animationBlock() {

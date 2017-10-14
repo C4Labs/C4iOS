@@ -32,7 +32,7 @@ public extension View {
         anim.keyPath = keyPath
         anim.fromValue = view.layer.presentation()?.value(forKeyPath: keyPath)
         anim.toValue = toValue
-        view.layer.add(anim, forKey:"C4AnimateKeyPath: \(keyPath)")
+        view.layer.add(anim, forKey: "C4AnimateKeyPath: \(keyPath)")
         view.layer.setValue(toValue, forKeyPath: keyPath)
     }
 

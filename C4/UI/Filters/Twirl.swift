@@ -46,11 +46,11 @@ public struct Twirl: Filter {
     public func createCoreImageFilter(_ inputImage: CIImage) -> CIFilter {
         let filter = CIFilter(name: filterName)!
         filter.setDefaults()
-        filter.setValue(radius, forKey:"inputRadius")
-        filter.setValue(angle, forKey:"inputAngle")
+        filter.setValue(radius, forKey: "inputRadius")
+        filter.setValue(angle, forKey: "inputAngle")
         let filterSize = inputImage.extent.size
         let vector = CIVector(x: CGFloat(center.x) * filterSize.width, y: CGFloat(1.0 - center.y) * filterSize.height)
-        filter.setValue(vector, forKey:"inputCenter")
+        filter.setValue(vector, forKey: "inputCenter")
         filter.setValue(inputImage, forKey: "inputImage")
         return filter
     }

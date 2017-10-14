@@ -44,7 +44,7 @@ public struct ColorBurn: Filter {
     public func createCoreImageFilter(_ inputImage: CIImage) -> CIFilter {
         let filter = CIFilter(name: filterName)!
         filter.setDefaults()
-        filter.setValue(background.ciImage, forKey:"inputImage")
+        filter.setValue(background.ciImage, forKey: "inputImage")
         filter.setValue(inputImage, forKey: "inputBackgroundImage")
         return filter
     }

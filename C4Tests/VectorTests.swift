@@ -51,14 +51,14 @@ class VectorTests: XCTestCase {
         let vectorA = Vector(x: 2, y: 0)
         let vectorB = Vector(x: 1, y: 1)
         let vectorC = Vector(x: 1, y: 0)
-        let angle = vectorA.angleTo(vectorB, basedOn:vectorC)
+        let angle = vectorA.angleTo(vectorB, basedOn: vectorC)
         XCTAssertEqual(angle, Double(Double.pi)/2.0, accuracy: 1e-15, "Product should be PI/2")
     }
 
     func testDivideScalar() {
         for i in 10...1000 {
-            let v = Double(random(below:i))+1.0
-            var vector = Vector(x:v, y:v)
+            let v = Double(random(below: i))+1.0
+            var vector = Vector(x: v, y: v)
             vector /= v
             XCTAssertEqual(vector.x, 1.0, "Vector should equal 1")
         }
@@ -67,7 +67,7 @@ class VectorTests: XCTestCase {
     func testMultiplyScalar() {
         for i in 10...1000 {
             let val = Double(i)
-            var vector = Vector(x:val, y:val)
+            var vector = Vector(x: val, y: val)
             vector *= 10
             XCTAssertEqual(vector.x, val*10, "Vector should equal 1")
         }

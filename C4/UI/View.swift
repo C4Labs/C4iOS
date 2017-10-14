@@ -535,7 +535,7 @@ open class View: NSObject {
     /// - parameter from: The view whose coordinate system the point is to be converted from
     /// - returns: `true` if the point is within the object's frame, otherwise `false`.
     public func hitTest(_ point: Point, from: View) -> Bool {
-        let p = convert(point, from:from)
+        let p = convert(point, from: from)
         return hitTest(p)
     }
 

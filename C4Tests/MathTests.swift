@@ -63,7 +63,7 @@ class MathTests: XCTestCase {
     }
 
     func testRandom() {
-        let testValue = random(below:100)
+        let testValue = random(below: 100)
         XCTAssertLessThan(testValue, 100, "Returned value for random is not below provided value")
     }
 
