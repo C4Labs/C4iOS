@@ -55,16 +55,16 @@ public func clamp<T: Comparable>(_ val: T, min: T, max: T) -> T {
 /// - parameter param: parameter between 0 and 1 for interpolation
 ///
 /// - returns: The interpolated value
-public func lerp(_ a: Double, _ b: Double, at: Double) -> Double {
+public func lerp<T: FloatingPoint>(_ a: T, _ b: T, at: T) -> T {
     return a + (b - a) * at
 }
 
-/// Linear mapping. Maps a value in the source range [min, max] to a value in the target range [toMin, toMax] using linear interpolation.
+/// Linear mapping. Maps a value in the source range [min, max) to a value in the target range [toMin, toMax) using linear interpolation.
 ///
 /// ````
-/// map(10, 0, 20, 0, 200) = 100
-/// map(10, 0, 100, 200, 300) = 210
-/// map(10, 0, 20, 200, 300) = 250
+/// map(10, 0..<20, 0..<200) = 100
+/// map(10, 0..<100, 200..<300) = 210
+/// map(10, 0..<20, 200..<300) = 250
 /// ````
 ///
 /// - parameter val:   Source value
@@ -74,9 +74,44 @@ public func lerp(_ a: Double, _ b: Double, at: Double) -> Double {
 /// - parameter toMax: Target range upper bound
 ///
 /// - returns: The mapped value.
-public func map(_ val: Double, min: Double, max: Double, toMin: Double, toMax: Double) -> Double {
-    let param = (val - min)/(max -  min)
-    return lerp(toMin, toMax, at: param)
+public func map<T: FloatingPoint>(_ val: T, from: Range<T>, to: Range<T>) -> T {
+    let param = (val - from.lowerBound)/(from.upperBound -  from.lowerBound)
+    return lerp(to.lowerBound, to.upperBound, at: param)
+}
+
+/// Linear mapping. Maps a value in the source range [min, max] to a value in the target range [toMin, toMax] using linear interpolation.
+///
+/// ````
+/// map(10, 0...20, 0...200) = 100
+/// map(10, 0...100, 200...300) = 210
+/// map(10, 0...20, 200...300) = 250
+/// ````
+///
+/// - parameter val:   Source value
+/// - parameter min:   Source range lower bound
+/// - parameter max:   Source range upper bound
+/// - parameter toMin: Target range lower bound
+/// - parameter toMax: Target range upper bound
+///
+/// - returns: The mapped value.
+public func map<T: FloatingPoint>(_ val: T, from: ClosedRange<T>, to: ClosedRange<T>) -> T {
+    let param = (val - from.lowerBound) / (from.upperBound - from.lowerBound)
+    return lerp(to.lowerBound, to.upperBound, at: param)
+}
+
+/// Returns a random `Int`.
+///
+/// ````
+/// let x = random()
+/// ````
+///
+/// - returns: Random `Int`.
+public func random() -> Int {
+    var r = 0
+    withUnsafeMutableBytes(of: &r) { bufferPointer in
+        arc4random_buf(bufferPointer.baseAddress, MemoryLayout<Int>.size)
+    }
+    return r
 }
 
 /// Return a random integer below `below`
@@ -87,35 +122,36 @@ public func map(_ val: Double, min: Double, max: Double, toMin: Double, toMax: D
 ///
 /// - parameter below: The upper bound
 ///
-/// - returns: A random value smaller than `below`
+/// - returns: A random value in the range `0 ..< below`
 public func random(below: Int) -> Int {
-    return Int(arc4random_uniform(UInt32(below)))
+    return abs(random()) % below
 }
 
-/// Return a random integer greater than or equal to min and less than max.
+/// Return a random integer in the given range.
 ///
 /// ````
-/// let x = random(10,20)
+/// let x = random(in: 10..<20)
 /// ````
 ///
-/// - parameter min: The lower bound
-/// - parameter max: The upper bound
+/// - parameter range: range of values
 ///
 /// - returns: A random value greater than or equal to min and less than max.
-public func random(min: Int, max: Int) -> Int {
-    assert(min < max, "min must be less than max")
-    return min + random(below: max - min)
+public func random(in range: Range<Int>) -> Int {
+    return range.lowerBound + random(below: range.upperBound - range.lowerBound)
 }
 
-/// Return a random Double in the interval [0, 1)
+/// Return a random Double in the given range.
 ///
 /// ````
-/// let x = random01()
+/// let x = random(in: 0..<1)
 /// ````
 ///
+/// - parameter range: range of values
 /// - returns: A random Double uniformly distributed between 0 and 1
-public func random01() -> Double {
-    return Double(arc4random()) / Double(UInt32.max)
+public func random(in range: Range<Double>) -> Double {
+    let intRange: Range<Double> = Double(-Int.max) ..< Double(Int.max) + 1
+    let r = Double(random())
+    return map(r, from: intRange, to: range)
 }
 
 /// Converts radian values to degrees.

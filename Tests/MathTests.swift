@@ -44,20 +44,26 @@ class MathTests: XCTestCase {
         XCTAssertEqual(testValue, correctValue, "Value should be clamped to upper bound")
     }
 
-    func testMap() {
-        let testValue = map(5, min: 0, max: 10, toMin: 0, toMax: 20)
+    func testMapOpen() {
+        let testValue = map(5, from: 0..<10, to: 0..<20)
+        let correctValue = 10.0
+        XCTAssertEqual(testValue, correctValue, "Value should be mapped to the target range")
+    }
+
+    func testMapClosed() {
+        let testValue = map(5, from: 0...10, to: 0...20)
         let correctValue = 10.0
         XCTAssertEqual(testValue, correctValue, "Value should be mapped to the target range")
     }
 
     func testLerpDouble() {
-        let testValue = map(5.0, min: 0.0, max: 10.0, toMin: 0.0, toMax: 20.0)
+        let testValue = map(5.0, from: 0.0..<10.0, to: 0.0..<20.0)
         let correctValue = 10.0
         XCTAssertEqual(testValue, correctValue, "Double value should be mapped to the target range")
     }
 
     func testLerpInt() {
-        let testValue = map(6, min: 0, max: 10, toMin: 0, toMax: 20)
+        let testValue = map(6, from: 0..<10, to: 0..<20)
         let correctValue = 12.0
         XCTAssertEqual(testValue, correctValue, "Double value should be mapped to the target range")
     }
@@ -89,7 +95,7 @@ class MathTests: XCTestCase {
         var min = Int.max
         var max = Int.min
         for _ in 0..<samples {
-            let value = random(min: lowerBound, max: upperBound)
+            let value = random(in: lowerBound..<upperBound)
             if value < min { min = value }
             if value > max { max = value }
         }
@@ -103,7 +109,7 @@ class MathTests: XCTestCase {
         var min = 1.0
         var max = 0.0
         for _ in 0..<samples {
-            let value = random01()
+            let value = random(in: 0.0..<1.0)
             if value < min { min = value }
             if value > max { max = value }
         }

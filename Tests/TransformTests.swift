@@ -26,7 +26,7 @@ class TransformTests: XCTestCase {
         var transform = Transform()
         for col in 0...3 {
             for row in 0...3 {
-                transform[row, col] = random01()
+                transform[row, col] = random(in: 0.0..<1.0)
             }
         }
         XCTAssertEqual(identity * transform, transform, "Multiplying by the identity transform should not change the other transform")
