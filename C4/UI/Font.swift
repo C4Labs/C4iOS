@@ -177,6 +177,7 @@ public class Font {
         return Double(internalFont!.lineHeight)
     }
 
+    #if os(iOS)
     /// Returns the standard font size used for labels.
     /// - returns:	The standard label font size in points.
     public var labelFontSize: Double {
@@ -200,6 +201,7 @@ public class Font {
     public var smallSystemFontSize: Double {
         return Double(UIFont.smallSystemFontSize)
     }
+    #endif
 
     /// Returns a CGFontRef version of the receiver.
     public var cgFont: CGFont? {

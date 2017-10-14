@@ -74,9 +74,11 @@ public class ScreenRecorder: NSObject, RPPreviewViewControllerDelegate {
         controller.present(preview, animated: true, completion: nil)
     }
 
+    #if os(iOS)
     public func previewController(_ previewController: RPPreviewViewController, didFinishWithActivityTypes activityTypes: Set<String>) {
         activities = activityTypes
     }
+    #endif
 
     public func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
         previewFinishedAction?(activities)
