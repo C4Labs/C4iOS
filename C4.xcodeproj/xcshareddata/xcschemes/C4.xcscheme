@@ -17,7 +17,7 @@
                BlueprintIdentifier = "614F824219DB5ED3001DF1D4"
                BuildableName = "C4.framework"
                BlueprintName = "C4"
-               ReferencedContainer = "container:C4iOS.xcodeproj">
+               ReferencedContainer = "container:C4.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -31,7 +31,7 @@
                BlueprintIdentifier = "614F824D19DB5ED4001DF1D4"
                BuildableName = "C4Tests.xctest"
                BlueprintName = "C4Tests"
-               ReferencedContainer = "container:C4iOS.xcodeproj">
+               ReferencedContainer = "container:C4.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -50,7 +50,7 @@
                BlueprintIdentifier = "614F824D19DB5ED4001DF1D4"
                BuildableName = "C4Tests.xctest"
                BlueprintName = "C4Tests"
-               ReferencedContainer = "container:C4iOS.xcodeproj">
+               ReferencedContainer = "container:C4.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -60,7 +60,7 @@
             BlueprintIdentifier = "614F824219DB5ED3001DF1D4"
             BuildableName = "C4.framework"
             BlueprintName = "C4"
-            ReferencedContainer = "container:C4iOS.xcodeproj">
+            ReferencedContainer = "container:C4.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -83,7 +83,7 @@
             BlueprintIdentifier = "614F824219DB5ED3001DF1D4"
             BuildableName = "C4.framework"
             BlueprintName = "C4"
-            ReferencedContainer = "container:C4iOS.xcodeproj">
+            ReferencedContainer = "container:C4.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -101,7 +101,7 @@
             BlueprintIdentifier = "614F824219DB5ED3001DF1D4"
             BuildableName = "C4.framework"
             BlueprintName = "C4"
-            ReferencedContainer = "container:C4iOS.xcodeproj">
+            ReferencedContainer = "container:C4.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
