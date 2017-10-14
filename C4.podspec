@@ -12,9 +12,11 @@ Pod::Spec.new do |s|
   s.license      = "MIT"
   s.authors      = { "Travis" => "info@c4ios.com", "Alejandro Isaza" => "al@isaza.ca" }
 
-  s.platform     = :ios
-  s.ios.deployment_target = '9.0'
-  s.source       = { :git => "https://github.com/C4Labs/C4iOS.git", :tag => s.version }
+  s.ios.deployment_target = '9.3'
+  s.tvos.deployment_target = '9.3'
 
-  s.source_files  = "C4/**/*.swift"
+  s.source = { :git => "https://github.com/C4Labs/C4iOS.git", :tag => s.version }
+
+  s.source_files = "C4/**/*.swift"
+  s.tvos.exclude_files = 'C4/UI/UIGestureRecognizer+Closure.swift', 'C4/UI/View+Gestures.swift', 'C4/UI/Camera.swift'
 end
