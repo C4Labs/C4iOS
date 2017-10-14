@@ -38,7 +38,7 @@ public class Camera: View {
     var stillImageOutput: AVCaptureStillImageOutput?
     var captureSession: AVCaptureSession?
     var didCaptureAction: (() -> Void)?
-    var orientationObserver: AnyObject?
+    var orientationObserver: Any?
 
     class CameraView: UIView {
         var previewLayer: PreviewLayer {
@@ -66,7 +66,7 @@ public class Camera: View {
         previewLayer.backgroundColor = clear.cgColor
         previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
 
-        orientationObserver = on(event: NSNotification.Name.UIDeviceOrientationDidChange.rawValue) { [unowned self] in
+        orientationObserver = on(event: NSNotification.Name.UIDeviceOrientationDidChange) { [unowned self] in
             self.updateOrientation()
         }
     }

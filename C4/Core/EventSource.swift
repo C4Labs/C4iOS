@@ -25,14 +25,14 @@ public protocol EventSource {
     /// Posts a new notification originating from the receiver.
     ///
     /// - parameter event: The name of the event to post.
-    func post(_ event: String)
+    func post(_ event: NSNotification.Name)
 
     /// Register an action to run when an event is triggered. Returns an observer handle you can use to cancel the action.
     ///
     /// - parameter notificationName: The notification name to listen for
     /// - parameter executionBlock:   A block of code to run when the receiver "hears" the specified notification name
     @discardableResult
-    func on(event notificationName: String, run: @escaping () -> Void) -> AnyObject
+    func on(event notificationName: NSNotification.Name, run: @escaping () -> Void) -> Any
 
     ///  Register an action to run when an event is triggered by the specified sender. Returns an observer handle you can use to cancel the action.
     ///
@@ -40,10 +40,10 @@ public protocol EventSource {
     /// - parameter sender:           The object from which to listen for the notification
     /// - parameter executionBlock:   A block of code to run when the receiver "hears" the specified notification name
     @discardableResult
-    func on(event notificationName: String, from sender: AnyObject?, run executionBlock: @escaping () -> Void) -> AnyObject
+    func on(event notificationName: NSNotification.Name, from sender: Any?, run executionBlock: @escaping () -> Void) -> Any
 
     /// Cancel a previously registered action from an observer handle.
-    func cancel(_ observer: AnyObject)
+    func cancel(_ observer: Any)
 }
 
 /// This extension allows any NSObject to post and listen for events in the same way as C4 objects.
@@ -58,8 +58,8 @@ extension NSObject: EventSource {
     /// ````
     ///
     /// - parameter event: The notification name for the event
-    public func post(_ event: String) {
-        NotificationCenter.default.post(name: Notification.Name(rawValue: event), object: self)
+    public func post(_ event: NSNotification.Name) {
+        NotificationCenter.default.post(name: event, object: self)
     }
 
     /// An action to run on receipt of a given event.
@@ -74,7 +74,7 @@ extension NSObject: EventSource {
     /// - parameter run:   A block of code to run when the receiver "hears" the specified event name
     /// - returns: A token to use for cancelling the action.
     @discardableResult
-    public func on(event notificationName: String, run executionBlock: @escaping () -> Void) -> AnyObject {
+    public func on(event notificationName: NSNotification.Name, run executionBlock: @escaping () -> Void) -> Any {
         return on(event: notificationName, from: nil, run: executionBlock)
     }
 
@@ -91,9 +91,9 @@ extension NSObject: EventSource {
     /// - parameter executionBlock:   A block of code to run when the receiver "hears" the specified notification name
     /// - returns: A token to use for cancelling the action.
     @discardableResult
-    public func on(event notificationName: String, from sender: AnyObject?, run executionBlock: @escaping () -> Void) -> AnyObject {
+    public func on(event notificationName: NSNotification.Name, from sender: Any?, run executionBlock: @escaping () -> Void) -> Any {
         let nc = NotificationCenter.default
-        let objectProtocol = nc.addObserver(forName: NSNotification.Name(rawValue: notificationName), object: sender, queue: OperationQueue.current, using: { _ in
+        let objectProtocol = nc.addObserver(forName: notificationName, object: sender, queue: OperationQueue.current, using: { _ in
             executionBlock()
         })
         return objectProtocol
@@ -106,7 +106,7 @@ extension NSObject: EventSource {
     /// ````
     ///
     /// - parameter token: A token returned from a call to `on(event:run:)` method
-    public func cancel(_ token: AnyObject) {
+    public func cancel(_ token: Any) {
         let nc = NotificationCenter.default
         nc.removeObserver(token)
     }

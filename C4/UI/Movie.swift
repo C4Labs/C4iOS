@@ -167,7 +167,7 @@ public class Movie: View {
         player = newPlayer
 
         //runs an overrideable method for handling the end of the movie
-        on(event: NSNotification.Name.AVPlayerItemDidPlayToEndTime.rawValue) {
+        on(event: NSNotification.Name.AVPlayerItemDidPlayToEndTime) {
             self.handleReachedEnd()
         }
 
