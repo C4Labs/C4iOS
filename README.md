@@ -42,12 +42,12 @@ ViewAnimation(duration: 0.5) {
 Whereas using UIKit + Core Animation you'd have to do something like this:
 
 ```swift
-UIView.animateWithDuration(0.5) {
+UIView.animate(withDuration: 0.5) {
     v.center = self.view.center
 }
 
 CATransaction.begin()
-CATransaction.setValue(NSNumber(float: 0.5), forKey: kCATransactionAnimationDuration)
+CATransaction.setValue(0.5, forKey: kCATransactionAnimationDuration)
 if let shapeLayer = v.layer as? CAShapeLayer {
     shapeLayer.lineWidth = 5
 }
@@ -122,18 +122,18 @@ Using UIKit + AVFoundation, you'd have to construct the movie object from scratc
 
 ```swift
 func viewDidLoad() {
-  guard let url = NSBundle.mainBundle().URLForResource("halo.mp4", withExtension: nil) else {
+  guard let url = Bundle.main.url(forResource: "halo.mp4", withExtension: nil) else {
       fatalError("File not found")
   }
 
-  let asset = AVAsset(URL: url)
+  let asset = AVAsset(url: url)
   let player = AVQueuePlayer(playerItem: AVPlayerItem(asset: asset))
-  player.actionAtItemEnd = .Pause
+  player.actionAtItemEnd = .pause
 
   let movieLayer = AVPlayerLayer(player: player)
-  movieLayer.videoGravity = AVLayerVideoGravityResize
+  movieLayer.videoGravity = .resize
 
-  let tracks = asset.tracksWithMediaType(AVMediaTypeVideo)
+  let tracks = asset.tracks(withMediaType: .video)
 
   let movieTrack = tracks[0]
   let size = movieTrack.naturalSize
