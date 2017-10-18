@@ -4,19 +4,13 @@
 
 C4 is an open-source creative coding framework that harnesses the power of native iOS programming with a simplified API that gets you working with media right away. Build artworks, design interfaces and explore new possibilities working with media and interaction.
 
-## Version 2.0
-
 Built on top of Swift, C4 puts the power of UIKit and Core Animation at your disposal, allowing you to create inventive digital interactions with far less time and effort. Plus, you get all the interactivity, fun and expressiveness of Swift. Your apps will run lightning-fast.
 
-The API of C4 is simple and streamlined allowing beginners to get into programming very easily. For seasoned developers, C4 can be dropped into any existing project with as little effort as linking any other native framework . With C4, you’ll save a ton of time working with interactions, animation and media.
-
-## Efficient
-
-Spend less time navigating between different frameworks and focus on bringing your ideas to life. C4 combines the power of UIKit and Core Animation into a single set of objects whose APIs are easy to understand and straightforward. And because C4's foundation is built on native frameworks, you’ll be inheriting Swift’s faster code, compile times and optimization for modern hardware.
+The API of C4 is simple and streamlined allowing beginners to get into programming very easily. For seasoned developers, C4 can be dropped into any existing project with as little effort as linking any other native framework. With C4, you’ll save a ton of time when working with interactions, animation and media.
 
 ## Expressive
 
-C4 brings your ideas to life by allowing you to focus on experimenting, designing, visualizing and building rather than on learning low-level technologies. Objects are consistent and intuitive — they all essentially work the same way .  C4's language has been designed to be as simple and expressive as possible.
+C4 brings your ideas to life by allowing you to focus on experimenting, designing, visualizing and building rather than on learning low-level technologies. Objects are consistent and intuitive—they all essentially work the same way. C4's language has been designed to be as simple and expressive as possible.
 
 For example, C4 compresses the access of properties:
 
@@ -98,12 +92,6 @@ C4 has been used for:
 - Communication Design
 - Print Design
 
-## Open Source
-
-Sporting the [MIT License](https://en.wikipedia.org/wiki/MIT_License), C4 is an open-source project whose features and functions can be used freely in educational, artistic and even professional settings. The project is open to anyone who wants to contribute, and the project’s code, documentation, and process are completely available for you to read through, learn from and take advantage of. Ongoing commitment by our core team and other developers guarantees that C4 will be constantly updated and focused on user’s interests.
-
-[Join our Slack community!](https://join-c4.herokuapp.com/)
-
 ## Simplicity
 
 Simplicity is a major accomplishment for C4. Across the board, C4 is simple to learn, to use, to read and to adopt. C4 reduces the amount of code you need to the most powerful essentials.
@@ -145,3 +133,17 @@ func viewDidLoad() {
 ```
 
 … And a whole lot more.
+
+
+## Open Source
+
+C4 is an open-source project licensed under the [MIT License](https://en.wikipedia.org/wiki/MIT_License). It can be used freely in educational, artistic and even professional settings. The project is open to anyone who wants to contribute, and the project’s code, documentation, and process are completely available for you to read through, learn from and take advantage of. Ongoing commitment by our core team and other developers guarantees that C4 will be constantly updated and focused on user’s interests.
+
+### Contributing
+
+There are many ways to contribute to C4 and we really appreciate any contributions. It can be anything from better documentation to a brand new feature. To get started take a look at our [contribution guidelens](CONTRIBUTING.md).
+
+### Community
+
+Join our [Slack channel](https://join-c4.herokuapp.com/) to ask for help, show off your app, suggest change, or just chat.
+
