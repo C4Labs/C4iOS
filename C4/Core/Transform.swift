@@ -205,8 +205,8 @@ public struct Transform: Equatable {
             b: CGFloat(self[0, 1]),
             c: CGFloat(self[1, 0]),
             d: CGFloat(self[1, 1]),
-            tx: CGFloat(self[0, 3]),
-            ty: CGFloat(self[1, 3]))
+            tx: CGFloat(self[3, 0]),
+            ty: CGFloat(self[3, 1]))
     }
 
     /// The CATransform3D version of the receiver.
