@@ -141,7 +141,7 @@ C4 is an open-source project licensed under the [MIT License](https://en.wikiped
 
 ### Contributing
 
-There are many ways to contribute to C4 and we really appreciate any contributions. It can be anything from better documentation to a brand new feature. To get started take a look at our [contribution guidelens](CONTRIBUTING.md).
+There are many ways to contribute to C4 and we really appreciate any contributions. It can be anything from better documentation to a brand new feature. To get started take a look at our [Contribution Guidelines](CONTRIBUTING.md).
 
 ### Community
 
