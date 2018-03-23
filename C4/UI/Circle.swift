@@ -21,7 +21,7 @@ import Foundation
 import CoreGraphics
 
 ///Circle is a concrete subclass of Ellipse that has a special initialzer that creates a uniform ellipse.
-public class Circle: Ellipse {
+open class Circle: Ellipse {
     /// Creates a circle.
     ///
     /// ````
