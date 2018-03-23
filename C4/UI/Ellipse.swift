@@ -21,7 +21,7 @@ import Foundation
 import CoreGraphics
 
 ///  Ellipse is a concrete subclass of Shape that has a special initialzer that creates an ellipse whose shape is defined by the object's frame.
-public class Ellipse: Shape {
+open class Ellipse: Shape {
 
     /// Creates an ellipse.
     ///
