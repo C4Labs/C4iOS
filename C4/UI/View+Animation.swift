@@ -61,7 +61,7 @@ public extension View {
     /// - parameter options: Options for animating views using block objects, see: UIViewAnimationOptions.
     /// - parameter animations: A block of code with specified animations to execute.
     /// - parameter completion: A block of code to execute when the animation completes.
-    public class func animate(duration: Double, delay: Double, options: UIViewAnimationOptions, animations: @escaping () -> Void, completion: ((Bool) -> Void)?) {
+    public class func animate(duration: Double, delay: Double, options: UIView.AnimationOptions, animations: @escaping () -> Void, completion: ((Bool) -> Void)?) {
         UIView.animate(withDuration: duration, delay: delay, options: options, animations: animations, completion: completion)
     }
 }
