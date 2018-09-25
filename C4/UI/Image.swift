@@ -242,7 +242,7 @@ open class Image: View, NSCopying {
 
         assert(pixels.count == Int(width * height))
 
-        var provider: CGDataProvider? = nil
+        var provider: CGDataProvider?
         pixels.withUnsafeBufferPointer { p in
             if let address = p.baseAddress {
                 let data = Data(bytes: UnsafePointer(address), count: pixels.count * MemoryLayout<Pixel>.size)

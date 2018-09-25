@@ -210,6 +210,6 @@ public class Font {
 
     /// Returns a CTFontRef version of the receiver.
     public var ctFont: CTFont {
-        return CTFontCreateWithNameAndOptions(fontName as CFString!, CGFloat(pointSize), nil, [])
+        return CTFontCreateWithNameAndOptions(fontName as CFString, CGFloat(pointSize), nil, [])
     }
 }

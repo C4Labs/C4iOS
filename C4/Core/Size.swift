@@ -170,7 +170,6 @@ public func <= (lhs: Size, rhs: Size) -> Bool {
 public extension CGSize {
     /// Initializes a new CGSize from a Size
     public init(_ size: Size) {
-        width = CGFloat(size.width)
-        height = CGFloat(size.height)
+        self.init(width: CGFloat(size.width), height: CGFloat(size.height))
     }
 }
