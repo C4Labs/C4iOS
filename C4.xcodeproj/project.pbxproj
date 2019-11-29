@@ -218,6 +218,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		138B93242391D042009219C5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		138B93252391D052009219C5 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		1F40C6FA1C82ADF0004AE1E7 /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		1F754DCA1C48EE600036D39F /* ImageLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLayer.swift; sourceTree = "<group>"; };
 		1F75FDE81C5B1FE700EB62C2 /* C4Loop.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = C4Loop.aif; sourceTree = "<group>"; };
@@ -358,6 +360,8 @@
 		614F823919DB5ED3001DF1D4 = {
 			isa = PBXGroup;
 			children = (
+				138B93242391D042009219C5 /* README.md */,
+				138B93252391D052009219C5 /* Package.swift */,
 				A9D4F66E1B534F9F00F937AB /* C4 */,
 				A9596D271A054A960023323D /* Tests */,
 				A96F505B1B5385A5002B3A46 /* C4App */,
@@ -681,6 +685,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
