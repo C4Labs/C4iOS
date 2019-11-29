@@ -18,6 +18,6 @@ let package = Package(
         .testTarget(
             name: "C4Tests-iOS",
             dependencies: ["C4"],
-            path: "TovalaKitTests"),
+            path: "Tests"),
     ]
 )
