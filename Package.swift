@@ -17,7 +17,7 @@ let package = Package(
             path: "C4"),
         .testTarget(
             name: "C4Tests-iOS",
-            dependencies: ["C4"],
+            dependencies: ["C4-iOS"],
             path: "Tests"),
     ]
 )
