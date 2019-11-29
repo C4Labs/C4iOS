@@ -72,9 +72,9 @@ extension UIView {
     /// - parameter subview: The subview to move to the back.
     public func sendToBack<T>(_ subview: T?) {
         if let v = subview as? UIView {
-            self.sendSubview(toBack: v)
+			self.sendSubviewToBack(v)
         } else if let v = subview as? View {
-            self.sendSubview(toBack: v.view)
+			self.sendSubviewToBack(v.view)
         } else {
             fatalError("Can't operate on subview of class `\(type(of: subview))`")
         }
@@ -85,9 +85,9 @@ extension UIView {
     /// - parameter subview: The subview to move to the front.
     public func bringToFront<T>(_ subview: T?) {
         if let v = subview as? UIView {
-            self.bringSubview(toFront: v)
+			self.bringSubviewToFront(v)
         } else if let v = subview as? View {
-            self.bringSubview(toFront: v.view)
+			self.bringSubviewToFront(v.view)
         } else {
             fatalError("Can't operate on subview of class `\(type(of: subview))`")
         }

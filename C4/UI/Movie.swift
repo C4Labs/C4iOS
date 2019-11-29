@@ -142,7 +142,7 @@ public class Movie: View {
     /// - parameter filename:	The name of the movie file included in your project.
     public convenience init?(_ filename: String) {
         do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+			try AVAudioSession.sharedInstance().setCategory(.playback)
             try AVAudioSession.sharedInstance().setActive(true)
         } catch {
             print("Couldn't set up AVAudioSession")
@@ -225,7 +225,7 @@ public class Movie: View {
             print("The current movie's player is not properly initialized")
             return
         }
-        p.seek(to: CMTimeMake(0, 1))
+		p.seek(to: CMTimeMake(value: 0, timescale: 1))
         p.pause()
     }
 

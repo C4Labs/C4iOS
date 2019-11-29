@@ -38,7 +38,7 @@ private var canvasAssociationKey: UInt8 = 0
 /// Where, `canvas` is essentially equal to `self.viewController.view`, keeping the interaction with a controller's main view consistent with using other View objects.
 public extension UIViewController {
     /// Returns a View object representation of the controller's `view` property.
-    public var canvas: View {
+	var canvas: View {
         if let canvas = objc_getAssociatedObject(self, &canvasAssociationKey) as? View {
             return canvas
         }

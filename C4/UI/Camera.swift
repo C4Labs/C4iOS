@@ -66,7 +66,7 @@ public class Camera: View {
         previewLayer.backgroundColor = clear.cgColor
         previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
 
-        orientationObserver = on(event: NSNotification.Name.UIDeviceOrientationDidChange) { [unowned self] in
+		orientationObserver = on(event: UIDevice.orientationDidChangeNotification) { [unowned self] in
             self.updateOrientation()
         }
     }
@@ -191,7 +191,7 @@ public class Camera: View {
             return image
         }
 
-        var orientation: UIImageOrientation
+		var orientation: UIImage.Orientation
         let shouldFlip = position == .front
 
         switch videoOrientation {

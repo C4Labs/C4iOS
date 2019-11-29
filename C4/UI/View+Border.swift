@@ -57,7 +57,7 @@ public extension View {
     /// ````
     ///
     /// Assigning a new value to this will change the `borderWidth`, `borderColor` and `cornderRadius` of the receiver's layer.
-    public var border: Border {
+	var border: Border {
         get {
             var border = Border()
             if let layer = layer {

@@ -41,7 +41,7 @@ open class Shape: View {
                 return nil
             }
 
-            let fillRule = shapeLayer.fillRule == kCAFillRuleNonZero ? CGPathFillRule.evenOdd : CGPathFillRule.winding
+			let fillRule = shapeLayer.fillRule == CAShapeLayerFillRule.nonZero ? CGPathFillRule.evenOdd : CGPathFillRule.winding
 
             if path.contains(point, using: fillRule, transform: CGAffineTransform.identity) {
                 return self
@@ -215,22 +215,22 @@ open class Shape: View {
     /// The fill rule used when filling the path. Defaults to `nonZero`.
     public var fillRule: FillRule {
         get {
-            switch shapeLayer.fillRule {
-            case kCAFillRuleNonZero:
-                return .nonZero
-            case kCAFillRuleEvenOdd:
-                return .evenOdd
-            default:
-                return .nonZero
-            }
+			switch shapeLayer.fillRule {
+			case .nonZero:
+				return .nonZero
+			case .evenOdd:
+				return .evenOdd
+			default:
+				return .nonZero
+			}
         }
         set(fillRule) {
-            switch fillRule {
-            case .nonZero:
-                shapeLayer.fillRule = kCAFillRuleNonZero
-            case .evenOdd:
-                shapeLayer.fillRule = kCAFillRuleEvenOdd
-            }
+			switch fillRule {
+			case .nonZero:
+				shapeLayer.fillRule = .nonZero
+			case .evenOdd:
+				shapeLayer.fillRule = .evenOdd
+			}
         }
     }
 
@@ -275,9 +275,9 @@ open class Shape: View {
     public var lineCap: LineCap {
         get {
             switch shapeLayer.lineCap {
-            case kCALineCapRound:
+			case .round:
                 return .round
-            case kCALineCapSquare:
+			case .square:
                 return .square
             default:
                 return .butt
@@ -286,11 +286,11 @@ open class Shape: View {
         set(lineCap) {
             switch lineCap {
             case .butt:
-                shapeLayer.lineCap = kCALineCapButt
+				shapeLayer.lineCap = .butt
             case .round:
-                shapeLayer.lineCap = kCALineCapRound
+				shapeLayer.lineCap = .round
             case .square:
-                shapeLayer.lineCap = kCALineCapSquare
+				shapeLayer.lineCap = .square
             }
         }
     }
@@ -299,9 +299,9 @@ open class Shape: View {
     public var lineJoin: LineJoin {
         get {
             switch shapeLayer.lineJoin {
-            case kCALineJoinRound:
+			case .round:
                 return .round
-            case kCALineJoinBevel:
+			case .bevel:
                 return .bevel
             default:
                 return .miter
@@ -310,11 +310,11 @@ open class Shape: View {
         set(lineJoin) {
             switch lineJoin {
             case .miter:
-                shapeLayer.lineJoin = kCALineJoinMiter
+				shapeLayer.lineJoin = .miter
             case .round:
-                shapeLayer.lineJoin = kCALineJoinRound
+				shapeLayer.lineJoin = .round
             case .bevel:
-                shapeLayer.lineJoin = kCALineJoinBevel
+				shapeLayer.lineJoin = .bevel
             }
         }
     }

@@ -34,21 +34,21 @@ public class StoredAnimation: Animation {
         let disable = ShapeLayer.disableActions
         ShapeLayer.disableActions = false
         var timing: CAMediaTimingFunction
-        var options: UIViewAnimationOptions = [UIViewAnimationOptions.beginFromCurrentState]
+		var options: UIView.AnimationOptions = [.beginFromCurrentState]
 
         switch curve {
         case .linear:
             options = [options, .curveLinear]
-            timing = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+			timing = CAMediaTimingFunction(name: .linear)
         case .easeOut:
             options = [options, .curveEaseOut]
-            timing = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+			timing = CAMediaTimingFunction(name: .easeOut)
         case .easeIn:
             options = [options, .curveEaseIn]
-            timing = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+			timing = CAMediaTimingFunction(name: .easeIn)
         case .easeInOut:
             options = [options, .curveEaseIn, .curveEaseOut]
-            timing = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+			timing = CAMediaTimingFunction(name: .easeOut)
         }
 
         autoreverses == true ? options.formUnion(.autoreverse) : options.subtract(.autoreverse)
