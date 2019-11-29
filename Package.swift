@@ -9,15 +9,12 @@ let package = Package(
     products: [
         .library(
             name: "C4",
-            targets: ["C4-iOS", "C4-tvOS"]),
+            targets: ["C4-iOS"]),
     ],
     targets: [
         .target(
             name: "C4-iOS",
             path: "C4"),
-		.target(
-			name: "C4-tvOS",
-			path: "C4"),
         .testTarget(
             name: "C4Tests-iOS",
             dependencies: ["C4"],
