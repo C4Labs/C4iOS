@@ -48,9 +48,9 @@ public class AudioPlayer: NSObject, AVAudioPlayerDelegate {
     /// ````
     public init?(_ name: String) {
         do {
-			try AVAudioSession.sharedInstance().setCategory(.playback)
+            try AVAudioSession.sharedInstance().setCategory(.playback)
             try AVAudioSession.sharedInstance().setActive(true)
-        } catch {
+     } catch {
             print("Couldn't set up AVAudioSession")
         }
 
