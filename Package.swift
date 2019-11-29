@@ -13,8 +13,11 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "C4",
+            name: "C4-iOS",
             path: "C4"),
+		.target(
+			name: "C4-tvOS",
+			path: "C4"),
         .testTarget(
             name: "C4Tests-iOS",
             dependencies: ["C4"],
