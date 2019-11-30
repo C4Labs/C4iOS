@@ -64,7 +64,7 @@ public final class Timer: NSObject {
         }
 
         let t = Foundation.Timer(timeInterval: TimeInterval(interval), target: self, selector: #selector(Timer.fire), userInfo: nil, repeats: true)
-		RunLoop.main.add(t, forMode: .default)
+        RunLoop.main.add(t, forMode: .default)
         timer = t
     }
 

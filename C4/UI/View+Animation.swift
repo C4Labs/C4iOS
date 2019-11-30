@@ -40,7 +40,7 @@ public extension View {
     ///
     /// - parameter duration: The length of time in seconds for the animation to execute.
     /// - parameter animations: A block of code with specified animations to execute.
-	class func animate(duration: Double, animations: @escaping () -> Void) {
+    class func animate(duration: Double, animations: @escaping () -> Void) {
         UIView.animate(withDuration: duration, animations: animations)
     }
 
@@ -50,7 +50,7 @@ public extension View {
     /// - parameter delay:      The length of time in seconds to wait before executing the specified block of code.
     /// - parameter completion: A block of code to execute when the animation completes.
     /// - parameter animations: A block of code with specified animations to execute.
-	class func animate(duration: Double, delay: Double, animations: @escaping () -> Void, completion: ((Bool) -> Void)?) {
+    class func animate(duration: Double, delay: Double, animations: @escaping () -> Void, completion: ((Bool) -> Void)?) {
         UIView.animate(withDuration: duration, animations: animations, completion: completion)
     }
 
@@ -61,7 +61,7 @@ public extension View {
     /// - parameter options: Options for animating views using block objects, see: UIViewAnimationOptions.
     /// - parameter animations: A block of code with specified animations to execute.
     /// - parameter completion: A block of code to execute when the animation completes.
-	class func animate(duration: Double, delay: Double, options: UIView.AnimationOptions, animations: @escaping () -> Void, completion: ((Bool) -> Void)?) {
+    class func animate(duration: Double, delay: Double, options: UIView.AnimationOptions, animations: @escaping () -> Void, completion: ((Bool) -> Void)?) {
         UIView.animate(withDuration: duration, delay: delay, options: options, animations: animations, completion: completion)
     }
 }

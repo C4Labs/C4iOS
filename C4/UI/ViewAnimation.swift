@@ -95,19 +95,19 @@ public class ViewAnimation: Animation {
     public var timingFunction: CAMediaTimingFunction {
         switch curve {
         case .linear:
-			return CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
+            return CAMediaTimingFunction(name: .linear)
         case .easeOut:
-			return CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
+            return CAMediaTimingFunction(name: .easeOut)
         case .easeIn:
-			return CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeIn)
+            return CAMediaTimingFunction(name: .easeIn)
         case .easeInOut:
-			return CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+            return CAMediaTimingFunction(name: .easeInEaseOut)
         }
     }
 
     ///Options for animating views using block objects.
-	public var options: UIView.AnimationOptions {
-		var options: UIView.AnimationOptions = [.beginFromCurrentState]
+    public var options: UIView.AnimationOptions {
+        var options: UIView.AnimationOptions = [UIView.AnimationOptions.beginFromCurrentState]
         switch curve {
         case .linear:
             options = [options, .curveLinear]

@@ -22,7 +22,7 @@ import UIKit
 public extension View {
     /// Creates a flattened image of the receiver and its subviews / layers.
     /// - returns: A new Image
-	@objc func render() -> Image? {
+    @objc func render() -> Image? {
         guard let l = layer else {
             print("Could not retrieve layer for current object: \(self)")
             return nil
@@ -40,7 +40,7 @@ public extension Shape {
     /// Creates a flattened image of the receiver and its subviews / layers.
     /// This override takes into consideration the lineWidth of the receiver.
     /// - returns: A new Image
-	override func render() -> Image? {
+    override func render() -> Image? {
         var s = CGSize(size)
         var inset: CGFloat = 0
 

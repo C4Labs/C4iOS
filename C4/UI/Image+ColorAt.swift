@@ -50,7 +50,7 @@ public extension Image {
     ///  let color = img.color(at: Point())
     ///  ````
     /// - parameter at: a Point.
-	func color(at point: Point) -> Color {
+    func color(at point: Point) -> Color {
 
         guard bounds.contains(point) else {
             print("Point is outside the image bounds")

@@ -132,7 +132,7 @@ extension CABasicAnimation {
             self.autoreverses = animation.autoreverses
             self.repeatCount = Float(animation.repeatCount)
         }
-		self.fillMode = .both
+        self.fillMode = .both
         self.isRemovedOnCompletion = false
     }
 }

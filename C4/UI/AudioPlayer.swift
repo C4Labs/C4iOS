@@ -48,9 +48,9 @@ public class AudioPlayer: NSObject, AVAudioPlayerDelegate {
     /// ````
     public init?(_ name: String) {
         do {
-            try AVAudioSession.sharedInstance().setCategory(.playback)
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category(rawValue: convertFromAVAudioSessionCategory(AVAudioSession.Category.playback)))
             try AVAudioSession.sharedInstance().setActive(true)
-     } catch {
+        } catch {
             print("Couldn't set up AVAudioSession")
         }
 
@@ -247,4 +247,9 @@ public class AudioPlayer: NSObject, AVAudioPlayerDelegate {
     public func peakPower(_ channel: Int) -> Double {
         return Double(player.peakPower(forChannel: channel))
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+private func convertFromAVAudioSessionCategory(_ input: AVAudioSession.Category) -> String {
+	return input.rawValue
 }
