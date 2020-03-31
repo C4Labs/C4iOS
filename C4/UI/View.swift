@@ -375,9 +375,9 @@ open class View: NSObject {
     /// - parameter subview: The subview to move to the back.
     public func sendToBack<T>(_ subview: T?) {
         if let v = subview as? UIView {
-            view.sendSubview(toBack: v)
+            view.sendSubviewToBack(v)
         } else if let v = subview as? View {
-            view.sendSubview(toBack: v.view)
+            view.sendSubviewToBack(v.view)
         } else {
             fatalError("Can't operate on subview of class `\(type(of: subview))`")
         }
@@ -387,9 +387,9 @@ open class View: NSObject {
     /// - parameter subview: The subview to move to the front.
     public func bringToFront<T>(_ subview: T?) {
         if let v = subview as? UIView {
-            view.bringSubview(toFront: v)
+            view.bringSubviewToFront(v)
         } else if let v = subview as? View {
-            view.bringSubview(toFront: v.view)
+            view.bringSubviewToFront(v.view)
         } else {
             fatalError("Can't operate on subview of class `\(type(of: subview))`")
         }
