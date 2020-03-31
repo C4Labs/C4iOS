@@ -1,6 +1,6 @@
 language: objective-c
-osx_image: xcode9
+osx_image: xcode11.3
 
 script:
-  - xcodebuild clean build test -project C4.xcodeproj -scheme C4-iOS -destination 'platform=iOS Simulator,name=iPhone 6s,OS=9.3'
+  - xcodebuild clean build test -project C4.xcodeproj -scheme C4-iOS -destination 'platform=iOS Simulator,name=iPhone 6s,OS=10.3.1'
   - xcodebuild clean build test -project C4.xcodeproj -scheme C4-tvOS -destination 'platform=tvOS Simulator,name=Apple TV 4K'
