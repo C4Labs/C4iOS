@@ -203,6 +203,8 @@ public class Camera: View {
             orientation = shouldFlip ? .leftMirrored : .right
         case .portraitUpsideDown:
             orientation = shouldFlip ? .rightMirrored : .left
+        @unknown default:
+            orientation = shouldFlip ? .leftMirrored : .right
         }
         return UIImage(cgImage: cgimg, scale: image.scale, orientation: orientation)
     }
