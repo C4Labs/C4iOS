@@ -40,7 +40,7 @@ public extension Shape {
     /// Creates a flattened image of the receiver and its subviews / layers.
     /// This override takes into consideration the lineWidth of the receiver.
     /// - returns: A new Image
-    public e func render() -> Image? {
+    override func render() -> Image? {
         var s = CGSize(size)
         var inset: CGFloat = 0
 
