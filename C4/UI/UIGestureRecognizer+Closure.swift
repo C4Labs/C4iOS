@@ -66,7 +66,7 @@ extension UIGestureRecognizer {
     }
 }
 
-public typealias TapAction = (_ locations: [Point], _ center: Point, _ state: UIGestureRecognizerState) -> Void
+public typealias TapAction = (_ locations: [Point], _ center: Point, _ state: UIGestureRecognizer.State) -> Void
 
 extension UITapGestureRecognizer {
     /// The closure to call when there is a gesture event.
@@ -107,7 +107,7 @@ extension UITapGestureRecognizer {
     }
 }
 
-public typealias PanAction = (_ locations: [Point], _ center: Point, _ translation: Vector, _ velocity: Vector, _ state: UIGestureRecognizerState) -> Void
+public typealias PanAction = (_ locations: [Point], _ center: Point, _ translation: Vector, _ velocity: Vector, _ state: UIGestureRecognizer.State) -> Void
 
 extension UIPanGestureRecognizer {
     /// The closure to call when there is a gesture event.
@@ -166,7 +166,7 @@ extension UIPanGestureRecognizer {
     }
 }
 
-public typealias PinchAction = (_ locations: [Point], _ center: Point, _ scale: Double, _ velocity: Double, _ state: UIGestureRecognizerState) -> Void
+public typealias PinchAction = (_ locations: [Point], _ center: Point, _ scale: Double, _ velocity: Double, _ state: UIGestureRecognizer.State) -> Void
 
 extension UIPinchGestureRecognizer {
     /// The closure to call when there is a gesture event.
@@ -207,7 +207,7 @@ extension UIPinchGestureRecognizer {
     }
 }
 
-public typealias RotationAction = (_ rotation: Double, _ velocity: Double, _ state: UIGestureRecognizerState) -> Void
+public typealias RotationAction = (_ rotation: Double, _ velocity: Double, _ state: UIGestureRecognizer.State) -> Void
 
 extension UIRotationGestureRecognizer {
     /// The closure to call when there is a gesture event.
@@ -244,7 +244,7 @@ extension UIRotationGestureRecognizer {
     }
 }
 
-public typealias LongPressAction = (_ locations: [Point], _ center: Point, _ state: UIGestureRecognizerState) -> Void
+public typealias LongPressAction = (_ locations: [Point], _ center: Point, _ state: UIGestureRecognizer.State) -> Void
 
 extension UILongPressGestureRecognizer {
     /// The closure to call when there is a gesture event.
@@ -285,7 +285,7 @@ extension UILongPressGestureRecognizer {
     }
 }
 
-public typealias SwipeAction = (_ locations: [Point], _ center: Point, _ state: UIGestureRecognizerState, _ direction: UISwipeGestureRecognizerDirection) -> Void
+public typealias SwipeAction = (_ locations: [Point], _ center: Point, _ state: UIGestureRecognizer.State, _ direction: UISwipeGestureRecognizer.Direction) -> Void
 
 extension UISwipeGestureRecognizer {
     /// The closure to call when there is a gesture event.
@@ -326,7 +326,7 @@ extension UISwipeGestureRecognizer {
     }
 }
 
-public typealias ScreenEdgePanAction = (_ location: Point, _ state: UIGestureRecognizerState) -> Void
+public typealias ScreenEdgePanAction = (_ location: Point, _ state: UIGestureRecognizer.State) -> Void
 
 extension UIScreenEdgePanGestureRecognizer {
     /// The closure to call when there is a gesture event.

@@ -7,12 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1F40C6FB1C82ADF0004AE1E7 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F40C6FA1C82ADF0004AE1E7 /* Camera.swift */; };
 		1F754DCB1C48EE600036D39F /* ImageLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F754DCA1C48EE600036D39F /* ImageLayer.swift */; };
 		1F75FDEB1C5B1FE700EB62C2 /* C4Loop.aif in Resources */ = {isa = PBXBuildFile; fileRef = 1F75FDE81C5B1FE700EB62C2 /* C4Loop.aif */; };
 		1F75FDEC1C5B1FE700EB62C2 /* halo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1F75FDE91C5B1FE700EB62C2 /* halo.mp4 */; };
 		1F75FDED1C5B1FE700EB62C2 /* haloGray.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1F75FDEA1C5B1FE700EB62C2 /* haloGray.mp4 */; };
-		1F75FE951C5CADBF00EB62C2 /* ScreenRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F75FE941C5CADBF00EB62C2 /* ScreenRecorder.swift */; };
 		1FAB35E81C5372CE00620741 /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAB35E71C5372CE00620741 /* Pixel.swift */; };
 		1FAB35EA1C53745300620741 /* Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAB35E91C53745300620741 /* Layer.swift */; };
 		1FAB35EC1C53749500620741 /* UIView+AddRemove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAB35EB1C53749500620741 /* UIView+AddRemove.swift */; };
@@ -56,7 +54,6 @@
 		610A6A891F928E96003B841A /* QuadCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6901B534F9F00F937AB /* QuadCurve.swift */; };
 		610A6A8A1F928E96003B841A /* Rectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6911B534F9F00F937AB /* Rectangle.swift */; };
 		610A6A8B1F928E96003B841A /* RegularPolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6921B534F9F00F937AB /* RegularPolygon.swift */; };
-		610A6A8C1F928E96003B841A /* ScreenRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F75FE941C5CADBF00EB62C2 /* ScreenRecorder.swift */; };
 		610A6A8D1F928E96003B841A /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6941B534F9F00F937AB /* Shape.swift */; };
 		610A6A8E1F928E96003B841A /* Shape+Creation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6931B534F9F00F937AB /* Shape+Creation.swift */; };
 		610A6A8F1F928E96003B841A /* ShapeLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4F6951B534F9F00F937AB /* ShapeLayer.swift */; };
@@ -218,12 +215,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1F40C6FA1C82ADF0004AE1E7 /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		1F754DCA1C48EE600036D39F /* ImageLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLayer.swift; sourceTree = "<group>"; };
 		1F75FDE81C5B1FE700EB62C2 /* C4Loop.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = C4Loop.aif; sourceTree = "<group>"; };
 		1F75FDE91C5B1FE700EB62C2 /* halo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = halo.mp4; sourceTree = "<group>"; };
 		1F75FDEA1C5B1FE700EB62C2 /* haloGray.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = haloGray.mp4; sourceTree = "<group>"; };
-		1F75FE941C5CADBF00EB62C2 /* ScreenRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenRecorder.swift; sourceTree = "<group>"; };
 		1FAB35E71C5372CE00620741 /* Pixel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pixel.swift; sourceTree = "<group>"; };
 		1FAB35E91C53745300620741 /* Layer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
 		1FAB35EB1C53749500620741 /* UIView+AddRemove.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+AddRemove.swift"; sourceTree = "<group>"; };
@@ -457,7 +452,6 @@
 				A9D4F67E1B534F9F00F937AB /* Animation.swift */,
 				A9D4F6801B534F9F00F937AB /* Arc.swift */,
 				A9D4F6811B534F9F00F937AB /* AudioPlayer.swift */,
-				1F40C6FA1C82ADF0004AE1E7 /* Camera.swift */,
 				A9D4F6821B534F9F00F937AB /* CanvasController.swift */,
 				A9D4F6831B534F9F00F937AB /* Circle.swift */,
 				A9D4F6841B534F9F00F937AB /* Curve.swift */,
@@ -482,7 +476,6 @@
 				A9D4F6901B534F9F00F937AB /* QuadCurve.swift */,
 				A9D4F6911B534F9F00F937AB /* Rectangle.swift */,
 				A9D4F6921B534F9F00F937AB /* RegularPolygon.swift */,
-				1F75FE941C5CADBF00EB62C2 /* ScreenRecorder.swift */,
 				A9D4F6941B534F9F00F937AB /* Shape.swift */,
 				A9D4F6931B534F9F00F937AB /* Shape+Creation.swift */,
 				A9D4F6951B534F9F00F937AB /* ShapeLayer.swift */,
@@ -649,7 +642,7 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 1000;
+				LastUpgradeCheck = 1230;
 				ORGANIZATIONNAME = C4;
 				TargetAttributes = {
 					610A6A4D1F928E1B003B841A = {
@@ -662,23 +655,23 @@
 					};
 					614F824219DB5ED3001DF1D4 = {
 						CreatedOnToolsVersion = 6.0;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1230;
 					};
 					614F824D19DB5ED4001DF1D4 = {
 						CreatedOnToolsVersion = 6.0;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1230;
 						TestTargetID = A96F50591B5385A5002B3A46;
 					};
 					A96F50591B5385A5002B3A46 = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = 75C7KVJZ99;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1230;
 					};
 				};
 			};
 			buildConfigurationList = 614F823D19DB5ED3001DF1D4 /* Build configuration list for PBXProject "C4" */;
 			compatibilityVersion = "Xcode 8.0";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -790,7 +783,6 @@
 				610A6A821F928E96003B841A /* ImageLayer.swift in Sources */,
 				610A6A7C1F928E96003B841A /* GradientLayer.swift in Sources */,
 				610A6A8B1F928E96003B841A /* RegularPolygon.swift in Sources */,
-				610A6A8C1F928E96003B841A /* ScreenRecorder.swift in Sources */,
 				610A6A8D1F928E96003B841A /* Shape.swift in Sources */,
 				610A6A771F928E96003B841A /* Ellipse.swift in Sources */,
 				610A6A801F928E96003B841A /* Image+Filter.swift in Sources */,
@@ -890,7 +882,6 @@
 				A9D4F6E31B534F9F00F937AB /* Twirl.swift in Sources */,
 				6159A4D61F928B79000A3A99 /* View+Gestures.swift in Sources */,
 				A9BC57271C50ABA80068BBA3 /* UIImage+Color.swift in Sources */,
-				1F40C6FB1C82ADF0004AE1E7 /* Camera.swift in Sources */,
 				61BBAF651BC38C1200A03FD0 /* View+KeyValues.swift in Sources */,
 				A9D4F6AF1B534F9F00F937AB /* Foundation.swift in Sources */,
 				A9D4F6D41B534F9F00F937AB /* View+Animation.swift in Sources */,
@@ -921,7 +912,6 @@
 				A9D4F6DB1B534F9F00F937AB /* Checkerboard.swift in Sources */,
 				A9D4F6BB1B534F9F00F937AB /* Arc.swift in Sources */,
 				A9D4F6D91B534F9F00F937AB /* Wedge.swift in Sources */,
-				1F75FE951C5CADBF00EB62C2 /* ScreenRecorder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1018,7 +1008,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Debug;
 		};
@@ -1049,7 +1039,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Release;
 		};
@@ -1073,7 +1063,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Debug;
 		};
@@ -1098,7 +1088,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Release;
 		};
@@ -1106,6 +1096,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1124,6 +1115,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1149,7 +1141,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1166,6 +1158,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1184,6 +1177,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1202,7 +1196,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
@@ -1229,6 +1223,7 @@
 				PRODUCT_NAME = C4;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -1247,6 +1242,7 @@
 				PRODUCT_NAME = C4;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -1262,6 +1258,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.c4ios.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/C4App.app/C4App";
 			};
 			name = Debug;
@@ -1275,6 +1272,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.c4ios.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/C4App.app/C4App";
 			};
 			name = Release;
@@ -1293,6 +1291,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.c4ios.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -1308,6 +1307,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.c4ios.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

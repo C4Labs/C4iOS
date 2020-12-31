@@ -41,7 +41,7 @@ open class Shape: View {
                 return nil
             }
 
-            let fillRule = shapeLayer.fillRule == kCAFillRuleNonZero ? CGPathFillRule.evenOdd : CGPathFillRule.winding
+            let fillRule = convertFromCAShapeLayerFillRule(shapeLayer.fillRule) == convertFromCAShapeLayerFillRule(CAShapeLayerFillRule.nonZero) ? CGPathFillRule.evenOdd : CGPathFillRule.winding
 
             if path.contains(point, using: fillRule, transform: CGAffineTransform.identity) {
                 return self
@@ -215,10 +215,10 @@ open class Shape: View {
     /// The fill rule used when filling the path. Defaults to `nonZero`.
     public var fillRule: FillRule {
         get {
-            switch shapeLayer.fillRule {
-            case kCAFillRuleNonZero:
+            switch convertFromCAShapeLayerFillRule(shapeLayer.fillRule) {
+            case convertFromCAShapeLayerFillRule(CAShapeLayerFillRule.nonZero):
                 return .nonZero
-            case kCAFillRuleEvenOdd:
+            case convertFromCAShapeLayerFillRule(CAShapeLayerFillRule.evenOdd):
                 return .evenOdd
             default:
                 return .nonZero
@@ -227,9 +227,9 @@ open class Shape: View {
         set(fillRule) {
             switch fillRule {
             case .nonZero:
-                shapeLayer.fillRule = kCAFillRuleNonZero
+                shapeLayer.fillRule = CAShapeLayerFillRule.nonZero
             case .evenOdd:
-                shapeLayer.fillRule = kCAFillRuleEvenOdd
+                shapeLayer.fillRule = CAShapeLayerFillRule.evenOdd
             }
         }
     }
@@ -274,10 +274,10 @@ open class Shape: View {
     /// The cap style used when stroking the path. Defaults to `Butt`.
     public var lineCap: LineCap {
         get {
-            switch shapeLayer.lineCap {
-            case kCALineCapRound:
+            switch convertFromCAShapeLayerLineCap(shapeLayer.lineCap) {
+            case convertFromCAShapeLayerLineCap(CAShapeLayerLineCap.round):
                 return .round
-            case kCALineCapSquare:
+            case convertFromCAShapeLayerLineCap(CAShapeLayerLineCap.square):
                 return .square
             default:
                 return .butt
@@ -286,11 +286,11 @@ open class Shape: View {
         set(lineCap) {
             switch lineCap {
             case .butt:
-                shapeLayer.lineCap = kCALineCapButt
+                shapeLayer.lineCap = CAShapeLayerLineCap.butt
             case .round:
-                shapeLayer.lineCap = kCALineCapRound
+                shapeLayer.lineCap = CAShapeLayerLineCap.round
             case .square:
-                shapeLayer.lineCap = kCALineCapSquare
+                shapeLayer.lineCap = CAShapeLayerLineCap.square
             }
         }
     }
@@ -298,10 +298,10 @@ open class Shape: View {
     /// The join style used when stroking the path. Defaults to `Miter`.
     public var lineJoin: LineJoin {
         get {
-            switch shapeLayer.lineJoin {
-            case kCALineJoinRound:
+            switch convertFromCAShapeLayerLineJoin(shapeLayer.lineJoin) {
+            case convertFromCAShapeLayerLineJoin(CAShapeLayerLineJoin.round):
                 return .round
-            case kCALineJoinBevel:
+            case convertFromCAShapeLayerLineJoin(CAShapeLayerLineJoin.bevel):
                 return .bevel
             default:
                 return .miter
@@ -310,11 +310,11 @@ open class Shape: View {
         set(lineJoin) {
             switch lineJoin {
             case .miter:
-                shapeLayer.lineJoin = kCALineJoinMiter
+                shapeLayer.lineJoin = CAShapeLayerLineJoin.miter
             case .round:
-                shapeLayer.lineJoin = kCALineJoinRound
+                shapeLayer.lineJoin = CAShapeLayerLineJoin.round
             case .bevel:
-                shapeLayer.lineJoin = kCALineJoinBevel
+                shapeLayer.lineJoin = CAShapeLayerLineJoin.bevel
             }
         }
     }
@@ -374,4 +374,19 @@ open class Shape: View {
     public override func hitTest(_ point: Point) -> Bool {
         return path?.containsPoint(point) ?? false
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+private func convertFromCAShapeLayerFillRule(_ input: CAShapeLayerFillRule) -> String {
+	return input.rawValue
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+private func convertFromCAShapeLayerLineCap(_ input: CAShapeLayerLineCap) -> String {
+	return input.rawValue
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+private func convertFromCAShapeLayerLineJoin(_ input: CAShapeLayerLineJoin) -> String {
+	return input.rawValue
 }
